@@ -30,6 +30,9 @@
 
 defined( 'ABSPATH' ) || die();
 
+define( 'YSTDTB_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'YSTDTB_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
+
 /**
  * [yStandard]確認
  */
@@ -37,3 +40,5 @@ $theme = wp_get_theme( get_template() );
 if ( 'ystandard' !== $theme->template ) {
 	return;
 }
+
+require_once __DIR__ . '/inc/load.php';
