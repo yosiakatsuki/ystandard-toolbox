@@ -5,7 +5,9 @@
  * @license GPL-2.0+
  */
 
-namespace ystandard_toolbox;
+namespace ystandard_toolbox\menu;
+
+use ystandard_toolbox\Menu_Page;
 
 defined( 'ABSPATH' ) || die();
 
@@ -30,23 +32,46 @@ abstract class Menu_Page_Base {
 	const MENU_NAV_HOOK = 'ystdtb_nav_menu';
 
 	/**
-	 * 現在ページ
-	 *
-	 * @var string
-	 */
-	protected $current_page = '';
-
-	/**
 	 * 設定ページテンプレート
 	 * @var string
 	 */
 	protected $template_name = '';
 
 	/**
+	 * メニュースラッグ
+	 *
+	 * @var string
+	 */
+	protected $menu_slug = '';
+	/**
+	 * メニュータイトル
+	 * @var string
+	 */
+	protected $menu_title = '';
+	/**
+	 * メニューラベル
+	 *
+	 * @var string
+	 */
+	protected $menu_label = '';
+
+	/**
+	 * 追加スクリプト
+	 *
+	 * @var array
+	 */
+	protected $enqueue_script = [];
+
+	/**
 	 * Menu_Page_Base constructor.
 	 */
 	public function __construct() {
+		$this->enqueue_script = [];
 		add_action( 'admin_init', [ $this, 'save_option' ] );
+		add_filter( self::MENU_NAV_HOOK, [ $this, 'menu_nav' ] );
+		add_action( 'admin_menu', [ $this, 'add_sub_menu_page' ], 51 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
+		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
 	}
 
 	/**
@@ -54,7 +79,37 @@ abstract class Menu_Page_Base {
 	 *
 	 * @param array $_post $_POST array.
 	 */
-	abstract protected function save( $_post );
+	abstract public function save( $_post );
+
+	/**
+	 * ナビゲーションの追加
+	 *
+	 * @param array $item Item.
+	 *
+	 * @return array
+	 */
+	public function menu_nav( $item ) {
+		$item[] = $this->get_menu_nav_args(
+			$this->menu_slug,
+			$this->menu_label
+		);
+
+		return $item;
+	}
+
+	/**
+	 * サブメニューページ追加
+	 */
+	public function add_sub_menu_page() {
+		add_submenu_page(
+			Menu_Page::MENU_SLUG,
+			$this->menu_title,
+			$this->menu_label,
+			'manage_options',
+			Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug,
+			[ $this, 'menu_page' ]
+		);
+	}
 
 	/**
 	 * 設定ページ表示
@@ -64,7 +119,7 @@ abstract class Menu_Page_Base {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 		?>
-		<div class="wrap ystdtb-menu-page">
+		<div class="wrap">
 			<div class="ystdtb-menu">
 				<ul class="ystdtb-menu__nav">
 					<?php $this->create_menu_nav(); ?>
@@ -88,10 +143,10 @@ abstract class Menu_Page_Base {
 	private function create_menu_nav() {
 		$nav = apply_filters( self::MENU_NAV_HOOK, [] );
 		foreach ( $nav as $item ) {
-			$current = $item['name'] === $this->current_page ? 'is-current' : '';
+			$current = $item['name'] === $this->menu_slug ? 'is-current' : '';
 			?>
 			<li class="ystdtb-menu__nav-item <?php echo $current; ?>">
-				<a href="<?php echo Menu_Page::get_menu_page_url( $item['name'] ); ?>"></a>
+				<a href="<?php echo Menu_Page::get_menu_page_url( $item['name'] ); ?>"><?php echo esc_html( $item['label'] ); ?></a>
 			</li>
 			<?php
 		}
@@ -110,6 +165,50 @@ abstract class Menu_Page_Base {
 			'name'  => $name,
 			'label' => $label,
 		];
+	}
+
+	/**
+	 * 管理画面-スクリプトの読み込み
+	 *
+	 * @param string $hook_suffix suffix.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_scripts( $hook_suffix ) {
+		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX ) ) {
+			return;
+		}
+		wp_enqueue_style(
+			'ystdtb-admin',
+			YSTDTB_URL . '/css/ystandard-toolbox-admin.css',
+			[],
+			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-admin.css' )
+		);
+		foreach ( $this->enqueue_script as $item ) {
+			wp_enqueue_style(
+				'ystdtb-' . $item['name'],
+				$item['url'],
+				$item['deps'],
+				$item['version']
+			);
+		}
+
+	}
+
+	/**
+	 * Body Class.
+	 *
+	 * @param string $classes Classes.
+	 *
+	 * @return string
+	 */
+	public function admin_body_class( $classes ) {
+		global $hook_suffix;
+		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX ) ) {
+			return $classes;
+		}
+
+		return $classes . ' ystdtb-menu-page';
 	}
 
 	/**

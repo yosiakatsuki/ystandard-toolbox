@@ -1,0 +1,64 @@
+.ystdtb-menu-page {
+  background-color: #fff;
+}
+
+.ystdtb-menu {
+  margin-top: 2em;
+  font-size: .9rem;
+
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+  }
+
+  @include media-breakpoint(md) {
+    display: flex;
+  }
+
+  .ystdtb-menu__nav {
+    margin: 0;
+    padding: 0 2em 0 0;
+    list-style: none;
+    font-size: .9em;
+
+    @include media-breakpoint(md) {
+      width: 180px;
+    }
+  }
+
+  .ystdtb-menu__nav-item {
+    a {
+      text-decoration: none;
+      color: currentColor;
+      transition: all .3s;
+
+      @include media-breakpoint(md) {
+        display: block;
+        padding: .5em;
+
+        &:hover {
+          background-color: $color__ystd_blue;
+          color: #fff;
+        }
+      }
+    }
+
+    &.is-current {
+      a {
+        @include media-breakpoint(md) {
+          border-right: 2px solid $color__ystd_blue;
+        }
+      }
+    }
+  }
+
+  .ystdtb-menu__detail {
+
+    @include media-breakpoint(md) {
+      width: calc(100% - 180px);
+    }
+  }
+}
+
+@import "code";

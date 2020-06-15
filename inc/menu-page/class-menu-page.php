@@ -17,15 +17,44 @@ defined( 'ABSPATH' ) || die();
 class Menu_Page {
 
 	/**
+	 * メニュー名
+	 */
+	const MENU_SLUG = 'ystdtb-menu';
+	/**
 	 * メニューページプレフィックス
 	 */
 	const MENU_PAGE_PREFIX = 'ystdtb-menu-';
+
+
+	/**
+	 * Menu_Page constructor.
+	 */
+	public function __construct() {
+		add_action( 'admin_menu', [ $this, 'add_menu_page' ], 50 );
+		$this->load();
+	}
 
 	/**
 	 * 読み込み
 	 */
 	private function load() {
 		require_once __DIR__ . '/class-menu-page-base.php';
+		require_once __DIR__ . '/class-menu-code.php';
+	}
+
+	/**
+	 *
+	 */
+	public function add_menu_page() {
+		add_menu_page(
+			'yStandard Toolbox',
+			'[ys] Toolbox',
+			'manage_options',
+			self::MENU_SLUG,
+			'',
+			'',
+			59
+		);
 	}
 
 	/**
@@ -41,3 +70,5 @@ class Menu_Page {
 		return esc_url_raw( admin_url( "admin.php?page=${menu_page}" ) );
 	}
 }
+
+new Menu_Page();

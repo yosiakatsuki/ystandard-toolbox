@@ -1,0 +1,15 @@
+//テーマカラー
+$color__ystd_blue: #07689f;
+
+//文字色
+$color__text-main: #222222 !default;
+$color__text-light: #757575 !default;
+$color__text-danger: #d53939 !default;
+
+
+// ブレークポイント
+$breakpoints: (
+        sm : 600px,
+        md : 769px,
+        lg : 1025px,
+) !default;

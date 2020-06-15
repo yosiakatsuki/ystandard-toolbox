@@ -1,0 +1,24 @@
+{
+  "name": "ystandard-toolbox",
+  "version": "1.0.0",
+  "description": "無料WordPressテーマ「yStandard」用機能拡張プラグイン",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^9.8.0",
+    "css-mqpacker": "^7.0.0",
+    "css-declaration-sorter": "^5.1.2",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "watch": "gulp watch"
+  },
+  "author": "yosiakatsuki",
+  "license": "GPL-2.0+",
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ]
+}
