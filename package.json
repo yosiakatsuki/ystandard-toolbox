@@ -12,9 +12,14 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp-zip": "^5.0.1"
+  },
   "scripts": {
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "build:deploy-files" : "gulp createDeployFiles",
+    "rename:beta-json" : "rename -f build/ystandard-toolbox-beta.json ystandard-toolbox.json"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",
