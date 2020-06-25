@@ -77,7 +77,7 @@ function copyProductionFiles() {
 		],
 		{ base: './' }
 	)
-		.pipe( dest( './ystandard-blocks' ) );
+		.pipe( dest( './ystandard-toolbox' ) );
 }
 
 /**
