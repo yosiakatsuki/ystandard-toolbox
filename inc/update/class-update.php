@@ -36,7 +36,7 @@ class Update {
 		\Puc_v4_Factory::buildUpdateChecker(
 			$url,
 			YSTDTB_PATH . '/ystandard-toolbox.php',
-			'yStandard Blocks'
+			'yStandard Toolbox'
 		);
 	}
 }
