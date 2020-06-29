@@ -1,4 +1,6 @@
-@mixin media-breakpoint($name,$breakpoints: $breakpoints) {
+@use "variables" as var;
+
+@mixin media-breakpoint($name,$breakpoints: var.$breakpoints) {
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -11,7 +13,7 @@
   }
 }
 
-@mixin media-breakpoint-down($name,$breakpoints: $breakpoints) {
+@mixin media-breakpoint-down($name,$breakpoints: var.$breakpoints) {
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -27,7 +29,7 @@
 @mixin media-breakpoint_between(
   $name_up,
   $name_down,
-  $breakpoints: $breakpoints
+  $breakpoints: var.$breakpoints
 ) {
   $breakpoint_up: map-get($breakpoints, $name_up);
   $breakpoint_down: map-get($breakpoints, $name_down);

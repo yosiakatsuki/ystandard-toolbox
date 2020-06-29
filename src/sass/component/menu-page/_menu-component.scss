@@ -1,3 +1,5 @@
+@use "../../global";
+
 .ystdtb-menu-page {
   label {
     font-weight: bold;
@@ -13,13 +15,13 @@
     padding: 0 0 .25em;
     font-size: 1.2em;
     font-weight: bold;
-    border-bottom: 1px solid $color__ystd_blue;
+    border-bottom: 1px solid global.$color__ystd_blue;
   }
 
   h2 {
     margin-top: 3em;
     font-size: 1.2em;
-    color: $color__ystd_blue;
+    color: global.$color__ystd_blue;
   }
 
   .ystdtb-menu__subtext {

@@ -1,5 +1,5 @@
 const { series, parallel, watch, src, dest } = require( 'gulp' );
-const gulpSass = require( 'gulp-sass' );
+const gulpSass = require( 'gulp-dart-sass' );
 const postcss = require( 'gulp-postcss' );
 const autoprefixer = require( 'autoprefixer' );
 const mqpacker = require( 'css-mqpacker' );
@@ -25,7 +25,7 @@ const postcssPlugins = [
 
 function sass() {
 	return src( './src/sass/*.scss' )
-		.pipe( gulpSass() )
+		.pipe( gulpSass( { outputStyle: 'compressed' } ) )
 		.pipe( postcss( postcssPlugins ) )
 		.pipe( dest( './css' ) );
 }
@@ -93,7 +93,6 @@ function copyJson() {
 	return src( [ 'ystandard-toolbox.json', 'ystandard-toolbox-beta.json' ] )
 		.pipe( dest( 'build' ) );
 }
-
 
 
 function watchFiles() {
