@@ -23,7 +23,7 @@ class Menu_Page {
 	/**
 	 * メニューページプレフィックス
 	 */
-	const MENU_PAGE_PREFIX = 'ystdtb-menu-';
+	const MENU_PAGE_PREFIX = 'ystdtb-menu';
 
 
 	/**
@@ -39,6 +39,7 @@ class Menu_Page {
 	 */
 	private function load() {
 		require_once __DIR__ . '/class-menu-page-base.php';
+		require_once __DIR__ . '/class-menu-start.php';
 		require_once __DIR__ . '/class-menu-code.php';
 	}
 

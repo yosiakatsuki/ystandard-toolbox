@@ -89,6 +89,9 @@ abstract class Menu_Page_Base {
 	 * @return array
 	 */
 	public function menu_nav( $item ) {
+		if ( ! $this->menu_slug ) {
+			return $item;
+		}
 		$item[] = $this->get_menu_nav_args(
 			$this->menu_slug,
 			$this->menu_label
@@ -101,6 +104,9 @@ abstract class Menu_Page_Base {
 	 * サブメニューページ追加
 	 */
 	public function add_sub_menu_page() {
+		if ( ! $this->menu_slug ) {
+			return;
+		}
 		add_submenu_page(
 			Menu_Page::MENU_SLUG,
 			$this->menu_title,
