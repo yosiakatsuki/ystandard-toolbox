@@ -1,0 +1,43 @@
+{
+  "h1": {
+    "preset": "",
+    "text": {
+      "size": 1.4,
+      "sizeUnit"  : "em",
+      "weight": "bold",
+      "style": "normal",
+      "lineHeight": 1.3,
+      "letterSpacing": 5
+    },
+    "border": {
+      "topWeight": 0,
+      "topStyle" : "solid",
+      "topColor" : "",
+      "rightWeight": 0,
+      "rightStyle" : "solid",
+      "rightColor" : "",
+      "bottomWeight": 0,
+      "bottomStyle" : "solid",
+      "bottomColor" : "",
+      "leftWeight": 0,
+      "leftStyle" : "solid",
+      "leftColor" : ""
+    },
+    "margin": {
+      "top" : "",
+      "topUnit" : "",
+      "bottom" : "",
+      "bottomUnit" : ""
+    },
+    "padding": {
+      "top" : "",
+      "topUnit" : "",
+      "right" : "",
+      "rightUnit" : "",
+      "bottom" : "",
+      "bottomUnit" : "",
+      "left" : "",
+      "leftUnit" : ""
+    }
+  }
+}

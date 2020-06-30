@@ -237,4 +237,21 @@ abstract class Menu_Page_Base {
 	protected function load_detail() {
 		require_once __DIR__ . '/template/' . $this->template_name . '.php';
 	}
+
+	/**
+	 * 管理画面用スクリプト読み込み
+	 *
+	 * @param string $name      Name.
+	 * @param array  $deps      Deps.
+	 * @param bool   $in_footer In Footer.
+	 */
+	protected function enqueue_admin_script( $name, $deps = [], $in_footer = true ) {
+		wp_enqueue_script(
+			"ystdtb-${name}",
+			YSTDTB_URL . "/js/admin/${name}.js",
+			$deps,
+			filemtime( YSTDTB_PATH . "/js/admin/${name}.js" ),
+			$in_footer
+		);
+	}
 }

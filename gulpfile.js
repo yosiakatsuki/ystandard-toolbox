@@ -7,6 +7,11 @@ const cssdeclsort = require( 'css-declaration-sorter' );
 const cssnano = require( 'cssnano' );
 const gulpZip = require( 'gulp-zip' );
 const del = require( 'del' );
+const webpackStream = require( 'webpack-stream' );
+const webpack = require( 'webpack' );
+
+const webpackConfig = require( './webpack.menu.config.js' );
+
 
 const postcssPlugins = [
 	autoprefixer( {
@@ -28,6 +33,11 @@ function sass() {
 		.pipe( gulpSass( { outputStyle: 'compressed' } ) )
 		.pipe( postcss( postcssPlugins ) )
 		.pipe( dest( './css' ) );
+}
+
+function buildAdminApp() {
+	return webpackStream( webpackConfig, webpack )
+		.pipe( dest( 'js/admin/' ) )
 }
 
 function cleanFiles( cb ) {
@@ -98,12 +108,15 @@ function copyJson() {
 function watchFiles() {
 	cleanFiles();
 	sass();
+	buildAdminApp();
 	watch( './src/sass/**/*.scss', sass );
+	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue' ], buildAdminApp );
 }
 
 exports.createDeployFiles = series( cleanFiles, copyProductionFiles, parallel( zip, copyJson ) );
 exports.sass = series( sass );
 exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
+exports.adminApp = series( buildAdminApp );
 
 exports.default = series( watchFiles );

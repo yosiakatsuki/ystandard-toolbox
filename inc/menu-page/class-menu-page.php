@@ -40,6 +40,7 @@ class Menu_Page {
 	private function load() {
 		require_once __DIR__ . '/class-menu-page-base.php';
 		require_once __DIR__ . '/class-menu-start.php';
+		require_once __DIR__ . '/class-menu-heading.php';
 		require_once __DIR__ . '/class-menu-code.php';
 	}
 
