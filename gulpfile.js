@@ -9,6 +9,7 @@ const gulpZip = require( 'gulp-zip' );
 const del = require( 'del' );
 const webpackStream = require( 'webpack-stream' );
 const webpack = require( 'webpack' );
+const plumber = require( 'gulp-plumber' );
 
 const webpackConfig = require( './webpack.menu.config.js' );
 
@@ -36,7 +37,8 @@ function sass() {
 }
 
 function buildAdminApp() {
-	return webpackStream( webpackConfig, webpack )
+	return plumber()
+		.pipe( webpackStream( webpackConfig, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
 

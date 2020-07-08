@@ -34,6 +34,11 @@ Source : <https://github.com/feathericons/feather>
 License: MIT  
 Source : <https://github.com/feathericons/react-feather>
 
+### Vue Feather Icons
+
+License: MIT  
+Source : <https://github.com/egoist/vue-feather-icons>
+
 ### Simple Icons
 
 License: CC0 - 1.0  
