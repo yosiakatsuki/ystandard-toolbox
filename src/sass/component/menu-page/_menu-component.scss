@@ -32,6 +32,135 @@
   .ystdtb-menu__section {
     margin-top: 2em;
   }
+
+  .ystdtb-menu__table {
+    display: flex;
+    width: 100%;
+    margin-top: .5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    .is-label {
+      width: 30%;
+      min-width: 5em;
+      color: #666;
+      font-size: .9em;
+    }
+
+    .is-content {
+      width: 70%;
+    }
+  }
+
+  .ystdtb-menu__icon-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    svg {
+      margin-right: .25em;
+    }
+  }
+
+  input[type="number"],
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    background: #f8f8f8;
+    padding: .5em .75em;
+    margin: 0;
+    border-radius: 0;
+    color: #666;
+    font: inherit;
+    font-weight: normal;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+  }
+
+  select {
+    max-width: 100%;
+    width: 100%;
+    padding: .25em .75em;
+    background: #fff;
+    color: #666;
+    border: 1px solid global.$color__border-gray-light;
+    transition: .2s ease-in-out;
+    transition-property: color,background-color,border;
+  }
+
+  .toggle-button {
+    display: none;
+
+    + label {
+      outline: 0;
+      display: block;
+      width: 2.5em;
+      height: 1.5em;
+      position: relative;
+      background: #ccc;
+      border-radius: 1.5em;
+      padding: 2px;
+      transition: all .4s ease;
+      cursor: pointer;
+      user-select: none;
+
+
+      &:after,
+      &:before {
+        position: relative;
+        display: block;
+        content: "";
+        width: 50%;
+        height: 100%;
+      }
+
+      &:after {
+        left: 0;
+        border-radius: 50%;
+        background: #fff;
+        transition: all .2s ease;
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+
+    &:checked + label {
+      background: #9FD6AE;
+
+      &:after {
+        left: 50%;
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    &.switch {
+      border: 1px solid #eeeeee;
+      border-radius: 4px;
+      background: #fff;
+      padding: .5em .75em;
+      margin: 0;
+      color: #666;
+      font: inherit;
+      -webkit-appearance: none;
+      outline: none;
+
+      svg {
+        vertical-align: -.25em;
+      }
+
+      &.is-on {
+        background-color: #aaa;
+        color: #fff;
+      }
+    }
+  }
 }
 
 

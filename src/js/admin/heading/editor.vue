@@ -34,10 +34,12 @@
 <style lang="scss">
 	.heading-editor-container {
 		display: flex;
+		width: 100%;
 	}
 
 	.heading-editor-control {
 		font-size: 1rem;
+		width: 60%;
 
 		> * {
 			margin-top: 1.5em;
@@ -55,21 +57,6 @@
 			&:first-child {
 				margin-top: 0;
 			}
-		}
-
-		label {
-			font-size: .9em;
-
-			&.is-block {
-				display: block;
-				margin-bottom: .5em;
-			}
-		}
-
-		input[type="number"] {
-			padding: .1em .1em .1em .25em;
-			line-height: 1.5;
-			min-height: auto;
 		}
 	}
 </style>
