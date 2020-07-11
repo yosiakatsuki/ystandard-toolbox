@@ -9,7 +9,7 @@ namespace ystandard_toolbox;
 
 defined( 'ABSPATH' ) || die();
 ?>
-<div class="heading">
+<div class="heading ystdtb-menu__component">
 	<h1 class="ystdtb-menu__title">見出し編集</h1>
 	<div id="app">
 		<App/><!-- vue app -->

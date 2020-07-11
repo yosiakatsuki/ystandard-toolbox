@@ -1,19 +1,10 @@
 @use "../../global";
 
-.ystdtb-menu-page {
-  label {
-    font-weight: bold;
-
-    &.is-block {
-      display: block;
-      margin-bottom: .25em;
-    }
-  }
-
+.ystdtb-menu__component {
   .ystdtb-menu__title {
     margin: 0 0 1.5em;
     padding: 0 0 .25em;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
     border-bottom: 1px solid global.$color__ystd_blue;
   }
@@ -36,7 +27,9 @@
   .ystdtb-menu__table {
     display: flex;
     width: 100%;
-    margin-top: .5em;
+    margin-top: .75em;
+    color: #666;
+    font-size: .9em;
 
     &:first-child {
       margin-top: 0;
@@ -45,8 +38,12 @@
     .is-label {
       width: 30%;
       min-width: 5em;
-      color: #666;
-      font-size: .9em;
+      padding: .5em .5em .5em 0;
+
+      label {
+        font-weight: normal;
+        font-size: 1em;
+      }
     }
 
     .is-content {
@@ -54,110 +51,35 @@
     }
   }
 
-  .ystdtb-menu__icon-control {
+  .ystdtb-menu__horizontal {
     display: flex;
     align-items: center;
     width: 100%;
+
+    > * {
+      margin-right: .5em;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
 
     svg {
       margin-right: .25em;
     }
   }
 
-  input[type="number"],
-  input[type="text"] {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    background: #f8f8f8;
-    padding: .5em .75em;
-    margin: 0;
-    border-radius: 0;
-    color: #666;
-    font: inherit;
-    font-weight: normal;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-  }
-
-  select {
-    max-width: 100%;
-    width: 100%;
-    padding: .25em .75em;
-    background: #fff;
-    color: #666;
-    border: 1px solid global.$color__border-gray-light;
-    transition: .2s ease-in-out;
-    transition-property: color,background-color,border;
-  }
-
-  .toggle-button {
-    display: none;
-
-    + label {
-      outline: 0;
-      display: block;
-      width: 2.5em;
-      height: 1.5em;
-      position: relative;
-      background: #ccc;
-      border-radius: 1.5em;
-      padding: 2px;
-      transition: all .4s ease;
-      cursor: pointer;
-      user-select: none;
 
 
-      &:after,
-      &:before {
-        position: relative;
-        display: block;
-        content: "";
-        width: 50%;
-        height: 100%;
-      }
+  .ystdtb-menu__card {
+    padding: 1em;
+    box-shadow: 0 0 8px rgba(#000, 0.1);
 
-      &:after {
-        left: 0;
-        border-radius: 50%;
-        background: #fff;
-        transition: all .2s ease;
-      }
+    > * {
+      margin-top: 1em;
 
-      &:before {
-        display: none;
-      }
-    }
-
-    &:checked + label {
-      background: #9FD6AE;
-
-      &:after {
-        left: 50%;
-      }
-    }
-  }
-
-  button {
-    cursor: pointer;
-    &.switch {
-      border: 1px solid #eeeeee;
-      border-radius: 4px;
-      background: #fff;
-      padding: .5em .75em;
-      margin: 0;
-      color: #666;
-      font: inherit;
-      -webkit-appearance: none;
-      outline: none;
-
-      svg {
-        vertical-align: -.25em;
-      }
-
-      &.is-on {
-        background-color: #aaa;
-        color: #fff;
+      &:first-child {
+        margin-top: 0;
       }
     }
   }

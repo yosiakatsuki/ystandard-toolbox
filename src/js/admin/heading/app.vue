@@ -1,5 +1,5 @@
 <template>
-	<div class="heading-editor">
+	<div class="heading-editor ystdtb-menu__form">
 		<div class="heading-editor__row" v-for="heading in headings">
 			<h2>{{ heading }}</h2>
 			<Editor :level="heading"/>

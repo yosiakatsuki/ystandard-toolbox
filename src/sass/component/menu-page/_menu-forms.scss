@@ -1,0 +1,143 @@
+@use "../../global";
+
+.ystdtb-menu__form {
+  label {
+    font-weight: bold;
+
+    &.is-block {
+      display: block;
+      margin-bottom: .25em;
+    }
+  }
+
+  input[type="number"],
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    background: #f8f8f8;
+    padding: .5em .75em;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    color: #666;
+    font: inherit;
+    font-weight: normal;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+  }
+
+  select {
+    max-width: 100%;
+    width: 100%;
+    padding: .25em .75em;
+    background: #fff;
+    color: #666;
+    border: 1px solid global.$color__border-gray-light;
+    transition: .2s ease-in-out;
+    transition-property: color, background-color, border;
+  }
+
+  button {
+    padding: .5em .75em;
+    background: #fff;
+    color: #666;
+    border: 1px solid global.$color__border-gray-light;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    transition-property: color, background-color, border;
+
+    svg {
+      vertical-align: -.25em;
+    }
+  }
+
+  .ystdtb-color-picker {
+    display: flex;
+    position: relative;
+
+    .ystdtb-color-picker__preview {
+      min-width: 2.5em;
+    }
+
+    .ystdtb-color-picker__control {
+      position: absolute;
+      top: calc(100% + 1em);
+      left: 0;
+      z-index: 5;
+    }
+  }
+
+  .toggle-button {
+    display: none;
+
+    + label {
+      outline: 0;
+      display: block;
+      width: 2.5em;
+      height: 1.5em;
+      position: relative;
+      background: #ccc;
+      border-radius: 1.5em;
+      padding: 2px;
+      transition: all .4s ease;
+      cursor: pointer;
+      user-select: none;
+
+
+      &:after,
+      &:before {
+        position: relative;
+        display: block;
+        content: "";
+        width: 50%;
+        height: 100%;
+      }
+
+      &:after {
+        left: 0;
+        border-radius: 50%;
+        background: #fff;
+        transition: all .2s ease;
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+
+    &:checked + label {
+      background: #9FD6AE;
+
+      &:after {
+        left: 50%;
+      }
+    }
+  }
+
+  .ystdtb-menu__advanced-switch {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+
+    &:before {
+      content: "高度な設定";
+      display: inline-block;
+      margin-right: .5em;
+      font-size: .8rem;
+      color: #666;
+    }
+  }
+
+  .vc-chrome {
+    .vc-chrome-toggle-btn,
+    .vc-chrome-alpha-wrap,
+    .vc-input__label {
+      display: none;
+    }
+  }
+}
+
+

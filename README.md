@@ -54,7 +54,3 @@ Source : <https://github.com/vuejs/vue>
 License: MIT  
 Source : <https://github.com/xiaokaike/vue-color>
 
-### Lato
-
-License: Open Font License.  
-Source : <https://fonts.google.com/specimen/Lato>

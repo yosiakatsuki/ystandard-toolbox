@@ -1,10 +1,11 @@
 <template>
 	<div class="heading-editor-container">
 		<div class="heading-editor-control">
-			<EditorFont :level="level" />
+			<EditorFont :level="level"/>
 		</div>
-
-		<Preview/>
+		<div class="heading-editor-preview">
+			<Preview :level="level"/>
+		</div>
 	</div>
 </template>
 
@@ -24,8 +25,7 @@
 			Preview,
 			EditorFont
 		},
-		methods: {
-		},
+		methods: {},
 		created() {
 		}
 	};
@@ -39,7 +39,7 @@
 
 	.heading-editor-control {
 		font-size: 1rem;
-		width: 60%;
+		width: 50%;
 
 		> * {
 			margin-top: 1.5em;
@@ -58,5 +58,9 @@
 				margin-top: 0;
 			}
 		}
+	}
+	.heading-editor-preview {
+		font-size: 1rem;
+		width: 50%;
 	}
 </style>

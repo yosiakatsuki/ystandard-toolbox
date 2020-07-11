@@ -9,7 +9,7 @@ namespace ystandard_toolbox;
 
 defined( 'ABSPATH' ) || die();
 ?>
-<div class="start">
+<div class="start ystdtb-menu__component">
 	<h1 class="ystdtb-menu__title">yStandard Toolbox</h1>
 </div>
 

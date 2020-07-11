@@ -9,7 +9,7 @@ namespace ystandard_toolbox;
 
 defined( 'ABSPATH' ) || die();
 ?>
-<div class="code">
+<div class="code ystdtb-menu__component">
 	<h1 class="ystdtb-menu__title">コード追加</h1>
 	<div class="code__normal">
 		<div class="code__section">
