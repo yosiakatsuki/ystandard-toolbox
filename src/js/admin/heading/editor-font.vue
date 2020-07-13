@@ -1,9 +1,8 @@
 <template>
 	<div class="heading-editor-font">
-		<h3>文字設定</h3>
 		<div class="ystdtb-menu__table">
 			<div class="is-label">レスポンシブモード</div>
-			<div class="is-content">
+			<div class="is-content" style="padding-top: .4em;">
 				<input
 					:name="`ystdtb_heading[${level}][fontSizeResponsive]`"
 					type="hidden"
@@ -73,19 +72,7 @@
 		<div class="ystdtb-menu__table">
 			<div class="is-label">文字色</div>
 			<div class="is-content">
-				<div class="ystdtb-color-picker">
-					<span class="ystdtb-color-picker__preview" :style="{background: fontColor}"> </span>
-					<button type="button" @click="showColorPicker = ! showColorPicker">
-						{{ fontColorButton }}
-					</button>
-					<chrome-picker
-						v-if="showColorPicker"
-						class="ystdtb-color-picker__control"
-						v-model="fontColor"
-					/>
-					<input type="hidden" :name="`ystdtb_heading[${level}][fontColor]`" v-model="fontColor">
-				</div>
-
+				<ColorPicker v-model="fontColor"/>
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
@@ -197,7 +184,7 @@
 		BoldIcon,
 		ItalicIcon
 	} from 'vue-feather-icons'
-	import { Chrome } from 'vue-color';
+	import ColorPicker from '../component/color-picker';
 
 	export default {
 		props: [ 'level' ],
@@ -207,7 +194,7 @@
 			}
 		},
 		components: {
-			'chrome-picker': Chrome,
+			ColorPicker,
 			MonitorIcon,
 			TabletIcon,
 			SmartphoneIcon,
@@ -255,11 +242,8 @@
 					return this.getOption( 'fontColor' );
 				},
 				set( newValue ) {
-					this.updateOption( 'fontColor', newValue.hex );
+					this.updateOption( 'fontColor', newValue );
 				}
-			},
-			fontColorButton: function() {
-				return this.showColorPicker ? '閉じる' : '変更';
 			},
 			fontWeight: {
 				get() {

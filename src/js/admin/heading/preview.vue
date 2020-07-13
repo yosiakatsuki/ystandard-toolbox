@@ -60,9 +60,8 @@
 		margin-left: 2em;
 
 		.editor-preview__content {
-			display: flex;
-			align-items: center;
-			height: 100%;
+			padding-top: 5em;
+			padding-bottom: 5em;
 		}
 
 		.heading-editor-preview,

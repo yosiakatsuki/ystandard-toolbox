@@ -54,22 +54,6 @@
     }
   }
 
-  .ystdtb-color-picker {
-    display: flex;
-    position: relative;
-
-    .ystdtb-color-picker__preview {
-      min-width: 2.5em;
-    }
-
-    .ystdtb-color-picker__control {
-      position: absolute;
-      top: calc(100% + 1em);
-      left: 0;
-      z-index: 5;
-    }
-  }
-
   .toggle-button {
     display: none;
 
@@ -128,14 +112,6 @@
       margin-right: .5em;
       font-size: .8rem;
       color: #666;
-    }
-  }
-
-  .vc-chrome {
-    .vc-chrome-toggle-btn,
-    .vc-chrome-alpha-wrap,
-    .vc-input__label {
-      display: none;
     }
   }
 }
