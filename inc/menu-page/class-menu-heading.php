@@ -7,7 +7,7 @@
 
 namespace ystandard_toolbox\menu;
 
-use ystandard_toolbox\Code;
+use ystandard_toolbox\Heading;
 use ystandard_toolbox\Menu_Page;
 
 defined( 'ABSPATH' ) || die();
@@ -44,6 +44,11 @@ class Menu_Heading extends Menu_Page_Base {
 			return;
 		}
 		$this->enqueue_admin_script( 'heading' );
+		wp_localize_script(
+			'ystdtb-heading',
+			'ystdtbHeadingData',
+			Heading::get_option()
+		);
 	}
 
 	/**
@@ -52,9 +57,10 @@ class Menu_Heading extends Menu_Page_Base {
 	 * @param array $_post 設定値.
 	 */
 	public function save( $_post ) {
-		if ( ! isset( $_post[ Code::OPTION_NAME ] ) ) {
+		if ( ! isset( $_post[ Heading::OPTION_NAME ] ) || ! is_array( $_post[ Heading::OPTION_NAME ] ) ) {
 			return;
 		}
+		update_option( Heading::OPTION_NAME, $_post[ Heading::OPTION_NAME ] );
 	}
 }
 

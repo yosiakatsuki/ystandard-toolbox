@@ -9,7 +9,7 @@
 			class="ystdtb-color-picker__control"
 			v-model="fontColor"
 		/>
-		<input type="hidden" :name="`ystdtb_heading[${level}][fontColor]`" v-model="fontColor">
+		<input type="hidden" :name="name" v-model="fontColor">
 		<span
 			class="ystdtb-color-picker__cover"
 			@click="showColorPicker = ! showColorPicker"
@@ -23,7 +23,7 @@
 
 	export default {
 		name: 'ColorPicker',
-		props: [ 'value' ],
+		props: [ 'value', 'name' ],
 		data() {
 			return {
 				showColorPicker: false

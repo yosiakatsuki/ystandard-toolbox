@@ -18,14 +18,21 @@ const store = new Vuex.Store( {
 			state.options = { ...newOptions };
 		},
 		initOptions( state ) {
-			let defaultOptions = {};
+			let Options = {};
 			for ( var i = 1; i <= 6; i++ ) {
-				defaultOptions[ `h${ i }` ] = { ...schema };
-				defaultOptions[ `h${ i }` ][ 'fontSizePc' ] = getDefaultFontSize( `h${ i }` );
-				defaultOptions[ `h${ i }` ][ 'fontSizeTablet' ] = getDefaultFontSize( `h${ i }` );
-				defaultOptions[ `h${ i }` ][ 'fontSizeMobile' ] = getDefaultFontSize( `h${ i }` );
+				Options[ `h${ i }` ] = { ...schema };
+				Options[ `h${ i }` ][ 'fontSizePc' ] = getDefaultFontSize( `h${ i }` );
+				Options[ `h${ i }` ][ 'fontSizeTablet' ] = getDefaultFontSize( `h${ i }` );
+				Options[ `h${ i }` ][ 'fontSizeMobile' ] = getDefaultFontSize( `h${ i }` );
+				if ( `h${ i }` in window.ystdtbHeadingData ) {
+					Options[ `h${ i }` ] = {
+						...Options[ `h${ i }` ],
+						...window.ystdtbHeadingData[ `h${ i }` ]
+					}
+				}
 			}
-			state.options = window.ystdtbHeadingData ? window.ystdtbHeadingData : defaultOptions;
+			console.log( Options );
+			state.options = Options;
 		}
 
 	},

@@ -72,14 +72,17 @@
 		<div class="ystdtb-menu__table">
 			<div class="is-label">文字色</div>
 			<div class="is-content">
-				<ColorPicker v-model="fontColor"/>
+				<ColorPicker
+					:name="`ystdtb_heading[${level}][fontColor]`"
+					v-model="fontColor"
+				/>
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
 			<div class="is-label">太さ</div>
 			<div class="is-content">
 				<select
-					name="`ystdtb_heading[${level}][fontWeight]`"
+					:name="`ystdtb_heading[${level}][fontWeight]`"
 					v-model="fontWeight"
 				>
 					<option value="normal">normal</option>
@@ -102,7 +105,7 @@
 			<div class="is-label">スタイル</div>
 			<div class="is-content">
 				<select
-					name="`ystdtb_heading[${level}][fontStyle]`"
+					:name="`ystdtb_heading[${level}][fontStyle]`"
 					v-model="fontStyle"
 				>
 					<option value="normal">normal</option>
@@ -114,6 +117,7 @@
 			<div class="ystdtb-menu__advanced-switch">
 				<input
 					:id="`font-size-advanced-switch--${level}`"
+					:name="`ystdtb_heading[${level}][fontAdvanced]`"
 					class="toggle-button"
 					type="checkbox"
 					value="true"
@@ -185,6 +189,7 @@
 		ItalicIcon
 	} from 'vue-feather-icons'
 	import ColorPicker from '../component/color-picker';
+	import _toBool from '../function/_toBool'
 
 	export default {
 		props: [ 'level' ],
@@ -204,7 +209,7 @@
 		computed: {
 			fontSizeResponsive: {
 				get() {
-					return this.getOption( 'fontSizeResponsive' );
+					return _toBool( this.getOption( 'fontSizeResponsive' ) );
 				},
 				set( newValue ) {
 					this.updateOption( 'fontSizeResponsive', newValue );
@@ -263,7 +268,7 @@
 			},
 			fontAdvanced: {
 				get() {
-					return this.getOption( 'fontAdvanced' );
+					return _toBool( this.getOption( 'fontAdvanced' ) );
 				},
 				set( newValue ) {
 					this.updateOption( 'fontAdvanced', newValue );
