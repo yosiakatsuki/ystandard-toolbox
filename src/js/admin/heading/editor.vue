@@ -2,7 +2,7 @@
 	<div class="heading-editor-container">
 		<div class="heading-editor-control">
 			<ul class="heading-editor-tabs">
-				<li :class="{'is-active':isActive('fontSize')}" @click="setActive('fontSize')">文字</li>
+				<li :class="{'is-active':isActive('font')}" @click="setActive('font')">文字</li>
 				<li :class="{'is-active':isActive('background')}" @click="setActive('background')">背景</li>
 				<li :class="{'is-active':isActive('border')}" @click="setActive('border')">罫線</li>
 				<li :class="{'is-active':isActive('margin')}" @click="setActive('margin')">余白</li>
@@ -10,7 +10,8 @@
 			</ul>
 			<div class="heading-editor-tab__content">
 				<transition name="fade">
-					<EditorFont v-if="isActive('fontSize')" :level="level"/>
+					<EditorFont v-if="isActive('font')" :level="level"/>
+					<EditorBackground v-if="isActive('background')" :level="level"/>
 				</transition>
 			</div>
 		</div>
@@ -24,17 +25,20 @@
 <script>
 	import Preview from './preview';
 	import EditorFont from './editor-font';
+	import EditorBackground from './editor-background';
 
 	export default {
+		name: 'editor',
 		props: [ 'level' ],
 		data() {
 			return {
-				panel: "fontSize"
+				panel: "font"
 			}
 		},
 		components: {
 			Preview,
-			EditorFont
+			EditorFont,
+			EditorBackground
 		},
 		computed: {},
 		methods: {

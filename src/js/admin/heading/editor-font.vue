@@ -85,8 +85,8 @@
 					:name="`ystdtb_heading[${level}][fontWeight]`"
 					v-model="fontWeight"
 				>
-					<option value="normal">normal</option>
-					<option value="bold">bold</option>
+					<option value="normal">標準</option>
+					<option value="bold">太字</option>
 					<optgroup label="高度な設定">
 						<option value="100">100</option>
 						<option value="200">200</option>
@@ -108,8 +108,8 @@
 					:name="`ystdtb_heading[${level}][fontStyle]`"
 					v-model="fontStyle"
 				>
-					<option value="normal">normal</option>
-					<option value="italic">italic</option>
+					<option value="normal">標準</option>
+					<option value="italic">イタリック体</option>
 				</select>
 			</div>
 		</div>
@@ -192,11 +192,10 @@
 	import _toBool from '../function/_toBool'
 
 	export default {
+		name: 'editor-font',
 		props: [ 'level' ],
 		data() {
-			return {
-				showColorPicker: false
-			}
+			return {}
 		},
 		components: {
 			ColorPicker,

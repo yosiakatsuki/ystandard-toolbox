@@ -11,6 +11,7 @@
 	import Editor from './editor';
 
 	export default {
+		name: 'app-headline',
 		data() {
 			return {
 				headings: [

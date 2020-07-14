@@ -60,7 +60,16 @@ class Menu_Heading extends Menu_Page_Base {
 		if ( ! isset( $_post[ Heading::OPTION_NAME ] ) || ! is_array( $_post[ Heading::OPTION_NAME ] ) ) {
 			return;
 		}
-		update_option( Heading::OPTION_NAME, $_post[ Heading::OPTION_NAME ] );
+		$new_option = $_post[ Heading::OPTION_NAME ];
+		$option     = Heading::get_option();
+		foreach ( $option as $level => $value ) {
+			if ( isset( $new_option[ $level ] ) ) {
+				foreach ( $new_option[ $level ] as $key => $new_value ) {
+					$option[ $level ][ $key ] = $new_value;
+				}
+			}
+		}
+		update_option( Heading::OPTION_NAME, $option );
 	}
 }
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="editor-preview">
 		<div class="ystdtb-menu__card editor-preview__content">
-			<textarea class="heading-editor-preview" :style="previewStyle">見出しのプレビュー</textarea>
+			<div class="heading-editor-preview" contenteditable="true" :style="previewStyle">見出しのプレビュー</div>
 		</div>
 	</div>
 </template>
@@ -9,6 +9,7 @@
 
 <script>
 	export default {
+		name: 'preview',
 		props: [ 'level' ],
 		data() {
 			return {}
@@ -19,10 +20,11 @@
 					fontSize: this.getFontSize() + this.getOption( 'fontSizeUnit' ),
 					color: this.getOption( 'fontColor' ),
 					fontWeight: this.getOption( 'fontWeight' ),
-					fontStyle: this.getOption( 'fontStyle' ),
+					fontStyle: this.getOption( 'fontStyle' ) + ' !important',
 					fontFamily: this.getFontFamily(),
 					lineHeight: this.getLineHeight(),
 					letterSpacing: this.getLetterSpacing(),
+					backgroundColor: this.getOption( 'backgroundColor' ),
 				}
 			}
 		},
@@ -50,7 +52,7 @@
 			getLetterSpacing() {
 				const value = this.getFontAdvancedValue( 'letterSpacing' );
 				return undefined === value ? undefined : value + 'em';
-			}
+			},
 		}
 	};
 </script>
