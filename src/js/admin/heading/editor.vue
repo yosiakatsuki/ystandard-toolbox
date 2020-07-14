@@ -88,15 +88,21 @@
 			li {
 				width: 100%;
 				padding: .5em;
-				border-bottom: 2px solid transparent;
+				border-right: 1px solid #fff;
+				border-bottom: 2px solid #f7f7f7;
+				background-color: #f7f7f7;
 				color: #666;
 				font-size: 0.9em;
 				text-align: center;
 				cursor: pointer;
 				transition: border .3s;
 
+				&:last-child {
+					border-right: 0;
+				}
+
 				&.is-active {
-					border-bottom-color: #07689f;
+					border-bottom: 2px solid #07689f;
 				}
 			}
 		}
