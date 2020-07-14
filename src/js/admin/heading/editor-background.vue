@@ -10,7 +10,6 @@
 					/>
 					<button class="editor-background__bgc-clear" type="button" @click="clearBackgroundColor">クリア</button>
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -125,7 +125,7 @@
 				>
 				<label :for="`font-size-advanced-switch--${level}`"></label>
 			</div>
-			<div v-if="fontAdvanced">
+			<div v-show="fontAdvanced">
 				<div class="ystdtb-menu__table">
 					<div class="is-label">
 						<label :for="`font-family--${level}`">font-family</label>
@@ -189,7 +189,8 @@
 		ItalicIcon
 	} from 'vue-feather-icons'
 	import ColorPicker from '../component/color-picker';
-	import _toBool from '../function/_toBool'
+	import _toBool from '../function/_toBool';
+	import _toggleSizeInUnit from '../function/_toggleSizeInUnit';
 
 	export default {
 		name: 'editor-font',
@@ -318,15 +319,18 @@
 			toggleFontSizeUnit() {
 				const unit = 'em' === this.fontSizeUnit ? 'px' : 'em';
 				this.updateOption( 'fontSizeUnit', unit );
-				if ( 'px' === unit ) {
-					this.updateOption( 'fontSizePc', parseInt( this.fontSizePc * 16 ) );
-					this.updateOption( 'fontSizeTablet', parseInt( this.fontSizeTablet * 16 ) );
-					this.updateOption( 'fontSizeMobile', parseInt( this.fontSizeMobile * 16 ) );
-				} else {
-					this.updateOption( 'fontSizePc', Math.round( this.fontSizePc / 16 * 10 ) / 10 );
-					this.updateOption( 'fontSizeTablet', Math.round( this.fontSizeTablet / 16 * 10 ) / 10 );
-					this.updateOption( 'fontSizeMobile', Math.round( this.fontSizeMobile / 16 * 10 ) / 10 );
-				}
+				this.updateOption(
+					'fontSizePc',
+					_toggleSizeInUnit( this.fontSizePc, unit )
+				);
+				this.updateOption(
+					'fontSizeTablet',
+					_toggleSizeInUnit( this.fontSizeTablet, unit )
+				);
+				this.updateOption(
+					'fontSizeMobile',
+					_toggleSizeInUnit( this.fontSizeMobile, unit )
+				);
 			}
 		},
 		created() {

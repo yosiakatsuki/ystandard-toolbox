@@ -40,6 +40,10 @@
       min-width: 5em;
       padding: .5em .5em .5em 0;
 
+      &.is-small {
+        width: 15%;
+      }
+
       label {
         font-weight: normal;
         font-size: 1em;
@@ -47,7 +51,7 @@
     }
 
     .is-content {
-      width: 70%;
+      flex-grow: 1;
     }
   }
 

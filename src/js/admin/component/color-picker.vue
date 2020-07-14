@@ -1,7 +1,7 @@
 <template>
 	<div class="ystdtb-color-picker">
 		<span class="ystdtb-color-picker__preview" :style="{background: color}"> </span>
-		<button type="button" @click="showColorPicker = ! showColorPicker">
+		<button class="ystdtb-color-picker__open" type="button" @click="showColorPicker = ! showColorPicker">
 			{{ colorButton }}
 		</button>
 		<chrome-picker
@@ -58,6 +58,11 @@
 			border-top: 1px solid #eee;
 			border-bottom: 1px solid #eee;
 			border-left: 1px solid #eee;
+		}
+
+		.ystdtb-color-picker__open {
+			white-space: nowrap;
+			font-size: 0.9em;
 		}
 
 		.ystdtb-color-picker__control {

@@ -4,15 +4,14 @@
 			<ul class="heading-editor-tabs">
 				<li :class="{'is-active':isActive('font')}" @click="setActive('font')">文字</li>
 				<li :class="{'is-active':isActive('background')}" @click="setActive('background')">背景</li>
-				<li :class="{'is-active':isActive('border')}" @click="setActive('border')">罫線</li>
+				<li :class="{'is-active':isActive('border')}" @click="setActive('border')">線</li>
 				<li :class="{'is-active':isActive('margin')}" @click="setActive('margin')">余白</li>
 				<li :class="{'is-active':isActive('other')}" @click="setActive('other')">その他</li>
 			</ul>
 			<div class="heading-editor-tab__content">
-				<transition name="fade">
-					<EditorFont v-if="isActive('font')" :level="level"/>
-					<EditorBackground v-if="isActive('background')" :level="level"/>
-				</transition>
+				<EditorFont v-show="isActive('font')" :level="level"/>
+				<EditorBackground v-show="isActive('background')" :level="level"/>
+				<EditorBorder v-show="isActive('border')" :level="level"/>
 			</div>
 		</div>
 		<div class="heading-editor-preview">
@@ -26,6 +25,7 @@
 	import Preview from './preview';
 	import EditorFont from './editor-font';
 	import EditorBackground from './editor-background';
+	import EditorBorder from './editor-border';
 
 	export default {
 		name: 'editor',
@@ -38,7 +38,8 @@
 		components: {
 			Preview,
 			EditorFont,
-			EditorBackground
+			EditorBackground,
+			EditorBorder
 		},
 		computed: {},
 		methods: {

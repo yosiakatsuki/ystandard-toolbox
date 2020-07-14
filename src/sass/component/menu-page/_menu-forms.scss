@@ -26,6 +26,11 @@
     box-sizing: border-box;
     -webkit-appearance: none;
   }
+  input[type="number"] {
+    &.is-small {
+      width: 5em;
+    }
+  }
 
   select {
     max-width: 100%;

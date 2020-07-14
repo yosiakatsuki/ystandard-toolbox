@@ -25,6 +25,10 @@
 					lineHeight: this.getLineHeight(),
 					letterSpacing: this.getLetterSpacing(),
 					backgroundColor: this.getOption( 'backgroundColor' ),
+					borderTop: this.getBorder( 'Top' ),
+					borderRight: this.getBorder( 'Right' ),
+					borderBottom: this.getBorder( 'Bottom' ),
+					borderLeft: this.getBorder( 'Left' ),
 				}
 			}
 		},
@@ -53,6 +57,21 @@
 				const value = this.getFontAdvancedValue( 'letterSpacing' );
 				return undefined === value ? undefined : value + 'em';
 			},
+			getBorder( pos ) {
+				const borderWidth = this.getOption( `border${ pos }Width` );
+				const borderWidthUnit = this.getOption( `border${ pos }WidthUnit` );
+				const borderStyle = this.getOption( `border${ pos }Style` );
+				let borderColor = this.getOption( `border${ pos }Color` );
+				console.log( borderWidth );
+				if ( 0 >= borderWidth ) {
+					return undefined;
+				}
+				if ( '' === borderColor ) {
+					borderColor = 'transparent';
+				}
+				console.log( `${ borderWidth }${ borderWidthUnit } ${ borderStyle } ${ borderColor }` );
+				return `${ borderWidth }${ borderWidthUnit } ${ borderStyle } ${ borderColor }`;
+			}
 		}
 	};
 </script>
