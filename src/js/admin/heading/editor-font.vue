@@ -1,25 +1,6 @@
 <template>
 	<div class="heading-editor-font">
 		<div class="ystdtb-menu__table">
-			<div class="is-label">レスポンシブモード</div>
-			<div class="is-content" style="padding-top: .4em;">
-				<input
-					:name="`ystdtb_heading[${level}][fontSizeResponsive]`"
-					type="hidden"
-					value="false"
-				>
-				<input
-					:id="`font-size-responsive--${level}`"
-					:name="`ystdtb_heading[${level}][fontSizeResponsive]`"
-					class="toggle-button"
-					type="checkbox"
-					value="true"
-					v-model="fontSizeResponsive"
-				>
-				<label :for="`font-size-responsive--${level}`"></label>
-			</div>
-		</div>
-		<div class="ystdtb-menu__table">
 			<div class="is-label">文字サイズ</div>
 			<div class="is-content">
 				<div class="ystdtb-menu__horizontal">
@@ -66,16 +47,20 @@
 						/>
 					</label>
 					<button type="button" style="height: 100%" @click="toggleFontSizeUnit">{{ fontSizeUnit }}</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][fontSizeUnit]`" v-model="fontSizeUnit">
 				</div>
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
 			<div class="is-label">文字色</div>
 			<div class="is-content">
-				<ColorPicker
-					:name="`ystdtb_heading[${level}][fontColor]`"
-					v-model="fontColor"
-				/>
+				<div class="ystdtb-menu__horizontal">
+					<ColorPicker
+						:name="`ystdtb_heading[${level}][fontColor]`"
+						v-model="fontColor"
+					/>
+					<button class="editor-border__color-clear" type="button" @click="clearTextColor()">クリア</button>
+				</div>
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
@@ -126,6 +111,31 @@
 				<label :for="`font-size-advanced-switch--${level}`"></label>
 			</div>
 			<div v-show="fontAdvanced">
+				<div class="ystdtb-menu__table">
+					<div class="is-label">レスポンシブ</div>
+					<div class="is-content" style="padding-top: .4em;">
+						<div class="ystdtb-menu__horizontal">
+							<div>
+								<input
+									:name="`ystdtb_heading[${level}][fontSizeResponsive]`"
+									type="hidden"
+									value="false"
+								>
+								<input
+									:id="`font-size-responsive--${level}`"
+									:name="`ystdtb_heading[${level}][fontSizeResponsive]`"
+									class="toggle-button"
+									type="checkbox"
+									value="true"
+									v-model="fontSizeResponsive"
+								>
+								<label :for="`font-size-responsive--${level}`"></label>
+							</div>
+							<span style="font-size: .8em;">文字サイズを画面サイズ別に設定する</span>
+						</div>
+
+					</div>
+				</div>
 				<div class="ystdtb-menu__table">
 					<div class="is-label">
 						<label :for="`font-family--${level}`">font-family</label>
@@ -331,10 +341,11 @@
 					'fontSizeMobile',
 					_toggleSizeInUnit( this.fontSizeMobile, unit )
 				);
+			},
+			clearTextColor() {
+				this.updateOption( 'fontColor', '#222222' );
 			}
 		},
-		created() {
-		}
 	};
 </script>
 

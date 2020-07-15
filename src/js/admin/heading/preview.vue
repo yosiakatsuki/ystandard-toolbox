@@ -29,6 +29,12 @@
 					borderRight: this.getBorder( 'Right' ),
 					borderBottom: this.getBorder( 'Bottom' ),
 					borderLeft: this.getBorder( 'Left' ),
+					paddingTop: this.getPadding( 'Top' ),
+					paddingRight: this.getPadding( 'Right' ),
+					paddingBottom: this.getPadding( 'Bottom' ),
+					paddingLeft: this.getPadding( 'Left' ),
+					marginTop: this.getMargin( 'Top' ),
+					marginBottom: this.getMargin( 'Bottom' ),
 				}
 			}
 		},
@@ -62,15 +68,35 @@
 				const borderWidthUnit = this.getOption( `border${ pos }WidthUnit` );
 				const borderStyle = this.getOption( `border${ pos }Style` );
 				let borderColor = this.getOption( `border${ pos }Color` );
-				console.log( borderWidth );
 				if ( 0 >= borderWidth ) {
 					return undefined;
 				}
 				if ( '' === borderColor ) {
 					borderColor = 'transparent';
 				}
-				console.log( `${ borderWidth }${ borderWidthUnit } ${ borderStyle } ${ borderColor }` );
 				return `${ borderWidth }${ borderWidthUnit } ${ borderStyle } ${ borderColor }`;
+			},
+			getPadding( pos ) {
+				const padding = this.getOption( `padding${ pos }` );
+				const unit = this.getOption( `padding${ pos }Unit` );
+				if ( '' === padding ) {
+					return undefined;
+				}
+				if ( 0 === padding ) {
+					return 0;
+				}
+				return `${ padding }${ unit }`;
+			},
+			getMargin( pos ) {
+				const margin = this.getOption( `margin${ pos }` );
+				const unit = this.getOption( `margin${ pos }Unit` );
+				if ( '' === margin ) {
+					return undefined;
+				}
+				if ( 0 === margin ) {
+					return 0;
+				}
+				return `${ margin }${ unit }`;
 			}
 		}
 	};

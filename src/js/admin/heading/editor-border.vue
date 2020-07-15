@@ -15,6 +15,7 @@
 						v-model="borderTopWidth"
 					/>
 					<button type="button" style="height: 100%" @click="toggleBorderWidth('Top')">{{ borderTopWidthUnit }}</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][borderTopWidthUnit]`" v-model="borderTopWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderTopStyle]`"
 						:id="`border-top-style--${level}`"
@@ -45,6 +46,7 @@
 						v-model="borderRightWidth"
 					/>
 					<button type="button" style="height: 100%" @click="toggleBorderWidth('Right')">{{ borderRightWidthUnit }}</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][borderRightWidthUnit]`" v-model="borderRightWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderRightStyle]`"
 						:id="`border-right-style--${level}`"
@@ -75,6 +77,7 @@
 						v-model="borderBottomWidth"
 					/>
 					<button type="button" style="height: 100%" @click="toggleBorderWidth('Bottom')">{{ borderBottomWidthUnit }}</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][borderBottomWidthUnit]`" v-model="borderBottomWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderBottomStyle]`"
 						:id="`border-bottom-style--${level}`"
@@ -105,6 +108,7 @@
 						v-model="borderLeftWidth"
 					/>
 					<button type="button" style="height: 100%" @click="toggleBorderWidth('Left')">{{ borderLeftWidthUnit }}</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][borderLeftWidthUnit]`" v-model="borderLeftWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderLeftStyle]`"
 						:id="`border-left-style--${level}`"
