@@ -64,6 +64,23 @@
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
+			<div class="is-label">揃え位置</div>
+			<div class="is-content">
+				<div class="font-align-buttons">
+					<button type="button" :class="getAlignClass('left')" @click="setAlign('left')">
+						<AlignLeftIcon size="20"/>
+					</button>
+					<button type="button" :class="getAlignClass('center')" @click="setAlign('center')">
+						<AlignCenterIcon size="20"/>
+					</button>
+					<button type="button" :class="getAlignClass('right')" @click="setAlign('right')">
+						<AlignRightIcon size="20"/>
+					</button>
+					<input type="hidden" :name="`ystdtb_heading[${level}][fontAlign]`" v-model="fontAlign">
+				</div>
+			</div>
+		</div>
+		<div class="ystdtb-menu__table">
 			<div class="is-label">太さ</div>
 			<div class="is-content">
 				<select
@@ -196,7 +213,10 @@
 		TabletIcon,
 		SmartphoneIcon,
 		BoldIcon,
-		ItalicIcon
+		ItalicIcon,
+		AlignLeftIcon,
+		AlignCenterIcon,
+		AlignRightIcon
 	} from 'vue-feather-icons'
 	import ColorPicker from '../component/color-picker';
 	import _toBool from '../function/_toBool';
@@ -214,7 +234,10 @@
 			TabletIcon,
 			SmartphoneIcon,
 			BoldIcon,
-			ItalicIcon
+			ItalicIcon,
+			AlignLeftIcon,
+			AlignCenterIcon,
+			AlignRightIcon
 		},
 		computed: {
 			fontSizeResponsive: {
@@ -258,6 +281,14 @@
 				},
 				set( newValue ) {
 					this.updateOption( 'fontColor', newValue );
+				}
+			},
+			fontAlign: {
+				get() {
+					return this.getOption( 'fontAlign' );
+				},
+				set( newValue ) {
+					this.updateOption( 'fontAlign', newValue );
 				}
 			},
 			fontWeight: {
@@ -326,6 +357,19 @@
 					value: newValue
 				} );
 			},
+			setAlign( value ) {
+				let oldValue = this.getOption( 'fontAlign' );
+				if ( value === oldValue ) {
+					value = '';
+				}
+				this.fontAlign = value;
+			},
+			getAlignClass( align ) {
+				if ( align === this.fontAlign ) {
+					return 'is-active';
+				}
+				return '';
+			},
 			toggleFontSizeUnit() {
 				const unit = 'em' === this.fontSizeUnit ? 'px' : 'em';
 				this.updateOption( 'fontSizeUnit', unit );
@@ -360,6 +404,24 @@
 
 			&:last-child {
 				margin-right: 0;
+			}
+		}
+	}
+
+	.font-align-buttons {
+		display: flex;
+
+		button {
+			&:first-of-type {
+				border-right: 0;
+			}
+
+			&:last-of-type {
+				border-left: 0;
+			}
+
+			&.is-active {
+				background-color: #eee;
 			}
 		}
 	}

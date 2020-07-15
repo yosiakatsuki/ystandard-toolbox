@@ -19,6 +19,7 @@
 				return {
 					fontSize: this.getFontSize() + this.getOption( 'fontSizeUnit' ),
 					color: this.getOption( 'fontColor' ),
+					textAlign: this.getOption( 'fontAlign' ),
 					fontWeight: this.getOption( 'fontWeight' ),
 					fontStyle: this.getOption( 'fontStyle' ) + ' !important',
 					fontFamily: this.getFontFamily(),
