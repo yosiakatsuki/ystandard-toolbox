@@ -32,13 +32,15 @@
     }
   }
 
-  select {
+  select,
+  .select {
     max-width: 100%;
     width: 100%;
     padding: .25em .75em;
     background: #fff;
     color: #666;
     border: 1px solid global.$color__border-gray-light;
+    text-align: left;
     transition: .2s ease-in-out;
     transition-property: color, background-color, border;
   }
@@ -56,6 +58,10 @@
 
     svg {
       vertical-align: -.25em;
+    }
+
+    &.is-nowrap {
+      white-space: nowrap;
     }
 
     &.ystdtb-menu__clear {

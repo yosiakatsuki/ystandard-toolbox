@@ -2,6 +2,7 @@
 	<div class="heading-editor-container">
 		<div class="heading-editor-control">
 			<ul class="heading-editor-tabs">
+				<li :class="{'is-active':isActive('basic')}" @click="setActive('basic')">基本</li>
 				<li :class="{'is-active':isActive('font')}" @click="setActive('font')">文字</li>
 				<li :class="{'is-active':isActive('background')}" @click="setActive('background')">背景</li>
 				<li :class="{'is-active':isActive('border')}" @click="setActive('border')">線</li>
@@ -9,6 +10,7 @@
 				<li :class="{'is-active':isActive('other')}" @click="setActive('other')">その他</li>
 			</ul>
 			<div class="heading-editor-tab__content">
+				<EditorBasic v-show="isActive('basic')" :level="level"/>
 				<EditorFont v-show="isActive('font')" :level="level"/>
 				<EditorBackground v-show="isActive('background')" :level="level"/>
 				<EditorBorder v-show="isActive('border')" :level="level"/>
@@ -24,6 +26,7 @@
 
 <script>
 	import Preview from './preview';
+	import EditorBasic from './editor-basic';
 	import EditorFont from './editor-font';
 	import EditorBackground from './editor-background';
 	import EditorBorder from './editor-border';
@@ -34,11 +37,12 @@
 		props: [ 'level' ],
 		data() {
 			return {
-				panel: "font"
+				panel: "basic"
 			}
 		},
 		components: {
 			Preview,
+			EditorBasic,
 			EditorFont,
 			EditorBackground,
 			EditorBorder,
@@ -96,7 +100,7 @@
 				border-bottom: 2px solid #f7f7f7;
 				background-color: #f7f7f7;
 				color: #666;
-				font-size: 0.9em;
+				font-size: 0.8em;
 				text-align: center;
 				cursor: pointer;
 				transition: border .3s;

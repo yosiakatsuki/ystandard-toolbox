@@ -112,7 +112,7 @@ function watchFiles() {
 	sass();
 	buildAdminApp();
 	watch( './src/sass/**/*.scss', sass );
-	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue' ], buildAdminApp );
+	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], buildAdminApp );
 }
 
 exports.createDeployFiles = series( cleanFiles, copyProductionFiles, parallel( zip, copyJson ) );

@@ -1,6 +1,9 @@
 {
+  "preset": "custom",
   "useCustomStyle": false,
-  "preset": "",
+  "useContent": true,
+  "useSidebar": true,
+  "useFooter": true,
   "fontSizeResponsive": false,
   "fontSizePc": 1.4,
   "fontSizeTablet": 1.4,
@@ -42,5 +45,14 @@
   "marginTop": "",
   "marginTopUnit": "em",
   "marginBottom": "",
-  "marginBottomUnit": "em"
+  "marginBottomUnit": "em",
+  "beforeContent": "",
+  "beforeSize": "",
+  "beforeWidth": "",
+  "beforeHeight": "",
+  "beforeColor": "",
+  "afterSize": "",
+  "afterWidth": "",
+  "afterHeight": "",
+  "afterColor": ""
 }
