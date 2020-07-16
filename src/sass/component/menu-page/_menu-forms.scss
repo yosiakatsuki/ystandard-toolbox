@@ -26,6 +26,7 @@
     box-sizing: border-box;
     -webkit-appearance: none;
   }
+
   input[type="number"] {
     &.is-small {
       width: 5em;
@@ -49,7 +50,8 @@
     transition-property: color, background-color, border;
   }
 
-  button {
+  button,
+  .button {
     padding: .5em .75em;
     background: #fff;
     color: #666;
@@ -72,6 +74,34 @@
       white-space: nowrap;
       font-size: .9em;
     }
+
+    &.is-block {
+      display: block;
+      width: 100%;
+    }
+
+    &.is-primary,
+    &.button-primary {
+      background-color: #07689f;
+      border-color: #07689f;
+      color: #fff;
+    }
+
+    &.is-cancel {
+      border: 1px solid #ccc;
+      color: #aaa;
+    }
+
+    &.is-danger {
+      border: 1px solid #f0506e;
+      color: #f0506e;
+    }
+
+    &.is-text {
+      border: 0;
+      background: transparent;
+    }
+
   }
 
   .toggle-button {
@@ -89,7 +119,6 @@
       transition: all .4s ease;
       cursor: pointer;
       user-select: none;
-
 
       &:after,
       &:before {
@@ -119,11 +148,12 @@
         left: 50%;
       }
     }
+
     &:disabled + label {
       background: #ccc;
 
       &:after {
-        opacity: 0.2;
+        opacity: 0.3;
       }
     }
   }

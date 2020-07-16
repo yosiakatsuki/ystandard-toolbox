@@ -31,8 +31,12 @@ const store = new Vuex.Store( {
 					}
 				}
 			}
-			console.log( Options );
 			state.options = Options;
+		},
+		resetOptions( state, data ) {
+			let newOptions = { ...state.options };
+			newOptions[ data.level ] = { ...schema };
+			state.options = newOptions;
 		}
 
 	},

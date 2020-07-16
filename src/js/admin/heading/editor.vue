@@ -15,6 +15,7 @@
 				<EditorBackground v-show="isActive('background')" :level="level"/>
 				<EditorBorder v-show="isActive('border')" :level="level"/>
 				<EditorMargin v-show="isActive('margin')" :level="level"/>
+				<EditorOther v-show="isActive('other')" :level="level"/>
 			</div>
 		</div>
 		<div class="heading-editor-preview">
@@ -31,6 +32,7 @@
 	import EditorBackground from './editor-background';
 	import EditorBorder from './editor-border';
 	import EditorMargin from './editor-margin';
+	import EditorOther from './editor-other';
 
 	export default {
 		name: 'editor',
@@ -46,7 +48,8 @@
 			EditorFont,
 			EditorBackground,
 			EditorBorder,
-			EditorMargin
+			EditorMargin,
+			EditorOther
 		},
 		computed: {},
 		methods: {

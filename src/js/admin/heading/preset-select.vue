@@ -18,23 +18,25 @@
 				変更
 			</button>
 		</div>
-		<div v-show="showPresetSelect" class="preset-select__modal">
-			<div class="preset-select__modal-cover" @click="closePresetSelect"></div>
-			<div class="preset-select__modal-content ystdtb-menu__card">
-				<h3>サンプルデザイン選択</h3>
-				<ul class="preset-select__list">
-					<li v-for="(value, name) in presetList">
-						<button
-							type="button"
-							class="is-nowrap preset-select__button"
-							@click="changePreset(name,value.default)"
-						>
-							<span class="preset-select__button-content" :style="parseStyle(value.default)">{{ value.name }}</span>
-						</button>
-					</li>
-				</ul>
+		<transition name="fade">
+			<div v-show="showPresetSelect" class="ystdtb-menu__modal preset-select__modal has-cover">
+				<div class="ystdtb-menu__modal-cover" @click="closePresetSelect"></div>
+				<div class="ystdtb-menu__modal-content is-large preset-select__modal-content ystdtb-menu__card">
+					<h3>サンプルデザイン選択</h3>
+					<ul class="preset-select__list">
+						<li v-for="(value, name) in presetList">
+							<button
+								type="button"
+								class="is-nowrap preset-select__button"
+								@click="changePreset(name,value.default)"
+							>
+								<span class="preset-select__button-content" :style="parseStyle(value.default)">{{ value.name }}</span>
+							</button>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</transition>
 	</div>
 
 </template>
@@ -95,7 +97,7 @@
 				return _parseStyle( style );
 			},
 			setDefaultStyle( style ) {
-				console.log(style);
+				console.log( style );
 				for ( const key in style ) {
 					this.updateOption( key, style[ key ] );
 				}
@@ -106,33 +108,8 @@
 
 <style lang="scss">
 	.preset-select__modal {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(#fff, 0.7);
-		z-index: 999999;
-
-		.preset-select__modal-cover {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			z-index: 999999;
-		}
 
 		.preset-select__modal-content {
-			width: 80%;
-			height: 80%;
-			position: relative;
-			padding: 2em;
-			border-radius: .25em;
-			background-color: #fff;
-			z-index: 1000000;
-
 			h3 {
 				margin: 0 0 1em;
 				text-align: center;

@@ -3,7 +3,7 @@
   "useCustomStyle": false,
   "useContent": true,
   "useSidebar": true,
-  "useFooter": true,
+  "useFooter": false,
   "fontSizeResponsive": false,
   "fontSizePc": 1.4,
   "fontSizeTablet": 1.4,
