@@ -36,8 +36,12 @@
   .select {
     max-width: 100%;
     width: 100%;
+    position: relative;
     padding: .25em .75em;
-    background: #fff;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
     color: #666;
     border: 1px solid global.$color__border-gray-light;
     text-align: left;
@@ -113,6 +117,13 @@
 
       &:after {
         left: 50%;
+      }
+    }
+    &:disabled + label {
+      background: #ccc;
+
+      &:after {
+        opacity: 0.2;
       }
     }
   }

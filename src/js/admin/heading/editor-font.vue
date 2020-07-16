@@ -118,6 +118,11 @@
 		<div class="ystdtb-menu__card" style="margin-top: 1em;">
 			<div class="ystdtb-menu__advanced-switch">
 				<input
+					:name="`ystdtb_heading[${level}][fontAdvanced]`"
+					type="hidden"
+					value="false"
+				>
+				<input
 					:id="`font-size-advanced-switch--${level}`"
 					:name="`ystdtb_heading[${level}][fontAdvanced]`"
 					class="toggle-button"

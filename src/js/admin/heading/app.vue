@@ -3,6 +3,9 @@
 		<div class="heading-editor__row" v-for="heading in headings">
 			<h2>{{ heading }}</h2>
 			<Editor :level="heading"/>
+			<div class="submit">
+				<input type="submit" name="submit" class="button button-primary" value="変更を保存">
+			</div>
 		</div>
 	</div>
 </template>

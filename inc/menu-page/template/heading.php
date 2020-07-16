@@ -14,9 +14,6 @@ defined( 'ABSPATH' ) || die();
 	<div id="app">
 		<App/><!-- vue app -->
 	</div>
-	<div class="ystdtb-menu__section">
-		<?php submit_button(); ?>
-	</div>
 </div>
 
 

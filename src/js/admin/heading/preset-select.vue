@@ -21,15 +21,18 @@
 		<div v-show="showPresetSelect" class="preset-select__modal">
 			<div class="preset-select__modal-cover" @click="closePresetSelect"></div>
 			<div class="preset-select__modal-content ystdtb-menu__card">
-				<div v-for="(value, name) in presetList">
-					<button
-						type="button"
-						class="is-nowrap preset-select__button"
-						@click="changePreset(name,value.default)"
-					>
-						<span class="preset-select__button-content" :style="parseStyle(value.default)">{{ value.name }}</span>
-					</button>
-				</div>
+				<h3>サンプルデザイン選択</h3>
+				<ul class="preset-select__list">
+					<li v-for="(value, name) in presetList">
+						<button
+							type="button"
+							class="is-nowrap preset-select__button"
+							@click="changePreset(name,value.default)"
+						>
+							<span class="preset-select__button-content" :style="parseStyle(value.default)">{{ value.name }}</span>
+						</button>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -122,17 +125,27 @@
 		}
 
 		.preset-select__modal-content {
-			display: flex;
-			flex-wrap: wrap;
 			width: 80%;
 			height: 80%;
 			position: relative;
-			padding: 2em 1em .5em;
+			padding: 2em;
 			border-radius: .25em;
 			background-color: #fff;
 			z-index: 1000000;
 
-			> div {
+			h3 {
+				margin: 0 0 1em;
+				text-align: center;
+				font-size: 1.5em;
+				color: #07689f;
+			}
+		}
+
+		.preset-select__list {
+			display: flex;
+			flex-wrap: wrap;
+
+			> li {
 				margin: 0 0 1.5em;
 				padding: 0 1em;
 				width: 25%;
