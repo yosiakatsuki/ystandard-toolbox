@@ -1,7 +1,7 @@
 <template>
 	<div class="preset-select">
 		<div class="ystdtb-menu__horizontal">
-			<button type="button" class="select" @click="openPresetSelect()">
+			<button type="button" class="select" @click="openPresetSelect()" style="font-size: .9em;padding: .35em .75em;">
 				{{ presetName }}
 			</button>
 			<input
@@ -22,15 +22,21 @@
 			<div v-show="showPresetSelect" class="ystdtb-menu__modal preset-select__modal has-cover">
 				<div class="ystdtb-menu__modal-cover" @click="closePresetSelect"></div>
 				<div class="ystdtb-menu__modal-content is-large preset-select__modal-content ystdtb-menu__card">
-					<h3>サンプルデザイン選択</h3>
+					<h3>デザインテンプレート選択</h3>
 					<ul class="preset-select__list">
 						<li v-for="(value, name) in presetList">
 							<button
 								type="button"
-								class="is-nowrap preset-select__button"
-								@click="changePreset(name,value.default)"
+								:class="buttonClass(name,value)"
+								@click="changePreset(name,value.default,value.clearAdvanced)"
 							>
-								<span class="preset-select__button-content" :style="parseStyle(value.default)">{{ value.name }}</span>
+
+								<span class="preset-select__button-content" :style="parseStyle(value.default)">
+									<span :style="previewBeforeAfterStyle(name,'before')"></span>
+									<span>{{ value.name }}</span>
+									<span :style="previewBeforeAfterStyle(name,'after')"></span>
+								</span>
+
 							</button>
 						</li>
 					</ul>
@@ -82,9 +88,12 @@
 					value: newValue
 				} );
 			},
-			changePreset( value, style ) {
+			changePreset( value, style, clearAdvanced ) {
 				this.updateOption( 'preset', value );
 				this.setDefaultStyle( style );
+				if ( clearAdvanced ) {
+					this.clearAdvanced();
+				}
 				this.closePresetSelect();
 			},
 			openPresetSelect() {
@@ -93,14 +102,74 @@
 			closePresetSelect() {
 				this.showPresetSelect = false;
 			},
+			buttonClass( name, value ) {
+				const useAdvanced = undefined !== value[ 'enableAdvanced' ];
+				return {
+					'is-nowrap': true,
+					'preset-select__button': true,
+					'is-selected': name === this.getOption( 'preset' ),
+					'use-advanced': useAdvanced
+				}
+			},
 			parseStyle( style ) {
 				return _parseStyle( style );
 			},
 			setDefaultStyle( style ) {
-				console.log( style );
 				for ( const key in style ) {
 					this.updateOption( key, style[ key ] );
 				}
+			},
+			previewBeforeAfterStyle( name, section ) {
+				if ( undefined === this.presetList[ name ] ) {
+					return {
+						display: 'none'
+					}
+				}
+				const style = this.presetList[ name ];
+				if ( undefined === style.default[ `${ section }Size` ] ) {
+					return {
+						display: 'none'
+					}
+				}
+
+				const size = style.default[ `${ section }Size` ];
+				const type = style.useAdvancedSize;
+				const display = style.default[ 'display' ] ? style.default[ 'display' ] : '';
+				const flexGrow = style.default[ `${ section }FlexGrow` ] ? style.default[ `${ section }FlexGrow` ] : false;
+				const align = 'flex' === display ? style.default[ `${ section }AlignSelf` ] : false;
+				const colorType = style.default[ `${ section }ColorType` ];
+				const color = style.default[ `${ section }Color` ];
+				const marginRight = 'before' === section ? '.5em' : false;
+				const marginLeft = 'after' === section ? '.5em' : false;
+
+				return {
+					height: type.includes( 'height' ) ? size + 'px' : false,
+					width: type.includes( 'width' ) ? size + 'px' : false,
+					alignSelf: align,
+					flexGrow: flexGrow,
+					backgroundColor: 'background' === colorType ? color : false,
+					color: 'color' === colorType ? color : false,
+					marginRight: marginRight,
+					marginLeft: marginLeft,
+				}
+
+			},
+			clearAdvanced() {
+				this.updateOption( 'display', '' );
+				this.updateOption( 'beforeContent', '' );
+				this.updateOption( 'beforeAlignSelf', '' );
+				this.updateOption( 'beforeFlexGrow', 0 );
+				this.updateOption( 'beforeMinWidth', '' );
+				this.updateOption( 'beforeSize', '' );
+				this.updateOption( 'beforeColor', '' );
+				this.updateOption( 'beforeColorType', '' );
+				this.updateOption( 'afterContent', '' );
+				this.updateOption( 'afterAlignSelf', '' );
+				this.updateOption( 'afterFlexGrow', 0 );
+				this.updateOption( 'afterMinWidth', '' );
+				this.updateOption( 'afterSize', '' );
+				this.updateOption( 'afterColor', '' );
+				this.updateOption( 'afterColorType', '' );
 			}
 		}
 	}
@@ -135,12 +204,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			&.is-selected {
+				border: 2px solid #07689f;
+			}
+
+			&.use-advanced {
+				background-color: rgba(#9f0799, 0.05);
+			}
 		}
 
 		.preset-select__button-content {
 			display: block;
 			width: 100%;
 			text-align: left;
+			font-size: .9em;
 		}
 	}
 </style>

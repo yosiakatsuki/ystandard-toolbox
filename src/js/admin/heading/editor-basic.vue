@@ -1,6 +1,6 @@
 <template>
 	<div class="heading-editor-basic">
-		<label class="is-block">サンプルデザイン</label>
+		<label class="is-block">デザインテンプレート</label>
 		<div style="margin-top: .5em;">
 			<presetSelect :level="level"/>
 		</div>

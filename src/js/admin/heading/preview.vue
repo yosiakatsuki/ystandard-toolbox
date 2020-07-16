@@ -1,18 +1,27 @@
 <template>
 	<div class="editor-preview">
 		<div class="ystdtb-menu__card editor-preview__content">
-			<div class="heading-editor-preview" contenteditable="true" :style="previewStyle">見出しのプレビュー</div>
+			<div class="heading-editor-preview" :style="previewStyle">
+				<span :style="previewBeforeStyle">{{ previewBeforeContent }}</span>
+				<span contenteditable="true">見出しのプレビュー</span>
+				<span :style="previewAfterStyle">{{ previewAfterContent }}</span>
+			</div>
 		</div>
 	</div>
 </template>
 
 
 <script>
+
+	import presets from './preset.json';
+
 	export default {
 		name: 'preview',
 		props: [ 'level' ],
 		data() {
-			return {}
+			return {
+				presetList: presets,
+			}
 		},
 		computed: {
 			previewStyle: function () {
@@ -36,8 +45,21 @@
 					paddingLeft: this.getPadding( 'Left' ),
 					marginTop: this.getMargin( 'Top' ),
 					marginBottom: this.getMargin( 'Bottom' ),
+					display: this.getOption( 'display' ),
 				}
-			}
+			},
+			previewBeforeContent: function () {
+				return this.getBeforeAfterContent( 'before' );
+			},
+			previewBeforeStyle: function () {
+				return this.getBeforeAfterStyle( 'before' );
+			},
+			previewAfterContent: function () {
+				return this.getBeforeAfterContent( 'after' );
+			},
+			previewAfterStyle: function () {
+				return this.getBeforeAfterStyle( 'after' );
+			},
 		},
 		methods: {
 			getOption( name ) {
@@ -98,6 +120,67 @@
 					return 0;
 				}
 				return `${ margin }${ unit }`;
+			},
+			getBeforeAfterContent( section ) {
+				let content = this.getOption( `${ section }Content` );
+				return content;
+			},
+			getBeforeAfterStyle( section ) {
+				const size = this.getOption( `${ section }Size` );
+				const align = this.getOption( `${ section }AlignSelf` );
+				const marginRight = 'before' === section ? '.5em' : false;
+				const marginLeft = 'after' === section ? '.5em' : false;
+				if ( '' === size || 0 >= size ) {
+					return {
+						display: 'none',
+					}
+				}
+				const flexGrow = this.getOption( `${ section }FlexGrow` );
+				const minWidth = this.getOption( `${ section }MinWidth` );
+				const color = this.getAdvancedOptionColor( section );
+				const optionSize = this.getAdvancedOptionSize( section );
+
+				return {
+					...{
+						flexGrow: flexGrow,
+						marginRight: marginRight,
+						marginLeft: marginLeft,
+						alignSelf: align,
+						minWidth: minWidth,
+						wordBreak: 'break-all',
+					},
+					...color,
+					...optionSize,
+				}
+			},
+			getAdvancedOptionSize( section ) {
+				const size = this.getOption( `${ section }Size` );
+				const preset = this.getOption( 'preset' );
+				if ( '' === size || 0 === size ) {
+					return {};
+				}
+				if ( undefined === this.presetList[ preset ] ) {
+					return {};
+				}
+				if ( undefined === this.presetList[ preset ][ 'useAdvancedSize' ] ) {
+					return {};
+				}
+				const useSize = this.presetList[ preset ][ 'useAdvancedSize' ];
+
+				return {
+					height: useSize.includes( 'height' ) ? size + 'px' : false,
+					width: useSize.includes( 'width' ) ? size + 'px' : false,
+				}
+			},
+			getAdvancedOptionColor( section ) {
+				let color = this.getOption( `${ section }Color` );
+				let type = this.getOption( `${ section }ColorType` );
+				color = '' === color ? false : color;
+
+				return {
+					backgroundColor: 'background' === type ? color : false,
+					color: 'color' === type ? color : false,
+				}
 			}
 		}
 	};

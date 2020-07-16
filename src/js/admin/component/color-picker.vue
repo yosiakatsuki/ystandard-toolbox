@@ -1,7 +1,7 @@
 <template>
 	<div class="ystdtb-color-picker">
-		<span class="ystdtb-color-picker__preview" :style="{background: color}"> </span>
-		<button class="ystdtb-color-picker__open" type="button" @click="showColorPicker = ! showColorPicker">
+		<span :class="{'ystdtb-color-picker__preview':true,'is-disable':disabled}" :style="{background: color}"> </span>
+		<button class="ystdtb-color-picker__open" type="button" @click="showColorPicker = ! showColorPicker" :disabled="disabled">
 			{{ colorButton }}
 		</button>
 		<chrome-picker
@@ -23,7 +23,7 @@
 
 	export default {
 		name: 'ColorPicker',
-		props: [ 'value', 'name' ],
+		props: [ 'value', 'name', 'disabled' ],
 		data() {
 			return {
 				showColorPicker: false
@@ -58,6 +58,10 @@
 			border-top: 1px solid #eee;
 			border-bottom: 1px solid #eee;
 			border-left: 1px solid #eee;
+
+			&.is-disable {
+				background-color: #f7f7f7;
+			}
 		}
 
 		.ystdtb-color-picker__open {

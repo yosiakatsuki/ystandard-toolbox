@@ -1,7 +1,8 @@
 {
   "custom": {
     "name": "カスタム",
-    "default": {}
+    "default": {},
+    "clearAdvanced": true
   },
   "border-bottom": {
     "name": "下線",
@@ -30,7 +31,8 @@
       "paddingBottomUnit": "em",
       "paddingLeft": 0,
       "paddingLeftUnit": "em"
-    }
+    },
+    "clearAdvanced": true
   },
   "border-horizontal": {
     "name": "上下の直線",
@@ -59,6 +61,61 @@
       "paddingBottomUnit": "em",
       "paddingLeft": 0,
       "paddingLeftUnit": "em"
-    }
+    },
+    "clearAdvanced": true
+  },
+  "text-center-border": {
+    "name": "左右に直線",
+    "default": {
+      "borderTopWidth": 0,
+      "borderTopWidthUnit": "px",
+      "borderTopStyle": "solid",
+      "borderTopColor": "#",
+      "borderRightWidth": 0,
+      "borderRightWidthUnit": "px",
+      "borderRightStyle": "solid",
+      "borderRightColor": "",
+      "borderBottomWidth": 0,
+      "borderBottomWidthUnit": "px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "",
+      "borderLeftWidth": 0,
+      "borderLeftWidthUnit": "px",
+      "borderLeftStyle": "solid",
+      "borderLeftColor": "",
+      "paddingTop": 0,
+      "paddingTopUnit": "em",
+      "paddingRight": 0,
+      "paddingRightUnit": "em",
+      "paddingBottom": 0,
+      "paddingBottomUnit": "em",
+      "paddingLeft": 0,
+      "paddingLeftUnit": "em",
+      "display": "flex",
+      "maxWidth": "80%",
+      "beforeContent": "",
+      "beforeAlignSelf": "center",
+      "beforeFlexGrow": 1,
+      "beforeMinWidth": "10%",
+      "beforeSize": 2,
+      "beforeColor": "#222222",
+      "beforeColorType": "background",
+      "afterContent": "",
+      "afterAlignSelf": "center",
+      "afterMinWidth": "10%",
+      "afterFlexGrow": 1,
+      "afterSize": 2,
+      "afterColor": "#222222",
+      "afterColorType": "background"
+    },
+    "enableAdvanced": [
+      "beforeSize",
+      "beforeColor",
+      "afterSize",
+      "afterColor"
+    ],
+    "useAdvancedSize": [
+      "height"
+    ]
   }
 }
