@@ -1,6 +1,7 @@
 <template>
 	<div class="editor-preview">
 		<div class="ystdtb-menu__card editor-preview__content">
+			<div class="editor-preview__level">{{ level }}</div>
 			<div class="heading-editor-preview" :style="previewStyle">
 				<span :style="previewBeforeStyle">{{ previewBeforeContent }}</span>
 				<span class="heading-editor-preview__text" contenteditable="true">見出しのプレビュー</span>
@@ -195,8 +196,19 @@
 		margin-left: 2em;
 
 		.editor-preview__content {
+			position: relative;
 			padding-top: 5em;
 			padding-bottom: 5em;
+
+			.editor-preview__level {
+				position: absolute;
+				top: .5em;
+				left: .5em;
+				font-weight: bold;
+				color: #ccc;
+				font-size: 1.4rem;
+				opacity: .7;
+			}
 		}
 
 		.heading-editor-preview,

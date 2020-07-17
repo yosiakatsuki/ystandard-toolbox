@@ -20,7 +20,7 @@
 						/>
 					</div>
 					<div class="advanced-option__before-after-container">
-						<label :for="`before-size--${level}`" class="is-block is-small">size</label>
+						<label :for="`before-size--${level}`" class="is-block is-small">サイズ</label>
 						<input
 							:id="`before-size--${level}`"
 							type="number"
@@ -37,7 +37,7 @@
 						/>
 					</div>
 					<div class="advanced-option__before-after-container">
-						<label :for="`before-color--${level}`" class="is-block is-small">color</label>
+						<label :for="`before-color--${level}`" class="is-block is-small">色</label>
 						<div class="ystdtb-menu__horizontal">
 							<ColorPicker
 								:name="`ystdtb_heading[${level}][beforeColor]`"
@@ -66,7 +66,7 @@
 						/>
 					</div>
 					<div class="advanced-option__before-after-container">
-						<label :for="`after-size--${level}`" class="is-block is-small">size</label>
+						<label :for="`after-size--${level}`" class="is-block is-small">サイズ</label>
 						<input
 							:id="`after-size--${level}`"
 							type="number"
@@ -83,7 +83,7 @@
 						/>
 					</div>
 					<div class="advanced-option__before-after-container">
-						<label :for="`after-color--${level}`" class="is-block is-small">color</label>
+						<label :for="`after-color--${level}`" class="is-block is-small">色</label>
 						<div class="ystdtb-menu__horizontal">
 							<ColorPicker
 								:name="`ystdtb_heading[${level}][afterColor]`"
