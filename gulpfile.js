@@ -42,6 +42,11 @@ function buildAdminApp() {
 		.pipe( dest( 'js/admin/' ) )
 }
 
+function copyJson() {
+	return src( './src/js/**/*.json' )
+		.pipe( dest( 'js/' ) )
+}
+
 function cleanFiles( cb ) {
 	return del(
 		[
@@ -101,7 +106,7 @@ function zip() {
 		.pipe( dest( 'build' ) );
 }
 
-function copyJson() {
+function copyUpdateInfo() {
 	return src( [ 'ystandard-toolbox.json', 'ystandard-toolbox-beta.json' ] )
 		.pipe( dest( 'build' ) );
 }
@@ -113,12 +118,14 @@ function watchFiles() {
 	buildAdminApp();
 	watch( './src/sass/**/*.scss', sass );
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], buildAdminApp );
+	watch( [ './src/js/admin/**/*.json' ], copyJson );
 }
 
-exports.createDeployFiles = series( cleanFiles, copyProductionFiles, parallel( zip, copyJson ) );
+exports.createDeployFiles = series( cleanFiles, copyJson, copyProductionFiles, parallel( zip, copyUpdateInfo ) );
 exports.sass = series( sass );
 exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
+exports.copyJson = series( copyJson );
 
 exports.default = series( watchFiles );

@@ -2,15 +2,11 @@
 	<div class="heading-editor-other">
 		<div class="ystdtb-menu__section" style="margin-top: 0;">
 			<label class="is-block">高度な設定</label>
-			<div class="ystdtb-menu__subtext">※薄紫色のデザインテンプレートのみ高度な設定が使用できます。</div>
-			<input :name="`ystdtb_heading[${level}][display]`" type="hidden" v-model="display"/>
+			<div class="ystdtb-menu__subtext">※薄橙色のデザインテンプレートのみ高度な設定が使用できます。</div>
 			<div class="ystdtb-menu__table">
 				<div class="is-label">before</div>
 				<div class="is-content">
 
-					<input :name="`ystdtb_heading[${level}][beforeAlignSelf]`" type="hidden" v-model="beforeAlignSelf"/>
-					<input :name="`ystdtb_heading[${level}][beforeFlexGrow]`" type="hidden" v-model="beforeFlexGrow"/>
-					<input :name="`ystdtb_heading[${level}][beforeMinWidth]`" type="hidden" v-model="beforeMinWidth"/>
 					<input :name="`ystdtb_heading[${level}][beforeColorType]`" type="hidden" v-model="beforeColorType"/>
 
 					<div v-show="false" class="advanced-option__before-after-container">
@@ -57,9 +53,6 @@
 				<div class="is-label">after</div>
 				<div class="is-content">
 
-					<input :name="`ystdtb_heading[${level}][afterAlignSelf]`" type="hidden" v-model="afterAlignSelf"/>
-					<input :name="`ystdtb_heading[${level}][afterFlexGrow]`" type="hidden" v-model="afterFlexGrow"/>
-					<input :name="`ystdtb_heading[${level}][afterMinWidth]`" type="hidden" v-model="afterMinWidth"/>
 					<input :name="`ystdtb_heading[${level}][afterColorType]`" type="hidden" v-model="afterColorType"/>
 
 					<div v-show="false" class="advanced-option__before-after-container">
@@ -139,44 +132,12 @@
 			}
 		},
 		computed: {
-			display: {
-				get() {
-					return this.getOption( 'display' );
-				},
-				set( newValue ) {
-					this.updateOption( 'display', newValue );
-				}
-			},
 			beforeContent: {
 				get() {
 					return this.getOption( 'beforeContent' );
 				},
 				set( newValue ) {
 					this.updateOption( 'beforeContent', newValue );
-				}
-			},
-			beforeAlignSelf: {
-				get() {
-					return this.getOption( 'beforeAlignSelf' );
-				},
-				set( newValue ) {
-					this.updateOption( 'beforeAlignSelf', newValue );
-				}
-			},
-			beforeFlexGrow: {
-				get() {
-					return this.getOption( 'beforeFlexGrow' );
-				},
-				set( newValue ) {
-					this.updateOption( 'beforeFlexGrow', newValue );
-				}
-			},
-			beforeMinWidth: {
-				get() {
-					return this.getOption( 'beforeMinWidth' );
-				},
-				set( newValue ) {
-					this.updateOption( 'beforeMinWidth', newValue );
 				}
 			},
 			beforeSize: {
@@ -209,30 +170,6 @@
 				},
 				set( newValue ) {
 					this.updateOption( 'afterContent', newValue );
-				}
-			},
-			afterAlignSelf: {
-				get() {
-					return this.getOption( 'afterAlignSelf' );
-				},
-				set( newValue ) {
-					this.updateOption( 'afterAlignSelf', newValue );
-				}
-			},
-			afterFlexGrow: {
-				get() {
-					return this.getOption( 'afterFlexGrow' );
-				},
-				set( newValue ) {
-					this.updateOption( 'afterFlexGrow', newValue );
-				}
-			},
-			afterMinWidth: {
-				get() {
-					return this.getOption( 'afterMinWidth' );
-				},
-				set( newValue ) {
-					this.updateOption( 'afterMinWidth', newValue );
 				}
 			},
 			afterSize: {

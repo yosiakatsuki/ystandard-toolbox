@@ -3,7 +3,7 @@
 		<div class="ystdtb-menu__card editor-preview__content">
 			<div class="heading-editor-preview" :style="previewStyle">
 				<span :style="previewBeforeStyle">{{ previewBeforeContent }}</span>
-				<span contenteditable="true">見出しのプレビュー</span>
+				<span class="heading-editor-preview__text" contenteditable="true">見出しのプレビュー</span>
 				<span :style="previewAfterStyle">{{ previewAfterContent }}</span>
 			</div>
 		</div>
@@ -25,6 +25,7 @@
 		},
 		computed: {
 			previewStyle: function () {
+				const styles = this.getAdditionalStyle( 'content' );
 				return {
 					fontSize: this.getFontSize() + this.getOption( 'fontSizeUnit' ),
 					color: this.getOption( 'fontColor' ),
@@ -45,7 +46,7 @@
 					paddingLeft: this.getPadding( 'Left' ),
 					marginTop: this.getMargin( 'Top' ),
 					marginBottom: this.getMargin( 'Bottom' ),
-					display: this.getOption( 'display' ),
+					...styles
 				}
 			},
 			previewBeforeContent: function () {
@@ -121,51 +122,43 @@
 				}
 				return `${ margin }${ unit }`;
 			},
+			getPreset() {
+				const preset = this.getOption( 'preset' );
+				if ( ! this.presetList.hasOwnProperty( preset ) ) {
+					return false;
+				}
+				return this.presetList[ preset ];
+			},
 			getBeforeAfterContent( section ) {
 				let content = this.getOption( `${ section }Content` );
 				return content;
 			},
 			getBeforeAfterStyle( section ) {
 				const size = this.getOption( `${ section }Size` );
-				const align = this.getOption( `${ section }AlignSelf` );
-				const marginRight = 'before' === section ? '.5em' : false;
-				const marginLeft = 'after' === section ? '.5em' : false;
 				if ( '' === size || 0 >= size ) {
 					return {
 						display: 'none',
 					}
 				}
-				const flexGrow = this.getOption( `${ section }FlexGrow` );
-				const minWidth = this.getOption( `${ section }MinWidth` );
 				const color = this.getAdvancedOptionColor( section );
 				const optionSize = this.getAdvancedOptionSize( section );
-
+				const styles = this.getAdditionalStyle( section );
 				return {
-					...{
-						flexGrow: flexGrow,
-						marginRight: marginRight,
-						marginLeft: marginLeft,
-						alignSelf: align,
-						minWidth: minWidth,
-						wordBreak: 'break-all',
-					},
+					...styles,
 					...color,
 					...optionSize,
 				}
 			},
 			getAdvancedOptionSize( section ) {
 				const size = this.getOption( `${ section }Size` );
-				const preset = this.getOption( 'preset' );
+				const preset = this.getPreset();
 				if ( '' === size || 0 === size ) {
 					return {};
 				}
-				if ( undefined === this.presetList[ preset ] ) {
+				if ( ! preset.hasOwnProperty( 'useAdvancedSize' ) ) {
 					return {};
 				}
-				if ( undefined === this.presetList[ preset ][ 'useAdvancedSize' ] ) {
-					return {};
-				}
-				const useSize = this.presetList[ preset ][ 'useAdvancedSize' ];
+				const useSize = preset.useAdvancedSize;
 
 				return {
 					height: useSize.includes( 'height' ) ? size + 'px' : false,
@@ -181,6 +174,17 @@
 					backgroundColor: 'background' === type ? color : false,
 					color: 'color' === type ? color : false,
 				}
+			},
+			getAdditionalStyle( type ) {
+				const preset = this.getPreset();
+
+				if ( ! preset.hasOwnProperty( 'additionalStyle' ) ) {
+					return {};
+				}
+				if ( ! preset.additionalStyle.hasOwnProperty( type ) ) {
+					return {};
+				}
+				return preset.additionalStyle[ type ];
 			}
 		}
 	};
@@ -206,6 +210,10 @@
 			line-height: 1.3;
 			appearance: none;
 			box-shadow: none;
+		}
+
+		.heading-editor-preview__text {
+			word-break: break-all;
 		}
 	}
 </style>

@@ -31,7 +31,7 @@
 								@click="changePreset(name,value.default,value.clearAdvanced)"
 							>
 
-								<span class="preset-select__button-content" :style="parseStyle(value.default)">
+								<span class="preset-select__button-content" :style="getContentStyle(name,value.default)">
 									<span :style="previewBeforeAfterStyle(name,'before')"></span>
 									<span>{{ value.name }}</span>
 									<span :style="previewBeforeAfterStyle(name,'after')"></span>
@@ -111,8 +111,12 @@
 					'use-advanced': useAdvanced
 				}
 			},
-			parseStyle( style ) {
-				return _parseStyle( style );
+			getContentStyle( name, defaults ) {
+				const additional = this.getAdditionalStyle( name, 'content' );
+				return {
+					..._parseStyle( defaults ),
+					...additional
+				};
 			},
 			setDefaultStyle( style ) {
 				for ( const key in style ) {
@@ -120,13 +124,13 @@
 				}
 			},
 			previewBeforeAfterStyle( name, section ) {
-				if ( undefined === this.presetList[ name ] ) {
+				if ( ! this.presetList.hasOwnProperty( name ) ) {
 					return {
 						display: 'none'
 					}
 				}
 				const style = this.presetList[ name ];
-				if ( undefined === style.default[ `${ section }Size` ] ) {
+				if ( ! style.default.hasOwnProperty( `${ section }Size` ) ) {
 					return {
 						display: 'none'
 					}
@@ -134,39 +138,41 @@
 
 				const size = style.default[ `${ section }Size` ];
 				const type = style.useAdvancedSize;
-				const display = style.default[ 'display' ] ? style.default[ 'display' ] : '';
-				const flexGrow = style.default[ `${ section }FlexGrow` ] ? style.default[ `${ section }FlexGrow` ] : false;
-				const align = 'flex' === display ? style.default[ `${ section }AlignSelf` ] : false;
 				const colorType = style.default[ `${ section }ColorType` ];
 				const color = style.default[ `${ section }Color` ];
-				const marginRight = 'before' === section ? '.5em' : false;
-				const marginLeft = 'after' === section ? '.5em' : false;
+				const styles = this.getAdditionalStyle( name, section );
 
 				return {
 					height: type.includes( 'height' ) ? size + 'px' : false,
 					width: type.includes( 'width' ) ? size + 'px' : false,
-					alignSelf: align,
-					flexGrow: flexGrow,
 					backgroundColor: 'background' === colorType ? color : false,
 					color: 'color' === colorType ? color : false,
-					marginRight: marginRight,
-					marginLeft: marginLeft,
+					...styles
 				}
+			},
+			getPreset( name ) {
+				if ( ! this.presetList.hasOwnProperty( name ) ) {
+					return false;
+				}
+				return this.presetList[ name ];
+			},
+			getAdditionalStyle( name, type ) {
+				const preset = this.getPreset( name );
 
+				if ( ! preset.hasOwnProperty( 'additionalStyle' ) ) {
+					return {};
+				}
+				if ( ! preset.additionalStyle.hasOwnProperty( type ) ) {
+					return {};
+				}
+				return preset.additionalStyle[ type ];
 			},
 			clearAdvanced() {
-				this.updateOption( 'display', '' );
 				this.updateOption( 'beforeContent', '' );
-				this.updateOption( 'beforeAlignSelf', '' );
-				this.updateOption( 'beforeFlexGrow', 0 );
-				this.updateOption( 'beforeMinWidth', '' );
 				this.updateOption( 'beforeSize', '' );
 				this.updateOption( 'beforeColor', '' );
 				this.updateOption( 'beforeColorType', '' );
 				this.updateOption( 'afterContent', '' );
-				this.updateOption( 'afterAlignSelf', '' );
-				this.updateOption( 'afterFlexGrow', 0 );
-				this.updateOption( 'afterMinWidth', '' );
 				this.updateOption( 'afterSize', '' );
 				this.updateOption( 'afterColor', '' );
 				this.updateOption( 'afterColorType', '' );
@@ -210,7 +216,7 @@
 			}
 
 			&.use-advanced {
-				background-color: rgba(#9f0799, 0.05);
+				background-color: rgba(#e2830b, 0.05);
 			}
 		}
 
