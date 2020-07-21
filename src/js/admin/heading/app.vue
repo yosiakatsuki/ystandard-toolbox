@@ -7,7 +7,7 @@
 		</ul>
 		<div class="heading-editor__row">
 			<div v-for="heading in headings">
-				<Editor v-if="heading === selected" :level="heading"/>
+				<Editor v-show="heading === selected" :level="heading"/>
 			</div>
 		</div>
 	</div>

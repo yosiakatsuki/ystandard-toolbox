@@ -230,10 +230,10 @@
 				if ( undefined === this.presetList[ preset ] ) {
 					return true;
 				}
-				if ( undefined === this.presetList[ preset ][ 'enableAdvanced' ] ) {
+				if ( undefined === this.presetList[ preset ][ 'enablePseudoElements' ] ) {
 					return true;
 				}
-				return ! this.presetList[ preset ].enableAdvanced.includes( name );
+				return ! this.presetList[ preset ].enablePseudoElements.includes( name );
 			}
 		}
 	}

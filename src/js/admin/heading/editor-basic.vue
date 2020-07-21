@@ -31,84 +31,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="ystdtb-menu__card" style="margin-top: .5em;">
-				<label class="is-block" style="font-size: 0.9em;">エリア別設定</label>
-				<div class="ystdtb-menu__table">
-					<div class="is-label">コンテンツ</div>
-					<div class="is-content">
-						<div class="ystdtb-menu__horizontal">
-							<div>
-								<input
-									:name="`ystdtb_heading[${level}][useContent]`"
-									type="hidden"
-									value="false"
-								>
-								<input
-									:id="`use-content--${level}`"
-									:name="`ystdtb_heading[${level}][useContent]`"
-									class="toggle-button"
-									type="checkbox"
-									value="true"
-									:disabled="! useCustomStyle"
-									v-model="useContent"
-								>
-								<label :for="`use-content--${level}`"></label>
-							</div>
-							<span class="ystdtb-menu__subtext">コンテンツ部分に適用する</span>
-						</div>
-					</div>
-				</div>
-				<div class="ystdtb-menu__table">
-					<div class="is-label">サイドバー</div>
-					<div class="is-content">
-						<div class="ystdtb-menu__horizontal">
-							<div>
-								<input
-									:name="`ystdtb_heading[${level}][useSidebar]`"
-									type="hidden"
-									value="false"
-								>
-								<input
-									:id="`use-sidebar--${level}`"
-									:name="`ystdtb_heading[${level}][useSidebar]`"
-									class="toggle-button"
-									type="checkbox"
-									value="true"
-									:disabled="! useCustomStyle"
-									v-model="useSidebar"
-								>
-								<label :for="`use-sidebar--${level}`"></label>
-							</div>
-							<span class="ystdtb-menu__subtext">サイドバー部分に適用する</span>
-						</div>
-					</div>
-				</div>
-				<div class="ystdtb-menu__table">
-					<div class="is-label">フッター</div>
-					<div class="is-content">
-						<div class="ystdtb-menu__horizontal">
-							<div>
-								<input
-									:name="`ystdtb_heading[${level}][useFooter]`"
-									type="hidden"
-									value="false"
-								>
-								<input
-									:id="`use-footer--${level}`"
-									:name="`ystdtb_heading[${level}][useFooter]`"
-									class="toggle-button"
-									type="checkbox"
-									value="true"
-									:disabled="! useCustomStyle"
-									v-model="useFooter"
-								>
-								<label :for="`use-footer--${level}`"></label>
-							</div>
-							<span class="ystdtb-menu__subtext">フッター部分に適用する</span>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </template>
@@ -135,30 +57,6 @@
 				},
 				set( newValue ) {
 					this.updateOption( 'useCustomStyle', newValue );
-				}
-			},
-			useContent: {
-				get() {
-					return _toBool( this.getOption( 'useContent' ) );
-				},
-				set( newValue ) {
-					this.updateOption( 'useContent', newValue );
-				}
-			},
-			useSidebar: {
-				get() {
-					return _toBool( this.getOption( 'useSidebar' ) );
-				},
-				set( newValue ) {
-					this.updateOption( 'useSidebar', newValue );
-				}
-			},
-			useFooter: {
-				get() {
-					return _toBool( this.getOption( 'useFooter' ) );
-				},
-				set( newValue ) {
-					this.updateOption( 'useFooter', newValue );
 				}
 			},
 		},

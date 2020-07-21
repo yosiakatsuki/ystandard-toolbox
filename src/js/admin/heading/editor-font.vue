@@ -18,7 +18,7 @@
 					</label>
 					<label
 						class="ystdtb-menu__horizontal"
-						v-if="fontSizeResponsive"
+						v-show="fontSizeResponsive"
 					>
 						<TabletIcon size="20"/>
 						<input
@@ -33,7 +33,7 @@
 					</label>
 					<label
 						class="ystdtb-menu__horizontal"
-						v-if="fontSizeResponsive"
+						v-show="fontSizeResponsive"
 					>
 						<SmartphoneIcon size="20"/>
 						<input
@@ -392,7 +392,7 @@
 				);
 			},
 			clearTextColor() {
-				this.updateOption( 'fontColor', '#222222' );
+				this.updateOption( 'fontColor', '' );
 			}
 		},
 	};

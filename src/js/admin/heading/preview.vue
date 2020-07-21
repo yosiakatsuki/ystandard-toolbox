@@ -156,10 +156,10 @@
 				if ( '' === size || 0 === size ) {
 					return {};
 				}
-				if ( ! preset.hasOwnProperty( 'useAdvancedSize' ) ) {
+				if ( ! preset.hasOwnProperty( 'usePseudoElementsSize' ) ) {
 					return {};
 				}
-				const useSize = preset.useAdvancedSize;
+				const useSize = preset.usePseudoElementsSize;
 
 				return {
 					height: useSize.includes( 'height' ) ? size + 'px' : false,

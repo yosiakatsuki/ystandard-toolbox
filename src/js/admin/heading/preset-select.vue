@@ -28,13 +28,13 @@
 							<button
 								type="button"
 								:class="buttonClass(name,value)"
-								@click="changePreset(name,value.default,value.clearAdvanced)"
+								@click="changePreset(name,value.default,value.clearPseudoElements)"
 							>
 
 								<span class="preset-select__button-content" :style="getContentStyle(name,value.default)">
-									<span :style="previewBeforeAfterStyle(name,'before')"></span>
+									<span :style="previewPseudoElements(name,'before')"></span>
 									<span>{{ value.name }}</span>
-									<span :style="previewBeforeAfterStyle(name,'after')"></span>
+									<span :style="previewPseudoElements(name,'after')"></span>
 								</span>
 
 							</button>
@@ -88,11 +88,11 @@
 					value: newValue
 				} );
 			},
-			changePreset( value, style, clearAdvanced ) {
+			changePreset( value, style, clearPseudoElements ) {
 				this.updateOption( 'preset', value );
 				this.setDefaultStyle( style );
-				if ( clearAdvanced ) {
-					this.clearAdvanced();
+				if ( clearPseudoElements ) {
+					this.clearPseudoElements();
 				}
 				this.closePresetSelect();
 			},
@@ -103,7 +103,7 @@
 				this.showPresetSelect = false;
 			},
 			buttonClass( name, value ) {
-				const useAdvanced = undefined !== value[ 'enableAdvanced' ];
+				const useAdvanced = undefined !== value[ 'enablePseudoElements' ];
 				return {
 					'is-nowrap': true,
 					'preset-select__button': true,
@@ -123,7 +123,7 @@
 					this.updateOption( key, style[ key ] );
 				}
 			},
-			previewBeforeAfterStyle( name, section ) {
+			previewPseudoElements( name, section ) {
 				if ( ! this.presetList.hasOwnProperty( name ) ) {
 					return {
 						display: 'none'
@@ -137,7 +137,7 @@
 				}
 
 				const size = style.default[ `${ section }Size` ];
-				const type = style.useAdvancedSize;
+				const type = style.usePseudoElementsSize;
 				const colorType = style.default[ `${ section }ColorType` ];
 				const color = style.default[ `${ section }Color` ];
 				const styles = this.getAdditionalStyle( name, section );
@@ -167,7 +167,7 @@
 				}
 				return preset.additionalStyle[ type ];
 			},
-			clearAdvanced() {
+			clearPseudoElements() {
 				this.updateOption( 'beforeContent', '' );
 				this.updateOption( 'beforeSize', '' );
 				this.updateOption( 'beforeColor', '' );

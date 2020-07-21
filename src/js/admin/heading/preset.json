@@ -2,7 +2,7 @@
   "custom": {
     "name": "カスタム",
     "default": {},
-    "clearAdvanced": true
+    "clearPseudoElements": true
   },
   "border-bottom": {
     "name": "下線",
@@ -32,7 +32,7 @@
       "paddingLeft": 0,
       "paddingLeftUnit": "em"
     },
-    "clearAdvanced": true
+    "clearPseudoElements": true
   },
   "border-horizontal": {
     "name": "上下の直線",
@@ -62,7 +62,7 @@
       "paddingLeft": 0,
       "paddingLeftUnit": "em"
     },
-    "clearAdvanced": true
+    "clearPseudoElements": true
   },
   "text-center-border": {
     "name": "左右に直線",
@@ -100,13 +100,13 @@
       "afterColor": "#222222",
       "afterColorType": "background"
     },
-    "enableAdvanced": [
+    "enablePseudoElements": [
       "beforeSize",
       "beforeColor",
       "afterSize",
       "afterColor"
     ],
-    "useAdvancedSize": [
+    "usePseudoElementsSize": [
       "height"
     ],
     "additionalStyle": {
