@@ -1,7 +1,7 @@
 <template>
 	<div class="editor-preview">
 		<div class="ystdtb-menu__card editor-preview__content">
-			<div class="editor-preview__level">{{ level }}</div>
+			<div class="editor-preview__level">{{ label }}</div>
 			<div class="heading-editor-preview" :style="previewStyle">
 				<span :style="previewBeforeStyle">{{ previewBeforeContent }}</span>
 				<span class="heading-editor-preview__text" contenteditable="true">見出しのプレビュー</span>
@@ -18,7 +18,7 @@
 
 	export default {
 		name: 'preview',
-		props: [ 'level' ],
+		props: [ 'level', 'label' ],
 		data() {
 			return {
 				presetList: presets,

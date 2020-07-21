@@ -102,7 +102,7 @@
 			<transition name="fade">
 				<div v-if="showResetModal" class="ystdtb-menu__modal">
 					<div class="ystdtb-menu__modal-content">
-						<p>これまで設定した {{ labelLevel }} のデザインがすべて初期化されますがよろしいですか？</p>
+						<p>これまで設定した {{ label }} のデザインがすべて初期化されますがよろしいですか？</p>
 						<div class="ystdtb-menu__horizontal">
 							<button type="button" class="is-primary is-block" @click="resetOptions()">設定をリセット</button>
 							<button type="button" class="is-cancel is-block" @click="showResetModal = false">キャンセル</button>
@@ -120,14 +120,13 @@
 
 	export default {
 		name: 'editor-other',
-		props: [ 'level' ],
+		props: [ 'level','label' ],
 		components: {
 			ColorPicker
 		},
 		data() {
 			return {
 				showResetModal: false,
-				labelLevel: this.level,
 				presetList: presets,
 			}
 		},

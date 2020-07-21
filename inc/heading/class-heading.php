@@ -93,7 +93,6 @@ class Heading {
 	 */
 	public function add_heading_styles() {
 		$options = self::get_option();
-
 		// 初期値等取得.
 		$this->schema = Utility::get_json_file_contents(
 			YSTDTB_PATH . '/js/admin/heading/schema.json'
@@ -204,34 +203,58 @@ class Heading {
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
 			$level_selector = "${level}:not([class^=\"is-style-\"])";
-			$content_class  = apply_filters(
+			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
 			);
 
-			return "${body_class} ${content_class} ${level_selector}";
+			return "${body_class} ${class} ${level_selector}";
 		}
 		// サイドバー.
 		if ( 'sidebar' === $level ) {
-			$sidebar_class = apply_filters(
+			$class = apply_filters(
 				'ystdtb_heading_selector_sidebar',
 				'.sidebar'
 			);
 
-			return "${body_class} ${sidebar_class} .widget-title";
+			return "${body_class} ${class} .widget-title";
 		}
 		// フッター.
 		if ( 'footer' === $level ) {
-			$footer_class = apply_filters(
+			$class = apply_filters(
 				'ystdtb_heading_selector_footer',
 				'.site-footer'
 			);
 
-			return "${body_class} ${footer_class} .widget-title";
+			return "${body_class} ${class} .widget-title";
 		}
 		// 投稿タイトル.
+		if ( 'post-title' === $level ) {
+			$class = apply_filters(
+				'ystdtb_heading_selector_post_title',
+				'.entry-title'
+			);
+
+			return "${body_class}.single ${class}";
+		}
 		// 固定ページタイトル.
+		if ( 'page-title' === $level ) {
+			$class = apply_filters(
+				'ystdtb_heading_selector_page_title',
+				'.entry-title'
+			);
+
+			return "${body_class}.page ${class}";
+		}
 		// アーカイブページタイトル.
+		if ( 'archive-title' === $level ) {
+			$class = apply_filters(
+				'ystdtb_heading_selector_page_title',
+				'.archive__header .archive__page-title'
+			);
+
+			return "${body_class} ${class}";
+		}
 
 		return '';
 	}

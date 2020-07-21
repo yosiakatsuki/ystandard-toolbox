@@ -15,11 +15,11 @@
 				<EditorBackground v-show="isActive('background')" :level="level"/>
 				<EditorBorder v-show="isActive('border')" :level="level"/>
 				<EditorMargin v-show="isActive('margin')" :level="level"/>
-				<EditorOther v-show="isActive('other')" :level="level"/>
+				<EditorOther v-show="isActive('other')" :level="level" :label="label"/>
 			</div>
 		</div>
 		<div class="heading-editor-preview">
-			<Preview :level="level"/>
+			<Preview :level="level" :label="label"/>
 		</div>
 	</div>
 </template>
@@ -36,7 +36,7 @@
 
 	export default {
 		name: 'editor',
-		props: [ 'level' ],
+		props: [ 'level', 'label' ],
 		data() {
 			return {
 				panel: "basic"

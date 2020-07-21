@@ -1,13 +1,17 @@
 <template>
 	<div class="heading-editor ystdtb-menu__form">
 		<ul class="heading-editor__level-tabs">
-			<li v-for="heading in headings">
-				<button type="button" :class="{'is-selected':heading === selected}" @click="changeLevel(heading)">{{ heading }}</button>
+			<li :class="`is-level-${ heading.level }`" v-for="heading in headings">
+				<button type="button" :class="{'is-selected': heading.level === selected}" @click="changeLevel(heading.level)">{{ heading.label }}</button>
 			</li>
 		</ul>
 		<div class="heading-editor__row">
 			<div v-for="heading in headings">
-				<Editor v-show="heading === selected" :level="heading"/>
+				<Editor
+					v-show="heading.level === selected"
+					:level="heading.level"
+					:label="heading.label"
+				/>
 			</div>
 		</div>
 	</div>
@@ -15,19 +19,13 @@
 
 <script>
 	import Editor from './editor';
+	import _getHeadingTypes from "./_getHeadingTypes";
 
 	export default {
 		name: 'app-headline',
 		data() {
 			return {
-				headings: [
-					"h1",
-					"h2",
-					"h3",
-					"h4",
-					"h5",
-					"h6",
-				],
+				headings: [],
 				selected: 'h2'
 			}
 		},
@@ -37,10 +35,13 @@
 		methods: {
 			changeLevel( level ) {
 				this.selected = level;
-			}
+			},
 		},
 		beforeCreate() {
 			this.$store.commit( 'initOptions' );
+		},
+		created() {
+			this.headings = _getHeadingTypes();
 		}
 	};
 </script>
@@ -48,13 +49,24 @@
 <style lang="scss">
 	.heading-editor__level-tabs {
 		display: flex;
+		flex-wrap: wrap;
 		width: 100%;
 		list-style: none;
 		padding: 0;
 		margin: 0 0 .5em;
 
 		li {
-			width: 100%;
+			flex-grow: 1;
+			margin-bottom: 2px;
+
+			&.is-level-h1,
+			&.is-level-h2,
+			&.is-level-h3,
+			&.is-level-h4,
+			&.is-level-h5,
+			&.is-level-h6 {
+				width: #{(1 / 6 * 100)}#{"%"};
+			}
 
 			button {
 				display: block;
@@ -67,7 +79,7 @@
 				background-color: #f7f7f7;
 				font-weight: bold;
 				color: #07689f;
-				font-size: 1rem;
+				font-size: .9rem;
 				text-align: center;
 				box-shadow: none;
 				cursor: pointer;
@@ -87,6 +99,6 @@
 
 	.heading-editor__row {
 		position: relative;
-		margin-top: 1em;
+		margin-top: 3em;
 	}
 </style>

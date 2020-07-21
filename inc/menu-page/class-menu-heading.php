@@ -61,16 +61,9 @@ class Menu_Heading extends Menu_Page_Base {
 			return;
 		}
 		$new_option = $_post[ Heading::OPTION_NAME ];
-//		var_dump($new_option);
-		$option     = Heading::get_option();
-		foreach ( $option as $level => $value ) {
-			if ( isset( $new_option[ $level ] ) ) {
-				foreach ( $new_option[ $level ] as $key => $new_value ) {
-					$option[ $level ][ $key ] = $new_value;
-				}
-			}
+		if ( is_array( $new_option ) ) {
+			update_option( Heading::OPTION_NAME, $new_option );
 		}
-		update_option( Heading::OPTION_NAME, $option );
 	}
 }
 

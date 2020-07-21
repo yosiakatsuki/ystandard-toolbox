@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import 'es6-promise/auto';
 import schema from '../schema.json';
 import getDefaultFontSize from '../_getDefaultFontSize.js';
+import _getHeadingTypes from "../_getHeadingTypes";
 
 Vue.use( Vuex );
 
@@ -19,15 +20,17 @@ const store = new Vuex.Store( {
 		},
 		initOptions( state ) {
 			let Options = {};
-			for ( var i = 1; i <= 6; i++ ) {
-				Options[ `h${ i }` ] = { ...schema };
-				Options[ `h${ i }` ][ 'fontSizePc' ] = getDefaultFontSize( `h${ i }` );
-				Options[ `h${ i }` ][ 'fontSizeTablet' ] = getDefaultFontSize( `h${ i }` );
-				Options[ `h${ i }` ][ 'fontSizeMobile' ] = getDefaultFontSize( `h${ i }` );
-				if ( `h${ i }` in window.ystdtbHeadingData ) {
-					Options[ `h${ i }` ] = {
-						...Options[ `h${ i }` ],
-						...window.ystdtbHeadingData[ `h${ i }` ]
+			const types = _getHeadingTypes();
+			for ( var i = 0; i < types.length; i++ ) {
+				let level = types[ i ].level;
+				Options[ level] = { ...schema };
+				Options[ level ][ 'fontSizePc' ] = getDefaultFontSize( level );
+				Options[ level ][ 'fontSizeTablet' ] = getDefaultFontSize( level );
+				Options[ level ][ 'fontSizeMobile' ] = getDefaultFontSize( level );
+				if ( level in window.ystdtbHeadingData ) {
+					Options[ level ] = {
+						...Options[ level ],
+						...window.ystdtbHeadingData[ level ]
 					}
 				}
 			}
