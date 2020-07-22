@@ -94,6 +94,7 @@
 				if ( clearPseudoElements ) {
 					this.clearPseudoElements();
 				}
+				this.updateOption( 'useCustomStyle', true );
 				this.closePresetSelect();
 			},
 			openPresetSelect() {

@@ -1,8 +1,13 @@
 <template>
 	<div class="heading-editor-basic">
-		<label class="is-block">デザインテンプレート</label>
-		<div style="margin-top: .5em;">
-			<presetSelect :level="level"/>
+		<div class="label is-block">
+			{{ description }}
+		</div>
+		<div class="ystdtb-menu__section">
+			<label class="is-block">デザインテンプレート</label>
+			<div style="margin-top: .5em;">
+				<presetSelect :level="level"/>
+			</div>
 		</div>
 
 		<div class="ystdtb-menu__section">
@@ -41,7 +46,7 @@
 
 	export default {
 		name: 'editor-basic',
-		props: [ 'level' ],
+		props: [ 'level', 'description' ],
 		components: {
 			presetSelect
 		},
@@ -59,6 +64,9 @@
 					this.updateOption( 'useCustomStyle', newValue );
 				}
 			},
+			optionDescription() {
+
+			}
 		},
 		methods: {
 			getOption( name ) {

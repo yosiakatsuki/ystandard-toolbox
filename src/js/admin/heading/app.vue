@@ -5,12 +5,14 @@
 				<button type="button" :class="{'is-selected': heading.level === selected}" @click="changeLevel(heading.level)">{{ heading.label }}</button>
 			</li>
 		</ul>
+		<input type="hidden" name="ystdtb_heading_active" v-model="selected">
 		<div class="heading-editor__row">
 			<div v-for="heading in headings">
 				<Editor
 					v-show="heading.level === selected"
 					:level="heading.level"
 					:label="heading.label"
+					:description="heading.description"
 				/>
 			</div>
 		</div>
@@ -42,6 +44,10 @@
 		},
 		created() {
 			this.headings = _getHeadingTypes();
+			if ( window.ystdtbHeadingActive ) {
+				this.selected = '' !== window.ystdtbHeadingActive.active ? window.ystdtbHeadingActive.active : 'h2';
+			}
+
 		}
 	};
 </script>
@@ -58,6 +64,7 @@
 		li {
 			flex-grow: 1;
 			margin-bottom: 2px;
+			margin-right: 2px;
 
 			&.is-level-h1,
 			&.is-level-h2,
@@ -65,17 +72,14 @@
 			&.is-level-h4,
 			&.is-level-h5,
 			&.is-level-h6 {
-				width: #{(1 / 6 * 100)}#{"%"};
+				width: calc( #{(1 / 6 * 100)}#{"%"} - 2px );
 			}
 
 			button {
 				display: block;
 				width: 100%;
 				padding: .5em;
-				border-top: 2px solid #f7f7f7;
-				border-right: 2px solid #fff;
-				border-bottom: 2px solid #f7f7f7;
-				border-left: 0;
+				border: 0;
 				background-color: #f7f7f7;
 				font-weight: bold;
 				color: #07689f;
@@ -84,8 +88,11 @@
 				box-shadow: none;
 				cursor: pointer;
 
-				&.is-selected {
-					border-bottom: 2px solid #07689f;
+
+				&.is-selected,
+				&:hover {
+					background-color: #07689f;
+					color: #fff;
 				}
 			}
 

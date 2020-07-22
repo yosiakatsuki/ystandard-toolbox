@@ -52,7 +52,7 @@ export default function _getHeadingTypes() {
 		},
 		{
 			level: "archive-title",
-			label: "投稿一覧ページタイトル",
+			label: "一覧ページタイトル",
 			description: "投稿一覧ページタイトル デザイン設定"
 		},
 	]

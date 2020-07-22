@@ -49,6 +49,15 @@ class Menu_Heading extends Menu_Page_Base {
 			'ystdtbHeadingData',
 			Heading::get_option()
 		);
+		$active_panel = '';
+		if ( isset( $_POST['ystdtb_heading_active'] ) ) {
+			$active_panel = $_POST['ystdtb_heading_active'];
+		}
+		wp_localize_script(
+			'ystdtb-heading',
+			'ystdtbHeadingActive',
+			[ 'active' => $active_panel ]
+		);
 	}
 
 	/**

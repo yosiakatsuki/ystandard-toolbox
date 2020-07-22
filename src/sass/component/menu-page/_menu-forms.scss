@@ -1,7 +1,8 @@
 @use "../../global";
 
 .ystdtb-menu__form {
-  label {
+  label,
+  .label {
     font-weight: bold;
 
     &.is-block {

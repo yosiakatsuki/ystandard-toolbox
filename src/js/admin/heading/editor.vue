@@ -10,7 +10,7 @@
 				<li :class="{'is-active':isActive('other')}" @click="setActive('other')">その他</li>
 			</ul>
 			<div class="heading-editor-tab__content">
-				<EditorBasic v-show="isActive('basic')" :level="level"/>
+				<EditorBasic v-show="isActive('basic')" :level="level" :description="description"/>
 				<EditorFont v-show="isActive('font')" :level="level"/>
 				<EditorBackground v-show="isActive('background')" :level="level"/>
 				<EditorBorder v-show="isActive('border')" :level="level"/>
@@ -36,7 +36,7 @@
 
 	export default {
 		name: 'editor',
-		props: [ 'level', 'label' ],
+		props: [ 'level', 'label', 'description' ],
 		data() {
 			return {
 				panel: "basic"
