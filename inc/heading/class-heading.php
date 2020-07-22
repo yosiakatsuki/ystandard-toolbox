@@ -68,11 +68,20 @@ class Heading {
 	private $css_pc;
 
 	/**
+	 * ブロックエディター用クラス
+	 *
+	 * @var bool
+	 */
+	private $editor = false;
+
+	/**
 	 * Heading constructor.
 	 */
 	public function __construct() {
 		add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'add_heading_styles' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'add_heading_editor_styles' ], 11 );
 		add_filter( 'body_class', [ $this, 'body_class_heading' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_option' ] );
 	}
 
 	/**
@@ -92,6 +101,41 @@ class Heading {
 	 * 見出し用CSS追加
 	 */
 	public function add_heading_styles() {
+
+		$css = $this->get_heading_css();
+
+		if ( empty( $css ) ) {
+			return;
+		}
+		wp_add_inline_style(
+			Config::CSS_HANDLE,
+			Utility::minify( $css )
+		);
+	}
+
+	/**
+	 * 見出し用CSS追加
+	 */
+	public function add_heading_editor_styles() {
+		$this->editor = true;
+		// CSS.
+		$css = $this->get_heading_css();
+
+		if ( empty( $css ) ) {
+			return;
+		}
+		wp_add_inline_style(
+			Config::BLOCK_CSS_HANDLE,
+			Utility::minify( $css )
+		);
+	}
+
+	/**
+	 * CSS作成
+	 *
+	 * @return string
+	 */
+	private function get_heading_css() {
 		$options = self::get_option();
 		// 初期値等取得.
 		$this->schema = Utility::get_json_file_contents(
@@ -117,16 +161,9 @@ class Heading {
 			$this->get_pseudo_elements_css();
 			// 結合.
 			$css .= $this->get_inline_css( $level );
-
 		}
 
-		if ( empty( $css ) ) {
-			return;
-		}
-		wp_add_inline_style(
-			Config::CSS_HANDLE,
-			Utility::minify( $css )
-		);
+		return $css;
 	}
 
 	/**
@@ -162,9 +199,15 @@ class Heading {
 
 		$block_style = $this->get_selector( $level, true );
 		$selector    = $this->get_selector( $level );
-		$content     = "${block_style},${selector}";
-		$before      = "${block_style}:before,${selector}:before";
-		$after       = "${block_style}:after,${selector}:after";
+
+		if ( $this->editor ) {
+			$wrap        = Config::EDITOR_STYLES_WRAPPER;
+			$block_style = "#editor ${wrap} .is-style-ystdtb-${level}";
+			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-style-default)";
+		}
+		$content = "${block_style},${selector}";
+		$before  = "${block_style}:before,${selector}:before";
+		$after   = "${block_style}:after,${selector}:after";
 		// CSS.
 		$css      = '';
 		$sections = [ 'content', 'before', 'after' ];
@@ -202,7 +245,7 @@ class Heading {
 		}
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-			$level_selector = "${level}:not([class^=\"is-style-\"])";
+			$level_selector = "${level}:not([class*=\"is-style-ystdtb-\"])";
 			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
@@ -600,6 +643,18 @@ class Heading {
 	 */
 	private function set_css_pc( $property, $value, $section = 'content' ) {
 		$this->css_pc[ $section ][ $this->get_css_property( $property ) ] = $value;
+	}
+
+	/**
+	 * ブロックエディターに渡す設定作成
+	 */
+	public function block_editor_option( ) {
+		wp_localize_script(
+			'ystandard-toolbox-styles',
+			'ystdtbBlockEditorHeading',
+			self::get_option()
+		);
+
 	}
 
 	/**

@@ -1,0 +1,27 @@
+const defaultConfig = require( "@wordpress/scripts/config/webpack.config" );
+
+module.exports = {
+	...defaultConfig,
+	entry: {
+		'app': './src/js/blocks/app.js',
+		'block': './src/js/blocks/block.js',
+		'styles': './blocks/styles/index.js',
+	},
+	output: {
+		filename: '[name].js',
+		path: `${ __dirname }/js/blocks`
+	},
+	module: {
+		rules: [
+			...defaultConfig.module.rules,
+			{
+				test: /\.css$/,
+				loader: 'style-loader!css-loader'
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|svg)$/,
+				loader: 'file-loader?name=../font/[name].[ext]'
+			}
+		]
+	}
+};

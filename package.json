@@ -7,6 +7,7 @@
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@wordpress/browserslist-config": "^2.7.0",
+    "@wordpress/scripts": "12.1.1",
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
     "css-declaration-sorter": "^5.1.2",
@@ -35,7 +36,9 @@
     "webpack-stream": "^5.2.1"
   },
   "scripts": {
-    "watch": "gulp watch",
+    "start": "wp-scripts start --config webpack.blocks.config.js",
+    "build": "wp-scripts build --config webpack.blocks.config.js",
+    "watch": "gulp watch & npm run start",
     "build:deploy-files": "gulp createDeployFiles",
     "rename:beta-json": "rename -f build/ystandard-toolbox-beta.json ystandard-toolbox.json"
   },
