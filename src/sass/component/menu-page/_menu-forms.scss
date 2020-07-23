@@ -57,10 +57,11 @@
 
   button,
   .button {
-    padding: .5em .75em;
+    padding: .5em 1em;
     background: #fff;
-    color: #666;
-    border: 1px solid global.$color__border-gray-light;
+    border:1px solid rgba(global.$color__ystd_blue,0.3);
+    color: global.$color__ystd_blue;
+    border-radius: 4px;
     appearance: none;
     outline: none;
     cursor: pointer;
@@ -70,6 +71,7 @@
     svg {
       vertical-align: -.25em;
     }
+
     &:disabled {
       background: #f7f7f7;
       color: #a0a5aa;
@@ -80,33 +82,37 @@
       white-space: nowrap;
     }
 
-    &.ystdtb-menu__clear {
-      white-space: nowrap;
-      font-size: .9em;
-    }
-
     &.is-block {
       display: block;
       width: 100%;
     }
+
     &.is-small {
-      font-size: .9em;
+      font-size: .85em;
+    }
+    &.is-white {
+      background: #fff;
+      color: #666;
+      border: 1px solid global.$color__border-gray-light;
     }
 
     &.is-primary,
     &.button-primary {
-      background-color: #07689f;
-      border-color: #07689f;
+      background-color: global.$color__ystd_blue;
+      border-color: global.$color__ystd_blue;
       color: #fff;
     }
 
     &.is-cancel {
-      border: 1px solid #ccc;
-      color: #aaa;
+      border-color: #eee;
+      background-color: #f7f7f7;
+      color: #666;
+      white-space: nowrap;
     }
 
     &.is-danger {
       border: 1px solid #f0506e;
+      background-color: #fff;
       color: #f0506e;
     }
 
@@ -155,7 +161,7 @@
     }
 
     &:checked + label {
-      background: #9FD6AE;
+      background: global.$color__ystd_blue;
 
       &:after {
         left: 50%;

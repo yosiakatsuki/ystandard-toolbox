@@ -14,9 +14,9 @@
 						:step="paddingTopStep"
 						v-model="paddingTop"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Top')">{{ paddingTopUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Top')">{{ paddingTopUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][paddingTopUnit]`" v-model="paddingTopUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearPadding('Top')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearPadding('Top')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -33,9 +33,9 @@
 						:step="paddingRightStep"
 						v-model="paddingRight"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Right')">{{ paddingRightUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Right')">{{ paddingRightUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][paddingRightUnit]`" v-model="paddingRightUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearPadding('Right')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearPadding('Right')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -52,9 +52,9 @@
 						:step="paddingBottomStep"
 						v-model="paddingBottom"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Bottom')">{{ paddingBottomUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Bottom')">{{ paddingBottomUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][paddingBottomUnit]`" v-model="paddingBottomUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearPadding('Bottom')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearPadding('Bottom')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -71,9 +71,9 @@
 						:step="paddingLeftStep"
 						v-model="paddingLeft"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Left')">{{ paddingLeftUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Left')">{{ paddingLeftUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][paddingLeftUnit]`" v-model="paddingLeftUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearPadding('Left')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearPadding('Left')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -91,9 +91,9 @@
 						:step="marginTopStep"
 						v-model="marginTop"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Top')">{{ marginTopUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Top')">{{ marginTopUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][marginTopUnit]`" v-model="marginTopUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearMargin('Top')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearMargin('Top')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -110,9 +110,9 @@
 						:step="marginBottomStep"
 						v-model="marginBottom"
 					/>
-					<button type="button" style="height: 100%" @click="togglePaddingUnit('Bottom')">{{ marginBottomUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Bottom')">{{ marginBottomUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][marginBottomUnit]`" v-model="marginBottomUnit">
-					<button class="ystdtb-menu__clear" type="button" @click="clearMargin('Bottom')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearMargin('Bottom')">クリア</button>
 				</div>
 			</div>
 		</div>

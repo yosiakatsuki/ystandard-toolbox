@@ -46,7 +46,7 @@
 							v-model="fontSizeMobile"
 						/>
 					</label>
-					<button type="button" style="height: 100%" @click="toggleFontSizeUnit">{{ fontSizeUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleFontSizeUnit">{{ fontSizeUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][fontSizeUnit]`" v-model="fontSizeUnit">
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 						:name="`ystdtb_heading[${level}][fontColor]`"
 						v-model="fontColor"
 					/>
-					<button class="editor-border__color-clear" type="button" @click="clearTextColor()">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearTextColor()">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -370,10 +370,12 @@
 				this.fontAlign = value;
 			},
 			getAlignClass( align ) {
-				if ( align === this.fontAlign ) {
-					return 'is-active';
-				}
-				return '';
+				return [
+					'is-white',
+					{
+						'is-active': align === this.fontAlign
+					}
+				]
 			},
 			toggleFontSizeUnit() {
 				const unit = 'em' === this.fontSizeUnit ? 'px' : 'em';
@@ -417,12 +419,18 @@
 		display: flex;
 
 		button {
+			border-radius: 0;
+
 			&:first-of-type {
 				border-right: 0;
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
 			}
 
 			&:last-of-type {
 				border-left: 0;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
 			}
 
 			&.is-active {

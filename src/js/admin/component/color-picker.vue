@@ -53,6 +53,12 @@
 		display: flex;
 		position: relative;
 
+		button {
+			background-color: #fff;
+			border-color: #eee;
+			color: #666;
+		}
+
 		.ystdtb-color-picker__preview {
 			min-width: 2.5em;
 			border-top: 1px solid #eee;
@@ -65,6 +71,7 @@
 		}
 
 		.ystdtb-color-picker__open {
+			border-radius: 0;
 			white-space: nowrap;
 			font-size: 0.9em;
 		}

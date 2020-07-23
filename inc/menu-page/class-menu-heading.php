@@ -43,6 +43,7 @@ class Menu_Heading extends Menu_Page_Base {
 		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
 			return;
 		}
+		wp_enqueue_media();
 		$this->enqueue_admin_script( 'heading' );
 		wp_localize_script(
 			'ystdtb-heading',

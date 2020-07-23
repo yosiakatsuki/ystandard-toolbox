@@ -14,7 +14,7 @@
 						:step="borderTopWidthStep"
 						v-model="borderTopWidth"
 					/>
-					<button type="button" style="height: 100%" @click="toggleBorderWidth('Top')">{{ borderTopWidthUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleBorderWidth('Top')">{{ borderTopWidthUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][borderTopWidthUnit]`" v-model="borderTopWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderTopStyle]`"
@@ -27,7 +27,7 @@
 						:name="`ystdtb_heading[${level}][borderTopColor]`"
 						v-model="borderTopColor"
 					/>
-					<button class="editor-border__color-clear" type="button" @click="clearBorderColor('Top')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Top')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 						:step="borderRightWidthStep"
 						v-model="borderRightWidth"
 					/>
-					<button type="button" style="height: 100%" @click="toggleBorderWidth('Right')">{{ borderRightWidthUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleBorderWidth('Right')">{{ borderRightWidthUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][borderRightWidthUnit]`" v-model="borderRightWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderRightStyle]`"
@@ -58,7 +58,7 @@
 						:name="`ystdtb_heading[${level}][borderRightColor]`"
 						v-model="borderRightColor"
 					/>
-					<button class="editor-border__color-clear" type="button" @click="clearBorderColor('Right')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Right')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 						:step="borderBottomWidthStep"
 						v-model="borderBottomWidth"
 					/>
-					<button type="button" style="height: 100%" @click="toggleBorderWidth('Bottom')">{{ borderBottomWidthUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleBorderWidth('Bottom')">{{ borderBottomWidthUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][borderBottomWidthUnit]`" v-model="borderBottomWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderBottomStyle]`"
@@ -89,7 +89,7 @@
 						:name="`ystdtb_heading[${level}][borderBottomColor]`"
 						v-model="borderBottomColor"
 					/>
-					<button class="editor-border__color-clear" type="button" @click="clearBorderColor('Bottom')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Bottom')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 						:step="borderLeftWidthStep"
 						v-model="borderLeftWidth"
 					/>
-					<button type="button" style="height: 100%" @click="toggleBorderWidth('Left')">{{ borderLeftWidthUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleBorderWidth('Left')">{{ borderLeftWidthUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][borderLeftWidthUnit]`" v-model="borderLeftWidthUnit">
 					<select
 						:name="`ystdtb_heading[${level}][borderLeftStyle]`"
@@ -120,7 +120,7 @@
 						:name="`ystdtb_heading[${level}][borderLeftColor]`"
 						v-model="borderLeftColor"
 					/>
-					<button class="editor-border__color-clear" type="button" @click="clearBorderColor('Left')">クリア</button>
+					<button class="is-cancel is-small " type="button" @click="clearBorderColor('Left')">クリア</button>
 				</div>
 			</div>
 		</div>
@@ -306,8 +306,5 @@
 </script>
 
 <style lang="scss">
-	.editor-border__color-clear {
-		font-size: .8em;
-		white-space: nowrap;
-	}
+
 </style>
