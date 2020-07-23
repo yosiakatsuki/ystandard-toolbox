@@ -101,8 +101,8 @@ class Heading {
 	 * 見出し用CSS追加
 	 */
 	public function add_heading_styles() {
-
-		$css = $this->get_heading_css();
+		$this->editor = false;
+		$css          = $this->get_heading_css();
 
 		if ( empty( $css ) ) {
 			return;
@@ -121,9 +121,16 @@ class Heading {
 		// CSS.
 		$css = $this->get_heading_css();
 
-		if ( empty( $css ) ) {
+		if ( empty( $css ) || ! is_admin() ) {
 			return;
 		}
+		$wrap        = Config::EDITOR_STYLES_WRAPPER;
+		$block_style = "#editor ${wrap}.block-editor-block-preview__container .is-style-default";
+		// スタイルパネル用.
+		$css .= "${block_style} {border:0;color:#222;background:none;}";
+		$css .= "${block_style}:before {display:none;}";
+		$css .= "${block_style}:after {display:none;}";
+
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
 			Utility::minify( $css )
@@ -203,7 +210,7 @@ class Heading {
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
 			$block_style = "#editor ${wrap} .is-style-ystdtb-${level}";
-			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-style-default)";
+			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"])";
 		}
 		$content = "${block_style},${selector}";
 		$before  = "${block_style}:before,${selector}:before";
@@ -402,6 +409,24 @@ class Heading {
 		$this->set_css(
 			'background-color',
 			$this->get_value( 'backgroundColor' )
+		);
+		$image = $this->get_value( 'backgroundImage' );
+		$image = empty( $image ) ? '' : "url(\"${image}\")";
+		$this->set_css(
+			'background-image',
+			$image
+		);
+		$this->set_css(
+			'background-position',
+			str_replace( '-', ' ', $this->get_value( 'backgroundPosition' ) )
+		);
+		$this->set_css(
+			'background-repeat',
+			$this->get_value( 'backgroundRepeat' )
+		);
+		$this->set_css(
+			'background-size',
+			$this->get_value( 'backgroundSize' )
 		);
 	}
 
@@ -648,7 +673,7 @@ class Heading {
 	/**
 	 * ブロックエディターに渡す設定作成
 	 */
-	public function block_editor_option( ) {
+	public function block_editor_option() {
 		wp_localize_script(
 			'ystandard-toolbox-styles',
 			'ystdtbBlockEditorHeading',

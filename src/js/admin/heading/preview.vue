@@ -37,6 +37,10 @@
 					lineHeight: this.getLineHeight(),
 					letterSpacing: this.getLetterSpacing(),
 					backgroundColor: this.getOption( 'backgroundColor' ),
+					backgroundImage: this.getBackgroundImage(),
+					backgroundPosition: this.getBackgroundPosition(),
+					backgroundRepeat: this.getOption( 'backgroundRepeat' ),
+					backgroundSize: this.getOption( 'backgroundSize' ),
 					borderTop: this.getBorder( 'Top' ),
 					borderRight: this.getBorder( 'Right' ),
 					borderBottom: this.getBorder( 'Bottom' ),
@@ -87,6 +91,17 @@
 			getLetterSpacing() {
 				const value = this.getFontAdvancedValue( 'letterSpacing' );
 				return undefined === value ? undefined : value + 'em';
+			},
+			getBackgroundImage() {
+				const url = this.getOption( 'backgroundImage' );
+				return '' === url ? undefined : `url("${ url }")`;
+			},
+			getBackgroundPosition() {
+				const value = this.getOption( 'backgroundPosition' );
+				if ( '' === value ) {
+					return undefined;
+				}
+				return value.replace( '-', ' ' );
 			},
 			getBorder( pos ) {
 				const borderWidth = this.getOption( `border${ pos }Width` );
