@@ -9,15 +9,11 @@
 
 					<input :name="`ystdtb_heading[${level}][beforeColorType]`" type="hidden" v-model="beforeColorType"/>
 
-					<div v-show="false" class="advanced-option__before-after-container">
-						<label :for="`before-content--${level}`" class="is-block is-small">content</label>
-						<input
-							:id="`before-content--${level}`"
-							:name="`ystdtb_heading[${level}][beforeContent]`"
-							type="text"
-							v-model="beforeContent"
-							:disabled="isDisable('beforeContent')"
-						/>
+					<div class="advanced-option__before-after-container">
+						<label :for="`before-content--${level}`" class="is-block is-small">アイコン</label>
+						<div style="font-size: .8em;">
+							<iconSelect :level="level" :type="'before'"/>
+						</div>
 					</div>
 					<div class="advanced-option__before-after-container">
 						<label :for="`before-size--${level}`" class="is-block is-small">サイズ</label>
@@ -26,7 +22,7 @@
 							type="number"
 							max="50"
 							min="0"
-							step="1"
+							:step="sizeStep"
 							v-model="beforeSize"
 							:disabled="isDisable('beforeSize')"
 						/>
@@ -55,15 +51,11 @@
 
 					<input :name="`ystdtb_heading[${level}][afterColorType]`" type="hidden" v-model="afterColorType"/>
 
-					<div v-show="false" class="advanced-option__before-after-container">
-						<label :for="`after-content--${level}`" class="is-block is-small">content</label>
-						<input
-							:id="`after-content--${level}`"
-							:name="`ystdtb_heading[${level}][afterContent]`"
-							type="text"
-							v-model="afterContent"
-							:disabled="isDisable('afterContent')"
-						/>
+					<div class="advanced-option__before-after-container">
+						<label :for="`before-content--${level}`" class="is-block is-small">アイコン</label>
+						<div style="font-size: .8em;">
+							<iconSelect :level="level" :type="'after'"/>
+						</div>
 					</div>
 					<div class="advanced-option__before-after-container">
 						<label :for="`after-size--${level}`" class="is-block is-small">サイズ</label>
@@ -72,7 +64,7 @@
 							type="number"
 							max="50"
 							min="0"
-							step="1"
+							:step="sizeStep"
 							v-model="afterSize"
 							:disabled="isDisable('afterSize')"
 						/>
@@ -116,13 +108,15 @@
 
 <script>
 	import ColorPicker from '../component/color-picker';
+	import iconSelect from './icon-select';
 	import presets from './preset.json';
 
 	export default {
 		name: 'editor-other',
-		props: [ 'level','label' ],
+		props: [ 'level', 'label' ],
 		components: {
-			ColorPicker
+			ColorPicker,
+			iconSelect
 		},
 		data() {
 			return {
@@ -203,6 +197,19 @@
 					this.updateOption( 'backgroundColor', newValue );
 				}
 			},
+			sizeStep() {
+				const preset = this.getOption( 'preset' );
+				if ( undefined === this.presetList[ preset ] ) {
+					return 1;
+				}
+				if ( undefined === this.presetList[ preset ][ 'usePseudoElementsSize' ] ) {
+					return 1;
+				}
+				if ( this.presetList[ preset ].usePseudoElementsSize.includes( 'iconSize' ) ) {
+					return 0.1;
+				}
+				return 1;
+			}
 		},
 		methods: {
 			getOption( name ) {
@@ -245,7 +252,8 @@
 		margin-top: .5em;
 
 		label {
-			width: 65px;
+			flex-shrink: 0;
+			width: 55px;
 			margin-right: .5em;
 		}
 	}

@@ -48,10 +48,12 @@
   "marginBottom": "",
   "marginBottomUnit": "em",
   "beforeContent": "",
+  "beforeIcon": "",
   "beforeSize": "",
   "beforeColor": "",
   "beforeColorType": "",
   "afterContent": "",
+  "afterIcon": "",
   "afterSize": "",
   "afterColor": "",
   "afterColorType": ""

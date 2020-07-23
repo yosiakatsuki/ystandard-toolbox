@@ -72,12 +72,6 @@
       vertical-align: -.25em;
     }
 
-    &:disabled {
-      background: #f7f7f7;
-      color: #a0a5aa;
-      cursor: unset;
-    }
-
     &.is-nowrap {
       white-space: nowrap;
     }
@@ -119,6 +113,13 @@
     &.is-text {
       border: 0;
       background: transparent;
+    }
+
+    &:disabled {
+      background: #f7f7f7 !important;
+      border-color: #eee !important;
+      color: #a0a5aa !important;
+      cursor: unset !important;
     }
 
   }

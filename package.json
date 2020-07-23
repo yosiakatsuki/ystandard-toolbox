@@ -16,6 +16,7 @@
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "es6-promise": "^4.2.8",
+    "feather-icons": "^4.28.0",
     "fibers": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-dart-sass": "^1.0.2",

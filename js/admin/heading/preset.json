@@ -126,5 +126,42 @@
         "marginLeft": ".5em"
       }
     }
+  },
+  "icons": {
+    "name": "アイコン付き",
+    "default": {
+      "beforeIcon": "award",
+      "beforeSize": 1.2,
+      "beforeColor": "#222222",
+      "beforeColorType": "color",
+      "afterIcon": "",
+      "afterSize": 0,
+      "afterColor": "#222222",
+      "afterColorType": "color"
+    },
+    "enablePseudoElements": [
+      "beforeIcon",
+      "beforeSize",
+      "beforeColor",
+      "afterIcon",
+      "afterSize",
+      "afterColor"
+    ],
+    "usePseudoElementsSize": [
+      "iconSize"
+    ],
+    "additionalStyle": {
+      "content": {
+        "display": "flex"
+      },
+      "before": {
+        "alignSelf": "center",
+        "marginRight": ".5em"
+      },
+      "after": {
+        "alignSelf": "center",
+        "marginLeft": ".5em"
+      }
+    }
   }
 }

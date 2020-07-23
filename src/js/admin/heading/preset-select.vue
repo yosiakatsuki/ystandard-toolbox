@@ -32,9 +32,9 @@
 							>
 
 								<span class="preset-select__button-content" :style="getContentStyle(name,value.default)">
-									<span :style="previewPseudoElements(name,'before')"></span>
+									<span :style="previewPseudoElements(name,'before')" v-html="getPseudoElementsContent(name,'before')"></span>
 									<span>{{ value.name }}</span>
-									<span :style="previewPseudoElements(name,'after')"></span>
+									<span :style="previewPseudoElements(name,'after')" v-html="getPseudoElementsContent(name,'after')"></span>
 								</span>
 
 							</button>
@@ -50,6 +50,7 @@
 <script>
 	import presets from './preset.json';
 	import _parseStyle from "../function/_parseStyle";
+	import _getFeatherIcon from "../function/_getFeatherIcon";
 
 	export default {
 		name: 'preset-select',
@@ -105,12 +106,14 @@
 			},
 			buttonClass( name, value ) {
 				const useAdvanced = undefined !== value[ 'enablePseudoElements' ];
-				return {
-					'is-nowrap': true,
-					'preset-select__button': true,
-					'is-selected': name === this.getOption( 'preset' ),
-					'use-advanced': useAdvanced
-				}
+				return [
+					'is-nowrap',
+					'preset-select__button',
+					{
+						'is-selected': name === this.getOption( 'preset' ),
+						'use-advanced': useAdvanced
+					}
+				]
 			},
 			getContentStyle( name, defaults ) {
 				const additional = this.getAdditionalStyle( name, 'content' );
@@ -144,10 +147,11 @@
 				const styles = this.getAdditionalStyle( name, section );
 
 				return {
-					height: type.includes( 'height' ) ? size + 'px' : false,
-					width: type.includes( 'width' ) ? size + 'px' : false,
-					backgroundColor: 'background' === colorType ? color : false,
-					color: 'color' === colorType ? color : false,
+					height: type.includes( 'height' ) ? size + 'px' : undefined,
+					width: type.includes( 'width' ) ? size + 'px' : undefined,
+					fontSize: type.includes( 'fontSize' ) ? size + 'em' : undefined,
+					backgroundColor: 'background' === colorType ? color : undefined,
+					color: 'color' === colorType ? color : undefined,
 					...styles
 				}
 			},
@@ -168,12 +172,30 @@
 				}
 				return preset.additionalStyle[ type ];
 			},
+			getPseudoElementsContent( name, type ) {
+				const preset = this.getPreset( name );
+				if ( preset.default.hasOwnProperty( `${ type }Icon` ) ) {
+					const size = preset.default[ `${ type }Size` ];
+					return _getFeatherIcon(
+						preset.default[ `${ type }Icon` ],
+						{
+							style: `width:${ size }em;height:${ size }em;`
+						}
+					);
+				}
+				if ( preset.default.hasOwnProperty( `${ type }Content` ) ) {
+					return _getFeatherIcon( preset.default[ `${ type }Content` ], {} );
+				}
+				return '';
+			},
 			clearPseudoElements() {
 				this.updateOption( 'beforeContent', '' );
+				this.updateOption( 'beforeIcon', '' );
 				this.updateOption( 'beforeSize', '' );
 				this.updateOption( 'beforeColor', '' );
 				this.updateOption( 'beforeColorType', '' );
 				this.updateOption( 'afterContent', '' );
+				this.updateOption( 'afterIcon', '' );
 				this.updateOption( 'afterSize', '' );
 				this.updateOption( 'afterColor', '' );
 				this.updateOption( 'afterColorType', '' );
@@ -211,6 +233,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			color: #222;
 
 			&.is-selected {
 				border: 2px solid #07689f;

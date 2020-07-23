@@ -3,9 +3,9 @@
 		<div class="ystdtb-menu__card editor-preview__content">
 			<div class="editor-preview__level">{{ label }}</div>
 			<div class="heading-editor-preview" :style="previewStyle">
-				<span :style="previewBeforeStyle">{{ previewBeforeContent }}</span>
+				<span :style="previewBeforeStyle"><span v-html="previewBeforeContent"></span></span>
 				<span class="heading-editor-preview__text" contenteditable="true">見出しのプレビュー</span>
-				<span :style="previewAfterStyle">{{ previewAfterContent }}</span>
+				<span :style="previewAfterStyle"><span v-html="previewAfterContent"></span></span>
 			</div>
 		</div>
 	</div>
@@ -13,8 +13,8 @@
 
 
 <script>
-
 	import presets from './preset.json';
+	import _getFeatherIcon from "../function/_getFeatherIcon";
 
 	export default {
 		name: 'preview',
@@ -55,16 +55,16 @@
 				}
 			},
 			previewBeforeContent: function () {
-				return this.getBeforeAfterContent( 'before' );
+				return this.getPseudoElementsContent( 'before' );
 			},
 			previewBeforeStyle: function () {
-				return this.getBeforeAfterStyle( 'before' );
+				return this.getPseudoElementsStyle( 'before' );
 			},
 			previewAfterContent: function () {
-				return this.getBeforeAfterContent( 'after' );
+				return this.getPseudoElementsContent( 'after' );
 			},
 			previewAfterStyle: function () {
-				return this.getBeforeAfterStyle( 'after' );
+				return this.getPseudoElementsStyle( 'after' );
 			},
 		},
 		methods: {
@@ -145,11 +145,21 @@
 				}
 				return this.presetList[ preset ];
 			},
-			getBeforeAfterContent( section ) {
+			getPseudoElementsContent( section ) {
 				let content = this.getOption( `${ section }Content` );
+				const icon = this.getOption( `${ section }Icon` );
+				if ( icon ) {
+					const size = this.getOption( `${ section }Size` );
+					content = _getFeatherIcon(
+						icon,
+						{
+							style: `width:${size}em;height:${size}em;`
+						}
+					);
+				}
 				return content;
 			},
-			getBeforeAfterStyle( section ) {
+			getPseudoElementsStyle( section ) {
 				const size = this.getOption( `${ section }Size` );
 				if ( '' === size || 0 >= size ) {
 					return {
@@ -177,8 +187,8 @@
 				const useSize = preset.usePseudoElementsSize;
 
 				return {
-					height: useSize.includes( 'height' ) ? size + 'px' : false,
-					width: useSize.includes( 'width' ) ? size + 'px' : false,
+					height: useSize.includes( 'height' ) ? size + 'px' : undefined,
+					width: useSize.includes( 'width' ) ? size + 'px' : undefined,
 				}
 			},
 			getAdvancedOptionColor( section ) {
