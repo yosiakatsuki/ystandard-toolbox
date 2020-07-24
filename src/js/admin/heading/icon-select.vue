@@ -102,10 +102,12 @@
 			},
 			getIconSvg( name ) {
 				const size = this.getOption( `${ this.type }Size` );
+				const color = this.getOption( `${ this.type }Color` );
 				return _getFeatherIcon(
 					name,
 					{
-						style: `width:${ size }em;height:${ size }em;`
+						style: `width:${ size }em;height:${ size }em;`,
+						stroke: color
 					}
 				);
 			}
@@ -140,6 +142,7 @@
 			width: calc(10% - 1em);
 			margin-right: 1em;
 			margin-bottom: 1em;
+			font-size: 1.2rem;
 
 			&.is-selected {
 				border: 2px solid #07689f;

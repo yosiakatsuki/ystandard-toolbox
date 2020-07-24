@@ -548,7 +548,8 @@ class Heading {
 			$content = stripslashes( $this->get_value( "${pos}Content" ) );
 			if ( false !== strpos( $content, '<svg' ) ) {
 				$content = str_replace( '\'', '"', $content );
-				$content = "url('data:image/svg+xml;utf-8,${content}')";
+				$content = str_replace( '#', '%23', $content );
+				$content = "url('data:image/svg+xml;charset=UTF-8,${content}')";
 			}
 			$this->set_css(
 				'content',
