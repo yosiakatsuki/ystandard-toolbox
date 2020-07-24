@@ -51,6 +51,9 @@
 	import presets from './preset.json';
 	import _parseStyle from "../function/_parseStyle";
 	import _getFeatherIcon from "../function/_getFeatherIcon";
+	import _getColorStyle from "../function/_getColorStyle";
+	import _getPseudoElementsSizeStyle from "../function/_getPseudoElementsSizeStyle";
+	import _replaceStyles from "../function/_replaceStyles";
 
 	export default {
 		name: 'preset-select',
@@ -117,10 +120,10 @@
 			},
 			getContentStyle( name, defaults ) {
 				const additional = this.getAdditionalStyle( name, 'content' );
-				return {
+				return _replaceStyles( {
 					..._parseStyle( defaults ),
 					...additional
-				};
+				} );
 			},
 			setDefaultStyle( style ) {
 				for ( const key in style ) {
@@ -141,19 +144,16 @@
 				}
 
 				const size = style.default[ `${ section }Size` ];
-				const type = style.usePseudoElementsSize;
 				const colorType = style.default[ `${ section }ColorType` ];
 				const color = style.default[ `${ section }Color` ];
+				const sizeStyles = _getPseudoElementsSizeStyle( size, style );
+				const colorStyles = _getColorStyle( colorType, color );
 				const styles = this.getAdditionalStyle( name, section );
-
-				return {
-					height: type.includes( 'height' ) ? size + 'px' : undefined,
-					width: type.includes( 'width' ) ? size + 'px' : undefined,
-					fontSize: type.includes( 'fontSize' ) ? size + 'em' : undefined,
-					backgroundColor: 'background' === colorType ? color : undefined,
-					color: 'color' === colorType ? color : undefined,
-					...styles
-				}
+				return _replaceStyles( {
+					...colorStyles,
+					...sizeStyles,
+					...styles,
+				} );
 			},
 			getPreset( name ) {
 				if ( ! this.presetList.hasOwnProperty( name ) ) {
@@ -219,6 +219,9 @@
 		.preset-select__list {
 			display: flex;
 			flex-wrap: wrap;
+			align-items: flex-start;
+			max-height: 90%;
+			overflow-y: scroll;
 
 			> li {
 				margin: 0 0 1.5em;

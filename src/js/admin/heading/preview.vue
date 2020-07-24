@@ -3,9 +3,9 @@
 		<div class="ystdtb-menu__card editor-preview__content">
 			<div class="editor-preview__level">{{ label }}</div>
 			<div class="heading-editor-preview" :style="previewStyle">
-				<span :style="previewBeforeStyle"><span v-html="previewBeforeContent"></span></span>
+				<span class="heading-editor-preview__before" :style="previewBeforeStyle"><span v-html="previewBeforeContent"></span></span>
 				<span class="heading-editor-preview__text" contenteditable="true">見出しのプレビュー</span>
-				<span :style="previewAfterStyle"><span v-html="previewAfterContent"></span></span>
+				<span class="heading-editor-preview__after" :style="previewAfterStyle"><span v-html="previewAfterContent"></span></span>
 			</div>
 		</div>
 	</div>
@@ -15,6 +15,9 @@
 <script>
 	import presets from './preset.json';
 	import _getFeatherIcon from "../function/_getFeatherIcon";
+	import _getColorStyle from "../function/_getColorStyle";
+	import _getPseudoElementsSizeStyle from "../function/_getPseudoElementsSizeStyle";
+	import _replaceStyles from "../function/_replaceStyles";
 
 	export default {
 		name: 'preview',
@@ -27,7 +30,7 @@
 		computed: {
 			previewStyle: function () {
 				const styles = this.getAdditionalStyle( 'content' );
-				return {
+				return _replaceStyles( {
 					fontSize: this.getFontSize() + this.getOption( 'fontSizeUnit' ),
 					color: this.getOption( 'fontColor' ),
 					textAlign: this.getOption( 'fontAlign' ),
@@ -52,7 +55,7 @@
 					marginTop: this.getMargin( 'Top' ),
 					marginBottom: this.getMargin( 'Bottom' ),
 					...styles
-				}
+				} );
 			},
 			previewBeforeContent: function () {
 				return this.getPseudoElementsContent( 'before' );
@@ -153,7 +156,7 @@
 					content = _getFeatherIcon(
 						icon,
 						{
-							style: `width:${size}em;height:${size}em;`
+							style: `width:${ size }em;height:${ size }em;`
 						}
 					);
 				}
@@ -169,37 +172,24 @@
 				const color = this.getAdvancedOptionColor( section );
 				const optionSize = this.getAdvancedOptionSize( section );
 				const styles = this.getAdditionalStyle( section );
-				return {
-					...styles,
-					...color,
-					...optionSize,
-				}
+				return _replaceStyles(
+					{
+						...color,
+						...optionSize,
+						...styles,
+					}
+				);
 			},
 			getAdvancedOptionSize( section ) {
 				const size = this.getOption( `${ section }Size` );
 				const preset = this.getPreset();
-				if ( '' === size || 0 === size ) {
-					return {};
-				}
-				if ( ! preset.hasOwnProperty( 'usePseudoElementsSize' ) ) {
-					return {};
-				}
-				const useSize = preset.usePseudoElementsSize;
-
-				return {
-					height: useSize.includes( 'height' ) ? size + 'px' : undefined,
-					width: useSize.includes( 'width' ) ? size + 'px' : undefined,
-				}
+				return _getPseudoElementsSizeStyle( size, preset );
 			},
 			getAdvancedOptionColor( section ) {
 				let color = this.getOption( `${ section }Color` );
 				let type = this.getOption( `${ section }ColorType` );
-				color = '' === color ? false : color;
 
-				return {
-					backgroundColor: 'background' === type ? color : false,
-					color: 'color' === type ? color : false,
-				}
+				return _getColorStyle( type, color );
 			},
 			getAdditionalStyle( type ) {
 				const preset = this.getPreset();
@@ -251,6 +241,13 @@
 
 		.heading-editor-preview__text {
 			word-break: break-all;
+		}
+	}
+
+	.heading-editor-preview__before,
+	.heading-editor-preview__after {
+		svg {
+			transform: translateY(-5%);
 		}
 	}
 </style>

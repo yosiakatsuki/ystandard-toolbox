@@ -64,7 +64,7 @@
 				}
 			},
 			selectedContent() {
-				return _getFeatherIcon( this.selectedIcon, {} );
+				return this.getIconSvg( this.selectedIcon );
 			},
 			iconPreview() {
 				return '' === this.selectedIcon ? '<span>-</span>' : _getFeatherIcon( this.selectedIcon, {} );
@@ -93,16 +93,7 @@
 			},
 			selectIcon( icon ) {
 				this.selectedIcon = icon;
-				const size = this.getOption( `${ this.type }Size` );
-				this.updateOption(
-					`${ this.type }Content`,
-					_getFeatherIcon(
-						icon,
-						{
-							style: `width:${size}em;height:${size}em;`
-						}
-					)
-				);
+				this.updateOption( `${ this.type }Content`, this.getIconSvg( icon ) );
 				this.showIconSelect = false;
 			},
 			clearIcon() {
@@ -110,7 +101,13 @@
 				this.updateOption( `${ this.type }Content`, '' );
 			},
 			getIconSvg( name ) {
-				return _getFeatherIcon( name, {} );
+				const size = this.getOption( `${ this.type }Size` );
+				return _getFeatherIcon(
+					name,
+					{
+						style: `width:${ size }em;height:${ size }em;`
+					}
+				);
 			}
 		}
 	}

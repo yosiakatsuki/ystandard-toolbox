@@ -328,6 +328,17 @@ class Heading {
 				$css     .= 'content:' . $content . ';';
 			} else {
 				if ( ! empty( $key ) && ! empty( $value ) ) {
+					if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
+						$replace  = $matches[0];
+						$property = str_replace( [ '#{', '}' ], '', $replace );
+						if ( isset( $styles[ $section ][ $this->get_css_property( $property ) ] ) ) {
+							$value = str_replace(
+								$replace,
+								$styles[ $section ][ $this->get_css_property( $property ) ],
+								$value
+							);
+						}
+					}
 					$css .= "${key}:${value};";
 				}
 			}
@@ -335,6 +346,7 @@ class Heading {
 
 		return $css;
 	}
+
 
 	/**
 	 * フォント関連
@@ -533,11 +545,17 @@ class Heading {
 		}
 		$pseudo_elements = [ 'before', 'after' ];
 		foreach ( $pseudo_elements as $pos ) {
+			$content = stripslashes( $this->get_value( "${pos}Content" ) );
+			if ( false !== strpos( $content, '<svg' ) ) {
+				$content = str_replace( '\'', '"', $content );
+				$content = "url('data:image/svg+xml;utf-8,${content}')";
+			}
 			$this->set_css(
 				'content',
-				$this->get_value( "${pos}Content" ),
+				$content,
 				$pos
 			);
+
 			// size.
 			if ( isset( $preset['usePseudoElementsSize'] ) ) {
 				foreach ( $preset['usePseudoElementsSize'] as $item ) {
@@ -617,18 +635,38 @@ class Heading {
 	private function get_css_property( $name ) {
 		// できればサクッと変換したい.
 		$list = [
-			'alignSelf'     => 'align-self',
-			'flexGrow'      => 'flex-grow',
-			'minWidth'      => 'min-width',
-			'maxWidth'      => 'max-width',
-			'marginTop'     => 'margin-top',
-			'marginRight'   => 'margin-right',
-			'marginBottom'  => 'margin-bottom',
-			'marginLeft'    => 'margin-left',
-			'paddingTop'    => 'padding-top',
-			'paddingRight'  => 'padding-right',
-			'paddingBottom' => 'padding-bottom',
-			'paddingLeft'   => 'padding-left',
+			'alignSelf'         => 'align-self',
+			'flexGrow'          => 'flex-grow',
+			'minWidth'          => 'min-width',
+			'maxWidth'          => 'max-width',
+			'backgroundColor'   => 'background-color',
+			'marginTop'         => 'margin-top',
+			'marginRight'       => 'margin-right',
+			'marginBottom'      => 'margin-bottom',
+			'marginLeft'        => 'margin-left',
+			'paddingTop'        => 'padding-top',
+			'paddingRight'      => 'padding-right',
+			'paddingBottom'     => 'padding-bottom',
+			'paddingLeft'       => 'padding-left',
+			'borderWidth'       => 'border-width',
+			'borderTopWidth'    => 'border-top-width',
+			'borderRightWidth'  => 'border-right-width',
+			'borderBottomWidth' => 'border-bottom-width',
+			'borderLeftWidth'   => 'border-left-width',
+			'borderStyle'       => 'border-style',
+			'borderTopStyle'    => 'border-top-style',
+			'borderRightStyle'  => 'border-right-style',
+			'borderBottomStyle' => 'border-bottom-style',
+			'borderLeftStyle'   => 'border-left-style',
+			'borderColor'       => 'border-color',
+			'borderTopColor'    => 'border-top-color',
+			'borderRightColor'  => 'border-right-color',
+			'borderBottomColor' => 'border-bottom-color',
+			'borderLeftColor'   => 'border-left-color',
+			'borderRadius'      => 'border-radius',
+			'lineHeight'        => 'line-height',
+			'boxShadow'         => 'box-shadow',
+			'iconSize'          => '',
 		];
 		if ( isset( $list[ $name ] ) ) {
 			return $list[ $name ];

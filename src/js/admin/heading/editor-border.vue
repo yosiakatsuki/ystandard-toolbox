@@ -1,5 +1,5 @@
 <template>
-	<div class="heading-editor-background">
+	<div class="heading-editor-border">
 		<div class="ystdtb-menu__table">
 			<div class="is-label is-small">上</div>
 			<div class="is-content">
@@ -27,7 +27,7 @@
 						:name="`ystdtb_heading[${level}][borderTopColor]`"
 						v-model="borderTopColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Top')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Top')"><XIcon size="1x" /></button>
 				</div>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 						:name="`ystdtb_heading[${level}][borderRightColor]`"
 						v-model="borderRightColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Right')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Right')"><XIcon size="1x" /></button>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 						:name="`ystdtb_heading[${level}][borderBottomColor]`"
 						v-model="borderBottomColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Bottom')">クリア</button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Bottom')"><XIcon size="1x" /></button>
 				</div>
 			</div>
 		</div>
@@ -120,7 +120,7 @@
 						:name="`ystdtb_heading[${level}][borderLeftColor]`"
 						v-model="borderLeftColor"
 					/>
-					<button class="is-cancel is-small " type="button" @click="clearBorderColor('Left')">クリア</button>
+					<button class="is-cancel is-small " type="button" @click="clearBorderColor('Left')"><XIcon size="1x" /></button>
 				</div>
 			</div>
 		</div>
@@ -130,13 +130,15 @@
 
 <script>
 	import ColorPicker from '../component/color-picker';
+	import { XIcon } from 'vue-feather-icons'
 	import _toggleSizeInUnit from '../function/_toggleSizeInUnit';
 
 	export default {
 		name: 'editor-border',
 		props: [ 'level' ],
 		components: {
-			ColorPicker
+			ColorPicker,
+			XIcon
 		},
 		data() {
 			return {
@@ -288,6 +290,9 @@
 				} );
 			},
 			clearBorderColor( pos ) {
+				this.updateOption( `border${ pos }Width`, 0 );
+				this.updateOption( `border${ pos }WidthUnit`, 'px' );
+				this.updateOption( `border${ pos }Style`, 'solid' );
 				this.updateOption( `border${ pos }Color`, '' );
 			},
 			toggleBorderWidth( pos ) {
@@ -306,5 +311,9 @@
 </script>
 
 <style lang="scss">
-
+	.heading-editor-border {
+		select {
+			font-size: 0.9em;
+		}
+	}
 </style>
