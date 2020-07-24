@@ -241,6 +241,13 @@
 
 		.heading-editor-preview__text {
 			word-break: break-all;
+			font-style: inherit !important;
+
+			&:focus {
+				outline: none;
+				border: 0;
+				box-shadow: none;
+			}
 		}
 	}
 

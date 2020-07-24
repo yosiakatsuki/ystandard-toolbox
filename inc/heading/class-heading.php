@@ -666,6 +666,7 @@ class Heading {
 			'borderLeftColor'   => 'border-left-color',
 			'borderRadius'      => 'border-radius',
 			'lineHeight'        => 'line-height',
+			'verticalAlign'     => 'vertical-align',
 			'boxShadow'         => 'box-shadow',
 			'iconSize'          => '',
 		];

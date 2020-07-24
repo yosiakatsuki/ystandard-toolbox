@@ -38,7 +38,7 @@
 						:name="`ystdtb_heading[${level}][backgroundPosition]`"
 						v-model="backgroundPosition"
 					>
-						<option value=""> - </option>
+						<option value=""> -</option>
 						<option value="top">上</option>
 						<option value="center">中央</option>
 						<option value="bottom">下</option>
@@ -63,7 +63,7 @@
 						:name="`ystdtb_heading[${level}][backgroundRepeat]`"
 						v-model="backgroundRepeat"
 					>
-						<option value=""> - </option>
+						<option value=""> -</option>
 						<option value="no-repeat">no-repeat</option>
 						<option value="repeat">repeat</option>
 						<option value="repeat-x">repeat-x</option>
@@ -76,15 +76,39 @@
 			<div class="ystdtb-menu__table">
 				<div class="is-label">サイズ</div>
 				<div class="is-content">
+					<div class="ystdtb-menu__horizontal" style="margin-bottom: .5em;">
+						<div>
+							<input
+								:id="`bg-size-manual-toggle--${level}`"
+								class="toggle-button"
+								type="checkbox"
+								value="true"
+								v-model="isManualBgSize"
+							>
+							<label :for="`bg-size-manual-toggle--${level}`"></label>
+						</div>
+						<span style="font-size: .8em;">直接入力モード</span>
+					</div>
 					<select
+						v-if="!isManualBgSize"
 						:name="`ystdtb_heading[${level}][backgroundSize]`"
 						v-model="backgroundSize"
 					>
-						<option value=""> - </option>
+						<option value="">-</option>
 						<option value="contain">contain</option>
 						<option value="cover">cover</option>
-						<option value="50%">50%</option>
 					</select>
+					<div v-if="isManualBgSize">
+						<div class="ystdtb-menu__horizontal">
+							<label :for="`bg-size-manual--${level}`" class="is-block is-small is-nowrap">直接入力</label>
+							<input
+								:id="`bg-size-manual--${level}`"
+								:name="`ystdtb_heading[${level}][backgroundSize]`"
+								type="text"
+								v-model="backgroundSize"
+							>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -103,6 +127,7 @@
 		data() {
 			return {
 				mediaUploader: null,
+				isManualBgSize: false,
 			}
 		},
 		computed: {
@@ -188,12 +213,18 @@
 					} );
 				} );
 			},
+			changeManualSize() {
+				this.isManualBgSize = ! this.isManualBgSize;
+			},
 			clearImage() {
 				this.backgroundImage = '';
 				this.backgroundPosition = '';
 				this.backgroundRepeat = '';
 				this.backgroundSize = '';
 			}
+		},
+		created() {
+			this.isManualBgSize = ! [ '', 'contain', 'cover' ].includes( this.backgroundSize );
 		}
 	}
 </script>
@@ -201,12 +232,16 @@
 <style lang="scss">
 
 	.background-image__preview {
+		display: flex;
 		border: 1px solid #eee;
 		background-color: #f7f7f7;
+		padding: .5em;
 
 		img {
+			display: block;
 			max-width: 100%;
 			height: auto;
+			margin: auto;
 		}
 	}
 </style>

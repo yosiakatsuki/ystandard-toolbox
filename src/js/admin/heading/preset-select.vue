@@ -252,6 +252,10 @@
 			width: 100%;
 			text-align: left;
 			font-size: .9em;
+
+			svg {
+				vertical-align: baseline;
+			}
 		}
 	}
 </style>

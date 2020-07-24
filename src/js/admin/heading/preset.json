@@ -97,7 +97,6 @@
   "border-left": {
     "name": "左線",
     "default": {
-      "fontWeight": "bold",
       "borderTopWidth": 0,
       "borderTopWidthUnit": "px",
       "borderTopStyle": "solid",
@@ -128,7 +127,6 @@
   "border-left-plus-bg": {
     "name": "左線 + 背景色",
     "default": {
-      "fontWeight": "bold",
       "backgroundColor": "#f7f7f7",
       "borderTopWidth": 0,
       "borderTopWidthUnit": "px",
@@ -427,20 +425,15 @@
       "iconSize"
     ],
     "additionalStyle": {
-      "content": {
-        "display": "flex"
-      },
       "before": {
-        "alignSelf": "center",
-        "marginRight": ".5em",
+        "marginRight": ".25em",
         "lineHeight": 1,
-        "transform": "translateY(5%)"
+        "verticalAlign": "-0.25em"
       },
       "after": {
-        "alignSelf": "center",
-        "marginLeft": ".5em",
+        "marginLeft": ".25em",
         "lineHeight": 1,
-        "transform": "translateY(5%)"
+        "verticalAlign": "-0.25em"
       }
     }
   }

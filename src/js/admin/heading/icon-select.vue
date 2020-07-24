@@ -28,7 +28,7 @@
 					<h3>アイコン選択</h3>
 					<div class="icon-select__container">
 						<div class="icon-select__list">
-							<button type="button" class="is-white" v-for="icon in icons" @click="selectIcon(icon)" v-html="getIconSvg(icon)">
+							<button type="button" class="is-white" v-for="icon in icons" @click="selectIcon(icon)" v-html="getSelectIcon(icon)">
 							</button>
 						</div>
 					</div>
@@ -110,6 +110,9 @@
 						stroke: color
 					}
 				);
+			},
+			getSelectIcon( name ) {
+				return _getFeatherIcon( name );
 			}
 		}
 	}
