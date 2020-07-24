@@ -23,7 +23,7 @@ const store = new Vuex.Store( {
 			const types = _getHeadingTypes();
 			for ( var i = 0; i < types.length; i++ ) {
 				let level = types[ i ].level;
-				Options[ level] = { ...schema };
+				Options[ level ] = { ...schema };
 				Options[ level ][ 'fontSizePc' ] = getDefaultFontSize( level );
 				Options[ level ][ 'fontSizeTablet' ] = getDefaultFontSize( level );
 				Options[ level ][ 'fontSizeMobile' ] = getDefaultFontSize( level );
@@ -38,7 +38,15 @@ const store = new Vuex.Store( {
 		},
 		resetOptions( state, data ) {
 			let newOptions = { ...state.options };
-			newOptions[ data.level ] = { ...schema };
+			const fontSize = getDefaultFontSize( data.level );
+			newOptions[ data.level ] = {
+				...schema,
+				...{
+					fontSizePc: fontSize,
+					fontSizeTablet: fontSize,
+					fontSizeMobile: fontSize,
+				}
+			};
 			state.options = newOptions;
 		}
 
