@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || die();
 	<h1 class="ystdtb-menu__title">見出しデザイン編集</h1>
 	<div id="app">
 		<App/><!-- vue app -->
+		<div class="ystdtb-menu__loading"></div>
 	</div>
 </div>
 

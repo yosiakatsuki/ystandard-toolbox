@@ -1,26 +1,30 @@
 <template>
-	<div class="heading-editor ystdtb-menu__form">
-		<ul class="heading-editor__level-tabs">
-			<li :class="`is-level-${ heading.level }`" v-for="heading in headings">
-				<button type="button" :class="{'is-selected': heading.level === selected}" @click="changeLevel(heading.level)">{{ heading.label }}</button>
-			</li>
-		</ul>
-		<input type="hidden" name="ystdtb_heading_active" v-model="selected">
-		<div class="heading-editor__row">
-			<div v-for="heading in headings">
-				<Editor
-					v-show="heading.level === selected"
-					:level="heading.level"
-					:label="heading.label"
-					:description="heading.description"
-				/>
+	<div class="heading-editor ystdtb-menu__form ystdtb-menu__loaded">
+		<transition name="fade">
+			<div v-show="loaded">
+				<ul class="heading-editor__level-tabs">
+					<li :class="`is-level-${ heading.level }`" v-for="heading in headings">
+						<button type="button" :class="{'is-selected': heading.level === selected}" @click="changeLevel(heading.level)">{{ heading.label }}</button>
+					</li>
+				</ul>
+				<input type="hidden" name="ystdtb_heading_active" v-model="selected">
+				<div class="heading-editor__row">
+					<div v-for="heading in headings">
+						<Editor
+							v-show="heading.level === selected"
+							:level="heading.level"
+							:label="heading.label"
+							:description="heading.description"
+						/>
+					</div>
+				</div>
+				<div class="ystdtb-menu__section">
+					<p class="submit">
+						<input type="submit" name="submit" id="submit" class="button button-primary" value="変更を保存">
+					</p>
+				</div>
 			</div>
-		</div>
-		<div class="ystdtb-menu__section">
-			<p class="submit">
-				<input type="submit" name="submit" id="submit" class="button button-primary" value="変更を保存">
-			</p>
-		</div>
+		</transition>
 	</div>
 </template>
 
@@ -33,7 +37,8 @@
 		data() {
 			return {
 				headings: [],
-				selected: 'h2'
+				selected: 'h2',
+				loaded: false
 			}
 		},
 		components: {
@@ -52,7 +57,9 @@
 			if ( window.ystdtbHeadingActive ) {
 				this.selected = '' !== window.ystdtbHeadingActive.active ? window.ystdtbHeadingActive.active : 'h2';
 			}
-
+		},
+		mounted() {
+			this.loaded = true;
 		}
 	};
 </script>
@@ -77,7 +84,7 @@
 			&.is-level-h4,
 			&.is-level-h5,
 			&.is-level-h6 {
-				width: calc( #{(1 / 6 * 100)}#{"%"} - 2px );
+				width: calc(#{(1 / 6 * 100)}#{"%"} - 2px);
 			}
 
 			button {
