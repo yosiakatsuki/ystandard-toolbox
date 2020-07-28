@@ -54,9 +54,20 @@ class Menu_Page {
 			'manage_options',
 			self::MENU_SLUG,
 			'',
-			'',
+			$this->menu_icon(),
 			59
 		);
+	}
+
+	/**
+	 * メニューアイコン
+	 *
+	 * @return string
+	 */
+	private function menu_icon() {
+		$icon = Utility::get_file_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
+
+		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
 	}
 
 	/**
