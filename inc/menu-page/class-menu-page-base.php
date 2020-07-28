@@ -8,6 +8,8 @@
 namespace ystandard_toolbox\menu;
 
 use ystandard_toolbox\Menu_Page;
+use ystandard_toolbox\Notice;
+use ystandard_toolbox\Utility;
 
 defined( 'ABSPATH' ) || die();
 
@@ -63,6 +65,13 @@ abstract class Menu_Page_Base {
 	protected $enqueue_script = [];
 
 	/**
+	 * テーマ専用オプション
+	 *
+	 * @var bool
+	 */
+	protected $ystandard_only = false;
+
+	/**
 	 * Menu_Page_Base constructor.
 	 */
 	public function __construct() {
@@ -78,6 +87,8 @@ abstract class Menu_Page_Base {
 	 * 設定値の保存
 	 *
 	 * @param array $_post $_POST array.
+	 *
+	 * @return bool
 	 */
 	abstract public function save( $_post );
 
@@ -105,6 +116,9 @@ abstract class Menu_Page_Base {
 	 */
 	public function add_sub_menu_page() {
 		if ( ! $this->menu_slug ) {
+			return;
+		}
+		if ( $this->ystandard_only && ! Utility::is_ystandard_enable() ) {
 			return;
 		}
 		add_submenu_page(
@@ -225,10 +239,28 @@ abstract class Menu_Page_Base {
 			return;
 		}
 		if ( ! wp_verify_nonce( $_POST[ self::NONCE_NAME ], self::NONCE_ACTION ) ) {
+			Notice::set_notice( [ $this, 'notice_save_error' ] );
+
 			return;
 		}
 
-		$this->save( $_POST );
+		if ( $this->save( $_POST ) ) {
+			Notice::set_notice( [ $this, 'notice_save_success' ] );
+		};
+	}
+
+	/**
+	 * 設定更新エラー
+	 */
+	public function notice_save_error() {
+		Notice::error( '設定を更新できませんでした。' );
+	}
+
+	/**
+	 * 設定更新完了
+	 */
+	public function notice_save_success() {
+		Notice::success( '設定を更新しました。' );
 	}
 
 	/**

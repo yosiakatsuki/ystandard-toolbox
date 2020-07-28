@@ -62,4 +62,9 @@ class Config {
 	 * ブロックエディターにわたすオプション作成フック名
 	 */
 	const BLOCK_EDITOR_OPTION_HOOK = 'ystdtb_block_editor_option';
+
+	/**
+	 * 設定名
+	 */
+	const OPTION_NAME = 'ystdtb-option';
 }

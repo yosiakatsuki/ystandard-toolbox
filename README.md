@@ -14,17 +14,17 @@
 
 ### Plugin Update Checker
 
-License: MIT
+License: MIT  
 Source : <https://github.com/YahnisElsts/plugin-update-checker>
 
 ### React FontIconPicker
 
-License: MIT
+License: MIT  
 Source : <https://github.com/fontIconPicker/react-fonticonpicker>
 
 ### IntersectionObserver
 
-License: W3C Software and Document License
+License: W3C Software and Document License  
 Source : <https://github.com/w3c/IntersectionObserver>
 
 ### Feather

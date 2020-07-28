@@ -42,6 +42,7 @@ class Menu_Page {
 		require_once __DIR__ . '/class-menu-start.php';
 		require_once __DIR__ . '/class-menu-heading.php';
 		require_once __DIR__ . '/class-menu-code.php';
+		require_once __DIR__ . '/class-menu-font.php';
 	}
 
 	/**

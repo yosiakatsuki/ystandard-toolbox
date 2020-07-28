@@ -20,16 +20,22 @@
 
   .ystdtb-menu__nav {
     margin: 0;
-    padding: 0 2em 0 0;
     list-style: none;
     font-size: .9em;
+    display: none;
 
     @include global.media-breakpoint(md) {
-      width: 180px;
+      display: block;
+      width: 160px;
+      border-right: 1px solid #eee;
+      padding: 0;
+      margin-right: 2em;
     }
   }
 
   .ystdtb-menu__nav-item {
+    margin-right: -1px;
+
     a {
       text-decoration: none;
       color: currentColor;

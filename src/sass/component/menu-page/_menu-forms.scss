@@ -34,6 +34,11 @@
     font-weight: normal;
     box-sizing: border-box;
     -webkit-appearance: none;
+    box-shadow: 0 0 2px rgba(#000, 0.2);
+
+    &::placeholder {
+      color: #ccc;
+    }
   }
 
   input[type="number"] {
@@ -59,11 +64,11 @@
     transition-property: color, background-color, border;
   }
 
-  button,
-  .button {
+  button:not(.notice-dismiss),
+  .button:not(.notice-dismiss) {
     padding: .5em 1em;
     background: #fff;
-    border:1px solid rgba(global.$color__ystd_blue,0.3);
+    border: 1px solid rgba(global.$color__ystd_blue, 0.3);
     color: global.$color__ystd_blue;
     border-radius: 4px;
     appearance: none;
@@ -88,6 +93,7 @@
     &.is-small {
       font-size: .85em;
     }
+
     &.is-white {
       background: #fff;
       color: #666;

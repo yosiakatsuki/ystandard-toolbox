@@ -38,6 +38,15 @@ class Utility {
 	}
 
 	/**
+	 * [yStandard]テーマが有効か
+	 *
+	 * @return bool
+	 */
+	public static function is_ystandard_enable() {
+		return 'ystandard' === get_template();
+	}
+
+	/**
 	 * Bool値に変換
 	 *
 	 * @param mixed $value value.

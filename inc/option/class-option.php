@@ -1,0 +1,93 @@
+<?php
+/**
+ * @package ystandard-toolbox
+ * @author  yosiakatsuki
+ * @license GPL-2.0+
+ */
+
+namespace ystandard_toolbox;
+
+defined( 'ABSPATH' ) || die();
+
+/**
+ * Class Utility
+ *
+ * @package ystandard_toolbox
+ */
+class Option {
+
+	/**
+	 * 設定取得
+	 *
+	 * @return array
+	 */
+	public static function get_all_option() {
+		return get_option( Config::OPTION_NAME, [] );
+	}
+
+	/**
+	 * 設定取得
+	 *
+	 * @param string $section Section.
+	 * @param string $name    Name.
+	 * @param string $default Default.
+	 *
+	 * @return mixed|string
+	 */
+	public static function get_option( $section, $name, $default = '' ) {
+		$option = self::get_all_option();
+		if ( ! isset( $option[ $section ] ) ) {
+			return $default;
+		}
+		if ( ! isset( $option[ $section ][ $name ] ) ) {
+			return $default;
+		}
+
+		return $option[ $section ][ $name ];
+	}
+
+	/**
+	 * 設定取得（bool）
+	 *
+	 * @param string $name    Name.
+	 * @param string $default Default.
+	 *
+	 * @return bool
+	 */
+	public static function get_option_by_bool( $name, $default = false ) {
+
+		return Utility::to_bool( self::get_option( $name, $default ) );
+	}
+
+	/**
+	 * 設定取得（num）
+	 *
+	 * @param string $name    Name.
+	 * @param string $default Default.
+	 *
+	 * @return int|float
+	 */
+	public static function get_option_by_num( $name, $default = 0 ) {
+		$option = self::get_option( $name, $default );
+		if ( ! is_numeric( $option ) ) {
+			return $default;
+		}
+
+		return $option;
+	}
+
+	/**
+	 * 設定更新
+	 *
+	 * @param string $name  Name.
+	 * @param mixed  $value Value.
+	 *
+	 * @return bool
+	 */
+	public static function update_option( $name, $value ) {
+		$option          = self::get_all_option();
+		$option[ $name ] = $value;
+
+		return update_option( Config::OPTION_NAME, $option );
+	}
+}

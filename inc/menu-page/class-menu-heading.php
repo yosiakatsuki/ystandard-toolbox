@@ -68,12 +68,14 @@ class Menu_Heading extends Menu_Page_Base {
 	 */
 	public function save( $_post ) {
 		if ( ! isset( $_post[ Heading::OPTION_NAME ] ) || ! is_array( $_post[ Heading::OPTION_NAME ] ) ) {
-			return;
+			return false;
 		}
 		$new_option = $_post[ Heading::OPTION_NAME ];
 		if ( is_array( $new_option ) ) {
-			update_option( Heading::OPTION_NAME, $new_option );
+			return update_option( Heading::OPTION_NAME, $new_option );
 		}
+
+		return false;
 	}
 }
 

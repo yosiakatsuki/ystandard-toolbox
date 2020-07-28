@@ -7,27 +7,29 @@
 
 namespace ystandard_toolbox\menu;
 
-use ystandard_toolbox\Code;
+use ystandard_toolbox\Config;
 use ystandard_toolbox\Menu_Page;
+use ystandard_toolbox\Font;
+use ystandard_toolbox\Option;
 
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Code
+ * Class Font
  *
  * @package ystandard_toolbox\menu
  */
-class Menu_Code extends Menu_Page_Base {
+class Menu_Font extends Menu_Page_Base {
 
 	/**
 	 * Code constructor.
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->menu_slug     = 'code';
-		$this->menu_title    = 'head,footer コード追加';
-		$this->menu_label    = 'コード追加';
-		$this->template_name = 'code';
+		$this->menu_slug     = 'font';
+		$this->menu_title    = 'フォント指定の追加';
+		$this->menu_label    = 'フォント指定の追加';
+		$this->template_name = 'font';
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'codemirror_enqueue' ] );
 	}
@@ -61,7 +63,7 @@ class Menu_Code extends Menu_Page_Base {
 		);
 		wp_add_inline_style(
 			'wp-codemirror',
-			'.CodeMirror {border: 1px solid #ddd;}'
+			'.CodeMirror {border: 1px solid #ddd;height:6rem;}'
 		);
 	}
 
@@ -71,19 +73,14 @@ class Menu_Code extends Menu_Page_Base {
 	 * @param array $_post 設定値.
 	 */
 	public function save( $_post ) {
-		if ( ! isset( $_post[ Code::OPTION_NAME ] ) ) {
+		if ( ! isset( $_post[ Font::OPTION_NAME ] ) ) {
 			return false;
 		}
-		$input               = $_post[ Code::OPTION_NAME ];
-		$input['head']       = isset( $input['head'] ) ? $this->sanitize_input( $input['head'] ) : '';
-		$input['body_open']  = isset( $input['body_open'] ) ? $this->sanitize_input( $input['body_open'] ) : '';
-		$input['body_close'] = isset( $input['body_close'] ) ? $this->sanitize_input( $input['body_close'] ) : '';
-		// AMP.
-		$input['head_amp']       = isset( $input['head_amp'] ) ? $this->sanitize_input( $input['head_amp'] ) : '';
-		$input['body_open_amp']  = isset( $input['body_open_amp'] ) ? $this->sanitize_input( $input['body_open_amp'] ) : '';
-		$input['body_close_amp'] = isset( $input['body_close_amp'] ) ? $this->sanitize_input( $input['body_close_amp'] ) : '';
+		$input           = $_post[ Font::OPTION_NAME ];
+		$input['html']   = $this->sanitize_code( $input['html'] );
+		$input['family'] = $this->sanitize_code( $input['family'] );
 
-		return update_option( Code::OPTION_NAME, $input );
+		return Option::update_option( Font::OPTION_NAME, $input );
 	}
 
 	/**
@@ -93,7 +90,7 @@ class Menu_Code extends Menu_Page_Base {
 	 *
 	 * @return string
 	 */
-	private function sanitize_input( $text ) {
+	private function sanitize_code( $text ) {
 		$text = trim( $text );
 
 		return $text;
@@ -101,4 +98,4 @@ class Menu_Code extends Menu_Page_Base {
 
 }
 
-new Menu_Code();
+new Menu_Font();

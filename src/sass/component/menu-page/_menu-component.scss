@@ -22,6 +22,10 @@
 
   .ystdtb-menu__section {
     margin-top: 2em;
+
+    &.is-small {
+      margin-top: 1em;
+    }
   }
 
   .ystdtb-menu__table {
@@ -155,6 +159,10 @@
       opacity: 0;
       height: 0;
     }
+  }
+
+  .notice {
+    padding: 9px 12px;
   }
 }
 
