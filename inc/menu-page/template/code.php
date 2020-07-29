@@ -42,7 +42,9 @@ defined( 'ABSPATH' ) || die();
 				</div>
 			<?php endif; ?>
 		</div>
-
+		<div class="ystdtb-menu__section">
+			<?php submit_button(); ?>
+		</div>
 	</div>
 	<?php if ( Utility::is_amp_enable() ): ?>
 		<div class="code__amp ystdtb-menu__section">
@@ -60,10 +62,10 @@ defined( 'ABSPATH' ) || die();
 				<textarea name="<?php echo Code::OPTION_NAME; ?>[body_close_amp]" id="code-head" class="widefat code-input" rows="8"><?php echo esc_textarea( Code::get_option( 'body_close_amp' ) ); ?></textarea>
 			</div>
 		</div>
+		<div class="ystdtb-menu__section">
+			<?php submit_button(); ?>
+		</div>
 	<?php endif; ?>
-	<div class="ystdtb-menu__section">
-		<?php submit_button(); ?>
-	</div>
 </div>
 
 

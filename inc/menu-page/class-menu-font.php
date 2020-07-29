@@ -26,45 +26,13 @@ class Menu_Font extends Menu_Page_Base {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->menu_slug     = 'font';
-		$this->menu_title    = 'フォント指定の追加';
-		$this->menu_label    = 'フォント指定の追加';
-		$this->template_name = 'font';
-
-		add_action( 'admin_enqueue_scripts', [ $this, 'codemirror_enqueue' ] );
-	}
-
-	/**
-	 * 管理画面-スクリプトの読み込み
-	 *
-	 * @param string $hook_suffix suffix.
-	 *
-	 * @return void
-	 */
-	public function codemirror_enqueue( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
-			return;
-		}
-		$settings['codeEditor'] = wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
-		if ( false === $settings ) {
-			return;
-		}
-		wp_localize_script( 'jquery', 'codeEditorSettings', $settings );
-		wp_enqueue_script( 'wp-theme-plugin-editor' );
-		wp_enqueue_style( 'wp-codemirror' );
-		wp_add_inline_script(
-			'wp-theme-plugin-editor',
-			'jQuery(document).ready(function($) { 
-				var input = $(\'.code-input\');
-				$(\'.code-input\').each(function(index, element) {
-					wp.codeEditor.initialize(element, codeEditorSettings );
-				})
-			})'
-		);
-		wp_add_inline_style(
-			'wp-codemirror',
-			'.CodeMirror {border: 1px solid #ddd;height:6rem;}'
-		);
+		$this->menu_slug        = 'font';
+		$this->menu_title       = 'フォント指定の追加';
+		$this->menu_label       = 'フォント指定の追加';
+		$this->template_name    = 'font';
+		$this->codemirror_type  = 'text/html';
+		$this->codemirror_style = 'height:6rem;';
+		$this->enqueue_codemirror();
 	}
 
 	/**

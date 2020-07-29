@@ -64,8 +64,8 @@
     transition-property: color, background-color, border;
   }
 
-  button:not(.notice-dismiss),
-  .button:not(.notice-dismiss) {
+  button,
+  .button {
     padding: .5em 1em;
     background: #fff;
     border: 1px solid rgba(global.$color__ystd_blue, 0.3);

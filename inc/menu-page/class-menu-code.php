@@ -28,41 +28,8 @@ class Menu_Code extends Menu_Page_Base {
 		$this->menu_title    = 'head,footer コード追加';
 		$this->menu_label    = 'コード追加';
 		$this->template_name = 'code';
-
-		add_action( 'admin_enqueue_scripts', [ $this, 'codemirror_enqueue' ] );
-	}
-
-	/**
-	 * 管理画面-スクリプトの読み込み
-	 *
-	 * @param string $hook_suffix suffix.
-	 *
-	 * @return void
-	 */
-	public function codemirror_enqueue( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
-			return;
-		}
-		$settings['codeEditor'] = wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
-		if ( false === $settings ) {
-			return;
-		}
-		wp_localize_script( 'jquery', 'codeEditorSettings', $settings );
-		wp_enqueue_script( 'wp-theme-plugin-editor' );
-		wp_enqueue_style( 'wp-codemirror' );
-		wp_add_inline_script(
-			'wp-theme-plugin-editor',
-			'jQuery(document).ready(function($) { 
-				var input = $(\'.code-input\');
-				$(\'.code-input\').each(function(index, element) {
-					wp.codeEditor.initialize(element, codeEditorSettings );
-				})
-			})'
-		);
-		wp_add_inline_style(
-			'wp-codemirror',
-			'.CodeMirror {border: 1px solid #ddd;}'
-		);
+		$this->codemirror_type  = 'text/html';
+		$this->enqueue_codemirror();
 	}
 
 	/**

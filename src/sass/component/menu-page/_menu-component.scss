@@ -154,6 +154,7 @@
       animation: 3s linear infinite rotation;
     }
   }
+
   .ystdtb-menu__loaded {
     + .ystdtb-menu__loading {
       opacity: 0;
@@ -163,6 +164,14 @@
 
   .notice {
     padding: 9px 12px;
+
+    button {
+      border: none;
+      padding: 9px;
+      background: 0 0;
+      color: #72777c;
+      cursor: pointer;
+    }
   }
 }
 

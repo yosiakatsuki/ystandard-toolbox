@@ -72,6 +72,20 @@ abstract class Menu_Page_Base {
 	protected $ystandard_only = false;
 
 	/**
+	 * CodeMirrorの動作タイプ
+	 *
+	 * @var string
+	 */
+	protected $codemirror_type = '';
+
+	/**
+	 * CodeMirrorの追加CSS
+	 *
+	 * @var string
+	 */
+	protected $codemirror_style = '';
+
+	/**
 	 * Menu_Page_Base constructor.
 	 */
 	public function __construct() {
@@ -229,6 +243,51 @@ abstract class Menu_Page_Base {
 		}
 
 		return $classes . ' ystdtb-menu-page';
+	}
+
+	/**
+	 * CodeMirrorの読み込み
+	 */
+	protected function enqueue_codemirror() {
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_codemirror_scripts' ] );
+	}
+
+	/**
+	 * CodeMirrorスクリプトの読み込み
+	 *
+	 * @param string $hook_suffix suffix.
+	 *
+	 * @return void
+	 */
+	public function enqueue_codemirror_scripts( $hook_suffix ) {
+		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
+			return;
+		}
+		if ( ! $this->codemirror_type ) {
+			return;
+		}
+		$settings['codeEditor'] = wp_enqueue_code_editor(
+			[ 'type' => $this->codemirror_type ]
+		);
+		if ( false === $settings ) {
+			return;
+		}
+		wp_localize_script( 'jquery', 'codeEditorSettings', $settings );
+		wp_enqueue_script( 'wp-theme-plugin-editor' );
+		wp_enqueue_style( 'wp-codemirror' );
+		wp_add_inline_script(
+			'wp-theme-plugin-editor',
+			'jQuery(document).ready(function($) { 
+				var input = $(\'.code-input\');
+				$(\'.code-input\').each(function(index, element) {
+					wp.codeEditor.initialize(element, codeEditorSettings );
+				})
+			})'
+		);
+		wp_add_inline_style(
+			'wp-codemirror',
+			".CodeMirror {border: 1px solid #ddd;{$this->codemirror_style}}"
+		);
 	}
 
 	/**
