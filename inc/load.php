@@ -13,6 +13,7 @@ require_once __DIR__ . '/option/class-option.php';
 require_once __DIR__ . '/notice/class-notice.php';
 require_once __DIR__ . '/init/class-init.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
+
 // Blocks.
 require_once __DIR__ . '/blocks/class-blocks.php';
 // Code.
