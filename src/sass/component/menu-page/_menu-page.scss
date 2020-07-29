@@ -68,3 +68,14 @@
     }
   }
 }
+
+
+#ystdtb-menu {
+  &.has-error {
+    &:after {
+      content: "設定内容にエラーがあります。";
+      display: block;
+      color: #8a1c16;
+    }
+  }
+}

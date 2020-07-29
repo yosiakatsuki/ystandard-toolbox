@@ -159,7 +159,7 @@ abstract class Menu_Page_Base {
 					<?php $this->create_menu_nav(); ?>
 				</ul>
 				<div class="ystdtb-menu__detail">
-					<form method="post" action="">
+					<form id="ystdtb-menu" method="post" action="">
 						<?php
 						wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME );
 						$this->load_detail();
@@ -217,6 +217,13 @@ abstract class Menu_Page_Base {
 			YSTDTB_URL . '/css/ystandard-toolbox-admin.css',
 			[],
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-admin.css' )
+		);
+		wp_enqueue_script(
+			'ystdtb-admin',
+			YSTDTB_URL . '/js/admin/admin.js',
+			[],
+			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
+			true
 		);
 		foreach ( $this->enqueue_script as $item ) {
 			wp_enqueue_style(
