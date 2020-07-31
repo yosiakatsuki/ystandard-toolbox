@@ -72,6 +72,13 @@ abstract class Menu_Page_Base {
 	protected $ystandard_only = false;
 
 	/**
+	 * 必要テーマバージョン
+	 *
+	 * @var string
+	 */
+	protected $need_ystandard_version = '';
+
+	/**
 	 * CodeMirrorの動作タイプ
 	 *
 	 * @var string
@@ -107,6 +114,22 @@ abstract class Menu_Page_Base {
 	abstract public function save( $_post );
 
 	/**
+	 * メニューを有効化できるか
+	 *
+	 * @return bool
+	 */
+	protected function enable_menu() {
+		if ( ! $this->menu_slug ) {
+			return false;
+		}
+		if ( $this->ystandard_only && ! Utility::ystandard_version_compare( $this->need_ystandard_version ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * ナビゲーションの追加
 	 *
 	 * @param array $item Item.
@@ -114,7 +137,7 @@ abstract class Menu_Page_Base {
 	 * @return array
 	 */
 	public function menu_nav( $item ) {
-		if ( ! $this->menu_slug ) {
+		if ( ! $this->enable_menu() ) {
 			return $item;
 		}
 		$item[] = $this->get_menu_nav_args(
@@ -129,10 +152,7 @@ abstract class Menu_Page_Base {
 	 * サブメニューページ追加
 	 */
 	public function add_sub_menu_page() {
-		if ( ! $this->menu_slug ) {
-			return;
-		}
-		if ( $this->ystandard_only && ! Utility::is_ystandard_enable() ) {
+		if ( ! $this->enable_menu() ) {
 			return;
 		}
 		add_submenu_page(

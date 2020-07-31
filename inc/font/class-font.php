@@ -25,6 +25,9 @@ class Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
+		if ( ! Utility::ystandard_version_compare() ) {
+			return;
+		}
 		add_action( 'wp_head', [ $this, 'wp_head' ], 11 );
 		add_filter( 'ys_css_vars', [ $this, 'add_font_family' ], 20 );
 	}

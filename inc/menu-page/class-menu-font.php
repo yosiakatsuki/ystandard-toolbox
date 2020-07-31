@@ -7,8 +7,6 @@
 
 namespace ystandard_toolbox\menu;
 
-use ystandard_toolbox\Config;
-use ystandard_toolbox\Menu_Page;
 use ystandard_toolbox\Font;
 use ystandard_toolbox\Option;
 
@@ -26,12 +24,14 @@ class Menu_Font extends Menu_Page_Base {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->menu_slug        = 'font';
-		$this->menu_title       = 'フォント指定の追加';
-		$this->menu_label       = 'フォント指定の追加';
-		$this->template_name    = 'font';
-		$this->codemirror_type  = 'text/html';
-		$this->codemirror_style = 'height:6rem;';
+		$this->menu_slug              = 'font';
+		$this->menu_title             = 'フォント指定の追加';
+		$this->menu_label             = 'フォント指定の追加';
+		$this->template_name          = 'font';
+		$this->ystandard_only         = true;
+		$this->need_ystandard_version = '4.8.0';
+		$this->codemirror_type        = 'text/html';
+		$this->codemirror_style       = 'height:6rem;';
 		$this->enqueue_codemirror();
 	}
 

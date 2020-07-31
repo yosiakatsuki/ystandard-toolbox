@@ -38,12 +38,28 @@ class Utility {
 	}
 
 	/**
-	 * [yStandard]テーマが有効か
+	 * テーマのバージョンチェック
 	 *
-	 * @return bool
+	 * @param string $version
+	 *
+	 * @return bool|int
 	 */
-	public static function is_ystandard_enable() {
-		return 'ystandard' === get_template();
+	public static function ystandard_version_compare( $version = '' ) {
+
+		if ( 'ystandard' !== get_template() ) {
+			return false;
+		}
+		// バージョンの確認不要であればテーマの確認のみ.
+		if ( '' === $version ) {
+			return true;
+		}
+		$theme = wp_get_theme( get_template() );
+		if ( is_null( $theme ) ) {
+			return false;
+		}
+		$theme_version = $theme->Version;
+
+		return version_compare( $theme_version, $version, '>=' );
 	}
 
 	/**
