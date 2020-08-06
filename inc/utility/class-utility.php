@@ -38,6 +38,25 @@ class Utility {
 	}
 
 	/**
+	 * ショートコードようにパラメーターを展開
+	 *
+	 * @param array $attributes Attributes.
+	 *
+	 * @return string
+	 */
+	public static function parse_shortcode_attributes( $attributes ) {
+		$result = '';
+		foreach ( $attributes as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$value = implode( ',', $value );
+			}
+			$result .= "${key}=\"${value}\" ";
+		}
+
+		return $result;
+	}
+
+	/**
 	 * テーマのバージョンチェック
 	 *
 	 * @param string $version

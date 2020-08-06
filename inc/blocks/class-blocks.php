@@ -27,6 +27,7 @@ class Blocks {
 	 * Blocks constructor.
 	 */
 	public function __construct() {
+		require_once __DIR__ . '/class-dynamic-block.php';
 		$this->init();
 		add_action( 'init', [ $this, 'register_dynamic_block' ] );
 		add_filter( 'block_categories', [ $this, 'block_categories' ] );

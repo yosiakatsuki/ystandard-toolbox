@@ -117,7 +117,7 @@ function watchFiles() {
 	sass();
 	buildAdminApp();
 	copyJson();
-	watch( './src/sass/**/*.scss', sass );
+	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], buildAdminApp );
 	watch( [ './src/js/admin/**/*.json' ], copyJson );
 }

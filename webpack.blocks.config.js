@@ -6,6 +6,7 @@ module.exports = {
 		'app': './src/js/blocks/app.js',
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
+		'posts': './blocks/posts/index.js',
 	},
 	output: {
 		filename: '[name].js',

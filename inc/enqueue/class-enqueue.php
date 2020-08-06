@@ -17,12 +17,12 @@ defined( 'ABSPATH' ) || die();
 class Enqueue {
 
 
-
 	/**
 	 * Enqueue constructor.
 	 */
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_css' ], 11 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
 	}
 
 	/**
@@ -45,6 +45,22 @@ class Enqueue {
 	 */
 	public static function get_css_uri() {
 		return YSTDTB_URL . '/css/ystandard-toolbox.css';
+	}
+
+	/**
+	 * 管理画面-スクリプトの読み込み
+	 *
+	 * @param string $hook_suffix suffix.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_scripts( $hook_suffix ) {
+		wp_enqueue_style(
+			'ystdtb-admin-all',
+			YSTDTB_URL . '/css/ystandard-toolbox-admin-all.css',
+			[],
+			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-admin-all.css' )
+		);
 	}
 }
 
