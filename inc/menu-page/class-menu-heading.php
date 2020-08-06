@@ -40,7 +40,7 @@ class Menu_Heading extends Menu_Page_Base {
 	 * @return void
 	 */
 	public function enqueue_app( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
+		if (  ! $this->is_toolbox_menu_page( $hook_suffix )  ) {
 			return;
 		}
 		wp_enqueue_media();

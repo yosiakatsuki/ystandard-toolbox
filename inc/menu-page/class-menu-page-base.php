@@ -160,7 +160,7 @@ abstract class Menu_Page_Base {
 			$this->menu_title,
 			$this->menu_label,
 			'manage_options',
-			Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug,
+			Menu_Page::MENU_PAGE_PREFIX . '-' . $this->menu_slug,
 			[ $this, 'menu_page' ]
 		);
 	}
@@ -287,7 +287,7 @@ abstract class Menu_Page_Base {
 	 * @return void
 	 */
 	public function enqueue_codemirror_scripts( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . $this->menu_slug ) ) {
+		if ( ! $this->is_toolbox_menu_page( $hook_suffix ) ) {
 			return;
 		}
 		if ( ! $this->codemirror_type ) {
@@ -373,5 +373,20 @@ abstract class Menu_Page_Base {
 			filemtime( YSTDTB_PATH . "/js/admin/${name}.js" ),
 			$in_footer
 		);
+	}
+
+	/**
+	 * Toolboxの管理画面チェック
+	 *
+	 * @param string $hook_suffix Page Suffix.
+	 *
+	 * @return bool
+	 */
+	protected function is_toolbox_menu_page( $hook_suffix ) {
+		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . '-' . $this->menu_slug ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }
