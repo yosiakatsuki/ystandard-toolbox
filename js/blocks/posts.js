@@ -246,9 +246,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/js/blocks/function/_toNumber */ "./src/js/blocks/function/_toNumber.js");
-/* harmony import */ var _src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../src/js/blocks/function/_getOptionsDefault */ "./src/js/blocks/function/_getOptionsDefault.js");
-/* harmony import */ var _src_js_blocks_function_getTermTree__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/js/blocks/function/_getTermTree */ "./src/js/blocks/function/_getTermTree.js");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../src/js/blocks/function/_toNumber */ "./src/js/blocks/function/_toNumber.js");
+/* harmony import */ var _src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/js/blocks/function/_getOptionsDefault */ "./src/js/blocks/function/_getOptionsDefault.js");
+/* harmony import */ var _src_js_blocks_function_getTermTree__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../src/js/blocks/function/_getTermTree */ "./src/js/blocks/function/_getTermTree.js");
+/* harmony import */ var _src_js_blocks_function_getParentPages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../src/js/blocks/function/_getParentPages */ "./src/js/blocks/function/_getParentPages.js");
+
+
 
 
 
@@ -291,35 +296,56 @@ var Posts = function Posts(props) {
 
     var _select2 = select('core'),
         getPostTypes = _select2.getPostTypes,
-        getTaxonomy = _select2.getTaxonomy;
+        getTaxonomy = _select2.getTaxonomy,
+        getEntityRecords = _select2.getEntityRecords;
 
     var postTypes = getPostTypes() ? getPostTypes() : [];
 
     var _taxonomy = getTaxonomy() ? getTaxonomy() : [];
+
+    var hierarchicalPostType = postTypes.filter(function (type) {
+      return type.hierarchical;
+    }).map(function (_ref) {
+      var slug = _ref.slug;
+      return slug;
+    });
+    var hierarchicalPosts = [];
+
+    if (hierarchicalPostType.includes(postType)) {
+      hierarchicalPosts = Object(_src_js_blocks_function_getParentPages__WEBPACK_IMPORTED_MODULE_12__["default"])(getEntityRecords('postType', postType, {
+        per_page: -1
+      }), 0, 0);
+
+      if (0 < hierarchicalPosts.length) {
+        hierarchicalPosts = [Object(_src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_10__["default"])()].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(hierarchicalPosts));
+      }
+    }
 
     return {
       imageSizes: getSettings()['imageSizes'],
       postTypes: postTypes.filter(function (type) {
         return !(!type.viewable || 'ys-parts' === type.slug || 'attachment' === type.slug);
       }),
-      taxonomyList: _taxonomy
+      taxonomyList: _taxonomy,
+      hierarchicalPosts: hierarchicalPosts
     };
   }),
       imageSizes = _useSelect.imageSizes,
       postTypes = _useSelect.postTypes,
-      taxonomyList = _useSelect.taxonomyList;
+      taxonomyList = _useSelect.taxonomyList,
+      hierarchicalPosts = _useSelect.hierarchicalPosts;
 
-  var imageSizesOptions = imageSizes.map(function (_ref) {
-    var name = _ref.name,
-        slug = _ref.slug;
+  var imageSizesOptions = imageSizes.map(function (_ref2) {
+    var name = _ref2.name,
+        slug = _ref2.slug;
     return {
       value: slug,
       label: name
     };
   });
-  var postTypesOptions = postTypes.map(function (_ref2) {
-    var name = _ref2.name,
-        slug = _ref2.slug;
+  var postTypesOptions = postTypes.map(function (_ref3) {
+    var name = _ref3.name,
+        slug = _ref3.slug;
     return {
       value: slug,
       label: name
@@ -331,7 +357,7 @@ var Posts = function Posts(props) {
 
   var taxonomyOptions = function taxonomyOptions() {
     var taxonomy = selectedPostType.length ? selectedPostType[0].taxonomies : [];
-    return [Object(_src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_9__["default"])()].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(taxonomy.map(function (value) {
+    return [Object(_src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_10__["default"])()].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(taxonomy.map(function (value) {
       if (taxonomyList.hasOwnProperty(value)) {
         return {
           value: taxonomyList[value].slug,
@@ -353,10 +379,10 @@ var Posts = function Posts(props) {
       terms = [];
     }
 
-    var tree = Object(_src_js_blocks_function_getTermTree__WEBPACK_IMPORTED_MODULE_10__["default"])(terms, 0, 0);
+    var tree = Object(_src_js_blocks_function_getTermTree__WEBPACK_IMPORTED_MODULE_11__["default"])(terms, 0, 0);
 
     return {
-      termOptions: [Object(_src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_9__["default"])()].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(tree))
+      termOptions: [Object(_src_js_blocks_function_getOptionsDefault__WEBPACK_IMPORTED_MODULE_10__["default"])()].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(tree))
     };
   }),
       termOptions = _useSelect2.termOptions;
@@ -371,7 +397,7 @@ var Posts = function Posts(props) {
     value: count,
     onChange: function onChange(value) {
       setAttributes({
-        count: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_8__["default"])(value, 1, 20, 3)
+        count: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_9__["default"])(value, 1, 20, 3)
       });
     },
     min: 1,
@@ -404,7 +430,7 @@ var Posts = function Posts(props) {
     value: colPc,
     onChange: function onChange(value) {
       setAttributes({
-        colPc: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_8__["default"])(value, 1, 6, 3)
+        colPc: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_9__["default"])(value, 1, 6, 3)
       });
     },
     min: 1,
@@ -415,7 +441,7 @@ var Posts = function Posts(props) {
     value: colTablet,
     onChange: function onChange(value) {
       setAttributes({
-        colTablet: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_8__["default"])(value, 1, 6, 3)
+        colTablet: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_9__["default"])(value, 1, 6, 3)
       });
     },
     min: 1,
@@ -426,7 +452,7 @@ var Posts = function Posts(props) {
     value: colMobile,
     onChange: function onChange(value) {
       setAttributes({
-        colMobile: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_8__["default"])(value, 1, 6, 1)
+        colMobile: Object(_src_js_blocks_function_toNumber__WEBPACK_IMPORTED_MODULE_9__["default"])(value, 1, 6, 1)
       });
     },
     min: 1,
@@ -461,7 +487,7 @@ var Posts = function Posts(props) {
     }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
     initialOpen: false,
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('日付・カテゴリー・概要', 'ystandard-toolbox')
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('日付・カテゴリー・概要の表示', 'ystandard-toolbox')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["ToggleControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('日付を表示する', 'ystandard-toolbox'),
     onChange: function onChange() {
@@ -487,6 +513,7 @@ var Posts = function Posts(props) {
     },
     checked: showExcerpt
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
+    initialOpen: false,
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('絞り込み設定', 'ystandard-toolbox')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('投稿タイプ', 'ystandard-toolbox'),
@@ -494,7 +521,10 @@ var Posts = function Posts(props) {
     options: postTypesOptions,
     onChange: function onChange(value) {
       setAttributes({
-        postType: value
+        postType: value,
+        postIn: '',
+        postNameIn: '',
+        postParent: ''
       });
     }
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
@@ -503,7 +533,10 @@ var Posts = function Posts(props) {
     options: taxonomyOptions(),
     onChange: function onChange(value) {
       setAttributes({
-        taxonomy: value
+        taxonomy: value,
+        postIn: '',
+        postNameIn: '',
+        postParent: ''
       });
     }
   }), !!taxonomy && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
@@ -512,10 +545,53 @@ var Posts = function Posts(props) {
     options: termOptions,
     onChange: function onChange(value) {
       setAttributes({
-        termSlug: value
+        termSlug: value,
+        postIn: '',
+        postNameIn: '',
+        postParent: ''
       });
     }
-  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Disabled"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["ServerSideRender"], {
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
+    initialOpen: false,
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('高度な絞り込み', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('投稿ID指定', 'ystandard-toolbox'),
+    value: postIn,
+    onChange: function onChange(value) {
+      setAttributes({
+        taxonomy: '',
+        termSlug: '',
+        postIn: value,
+        postNameIn: '',
+        postParent: ''
+      });
+    }
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('投稿名指定', 'ystandard-toolbox'),
+    value: postNameIn,
+    onChange: function onChange(value) {
+      setAttributes({
+        taxonomy: '',
+        termSlug: '',
+        postIn: '',
+        postNameIn: value,
+        postParent: ''
+      });
+    }
+  })), 0 < hierarchicalPosts.length && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('親ページ指定', 'ystandard-toolbox'),
+    value: postParent,
+    options: hierarchicalPosts,
+    onChange: function onChange(value) {
+      setAttributes({
+        taxonomy: '',
+        termSlug: '',
+        postIn: '',
+        postNameIn: '',
+        postParent: value
+      });
+    }
+  }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["Disabled"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_8___default.a, {
     block: "ystdtb/posts",
     attributes: attributes
   })));
@@ -20123,6 +20199,67 @@ function getOptionsDefault() {
 
 /***/ }),
 
+/***/ "./src/js/blocks/function/_getParentPages.js":
+/*!***************************************************!*\
+  !*** ./src/js/blocks/function/_getParentPages.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _getParentPages; });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _getParentPages(posts, parent, level) {
+  var result = [];
+
+  if (null === posts || undefined === posts || !posts) {
+    return result;
+  }
+
+  var parents = posts.filter(function (post) {
+    return parent === post.parent;
+  });
+
+  var _iterator = _createForOfIteratorHelper(parents),
+      _step;
+
+  try {
+    var _loop = function _loop() {
+      var post = _step.value;
+      var label = '　'.repeat(level) + post.title.rendered;
+      var child = posts.filter(function (filterPost) {
+        return post.id === filterPost.parent;
+      });
+
+      if (0 < child.length) {
+        result.push({
+          value: post.id,
+          label: label
+        });
+        result = result.concat(_getParentPages(posts, post.id, level + 1));
+      }
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _loop();
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return result;
+}
+
+/***/ }),
+
 /***/ "./src/js/blocks/function/_getTermTree.js":
 /*!************************************************!*\
   !*** ./src/js/blocks/function/_getTermTree.js ***!
@@ -20168,8 +20305,6 @@ function _getTermTree(terms, parent, level) {
   } finally {
     _iterator.f();
   }
-
-  console.log(result); // 中で並び替えしないと無理だ
 
   return result;
 }
@@ -20291,6 +20426,17 @@ function _toNumber(value) {
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/server-side-render":
+/*!***************************************************!*\
+  !*** external {"this":["wp","serverSideRender"]} ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["serverSideRender"]; }());
 
 /***/ }),
 

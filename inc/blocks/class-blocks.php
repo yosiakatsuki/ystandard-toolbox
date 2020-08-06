@@ -29,8 +29,9 @@ class Blocks {
 	public function __construct() {
 		require_once __DIR__ . '/class-dynamic-block.php';
 		$this->init();
-		add_action( 'init', [ $this, 'register_dynamic_block' ] );
 		add_filter( 'block_categories', [ $this, 'block_categories' ] );
+		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_dynamic_block_scripts' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block' ] );
 	}
@@ -125,7 +126,7 @@ class Blocks {
 	/**
 	 * ダイナミックブロックの登録
 	 */
-	public function register_dynamic_block() {
+	public function enqueue_dynamic_block_scripts() {
 		foreach ( $this->register_blocks['dynamic'] as $block ) {
 			wp_enqueue_script(
 				'ystandard-toolbox-' . $block['name'],
@@ -133,6 +134,13 @@ class Blocks {
 				$block['dependencies'],
 				$block['version']
 			);
+		}
+	}
+	/**
+	 * ダイナミックブロックの登録
+	 */
+	public function require_dynamic_block_file() {
+		foreach ( $this->register_blocks['dynamic'] as $block ) {
 			require_once( $block['render'] );
 		}
 	}

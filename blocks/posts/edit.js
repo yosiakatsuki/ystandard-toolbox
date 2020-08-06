@@ -18,12 +18,13 @@ import {
 	RadioControl,
 	SelectControl,
 	Button,
-	ServerSideRender,
 	Disabled
 } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 import _toNumber from "../../src/js/blocks/function/_toNumber";
 import _getOptionsDefault from "../../src/js/blocks/function/_getOptionsDefault";
 import _getTermTree from "../../src/js/blocks/function/_getTermTree";
+import _getParentPages from "../../src/js/blocks/function/_getParentPages";
 
 const Posts = ( props ) => {
 	const {
@@ -55,18 +56,46 @@ const Posts = ( props ) => {
 	const {
 		imageSizes,
 		postTypes,
-		taxonomyList
+		taxonomyList,
+		hierarchicalPosts,
 	} = useSelect( ( select ) => {
 		const { getSettings } = select( 'core/block-editor' );
-		const { getPostTypes, getTaxonomy } = select( 'core' );
+		const { getPostTypes, getTaxonomy, getEntityRecords } = select( 'core' );
 		let postTypes = getPostTypes() ? getPostTypes() : [];
 		let _taxonomy = getTaxonomy() ? getTaxonomy() : [];
+		const hierarchicalPostType = postTypes.filter( ( type ) => {
+			return type.hierarchical;
+		} ).map( ( { slug } ) => {
+			return slug;
+		} );
+		let hierarchicalPosts = [];
+		if ( hierarchicalPostType.includes( postType ) ) {
+			hierarchicalPosts = _getParentPages(
+				getEntityRecords(
+					'postType',
+					postType,
+					{
+						per_page: -1,
+					}
+				),
+				0,
+				0
+			);
+			if ( 0 < hierarchicalPosts.length ) {
+				hierarchicalPosts = [
+					_getOptionsDefault(),
+					...hierarchicalPosts
+				]
+			}
+		}
+
 		return {
 			imageSizes: getSettings()[ 'imageSizes' ],
 			postTypes: postTypes.filter( ( type ) => {
 				return ! ( ! type.viewable || 'ys-parts' === type.slug || 'attachment' === type.slug );
 			} ),
-			taxonomyList: _taxonomy
+			taxonomyList: _taxonomy,
+			hierarchicalPosts: hierarchicalPosts,
 		}
 	} );
 
@@ -139,8 +168,8 @@ const Posts = ( props ) => {
 							onChange={ ( value ) => {
 								const order = value.split( '/' );
 								setAttributes( {
-									orderby: order[0],
-									order: order[1],
+									orderby: order[ 0 ],
+									order: order[ 1 ],
 								} );
 							} }
 						/>
@@ -222,7 +251,7 @@ const Posts = ( props ) => {
 					</PanelBody>
 					<PanelBody
 						initialOpen={ false }
-						title={ __( '日付・カテゴリー・概要', 'ystandard-toolbox' ) }
+						title={ __( '日付・カテゴリー・概要の表示', 'ystandard-toolbox' ) }
 					>
 						<ToggleControl
 							label={ __( '日付を表示する', 'ystandard-toolbox' ) }
@@ -253,6 +282,7 @@ const Posts = ( props ) => {
 						/>
 					</PanelBody>
 					<PanelBody
+						initialOpen={ false }
 						title={ __( '絞り込み設定', 'ystandard-toolbox' ) }
 					>
 						<SelectControl
@@ -260,7 +290,12 @@ const Posts = ( props ) => {
 							value={ postType }
 							options={ postTypesOptions }
 							onChange={ ( value ) => {
-								setAttributes( { postType: value } )
+								setAttributes( {
+									postType: value,
+									postIn: '',
+									postNameIn: '',
+									postParent: '',
+								} )
 							} }
 						/>
 						<SelectControl
@@ -268,7 +303,12 @@ const Posts = ( props ) => {
 							value={ taxonomy }
 							options={ taxonomyOptions() }
 							onChange={ ( value ) => {
-								setAttributes( { taxonomy: value } )
+								setAttributes( {
+									taxonomy: value,
+									postIn: '',
+									postNameIn: '',
+									postParent: '',
+								} )
 							} }
 						/>
 						{ !! taxonomy &&
@@ -277,9 +317,67 @@ const Posts = ( props ) => {
 							value={ termSlug }
 							options={ termOptions }
 							onChange={ ( value ) => {
-								setAttributes( { termSlug: value } )
+								setAttributes( {
+									termSlug: value,
+									postIn: '',
+									postNameIn: '',
+									postParent: '',
+								} )
 							} }
 						/>
+						}
+					</PanelBody>
+					<PanelBody
+						initialOpen={ false }
+						title={ __( '高度な絞り込み', 'ystandard-toolbox' ) }
+					>
+						<BaseControl>
+							<TextControl
+								label={ __( '投稿ID指定', 'ystandard-toolbox' ) }
+								value={ postIn }
+								onChange={ ( value ) => {
+									setAttributes( {
+										taxonomy: '',
+										termSlug: '',
+										postIn: value,
+										postNameIn: '',
+										postParent: '',
+									} )
+								} }
+							/>
+						</BaseControl>
+						<BaseControl>
+							<TextControl
+								label={ __( '投稿名指定', 'ystandard-toolbox' ) }
+								value={ postNameIn }
+								onChange={ ( value ) => {
+									setAttributes( {
+										taxonomy: '',
+										termSlug: '',
+										postIn: '',
+										postNameIn: value,
+										postParent: '',
+									} )
+								} }
+							/>
+						</BaseControl>
+						{ 0 < hierarchicalPosts.length &&
+						<BaseControl>
+							<SelectControl
+								label={ __( '親ページ指定', 'ystandard-toolbox' ) }
+								value={ postParent }
+								options={ hierarchicalPosts }
+								onChange={ ( value ) => {
+									setAttributes( {
+										taxonomy: '',
+										termSlug: '',
+										postIn: '',
+										postNameIn: '',
+										postParent: value,
+									} )
+								} }
+							/>
+						</BaseControl>
 						}
 					</PanelBody>
 				</InspectorControls>

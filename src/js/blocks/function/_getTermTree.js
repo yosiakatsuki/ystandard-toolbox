@@ -12,7 +12,5 @@ export default function _getTermTree( terms, parent, level ) {
 		result.push( { value: term.slug, label: label } );
 		result = result.concat( _getTermTree( terms, term.id, level + 1 ) );
 	}
-	console.log( result );
-	// 中で並び替えしないと無理だ
 	return result;
 }
