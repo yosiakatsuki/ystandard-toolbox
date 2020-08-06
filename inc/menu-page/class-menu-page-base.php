@@ -299,9 +299,9 @@ abstract class Menu_Page_Base {
 		if ( false === $settings ) {
 			return;
 		}
-		wp_localize_script( 'jquery', 'codeEditorSettings', $settings );
+		// Scripts.
 		wp_enqueue_script( 'wp-theme-plugin-editor' );
-		wp_enqueue_style( 'wp-codemirror' );
+		wp_localize_script( 'wp-theme-plugin-editor', 'codeEditorSettings', $settings );
 		wp_add_inline_script(
 			'wp-theme-plugin-editor',
 			'jQuery(document).ready(function($) { 
@@ -311,6 +311,8 @@ abstract class Menu_Page_Base {
 				})
 			})'
 		);
+		// Style.
+		wp_enqueue_style( 'wp-codemirror' );
 		wp_add_inline_style(
 			'wp-codemirror',
 			".CodeMirror {border: 1px solid #ddd;{$this->codemirror_style}}"
