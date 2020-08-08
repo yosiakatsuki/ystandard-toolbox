@@ -92,7 +92,7 @@ class Blocks {
 		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
 		wp_enqueue_script(
 			'ystandard-toolbox-block-editor',
-			YSTDTB_PATH . '/js/blocks/block.js',
+			YSTDTB_URL . '/js/blocks/block.js',
 			$asset_file['dependencies'],
 			$asset_file['version']
 		);
