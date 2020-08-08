@@ -120,11 +120,13 @@ try {
   for (_iterator.s(); !(_step = _iterator.n()).done;) {
     var item = _step.value;
 
-    if (Object(_src_js_admin_function_toBool__WEBPACK_IMPORTED_MODULE_2__["default"])(option[item.level]['useCustomStyle'])) {
-      Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockStyle"])('core/heading', {
+    if (!!option[item.level] && Object(_src_js_admin_function_toBool__WEBPACK_IMPORTED_MODULE_2__["default"])(option[item.level]['useCustomStyle'])) {
+      var style = {
         name: "ystdtb-".concat(item.level),
         label: item.label
-      });
+      };
+      Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockStyle"])('core/heading', style);
+      Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockStyle"])('ystdb/heading', style);
     }
   }
 } catch (err) {

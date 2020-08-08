@@ -128,5 +128,6 @@ exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
 exports.copyJson = series( copyJson );
+exports.build = parallel( sass, buildAdminApp );
 
 exports.default = series( watchFiles );

@@ -5,14 +5,14 @@ import _toBool from "../../../src/js/admin/function/_toBool";
 const types = _getHeadingTypes();
 const option = window.ystdtbBlockEditorHeading;
 for ( let item of types ) {
-	if ( _toBool( option[ item.level ][ 'useCustomStyle' ] ) ) {
-		registerBlockStyle(
-			'core/heading',
-			{
-				name: `ystdtb-${ item.level }`,
-				label: item.label,
-			}
-		);
+	if ( !! option[ item.level ] && _toBool( option[ item.level ][ 'useCustomStyle' ] ) ) {
+		const style = {
+			name: `ystdtb-${ item.level }`,
+			label: item.label,
+		};
+		registerBlockStyle( 'core/heading', style );
+		registerBlockStyle( 'ystdb/heading', style );
 	}
 }
+
 
