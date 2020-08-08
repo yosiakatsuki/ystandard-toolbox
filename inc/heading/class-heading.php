@@ -252,7 +252,7 @@ class Heading {
 		}
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-			$level_selector = "${level}:not([class*=\"is-style-ystdtb-\"])";
+			$level_selector = "${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
