@@ -327,7 +327,7 @@ class Heading {
 				$content = empty( $value ) ? '""' : $value;
 				$css     .= 'content:' . $content . ';';
 			} else {
-				if ( ! empty( $key ) && ! empty( $value ) ) {
+				if ( ! empty( $key ) && '' !== $value ) {
 					if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
 						$replace  = $matches[0];
 						$property = str_replace( [ '#{', '}' ], '', $replace );
