@@ -89,18 +89,20 @@ class Blocks {
 	 * Block Assets.
 	 */
 	public function enqueue_block_assets() {
-		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
-		wp_enqueue_script(
-			'ystandard-toolbox-block-editor',
-			YSTDTB_URL . '/js/blocks/block.js',
-			$asset_file['dependencies'],
-			$asset_file['version']
-		);
-		wp_localize_script(
-			'ystandard-toolbox-block-editor',
-			'ystdtbBlockEditor',
-			$this->create_block_option()
-		);
+		if ( ! Utility::is_amp() ) {
+			$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
+			wp_enqueue_script(
+				'ystandard-toolbox-block-editor',
+				YSTDTB_URL . '/js/blocks/block.js',
+				$asset_file['dependencies'],
+				$asset_file['version']
+			);
+			wp_localize_script(
+				'ystandard-toolbox-block-editor',
+				'ystdtbBlockEditor',
+				$this->create_block_option()
+			);
+		}
 		wp_enqueue_style(
 			Config::BLOCK_CSS_HANDLE,
 			YSTDTB_URL . '/css/ystandard-toolbox-blocks.css',
@@ -136,6 +138,7 @@ class Blocks {
 			);
 		}
 	}
+
 	/**
 	 * ダイナミックブロックの登録
 	 */
