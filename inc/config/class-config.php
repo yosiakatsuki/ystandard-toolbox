@@ -47,7 +47,7 @@ class Config {
 	/**
 	 * ブロックカテゴリー名
 	 */
-	const BLOCK_CATEGORY_NAME = '[ys] Toolbox';
+	const BLOCK_CATEGORY_NAME = '[ys]yStandard Toolbox';
 	/**
 	 * Block CSS Handle
 	 */

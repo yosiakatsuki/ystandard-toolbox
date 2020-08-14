@@ -50,15 +50,15 @@ defined( 'ABSPATH' ) || die();
 		<div class="code__amp ystdtb-menu__section">
 			<h2>AMP用コード追加</h2>
 			<div class="code__section">
-				<label for="code-head" class="is-block">&lt;Head&gt;に挿入するコード</label>
+				<label for="code-head" class="is-block">&lt;Head&gt;に挿入するコード(AMP)</label>
 				<textarea name="<?php echo Code::OPTION_NAME; ?>[head_amp]" id="code-head" class="widefat code-input" rows="8"><?php echo esc_textarea( Code::get_option( 'head_amp' ) ); ?></textarea>
 			</div>
 			<div class="code__section">
-				<label for="code-head" class="is-block">&lt;body&gt;直後に挿入するコード</label>
+				<label for="code-head" class="is-block">&lt;body&gt;直後に挿入するコード(AMP)</label>
 				<textarea name="<?php echo Code::OPTION_NAME; ?>[body_open_amp]" id="code-head" class="widefat code-input" rows="8"><?php echo esc_textarea( Code::get_option( 'body_open_amp' ) ); ?></textarea>
 			</div>
 			<div class="code__section">
-				<label for="code-head" class="is-block">&lt;/body&gt;直前に挿入するコード</label>
+				<label for="code-head" class="is-block">&lt;/body&gt;直前に挿入するコード(AMP)</label>
 				<textarea name="<?php echo Code::OPTION_NAME; ?>[body_close_amp]" id="code-head" class="widefat code-input" rows="8"><?php echo esc_textarea( Code::get_option( 'body_close_amp' ) ); ?></textarea>
 			</div>
 		</div>

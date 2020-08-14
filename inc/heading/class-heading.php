@@ -450,11 +450,13 @@ class Heading {
 		foreach ( $pos as $value ) {
 			$unit  = $this->get_unit( "border${value}WidthUnit" );
 			$width = $this->get_value( "border${value}Width" );
+			$style = $this->get_value( "border${value}Style" );
+			$color = $this->get_value( "border${value}Color" );
 			if ( '0' === $width ) {
-				$unit = '';
+				$unit  = '';
+				$style = '';
+				$color = '';
 			}
-			$style    = $this->get_value( "border${value}Style" );
-			$color    = $this->get_value( "border${value}Color" );
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(

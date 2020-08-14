@@ -25,8 +25,8 @@ class Menu_Font extends Menu_Page_Base {
 	public function __construct() {
 		parent::__construct();
 		$this->menu_slug              = 'font';
-		$this->menu_title             = 'フォント指定の追加';
-		$this->menu_label             = 'フォント指定の追加';
+		$this->menu_title             = 'Webフォント設定';
+		$this->menu_label             = 'Webフォント設定';
 		$this->template_name          = 'font';
 		$this->ystandard_only         = true;
 		$this->need_ystandard_version = '4.8.0';

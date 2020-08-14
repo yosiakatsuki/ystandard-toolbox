@@ -3,55 +3,54 @@ import Vuex from 'vuex';
 import 'es6-promise/auto';
 import schema from '../schema.json';
 import getDefaultFontSize from '../_getDefaultFontSize.js';
-import _getHeadingTypes from "../_getHeadingTypes";
+import _getHeadingTypes from '../_getHeadingTypes';
 
-Vue.use( Vuex );
+Vue.use(Vuex);
 
-const store = new Vuex.Store( {
+const store = new Vuex.Store({
 	state: {
-		options: null
+		options: null,
 	},
 	getters: {},
 	mutations: {
-		updateOption( state, data ) {
-			let newOptions = { ...state.options };
-			newOptions[ data.level ][ data.name ] = data.value;
+		updateOption(state, data) {
+			const newOptions = { ...state.options };
+			newOptions[data.level][data.name] = data.value;
 			state.options = { ...newOptions };
 		},
-		initOptions( state ) {
-			let Options = {};
+		initOptions(state) {
+			const Options = {};
 			const types = _getHeadingTypes();
-			for ( var i = 0; i < types.length; i++ ) {
-				let level = types[ i ].level;
-				Options[ level ] = { ...schema };
-				Options[ level ][ 'fontSizePc' ] = getDefaultFontSize( level );
-				Options[ level ][ 'fontSizeTablet' ] = getDefaultFontSize( level );
-				Options[ level ][ 'fontSizeMobile' ] = getDefaultFontSize( level );
-				if ( level in window.ystdtbHeadingData ) {
-					Options[ level ] = {
-						...Options[ level ],
-						...window.ystdtbHeadingData[ level ]
-					}
+			for (let i = 0; i < types.length; i++) {
+				const level = types[i].level;
+				Options[level] = { ...schema };
+				Options[level].fontSizePc = getDefaultFontSize(level);
+				Options[level].fontSizeTablet = getDefaultFontSize(level);
+				Options[level].fontSizeMobile = getDefaultFontSize(level);
+				if (level in window.ystdtbHeadingData) {
+					Options[level] = {
+						...Options[level],
+						...window.ystdtbHeadingData[level],
+					};
 				}
 			}
 			state.options = Options;
 		},
-		resetOptions( state, data ) {
-			let newOptions = { ...state.options };
-			const fontSize = getDefaultFontSize( data.level );
-			newOptions[ data.level ] = {
+		resetOptions(state, data) {
+			const newOptions = { ...state.options };
+			const fontSize = getDefaultFontSize(data.level);
+			newOptions[data.level] = {
 				...schema,
 				...{
 					fontSizePc: fontSize,
 					fontSizeTablet: fontSize,
 					fontSizeMobile: fontSize,
-				}
+				},
 			};
 			state.options = newOptions;
-		}
-
+		},
 	},
-	actions: {}
-} );
+	actions: {},
+});
 
 export default store;
