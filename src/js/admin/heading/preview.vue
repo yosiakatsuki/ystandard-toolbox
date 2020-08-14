@@ -208,7 +208,10 @@
 <style lang="scss">
 	.editor-preview {
 		height: 100%;
-		margin-left: 2em;
+		margin: 1rem 0 0;
+		@media (min-width: 769px) {
+			margin: 0 0 0 1rem;
+		}
 
 		.editor-preview__content {
 			position: relative;

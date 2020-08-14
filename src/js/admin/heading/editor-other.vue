@@ -96,7 +96,7 @@
 					<div class="ystdtb-menu__modal-content">
 						<p>これまで設定した {{ label }} のデザインがすべて初期化されますがよろしいですか？</p>
 						<div class="ystdtb-menu__horizontal">
-							<button type="button" class="is-primary is-block" @click="resetOptions()">設定をリセット</button>
+							<button type="button" class="is-danger is-block" @click="resetOptions()">設定をリセット</button>
 							<button type="button" class="is-cancel is-block" @click="showResetModal = false">キャンセル</button>
 						</div>
 					</div>

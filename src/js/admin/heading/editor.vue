@@ -67,13 +67,18 @@
 
 <style lang="scss">
 	.heading-editor-container {
-		display: flex;
-		width: 100%;
+
+		@media (min-width: 769px) {
+			display: flex;
+			width: 100%;
+		}
 	}
 
 	.heading-editor-control {
 		font-size: 1rem;
-		width: 50%;
+		@media (min-width: 769px) {
+			width: 50%;
+		}
 
 		> * {
 			margin-top: 1.5em;
@@ -128,6 +133,8 @@
 
 	.heading-editor-preview {
 		font-size: 1rem;
-		width: 50%;
+		@media (min-width: 769px) {
+			width: 50%;
+		}
 	}
 </style>

@@ -211,8 +211,13 @@
 			h3 {
 				margin: 0 0 1em;
 				text-align: center;
-				font-size: 1.5em;
+				font-size: 1rem;
 				color: #07689f;
+				line-height: 1.3;
+
+				@media (min-width: 769px) {
+					font-size: 1.5em;
+				}
 			}
 		}
 
@@ -226,7 +231,14 @@
 			> li {
 				margin: 0 0 1.5em;
 				padding: 0 1em;
-				width: 25%;
+				width: 100%;
+				@media (min-width: 600px) {
+					width: 50%;
+				}
+				@media (min-width: 769px) {
+					width: 25%;
+				}
+
 			}
 		}
 

@@ -132,8 +132,13 @@
       z-index: 1000000;
 
       &.is-large {
-        width: 80%;
-        height: 80%;
+        width: 95%;
+        height: 95%;
+
+        @include global.media-breakpoint(md) {
+          width: 80%;
+          height: 80%;
+        }
       }
 
       > * {
@@ -230,6 +235,7 @@
 
       h2 {
         text-align: center;
+        font-size: 1.1em;
       }
 
       figure {
@@ -246,6 +252,7 @@
     svg {
       width: 3em;
       height: 3em;
+      stroke-width: 0.08em;
     }
   }
 
