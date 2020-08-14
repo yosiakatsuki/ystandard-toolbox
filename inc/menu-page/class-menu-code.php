@@ -1,5 +1,7 @@
 <?php
 /**
+ * Code Menu
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -24,11 +26,11 @@ class Menu_Code extends Menu_Page_Base {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->menu_slug     = 'code';
-		$this->menu_title    = 'head,body コード追加';
-		$this->menu_label    = 'コード追加';
-		$this->template_name = 'code';
-		$this->codemirror_type  = 'text/html';
+		$this->menu_slug       = 'code';
+		$this->menu_title      = 'head,body コード追加';
+		$this->menu_label      = 'コード追加';
+		$this->template_name   = 'code';
+		$this->codemirror_type = 'text/html';
 		$this->enqueue_codemirror();
 	}
 

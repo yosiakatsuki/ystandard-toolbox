@@ -1,5 +1,7 @@
 <?php
 /**
+ * Blocks
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -54,7 +56,7 @@ class Blocks {
 				}
 
 				$asset = include( YSTDTB_PATH . "/js/blocks/${name}.asset.php" );
-				// ダイナミックブロック判定,
+				// ダイナミックブロック判定.
 				$render = YSTDTB_PATH . "/blocks/${name}/class-${name}.php";
 				$type   = file_exists( $render ) ? 'dynamic' : 'normal';
 				// セット.
@@ -79,7 +81,7 @@ class Blocks {
 	public function block_categories( $categories ) {
 		$categories[] = [
 			'slug'  => Config::BLOCK_CATEGORY,
-			'title' => __( Config::BLOCK_CATEGORY_NAME, 'ystandard-toolbox' ),
+			'title' => Config::BLOCK_CATEGORY_NAME,
 		];
 
 		return $categories;

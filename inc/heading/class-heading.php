@@ -1,5 +1,7 @@
 <?php
 /**
+ * Heading
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -198,7 +200,6 @@ class Heading {
 	 * 見出し用CSS作成.
 	 *
 	 * @param string $level 見出しレベル.
-	 * @param array  $value 設定値.
 	 *
 	 * @return bool
 	 */
@@ -243,6 +244,14 @@ class Heading {
 		return $css;
 	}
 
+	/**
+	 * セレクター取得
+	 *
+	 * @param string $level 見出しレベル.
+	 * @param bool   $block ブロック.
+	 *
+	 * @return string
+	 */
 	private function get_selector( $level, $block = false ) {
 		$body_class = '.' . Config::BODY_CLASS;
 		// ブロックスタイル.
@@ -325,7 +334,8 @@ class Heading {
 		foreach ( $styles[ $section ] as $key => $value ) {
 			if ( 'content' === $key ) {
 				$content = empty( $value ) ? '""' : $value;
-				$css     .= 'content:' . $content . ';';
+				// 結合.
+				$css .= 'content:' . $content . ';';
 			} else {
 				if ( ! empty( $key ) && '' !== $value ) {
 					if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
@@ -683,7 +693,7 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value
+	 * @param mixed  $value    value.
 	 * @param string $section  section name.
 	 */
 	private function set_css( $property, $value, $section = 'content' ) {
@@ -694,7 +704,7 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value
+	 * @param mixed  $value    value.
 	 * @param string $section  section name.
 	 */
 	private function set_css_tablet( $property, $value, $section = 'content' ) {
@@ -705,7 +715,7 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value
+	 * @param mixed  $value    value.
 	 * @param string $section  section name.
 	 */
 	private function set_css_pc( $property, $value, $section = 'content' ) {

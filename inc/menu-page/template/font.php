@@ -1,5 +1,7 @@
 <?php
 /**
+ * Font Menu.
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -20,7 +22,7 @@ $font_family = Font::get_font_family();
 		<div class="ystdtb-menu__subtext">
 			<a href="https://fonts.google.com/" target="_blank" rel="noreferrer nofollow noopener">Google Fonts</a>などで発行したフォント読み込み用のHTMLを貼り付けてください。
 		</div>
-		<?php if ( Utility::is_amp_enable() ): ?>
+		<?php if ( Utility::is_amp_enable() ) : ?>
 			<div class="ystdtb-menu__subtext">
 				※入力したコードはAMPページでも出力されます。<br>
 				※AMPページと分けたい場合は「コード追加」設定を使用してください。
@@ -35,7 +37,7 @@ $font_family = Font::get_font_family();
 		</div>
 		<div class="ystdtb-menu__subtext ystdtb-menu__section is-small">
 			※追加したWebフォントを含めた font-family を入力してください。
-			<?php if ( empty( $font_family ) ): ?>
+			<?php if ( empty( $font_family ) ) : ?>
 				<br>
 				※現在の設定では<code><?php echo esc_html( $sample_font ); ?></code>が有効になっています。<br>
 				※font-family の指定をコピーして、追加したフォントの指定を追記してください。

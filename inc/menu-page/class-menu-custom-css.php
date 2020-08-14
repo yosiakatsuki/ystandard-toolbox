@@ -1,5 +1,7 @@
 <?php
 /**
+ * Custom CSS Menu
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -30,6 +32,11 @@ class Menu_Custom_CSS extends Menu_Page_Base {
 		$this->enqueue_codemirror();
 	}
 
+	/**
+	 * カスタムCSS取得
+	 *
+	 * @return string
+	 */
 	public static function get_custom_css() {
 		if ( empty( $stylesheet ) ) {
 			$stylesheet = get_stylesheet();

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Utility
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -59,7 +61,7 @@ class Utility {
 	/**
 	 * テーマのバージョンチェック
 	 *
-	 * @param string $version
+	 * @param string $version バージョン.
 	 *
 	 * @return bool|int
 	 */
@@ -76,7 +78,7 @@ class Utility {
 		if ( is_null( $theme ) ) {
 			return false;
 		}
-		$theme_version = $theme->Version;
+		$theme_version = $theme->version;
 
 		return version_compare( $theme_version, $version, '>=' );
 	}

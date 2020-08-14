@@ -1,5 +1,7 @@
 <?php
 /**
+ * Init
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -72,12 +74,11 @@ class Init {
 		<ul>{$this->version_warning}</ul>
 		テーマ・プラグインのアップデートを実施するまでは一部機能が制限されます。
 		";
-		if ( true ) {
-			return;
-		}
-		Notice::set_notice( function () {
-			Notice::warning( $this->version_warning );
-		} );
+		Notice::set_notice(
+			function () {
+				Notice::warning( $this->version_warning );
+			}
+		);
 	}
 }
 

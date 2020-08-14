@@ -1,5 +1,7 @@
 <?php
 /**
+ * Heading
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -40,7 +42,7 @@ class Menu_Heading extends Menu_Page_Base {
 	 * @return void
 	 */
 	public function enqueue_app( $hook_suffix ) {
-		if (  ! $this->is_toolbox_menu_page( $hook_suffix )  ) {
+		if ( ! $this->is_toolbox_menu_page( $hook_suffix ) ) {
 			return;
 		}
 		wp_enqueue_media();

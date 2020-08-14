@@ -1,5 +1,7 @@
 <?php
 /**
+ * Menu Page
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -48,7 +50,7 @@ class Menu_Page {
 	}
 
 	/**
-	 *
+	 * メニュー追加
 	 */
 	public function add_menu_page() {
 		add_menu_page(

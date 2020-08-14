@@ -1,5 +1,7 @@
 <?php
 /**
+ * Menu Page Base
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -35,6 +37,7 @@ abstract class Menu_Page_Base {
 
 	/**
 	 * 設定ページテンプレート
+	 *
 	 * @var string
 	 */
 	protected $template_name = '';
@@ -47,6 +50,7 @@ abstract class Menu_Page_Base {
 	protected $menu_slug = '';
 	/**
 	 * メニュータイトル
+	 *
 	 * @var string
 	 */
 	protected $menu_title = '';

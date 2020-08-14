@@ -1,5 +1,7 @@
 <?php
 /**
+ * File Load
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -22,7 +24,7 @@ require_once __DIR__ . '/code/class-code.php';
 require_once __DIR__ . '/heading/class-heading.php';
 // Font.
 require_once __DIR__ . '/font/class-font.php';
-// Copyright
+// Copyright.
 require_once __DIR__ . '/copyright/class-copyright.php';
 
 // Admin.

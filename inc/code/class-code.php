@@ -1,5 +1,7 @@
 <?php
 /**
+ * Code
+ *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
@@ -37,14 +39,14 @@ class Code {
 		$this->echo_code( 'head', 'head_amp' );
 	}
 
-	/*
+	/**
 	 * Body開始位置に追加
 	 */
 	public function add_body_open() {
 		$this->echo_code( 'body_open', 'body_open_amp' );
 	}
 
-	/*
+	/**
 	 * Body終了位置に追加
 	 */
 	public function add_footer() {
