@@ -22,6 +22,8 @@ require_once __DIR__ . '/code/class-code.php';
 require_once __DIR__ . '/heading/class-heading.php';
 // Font.
 require_once __DIR__ . '/font/class-font.php';
+// Copyright
+require_once __DIR__ . '/copyright/class-copyright.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';

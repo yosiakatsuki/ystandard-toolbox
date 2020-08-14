@@ -47,6 +47,14 @@ defined( 'ABSPATH' ) || die();
 			<?php echo Utility::manual_link( 'custom-css', '', 'button' ) ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
+			<h2>Copyright編集</h2>
+			<figure class="ystdtb-menu__column-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+			</figure>
+			<p>サイトフッターに表示されるCopyright表記の編集、「yStandard Theme by yosiakatsuki Powered by WordPress」の削除機能</p>
+			<?php echo Utility::manual_link( 'copyright', '', 'button' ) ?>
+		</div>
+		<div class="ystdtb-menu__column-item">
 			<h2>記事一覧ブロック</h2>
 			<figure class="ystdtb-menu__column-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>

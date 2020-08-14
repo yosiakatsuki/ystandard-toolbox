@@ -49,14 +49,15 @@ class Option {
 	/**
 	 * 設定取得（bool）
 	 *
+	 * @param string $section Section.
 	 * @param string $name    Name.
-	 * @param string $default Default.
+	 * @param bool   $default Default.
 	 *
 	 * @return bool
 	 */
-	public static function get_option_by_bool( $name, $default = false ) {
+	public static function get_option_by_bool( $section, $name, $default = false ) {
 
-		return Utility::to_bool( self::get_option( $name, $default ) );
+		return Utility::to_bool( self::get_option( $section, $name, $default ) );
 	}
 
 	/**
@@ -87,6 +88,20 @@ class Option {
 	public static function update_option( $name, $value ) {
 		$option          = self::get_all_option();
 		$option[ $name ] = $value;
+
+		return update_option( Config::OPTION_NAME, $option );
+	}
+
+	/**
+	 * 設定削除
+	 *
+	 * @param string $name Name.
+	 *
+	 * @return bool
+	 */
+	public static function delete_option( $name ) {
+		$option = self::get_all_option();
+		unset( $option[ $name ] );
 
 		return update_option( Config::OPTION_NAME, $option );
 	}
