@@ -11,7 +11,7 @@ namespace ystandard_toolbox;
 
 defined( 'ABSPATH' ) || die();
 ?>
-<div class="start ystdtb-menu__component">
+<div class="start ystdtb-menu__component ystdtb-menu__form">
 	<h1 class="ystdtb-menu__title">yStandard Toolbox</h1>
 	<div class="ystdtb-menu__column">
 		<div class="ystdtb-menu__column-item">
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>コンテンツやページタイトルのデザインをカスタマイズできる機能</p>
-			<?php echo Utility::manual_link( 'heading', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'heading', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
 			<h2>コード追加</h2>
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>&lt;head&gt;内や&lt;/body&gt;直前などにJavaScriptなどを追加できる機能</p>
-			<?php echo Utility::manual_link( 'add-code', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'add-code', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
 			<h2>Webフォント追加</h2>
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>Google Fontsなどを使ってWebフォントを追加する機能</p>
-			<?php echo Utility::manual_link( 'add-font', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'add-font', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
 			<h2>追加CSS編集</h2>
@@ -55,7 +55,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>「外観」→「カスタマイズ」→「追加CSS」で編集できるCSSを大きい入力欄で編集する機能</p>
-			<?php echo Utility::manual_link( 'custom-css', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'custom-css', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
 			<h2>Copyright編集</h2>
@@ -66,7 +66,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>サイトフッターに表示されるCopyright表記の編集、「yStandard Theme by yosiakatsuki Powered by WordPress」の削除機能</p>
-			<?php echo Utility::manual_link( 'copyright', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'copyright', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
 			<h2>記事一覧ブロック</h2>
@@ -78,7 +78,7 @@ defined( 'ABSPATH' ) || die();
 				</svg>
 			</figure>
 			<p>投稿の一覧を様々な条件で絞り込み表示できるブロック</p>
-			<?php echo Utility::manual_link( 'block-posts', '', 'button' ); ?>
+			<?php echo Utility::manual_link( 'block-posts', '', 'button is-primary is-small' ); ?>
 		</div>
 	</div>
 </div>

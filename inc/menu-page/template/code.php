@@ -12,8 +12,9 @@ namespace ystandard_toolbox;
 defined( 'ABSPATH' ) || die();
 ?>
 <div class="code ystdtb-menu__component">
-	<h1 class="ystdtb-menu__title">コード追加</h1>
-	<div class="code__normal">
+	<h1 class="ystdtb-menu__title is-no-margin">コード追加</h1>
+	<?php echo Utility::manual_link_inline( 'add-code' ); ?>
+	<div class="code__normal ystdtb-menu__section">
 		<div class="code__section">
 			<label for="code-head" class="is-block">&lt;Head&gt;に挿入するコード</label>
 			<textarea name="<?php echo Code::OPTION_NAME; ?>[head]" id="code-head" class="widefat code-input" rows="8"><?php echo esc_textarea( Code::get_option( 'head' ) ); ?></textarea>

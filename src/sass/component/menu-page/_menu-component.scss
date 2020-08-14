@@ -7,6 +7,10 @@
     font-size: 1.5em;
     font-weight: bold;
     border-bottom: 1px solid global.$color__ystd_blue;
+
+    &.is-no-margin {
+      margin-bottom: .25em;
+    }
   }
 
   h2 {
@@ -18,6 +22,7 @@
   code {
     font-size: 1em;
   }
+
   .ystdtb-menu__subtext {
     font-size: .8em;
     color: #aaa;
@@ -232,10 +237,6 @@
         text-align: center;
       }
 
-      a {
-        font-size: .9em;
-      }
-
     }
   }
 
@@ -253,21 +254,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: global.$color__ystd_blue;
-      color: #fff;
-
-      &:hover,
-      &:focus {
-        background-color: global.$color__ystd_blue;
-        color: #fff;
-        opacity: .9;
-      }
+      padding: 0;
 
       svg {
         width: 1.2em;
         height: 1.2em;
         margin-right: .25em;
       }
+    }
+  }
+
+  .ystdtb-menu__manual-link-inline {
+    display: inline-block;
+    font-size: 0.8em;
+
+    svg {
+      width: 1.2em;
+      height: 1.2em;
+      vertical-align: middle;
+      margin-right: .25em;
     }
   }
 }
