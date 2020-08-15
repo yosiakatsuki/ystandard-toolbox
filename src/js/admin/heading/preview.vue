@@ -209,7 +209,7 @@
 	.editor-preview {
 		height: 100%;
 		margin: 1rem 0 0;
-		@media (min-width: 769px) {
+		@media (min-width: 1200px) {
 			margin: 0 0 0 1rem;
 		}
 

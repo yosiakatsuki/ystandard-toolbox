@@ -68,7 +68,7 @@
 <style lang="scss">
 	.heading-editor-container {
 
-		@media (min-width: 769px) {
+		@media (min-width: 1200px) {
 			display: flex;
 			width: 100%;
 		}
@@ -76,7 +76,7 @@
 
 	.heading-editor-control {
 		font-size: 1rem;
-		@media (min-width: 769px) {
+		@media (min-width: 1200px) {
 			width: 50%;
 		}
 
@@ -133,7 +133,7 @@
 
 	.heading-editor-preview {
 		font-size: 1rem;
-		@media (min-width: 769px) {
+		@media (min-width: 1200px) {
 			width: 50%;
 		}
 	}

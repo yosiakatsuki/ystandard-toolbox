@@ -27,7 +27,9 @@
 						:name="`ystdtb_heading[${level}][borderTopColor]`"
 						v-model="borderTopColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Top')"><XIcon size="1x" /></button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Top')">
+						<XIcon size="1x"/>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -58,7 +60,9 @@
 						:name="`ystdtb_heading[${level}][borderRightColor]`"
 						v-model="borderRightColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Right')"><XIcon size="1x" /></button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Right')">
+						<XIcon size="1x"/>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -89,7 +93,9 @@
 						:name="`ystdtb_heading[${level}][borderBottomColor]`"
 						v-model="borderBottomColor"
 					/>
-					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Bottom')"><XIcon size="1x" /></button>
+					<button class="is-cancel is-small" type="button" @click="clearBorderColor('Bottom')">
+						<XIcon size="1x"/>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -120,7 +126,9 @@
 						:name="`ystdtb_heading[${level}][borderLeftColor]`"
 						v-model="borderLeftColor"
 					/>
-					<button class="is-cancel is-small " type="button" @click="clearBorderColor('Left')"><XIcon size="1x" /></button>
+					<button class="is-cancel is-small " type="button" @click="clearBorderColor('Left')">
+						<XIcon size="1x"/>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -314,6 +322,12 @@
 	.heading-editor-border {
 		select {
 			font-size: 0.9em;
+		}
+		.ystdtb-menu__table {
+			.is-label.is-small {
+				width: 2em;
+				min-width: 2em;
+			}
 		}
 	}
 </style>

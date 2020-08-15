@@ -24,7 +24,7 @@
     font-size: .9em;
     display: none;
 
-    @include global.media-breakpoint(md) {
+    @include global.media-breakpoint(lg) {
       display: block;
       width: 160px;
       border-right: 1px solid #eee;
@@ -62,8 +62,8 @@
   }
 
   .ystdtb-menu__detail {
-
-    @include global.media-breakpoint(md) {
+    width: 100%;
+    @include global.media-breakpoint(lg) {
       width: calc(100% - 180px);
     }
   }
