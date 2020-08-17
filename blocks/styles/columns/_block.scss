@@ -1,0 +1,8 @@
+.wp-block-column {
+  &.is-style-ystdtb-col-auto {
+    flex-basis: auto;
+  }
+  &.is-style-ystdtb-no-shrink {
+    flex: 0 0 auto;
+  }
+}
