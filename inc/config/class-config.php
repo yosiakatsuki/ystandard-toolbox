@@ -69,4 +69,11 @@ class Config {
 	 * 設定名
 	 */
 	const OPTION_NAME = 'ystdtb-option';
+
+	/**
+	 * Text Domain.
+	 *
+	 * @var string
+	 */
+	const TEXT_DOMAIN = 'ystandard-toolbox';
 }

@@ -264,4 +264,15 @@ class Utility {
 
 		return "<a ${class} href=\"${url}\" target=\"_blank\">${icon}${text}</a>";
 	}
+
+	/**
+	 * メニューアイコン取得
+	 *
+	 * @return string
+	 */
+	public static function get_menu_icon() {
+		$icon = Utility::get_file_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
+
+		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
+	}
 }

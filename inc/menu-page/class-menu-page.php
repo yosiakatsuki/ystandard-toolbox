@@ -45,6 +45,7 @@ class Menu_Page {
 		require_once __DIR__ . '/class-menu-heading.php';
 		require_once __DIR__ . '/class-menu-code.php';
 		require_once __DIR__ . '/class-menu-font.php';
+		require_once __DIR__ . '/class-menu-block-patterns.php';
 		require_once __DIR__ . '/class-menu-custom-css.php';
 		require_once __DIR__ . '/class-menu-copyright.php';
 	}
@@ -59,21 +60,11 @@ class Menu_Page {
 			'manage_options',
 			self::MENU_SLUG,
 			'',
-			$this->menu_icon(),
+			Utility::get_menu_icon(),
 			59
 		);
 	}
 
-	/**
-	 * メニューアイコン
-	 *
-	 * @return string
-	 */
-	private function menu_icon() {
-		$icon = Utility::get_file_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
-
-		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
-	}
 
 	/**
 	 * メニューページURL取得

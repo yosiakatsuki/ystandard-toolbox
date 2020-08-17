@@ -28,7 +28,7 @@ $disable_theme_info = Copyright::get_disable_theme_info();
 			</div>
 		</div>
 		<div class="ystdtb-menu__table">
-			<div class="is-label">Powered by の削除</div>
+			<div class="is-label label">Powered by の削除</div>
 			<div class="is-content">
 				<label style="font-weight: normal;">
 					<input name="<?php echo Copyright::OPTION_NAME; ?>[disable_theme_info]" id="poweredby" type="checkbox" value="1" <?php checked( $disable_theme_info ); ?>>Powered by の表示を削除する

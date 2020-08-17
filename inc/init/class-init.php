@@ -38,8 +38,20 @@ class Init {
 	 * Init constructor.
 	 */
 	public function __construct() {
+		add_action( 'after_setup_theme', [ $this, 'plugin_init' ] );
 		add_filter( 'body_class', [ $this, 'body_class' ] );
 		$this->check_versions();
+	}
+
+	/**
+	 * プラグインの初期化処理
+	 */
+	public function plugin_init() {
+		$result = load_plugin_textdomain(
+			Config::TEXT_DOMAIN,
+			false,
+			dirname( YSTDTB_NAME ) . '/languages'
+		);
 	}
 
 	/**

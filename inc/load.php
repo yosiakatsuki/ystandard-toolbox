@@ -26,7 +26,11 @@ require_once __DIR__ . '/heading/class-heading.php';
 require_once __DIR__ . '/font/class-font.php';
 // Copyright.
 require_once __DIR__ . '/copyright/class-copyright.php';
+// Block Patterns.
+require_once __DIR__ . '/block-patterns/class-block-patterns.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';
-require_once __DIR__ . '/update/class-update.php';
+if ( file_exists( __DIR__ . '/update/class-update.php' ) ) {
+	require_once __DIR__ . '/update/class-update.php';
+}
