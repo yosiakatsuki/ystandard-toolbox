@@ -70,12 +70,31 @@ class Copyright {
 	}
 
 	/**
+	 * デフォルト表示
+	 *
+	 * @return string
+	 */
+	public static function get_default() {
+
+		$year      = date_i18n( 'Y' );
+		$url       = esc_url( home_url( '/' ) );
+		$blog_name = get_bloginfo( 'name' );
+
+		return sprintf(
+			'&copy; %s <a href="%s" rel="home">%s</a>',
+			esc_html( $year ),
+			$url,
+			$blog_name
+		);
+	}
+
+	/**
 	 * Copyright設定取得
 	 *
 	 * @return mixed|string
 	 */
 	public static function get_copyright_option() {
-		$copyright = get_option( 'ys_copyright', '' );
+		$copyright = get_option( 'ys_copyright', self::get_default() );
 
 		return Option::get_option( Copyright::OPTION_NAME, 'copyright', $copyright );
 	}
