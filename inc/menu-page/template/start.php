@@ -89,7 +89,7 @@ defined( 'ABSPATH' ) || die();
 					<line x1="4" y1="22" x2="4" y2="15"></line>
 				</svg>
 			</figure>
-			<p>カラムブロックなど便利なデザインスタイル</p>
+			<p>カラムブロックやテーブルブロックなどの便利なデザインスタイル</p>
 			<?php echo Utility::manual_link( 'block-styles', '', 'button is-primary is-small' ); ?>
 		</div>
 		<div class="ystdtb-menu__column-item">
