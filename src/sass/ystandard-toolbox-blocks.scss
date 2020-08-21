@@ -1,3 +1,5 @@
 @use "component/blocks/inspector-controls";
 @use "../../blocks/posts/edit";
-@use "../../blocks/styles/columns/block";
+@use "../../blocks/styles/columns/block" as column;
+@use "../../blocks/styles/table/block" as table;
+@use "../../blocks/styles/table/edit" as table-edit;
