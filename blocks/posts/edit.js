@@ -129,7 +129,20 @@ const Posts = (props) => {
 		if (!terms) {
 			terms = [];
 		}
-		const tree = _getTermTree(terms, 0, 0);
+		let tree = terms;
+		if (
+			taxonomyList.hasOwnProperty(taxonomy) &&
+			taxonomyList[taxonomy].hierarchical
+		) {
+			tree = _getTermTree(terms, 0, 0);
+		} else {
+			tree = tree.map((value) => {
+				return {
+					value: value.slug,
+					label: value.name,
+				};
+			});
+		}
 
 		return {
 			termOptions: [_getOptionsDefault(), ...tree],
