@@ -557,18 +557,19 @@ class Heading {
 		}
 		$pseudo_elements = [ 'before', 'after' ];
 		foreach ( $pseudo_elements as $pos ) {
-			$content = stripslashes( $this->get_value( "${pos}Content" ) );
-			if ( false !== strpos( $content, '<svg' ) ) {
-				$content = str_replace( '\'', '"', $content );
-				$content = str_replace( '#', '%23', $content );
-				$content = "url('data:image/svg+xml;charset=UTF-8,${content}')";
+			if ( '0' !== $this->get_value( "${pos}Size" ) ) {
+				$content = stripslashes( $this->get_value( "${pos}Content" ) );
+				if ( false !== strpos( $content, '<svg' ) ) {
+					$content = str_replace( '\'', '"', $content );
+					$content = str_replace( '#', '%23', $content );
+					$content = "url('data:image/svg+xml;charset=UTF-8,${content}')";
+				}
+				$this->set_css(
+					'content',
+					$content,
+					$pos
+				);
 			}
-			$this->set_css(
-				'content',
-				$content,
-				$pos
-			);
-
 			// size.
 			if ( isset( $preset['usePseudoElementsSize'] ) ) {
 				foreach ( $preset['usePseudoElementsSize'] as $item ) {

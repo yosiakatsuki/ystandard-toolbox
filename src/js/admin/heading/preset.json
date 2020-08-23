@@ -431,12 +431,12 @@
       "before": {
         "marginRight": ".25em",
         "lineHeight": 1,
-        "verticalAlign": "-0.25em"
+        "verticalAlign": "-0.15em"
       },
       "after": {
         "marginLeft": ".25em",
         "lineHeight": 1,
-        "verticalAlign": "-0.25em"
+        "verticalAlign": "-0.15em"
       }
     }
   }
