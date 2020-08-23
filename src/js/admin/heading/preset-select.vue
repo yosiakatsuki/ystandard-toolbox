@@ -40,6 +40,7 @@
 							</button>
 						</li>
 					</ul>
+					<div class="ystdtb-menu__subtext">※薄橙色のデザインテンプレートは「その他」の「高度な設定」が使用できます。</div>
 				</div>
 			</div>
 		</transition>
@@ -217,6 +218,9 @@
 	.preset-select__modal {
 
 		.preset-select__modal-content {
+			display: flex;
+			flex-direction: column;
+
 			h3 {
 				margin: 0 0 1em;
 				text-align: center;
@@ -236,6 +240,7 @@
 			align-items: flex-start;
 			max-height: 90%;
 			overflow-y: scroll;
+			flex-grow: 1;
 
 			> li {
 				margin: 0 0 1.5em;
