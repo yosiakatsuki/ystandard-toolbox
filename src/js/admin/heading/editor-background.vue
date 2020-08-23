@@ -117,6 +117,7 @@
 
 <script>
 	import ColorPicker from '../component/color-picker';
+	import presets from './preset.json';
 
 	export default {
 		name: 'editor-background',
@@ -128,6 +129,7 @@
 			return {
 				mediaUploader: null,
 				isManualBgSize: false,
+				presetList: presets,
 			}
 		},
 		computed: {
@@ -137,6 +139,15 @@
 				},
 				set( newValue ) {
 					this.updateOption( 'backgroundColor', newValue );
+					const preset = this.getOption( 'preset' );
+					if ( this.presetList.hasOwnProperty( preset ) ) {
+						if ( this.presetList[ preset ].hasOwnProperty( 'syncBackgroundColor' ) ) {
+							const sync = this.presetList[ preset ].syncBackgroundColor;
+							sync.forEach( ( value ) => {
+								this.updateOption( value, newValue );
+							} );
+						}
+					}
 				}
 			},
 			backgroundImage: {

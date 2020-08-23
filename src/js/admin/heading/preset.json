@@ -343,7 +343,7 @@
   "balloon": {
     "name": "吹き出し",
     "default": {
-      "backgroundColor": "#f7f7f7",
+      "backgroundColor": "#d4e7f2",
       "borderTopWidth": 0,
       "borderTopWidthUnit": "px",
       "borderTopStyle": "solid",
@@ -374,9 +374,12 @@
       "beforeColorType": "",
       "afterContent": "",
       "afterSize": 16,
-      "afterColor": "#f7f7f7",
+      "afterColor": "#d4e7f2",
       "afterColorType": "borderTopColor"
     },
+    "syncBackgroundColor": [
+      "afterColor"
+    ],
     "enablePseudoElements": [
       "afterSize",
       "afterColor"
