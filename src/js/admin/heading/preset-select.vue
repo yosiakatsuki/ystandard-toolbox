@@ -92,13 +92,22 @@
 					value: newValue
 				} );
 			},
+			resetCustom( name, newValue ) {
+				this.$store.commit( 'resetCustom', {
+					level: this.level,
+				} );
+			},
 			changePreset( value, style, clearPseudoElements ) {
 				this.updateOption( 'preset', value );
-				this.setDefaultStyle( style );
-				if ( clearPseudoElements ) {
-					this.clearPseudoElements();
+				if ( 'custom' === value ) {
+					this.resetCustom();
+				} else {
+					this.setDefaultStyle( style );
+					if ( clearPseudoElements ) {
+						this.clearPseudoElements();
+					}
+					this.updateOption( 'useCustomStyle', true );
 				}
-				this.updateOption( 'useCustomStyle', true );
 				this.closePresetSelect();
 			},
 			openPresetSelect() {
