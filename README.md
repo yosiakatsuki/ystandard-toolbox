@@ -4,6 +4,9 @@
 
 ## 更新履歴
 
+### v0.3.0
+- [追加] タイムラインブロック追加
+
 ### v0.2.1
 - [修正] 記事一覧ブロック タグ選択不具合修正
 - [調整] 見出し編集機能　カスタム選択時は文字設定以外をクリア
@@ -77,4 +80,3 @@ Source : <https://github.com/vuejs/vue>
 
 License: MIT  
 Source : <https://github.com/xiaokaike/vue-color>
-

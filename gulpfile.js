@@ -37,6 +37,10 @@ function sass() {
 }
 
 function buildAdminApp() {
+	return webpackStream( webpackConfig, webpack )
+		.pipe( dest( 'js/admin/' ) )
+}
+function watchBuildAdminApp() {
 	return plumber()
 		.pipe( webpackStream( webpackConfig, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
@@ -117,10 +121,10 @@ function copyUpdateInfo() {
 function watchFiles() {
 	cleanFiles();
 	sass();
-	buildAdminApp();
+	watchBuildAdminApp();
 	copyJson();
 	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
-	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], buildAdminApp );
+	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], watchBuildAdminApp );
 	watch( [ './src/js/admin/**/*.json' ], copyJson );
 }
 
@@ -130,6 +134,6 @@ exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
 exports.copyJson = series( copyJson );
-exports.build = parallel( sass, buildAdminApp, copyJson );
+exports.build = series( sass, buildAdminApp, copyJson );
 
 exports.default = series( watchFiles );

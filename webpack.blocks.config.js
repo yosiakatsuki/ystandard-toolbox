@@ -7,6 +7,8 @@ module.exports = {
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
 		'posts': './blocks/posts/index.js',
+		'timeline': './blocks/timeline/index.js',
+		'timeline-item': './blocks/timeline/item/index.js',
 	},
 	output: {
 		filename: '[name].js',
