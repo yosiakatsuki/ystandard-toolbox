@@ -109,6 +109,12 @@ class Blocks {
 			[],
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-blocks.css' )
 		);
+		if ( ! Utility::ystandard_blocks_version_compare() ) {
+			wp_add_inline_style(
+				Config::CSS_HANDLE,
+				Enqueue::get_color_palette_css( '.editor-styles-wrapper ' )
+			);
+		}
 	}
 
 	/**

@@ -69,19 +69,19 @@ export const supports = {
 };
 
 export const labelTypes = [
-	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
-	{ label: __( 'アイコン', 'ystandard-toolbox' ), name: 'icon' },
-	{ label: __( 'テキスト', 'ystandard-toolbox' ), name: 'text' },
+	{ label: __('なし', 'ystandard-toolbox'), name: '' },
+	{ label: __('アイコン', 'ystandard-toolbox'), name: 'icon' },
+	{ label: __('テキスト', 'ystandard-toolbox'), name: 'text' },
 ];
 export const innerMargin = [
-	{ label: __( '小', 'ystandard-toolbox' ), name: 'small' },
-	{ label: __( '通常', 'ystandard-toolbox' ), name: 'normal' },
-	{ label: __( '大', 'ystandard-toolbox' ), name: 'large' },
+	{ label: __('小', 'ystandard-toolbox'), name: 'small' },
+	{ label: __('通常', 'ystandard-toolbox'), name: 'normal' },
+	{ label: __('大', 'ystandard-toolbox'), name: 'large' },
 ];
 
 export const template = [
 	[
 		'core/paragraph',
-		{ placeholder: __( 'タイムラインコンテンツ…', 'ystandard-toolbox' ) },
+		{ placeholder: __('タイムラインコンテンツ…', 'ystandard-toolbox') },
 	],
 ];

@@ -6,7 +6,7 @@ import {
 } from '@wordpress/block-editor';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
 
-export default function ( { attributes } ) {
+export default function({ attributes }) {
 	const {
 		labelType,
 		labelContents,
@@ -32,7 +32,7 @@ export default function ( { attributes } ) {
 	const selectContentsInnerMargin =
 		undefined === contentsInnerMargin ? 'normal' : contentsInnerMargin;
 
-	const labelColorClass = getColorClassName( 'color', labelColor );
+	const labelColorClass = getColorClassName('color', labelColor);
 	const labelBackgroundColorClass = getColorClassName(
 		'background-color',
 		labelBackgroundColor
@@ -45,35 +45,35 @@ export default function ( { attributes } ) {
 		'border-color',
 		contentsBorderColor
 	);
-	const labelFontSizeClass = getFontSizeClass( labelFontSize );
+	const labelFontSizeClass = getFontSizeClass(labelFontSize);
 
-	const classes = classnames( 'ystdtb-timeline-item', className, {
-		[ `is-margin-${ selectContentsInnerMargin }` ]:
-		'normal' !== selectContentsInnerMargin,
-		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
+	const classes = classnames('ystdtb-timeline-item', className, {
+		[`is-margin-${selectContentsInnerMargin}`]:
+			'normal' !== selectContentsInnerMargin,
+		[`has-${selectLabelType}`]: '' !== selectLabelType,
 		'has-border': contentsBorderColor || customContentsBorderColor,
-		[ contentsBorderColorClass ]: contentsBorderColorClass,
-	} );
+		[contentsBorderColorClass]: contentsBorderColorClass,
+	});
 	const timelineStyle = {
 		borderColor: contentsBorderColorClass
 			? undefined
 			: customContentsBorderColor,
 	};
 
-	const labelClasses = classnames( 'ystdtb-timeline__label', {
-		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
+	const labelClasses = classnames('ystdtb-timeline__label', {
+		[`has-${selectLabelType}`]: '' !== selectLabelType,
 		'has-long-text':
 			'text' === selectLabelType &&
 			undefined !== labelContents &&
 			1 < labelContents.length,
-		[ labelFontSizeClass ]: labelFontSizeClass,
+		[labelFontSizeClass]: labelFontSizeClass,
 		'has-text-color': labelColor || customLabelColor,
-		[ labelColorClass ]: labelColorClass,
+		[labelColorClass]: labelColorClass,
 		'has-background': labelBackgroundColor || customLabelBackgroundColor,
-		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
+		[labelBackgroundColorClass]: labelBackgroundColorClass,
 		'has-border': labelBorderColor || customLabelBorderColor,
-		[ labelBorderColorClass ]: labelBorderColorClass,
-	} );
+		[labelBorderColorClass]: labelBorderColorClass,
+	});
 	const labelStyles = {
 		fontSize: labelFontSizeClass ? undefined : customLabelFontSize,
 		fontWeight: labelBold ? 700 : undefined,
@@ -87,44 +87,44 @@ export default function ( { attributes } ) {
 		borderStyle: labelBorderSize ? 'solid' : undefined,
 	};
 
-	const contentsClass = classnames( 'ystdtb-timeline__contents', {
-		[ `is-margin-${ selectContentsInnerMargin }` ]: selectContentsInnerMargin,
-	} );
+	const contentsClass = classnames('ystdtb-timeline__contents', {
+		[`is-margin-${selectContentsInnerMargin}`]: selectContentsInnerMargin,
+	});
 	const contentMarginTopCalc = 0 > contentMarginTop ? '-' : '+';
 	const contentsStyle = {
 		marginTop: contentMarginTop
-			? `calc(-1.3em ${ contentMarginTopCalc } ${ Math.abs(
-				contentMarginTop
-			) }px)`
+			? `calc(-1.3em ${contentMarginTopCalc} ${Math.abs(
+					contentMarginTop
+			  )}px)`
 			: undefined,
 	};
 
 	const getLabelContents = () => {
-		const labelContentsClasses = classnames( {
+		const labelContentsClasses = classnames({
 			'ystdtb-timeline__label-text': 'text' === selectLabelType,
 			'ystdtb-timeline__label-icon': 'icon' === selectLabelType,
-		} );
-		if ( 'text' === selectLabelType ) {
+		});
+		if ('text' === selectLabelType) {
 			return (
-				<span className={ labelContentsClasses }>{ labelContents }</span>
+				<span className={labelContentsClasses}>{labelContents}</span>
 			);
 		}
-		if ( 'icon' === selectLabelType ) {
+		if ('icon' === selectLabelType) {
 			return (
-				<span className={ labelContentsClasses }>
-					<SVGIcon name={ labelContents }/>
+				<span className={labelContentsClasses}>
+					<SVGIcon name={labelContents} />
 				</span>
 			);
 		}
 	};
 
 	return (
-		<div className={ classes } style={ timelineStyle }>
-			<div className={ labelClasses } style={ labelStyles }>
-				{ getLabelContents() }
+		<div className={classes} style={timelineStyle}>
+			<div className={labelClasses} style={labelStyles}>
+				{getLabelContents()}
 			</div>
-			<div className={ contentsClass } style={ contentsStyle }>
-				<InnerBlocks.Content/>
+			<div className={contentsClass} style={contentsStyle}>
+				<InnerBlocks.Content />
 			</div>
 		</div>
 	);

@@ -74,8 +74,7 @@ class Init {
 		if ( ! Utility::ystandard_version_compare( self::REQUIRE_YSTANDARD_VERSION ) ) {
 			$this->version_warning .= '<li>yStandard : ' . self::REQUIRE_YSTANDARD_VERSION . '</li>';
 		}
-		$blocks = apply_filters( 'ystdb_get_version', '' );
-		if ( '' === $blocks || version_compare( $blocks, self::REQUIRE_YSTANDARD_BLOCKS_VERSION, '<' ) ) {
+		if ( ! Utility::ystandard_blocks_version_compare( self::REQUIRE_YSTANDARD_BLOCKS_VERSION ) ) {
 			$this->version_warning .= '<li>yStandard Blocks : ' . self::REQUIRE_YSTANDARD_BLOCKS_VERSION . '</li>';
 		}
 		if ( '' === $this->version_warning ) {

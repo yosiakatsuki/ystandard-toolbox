@@ -84,6 +84,26 @@ class Utility {
 	}
 
 	/**
+	 *  [yStandard Blocks]のバージョンチェック
+	 *
+	 * @param string $version バージョン.
+	 *
+	 * @return bool|int
+	 */
+	public static function ystandard_blocks_version_compare( $version = '' ) {
+		$blocks = apply_filters( 'ystdb_get_version', '' );
+		if ( '' === $blocks ) {
+			return false;
+		}
+		// バージョンの確認不要であればプラグインの確認のみ.
+		if ( '' === $version ) {
+			return true;
+		}
+
+		return version_compare( $blocks, $version, '>=' );
+	}
+
+	/**
 	 * Bool値に変換
 	 *
 	 * @param mixed $value value.
