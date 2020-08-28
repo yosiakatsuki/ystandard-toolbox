@@ -9,6 +9,8 @@ module.exports = {
 		'posts': './blocks/posts/index.js',
 		'timeline': './blocks/timeline/index.js',
 		'timeline-item': './blocks/timeline/item/index.js',
+		'faq': './blocks/faq/index.js',
+		'faq-item': './blocks/faq/item/index.js',
 	},
 	output: {
 		filename: '[name].js',
