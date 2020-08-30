@@ -34,11 +34,11 @@ export default function({ attributes }) {
 			? undefined
 			: customBackgroundColor,
 		borderColor: borderColorClass ? undefined : customBorderColor,
+		borderWidth: 'all' === borderType ? borderSize : undefined,
 		borderBottomWidth:
 			'bottom' === borderType || 'all' === borderType
 				? borderSize
 				: undefined,
-		borderWidth: 'all' === borderType ? borderSize : undefined,
 	};
 
 	return (

@@ -64,6 +64,9 @@ export const attributes = {
 	accordionArrowColor: {
 		type: 'string',
 	},
+	customAccordionArrowColor: {
+		type: 'string',
+	},
 };
 
 export const supports = {
@@ -80,11 +83,6 @@ export const faqBorderTypes = [
 
 export const template = [
 	['core/paragraph', { placeholder: __('Q&A項目…', 'ystandard-toolbox') }],
-];
-
-export const accordionOpenOption = [
-	{ label: __('閉じる', 'ystandard-toolbox'), name: 'close' },
-	{ label: __('開く', 'ystandard-toolbox'), name: 'open' },
 ];
 
 export const designPreset = [

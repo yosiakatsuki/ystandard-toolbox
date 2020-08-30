@@ -18,6 +18,10 @@ import { compose } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { withDispatch, select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+import {
+	getColorCode,
+	getColorSlug,
+} from '../../src/js/blocks/function/_getColorSlug';
 
 function faq(props) {
 	const {
@@ -46,11 +50,11 @@ function faq(props) {
 	const faqStyles = {
 		backgroundColor: backgroundColor.color,
 		borderColor: borderColor.color,
+		borderWidth: 'all' === borderType ? borderSize : undefined,
 		borderBottomWidth:
 			'bottom' === borderType || 'all' === borderType
 				? borderSize
 				: undefined,
-		borderWidth: 'all' === borderType ? borderSize : undefined,
 	};
 
 	return (
@@ -82,7 +86,12 @@ function faq(props) {
 								onChange={(color) => {
 									setAccordionArrowColor(color);
 									updateChildAttributes({
-										accordionArrowColor: color,
+										accordionArrowColor: getColorSlug(
+											color
+										),
+										customAccordionArrowColor: getColorCode(
+											color
+										),
 									});
 								}}
 								value={accordionArrowColor.color}

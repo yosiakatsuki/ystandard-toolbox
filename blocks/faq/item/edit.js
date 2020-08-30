@@ -6,6 +6,7 @@ import {
 	withColors,
 	FontSizePicker,
 	withFontSizes,
+	getColorClassName,
 	__experimentalBlock as Block,
 } from '@wordpress/block-editor';
 import {
@@ -50,6 +51,7 @@ function faqItem(props) {
 		labelBorderSize,
 		labelBorderRadius,
 		accordionArrowColor,
+		customAccordionArrowColor,
 	} = attributes;
 
 	const { colors } = select('core/block-editor').getSettings();
@@ -85,9 +87,16 @@ function faqItem(props) {
 
 	const contentsClasses = classnames('ystdtb-faq-item__contents', {});
 
-	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {});
+	const accordionArrowColorClass = getColorClassName(
+		'color',
+		accordionArrowColor
+	);
+	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {
+		'has-text-color': accordionArrowColorClass || customAccordionArrowColor,
+		[accordionArrowColorClass]: accordionArrowColorClass,
+	});
 	const accordionArrowStyle = {
-		color: accordionArrowColor,
+		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
 	};
 
 	return (
@@ -210,10 +219,6 @@ function faqItem(props) {
 							disableCustomColors={false}
 							onChange={(color) => {
 								setLabelColor(color);
-								setAttributes({
-									accordionArrowColor:
-										'q' === faqType ? color : undefined,
-								});
 							}}
 							value={labelColor.color}
 						/>

@@ -5,7 +5,6 @@ import {
 	getFontSizeClass,
 } from '@wordpress/block-editor';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
-import { getColorSlug } from '../../../src/js/blocks/function/_getColorSlug';
 
 export default function({ attributes }) {
 	const {
@@ -29,6 +28,7 @@ export default function({ attributes }) {
 		labelBorderColor,
 		customLabelBorderColor,
 		accordionArrowColor,
+		customAccordionArrowColor,
 	} = attributes;
 
 	const faqBackgroundColorClass = getColorClassName(
@@ -101,22 +101,18 @@ export default function({ attributes }) {
 
 	const accordionArrowColorClass = getColorClassName(
 		'color',
-		getColorSlug(accordionArrowColor)
+		accordionArrowColor
 	);
 	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {
-		'has-text-color': accordionArrowColorClass || accordionArrowColor,
+		'has-text-color': accordionArrowColorClass || customAccordionArrowColor,
 		[accordionArrowColorClass]: accordionArrowColorClass,
 	});
 	const accordionArrowStyle = {
-		color: accordionArrowColorClass ? undefined : accordionArrowColor,
+		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
 	};
 
 	return (
-		<div
-			className={itemClasses}
-			style={itemStyles}
-			data-arrow-color={'q' === faqType ? accordionArrowColor : undefined}
-		>
+		<div className={itemClasses} style={itemStyles}>
 			<div className={labelClasses} style={labelStyles}>
 				<span className={labelTextClasses}>{faqType}</span>
 			</div>
