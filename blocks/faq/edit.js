@@ -16,10 +16,10 @@ import {
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
-import { select } from '@wordpress/data';
+import { withDispatch, select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
-function faq( props ) {
+function faq(props) {
 	const {
 		className,
 		attributes,
@@ -28,140 +28,154 @@ function faq( props ) {
 		setBackgroundColor,
 		borderColor,
 		setBorderColor,
+		accordionArrowColor,
+		setAccordionArrowColor,
+		updateChildAttributes,
 	} = props;
 
-	const {
-		isAccordion,
-		borderType,
-		borderSize,
-	} = attributes;
+	const { isAccordion, borderType, borderSize } = attributes;
 
-	const { colors } = select( 'core/block-editor' ).getSettings();
+	const { colors } = select('core/block-editor').getSettings();
 
-	const faqClasses = classnames(
-		'ystdtb-faq',
-		className,
-		{
-			'has-padding': 'all' === borderType || backgroundColor.color,
-			[ `border-type--${ borderType }` ]: '' !== borderType,
-			'is-accordion': isAccordion,
-		}
-	);
+	const faqClasses = classnames('ystdtb-faq', className, {
+		'has-padding': 'all' === borderType || backgroundColor.color,
+		[`border-type--${borderType}`]: '' !== borderType,
+		'is-accordion': isAccordion,
+	});
 
 	const faqStyles = {
 		backgroundColor: backgroundColor.color,
 		borderColor: borderColor.color,
-		borderBottomWidth: 'bottom' === borderType || 'all' === borderType ? borderSize : undefined,
+		borderBottomWidth:
+			'bottom' === borderType || 'all' === borderType
+				? borderSize
+				: undefined,
 		borderWidth: 'all' === borderType ? borderSize : undefined,
 	};
 
 	return (
 		<Fragment>
 			<InspectorControls>
-				<PanelBody
-					title={ __( 'FAQ', 'ystandard-toolbox' ) }
-				>
+				<PanelBody title={__('FAQ', 'ystandard-toolbox')}>
 					<BaseControl
-						id={ 'accordion' }
-						label={ __( '開閉設定', 'ystandard-toolbox' ) }
+						id={'accordion'}
+						label={__('開閉設定', 'ystandard-toolbox')}
 					>
 						<ToggleControl
-							label={ __( '開閉式にする', 'ystandard-toolbox' ) }
-							onChange={ () => {
-								setAttributes( {
-									isAccordion: ! isAccordion,
-								} );
-							} }
-							checked={ isAccordion }
+							label={__('開閉式にする', 'ystandard-toolbox')}
+							onChange={() => {
+								setAttributes({
+									isAccordion: !isAccordion,
+								});
+							}}
+							checked={isAccordion}
 						/>
 					</BaseControl>
+					{isAccordion && (
+						<BaseControl
+							id={'accordion-arrow-color'}
+							label={__('開閉ボタンの色', 'ystandard-toolbox')}
+						>
+							<ColorPalette
+								colors={colors}
+								disableCustomColors={false}
+								onChange={(color) => {
+									setAccordionArrowColor(color);
+									updateChildAttributes({
+										accordionArrowColor: color,
+									});
+								}}
+								value={accordionArrowColor.color}
+							/>
+						</BaseControl>
+					)}
 					<BaseControl
-						id={ 'background-color' }
-						label={ __( '背景色', 'ystandard-toolbox' ) }
+						id={'background-color'}
+						label={__('背景色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setBackgroundColor( color );
-							} }
-							value={ backgroundColor.color }
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setBackgroundColor(color);
+							}}
+							value={backgroundColor.color}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'border-type' }
-						label={ __( '枠線タイプ', 'ystandard-toolbox' ) }
+						id={'border-type'}
+						label={__('枠線タイプ', 'ystandard-toolbox')}
 					>
 						<div className="ystdtb__horizon-buttons">
-							{ faqBorderTypes.map( ( item ) => {
+							{faqBorderTypes.map((item) => {
 								return (
 									<Button
-										key={ item.name }
-										isSecondary={
-											borderType !==
-											item.name
-										}
-										isPrimary={
-											borderType ===
-											item.name
-										}
-										onClick={ () => {
-											setAttributes( {
+										key={item.name}
+										isSecondary={borderType !== item.name}
+										isPrimary={borderType === item.name}
+										onClick={() => {
+											setAttributes({
 												borderType: item.name,
-											} );
-											if ( '' === item.name ) {
-												setAttributes( { borderSize: 0 } );
-												setBorderColor( undefined );
+											});
+											if ('' === item.name) {
+												setAttributes({
+													borderSize: 0,
+												});
+												setBorderColor(undefined);
 											}
-										} }
+										}}
 									>
-										<span>{ item.label }</span>
+										<span>{item.label}</span>
 									</Button>
 								);
-							} ) }
+							})}
 						</div>
 					</BaseControl>
-					{ ( '' !== borderType &&
+					{'' !== borderType && (
 						<>
 							<BaseControl
-								id={ 'border-size' }
-								label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+								id={'border-size'}
+								label={__('枠線サイズ', 'ystandard-toolbox')}
 							>
 								<RangeControl
-									value={ undefined === borderSize ? 0 : borderSize }
-									onChange={ ( value ) =>
-										setAttributes( { borderSize: value } )
+									value={
+										undefined === borderSize
+											? 0
+											: borderSize
 									}
-									min={ 0 }
-									max={ 10 }
-									step={ 1 }
-									allowReset={ true }
+									onChange={(value) =>
+										setAttributes({ borderSize: value })
+									}
+									min={0}
+									max={10}
+									step={1}
+									allowReset={true}
 								/>
 							</BaseControl>
 							<BaseControl
-								id={ 'border-color' }
-								label={ __( '枠線の色', 'ystandard-toolbox' ) }
+								id={'border-color'}
+								label={__('枠線の色', 'ystandard-toolbox')}
 							>
 								<ColorPalette
-									colors={ colors }
-									disableCustomColors={ false }
-									onChange={ ( color ) => {
-										setBorderColor( color );
-									} }
-									value={ borderColor.color }
+									colors={colors}
+									disableCustomColors={false}
+									onChange={(color) => {
+										setBorderColor(color);
+									}}
+									value={borderColor.color}
 								/>
 							</BaseControl>
 						</>
-					) }
+					)}
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div className={ classnames( 'ystdtb-faq-wrap' ) }>
-				<div className={ faqClasses } style={ faqStyles }>
+			<Block.div className={classnames('ystdtb-faq-wrap')}>
+				<div className={faqClasses} style={faqStyles}>
 					<InnerBlocks
-						allowedBlocks={ [ 'ystdtb/faq-item' ] }
-						template={ template }
-						templateLock={ 'all' }
+						allowedBlocks={['ystdtb/faq-item']}
+						template={template}
+						templateLock={'all'}
 					/>
 				</div>
 			</Block.div>
@@ -169,9 +183,22 @@ function faq( props ) {
 	);
 }
 
-export default compose( [
-	withColors( {
+const faqEdit = withDispatch((dispatch, ownProps, registry) => ({
+	updateChildAttributes(attributes) {
+		const { clientId } = ownProps;
+		const { updateBlockAttributes } = dispatch('core/block-editor');
+		const { getBlockOrder } = registry.select('core/block-editor');
+		const innerBlockClientIds = getBlockOrder(clientId);
+		innerBlockClientIds.forEach((innerBlockClientId) => {
+			updateBlockAttributes(innerBlockClientId, attributes);
+		});
+	},
+}))(faq);
+
+export default compose([
+	withColors({
 		backgroundColor: 'backgroundColor',
 		borderColor: 'borderColor',
-	} ),
-] )( faq );
+		accordionArrowColor: 'color',
+	}),
+])(faqEdit);

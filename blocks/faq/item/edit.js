@@ -1,12 +1,11 @@
 import classnames from 'classnames';
-import { template, faqBorderTypes, designPreset, accordionOpenOption } from './config';
+import { template, faqBorderTypes, designPreset } from './config';
 import {
 	InnerBlocks,
 	InspectorControls,
 	withColors,
 	FontSizePicker,
 	withFontSizes,
-	getColorClassName,
 	__experimentalBlock as Block,
 } from '@wordpress/block-editor';
 import {
@@ -23,7 +22,7 @@ import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import { ChevronDown } from 'react-feather';
 
-function faqItem( props ) {
+function faqItem(props) {
 	const {
 		className,
 		attributes,
@@ -53,28 +52,25 @@ function faqItem( props ) {
 		accordionArrowColor,
 	} = attributes;
 
-	const { colors } = select( 'core/block-editor' ).getSettings();
+	const { colors } = select('core/block-editor').getSettings();
 
-	const itemClasses = classnames(
-		'ystdtb-faq-item', className,
-		{
-			[ `is-faq--${ faqType }` ]: faqType,
-			[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-			'has-background': faqBackgroundColor.color,
-		}
-	);
+	const itemClasses = classnames('ystdtb-faq-item', className, {
+		[`is-faq--${faqType}`]: faqType,
+		[`has-border-${faqBorderType}`]: '' !== faqBorderType,
+		'has-background': faqBackgroundColor.color,
+	});
 	const itemStyles = {
 		backgroundColor: faqBackgroundColor.color,
 		borderColor: faqBorderColor.color,
 		borderWidth: faqBorderSize,
 	};
 
-	const labelClasses = classnames(
-		'ystdtb-faq-item__label',
-		{
-			'has-padding': labelBackgroundColor.color || labelBorderColor.color || labelBorderSize,
-		}
-	);
+	const labelClasses = classnames('ystdtb-faq-item__label', {
+		'has-padding':
+			labelBackgroundColor.color ||
+			labelBorderColor.color ||
+			labelBorderSize,
+	});
 	const labelStyles = {
 		fontSize: labelSize.size,
 		fontWeight: labelBold ? undefined : 400,
@@ -85,344 +81,346 @@ function faqItem( props ) {
 		borderRadius: labelBorderRadius,
 	};
 
-	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );
+	const labelTextClasses = classnames('ystdtb-faq-item__label-text', {});
 
-	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {} );
+	const contentsClasses = classnames('ystdtb-faq-item__contents', {});
 
-	const accordionArrowColorClass = getColorClassName(
-		'color',
-		accordionArrowColor
-	);
-
-	const accordionArrowClass = classnames(
-		'ystdtb-faq-item__arrow',
-		{
-			[ accordionArrowColorClass ]: accordionArrowColorClass
-		}
-	);
-	const getAccordionArrowStyle = () => {
-		if ( ! accordionArrowColorClass && ! accordionArrowColor ) {
-			return {
-				color: 'currentColor',
-			}
-		}
-		if ( accordionArrowClass ) {
-			return {};
-		}
-		return {
-			color: accordionArrowColor,
-		}
-	};
+	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {});
 	const accordionArrowStyle = {
-		...getAccordionArrowStyle(),
+		color: accordionArrowColor,
 	};
 
 	return (
 		<Fragment>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
-					initialOpen={ false }
+					title={__('デザインサンプル', 'ystandard-toolbox')}
+					initialOpen={false}
 				>
 					<BaseControl
-						id={ 'sample-design' }
-						label={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
+						id={'sample-design'}
+						label={__('デザインサンプル', 'ystandard-toolbox')}
 					>
-						<div className={ 'ystdtb__preset-select-buttons' }>
-							{ designPreset.map( ( item ) => {
+						<div className={'ystdtb__preset-select-buttons'}>
+							{designPreset.map((item) => {
 								return (
 									<Button
-										key={ item.name }
-										isSecondary={ true }
-										onClick={ () => {
-											setAttributes( {
+										key={item.name}
+										isSecondary={true}
+										onClick={() => {
+											setAttributes({
 												...item.attributes,
 												...{
-													faqBackgroundColor: setFaqBackgroundColor( item.attributes.faqBackgroundColor ),
-													faqBorderColor: setFaqBorderColor( item.attributes.faqBorderColor ),
-													labelSize: setLabelSize( item.attributes.labelSize ),
-													labelColor: setLabelColor( item.attributes.labelColor ),
-													labelBackgroundColor: setLabelBackgroundColor( item.attributes.labelBackgroundColor ),
-													labelBorderColor: setLabelBorderColor( item.attributes.labelBorderColor ),
-													accordionArrowColor: item.attributes.labelColor,
-												}
-											} );
-										} }
+													faqBackgroundColor: setFaqBackgroundColor(
+														item.attributes
+															.faqBackgroundColor
+													),
+													faqBorderColor: setFaqBorderColor(
+														item.attributes
+															.faqBorderColor
+													),
+													labelSize: setLabelSize(
+														item.attributes
+															.labelSize
+													),
+													labelColor: setLabelColor(
+														item.attributes
+															.labelColor
+													),
+													labelBackgroundColor: setLabelBackgroundColor(
+														item.attributes
+															.labelBackgroundColor
+													),
+													labelBorderColor: setLabelBorderColor(
+														item.attributes
+															.labelBorderColor
+													),
+													accordionArrowColor:
+														item.attributes
+															.labelColor,
+												},
+											});
+										}}
 									>
-									<span
-										className={ 'is-flex' }
-										style={ {
-											width: '100%',
-											alignItems: 'center',
-											...item.itemStyles,
-										} }
-									>
-										<span style={ {
-											textTransform: 'uppercase',
-											marginRight: '1em',
-											...item.labelStyles,
-										} }>
-											{ faqType }
-										</span>
 										<span
-											style={ {
-												flexGrow: 1,
-												textAlign: 'left',
-												color: '#222222',
-											} }
+											className={'is-flex'}
+											style={{
+												width: '100%',
+												alignItems: 'center',
+												...item.itemStyles,
+											}}
 										>
-											FAQ FAQ FAQ...
+											<span
+												style={{
+													textTransform: 'uppercase',
+													marginRight: '1em',
+													...item.labelStyles,
+												}}
+											>
+												{faqType}
+											</span>
+											<span
+												style={{
+													flexGrow: 1,
+													textAlign: 'left',
+													color: '#222222',
+												}}
+											>
+												FAQ FAQ FAQ...
+											</span>
 										</span>
-									</span>
 									</Button>
 								);
-							} ) }
+							})}
 						</div>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody
-					title={ __( 'FAQラベル', 'ystandard-toolbox' ) }
-				>
+				<PanelBody title={__('FAQラベル', 'ystandard-toolbox')}>
 					<BaseControl
-						id={ 'label-size' }
-						label={ __( 'ラベルサイズ', 'ystandard-toolbox' ) }
+						id={'label-size'}
+						label={__('ラベルサイズ', 'ystandard-toolbox')}
 					>
 						<FontSizePicker
-							value={ labelSize.size }
-							onChange={ ( font ) => {
-								setLabelSize( font );
-							} }
+							value={labelSize.size}
+							onChange={(font) => {
+								setLabelSize(font);
+							}}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-contents-weight' }
-						label={ __( '文字の太さ', 'ystandard-toolbox' ) }
+						id={'label-contents-weight'}
+						label={__('文字の太さ', 'ystandard-toolbox')}
 					>
 						<ToggleControl
-							label={ __( '太字にする', 'ystandard-toolbox' ) }
-							onChange={ () => {
-								setAttributes( {
-									labelBold: ! labelBold,
-								} );
-							} }
-							checked={ labelBold }
+							label={__('太字にする', 'ystandard-toolbox')}
+							onChange={() => {
+								setAttributes({
+									labelBold: !labelBold,
+								});
+							}}
+							checked={labelBold}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-color' }
-						label={ __( '文字色', 'ystandard-toolbox' ) }
+						id={'label-color'}
+						label={__('文字色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setLabelColor( color );
-								setAttributes( {
-									accordionArrowColor: 'q' === faqType ? color : undefined,
-								} );
-							} }
-							value={ labelColor.color }
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setLabelColor(color);
+								setAttributes({
+									accordionArrowColor:
+										'q' === faqType ? color : undefined,
+								});
+							}}
+							value={labelColor.color}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-color' }
-						label={ __( '背景色', 'ystandard-toolbox' ) }
+						id={'label-color'}
+						label={__('背景色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setLabelBackgroundColor( color );
-							} }
-							value={ labelBackgroundColor.color }
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setLabelBackgroundColor(color);
+							}}
+							value={labelBackgroundColor.color}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-border-radius' }
-						label={ __( '角丸', 'ystandard-toolbox' ) }
+						id={'label-border-radius'}
+						label={__('角丸', 'ystandard-toolbox')}
 					>
 						<RangeControl
-							value={ undefined === labelBorderRadius ? 0 : labelBorderRadius }
-							onChange={ ( value ) =>
-								setAttributes( { labelBorderRadius: value } )
+							value={
+								undefined === labelBorderRadius
+									? 0
+									: labelBorderRadius
 							}
-							min={ 0 }
-							max={ 100 }
-							step={ 1 }
-							allowReset={ true }
+							onChange={(value) =>
+								setAttributes({ labelBorderRadius: value })
+							}
+							min={0}
+							max={100}
+							step={1}
+							allowReset={true}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-border-size' }
-						label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+						id={'label-border-size'}
+						label={__('枠線サイズ', 'ystandard-toolbox')}
 					>
 						<RangeControl
-							value={ undefined === labelBorderSize ? 0 : labelBorderSize }
-							onChange={ ( value ) =>
-								setAttributes( { labelBorderSize: value } )
+							value={
+								undefined === labelBorderSize
+									? 0
+									: labelBorderSize
 							}
-							min={ 0 }
-							max={ 10 }
-							step={ 1 }
-							allowReset={ true }
+							onChange={(value) =>
+								setAttributes({ labelBorderSize: value })
+							}
+							min={0}
+							max={10}
+							step={1}
+							allowReset={true}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-border-color' }
-						label={ __( '枠線の色', 'ystandard-toolbox' ) }
+						id={'label-border-color'}
+						label={__('枠線の色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setLabelBorderColor( color );
-							} }
-							value={ labelBorderColor.color }
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setLabelBorderColor(color);
+							}}
+							value={labelBorderColor.color}
 						/>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody
-					title={ __( 'FAQコンテンツ', 'ystandard-toolbox' ) }
-				>
+				<PanelBody title={__('FAQコンテンツ', 'ystandard-toolbox')}>
 					<BaseControl
-						id={ 'basic-background-color' }
-						label={ __( '項目の背景色', 'ystandard-toolbox' ) }
+						id={'basic-background-color'}
+						label={__('項目の背景色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setFaqBackgroundColor( color );
-							} }
-							value={ faqBackgroundColor.color }
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setFaqBackgroundColor(color);
+							}}
+							value={faqBackgroundColor.color}
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'basic-border-type' }
-						label={ __( '項目の枠線タイプ', 'ystandard-toolbox' ) }
+						id={'basic-border-type'}
+						label={__('項目の枠線タイプ', 'ystandard-toolbox')}
 					>
 						<div className="ystdtb__horizon-buttons">
-							{ faqBorderTypes.map( ( item ) => {
+							{faqBorderTypes.map((item) => {
 								return (
 									<Button
-										key={ item.name }
+										key={item.name}
 										isSecondary={
-											faqBorderType !==
-											item.name
+											faqBorderType !== item.name
 										}
-										isPrimary={
-											faqBorderType ===
-											item.name
-										}
-										onClick={ () => {
-											setAttributes( {
+										isPrimary={faqBorderType === item.name}
+										onClick={() => {
+											setAttributes({
 												faqBorderType: item.name,
-											} );
-											if ( '' !== item.name ) {
-												setAttributes( {
+											});
+											if ('' !== item.name) {
+												setAttributes({
 													faqBorderSize: 0,
-												} );
-												setFaqBorderColor( undefined );
+												});
+												setFaqBorderColor(undefined);
 											} else {
-												setAttributes( {
+												setAttributes({
 													faqBorderSize: 1,
-												} );
-												setFaqBorderColor( '#eeeeee' );
+												});
+												setFaqBorderColor('#eeeeee');
 											}
-										} }
+										}}
 									>
-										<span>{ item.label }</span>
+										<span>{item.label}</span>
 									</Button>
 								);
-							} ) }
+							})}
 						</div>
 					</BaseControl>
-					{ ( '' !== faqBorderType &&
+					{'' !== faqBorderType && (
 						<>
 							<BaseControl
-								id={ 'basic-border-size' }
-								label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+								id={'basic-border-size'}
+								label={__('枠線サイズ', 'ystandard-toolbox')}
 							>
 								<RangeControl
-									value={ undefined === faqBorderSize ? 0 : faqBorderSize }
-									onChange={ ( value ) =>
-										setAttributes( { faqBorderSize: value } )
+									value={
+										undefined === faqBorderSize
+											? 0
+											: faqBorderSize
 									}
-									min={ 0 }
-									max={ 10 }
-									step={ 1 }
-									allowReset={ true }
+									onChange={(value) =>
+										setAttributes({ faqBorderSize: value })
+									}
+									min={0}
+									max={10}
+									step={1}
+									allowReset={true}
 								/>
 							</BaseControl>
 							<BaseControl
-								id={ 'basic-border-color' }
-								label={ __( '枠線の色', 'ystandard-toolbox' ) }
+								id={'basic-border-color'}
+								label={__('枠線の色', 'ystandard-toolbox')}
 							>
 								<ColorPalette
-									colors={ colors }
-									disableCustomColors={ false }
-									onChange={ ( color ) => {
-										setFaqBorderColor( color );
-									} }
-									value={ faqBorderColor.color }
+									colors={colors}
+									disableCustomColors={false}
+									onChange={(color) => {
+										setFaqBorderColor(color);
+									}}
+									value={faqBorderColor.color}
 								/>
 							</BaseControl>
 						</>
-					) }
+					)}
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div className={
-				classnames(
-					'ystdtb-faq-item-wrap',
-					{
-						[ `is-faq--${ faqType }` ]: faqType,
-					}
-				)
-			}>
-				<div className={ itemClasses } style={ itemStyles }>
-					<div className={ labelClasses } style={ labelStyles }>
-						<span className={ labelTextClasses }>
-							{ faqType }
-						</span>
+			<Block.div
+				className={classnames('ystdtb-faq-item-wrap', {
+					[`is-faq--${faqType}`]: faqType,
+				})}
+			>
+				<div className={itemClasses} style={itemStyles}>
+					<div className={labelClasses} style={labelStyles}>
+						<span className={labelTextClasses}>{faqType}</span>
 					</div>
-					<div className={ contentsClasses }>
+					<div className={contentsClasses}>
 						<InnerBlocks
-							templateLock={ false }
-							template={ template }
+							templateLock={false}
+							template={template}
 							renderAppender={
 								hasChildBlocks
 									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender/>
+									: () => <InnerBlocks.ButtonBlockAppender />
 							}
 						/>
 					</div>
-					{ ( 'q' === faqType &&
-						<div className={ accordionArrowClass } style={ accordionArrowStyle }>
-							<ChevronDown/>
+					{'q' === faqType && (
+						<div
+							className={accordionArrowClass}
+							style={accordionArrowStyle}
+						>
+							<ChevronDown />
 						</div>
-					) }
+					)}
 				</div>
 			</Block.div>
 		</Fragment>
 	);
 }
 
-export default compose( [
-	withColors( {
+export default compose([
+	withColors({
 		faqBackgroundColor: 'backgroundColor',
 		faqBorderColor: 'borderColor',
 		labelColor: 'color',
 		labelBackgroundColor: 'backgroundColor',
 		labelBorderColor: 'borderColor',
-	} ),
-	withFontSizes( 'labelSize' ),
-	withSelect( ( ownSelect, ownProps ) => {
+	}),
+	withFontSizes('labelSize'),
+	withSelect((ownSelect, ownProps) => {
 		const { clientId } = ownProps;
-		const { getBlockOrder } = ownSelect( 'core/block-editor' );
+		const { getBlockOrder } = ownSelect('core/block-editor');
 
 		return {
-			hasChildBlocks: getBlockOrder( clientId ).length > 0,
+			hasChildBlocks: getBlockOrder(clientId).length > 0,
 		};
-	} ),
-] )( faqItem );
+	}),
+])(faqItem);

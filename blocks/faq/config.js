@@ -25,6 +25,12 @@ export const attributes = {
 	customBorderColor: {
 		type: 'string',
 	},
+	accordionArrowColor: {
+		type: 'string',
+	},
+	customAccordionArrowColor: {
+		type: 'string',
+	},
 };
 
 export const supports = {
@@ -33,11 +39,10 @@ export const supports = {
 	lightBlockWrapper: true,
 };
 
-
 export const faqBorderTypes = [
-	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
-	{ label: __( '上下左右', 'ystandard-toolbox' ), name: 'all' },
-	{ label: __( '下のみ', 'ystandard-toolbox' ), name: 'bottom' },
+	{ label: __('なし', 'ystandard-toolbox'), name: '' },
+	{ label: __('上下左右', 'ystandard-toolbox'), name: 'all' },
+	{ label: __('下のみ', 'ystandard-toolbox'), name: 'bottom' },
 ];
 
 export const template = [
@@ -45,12 +50,12 @@ export const template = [
 		'ystdtb/faq-item',
 		{
 			faqType: 'q',
-		}
+		},
 	],
 	[
 		'ystdtb/faq-item',
 		{
 			faqType: 'a',
-		}
+		},
 	],
 ];

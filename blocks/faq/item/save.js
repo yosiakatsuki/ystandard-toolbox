@@ -4,9 +4,10 @@ import {
 	getColorClassName,
 	getFontSizeClass,
 } from '@wordpress/block-editor';
-import SVGIcon from "../../../src/js/blocks/component/svg-icon";
+import SVGIcon from '../../../src/js/blocks/component/svg-icon';
+import { getColorSlug } from '../../../src/js/blocks/function/_getColorSlug';
 
-export default function ( { attributes } ) {
+export default function({ attributes }) {
 	const {
 		className,
 		faqType,
@@ -38,10 +39,7 @@ export default function ( { attributes } ) {
 		'border-color',
 		faqBorderColor
 	);
-	const labelColorClass = getColorClassName(
-		'color',
-		labelColor
-	);
+	const labelColorClass = getColorClassName('color', labelColor);
 	const labelBackgroundColorClass = getColorClassName(
 		'background-color',
 		labelBackgroundColor
@@ -51,38 +49,39 @@ export default function ( { attributes } ) {
 		labelBorderColor
 	);
 
-	const labelSizeClass = getFontSizeClass( labelSize );
+	const labelSizeClass = getFontSizeClass(labelSize);
 
-	const itemClasses = classnames(
-		'ystdtb-faq-item', className,
-		{
-			[ `is-faq--${ faqType }` ]: faqType,
-			[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-			'has-background': faqBackgroundColor || customFaqBackgroundColor,
-			[ faqBackgroundColorClass ]: faqBackgroundColorClass,
-			'has-border': faqBorderColor || customFaqBorderColor,
-			[ faqBorderColorClass ]: faqBorderColorClass,
-		}
-	);
+	const itemClasses = classnames('ystdtb-faq-item', className, {
+		[`is-faq--${faqType}`]: faqType,
+		[`has-border-${faqBorderType}`]: '' !== faqBorderType,
+		'has-background': faqBackgroundColor || customFaqBackgroundColor,
+		[faqBackgroundColorClass]: faqBackgroundColorClass,
+		'has-border': faqBorderColor || customFaqBorderColor,
+		[faqBorderColorClass]: faqBorderColorClass,
+	});
 	const itemStyles = {
-		backgroundColor: faqBackgroundColorClass ? undefined : customFaqBackgroundColor,
+		backgroundColor: faqBackgroundColorClass
+			? undefined
+			: customFaqBackgroundColor,
 		borderColor: faqBorderColorClass ? undefined : customFaqBorderColor,
 		borderWidth: 0 === faqBorderSize ? undefined : faqBorderSize + 'px',
 	};
 
-	const labelClasses = classnames(
-		'ystdtb-faq-item__label',
-		{
-			[ labelSizeClass ]: labelSizeClass,
-			'has-text-color': labelColor || customLabelColor,
-			[ labelColorClass ]: labelColorClass,
-			'has-background': labelBackgroundColor || customLabelBackgroundColor,
-			[ labelBackgroundColorClass ]: labelBackgroundColorClass,
-			'has-border': labelBorderColor || customLabelBorderColor,
-			[ labelBorderColorClass ]: labelBorderColorClass,
-			'has-padding': labelBackgroundColor || customLabelBackgroundColor || labelBorderColor || customLabelBorderColor || labelBorderSize,
-		}
-	);
+	const labelClasses = classnames('ystdtb-faq-item__label', {
+		[labelSizeClass]: labelSizeClass,
+		'has-text-color': labelColor || customLabelColor,
+		[labelColorClass]: labelColorClass,
+		'has-background': labelBackgroundColor || customLabelBackgroundColor,
+		[labelBackgroundColorClass]: labelBackgroundColorClass,
+		'has-border': labelBorderColor || customLabelBorderColor,
+		[labelBorderColorClass]: labelBorderColorClass,
+		'has-padding':
+			labelBackgroundColor ||
+			customLabelBackgroundColor ||
+			labelBorderColor ||
+			customLabelBorderColor ||
+			labelBorderSize,
+	});
 	const labelStyles = {
 		fontSize: labelSizeClass ? undefined : customLabelSize,
 		color: labelColorClass ? undefined : customLabelColor,
@@ -92,60 +91,46 @@ export default function ( { attributes } ) {
 			: customLabelBackgroundColor,
 		borderColor: labelBorderColorClass ? undefined : customLabelBorderColor,
 		borderWidth: 0 === labelBorderSize ? undefined : labelBorderSize + 'px',
-		borderRadius: 0 === labelBorderRadius ? undefined : labelBorderRadius + 'px',
+		borderRadius:
+			0 === labelBorderRadius ? undefined : labelBorderRadius + 'px',
 	};
 
-	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );
+	const labelTextClasses = classnames('ystdtb-faq-item__label-text', {});
 
-	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {} );
+	const contentsClasses = classnames('ystdtb-faq-item__contents', {});
 
 	const accordionArrowColorClass = getColorClassName(
 		'color',
-		accordionArrowColor
+		getColorSlug(accordionArrowColor)
 	);
-	const accordionArrowClass = classnames(
-		'ystdtb-faq-item__arrow',
-		{
-			[ accordionArrowColorClass ]: accordionArrowColorClass
-		}
-	);
-	const getAccordionArrowStyle = () => {
-		if ( ! accordionArrowColorClass && ! accordionArrowColor ) {
-			return {
-				color: 'currentColor',
-			}
-		}
-		if ( accordionArrowClass ) {
-			return {};
-		}
-		return {
-			color: accordionArrowColor,
-		}
-	};
+	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {
+		'has-text-color': accordionArrowColorClass || accordionArrowColor,
+		[accordionArrowColorClass]: accordionArrowColorClass,
+	});
 	const accordionArrowStyle = {
-		...getAccordionArrowStyle(),
+		color: accordionArrowColorClass ? undefined : accordionArrowColor,
 	};
-
 
 	return (
 		<div
-			className={ itemClasses }
-			style={ itemStyles }
-			data-arrow-color={ 'q' === faqType ? accordionArrowColor : undefined }
+			className={itemClasses}
+			style={itemStyles}
+			data-arrow-color={'q' === faqType ? accordionArrowColor : undefined}
 		>
-			<div className={ labelClasses } style={ labelStyles }>
-				<span className={ labelTextClasses }>
-					{ faqType }
-				</span>
+			<div className={labelClasses} style={labelStyles}>
+				<span className={labelTextClasses}>{faqType}</span>
 			</div>
-			<div className={ contentsClasses }>
-				<InnerBlocks.Content/>
+			<div className={contentsClasses}>
+				<InnerBlocks.Content />
 			</div>
-			{ ( 'q' === faqType &&
-				<div className={ accordionArrowClass } style={ accordionArrowStyle }>
-					<SVGIcon name={ 'chevron-down' }/>
+			{'q' === faqType && (
+				<div
+					className={accordionArrowClass}
+					style={accordionArrowStyle}
+				>
+					<SVGIcon name={'chevron-down'} />
 				</div>
-			) }
+			)}
 		</div>
 	);
 }
