@@ -90,7 +90,7 @@
 /*!***********************************!*\
   !*** ./blocks/faq/item/config.js ***!
   \***********************************/
-/*! exports provided: attributes, supports, faqBorderTypes, template, designPreset */
+/*! exports provided: attributes, supports, faqBorderTypes, template, accordionOpenOption, designPreset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,6 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supports", function() { return supports; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faqBorderTypes", function() { return faqBorderTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "template", function() { return template; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "accordionOpenOption", function() { return accordionOpenOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "designPreset", function() { return designPreset; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
@@ -107,6 +108,14 @@ var attributes = {
   faqType: {
     type: 'string',
     default: 'q'
+  },
+  isAccordion: {
+    type: 'bool',
+    default: false
+  },
+  accordionState: {
+    type: 'string',
+    default: 'open'
   },
   faqBackgroundColor: {
     type: 'string'
@@ -181,6 +190,13 @@ var faqBorderTypes = [{
 var template = [['core/paragraph', {
   placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Q&A項目…', 'ystandard-toolbox')
 }]];
+var accordionOpenOption = [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('閉じる', 'ystandard-toolbox'),
+  name: 'close'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('開く', 'ystandard-toolbox'),
+  name: 'open'
+}];
 var designPreset = [{
   name: 'default',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('デフォルト', 'ystandard-toolbox'),
@@ -414,6 +430,8 @@ function faqItem(props) {
       labelBorderColor = props.labelBorderColor,
       setLabelBorderColor = props.setLabelBorderColor;
   var faqType = attributes.faqType,
+      isAccordion = attributes.isAccordion,
+      accordionState = attributes.accordionState,
       faqBorderType = attributes.faqBorderType,
       faqBorderSize = attributes.faqBorderSize,
       labelBold = attributes.labelBold,
@@ -483,6 +501,33 @@ function faqItem(props) {
         color: '#222222'
       }
     }, "FAQ FAQ FAQ...")));
+  })))), 'q' === faqType && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('開閉設定', 'ystandard-toolbox'),
+    initialOpen: false
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('開閉式にする', 'ystandard-toolbox'),
+    onChange: function onChange() {
+      updateChildAttributes({
+        isAccordion: !isAccordion
+      });
+    },
+    checked: isAccordion
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'accordion-state',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('初期状態', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "ystdtb__horizon-buttons"
+  }, _config__WEBPACK_IMPORTED_MODULE_3__["accordionOpenOption"].map(function (item) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      key: item.name,
+      isSecondary: accordionState !== item.name,
+      isPrimary: accordionState === item.name,
+      onClick: function onClick() {
+        setAttributes({
+          accordionState: item.name
+        });
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", null, item.label));
   })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('FAQラベル', 'ystandard-toolbox')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
@@ -500,9 +545,6 @@ function faqItem(props) {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('太字にする', 'ystandard-toolbox'),
     onChange: function onChange() {
       updateChildAttributes({
-        labelBold: !labelBold
-      });
-      setState({
         labelBold: !labelBold
       });
     },

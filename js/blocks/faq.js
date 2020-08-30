@@ -90,25 +90,38 @@
 /*!******************************!*\
   !*** ./blocks/faq/config.js ***!
   \******************************/
-/*! exports provided: attributes, supports, template */
+/*! exports provided: attributes, supports, faqBorderTypes, template */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attributes", function() { return attributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supports", function() { return supports; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faqBorderTypes", function() { return faqBorderTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "template", function() { return template; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 
 var attributes = {
-  isAccordion: {
-    type: 'bool',
-    default: false
+  backgroundColor: {
+    type: 'string'
   },
-  isAccordionOpen: {
-    type: 'bool',
-    default: true
+  customBackgroundColor: {
+    type: 'string'
+  },
+  borderType: {
+    type: 'string',
+    default: ''
+  },
+  borderSize: {
+    type: 'number',
+    default: 0
+  },
+  borderColor: {
+    type: 'string'
+  },
+  customBorderColor: {
+    type: 'string'
   }
 };
 var supports = {
@@ -116,6 +129,16 @@ var supports = {
   className: false,
   lightBlockWrapper: true
 };
+var faqBorderTypes = [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('なし', 'ystandard-toolbox'),
+  name: ''
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('上下左右', 'ystandard-toolbox'),
+  name: 'all'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('下のみ', 'ystandard-toolbox'),
+  name: 'bottom'
+}];
 var template = [['ystdtb/faq-item', {
   faqType: 'q'
 }], ['ystdtb/faq-item', {
@@ -133,24 +156,23 @@ var template = [['ystdtb/faq-item', {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config */ "./blocks/faq/config.js");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _src_js_blocks_function_getColorSlug__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/js/blocks/function/_getColorSlug */ "./src/js/blocks/function/_getColorSlug.js");
-/* harmony import */ var _src_js_blocks_function_getFontSlug__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../src/js/blocks/function/_getFontSlug */ "./src/js/blocks/function/_getFontSlug.js");
-
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./config */ "./blocks/faq/config.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -164,44 +186,102 @@ __webpack_require__.r(__webpack_exports__);
 
 function faq(props) {
   var className = props.className,
-      setState = props.setState;
+      attributes = props.attributes,
+      setAttributes = props.setAttributes,
+      backgroundColor = props.backgroundColor,
+      setBackgroundColor = props.setBackgroundColor,
+      borderColor = props.borderColor,
+      setBorderColor = props.setBorderColor;
+  var borderType = attributes.borderType,
+      borderSize = attributes.borderSize;
 
-  var _select$getSettings = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_6__["select"])('core/block-editor').getSettings(),
+  var _select$getSettings = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["select"])('core/block-editor').getSettings(),
       colors = _select$getSettings.colors;
 
-  var classes = classnames__WEBPACK_IMPORTED_MODULE_1___default()('ystdtb-faq', className, {});
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], {
-    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('FAQ一括設定', 'ystandard-toolbox')
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["__experimentalBlock"].div, {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ystdtb-faq-wrap')
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: classes
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"], {
+  var faqClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('ystdtb-faq', className, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+    'has-padding': 'all' === borderType || backgroundColor.color
+  }, "border-type--".concat(borderType), '' !== borderType));
+  var faqStyles = {
+    backgroundColor: backgroundColor.color,
+    borderColor: borderColor.color,
+    borderWidth: 'all' === borderType ? borderSize : undefined,
+    borderBottomWidth: 'bottom' === borderType ? borderSize : undefined
+  };
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('FAQ', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'background-color',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('背景色', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["ColorPalette"], {
+    colors: colors,
+    disableCustomColors: false,
+    onChange: function onChange(color) {
+      setBackgroundColor(color);
+    },
+    value: backgroundColor.color
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'border-type',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('枠線タイプ', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "ystdtb__horizon-buttons"
+  }, _config__WEBPACK_IMPORTED_MODULE_3__["faqBorderTypes"].map(function (item) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      key: item.name,
+      isSecondary: borderType !== item.name,
+      isPrimary: borderType === item.name,
+      onClick: function onClick() {
+        setAttributes({
+          borderType: item.name
+        });
+
+        if ('' === item.name) {
+          setAttributes({
+            borderSize: 0
+          });
+          setBorderColor(undefined);
+        }
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", null, item.label));
+  }))), '' !== borderType && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'border-size',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('枠線サイズ', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["RangeControl"], {
+    value: undefined === borderSize ? 0 : borderSize,
+    onChange: function onChange(value) {
+      return setAttributes({
+        borderSize: value
+      });
+    },
+    min: 0,
+    max: 10,
+    step: 1,
+    allowReset: true
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'border-color',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('枠線の色', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["ColorPalette"], {
+    colors: colors,
+    disableCustomColors: false,
+    onChange: function onChange(color) {
+      setBorderColor(color);
+    },
+    value: borderColor.color
+  }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["__experimentalBlock"].div, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ystdtb-faq-wrap')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: faqClasses,
+    style: faqStyles
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
     allowedBlocks: ['ystdtb/faq-item'],
-    template: _config__WEBPACK_IMPORTED_MODULE_2__["template"],
+    template: _config__WEBPACK_IMPORTED_MODULE_3__["template"],
     templateLock: 'all'
   }))));
 }
 
-var faqEdit = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_6__["withDispatch"])(function (dispatch, ownProps, registry) {
-  return {
-    updateChildAttributes: function updateChildAttributes(attributes) {
-      var clientId = ownProps.clientId;
-
-      var _dispatch = dispatch('core/block-editor'),
-          updateBlockAttributes = _dispatch.updateBlockAttributes;
-
-      var _registry$select = registry.select('core/block-editor'),
-          getBlockOrder = _registry$select.getBlockOrder;
-
-      var innerBlockClientIds = getBlockOrder(clientId);
-      innerBlockClientIds.forEach(function (innerBlockClientId) {
-        updateBlockAttributes(innerBlockClientId, attributes);
-      });
-    }
-  };
-})(faq);
-/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__["compose"])([Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__["withState"])({})])(faqEdit));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_6__["compose"])([Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["withColors"])({
+  backgroundColor: 'backgroundColor',
+  borderColor: 'borderColor'
+})])(faq));
 
 /***/ }),
 
@@ -261,23 +341,72 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_6__["registerBlockType"])('yst
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var _classnames;
+
   var attributes = _ref.attributes;
-  var className = attributes.className;
-  var classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('ystdtb-faq', className, {});
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: classes
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null));
+  var className = attributes.className,
+      borderType = attributes.borderType,
+      borderSize = attributes.borderSize,
+      backgroundColor = attributes.backgroundColor,
+      customBackgroundColor = attributes.customBackgroundColor,
+      borderColor = attributes.borderColor,
+      customBorderColor = attributes.customBorderColor;
+  var backgroundColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["getColorClassName"])('background-color', backgroundColor);
+  var borderColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["getColorClassName"])('border-color', borderColor);
+  var faqClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('ystdtb-faq', className, (_classnames = {
+    'has-padding': 'all' === borderType || backgroundColor,
+    'has-background': backgroundColor || customBackgroundColor
+  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, backgroundColorClass, backgroundColorClass), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'has-border', borderSize || borderColor || customBorderColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, borderColorClass, borderColorClass), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "border-type--".concat(borderType), '' !== borderType), _classnames));
+  var faqStyle = {
+    backgroundColor: backgroundColorClass ? undefined : customBackgroundColor,
+    borderColor: borderColorClass ? undefined : customBorderColor,
+    borderBottomWidth: 'bottom' === borderType || 'all' === borderType ? borderSize : undefined,
+    borderWidth: 'all' === borderType ? borderSize : undefined
+  };
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: faqClasses,
+    style: faqStyle
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"].Content, null));
 });
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
 
 /***/ }),
 
@@ -19756,86 +19885,6 @@ var ystdtbConfig = {
     iconDeprecatedForeground: '#be4141'
   }
 };
-
-/***/ }),
-
-/***/ "./src/js/blocks/function/_getColorSlug.js":
-/*!*************************************************!*\
-  !*** ./src/js/blocks/function/_getColorSlug.js ***!
-  \*************************************************/
-/*! exports provided: getColorSlug, getColorCode */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getColorSlug", function() { return getColorSlug; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getColorCode", function() { return getColorCode; });
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-
-function getColorSlug(color) {
-  var _select$getSettings = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/block-editor').getSettings(),
-      colors = _select$getSettings.colors;
-
-  var selected = colors.filter(function (data) {
-    return data.color === color;
-  });
-
-  if (0 < selected.length) {
-    return selected[0].slug;
-  }
-
-  return undefined;
-}
-function getColorCode(color) {
-  var colorClass = getColorSlug(color);
-
-  if (undefined !== colorClass) {
-    return undefined;
-  }
-
-  return color;
-}
-
-/***/ }),
-
-/***/ "./src/js/blocks/function/_getFontSlug.js":
-/*!************************************************!*\
-  !*** ./src/js/blocks/function/_getFontSlug.js ***!
-  \************************************************/
-/*! exports provided: getFontSlug, getFontSize */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFontSlug", function() { return getFontSlug; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFontSize", function() { return getFontSize; });
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-
-function getFontSlug(size) {
-  var _select$getSettings = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/block-editor').getSettings(),
-      fontSizes = _select$getSettings.fontSizes;
-
-  var selected = fontSizes.filter(function (data) {
-    return data.size === size;
-  });
-
-  if (0 < selected.length) {
-    return selected[0].slug;
-  }
-
-  return undefined;
-}
-function getFontSize(size) {
-  var sizeClass = getFontSlug(size);
-
-  if (undefined !== sizeClass) {
-    return undefined;
-  }
-
-  return size;
-}
 
 /***/ }),
 

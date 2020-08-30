@@ -1,16 +1,28 @@
 @use "../../src/sass/global";
 
 .ystdtb-faq {
+  border: 0;
+  
   & + .ystdtb-faq {
     margin-top: 0;
   }
 
-  &.has-border {
-
+  &.has-padding {
     .ystdtb-faq-item {
       padding-right: 1.5em;
       padding-left: 1.5em;
     }
+  }
+
+  &.border-type--all {
+    border-style: solid;
+
+    & + .ystdtb-faq {
+      border-top: 0;
+    }
+  }
+  &.border-type--bottom {
+    border-bottom-style: solid;
   }
 }
 

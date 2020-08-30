@@ -5,6 +5,14 @@ export const attributes = {
 		type: 'string',
 		default: 'q',
 	},
+	isAccordion: {
+		type: 'bool',
+		default: false,
+	},
+	accordionState: {
+		type: 'string',
+		default: 'open',
+	},
 	faqBackgroundColor: {
 		type: 'string',
 	},
@@ -82,6 +90,12 @@ export const template = [
 		{ placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) },
 	],
 ];
+
+export const accordionOpenOption = [
+	{ label: __( '閉じる', 'ystandard-toolbox' ), name: 'close' },
+	{ label: __( '開く', 'ystandard-toolbox' ), name: 'open' },
+];
+
 
 export const designPreset = [
 	{

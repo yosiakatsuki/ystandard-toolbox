@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { template, faqBorderTypes, designPreset } from './config';
+import { template, faqBorderTypes, designPreset, accordionOpenOption } from './config';
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -43,6 +43,8 @@ function faqItem( props ) {
 
 	const {
 		faqType,
+		isAccordion,
+		accordionState,
 		faqBorderType,
 		faqBorderSize,
 		labelBold,
@@ -148,6 +150,53 @@ function faqItem( props ) {
 						</div>
 					</BaseControl>
 				</PanelBody>
+				{ ( 'q' === faqType &&
+					<PanelBody
+						title={ __( '開閉設定', 'ystandard-toolbox' ) }
+						initialOpen={ false }
+					>
+						<BaseControl>
+							<ToggleControl
+								label={ __( '開閉式にする', 'ystandard-toolbox' ) }
+								onChange={ () => {
+									updateChildAttributes( {
+										isAccordion: ! isAccordion,
+									} );
+								} }
+								checked={ isAccordion }
+							/>
+						</BaseControl>
+						<BaseControl
+							id={ 'accordion-state' }
+							label={ __( '初期状態', 'ystandard-toolbox' ) }
+						>
+							<div className="ystdtb__horizon-buttons">
+								{ accordionOpenOption.map( ( item ) => {
+									return (
+										<Button
+											key={ item.name }
+											isSecondary={
+												accordionState !==
+												item.name
+											}
+											isPrimary={
+												accordionState ===
+												item.name
+											}
+											onClick={ () => {
+												setAttributes( {
+													accordionState: item.name,
+												} );
+											} }
+										>
+											<span>{ item.label }</span>
+										</Button>
+									);
+								} ) }
+							</div>
+						</BaseControl>
+					</PanelBody>
+				) }
 				<PanelBody
 					title={ __( 'FAQラベル', 'ystandard-toolbox' ) }
 				>
@@ -170,9 +219,6 @@ function faqItem( props ) {
 							label={ __( '太字にする', 'ystandard-toolbox' ) }
 							onChange={ () => {
 								updateChildAttributes( {
-									labelBold: ! labelBold,
-								} );
-								setState( {
 									labelBold: ! labelBold,
 								} );
 							} }

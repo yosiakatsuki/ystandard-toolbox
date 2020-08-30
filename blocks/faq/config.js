@@ -1,13 +1,25 @@
 import { __ } from '@wordpress/i18n';
 
 export const attributes = {
-	isAccordion: {
-		type: 'bool',
-		default: false,
+	backgroundColor: {
+		type: 'string',
 	},
-	isAccordionOpen: {
-		type: 'bool',
-		default: true,
+	customBackgroundColor: {
+		type: 'string',
+	},
+	borderType: {
+		type: 'string',
+		default: '',
+	},
+	borderSize: {
+		type: 'number',
+		default: 0,
+	},
+	borderColor: {
+		type: 'string',
+	},
+	customBorderColor: {
+		type: 'string',
 	},
 };
 
@@ -16,6 +28,13 @@ export const supports = {
 	className: false,
 	lightBlockWrapper: true,
 };
+
+
+export const faqBorderTypes = [
+	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
+	{ label: __( '上下左右', 'ystandard-toolbox' ), name: 'all' },
+	{ label: __( '下のみ', 'ystandard-toolbox' ), name: 'bottom' },
+];
 
 export const template = [
 	[

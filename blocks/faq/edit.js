@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import { template } from './config';
+import { template, faqBorderTypes } from './config';
 import {
 	InnerBlocks,
 	InspectorControls,
-	FontSizePicker,
+	withColors,
 	__experimentalBlock as Block,
 } from '@wordpress/block-editor';
 import {
@@ -11,44 +11,137 @@ import {
 	BaseControl,
 	RangeControl,
 	Button,
-	ToggleControl,
 	ColorPalette,
 } from '@wordpress/components';
-import { withState, compose } from '@wordpress/compose';
+import { compose } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
-import { withDispatch, select } from '@wordpress/data';
+import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import {
-	getColorSlug,
-	getColorCode,
-} from '../../src/js/blocks/function/_getColorSlug';
-import {
-	getFontSize,
-	getFontSlug,
-} from '../../src/js/blocks/function/_getFontSlug';
 
 function faq( props ) {
 	const {
 		className,
-		setState,
+		attributes,
+		setAttributes,
+		backgroundColor,
+		setBackgroundColor,
+		borderColor,
+		setBorderColor,
 	} = props;
+
+	const {
+		borderType,
+		borderSize,
+	} = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 
-	const classes = classnames( 'ystdtb-faq', className, {} );
+	const faqClasses = classnames(
+		'ystdtb-faq',
+		className,
+		{
+			'has-padding': 'all' === borderType || backgroundColor.color,
+			[ `border-type--${ borderType }` ]: '' !== borderType,
+		}
+	);
+
+	const faqStyles = {
+		backgroundColor: backgroundColor.color,
+		borderColor: borderColor.color,
+		borderWidth: 'all' === borderType ? borderSize : undefined,
+		borderBottomWidth: 'bottom' === borderType ? borderSize : undefined,
+
+	};
 
 	return (
 		<Fragment>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'FAQ一括設定', 'ystandard-toolbox' ) }
+					title={ __( 'FAQ', 'ystandard-toolbox' ) }
 				>
-
+					<BaseControl
+						id={ 'background-color' }
+						label={ __( '背景色', 'ystandard-toolbox' ) }
+					>
+						<ColorPalette
+							colors={ colors }
+							disableCustomColors={ false }
+							onChange={ ( color ) => {
+								setBackgroundColor( color );
+							} }
+							value={ backgroundColor.color }
+						/>
+					</BaseControl>
+					<BaseControl
+						id={ 'border-type' }
+						label={ __( '枠線タイプ', 'ystandard-toolbox' ) }
+					>
+						<div className="ystdtb__horizon-buttons">
+							{ faqBorderTypes.map( ( item ) => {
+								return (
+									<Button
+										key={ item.name }
+										isSecondary={
+											borderType !==
+											item.name
+										}
+										isPrimary={
+											borderType ===
+											item.name
+										}
+										onClick={ () => {
+											setAttributes( {
+												borderType: item.name,
+											} );
+											if ( '' === item.name ) {
+												setAttributes( { borderSize: 0 } );
+												setBorderColor( undefined );
+											}
+										} }
+									>
+										<span>{ item.label }</span>
+									</Button>
+								);
+							} ) }
+						</div>
+					</BaseControl>
+					{ ( '' !== borderType &&
+						<>
+							<BaseControl
+								id={ 'border-size' }
+								label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+							>
+								<RangeControl
+									value={ undefined === borderSize ? 0 : borderSize }
+									onChange={ ( value ) =>
+										setAttributes( { borderSize: value } )
+									}
+									min={ 0 }
+									max={ 10 }
+									step={ 1 }
+									allowReset={ true }
+								/>
+							</BaseControl>
+							<BaseControl
+								id={ 'border-color' }
+								label={ __( '枠線の色', 'ystandard-toolbox' ) }
+							>
+								<ColorPalette
+									colors={ colors }
+									disableCustomColors={ false }
+									onChange={ ( color ) => {
+										setBorderColor( color );
+									} }
+									value={ borderColor.color }
+								/>
+							</BaseControl>
+						</>
+					) }
 				</PanelBody>
 			</InspectorControls>
 
 			<Block.div className={ classnames( 'ystdtb-faq-wrap' ) }>
-				<div className={ classes }>
+				<div className={ faqClasses } style={ faqStyles }>
 					<InnerBlocks
 						allowedBlocks={ [ 'ystdtb/faq-item' ] }
 						template={ template }
@@ -60,18 +153,9 @@ function faq( props ) {
 	);
 }
 
-const faqEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
-	updateChildAttributes( attributes ) {
-		const { clientId } = ownProps;
-		const { updateBlockAttributes } = dispatch( 'core/block-editor' );
-		const { getBlockOrder } = registry.select( 'core/block-editor' );
-		const innerBlockClientIds = getBlockOrder( clientId );
-		innerBlockClientIds.forEach( ( innerBlockClientId ) => {
-			updateBlockAttributes( innerBlockClientId, attributes );
-		} );
-	},
-} ) )( faq );
-
 export default compose( [
-	withState( {} ),
-] )( faqEdit );
+	withColors( {
+		backgroundColor: 'backgroundColor',
+		borderColor: 'borderColor',
+	} ),
+] )( faq );
