@@ -4,6 +4,7 @@ import {
 	getColorClassName,
 	getFontSizeClass,
 } from '@wordpress/block-editor';
+import SVGIcon from "../../../src/js/blocks/component/svg-icon";
 
 export default function ( { attributes } ) {
 	const {
@@ -26,6 +27,7 @@ export default function ( { attributes } ) {
 		customLabelBackgroundColor,
 		labelBorderColor,
 		customLabelBorderColor,
+		accordionArrowColor,
 	} = attributes;
 
 	const faqBackgroundColorClass = getColorClassName(
@@ -97,17 +99,53 @@ export default function ( { attributes } ) {
 
 	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {} );
 
+	const accordionArrowColorClass = getColorClassName(
+		'color',
+		accordionArrowColor
+	);
+	const accordionArrowClass = classnames(
+		'ystdtb-faq-item__arrow',
+		{
+			[ accordionArrowColorClass ]: accordionArrowColorClass
+		}
+	);
+	const getAccordionArrowStyle = () => {
+		if ( ! accordionArrowColorClass && ! accordionArrowColor ) {
+			return {
+				color: 'currentColor',
+			}
+		}
+		if ( accordionArrowClass ) {
+			return {};
+		}
+		return {
+			color: accordionArrowColor,
+		}
+	};
+	const accordionArrowStyle = {
+		...getAccordionArrowStyle(),
+	};
+
 
 	return (
-		<dl className={ itemClasses } style={ itemStyles }>
-			<dt className={ labelClasses } style={ labelStyles }>
+		<div
+			className={ itemClasses }
+			style={ itemStyles }
+			data-arrow-color={ 'q' === faqType ? accordionArrowColor : undefined }
+		>
+			<div className={ labelClasses } style={ labelStyles }>
 				<span className={ labelTextClasses }>
 					{ faqType }
 				</span>
-			</dt>
-			<dd className={ contentsClasses }>
+			</div>
+			<div className={ contentsClasses }>
 				<InnerBlocks.Content/>
-			</dd>
-		</dl>
+			</div>
+			{ ( 'q' === faqType &&
+				<div className={ accordionArrowClass } style={ accordionArrowStyle }>
+					<SVGIcon name={ 'chevron-down' }/>
+				</div>
+			) }
+		</div>
 	);
 }

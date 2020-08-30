@@ -7,6 +7,7 @@ import classnames from 'classnames';
 export default function ( { attributes } ) {
 	const {
 		className,
+		isAccordion,
 		borderType,
 		borderSize,
 		backgroundColor,
@@ -28,6 +29,7 @@ export default function ( { attributes } ) {
 		'ystdtb-faq',
 		className,
 		{
+			'is-accordion': isAccordion,
 			'has-padding': 'all' === borderType || backgroundColor,
 			'has-background': backgroundColor || customBackgroundColor,
 			[ backgroundColorClass ]: backgroundColorClass,

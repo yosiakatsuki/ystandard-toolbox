@@ -11,6 +11,7 @@ import {
 	BaseControl,
 	RangeControl,
 	Button,
+	ToggleControl,
 	ColorPalette,
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
@@ -30,6 +31,7 @@ function faq( props ) {
 	} = props;
 
 	const {
+		isAccordion,
 		borderType,
 		borderSize,
 	} = attributes;
@@ -42,15 +44,15 @@ function faq( props ) {
 		{
 			'has-padding': 'all' === borderType || backgroundColor.color,
 			[ `border-type--${ borderType }` ]: '' !== borderType,
+			'is-accordion': isAccordion,
 		}
 	);
 
 	const faqStyles = {
 		backgroundColor: backgroundColor.color,
 		borderColor: borderColor.color,
+		borderBottomWidth: 'bottom' === borderType || 'all' === borderType ? borderSize : undefined,
 		borderWidth: 'all' === borderType ? borderSize : undefined,
-		borderBottomWidth: 'bottom' === borderType ? borderSize : undefined,
-
 	};
 
 	return (
@@ -59,6 +61,20 @@ function faq( props ) {
 				<PanelBody
 					title={ __( 'FAQ', 'ystandard-toolbox' ) }
 				>
+					<BaseControl
+						id={ 'accordion' }
+						label={ __( '開閉設定', 'ystandard-toolbox' ) }
+					>
+						<ToggleControl
+							label={ __( '開閉式にする', 'ystandard-toolbox' ) }
+							onChange={ () => {
+								setAttributes( {
+									isAccordion: ! isAccordion,
+								} );
+							} }
+							checked={ isAccordion }
+						/>
+					</BaseControl>
 					<BaseControl
 						id={ 'background-color' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }

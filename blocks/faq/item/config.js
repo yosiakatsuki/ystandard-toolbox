@@ -5,14 +5,6 @@ export const attributes = {
 		type: 'string',
 		default: 'q',
 	},
-	isAccordion: {
-		type: 'bool',
-		default: false,
-	},
-	accordionState: {
-		type: 'string',
-		default: 'open',
-	},
 	faqBackgroundColor: {
 		type: 'string',
 	},
@@ -67,6 +59,9 @@ export const attributes = {
 		type: 'string',
 	},
 	customLabelBorderColor: {
+		type: 'string',
+	},
+	accordionArrowColor: {
 		type: 'string',
 	},
 };

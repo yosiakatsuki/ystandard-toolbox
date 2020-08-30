@@ -103,6 +103,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 
 var attributes = {
+  isAccordion: {
+    type: 'bool',
+    default: false
+  },
   backgroundColor: {
     type: 'string'
   },
@@ -185,6 +189,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function faq(props) {
+  var _classnames;
+
   var className = props.className,
       attributes = props.attributes,
       setAttributes = props.setAttributes,
@@ -192,24 +198,36 @@ function faq(props) {
       setBackgroundColor = props.setBackgroundColor,
       borderColor = props.borderColor,
       setBorderColor = props.setBorderColor;
-  var borderType = attributes.borderType,
+  var isAccordion = attributes.isAccordion,
+      borderType = attributes.borderType,
       borderSize = attributes.borderSize;
 
   var _select$getSettings = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["select"])('core/block-editor').getSettings(),
       colors = _select$getSettings.colors;
 
-  var faqClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('ystdtb-faq', className, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+  var faqClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('ystdtb-faq', className, (_classnames = {
     'has-padding': 'all' === borderType || backgroundColor.color
-  }, "border-type--".concat(borderType), '' !== borderType));
+  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "border-type--".concat(borderType), '' !== borderType), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'is-accordion', isAccordion), _classnames));
   var faqStyles = {
     backgroundColor: backgroundColor.color,
     borderColor: borderColor.color,
-    borderWidth: 'all' === borderType ? borderSize : undefined,
-    borderBottomWidth: 'bottom' === borderType ? borderSize : undefined
+    borderBottomWidth: 'bottom' === borderType || 'all' === borderType ? borderSize : undefined,
+    borderWidth: 'all' === borderType ? borderSize : undefined
   };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('FAQ', 'ystandard-toolbox')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
+    id: 'accordion',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('開閉設定', 'ystandard-toolbox')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('開閉式にする', 'ystandard-toolbox'),
+    onChange: function onChange() {
+      setAttributes({
+        isAccordion: !isAccordion
+      });
+    },
+    checked: isAccordion
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["BaseControl"], {
     id: 'background-color',
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('背景色', 'ystandard-toolbox')
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["ColorPalette"], {
@@ -358,6 +376,7 @@ __webpack_require__.r(__webpack_exports__);
 
   var attributes = _ref.attributes;
   var className = attributes.className,
+      isAccordion = attributes.isAccordion,
       borderType = attributes.borderType,
       borderSize = attributes.borderSize,
       backgroundColor = attributes.backgroundColor,
@@ -367,6 +386,7 @@ __webpack_require__.r(__webpack_exports__);
   var backgroundColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["getColorClassName"])('background-color', backgroundColor);
   var borderColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["getColorClassName"])('border-color', borderColor);
   var faqClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('ystdtb-faq', className, (_classnames = {
+    'is-accordion': isAccordion,
     'has-padding': 'all' === borderType || backgroundColor,
     'has-background': backgroundColor || customBackgroundColor
   }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, backgroundColorClass, backgroundColorClass), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'has-border', borderSize || borderColor || customBorderColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, borderColorClass, borderColorClass), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "border-type--".concat(borderType), '' !== borderType), _classnames));

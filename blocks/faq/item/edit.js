@@ -6,6 +6,7 @@ import {
 	withColors,
 	FontSizePicker,
 	withFontSizes,
+	getColorClassName,
 	__experimentalBlock as Block,
 } from '@wordpress/block-editor';
 import {
@@ -20,6 +21,7 @@ import { withSelect, select } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
+import { ChevronDown } from 'react-feather';
 
 function faqItem( props ) {
 	const {
@@ -43,13 +45,12 @@ function faqItem( props ) {
 
 	const {
 		faqType,
-		isAccordion,
-		accordionState,
 		faqBorderType,
 		faqBorderSize,
 		labelBold,
 		labelBorderSize,
 		labelBorderRadius,
+		accordionArrowColor,
 	} = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
@@ -88,6 +89,34 @@ function faqItem( props ) {
 
 	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {} );
 
+	const accordionArrowColorClass = getColorClassName(
+		'color',
+		accordionArrowColor
+	);
+
+	const accordionArrowClass = classnames(
+		'ystdtb-faq-item__arrow',
+		{
+			[ accordionArrowColorClass ]: accordionArrowColorClass
+		}
+	);
+	const getAccordionArrowStyle = () => {
+		if ( ! accordionArrowColorClass && ! accordionArrowColor ) {
+			return {
+				color: 'currentColor',
+			}
+		}
+		if ( accordionArrowClass ) {
+			return {};
+		}
+		return {
+			color: accordionArrowColor,
+		}
+	};
+	const accordionArrowStyle = {
+		...getAccordionArrowStyle(),
+	};
+
 	return (
 		<Fragment>
 			<InspectorControls>
@@ -115,6 +144,7 @@ function faqItem( props ) {
 													labelColor: setLabelColor( item.attributes.labelColor ),
 													labelBackgroundColor: setLabelBackgroundColor( item.attributes.labelBackgroundColor ),
 													labelBorderColor: setLabelBorderColor( item.attributes.labelBorderColor ),
+													accordionArrowColor: item.attributes.labelColor,
 												}
 											} );
 										} }
@@ -150,53 +180,6 @@ function faqItem( props ) {
 						</div>
 					</BaseControl>
 				</PanelBody>
-				{ ( 'q' === faqType &&
-					<PanelBody
-						title={ __( '開閉設定', 'ystandard-toolbox' ) }
-						initialOpen={ false }
-					>
-						<BaseControl>
-							<ToggleControl
-								label={ __( '開閉式にする', 'ystandard-toolbox' ) }
-								onChange={ () => {
-									updateChildAttributes( {
-										isAccordion: ! isAccordion,
-									} );
-								} }
-								checked={ isAccordion }
-							/>
-						</BaseControl>
-						<BaseControl
-							id={ 'accordion-state' }
-							label={ __( '初期状態', 'ystandard-toolbox' ) }
-						>
-							<div className="ystdtb__horizon-buttons">
-								{ accordionOpenOption.map( ( item ) => {
-									return (
-										<Button
-											key={ item.name }
-											isSecondary={
-												accordionState !==
-												item.name
-											}
-											isPrimary={
-												accordionState ===
-												item.name
-											}
-											onClick={ () => {
-												setAttributes( {
-													accordionState: item.name,
-												} );
-											} }
-										>
-											<span>{ item.label }</span>
-										</Button>
-									);
-								} ) }
-							</div>
-						</BaseControl>
-					</PanelBody>
-				) }
 				<PanelBody
 					title={ __( 'FAQラベル', 'ystandard-toolbox' ) }
 				>
@@ -218,7 +201,7 @@ function faqItem( props ) {
 						<ToggleControl
 							label={ __( '太字にする', 'ystandard-toolbox' ) }
 							onChange={ () => {
-								updateChildAttributes( {
+								setAttributes( {
 									labelBold: ! labelBold,
 								} );
 							} }
@@ -234,6 +217,9 @@ function faqItem( props ) {
 							disableCustomColors={ false }
 							onChange={ ( color ) => {
 								setLabelColor( color );
+								setAttributes( {
+									accordionArrowColor: 'q' === faqType ? color : undefined,
+								} );
 							} }
 							value={ labelColor.color }
 						/>
@@ -394,13 +380,13 @@ function faqItem( props ) {
 					}
 				)
 			}>
-				<dl className={ itemClasses } style={ itemStyles }>
-					<dt className={ labelClasses } style={ labelStyles }>
+				<div className={ itemClasses } style={ itemStyles }>
+					<div className={ labelClasses } style={ labelStyles }>
 						<span className={ labelTextClasses }>
 							{ faqType }
 						</span>
-					</dt>
-					<dd className={ contentsClasses }>
+					</div>
+					<div className={ contentsClasses }>
 						<InnerBlocks
 							templateLock={ false }
 							template={ template }
@@ -410,8 +396,13 @@ function faqItem( props ) {
 									: () => <InnerBlocks.ButtonBlockAppender/>
 							}
 						/>
-					</dd>
-				</dl>
+					</div>
+					{ ( 'q' === faqType &&
+						<div className={ accordionArrowClass } style={ accordionArrowStyle }>
+							<ChevronDown/>
+						</div>
+					) }
+				</div>
 			</Block.div>
 		</Fragment>
 	);

@@ -86,13 +86,38 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./blocks/faq/app.js":
+/*!***************************!*\
+  !*** ./blocks/faq/app.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.addEventListener('DOMContentLoaded', function () {
+  var faq = document.querySelectorAll('.ystdtb-faq.is-accordion .is-faq--q');
+
+  if (faq) {
+    faq.forEach(function (element) {
+      element.addEventListener('click', function () {
+        element.classList.toggle('is-open');
+      });
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./src/js/blocks/app.js":
 /*!******************************!*\
   !*** ./src/js/blocks/app.js ***!
   \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _blocks_faq_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../blocks/faq/app */ "./blocks/faq/app.js");
+/* harmony import */ var _blocks_faq_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_blocks_faq_app__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ })

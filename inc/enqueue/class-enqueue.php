@@ -24,10 +24,12 @@ class Enqueue {
 	 */
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_css' ], 11 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_script' ], 11 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
 		if ( ! Utility::ystandard_blocks_version_compare() ) {
 			add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'enqueue_block_style' ], 11 );
 		}
+		add_action( 'wp_head', [ $this, 'enqueue_no_script_css' ], PHP_INT_MAX );
 	}
 
 	/**
@@ -41,6 +43,23 @@ class Enqueue {
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox.css' )
 		);
 		do_action( Config::AFTER_ENQUEUE_CSS_HOOK );
+	}
+
+	/**
+	 * Enqueue Scripts
+	 */
+	public function enqueue_script() {
+		if ( Utility::is_amp() ) {
+			return;
+		}
+		wp_enqueue_script(
+			Config::JS_APP_HANDLE,
+			YSTDTB_URL . '/js/blocks/app.js',
+			[],
+			filemtime( YSTDTB_PATH . '/js/blocks/app.js' ),
+			true,
+		);
+		wp_scripts()->add_data( Config::JS_APP_HANDLE, 'defer', true );
 	}
 
 	/**
@@ -75,6 +94,16 @@ class Enqueue {
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
 			self::get_color_palette_css()
+		);
+	}
+
+	/**
+	 * JavaScriptが使えない場合のCSS
+	 */
+	public function enqueue_no_script_css() {
+		printf(
+			'<noscript><link rel="stylesheet" href="%s"></noscript>',
+			YSTDTB_URL . '/css/ystandard-toolbox-no-script.css'
 		);
 	}
 

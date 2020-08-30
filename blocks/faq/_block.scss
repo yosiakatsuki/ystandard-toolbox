@@ -2,7 +2,7 @@
 
 .ystdtb-faq {
   border: 0;
-  
+
   & + .ystdtb-faq {
     margin-top: 0;
   }
@@ -21,8 +21,37 @@
       border-top: 0;
     }
   }
+
   &.border-type--bottom {
     border-bottom-style: solid;
+  }
+
+  &.is-accordion {
+    .ystdtb-faq-item__arrow {
+      display: block;
+    }
+
+    .ystdtb-faq-item {
+
+      &.is-faq--a {
+        height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: height .3s, padding .3s, opacity .2s;
+      }
+
+      &.is-open {
+        + .is-faq--a {
+          height: auto;
+          padding-top: 1.5em;
+          padding-bottom: 1.5em;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
   }
 }
 
@@ -82,4 +111,8 @@
       margin-bottom: 0;
     }
   }
+}
+
+.ystdtb-faq-item__arrow {
+  display: none;
 }

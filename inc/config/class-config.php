@@ -22,6 +22,10 @@ class Config {
 	 */
 	const CSS_HANDLE = 'ystdtb-css';
 	/**
+	 * Script App Handle
+	 */
+	const JS_APP_HANDLE = 'ystdtb-app';
+	/**
 	 * CSS Hook
 	 */
 	const AFTER_ENQUEUE_CSS_HOOK = 'ystdtb_enqueue_css';
