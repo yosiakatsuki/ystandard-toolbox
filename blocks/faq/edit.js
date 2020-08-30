@@ -27,7 +27,7 @@ import {
 	getFontSlug,
 } from '../../src/js/blocks/function/_getFontSlug';
 
-function timeline( props ) {
+function faq( props ) {
 	const {
 		className,
 		setState,
@@ -52,7 +52,7 @@ function timeline( props ) {
 					<InnerBlocks
 						allowedBlocks={ [ 'ystdtb/faq-item' ] }
 						template={ template }
-						templateLock={ true }
+						templateLock={ 'all' }
 					/>
 				</div>
 			</Block.div>
@@ -60,7 +60,7 @@ function timeline( props ) {
 	);
 }
 
-const timelineEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
+const faqEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 	updateChildAttributes( attributes ) {
 		const { clientId } = ownProps;
 		const { updateBlockAttributes } = dispatch( 'core/block-editor' );
@@ -70,8 +70,8 @@ const timelineEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 			updateBlockAttributes( innerBlockClientId, attributes );
 		} );
 	},
-} ) )( timeline );
+} ) )( faq );
 
 export default compose( [
 	withState( {} ),
-] )( timelineEdit );
+] )( faqEdit );

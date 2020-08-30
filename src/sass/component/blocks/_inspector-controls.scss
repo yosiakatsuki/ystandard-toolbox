@@ -29,3 +29,26 @@
     }
   }
 }
+
+.ystdtb__preset-select-buttons {
+  > button {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    height: auto;
+    border: 1px solid var(--wp-admin-theme-color);
+    box-shadow: none !important;
+
+    &:nth-child(n+2) {
+      border-top: 0;
+    }
+  }
+
+  .is-block {
+    display: block;
+  }
+
+  .is-flex {
+    display: flex;
+  }
+}

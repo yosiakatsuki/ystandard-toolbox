@@ -1,1 +1,15 @@
 @use "block";
+
+[data-type="ystdtb/faq"],
+[data-type="ystdtb/faq-item"] {
+  &.is-selected {
+    padding: 1em;
+  }
+}
+
+[data-type="ystdtb/faq-item"] {
+
+  &.is-faq--q {
+    margin-bottom: 0;
+  }
+}

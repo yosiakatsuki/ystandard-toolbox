@@ -1,6 +1,15 @@
 import { __ } from '@wordpress/i18n';
 
-export const attributes = {};
+export const attributes = {
+	isAccordion: {
+		type: 'bool',
+		default: false,
+	},
+	isAccordionOpen: {
+		type: 'bool',
+		default: true,
+	},
+};
 
 export const supports = {
 	align: false,
