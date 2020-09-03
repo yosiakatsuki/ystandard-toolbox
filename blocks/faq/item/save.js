@@ -14,6 +14,8 @@ export default function({ attributes }) {
 		faqBorderSize,
 		labelBorderSize,
 		labelBorderRadius,
+		faqTextColor,
+		customFaqTextColor,
 		faqBackgroundColor,
 		customFaqBackgroundColor,
 		faqBorderColor,
@@ -31,6 +33,7 @@ export default function({ attributes }) {
 		customAccordionArrowColor,
 	} = attributes;
 
+	const faqTextColorClass = getColorClassName('color', faqTextColor);
 	const faqBackgroundColorClass = getColorClassName(
 		'background-color',
 		faqBackgroundColor
@@ -97,7 +100,14 @@ export default function({ attributes }) {
 
 	const labelTextClasses = classnames('ystdtb-faq-item__label-text', {});
 
-	const contentsClasses = classnames('ystdtb-faq-item__contents', {});
+	const contentsClasses = classnames('ystdtb-faq-item__contents', {
+		'has-text-color': faqTextColor || customFaqTextColor,
+		[faqTextColorClass]: faqTextColorClass,
+	});
+
+	const contentsStyles = {
+		color: faqTextColorClass ? undefined : customFaqTextColor,
+	};
 
 	const accordionArrowColorClass = getColorClassName(
 		'color',
@@ -116,7 +126,7 @@ export default function({ attributes }) {
 			<div className={labelClasses} style={labelStyles}>
 				<span className={labelTextClasses}>{faqType}</span>
 			</div>
-			<div className={contentsClasses}>
+			<div className={contentsClasses} style={contentsStyles}>
 				<InnerBlocks.Content />
 			</div>
 			{'q' === faqType && (

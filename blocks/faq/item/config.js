@@ -5,6 +5,12 @@ export const attributes = {
 		type: 'string',
 		default: 'q',
 	},
+	faqTextColor: {
+		type: 'string',
+	},
+	customFaqTextColor: {
+		type: 'string',
+	},
 	faqBackgroundColor: {
 		type: 'string',
 	},

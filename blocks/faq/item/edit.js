@@ -29,6 +29,8 @@ function faqItem(props) {
 		attributes,
 		setAttributes,
 		hasChildBlocks,
+		faqTextColor,
+		setFaqTextColor,
 		faqBackgroundColor,
 		setFaqBackgroundColor,
 		faqBorderColor,
@@ -85,7 +87,13 @@ function faqItem(props) {
 
 	const labelTextClasses = classnames('ystdtb-faq-item__label-text', {});
 
-	const contentsClasses = classnames('ystdtb-faq-item__contents', {});
+	const contentsClasses = classnames('ystdtb-faq-item__contents', {
+		'has-text-color': faqTextColor.color,
+	});
+
+	const contentsStyles = {
+		color: faqTextColor.color,
+	};
 
 	const accordionArrowColorClass = getColorClassName(
 		'color',
@@ -291,7 +299,20 @@ function faqItem(props) {
 				<PanelBody title={__('FAQコンテンツ', 'ystandard-toolbox')}>
 					<BaseControl
 						id={'basic-background-color'}
-						label={__('項目の背景色', 'ystandard-toolbox')}
+						label={__('文字色', 'ystandard-toolbox')}
+					>
+						<ColorPalette
+							colors={colors}
+							disableCustomColors={false}
+							onChange={(color) => {
+								setFaqTextColor(color);
+							}}
+							value={faqTextColor.color}
+						/>
+					</BaseControl>
+					<BaseControl
+						id={'basic-background-color'}
+						label={__('背景色', 'ystandard-toolbox')}
 					>
 						<ColorPalette
 							colors={colors}
@@ -304,7 +325,7 @@ function faqItem(props) {
 					</BaseControl>
 					<BaseControl
 						id={'basic-border-type'}
-						label={__('項目の枠線タイプ', 'ystandard-toolbox')}
+						label={__('枠線タイプ', 'ystandard-toolbox')}
 					>
 						<div className="ystdtb__horizon-buttons">
 							{faqBorderTypes.map((item) => {
@@ -386,7 +407,7 @@ function faqItem(props) {
 					<div className={labelClasses} style={labelStyles}>
 						<span className={labelTextClasses}>{faqType}</span>
 					</div>
-					<div className={contentsClasses}>
+					<div className={contentsClasses} style={contentsStyles}>
 						<InnerBlocks
 							templateLock={false}
 							template={template}
@@ -413,6 +434,7 @@ function faqItem(props) {
 
 export default compose([
 	withColors({
+		faqTextColor: 'color',
 		faqBackgroundColor: 'backgroundColor',
 		faqBorderColor: 'borderColor',
 		labelColor: 'color',
