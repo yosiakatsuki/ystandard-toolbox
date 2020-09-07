@@ -3,13 +3,14 @@
  * Plugin Name: yStandard Toolbox
  * Plugin URI: https://wp-ystandard.com/
  * Description: 無料WordPressテーマ「yStandard」用機能拡張プラグイン.
- * Version: 0.5.0-beta-1
+ * Version: 0.5.0-beta-2
  * Author: yosiakatsuki
  * Author URI: https://yosiakatsuki.net
  * License: GPL-2.0 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: ystandard-toolbox
  * Domain Path: /languages
+ * Requires PHP: 7.3.0
  *
  * @package yStandard_toolbox
  */
