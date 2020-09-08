@@ -650,6 +650,7 @@ class Heading {
 		// できればサクッと変換したい.
 		$list = [
 			'alignSelf'         => 'align-self',
+			'alignItems'        => 'align-items',
 			'flexGrow'          => 'flex-grow',
 			'minWidth'          => 'min-width',
 			'maxWidth'          => 'max-width',

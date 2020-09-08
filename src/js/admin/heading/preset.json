@@ -144,11 +144,11 @@
       "borderLeftWidthUnit": "px",
       "borderLeftStyle": "solid",
       "borderLeftColor": "#222222",
-      "paddingTop": 0.3,
+      "paddingTop": 0.5,
       "paddingTopUnit": "em",
-      "paddingRight": 0,
+      "paddingRight": 0.5,
       "paddingRightUnit": "em",
-      "paddingBottom": 0.3,
+      "paddingBottom": 0.5,
       "paddingBottomUnit": "em",
       "paddingLeft": 0.5,
       "paddingLeftUnit": "em"
@@ -245,7 +245,7 @@
       "paddingTopUnit": "em",
       "paddingRight": 0,
       "paddingRightUnit": "em",
-      "paddingBottom": 0.3,
+      "paddingBottom": 0.5,
       "paddingBottomUnit": "em",
       "paddingLeft": 0,
       "paddingLeftUnit": "em",
@@ -364,12 +364,14 @@
       "borderLeftColor": "",
       "paddingTop": 0.5,
       "paddingTopUnit": "em",
-      "paddingRight": 0.5,
+      "paddingRight": 0.7,
       "paddingRightUnit": "em",
       "paddingBottom": 0.5,
       "paddingBottomUnit": "em",
-      "paddingLeft": 0.5,
+      "paddingLeft": 0.7,
       "paddingLeftUnit": "em",
+      "marginBottom": 1.5,
+      "marginBottomUnit": "em",
       "beforeContent": "",
       "beforeSize": "",
       "beforeColor": "",
@@ -430,15 +432,17 @@
       "iconSize"
     ],
     "additionalStyle": {
+      "content": {
+        "display": "flex",
+        "alignItems": "center"
+      },
       "before": {
-        "marginRight": ".25em",
-        "lineHeight": 1,
-        "verticalAlign": "-0.15em"
+        "marginRight": ".5em",
+        "lineHeight": 1
       },
       "after": {
-        "marginLeft": ".25em",
-        "lineHeight": 1,
-        "verticalAlign": "-0.15em"
+        "marginLeft": ".5em",
+        "lineHeight": 1
       }
     }
   }

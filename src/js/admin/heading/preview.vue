@@ -257,7 +257,6 @@
 	.heading-editor-preview__before,
 	.heading-editor-preview__after {
 		svg {
-			transform: translateY(-5%);
 		}
 	}
 </style>
