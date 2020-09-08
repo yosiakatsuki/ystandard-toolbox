@@ -51,7 +51,7 @@
     "lint-js:fix": "npm run lint-js -- --fix",
     "build:block": "wp-scripts build --config webpack.blocks.config.js",
     "watch": "gulp watch & npm run start",
-    "build": "gulp build & npm run build:block",
+    "build": "gulp build && npm run build:block",
     "build:deploy-files": "gulp createDeployFiles",
     "rename:beta-json": "rename -f build/ystandard-toolbox-beta.json ystandard-toolbox.json"
   },

@@ -1,3 +1,5 @@
 *.zip
+css
+js
 build/
 ystandard-toolbox/
