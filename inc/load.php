@@ -14,6 +14,10 @@ require_once __DIR__ . '/utility/class-utility.php';
 require_once __DIR__ . '/option/class-option.php';
 require_once __DIR__ . '/notice/class-notice.php';
 require_once __DIR__ . '/init/class-init.php';
+// ビルドファイルチェック.
+if ( ! \ystandard_toolbox\Init::check_build_files() ) {
+	return;
+}
 require_once __DIR__ . '/enqueue/class-enqueue.php';
 
 // Blocks.
