@@ -4,6 +4,13 @@
 
 ## 更新履歴
 
+### v0.6.0
+- [追加] 見出しデザイン追加
+- [調整] ビルド機能調整
+
+### v0.5.0
+- [調整] アップデート機能調整
+
 ### v0.4.0
 - [追加] FAQブロック追加
 
@@ -83,3 +90,8 @@ Source : <https://github.com/vuejs/vue>
 
 License: MIT  
 Source : <https://github.com/xiaokaike/vue-color>
+
+### hex-rgb
+
+License: MIT  
+Source : <https://github.com/sindresorhus/hex-rgb>

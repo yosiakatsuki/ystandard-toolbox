@@ -341,10 +341,20 @@ class Heading {
 					if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
 						$replace  = $matches[0];
 						$property = str_replace( [ '#{', '}' ], '', $replace );
+						$convert  = '';
+						if ( 1 < count( explode( ',', $property ) ) ) {
+							$convert  = explode( ',', $property )[1];
+							$property = explode( ',', $property )[0];
+						}
 						if ( isset( $styles[ $section ][ $this->get_css_property( $property ) ] ) ) {
+							$style = $styles[ $section ][ $this->get_css_property( $property ) ];
+							if ( 'rgb' === $convert ) {
+								$rgb   = Utility::hex_2_rgb( $style );
+								$style = "{$rgb[0]},{$rgb[1]},{$rgb[2]}";
+							}
 							$value = str_replace(
 								$replace,
-								$styles[ $section ][ $this->get_css_property( $property ) ],
+								$style,
 								$value
 							);
 						}
@@ -474,6 +484,13 @@ class Heading {
 				trim( "${width}${unit} ${style} ${color}" )
 			);
 		}
+		$radius = $this->get_value( 'borderRadius' );
+		if ( '' !== $radius ) {
+			$this->set_css(
+				'border-radius',
+				$radius . 'px'
+			);
+		}
 	}
 
 	/**
@@ -557,7 +574,8 @@ class Heading {
 		}
 		$pseudo_elements = [ 'before', 'after' ];
 		foreach ( $pseudo_elements as $pos ) {
-			if ( '0' !== $this->get_value( "${pos}Size" ) ) {
+			$size = $this->get_value( "${pos}Size" );
+			if ( '0' !== $size && '' !== $size ) {
 				$content = stripslashes( $this->get_value( "${pos}Content" ) );
 				if ( false !== strpos( $content, '<svg' ) ) {
 					$content = str_replace( '\'', '"', $content );
@@ -683,6 +701,7 @@ class Heading {
 			'verticalAlign'     => 'vertical-align',
 			'boxShadow'         => 'box-shadow',
 			'iconSize'          => '',
+			'zIndex'            => 'z-index',
 		];
 		if ( isset( $list[ $name ] ) ) {
 			return $list[ $name ];

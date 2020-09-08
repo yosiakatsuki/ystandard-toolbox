@@ -295,4 +295,19 @@ class Utility {
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
 	}
+
+	/**
+	 * カラーコードをrgbに変換
+	 *
+	 * @param string $color カラーコード.
+	 *
+	 * @return array
+	 */
+	public static function hex_2_rgb( $color ) {
+		return [
+			hexdec( substr( $color, 1, 2 ) ),
+			hexdec( substr( $color, 3, 2 ) ),
+			hexdec( substr( $color, 5, 2 ) ),
+		];
+	}
 }

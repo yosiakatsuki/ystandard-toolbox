@@ -124,6 +124,67 @@
     },
     "clearPseudoElements": true
   },
+  "border-horizontal": {
+    "name": "上下の直線",
+    "default": {
+      "borderTopWidth": 1,
+      "borderTopWidthUnit": "px",
+      "borderTopStyle": "solid",
+      "borderTopColor": "#222222",
+      "borderRightWidth": 0,
+      "borderRightWidthUnit": "px",
+      "borderRightStyle": "solid",
+      "borderRightColor": "",
+      "borderBottomWidth": 1,
+      "borderBottomWidthUnit": "px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "#222222",
+      "borderLeftWidth": 0,
+      "borderLeftWidthUnit": "px",
+      "borderLeftStyle": "solid",
+      "borderLeftColor": "",
+      "paddingTop": 0.5,
+      "paddingTopUnit": "em",
+      "paddingRight": 0,
+      "paddingRightUnit": "em",
+      "paddingBottom": 0.5,
+      "paddingBottomUnit": "em",
+      "paddingLeft": 0,
+      "paddingLeftUnit": "em"
+    },
+    "clearPseudoElements": true
+  },
+  "background-color": {
+    "name": "背景色",
+    "default": {
+      "backgroundColor": "#eeeeee",
+      "borderTopWidth": 0,
+      "borderTopWidthUnit": "px",
+      "borderTopStyle": "solid",
+      "borderTopColor": "",
+      "borderRightWidth": 0,
+      "borderRightWidthUnit": "px",
+      "borderRightStyle": "solid",
+      "borderRightColor": "",
+      "borderBottomWidth": 0,
+      "borderBottomWidthUnit": "px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "",
+      "borderLeftWidth": 0,
+      "borderLeftWidthUnit": "px",
+      "borderLeftStyle": "solid",
+      "borderLeftColor": "",
+      "paddingTop": 0.5,
+      "paddingTopUnit": "em",
+      "paddingRight": 0.5,
+      "paddingRightUnit": "em",
+      "paddingBottom": 0.5,
+      "paddingBottomUnit": "em",
+      "paddingLeft": 0.5,
+      "paddingLeftUnit": "em"
+    },
+    "clearPseudoElements": true
+  },
   "border-left-plus-bg": {
     "name": "左線 + 背景色",
     "default": {
@@ -151,36 +212,6 @@
       "paddingBottom": 0.5,
       "paddingBottomUnit": "em",
       "paddingLeft": 0.5,
-      "paddingLeftUnit": "em"
-    },
-    "clearPseudoElements": true
-  },
-  "border-horizontal": {
-    "name": "上下の直線",
-    "default": {
-      "borderTopWidth": 1,
-      "borderTopWidthUnit": "px",
-      "borderTopStyle": "solid",
-      "borderTopColor": "#222222",
-      "borderRightWidth": 0,
-      "borderRightWidthUnit": "px",
-      "borderRightStyle": "solid",
-      "borderRightColor": "",
-      "borderBottomWidth": 1,
-      "borderBottomWidthUnit": "px",
-      "borderBottomStyle": "solid",
-      "borderBottomColor": "#222222",
-      "borderLeftWidth": 0,
-      "borderLeftWidthUnit": "px",
-      "borderLeftStyle": "solid",
-      "borderLeftColor": "",
-      "paddingTop": 0.5,
-      "paddingTopUnit": "em",
-      "paddingRight": 0,
-      "paddingRightUnit": "em",
-      "paddingBottom": 0.5,
-      "paddingBottomUnit": "em",
-      "paddingLeft": 0,
       "paddingLeftUnit": "em"
     },
     "clearPseudoElements": true
@@ -274,6 +305,62 @@
         "position": "absolute",
         "left": 0,
         "top": "100%"
+      }
+    }
+  },
+  "repeating-linear-gradient": {
+    "name": "斜めしましま下線",
+    "default": {
+      "borderTopWidth": 0,
+      "borderTopWidthUnit": "px",
+      "borderTopStyle": "solid",
+      "borderTopColor": "",
+      "borderRightWidth": 0,
+      "borderRightWidthUnit": "px",
+      "borderRightStyle": "solid",
+      "borderRightColor": "",
+      "borderBottomWidth": 0,
+      "borderBottomWidthUnit": "px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "",
+      "borderLeftWidth": 0,
+      "borderLeftWidthUnit": "px",
+      "borderLeftStyle": "solid",
+      "borderLeftColor": "",
+      "paddingTop": 0,
+      "paddingTopUnit": "em",
+      "paddingRight": 0,
+      "paddingRightUnit": "em",
+      "paddingBottom": 0,
+      "paddingBottomUnit": "em",
+      "paddingLeft": 0,
+      "paddingLeftUnit": "em",
+      "beforeContent": "",
+      "beforeSize": "",
+      "beforeColor": "",
+      "beforeColorType": "",
+      "afterContent": "",
+      "afterSize": 2,
+      "afterColor": "#cccccc",
+      "afterColorType": "color"
+    },
+    "enablePseudoElements": [
+      "afterColor"
+    ],
+    "additionalStyle": {
+      "content": {
+        "position": "relative",
+        "zIndex": "1"
+      },
+      "after": {
+        "content": "",
+        "position": "absolute",
+        "left": 0,
+        "bottom": "3px",
+        "width": "100%",
+        "height": "5px",
+        "zIndex": "-1",
+        "background": "repeating-linear-gradient(-45deg,rgba(#{color,rgb},.3),rgba(#{color,rgb},.3) 2px,#fff 0,#fff 4px)"
       }
     }
   },
@@ -405,6 +492,66 @@
         "borderRightColor": "transparent",
         "borderBottomColor": "transparent",
         "borderLeftColor": "transparent"
+      }
+    }
+  },
+  "ribbon": {
+    "name": "リボン",
+    "default": {
+      "backgroundColor": "#eeeeee",
+      "borderTopWidth": 0,
+      "borderTopWidthUnit": "px",
+      "borderTopStyle": "solid",
+      "borderTopColor": "",
+      "borderRightWidth": 0,
+      "borderRightWidthUnit": "px",
+      "borderRightStyle": "solid",
+      "borderRightColor": "",
+      "borderBottomWidth": 0,
+      "borderBottomWidthUnit": "px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "",
+      "borderLeftWidth": 0,
+      "borderLeftWidthUnit": "px",
+      "borderLeftStyle": "solid",
+      "borderLeftColor": "",
+      "borderRadius": 0,
+      "paddingTop": 0.5,
+      "paddingTopUnit": "em",
+      "paddingRight": 0.5,
+      "paddingRightUnit": "em",
+      "paddingBottom": 0.5,
+      "paddingBottomUnit": "em",
+      "paddingLeft": 0.5,
+      "paddingLeftUnit": "em",
+      "beforeContent": "",
+      "beforeSize": "",
+      "beforeColor": "",
+      "beforeColorType": "",
+      "afterContent": "",
+      "afterSize": 20,
+      "afterColor": "#aaaaaa",
+      "afterColorType": "color"
+    },
+    "enablePseudoElements": [
+      "afterColor"
+    ],
+    "usePseudoElementsSize": [
+      "borderRightWidth"
+    ],
+    "additionalStyle": {
+      "content": {
+        "position": "relative"
+      },
+      "after": {
+        "content": "",
+        "position": "absolute",
+        "top": "100%",
+        "left": 0,
+        "borderTop": 0,
+        "borderLeft": 0,
+        "borderBottom": "solid 10px transparent",
+        "borderRight": "solid 20px #{color}"
       }
     }
   },

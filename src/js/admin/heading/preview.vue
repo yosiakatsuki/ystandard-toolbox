@@ -48,6 +48,7 @@
 					borderRight: this.getBorder( 'Right' ),
 					borderBottom: this.getBorder( 'Bottom' ),
 					borderLeft: this.getBorder( 'Left' ),
+					borderRadius: this.getBorderRadius(),
 					paddingTop: this.getPadding( 'Top' ),
 					paddingRight: this.getPadding( 'Right' ),
 					paddingBottom: this.getPadding( 'Bottom' ),
@@ -118,6 +119,13 @@
 					borderColor = 'transparent';
 				}
 				return `${ borderWidth }${ borderWidthUnit } ${ borderStyle } ${ borderColor }`;
+			},
+			getBorderRadius() {
+				const borderRadius = this.getOption( 'borderRadius' );
+				if ( '' === borderRadius ) {
+					return undefined;
+				}
+				return borderRadius + 'px';
 			},
 			getPadding( pos ) {
 				const padding = this.getOption( `padding${ pos }` );

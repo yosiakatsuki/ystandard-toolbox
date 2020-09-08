@@ -1,5 +1,6 @@
 <template>
 	<div class="heading-editor-border">
+		<label class="is-block">線</label>
 		<div class="ystdtb-menu__table">
 			<div class="is-label is-small">上</div>
 			<div class="is-content">
@@ -132,7 +133,25 @@
 				</div>
 			</div>
 		</div>
-
+		<label class="is-block" style="margin-top: 2em;">角丸</label>
+		<div class="ystdtb-menu__table">
+			<div class="is-label is-small">角丸</div>
+			<div class="is-content">
+				<div class="ystdtb-menu__horizontal">
+					<input
+						:id="`border-left-width--${level}`"
+						class="is-small"
+						:name="`ystdtb_heading[${level}][borderRadius]`"
+						type="number"
+						min="0"
+						max="100"
+						step="1"
+						v-model="borderRadius"
+					/>
+					<span>px</span>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -285,6 +304,14 @@
 					this.updateOption( 'borderLeftColor', newValue );
 				}
 			},
+			borderRadius: {
+				get() {
+					return this.getOption( 'borderRadius' );
+				},
+				set( newValue ) {
+					this.updateOption( 'borderRadius', newValue );
+				}
+			},
 		},
 		methods: {
 			getOption( name ) {
@@ -325,7 +352,7 @@
 		}
 		.ystdtb-menu__table {
 			.is-label.is-small {
-				width: 2em;
+				width: auto;
 				min-width: 2em;
 			}
 		}

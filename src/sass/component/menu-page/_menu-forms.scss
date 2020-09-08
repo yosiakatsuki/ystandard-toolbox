@@ -39,6 +39,11 @@
     &::placeholder {
       color: #ccc;
     }
+
+    &:disabled {
+      background: #f7f7f7 !important;
+      color: #f7f7f7 !important;
+    }
   }
 
   input[type="number"] {
