@@ -36,10 +36,13 @@ class Option {
 	 *
 	 * @return mixed|string
 	 */
-	public static function get_option( $section, $name, $default = '' ) {
+	public static function get_option( $section, $name = '', $default = '' ) {
 		$option = self::get_all_option();
 		if ( ! isset( $option[ $section ] ) ) {
 			return $default;
+		}
+		if ( '' === $name ) {
+			return $option[ $section ];
 		}
 		if ( ! isset( $option[ $section ][ $name ] ) ) {
 			return $default;

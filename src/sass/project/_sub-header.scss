@@ -1,0 +1,65 @@
+@use "../global";
+
+.sub-header {
+
+  &.is-top {
+    display: none;
+    @include global.media-breakpoint(md) {
+      background-color: #f1f1f3;
+      display: block;
+    }
+  }
+
+  &.is-mobile {
+    .sub-header__nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 2.5em;
+      margin-left: .5em;
+      padding-top: 2.5em;
+      border-top: 1px solid var(--mobile-nav-text);
+      font-size: 0.9em;
+
+      @include global.media-breakpoint(md) {
+        display: none;
+      }
+
+      li {
+
+        a {
+          display: block;
+          color: var(--mobile-nav-text);
+          padding: .5em;
+        }
+      }
+    }
+  }
+}
+
+.sub-header__nav {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0.25em 0;
+  list-style: none;
+  font-size: 0.7em;
+
+  li {
+    margin-right: 2.5em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: currentColor;
+  }
+
+  @include global.media-breakpoint(md) {
+
+  }
+}
+

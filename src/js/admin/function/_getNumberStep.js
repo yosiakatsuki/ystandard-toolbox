@@ -1,3 +1,9 @@
 export default function _getNumberStep(unit) {
-	return 'px' === unit ? 1 : 0.1;
+	if( 'em' === unit ) {
+		return 0.1;
+	}
+	if( 'rem' === unit ) {
+		return 0.1;
+	}
+	return 1;
 }

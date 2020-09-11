@@ -13,10 +13,23 @@
     }
   }
 
+  .ystdtb-menu__section-title {
+    margin: 1.5em 0;
+    padding: .5em .5em;
+    background-color: #fafafc;
+    font-size: 1em;
+    font-weight: bold;
+    border-left: 2px solid global.$color__ystd_blue;
+  }
+
   h2 {
     margin-top: 3em;
     font-size: 1.2em;
     color: global.$color__ystd_blue;
+  }
+
+  h3 {
+    font-size: 1em;
   }
 
   code {
@@ -33,6 +46,9 @@
 
     &.is-small {
       margin-top: 1em;
+    }
+    &.is-w-600 {
+      max-width: 600px;
     }
   }
 

@@ -32,6 +32,8 @@ require_once __DIR__ . '/font/class-font.php';
 require_once __DIR__ . '/copyright/class-copyright.php';
 // Block Patterns.
 require_once __DIR__ . '/block-patterns/class-block-patterns.php';
+// Header Design.
+require_once __DIR__ . '/header/class-header-design.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';
