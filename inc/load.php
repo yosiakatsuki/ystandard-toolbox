@@ -34,6 +34,8 @@ require_once __DIR__ . '/copyright/class-copyright.php';
 require_once __DIR__ . '/block-patterns/class-block-patterns.php';
 // Header Design.
 require_once __DIR__ . '/header/class-header-design.php';
+// Post Meta.
+require_once __DIR__ . '/post-meta/class-post-meta.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';
