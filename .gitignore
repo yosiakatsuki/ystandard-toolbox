@@ -1,5 +1,5 @@
 *.zip
-css
-js
-build/
+/css
+/js
+/build
 ystandard-toolbox/
