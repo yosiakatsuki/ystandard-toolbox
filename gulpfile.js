@@ -37,9 +37,11 @@ function sass() {
 }
 
 function buildAdminApp() {
-	return webpackStream( webpackConfig, webpack )
+	return plumber()
+		.pipe( webpackStream( webpackConfig, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
+
 function watchBuildAdminApp() {
 	return plumber()
 		.pipe( webpackStream( webpackConfig, webpack ) )
