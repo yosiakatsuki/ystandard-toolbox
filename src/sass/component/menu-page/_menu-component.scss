@@ -51,6 +51,10 @@
       max-width: 600px;
     }
   }
+  .ystdtb-menu__section_title {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid global.$color__ystd_blue;
+  }
 
   .ystdtb-menu__table {
     display: flex;
@@ -249,7 +253,8 @@
         }
       }
 
-      h2 {
+      h3 {
+        color: global.$color__ystd_blue;
         text-align: center;
         font-size: 1.1em;
       }
