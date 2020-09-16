@@ -60,7 +60,7 @@ class Menu_Custom_CSS extends Menu_Page_Base {
 			return false;
 		}
 
-		return ! is_wp_error( wp_update_custom_css_post( $_post['custom-css'] ) );
+		return ! is_wp_error( wp_update_custom_css_post( stripslashes( $_post['custom-css'] ) ) );
 	}
 }
 
