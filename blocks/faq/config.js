@@ -40,9 +40,9 @@ export const supports = {
 };
 
 export const faqBorderTypes = [
-	{ label: __('なし', 'ystandard-toolbox'), name: '' },
-	{ label: __('上下左右', 'ystandard-toolbox'), name: 'all' },
-	{ label: __('下のみ', 'ystandard-toolbox'), name: 'bottom' },
+	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
+	{ label: __( '上下左右', 'ystandard-toolbox' ), name: 'all' },
+	{ label: __( '下のみ', 'ystandard-toolbox' ), name: 'bottom' },
 ];
 
 export const template = [

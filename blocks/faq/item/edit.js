@@ -1,5 +1,10 @@
 import classnames from 'classnames';
-import { template, faqBorderTypes, designPreset, labelPositions } from './config';
+import {
+	template,
+	faqBorderTypes,
+	designPreset,
+	labelPositions,
+} from './config';
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -68,6 +73,7 @@ function faqItem( props ) {
 		backgroundColor: faqBackgroundColor.color,
 		borderColor: faqBorderColor.color,
 		borderWidth: faqBorderSize,
+		alignItems: labelPosition,
 	};
 
 	const labelClasses = classnames( 'ystdtb-faq-item__label', {
@@ -84,7 +90,6 @@ function faqItem( props ) {
 		borderColor: labelBorderColor.color,
 		borderWidth: labelBorderSize,
 		borderRadius: labelBorderRadius,
-		alignSelf: labelPosition,
 	};
 
 	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );
@@ -107,7 +112,6 @@ function faqItem( props ) {
 	} );
 	const accordionArrowStyle = {
 		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
-		alignSelf: labelPosition,
 	};
 
 	return (
@@ -117,9 +121,7 @@ function faqItem( props ) {
 					title={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
 					initialOpen={ false }
 				>
-					<BaseControl
-						id={ 'sample-design' }
-					>
+					<BaseControl id={ 'sample-design' }>
 						<div className={ 'ystdtb__design-select' }>
 							{ designPreset.map( ( item ) => {
 								return (
@@ -154,8 +156,8 @@ function faqItem( props ) {
 															.labelBorderColor
 													),
 													accordionArrowColor:
-													item.attributes
-														.labelColor,
+														item.attributes
+															.labelColor,
 												},
 											} );
 										} }
@@ -206,7 +208,9 @@ function faqItem( props ) {
 										isSecondary={
 											labelPosition !== item.name
 										}
-										isPrimary={ labelPosition === item.name }
+										isPrimary={
+											labelPosition === item.name
+										}
 										onClick={ () => {
 											setAttributes( {
 												labelPosition: item.name,
@@ -361,7 +365,9 @@ function faqItem( props ) {
 										isSecondary={
 											faqBorderType !== item.name
 										}
-										isPrimary={ faqBorderType === item.name }
+										isPrimary={
+											faqBorderType === item.name
+										}
 										onClick={ () => {
 											setAttributes( {
 												faqBorderType: item.name,
@@ -389,7 +395,10 @@ function faqItem( props ) {
 						<>
 							<BaseControl
 								id={ 'basic-border-size' }
-								label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+								label={ __(
+									'枠線サイズ',
+									'ystandard-toolbox'
+								) }
 							>
 								<RangeControl
 									value={
@@ -398,7 +407,9 @@ function faqItem( props ) {
 											: faqBorderSize
 									}
 									onChange={ ( value ) =>
-										setAttributes( { faqBorderSize: value } )
+										setAttributes( {
+											faqBorderSize: value,
+										} )
 									}
 									min={ 0 }
 									max={ 10 }
@@ -440,7 +451,7 @@ function faqItem( props ) {
 							renderAppender={
 								hasChildBlocks
 									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender/>
+									: () => <InnerBlocks.ButtonBlockAppender />
 							}
 						/>
 					</div>
@@ -449,7 +460,7 @@ function faqItem( props ) {
 							className={ accordionArrowClass }
 							style={ accordionArrowStyle }
 						>
-							<ChevronDown/>
+							<ChevronDown />
 						</div>
 					) }
 				</div>

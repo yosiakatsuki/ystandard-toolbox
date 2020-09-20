@@ -9,13 +9,13 @@ export const supports = {
 };
 
 export const template = [
-	['ystdtb/timeline-item', {}],
-	['ystdtb/timeline-item', {}],
-	['ystdtb/timeline-item', {}],
+	[ 'ystdtb/timeline-item', {} ],
+	[ 'ystdtb/timeline-item', {} ],
+	[ 'ystdtb/timeline-item', {} ],
 ];
 
 export const presetLabelTypes = [
-	{ label: __('なし', 'ystandard-toolbox'), name: '' },
-	{ label: __('アイコン', 'ystandard-toolbox'), name: 'icon' },
-	{ label: __('連番', 'ystandard-toolbox'), name: 'text' },
+	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
+	{ label: __( 'アイコン', 'ystandard-toolbox' ), name: 'icon' },
+	{ label: __( '連番', 'ystandard-toolbox' ), name: 'text' },
 ];

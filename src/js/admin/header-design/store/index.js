@@ -19,7 +19,7 @@ const store = new Vuex.Store( {
 		initOptions( state ) {
 			state.options = {
 				...options,
-				...window.ystdtbHeaderDesignData
+				...window.ystdtbHeaderDesignData,
 			};
 		},
 	},

@@ -69,6 +69,7 @@ export default function ( { attributes } ) {
 			: customFaqBackgroundColor,
 		borderColor: faqBorderColorClass ? undefined : customFaqBorderColor,
 		borderWidth: 0 === faqBorderSize ? undefined : faqBorderSize + 'px',
+		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
 	const labelClasses = classnames( 'ystdtb-faq-item__label', {
@@ -97,7 +98,6 @@ export default function ( { attributes } ) {
 		borderWidth: 0 === labelBorderSize ? undefined : labelBorderSize + 'px',
 		borderRadius:
 			0 === labelBorderRadius ? undefined : labelBorderRadius + 'px',
-		alignSelf: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
 	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );
@@ -121,7 +121,6 @@ export default function ( { attributes } ) {
 	} );
 	const accordionArrowStyle = {
 		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
-		alignSelf: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
 	return (
@@ -130,14 +129,14 @@ export default function ( { attributes } ) {
 				<span className={ labelTextClasses }>{ faqType }</span>
 			</div>
 			<div className={ contentsClasses } style={ contentsStyles }>
-				<InnerBlocks.Content/>
+				<InnerBlocks.Content />
 			</div>
 			{ 'q' === faqType && (
 				<div
 					className={ accordionArrowClass }
 					style={ accordionArrowStyle }
 				>
-					<SVGIcon name={ 'chevron-down' }/>
+					<SVGIcon name={ 'chevron-down' } />
 				</div>
 			) }
 		</div>

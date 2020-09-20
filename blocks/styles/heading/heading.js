@@ -5,13 +5,16 @@ import _toBool from '../../../src/js/admin/function/_toBool';
 const types = _getHeadingTypes();
 const option = window.ystdtbBlockEditorHeading;
 
-for (const item of types) {
-	if (!!option[item.level] && _toBool(option[item.level].useCustomStyle)) {
+for ( const item of types ) {
+	if (
+		!! option[ item.level ] &&
+		_toBool( option[ item.level ].useCustomStyle )
+	) {
 		const style = {
-			name: `ystdtb-${item.level}`,
+			name: `ystdtb-${ item.level }`,
 			label: item.label,
 		};
-		registerBlockStyle('core/heading', style);
-		registerBlockStyle('ystdb/heading', style);
+		registerBlockStyle( 'core/heading', style );
+		registerBlockStyle( 'ystdb/heading', style );
 	}
 }

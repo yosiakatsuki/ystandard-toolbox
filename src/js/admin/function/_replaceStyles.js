@@ -1,4 +1,4 @@
-import hexRgb from "hex-rgb";
+import hexRgb from 'hex-rgb';
 
 export default function _replaceStyles( styles ) {
 	const result = {};
@@ -7,7 +7,9 @@ export default function _replaceStyles( styles ) {
 		const replace = ( value + '' ).match( /#\{.+?\}/g );
 		if ( replace ) {
 			for ( const replaceItem of replace ) {
-				let property = replaceItem.replace( '#{', '' ).replace( '}', '' );
+				let property = replaceItem
+					.replace( '#{', '' )
+					.replace( '}', '' );
 				let convert = '';
 				if ( 1 < property.split( ',' ).length ) {
 					convert = property.split( ',' )[ 1 ];

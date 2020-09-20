@@ -1,26 +1,26 @@
-export default function _getColorStyle(type, color) {
+export default function _getColorStyle( type, color ) {
 	const result = {};
 	const newColor = '' === color ? undefined : color;
 
-	if ('background' === type) {
+	if ( 'background' === type ) {
 		result.backgroundColor = newColor;
 	}
-	if ('color' === type) {
+	if ( 'color' === type ) {
 		result.color = newColor;
 	}
-	if ('borderColor' === type) {
+	if ( 'borderColor' === type ) {
 		result.borderColor = newColor;
 	}
-	if ('borderTopColor' === type) {
+	if ( 'borderTopColor' === type ) {
 		result.borderTopColor = newColor;
 	}
-	if ('borderRightColor' === type) {
+	if ( 'borderRightColor' === type ) {
 		result.borderRightColor = newColor;
 	}
-	if ('borderBottomColor' === type) {
+	if ( 'borderBottomColor' === type ) {
 		result.borderBottomColor = newColor;
 	}
-	if ('borderLeftColor' === type) {
+	if ( 'borderLeftColor' === type ) {
 		result.borderLeftColor = newColor;
 	}
 	return result;

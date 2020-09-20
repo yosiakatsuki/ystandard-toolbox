@@ -61,6 +61,7 @@
   display: flex;
   margin: 0;
   padding: 0.75em 0;
+  align-items: center;
 
   &.has-border-bottom {
     border-bottom-width: 1px;
@@ -78,7 +79,6 @@
 }
 
 .ystdtb-faq-item__label {
-  align-self: center;
   margin: 0;
   font-size: 24px;
   font-weight: 700;
@@ -117,5 +117,4 @@
 
 .ystdtb-faq-item__arrow {
   display: none;
-  align-self: center;
 }

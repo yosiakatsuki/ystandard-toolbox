@@ -92,7 +92,10 @@ export const faqBorderTypes = [
 ];
 
 export const template = [
-	[ 'core/paragraph', { placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) } ],
+	[
+		'core/paragraph',
+		{ placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) },
+	],
 ];
 
 export const labelPositions = [

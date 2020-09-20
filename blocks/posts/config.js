@@ -81,23 +81,26 @@ export const supports = {
 	customClassName: false,
 	className: false,
 	html: false,
-	align: ['full'],
+	align: [ 'full' ],
 };
 
 export const orderbySelect = [
-	{ label: __('公開日 / 新しい順', 'ystandard-toolbox'), value: 'date/DESC' },
-	{ label: __('公開日 / 古い順', 'ystandard-toolbox'), value: 'date/ASC' },
-	{ label: __('タイトル / A→Z', 'ystandard-toolbox'), value: 'title/ASC' },
-	{ label: __('タイトル / Z→A', 'ystandard-toolbox'), value: 'title/DESC' },
-	{ label: __('ランダム', 'ystandard-toolbox'), value: 'rand/DESC' },
+	{
+		label: __( '公開日 / 新しい順', 'ystandard-toolbox' ),
+		value: 'date/DESC',
+	},
+	{ label: __( '公開日 / 古い順', 'ystandard-toolbox' ), value: 'date/ASC' },
+	{ label: __( 'タイトル / A→Z', 'ystandard-toolbox' ), value: 'title/ASC' },
+	{ label: __( 'タイトル / Z→A', 'ystandard-toolbox' ), value: 'title/DESC' },
+	{ label: __( 'ランダム', 'ystandard-toolbox' ), value: 'rand/DESC' },
 ];
 export const listTypeSelect = [
-	{ label: __('カード', 'ystandard-toolbox'), value: 'card' },
-	{ label: __('リスト', 'ystandard-toolbox'), value: 'list' },
+	{ label: __( 'カード', 'ystandard-toolbox' ), value: 'card' },
+	{ label: __( 'リスト', 'ystandard-toolbox' ), value: 'list' },
 ];
 
 export const thumbnailRatioSelect = [
-	{ label: __('16-9', 'ystandard-toolbox'), value: '16-9' },
-	{ label: __('4-3', 'ystandard-toolbox'), value: '4-3' },
-	{ label: __('1-1', 'ystandard-toolbox'), value: '1-1' },
+	{ label: __( '16-9', 'ystandard-toolbox' ), value: '16-9' },
+	{ label: __( '4-3', 'ystandard-toolbox' ), value: '4-3' },
+	{ label: __( '1-1', 'ystandard-toolbox' ), value: '1-1' },
 ];

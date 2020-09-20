@@ -12,17 +12,17 @@ export default function _toNumber(
 	max = null,
 	defaultNum = null
 ) {
-	value = Number(value);
+	value = Number( value );
 
-	if (isNaN(value) || value < min) {
-		if (null !== defaultNum) {
+	if ( isNaN( value ) || value < min ) {
+		if ( null !== defaultNum ) {
 			value = defaultNum;
 		} else {
 			value = min;
 		}
 	}
 
-	if (null !== max && value > max) {
+	if ( null !== max && value > max ) {
 		value = max;
 	}
 

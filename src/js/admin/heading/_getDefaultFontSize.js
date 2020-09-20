@@ -12,6 +12,6 @@ const defaultFontSize = {
 	'archive-title': 1.4,
 };
 
-export default function getDefaultFontSize(level) {
-	return defaultFontSize[level];
+export default function getDefaultFontSize( level ) {
+	return defaultFontSize[ level ];
 }
