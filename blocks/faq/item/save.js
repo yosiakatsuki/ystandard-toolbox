@@ -6,12 +6,13 @@ import {
 } from '@wordpress/block-editor';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
 
-export default function({ attributes }) {
+export default function ( { attributes } ) {
 	const {
 		className,
 		faqType,
 		faqBorderType,
 		faqBorderSize,
+		labelPosition,
 		labelBorderSize,
 		labelBorderRadius,
 		faqTextColor,
@@ -33,7 +34,7 @@ export default function({ attributes }) {
 		customAccordionArrowColor,
 	} = attributes;
 
-	const faqTextColorClass = getColorClassName('color', faqTextColor);
+	const faqTextColorClass = getColorClassName( 'color', faqTextColor );
 	const faqBackgroundColorClass = getColorClassName(
 		'background-color',
 		faqBackgroundColor
@@ -42,7 +43,7 @@ export default function({ attributes }) {
 		'border-color',
 		faqBorderColor
 	);
-	const labelColorClass = getColorClassName('color', labelColor);
+	const labelColorClass = getColorClassName( 'color', labelColor );
 	const labelBackgroundColorClass = getColorClassName(
 		'background-color',
 		labelBackgroundColor
@@ -52,16 +53,16 @@ export default function({ attributes }) {
 		labelBorderColor
 	);
 
-	const labelSizeClass = getFontSizeClass(labelSize);
+	const labelSizeClass = getFontSizeClass( labelSize );
 
-	const itemClasses = classnames('ystdtb-faq-item', className, {
-		[`is-faq--${faqType}`]: faqType,
-		[`has-border-${faqBorderType}`]: '' !== faqBorderType,
+	const itemClasses = classnames( 'ystdtb-faq-item', className, {
+		[ `is-faq--${ faqType }` ]: faqType,
+		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
 		'has-background': faqBackgroundColor || customFaqBackgroundColor,
-		[faqBackgroundColorClass]: faqBackgroundColorClass,
+		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
 		'has-border': faqBorderColor || customFaqBorderColor,
-		[faqBorderColorClass]: faqBorderColorClass,
-	});
+		[ faqBorderColorClass ]: faqBorderColorClass,
+	} );
 	const itemStyles = {
 		backgroundColor: faqBackgroundColorClass
 			? undefined
@@ -70,21 +71,21 @@ export default function({ attributes }) {
 		borderWidth: 0 === faqBorderSize ? undefined : faqBorderSize + 'px',
 	};
 
-	const labelClasses = classnames('ystdtb-faq-item__label', {
-		[labelSizeClass]: labelSizeClass,
+	const labelClasses = classnames( 'ystdtb-faq-item__label', {
+		[ labelSizeClass ]: labelSizeClass,
 		'has-text-color': labelColor || customLabelColor,
-		[labelColorClass]: labelColorClass,
+		[ labelColorClass ]: labelColorClass,
 		'has-background': labelBackgroundColor || customLabelBackgroundColor,
-		[labelBackgroundColorClass]: labelBackgroundColorClass,
+		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
 		'has-border': labelBorderColor || customLabelBorderColor,
-		[labelBorderColorClass]: labelBorderColorClass,
+		[ labelBorderColorClass ]: labelBorderColorClass,
 		'has-padding':
 			labelBackgroundColor ||
 			customLabelBackgroundColor ||
 			labelBorderColor ||
 			customLabelBorderColor ||
 			labelBorderSize,
-	});
+	} );
 	const labelStyles = {
 		fontSize: labelSizeClass ? undefined : customLabelSize,
 		color: labelColorClass ? undefined : customLabelColor,
@@ -96,14 +97,15 @@ export default function({ attributes }) {
 		borderWidth: 0 === labelBorderSize ? undefined : labelBorderSize + 'px',
 		borderRadius:
 			0 === labelBorderRadius ? undefined : labelBorderRadius + 'px',
+		alignSelf: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
-	const labelTextClasses = classnames('ystdtb-faq-item__label-text', {});
+	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );
 
-	const contentsClasses = classnames('ystdtb-faq-item__contents', {
+	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {
 		'has-text-color': faqTextColor || customFaqTextColor,
-		[faqTextColorClass]: faqTextColorClass,
-	});
+		[ faqTextColorClass ]: faqTextColorClass,
+	} );
 
 	const contentsStyles = {
 		color: faqTextColorClass ? undefined : customFaqTextColor,
@@ -113,30 +115,31 @@ export default function({ attributes }) {
 		'color',
 		accordionArrowColor
 	);
-	const accordionArrowClass = classnames('ystdtb-faq-item__arrow', {
+	const accordionArrowClass = classnames( 'ystdtb-faq-item__arrow', {
 		'has-text-color': accordionArrowColorClass || customAccordionArrowColor,
-		[accordionArrowColorClass]: accordionArrowColorClass,
-	});
+		[ accordionArrowColorClass ]: accordionArrowColorClass,
+	} );
 	const accordionArrowStyle = {
 		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
+		alignSelf: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
 	return (
-		<div className={itemClasses} style={itemStyles}>
-			<div className={labelClasses} style={labelStyles}>
-				<span className={labelTextClasses}>{faqType}</span>
+		<div className={ itemClasses } style={ itemStyles }>
+			<div className={ labelClasses } style={ labelStyles }>
+				<span className={ labelTextClasses }>{ faqType }</span>
 			</div>
-			<div className={contentsClasses} style={contentsStyles}>
-				<InnerBlocks.Content />
+			<div className={ contentsClasses } style={ contentsStyles }>
+				<InnerBlocks.Content/>
 			</div>
-			{'q' === faqType && (
+			{ 'q' === faqType && (
 				<div
-					className={accordionArrowClass}
-					style={accordionArrowStyle}
+					className={ accordionArrowClass }
+					style={ accordionArrowStyle }
 				>
-					<SVGIcon name={'chevron-down'} />
+					<SVGIcon name={ 'chevron-down' }/>
 				</div>
-			)}
+			) }
 		</div>
 	);
 }

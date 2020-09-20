@@ -1,3 +1,5 @@
+@use "../../global";
+
 .ystdtb-block-label {
   font-weight: 400;
   margin-bottom: 8px;
@@ -41,6 +43,34 @@
 
     &:nth-child(n+2) {
       border-top: 0;
+    }
+  }
+
+  .is-block {
+    display: block;
+  }
+
+  .is-flex {
+    display: flex;
+  }
+}
+
+.ystdtb__design-select {
+  > button {
+    display: block;
+    width: 100%;
+    padding: 1.5em 1em;
+    margin-top: 1.5em;
+    height: auto;
+    border: 0;
+    border-radius: 0.5em;
+    outline: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0 !important;
+    transition: background-color .3s;
+
+    &:hover,
+    &:focus {
+      background-color: global.$color__bg-gray-light;
     }
   }
 

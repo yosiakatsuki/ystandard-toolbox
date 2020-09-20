@@ -2,6 +2,8 @@
 
 .ystdtb-faq {
   border: 0;
+  padding-top: .75em;
+  padding-bottom: .75em;
 
   & + .ystdtb-faq {
     margin-top: 0;
@@ -57,9 +59,8 @@
 
 .ystdtb-faq-item {
   display: flex;
-  align-items: center;
   margin: 0;
-  padding: 1.5em 0;
+  padding: 0.75em 0;
 
   &.has-border-bottom {
     border-bottom-width: 1px;
@@ -77,6 +78,7 @@
 }
 
 .ystdtb-faq-item__label {
+  align-self: center;
   margin: 0;
   font-size: 24px;
   font-weight: 700;
@@ -97,7 +99,7 @@
 }
 
 .ystdtb-faq-item__contents {
-  margin: 0 0 0 2em;
+  margin: 0 0 0 1.5em;
   flex-grow: 1;
 
   > * {
@@ -115,4 +117,5 @@
 
 .ystdtb-faq-item__arrow {
   display: none;
+  align-self: center;
 }

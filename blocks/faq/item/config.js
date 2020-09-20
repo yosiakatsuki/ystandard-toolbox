@@ -31,6 +31,10 @@ export const attributes = {
 	customFaqBorderColor: {
 		type: 'string',
 	},
+	labelPosition: {
+		type: 'string',
+		default: 'center',
+	},
 	labelSize: {
 		type: 'string',
 	},
@@ -83,18 +87,24 @@ export const supports = {
 };
 
 export const faqBorderTypes = [
-	{ label: __('なし', 'ystandard-toolbox'), name: '' },
-	{ label: __('下区切り線', 'ystandard-toolbox'), name: 'bottom' },
+	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
+	{ label: __( '下区切り線', 'ystandard-toolbox' ), name: 'bottom' },
 ];
 
 export const template = [
-	['core/paragraph', { placeholder: __('Q&A項目…', 'ystandard-toolbox') }],
+	[ 'core/paragraph', { placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) } ],
+];
+
+export const labelPositions = [
+	{ label: __( '上', 'ystandard-toolbox' ), name: 'flex-start' },
+	{ label: __( '中央', 'ystandard-toolbox' ), name: 'center' },
+	{ label: __( '下', 'ystandard-toolbox' ), name: 'flex-end' },
 ];
 
 export const designPreset = [
 	{
 		name: 'default',
-		label: __('デフォルト', 'ystandard-toolbox'),
+		label: __( 'デフォルト', 'ystandard-toolbox' ),
 		itemStyles: {},
 		labelStyles: {
 			color: '#222222',
@@ -121,7 +131,7 @@ export const designPreset = [
 	},
 	{
 		name: 'background-square',
-		label: __('背景あり四角', 'ystandard-toolbox'),
+		label: __( '背景あり四角', 'ystandard-toolbox' ),
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -149,7 +159,7 @@ export const designPreset = [
 	},
 	{
 		name: 'background-circle',
-		label: __('背景あり丸', 'ystandard-toolbox'),
+		label: __( '背景あり丸', 'ystandard-toolbox' ),
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -178,7 +188,7 @@ export const designPreset = [
 	},
 	{
 		name: 'outline-square',
-		label: __('四角アウトライン', 'ystandard-toolbox'),
+		label: __( '四角アウトライン', 'ystandard-toolbox' ),
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -207,7 +217,7 @@ export const designPreset = [
 	},
 	{
 		name: 'outline-circle',
-		label: __('丸アウトライン', 'ystandard-toolbox'),
+		label: __( '丸アウトライン', 'ystandard-toolbox' ),
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -237,7 +247,7 @@ export const designPreset = [
 	},
 	{
 		name: 'bottom-divider',
-		label: __('区切り線あり', 'ystandard-toolbox'),
+		label: __( '区切り線あり', 'ystandard-toolbox' ),
 		itemStyles: {
 			paddingBottom: '.25em',
 			borderBottom: '1px solid #aaaaaa',
