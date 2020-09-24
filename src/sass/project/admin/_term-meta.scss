@@ -1,0 +1,18 @@
+@use "../../global";
+
+.ystdtb-term-option {
+  position: relative;
+  margin-top: 2em;
+  padding: 2em;
+  background-color: rgba(#fff, 0.8);
+  border-radius: .5em;
+  border: 1px solid global.$color__border-gray-light;
+}
+
+.ystdtb-term-option__label {
+  padding-bottom: .5em;
+  border-bottom: 1px solid global.$color__border-gray-light;
+  color: global.$color__ystd_blue;
+  font-size: 1.2em;
+  font-weight: bold;
+}

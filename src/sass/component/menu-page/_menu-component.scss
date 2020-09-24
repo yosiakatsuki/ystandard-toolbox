@@ -276,33 +276,6 @@
       stroke-width: 0.08em;
     }
   }
-
-  .ystdtb-menu__manual-link {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-
-      svg {
-        width: 1.2em;
-        height: 1.2em;
-        margin-right: .25em;
-      }
-    }
-  }
-
-  .ystdtb-menu__manual-link-inline {
-    display: inline-block;
-    font-size: 0.8em;
-
-    svg {
-      width: 1.2em;
-      height: 1.2em;
-      vertical-align: middle;
-      margin-right: .25em;
-    }
-  }
 }
 
 // .ystdtb-menu__component

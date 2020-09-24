@@ -310,4 +310,82 @@ class Utility {
 			hexdec( substr( $color, 5, 2 ) ),
 		];
 	}
+
+	/**
+	 * 投稿タイプ取得
+	 *
+	 * @param array $args    args.
+	 * @param bool  $exclude 除外.
+	 *
+	 * @return array
+	 */
+	public static function get_post_types( $args = [], $exclude = true ) {
+		$args = array_merge(
+			[ 'public' => true ],
+			$args
+		);
+
+		$types = get_post_types( $args );
+
+		if ( is_array( $exclude ) ) {
+			$exclude[] = 'attachment';
+			foreach ( $exclude as $item ) {
+				unset( $types[ $item ] );
+			}
+		}
+
+		if ( true === $exclude ) {
+			unset( $types['attachment'] );
+		}
+
+		foreach ( $types as $key => $value ) {
+			$post_type = get_post_type_object( $key );
+			if ( $post_type ) {
+				$types[ $key ] = $post_type->labels->singular_name;
+			}
+		}
+
+		return $types;
+	}
+
+	/**
+	 * Nonceチェック
+	 *
+	 * @param string $name   Name.
+	 * @param string $action Action.
+	 *
+	 * @return bool|int
+	 */
+	public static function verify_nonce( $name, $action ) {
+		// nonceがセットされているかどうか確認.
+		if ( ! isset( $_POST[ $name ] ) ) {
+			return false;
+		}
+
+		return wp_verify_nonce( $_POST[ $name ], $action );
+	}
+
+	/**
+	 * タイトルタグ用タイトルの作成
+	 *
+	 * @param string $title Title.
+	 */
+	public static function get_document_title( $title ) {
+		$site  = get_bloginfo( 'name', 'display' );
+		$sep   = apply_filters( 'document_title_separator', '-' );
+		$title = $title . ' ' . $sep . ' ' . $site;
+		$title = wptexturize( $title );
+		$title = convert_chars( $title );
+		$title = esc_html( $title );
+		$title = capital_P_dangit( $title );
+
+		return $title;
+	}
+
+	/**
+	 * カテゴリー・タグ・ターム 一覧ページかどうか
+	 */
+	public static function is_term_archive() {
+		return is_tax() || is_category() || is_tag();
+	}
 }

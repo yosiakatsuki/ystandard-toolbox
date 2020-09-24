@@ -257,7 +257,6 @@ abstract class Menu_Page_Base {
 				$item['version']
 			);
 		}
-
 	}
 
 	/**
@@ -272,8 +271,11 @@ abstract class Menu_Page_Base {
 		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX ) ) {
 			return $classes;
 		}
+		if ( false === strpos( $classes, 'ystdtb-menu-page' ) ) {
+			$classes = $classes . ' ystdtb-menu-page';
+		}
 
-		return $classes . ' ystdtb-menu-page';
+		return $classes;
 	}
 
 	/**

@@ -36,6 +36,8 @@ require_once __DIR__ . '/block-patterns/class-block-patterns.php';
 require_once __DIR__ . '/header/class-header-design.php';
 // Post Meta.
 require_once __DIR__ . '/post-meta/class-post-meta.php';
+// Taxonomy.
+require_once __DIR__ . '/taxonomy/class-taxonomy.php';
 // SEO.
 require_once __DIR__ . '/seo/class-seo.php';
 

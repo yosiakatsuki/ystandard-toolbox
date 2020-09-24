@@ -34,18 +34,14 @@ class Post_Meta_SEO {
 
 	/**
 	 * <title>タグ
+	 *
+	 * @param string $title Title.
 	 */
 	public function render_title_tag( $title ) {
 		if ( is_singular() ) {
 			$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
 			if ( ! empty( trim( $seo_title ) ) ) {
-				$site  = get_bloginfo( 'name', 'display' );
-				$sep   = apply_filters( 'document_title_separator', '-' );
-				$title = $seo_title . ' ' . $sep . ' ' . $site;
-				$title = wptexturize( $title );
-				$title = convert_chars( $title );
-				$title = esc_html( $title );
-				$title = capital_P_dangit( $title );
+				$title = Utility::get_document_title( $seo_title );
 			}
 		}
 
