@@ -28,16 +28,14 @@ class Post_Meta_SEO {
 		}
 		add_action( 'ys_meta_box_seo', [ $this, 'add_seo_option' ] );
 		add_action( 'ys_save_post_meta_seo', [ $this, 'save_seo_option' ] );
-		remove_action( 'wp_head', '_wp_render_title_tag', 1 );
-		add_action( 'wp_head', [ $this, '_render_title_tag' ], 1 );
+		add_action( 'ystdtb_render_title_tag', [ $this, 'render_title_tag' ] );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
 	}
 
 	/**
 	 * <title>タグ
 	 */
-	public function _render_title_tag() {
-		$title = wp_get_document_title();
+	public function render_title_tag( $title ) {
 		if ( is_singular() ) {
 			$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
 			if ( ! empty( trim( $seo_title ) ) ) {
@@ -50,7 +48,8 @@ class Post_Meta_SEO {
 				$title = capital_P_dangit( $title );
 			}
 		}
-		echo '<title>' . $title . '</title>' . PHP_EOL;
+
+		return $title;
 	}
 
 	/**
