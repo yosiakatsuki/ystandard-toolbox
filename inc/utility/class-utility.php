@@ -59,6 +59,20 @@ class Utility {
 	}
 
 	/**
+	 * WordPressのバージョンチェック
+	 *
+	 * @param string $version バージョン.
+	 *
+	 * @return bool|int
+	 */
+	public static function wordpress_version_compare( $version ) {
+
+		$wp_version = get_bloginfo( 'version' );
+
+		return version_compare( $wp_version, $version, '>=' );
+	}
+
+	/**
 	 * テーマのバージョンチェック
 	 *
 	 * @param string $version バージョン.

@@ -145,7 +145,7 @@ defined( 'ABSPATH' ) || die();
 		<h2 class="ystdtb-menu__section_title">SEO関連機能</h2>
 		<div class="ystdtb-menu__column">
 			<div class="ystdtb-menu__column-item">
-				<h3>title,description設定</h3>
+				<h3>投稿のtitle,description設定</h3>
 				<figure class="ystdtb-menu__column-icon">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle">
 						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -154,6 +154,18 @@ defined( 'ABSPATH' ) || die();
 				</figure>
 				<p>投稿タイトルとは別の&lt;title&gt;設定、メタデスクリプションを設定できる機能</p>
 				<?php echo Utility::manual_link( 'title-dscr', '', 'button is-primary is-small' ); ?>
+			</div>
+			<div class="ystdtb-menu__column-item">
+				<h3>一覧のtitle,description設定</h3>
+				<figure class="ystdtb-menu__column-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive">
+						<polyline points="21 8 21 21 3 21 3 8"></polyline>
+						<rect x="1" y="3" width="22" height="5"></rect>
+						<line x1="10" y1="12" x2="14" y2="12"></line>
+					</svg>
+				</figure>
+				<p>カテゴリー・タグ一覧ページの&lt;title&gt;設定、メタデスクリプションを設定できる機能</p>
+				<?php echo Utility::manual_link( 'term-meta-seo', '', 'button is-primary is-small' ); ?>
 			</div>
 		</div>
 	</div>

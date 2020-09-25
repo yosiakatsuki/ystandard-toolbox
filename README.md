@@ -2,10 +2,14 @@
 
 無料WordPressテーマ「yStandard」用機能拡張プラグイン
 
+詳細はこちら▼  
+[https://wp-ystandard.com/plugins/ystandard-toolbox/](https://wp-ystandard.com/plugins/ystandard-toolbox/)
+
 ## 更新履歴
 
 ### v1.1.0
 - [追加] カテゴリー・アーカイブページのtitle,meta description設定追加
+- [追加] WordPressバージョンのチェック追加
 
 ### v1.0.2
 - [追加] Q・A ラベルの揃え位置再調整

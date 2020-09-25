@@ -19,6 +19,11 @@ defined( 'ABSPATH' ) || die();
 class Init {
 
 	/**
+	 * 必要なWordPressバージョン
+	 */
+	const REQUIRE_WORDPRESS_VERSION = '5.5.0';
+
+	/**
 	 * 必要なyStandardバージョン
 	 */
 	const REQUIRE_YSTANDARD_VERSION = '4.12.0';
@@ -71,6 +76,9 @@ class Init {
 	 * テーマ・プラグインのバージョンチェック
 	 */
 	private function check_versions() {
+		if ( ! Utility::wordpress_version_compare( self::REQUIRE_WORDPRESS_VERSION ) ) {
+			$this->version_warning .= '<li>WordPress : ' . self::REQUIRE_WORDPRESS_VERSION . '</li>';
+		}
 		if ( ! Utility::ystandard_version_compare( self::REQUIRE_YSTANDARD_VERSION ) ) {
 			$this->version_warning .= '<li>yStandard : ' . self::REQUIRE_YSTANDARD_VERSION . '</li>';
 		}
@@ -81,9 +89,9 @@ class Init {
 			return;
 		}
 		$this->version_warning = "
-		yStandard Toolboxの全機能を使用するためには以下のバージョンのテーマ・プラグインを使用する必要があります。<br>
+		yStandard Toolboxの全機能を使用するためには以下のバージョンのWordPress・テーマ・プラグインを使用する必要があります。<br>
 		<ul>{$this->version_warning}</ul>
-		テーマ・プラグインのアップデートを実施するまでは一部機能が制限されます。
+		WordPress本体・テーマ・プラグインのアップデートを実施するまでは一部機能が制限されます。
 		";
 		Notice::set_notice(
 			function () {
