@@ -402,4 +402,35 @@ class Utility {
 	public static function is_term_archive() {
 		return is_tax() || is_category() || is_tag();
 	}
+
+	/**
+	 * 使える画像サイズ一覧取得
+	 *
+	 * @return array
+	 */
+	public static function get_image_sizes() {
+		global $_wp_additional_image_sizes;
+		$sizes = [];
+		foreach ( get_intermediate_image_sizes() as $size ) {
+			if ( in_array( $size, [ 'thumbnail', 'medium', 'medium_large', 'large' ], true ) ) {
+				$sizes[ $size ]['width']  = get_option( "{$size}_size_w" );
+				$sizes[ $size ]['height'] = get_option( "{$size}_size_h" );
+			} elseif ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+				$sizes[ $size ] = [
+					'width'  => $_wp_additional_image_sizes[ $size ]['width'],
+					'height' => $_wp_additional_image_sizes[ $size ]['height'],
+				];
+
+			}
+		}
+		/**
+		 * フルサイズ追加
+		 */
+		$sizes['full'] = [
+			'width'  => '-',
+			'height' => '-',
+		];
+
+		return $sizes;
+	}
 }

@@ -91,7 +91,21 @@ class Option {
 	 * @return bool
 	 */
 	public static function update_option( $name, $value ) {
-		$option          = self::get_all_option();
+		$option = self::get_all_option();
+
+		if ( is_array( $value ) ) {
+			/**
+			 * テーマ設定は別保存
+			 */
+			foreach ( $value as $key => $option_value ) {
+				if ( false !== strpos( $key, 'theme_' ) ) {
+					$theme_option = str_replace( 'theme_', '', $key );
+					update_option( $theme_option, $option_value );
+					unset( $value[ $key ] );
+				}
+			}
+		}
+
 		$option[ $name ] = $value;
 
 		return update_option( Config::OPTION_NAME, $option );

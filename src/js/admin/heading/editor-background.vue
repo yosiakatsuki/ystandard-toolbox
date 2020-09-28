@@ -201,7 +201,6 @@
 				this.updateOption( 'backgroundColor', '' );
 			},
 			openMediaUploader() {
-				console.log( 'aaa' );
 				this.initMediaUploader();
 				this.mediaUploader.open();
 			},

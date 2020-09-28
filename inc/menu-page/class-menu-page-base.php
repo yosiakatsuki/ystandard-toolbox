@@ -382,6 +382,19 @@ abstract class Menu_Page_Base {
 	}
 
 	/**
+	 * 管理画面用スクリプトデータ追加
+	 *
+	 * @param string $name        Name.
+	 * @param string $object_name Object Name.
+	 * @param array  $args        Args.
+	 */
+	protected function enqueue_admin_localize_script( $name, $object_name, $args ) {
+		$args['site-url']   = esc_url_raw( home_url() );
+		$args['plugin-url'] = YSTDTB_URL;
+		wp_localize_script( "ystdtb-${name}", $object_name, $args );
+	}
+
+	/**
 	 * Toolboxの管理画面チェック
 	 *
 	 * @param string $hook_suffix Page Suffix.
