@@ -35,6 +35,9 @@ class Archive {
 		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
 			add_filter( 'ys_get_archive_type', [ $this, 'mobile_archive_type' ] );
 		}
+		if ( Option::get_option( self::OPTION_NAME, 'archiveOrder', '' ) ) {
+			add_action( 'pre_get_posts', [ $this, 'change_archive_order' ] );
+		}
 	}
 
 	/**
@@ -87,6 +90,29 @@ class Archive {
 
 		return $type;
 	}
+
+
+	/**
+	 * アーカイブページの並び順変更
+	 *
+	 * @param \WP_Query $query query.
+	 */
+	public function change_archive_order( $query ) {
+		if ( is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
+		if ( $query->is_archive() || $query->is_search() ) {
+			$order = Option::get_option( self::OPTION_NAME, 'archiveOrder', '' );
+			if ( $order ) {
+				$order = explode( '/', $order );
+				if ( is_array( $order ) && 0 < count( $order ) ) {
+					$query->set( 'orderby', $order[0] );
+					$query->set( 'order', $order[1] );
+				}
+			}
+		}
+	}
+
 }
 
 new Archive();

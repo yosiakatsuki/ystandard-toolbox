@@ -1,5 +1,5 @@
 <template>
-	<div class="layout">
+	<div class="ystdtb-menu__section layout">
 		<h3 class="ystdtb-menu__section-title">レイアウト設定</h3>
 		<p class="ystdtb-menu__subtext">投稿一覧ページレイアウト設定</p>
 		<div class="ystdtb-menu__section">

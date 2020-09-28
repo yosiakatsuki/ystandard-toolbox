@@ -2,6 +2,7 @@
 	<div class="ystdtb-menu__form archive">
 		<DefaultImage/>
 		<Layout/>
+		<Order/>
 		<div class="ystdtb-menu__section">
 			<p class="submit">
 				<input type="submit" name="submit" id="submit" class="button button-primary" value="変更を保存">
@@ -13,6 +14,7 @@
 <script>
 	import DefaultImage from "./default-image";
 	import Layout from "./layout";
+	import Order from "./order";
 
 	export default {
 		name: 'app-archive',
@@ -21,7 +23,8 @@
 		},
 		components: {
 			DefaultImage,
-			Layout
+			Layout,
+			Order,
 		},
 		beforeCreate() {
 			this.$store.commit( 'initOptions' );
