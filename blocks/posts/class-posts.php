@@ -66,19 +66,19 @@ class Posts extends Dynamic_Block {
 				'type' => 'string',
 			],
 			'showImg'        => [
-				'type'    => 'bool',
+				'type'    => 'boolean',
 				'default' => true,
 			],
 			'showDate'       => [
-				'type'    => 'bool',
+				'type'    => 'boolean',
 				'default' => true,
 			],
 			'showCategory'   => [
-				'type'    => 'bool',
+				'type'    => 'boolean',
 				'default' => true,
 			],
 			'showExcerpt'    => [
-				'type'    => 'bool',
+				'type'    => 'boolean',
 				'default' => false,
 			],
 			'thumbnailSize'  => [
