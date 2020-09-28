@@ -48,12 +48,19 @@ class Menu_Archive extends Menu_Page_Base {
 			return;
 		}
 
+		$option = array_merge(
+			[
+				'theme_ys_archive_type' => get_option( 'ys_archive_type', 'card' ),
+			],
+			Option::get_option( Archive::OPTION_NAME, '', [] )
+		);
+
 		wp_enqueue_media();
 		$this->enqueue_admin_script( 'archive' );
 		$this->enqueue_admin_localize_script(
 			'archive',
 			'ystdtbArchiveData',
-			Option::get_option( Archive::OPTION_NAME, '', [] )
+			$option
 		);
 	}
 

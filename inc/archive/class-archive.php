@@ -32,6 +32,9 @@ class Archive {
 		if ( Utility::ystandard_version_compare( '4.13.1' ) ) {
 			add_filter( 'ys_get_archive_default_image', [ $this, 'get_archive_default_image' ], 10, 4 );
 		}
+		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
+			add_filter( 'ys_get_archive_type', [ $this, 'mobile_archive_type' ] );
+		}
 	}
 
 	/**
@@ -71,6 +74,19 @@ class Archive {
 		return $image;
 	}
 
+	/**
+	 * モバイルでの一覧レイアウト
+	 *
+	 * @param string $type Type.
+	 */
+	public function mobile_archive_type( $type ) {
+		$mobile = Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' );
+		if ( $mobile && Utility::is_mobile() ) {
+			$type = $mobile;
+		}
+
+		return $type;
+	}
 }
 
 new Archive();

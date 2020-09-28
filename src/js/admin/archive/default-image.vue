@@ -2,8 +2,8 @@
 	<div class="default-image">
 		<h3 class="ystdtb-menu__section-title">投稿一覧デフォルト画像</h3>
 		<p class="ystdtb-menu__subtext">投稿一覧でアイキャッチ画像がなかった場合に表示される画像の設定</p>
-		<div class="ystdtb-menu__section is-w-600">
-			<div class="ystdtb-menu__table">
+		<div class="ystdtb-menu__section">
+			<div class="ystdtb-menu__table-collapse">
 				<div class="is-label">デフォルト画像</div>
 				<div class="is-content">
 					<div class="ystdtb-menu__horizontal">
@@ -94,6 +94,7 @@
 <style lang="scss">
 	.default-image__preview {
 		width: 300px;
+		max-width: 100%;
 
 		img {
 			display: block;

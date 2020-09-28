@@ -137,6 +137,20 @@
       cursor: unset !important;
     }
 
+    &.is-image-button {
+      padding: .5em;
+      transition: none;
+
+      img {
+        display: block;
+      }
+
+      &.is-select {
+        border-width: .5em;
+        padding: 0;
+      }
+    }
+
   }
 
   .toggle-button {
