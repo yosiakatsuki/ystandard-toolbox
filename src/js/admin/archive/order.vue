@@ -30,6 +30,8 @@
 					{ value: 'date/ASC', label: '公開日/昇順' },
 					{ value: 'modified/DESC', label: '更新日/降順' },
 					{ value: 'modified/ASC', label: '更新日/昇順' },
+					{ value: 'title/ASC', label: 'タイトル/A-Z' },
+					{ value: 'title/DESC', label: 'タイトル/Z-A' },
 					{ value: 'rand/ASC', label: 'ランダム' },
 				],
 			}
