@@ -26,7 +26,7 @@ class Init {
 	/**
 	 * 必要なyStandardバージョン
 	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.12.0';
+	const REQUIRE_YSTANDARD_VERSION = '4.13.1';
 	/**
 	 * 必要なyStandard Blocksバージョン
 	 */

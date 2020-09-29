@@ -2,7 +2,7 @@
 
 無料WordPressテーマ「yStandard」用機能拡張プラグイン
 
-詳細はこちら▼  
+詳細・購入はこちら▼  
 [https://wp-ystandard.com/plugins/ystandard-toolbox/](https://wp-ystandard.com/plugins/ystandard-toolbox/)
 
 ## 更新履歴
