@@ -62,14 +62,5 @@
 </script>
 
 <style lang="scss">
-	.default-image__preview {
-		width: 300px;
-		max-width: 100%;
 
-		img {
-			display: block;
-			max-width: 100%;
-			height: auto;
-		}
-	}
 </style>

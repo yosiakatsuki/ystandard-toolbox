@@ -1,5 +1,8 @@
 {
   "archiveDefaultImage": "",
   "archiveMobileLayout": "",
-  "archiveOrder": ""
+  "archiveOrder": "",
+  "archiveImageRatio": "16-9",
+  "archiveImageRatioMobile": "16-9",
+  "archiveDisplayDate": ""
 }

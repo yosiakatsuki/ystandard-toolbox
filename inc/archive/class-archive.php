@@ -38,6 +38,12 @@ class Archive {
 		if ( Option::get_option( self::OPTION_NAME, 'archiveOrder', '' ) ) {
 			add_action( 'pre_get_posts', [ $this, 'change_archive_order' ] );
 		}
+		if ( Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' ) ) {
+			add_filter( 'ys_archive_image_ratio', [ $this, 'archive_image_ratio' ] );
+		}
+		if (  Utility::ystandard_version_compare( '4.13.2' )  ) {
+			add_filter( 'ys_get_archive_detail_date', [ $this, 'get_archive_detail_date' ], 10, 4 );
+		}
 	}
 
 	/**
@@ -81,6 +87,8 @@ class Archive {
 	 * モバイルでの一覧レイアウト
 	 *
 	 * @param string $type Type.
+	 *
+	 * @return string
 	 */
 	public function mobile_archive_type( $type ) {
 		$mobile = Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' );
@@ -89,6 +97,57 @@ class Archive {
 		}
 
 		return $type;
+	}
+
+	/**
+	 * アーカイブページの縦横比変更
+	 *
+	 * @param string $ratio Ratio Class.
+	 *
+	 * @return string
+	 */
+	public function archive_image_ratio( $ratio ) {
+		$new_ratio = '';
+
+		$ratio_option = Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' );
+		$new_ratio    = ! empty( $ratio_option ) ? $ratio_option : $new_ratio;
+		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
+			if ( Utility::is_mobile() ) {
+				$mobile_ratio = Option::get_option( self::OPTION_NAME, 'archiveImageRatioMobile', '' );
+
+				$new_ratio    = ! empty( $mobile_ratio ) ? $mobile_ratio : $new_ratio;
+			}
+		}
+
+		if ( empty( $new_ratio ) ) {
+			return $ratio;
+		}
+
+		return "is-${new_ratio}";
+	}
+
+
+	/**
+	 * 日付情報の変更
+	 *
+	 * @param string $date        日付情報.
+	 * @param string $format      HTMLフォーマット.
+	 * @param string $icon        アイコン.
+	 * @param string $date_format 日付フォーマット.
+	 *
+	 * @return string
+	 */
+	public function get_archive_detail_date( $date, $format, $icon, $date_format ) {
+		if ( 'modified' === Option::get_option( self::OPTION_NAME, 'archiveDisplayDate', '' ) ) {
+			return sprintf(
+				$format,
+				$icon,
+				get_the_modified_date( 'Y-m-d' ),
+				get_the_modified_date( $date_format )
+			);
+		}
+
+		return $date;
 	}
 
 
