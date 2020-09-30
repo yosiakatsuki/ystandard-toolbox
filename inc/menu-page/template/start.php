@@ -13,6 +13,11 @@ defined( 'ABSPATH' ) || die();
 ?>
 <div class="start ystdtb-menu__start ystdtb-menu__component ystdtb-menu__form">
 	<h1 class="ystdtb-menu__title">yStandard Toolbox</h1>
+	<!--
+	/**
+	 * デザイン機能
+	 */
+	-->
 	<div class="ystdtb-menu__section">
 		<h2 class="ystdtb-menu__section_title">デザイン機能</h2>
 		<div class="ystdtb-menu__column">
@@ -57,6 +62,19 @@ defined( 'ABSPATH' ) || die();
 				<?php echo Utility::manual_link( 'header-design', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
+				<h3>アーカイブページ拡張</h3>
+				<figure class="ystdtb-menu__column-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+						<rect x="3" y="3" width="7" height="7"></rect>
+						<rect x="14" y="3" width="7" height="7"></rect>
+						<rect x="14" y="14" width="7" height="7"></rect>
+						<rect x="3" y="14" width="7" height="7"></rect>
+					</svg>
+				</figure>
+				<p>投稿一覧のデフォルト画像や一覧画像サイズ、一覧レイアウトを変更できる機能</p>
+				<?php echo Utility::manual_link( 'archive', '', 'button is-primary is-small' ); ?>
+			</div>
+			<div class="ystdtb-menu__column-item">
 				<h3>追加CSS編集</h3>
 				<figure class="ystdtb-menu__column-icon">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-droplet">
@@ -79,6 +97,11 @@ defined( 'ABSPATH' ) || die();
 			</div>
 		</div>
 	</div>
+	<!--
+	/**
+	 * ブロック機能
+	 */
+	-->
 	<div class="ystdtb-menu__section">
 		<h2 class="ystdtb-menu__section_title">ブロック機能</h2>
 		<div class="ystdtb-menu__column">
@@ -141,6 +164,11 @@ defined( 'ABSPATH' ) || die();
 			</div>
 		</div>
 	</div>
+	<!--
+	/**
+	 * SEO関連機能
+	 */
+	-->
 	<div class="ystdtb-menu__section">
 		<h2 class="ystdtb-menu__section_title">SEO関連機能</h2>
 		<div class="ystdtb-menu__column">
@@ -169,6 +197,11 @@ defined( 'ABSPATH' ) || die();
 			</div>
 		</div>
 	</div>
+	<!--
+	/**
+	 * その他機能
+	 */
+	-->
 	<div class="ystdtb-menu__section">
 		<h2 class="ystdtb-menu__section_title">その他機能</h2>
 		<div class="ystdtb-menu__column">
