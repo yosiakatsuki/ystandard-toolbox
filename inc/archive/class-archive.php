@@ -41,7 +41,7 @@ class Archive {
 		if ( Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' ) ) {
 			add_filter( 'ys_archive_image_ratio', [ $this, 'archive_image_ratio' ] );
 		}
-		if (  Utility::ystandard_version_compare( '4.13.2' )  ) {
+		if ( Utility::ystandard_version_compare( '4.13.2' ) ) {
 			add_filter( 'ys_get_archive_detail_date', [ $this, 'get_archive_detail_date' ], 10, 4 );
 		}
 	}
@@ -115,7 +115,7 @@ class Archive {
 			if ( Utility::is_mobile() ) {
 				$mobile_ratio = Option::get_option( self::OPTION_NAME, 'archiveImageRatioMobile', '' );
 
-				$new_ratio    = ! empty( $mobile_ratio ) ? $mobile_ratio : $new_ratio;
+				$new_ratio = ! empty( $mobile_ratio ) ? $mobile_ratio : $new_ratio;
 			}
 		}
 
