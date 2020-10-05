@@ -28,6 +28,15 @@ class Option {
 	}
 
 	/**
+	 * 設定削除
+	 *
+	 * @return bool
+	 */
+	public static function delete_all_option() {
+		return delete_option( Config::OPTION_NAME );
+	}
+
+	/**
 	 * 設定取得
 	 *
 	 * @param string $section Section.
@@ -98,7 +107,7 @@ class Option {
 			 * テーマ設定は別保存
 			 */
 			foreach ( $value as $key => $option_value ) {
-				if ( false !== strpos( $key, 'theme_' ) ) {
+				if ( 0 === strpos( $key, 'theme_' ) ) {
 					$theme_option = str_replace( 'theme_', '', $key );
 					update_option( $theme_option, $option_value );
 					unset( $value[ $key ] );
