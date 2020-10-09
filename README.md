@@ -7,6 +7,9 @@
 
 ## 更新履歴
 
+### v1.3.0
+- [修正] yStandard Blocks セクションブロック拡張機能追加
+
 ### v1.2.1
 - [修正] Copyright編集機能でテーマ情報削除設定が保存されない不具合の修正
 
@@ -124,3 +127,13 @@ Source : <https://github.com/xiaokaike/vue-color>
 
 License: MIT  
 Source : <https://github.com/sindresorhus/hex-rgb>
+
+### BGJar.
+
+License: CC BY 4.0  
+Source : <https://bgjar.com/>
+
+### Hero Patterns.
+
+License: CC BY 4.0  
+Source : <https://www.heropatterns.com/>

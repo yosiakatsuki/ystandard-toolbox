@@ -29,13 +29,21 @@ class Blocks {
 	 * Blocks constructor.
 	 */
 	public function __construct() {
-		require_once __DIR__ . '/class-dynamic-block.php';
+		$this->load_files();
 		$this->init();
 		add_filter( 'block_categories', [ $this, 'block_categories' ] );
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_dynamic_block_scripts' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block' ] );
+	}
+
+	/**
+	 * ファイルの読み込み
+	 */
+	private function load_files() {
+		require_once __DIR__ . '/class-dynamic-block.php';
+		require_once __DIR__ . '/extension/class-section.php';
 	}
 
 	/**

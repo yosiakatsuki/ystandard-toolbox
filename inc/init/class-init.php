@@ -30,7 +30,7 @@ class Init {
 	/**
 	 * 必要なyStandard Blocksバージョン
 	 */
-	const REQUIRE_YSTANDARD_BLOCKS_VERSION = '2.1.0';
+	const REQUIRE_YSTANDARD_BLOCKS_VERSION = '2.5.0';
 
 	/**
 	 * バージョンチェック警告文
