@@ -31,7 +31,7 @@ class Taxonomy {
 	 * Taxonomy constructor.
 	 */
 	public function __construct() {
-		$this->add_term_options();
+		add_action( 'init', [ $this, 'add_term_options' ], PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
 		add_action( 'ystdtb_render_title_tag', [ $this, 'render_title_tag' ] );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
@@ -132,7 +132,7 @@ class Taxonomy {
 	/**
 	 * タームの拡張設定追加
 	 */
-	private function add_term_options() {
+	public function add_term_options() {
 
 		$taxonomies = get_taxonomies(
 			[
