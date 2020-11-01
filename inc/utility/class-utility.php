@@ -385,9 +385,18 @@ class Utility {
 	 * @param string $title Title.
 	 */
 	public static function get_document_title( $title ) {
-		$site  = get_bloginfo( 'name', 'display' );
+
+		$title = apply_filters(
+			'document_title_parts',
+			[
+				'title'   => $title,
+				'page'    => '',
+				'tagline' => '',
+				'site'    => get_bloginfo( 'name', 'display' ),
+			]
+		);
 		$sep   = apply_filters( 'document_title_separator', '-' );
-		$title = $title . ' ' . $sep . ' ' . $site;
+		$title = implode( " $sep ", array_filter( $title ) );
 		$title = wptexturize( $title );
 		$title = convert_chars( $title );
 		$title = esc_html( $title );
