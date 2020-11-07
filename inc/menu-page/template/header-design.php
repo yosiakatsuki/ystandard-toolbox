@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || die();
 ?>
 <div class="heading ystdtb-menu__component">
 	<h1 class="ystdtb-menu__title is-no-margin">ヘッダーデザイン設定</h1>
-	<?php echo Utility::manual_link_inline( 'header-design' ); ?>
+	<?php echo Utility::manual_link_inline( 'manual/ystdtb-header-design' ); ?>
 	<div id="app" class="ystdtb-menu__section">
 		<App/><!-- vue app -->
 	</div>

@@ -157,7 +157,7 @@ class Taxonomy {
 		<div class="ystdtb-term-option">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
 			<div class="ystdtb-term-option__label">yStandard Toolbox 設定</div>
-			<div class="ystdtb-term-option__manual"><?php echo Utility::manual_link_inline( 'term-meta' ); ?></div>
+			<div class="ystdtb-term-option__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
 			<table class="form-table" role="presentation">
 				<tr class="form-field">
 					<th scope="row">

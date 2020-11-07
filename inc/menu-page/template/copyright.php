@@ -15,7 +15,7 @@ $disable_theme_info = Copyright::get_disable_theme_info();
 ?>
 <div class="copyright ystdtb-menu__component ystdtb-menu__form">
 	<h1 class="ystdtb-menu__title is-no-margin">Copyright編集</h1>
-	<?php echo Utility::manual_link_inline( 'copyright' ); ?>
+	<?php echo Utility::manual_link_inline( 'manual/ystdtb-copyright' ); ?>
 	<div class="ystdtb-menu__section">
 		<div class="ystdtb-menu__table">
 			<label for="copyright" class="is-label">Copyright</label>

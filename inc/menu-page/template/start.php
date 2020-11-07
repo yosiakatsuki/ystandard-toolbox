@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>コンテンツやページタイトルのデザインをカスタマイズできる機能</p>
-				<?php echo Utility::manual_link( 'heading', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-heading', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>Webフォント追加</h3>
@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>Google Fontsなどを使ってWebフォントを追加する機能</p>
-				<?php echo Utility::manual_link( 'add-font', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-add-font', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>ヘッダーデザイン拡張</h3>
@@ -59,7 +59,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>サイトヘッダー関連の機能拡張</p>
-				<?php echo Utility::manual_link( 'header-design', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-header-design', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>アーカイブページ拡張</h3>
@@ -72,7 +72,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>投稿一覧のデフォルト画像や一覧画像サイズ、一覧レイアウトを変更できる機能</p>
-				<?php echo Utility::manual_link( 'archive', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-archive', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>追加CSS編集</h3>
@@ -82,7 +82,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>「外観」→「カスタマイズ」→「追加CSS」で編集できるCSSを大きい入力欄で編集する機能</p>
-				<?php echo Utility::manual_link( 'custom-css', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-custom-css', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>Copyright編集</h3>
@@ -93,7 +93,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>サイトフッターに表示されるCopyright表記の編集、「yStandard Theme by yosiakatsuki Powered by WordPress」の削除機能</p>
-				<?php echo Utility::manual_link( 'copyright', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-copyright', '', 'button is-primary is-small' ); ?>
 			</div>
 		</div>
 	</div>
@@ -116,7 +116,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>よく使う定型文などを登録してブロックエディターで簡単に利用できる機能</p>
-				<?php echo Utility::manual_link( 'block-patterns', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-patterns', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>ブロックスタイル</h3>
@@ -127,7 +127,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>カラムブロックやテーブルブロックなどの便利なデザインスタイル</p>
-				<?php echo Utility::manual_link( 'block-styles', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-styles', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>タイムラインブロック</h3>
@@ -138,7 +138,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>時系列に略歴を表示したり、手順の説明などに便利なタイムライン（ステップ）ブロック</p>
-				<?php echo Utility::manual_link( 'block-timeline', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-timeline', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>Q&Aブロック</h3>
@@ -148,7 +148,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>「よくある質問」ページの制作に便利なブロック</p>
-				<?php echo Utility::manual_link( 'block-faq', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-faq', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>記事一覧ブロック</h3>
@@ -160,7 +160,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>投稿の一覧を様々な条件で絞り込み表示できるブロック</p>
-				<?php echo Utility::manual_link( 'block-posts', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-posts', '', 'button is-primary is-small' ); ?>
 			</div>
 		</div>
 	</div>
@@ -181,7 +181,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>投稿タイトルとは別の&lt;title&gt;設定、メタデスクリプションを設定できる機能</p>
-				<?php echo Utility::manual_link( 'title-dscr', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-title-dscr', '', 'button is-primary is-small' ); ?>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>一覧のtitle,description設定</h3>
@@ -193,7 +193,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>カテゴリー・タグ一覧ページの&lt;title&gt;設定、メタデスクリプションを設定できる機能</p>
-				<?php echo Utility::manual_link( 'term-meta-seo', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-term-meta-seo', '', 'button is-primary is-small' ); ?>
 			</div>
 		</div>
 	</div>
@@ -214,7 +214,7 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>&lt;head&gt;内や&lt;/body&gt;直前などにJavaScriptなどを追加できる機能</p>
-				<?php echo Utility::manual_link( 'add-code', '', 'button is-primary is-small' ); ?>
+				<?php echo Utility::manual_link( 'manual/ystdtb-add-code', '', 'button is-primary is-small' ); ?>
 			</div>
 		</div>
 	</div>
