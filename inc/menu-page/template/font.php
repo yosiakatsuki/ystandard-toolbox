@@ -16,7 +16,7 @@ $font_family = Font::get_font_family();
 ?>
 <div class="font ystdtb-menu__component ystdtb-menu__form">
 	<h1 class="ystdtb-menu__title is-no-margin">Webフォント設定</h1>
-	<?php echo Utility::manual_link_inline( 'add-font' ); ?>
+	<?php echo Utility::manual_link_inline( 'manual/ystdtb-add-font' ); ?>
 	<div class="ystdtb-menu__section">
 		<label for="font-html" class="is-block">Webフォント追加用HTML</label>
 		<textarea name="<?php echo Font::OPTION_NAME; ?>[html]" id="font-html" class="widefat code-input" rows="4"><?php echo esc_textarea( wp_unslash( Option::get_option( Font::OPTION_NAME, 'html' ) ) ); ?></textarea>

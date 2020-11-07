@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || die();
 ?>
 <div class="code ystdtb-menu__component">
 	<h1 class="ystdtb-menu__title is-no-margin">コード追加</h1>
-	<?php echo Utility::manual_link_inline( 'add-code' ); ?>
+	<?php echo Utility::manual_link_inline( 'manual/ystdtb-add-code' ); ?>
 	<div class="code__normal ystdtb-menu__section">
 		<div class="code__section">
 			<label for="code-head" class="is-block">&lt;Head&gt;に挿入するコード</label>
