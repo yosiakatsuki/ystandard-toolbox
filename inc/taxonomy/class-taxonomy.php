@@ -33,7 +33,7 @@ class Taxonomy {
 	public function __construct() {
 		add_action( 'init', [ $this, 'add_term_options' ], PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
-		add_action( 'ystdtb_render_title_tag', [ $this, 'render_title_tag' ] );
+		add_filter( 'pre_get_document_title', [ $this, 'render_title_tag' ], 11 );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
 		add_filter( 'ys_ogp_description_archive', [ $this, 'meta_description' ], PHP_INT_MAX );
 	}
@@ -42,6 +42,8 @@ class Taxonomy {
 	 * タイトルタグの書き換え
 	 *
 	 * @param string $title Title.
+	 *
+	 * @return string
 	 */
 	public function render_title_tag( $title ) {
 		if ( ! Utility::is_term_archive() ) {
@@ -64,6 +66,8 @@ class Taxonomy {
 	 * メタデスクリプション
 	 *
 	 * @param string $dscr description.
+	 *
+	 * @return string
 	 */
 	public function meta_description( $dscr ) {
 		if ( ! Utility::is_term_archive() ) {
