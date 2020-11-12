@@ -28,7 +28,7 @@ class Post_Meta_SEO {
 		}
 		add_action( 'ys_meta_box_seo', [ $this, 'add_seo_option' ] );
 		add_action( 'ys_save_post_meta_seo', [ $this, 'save_seo_option' ] );
-		add_action( 'ystdtb_render_title_tag', [ $this, 'render_title_tag' ] );
+		add_action( 'pre_get_document_title', [ $this, 'render_title_tag' ], 11 );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
 	}
 
@@ -36,6 +36,8 @@ class Post_Meta_SEO {
 	 * <title>タグ
 	 *
 	 * @param string $title Title.
+	 *
+	 * @return string;
 	 */
 	public function render_title_tag( $title ) {
 		if ( is_singular() ) {
