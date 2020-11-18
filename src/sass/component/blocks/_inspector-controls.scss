@@ -5,6 +5,20 @@
   margin-bottom: 8px;
 }
 
+.ystdtb-block-dscr {
+  font-size: 0.8em;
+  color: global.$color__text-light;
+
+  &.has-margin {
+    margin: 8px 0;
+  }
+}
+.components-base-control {
+  + .ystdtb-block-dscr {
+    margin-top: -20px;
+  }
+}
+
 .ystdtb__horizon-buttons {
   display: flex;
   width: 100%;

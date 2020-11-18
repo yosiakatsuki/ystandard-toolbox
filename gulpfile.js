@@ -76,6 +76,8 @@ function copyProductionFiles() {
 			'!gulpfile.js',
 			'!package.json',
 			'!package-lock.json',
+			'!composer.json',
+			'!composer.lock',
 			'!webpack.blocks.config.js',
 			'!webpack.menu.config.js',
 			'!ystandard-toolbox-webpack-config.js',

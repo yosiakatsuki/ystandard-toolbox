@@ -6,6 +6,8 @@ export const ystdtbConfig = {
 	},
 	color: {
 		iconForeground: '#4190be',
+		iconForegroundChild: '#A64276',
 		iconDeprecatedForeground: '#be4141',
+		iconBeta: '#9CADBC',
 	},
 };

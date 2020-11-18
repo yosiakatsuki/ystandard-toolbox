@@ -55,6 +55,14 @@ class Config {
 	 */
 	const BLOCK_CATEGORY_NAME = '[ys]yStandard Toolbox';
 	/**
+	 * ブロックカテゴリー β スラッグ
+	 */
+	const BLOCK_CATEGORY_BETA = 'ystdtb_beta';
+	/**
+	 * ブロックカテゴリー名 β
+	 */
+	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(β)';
+	/**
 	 * Block CSS Handle
 	 */
 	const BLOCK_CSS_HANDLE = 'ystdtb-block-css';
