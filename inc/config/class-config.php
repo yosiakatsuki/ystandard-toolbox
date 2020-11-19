@@ -18,6 +18,19 @@ defined( 'ABSPATH' ) || die();
  */
 class Config {
 	/**
+	 * 必要なWordPressバージョン
+	 */
+	const REQUIRE_WORDPRESS_VERSION = '5.5.0';
+
+	/**
+	 * 必要なyStandardバージョン
+	 */
+	const REQUIRE_YSTANDARD_VERSION = '4.16.0-beta-1';
+	/**
+	 * 必要なyStandard Blocksバージョン
+	 */
+	const REQUIRE_YSTANDARD_BLOCKS_VERSION = '2.5.0';
+	/**
 	 * CSS Handle
 	 */
 	const CSS_HANDLE = 'ystdtb-css';

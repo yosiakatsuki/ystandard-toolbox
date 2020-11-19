@@ -19,20 +19,6 @@ defined( 'ABSPATH' ) || die();
 class Init {
 
 	/**
-	 * 必要なWordPressバージョン
-	 */
-	const REQUIRE_WORDPRESS_VERSION = '5.5.0';
-
-	/**
-	 * 必要なyStandardバージョン
-	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.16.0';
-	/**
-	 * 必要なyStandard Blocksバージョン
-	 */
-	const REQUIRE_YSTANDARD_BLOCKS_VERSION = '2.5.0';
-
-	/**
 	 * バージョンチェック警告文
 	 *
 	 * @var string
@@ -76,14 +62,14 @@ class Init {
 	 * テーマ・プラグインのバージョンチェック
 	 */
 	private function check_versions() {
-		if ( ! Utility::wordpress_version_compare( self::REQUIRE_WORDPRESS_VERSION ) ) {
-			$this->version_warning .= '<li>WordPress : ' . self::REQUIRE_WORDPRESS_VERSION . '</li>';
+		if ( ! Utility::wordpress_version_compare( Config::REQUIRE_WORDPRESS_VERSION ) ) {
+			$this->version_warning .= '<li>WordPress : ' . Config::REQUIRE_WORDPRESS_VERSION . '</li>';
 		}
-		if ( ! Utility::ystandard_version_compare( self::REQUIRE_YSTANDARD_VERSION ) ) {
-			$this->version_warning .= '<li>yStandard : ' . self::REQUIRE_YSTANDARD_VERSION . '</li>';
+		if ( ! Utility::ystandard_version_compare( Config::REQUIRE_YSTANDARD_VERSION ) ) {
+			$this->version_warning .= '<li>yStandard : ' . Config::REQUIRE_YSTANDARD_VERSION . '</li>';
 		}
-		if ( ! Utility::ystandard_blocks_version_compare( self::REQUIRE_YSTANDARD_BLOCKS_VERSION ) ) {
-			$this->version_warning .= '<li>yStandard Blocks : ' . self::REQUIRE_YSTANDARD_BLOCKS_VERSION . '</li>';
+		if ( ! Utility::ystandard_blocks_version_compare( Config::REQUIRE_YSTANDARD_BLOCKS_VERSION ) ) {
+			$this->version_warning .= '<li>yStandard Blocks : ' . Config::REQUIRE_YSTANDARD_BLOCKS_VERSION . '</li>';
 		}
 		if ( '' === $this->version_warning ) {
 			return;
