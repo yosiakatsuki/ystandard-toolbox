@@ -1,0 +1,14 @@
+@use "../../src/sass/global";
+
+@use "block";
+
+.editor-styles-wrapper {
+  @include block.block-style;
+
+  .ystdtb-sns-share-edit__no-preview {
+    padding: 2em;
+    background-color: global.$color__bg-gray-light;
+    border: 1px solid global.$color__border-gray-light;
+    font-size: 0.8em;
+  }
+}

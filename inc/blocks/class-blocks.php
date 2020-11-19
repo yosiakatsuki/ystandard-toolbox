@@ -91,6 +91,10 @@ class Blocks {
 			'slug'  => Config::BLOCK_CATEGORY,
 			'title' => Config::BLOCK_CATEGORY_NAME,
 		];
+		$categories[] = [
+			'slug'  => Config::BLOCK_CATEGORY_BETA,
+			'title' => Config::BLOCK_CATEGORY_NAME_BETA,
+		];
 
 		return $categories;
 	}

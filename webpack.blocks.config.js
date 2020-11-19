@@ -11,6 +11,7 @@ module.exports = {
 		'timeline-item': './blocks/timeline/item/index.js',
 		'faq': './blocks/faq/index.js',
 		'faq-item': './blocks/faq/item/index.js',
+		'sns-share': './blocks/sns-share/index.js',
 	},
 	output: {
 		filename: '[name].js',
