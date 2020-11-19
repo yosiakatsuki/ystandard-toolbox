@@ -29,3 +29,14 @@ jobs:
           LOCAL_DIR: build
           REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR_PRODUCTION }}
           ARGS: --verbose
+
+      - name: Notify Release
+        uses: 8398a7/action-slack@v3.8.0
+        with:
+          status: ${{ job.status }}
+          author_name: "[yStandard Toolbox]新バージョンのアップデート準備OK！"
+          fields: repo,message
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: success()
