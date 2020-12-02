@@ -32,6 +32,10 @@
     font-size: 1em;
   }
 
+  h4 {
+    margin: 1.5em 0 .5em;
+  }
+
   code {
     font-size: 1em;
   }
@@ -87,6 +91,10 @@
 
     .is-content {
       flex-grow: 1;
+
+      label {
+        font-weight: normal;
+      }
     }
   }
 
@@ -128,6 +136,10 @@
 
     .is-content {
       flex-grow: 1;
+
+      label {
+        font-weight: normal;
+      }
     }
   }
 
@@ -326,7 +338,24 @@
     padding: .5em;
   }
 
+  .is-beta-feature {
+    position: relative;
+    margin: 3em 0;
+    padding: 2em 1.5em;
+    border: 1px solid global.$color__ystd_beta;
+    background-color: rgba(global.$color__ystd_beta, 0.05);
 
+    &:before {
+      content: "β版機能";
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0.5em 2em;
+      background-color: global.$color__ystd_beta;
+      color: #fff;
+      font-size: 0.8em;
+    }
+  }
 }
 
 // .ystdtb-menu__component

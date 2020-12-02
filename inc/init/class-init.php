@@ -30,7 +30,7 @@ class Init {
 	 */
 	public function __construct() {
 		add_action( 'after_setup_theme', [ $this, 'plugin_init' ] );
-		add_filter( 'body_class', [ $this, 'body_class' ] );
+		add_filter( 'body_class', [ $this, 'body_class' ], 20 );
 		$this->check_versions();
 	}
 

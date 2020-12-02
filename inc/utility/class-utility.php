@@ -362,6 +362,43 @@ class Utility {
 	}
 
 	/**
+	 * Post Type
+	 *
+	 * @return false|string
+	 * @global \WP_Query
+	 */
+	public static function get_post_type() {
+		global $wp_query;
+		$post_type = get_post_type();
+		if ( ! $post_type ) {
+			if ( isset( $wp_query->query['post_type'] ) ) {
+				$post_type = $wp_query->query['post_type'];
+			}
+		}
+
+		return $post_type;
+	}
+
+	/**
+	 * 一覧ページを持っている投稿タイプ取得
+	 *
+	 * @param array $args    args.
+	 * @param bool  $exclude 除外.
+	 *
+	 * @return array
+	 */
+	public static function get_has_archive_post_types( $args = [], $exclude = true ) {
+
+		return self::get_post_types(
+			array_merge(
+				[ 'has_archive' => true ],
+				$args
+			),
+			$exclude
+		);
+	}
+
+	/**
 	 * Nonceチェック
 	 *
 	 * @param string $name   Name.
@@ -454,4 +491,5 @@ class Utility {
 
 		return wp_is_mobile();
 	}
+
 }
