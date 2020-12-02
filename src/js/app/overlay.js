@@ -23,7 +23,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				{ passive: true }
 			);
 		} else {
-			console.log(header.offsetHeight);
 			document.body.style.paddingTop = `${ header.offsetHeight }px`;
 		}
 	}
