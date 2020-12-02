@@ -148,6 +148,7 @@ exports.sass = series( sass );
 exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
+exports.buildApp = series( buildJs );
 exports.copyJson = series( copyJson );
 exports.build = series( sass, buildAdminApp, buildJs, copyJson );
 

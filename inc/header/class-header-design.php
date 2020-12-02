@@ -35,6 +35,7 @@ class Header_Design {
 	 */
 	private function load_files() {
 		require_once __DIR__ . '/class-sub-header.php';
+		require_once __DIR__ . '/class-header-overlay.php';
 	}
 
 	/**
