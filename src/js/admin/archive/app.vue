@@ -22,9 +22,6 @@
 
 	export default {
 		name: 'app-archive',
-		data() {
-
-		},
 		components: {
 			DefaultImage,
 			Layout,

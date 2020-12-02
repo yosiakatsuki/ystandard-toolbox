@@ -50,8 +50,6 @@
 
 	export default {
 		name: 'layout',
-		data() {
-		},
 		components: {},
 		methods: {
 			getOption( name ) {
