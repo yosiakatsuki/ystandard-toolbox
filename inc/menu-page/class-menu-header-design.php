@@ -133,7 +133,7 @@ class Menu_Header_Design extends Menu_Page_Base {
 		wp_enqueue_media();
 		$this->enqueue_admin_script( 'header-design' );
 
-		// 投稿タイプ一覧ページ
+		// 投稿タイプ一覧ページ.
 		$types   = Utility::get_has_archive_post_types();
 		$archive = [];
 		if ( ! empty( $types ) ) {
@@ -141,7 +141,6 @@ class Menu_Header_Design extends Menu_Page_Base {
 				$archive[ 'archive-' . $key ] = $value;
 			}
 		}
-
 
 		$param = array_merge(
 			Option::get_option( Header_Design::OPTION_NAME, '', [] ),
@@ -167,7 +166,6 @@ class Menu_Header_Design extends Menu_Page_Base {
 			return false;
 		}
 		$input = $_post[ Header_Design::OPTION_NAME ];
-
 
 		return Option::update_option( Header_Design::OPTION_NAME, $input );
 	}
