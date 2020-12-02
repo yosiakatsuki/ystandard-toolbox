@@ -3,7 +3,7 @@
  * Plugin Name: yStandard Toolbox
  * Plugin URI: https://wp-ystandard.com/
  * Description: 無料WordPressテーマ「yStandard」用機能拡張プラグイン.
- * Version: 1.4.0-beta-1
+ * Version: 1.4.0-beta-2
  * Author: yosiakatsuki
  * Author URI: https://yosiakatsuki.net
  * License: GPL-2.0 or later
