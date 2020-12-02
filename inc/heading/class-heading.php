@@ -82,7 +82,7 @@ class Heading {
 	public function __construct() {
 		add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'add_heading_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'add_heading_editor_styles' ], 11 );
-		add_filter( 'body_class', [ $this, 'body_class_heading' ] );
+		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_option' ] );
 	}
 

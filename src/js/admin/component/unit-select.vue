@@ -1,8 +1,7 @@
 <template>
 	<select
 		:name="name"
-		:id="id"
-		:style="style"
+		:style="componentStyle"
 		:class="className"
 		v-model="unit"
 	>
@@ -15,9 +14,7 @@
 <script>
 	export default {
 		name: 'UnitSelect',
-		props: [ 'value', 'name', 'id', 'style', 'class' ],
-		data() {
-		},
+		props: [ 'value', 'name', 'className', 'componentStyle' ],
 		computed: {
 			unit: {
 				get() {
@@ -27,9 +24,10 @@
 					this.$emit( 'input', value );
 				}
 			},
-			className() {
+			selectClass() {
 				return [
-					'ystdtb-unit-select'
+					'ystdtb-unit-select',
+					...className
 				]
 			}
 		},

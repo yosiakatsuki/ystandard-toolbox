@@ -65,9 +65,6 @@
 
 	export default {
 		name: 'sub-header',
-		data() {
-
-		},
 		components: {
 			ColorPicker,
 			UnitSelect

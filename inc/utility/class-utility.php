@@ -299,6 +299,33 @@ class Utility {
 	}
 
 	/**
+	 * 設定画面リンク作成
+	 *
+	 * @param string $url   URL.
+	 * @param string $text  Text.
+	 * @param string $class CSS Class.
+	 *
+	 * @return string
+	 */
+	public static function option_link_a( $url, $text = '', $class = '' ) {
+		if ( empty( $url ) ) {
+			return '';
+		}
+
+		if ( '' === $text ) {
+			$text = '設定画面';
+		}
+		$icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>';
+
+		if ( false === strpos( $url, 'https://' ) ) {
+			$url = Menu_Page::get_menu_page_url( $url );
+		}
+		$class = '' === $class ? '' : "class=\"$class\"";
+
+		return "<a ${class} href=\"${url}\">${icon}${text}</a>";
+	}
+
+	/**
 	 * メニューアイコン取得
 	 *
 	 * @return string
@@ -359,6 +386,43 @@ class Utility {
 		}
 
 		return $types;
+	}
+
+	/**
+	 * Post Type
+	 *
+	 * @return false|string
+	 * @global \WP_Query
+	 */
+	public static function get_post_type() {
+		global $wp_query;
+		$post_type = get_post_type();
+		if ( ! $post_type ) {
+			if ( isset( $wp_query->query['post_type'] ) ) {
+				$post_type = $wp_query->query['post_type'];
+			}
+		}
+
+		return $post_type;
+	}
+
+	/**
+	 * 一覧ページを持っている投稿タイプ取得
+	 *
+	 * @param array $args    args.
+	 * @param bool  $exclude 除外.
+	 *
+	 * @return array
+	 */
+	public static function get_has_archive_post_types( $args = [], $exclude = true ) {
+
+		return self::get_post_types(
+			array_merge(
+				[ 'has_archive' => true ],
+				$args
+			),
+			$exclude
+		);
 	}
 
 	/**
@@ -454,4 +518,5 @@ class Utility {
 
 		return wp_is_mobile();
 	}
+
 }

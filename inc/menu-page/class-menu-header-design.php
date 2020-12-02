@@ -12,6 +12,7 @@ namespace ystandard_toolbox\menu;
 use ystandard_toolbox\Header_Design;
 use ystandard_toolbox\Menu_Page;
 use ystandard_toolbox\Option;
+use ystandard_toolbox\Utility;
 
 defined( 'ABSPATH' ) || die();
 
@@ -48,10 +49,25 @@ class Menu_Header_Design extends Menu_Page_Base {
 		}
 		wp_enqueue_media();
 		$this->enqueue_admin_script( 'header-design' );
+
+		// 投稿タイプ一覧ページ.
+		$types   = Utility::get_has_archive_post_types();
+		$archive = [];
+		if ( ! empty( $types ) ) {
+			foreach ( $types as $key => $value ) {
+				$archive[ 'archive-' . $key ] = $value;
+			}
+		}
+
+		$param = array_merge(
+			Option::get_option( Header_Design::OPTION_NAME, '', [] ),
+			[ 'postTypes' => Utility::get_post_types( [], [ 'ys-parts' ] ) ],
+			[ 'archivePostTypes' => $archive ]
+		);
 		wp_localize_script(
 			'ystdtb-header-design',
 			'ystdtbHeaderDesignData',
-			Option::get_option( Header_Design::OPTION_NAME, '', [] )
+			$param
 		);
 	}
 
@@ -59,6 +75,8 @@ class Menu_Header_Design extends Menu_Page_Base {
 	 * 設定保存
 	 *
 	 * @param array $_post 設定値.
+	 *
+	 * @return boolean
 	 */
 	public function save( $_post ) {
 		if ( ! isset( $_post[ Header_Design::OPTION_NAME ] ) ) {

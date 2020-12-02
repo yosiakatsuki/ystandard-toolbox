@@ -105,7 +105,7 @@ abstract class Menu_Page_Base {
 		add_filter( self::MENU_NAV_HOOK, [ $this, 'menu_nav' ] );
 		add_action( 'admin_menu', [ $this, 'add_sub_menu_page' ], 51 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
-		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
+		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ], 20 );
 	}
 
 	/**

@@ -1,7 +1,7 @@
 const VueLoaderPlugin = require( 'vue-loader/lib/plugin' );
 
 module.exports = {
-	mode: "production",
+	mode: process.env.NODE_ENV,
 	entry: {
 		'admin': './src/js/admin/admin.js',
 		'heading': './src/js/admin/heading/index.js',

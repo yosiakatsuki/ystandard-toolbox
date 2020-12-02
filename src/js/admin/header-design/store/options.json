@@ -3,5 +3,7 @@
   "subHeaderColorDesktop": "#666666",
   "subHeaderAlignDesktop": "right",
   "subHeaderFontSizeDesktop": "0.7",
-  "subHeaderFontSizeUnitDesktop": "em"
+  "subHeaderFontSizeUnitDesktop": "em",
+  "enableOverlay": "false",
+  "overlayPageType": []
 }
