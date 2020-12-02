@@ -10,6 +10,7 @@ const del = require( 'del' );
 const webpackStream = require( 'webpack-stream' );
 const webpack = require( 'webpack' );
 const plumber = require( 'gulp-plumber' );
+const babel = require( 'gulp-babel' );
 
 const webpackConfig = require( './webpack.menu.config.js' );
 
@@ -47,6 +48,14 @@ function watchBuildAdminApp() {
 		.pipe( webpackStream( webpackConfig, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
+
+const buildJs = () => {
+	return src( './src/js/app/*.js' )
+		.pipe( babel( {
+			presets: [ '@babel/env' ]
+		} ) )
+		.pipe( dest( './js/app' ) );
+};
 
 function copyJson() {
 	return src( './src/js/**/*.json' )
@@ -127,9 +136,11 @@ function watchFiles() {
 	sass();
 	watchBuildAdminApp();
 	copyJson();
+	buildJs();
 	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], watchBuildAdminApp );
 	watch( [ './src/js/admin/**/*.json' ], copyJson );
+	watch( [ './src/js/app/*.js' ], buildJs );
 }
 
 exports.createDeployFiles = series( cleanFiles, copyJson, copyProductionFiles, parallel( zip, copyUpdateInfo ) );
@@ -138,6 +149,6 @@ exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
 exports.copyJson = series( copyJson );
-exports.build = series( sass, buildAdminApp, copyJson );
+exports.build = series( sass, buildAdminApp, buildJs, copyJson );
 
 exports.default = series( watchFiles );

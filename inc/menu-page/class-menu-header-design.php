@@ -34,6 +34,7 @@ class Menu_Header_Design extends Menu_Page_Base {
 		$this->template_name = 'header-design';
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
+		add_action( 'ys_enqueue_script', [ $this, 'enqueue_overlay_script' ] );
 		add_action( 'body_class', [ $this, 'add_overlay_class' ], 20 );
 	}
 
@@ -46,8 +47,9 @@ class Menu_Header_Design extends Menu_Page_Base {
 	 */
 	public function add_overlay_class( $classes ) {
 
-		if ( $this->is_header_overlay() ) {
+		if ( self::is_header_overlay() ) {
 			$classes[] = 'is-overlay';
+			$classes[] = 'is-transparent';
 		}
 
 		return $classes;
@@ -56,18 +58,18 @@ class Menu_Header_Design extends Menu_Page_Base {
 	/**
 	 * ヘッダーオーバーレイ機能有効判定
 	 *
-	 * @return mixed|void
+	 * @return boolean
 	 */
-	private function is_header_overlay() {
+	public static function is_header_overlay() {
+		$enable = Option::get_option_by_bool( Header_Design::OPTION_NAME, 'enableOverlay', false );
+		if ( ! $enable ) {
+			return false;
+		}
 		$overlay = false;
 		// 設定取得.
-		$option = Option::get_option( Header_Design::OPTION_NAME, '', [] );
-		if ( ! isset( $option['overlayPageType'] ) ) {
-			$option['overlayPageType'] = [];
-		}
-		$types = $option['overlayPageType'];
+		$types = Option::get_option( Header_Design::OPTION_NAME, 'overlayPageType', [] );
 		// フロントページ.
-		if ( is_front_page() && in_array( 'frontpage', $types, true ) ) {
+		if ( is_front_page() && in_array( 'front-page', $types, true ) ) {
 			$overlay = true;
 		}
 		// 投稿一覧.
@@ -79,7 +81,7 @@ class Menu_Header_Design extends Menu_Page_Base {
 			$overlay = true;
 		}
 		// 404.
-		if ( is_404() && in_array( 'search', $types, true ) ) {
+		if ( is_404() && in_array( '404', $types, true ) ) {
 			$overlay = true;
 		}
 		// 投稿タイプ関連.
@@ -98,6 +100,24 @@ class Menu_Header_Design extends Menu_Page_Base {
 		return apply_filters( 'ystdt_is_header_overlay', $overlay );
 	}
 
+
+	/**
+	 * オーバーレイ機能用スクリプト読み込み
+	 */
+	public function enqueue_overlay_script() {
+		if ( ! self::is_header_overlay() ) {
+			return;
+		}
+		$handle = 'ystdtb-overlay';
+		wp_enqueue_script(
+			$handle,
+			YSTDTB_URL . '/js/app/overlay.js',
+			[],
+			filemtime( YSTDTB_PATH . '/js/app/overlay.js' ),
+			true,
+		);
+		wp_script_add_data( $handle, 'defer', true );
+	}
 
 	/**
 	 * 管理画面-スクリプトの読み込み

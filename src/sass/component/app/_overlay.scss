@@ -1,0 +1,29 @@
+.ystdtb.is-overlay {
+
+
+  &.is-transparent {
+    --header-bg: transparent;
+    --header-shadow: none;
+  }
+
+  .info-bar {
+    display: none;
+  }
+
+  .site-header,
+  .global-nav {
+    transition: background-color .3s, box-shadow .3s;
+  }
+
+  &.has-fixed-header {
+    padding-top: 0;
+  }
+
+  // ヘッダー固定以外の場合.
+  &:not(.has-fixed-header) {
+    .site-header {
+      position: absolute;
+      width: 100%;
+    }
+  }
+}
