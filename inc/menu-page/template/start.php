@@ -29,7 +29,12 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>コンテンツやページタイトルのデザインをカスタマイズできる機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-heading', '', 'button is-primary is-small' ); ?>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'heading', '', 'button is-primary is-small' );
+					echo Utility::manual_link_a( 'manual/ystdtb-heading', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>Webフォント追加</h3>
@@ -41,7 +46,12 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>Google Fontsなどを使ってWebフォントを追加する機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-add-font', '', 'button is-primary is-small' ); ?>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'font', '', 'button is-primary is-small' );
+					echo Utility::manual_link_a( 'manual/ystdtb-add-font', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>ヘッダーデザイン拡張</h3>
@@ -58,8 +68,15 @@ defined( 'ABSPATH' ) || die();
 						<line x1="17" y1="16" x2="23" y2="16"></line>
 					</svg>
 				</figure>
-				<p>サイトヘッダー関連の機能拡張</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-header-design', '', 'button is-primary is-small' ); ?>
+				<p>
+					サブヘッダーやヘッダーオーバーレイなど、 サイトヘッダー関連の機能拡張
+				</p>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'header-design', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-header-design', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>アーカイブページ拡張</h3>
@@ -72,7 +89,12 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>投稿一覧のデフォルト画像や一覧画像サイズ、一覧レイアウトを変更できる機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-archive', '', 'button is-primary is-small' ); ?>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'archive', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-archive', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>追加CSS編集</h3>
@@ -82,7 +104,12 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>「外観」→「カスタマイズ」→「追加CSS」で編集できるCSSを大きい入力欄で編集する機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-custom-css', '', 'button is-primary is-small' ); ?>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'css', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-custom-css', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
 				<h3>Copyright編集</h3>
@@ -93,7 +120,13 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>サイトフッターに表示されるCopyright表記の編集、「yStandard Theme by yosiakatsuki Powered by WordPress」の削除機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-copyright', '', 'button is-primary is-small' ); ?>
+
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'copyright', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-copyright', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -162,6 +195,21 @@ defined( 'ABSPATH' ) || die();
 				<p>投稿の一覧を様々な条件で絞り込み表示できるブロック</p>
 				<?php echo Utility::manual_link( 'manual/ystdtb-block-posts', '', 'button is-primary is-small' ); ?>
 			</div>
+
+			<div class="ystdtb-menu__column-item">
+				<h3>シェアボタンブロック</h3>
+				<figure class="ystdtb-menu__column-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2">
+						<circle cx="18" cy="5" r="3"></circle>
+						<circle cx="6" cy="12" r="3"></circle>
+						<circle cx="18" cy="19" r="3"></circle>
+						<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+						<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+					</svg>
+				</figure>
+				<p>SNSシェアボタンを表示できるブロック</p>
+				<?php echo Utility::manual_link( 'manual/ystdtb-block-sns-share', '', 'button is-primary is-small' ); ?>
+			</div>
 		</div>
 	</div>
 	<!--
@@ -214,7 +262,12 @@ defined( 'ABSPATH' ) || die();
 					</svg>
 				</figure>
 				<p>&lt;head&gt;内や&lt;/body&gt;直前などにJavaScriptなどを追加できる機能</p>
-				<?php echo Utility::manual_link( 'manual/ystdtb-add-code', '', 'button is-primary is-small' ); ?>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'code', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-add-code', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
