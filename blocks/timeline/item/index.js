@@ -11,7 +11,7 @@ registerBlockType( 'ystdtb/timeline-item', {
 	description: __( 'タイムライン表示 詳細ブロック', 'ystandard-blocks' ),
 	icon: (
 		<Clock
-			stroke={ ystdtbConfig.color.iconForeground }
+			stroke={ ystdtbConfig.color.iconForegroundChild }
 			style={ { fill: 'none' } }
 		/>
 	),

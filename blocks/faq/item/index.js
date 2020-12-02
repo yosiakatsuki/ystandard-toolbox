@@ -12,7 +12,7 @@ registerBlockType( 'ystdtb/faq-item', {
 	description: __( 'Q&Aの内容', 'ystandard-blocks' ),
 	icon: (
 		<MessageCircle
-			stroke={ ystdtbConfig.color.iconForeground }
+			stroke={ ystdtbConfig.color.iconForegroundChild }
 			style={ { fill: 'none' } }
 		/>
 	),
