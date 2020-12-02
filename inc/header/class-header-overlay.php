@@ -58,7 +58,7 @@ class Header_Overlay {
 		// 設定取得.
 		$types = Option::get_option( Header_Design::OPTION_NAME, 'overlayPageType', [] );
 		// フロントページ.
-		if ( is_front_page() && in_array( 'front-page', $types, true ) ) {
+		if ( ( is_front_page() && ! is_paged() ) && in_array( 'front-page', $types, true ) ) {
 			$overlay = true;
 		}
 		// 投稿一覧.
