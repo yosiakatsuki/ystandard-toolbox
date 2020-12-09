@@ -8,6 +8,7 @@ import { deprecated } from './_deprecated';
 import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'ystdtb/faq-item', {
+	apiVersion: 2,
 	title: __( 'Q&A項目', 'ystandard-blocks' ),
 	description: __( 'Q&Aの内容', 'ystandard-blocks' ),
 	icon: (

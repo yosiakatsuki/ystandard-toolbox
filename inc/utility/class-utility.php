@@ -49,6 +49,9 @@ class Utility {
 	public static function parse_shortcode_attributes( $attributes ) {
 		$result = '';
 		foreach ( $attributes as $key => $value ) {
+			if ( is_null( $value ) ) {
+				continue;
+			}
 			if ( is_array( $value ) ) {
 				$value = implode( ',', $value );
 			}

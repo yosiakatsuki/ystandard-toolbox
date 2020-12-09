@@ -36,7 +36,10 @@ class Block_Patterns {
 			return;
 		}
 		add_action( 'init', [ $this, 'register_post_type' ] );
+		add_action( 'init', [ $this, 'register_taxonomy' ] );
 		add_action( 'init', [ $this, 'register_block_pattern' ] );
+		add_filter( 'pre_get_posts', [ $this, 'set_order' ] );
+		add_action( 'restrict_manage_posts', [ $this, 'block_pattern_tax_dropdown' ] );
 		if ( Option::get_option_by_bool( Block_Patterns::OPTION_NAME, 'disable_core_pattern', false ) ) {
 			add_action( 'init', [ $this, 'remove_core_patterns' ] );
 		}
@@ -102,9 +105,82 @@ class Block_Patterns {
 	}
 
 	/**
+	 * タクソノミーの有効化.
+	 */
+	public function register_taxonomy() {
+		register_taxonomy(
+			self::BLOCK_PATTERNS . '_tax',
+			self::BLOCK_PATTERNS,
+			[
+				'hierarchical'          => true,
+				'update_count_callback' => '_update_post_term_count',
+				'label'                 => __( 'ブロックパターンカテゴリー', 'ystandard-toolbox' ),
+				'singular_label'        => __( 'ブロックパターンカテゴリー', 'ystandard-toolbox' ),
+				'public'                => false,
+				'show_ui'               => true,
+				'show_in_rest'          => true,
+				'show_in_quick_edit'    => true,
+				'show_admin_column'     => true,
+			]
+		);
+	}
+
+	/**
+	 * ブロックパターンカテゴリーの絞り込み.
+	 *
+	 * @param string $post_type Post Type.
+	 */
+	public function block_pattern_tax_dropdown( $post_type ) {
+		if ( self::BLOCK_PATTERNS === $post_type ) {
+			$taxonomy = self::BLOCK_PATTERNS . '_tax';
+			$terms    = get_terms(
+				$taxonomy,
+				[ 'hide_empty' => false ]
+			);
+			if ( is_wp_error( $terms ) || empty( $terms ) ) {
+				return;
+			}
+			wp_dropdown_categories(
+				[
+					'show_option_all' => __( '全てのカテゴリー', 'ystandard-toolbox' ),
+					'orderby'         => 'name',
+					'selected'        => get_query_var( $taxonomy ),
+					'hide_empty'      => 0,
+					'name'            => $taxonomy,
+					'taxonomy'        => $taxonomy,
+					'value_field'     => 'slug',
+				]
+			);
+		}
+	}
+
+	/**
 	 * ブロックパターン追加
 	 */
 	public function register_block_pattern() {
+		/**
+		 * カテゴリー登録
+		 */
+		$taxonomy = self::BLOCK_PATTERNS . '_tax';
+		$terms    = get_terms( $taxonomy, [ 'hide_empty' => true ] );
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				// カテゴリー登録.
+				register_block_pattern_category(
+					self::BLOCK_PATTERNS . '_' . $term->slug,
+					[ 'label' => $term->name ]
+				);
+			}
+		}
+		// カテゴリーがついていないパターンの受け皿.
+		register_block_pattern_category(
+			self::BLOCK_PATTERNS,
+			[ 'label' => 'yStandard Toolbox' ]
+		);
+
+		do_action( 'ystdtb_register_block_pattern_category' );
+
+		// 投稿取得.
 		$patterns = get_posts(
 			[
 				'post_type'      => [ self::BLOCK_PATTERNS ],
@@ -115,23 +191,42 @@ class Block_Patterns {
 		if ( empty( $patterns ) ) {
 			return;
 		}
-		register_block_pattern_category(
-			self::BLOCK_PATTERNS,
-			[ 'label' => 'yStandard Toolbox' ]
-		);
-		$count = 1;
+
 		foreach ( $patterns as $pattern ) {
 			if ( $pattern->post_content ) {
+				$pattern_categories = [ self::BLOCK_PATTERNS ];
+				$category           = get_the_terms( $pattern->ID, $taxonomy );
+				if ( ! is_wp_error( $category ) && ! empty( $category ) ) {
+					$pattern_categories = [];
+					foreach ( $category as $term ) {
+						$pattern_categories[] = self::BLOCK_PATTERNS . '_' . $term->slug;
+					}
+				}
 				register_block_pattern(
-					'ystdtb/pattern-' . $count,
+					'ystdtb/pattern-' . $pattern->ID,
 					[
 						'title'      => $pattern->post_title,
 						'content'    => $pattern->post_content,
-						'categories' => [ self::BLOCK_PATTERNS ],
+						'categories' => $pattern_categories,
 					]
 				);
 			}
-			$count ++;
+		}
+
+		do_action( 'ystdtb_register_block_pattern' );
+	}
+
+	/**
+	 * 管理画面並び替え
+	 *
+	 * @param \WP_Query $query query.
+	 */
+	public function set_order( $query ) {
+		if ( is_admin() ) {
+			if ( isset( $query->query['post_type'] ) && self::BLOCK_PATTERNS === $query->query['post_type'] ) {
+				$query->set( 'orderby', 'date' );
+				$query->set( 'order', 'DESC' );
+			}
 		}
 	}
 

@@ -1,14 +1,14 @@
-import { InnerBlocks } from '@wordpress/block-editor';
-import classnames from 'classnames';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 export default function ( { attributes } ) {
-	const { className } = attributes;
 
-	const classes = classnames( 'ystdtb-timeline', className, {} );
+	const blockProps = useBlockProps.save( {
+		className: 'ystdtb-timeline',
+	} );
 
 	return (
-		<div className={ classes }>
-			<InnerBlocks.Content />
+		<div { ...blockProps }>
+			<InnerBlocks.Content/>
 		</div>
 	);
 }

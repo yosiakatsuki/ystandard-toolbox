@@ -12,7 +12,7 @@ import {
 	FontSizePicker,
 	withFontSizes,
 	getColorClassName,
-	__experimentalBlock as Block,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -28,7 +28,7 @@ import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import { ChevronDown } from 'react-feather';
 
-function faqItem( props ) {
+function FAQItem( props ) {
 	const {
 		className,
 		attributes,
@@ -114,6 +114,12 @@ function faqItem( props ) {
 		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
 	};
 
+	const blockProps = useBlockProps( {
+		className: classnames( 'ystdtb-faq-item-wrap', {
+			[ `is-faq--${ faqType }` ]: faqType,
+		} ),
+	} );
+
 	return (
 		<Fragment>
 			<InspectorControls>
@@ -156,8 +162,8 @@ function faqItem( props ) {
 															.labelBorderColor
 													),
 													accordionArrowColor:
-														item.attributes
-															.labelColor,
+													item.attributes
+														.labelColor,
 												},
 											} );
 										} }
@@ -435,11 +441,7 @@ function faqItem( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div
-				className={ classnames( 'ystdtb-faq-item-wrap', {
-					[ `is-faq--${ faqType }` ]: faqType,
-				} ) }
-			>
+			<div { ...blockProps }>
 				<div className={ itemClasses } style={ itemStyles }>
 					<div className={ labelClasses } style={ labelStyles }>
 						<span className={ labelTextClasses }>{ faqType }</span>
@@ -451,7 +453,7 @@ function faqItem( props ) {
 							renderAppender={
 								hasChildBlocks
 									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender />
+									: () => <InnerBlocks.ButtonBlockAppender/>
 							}
 						/>
 					</div>
@@ -460,11 +462,11 @@ function faqItem( props ) {
 							className={ accordionArrowClass }
 							style={ accordionArrowStyle }
 						>
-							<ChevronDown />
+							<ChevronDown/>
 						</div>
 					) }
 				</div>
-			</Block.div>
+			</div>
 		</Fragment>
 	);
 }
@@ -487,4 +489,4 @@ export default compose( [
 			hasChildBlocks: getBlockOrder( clientId ).length > 0,
 		};
 	} ),
-] )( faqItem );
+] )( FAQItem );

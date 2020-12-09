@@ -3,6 +3,7 @@ import {
 	InnerBlocks,
 	getColorClassName,
 	getFontSizeClass,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
 
@@ -123,20 +124,25 @@ export default function ( { attributes } ) {
 		color: accordionArrowColorClass ? undefined : customAccordionArrowColor,
 	};
 
+	const blockProps = useBlockProps.save( {
+		className: itemClasses,
+		style: itemStyles,
+	} );
+
 	return (
-		<div className={ itemClasses } style={ itemStyles }>
+		<div { ...blockProps }>
 			<div className={ labelClasses } style={ labelStyles }>
 				<span className={ labelTextClasses }>{ faqType }</span>
 			</div>
 			<div className={ contentsClasses } style={ contentsStyles }>
-				<InnerBlocks.Content />
+				<InnerBlocks.Content/>
 			</div>
 			{ 'q' === faqType && (
 				<div
 					className={ accordionArrowClass }
 					style={ accordionArrowStyle }
 				>
-					<SVGIcon name={ 'chevron-down' } />
+					<SVGIcon name={ 'chevron-down' }/>
 				</div>
 			) }
 		</div>

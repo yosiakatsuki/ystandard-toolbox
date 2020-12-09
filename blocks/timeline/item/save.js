@@ -3,6 +3,7 @@ import {
 	InnerBlocks,
 	getColorClassName,
 	getFontSizeClass,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
 
@@ -25,7 +26,6 @@ export default function ( { attributes } ) {
 		customContentsBorderColor,
 		labelFontSize,
 		customLabelFontSize,
-		className,
 	} = attributes;
 
 	const selectLabelType = undefined === labelType ? '' : labelType;
@@ -47,9 +47,9 @@ export default function ( { attributes } ) {
 	);
 	const labelFontSizeClass = getFontSizeClass( labelFontSize );
 
-	const classes = classnames( 'ystdtb-timeline-item', className, {
+	const classes = classnames( 'ystdtb-timeline-item', {
 		[ `is-margin-${ selectContentsInnerMargin }` ]:
-			'normal' !== selectContentsInnerMargin,
+		'normal' !== selectContentsInnerMargin,
 		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
 		'has-border': contentsBorderColor || customContentsBorderColor,
 		[ contentsBorderColorClass ]: contentsBorderColorClass,
@@ -94,8 +94,8 @@ export default function ( { attributes } ) {
 	const contentsStyle = {
 		marginTop: contentMarginTop
 			? `calc(-1.3em ${ contentMarginTopCalc } ${ Math.abs(
-					contentMarginTop
-			  ) }px)`
+				contentMarginTop
+			) }px)`
 			: undefined,
 	};
 
@@ -114,19 +114,24 @@ export default function ( { attributes } ) {
 		if ( 'icon' === selectLabelType ) {
 			return (
 				<span className={ labelContentsClasses }>
-					<SVGIcon name={ labelContents } />
+					<SVGIcon name={ labelContents }/>
 				</span>
 			);
 		}
 	};
 
+	const blockProps = useBlockProps.save( {
+		className: classes,
+		style: timelineStyle,
+	} );
+
 	return (
-		<div className={ classes } style={ timelineStyle }>
+		<div { ...blockProps }>
 			<div className={ labelClasses } style={ labelStyles }>
 				{ getLabelContents() }
 			</div>
 			<div className={ contentsClass } style={ contentsStyle }>
-				<InnerBlocks.Content />
+				<InnerBlocks.Content/>
 			</div>
 		</div>
 	);
