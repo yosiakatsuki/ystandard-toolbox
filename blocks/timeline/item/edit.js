@@ -7,7 +7,7 @@ import {
 	FontSizePicker,
 	withFontSizes,
 	PlainText,
-	__experimentalBlock as Block,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -25,7 +25,7 @@ import SVGIconSelect from '../../../src/js/blocks/component/icon-picker';
 import SVGIcon from '../../../src/js/blocks/component/svg-icon';
 import { calcContentMarginTop } from './function';
 
-function timelineItem( props ) {
+function TimelineItem( props ) {
 	const {
 		attributes,
 		setAttributes,
@@ -70,7 +70,7 @@ function timelineItem( props ) {
 
 	const classes = classnames( 'ystdtb-timeline-item', className, {
 		[ `is-margin-${ selectContentsInnerMargin }` ]:
-			'normal' !== selectContentsInnerMargin,
+		'normal' !== selectContentsInnerMargin,
 		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
 		[ contentsBorderColor.class ]: contentsBorderColor.class,
 	} );
@@ -110,8 +110,8 @@ function timelineItem( props ) {
 	const contentsStyle = {
 		marginTop: contentMarginTop
 			? `calc(-1.3em ${ contentMarginTopCalc } ${ Math.abs(
-					contentMarginTop
-			  ) }px)`
+				contentMarginTop
+			) }px)`
 			: undefined,
 	};
 
@@ -130,11 +130,16 @@ function timelineItem( props ) {
 		if ( 'icon' === selectLabelType ) {
 			return (
 				<span className={ labelContentsClasses }>
-					<SVGIcon name={ labelContents } />
+					<SVGIcon name={ labelContents }/>
 				</span>
 			);
 		}
 	};
+
+	const blockProps = useBlockProps( {
+		className: classes,
+		style: timelineStyle,
+	} );
 
 	return (
 		<Fragment>
@@ -433,24 +438,22 @@ function timelineItem( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div>
-				<div className={ classes } style={ timelineStyle }>
-					<div className={ labelClasses } style={ labelStyles }>
-						{ getLabelContents() }
-					</div>
-					<div className={ contentsClass } style={ contentsStyle }>
-						<InnerBlocks
-							templateLock={ false }
-							template={ template }
-							renderAppender={
-								hasChildBlocks
-									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender />
-							}
-						/>
-					</div>
+			<div { ...blockProps }>
+				<div className={ labelClasses } style={ labelStyles }>
+					{ getLabelContents() }
 				</div>
-			</Block.div>
+				<div className={ contentsClass } style={ contentsStyle }>
+					<InnerBlocks
+						templateLock={ false }
+						template={ template }
+						renderAppender={
+							hasChildBlocks
+								? undefined
+								: () => <InnerBlocks.ButtonBlockAppender/>
+						}
+					/>
+				</div>
+			</div>
 		</Fragment>
 	);
 }
@@ -471,4 +474,4 @@ export default compose( [
 			hasChildBlocks: getBlockOrder( clientId ).length > 0,
 		};
 	} ),
-] )( timelineItem );
+] )( TimelineItem );

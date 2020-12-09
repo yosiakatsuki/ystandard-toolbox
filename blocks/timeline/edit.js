@@ -4,7 +4,7 @@ import {
 	InnerBlocks,
 	InspectorControls,
 	FontSizePicker,
-	__experimentalBlock as Block,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -29,7 +29,7 @@ import {
 	getFontSlug,
 } from '../../src/js/blocks/function/_getFontSlug';
 
-function timeline( props ) {
+function Timeline( props ) {
 	const {
 		className,
 		updateChildAttributes,
@@ -52,6 +52,10 @@ function timeline( props ) {
 		contentMarginTop,
 		'1'
 	);
+
+	const blockProps = useBlockProps( {
+		className: classnames( 'ystdtb-timeline-wrap' ),
+	} );
 
 	return (
 		<Fragment>
@@ -310,7 +314,7 @@ function timeline( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div className={ classnames( 'ystdtb-timeline-wrap' ) }>
+			<div { ...blockProps }>
 				<div className={ classes }>
 					<InnerBlocks
 						allowedBlocks={ [ 'ystdtb/timeline-item' ] }
@@ -318,7 +322,7 @@ function timeline( props ) {
 						templateLock={ false }
 					/>
 				</div>
-			</Block.div>
+			</div>
 		</Fragment>
 	);
 }
@@ -356,7 +360,7 @@ const timelineEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 			} );
 		} );
 	},
-} ) )( timeline );
+} ) )( Timeline );
 
 export default compose( [
 	withState( {

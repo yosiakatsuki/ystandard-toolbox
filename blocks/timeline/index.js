@@ -7,6 +7,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'ystdtb/timeline', {
+	apiVersion: 2,
 	title: __( 'タイムライン', 'ystandard-blocks' ),
 	description: __( 'タイムライン表示ブロック', 'ystandard-blocks' ),
 	icon: (
