@@ -93,8 +93,8 @@ abstract class Dynamic_Block {
 	 */
 	protected function parse_default( $attributes ) {
 		foreach ( $this->block_attributes as $key => $item ) {
-			if ( ! isset( $attributes[ $key ] ) && isset( $item['default'] ) ) {
-				$attributes[ $key ] = $item['default'];
+			if ( ! isset( $attributes[ $key ] ) ) {
+				$attributes[ $key ] = isset( $item['default'] ) ? $item['default'] : null;
 			}
 			if ( 'bool' === $item['type'] ) {
 				$attributes[ $key ] = Utility::to_bool( $attributes[ $key ] );
