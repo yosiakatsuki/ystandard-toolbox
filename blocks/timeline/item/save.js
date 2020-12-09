@@ -49,7 +49,7 @@ export default function ( { attributes } ) {
 
 	const classes = classnames( 'ystdtb-timeline-item', {
 		[ `is-margin-${ selectContentsInnerMargin }` ]:
-		'normal' !== selectContentsInnerMargin,
+			'normal' !== selectContentsInnerMargin,
 		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
 		'has-border': contentsBorderColor || customContentsBorderColor,
 		[ contentsBorderColorClass ]: contentsBorderColorClass,
@@ -94,8 +94,8 @@ export default function ( { attributes } ) {
 	const contentsStyle = {
 		marginTop: contentMarginTop
 			? `calc(-1.3em ${ contentMarginTopCalc } ${ Math.abs(
-				contentMarginTop
-			) }px)`
+					contentMarginTop
+			  ) }px)`
 			: undefined,
 	};
 
@@ -114,7 +114,7 @@ export default function ( { attributes } ) {
 		if ( 'icon' === selectLabelType ) {
 			return (
 				<span className={ labelContentsClasses }>
-					<SVGIcon name={ labelContents }/>
+					<SVGIcon name={ labelContents } />
 				</span>
 			);
 		}
@@ -131,7 +131,7 @@ export default function ( { attributes } ) {
 				{ getLabelContents() }
 			</div>
 			<div className={ contentsClass } style={ contentsStyle }>
-				<InnerBlocks.Content/>
+				<InnerBlocks.Content />
 			</div>
 		</div>
 	);

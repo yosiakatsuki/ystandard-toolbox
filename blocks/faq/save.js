@@ -1,4 +1,8 @@
-import { InnerBlocks, getColorClassName, useBlockProps } from '@wordpress/block-editor';
+import {
+	InnerBlocks,
+	getColorClassName,
+	useBlockProps,
+} from '@wordpress/block-editor';
 import classnames from 'classnames';
 
 export default function ( { attributes } ) {
@@ -48,7 +52,7 @@ export default function ( { attributes } ) {
 
 	return (
 		<div { ...blockProps }>
-			<InnerBlocks.Content/>
+			<InnerBlocks.Content />
 		</div>
 	);
 }

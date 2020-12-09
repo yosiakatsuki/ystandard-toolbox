@@ -162,8 +162,8 @@ function FAQItem( props ) {
 															.labelBorderColor
 													),
 													accordionArrowColor:
-													item.attributes
-														.labelColor,
+														item.attributes
+															.labelColor,
 												},
 											} );
 										} }
@@ -453,7 +453,7 @@ function FAQItem( props ) {
 							renderAppender={
 								hasChildBlocks
 									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender/>
+									: () => <InnerBlocks.ButtonBlockAppender />
 							}
 						/>
 					</div>
@@ -462,7 +462,7 @@ function FAQItem( props ) {
 							className={ accordionArrowClass }
 							style={ accordionArrowStyle }
 						>
-							<ChevronDown/>
+							<ChevronDown />
 						</div>
 					) }
 				</div>

@@ -70,7 +70,7 @@ function TimelineItem( props ) {
 
 	const classes = classnames( 'ystdtb-timeline-item', className, {
 		[ `is-margin-${ selectContentsInnerMargin }` ]:
-		'normal' !== selectContentsInnerMargin,
+			'normal' !== selectContentsInnerMargin,
 		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
 		[ contentsBorderColor.class ]: contentsBorderColor.class,
 	} );
@@ -110,8 +110,8 @@ function TimelineItem( props ) {
 	const contentsStyle = {
 		marginTop: contentMarginTop
 			? `calc(-1.3em ${ contentMarginTopCalc } ${ Math.abs(
-				contentMarginTop
-			) }px)`
+					contentMarginTop
+			  ) }px)`
 			: undefined,
 	};
 
@@ -130,7 +130,7 @@ function TimelineItem( props ) {
 		if ( 'icon' === selectLabelType ) {
 			return (
 				<span className={ labelContentsClasses }>
-					<SVGIcon name={ labelContents }/>
+					<SVGIcon name={ labelContents } />
 				</span>
 			);
 		}
@@ -449,7 +449,7 @@ function TimelineItem( props ) {
 						renderAppender={
 							hasChildBlocks
 								? undefined
-								: () => <InnerBlocks.ButtonBlockAppender/>
+								: () => <InnerBlocks.ButtonBlockAppender />
 						}
 					/>
 				</div>
