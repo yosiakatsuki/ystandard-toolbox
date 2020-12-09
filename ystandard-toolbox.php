@@ -11,6 +11,7 @@
  * Text Domain: ystandard-toolbox
  * Domain Path: /languages
  * Requires PHP: 7.3.0
+ * Requires at least: 5.6
  *
  * @package yStandard_toolbox
  */
