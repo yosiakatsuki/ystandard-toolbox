@@ -135,14 +135,14 @@ export default function ( { attributes } ) {
 				<span className={ labelTextClasses }>{ faqType }</span>
 			</div>
 			<div className={ contentsClasses } style={ contentsStyles }>
-				<InnerBlocks.Content/>
+				<InnerBlocks.Content />
 			</div>
 			{ 'q' === faqType && (
 				<div
 					className={ accordionArrowClass }
 					style={ accordionArrowStyle }
 				>
-					<SVGIcon name={ 'chevron-down' }/>
+					<SVGIcon name={ 'chevron-down' } />
 				</div>
 			) }
 		</div>
