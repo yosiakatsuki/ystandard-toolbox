@@ -7,6 +7,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'ystdtb/faq', {
+	apiVersion: 2,
 	title: __( 'Q&A', 'ystandard-blocks' ),
 	description: __( 'Q&A(FAQ)表示ブロック', 'ystandard-blocks' ),
 	icon: (

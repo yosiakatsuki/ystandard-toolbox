@@ -1,4 +1,4 @@
-import { InnerBlocks, getColorClassName } from '@wordpress/block-editor';
+import { InnerBlocks, getColorClassName, useBlockProps } from '@wordpress/block-editor';
 import classnames from 'classnames';
 
 export default function ( { attributes } ) {
@@ -41,9 +41,14 @@ export default function ( { attributes } ) {
 				: undefined,
 	};
 
+	const blockProps = useBlockProps.save( {
+		className: faqClasses,
+		style: faqStyle,
+	} );
+
 	return (
-		<div className={ faqClasses } style={ faqStyle }>
-			<InnerBlocks.Content />
+		<div { ...blockProps }>
+			<InnerBlocks.Content/>
 		</div>
 	);
 }

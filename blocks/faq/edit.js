@@ -4,7 +4,7 @@ import {
 	InnerBlocks,
 	InspectorControls,
 	withColors,
-	__experimentalBlock as Block,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -23,7 +23,7 @@ import {
 	getColorSlug,
 } from '../../src/js/blocks/function/_getColorSlug';
 
-function faq( props ) {
+function FAQ( props ) {
 	const {
 		className,
 		attributes,
@@ -56,6 +56,10 @@ function faq( props ) {
 				? borderSize
 				: undefined,
 	};
+
+	const blockProps = useBlockProps( {
+		className: classnames( 'ystdtb-faq-wrap' ),
+	} );
 
 	return (
 		<Fragment>
@@ -185,7 +189,7 @@ function faq( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<Block.div className={ classnames( 'ystdtb-faq-wrap' ) }>
+			<div { ...blockProps }>
 				<div className={ faqClasses } style={ faqStyles }>
 					<InnerBlocks
 						allowedBlocks={ [ 'ystdtb/faq-item' ] }
@@ -193,7 +197,7 @@ function faq( props ) {
 						templateLock={ 'all' }
 					/>
 				</div>
-			</Block.div>
+			</div>
 		</Fragment>
 	);
 }
@@ -208,7 +212,7 @@ const faqEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 			updateBlockAttributes( innerBlockClientId, attributes );
 		} );
 	},
-} ) )( faq );
+} ) )( FAQ );
 
 export default compose( [
 	withColors( {
