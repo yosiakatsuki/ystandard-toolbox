@@ -356,6 +356,7 @@
       font-size: 0.8em;
     }
   }
+
   .beta-feature-more {
     margin: 3em 0 0;
     font-size: 0.8em;
@@ -367,8 +368,12 @@
   }
 
   .ystdtb-menu__image-select-preview {
+    display: inline-block;
+    background: rgba(#000, 0.1);
+    border: 2px solid global.$color__border-gray-light;
+
     img {
-      border: 2px solid global.$color__border-gray-light;
+      display: block;
     }
   }
 }
