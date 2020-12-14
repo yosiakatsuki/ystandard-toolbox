@@ -549,10 +549,12 @@
         "position": "absolute",
         "top": "100%",
         "left": 0,
+        "right": "auto",
         "borderTop": 0,
         "borderLeft": 0,
         "borderBottom": "solid 10px transparent",
-        "borderRight": "solid 20px #{color}"
+        "borderRight": "solid 20px #{color}",
+        "borderRadius": 0
       }
     }
   },
