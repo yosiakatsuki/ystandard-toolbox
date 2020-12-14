@@ -64,8 +64,10 @@
 							<div class="ystdtb-menu__image-select">
 								<input type="hidden" :name="`header_design[overlayImage]`" v-model="overlayImage">
 								<div v-if="hasImage">
-									<div class="ystdtb-menu__image-select-preview">
-										<img :src="overlayImage" alt="" style="max-width: 300px;">
+									<div>
+										<div class="ystdtb-menu__image-select-preview">
+											<img :src="overlayImage" alt="" style="max-width: 300px;">
+										</div>
 									</div>
 									<button type="button" class="is-small is-cancel is-small" @click="clearImage" style="margin-top: .5em;">画像をクリア</button>
 								</div>
