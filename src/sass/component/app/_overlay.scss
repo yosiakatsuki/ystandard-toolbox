@@ -1,5 +1,12 @@
+@use "../../global";
+
 .ystdtb.is-overlay {
 
+  @include global.media-breakpoint(md) {
+    .global-nav {
+      background-color: transparent;
+    }
+  }
 
   &.is-transparent {
     --header-text: var(--overlay-text-color);
