@@ -156,7 +156,6 @@ class Option {
 	 *
 	 * @param string $name    option key.
 	 * @param mixed  $default デフォルト値.
-	 * @param mixed  $type    取得する型.
 	 *
 	 * @return mixed
 	 */
