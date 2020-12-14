@@ -133,4 +133,38 @@ class Option {
 
 		return update_option( Config::OPTION_NAME, $option );
 	}
+
+	/**
+	 * [yStandard]の設定取得
+	 *
+	 * @param string $name    option key.
+	 * @param mixed  $default デフォルト値.
+	 * @param mixed  $type    取得する型.
+	 *
+	 * @return mixed
+	 */
+	public static function get_ystd_option( $name, $default = false, $type = false ) {
+		if ( function_exists( 'ys_get_option' ) ) {
+			return ys_get_option( $name, $default, $type );
+		}
+
+		return get_option( $name, $default );
+	}
+
+	/**
+	 * [yStandard]の設定取得(bool)
+	 *
+	 * @param string $name    option key.
+	 * @param mixed  $default デフォルト値.
+	 * @param mixed  $type    取得する型.
+	 *
+	 * @return mixed
+	 */
+	public static function get_ystd_option_by_bool( $name, $default = false ) {
+		if ( function_exists( 'ys_get_option_by_bool' ) ) {
+			return ys_get_option_by_bool( $name, $default );
+		}
+
+		return self::get_ystd_option( $name, $default, 'boolean' );
+	}
 }
