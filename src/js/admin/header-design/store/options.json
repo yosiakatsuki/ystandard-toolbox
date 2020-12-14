@@ -5,5 +5,7 @@
   "subHeaderFontSizeDesktop": "0.7",
   "subHeaderFontSizeUnitDesktop": "em",
   "enableOverlay": "false",
-  "overlayPageType": []
+  "overlayPageType": [],
+  "overlayImage": "",
+  "overlayTextColor": ""
 }

@@ -365,6 +365,12 @@
       padding-left: 1.5em;
     }
   }
+
+  .ystdtb-menu__image-select-preview {
+    img {
+      border: 2px solid global.$color__border-gray-light;
+    }
+  }
 }
 
 // .ystdtb-menu__component

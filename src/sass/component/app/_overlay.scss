@@ -2,8 +2,25 @@
 
 
   &.is-transparent {
+    --header-text: var(--overlay-text-color);
+    --header-dscr: var(--overlay-text-color);
+    --mobile-nav-open: var(--overlay-text-color);
     --header-bg: transparent;
     --header-shadow: none;
+
+    .custom-logo {
+      &.is-normal {
+        display: none;
+      }
+
+      &.is-overlay {
+        display: block;
+      }
+    }
+  }
+
+  .custom-logo.is-overlay {
+    display: none;
   }
 
   .info-bar {
