@@ -27,6 +27,13 @@ class Header_Overlay {
 		add_filter( 'ys_css_vars', [ $this, 'overlay_css_vars' ], 20 );
 		add_filter( 'get_custom_logo_image_attributes', [ $this, 'custom_logo_image_attributes' ] );
 		add_filter( 'ys_get_header_logo', [ $this, 'add_overlay_logo' ] );
+
+		new Meta_Box(
+			'overlay',
+			'オーバーレイ',
+			[ $this, 'meta_box' ],
+			[ $this, 'save_meta' ]
+		);
 	}
 
 
@@ -57,39 +64,36 @@ class Header_Overlay {
 		if ( ! $enable ) {
 			return false;
 		}
-		$overlay = false;
+		$overlay = apply_filters( 'ystdtb_is_header_overlay', false );
+		if ( $overlay ) {
+			return true;
+		}
 		// 設定取得.
 		$types = Option::get_option( Header_Design::OPTION_NAME, 'overlayPageType', [] );
 		// フロントページ.
 		if ( ( is_front_page() && ! is_paged() ) && in_array( 'front-page', $types, true ) ) {
 			$overlay = true;
 		}
-		// 投稿一覧.
-		if ( is_home() && in_array( 'archive-post', $types, true ) ) {
-			$overlay = true;
-		}
-		// 検索.
-		if ( is_search() && in_array( 'search', $types, true ) ) {
-			$overlay = true;
-		}
-		// 404.
-		if ( is_404() && in_array( '404', $types, true ) ) {
-			$overlay = true;
-		}
 		// 投稿タイプ関連.
 		$post_type = Utility::get_post_type();
 		// 投稿タイプ.
 		if ( ! is_front_page() && ! is_home() ) {
-			if ( is_singular() && in_array( $post_type, $types, true ) ) {
-				$overlay = true;
+			if ( is_singular() ) {
+				if ( in_array( $post_type, $types, true ) ) {
+					$overlay = true;
+				}
+				$meta = Post_Meta::get_post_meta( 'ystdtb-overlay' );
+				$meta = empty( $meta ) ? 'none' : $meta;
+				if ( 'on' === $meta ) {
+					$overlay = true;
+				}
+				if ( 'off' === $meta ) {
+					$overlay = false;
+				}
 			}
 		}
-		// 投稿タイプ 一覧.
-		if ( is_post_type_archive() && in_array( 'archive-' . $post_type, $types, true ) ) {
-			$overlay = true;
-		}
 
-		return apply_filters( 'ystdt_is_header_overlay', $overlay );
+		return $overlay;
 	}
 
 	/**
@@ -208,6 +212,45 @@ class Header_Overlay {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Meta box 表示.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	public function meta_box( $post_id ) {
+
+		$value = Post_Meta::get_post_meta( 'ystdtb-overlay', $post_id );
+		$value = empty( $value ) ? 'none' : $value;
+
+		?>
+		<div class="ystdtb-meta-box">
+			<h3 class="ystdtb-meta-box__title">ヘッダーオーバーレイ</h3>
+			<div class="ystdtb-meta-box__radio-horizon">
+				<input id="ystdtb-overlay-none" type="radio" name="ystdtb-overlay" value="none" <?php checked( $value, 'none' ); ?>>
+				<label for="ystdtb-overlay-none">-</label>
+
+				<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
+				<label for="ystdtb-overlay-on">ON</label>
+
+				<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
+				<label for="ystdtb-overlay-off">OFF</label>
+			</div>
+			<div class="ystdtb-meta-box__notes">
+				※「-」を選択した場合、ヘッダーオーバーレイ「詳細ページ」設定に従います。
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * 投稿メタ保存
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	public function save_meta( $post_id ) {
+		Post_Meta::save_post_meta( $post_id, 'ystdtb-overlay' );
 	}
 }
 

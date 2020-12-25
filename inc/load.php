@@ -18,6 +18,7 @@ require_once __DIR__ . '/init/class-init.php';
 if ( ! \ystandard_toolbox\Init::check_build_files() ) {
 	return;
 }
+require_once __DIR__ . '/meta-box/class-meta-box.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
 
 // Blocks.
