@@ -1,0 +1,18 @@
+@use "../../global";
+
+.ystdtb-meta-box {
+  margin: 1.5em 0;
+
+  .ystdtb-meta-box__title {
+    margin: 1em 0 .5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .ystdtb-meta-box__notes {
+    color: global.$color__text-light;
+    font-size: .8em;
+  }
+}

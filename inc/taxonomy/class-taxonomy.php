@@ -33,56 +33,6 @@ class Taxonomy {
 	public function __construct() {
 		add_action( 'init', [ $this, 'add_term_options' ], PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
-		add_filter( 'pre_get_document_title', [ $this, 'render_title_tag' ], 11 );
-		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
-		add_filter( 'ys_ogp_description_archive', [ $this, 'meta_description' ], PHP_INT_MAX );
-	}
-
-	/**
-	 * タイトルタグの書き換え
-	 *
-	 * @param string $title Title.
-	 *
-	 * @return string
-	 */
-	public function render_title_tag( $title ) {
-		if ( ! Utility::is_term_archive() ) {
-			return $title;
-		}
-		$term_id = $this->get_term_id();
-
-		if ( ! $term_id ) {
-			return $title;
-		}
-		$seo_title = get_term_meta( $term_id, 'ystdtb-seo-title', true );
-		if ( ! empty( $seo_title ) ) {
-			$title = Utility::get_document_title( $seo_title );
-		}
-
-		return $title;
-	}
-
-	/**
-	 * メタデスクリプション
-	 *
-	 * @param string $dscr description.
-	 *
-	 * @return string
-	 */
-	public function meta_description( $dscr ) {
-		if ( ! Utility::is_term_archive() ) {
-			return $dscr;
-		}
-		$term_id = $this->get_term_id();
-		if ( ! $term_id ) {
-			return $dscr;
-		}
-		$seo_dscr = get_term_meta( $term_id, 'ystdtb-seo-description', true );
-		if ( ! empty( $seo_dscr ) ) {
-			$dscr = $seo_dscr;
-		}
-
-		return $dscr;
 	}
 
 	/**
@@ -90,7 +40,7 @@ class Taxonomy {
 	 *
 	 * @return bool|int
 	 */
-	private function get_term_id() {
+	public static function get_term_id() {
 		$term_id = false;
 		if ( is_tax() ) {
 			$taxonomy = get_query_var( 'taxonomy' );
@@ -105,6 +55,13 @@ class Taxonomy {
 		}
 
 		return $term_id;
+	}
+
+	/**
+	 * カテゴリー・タグ・ターム 一覧ページかどうか
+	 */
+	public static function is_term_archive() {
+		return is_tax() || is_category() || is_tag();
 	}
 
 	/**
@@ -160,26 +117,9 @@ class Taxonomy {
 		?>
 		<div class="ystdtb-term-option">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
-			<div class="ystdtb-term-option__label">yStandard Toolbox 設定</div>
+			<h2 class="ystdtb-term-option__label">yStandard Toolbox 設定</h2>
 			<div class="ystdtb-term-option__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
-			<table class="form-table" role="presentation">
-				<tr class="form-field">
-					<th scope="row">
-						<label for="ystdtb-seo-title"><?php echo esc_html( '<title>' ); ?>タグ用タイトル</label>
-					</th>
-					<td>
-						<textarea id="ystdtb-seo-title" name="ystdtb-seo-title" rows="2" cols="40"><?php echo esc_textarea( get_term_meta( $tag->term_id, 'ystdtb-seo-title', true ) ); ?></textarea>
-					</td>
-				</tr>
-				<tr class="form-field">
-					<th scope="row">
-						<label for="ystdtb-seo-description">meta description</label>
-					</th>
-					<td>
-						<textarea id="ystdtb-seo-description" name="ystdtb-seo-description" rows="4" cols="40"><?php echo esc_textarea( get_term_meta( $tag->term_id, 'ystdtb-seo-description', true ) ); ?></textarea>
-					</td>
-				</tr>
-			</table>
+			<?php do_action( 'ystdtb_term_edit_form', $tag, $taxonomy ); ?>
 		</div>
 		<?php
 	}
@@ -194,22 +134,8 @@ class Taxonomy {
 		if ( ! Utility::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
 			return;
 		}
-		/**
-		 * タイトルの上書き
-		 */
-		if ( isset( $_POST['ystdtb-seo-title'] ) && ! empty( $_POST['ystdtb-seo-title'] ) ) {
-			update_term_meta( $term_id, 'ystdtb-seo-title', esc_attr( $_POST['ystdtb-seo-title'] ) );
-		} else {
-			delete_term_meta( $term_id, 'ystdtb-seo-title' );
-		}
-		/**
-		 * 説明の上書き
-		 */
-		if ( isset( $_POST['ystdtb-seo-description'] ) && ! empty( $_POST['ystdtb-seo-description'] ) ) {
-			update_term_meta( $term_id, 'ystdtb-seo-description', esc_attr( $_POST['ystdtb-seo-description'] ) );
-		} else {
-			delete_term_meta( $term_id, 'ystdtb-seo-description' );
-		}
+
+		do_action( 'ystdtb_term_edit_save', $term_id );
 	}
 }
 

@@ -49,6 +49,23 @@ class Post_Meta {
 	}
 
 	/**
+	 * 投稿オプションの更新
+	 *
+	 * @param int    $post_id 投稿ID.
+	 * @param string $key     設定キー.
+	 */
+	public static function save_post_meta( $post_id, $key ) {
+		if ( ! isset( $_POST[ $key ] ) ) {
+			return;
+		}
+		if ( ! empty( $_POST[ $key ] ) ) {
+			update_post_meta( $post_id, $key, $_POST[ $key ] );
+		} else {
+			delete_post_meta( $post_id, $key );
+		}
+	}
+
+	/**
 	 * 投稿オプションの更新：textarea
 	 *
 	 * @param int    $post_id       投稿ID.

@@ -1,5 +1,5 @@
 <template>
-	<div class="header-overlay is-beta-feature">
+	<div class="header-overlay">
 		<h3 class="ystdtb-menu__section-title">ヘッダーオーバーレイ</h3>
 		<div class="ystdtb-menu__section is-w-600">
 			<div class="ystdtb-menu__table ystdtb-menu__section">
@@ -17,40 +17,17 @@
 						<div class="is-label">ページタイプ</div>
 						<div class="is-content">
 							<div class="ystdtb-menu__subtext">オーバーレイ機能を有効にするページタイプにチェックを付けてください。</div>
-							<h4>フロントページ/投稿一覧/検索/404</h4>
+							<h4>フロントページ</h4>
 							<div>
 								<label>
 									<input type="checkbox" name="header_design[overlayPageType][]" value="front-page" v-model="overlayPageType">フロントページ
 								</label>
 							</div>
-							<div>
-								<label>
-									<input type="checkbox" name="header_design[overlayPageType][]" value="archive-post" v-model="overlayPageType">投稿一覧
-								</label>
-							</div>
-							<div>
-								<label>
-									<input type="checkbox" name="header_design[overlayPageType][]" value="search" v-model="overlayPageType">検索結果一覧
-								</label>
-							</div>
-							<div>
-								<label>
-									<input type="checkbox" name="header_design[overlayPageType][]" value="404" v-model="overlayPageType">404
-								</label>
-							</div>
 							<div v-if="hasPageTypes">
-								<h4>ページタイプ別</h4>
+								<h4>詳細ページ</h4>
 								<div v-for="(page,name) in pageTypes">
 									<label>
 										<input type="checkbox" name="header_design[overlayPageType][]" :value="name" v-model="overlayPageType">{{ page }}
-									</label>
-								</div>
-							</div>
-							<div v-if="hasArchivePostTypes">
-								<h4>投稿アーカイブ</h4>
-								<div v-for="(page,name) in archivePostTypes">
-									<label>
-										<input type="checkbox" name="header_design[overlayPageType][]" :value="name" v-model="overlayPageType">{{ page }} 一覧
 									</label>
 								</div>
 							</div>
@@ -94,15 +71,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="beta-feature-more">
-				<h3>今後追加予定の機能</h3>
-				<ul>
-					<li>詳細ページ：ページ別オーバーレイ有効化・無効化機能</li>
-					<li>カテゴリー・タグ一覧：カテゴリー別オーバーレイ有効化・無効化機能</li>
-					<li>オーバーレイページ用ロゴ画像設定機能</li>
-					<li>オーバーレイページ用文字色設定機能</li>
-				</ul>
 			</div>
 		</div>
 	</div>
@@ -184,12 +152,6 @@
 			},
 			hasPageTypes() {
 				return !! Object.keys( this.pageTypes ).length;
-			},
-			archivePostTypes() {
-				return window.ystdtbHeaderDesignData.archivePostTypes;
-			},
-			hasArchivePostTypes() {
-				return !! Object.keys( this.archivePostTypes ).length;
 			},
 			overlayImage: {
 				get() {

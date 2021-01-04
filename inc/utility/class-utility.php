@@ -472,13 +472,6 @@ class Utility {
 	}
 
 	/**
-	 * カテゴリー・タグ・ターム 一覧ページかどうか
-	 */
-	public static function is_term_archive() {
-		return is_tax() || is_category() || is_tag();
-	}
-
-	/**
 	 * 使える画像サイズ一覧取得
 	 *
 	 * @return array
@@ -520,6 +513,21 @@ class Utility {
 		}
 
 		return wp_is_mobile();
+	}
+
+
+	/**
+	 * 変数の内容をファイルに出力（開発用）
+	 *
+	 * @param mixed $var value.
+	 */
+	public static function debug_var_dump_file( $var ) {
+		ob_start();
+		echo date_i18n( 'Y.m.d H:i:s' ) . '<br>';
+		var_dump( $var );
+		$dump = ob_get_contents();
+		ob_end_clean();
+		file_put_contents( ABSPATH . 'wp-content/uploads/debug.html', $dump, FILE_APPEND );
 	}
 
 }
