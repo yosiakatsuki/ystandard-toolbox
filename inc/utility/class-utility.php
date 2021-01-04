@@ -472,13 +472,6 @@ class Utility {
 	}
 
 	/**
-	 * カテゴリー・タグ・ターム 一覧ページかどうか
-	 */
-	public static function is_term_archive() {
-		return is_tax() || is_category() || is_tag();
-	}
-
-	/**
 	 * 使える画像サイズ一覧取得
 	 *
 	 * @return array

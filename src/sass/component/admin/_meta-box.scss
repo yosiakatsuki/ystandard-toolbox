@@ -16,39 +16,3 @@
     font-size: .8em;
   }
 }
-
-.ystdtb-meta-box__radio-horizon {
-  display: flex;
-  margin: .5em 0;
-
-  label {
-    width: 100%;
-    text-align: center;
-    padding: .25em;
-
-    border-top: 1px solid global.$color__ystd_blue;
-    border-bottom: 1px solid global.$color__ystd_blue;
-    border-left: 1px solid global.$color__ystd_blue;
-
-    &:first-of-type {
-      border-radius: 4px 0 0 4px;
-    }
-
-    &:last-of-type {
-      border-radius: 0 4px 4px 0;
-      border-right: 1px solid global.$color__ystd_blue;
-    }
-  }
-
-  input[type="radio"] {
-    display: none;
-
-    &:checked {
-
-      + label {
-        background-color: global.$color__ystd_blue;
-        color: #fff;
-      }
-    }
-  }
-}

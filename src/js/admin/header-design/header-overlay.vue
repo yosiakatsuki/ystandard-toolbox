@@ -1,5 +1,5 @@
 <template>
-	<div class="header-overlay is-beta-feature">
+	<div class="header-overlay">
 		<h3 class="ystdtb-menu__section-title">ヘッダーオーバーレイ</h3>
 		<div class="ystdtb-menu__section is-w-600">
 			<div class="ystdtb-menu__table ystdtb-menu__section">
@@ -71,15 +71,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="beta-feature-more">
-				<h3>今後追加予定の機能</h3>
-				<ul>
-					<li>詳細ページ：ページ別オーバーレイ有効化・無効化機能</li>
-					<li>カテゴリー・タグ一覧：カテゴリー別オーバーレイ有効化・無効化機能</li>
-					<li>オーバーレイページ用ロゴ画像設定機能</li>
-					<li>オーバーレイページ用文字色設定機能</li>
-				</ul>
 			</div>
 		</div>
 	</div>

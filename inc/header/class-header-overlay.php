@@ -27,7 +27,8 @@ class Header_Overlay {
 		add_filter( 'ys_css_vars', [ $this, 'overlay_css_vars' ], 20 );
 		add_filter( 'get_custom_logo_image_attributes', [ $this, 'custom_logo_image_attributes' ] );
 		add_filter( 'ys_get_header_logo', [ $this, 'add_overlay_logo' ] );
-
+		add_action( 'ystdtb_term_edit_form', [ $this, 'term_overlay_edit' ], 11, 2 );
+		add_action( 'ystdtb_term_edit_save', [ $this, 'term_overlay_save' ], 11 );
 		new Meta_Box(
 			'overlay',
 			'オーバーレイ',
@@ -88,6 +89,19 @@ class Header_Overlay {
 					$overlay = true;
 				}
 				if ( 'off' === $meta ) {
+					$overlay = false;
+				}
+			}
+		}
+		if ( Taxonomy::is_term_archive() ) {
+			$term_id = Taxonomy::get_term_id();
+			if ( $term_id ) {
+				$term_overlay = get_term_meta( $term_id, 'ystdtb-overlay', true );
+				$term_overlay = empty( $term_overlay ) ? 'off' : $term_overlay;
+				if ( 'on' === $term_overlay ) {
+					$overlay = true;
+				}
+				if ( 'off' === $term_overlay ) {
 					$overlay = false;
 				}
 			}
@@ -227,7 +241,7 @@ class Header_Overlay {
 		?>
 		<div class="ystdtb-meta-box">
 			<h3 class="ystdtb-meta-box__title">ヘッダーオーバーレイ</h3>
-			<div class="ystdtb-meta-box__radio-horizon">
+			<div class="ystdtb-radio-horizon">
 				<input id="ystdtb-overlay-none" type="radio" name="ystdtb-overlay" value="none" <?php checked( $value, 'none' ); ?>>
 				<label for="ystdtb-overlay-none">-</label>
 
@@ -251,6 +265,58 @@ class Header_Overlay {
 	 */
 	public function save_meta( $post_id ) {
 		Post_Meta::save_post_meta( $post_id, 'ystdtb-overlay' );
+	}
+
+	/**
+	 * タームにオーバーレイ設定追加
+	 *
+	 * @param \WP_Term $tag      Current taxonomy term object.
+	 * @param string   $taxonomy Current taxonomy slug.
+	 */
+	public function term_overlay_edit( $tag, $taxonomy ) {
+		$value = get_term_meta( $tag->term_id, 'ystdtb-overlay', true );
+		$value = empty( $value ) ? 'off' : $value;
+		?>
+		<div class="ystdtb-term-option__section">
+			<h3 class="ystdtb-term-option__title">オーバーレイ設定</h3>
+			<table class="form-table" role="presentation">
+				<tr class="form-field">
+					<th scope="row">
+						<label for="ystdtb-overlay">ヘッダーオーバーレイ</label>
+					</th>
+					<td>
+						<div class="ystdtb-radio-horizon is-small">
+							<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
+							<label for="ystdtb-overlay-on">ON</label>
+
+							<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
+							<label for="ystdtb-overlay-off">OFF</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<?php
+	}
+
+	/**
+	 * オーバーレイ設定の保存・削除
+	 *
+	 * @param int $term_id Term ID.
+	 */
+	public function term_overlay_save( $term_id ) {
+		/**
+		 * オーバーレイ設定
+		 */
+		if ( isset( $_POST['ystdtb-overlay'] ) && ! empty( $_POST['ystdtb-overlay'] ) ) {
+			$value = $_POST['ystdtb-overlay'];
+			if ( 'on' !== $value && 'off' !== $value ) {
+				$value = 'off';
+			}
+			update_term_meta( $term_id, 'ystdtb-overlay', $value );
+		} else {
+			delete_term_meta( $term_id, 'ystdtb-overlay' );
+		}
 	}
 }
 
