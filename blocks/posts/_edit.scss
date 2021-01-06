@@ -1,3 +1,16 @@
-[data-type="ystdtb/posts"] {
+@use "../../src/sass/global";
 
+[data-type="ystdtb/posts"] {
+  .ystdtb-posts {
+    &:empty {
+      &:after {
+        content: "記事一覧ブロック：投稿が見つかりませんでした。";
+        display: block;
+        padding: 2em;
+        background: global.$color__bg-gray-light;
+        color: global.$color__text-light;
+        font-size: 0.8em;
+      }
+    }
+  }
 }

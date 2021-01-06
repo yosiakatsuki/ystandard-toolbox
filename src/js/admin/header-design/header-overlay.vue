@@ -17,10 +17,10 @@
 						<div class="is-label">ページタイプ</div>
 						<div class="is-content">
 							<div class="ystdtb-menu__subtext">オーバーレイ機能を有効にするページタイプにチェックを付けてください。</div>
-							<h4>フロントページ</h4>
+							<h4>フロントページ(TOPページ)</h4>
 							<div>
 								<label>
-									<input type="checkbox" name="header_design[overlayPageType][]" value="front-page" v-model="overlayPageType">フロントページ
+									<input type="checkbox" name="header_design[overlayPageType][]" value="front-page" v-model="overlayPageType">フロントページ(TOPページ)
 								</label>
 							</div>
 							<div v-if="hasPageTypes">
