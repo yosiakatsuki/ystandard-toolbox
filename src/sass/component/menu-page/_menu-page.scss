@@ -55,7 +55,13 @@
     &.is-current {
       a {
         @include global.media-breakpoint(md) {
-          border-right: 2px solid global.$color__ystd_blue;
+          border-right: 3px solid global.$color__ystd_blue;
+          color: global.$color__ystd_blue;
+          font-weight: 700;
+
+          &:hover {
+            color: #fff;
+          }
         }
       }
     }
