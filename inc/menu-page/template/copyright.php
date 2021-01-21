@@ -22,8 +22,11 @@ $disable_theme_info = Copyright::get_disable_theme_info();
 			<div class="is-content">
 				<textarea name="<?php echo Copyright::OPTION_NAME; ?>[copyright]" id="copyright" class="widefat code-input" rows="4"><?php echo esc_textarea( wp_unslash( $copyright ) ); ?></textarea>
 				<p class="ystdtb-menu__subtext">
-					※本文内に<code>{year}</code>を入力すると、その部分が現在の年に変換されます。<br>
-					※次のHTMLタグが使用できます。<code>a</code>,<code>strong</code>,<code>span</code>,<code>br</code>
+					※次のHTMLタグが使用できます。<code>a</code>,<code>strong</code>,<code>span</code>,<code>br</code><br>
+					※本文内に以下の文字を入力すると、表示時にそれぞれ変換されます。<br>
+					・{year}: 現在の年<br>
+					・{site}: サイト名<br>
+					・{url}: サイトURL
 				</p>
 			</div>
 		</div>
