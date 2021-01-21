@@ -32,6 +32,8 @@ class Font {
 		}
 		add_action( 'wp_head', [ $this, 'wp_head' ], 11 );
 		add_filter( 'ys_css_vars', [ $this, 'add_font_family' ], 20 );
+		add_action( 'admin_head', [ $this, 'wp_head' ], 11 );
+		add_action( 'enqueue_block_assets', [ $this, 'add_editor_font_styles' ], 11 );
 	}
 
 	/**
@@ -42,7 +44,7 @@ class Font {
 		if ( empty( $option ) ) {
 			return;
 		}
-		echo $option;
+		echo $option . PHP_EOL;
 	}
 
 	/**
@@ -73,6 +75,25 @@ class Font {
 	 */
 	public static function get_font_family() {
 		return wp_unslash( Option::get_option( self::OPTION_NAME, 'family', '' ) );
+	}
+
+	/**
+	 * エディターにフォント設定反映
+	 */
+	public function add_editor_font_styles() {
+		$family = self::get_font_family();
+		if ( empty( $family ) ) {
+			return;
+		}
+		$css = "
+		#editor .editor-styles-wrapper,
+		#editor .editor-styles-wrapper .editor-post-title__block .editor-post-title__input {
+			font-family:${family};
+		}";
+		wp_add_inline_style(
+			Config::BLOCK_CSS_HANDLE,
+			Utility::minify( $css )
+		);
 	}
 
 	/**

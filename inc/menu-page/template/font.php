@@ -40,8 +40,20 @@ $font_family = Font::get_font_family();
 			※追加したWebフォントを含めた font-family を入力してください。
 			<?php if ( empty( $font_family ) ) : ?>
 				<br>
-				※現在の設定では<code><?php echo esc_html( $sample_font ); ?></code>が有効になっています。<br>
+				※現在の設定では<code id="font-family-option"><?php echo esc_html( $sample_font ); ?></code>が有効になっています。<br>
 				※font-family の指定をコピーして、追加したフォントの指定を追記してください。
+				<div style="margin-top: .5em;">
+					<button id="font-family-copy">現在の設定をfont-family欄にセットする</button>
+				</div>
+				<script>
+					document.getElementById( 'font-family-copy' ).addEventListener( 'click', function ( e ) {
+						e.preventDefault();
+						var input = document.getElementById( 'font-family' );
+						input.value = document.getElementById( 'font-family-option' ).textContent;
+						input.focus();
+						input.select();
+					} );
+				</script>
 			<?php endif; ?>
 		</div>
 	</div>

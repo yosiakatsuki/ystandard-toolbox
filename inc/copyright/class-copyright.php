@@ -50,8 +50,14 @@ class Copyright {
 	 * @return string|string[]
 	 */
 	public function _copyright( $text ) {
+		$copyright = self::get_copyright_option();
 
-		return str_replace( '{year}', date_i18n( 'Y' ), self::get_copyright_option() );
+		// 変換.
+		$copyright = str_replace( '{year}', date_i18n( 'Y' ), $copyright );
+		$copyright = str_replace( '{site}', get_bloginfo( 'name', 'display' ), $copyright );
+		$copyright = str_replace( '{url}', home_url( '/' ), $copyright );
+
+		return $copyright;
 	}
 
 	/**
