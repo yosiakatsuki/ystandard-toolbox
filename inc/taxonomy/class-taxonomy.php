@@ -115,10 +115,10 @@ class Taxonomy {
 	 */
 	public function edit_form( $tag, $taxonomy ) {
 		?>
-		<div class="ystdtb-term-option">
+		<div class="ystdtb-option-box">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
-			<h2 class="ystdtb-term-option__label">yStandard Toolbox 設定</h2>
-			<div class="ystdtb-term-option__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
+			<h2 class="ystdtb-option-box__label">yStandard Toolbox 設定</h2>
+			<div class="ystdtb-option-box__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
 			<?php do_action( 'ystdtb_term_edit_form', $tag, $taxonomy ); ?>
 		</div>
 		<?php
