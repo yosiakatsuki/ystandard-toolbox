@@ -113,6 +113,10 @@ class Accordion {
 	public function sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
+		if ( Utility::is_amp() ) {
+			return $params;
+		}
+
 		if ( ! isset( $params[0] ) || ! isset( $params[0]['widget_id'] ) ) {
 			return $params;
 		}
