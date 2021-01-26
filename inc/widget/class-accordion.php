@@ -106,6 +106,8 @@ class Accordion {
 	}
 
 	/**
+	 * ウィジェットにクラス追加
+	 *
 	 * @param array $params Params.
 	 *
 	 * @return array
