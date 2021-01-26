@@ -43,6 +43,8 @@ require_once __DIR__ . '/archive/class-archive.php';
 require_once __DIR__ . '/taxonomy/class-taxonomy.php';
 // SEO.
 require_once __DIR__ . '/seo/class-seo.php';
+// widget.
+require_once __DIR__ . '/widget/class-accordion.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';

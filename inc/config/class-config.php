@@ -37,7 +37,11 @@ class Config {
 	/**
 	 * Script App Handle
 	 */
-	const JS_APP_HANDLE = 'ystdtb-app';
+	const JS_FRONT_APP_HANDLE = 'ystdtb-app';
+	/**
+	 * Script Block App Handle
+	 */
+	const JS_BLOCK_APP_HANDLE = 'ystdtb-block-app';
 	/**
 	 * CSS Hook
 	 */

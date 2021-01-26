@@ -1,0 +1,56 @@
+.ystdtb-is-accordion {
+
+  li {
+    position: relative;
+  }
+
+  .children,
+  .sub-menu {
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: height .3s, opacity .3s;
+
+    &.is-open {
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .ystdtb-accordion__toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    padding: .75em .25em;
+    z-index: 1;
+    background-color: transparent;
+    border: 0;
+    color: currentColor;
+    outline: none;
+    box-shadow: none;
+
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:after {
+      display: inline-block;
+      width: .5em;
+      height: .5em;
+      margin-right: .75em;
+      margin-bottom: .1em;
+      transform: rotate(45deg);
+      border-right: 1px solid;
+      border-bottom: 1px solid;
+      content: "";
+      transition: margin .3s, transform .3s;
+    }
+
+    &.is-open:after {
+      transform: rotate(-135deg);
+    }
+  }
+}

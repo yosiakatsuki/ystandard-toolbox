@@ -277,8 +277,8 @@ class Header_Overlay {
 		$value = get_term_meta( $tag->term_id, 'ystdtb-overlay', true );
 		$value = empty( $value ) ? 'off' : $value;
 		?>
-		<div class="ystdtb-term-option__section">
-			<h3 class="ystdtb-term-option__title">オーバーレイ設定</h3>
+		<div class="ystdtb-option-box__section">
+			<h3 class="ystdtb-option-box__title">オーバーレイ設定</h3>
 			<table class="form-table" role="presentation">
 				<tr class="form-field">
 					<th scope="row">

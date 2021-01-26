@@ -84,8 +84,8 @@ class SEO {
 	 */
 	public function term_seo_edit( $tag, $taxonomy ) {
 		?>
-		<div class="ystdtb-term-option__section">
-			<h3 class="ystdtb-term-option__title">SEO設定</h3>
+		<div class="ystdtb-option-box__section">
+			<h3 class="ystdtb-option-box__title">SEO設定</h3>
 			<table class="form-table" role="presentation">
 				<tr class="form-field">
 					<th scope="row">
