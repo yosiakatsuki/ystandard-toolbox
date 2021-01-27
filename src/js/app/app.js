@@ -38,6 +38,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 						childrenElement.style.height = 'auto';
 					}, 300 );
 				}
+				childrenElement.style.minHeight = childrenHeight;
 				childrenElement.style.height = childrenHeight;
 				e.target.classList.toggle( classOpen );
 				childrenElement.classList.toggle( classOpen );

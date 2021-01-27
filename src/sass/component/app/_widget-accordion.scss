@@ -7,9 +7,10 @@
   .children,
   .sub-menu {
     height: 0;
+    min-height: 0;
     visibility: hidden;
     opacity: 0;
-    transition: height .3s, opacity .3s;
+    transition: min-height .3s, height .3s, opacity .3s;
 
     &.is-open {
       height: auto;

@@ -66,13 +66,13 @@ class Accordion {
 		$check = isset( $instance[ self::FIELD_ID ] ) ? $instance[ self::FIELD_ID ] : false;
 		?>
 		<div class="ystdtb-option-box ystdtb-widget-option">
-			<div class="ystdtb-option-box__label"><?php _e( '[Toolbox]開閉設定', 'ystandard-toolbox' ); ?></div>
+			<div class="ystdtb-option-box__label"><?php _e( '[Toolbox]子階層の折りたたみ設定', 'ystandard-toolbox' ); ?></div>
 			<div class="ystdtb-option-box__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-widget' ); ?></div>
 			<div class="ystdtb-option-box__section">
 				<label for="<?php echo esc_attr( $widget->get_field_id( self::FIELD_ID ) ); ?>">
-					<input value="1" id="<?php echo esc_attr( $widget->get_field_id( self::FIELD_ID ) ); ?>" name="<?php echo esc_attr( $widget->get_field_name( self::FIELD_ID ) ); ?>" type="checkbox" <?php checked( $check ); ?>/><?php _e( '2階層目以降を開閉式にする', 'ystandard-toolbox' ); ?>
+					<input value="1" id="<?php echo esc_attr( $widget->get_field_id( self::FIELD_ID ) ); ?>" name="<?php echo esc_attr( $widget->get_field_name( self::FIELD_ID ) ); ?>" type="checkbox" <?php checked( $check ); ?>/><?php _e( '2階層目以降を折りたたみ式にする', 'ystandard-toolbox' ); ?>
 					<div class="ystdtb-option-box__notes">
-						<?php _e( '一覧の2階層目以降を親メニューをクリックしたら表示する方式にします。', 'ystandard-toolbox' ); ?>
+						<?php _e( '一覧の2階層目以降を親メニュー・カテゴリーをクリックしたら表示する方式にします。', 'ystandard-toolbox' ); ?>
 					</div>
 				</label>
 			</div>
