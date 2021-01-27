@@ -54,27 +54,22 @@ defined( 'ABSPATH' ) || die();
 				</div>
 			</div>
 			<div class="ystdtb-menu__column-item">
-				<h3>ヘッダーデザイン拡張</h3>
+				<h3>ヘッダーオーバーレイ</h3>
 				<figure class="ystdtb-menu__column-icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders">
-						<line x1="4" y1="21" x2="4" y2="14"></line>
-						<line x1="4" y1="10" x2="4" y2="3"></line>
-						<line x1="12" y1="21" x2="12" y2="12"></line>
-						<line x1="12" y1="8" x2="12" y2="3"></line>
-						<line x1="20" y1="21" x2="20" y2="16"></line>
-						<line x1="20" y1="12" x2="20" y2="3"></line>
-						<line x1="1" y1="14" x2="7" y2="14"></line>
-						<line x1="9" y1="8" x2="15" y2="8"></line>
-						<line x1="17" y1="16" x2="23" y2="16"></line>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+						<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+						<polyline points="2 17 12 22 22 17"></polyline>
+						<polyline points="2 12 12 17 22 12"></polyline>
 					</svg>
 				</figure>
 				<p>
-					サブヘッダーやヘッダーオーバーレイなど、 サイトヘッダー関連の機能拡張
+					ヘッダーを透明にしてコンテンツに重ねて表示できる機能<br>
+					ページ先頭に大きく画像や動画を表示するレイアウトに便利です。
 				</p>
 				<div class="ystdtb-menu__manual-link is-horizon">
 					<?php
 					echo Utility::option_link_a( 'header-design', '', 'button is-primary is-small' );
-					echo Utility::manual_link( 'manual/ystdtb-header-design', 'マニュアル', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-header-overlay', 'マニュアル', 'button is-primary is-small' );
 					?>
 				</div>
 			</div>
@@ -93,6 +88,25 @@ defined( 'ABSPATH' ) || die();
 					<?php
 					echo Utility::option_link_a( 'archive', '', 'button is-primary is-small' );
 					echo Utility::manual_link( 'manual/ystdtb-archive', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
+			</div>
+			<div class="ystdtb-menu__column-item">
+				<h3>サブヘッダーメニュー</h3>
+				<figure class="ystdtb-menu__column-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+						<line x1="3" y1="12" x2="21" y2="12"></line>
+						<line x1="3" y1="6" x2="21" y2="6"></line>
+						<line x1="3" y1="18" x2="21" y2="18"></line>
+					</svg>
+				</figure>
+				<p>
+					ヘッダーの上に追加で小さくメニューを表示できる機能
+				</p>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::option_link_a( 'header-design', '', 'button is-primary is-small' );
+					echo Utility::manual_link( 'manual/ystdtb-sub-header/', 'マニュアル', 'button is-primary is-small' );
 					?>
 				</div>
 			</div>
@@ -125,6 +139,24 @@ defined( 'ABSPATH' ) || die();
 					<?php
 					echo Utility::option_link_a( 'copyright', '', 'button is-primary is-small' );
 					echo Utility::manual_link( 'manual/ystdtb-copyright', 'マニュアル', 'button is-primary is-small' );
+					?>
+				</div>
+			</div>
+
+			<div class="ystdtb-menu__column-item">
+				<h3>ウィジェット子階層折りたたみ</h3>
+				<figure class="ystdtb-menu__column-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize-2">
+						<polyline points="4 14 10 14 10 20"></polyline>
+						<polyline points="20 10 14 10 14 4"></polyline>
+						<line x1="14" y1="10" x2="21" y2="3"></line>
+						<line x1="3" y1="21" x2="10" y2="14"></line>
+					</svg>
+				</figure>
+				<p>カテゴリー・ナビゲーションメニュー・固定ページウィジェットで子階層を折りたたみ表示する機能</p>
+				<div class="ystdtb-menu__manual-link is-horizon">
+					<?php
+					echo Utility::manual_link( 'manual/ystdtb-widget-accordion', 'マニュアル', 'button is-primary is-small' );
 					?>
 				</div>
 			</div>
