@@ -159,10 +159,20 @@ Source : <https://github.com/vuejs/vue>
 License: MIT  
 Source : <https://github.com/xiaokaike/vue-color>
 
+### vue-toasted
+
+License: MIT  
+Source : <https://github.com/shakee93/vue-toasted>
+
 ### hex-rgb
 
 License: MIT  
 Source : <https://github.com/sindresorhus/hex-rgb>
+
+### axios
+
+License: MIT  
+Source : <https://github.com/axios/axios>
 
 ### BGJar.
 

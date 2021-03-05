@@ -10,6 +10,7 @@
     "@wordpress/browserslist-config": "^2.7.0",
     "@wordpress/scripts": "^12.5.0",
     "autoprefixer": "^9.8.4",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "classnames": "^2.2.6",
     "css-declaration-sorter": "^5.1.2",
@@ -44,6 +45,7 @@
     "vue-feather-icons": "^5.0.0",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.11",
+    "vue-toasted": "^1.1.28",
     "vuex": "^3.6.0",
     "webpack": "^4.43.0",
     "webpack-stream": "^5.2.1"
