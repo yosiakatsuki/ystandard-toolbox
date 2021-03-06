@@ -38,4 +38,4 @@ class Navigation {
 	}
 }
 
-new Header_Design();
+new Navigation();

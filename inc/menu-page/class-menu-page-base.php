@@ -460,7 +460,7 @@ abstract class Menu_Page_Base {
 	 * @param bool   $in_footer In Footer.
 	 */
 	protected function enqueue_admin_script( $name, $deps = [], $in_footer = true ) {
-		$ver = date( 'YmdHis' );
+		$ver = gmdate( 'YmdHis' );
 		if ( file_exists( YSTDTB_PATH . "/js/admin/${name}.js" ) ) {
 			$ver = filemtime( YSTDTB_PATH . "/js/admin/${name}.js" );
 		}
@@ -499,7 +499,7 @@ abstract class Menu_Page_Base {
 			"ystdtb-${name}",
 			$object_name,
 			[
-				'config'  => [ 'optionName' => $option_name, ],
+				'config'  => [ 'optionName' => $option_name ],
 				'options' => $options,
 			]
 		);

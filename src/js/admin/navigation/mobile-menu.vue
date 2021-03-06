@@ -20,6 +20,15 @@
         </div>
       </div>
 
+      <div class="ystdtb-menu__table" v-show="enableMobileMenu">
+        <div class="is-label">検索フォーム</div>
+        <div class="is-content">
+          <label>
+            <input type="checkbox" name="navigation[mobileMenuHideSearch]" v-model="mobileMenuHideSearch">モバイルメニュー内の検索フォームを非表示にする
+          </label>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -60,6 +69,14 @@ export default {
       },
       set( newValue ) {
         this.updateOption( 'mobileMenuHideGlobalMenu', _toBool( newValue ) );
+      }
+    },
+    mobileMenuHideSearch: {
+      get() {
+        return _toBool( this.getOption( 'mobileMenuHideSearch' ) );
+      },
+      set( newValue ) {
+        this.updateOption( 'mobileMenuHideSearch', _toBool( newValue ) );
       }
     },
   },

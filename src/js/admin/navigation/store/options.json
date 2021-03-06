@@ -1,4 +1,5 @@
 {
   "mobileMenuEnable": "false",
-  "mobileMenuHideGlobalMenu": "false"
+  "mobileMenuHideGlobalMenu": "false",
+  "mobileMenuHideSearch": "false"
 }
