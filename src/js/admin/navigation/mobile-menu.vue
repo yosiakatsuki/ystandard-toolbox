@@ -2,7 +2,7 @@
   <div class="mobile-menu">
     <h3 class="ystdtb-menu__section-title">モバイルメニュー</h3>
     <div class="ystdtb-menu__section is-w-600">
-      <div class="ystdtb-menu__table ystdtb-menu__section">
+      <div class="ystdtb-menu__table">
         <div class="is-label">有効化</div>
         <div class="is-content">
           <label>
@@ -10,6 +10,16 @@
           </label>
         </div>
       </div>
+
+      <div class="ystdtb-menu__table" v-show="enableMobileMenu">
+        <div class="is-label">グローバルメニュー</div>
+        <div class="is-content">
+          <label>
+            <input type="checkbox" name="navigation[mobileMenuHideGlobalMenu]" v-model="mobileMenuHideGlobalMenu">モバイルメニュー内のグローバルメニューを非表示にする
+          </label>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -42,6 +52,14 @@ export default {
       },
       set( newValue ) {
         this.updateOption( 'mobileMenuEnable', _toBool( newValue ) );
+      }
+    },
+    mobileMenuHideGlobalMenu: {
+      get() {
+        return _toBool( this.getOption( 'mobileMenuHideGlobalMenu' ) );
+      },
+      set( newValue ) {
+        this.updateOption( 'mobileMenuHideGlobalMenu', _toBool( newValue ) );
       }
     },
   },
