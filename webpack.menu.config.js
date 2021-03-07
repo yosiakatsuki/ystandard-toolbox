@@ -6,6 +6,7 @@ module.exports = {
 		'admin': './src/js/admin/admin.js',
 		'heading': './src/js/admin/heading/index.js',
 		'header-design': './src/js/admin/header-design/index.js',
+		'navigation': './src/js/admin/navigation/index.js',
 		'archive': './src/js/admin/archive/index.js',
 	},
 	output: {

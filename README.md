@@ -8,6 +8,9 @@
 ## 更新履歴
 
 ### v1.8.0
+- [追加] モバイルメニュー用ウィジェット機能追加
+
+### v1.8.0
 - [追加] ウィジェット:カテゴリー,ナビゲーションメニュー,固定ページ ウィジェットで子階層を折り畳める機能を追加
 
 ### v1.7.0
@@ -31,7 +34,6 @@
 - [追加] SNSシェアボタンブロック追加
 - [調整] タイムライン・FAQブロックの子ブロックアイコン色を変更
 - [調整] ページ別SEO設定に補足説明文追加
-
 
 ### v1.3.3
 - [調整] SEO対策プラグインを使うとtitleタグが重複することがある点の対応
@@ -159,10 +161,20 @@ Source : <https://github.com/vuejs/vue>
 License: MIT  
 Source : <https://github.com/xiaokaike/vue-color>
 
+### vue-toasted
+
+License: MIT  
+Source : <https://github.com/shakee93/vue-toasted>
+
 ### hex-rgb
 
 License: MIT  
 Source : <https://github.com/sindresorhus/hex-rgb>
+
+### axios
+
+License: MIT  
+Source : <https://github.com/axios/axios>
 
 ### BGJar.
 

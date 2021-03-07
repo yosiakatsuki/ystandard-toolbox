@@ -97,6 +97,13 @@ abstract class Menu_Page_Base {
 	protected $codemirror_style = '';
 
 	/**
+	 * Ajax更新処理結果
+	 *
+	 * @var array
+	 */
+	protected $ajax_result;
+
+	/**
 	 * Menu_Page_Base constructor.
 	 */
 	public function __construct() {
@@ -116,6 +123,76 @@ abstract class Menu_Page_Base {
 	 * @return bool
 	 */
 	abstract public function save( $_post );
+
+	/**
+	 * Ajax更新のセット
+	 */
+	protected function set_ajax() {
+		add_action( 'wp_ajax_ystdtb_save_options', [ $this, 'save_ajax' ] );
+	}
+
+	/**
+	 * 設定値の保存(Ajax)
+	 */
+	public function save_ajax() {
+		// init.
+		$this->ajax_result = [
+			'status'  => 0,
+			'message' => '',
+			'data'    => [],
+		];
+		// 認証.
+		if ( ! $this->verify_nonce_ajax() ) {
+			$this->response_ajax();
+		}
+		// 設定更新.
+		if ( isset( $_POST['options'] ) ) {
+			$data = json_decode( stripslashes( $_POST['options'] ), true );
+			if ( $this->save( $data ) ) {
+				$this->ajax_result['status']  = 200;
+				$this->ajax_result['message'] = '更新しました';
+			} else {
+				$this->ajax_result['status']  = 500;
+				$this->ajax_result['message'] = '更新に失敗しました';
+			}
+			$this->ajax_result['data'] = $data;
+		} else {
+			$this->ajax_result['status']  = 404;
+			$this->ajax_result['message'] = '必要なデータが送信されていません';
+		}
+		// 返却.
+		$this->response_ajax();
+	}
+
+	/**
+	 * Ajax認証
+	 *
+	 * @return bool
+	 */
+	private function verify_nonce_ajax() {
+		$this->ajax_result['status']  = 403;
+		$this->ajax_result['message'] = '認証出来ませんでした。ページを再読み込みしてください。';
+
+		if ( ! isset( $_POST['nonce'] ) || ! isset( $_POST['nonceAction'] ) ) {
+			return false;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['nonce'], $_POST['nonceAction'] ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Ajax返却
+	 */
+	private function response_ajax() {
+		header( 'Content-Type: application/json; charset=utf-8' );
+		echo json_encode( $this->ajax_result );
+		die();
+	}
+
 
 	/**
 	 * メニューを有効化できるか
@@ -249,6 +326,17 @@ abstract class Menu_Page_Base {
 			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
 			true
 		);
+		wp_localize_script(
+			'ystdtb-admin',
+			'ystdtbAdminConfig',
+			[
+				'ajaxUrl'     => admin_url( 'admin-ajax.php?action=ystdtb_save_options' ),
+				'siteUrl'     => esc_url_raw( home_url() ),
+				'pluginUrl'   => YSTDTB_URL,
+				'nonceAction' => self::NONCE_ACTION,
+				'nonceValue'  => wp_create_nonce( self::NONCE_ACTION ),
+			]
+		);
 		foreach ( $this->enqueue_script as $item ) {
 			wp_enqueue_style(
 				'ystdtb-' . $item['name'],
@@ -372,11 +460,15 @@ abstract class Menu_Page_Base {
 	 * @param bool   $in_footer In Footer.
 	 */
 	protected function enqueue_admin_script( $name, $deps = [], $in_footer = true ) {
+		$ver = gmdate( 'YmdHis' );
+		if ( file_exists( YSTDTB_PATH . "/js/admin/${name}.js" ) ) {
+			$ver = filemtime( YSTDTB_PATH . "/js/admin/${name}.js" );
+		}
 		wp_enqueue_script(
 			"ystdtb-${name}",
 			YSTDTB_URL . "/js/admin/${name}.js",
 			$deps,
-			filemtime( YSTDTB_PATH . "/js/admin/${name}.js" ),
+			$ver,
 			$in_footer
 		);
 	}
@@ -392,6 +484,25 @@ abstract class Menu_Page_Base {
 		$args['site-url']   = esc_url_raw( home_url() );
 		$args['plugin-url'] = YSTDTB_URL;
 		wp_localize_script( "ystdtb-${name}", $object_name, $args );
+	}
+
+	/**
+	 * 管理画面用スクリプトデータ追加(Ajax処理用)
+	 *
+	 * @param string $name        Name.
+	 * @param string $object_name Object Name.
+	 * @param string $option_name Option Name.
+	 * @param array  $options     Options.
+	 */
+	protected function enqueue_admin_localize_script_ajax( $name, $object_name, $option_name, $options ) {
+		wp_localize_script(
+			"ystdtb-${name}",
+			$object_name,
+			[
+				'config'  => [ 'optionName' => $option_name ],
+				'options' => $options,
+			]
+		);
 	}
 
 	/**
