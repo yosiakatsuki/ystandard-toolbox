@@ -97,7 +97,7 @@ class Init {
 		}
 		Notice::set_notice(
 			function () {
-				Notice::error( '<div style="padding: 1em 0.5em;line-height: 2;">このyStandard Toolboxは正しくセットアップされていません。<br><a href="https://support.wp-ystandard.com/shop/" target="_blank" rel="nofollow noreferrer noopener">公式サイト</a>よりプラグインをご購入ください。<br>もし購入されている場合は<a href="https://support.wp-ystandard.com/my-account/" target="_blank" rel="nofollow noreferrer noopener">マイページ</a>より再度ダウンロードし、プラグインをインストールし直してください。</div>' );
+				Notice::error( '<div style="padding: 1em 0.5em;line-height: 2;">このyStandard Toolboxは正しくセットアップされていません。<br><a href="https://support.wp-ystandard.com/shop/" target="_blank" rel="nofollow noreferrer noopener">公式サイト</a>よりプラグインをご購入ください。<br>もし購入されている場合は<a href="https://support.wp-ystandard.com/my-account/" target="_blank" rel="nofollow noreferrer noopener">マイページ</a>より再度ダウンロードし、プラグインを再インストールしてください。</div>' );
 			}
 		);
 	}
