@@ -14,11 +14,11 @@ const store = new Vuex.Store( {
 		config: null,
 	},
 	getters: {
-		options: state => state.options,
+		options: ( state ) => state.options,
 		getOption: ( state ) => ( name ) => {
 			return state.options[ name ];
 		},
-		config: state => state.config,
+		config: ( state ) => state.config,
 		getConfig: ( state ) => ( name ) => {
 			return state.config[ name ];
 		},
