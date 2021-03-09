@@ -124,6 +124,9 @@ class Posts extends Dynamic_Block {
 		if ( isset( $attributes['align'] ) && '' !== $attributes['align'] ) {
 			$classes .= ' alignfull';
 		}
+		if ( isset( $attributes['orderby'] ) && 'ranking' === $attributes['orderby'] ) {
+			$attributes['filter'] = 'sga';
+		}
 
 		$attributes = Utility::parse_shortcode_attributes(
 			$this->migration_attributes( $attributes )
