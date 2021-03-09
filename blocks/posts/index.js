@@ -14,7 +14,13 @@ registerBlockType( 'ystdtb/posts', {
 			style={ { fill: 'none' } }
 		/>
 	),
-	keywords: [ __( 'posts' ), __( 'post' ), __( '記事一覧' ), 'posts', 'archive' ],
+	keywords: [
+		__( 'posts' ),
+		__( 'post' ),
+		__( '記事一覧' ),
+		'posts',
+		'archive',
+	],
 	category: ystdtbConfig.category.common,
 	attributes,
 	supports,

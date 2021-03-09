@@ -94,7 +94,10 @@ export const orderbySelect = [
 		label: __( '更新日 / 新しい順', 'ystandard-toolbox' ),
 		value: 'modified/DESC',
 	},
-	{ label: __( '更新日 / 古い順', 'ystandard-toolbox' ), value: 'modified/ASC' },
+	{
+		label: __( '更新日 / 古い順', 'ystandard-toolbox' ),
+		value: 'modified/ASC',
+	},
 	{ label: __( 'タイトル / A→Z', 'ystandard-toolbox' ), value: 'title/ASC' },
 	{ label: __( 'タイトル / Z→A', 'ystandard-toolbox' ), value: 'title/DESC' },
 	{ label: __( 'ランダム', 'ystandard-toolbox' ), value: 'rand/DESC' },
