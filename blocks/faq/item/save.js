@@ -96,9 +96,14 @@ export default function ( { attributes } ) {
 			? undefined
 			: customLabelBackgroundColor,
 		borderColor: labelBorderColorClass ? undefined : customLabelBorderColor,
-		borderWidth: 0 === labelBorderSize ? undefined : labelBorderSize + 'px',
+		borderWidth:
+			0 === labelBorderSize || ! labelBorderSize
+				? undefined
+				: labelBorderSize + 'px',
 		borderRadius:
-			0 === labelBorderRadius ? undefined : labelBorderRadius + 'px',
+			0 === labelBorderRadius || ! labelBorderRadius
+				? undefined
+				: labelBorderRadius + 'px',
 	};
 
 	const labelTextClasses = classnames( 'ystdtb-faq-item__label-text', {} );

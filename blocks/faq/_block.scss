@@ -2,8 +2,6 @@
 
 .ystdtb-faq {
   border: 0;
-  padding-top: .75em;
-  padding-bottom: .75em;
 
   & + .ystdtb-faq {
     margin-top: 0;
@@ -35,6 +33,10 @@
 
     .ystdtb-faq-item {
 
+      &.is-faq--q:not(.is-open) {
+        border-bottom: 0;
+      }
+
       &.is-faq--a {
         height: 0;
         padding-top: 0;
@@ -60,7 +62,7 @@
 .ystdtb-faq-item {
   display: flex;
   margin: 0;
-  padding: 1em 0;
+  padding: 1.5em 0;
   align-items: center;
 
   &.has-border-bottom {
