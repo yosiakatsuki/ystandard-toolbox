@@ -160,7 +160,7 @@ const Posts = ( props ) => {
 		)
 	) {
 		orderbySelect.push( {
-			label: __( 'ランキング', 'ystandard-toolbox' ),
+			label: __( 'ランキング(β)', 'ystandard-toolbox' ),
 			value: 'ranking/DESC',
 		} );
 	}
