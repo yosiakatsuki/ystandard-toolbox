@@ -172,7 +172,11 @@ class Blocks {
 	 * @return array
 	 */
 	private function create_block_option() {
-		return apply_filters( Config::BLOCK_EDITOR_OPTION_HOOK, [] );
+		$options = [
+			'isEnableSga' => function_exists( 'sga_ranking_get_date' ),
+		];
+
+		return apply_filters( Config::BLOCK_EDITOR_OPTION_HOOK, $options );
 	}
 }
 

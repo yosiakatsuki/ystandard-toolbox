@@ -153,6 +153,18 @@ const Posts = ( props ) => {
 
 	const orderSelected = `${ orderby }/${ order }`;
 
+	if (
+		window.ystdtbBlockEditor.isEnableSga &&
+		! orderbySelect.some(
+			( orderItem ) => 'ranking/DESC' === orderItem.value
+		)
+	) {
+		orderbySelect.push( {
+			label: __( 'ランキング', 'ystandard-toolbox' ),
+			value: 'ranking/DESC',
+		} );
+	}
+
 	return (
 		<div className={ 'ystdtb-posts' }>
 			<Fragment>
