@@ -92,6 +92,11 @@
     .is-content {
       flex-grow: 1;
 
+      &.is-align-center {
+        display: flex;
+        align-items: center;
+      }
+
       label {
         font-weight: normal;
       }

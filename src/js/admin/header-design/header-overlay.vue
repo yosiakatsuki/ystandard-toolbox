@@ -4,7 +4,7 @@
 		<div class="ystdtb-menu__section is-w-600">
 			<div class="ystdtb-menu__table ystdtb-menu__section">
 				<div class="is-label">有効化</div>
-				<div class="is-content">
+				<div class="is-content is-align-center">
 					<label>
 						<input type="hidden" name="header_design[enableOverlay]" value="false">
 						<input type="checkbox" name="header_design[enableOverlay]" value="true" v-model="enableOverlay"> ヘッダーオーバーレイ機能を有効化する
