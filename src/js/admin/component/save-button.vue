@@ -1,6 +1,6 @@
 <template>
   <div class="submit ystdtb-save-button">
-    <button type="button" class="button button-primary" @click="saveData" :disabled="disabled">変更を保存</button>
+    <button type="button" class="button button-primary" @click="saveData" :disabled="disabled">{{ buttonText }}</button>
   </div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
   data() {
     return {
       disabled: false,
+      buttonText: '変更を保存',
+      buttonTextDefault: '変更を保存',
+      buttonTextSaving: '保存中…',
       toastedOptions: {
         position: 'bottom-right',
         duration: 2000,
@@ -38,20 +41,24 @@ export default {
             .then( response => {
               this.toastedOptions.type = 200 === response.data.status ? 'success' : 'error';
               this.$toasted.show( response.data.message, this.toastedOptions );
+              this.saveEnd();
             } ).catch( error => {
           this.showErrorToast( this.unknownErrorMessage );
+          this.saveEnd();
           /* eslint-disable no-console */
           console.log( error );
         } );
-        this.saveEnd();
+
       } else {
         this.showErrorToast( this.unknownErrorMessage );
       }
     },
     saveStart() {
+      this.buttonText = this.buttonTextSaving;
       this.disabled = true;
     },
     saveEnd() {
+      this.buttonText = this.buttonTextDefault;
       this.disabled = false;
     },
     showErrorToast( message ) {
