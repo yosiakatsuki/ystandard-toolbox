@@ -175,6 +175,11 @@ Source : <https://github.com/xiaokaike/vue-color>
 License: MIT  
 Source : <https://github.com/shakee93/vue-toasted>
 
+### Vue.Draggable
+
+License: MIT  
+Source : <https://github.com/SortableJS/Vue.Draggable>
+
 ### hex-rgb
 
 License: MIT  

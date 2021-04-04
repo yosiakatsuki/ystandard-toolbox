@@ -25,7 +25,7 @@ class Config {
 	/**
 	 * 必要なyStandardバージョン
 	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.22.0-beta-1';
+	const REQUIRE_YSTANDARD_VERSION = '4.23.0';
 	/**
 	 * 必要なyStandard Blocksバージョン
 	 */

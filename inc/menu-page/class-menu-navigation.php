@@ -35,7 +35,24 @@ class Menu_Navigation extends Menu_Page_Base {
 		$this->option_name   = Navigation::OPTION_NAME;
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
-		$this->set_ajax();
+		add_action( $this->get_ajax_action_hook(), [ $this, 'save_ajax' ] );
+	}
+
+	/**
+	 * Ajax処理
+	 */
+	public function save_ajax() {
+		$data = self::get_ajax_save_data();
+		if ( is_null( $data ) ) {
+			self::response_ajax( self::response_ajax_not_found() );
+
+			return;
+		}
+		if ( $this->save( $data ) ) {
+			self::response_ajax( self::response_ajax_success() );
+		} else {
+			self::response_ajax( self::response_ajax_error() );
+		}
 	}
 
 	/**

@@ -47,6 +47,8 @@ require_once __DIR__ . '/taxonomy/class-taxonomy.php';
 require_once __DIR__ . '/seo/class-seo.php';
 // widget.
 require_once __DIR__ . '/widget/class-accordion.php';
+// CTA.
+require_once __DIR__ . '/cta/class-cta.php';
 
 // Admin.
 require_once __DIR__ . '/menu-page/class-menu-page.php';

@@ -2,36 +2,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-13T12:35:59+00:00\n"
-"PO-Revision-Date: 2021-03-13 21:41+0900\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: ja\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"POT-Creation-Date: 2021-03-13T12:35:59+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: ystandard-toolbox\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: block-patterns/class-block-patterns.php:72
 #: block-patterns/class-block-patterns.php:73
 #: block-patterns/class-block-patterns.php:76
 msgid "Block Pattern"
-msgstr "ブロックパターン"
+msgstr ""
 
 #: block-patterns/class-block-patterns.php:74
 msgid "All Block Pattern"
-msgstr "ブロックパターン一覧"
+msgstr ""
 
 #: block-patterns/class-block-patterns.php:75
 #: block-patterns/class-block-patterns.php:77
 msgid "Add New Block Pattern"
-msgstr "ブロックパターン追加"
+msgstr ""
 
 #: block-patterns/class-block-patterns.php:78
 msgid "Edit Block Pattern"
-msgstr "ブロックパターンの編集"
+msgstr ""
 
 #: block-patterns/class-block-patterns.php:84
 msgid "ブロックパターン編集機能"
@@ -49,49 +47,52 @@ msgstr ""
 #: cta/class-cta-sort.php:42
 msgctxt "cta"
 msgid "Post Thumbnail"
-msgstr "アイキャッチ画像"
+msgstr ""
 
 #: cta/class-cta-sort.php:49
 msgid "Post Title"
-msgstr "投稿タイトル"
+msgstr ""
 
 #: cta/class-cta-sort.php:56
 msgctxt "cta"
 msgid "Post Meta"
-msgstr "日付・カテゴリー"
+msgstr ""
 
-#: cta/class-cta-sort.php:63 cta/class-cta-sort.php:108
+#: cta/class-cta-sort.php:63
+#: cta/class-cta-sort.php:108
 msgid "Share Buttons"
-msgstr "シェボタン"
+msgstr ""
 
-#: cta/class-cta-sort.php:70 cta/class-cta-sort.php:101
+#: cta/class-cta-sort.php:70
+#: cta/class-cta-sort.php:101
 msgid "Advertisement"
-msgstr "広告"
+msgstr ""
 
-#: cta/class-cta-sort.php:77 cta/class-cta-sort.php:94
+#: cta/class-cta-sort.php:77
+#: cta/class-cta-sort.php:94
 msgid "Widget"
-msgstr "ウィジェット"
+msgstr ""
 
 #: cta/class-cta-sort.php:115
 msgid "Category & Tag"
-msgstr "カテゴリー・タグ"
+msgstr ""
 
 #: cta/class-cta-sort.php:122
 msgctxt "cta"
 msgid "Author"
-msgstr "著者情報"
+msgstr ""
 
 #: cta/class-cta-sort.php:129
 msgid "Related Posts"
-msgstr "関連記事"
+msgstr ""
 
 #: cta/class-cta-sort.php:136
 msgid "Comments"
-msgstr "コメント"
+msgstr ""
 
 #: cta/class-cta-sort.php:143
 msgid "Paging"
-msgstr "前の記事・次の記事"
+msgstr ""
 
 #: widget/class-accordion.php:69
 msgid "[Toolbox]子階層の折りたたみ設定"
@@ -102,7 +103,5 @@ msgid "2階層目以降を折りたたみ式にする"
 msgstr ""
 
 #: widget/class-accordion.php:75
-msgid ""
-"一覧の2階層目以降を親メニュー・カテゴリーをクリックし"
-"たら表示する方式にします。"
+msgid "一覧の2階層目以降を親メニュー・カテゴリーをクリックしたら表示する方式にします。"
 msgstr ""
