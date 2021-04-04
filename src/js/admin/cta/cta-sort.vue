@@ -74,6 +74,7 @@
         <div class="ystdtb-menu__horizontal">
           <SaveButton
               ref="ctaSave"
+              :ajaxUrl="ajaxUrl"
               :optionName="getConfig('optionName')"
               :options="saveOptions"
               :disabled="!this.isEdit"
@@ -308,6 +309,9 @@ export default {
     postTypes: function () {
       return this.$store.getters.getConfig( 'postTypes' );
     },
+    ajaxUrl() {
+      return this.getConfig('ajaxUrl');
+    }
   },
 }
 </script>

@@ -41,6 +41,11 @@ abstract class Menu_Page_Base {
 	const AJAX_ACTION_PREFIX = 'ystdtb_save_options';
 
 	/**
+	 * Ajax用設定追加オブジェクト名
+	 */
+	const AJAX_LOCALIZE_SCRIPT_OBJECT = 'ystdtbAdminAjaxConfig';
+
+	/**
 	 * 設定ページテンプレート
 	 *
 	 * @var string
@@ -265,18 +270,13 @@ abstract class Menu_Page_Base {
 	}
 
 	/**
-	 * Ajax更新用の設定取得
+	 * Ajax URL 取得.
 	 *
-	 * @return array
+	 * @return string
 	 */
-	protected function get_ajax_config() {
-		$ajax_path = 'admin-ajax.php?action=' . $this->get_ajax_action_name();
+	protected function get_ajax_url() {
 
-		return [
-			'ajaxUrl'     => admin_url( $ajax_path ),
-			'nonceAction' => self::NONCE_ACTION,
-			'nonceValue'  => wp_create_nonce( self::NONCE_ACTION ),
-		];
+		return admin_url( 'admin-ajax.php?action=' . $this->get_ajax_action_name() );
 	}
 
 
@@ -412,18 +412,16 @@ abstract class Menu_Page_Base {
 			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
 			true
 		);
-		$config = apply_filters(
-			'ystdtb_admin_config',
-			[
-				'siteUrl'   => esc_url_raw( home_url() ),
-				'pluginUrl' => YSTDTB_URL,
-			]
-		);
 
 		wp_localize_script(
 			'ystdtb-admin',
 			'ystdtbAdminConfig',
-			$config
+			[
+				'siteUrl'     => esc_url_raw( home_url() ),
+				'pluginUrl'   => YSTDTB_URL,
+				'nonceAction' => self::NONCE_ACTION,
+				'nonceValue'  => wp_create_nonce( self::NONCE_ACTION ),
+			]
 		);
 		foreach ( $this->enqueue_script as $item ) {
 			wp_enqueue_style(
@@ -585,7 +583,10 @@ abstract class Menu_Page_Base {
 	 */
 	protected function enqueue_admin_localize_script_ajax( $name, $object_name, $option_name, $options, $config = [] ) {
 		$config = array_merge(
-			[ 'optionName' => $option_name ],
+			[
+				'optionName' => $option_name,
+				'ajaxUrl'    => $this->get_ajax_url(),
+			],
 			$config
 		);
 		wp_localize_script(

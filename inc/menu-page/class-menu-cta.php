@@ -39,23 +39,6 @@ class Menu_CTA extends Menu_Page_Base {
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
 		add_action( $this->get_ajax_action_hook(), [ $this, 'save_ajax' ] );
-		add_filter( 'ystdtb_admin_config', [ $this, 'admin_config' ] );
-	}
-
-	/**
-	 * Ajax更新用設定追加
-	 *
-	 * @param array $config Config.
-	 *
-	 * @return array
-	 */
-	public function admin_config( $config ) {
-		$config = array_merge(
-			$config,
-			$this->get_ajax_config(),
-		);
-
-		return $config;
 	}
 
 	/**

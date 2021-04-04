@@ -36,6 +36,7 @@ class Menu_Navigation extends Menu_Page_Base {
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
 		add_action( $this->get_ajax_action_hook(), [ $this, 'save_ajax' ] );
+		add_filter( "ystdtb_admin_config_{$this->menu_slug}", [ $this, 'admin_config' ] );
 	}
 
 	/**

@@ -13,6 +13,7 @@ import axios from "axios";
 export default {
   name: 'saveButton',
   props: [
+    'ajaxUrl',
     'optionName',
     'options',
     'disabled',
@@ -40,7 +41,6 @@ export default {
       this.saveData();
     },
     saveData( option ) {
-      const ajaxUrl = window.ystdtbAdminConfig[ 'ajaxUrl' ];
       const action = window.ystdtbAdminConfig[ 'nonceAction' ];
       const nonce = window.ystdtbAdminConfig[ 'nonceValue' ];
       let params = new URLSearchParams();
@@ -49,9 +49,9 @@ export default {
       params.append( 'nonceAction', action );
       params.append( 'nonce', nonce );
       params.append( 'options', JSON.stringify( postData ) );
-      if ( ajaxUrl ) {
+      if ( this.ajaxUrl ) {
         this.saveStart();
-        axios.post( ajaxUrl, params )
+        axios.post( this.ajaxUrl, params )
             .then( response => {
               this.toastedOptions.type = 200 === response.data.status ? 'success' : 'error';
               if ( 'success' === this.toastedOptions.type && this.onSuccess ) {
@@ -100,7 +100,7 @@ export default {
         if ( null !== this.disabled && undefined !== this.disabled ) {
           return this.disabled;
         }
-        return result;
+        return this.disabledSaveButton;
       },
       set( newValue ) {
         this.disabledSaveButton = newValue;
