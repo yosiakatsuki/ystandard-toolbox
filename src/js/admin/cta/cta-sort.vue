@@ -6,7 +6,7 @@
         <label for="sort-post-type">投稿タイプ : </label>
         <select id="sort-post-type" style="width: auto;padding-right: 2em;" v-model="selectedPostType"
                 @change="setCtaData()" :disabled="disabledPostType">
-          <option value="">選択してください</option>
+          <option v-if="1 < postTypes.length" value="">選択してください</option>
           <option v-for="data in postTypes" :key="data.id" :value="data.id">{{ data.name }}</option>
         </select>
       </div>
@@ -87,7 +87,7 @@
           </button>
           <button type="button" class="button ystdtb-button-delete" @click="selectDelete" :disabled="!selectedPostType"
                   style="margin-left: auto;">
-            リセット
+            初期値に戻す
           </button>
         </div>
       </div>
@@ -106,7 +106,7 @@ import {
   ChevronDownIcon,
   MenuIcon
 } from 'vue-feather-icons'
-import _toNewObject from "../function/_toNewObject";
+import _copyObject from "../function/_copyObject";
 
 export default {
   name: 'cta-sort',
@@ -119,7 +119,7 @@ export default {
   },
   data() {
     return {
-      selectedPostType: '',
+      selected: '',
       headerCta: [],
       footerCta: [],
       transitionName: 'sort-item',
@@ -188,19 +188,23 @@ export default {
         this.resetPriority( 'footer' );
       }
       this.tempData = {
-        header: _toNewObject( this.headerCta ),
-        footer: _toNewObject( this.footerCta ),
+        header: _copyObject( this.headerCta ),
+        footer: _copyObject( this.footerCta ),
       };
     },
     resetPriority( type ) {
       const priorityConfig = this.getConfig( 'priority' );
       if ( 'header' === type || 'all' === type ) {
-        this.headerCta = _toNewObject( priorityConfig.header );
+        this.headerCta = _copyObject( priorityConfig.header );
       }
       if ( 'footer' === type || 'all' === type ) {
-        this.footerCta = _toNewObject( priorityConfig.footer );
+        this.footerCta = _copyObject( priorityConfig.footer );
       }
       this.sortCtaData();
+      this.tempData = {
+        header: _copyObject( this.headerCta ),
+        footer: _copyObject( this.footerCta ),
+      };
     },
     updateHeaderCtaNumber() {
       this.headerCta = this.headerCta.map( function ( item, index ) {
@@ -272,16 +276,16 @@ export default {
       // this.isEdit = false;
     },
     selectCancel() {
-      this.headerCta = _toNewObject( this.tempData[ 'header' ] );
-      this.footerCta = _toNewObject( this.tempData[ 'footer' ] );
+      this.headerCta = _copyObject( this.tempData[ 'header' ] );
+      this.footerCta = _copyObject( this.tempData[ 'footer' ] );
       this.saveCtaSort();
       this.sortCtaData();
       this.disabledPostType = false;
       this.isEdit = false;
     },
     selectDelete() {
-      this.headerCta = _toNewObject( [] );
-      this.footerCta = _toNewObject( [] );
+      this.headerCta = _copyObject( [] );
+      this.footerCta = _copyObject( [] );
       this.saveCtaSort();
       this.$refs.ctaSave.saveData( this.saveOptions );
       this.setCtaData();
@@ -295,6 +299,12 @@ export default {
 
       this.updateOption( 'ctaSort', option );
     },
+    resetSelectedPostType() {
+      if ( 1 === this.postTypes.length ) {
+        return;
+      }
+      this.selectedPostType = '';
+    },
   },
   computed: {
     saveOptions: function () {
@@ -306,13 +316,29 @@ export default {
         }
       };
     },
+    selectedPostType: {
+      get() {
+        if ( 1 >= this.postTypes.length ) {
+          return this.postTypes[ 0 ].id;
+        }
+        return this.selected;
+      },
+      set( newValue ) {
+        this.selected = newValue;
+      }
+    },
     postTypes: function () {
       return this.$store.getters.getConfig( 'postTypes' );
     },
     ajaxUrl() {
-      return this.getConfig('ajaxUrl');
+      return this.getConfig( 'ajaxUrl' );
     }
   },
+  mounted() {
+    if ( 1 >= this.postTypes.length ) {
+      this.setCtaData();
+    }
+  }
 }
 </script>
 
