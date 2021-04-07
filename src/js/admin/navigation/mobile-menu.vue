@@ -4,7 +4,7 @@
     <div class="ystdtb-menu__section is-w-600">
       <div class="ystdtb-menu__table">
         <div class="is-label">有効化</div>
-        <div class="is-content">
+        <div class="is-content is-align-center">
           <label>
             <input type="checkbox" name="navigation[mobileMenuEnable]" v-model="enableMobileMenu">モバイルメニューウィジェットを有効化する
           </label>
@@ -13,7 +13,7 @@
 
       <div class="ystdtb-menu__table" v-show="enableMobileMenu">
         <div class="is-label">グローバルメニュー</div>
-        <div class="is-content">
+        <div class="is-content is-align-center">
           <label>
             <input type="checkbox" name="navigation[mobileMenuHideGlobalMenu]" v-model="mobileMenuHideGlobalMenu">モバイルメニュー内のグローバルメニューを非表示にする
           </label>
@@ -22,7 +22,7 @@
 
       <div class="ystdtb-menu__table" v-show="enableMobileMenu">
         <div class="is-label">検索フォーム</div>
-        <div class="is-content">
+        <div class="is-content is-align-center">
           <label>
             <input type="checkbox" name="navigation[mobileMenuHideSearch]" v-model="mobileMenuHideSearch">モバイルメニュー内の検索フォームを非表示にする
           </label>

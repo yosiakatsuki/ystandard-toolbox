@@ -7,6 +7,7 @@ module.exports = {
 		'heading': './src/js/admin/heading/index.js',
 		'header-design': './src/js/admin/header-design/index.js',
 		'navigation': './src/js/admin/navigation/index.js',
+		'cta': './src/js/admin/cta/index.js',
 		'archive': './src/js/admin/archive/index.js',
 	},
 	output: {

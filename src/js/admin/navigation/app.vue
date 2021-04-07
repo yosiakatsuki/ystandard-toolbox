@@ -3,7 +3,11 @@
     <MobileMenu/>
 
     <div class="ystdtb-menu__section">
-      <SaveButton :optionName="getConfig('optionName')" :options="options"/>
+      <SaveButton
+          :ajaxUrl="ajaxUrl"
+          :optionName="getConfig('optionName')"
+          :options="options"
+      />
     </div>
   </div>
 </template>
@@ -26,6 +30,9 @@ export default {
   computed: {
     options: function () {
       return this.$store.getters.options;
+    },
+    ajaxUrl() {
+      return this.getConfig('ajaxUrl');
     }
   },
   beforeCreate() {

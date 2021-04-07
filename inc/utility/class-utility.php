@@ -521,9 +521,12 @@ class Utility {
 	 *
 	 * @param mixed $var value.
 	 */
-	public static function debug_var_dump_file( $var ) {
+	public static function debug_var_dump_file( $var, $file = '', $line = '' ) {
 		ob_start();
-		echo date_i18n( 'Y.m.d H:i:s' ) . '<br>';
+		echo date_i18n( 'Y.m.d H:i:s' ) . '<br>' . PHP_EOL;
+		if ( $file || $line ) {
+			echo $file . ' ' . $line . '<br>' . PHP_EOL;
+		}
 		var_dump( $var );
 		$dump = ob_get_contents();
 		ob_end_clean();

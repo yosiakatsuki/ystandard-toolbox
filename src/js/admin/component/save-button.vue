@@ -1,6 +1,9 @@
 <template>
   <div class="submit ystdtb-save-button">
-    <button type="button" class="button button-primary" @click="saveData" :disabled="disabled">変更を保存</button>
+    <button type="button" :class="buttonClass" @click="onClickSaveButton" :disabled="buttonDisabled">{{
+        buttonText
+      }}
+    </button>
   </div>
 </template>
 
@@ -9,10 +12,21 @@ import axios from "axios";
 
 export default {
   name: 'saveButton',
-  props: [ 'optionName', 'options' ],
+  props: [
+    'ajaxUrl',
+    'optionName',
+    'options',
+    'disabled',
+    'onSuccess',
+    'onError',
+    'buttonType',
+    'text',
+    'saveText',
+  ],
   data() {
     return {
-      disabled: false,
+      disabledSaveButton: false,
+      isSaving: false,
       toastedOptions: {
         position: 'bottom-right',
         duration: 2000,
@@ -23,42 +37,89 @@ export default {
     }
   },
   methods: {
-    saveData() {
-      const ajaxUrl = window.ystdtbAdminConfig[ 'ajaxUrl' ];
+    onClickSaveButton() {
+      this.saveData();
+    },
+    saveData( option ) {
       const action = window.ystdtbAdminConfig[ 'nonceAction' ];
       const nonce = window.ystdtbAdminConfig[ 'nonceValue' ];
       let params = new URLSearchParams();
-      const postData = { [ this.optionName ]: this.options };
+      const postOption = undefined !== option ? option : this.options;
+      const postData = { [ this.optionName ]: postOption };
       params.append( 'nonceAction', action );
       params.append( 'nonce', nonce );
       params.append( 'options', JSON.stringify( postData ) );
-      if ( ajaxUrl ) {
+      if ( this.ajaxUrl ) {
         this.saveStart();
-        axios.post( ajaxUrl, params )
+        axios.post( this.ajaxUrl, params )
             .then( response => {
               this.toastedOptions.type = 200 === response.data.status ? 'success' : 'error';
+              if ( 'success' === this.toastedOptions.type && this.onSuccess ) {
+                this.onSuccess( response.data.status );
+              } else if ( this.onError ) {
+                this.onError( response.data.status );
+              }
               this.$toasted.show( response.data.message, this.toastedOptions );
+              this.saveEnd();
             } ).catch( error => {
           this.showErrorToast( this.unknownErrorMessage );
+          this.saveEnd();
           /* eslint-disable no-console */
           console.log( error );
+          if ( this.onError ) {
+            this.onError( 500 );
+          }
         } );
-        this.saveEnd();
+
       } else {
         this.showErrorToast( this.unknownErrorMessage );
+        if ( this.onError ) {
+          this.onError( 404 );
+        }
       }
     },
     saveStart() {
-      this.disabled = true;
+      this.buttonDisabled = true;
+      this.isSaving = true;
     },
     saveEnd() {
-      this.disabled = false;
+      this.isSaving = false;
+      this.buttonDisabled = false;
     },
     showErrorToast( message ) {
       this.toastedOptions.type = 'error';
       this.$toasted.show( message, this.toastedOptions );
     }
   },
+  computed: {
+    buttonDisabled: {
+      get() {
+        if ( true === this.disabledSaveButton ) {
+          return true;
+        }
+        if ( null !== this.disabled && undefined !== this.disabled ) {
+          return this.disabled;
+        }
+        return this.disabledSaveButton;
+      },
+      set( newValue ) {
+        this.disabledSaveButton = newValue;
+      }
+    },
+    buttonClass() {
+      return {
+        button: true,
+        [ `button-primary` ]: ! this.buttonType || 'primary' === this.buttonType,
+        [ `ystdtb-button-delete` ]: 'delete' === this.buttonType,
+      }
+    },
+    buttonText() {
+      if ( this.isSaving ) {
+        return this.saveText ? this.saveText : '保存中…';
+      }
+      return this.text ? this.text : '変更を保存';
+    }
+  }
 }
 </script>
 

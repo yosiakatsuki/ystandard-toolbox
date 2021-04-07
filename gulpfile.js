@@ -134,9 +134,7 @@ function copyUpdateInfo() {
 function watchFiles() {
 	cleanFiles();
 	sass();
-	watchBuildAdminApp();
-	copyJson();
-	buildJs();
+	series( watchBuildAdminApp, copyJson, buildJs );
 	watch( [ './src/sass/**/*.scss', './blocks/**/*.scss' ], sass );
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], watchBuildAdminApp );
 	watch( [ './src/js/admin/**/*.json' ], copyJson );

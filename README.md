@@ -7,6 +7,10 @@
 
 ## 更新履歴
 
+### v1.10.0
+- [調整] Toolbox設定画面スタイル調整
+- [調整] Toolbox設定画面 保存中表示調整
+
 ### v1.9.0
 - [追加] モバイルメニュー用ウィジェット機能追加
 - [追加] 記事一覧ブロック 並び替え条件に更新日を追加
@@ -170,6 +174,11 @@ Source : <https://github.com/xiaokaike/vue-color>
 
 License: MIT  
 Source : <https://github.com/shakee93/vue-toasted>
+
+### Vue.Draggable
+
+License: MIT  
+Source : <https://github.com/SortableJS/Vue.Draggable>
 
 ### hex-rgb
 

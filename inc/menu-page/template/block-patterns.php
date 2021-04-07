@@ -18,7 +18,7 @@ $disable_core_pattern = Option::get_option_by_bool( Block_Patterns::OPTION_NAME,
 	<div class="ystdtb-menu__section">
 		<div class="ystdtb-menu__table">
 			<div class="is-label label">WordPress標準パターン</div>
-			<div class="is-content">
+			<div class="is-content is-align-center">
 				<input name="<?php echo Block_Patterns::OPTION_NAME; ?>[disable_core_pattern]" type="hidden" value="0">
 				<label style="font-weight: normal;">
 					<input name="<?php echo Block_Patterns::OPTION_NAME; ?>[disable_core_pattern]" id="disable_core_pattern" type="checkbox" value="1" <?php checked( $disable_core_pattern ); ?>>WordPress本体のブロックパターンを無効にする

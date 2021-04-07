@@ -36,6 +36,16 @@ abstract class Menu_Page_Base {
 	const MENU_NAV_HOOK = 'ystdtb_nav_menu';
 
 	/**
+	 * Ajaxアクションプレフィックス
+	 */
+	const AJAX_ACTION_PREFIX = 'ystdtb_save_options';
+
+	/**
+	 * Ajax用設定追加オブジェクト名
+	 */
+	const AJAX_LOCALIZE_SCRIPT_OBJECT = 'ystdtbAdminAjaxConfig';
+
+	/**
 	 * 設定ページテンプレート
 	 *
 	 * @var string
@@ -125,43 +135,109 @@ abstract class Menu_Page_Base {
 	abstract public function save( $_post );
 
 	/**
-	 * Ajax更新のセット
+	 * Ajax処理アクション名取得
+	 *
+	 * @return string
 	 */
-	protected function set_ajax() {
-		add_action( 'wp_ajax_ystdtb_save_options', [ $this, 'save_ajax' ] );
+	protected function get_ajax_action_name() {
+		return self::AJAX_ACTION_PREFIX . '_' . $this->menu_slug;
 	}
 
 	/**
-	 * 設定値の保存(Ajax)
+	 * Ajaxアクションフック名取得
+	 *
+	 * @return string
 	 */
-	public function save_ajax() {
-		// init.
-		$this->ajax_result = [
+	protected function get_ajax_action_hook() {
+		return 'wp_ajax_' . self::get_ajax_action_name();
+	}
+
+	/**
+	 * Ajax用のデータ取得
+	 *
+	 * @return array
+	 */
+	public static function get_ajax_response_data() {
+		return [
 			'status'  => 0,
 			'message' => '',
 			'data'    => [],
+			'error'   => false,
 		];
+	}
+
+	/**
+	 * Ajax更新用データ取得
+	 *
+	 * @return array|null
+	 */
+	public static function get_ajax_save_data() {
 		// 認証.
-		if ( ! $this->verify_nonce_ajax() ) {
-			$this->response_ajax();
+		if ( ! self::verify_nonce_ajax() ) {
+			self::response_ajax( self::response_ajax_forbidden() );
+
+			return null;
 		}
-		// 設定更新.
-		if ( isset( $_POST['options'] ) ) {
-			$data = json_decode( stripslashes( $_POST['options'] ), true );
-			if ( $this->save( $data ) ) {
-				$this->ajax_result['status']  = 200;
-				$this->ajax_result['message'] = '更新しました';
-			} else {
-				$this->ajax_result['status']  = 500;
-				$this->ajax_result['message'] = '更新に失敗しました';
-			}
-			$this->ajax_result['data'] = $data;
-		} else {
-			$this->ajax_result['status']  = 404;
-			$this->ajax_result['message'] = '必要なデータが送信されていません';
+		// 設定確認.
+		if ( ! isset( $_POST['options'] ) ) {
+			self::response_ajax( self::response_ajax_not_found() );
+
+			return null;
 		}
-		// 返却.
-		$this->response_ajax();
+
+		$result = json_decode( stripslashes( $_POST['options'] ), true );
+		if ( ! is_array( $result ) ) {
+			return null;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * 認証エラーの返却
+	 */
+	public static function response_ajax_forbidden() {
+		$response            = self::get_ajax_response_data();
+		$response['status']  = 403;
+		$response['message'] = '認証出来ませんでした。ページを再読み込みしてください。';
+		$response['error']   = true;
+
+		return $response;
+	}
+
+	/**
+	 * 必要データ無しエラーの返却
+	 */
+	public static function response_ajax_not_found() {
+		$response            = self::get_ajax_response_data();
+		$response['status']  = 404;
+		$response['message'] = '必要なデータが送信されていません';
+		$response['error']   = true;
+
+		return $response;
+	}
+
+	/**
+	 * 成功ステータスの返却
+	 */
+	public static function response_ajax_success() {
+		$response            = self::get_ajax_response_data();
+		$response['status']  = 200;
+		$response['message'] = '更新しました';
+
+		return $response;
+	}
+
+	/**
+	 * エラーステータスの返却
+	 */
+	public static function response_ajax_error() {
+		$response            = self::get_ajax_response_data();
+		$response['status']  = 500;
+		$response['message'] = '更新に失敗しました';
+		$response['error']   = true;
+
+		return $response;
 	}
 
 	/**
@@ -169,9 +245,7 @@ abstract class Menu_Page_Base {
 	 *
 	 * @return bool
 	 */
-	private function verify_nonce_ajax() {
-		$this->ajax_result['status']  = 403;
-		$this->ajax_result['message'] = '認証出来ませんでした。ページを再読み込みしてください。';
+	public static function verify_nonce_ajax() {
 
 		if ( ! isset( $_POST['nonce'] ) || ! isset( $_POST['nonceAction'] ) ) {
 			return false;
@@ -186,11 +260,23 @@ abstract class Menu_Page_Base {
 
 	/**
 	 * Ajax返却
+	 *
+	 * @param $response array response data.
 	 */
-	private function response_ajax() {
+	public static function response_ajax( $response ) {
 		header( 'Content-Type: application/json; charset=utf-8' );
-		echo json_encode( $this->ajax_result );
+		echo json_encode( $response );
 		die();
+	}
+
+	/**
+	 * Ajax URL 取得.
+	 *
+	 * @return string
+	 */
+	protected function get_ajax_url() {
+
+		return admin_url( 'admin-ajax.php?action=' . $this->get_ajax_action_name() );
 	}
 
 
@@ -326,11 +412,11 @@ abstract class Menu_Page_Base {
 			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
 			true
 		);
+
 		wp_localize_script(
 			'ystdtb-admin',
 			'ystdtbAdminConfig',
 			[
-				'ajaxUrl'     => admin_url( 'admin-ajax.php?action=ystdtb_save_options' ),
 				'siteUrl'     => esc_url_raw( home_url() ),
 				'pluginUrl'   => YSTDTB_URL,
 				'nonceAction' => self::NONCE_ACTION,
@@ -493,13 +579,21 @@ abstract class Menu_Page_Base {
 	 * @param string $object_name Object Name.
 	 * @param string $option_name Option Name.
 	 * @param array  $options     Options.
+	 * @param array  $config      Config.
 	 */
-	protected function enqueue_admin_localize_script_ajax( $name, $object_name, $option_name, $options ) {
+	protected function enqueue_admin_localize_script_ajax( $name, $object_name, $option_name, $options, $config = [] ) {
+		$config = array_merge(
+			[
+				'optionName' => $option_name,
+				'ajaxUrl'    => $this->get_ajax_url(),
+			],
+			$config
+		);
 		wp_localize_script(
 			"ystdtb-${name}",
 			$object_name,
 			[
-				'config'  => [ 'optionName' => $option_name ],
+				'config'  => $config,
 				'options' => $options,
 			]
 		);
