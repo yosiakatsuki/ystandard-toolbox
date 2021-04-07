@@ -167,7 +167,7 @@ export default {
         return;
       }
       const option = this.getOption( 'ctaSort' );
-      if ( ! option || 0 === option.length ) {
+      if ( ! option ) {
         this.resetPriority( 'all' );
         return;
       }
@@ -268,6 +268,7 @@ export default {
       }
     },
     saveSuccess( status ) {
+      this.saveCtaSort();
       this.disabledPostType = false;
       this.isEdit = false;
     },
@@ -291,12 +292,11 @@ export default {
       this.setCtaData();
     },
     saveCtaSort() {
-      const option = this.getOption( 'ctaSort' );
+      let option = this.getOption( 'ctaSort' );
       option[ this.selectedPostType ] = {
         header: this.headerCta,
         footer: this.footerCta,
       };
-
       this.updateOption( 'ctaSort', option );
     },
     resetSelectedPostType() {
