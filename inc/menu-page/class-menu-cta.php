@@ -82,11 +82,6 @@ class Menu_CTA extends Menu_Page_Base {
 				'name' => $value,
 			];
 		}
-//		$post_types   = [];
-//		$post_types[] = [
-//			'id'   => 'post',
-//			'name' => '投稿',
-//		];
 
 		$this->enqueue_admin_script( 'cta' );
 		$this->enqueue_admin_localize_script_ajax(

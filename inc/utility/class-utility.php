@@ -519,7 +519,9 @@ class Utility {
 	/**
 	 * 変数の内容をファイルに出力（開発用）
 	 *
-	 * @param mixed $var value.
+	 * @param mixed  $var  value.
+	 * @param string $file File Name.
+	 * @param string $line Line Number.
 	 */
 	public static function debug_var_dump_file( $var, $file = '', $line = '' ) {
 		ob_start();
