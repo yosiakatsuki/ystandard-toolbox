@@ -261,7 +261,7 @@ abstract class Menu_Page_Base {
 	/**
 	 * Ajax返却
 	 *
-	 * @param $response array response data.
+	 * @param array $response response data.
 	 */
 	public static function response_ajax( $response ) {
 		header( 'Content-Type: application/json; charset=utf-8' );
