@@ -242,6 +242,8 @@ export default {
           type
       );
       this.sortCtaData();
+      this.disabledPostType = true;
+      this.isEdit = true;
     },
     downItem( index, type ) {
       const length = 'header' === type ? this.headerCta.length : this.footerCta.length;
@@ -254,6 +256,8 @@ export default {
           type
       );
       this.sortCtaData();
+      this.disabledPostType = true;
+      this.isEdit = true;
     },
     changeNumber( nowIndex, toIndex, type ) {
       if ( 'header' === type ) {
