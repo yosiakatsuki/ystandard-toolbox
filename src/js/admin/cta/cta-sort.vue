@@ -145,6 +145,29 @@ export default {
       this.setPostTypeCta( this.selectedPostType );
       this.sortCtaData();
     },
+    refreshCtaName() {
+      const priorityConfig = this.getConfig( 'priority' );
+      const headerConfig = priorityConfig.header;
+      const footerConfig = priorityConfig.footer;
+      this.headerCta = this.headerCta.map( item => {
+        const target = headerConfig.find( conf => {
+          return conf.id === item.id;
+        } );
+        if ( target ) {
+          item.label = target.label;
+        }
+        return item;
+      } );
+      this.footerCta = this.footerCta.map( item => {
+        const target = footerConfig.find( conf => {
+          return conf.id === item.id;
+        } );
+        if ( target ) {
+          item.label = target.label;
+        }
+        return item;
+      } );
+    },
     sortCtaData() {
       this.headerCta = this.headerCta.sort( function ( a, b ) {
         if ( a.number < b.number ) return -1;
@@ -187,6 +210,7 @@ export default {
       } else {
         this.resetPriority( 'footer' );
       }
+      this.refreshCtaName();
       this.tempData = {
         header: _copyObject( this.headerCta ),
         footer: _copyObject( this.footerCta ),
