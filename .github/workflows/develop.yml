@@ -4,6 +4,58 @@ on:
     branches:
       - develop
 jobs:
+  test:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php: [ '5.6', '7.3', '7.4' ]
+        wp: [ '5.5', 'latest', 'trunk' ]
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_ROOT_PASSWORD: root
+    name: WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: 'develop'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: xdebug
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Start MySQL
+        run: sudo systemctl start mysql
+
+      - name: Install WordPress
+        run: bash bin/install-wp-tests.sh wordpress root root 127.0.0.1 ${{ matrix.wp }}
+
+      - name: Run test suite
+        run: composer test
+
+      - name: Notify Test
+        uses: 8398a7/action-slack@v3.8.0
+        with:
+          status: ${{ job.status }}
+          author_name: "Failure : WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest"
+          fields: repo,message,commit,job
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
   lint:
     runs-on:  ubuntu-latest
     name: lint
@@ -11,7 +63,6 @@ jobs:
       - uses: actions/checkout@v1
         with:
           ref: 'develop'
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
