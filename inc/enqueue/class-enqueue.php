@@ -65,7 +65,7 @@ class Enqueue {
 			YSTDTB_URL . '/js/blocks/app.js',
 			[],
 			filemtime( YSTDTB_PATH . '/js/blocks/app.js' ),
-			true,
+			true
 		);
 		wp_script_add_data( Config::JS_BLOCK_APP_HANDLE, 'defer', true );
 
@@ -74,7 +74,7 @@ class Enqueue {
 			YSTDTB_URL . '/js/app/app.js',
 			[],
 			filemtime( YSTDTB_PATH . '/js/app/app.js' ),
-			true,
+			true
 		);
 		wp_script_add_data( Config::JS_FRONT_APP_HANDLE, 'defer', true );
 	}
