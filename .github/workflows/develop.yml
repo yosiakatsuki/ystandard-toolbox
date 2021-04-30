@@ -105,7 +105,7 @@ jobs:
 
   release:
     name: Release
-    needs: [ lint ]
+    needs: [ test, lint ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
