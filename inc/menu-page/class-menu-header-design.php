@@ -52,7 +52,7 @@ class Menu_Header_Design extends Menu_Page_Base {
 
 		$param = array_merge(
 			Option::get_option( Header_Design::OPTION_NAME, '', [] ),
-			[ 'postTypes' => Utility::get_post_types( [], [ 'ys-parts' ] ) ],
+			[ 'postTypes' => Utility::get_post_types( [], [ 'ys-parts' ] ) ]
 		);
 		wp_localize_script(
 			'ystdtb-header-design',

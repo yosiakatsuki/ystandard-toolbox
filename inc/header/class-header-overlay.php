@@ -123,7 +123,7 @@ class Header_Overlay {
 			YSTDTB_URL . '/js/app/overlay.js',
 			[],
 			filemtime( YSTDTB_PATH . '/js/app/overlay.js' ),
-			true,
+			true
 		);
 		wp_script_add_data( $handle, 'defer', true );
 	}
