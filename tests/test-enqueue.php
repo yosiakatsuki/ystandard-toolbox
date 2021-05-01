@@ -6,6 +6,7 @@
  */
 
 use ystandard_toolbox\Config;
+use ystandard_toolbox\Enqueue;
 
 /**
  * Class EnqueueTest
@@ -16,7 +17,7 @@ class EnqueueTest extends WP_UnitTestCase {
 	 * Enqueue script
 	 */
 	public function test_enqueue_script() {
-		$enqueue = new \ystandard_toolbox\Enqueue();
+		$enqueue = new Enqueue();
 
 		$this->assertSame( 11, has_action( 'wp_enqueue_scripts', [ $enqueue, 'enqueue_css' ] ) );
 		$this->assertSame( 11, has_action( 'wp_enqueue_scripts', [ $enqueue, 'enqueue_script' ] ) );
