@@ -29,6 +29,7 @@
     "gulp-zip": "^5.0.2",
     "hex-rgb": "^4.2.0",
     "lodash": "^4.17.15",
+    "po2json": "^0.4.5",
     "prettier": "npm:wp-prettier@^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -60,7 +61,8 @@
     "watch": "NODE_ENV=development gulp watch & npm run start",
     "build": "NODE_ENV=production gulp build && npm run build:block",
     "build:deploy-files": "gulp createDeployFiles",
-    "build:pot": "wp i18n make-pot ./inc languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\"library,tests,vendor,bin\"",
+    "build:pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,src,tests\"",
+    "build:pot-json": "wp i18n make-json languages --no-purge",
     "rename:beta-json": "rename -f build/ystandard-toolbox-beta.json ystandard-toolbox.json"
   },
   "author": "yosiakatsuki",

@@ -8,8 +8,8 @@ import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'ystdtb/timeline-item', {
 	apiVersion: 2,
-	title: __( 'タイムライン(詳細)', 'ystandard-blocks' ),
-	description: __( 'タイムライン表示 詳細ブロック', 'ystandard-blocks' ),
+	title: __( 'タイムライン(詳細)', 'ystandard-toolbox' ),
+	description: __( 'タイムライン表示 詳細ブロック', 'ystandard-toolbox' ),
 	icon: (
 		<Clock
 			stroke={ ystdtbConfig.color.iconForegroundChild }

@@ -1,107 +1,687 @@
+# Copyright (C) 2021 yosiakatsuki
+# This file is distributed under the same license as the yStandard Toolbox plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: yStandard Toolbox 1.10.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ystandard-toolbox\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-13T12:35:59+00:00\n"
+"POT-Creation-Date: 2021-05-17T08:53:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: ystandard-toolbox\n"
 
-#: block-patterns/class-block-patterns.php:72
-#: block-patterns/class-block-patterns.php:73
-#: block-patterns/class-block-patterns.php:76
+#. Plugin Name of the plugin
+msgid "yStandard Toolbox"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wp-ystandard.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "無料WordPressテーマ「yStandard」用機能拡張プラグイン."
+msgstr ""
+
+#. Author of the plugin
+msgid "yosiakatsuki"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://yosiakatsuki.net"
+msgstr ""
+
+#: inc/block-patterns/class-block-patterns.php:72
+#: inc/block-patterns/class-block-patterns.php:73
+#: inc/block-patterns/class-block-patterns.php:76
 msgid "Block Pattern"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:74
+#: inc/block-patterns/class-block-patterns.php:74
 msgid "All Block Pattern"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:75
-#: block-patterns/class-block-patterns.php:77
+#: inc/block-patterns/class-block-patterns.php:75
+#: inc/block-patterns/class-block-patterns.php:77
 msgid "Add New Block Pattern"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:78
+#: inc/block-patterns/class-block-patterns.php:78
 msgid "Edit Block Pattern"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:84
+#: inc/block-patterns/class-block-patterns.php:84
 msgid "ブロックパターン編集機能"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:117
-#: block-patterns/class-block-patterns.php:118
+#: inc/block-patterns/class-block-patterns.php:117
+#: inc/block-patterns/class-block-patterns.php:118
 msgid "ブロックパターンカテゴリー"
 msgstr ""
 
-#: block-patterns/class-block-patterns.php:145
+#: inc/block-patterns/class-block-patterns.php:145
 msgid "全てのカテゴリー"
 msgstr ""
 
-#: cta/class-cta-sort.php:42
+#: inc/cta/class-cta-sort.php:104
 msgctxt "cta"
 msgid "Post Thumbnail"
 msgstr ""
 
-#: cta/class-cta-sort.php:49
+#: inc/cta/class-cta-sort.php:111
 msgid "Post Title"
 msgstr ""
 
-#: cta/class-cta-sort.php:56
+#: inc/cta/class-cta-sort.php:118
 msgctxt "cta"
 msgid "Post Meta"
 msgstr ""
 
-#: cta/class-cta-sort.php:63
-#: cta/class-cta-sort.php:108
+#: inc/cta/class-cta-sort.php:125
+#: inc/cta/class-cta-sort.php:170
 msgid "Share Buttons"
 msgstr ""
 
-#: cta/class-cta-sort.php:70
-#: cta/class-cta-sort.php:101
+#: inc/cta/class-cta-sort.php:132
+#: inc/cta/class-cta-sort.php:163
 msgid "Advertisement"
 msgstr ""
 
-#: cta/class-cta-sort.php:77
-#: cta/class-cta-sort.php:94
+#: inc/cta/class-cta-sort.php:139
+#: inc/cta/class-cta-sort.php:156
 msgid "Widget"
 msgstr ""
 
-#: cta/class-cta-sort.php:115
+#: inc/cta/class-cta-sort.php:177
 msgid "Category & Tag"
 msgstr ""
 
-#: cta/class-cta-sort.php:122
+#: inc/cta/class-cta-sort.php:184
 msgctxt "cta"
 msgid "Author"
 msgstr ""
 
-#: cta/class-cta-sort.php:129
+#: inc/cta/class-cta-sort.php:191
 msgid "Related Posts"
 msgstr ""
 
-#: cta/class-cta-sort.php:136
+#: inc/cta/class-cta-sort.php:198
 msgid "Comments"
 msgstr ""
 
-#: cta/class-cta-sort.php:143
+#: inc/cta/class-cta-sort.php:205
 msgid "Paging"
 msgstr ""
 
-#: widget/class-accordion.php:69
+#: inc/widget/class-accordion.php:69
 msgid "[Toolbox]子階層の折りたたみ設定"
 msgstr ""
 
-#: widget/class-accordion.php:73
+#: inc/widget/class-accordion.php:73
 msgid "2階層目以降を折りたたみ式にする"
 msgstr ""
 
-#: widget/class-accordion.php:75
+#: inc/widget/class-accordion.php:75
 msgid "一覧の2階層目以降を親メニュー・カテゴリーをクリックしたら表示する方式にします。"
+msgstr ""
+
+#: blocks/faq/config.js:43
+#: blocks/faq/item/config.js:90
+#: blocks/timeline/config.js:18
+#: blocks/timeline/item/config.js:72
+msgid "なし"
+msgstr ""
+
+#: blocks/faq/config.js:44
+msgid "上下左右"
+msgstr ""
+
+#: blocks/faq/config.js:45
+msgid "下のみ"
+msgstr ""
+
+#: blocks/faq/edit.js:67
+msgid "FAQ"
+msgstr ""
+
+#: blocks/faq/edit.js:70
+msgid "開閉設定"
+msgstr ""
+
+#: blocks/faq/edit.js:73
+msgid "開閉式にする"
+msgstr ""
+
+#: blocks/faq/edit.js:85
+msgid "開閉ボタンの色"
+msgstr ""
+
+#: blocks/faq/edit.js:110
+#: blocks/faq/item/edit.js:272
+#: blocks/faq/item/edit.js:351
+#: blocks/timeline/edit.js:263
+#: blocks/timeline/item/edit.js:394
+msgid "背景色"
+msgstr ""
+
+#: blocks/faq/edit.js:123
+#: blocks/faq/item/edit.js:364
+msgid "枠線タイプ"
+msgstr ""
+
+#: blocks/faq/edit.js:154
+#: blocks/faq/item/edit.js:304
+#: blocks/faq/item/edit.js:404
+msgid "枠線サイズ"
+msgstr ""
+
+#: blocks/faq/edit.js:176
+#: blocks/faq/item/edit.js:323
+#: blocks/faq/item/edit.js:428
+#: blocks/timeline/edit.js:299
+#: blocks/timeline/item/edit.js:427
+msgid "枠線の色"
+msgstr ""
+
+#: blocks/faq/index.js:11
+msgid "Q&A"
+msgstr ""
+
+#: blocks/faq/index.js:12
+msgid "Q&A(FAQ)表示ブロック"
+msgstr ""
+
+#: blocks/faq/item/config.js:91
+msgid "下区切り線"
+msgstr ""
+
+#: blocks/faq/item/config.js:97
+msgid "Q&A項目…"
+msgstr ""
+
+#: blocks/faq/item/config.js:102
+msgid "上"
+msgstr ""
+
+#: blocks/faq/item/config.js:103
+msgid "中央"
+msgstr ""
+
+#: blocks/faq/item/config.js:104
+msgid "下"
+msgstr ""
+
+#: blocks/faq/item/config.js:110
+msgid "デフォルト"
+msgstr ""
+
+#: blocks/faq/item/config.js:137
+msgid "背景あり四角"
+msgstr ""
+
+#: blocks/faq/item/config.js:165
+msgid "背景あり丸"
+msgstr ""
+
+#: blocks/faq/item/config.js:194
+msgid "四角アウトライン"
+msgstr ""
+
+#: blocks/faq/item/config.js:223
+msgid "丸アウトライン"
+msgstr ""
+
+#: blocks/faq/item/config.js:253
+msgid "区切り線あり"
+msgstr ""
+
+#: blocks/faq/item/edit.js:127
+msgid "デザインサンプル"
+msgstr ""
+
+#: blocks/faq/item/edit.js:204
+msgid "FAQラベル"
+msgstr ""
+
+#: blocks/faq/item/edit.js:207
+msgid "ラベル表示位置"
+msgstr ""
+
+#: blocks/faq/item/edit.js:234
+msgid "ラベルサイズ"
+msgstr ""
+
+#: blocks/faq/item/edit.js:245
+#: blocks/timeline/edit.js:194
+#: blocks/timeline/item/edit.js:333
+msgid "文字の太さ"
+msgstr ""
+
+#: blocks/faq/item/edit.js:248
+#: blocks/timeline/edit.js:197
+#: blocks/timeline/item/edit.js:339
+msgid "太字にする"
+msgstr ""
+
+#: blocks/faq/item/edit.js:259
+#: blocks/faq/item/edit.js:338
+msgid "文字色"
+msgstr ""
+
+#: blocks/faq/item/edit.js:285
+#: blocks/timeline/edit.js:136
+#: blocks/timeline/item/edit.js:231
+msgid "角丸"
+msgstr ""
+
+#: blocks/faq/item/edit.js:335
+msgid "FAQコンテンツ"
+msgstr ""
+
+#: blocks/faq/item/index.js:12
+msgid "Q&A項目"
+msgstr ""
+
+#: blocks/faq/item/index.js:13
+msgid "Q&Aの内容"
+msgstr ""
+
+#: blocks/icon-list/config.js:36
+#: blocks/icon-list/config.js:38
+msgid "右矢印"
+msgstr ""
+
+#: blocks/icon-list/config.js:37
+msgid "右二重矢印"
+msgstr ""
+
+#: blocks/icon-list/config.js:39
+msgid "右丸矢印"
+msgstr ""
+
+#: blocks/icon-list/config.js:40
+msgid "チェック"
+msgstr ""
+
+#: blocks/icon-list/config.js:41
+msgid "チェック(円)"
+msgstr ""
+
+#: blocks/icon-list/config.js:42
+msgid "いいね"
+msgstr ""
+
+#: blocks/icon-list/config.js:43
+msgid "よくないね"
+msgstr ""
+
+#: blocks/icon-list/config.js:44
+msgid "星"
+msgstr ""
+
+#: blocks/icon-list/config.js:45
+msgid "ハート"
+msgstr ""
+
+#: blocks/icon-list/config.js:46
+msgid "アワード"
+msgstr ""
+
+#: blocks/icon-list/config.js:47
+msgid "ベル"
+msgstr ""
+
+#: blocks/icon-list/config.js:48
+msgid "ブックマーク"
+msgstr ""
+
+#: blocks/icon-list/config.js:49
+msgid "アラート(円)"
+msgstr ""
+
+#: blocks/icon-list/config.js:50
+msgid "アラート(三角)"
+msgstr ""
+
+#: blocks/icon-list/config.js:51
+msgid "リンク"
+msgstr ""
+
+#: blocks/icon-list/config.js:52
+msgid "メッセージ"
+msgstr ""
+
+#: blocks/icon-list/config.js:56
+#: blocks/timeline/item/config.js:79
+msgid "大"
+msgstr ""
+
+#: blocks/icon-list/config.js:57
+msgid "中"
+msgstr ""
+
+#: blocks/icon-list/config.js:58
+#: blocks/timeline/item/config.js:77
+msgid "小"
+msgstr ""
+
+#: blocks/icon-list/edit.js:28
+msgid "Icon list text"
+msgstr ""
+
+#: blocks/icon-list/edit.js:29
+msgid "Icon list"
+msgstr ""
+
+#: blocks/icon-list/index.js:11
+msgid "アイコンリスト"
+msgstr ""
+
+#: blocks/icon-list/index.js:12
+msgid "アイコンを表示できるリストブロック"
+msgstr ""
+
+#: blocks/posts/config.js:89
+msgid "公開日 / 新しい順"
+msgstr ""
+
+#: blocks/posts/config.js:92
+msgid "公開日 / 古い順"
+msgstr ""
+
+#: blocks/posts/config.js:94
+msgid "更新日 / 新しい順"
+msgstr ""
+
+#: blocks/posts/config.js:98
+msgid "更新日 / 古い順"
+msgstr ""
+
+#: blocks/posts/config.js:101
+msgid "タイトル / A→Z"
+msgstr ""
+
+#: blocks/posts/config.js:102
+msgid "タイトル / Z→A"
+msgstr ""
+
+#: blocks/posts/config.js:103
+msgid "ランダム"
+msgstr ""
+
+#: blocks/posts/config.js:106
+msgid "カード"
+msgstr ""
+
+#: blocks/posts/config.js:107
+msgid "リスト"
+msgstr ""
+
+#: blocks/posts/config.js:111
+msgid "16-9"
+msgstr ""
+
+#: blocks/posts/config.js:112
+msgid "4-3"
+msgstr ""
+
+#: blocks/posts/config.js:113
+msgid "1-1"
+msgstr ""
+
+#: blocks/posts/edit.js:172
+msgid "基本設定"
+msgstr ""
+
+#: blocks/posts/edit.js:174
+msgid "表示件数"
+msgstr ""
+
+#: blocks/posts/edit.js:185
+msgid "並び順"
+msgstr ""
+
+#: blocks/posts/edit.js:197
+msgid "表示設定"
+msgstr ""
+
+#: blocks/posts/edit.js:199
+msgid "デザイン"
+msgstr ""
+
+#: blocks/posts/edit.js:207
+msgid "表示列数"
+msgstr ""
+
+#: blocks/posts/edit.js:210
+msgid "デスクトップ"
+msgstr ""
+
+#: blocks/posts/edit.js:222
+msgid "タブレット"
+msgstr ""
+
+#: blocks/posts/edit.js:234
+msgid "モバイル"
+msgstr ""
+
+#: blocks/posts/edit.js:246
+msgid "画像設定"
+msgstr ""
+
+#: blocks/posts/edit.js:248
+msgid "画像を表示する"
+msgstr ""
+
+#: blocks/posts/edit.js:260
+msgid "画像サイズ"
+msgstr ""
+
+#: blocks/posts/edit.js:268
+msgid "画像縦横比"
+msgstr ""
+
+#: blocks/posts/edit.js:278
+msgid "日付・カテゴリー・概要の表示"
+msgstr ""
+
+#: blocks/posts/edit.js:284
+msgid "日付を表示する"
+msgstr ""
+
+#: blocks/posts/edit.js:296
+msgid "カテゴリーを表示する"
+msgstr ""
+
+#: blocks/posts/edit.js:308
+msgid "概要を表示する"
+msgstr ""
+
+#: blocks/posts/edit.js:322
+msgid "絞り込み設定"
+msgstr ""
+
+#: blocks/posts/edit.js:325
+msgid "投稿タイプ"
+msgstr ""
+
+#: blocks/posts/edit.js:338
+msgid "分類"
+msgstr ""
+
+#: blocks/posts/edit.js:352
+msgid "カテゴリー・タグ"
+msgstr ""
+
+#: blocks/posts/edit.js:371
+msgid "高度な絞り込み"
+msgstr ""
+
+#: blocks/posts/edit.js:375
+msgid "投稿ID指定"
+msgstr ""
+
+#: blocks/posts/edit.js:393
+msgid "投稿名指定"
+msgstr ""
+
+#: blocks/posts/edit.js:412
+msgid "親ページ指定"
+msgstr ""
+
+#: blocks/posts/index.js:9
+msgid "記事一覧"
+msgstr ""
+
+#: blocks/posts/index.js:10
+msgid "投稿一覧を表示するブロック"
+msgstr ""
+
+#: blocks/sns-share/config.js:61
+msgid "円"
+msgstr ""
+
+#: blocks/sns-share/config.js:62
+msgid "四角"
+msgstr ""
+
+#: blocks/sns-share/config.js:63
+#: blocks/timeline/config.js:19
+#: blocks/timeline/item/config.js:73
+#: blocks/timeline/item/edit.js:289
+msgid "アイコン"
+msgstr ""
+
+#: blocks/sns-share/config.js:64
+msgid "公式"
+msgstr ""
+
+#: blocks/sns-share/index.js:9
+msgid "シェアボタン"
+msgstr ""
+
+#: blocks/sns-share/index.js:10
+msgid "シェアボタンを表示するブロック"
+msgstr ""
+
+#: blocks/styles/columns/column.js:6
+msgid "幅:auto"
+msgstr ""
+
+#: blocks/styles/columns/column.js:10
+msgid "幅:auto(折返しなし)"
+msgstr ""
+
+#: blocks/styles/table/table.js:6
+msgid "2列用"
+msgstr ""
+
+#: blocks/styles/table/table.js:11
+msgid "2列用(モバイルで1列)"
+msgstr ""
+
+#: blocks/styles/table/table.js:15
+msgid "モバイルでスクロール"
+msgstr ""
+
+#: blocks/timeline/config.js:20
+msgid "連番"
+msgstr ""
+
+#: blocks/timeline/edit.js:64
+msgid "タイムライン一括設定"
+msgstr ""
+
+#: blocks/timeline/edit.js:68
+msgid "コンテンツ間の余白"
+msgstr ""
+
+#: blocks/timeline/edit.js:93
+#: blocks/timeline/item/edit.js:182
+msgid "線の色"
+msgstr ""
+
+#: blocks/timeline/edit.js:110
+#: blocks/timeline/item/edit.js:195
+msgid "コンテンツ上部余白"
+msgstr ""
+
+#: blocks/timeline/edit.js:132
+msgid "ラベル一括設定"
+msgstr ""
+
+#: blocks/timeline/edit.js:155
+#: blocks/timeline/item/edit.js:255
+msgid "タイプ"
+msgstr ""
+
+#: blocks/timeline/edit.js:217
+#: blocks/timeline/item/edit.js:358
+msgid "文字・アイコン サイズ"
+msgstr ""
+
+#: blocks/timeline/edit.js:223
+#: blocks/timeline/item/edit.js:364
+msgid "サイズ"
+msgstr ""
+
+#: blocks/timeline/edit.js:241
+#: blocks/timeline/item/edit.js:376
+msgid "文字・アイコン 色"
+msgstr ""
+
+#: blocks/timeline/edit.js:280
+#: blocks/timeline/item/edit.js:407
+msgid "枠線の太さ"
+msgstr ""
+
+#: blocks/timeline/index.js:11
+#: blocks/timeline/item/edit.js:147
+msgid "タイムライン"
+msgstr ""
+
+#: blocks/timeline/index.js:12
+msgid "タイムライン表示ブロック"
+msgstr ""
+
+#: blocks/timeline/item/config.js:74
+#: blocks/timeline/item/edit.js:308
+#: blocks/timeline/item/edit.js:321
+#: blocks/timeline/item/edit.js:325
+msgid "テキスト"
+msgstr ""
+
+#: blocks/timeline/item/config.js:78
+msgid "通常"
+msgstr ""
+
+#: blocks/timeline/item/config.js:85
+msgid "タイムラインコンテンツ…"
+msgstr ""
+
+#: blocks/timeline/item/edit.js:150
+msgid "コンテンツ内の余白"
+msgstr ""
+
+#: blocks/timeline/item/edit.js:217
+msgid "ラベルにアイコンやテキストを使ったときにコンテンツの開始位置がずれる場合、余白を調整してください。"
+msgstr ""
+
+#: blocks/timeline/item/edit.js:226
+msgid "ラベル"
+msgstr ""
+
+#: blocks/timeline/item/edit.js:292
+msgid "アイコン選択"
+msgstr ""
+
+#: blocks/timeline/item/index.js:11
+msgid "タイムライン(詳細)"
+msgstr ""
+
+#: blocks/timeline/item/index.js:12
+msgid "タイムライン表示 詳細ブロック"
 msgstr ""

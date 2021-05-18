@@ -115,6 +115,15 @@ class Blocks {
 			'ystdtbBlockEditor',
 			$this->create_block_option()
 		);
+
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations(
+				'ystandard-toolbox-block-editor',
+				'ystandard-toolbox',
+				YSTDTB_PATH . '/languages'
+			);
+		}
+
 		wp_enqueue_style(
 			Config::BLOCK_CSS_HANDLE,
 			YSTDTB_URL . '/css/ystandard-toolbox-blocks.css',
