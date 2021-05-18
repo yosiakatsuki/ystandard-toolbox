@@ -1,6 +1,7 @@
 import { ystdtbConfig } from '../../src/js/blocks/config/config';
 import edit from './edit';
 import save from './save';
+import transforms from './transforms';
 import { List } from 'react-feather';
 import { attributes, supports } from './config';
 import { registerBlockType } from '@wordpress/blocks';
@@ -22,5 +23,6 @@ registerBlockType( 'ystdtb/icon-list', {
 	supports,
 	edit,
 	save,
-	example: {}
+	example: {},
+	transforms
 } );
