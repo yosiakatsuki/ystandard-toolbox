@@ -1,3 +1,5 @@
+@use "../../global/index" as global;
+
 .wp-admin {
   .ystdtb-menu__manual-link {
     a {
@@ -5,6 +7,11 @@
       align-items: center;
       justify-content: center;
       padding: 0;
+      min-height: unset;
+
+      @include global.media-breakpoint(md) {
+        padding: .25em 0;
+      }
 
       svg {
         width: 1.2em;
@@ -14,18 +21,26 @@
     }
 
     &.is-horizon {
-      display: flex;
+      @include global.media-breakpoint(md) {
+        display: flex;
+      }
 
       > * {
         width: 100%;
-        margin-left: .25em;
-        margin-right: .25em;
+        margin-bottom: .25em;
 
-        &:first-child {
-          margin-left: 0;
-        }
-        &:last-child {
-          margin-right: 0;
+        @include global.media-breakpoint(md) {
+          margin-left: .25em;
+          margin-right: .25em;
+          margin-bottom: 0;
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
         }
       }
     }

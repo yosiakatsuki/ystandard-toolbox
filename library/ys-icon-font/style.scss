@@ -1,0 +1,103 @@
+@use "variables";
+
+[class^="ys-icon-"], [class*=" ys-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{variables.$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ys-icon-alert-circle {
+  &:before {
+    content: variables.$ys-icon-alert-circle;
+  }
+}
+.ys-icon-alert-triangle {
+  &:before {
+    content: variables.$ys-icon-alert-triangle;
+  }
+}
+.ys-icon-arrow-right {
+  &:before {
+    content: variables.$ys-icon-arrow-right;
+  }
+}
+.ys-icon-arrow-right-circle {
+  &:before {
+    content: variables.$ys-icon-arrow-right-circle;
+  }
+}
+.ys-icon-award {
+  &:before {
+    content: variables.$ys-icon-award;
+  }
+}
+.ys-icon-bell {
+  &:before {
+    content: variables.$ys-icon-bell;
+  }
+}
+.ys-icon-bookmark {
+  &:before {
+    content: variables.$ys-icon-bookmark;
+  }
+}
+.ys-icon-check {
+  &:before {
+    content: variables.$ys-icon-check;
+  }
+}
+.ys-icon-check-circle {
+  &:before {
+    content: variables.$ys-icon-check-circle;
+  }
+}
+.ys-icon-chevron-right {
+  &:before {
+    content: variables.$ys-icon-chevron-right;
+  }
+}
+.ys-icon-chevrons-right {
+  &:before {
+    content: variables.$ys-icon-chevrons-right;
+  }
+}
+.ys-icon-heart {
+  &:before {
+    content: variables.$ys-icon-heart;
+  }
+}
+.ys-icon-link {
+  &:before {
+    content: variables.$ys-icon-link;
+  }
+}
+.ys-icon-message-circle {
+  &:before {
+    content: variables.$ys-icon-message-circle;
+  }
+}
+.ys-icon-star {
+  &:before {
+    content: variables.$ys-icon-star;
+  }
+}
+.ys-icon-thumbs-down {
+  &:before {
+    content: variables.$ys-icon-thumbs-down;
+  }
+}
+.ys-icon-thumbs-up {
+  &:before {
+    content: variables.$ys-icon-thumbs-up;
+  }
+}
+

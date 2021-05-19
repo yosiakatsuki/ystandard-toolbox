@@ -29,6 +29,7 @@ require_once __DIR__ . '/code/class-code.php';
 require_once __DIR__ . '/heading/class-heading.php';
 // Font.
 require_once __DIR__ . '/font/class-font.php';
+require_once __DIR__ . '/font/class-icon-font.php';
 // Copyright.
 require_once __DIR__ . '/copyright/class-copyright.php';
 // Block Patterns.

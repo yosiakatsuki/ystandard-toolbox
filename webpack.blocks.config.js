@@ -12,6 +12,7 @@ module.exports = {
 		'faq': './blocks/faq/index.js',
 		'faq-item': './blocks/faq/item/index.js',
 		'sns-share': './blocks/sns-share/index.js',
+		'icon-list': './blocks/icon-list/index.js',
 	},
 	output: {
 		filename: '[name].js',

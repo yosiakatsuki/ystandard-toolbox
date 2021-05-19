@@ -1,3 +1,4 @@
+// eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
 	const faq = document.querySelectorAll(
 		'.ystdtb-faq.is-accordion .is-faq--q'
