@@ -4,13 +4,55 @@ on:
     branches:
       - develop
 jobs:
+  lint:
+    runs-on:  ubuntu-latest
+    name: lint
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: 'develop'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.3
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: xdebug
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Composer install
+        run: composer install --optimize-autoloader --prefer-dist
+
+      - name: phpcs tests
+        run: composer phpcs
+
+      - name: npm install
+        run: npm install
+
+      - name: npm run lint-js
+        run: npm run lint-js
+
+      - name: Notify Lint
+        uses: 8398a7/action-slack@v3.8.0
+        with:
+          status: ${{ job.status }}
+          author_name: Failure lint
+          fields: repo,message,commit,job
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
   codeCheck:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
         php: [ '5.6', '7.2', '7.3', '7.4' ]
-    name: PHP Error Check
+    name: PHP Error Check (PHP ${{ matrix.php }})
+    needs: [ lint ]
     steps:
       - uses: actions/checkout@v1
         with:
@@ -53,6 +95,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: root
     name: WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest
+    needs: [ codeCheck ]
     steps:
       - uses: actions/checkout@v1
         with:
@@ -96,46 +139,6 @@ jobs:
         with:
           status: ${{ job.status }}
           author_name: "Failure : WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest"
-          fields: repo,message,commit,job
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: failure()
-  lint:
-    runs-on:  ubuntu-latest
-    name: lint
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          ref: 'develop'
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.3
-          extensions: mbstring, intl
-          ini-values: post_max_size=256M, short_open_tag=On
-          coverage: xdebug
-
-      - name: Check PHP Version
-        run: php -v
-
-      - name: Composer install
-        run: composer install --optimize-autoloader --prefer-dist
-
-      - name: phpcs tests
-        run: composer phpcs
-
-      - name: npm install
-        run: npm install
-
-      - name: npm run lint-js
-        run: npm run lint-js
-
-      - name: Notify Lint
-        uses: 8398a7/action-slack@v3.8.0
-        with:
-          status: ${{ job.status }}
-          author_name: Failure lint
           fields: repo,message,commit,job
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
