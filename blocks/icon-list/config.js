@@ -2,11 +2,11 @@ import { __ } from '@wordpress/i18n';
 
 export const attributes = {
 	values: {
-		type: "string",
-		source: "html",
-		selector: "ul",
-		multiline: "li",
-		default: ""
+		type: 'string',
+		source: 'html',
+		selector: 'ul',
+		multiline: 'li',
+		default: '',
 	},
 	iconType: {
 		type: 'string',
@@ -21,7 +21,7 @@ export const attributes = {
 	},
 	customIconColor: {
 		type: 'string',
-	}
+	},
 };
 
 export const supports = {
@@ -29,7 +29,7 @@ export const supports = {
 	className: false,
 	lightBlockWrapper: true,
 	fontSize: true,
-	color: true
+	color: true,
 };
 
 export const blockClassName = 'ystdtb-icon-list';
@@ -38,7 +38,10 @@ export const iconTypes = [
 	{ label: __( '右矢印', 'ystandard-toolbox' ), name: 'chevron-right' },
 	{ label: __( '右二重矢印', 'ystandard-toolbox' ), name: 'chevrons-right' },
 	{ label: __( '右矢印', 'ystandard-toolbox' ), name: 'arrow-right' },
-	{ label: __( '右丸矢印', 'ystandard-toolbox' ), name: 'arrow-right-circle' },
+	{
+		label: __( '右丸矢印', 'ystandard-toolbox' ),
+		name: 'arrow-right-circle',
+	},
 	{ label: __( 'チェック', 'ystandard-toolbox' ), name: 'check' },
 	{ label: __( 'チェック(円)', 'ystandard-toolbox' ), name: 'check-circle' },
 	{ label: __( 'いいね', 'ystandard-toolbox' ), name: 'thumbs-up' },
@@ -49,7 +52,10 @@ export const iconTypes = [
 	{ label: __( 'ベル', 'ystandard-toolbox' ), name: 'bell' },
 	{ label: __( 'ブックマーク', 'ystandard-toolbox' ), name: 'bookmark' },
 	{ label: __( 'アラート(円)', 'ystandard-toolbox' ), name: 'alert-circle' },
-	{ label: __( 'アラート(三角)', 'ystandard-toolbox' ), name: 'alert-triangle' },
+	{
+		label: __( 'アラート(三角)', 'ystandard-toolbox' ),
+		name: 'alert-triangle',
+	},
 	{ label: __( 'リンク', 'ystandard-toolbox' ), name: 'link' },
 	{ label: __( 'メッセージ', 'ystandard-toolbox' ), name: 'message-circle' },
 ];

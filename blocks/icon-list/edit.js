@@ -3,7 +3,7 @@ import {
 	RichText,
 	InspectorControls,
 	withColors,
-	useBlockProps
+	useBlockProps,
 } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import {
@@ -13,10 +13,11 @@ import {
 	Button,
 	ColorPalette,
 } from '@wordpress/components';
+import { createBlock } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { blockClassName, iconTypes } from './config';
-import { getFeatherIcon } from "../../src/js/blocks/component/icon-picker/_getFeatherIcon";
+import { getFeatherIcon } from '../../src/js/blocks/component/icon-picker/_getFeatherIcon';
 
 function IconList( props ) {
 	const {
@@ -27,25 +28,17 @@ function IconList( props ) {
 		iconColor,
 		setIconColor,
 	} = props;
-	const {
-		values,
-		iconType,
-		iconBold,
-	} = attributes;
+	const { values, iconType, iconBold } = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 	const blockProps = useBlockProps( {
-		className: classnames(
-			blockClassName,
-			`icon--${ iconType }`,
-			{
-				'is-bold': iconBold,
-				'has-icon-font-color': iconColor.color,
-			}
-		),
+		className: classnames( blockClassName, `icon--${ iconType }`, {
+			'is-bold': iconBold,
+			'has-icon-font-color': iconColor.color,
+		} ),
 		style: {
-			'--icon-font-color': iconColor.color
-		}
+			'--icon-font-color': iconColor.color,
+		},
 	} );
 
 	return (
@@ -71,7 +64,9 @@ function IconList( props ) {
 									>
 										<span
 											dangerouslySetInnerHTML={ {
-												__html: getFeatherIcon( item.name ),
+												__html: getFeatherIcon(
+													item.name
+												),
 											} }
 										/>
 									</Button>
@@ -81,10 +76,7 @@ function IconList( props ) {
 					</BaseControl>
 					<BaseControl
 						id={ 'icon-color' }
-						label={ __(
-							'アイコン色',
-							'ystandard-toolbox'
-						) }
+						label={ __( 'アイコン色', 'ystandard-toolbox' ) }
 					>
 						<ColorPalette
 							colors={ colors }
@@ -100,7 +92,10 @@ function IconList( props ) {
 						label={ __( 'アイコン太さ', 'ystandard-toolbox' ) }
 					>
 						<ToggleControl
-							label={ __( 'アイコンを太くする', 'ystandard-toolbox' ) }
+							label={ __(
+								'アイコンを太くする',
+								'ystandard-toolbox'
+							) }
 							onChange={ () => {
 								setAttributes( {
 									iconBold: ! iconBold,
@@ -121,10 +116,13 @@ function IconList( props ) {
 				}
 				value={ values }
 				aria-label={ __( 'Icon list text', 'ystandard-toolbox' ) }
-				placeholder={ __( 'リストを入力...', 'ystandard-toolbox' ) }
+				placeholder={ __( 'リストを入力…', 'ystandard-toolbox' ) }
 				onMerge={ mergeBlocks }
 				onSplit={ ( value ) =>
-					createBlock( 'ystdtb/icon-list', { ...attributes, values: value } )
+					createBlock( 'ystdtb/icon-list', {
+						...attributes,
+						values: value,
+					} )
 				}
 				onReplace={ onReplace }
 				onRemove={ () => onReplace( [] ) }
@@ -139,4 +137,4 @@ export default compose( [
 	withColors( {
 		iconColor: 'iconFontColor',
 	} ),
-] )( IconList )
+] )( IconList );

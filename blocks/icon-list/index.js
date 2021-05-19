@@ -10,7 +10,10 @@ import { __ } from '@wordpress/i18n';
 registerBlockType( 'ystdtb/icon-list', {
 	apiVersion: 2,
 	title: __( 'アイコンリスト', 'ystandard-toolbox' ),
-	description: __( 'アイコンを表示できるリストブロック', 'ystandard-toolbox' ),
+	description: __(
+		'アイコンを表示できるリストブロック',
+		'ystandard-toolbox'
+	),
 	icon: (
 		<List
 			stroke={ ystdtbConfig.color.iconForeground }
@@ -24,5 +27,5 @@ registerBlockType( 'ystdtb/icon-list', {
 	edit,
 	save,
 	example: {},
-	transforms
+	transforms,
 } );

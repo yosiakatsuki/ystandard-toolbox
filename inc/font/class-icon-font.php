@@ -112,7 +112,7 @@ class Icon_Font {
 		$css = '';
 		foreach ( $palette[0] as $value ) {
 			/**
-			 * icon-color
+			 * Class : icon-font-color.
 			 */
 			$class_name = "has-{$value['slug']}-icon-font-color";
 			/**
