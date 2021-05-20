@@ -11,6 +11,7 @@ const webpackStream = require( 'webpack-stream' );
 const webpack = require( 'webpack' );
 const plumber = require( 'gulp-plumber' );
 const babel = require( 'gulp-babel' );
+const rename = require( 'gulp-rename' );
 
 const webpackConfig = require( './webpack.menu.config.js' );
 
@@ -125,8 +126,14 @@ function zip() {
 		.pipe( dest( 'build' ) );
 }
 
-function copyUpdateInfo() {
-	return src( [ 'ystandard-toolbox.json', 'ystandard-toolbox-beta.json' ] )
+function copyUpdateJson() {
+	return src( 'ystandard-toolbox.json' )
+		.pipe( dest( 'build' ) );
+}
+
+function copyUpdateJsonBeta() {
+	return src( 'ystandard-toolbox-beta.json' )
+		.pipe( rename( 'ystandard-toolbox.json' ) )
 		.pipe( dest( 'build' ) );
 }
 
@@ -141,7 +148,9 @@ function watchFiles() {
 	watch( [ './src/js/app/*.js' ], buildJs );
 }
 
-exports.createDeployFiles = series( cleanFiles, copyJson, copyProductionFiles, parallel( zip, copyUpdateInfo ) );
+exports.deployFiles = series( cleanFiles, copyJson, copyProductionFiles, zip, copyUpdateJson );
+exports.deployFilesBeta = series( cleanFiles, copyJson, copyProductionFiles, zip, copyUpdateJsonBeta );
+
 exports.sass = series( sass );
 exports.watch = series( watchFiles );
 exports.clean = series( cleanFiles );
