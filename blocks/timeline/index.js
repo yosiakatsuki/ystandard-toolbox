@@ -22,4 +22,5 @@ registerBlockType( 'ystdtb/timeline', {
 	supports,
 	edit,
 	save,
+	example: {},
 } );

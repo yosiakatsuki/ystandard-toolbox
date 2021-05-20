@@ -22,4 +22,5 @@ registerBlockType( 'ystdtb/faq', {
 	supports,
 	edit,
 	save,
+	example: {},
 } );

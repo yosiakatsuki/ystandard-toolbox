@@ -28,4 +28,5 @@ registerBlockType( 'ystdtb/posts', {
 	save() {
 		return null;
 	},
+	example: {},
 } );

@@ -28,4 +28,5 @@ registerBlockType( 'ystdtb/sns-share', {
 	save() {
 		return null;
 	},
+	example: {},
 } );
