@@ -4,10 +4,17 @@
   list-style: none;
 
   li {
-    display: flex;
+    position: relative;
+    padding-left: 1.5em;
+
+    &::marker {
+      display: none;
+    }
 
     &:before {
-      margin-right: .5em;
+      position: absolute;
+      top: 0;
+      left: 0;
       font-family: 'ys-icon-font', sans-serif;
       speak: never;
       color: var(--icon-font-color, currentColor);
