@@ -63,7 +63,7 @@
     "build:deploy-files": "gulp createDeployFiles",
     "build:pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,src,tests\"",
     "build:pot-json": "wp i18n make-json languages --no-purge",
-    "rename:beta-json": "rename -f build/ystandard-toolbox-beta.json ystandard-toolbox.json"
+    "rename:beta-json": "rename -f build/ystandard-toolbox-beta.json build/ystandard-toolbox.json"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",
