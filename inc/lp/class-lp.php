@@ -22,6 +22,9 @@ class LP {
 	 * LP constructor.
 	 */
 	public function __construct() {
+		if ( ! Utility::ystandard_version_compare( '4.26.1' ) ) {
+			return;
+		}
 		add_filter( 'theme_templates', [ $this, 'add_template' ], 20, 4 );
 		add_filter( 'template_include', [ $this, 'load_template' ], 99 );
 		add_filter( 'ys_show_footer_mobile_nav', [ $this, 'disable_footer_nav' ] );
