@@ -21,7 +21,6 @@ class Admin_Utility {
 	/**
 	 * Toolbox設定画面チェック
 	 *
-	 * @param string $slug        Page Slug.
 	 * @param string $hook_suffix Hook Suffix.
 	 *
 	 * @return bool
@@ -120,6 +119,8 @@ class Admin_Utility {
 
 	/**
 	 * メニューナビゲーション作成
+	 *
+	 * @param string $slug Menu Slug.
 	 */
 	private static function create_menu_nav( $slug ) {
 		$nav = apply_filters( Config::ADMIN_MENU_NAV_HOOK, [] );
