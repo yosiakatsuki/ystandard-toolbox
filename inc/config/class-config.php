@@ -25,7 +25,7 @@ class Config {
 	/**
 	 * 必要なyStandardバージョン
 	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.23.0';
+	const REQUIRE_YSTANDARD_VERSION = '4.26.1';
 	/**
 	 * 必要なyStandard Blocksバージョン
 	 */
@@ -105,4 +105,11 @@ class Config {
 	 * @var string
 	 */
 	const TEXT_DOMAIN = 'ystandard-toolbox';
+
+	/**
+	 * カスタムテンプレートフォルダ
+	 *
+	 * @var string
+	 */
+	const CUSTOM_TEMPLATE_DIR = 'toolbox-template-dir';
 }
