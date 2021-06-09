@@ -102,6 +102,9 @@ class LP {
 	 * @return string
 	 */
 	public function load_template( $template ) {
+		if ( ! is_singular() ) {
+			return $template;
+		}
 		global $post;
 		$page_template_slug = get_page_template_slug( $post->ID );
 
