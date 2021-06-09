@@ -70,6 +70,10 @@ class Utility {
 	 */
 	public static function wordpress_version_compare( $version ) {
 
+		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
+			return true;
+		}
+
 		$wp_version = get_bloginfo( 'version' );
 
 		return version_compare( $wp_version, $version, '>=' );
@@ -83,6 +87,10 @@ class Utility {
 	 * @return bool|int
 	 */
 	public static function ystandard_version_compare( $version = '' ) {
+
+		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
+			return true;
+		}
 
 		if ( 'ystandard' !== get_template() ) {
 			return false;
@@ -108,6 +116,10 @@ class Utility {
 	 * @return bool|int
 	 */
 	public static function ystandard_blocks_version_compare( $version = '' ) {
+		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
+			return true;
+		}
+
 		$blocks = apply_filters( 'ystdb_get_version', '' );
 		if ( '' === $blocks ) {
 			return false;

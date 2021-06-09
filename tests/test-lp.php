@@ -33,9 +33,18 @@ class LPTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * フィルターのセット
+	 */
+	public function set_filter() {
+	}
+
+	/**
 	 * Test is_lp_template.
 	 */
 	public function test_is_lp() {
+		$this->set_filter();
+		$this->set_template_path();
+
 		$post_id = $this->factory->post->create();
 		$this->go_to( get_the_permalink( $post_id ) );
 
@@ -55,37 +64,41 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_singular() {
-		$post_id = $this->factory->post->create();
-		$this->go_to( get_the_permalink( $post_id ) );
+		$this->set_filter();
 		$this->set_template_path();
 
+		$post_id = $this->factory->post->create();
+		$this->go_to( get_the_permalink( $post_id ) );
+
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 
 		update_post_meta( $post_id, '_wp_page_template', 'toolbox-template-dir/lp/lp.php' );
+		$this->go_to( get_the_permalink( $post_id ) );
 		$this->assertSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 
 		update_post_meta( $post_id, '_wp_page_template', 'toolbox-template-dir/lp/lp-wide.php' );
+		$this->go_to( get_the_permalink( $post_id ) );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 		$this->assertSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 
 		$page_id = $this->factory->post->create(
@@ -93,32 +106,34 @@ class LPTest extends WP_UnitTestCase {
 		);
 		$this->go_to( get_the_permalink( $page_id ) );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_page_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_page_template() )
 		);
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_page_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_page_template() )
 		);
 
 		update_post_meta( $page_id, '_wp_page_template', 'toolbox-template-dir/lp/lp.php' );
+		$this->go_to( get_the_permalink( $page_id ) );
 		$this->assertSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 
 		update_post_meta( $page_id, '_wp_page_template', 'toolbox-template-dir/lp/lp-wide.php' );
+		$this->go_to( get_the_permalink( $page_id ) );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 		$this->assertSame(
-			apply_filters( 'template_include', get_single_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_single_template() )
 		);
 	}
 
@@ -126,6 +141,7 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_front_page() {
+		$this->set_filter();
 		$this->set_template_path();
 
 		$post_id = $this->factory->post->create();
@@ -135,12 +151,12 @@ class LPTest extends WP_UnitTestCase {
 		$this->assertTrue( is_front_page() );
 
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_home_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_home_template() )
 		);
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_home_template() ),
-			$this->lp_wide_template_path
+			$this->lp_wide_template_path,
+			apply_filters( 'template_include', get_home_template() )
 		);
 
 		$page_id = $this->factory->post->create(
@@ -152,8 +168,8 @@ class LPTest extends WP_UnitTestCase {
 		$this->go_to( home_url( '/' ) );
 		$this->assertTrue( is_front_page() );
 		$this->assertSame(
-			apply_filters( 'template_include', get_front_page_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_front_page_template() )
 		);
 	}
 
@@ -161,6 +177,9 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_archive() {
+		$this->set_filter();
+		$this->set_template_path();
+
 		$front_page   = $this->factory->post->create(
 			[ 'post_type' => 'page' ]
 		);
@@ -188,34 +207,34 @@ class LPTest extends WP_UnitTestCase {
 		$this->go_to( get_the_permalink( $archive_page ) );
 		$this->assertTrue( is_home() );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_home_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_home_template() )
 		);
 		$this->assertSame(
-			apply_filters( 'template_include', get_home_template() ),
-			get_home_template()
+			get_home_template(),
+			apply_filters( 'template_include', get_home_template() )
 		);
 
 		$this->go_to( get_category_link( $cat_a ) );
 		$this->assertTrue( is_category() );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_category_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_category_template() )
 		);
 		$this->assertSame(
-			apply_filters( 'template_include', get_category_template() ),
-			get_category_template()
+			get_category_template(),
+			apply_filters( 'template_include', get_category_template() )
 		);
 
 		$this->go_to( get_day_link( 2020, 01, 01 ) );
 		$this->assertTrue( is_date() );
 		$this->assertNotSame(
-			apply_filters( 'template_include', get_date_template() ),
-			$this->lp_template_path
+			$this->lp_template_path,
+			apply_filters( 'template_include', get_date_template() )
 		);
 		$this->assertSame(
-			apply_filters( 'template_include', get_date_template() ),
-			get_date_template()
+			get_date_template(),
+			apply_filters( 'template_include', get_date_template() )
 		);
 
 	}
