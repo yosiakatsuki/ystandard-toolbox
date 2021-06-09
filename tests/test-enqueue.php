@@ -2,7 +2,7 @@
 /**
  * Class EnqueueTest
  *
- * @package Ystandard_Toolbox
+ * @package ystandard_toolbox
  */
 
 use ystandard_toolbox\Config;

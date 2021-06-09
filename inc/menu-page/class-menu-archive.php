@@ -10,7 +10,7 @@
 namespace ystandard_toolbox\menu;
 
 use ystandard_toolbox\Archive;
-use ystandard_toolbox\Menu_Page;
+use ystandard_toolbox\Plugin_Menu;
 use ystandard_toolbox\Option;
 use ystandard_toolbox\Utility;
 

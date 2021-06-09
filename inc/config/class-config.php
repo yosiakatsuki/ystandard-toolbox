@@ -18,6 +18,13 @@ defined( 'ABSPATH' ) || die();
  */
 class Config {
 	/**
+	 * Text Domain.
+	 *
+	 * @var string
+	 */
+	const TEXT_DOMAIN = 'ystandard-toolbox';
+
+	/**
 	 * 必要なWordPressバージョン
 	 */
 	const REQUIRE_WORDPRESS_VERSION = '5.5.0';
@@ -25,23 +32,28 @@ class Config {
 	/**
 	 * 必要なyStandardバージョン
 	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.23.0';
+	const REQUIRE_YSTANDARD_VERSION = '4.26.1';
+
 	/**
 	 * 必要なyStandard Blocksバージョン
 	 */
 	const REQUIRE_YSTANDARD_BLOCKS_VERSION = '2.5.0';
+
 	/**
 	 * CSS Handle
 	 */
 	const CSS_HANDLE = 'ystdtb-css';
+
 	/**
 	 * Script App Handle
 	 */
 	const JS_FRONT_APP_HANDLE = 'ystdtb-app';
+
 	/**
 	 * Script Block App Handle
 	 */
 	const JS_BLOCK_APP_HANDLE = 'ystdtb-block-app';
+
 	/**
 	 * CSS Hook
 	 */
@@ -67,18 +79,22 @@ class Config {
 	 * ブロックカテゴリー スラッグ
 	 */
 	const BLOCK_CATEGORY = 'ystdtb';
+
 	/**
 	 * ブロックカテゴリー名
 	 */
 	const BLOCK_CATEGORY_NAME = '[ys]yStandard Toolbox';
+
 	/**
 	 * ブロックカテゴリー β スラッグ
 	 */
 	const BLOCK_CATEGORY_BETA = 'ystdtb_beta';
+
 	/**
 	 * ブロックカテゴリー名 β
 	 */
 	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(β)';
+
 	/**
 	 * Block CSS Handle
 	 */
@@ -100,9 +116,24 @@ class Config {
 	const OPTION_NAME = 'ystdtb-option';
 
 	/**
-	 * Text Domain.
+	 * カスタムテンプレートフォルダ
 	 *
 	 * @var string
 	 */
-	const TEXT_DOMAIN = 'ystandard-toolbox';
+	const CUSTOM_TEMPLATE_DIR = 'toolbox-template-dir';
+
+	/**
+	 * 設定画面親スラッグ
+	 */
+	const ADMIN_MENU_PARENT_SLUG = 'ystandard-toolbox';
+
+	/**
+	 * 設定画面メニュープレフィックス
+	 */
+	const ADMIN_MENU_PAGE_PREFIX = 'ystdtb-menu';
+
+	/**
+	 * 設定メニュー追加用フック
+	 */
+	const ADMIN_MENU_NAV_HOOK = 'ystdtb_nav_menu';
 }

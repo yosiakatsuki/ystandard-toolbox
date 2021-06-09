@@ -9,7 +9,8 @@
 
 namespace ystandard_toolbox\menu;
 
-use ystandard_toolbox\Menu_Page;
+use ystandard_toolbox\Admin_Utility;
+use ystandard_toolbox\Config;
 use ystandard_toolbox\Notice;
 use ystandard_toolbox\Utility;
 
@@ -323,11 +324,11 @@ abstract class Menu_Page_Base {
 			return;
 		}
 		add_submenu_page(
-			Menu_Page::MENU_SLUG,
+			Config::ADMIN_MENU_PARENT_SLUG,
 			$this->menu_title,
 			$this->menu_label,
 			'manage_options',
-			Menu_Page::MENU_PAGE_PREFIX . '-' . $this->menu_slug,
+			Config::ADMIN_MENU_PAGE_PREFIX . '-' . $this->menu_slug,
 			[ $this, 'menu_page' ]
 		);
 	}
@@ -367,7 +368,7 @@ abstract class Menu_Page_Base {
 			$current = $item['name'] === $this->menu_slug ? 'is-current' : '';
 			?>
 			<li class="ystdtb-menu__nav-item <?php echo $current; ?>">
-				<a href="<?php echo Menu_Page::get_menu_page_url( $item['name'] ); ?>"><?php echo esc_html( $item['label'] ); ?></a>
+				<a href="<?php echo Admin_Utility::get_menu_page_url( $item['name'] ); ?>"><?php echo esc_html( $item['label'] ); ?></a>
 			</li>
 			<?php
 		}
@@ -396,7 +397,7 @@ abstract class Menu_Page_Base {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX ) ) {
+		if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PAGE_PREFIX ) ) {
 			return;
 		}
 		wp_enqueue_style(
@@ -442,7 +443,7 @@ abstract class Menu_Page_Base {
 	 */
 	public function admin_body_class( $classes ) {
 		global $hook_suffix;
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX ) ) {
+		if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PAGE_PREFIX ) ) {
 			return $classes;
 		}
 		if ( false === strpos( $classes, 'ystdtb-menu-page' ) ) {
@@ -607,7 +608,7 @@ abstract class Menu_Page_Base {
 	 * @return bool
 	 */
 	protected function is_toolbox_menu_page( $hook_suffix ) {
-		if ( false === strpos( $hook_suffix, Menu_Page::MENU_PAGE_PREFIX . '-' . $this->menu_slug ) ) {
+		if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PAGE_PREFIX . '-' . $this->menu_slug ) ) {
 			return false;
 		}
 
