@@ -10,7 +10,7 @@
 namespace ystandard_toolbox\menu;
 
 use ystandard_toolbox\Heading;
-use ystandard_toolbox\Menu_Page;
+use ystandard_toolbox\Plugin_Menu;
 
 defined( 'ABSPATH' ) || die();
 
