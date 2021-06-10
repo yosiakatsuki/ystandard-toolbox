@@ -33,16 +33,23 @@ class LPTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * フィルターのセット
+	 * 初期化
 	 */
-	public function set_filter() {
+	public function init() {
+		add_filter( 'template', function () {
+			return 'ystandard';
+		} );
+		add_filter( 'ys_ystandard_version', function () {
+			return '100.0.0';
+		} );
+		$lp = new \ystandard_toolbox\LP();
 	}
 
 	/**
 	 * Test is_lp_template.
 	 */
 	public function test_is_lp() {
-		$this->set_filter();
+		$this->init();
 		$this->set_template_path();
 
 		$post_id = $this->factory->post->create();
@@ -64,7 +71,7 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_singular() {
-		$this->set_filter();
+		$this->init();
 		$this->set_template_path();
 
 		$post_id = $this->factory->post->create();
@@ -141,7 +148,7 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_front_page() {
-		$this->set_filter();
+		$this->init();
 		$this->set_template_path();
 
 		$post_id = $this->factory->post->create();
@@ -177,7 +184,7 @@ class LPTest extends WP_UnitTestCase {
 	 * Test load_template
 	 */
 	public function test_load_template_archive() {
-		$this->set_filter();
+		$this->init();
 		$this->set_template_path();
 
 		$front_page   = $this->factory->post->create(

@@ -70,10 +70,6 @@ class Utility {
 	 */
 	public static function wordpress_version_compare( $version ) {
 
-		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
-			return true;
-		}
-
 		$wp_version = get_bloginfo( 'version' );
 
 		return version_compare( $wp_version, $version, '>=' );
@@ -87,11 +83,6 @@ class Utility {
 	 * @return bool|int
 	 */
 	public static function ystandard_version_compare( $version = '' ) {
-
-		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
-			return true;
-		}
-
 		if ( 'ystandard' !== get_template() ) {
 			return false;
 		}
@@ -99,11 +90,16 @@ class Utility {
 		if ( '' === $version ) {
 			return true;
 		}
-		$theme = wp_get_theme( get_template() );
-		if ( is_null( $theme ) ) {
-			return false;
+		$pre_version = apply_filters( 'ys_ystandard_version', null );
+		if ( is_null( $pre_version ) ) {
+			$theme = wp_get_theme( get_template() );
+			if ( is_null( $theme ) ) {
+				return false;
+			}
+			$theme_version = $theme->version;
+		} else {
+			$theme_version = $pre_version;
 		}
-		$theme_version = $theme->version;
 
 		return version_compare( $theme_version, $version, '>=' );
 	}
@@ -116,9 +112,6 @@ class Utility {
 	 * @return bool|int
 	 */
 	public static function ystandard_blocks_version_compare( $version = '' ) {
-		if ( defined( 'YSTDTB_SKIP_VERSION_COMPARE' ) && YSTDTB_SKIP_VERSION_COMPARE ) {
-			return true;
-		}
 
 		$blocks = apply_filters( 'ystdb_get_version', '' );
 		if ( '' === $blocks ) {
