@@ -31,6 +31,29 @@ class LP {
 		add_filter( 'ys_is_wide_templates', [ $this, 'add_is_wide_templates' ] );
 		add_filter( 'ys_is_no_title_templates', [ $this, 'add_lp_templates' ] );
 		add_filter( 'ys_is_one_column_templates', [ $this, 'add_lp_templates' ] );
+		add_filter( 'ys_create_toc', [ $this, 'return_false' ] );
+		add_filter( 'ys_is_active_advertisement', [ $this, 'return_false' ] );
+	}
+
+	/**
+	 * フィルター用：LPテンプレートならfalse.
+	 *
+	 * @param bool $value Value.
+	 *
+	 * @return bool
+	 */
+	public function return_false( $value ) {
+		if ( ! is_singular() ) {
+			return $value;
+		}
+		global $post;
+		$lp_templates       = self::get_lp_templates();
+		$page_template_slug = get_page_template_slug( $post->ID );
+		if ( array_key_exists( $page_template_slug, $lp_templates ) ) {
+			return false;
+		}
+
+		return $value;
 	}
 
 	/**
