@@ -246,4 +246,53 @@ class LPTest extends WP_UnitTestCase {
 
 	}
 
+	/**
+	 * Test Title.
+	 */
+	public function test_title() {
+		$this->init();
+		update_option( 'blogname', 'yStandard' );
+		$cat_a   = $this->factory->term->create(
+			[
+				'taxonomy' => 'category',
+				'name'     => 'cat-a',
+			]
+		);
+		$post_id = $this->factory->post->create(
+			[
+				'post_title'    => 'LP Test',
+				'post_date'     => '2020-01-01 00:00:00',
+				'post_category' => [ $cat_a ],
+			]
+		);
+		$this->go_to( get_the_permalink( $post_id ) );
+		$this->assertSame(
+			wptexturize( 'LP Test - yStandard' ),
+			wp_get_document_title()
+		);
+		update_post_meta( $post_id, '_wp_page_template', 'toolbox-template-dir/lp/lp.php' );
+		$this->assertTrue( \ystandard_toolbox\LP::is_lp_template() );
+		$this->assertSame(
+			'LP Test',
+			wp_get_document_title()
+		);
+		$post_seo = new \ystandard_toolbox\Post_Meta_SEO();
+		update_post_meta( $post_id, '_wp_page_template', 'default' );
+		update_post_meta( $post_id, 'ystdtb_seo_title', 'SEO Title' );
+		$this->assertSame(
+			wptexturize( 'SEO Title - yStandard' ),
+			wp_get_document_title()
+		);
+		update_post_meta( $post_id, '_wp_page_template', 'toolbox-template-dir/lp/lp.php' );
+		$this->assertSame(
+			'SEO Title',
+			wp_get_document_title()
+		);
+
+		$this->go_to( get_category_link( $cat_a ) );
+		$this->assertSame(
+			wptexturize( 'cat-a - yStandard' ),
+			wp_get_document_title()
+		);
+	}
 }

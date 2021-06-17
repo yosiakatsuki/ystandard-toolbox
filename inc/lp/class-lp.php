@@ -33,6 +33,7 @@ class LP {
 		add_filter( 'ys_is_one_column_templates', [ $this, 'add_lp_templates' ] );
 		add_filter( 'ys_create_toc', [ $this, 'return_false' ] );
 		add_filter( 'ys_is_active_advertisement', [ $this, 'return_false' ] );
+		add_filter( 'document_title_parts', [ $this, 'lp_document_title' ], 100 );
 	}
 
 	/**
@@ -43,18 +44,13 @@ class LP {
 	 * @return bool
 	 */
 	public function return_false( $value ) {
-		if ( ! is_singular() ) {
-			return $value;
-		}
-		global $post;
-		$lp_templates       = self::get_lp_templates();
-		$page_template_slug = get_page_template_slug( $post->ID );
-		if ( array_key_exists( $page_template_slug, $lp_templates ) ) {
+		if ( self::is_lp_template() ) {
 			return false;
 		}
 
 		return $value;
 	}
+
 
 	/**
 	 * LPテンプレート一覧取得
@@ -77,8 +73,16 @@ class LP {
 	 *
 	 * @return bool
 	 */
-	public static function is_lp_template( $template ) {
-		if ( false !== strpos( $template, Config::CUSTOM_TEMPLATE_DIR ) ) {
+	public static function is_lp_template( $template = '' ) {
+		$lp_templates = self::get_lp_templates();
+		if ( '' === $template ) {
+			if ( ! is_singular() ) {
+				return false;
+			}
+			global $post;
+			$template = get_page_template_slug( $post->ID );
+		}
+		if ( array_key_exists( $template, $lp_templates ) ) {
 			return true;
 		}
 
@@ -181,6 +185,24 @@ class LP {
 			$templates,
 			array_keys( self::get_lp_templates() )
 		);
+	}
+
+	/**
+	 * タイトルの変更
+	 *
+	 * @param array $title Title parts.
+	 *
+	 * @return array
+	 */
+	public function lp_document_title( $title ) {
+		if ( ! self::is_lp_template() ) {
+			return $title;
+		}
+		if ( isset( $title['title'] ) ) {
+			return [ 'title' => $title['title'] ];
+		}
+
+		return $title;
 	}
 }
 
