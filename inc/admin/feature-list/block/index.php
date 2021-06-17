@@ -17,12 +17,12 @@ defined( 'ABSPATH' ) || die();
 	<div class="ystdtb-menu__column">
 		<?php
 		include __DIR__ . '/block-pattern.php';
-		include __DIR__ . '/block-style.php';
+		include __DIR__ . '/icon-list.php';
 		include __DIR__ . '/timeline.php';
 		include __DIR__ . '/faq.php';
-		include __DIR__ . '/icon-list.php';
 		include __DIR__ . '/posts.php';
 		include __DIR__ . '/share-button.php';
+		include __DIR__ . '/block-style.php';
 		?>
 	</div>
 </div>
