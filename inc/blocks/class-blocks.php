@@ -31,11 +31,15 @@ class Blocks {
 	public function __construct() {
 		$this->load_files();
 		$this->init();
-		add_filter( 'block_categories', [ $this, 'block_categories' ] );
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_dynamic_block_scripts' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block' ] );
+		if ( Utility::wordpress_version_compare( '5.8-alpha-1' ) ) {
+			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
+		} else {
+			add_filter( 'block_categories', [ __CLASS__, 'add_block_categories' ] );
+		}
 	}
 
 	/**
@@ -86,7 +90,7 @@ class Blocks {
 	 *
 	 * @return array
 	 */
-	public function block_categories( $categories ) {
+	public static function add_block_categories( $categories ) {
 		$categories[] = [
 			'slug'  => Config::BLOCK_CATEGORY,
 			'title' => Config::BLOCK_CATEGORY_NAME,
