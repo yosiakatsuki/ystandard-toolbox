@@ -169,15 +169,8 @@ class Utility {
 	 * @return bool|string
 	 */
 	public static function get_file_contents( $path ) {
-		global $wp_filesystem;
-		if ( empty( $wp_filesystem ) ) {
-			require_once ABSPATH . '/wp-admin/includes/file.php';
-		}
-		$content = false;
-		if ( WP_Filesystem() ) {
-			global $wp_filesystem;
-			$content = $wp_filesystem->get_contents( $path );
-		}
+
+		$content = File_System::file_get_contents( $path );
 
 		return $content;
 	}
