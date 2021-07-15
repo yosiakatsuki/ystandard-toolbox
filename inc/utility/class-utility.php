@@ -170,7 +170,7 @@ class Utility {
 	 */
 	public static function get_file_contents( $path ) {
 
-		$content = File_System::file_get_contents( $path );
+		$content = Filesystem::file_get_contents( $path );
 
 		return $content;
 	}

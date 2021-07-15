@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @package ystandard_toolbox
  */
-class File_System {
+class Filesystem {
 	/**
 	 * 変数 wp_filesystem の退避用
 	 *
