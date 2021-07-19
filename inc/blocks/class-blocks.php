@@ -32,9 +32,9 @@ class Blocks {
 		$this->load_files();
 		$this->init();
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
+		add_action( 'init', [ $this, 'register_block' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_dynamic_block_scripts' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block' ] );
 		if ( Utility::wordpress_version_compare( '5.8-alpha-1' ) ) {
 			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
 		} else {
@@ -147,11 +147,16 @@ class Blocks {
 	 */
 	public function register_block() {
 		foreach ( $this->register_blocks['normal'] as $block ) {
-			wp_enqueue_script(
-				'ystandard-toolbox-' . $block['name'],
+			$handle = 'ystandard-toolbox-' . $block['name'];
+			wp_register_script(
+				$handle,
 				$block['url'],
 				$block['dependencies'],
 				$block['version']
+			);
+			register_block_type(
+				Config::BLOCK_CATEGORY . '/' . $block['name'],
+				[ 'editor_script' => $handle ]
 			);
 		}
 	}
