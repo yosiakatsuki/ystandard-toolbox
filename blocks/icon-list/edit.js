@@ -17,7 +17,7 @@ import { createBlock } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { blockClassName, iconTypes } from './config';
-import { getFeatherIcon } from '../../src/js/blocks/component/icon-picker/_getFeatherIcon';
+import { getFeatherIcon } from '../../src/js/blocks/function/_getFeatherIcon';
 
 function IconList( props ) {
 	const {

@@ -11,4 +11,12 @@
     border: 1px solid global.$color__border-gray-light;
     font-size: 0.8em;
   }
+
+  [data-type="ystdtb/sns-share"] {
+    .sns-share__button {
+      .sns-share__link {
+        padding: 0;
+      }
+    }
+  }
 }

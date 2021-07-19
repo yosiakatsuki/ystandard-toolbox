@@ -6,7 +6,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
-    "@fonticonpicker/react-fonticonpicker": "^1.2.0",
     "@wordpress/browserslist-config": "^2.7.0",
     "@wordpress/scripts": "^12.5.0",
     "autoprefixer": "^9.8.4",
@@ -60,6 +59,7 @@
     "build:block": "wp-scripts build --config webpack.blocks.config.js",
     "watch": "NODE_ENV=development gulp watch & npm run start",
     "build": "NODE_ENV=production gulp build && npm run build:block",
+    "build:icons": "node src/js/script/create-svg-icon-list.js",
     "build:deploy-files": "gulp deployFiles",
     "build:deploy-files-beta": "gulp deployFilesBeta",
     "build:pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,src,tests\"",

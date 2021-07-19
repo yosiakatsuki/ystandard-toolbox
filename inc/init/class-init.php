@@ -32,6 +32,7 @@ class Init {
 		add_action( 'after_setup_theme', [ $this, 'plugin_init' ] );
 		add_filter( 'body_class', [ $this, 'body_class' ], 20 );
 		$this->check_versions();
+		add_filter( 'ys_system_info', [ __CLASS__, 'system_info' ], 11 );
 	}
 
 	/**
@@ -100,6 +101,21 @@ class Init {
 				Notice::error( '<div style="padding: 1em 0.5em;line-height: 2;">このyStandard Toolboxは正しくセットアップされていません。<br><a href="https://support.wp-ystandard.com/shop/" target="_blank" rel="nofollow noreferrer noopener">公式サイト</a>よりプラグインをご購入ください。<br>もし購入されている場合は<a href="https://support.wp-ystandard.com/my-account/" target="_blank" rel="nofollow noreferrer noopener">マイページ</a>より再度ダウンロードし、プラグインを再インストールしてください。</div>' );
 			}
 		);
+
+		return false;
+	}
+
+	/**
+	 * システム情報
+	 *
+	 * @param array $info システム情報.
+	 *
+	 * @return array
+	 */
+	public static function system_info( $info ) {
+		$info[] = 'yStandard Toolbox バージョン: ' . YSTDTB_VERSION;
+
+		return $info;
 	}
 }
 

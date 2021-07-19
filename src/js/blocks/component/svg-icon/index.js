@@ -1,6 +1,6 @@
 import { Component } from '@wordpress/element';
 import classnames from 'classnames';
-import { getSVGIconTag } from '../icon-picker/index';
+import { getIconSvg } from '@ystdtb/function/icons';
 
 /**
  * SVGIcon
@@ -12,12 +12,13 @@ class SVGIcon extends Component {
 		if ( ! name ) {
 			return '';
 		}
+
 		return (
 			<span
 				className={ classnames( 'ys-icon', {
 					'sns-icon': -1 !== name.indexOf( 'sns-' ),
 				} ) }
-				dangerouslySetInnerHTML={ { __html: getSVGIconTag( name ) } }
+				dangerouslySetInnerHTML={ { __html: getIconSvg( name ) } }
 			/>
 		);
 	}

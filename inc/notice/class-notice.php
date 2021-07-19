@@ -24,9 +24,9 @@ class Notice {
 	/**
 	 * アクションのセット
 	 *
-	 * @param string|array $function      Function.
-	 * @param int          $priority      Priority.
-	 * @param int          $accepted_args Args.
+	 * @param string|array|callable $function      Function.
+	 * @param int                   $priority      Priority.
+	 * @param int                   $accepted_args Args.
 	 */
 	public static function set_notice( $function, $priority = 10, $accepted_args = 1 ) {
 		add_action( self::ACTION, $function, $priority, $accepted_args );

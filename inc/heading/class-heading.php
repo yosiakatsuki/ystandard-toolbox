@@ -210,7 +210,7 @@ class Heading {
 
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
-			$block_style = "#editor ${wrap} .is-style-ystdtb-${level}";
+			$block_style = "${wrap} .is-style-ystdtb-${level}";
 			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 		}
 		$content = "${block_style},${selector}";

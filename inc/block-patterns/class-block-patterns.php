@@ -41,7 +41,7 @@ class Block_Patterns {
 		add_filter( 'pre_get_posts', [ $this, 'set_order' ] );
 		add_action( 'restrict_manage_posts', [ $this, 'block_pattern_tax_dropdown' ] );
 		if ( Option::get_option_by_bool( Block_Patterns::OPTION_NAME, 'disable_core_pattern', false ) ) {
-			add_action( 'init', [ $this, 'remove_core_patterns' ] );
+			add_action( 'init', [ $this, 'remove_core_patterns' ], 9 );
 		}
 	}
 
@@ -236,13 +236,7 @@ class Block_Patterns {
 	 * コアブロックパターンの削除
 	 */
 	public function remove_core_patterns() {
-		$registered = \WP_Block_Patterns_Registry::get_instance()->get_all_registered();
-
-		foreach ( $registered as $item ) {
-			if ( false !== strpos( $item['name'], 'core/' ) ) {
-				unregister_block_pattern( $item['name'] );
-			}
-		}
+		remove_theme_support( 'core-block-patterns' );
 	}
 }
 

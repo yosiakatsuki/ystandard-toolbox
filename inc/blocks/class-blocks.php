@@ -17,6 +17,10 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Blocks {
+	/**
+	 * ブロックエディター用スクリプトハンドル
+	 */
+	const BLOCK_EDITOR_SCRIPT_HANDLE = 'ystandard-toolbox-block-editor';
 
 	/**
 	 * 有効化するブロックのリスト
@@ -31,11 +35,15 @@ class Blocks {
 	public function __construct() {
 		$this->load_files();
 		$this->init();
-		add_filter( 'block_categories', [ $this, 'block_categories' ] );
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
+		add_action( 'init', [ $this, 'register_block' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_dynamic_block_scripts' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block' ] );
+		if ( Utility::wordpress_version_compare( '5.8-alpha-1' ) ) {
+			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
+		} else {
+			add_filter( 'block_categories', [ __CLASS__, 'add_block_categories' ] );
+		}
 	}
 
 	/**
@@ -86,7 +94,7 @@ class Blocks {
 	 *
 	 * @return array
 	 */
-	public function block_categories( $categories ) {
+	public static function add_block_categories( $categories ) {
 		$categories[] = [
 			'slug'  => Config::BLOCK_CATEGORY,
 			'title' => Config::BLOCK_CATEGORY_NAME,
@@ -105,20 +113,20 @@ class Blocks {
 	public function enqueue_block_assets() {
 		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
 		wp_enqueue_script(
-			'ystandard-toolbox-block-editor',
+			self::BLOCK_EDITOR_SCRIPT_HANDLE,
 			YSTDTB_URL . '/js/blocks/block.js',
 			$asset_file['dependencies'],
 			$asset_file['version']
 		);
 		wp_localize_script(
-			'ystandard-toolbox-block-editor',
+			self::BLOCK_EDITOR_SCRIPT_HANDLE,
 			'ystdtbBlockEditor',
 			$this->create_block_option()
 		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations(
-				'ystandard-toolbox-block-editor',
+				self::BLOCK_EDITOR_SCRIPT_HANDLE,
 				'ystandard-toolbox',
 				YSTDTB_PATH . '/languages'
 			);
@@ -143,11 +151,16 @@ class Blocks {
 	 */
 	public function register_block() {
 		foreach ( $this->register_blocks['normal'] as $block ) {
-			wp_enqueue_script(
-				'ystandard-toolbox-' . $block['name'],
+			$handle = 'ystandard-toolbox-' . $block['name'];
+			wp_register_script(
+				$handle,
 				$block['url'],
 				$block['dependencies'],
 				$block['version']
+			);
+			register_block_type(
+				Config::BLOCK_CATEGORY . '/' . $block['name'],
+				[ 'editor_script' => $handle ]
 			);
 		}
 	}
