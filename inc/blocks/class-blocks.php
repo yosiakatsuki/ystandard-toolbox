@@ -17,6 +17,10 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Blocks {
+	/**
+	 * ブロックエディター用スクリプトハンドル
+	 */
+	const BLOCK_EDITOR_SCRIPT_HANDLE = 'ystandard-toolbox-block-editor';
 
 	/**
 	 * 有効化するブロックのリスト
@@ -109,20 +113,20 @@ class Blocks {
 	public function enqueue_block_assets() {
 		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
 		wp_enqueue_script(
-			'ystandard-toolbox-block-editor',
+			self::BLOCK_EDITOR_SCRIPT_HANDLE,
 			YSTDTB_URL . '/js/blocks/block.js',
 			$asset_file['dependencies'],
 			$asset_file['version']
 		);
 		wp_localize_script(
-			'ystandard-toolbox-block-editor',
+			self::BLOCK_EDITOR_SCRIPT_HANDLE,
 			'ystdtbBlockEditor',
 			$this->create_block_option()
 		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations(
-				'ystandard-toolbox-block-editor',
+				self::BLOCK_EDITOR_SCRIPT_HANDLE,
 				'ystandard-toolbox',
 				YSTDTB_PATH . '/languages'
 			);
