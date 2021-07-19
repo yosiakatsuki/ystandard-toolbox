@@ -6,7 +6,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
-    "@fonticonpicker/react-fonticonpicker": "^1.2.0",
     "@wordpress/browserslist-config": "^2.7.0",
     "@wordpress/scripts": "^12.5.0",
     "autoprefixer": "^9.8.4",
