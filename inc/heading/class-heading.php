@@ -213,9 +213,10 @@ class Heading {
 			$block_style = "${wrap} .is-style-ystdtb-${level}";
 			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 		}
-		$content = "${block_style},${selector}";
-		$before  = "${block_style}:before,${selector}:before";
-		$after   = "${block_style}:after,${selector}:after";
+
+		$content = $this->get_section_selector( "${block_style},${selector}" );
+		$before  = $this->get_section_selector( "${block_style},${selector}", '::before' );
+		$after   = $this->get_section_selector( "${block_style},${selector}", '::after' );
 		// CSS.
 		$css      = '';
 		$sections = [ 'content', 'before', 'after' ];
@@ -242,6 +243,16 @@ class Heading {
 		}
 
 		return $css;
+	}
+
+	private function get_section_selector( $selectors, $pseudo = '' ) {
+		$result    = '';
+		$selectors = explode( ',', $selectors );
+		foreach ( $selectors as $selector ) {
+			$result .= "${selector}${pseudo},";
+		}
+
+		return rtrim( $result, ',' );
 	}
 
 	/**
@@ -276,7 +287,7 @@ class Heading {
 				'.sidebar'
 			);
 
-			return "${body_class} ${class} .widget-title";
+			return "${body_class} ${class} .widget-title,${body_class} ${class} .widgettitle";
 		}
 		// フッター.
 		if ( 'footer' === $level ) {
@@ -285,7 +296,7 @@ class Heading {
 				'.site-footer'
 			);
 
-			return "${body_class} ${class} .widget-title";
+			return "${body_class} ${class} .widget-title,${body_class} ${class} .widgettitle";
 		}
 		// 投稿タイトル.
 		if ( 'post-title' === $level ) {
