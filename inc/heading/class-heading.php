@@ -217,6 +217,7 @@ class Heading {
 		$content = $this->get_section_selector( "${block_style},${selector}" );
 		$before  = $this->get_section_selector( "${block_style},${selector}", '::before' );
 		$after   = $this->get_section_selector( "${block_style},${selector}", '::after' );
+
 		// CSS.
 		$css      = '';
 		$sections = [ 'content', 'before', 'after' ];
@@ -245,6 +246,14 @@ class Heading {
 		return $css;
 	}
 
+	/**
+	 * セレクタの分解と結合・疑似要素追加
+	 *
+	 * @param string $selectors セレクタ.
+	 * @param string $pseudo    疑似要素.
+	 *
+	 * @return string
+	 */
 	private function get_section_selector( $selectors, $pseudo = '' ) {
 		$result    = '';
 		$selectors = explode( ',', $selectors );
