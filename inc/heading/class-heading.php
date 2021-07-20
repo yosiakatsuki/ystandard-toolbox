@@ -211,7 +211,9 @@ class Heading {
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
 			$block_style = "${wrap} .is-style-ystdtb-${level}";
-			$selector    = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+			if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
+				$selector = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+			}
 		}
 
 		$content = $this->get_section_selector( "${block_style},${selector}" );
