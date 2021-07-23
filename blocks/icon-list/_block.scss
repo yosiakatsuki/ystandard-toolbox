@@ -28,6 +28,10 @@
     }
   }
 
+  &.has-background {
+    padding: 1.5em;
+  }
+
   &.is-bold {
     li {
       &:before {
