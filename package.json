@@ -29,7 +29,7 @@
     "gulp-zip": "^5.0.2",
     "hex-rgb": "^4.2.0",
     "lodash": "^4.17.15",
-    "po2json": "^0.4.5",
+    "po2json": "^1.0.0-alpha",
     "prettier": "npm:wp-prettier@^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -62,8 +62,8 @@
     "build:icons": "node src/js/script/create-svg-icon-list.js",
     "build:deploy-files": "gulp deployFiles",
     "build:deploy-files-beta": "gulp deployFilesBeta",
-    "build:pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,src,tests\"",
-    "build:pot-json": "wp i18n make-json languages --no-purge"
+    "i18n:make-pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,tests\"",
+    "i18n:blocks": "po2json languages/ystandard-toolbox-ja.po languages/ystandard-toolbox-ja-ystandard-toolbox-block-editor.json -f jed -p"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",
