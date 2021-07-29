@@ -3,7 +3,7 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
-	mode: process.env.NODE_ENV,
+	mode: 'production',
 	entry: {
 		'app': './src/js/blocks/app.js',
 		'block': './src/js/blocks/block.js',
@@ -21,6 +21,7 @@ module.exports = {
 		path: `${ __dirname }/js/blocks`
 	},
 	module: {
+		...defaultConfig.module,
 		rules: [
 			...defaultConfig.module.rules,
 			{
@@ -42,7 +43,9 @@ module.exports = {
 		]
 	},
 	resolve: {
+		...defaultConfig.resolve,
 		alias: {
+			...defaultConfig.alias,
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
 			'@ystdtb/components': path.resolve( __dirname, 'src/js/blocks/component' ),
 		}

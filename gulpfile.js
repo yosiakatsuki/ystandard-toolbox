@@ -14,6 +14,7 @@ const babel = require( 'gulp-babel' );
 const rename = require( 'gulp-rename' );
 
 const webpackConfig = require( './webpack.menu.config.js' );
+const webpackConfigDev = require( './webpack.menu.config.dev.js' );
 
 
 const postcssPlugins = [
@@ -46,7 +47,7 @@ function buildAdminApp() {
 
 function watchBuildAdminApp() {
 	return plumber()
-		.pipe( webpackStream( webpackConfig, webpack ) )
+		.pipe( webpackStream( webpackConfigDev, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
 
