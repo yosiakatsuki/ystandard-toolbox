@@ -3,6 +3,7 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
+	mode: process.env.NODE_ENV,
 	entry: {
 		'app': './src/js/blocks/app.js',
 		'block': './src/js/blocks/block.js',
@@ -24,11 +25,19 @@ module.exports = {
 			...defaultConfig.module.rules,
 			{
 				test: /\.css$/,
-				loader: 'style-loader!css-loader'
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader'
+					}
+				]
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|svg)$/,
-				loader: 'file-loader?name=../font/[name].[ext]'
+				loader: 'file-loader',
+				options: {
+					name: '../font/[name].[ext]'
+				}
 			}
 		]
 	},
