@@ -15,19 +15,12 @@ import {
 	ColorPalette,
 } from '@wordpress/components';
 import { withState, compose } from '@wordpress/compose';
-import { Fragment } from '@wordpress/element';
 import { withDispatch, select } from '@wordpress/data';
 import { innerMargin } from './item/config';
 import { calcContentMarginTop } from './item/function';
 import { __ } from '@wordpress/i18n';
-import {
-	getColorSlug,
-	getColorCode,
-} from '../../src/js/blocks/function/_getColorSlug';
-import {
-	getFontSize,
-	getFontSlug,
-} from '../../src/js/blocks/function/_getFontSlug';
+import { getColorSlug, getColorCode } from '@ystdtb/function/_getColorSlug';
+import { getFontSize, getFontSlug } from '@ystdtb/function/_getFontSlug';
 
 function Timeline( props ) {
 	const {
@@ -58,7 +51,7 @@ function Timeline( props ) {
 	} );
 
 	return (
-		<Fragment>
+		<>
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'タイムライン一括設定', 'ystandard-toolbox' ) }
@@ -323,7 +316,7 @@ function Timeline( props ) {
 					/>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 }
 

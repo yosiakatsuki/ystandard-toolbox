@@ -153,6 +153,16 @@
 ### v0.0.1
 - [追加] α版作成
 
+## yStandardシリーズ共通フック
+
+### `ys_get_custom_icon`
+
+カスタムアイコン追加用フック
+
+### `ys_block_default_attributes`
+
+ブロック初期値カスタマイズ用
+
 ## Third-party resources
 
 ### Plugin Update Checker

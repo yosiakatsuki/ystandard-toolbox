@@ -15,13 +15,9 @@ import {
 	ColorPalette,
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
-import { Fragment } from '@wordpress/element';
 import { withDispatch, select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import {
-	getColorCode,
-	getColorSlug,
-} from '../../src/js/blocks/function/_getColorSlug';
+import { getColorCode, getColorSlug } from '@ystdtb/function/_getColorSlug';
 
 function FAQ( props ) {
 	const {
@@ -62,7 +58,7 @@ function FAQ( props ) {
 	} );
 
 	return (
-		<Fragment>
+		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'FAQ', 'ystandard-toolbox' ) }>
 					<BaseControl
@@ -198,7 +194,7 @@ function FAQ( props ) {
 					/>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 }
 

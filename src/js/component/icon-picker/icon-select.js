@@ -3,7 +3,7 @@ import { withState, compose } from '@wordpress/compose';
 import { Button } from '@wordpress/components';
 import classnames from 'classnames';
 import { getIcons } from '@ystdtb/function/icons';
-import SVGIcon from '@ystdtb/components/svg-icon';
+import SVGIcon from '../svg-icon';
 import { __ } from '@wordpress/i18n';
 
 class IconSelect extends Component {
@@ -37,10 +37,20 @@ class IconSelect extends Component {
 						onClick={ () => {
 							setState( { isOpen: ! isOpen } );
 						} }
+						style={ {
+							minWidth: '110px',
+							textAlign: 'center',
+							justifyContent: 'center',
+						} }
 					>
-						<span>
-							{ __( 'アイコン選択', 'ystandard-blocks' ) }
-						</span>
+						{ isOpen && (
+							<span>{ __( '閉じる', 'ystandard-blocks' ) }</span>
+						) }
+						{ ! isOpen && (
+							<span>
+								{ __( 'アイコン選択', 'ystandard-blocks' ) }
+							</span>
+						) }
 					</Button>
 					<Button
 						className={ 'ys-icon-picker__remove' }

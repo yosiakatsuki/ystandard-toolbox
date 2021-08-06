@@ -2,7 +2,6 @@ const { series, parallel, watch, src, dest } = require( 'gulp' );
 const gulpSass = require( 'gulp-dart-sass' );
 const postcss = require( 'gulp-postcss' );
 const autoprefixer = require( 'autoprefixer' );
-const mqpacker = require( 'css-mqpacker' );
 const cssdeclsort = require( 'css-declaration-sorter' );
 const cssnano = require( 'cssnano' );
 const gulpZip = require( 'gulp-zip' );
@@ -21,7 +20,6 @@ const postcssPlugins = [
 	autoprefixer( {
 		grid: 'autoplace'
 	} ),
-	mqpacker(),
 	cssnano( {
 			preset: [
 				'default',

@@ -15,6 +15,7 @@ module.exports = {
 		'faq-item': './blocks/faq/item/index.js',
 		'sns-share': './blocks/sns-share/index.js',
 		'icon-list': './blocks/icon-list/index.js',
+		'box': './blocks/box/index.js',
 	},
 	output: {
 		filename: '[name].js',
@@ -47,7 +48,9 @@ module.exports = {
 		alias: {
 			...defaultConfig.alias,
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
-			'@ystdtb/components': path.resolve( __dirname, 'src/js/blocks/component' ),
+			'@ystdtb/config': path.resolve( __dirname, 'src/js/blocks/config' ),
+			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
+			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
 	},
 };

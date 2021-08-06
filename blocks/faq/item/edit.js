@@ -25,7 +25,6 @@ import {
 import { withSelect, select } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
 import { ChevronDown } from 'react-feather';
 
 function FAQItem( props ) {
@@ -121,17 +120,18 @@ function FAQItem( props ) {
 	} );
 
 	return (
-		<Fragment>
+		<>
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
 					initialOpen={ false }
 				>
 					<BaseControl id={ 'sample-design' }>
-						<div className={ 'ystdtb__design-select' }>
+						<div>
 							{ designPreset.map( ( item ) => {
 								return (
 									<Button
+										className={ 'ystdtb__shadow-button' }
 										key={ item.name }
 										onClick={ () => {
 											setAttributes( {
@@ -169,7 +169,9 @@ function FAQItem( props ) {
 										} }
 									>
 										<span
-											className={ 'is-flex' }
+											className={
+												'ystdtb-faq__design-sample-content'
+											}
 											style={ {
 												width: '100%',
 												alignItems: 'center',
@@ -467,7 +469,7 @@ function FAQItem( props ) {
 					) }
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 }
 

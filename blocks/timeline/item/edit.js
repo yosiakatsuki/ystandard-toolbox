@@ -20,7 +20,6 @@ import {
 import { withSelect, select } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
 import SVGIconSelect from '@ystdtb/components/icon-picker';
 import SVGIcon from '@ystdtb/components/svg-icon';
 import { calcContentMarginTop } from './function';
@@ -142,7 +141,7 @@ function TimelineItem( props ) {
 	} );
 
 	return (
-		<Fragment>
+		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'タイムライン', 'ystandard-toolbox' ) }>
 					<BaseControl
@@ -454,7 +453,7 @@ function TimelineItem( props ) {
 					/>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 }
 

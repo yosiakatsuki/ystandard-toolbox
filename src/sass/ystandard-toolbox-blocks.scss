@@ -1,5 +1,5 @@
 @use "component/blocks/inspector-controls";
-@use "../js/blocks/component/icon-picker/edit" as icon-picker;
+@use "../js/component/icon-picker/edit" as icon-picker;
 @use "../../blocks/posts/edit";
 @use "../../blocks/styles/columns/block" as column;
 @use "../../blocks/styles/table/block" as table;
@@ -8,3 +8,4 @@
 @use "../../blocks/faq/edit" as faq;
 @use "../../blocks/sns-share/edit" as sns-share;
 @use "../../blocks/icon-list/edit" as icon-list;
+@use "../../blocks/box/edit" as box;

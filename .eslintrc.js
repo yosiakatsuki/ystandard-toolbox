@@ -7,4 +7,9 @@ module.exports = {
 		ystdtbBlockEditor: true,
 		ystdtbIconList: true,
 	},
+	rules: {
+		...defaultConfig.rules,
+		'import/no-unresolved': 'off',
+		'@wordpress/no-unsafe-wp-apis': 'off'
+	}
 };

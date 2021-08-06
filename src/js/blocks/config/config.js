@@ -1,3 +1,4 @@
+// TODO:src/js/configへ移動.
 export const ystdtbConfig = {
 	category: {
 		common: 'ystdtb',
