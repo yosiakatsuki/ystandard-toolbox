@@ -13,6 +13,12 @@ export const mergeDefaultAttributes = ( name, attributes ) => {
 	if ( ! defaultAttributes.hasOwnProperty( name ) ) {
 		return attributes;
 	}
-	// TODO:デフォルト値変更処理.
-	return defaultAttributes[ name ];
+	const blockDefaultAttr = defaultAttributes[ name ];
+	Object.keys( blockDefaultAttr ).map( ( key ) => {
+		if ( attributes.hasOwnProperty( key ) ) {
+			attributes[ key ].default = blockDefaultAttr[ key ];
+		}
+		return blockDefaultAttr;
+	} );
+	return attributes;
 };
