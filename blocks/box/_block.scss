@@ -19,6 +19,10 @@ $box_color_default: #666;
   padding: 0.3em 1em;
   white-space: nowrap;
 
+  &.is-label-bold {
+    font-weight: bold;
+  }
+
   &:not(.has-background) {
     background-color: $box_color_default;
   }

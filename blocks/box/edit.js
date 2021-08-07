@@ -21,7 +21,13 @@ import {
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { units, blockClassName, boxStyleList, borderStyles } from './config';
+import {
+	units,
+	blockClassName,
+	boxStyleList,
+	borderStyles,
+	fontWeightList,
+} from './config';
 import {
 	getResponsiveProperty,
 	addResponsiveProperty,
@@ -62,6 +68,7 @@ function Box( props ) {
 		isResponsiveBoxPadding,
 		label,
 		labelIcon,
+		labelWeight,
 		labelBorderRadius,
 	} = attributes;
 
@@ -181,7 +188,9 @@ function Box( props ) {
 		if ( ! hasLabel ) {
 			return;
 		}
-		const labelClass = classnames( 'ystdtb-box__label' );
+		const labelClass = classnames( 'ystdtb-box__label', {
+			[ `is-label-${ labelWeight }` ]: labelWeight,
+		} );
 		const labelStyle = {
 			borderTopLeftRadius: getLabelBorderRadius(
 				boxStyle,
@@ -191,6 +200,11 @@ function Box( props ) {
 			borderTopRightRadius: getLabelBorderRadius(
 				boxStyle,
 				'topRight',
+				labelBorderRadius
+			),
+			borderBottomLeftRadius: getLabelBorderRadius(
+				boxStyle,
+				'bottomLeft',
 				labelBorderRadius
 			),
 			borderBottomRightRadius: getLabelBorderRadius(
@@ -451,6 +465,18 @@ function Box( props ) {
 						/>
 					</BaseControl>
 					<BaseControl
+						id={ 'label-icon' }
+						label={ __( 'アイコン', 'ystandard-toolbox' ) }
+					>
+						<SVGIconSelect
+							iconControlTitle={ '' }
+							selectedIcon={ labelIcon }
+							onClickIcon={ ( value ) => {
+								setAttributes( { labelIcon: value } );
+							} }
+						/>
+					</BaseControl>
+					<BaseControl
 						id={ 'label-size' }
 						label={ __( '文字サイズ', 'ystandard-toolbox' ) }
 					>
@@ -462,16 +488,29 @@ function Box( props ) {
 						/>
 					</BaseControl>
 					<BaseControl
-						id={ 'label-icon' }
-						label={ __( 'アイコン', 'ystandard-toolbox' ) }
+						id={ 'label-font-weight' }
+						label={ __( '文字の太さ', 'ystandard-toolbox' ) }
 					>
-						<SVGIconSelect
-							iconControlTitle={ '' }
-							selectedIcon={ labelIcon }
-							onClickIcon={ ( value ) => {
-								setAttributes( { labelIcon: value } );
-							} }
-						/>
+						<div className="ystdtb__horizon-buttons">
+							{ fontWeightList.map( ( item ) => {
+								return (
+									<Button
+										key={ item.value }
+										isSecondary={
+											labelWeight !== item.value
+										}
+										isPrimary={ labelWeight === item.value }
+										onClick={ () => {
+											setAttributes( {
+												labelWeight: item.value,
+											} );
+										} }
+									>
+										<span>{ item.label }</span>
+									</Button>
+								);
+							} ) }
+						</div>
 					</BaseControl>
 					<BaseControl
 						id={ 'label' }

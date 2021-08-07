@@ -30,6 +30,7 @@ export default function save( { attributes } ) {
 		label,
 		labelIcon,
 		labelFontSize,
+		labelWeight,
 		customLabelFontSize,
 		labelBackgroundColor,
 		customLabelBackgroundColor,
@@ -202,6 +203,7 @@ export default function save( { attributes } ) {
 			[ colorClass.labelTextColor ]: colorClass.labelTextColor,
 			'has-text-color': colorClass.labelTextColor || customLabelTextColor,
 			'has-font-size': false,
+			[ `is-label-${ labelWeight }` ]: labelWeight,
 		} );
 		const labelStyle = {
 			borderTopLeftRadius: getLabelBorderRadius(

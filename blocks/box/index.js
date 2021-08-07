@@ -26,5 +26,25 @@ registerBlockType( blockName, {
 	supports,
 	edit,
 	save,
-	example: {},
+	example: {
+		attributes: {
+			label: __( 'ボックスラベル', 'ystandard-toolbox' ),
+			boxBorderColor: '#07689f',
+			boxBorderSize: '2px',
+		},
+		innerBlocks: [
+			{
+				name: 'core/paragraph',
+				attributes: {
+					content: __( 'ボックスコンテンツ', 'ystandard-toolbox' ),
+				},
+			},
+			{
+				name: 'core/paragraph',
+				attributes: {
+					content: __( 'ボックスコンテンツ', 'ystandard-toolbox' ),
+				},
+			},
+		],
+	},
 } );

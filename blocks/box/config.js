@@ -47,12 +47,19 @@ export const attributes = {
 	label: {
 		type: 'string',
 	},
+	labelIcon: {
+		type: 'string',
+	},
 	labelFontSize: {
 		type: 'string',
 	},
 	customLabelFontSize: {
 		type: 'string',
 		default: '0.9em',
+	},
+	labelWeight: {
+		type: 'string',
+		default: 'normal',
 	},
 	labelBackgroundColor: {
 		type: 'string',
@@ -65,9 +72,6 @@ export const attributes = {
 		type: 'string',
 	},
 	customLabelTextColor: {
-		type: 'string',
-	},
-	labelIcon: {
 		type: 'string',
 	},
 	labelBorderRadius: {
@@ -100,4 +104,9 @@ export const borderStyles = [
 	{ value: 'dotted', label: __( '点線', 'ystandard-toolbox' ) },
 	{ value: 'dashed', label: __( '破線', 'ystandard-toolbox' ) },
 	{ value: 'double', label: __( '二重線', 'ystandard-toolbox' ) },
+];
+
+export const fontWeightList = [
+	{ value: 'normal', label: __( '通常', 'ystandard-toolbox' ) },
+	{ value: 'bold', label: __( '太字', 'ystandard-toolbox' ) },
 ];

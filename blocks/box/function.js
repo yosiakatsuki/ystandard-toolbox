@@ -34,17 +34,30 @@ export const isLabelOutside = ( boxStyle ) => {
 export const getLabelBorderRadius = ( boxStyle, position, value ) => {
 	switch ( position ) {
 		case 'topLeft':
-			if ( 'label-out' === boxStyle || 'label-wide' === boxStyle ) {
+			if (
+				'label-out' === boxStyle ||
+				'label-wide' === boxStyle ||
+				'label-line' === boxStyle
+			) {
 				return value;
 			}
 			break;
 		case 'topRight':
-			if ( 'label-out' === boxStyle || 'label-wide' === boxStyle ) {
+			if (
+				'label-out' === boxStyle ||
+				'label-wide' === boxStyle ||
+				'label-line' === boxStyle
+			) {
+				return value;
+			}
+			break;
+		case 'bottomLeft':
+			if ( 'label-line' === boxStyle ) {
 				return value;
 			}
 			break;
 		case 'bottomRight':
-			if ( 'label-in' === boxStyle ) {
+			if ( 'label-in' === boxStyle || 'label-line' === boxStyle ) {
 				return value;
 			}
 			break;
