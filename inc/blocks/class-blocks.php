@@ -111,6 +111,25 @@ class Blocks {
 	 * Block Assets.
 	 */
 	public function enqueue_block_assets() {
+
+		wp_enqueue_style(
+			Config::BLOCK_CSS_HANDLE,
+			YSTDTB_URL . '/css/ystandard-toolbox-blocks.css',
+			[],
+			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-blocks.css' )
+		);
+		if ( ! Utility::ystandard_blocks_version_compare() ) {
+			wp_add_inline_style(
+				Config::CSS_HANDLE,
+				Enqueue::get_color_palette_css( '.editor-styles-wrapper ' )
+			);
+		}
+	}
+
+	/**
+	 * ブロックの登録.
+	 */
+	public function register_block() {
 		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
 		wp_enqueue_script(
 			self::BLOCK_EDITOR_SCRIPT_HANDLE,
@@ -131,25 +150,6 @@ class Blocks {
 				YSTDTB_PATH . '/languages'
 			);
 		}
-
-		wp_enqueue_style(
-			Config::BLOCK_CSS_HANDLE,
-			YSTDTB_URL . '/css/ystandard-toolbox-blocks.css',
-			[],
-			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-blocks.css' )
-		);
-		if ( ! Utility::ystandard_blocks_version_compare() ) {
-			wp_add_inline_style(
-				Config::CSS_HANDLE,
-				Enqueue::get_color_palette_css( '.editor-styles-wrapper ' )
-			);
-		}
-	}
-
-	/**
-	 * ブロックの登録.
-	 */
-	public function register_block() {
 		foreach ( $this->register_blocks['normal'] as $block ) {
 			$handle = 'ystandard-toolbox-' . $block['name'];
 			wp_register_script(
@@ -195,10 +195,20 @@ class Blocks {
 	 */
 	private function create_block_option() {
 		$options = [
-			'isEnableSga' => function_exists( 'sga_ranking_get_date' ),
+			'isEnableSga'       => function_exists( 'sga_ranking_get_date' ),
+			'defaultAttributes' => $this->get_block_default_attributes(),
 		];
 
 		return apply_filters( Config::BLOCK_EDITOR_OPTION_HOOK, $options );
+	}
+
+	/**
+	 * ブロック初期値カスタマイズ値取得
+	 *
+	 * @return array
+	 */
+	private function get_block_default_attributes() {
+		return apply_filters( 'ys_block_default_attributes', [] );
 	}
 }
 

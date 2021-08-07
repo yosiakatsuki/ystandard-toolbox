@@ -2,7 +2,6 @@ const { series, parallel, watch, src, dest } = require( 'gulp' );
 const gulpSass = require( 'gulp-dart-sass' );
 const postcss = require( 'gulp-postcss' );
 const autoprefixer = require( 'autoprefixer' );
-const mqpacker = require( 'css-mqpacker' );
 const cssdeclsort = require( 'css-declaration-sorter' );
 const cssnano = require( 'cssnano' );
 const gulpZip = require( 'gulp-zip' );
@@ -14,13 +13,13 @@ const babel = require( 'gulp-babel' );
 const rename = require( 'gulp-rename' );
 
 const webpackConfig = require( './webpack.menu.config.js' );
+const webpackConfigDev = require( './webpack.menu.config.dev.js' );
 
 
 const postcssPlugins = [
 	autoprefixer( {
 		grid: 'autoplace'
 	} ),
-	mqpacker(),
 	cssnano( {
 			preset: [
 				'default',
@@ -46,7 +45,7 @@ function buildAdminApp() {
 
 function watchBuildAdminApp() {
 	return plumber()
-		.pipe( webpackStream( webpackConfig, webpack ) )
+		.pipe( webpackStream( webpackConfigDev, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
 

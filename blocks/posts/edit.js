@@ -1,6 +1,5 @@
 import { orderbySelect, listTypeSelect, thumbnailRatioSelect } from './config';
 import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 
 import { InspectorControls } from '@wordpress/block-editor';
@@ -167,7 +166,7 @@ const Posts = ( props ) => {
 
 	return (
 		<div className={ 'ystdtb-posts' }>
-			<Fragment>
+			<>
 				<InspectorControls>
 					<PanelBody title={ __( '基本設定', 'ystandard-toolbox' ) }>
 						<RangeControl
@@ -429,7 +428,7 @@ const Posts = ( props ) => {
 						) }
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 			<Disabled>
 				<ServerSideRender
 					block="ystdtb/posts"

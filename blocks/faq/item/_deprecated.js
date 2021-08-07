@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import SVGIcon from '../../../src/js/blocks/component/svg-icon';
+import SVGIcon from '../../../src/js/component/svg-icon';
 import {
 	InnerBlocks,
 	getColorClassName,

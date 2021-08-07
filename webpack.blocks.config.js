@@ -3,6 +3,7 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
+	mode: 'production',
 	entry: {
 		'app': './src/js/blocks/app.js',
 		'block': './src/js/blocks/block.js',
@@ -14,28 +15,42 @@ module.exports = {
 		'faq-item': './blocks/faq/item/index.js',
 		'sns-share': './blocks/sns-share/index.js',
 		'icon-list': './blocks/icon-list/index.js',
+		'box': './blocks/box/index.js',
 	},
 	output: {
 		filename: '[name].js',
 		path: `${ __dirname }/js/blocks`
 	},
 	module: {
+		...defaultConfig.module,
 		rules: [
 			...defaultConfig.module.rules,
 			{
 				test: /\.css$/,
-				loader: 'style-loader!css-loader'
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader'
+					}
+				]
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|svg)$/,
-				loader: 'file-loader?name=../font/[name].[ext]'
+				loader: 'file-loader',
+				options: {
+					name: '../font/[name].[ext]'
+				}
 			}
 		]
 	},
 	resolve: {
+		...defaultConfig.resolve,
 		alias: {
+			...defaultConfig.alias,
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
-			'@ystdtb/components': path.resolve( __dirname, 'src/js/blocks/component' ),
+			'@ystdtb/config': path.resolve( __dirname, 'src/js/blocks/config' ),
+			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
+			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
 	},
 };

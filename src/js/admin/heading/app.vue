@@ -65,6 +65,7 @@
 </script>
 
 <style lang="scss">
+  @use "sass:math";
 	.heading-editor__level-tabs {
 		display: flex;
 		flex-wrap: wrap;
@@ -84,7 +85,7 @@
 			&.is-level-h4,
 			&.is-level-h5,
 			&.is-level-h6 {
-				width: calc(#{(1 / 6 * 100)}#{"%"} - 2px);
+				width: calc(#{(math.div(1,6) * 100)}#{"%"} - 2px);
 			}
 
 			button {
