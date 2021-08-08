@@ -22,16 +22,16 @@ jobs:
       - name: Check PHP Version
         run: php -v
 
-#      - name: Get Composer Cache Directory
-#        id: composer-cache
-#        run: |
-#          echo "::set-output name=dir::$(composer config cache-files-dir)"
-#      - uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.composer-cache.outputs.dir }}
-#          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-composer-
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Composer install
         run: composer install
@@ -109,7 +109,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php: [ '7.2', '7.3', '7.4' ]
+        php: [  '7.3', '7.4' ]
         wp: [ '5.6', 'latest', 'trunk' ]
     services:
       mysql:
@@ -136,16 +136,16 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-#      - name: Get Composer Cache Directory
-#        id: composer-cache
-#        run: |
-#          echo "::set-output name=dir::$(composer config cache-files-dir)"
-#      - uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.composer-cache.outputs.dir }}
-#          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-composer-
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Install dependencies
         run: composer install
