@@ -137,6 +137,9 @@ export default function save( { attributes } ) {
 		[ colorClass.boxBorderColor ]: colorClass.boxBorderColor,
 		'has-border': colorClass.boxBorderColor || customBoxBorderColor,
 		'has-border-color': colorClass.boxBorderColor || customBoxBorderColor,
+		'show-default-border':
+			! ( colorClass.boxBackgroundColor || customBoxBackgroundColor ) &&
+			! ( colorClass.boxBorderColor || customBoxBorderColor ),
 	} );
 
 	const boxBorderColorStyle = colorClass.boxBorderColor

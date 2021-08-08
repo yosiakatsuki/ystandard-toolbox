@@ -145,7 +145,10 @@ function Box( props ) {
 	} );
 
 	const boxContainerClass = classnames( 'ystdtb-box__inner-container', {
-		'has-border-color': boxBackgroundColor.color,
+		'has-background': boxBackgroundColor.color,
+		'has-border': boxBorderColor.color,
+		'show-default-border':
+			! boxBorderColor.color && ! boxBackgroundColor.color,
 	} );
 
 	const boxContainerStyle = {
@@ -181,6 +184,9 @@ function Box( props ) {
 	const boxContentStyle = {
 		color: boxTextColor.color,
 	};
+	const boxContentClass = classnames( 'ystdtb-box__content', {
+		'has-text-color': boxTextColor.color,
+	} );
 
 	const getLabelContents = () => {
 		if ( ! hasLabel ) {
@@ -564,7 +570,7 @@ function Box( props ) {
 					>
 						{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 						<div
-							className="ystdtb-box__content"
+							className={ boxContentClass }
 							style={ boxContentStyle }
 						>
 							<InnerBlocks />
