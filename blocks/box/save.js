@@ -191,7 +191,7 @@ export default function save( { attributes } ) {
 			[ labelFontSizeClass ]: labelFontSizeClass,
 			'has-font-size-class': labelFontSizeClass,
 			[ colorClass.labelBackgroundColor ]:
-			colorClass.labelBackgroundColor,
+				colorClass.labelBackgroundColor,
 			'has-background':
 				colorClass.labelBackgroundColor || customLabelBackgroundColor,
 			[ colorClass.labelTextColor ]: colorClass.labelTextColor,
@@ -225,7 +225,7 @@ export default function save( { attributes } ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon }/>
+							<SVGIcon name={ labelIcon } />
 						</span>
 					) }
 					{ label && (
@@ -244,7 +244,7 @@ export default function save( { attributes } ) {
 			<div className={ boxContainerClass } style={ boxContainerStyle }>
 				{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 				<div className={ boxContentClass } style={ boxContentStyle }>
-					<InnerBlocks.Content/>
+					<InnerBlocks.Content />
 				</div>
 			</div>
 		</div>

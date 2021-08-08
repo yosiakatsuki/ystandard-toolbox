@@ -220,7 +220,7 @@ function Box( props ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon }/>
+							<SVGIcon name={ labelIcon } />
 						</span>
 					) }
 					{ label && (
@@ -567,7 +567,7 @@ function Box( props ) {
 							className="ystdtb-box__content"
 							style={ boxContentStyle }
 						>
-							<InnerBlocks/>
+							<InnerBlocks />
 						</div>
 					</div>
 				</div>
