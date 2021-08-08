@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || die();
 	<div class="ystdtb-menu__column">
 		<?php
 		include __DIR__ . '/block-pattern.php';
+		include __DIR__ . '/box.php';
 		include __DIR__ . '/icon-list.php';
 		include __DIR__ . '/timeline.php';
 		include __DIR__ . '/faq.php';
