@@ -75,13 +75,11 @@ function Box( props ) {
 	const { colors } = select( 'core/block-editor' ).getSettings();
 
 	const hasLabel = label || labelIcon;
-	const hasBorder =
-		boxBorderColor.color && '' !== boxBorderSize && boxBorderStyle;
 
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
-			'--ystdtb-box-border-width': hasBorder ? boxBorderSize : undefined,
+			'--ystdtb-box-border-width': boxBorderSize,
 			'--ystdtb-box-padding-top': getPadding(
 				boxPadding,
 				'desktop',
@@ -147,13 +145,13 @@ function Box( props ) {
 	} );
 
 	const boxContainerClass = classnames( 'ystdtb-box__inner-container', {
-		'has-box-border': hasBorder,
+		'has-border-color': boxBackgroundColor.color,
 	} );
 
 	const boxContainerStyle = {
 		backgroundColor: boxBackgroundColor.color,
-		borderColor: hasBorder ? boxBorderColor.color : undefined,
-		borderStyle: hasBorder ? boxBorderStyle : undefined,
+		borderColor: boxBorderColor.color,
+		borderStyle: boxBorderStyle,
 		borderTopLeftRadius: getBoxBorderRadius(
 			boxStyle,
 			'topLeft',
@@ -190,6 +188,8 @@ function Box( props ) {
 		}
 		const labelClass = classnames( 'ystdtb-box__label', {
 			[ `is-label-${ labelWeight }` ]: labelWeight,
+			'has-background': labelBackgroundColor.color,
+			'has-text-color': labelTextColor.color,
 		} );
 		const labelStyle = {
 			borderTopLeftRadius: getLabelBorderRadius(
@@ -220,7 +220,7 @@ function Box( props ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon } />
+							<SVGIcon name={ labelIcon }/>
 						</span>
 					) }
 					{ label && (
@@ -567,7 +567,7 @@ function Box( props ) {
 							className="ystdtb-box__content"
 							style={ boxContentStyle }
 						>
-							<InnerBlocks />
+							<InnerBlocks/>
 						</div>
 					</div>
 				</div>

@@ -24,7 +24,6 @@ export const attributes = {
 	},
 	customBoxBorderColor: {
 		type: 'string',
-		default: '#666666',
 	},
 	boxBorderSize: {
 		type: 'string',
@@ -66,7 +65,6 @@ export const attributes = {
 	},
 	customLabelBackgroundColor: {
 		type: 'string',
-		default: '#666666',
 	},
 	labelTextColor: {
 		type: 'string',

@@ -54,10 +54,6 @@ export default function save( { attributes } ) {
 	};
 
 	const hasLabel = label || labelIcon;
-	const hasBoxBorder =
-		( colorClass.boxBorderColor || customBoxBorderColor ) &&
-		boxBorderSize &&
-		boxBorderStyle;
 	const labelFontSizeClass = getFontSizeClass( labelFontSize );
 
 	const labelFontSizeValue =
@@ -66,9 +62,7 @@ export default function save( { attributes } ) {
 	const blockProps = useBlockProps.save( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
-			'--ystdtb-box-border-width': hasBoxBorder
-				? boxBorderSize
-				: undefined,
+			'--ystdtb-box-border-width': boxBorderSize,
 			'--ystdtb-box-padding-top': getPadding(
 				boxPadding,
 				'desktop',
@@ -142,7 +136,7 @@ export default function save( { attributes } ) {
 			colorClass.boxBackgroundColor || customBoxBackgroundColor,
 		[ colorClass.boxBorderColor ]: colorClass.boxBorderColor,
 		'has-border': colorClass.boxBorderColor || customBoxBorderColor,
-		'has-box-border': hasBoxBorder,
+		'has-border-color': colorClass.boxBorderColor || customBoxBorderColor,
 	} );
 
 	const boxBorderColorStyle = colorClass.boxBorderColor
@@ -153,8 +147,8 @@ export default function save( { attributes } ) {
 		backgroundColor: colorClass.boxBackgroundColor
 			? undefined
 			: customBoxBackgroundColor,
-		borderColor: hasBoxBorder ? boxBorderColorStyle : undefined,
-		borderStyle: hasBoxBorder ? boxBorderStyle : undefined,
+		borderColor: boxBorderColorStyle,
+		borderStyle: boxBorderStyle,
 		borderTopLeftRadius: getBoxBorderRadius(
 			boxStyle,
 			'topLeft',
@@ -197,7 +191,7 @@ export default function save( { attributes } ) {
 			[ labelFontSizeClass ]: labelFontSizeClass,
 			'has-font-size-class': labelFontSizeClass,
 			[ colorClass.labelBackgroundColor ]:
-				colorClass.labelBackgroundColor,
+			colorClass.labelBackgroundColor,
 			'has-background':
 				colorClass.labelBackgroundColor || customLabelBackgroundColor,
 			[ colorClass.labelTextColor ]: colorClass.labelTextColor,
@@ -231,7 +225,7 @@ export default function save( { attributes } ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon } />
+							<SVGIcon name={ labelIcon }/>
 						</span>
 					) }
 					{ label && (
@@ -250,7 +244,7 @@ export default function save( { attributes } ) {
 			<div className={ boxContainerClass } style={ boxContainerStyle }>
 				{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 				<div className={ boxContentClass } style={ boxContentStyle }>
-					<InnerBlocks.Content />
+					<InnerBlocks.Content/>
 				</div>
 			</div>
 		</div>
