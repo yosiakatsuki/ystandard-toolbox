@@ -16,7 +16,7 @@ $box_color_default: #666;
   position: relative;
   border-width: var(--ystdtb-box-border-width);
 
-  &:not(.has-border-color) {
+  &.show-default-border {
     border-color: $box_color_default;
   }
 }
