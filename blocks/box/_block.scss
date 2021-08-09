@@ -76,6 +76,13 @@ $box_color_default: #666;
   }
 }
 
+.is-ie {
+  .ystdtb-box__label {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 .ystdtb-box__label-icon {
   margin-right: .25em;
 
@@ -125,3 +132,5 @@ $box_color_default: #666;
     }
   }
 }
+
+
