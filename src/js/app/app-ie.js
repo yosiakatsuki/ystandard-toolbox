@@ -4,9 +4,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
 } );
 
 /**
- * IE用スタイル処理
+ * IE用スタイル処理.
  */
-function parseResponsiveProperties() {
+const parseResponsiveProperties = () => {
 	const fallbackAttribute = 'data-ys-ie-styles';
 	const fallback = document.querySelectorAll( `[${ fallbackAttribute }]` );
 	const property = Array.prototype.slice.call( fallback, 0 );
