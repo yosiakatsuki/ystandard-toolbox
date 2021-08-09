@@ -1,5 +1,3 @@
-import { getResponsiveProperty } from '@ystdtb/helper/responsive';
-
 export const getBoxBorderRadius = ( boxStyle, position, value, hasLabel ) => {
 	if ( ! hasLabel ) {
 		return value;
@@ -64,12 +62,4 @@ export const getLabelBorderRadius = ( boxStyle, position, value ) => {
 	}
 
 	return undefined;
-};
-
-export const getPadding = ( boxPadding, media, position ) => {
-	const value = getResponsiveProperty( boxPadding, media );
-	if ( ! value ) {
-		return undefined;
-	}
-	return value[ position ];
 };

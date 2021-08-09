@@ -39,8 +39,8 @@ import {
 	getBoxBorderRadius,
 	isLabelOutside,
 	getLabelBorderRadius,
-	getPadding,
 } from './function';
+import { getSpacing } from '@ystdtb/helper/spacing';
 
 function Box( props ) {
 	const {
@@ -80,65 +80,65 @@ function Box( props ) {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
 			'--ystdtb-box-border-width': boxBorderSize,
-			'--ystdtb-box-padding-top': getPadding(
+			'--ystdtb-box-padding-top': getSpacing(
 				boxPadding,
-				'desktop',
-				'top'
+				'top',
+				'desktop'
 			),
-			'--ystdtb-box-padding-right': getPadding(
+			'--ystdtb-box-padding-right': getSpacing(
 				boxPadding,
-				'desktop',
-				'right'
+				'right',
+				'desktop'
 			),
-			'--ystdtb-box-padding-bottom': getPadding(
+			'--ystdtb-box-padding-bottom': getSpacing(
 				boxPadding,
-				'desktop',
-				'bottom'
+				'bottom',
+				'desktop'
 			),
-			'--ystdtb-box-padding-left': getPadding(
+			'--ystdtb-box-padding-left': getSpacing(
 				boxPadding,
-				'desktop',
-				'left'
+				'left',
+				'desktop'
 			),
-			'--ystdtb-box-padding-top-tablet': getPadding(
+			'--ystdtb-box-padding-top-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'top'
+				'top',
+				'tablet'
 			),
-			'--ystdtb-box-padding-right-tablet': getPadding(
+			'--ystdtb-box-padding-right-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'right'
+				'right',
+				'tablet'
 			),
-			'--ystdtb-box-padding-bottom-tablet': getPadding(
+			'--ystdtb-box-padding-bottom-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'bottom'
+				'bottom',
+				'tablet'
 			),
-			'--ystdtb-box-padding-left-tablet': getPadding(
+			'--ystdtb-box-padding-left-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'left'
+				'left',
+				'tablet'
 			),
-			'--ystdtb-box-padding-top-mobile': getPadding(
+			'--ystdtb-box-padding-top-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'top'
+				'top',
+				'mobile'
 			),
-			'--ystdtb-box-padding-right-mobile': getPadding(
+			'--ystdtb-box-padding-right-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'right'
+				'right',
+				'mobile'
 			),
-			'--ystdtb-box-padding-bottom-mobile': getPadding(
+			'--ystdtb-box-padding-bottom-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'bottom'
+				'bottom',
+				'mobile'
 			),
-			'--ystdtb-box-padding-left-mobile': getPadding(
+			'--ystdtb-box-padding-left-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'left'
+				'left',
+				'mobile'
 			),
 			'--ystdtb-box-label-font-size': labelFontSize.size,
 		},
