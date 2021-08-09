@@ -25,6 +25,7 @@ class Polyfill {
 			return;
 		}
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_polyfill' ], 11 );
+		add_filter( 'body_class', [ $this, 'add_is_ie' ], 100 );
 	}
 
 	/**
@@ -38,6 +39,19 @@ class Polyfill {
 			YSTDTB_VERSION,
 			true
 		);
+	}
+
+	/**
+	 * IE判定クラス追加
+	 *
+	 * @param array $classes Classes.
+	 *
+	 * @return array
+	 */
+	public function add_is_ie( $classes ) {
+		$classes[] = 'is-ie';
+
+		return $classes;
 	}
 
 	/**
