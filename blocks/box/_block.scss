@@ -22,6 +22,7 @@ $box_color_default: #666;
 }
 
 .ystdtb-box__content {
+  padding: #{$default_padding};
   padding-top: var(--ystdtb-box-padding-top);
   padding-right: var(--ystdtb-box-padding-right);
   padding-bottom: var(--ystdtb-box-padding-bottom);

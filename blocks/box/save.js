@@ -9,10 +9,11 @@ import {
 	getBoxBorderRadius,
 	isLabelOutside,
 	getLabelBorderRadius,
-	getPadding,
 } from './function';
 import classnames from 'classnames';
 import { blockClassName } from './config';
+import getDataFallbackProperty from '@ystdtb/helper/fallback';
+import { getSpacing } from '@ystdtb/helper/spacing';
 
 export default function save( { attributes } ) {
 	const {
@@ -63,65 +64,65 @@ export default function save( { attributes } ) {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
 			'--ystdtb-box-border-width': boxBorderSize,
-			'--ystdtb-box-padding-top': getPadding(
+			'--ystdtb-box-padding-top': getSpacing(
 				boxPadding,
-				'desktop',
-				'top'
+				'top',
+				'desktop'
 			),
-			'--ystdtb-box-padding-right': getPadding(
+			'--ystdtb-box-padding-right': getSpacing(
 				boxPadding,
-				'desktop',
-				'right'
+				'right',
+				'desktop'
 			),
-			'--ystdtb-box-padding-bottom': getPadding(
+			'--ystdtb-box-padding-bottom': getSpacing(
 				boxPadding,
-				'desktop',
-				'bottom'
+				'bottom',
+				'desktop'
 			),
-			'--ystdtb-box-padding-left': getPadding(
+			'--ystdtb-box-padding-left': getSpacing(
 				boxPadding,
-				'desktop',
-				'left'
+				'left',
+				'desktop'
 			),
-			'--ystdtb-box-padding-top-tablet': getPadding(
+			'--ystdtb-box-padding-top-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'top'
+				'top',
+				'tablet'
 			),
-			'--ystdtb-box-padding-right-tablet': getPadding(
+			'--ystdtb-box-padding-right-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'right'
+				'right',
+				'tablet'
 			),
-			'--ystdtb-box-padding-bottom-tablet': getPadding(
+			'--ystdtb-box-padding-bottom-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'bottom'
+				'bottom',
+				'tablet'
 			),
-			'--ystdtb-box-padding-left-tablet': getPadding(
+			'--ystdtb-box-padding-left-tablet': getSpacing(
 				boxPadding,
-				'tablet',
-				'left'
+				'left',
+				'tablet'
 			),
-			'--ystdtb-box-padding-top-mobile': getPadding(
+			'--ystdtb-box-padding-top-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'top'
+				'top',
+				'mobile'
 			),
-			'--ystdtb-box-padding-right-mobile': getPadding(
+			'--ystdtb-box-padding-right-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'right'
+				'right',
+				'mobile'
 			),
-			'--ystdtb-box-padding-bottom-mobile': getPadding(
+			'--ystdtb-box-padding-bottom-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'bottom'
+				'bottom',
+				'mobile'
 			),
-			'--ystdtb-box-padding-left-mobile': getPadding(
+			'--ystdtb-box-padding-left-mobile': getSpacing(
 				boxPadding,
-				'mobile',
-				'left'
+				'left',
+				'mobile'
 			),
 			'--ystdtb-box-label-font-size':
 				! labelFontSizeClass && labelFontSizeValue
@@ -177,6 +178,11 @@ export default function save( { attributes } ) {
 			hasLabel
 		),
 	};
+	const boxContainerData = {
+		...getDataFallbackProperty( {
+			'border-width': '' === boxBorderSize ? 0 : boxBorderSize,
+		} ),
+	}
 
 	const boxContentClass = classnames( 'ystdtb-box__content', {
 		[ colorClass.boxTextColor ]: colorClass.boxTextColor,
@@ -184,6 +190,15 @@ export default function save( { attributes } ) {
 	} );
 	const boxContentStyle = {
 		color: colorClass.boxTextColor ? undefined : customBoxTextColor,
+	};
+	const boxContentData = {
+		...getDataFallbackProperty( {
+			'border-width': '' === boxBorderSize ? 0 : boxBorderSize,
+			'padding-top': getSpacing( boxPadding, 'top', 'desktop' ),
+			'padding-right': getSpacing( boxPadding, 'right', 'desktop' ),
+			'padding-bottom': getSpacing( boxPadding, 'bottom', 'desktop' ),
+			'padding-left': getSpacing( boxPadding, 'left', 'desktop' ),
+		} ),
 	};
 
 	const getLabelContents = () => {
@@ -194,7 +209,7 @@ export default function save( { attributes } ) {
 			[ labelFontSizeClass ]: labelFontSizeClass,
 			'has-font-size-class': labelFontSizeClass,
 			[ colorClass.labelBackgroundColor ]:
-				colorClass.labelBackgroundColor,
+			colorClass.labelBackgroundColor,
 			'has-background':
 				colorClass.labelBackgroundColor || customLabelBackgroundColor,
 			[ colorClass.labelTextColor ]: colorClass.labelTextColor,
@@ -228,7 +243,7 @@ export default function save( { attributes } ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon } />
+							<SVGIcon name={ labelIcon }/>
 						</span>
 					) }
 					{ label && (
@@ -244,10 +259,18 @@ export default function save( { attributes } ) {
 	return (
 		<div { ...blockProps }>
 			{ isLabelOutside( boxStyle ) && getLabelContents() }
-			<div className={ boxContainerClass } style={ boxContainerStyle }>
+			<div
+				className={ boxContainerClass }
+				style={ boxContainerStyle }
+				{ ...boxContainerData }
+			>
 				{ ! isLabelOutside( boxStyle ) && getLabelContents() }
-				<div className={ boxContentClass } style={ boxContentStyle }>
-					<InnerBlocks.Content />
+				<div
+					className={ boxContentClass }
+					style={ boxContentStyle }
+					{ ...boxContentData }
+				>
+					<InnerBlocks.Content/>
 				</div>
 			</div>
 		</div>
