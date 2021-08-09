@@ -20,4 +20,4 @@ const parseResponsiveProperties = () => {
 		}
 		el.removeAttribute( fallbackAttribute );
 	} );
-}
+};
