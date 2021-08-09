@@ -52,7 +52,12 @@ function watchBuildAdminApp() {
 const buildJs = () => {
 	return src( './src/js/app/*.js' )
 		.pipe( babel( {
-			presets: [ '@babel/env' ]
+			presets: [ '@babel/env' ],
+			targets: {
+				ie: '11',
+			},
+			minified: true,
+			comments: false,
 		} ) )
 		.pipe( dest( './js/app' ) );
 };
