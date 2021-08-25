@@ -130,6 +130,9 @@ class Blocks {
 	 * ブロックの登録.
 	 */
 	public function register_block() {
+		if ( ! is_admin() ) {
+			return;
+		}
 		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
 		wp_enqueue_script(
 			self::BLOCK_EDITOR_SCRIPT_HANDLE,
