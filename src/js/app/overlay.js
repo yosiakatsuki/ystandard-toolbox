@@ -1,30 +1,35 @@
-window.overlayTimer = null;
+window.ysOverlayTimer = null;
 // eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
-	if ( document.body.classList.contains( 'has-fixed-header' ) ) {
+	const bodyClasses = document.body.classList;
+	if ( bodyClasses.contains( 'has-fixed-header' ) ) {
 		const header = document.getElementById( 'masthead' );
-		if ( document.body.classList.contains( 'is-overlay' ) ) {
-			// eslint-disable-next-line @wordpress/no-global-event-listener
-			document.addEventListener(
-				'scroll',
-				() => {
-					clearTimeout( window.overlayTimer );
-					window.overlayTimer = setTimeout( function () {
-						if ( window.scrollY > header.offsetHeight ) {
-							document.body.classList.remove( 'is-transparent' );
-						} else if (
-							! document.body.classList.contains(
-								'is-transparent'
-							)
-						) {
-							document.body.classList.add( 'is-transparent' );
-						}
-					}, 1000 / 60 );
-				},
-				{ passive: true }
-			);
-		} else {
-			document.body.style.paddingTop = `${ header.offsetHeight }px`;
+		if ( header ) {
+			if ( bodyClasses.contains( 'is-overlay' ) ) {
+				// eslint-disable-next-line @wordpress/no-global-event-listener
+				document.addEventListener(
+					'scroll',
+					() => {
+						clearTimeout( window.ysOverlayTimer );
+						window.ysOverlayTimer = setTimeout( function () {
+							if ( window.scrollY > header.getBoundingClientRect().height ) {
+								bodyClasses.remove( 'is-transparent' );
+							} else if (
+								! bodyClasses.contains(
+									'is-transparent'
+								)
+							) {
+								bodyClasses.add( 'is-transparent' );
+							}
+						}, 1000 / 60 );
+					},
+					{ passive: true }
+				);
+			} else {
+				if ( ! bodyClasses.contains( 'disable-auto-padding' ) ) {
+					document.body.style.paddingTop = `${ header.getBoundingClientRect().height }px`;
+				}
+			}
 		}
 	}
 } );
