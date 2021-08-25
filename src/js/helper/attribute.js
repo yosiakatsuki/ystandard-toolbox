@@ -1,4 +1,10 @@
 export const getDefaultAttributes = () => {
+	if (
+		! window.ystdtbBlockEditor ||
+		'object' !== typeof window.ystdtbBlockEditor
+	) {
+		return {};
+	}
 	if ( ! window.ystdtbBlockEditor.hasOwnProperty( 'defaultAttributes' ) ) {
 		return {};
 	}

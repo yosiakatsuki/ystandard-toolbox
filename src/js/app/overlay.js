@@ -12,12 +12,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
 					() => {
 						clearTimeout( window.ysOverlayTimer );
 						window.ysOverlayTimer = setTimeout( function () {
-							if ( window.scrollY > header.getBoundingClientRect().height ) {
+							if (
+								window.scrollY >
+								header.getBoundingClientRect().height
+							) {
 								bodyClasses.remove( 'is-transparent' );
 							} else if (
-								! bodyClasses.contains(
-									'is-transparent'
-								)
+								! bodyClasses.contains( 'is-transparent' )
 							) {
 								bodyClasses.add( 'is-transparent' );
 							}
@@ -25,10 +26,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
 					},
 					{ passive: true }
 				);
-			} else {
-				if ( ! bodyClasses.contains( 'disable-auto-padding' ) ) {
-					document.body.style.paddingTop = `${ header.getBoundingClientRect().height }px`;
-				}
+			} else if ( ! bodyClasses.contains( 'disable-auto-padding' ) ) {
+				document.body.style.paddingTop = `${
+					header.getBoundingClientRect().height
+				}px`;
 			}
 		}
 	}
