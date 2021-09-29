@@ -522,10 +522,13 @@ class Heading {
 		$pos = $this->get_position_list();
 		foreach ( $pos as $value ) {
 			$num = $this->get_value( "padding${value}" );
-			if ( empty( $num ) ) {
+			if ( ! is_numeric( $num ) && empty( $num ) ) {
 				continue;
 			}
-			$unit     = $this->get_unit( "padding${value}Unit" );
+			$unit = $this->get_unit( "padding${value}Unit" );
+			if ( 0 === $num || '0' === $num ) {
+				$unit = '';
+			}
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(
@@ -542,10 +545,13 @@ class Heading {
 		$pos = [ 'Top', 'Bottom' ];
 		foreach ( $pos as $value ) {
 			$num = $this->get_value( "margin${value}" );
-			if ( empty( $num ) ) {
+			if ( ! is_numeric( $num ) && empty( $num ) ) {
 				continue;
 			}
-			$unit     = $this->get_unit( "margin${value}Unit" );
+			$unit = $this->get_unit( "margin${value}Unit" );
+			if ( 0 === $num || '0' === $num ) {
+				$unit = '';
+			}
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(

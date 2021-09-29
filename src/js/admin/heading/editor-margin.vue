@@ -91,7 +91,7 @@
 						:step="marginTopStep"
 						v-model="marginTop"
 					/>
-					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Top')">{{ marginTopUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleMarginUnit('Top')">{{ marginTopUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][marginTopUnit]`" v-model="marginTopUnit">
 					<button class="is-cancel is-small" type="button" @click="clearMargin('Top')">クリア</button>
 				</div>
@@ -110,7 +110,7 @@
 						:step="marginBottomStep"
 						v-model="marginBottom"
 					/>
-					<button type="button" class="is-white" style="height: 100%" @click="togglePaddingUnit('Bottom')">{{ marginBottomUnit }}</button>
+					<button type="button" class="is-white" style="height: 100%" @click="toggleMarginUnit('Bottom')">{{ marginBottomUnit }}</button>
 					<input type="hidden" :name="`ystdtb_heading[${level}][marginBottomUnit]`" v-model="marginBottomUnit">
 					<button class="is-cancel is-small" type="button" @click="clearMargin('Bottom')">クリア</button>
 				</div>
@@ -264,6 +264,13 @@
 				const newUnit = 'px' === unit ? 'em' : 'px';
 				this.updateOption( `padding${ pos }Unit`, newUnit );
 				this.updateOption( `padding${ pos }`, _toggleSizeInUnit( size, newUnit ) );
+			},
+			toggleMarginUnit( pos ) {
+				const unit = this.getOption( `margin${ pos }Unit` );
+				const size = this.getOption( `margin${ pos }` );
+				const newUnit = 'px' === unit ? 'em' : 'px';
+				this.updateOption( `margin${ pos }Unit`, newUnit );
+				this.updateOption( `margin${ pos }`, _toggleSizeInUnit( size, newUnit ) );
 			},
 			clearPadding( pos ) {
 				this.updateOption( `padding${ pos }`, '' );
