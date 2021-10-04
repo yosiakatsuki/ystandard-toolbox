@@ -1,4 +1,3 @@
-import { orderbySelect, listTypeSelect, thumbnailRatioSelect } from './config';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 
@@ -13,10 +12,13 @@ import {
 	Disabled,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
+
+import { orderbySelect, thumbnailRatioSelect } from './config';
 import _toNumber from '../../src/js/blocks/function/_toNumber';
 import _getOptionsDefault from '../../src/js/blocks/function/_getOptionsDefault';
 import _getTermTree from '../../src/js/blocks/function/_getTermTree';
 import _getParentPages from '../../src/js/blocks/function/_getParentPages';
+import * as BlockOption from './inspector-controls';
 
 const Posts = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -24,7 +26,6 @@ const Posts = ( props ) => {
 		count,
 		orderby,
 		order,
-		listType,
 		colMobile,
 		colTablet,
 		colPc,
@@ -194,14 +195,7 @@ const Posts = ( props ) => {
 						/>
 					</PanelBody>
 					<PanelBody title={ __( '表示設定', 'ystandard-toolbox' ) }>
-						<SelectControl
-							label={ __( 'デザイン', 'ystandard-toolbox' ) }
-							value={ listType }
-							options={ listTypeSelect }
-							onChange={ ( value ) => {
-								setAttributes( { listType: value } );
-							} }
-						/>
+						<BlockOption.ListDesign { ...props } />
 						<div className="ystdtb-block-label">
 							{ __( '表示列数', 'ystandard-toolbox' ) }
 						</div>

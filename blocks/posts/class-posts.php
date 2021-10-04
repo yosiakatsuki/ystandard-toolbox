@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox\blocks;
 
+use ystandard_toolbox\Config;
 use ystandard_toolbox\Dynamic_Block;
 use ystandard_toolbox\Utility;
 
@@ -109,6 +110,21 @@ class Posts extends Dynamic_Block {
 				return shortcode_exists( 'ys_recent_posts' );
 			}
 		);
+		add_filter( Config::BLOCK_EDITOR_OPTION_HOOK, [ $this, 'add_block_config' ] );
+	}
+
+	/**
+	 * ブロック設定の追加
+	 *
+	 * @param array $option Options.
+	 *
+	 * @return array
+	 */
+	public function add_block_config( $option ) {
+
+		$option['postsDesign'] = [];
+
+		return $option;
 	}
 
 	/**
