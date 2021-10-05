@@ -10,6 +10,7 @@ export default function save( { attributes } ) {
 	const {
 		values,
 		iconType,
+		customIconClass,
 		iconBold,
 		iconColor,
 		customIconColor,
@@ -20,6 +21,7 @@ export default function save( { attributes } ) {
 	const listClassName = classnames( blockClassName, `icon--${ iconType }`, {
 		'is-bold': iconBold,
 		[ iconColorClass ]: iconColorClass,
+		[ customIconClass ]: customIconClass,
 		'has-icon-font-color': iconColor || customIconColor,
 	} );
 

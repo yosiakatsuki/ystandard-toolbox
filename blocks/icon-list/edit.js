@@ -10,14 +10,13 @@ import {
 	PanelBody,
 	BaseControl,
 	ToggleControl,
-	Button,
 	ColorPalette,
 } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { blockClassName, iconTypes } from './config';
-import { getFeatherIcon } from '../../src/js/blocks/function/_getFeatherIcon';
+import { blockClassName } from './config';
+import * as BlockOption from './inspector-controls';
 
 function IconList( props ) {
 	const {
@@ -28,13 +27,14 @@ function IconList( props ) {
 		iconColor,
 		setIconColor,
 	} = props;
-	const { values, iconType, iconBold } = attributes;
+	const { values, iconType, customIconClass, iconBold } = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `icon--${ iconType }`, {
 			'is-bold': iconBold,
 			'has-icon-font-color': iconColor.color,
+			[ customIconClass ]: customIconClass,
 		} ),
 		style: {
 			'--icon-font-color': iconColor.color,
@@ -45,35 +45,7 @@ function IconList( props ) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'アイコン', 'ystandard-toolbox' ) }>
-					<BaseControl
-						id={ 'list-icon' }
-						label={ __( 'リストアイコン', 'ystandard-toolbox' ) }
-					>
-						<div className="ystdtb__icon-list-buttons">
-							{ iconTypes.map( ( item ) => {
-								return (
-									<Button
-										key={ item.name }
-										isSecondary={ iconType !== item.name }
-										isPrimary={ iconType === item.name }
-										onClick={ () => {
-											setAttributes( {
-												iconType: item.name,
-											} );
-										} }
-									>
-										<span
-											dangerouslySetInnerHTML={ {
-												__html: getFeatherIcon(
-													item.name
-												),
-											} }
-										/>
-									</Button>
-								);
-							} ) }
-						</div>
-					</BaseControl>
+					<BlockOption.ListIcon { ...props } />
 					<BaseControl
 						id={ 'icon-color' }
 						label={ __( 'アイコン色', 'ystandard-toolbox' ) }

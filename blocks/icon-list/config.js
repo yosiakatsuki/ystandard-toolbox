@@ -12,6 +12,9 @@ export const attributes = {
 		type: 'string',
 		default: 'chevron-right',
 	},
+	customIconClass: {
+		type: 'string',
+	},
 	iconBold: {
 		type: 'bool',
 		default: false,
