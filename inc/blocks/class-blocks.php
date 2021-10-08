@@ -44,6 +44,8 @@ class Blocks {
 		} else {
 			add_filter( 'block_categories', [ __CLASS__, 'add_block_categories' ] );
 		}
+		add_action( 'after_setup_theme', [ $this, 'add_block_editor_styles' ] );
+		add_action( 'https_ssl_verify', [ $this, 'add_block_editor_styles_ssl_verify' ], 10, 2 );
 	}
 
 	/**
@@ -124,6 +126,35 @@ class Blocks {
 				Enqueue::get_color_palette_css( '.editor-styles-wrapper ' )
 			);
 		}
+	}
+
+	/**
+	 * ブロックCSSをエディター用に追加する.
+	 */
+	public function add_block_editor_styles() {
+		// パーツブロックのプレビューでブロックのCSSが必要になる.
+		$styles = wp_styles();
+		if ( isset( $styles->registered['wp-block-library']->src ) ) {
+			$path     = $styles->registered['wp-block-library']->src;
+			$site_url = site_url();
+			add_editor_style( "${site_url}${path}" );
+		}
+	}
+
+	/**
+	 * 自サイトのURLであれば検証をスキップ.
+	 *
+	 * @param bool   $verify Verify.
+	 * @param string $url    URL.
+	 *
+	 * @return bool
+	 */
+	public function add_block_editor_styles_ssl_verify( $verify, $url ) {
+		if ( false !== strpos( $url, site_url() ) ) {
+			return false;
+		}
+
+		return $verify;
 	}
 
 	/**
