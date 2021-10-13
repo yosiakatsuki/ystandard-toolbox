@@ -37,6 +37,7 @@ class Block_Patterns {
 		}
 		add_action( 'init', [ $this, 'register_post_type' ] );
 		add_action( 'init', [ $this, 'register_taxonomy' ] );
+		add_action( 'init', [ $this, 'register_custom_block_pattern' ] );
 		add_action( 'init', [ $this, 'register_block_pattern' ] );
 		add_filter( 'pre_get_posts', [ $this, 'set_order' ] );
 		add_action( 'restrict_manage_posts', [ $this, 'block_pattern_tax_dropdown' ] );
@@ -151,6 +152,43 @@ class Block_Patterns {
 					'value_field'     => 'slug',
 				]
 			);
+		}
+	}
+
+	/**
+	 * コードでのブロックパターン追加
+	 */
+	public function register_custom_block_pattern() {
+		$category = apply_filters( 'ystdtb_custom_block_pattern_category', [] );
+		if ( ! empty( $category ) ) {
+			foreach ( $category as $item ) {
+				register_block_pattern_category(
+					self::BLOCK_PATTERNS . '_' . $item['slug'],
+					[ 'label' => $item['name'] ]
+				);
+			}
+		}
+		$pattern = apply_filters( 'ystdtb_custom_block_pattern', [] );
+		if ( ! empty( $pattern ) ) {
+			foreach ( $pattern as $item ) {
+				$pattern_categories = [ self::BLOCK_PATTERNS ];
+				if ( isset( $item['categories'] ) ) {
+					$pattern_categories = array_map(
+						function ( $value ) {
+							return self::BLOCK_PATTERNS . '_' . $value;
+						},
+						$item['categories']
+					);
+				}
+				register_block_pattern(
+					'ystdtb/pattern-' . $item['name'],
+					[
+						'title'      => $item['title'],
+						'content'    => $item['content'],
+						'categories' => $pattern_categories,
+					]
+				);
+			}
 		}
 	}
 

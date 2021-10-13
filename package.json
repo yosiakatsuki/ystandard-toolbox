@@ -53,20 +53,20 @@
     "webpack-stream": "^6.1.2"
   },
   "scripts": {
-    "start": "wp-scripts start --config webpack.blocks.config.dev.js",
     "lint-js": "wp-scripts lint-js blocks ./src/js",
     "lint-js:fix": "npm run lint-js -- --fix",
     "lint-php": "composer phpcs",
     "lint": "npm run lint-js:fix && npm run lint-php",
-    "packages-update": "wp-scripts packages-update",
+    "watch:block": "wp-scripts start --config webpack.blocks.config.dev.js",
+    "watch": "gulp watch & npm run watch:block",
     "build:block": "wp-scripts build --config webpack.blocks.config.js",
-    "watch": "gulp watch & npm run start",
     "build:icons": "node src/js/script/create-svg-icon-list.js",
     "build": "gulp build && npm run build:block",
     "build:deploy-files": "gulp deployFiles",
     "build:deploy-files-beta": "gulp deployFilesBeta",
     "i18n:make-pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,tests\"",
-    "i18n:blocks": "po2json languages/ystandard-toolbox-ja.po languages/ystandard-toolbox-ja-ystandard-toolbox-block-editor.json -f jed"
+    "i18n:blocks": "po2json languages/ystandard-toolbox-ja.po languages/ystandard-toolbox-ja-ystandard-toolbox-block-editor.json -f jed",
+    "packages-update": "wp-scripts packages-update"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",

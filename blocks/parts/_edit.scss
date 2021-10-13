@@ -1,0 +1,63 @@
+@use "../../src/sass/global";
+
+.editor-styles-wrapper {
+  [data-type="ystdtb/parts"] {
+    &.ystdtb-parts {
+      max-width: 100%;
+    }
+  }
+}
+
+.ystdtb-parts__edit-parts-select {
+  padding: 2em;
+  background-color: global.$color__bg-gray-light;
+}
+
+.ystdtb-parts__edit-parts-preview {
+  position: relative;
+
+  &::before {
+    content: '[ys]パーツ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: -8px;
+    background-color: rgba(global.$color__ystd_blue, 0.8);
+    color: #fff;
+    font-size: 0.5em;
+    line-height: 1;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: -8px;
+    background: global.$color__ystd_blue;
+    opacity: 0.05;
+    z-index: 1;
+  }
+
+  > div {
+    > * {
+      max-width: 830px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    > *.alignfull,
+    > *.alignwide {
+      max-width: none;
+      margin-right: -8px;
+      margin-left: -8px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+}

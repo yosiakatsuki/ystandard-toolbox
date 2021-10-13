@@ -16,6 +16,7 @@ module.exports = {
 		'sns-share': './blocks/sns-share/index.js',
 		'icon-list': './blocks/icon-list/index.js',
 		'box': './blocks/box/index.js',
+		'parts': './blocks/parts/index.js',
 	},
 	output: {
 		filename: '[name].js',

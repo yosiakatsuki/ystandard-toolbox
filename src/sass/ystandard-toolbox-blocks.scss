@@ -1,6 +1,6 @@
 @use "component/blocks/inspector-controls";
 @use "../js/component/icon-picker/edit" as icon-picker;
-@use "../../blocks/posts/edit";
+@use "../../blocks/posts/edit" as posts-edit;
 @use "../../blocks/styles/columns/block" as column;
 @use "../../blocks/styles/table/block" as table;
 @use "../../blocks/styles/table/edit" as table-edit;
@@ -9,3 +9,4 @@
 @use "../../blocks/sns-share/edit" as sns-share;
 @use "../../blocks/icon-list/edit" as icon-list;
 @use "../../blocks/box/edit" as box;
+@use "../../blocks/parts/edit" as parts-edit;

@@ -24,6 +24,7 @@ require_once __DIR__ . '/enqueue/class-enqueue.php';
 
 // Blocks.
 require_once __DIR__ . '/blocks/class-blocks.php';
+require_once __DIR__ . '/../blocks/icon-list/class-block-config.php';
 // Code.
 require_once __DIR__ . '/code/class-code.php';
 // Heading.
