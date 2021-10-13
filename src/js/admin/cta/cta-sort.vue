@@ -27,6 +27,23 @@
                     <div class="sort-items__item-text">
                       <div class="sort-items__item-label">{{ item.label }}</div>
                     </div>
+                    <div class="sort-items__item-enable">
+                      <div class="sort-items__item-enable__toggle">
+                        <input
+                            type="checkbox"
+                            :id="`sort-items-header-${item.index}`"
+                            class="sort-items__item-enable__toggle-checkbox"
+                            v-model="item.enable"
+                            @change="toggleEnable()"
+                        >
+                        <label
+                            :for="`sort-items-header-${item.index}`"
+                            class="sort-items__item-enable__toggle-checkbox-label"
+                        >
+                          <div/>
+                        </label>
+                      </div>
+                    </div>
                     <div class="sort-items__item-arrow">
                       <button type="button" @click="upItem(item.index,'header')">
                         <ChevronUpIcon size="14"/>
@@ -53,6 +70,23 @@
                     </div>
                     <div class="sort-items__item-text">
                       <div class="sort-items__item-label">{{ item.label }}</div>
+                    </div>
+                    <div class="sort-items__item-enable">
+                      <div class="sort-items__item-enable__toggle">
+                        <input
+                            type="checkbox"
+                            :id="`sort-items-footer-${item.index}`"
+                            class="sort-items__item-enable__toggle-checkbox"
+                            v-model="item.enable"
+                            @change="toggleEnable()"
+                        >
+                        <label
+                            :for="`sort-items-footer-${item.index}`"
+                            class="sort-items__item-enable__toggle-checkbox-label"
+                        >
+                          <div/>
+                        </label>
+                      </div>
                     </div>
                     <div class="sort-items__item-arrow">
                       <button type="button" @click="upItem(item.index,'footer')">
@@ -256,6 +290,10 @@ export default {
       this.disabledPostType = true;
       this.isEdit = true;
     },
+    toggleEnable() {
+      this.disabledPostType = true;
+      this.isEdit = true;
+    },
     upItem( index, type ) {
       if ( 1 >= index ) {
         return;
@@ -419,10 +457,55 @@ export default {
 }
 
 .sort-items__item-text {
-  flex-grow: 1;
+}
+
+.sort-items__item-enable {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.sort-items__item-enable__toggle {
+  position: relative;
+
+  .sort-items__item-enable__toggle-checkbox {
+    display: none;
+  }
+
+  .sort-items__item-enable__toggle-checkbox-label {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    margin-left: auto;
+    border-radius: 80px;
+    background: #aaa;
+    cursor: pointer;
+    transition: all .2s;
+  }
+
+  .sort-items__item-enable__toggle-checkbox:checked + .sort-items__item-enable__toggle-checkbox-label {
+    background: #07689f;
+  }
+
+  .sort-items__item-enable__toggle-checkbox-label::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 80px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    transition: all .2s;
+  }
+
+  .sort-items__item-enable__toggle-checkbox:checked + .sort-items__item-enable__toggle-checkbox-label::before {
+    left: 18px;
+  }
 }
 
 .sort-items__item-arrow {
+
   button {
     margin-top: 1px;
     display: block;

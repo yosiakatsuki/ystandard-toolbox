@@ -86,7 +86,11 @@ class CTA_Sort {
 		}
 		$result = [];
 		foreach ( $option[ $post_type ][ $type ] as $item ) {
-			$result[ $item['id'] ] = $item['priority'];
+			$priority = $item['priority'];
+			if ( false === $item['enable'] ) {
+				$priority = 'none';
+			}
+			$result[ $item['id'] ] = $priority;
 		}
 
 		return $result;
