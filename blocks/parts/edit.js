@@ -1,10 +1,11 @@
+import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
-
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
+
 import * as BlockOption from './inspector-controls';
-import classnames from 'classnames';
+import EditorStyles from './editor-styles/index';
 
 const Parts = ( props ) => {
 	const { attributes } = props;
@@ -31,6 +32,7 @@ const Parts = ( props ) => {
 							block="ystdtb/parts"
 							attributes={ attributes }
 						/>
+						<EditorStyles />
 					</div>
 				) }
 				{ ! partsId && (

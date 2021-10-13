@@ -1,10 +1,4 @@
-@use "../../blocks/styles/columns/block" as column;
-@use "../../blocks/styles/table/block" as table;
-@use "../../blocks/timeline/block" as timeline;
-@use "../../blocks/faq/block" as faq;
-@use "../../blocks/sns-share/block" as sns-share;
-@use "../../blocks/icon-list/block" as icon-list;
-@use "../../blocks/box/block" as box;
+@use "./ystandard-toolbox-blocks";
 @use "./project/sub-header";
 @use "./component/app/overlay";
 @use "./component/app/widget-accordion";

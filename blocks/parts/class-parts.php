@@ -11,6 +11,7 @@ namespace ystandard_toolbox\blocks;
 
 use ystandard_toolbox\Config;
 use ystandard_toolbox\Dynamic_Block;
+use ystandard_toolbox\Filesystem;
 use ystandard_toolbox\Utility;
 
 defined( 'ABSPATH' ) || die();
@@ -68,9 +69,48 @@ class Parts extends Dynamic_Block {
 			$parts
 		);
 
-		$option['partsList'] = $parts;
+		$option['partsList']          = $parts;
+		$option['partsPreviewStyles'] = $this->get_parts_preview_styles();
 
 		return $option;
+	}
+
+	/**
+	 * パーツブロックプレビュー用CSS
+	 *
+	 * @return array
+	 */
+	private function get_parts_preview_styles() {
+		$result = [];
+		$styles = wp_styles();
+		/**
+		 * コアブロック
+		 */
+		if ( isset( $styles->registered['wp-block-library']->src ) ) {
+			$src  = $styles->registered['wp-block-library']->src;
+			$path = untrailingslashit( ABSPATH ) . $src;
+			if ( is_file( $path ) ) {
+				$result[] = [
+					'css'            => file_get_contents( $path ),
+					'baseURL'        => site_url() . $src,
+					'__unstableType' => 'plugin',
+				];
+			}
+		}
+
+		/**
+		 * Toolbox ブロック
+		 */
+		$path = YSTDTB_PATH . '/css/ystandard-toolbox.css';
+		if ( is_file( $path ) ) {
+			$result[] = [
+				'css'            => file_get_contents( $path ),
+				'baseURL'        => YSTDTB_URL . '/css/ystandard-toolbox.css',
+				'__unstableType' => 'plugin',
+			];
+		}
+
+		return apply_filters( 'yststd_parts_block_preview_styles', $result );
 	}
 
 	/**
