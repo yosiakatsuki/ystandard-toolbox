@@ -2,7 +2,7 @@
 
 .editor-styles-wrapper {
   [data-type="ystdtb/parts"] {
-    &.ystdtb-parts {
+    &.ystdtb-parts.has-parts {
       max-width: 100%;
     }
   }
