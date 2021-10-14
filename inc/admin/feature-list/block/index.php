@@ -22,6 +22,7 @@ defined( 'ABSPATH' ) || die();
 		include __DIR__ . '/timeline.php';
 		include __DIR__ . '/faq.php';
 		include __DIR__ . '/posts.php';
+		include __DIR__ . '/parts.php';
 		include __DIR__ . '/share-button.php';
 		include __DIR__ . '/block-style.php';
 		?>

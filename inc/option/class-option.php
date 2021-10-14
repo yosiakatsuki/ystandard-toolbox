@@ -101,7 +101,9 @@ class Option {
 	 */
 	public static function update_option( $name, $value ) {
 		$option = self::get_all_option();
-
+		if ( ! is_array( $option ) ) {
+			$option = [];
+		}
 		if ( is_array( $value ) ) {
 			/**
 			 * テーマ設定は別保存
@@ -129,6 +131,12 @@ class Option {
 	 */
 	public static function delete_option( $name ) {
 		$option = self::get_all_option();
+		if ( ! is_array( $option ) ) {
+			$option = [];
+		}
+		if ( ! isset( $option[ $name ] ) ) {
+			return true;
+		}
 		unset( $option[ $name ] );
 
 		return update_option( Config::OPTION_NAME, $option );
