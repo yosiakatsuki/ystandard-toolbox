@@ -6,7 +6,10 @@ import {
 	withFontSizes,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import {
+	PanelBody,
+	TextControl
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { blockClassName } from './config';
@@ -18,16 +21,19 @@ import {
 } from './function';
 import { getSpacing } from '@ystdtb/helper/spacing';
 import * as BlockOption from './inspector-controls';
+import StretchTextControl from "@ystdtb/components/stretch-text-control";
 
 function Box( props ) {
 	const {
 		attributes,
+		setAttributes,
 		boxBackgroundColor,
 		boxTextColor,
 		boxBorderColor,
 		labelBackgroundColor,
 		labelTextColor,
 		labelFontSize,
+		isSelected,
 	} = props;
 	const {
 		boxStyle,
@@ -41,7 +47,7 @@ function Box( props ) {
 		labelBorderRadius,
 	} = attributes;
 
-	const hasLabel = label || labelIcon;
+	const hasLabel = label || labelIcon || isSelected;
 
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
@@ -196,10 +202,15 @@ function Box( props ) {
 							<SVGIcon name={ labelIcon }/>
 						</span>
 					) }
-					{ label && (
-						<span className="ystdtb-box__label-text">
-							{ label }
-						</span>
+					{ ( label || isSelected ) && (
+						<StretchTextControl
+							className="ystdtb-box__label-text"
+							value={ label }
+							onChange={ ( value ) => {
+								setAttributes( { label: value } );
+							} }
+							placeholder={ __( 'ラベルテキスト...', 'ystandard-toolbox' ) }
+						/>
 					) }
 				</div>
 			</div>
