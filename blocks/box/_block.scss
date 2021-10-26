@@ -68,6 +68,12 @@ $box_color_default: #666;
       margin-top: 0;
     }
   }
+
+  &.has-text-color {
+    a {
+      color: currentColor;
+    }
+  }
 }
 
 .ystdtb-box__label {
