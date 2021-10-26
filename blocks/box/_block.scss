@@ -34,14 +34,17 @@ $box_color_default: #666;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  z-index: 1;
 }
 
 .ystdtb-box__content {
+  position: relative;
   padding: #{$default_padding};
   padding-top: var(--ystdtb-box-padding-top);
   padding-right: var(--ystdtb-box-padding-right);
   padding-bottom: var(--ystdtb-box-padding-bottom);
   padding-left: var(--ystdtb-box-padding-left);
+  z-index: 1;
 
   @include global.media-breakpoint-down(md) {
     padding-top: var(--ystdtb-box-padding-top-tablet, var(--ystdtb-box-padding-top));

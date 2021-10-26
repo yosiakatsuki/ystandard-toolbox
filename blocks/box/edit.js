@@ -235,7 +235,7 @@ function Box( props ) {
 		}
 	);
 	const backgroundCoverStyle = {
-		backgroundColor: hasBackgroundImage && boxBackgroundColor.color,
+		backgroundColor: hasBackgroundImage && boxBackgroundColor.color ? boxBackgroundColor.color : undefined,
 		opacity: backgroundImageCoverOpacity
 	};
 

@@ -38,7 +38,12 @@ export default function save( { attributes } ) {
 		labelTextColor,
 		customLabelTextColor,
 		labelBorderRadius,
+		backgroundImage,
+		backgroundImageCoverOpacity,
+		backgroundImageRepeat,
 	} = attributes;
+
+	const hasBackgroundImage = !! backgroundImage?.url;
 
 	const colorClass = {
 		boxBackgroundColor: getColorClassName(
@@ -209,7 +214,7 @@ export default function save( { attributes } ) {
 			[ labelFontSizeClass ]: labelFontSizeClass,
 			'has-font-size-class': labelFontSizeClass,
 			[ colorClass.labelBackgroundColor ]:
-				colorClass.labelBackgroundColor,
+			colorClass.labelBackgroundColor,
 			'has-background':
 				colorClass.labelBackgroundColor || customLabelBackgroundColor,
 			[ colorClass.labelTextColor ]: colorClass.labelTextColor,
@@ -243,7 +248,7 @@ export default function save( { attributes } ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon } />
+							<SVGIcon name={ labelIcon }/>
 						</span>
 					) }
 					{ label && (
@@ -256,6 +261,29 @@ export default function save( { attributes } ) {
 		);
 	};
 
+	const backgroundClass = classnames( 'ystdtb-box__background' );
+
+	const backgroundStyle = {
+		backgroundImage: backgroundImage?.url ? `url('${ backgroundImage.url }')` : undefined,
+		backgroundRepeat: backgroundImageRepeat,
+		backgroundSize: 'no-repeat' === backgroundImageRepeat ? undefined : 'auto',
+	};
+
+	const backgroundCoverClass = classnames(
+		'ystdtb-box__background-cover',
+		{
+			[ colorClass.boxBackgroundColor ]: hasBackgroundImage && colorClass.boxBackgroundColor,
+			'has-background':
+				hasBackgroundImage && ( colorClass.boxBackgroundColor || customBoxBackgroundColor ),
+		}
+	);
+	const backgroundCoverStyle = {
+		backgroundColor: hasBackgroundImage && colorClass.boxBackgroundColor
+			? undefined
+			: customBoxBackgroundColor,
+		opacity: backgroundImageCoverOpacity,
+	};
+
 	return (
 		<div { ...blockProps }>
 			{ isLabelOutside( boxStyle ) && getLabelContents() }
@@ -264,13 +292,25 @@ export default function save( { attributes } ) {
 				style={ boxContainerStyle }
 				{ ...boxContainerData }
 			>
+				{ ( hasBackgroundImage &&
+					<div
+						className={ backgroundClass }
+						style={ backgroundStyle }
+						aria-hidden="true"
+					>
+						<div
+							className={ backgroundCoverClass }
+							style={ backgroundCoverStyle }
+						/>
+					</div>
+				) }
 				{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 				<div
 					className={ boxContentClass }
 					style={ boxContentStyle }
 					{ ...boxContentData }
 				>
-					<InnerBlocks.Content />
+					<InnerBlocks.Content/>
 				</div>
 			</div>
 		</div>
