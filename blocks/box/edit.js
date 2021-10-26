@@ -44,9 +44,11 @@ function Box( props ) {
 		labelIcon,
 		labelWeight,
 		labelBorderRadius,
+		backgroundImage,
 	} = attributes;
 
 	const hasLabel = label || labelIcon || isSelected;
+	const hasBackgroundImage = !! backgroundImage?.url;
 
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
@@ -117,14 +119,14 @@ function Box( props ) {
 	} );
 
 	const boxContainerClass = classnames( 'ystdtb-box__inner-container', {
-		'has-background': boxBackgroundColor.color,
+		'has-background': ! hasBackgroundImage && boxBackgroundColor.color,
 		'has-border': boxBorderColor.color,
 		'show-default-border':
 			! boxBorderColor.color && ! boxBackgroundColor.color,
 	} );
 
 	const boxContainerStyle = {
-		backgroundColor: boxBackgroundColor.color,
+		backgroundColor: ! hasBackgroundImage && boxBackgroundColor.color,
 		borderColor: boxBorderColor.color,
 		borderStyle: boxBorderStyle,
 		borderTopLeftRadius: getBoxBorderRadius(
@@ -216,6 +218,23 @@ function Box( props ) {
 		);
 	};
 
+	const backgroundClass = classnames( 'ystdtb-box__background' );
+
+	const backgroundStyle = {
+		backgroundImage: backgroundImage?.url ? `url('${ backgroundImage.url }')` : undefined,
+	};
+
+	const backgroundCoverClass = classnames(
+		'ystdtb-box__background-cover',
+		{
+			'has-background': hasBackgroundImage && boxBackgroundColor.color,
+		}
+	);
+	const backgroundCoverStyle = {
+		backgroundColor: hasBackgroundImage && boxBackgroundColor.color,
+	};
+
+
 	return (
 		<>
 			<InspectorControls>
@@ -240,6 +259,9 @@ function Box( props ) {
 					<BlockOption.LabelTextColor { ...props } />
 					<BlockOption.LabelBorderRadius { ...props } />
 				</PanelBody>
+				<PanelBody title={ __( '背景画像', 'ystandard-toolbox' ) }>
+					<BlockOption.BackgroundImage { ...props } />
+				</PanelBody>
 			</InspectorControls>
 
 			<>
@@ -249,6 +271,18 @@ function Box( props ) {
 						className={ boxContainerClass }
 						style={ boxContainerStyle }
 					>
+						{ ( hasBackgroundImage &&
+							<div
+								className={ backgroundClass }
+								style={ backgroundStyle }
+								aria-hidden="true"
+							>
+								<div
+									className={ backgroundCoverClass }
+									style={ backgroundCoverStyle }
+								/>
+							</div>
+						) }
 						{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 						<div
 							className={ boxContentClass }

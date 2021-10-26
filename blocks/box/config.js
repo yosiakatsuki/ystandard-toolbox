@@ -75,6 +75,9 @@ export const attributes = {
 	labelBorderRadius: {
 		type: 'string',
 	},
+	backgroundImage: {
+		type: 'object',
+	},
 };
 
 export const supports = {
