@@ -59,7 +59,10 @@ export default function save( { attributes } ) {
 		labelTextColor: getColorClassName( 'color', labelTextColor ),
 	};
 
-	const hasLabel = label || labelIcon;
+	let hasLabel = label || labelIcon;
+	if ( 'label-none' === boxStyle ) {
+		hasLabel = false;
+	}
 	const labelFontSizeClass = getFontSizeClass( labelFontSize );
 
 	const labelFontSizeValue =

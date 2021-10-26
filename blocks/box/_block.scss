@@ -125,6 +125,11 @@ $box_color_default: #666;
 
 // スタイル別.
 .ystdtb-box {
+  &.is-box-style--label-none {
+    .ystdtb-box__label {
+      display: none;
+    }
+  }
   &.is-box-style--label-in {
     .ystdtb-box__inner-container {
       overflow: hidden;
