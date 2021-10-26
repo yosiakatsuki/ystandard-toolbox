@@ -4,19 +4,12 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { units } from "../config";
-
+import { units } from '../config';
 
 const LabelBorderRadius = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		labelBorderRadius
-	} = attributes;
+	const { labelBorderRadius } = attributes;
 
 	return (
 		<BaseControl
@@ -34,6 +27,6 @@ const LabelBorderRadius = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelBorderRadius;

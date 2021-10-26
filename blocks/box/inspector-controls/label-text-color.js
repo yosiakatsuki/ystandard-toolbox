@@ -1,16 +1,9 @@
-import {
-	BaseControl,
-	ColorPalette,
-} from '@wordpress/components';
+import { BaseControl, ColorPalette } from '@wordpress/components';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
-
 const LabelTextColor = ( props ) => {
-	const {
-		labelTextColor,
-		setLabelTextColor,
-	} = props;
+	const { labelTextColor, setLabelTextColor } = props;
 	const { colors } = select( 'core/block-editor' ).getSettings();
 
 	return (
@@ -28,6 +21,6 @@ const LabelTextColor = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelTextColor;

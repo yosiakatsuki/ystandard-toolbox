@@ -11,7 +11,7 @@ const MediaUploadControl = ( props ) => {
 		onClear,
 		value,
 		clearLabel,
-		selectLabel
+		selectLabel,
 	} = props;
 
 	const _mediaTypes = mediaTypes || MEDIA_TYPES;
@@ -35,16 +35,13 @@ const MediaUploadControl = ( props ) => {
 		}
 
 		return (
-			<div className='ystdtb-media-upload-control__render'>
+			<div className="ystdtb-media-upload-control__render">
 				<Button
 					onClick={ obj.open }
 					className={ 'ystdtb-media-upload-control__preview' }
 				>
 					{ 'image' === mediaType && (
-						<img
-							src={ media?.url }
-							alt={ media?.alt }
-						/>
+						<img src={ media?.url } alt={ media?.alt } />
 					) }
 					{ 'video' === mediaType && (
 						<video
@@ -57,7 +54,7 @@ const MediaUploadControl = ( props ) => {
 					) }
 				</Button>
 				<Button
-					className={'ystdtb-media-upload-control__clear'}
+					className={ 'ystdtb-media-upload-control__clear' }
 					isDestructive
 					onClick={ onClear }
 				>
@@ -65,7 +62,7 @@ const MediaUploadControl = ( props ) => {
 				</Button>
 			</div>
 		);
-	}
+	};
 
 	return (
 		<div className="ystdtb-media-upload-control">
@@ -77,6 +74,6 @@ const MediaUploadControl = ( props ) => {
 			/>
 		</div>
 	);
-}
+};
 
 export default MediaUploadControl;

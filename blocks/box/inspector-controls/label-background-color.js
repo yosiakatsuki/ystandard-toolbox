@@ -1,16 +1,9 @@
-import {
-	BaseControl,
-	ColorPalette,
-} from '@wordpress/components';
+import { BaseControl, ColorPalette } from '@wordpress/components';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
-
 const LabelBackgroundColor = ( props ) => {
-	const {
-		labelBackgroundColor,
-		setLabelBackgroundColor,
-	} = props;
+	const { labelBackgroundColor, setLabelBackgroundColor } = props;
 	const { colors } = select( 'core/block-editor' ).getSettings();
 
 	return (
@@ -28,6 +21,6 @@ const LabelBackgroundColor = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelBackgroundColor;

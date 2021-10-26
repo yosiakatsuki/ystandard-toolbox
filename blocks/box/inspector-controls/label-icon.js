@@ -1,19 +1,11 @@
-import {
-	BaseControl,
-} from '@wordpress/components';
+import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import SVGIconSelect from "@ystdtb/components/icon-picker";
+import SVGIconSelect from '@ystdtb/components/icon-picker';
 
 const LabelIcon = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		labelIcon,
-	} = attributes;
+	const { labelIcon } = attributes;
 
 	return (
 		<BaseControl
@@ -29,6 +21,6 @@ const LabelIcon = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelIcon;

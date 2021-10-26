@@ -5,21 +5,17 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { units } from "../config";
-import { addResponsiveProperty, deleteResponsiveProperty, getResponsiveProperty } from "@ystdtb/helper/responsive";
-
+import { units } from '../config';
+import {
+	addResponsiveProperty,
+	deleteResponsiveProperty,
+	getResponsiveProperty,
+} from '@ystdtb/helper/responsive';
 
 const BoxPadding = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		boxPadding,
-		isResponsiveBoxPadding,
-	} = attributes;
+	const { boxPadding, isResponsiveBoxPadding } = attributes;
 
 	return (
 		<BaseControl
@@ -28,14 +24,8 @@ const BoxPadding = ( props ) => {
 		>
 			<BaseControl>
 				<BoxControl
-					label={ __(
-						'ボックス内側余白',
-						'ystandard-toolbox'
-					) }
-					values={ getResponsiveProperty(
-						boxPadding,
-						'desktop'
-					) }
+					label={ __( 'ボックス内側余白', 'ystandard-toolbox' ) }
+					values={ getResponsiveProperty( boxPadding, 'desktop' ) }
 					onChange={ ( nextValues ) => {
 						setAttributes( {
 							boxPadding: {
@@ -54,9 +44,7 @@ const BoxPadding = ( props ) => {
 					onChange={ ( value ) => {
 						let newBoxPadding;
 						if ( value ) {
-							newBoxPadding = addResponsiveProperty(
-								boxPadding
-							);
+							newBoxPadding = addResponsiveProperty( boxPadding );
 						} else {
 							newBoxPadding = deleteResponsiveProperty(
 								boxPadding
@@ -73,14 +61,8 @@ const BoxPadding = ( props ) => {
 			{ isResponsiveBoxPadding && (
 				<BaseControl>
 					<BoxControl
-						label={ __(
-							'タブレット',
-							'ystandard-toolbox'
-						) }
-						values={ getResponsiveProperty(
-							boxPadding,
-							'tablet'
-						) }
+						label={ __( 'タブレット', 'ystandard-toolbox' ) }
+						values={ getResponsiveProperty( boxPadding, 'tablet' ) }
 						onChange={ ( nextValues ) => {
 							setAttributes( {
 								boxPadding: {
@@ -92,14 +74,8 @@ const BoxPadding = ( props ) => {
 						units={ units }
 					/>
 					<BoxControl
-						label={ __(
-							'モバイル',
-							'ystandard-toolbox'
-						) }
-						values={ getResponsiveProperty(
-							boxPadding,
-							'mobile'
-						) }
+						label={ __( 'モバイル', 'ystandard-toolbox' ) }
+						values={ getResponsiveProperty( boxPadding, 'mobile' ) }
 						onChange={ ( nextValues ) => {
 							setAttributes( {
 								boxPadding: {
@@ -114,6 +90,6 @@ const BoxPadding = ( props ) => {
 			) }
 		</BaseControl>
 	);
-}
+};
 
 export default BoxPadding;

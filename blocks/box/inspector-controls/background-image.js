@@ -1,29 +1,17 @@
-import {
-	BaseControl,
-} from '@wordpress/components';
-import MediaUploadControl from "@ystdtb/components/media-upload-control";
+import { BaseControl } from '@wordpress/components';
+import MediaUploadControl from '@ystdtb/components/media-upload-control';
 
 const BackgroundImage = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		backgroundImage,
-	} = attributes;
+	const { backgroundImage } = attributes;
 
 	const handleOnSelect = ( media ) => {
-		setAttributes(
-			{ backgroundImage: media }
-		);
-	}
+		setAttributes( { backgroundImage: media } );
+	};
 	const handleOnClear = () => {
-		setAttributes(
-			{ backgroundImage: undefined }
-		);
-	}
+		setAttributes( { backgroundImage: undefined } );
+	};
 
 	return (
 		<BaseControl>
@@ -35,6 +23,6 @@ const BackgroundImage = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BackgroundImage;

@@ -1,19 +1,11 @@
-import classnames from "classnames";
-import {
-	Button,
-} from '@wordpress/components';
+import classnames from 'classnames';
+import { Button } from '@wordpress/components';
 
-import { boxStyleList } from "../config";
+import { boxStyleList } from '../config';
 
 const BoxType = ( props ) => {
-
-	const {
-		attributes,
-		setAttributes
-	} = props;
-	const {
-		boxStyle
-	} = attributes;
+	const { attributes, setAttributes } = props;
+	const { boxStyle } = attributes;
 	return (
 		<>
 			<div className="ystdtb-box__type-select">
@@ -24,8 +16,7 @@ const BoxType = ( props ) => {
 								'ystdtb-box__type-button',
 								'ystdtb__shadow-button',
 								{
-									'is-selected':
-										boxStyle === item.value,
+									'is-selected': boxStyle === item.value,
 								}
 							) }
 							key={ item.value }
@@ -36,28 +27,28 @@ const BoxType = ( props ) => {
 								} );
 							} }
 						>
-									<span
-										className={ classnames(
-											'ystdtb-box__type-wrap',
-											`is-${ item.value }`
-										) }
-									>
-										<span
-											className="ystdtb-box__type-label"
-											aria-hidden="true"
-										/>
-										<span className="ystdtb-box__type-box">
-											<span className="ystdtb-box__type-name">
-												{ item.label }
-											</span>
-										</span>
+							<span
+								className={ classnames(
+									'ystdtb-box__type-wrap',
+									`is-${ item.value }`
+								) }
+							>
+								<span
+									className="ystdtb-box__type-label"
+									aria-hidden="true"
+								/>
+								<span className="ystdtb-box__type-box">
+									<span className="ystdtb-box__type-name">
+										{ item.label }
 									</span>
+								</span>
+							</span>
 						</Button>
 					);
 				} ) }
 			</div>
 		</>
 	);
-}
+};
 
 export default BoxType;

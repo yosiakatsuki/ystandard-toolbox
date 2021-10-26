@@ -1,26 +1,14 @@
-import {
-	BaseControl,
-	RangeControl,
-} from '@wordpress/components';
+import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-
 const BackgroundOpacity = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		backgroundImageCoverOpacity,
-	} = attributes;
+	const { backgroundImageCoverOpacity } = attributes;
 
 	const handleOnChange = ( value ) => {
-		setAttributes(
-			{ backgroundImageCoverOpacity: value }
-		);
-	}
+		setAttributes( { backgroundImageCoverOpacity: value } );
+	};
 
 	return (
 		<BaseControl>
@@ -34,6 +22,6 @@ const BackgroundOpacity = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BackgroundOpacity;

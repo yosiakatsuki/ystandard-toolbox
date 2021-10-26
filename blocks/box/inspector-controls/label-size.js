@@ -1,17 +1,9 @@
-import {
-	BaseControl,
-} from '@wordpress/components';
-import {
-	FontSizePicker,
-} from '@wordpress/block-editor';
+import { BaseControl } from '@wordpress/components';
+import { FontSizePicker } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 const LabelSize = ( props ) => {
-
-	const {
-		labelFontSize,
-		setLabelFontSize,
-	} = props;
+	const { labelFontSize, setLabelFontSize } = props;
 
 	return (
 		<BaseControl
@@ -26,6 +18,6 @@ const LabelSize = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelSize;

@@ -16,12 +16,20 @@ export const ystdtbConfig = {
 		backgroundRepeat: [
 			{
 				value: 'no-repeat',
-				label: _x( '繰り返し無し', 'component-config', 'ystandard-toolbox' ),
+				label: _x(
+					'繰り返し無し',
+					'component-config',
+					'ystandard-toolbox'
+				),
 			},
 			{
 				value: 'repeat',
-				label: _x( '繰り返す', 'component-config', 'ystandard-toolbox' ),
-			}
-		]
-	}
+				label: _x(
+					'繰り返す',
+					'component-config',
+					'ystandard-toolbox'
+				),
+			},
+		],
+	},
 };

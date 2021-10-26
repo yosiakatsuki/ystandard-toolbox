@@ -6,7 +6,7 @@ import { mergeDefaultAttributes } from '@ystdtb/helper/attribute';
 import edit from './edit';
 import save from './save';
 import { attributes, supports } from './config';
-import { deprecated } from "./deprecated";
+import { deprecated } from './deprecated';
 
 const blockName = 'ystdtb/box';
 const blockAttributes = mergeDefaultAttributes( blockName, attributes );

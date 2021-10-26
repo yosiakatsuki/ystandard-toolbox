@@ -128,7 +128,10 @@ export const deprecated116 = [
 					boxBackgroundColor
 				),
 				boxTextColor: getColorClassName( 'color', boxTextColor ),
-				boxBorderColor: getColorClassName( 'border-color', boxBorderColor ),
+				boxBorderColor: getColorClassName(
+					'border-color',
+					boxBorderColor
+				),
 				labelBackgroundColor: getColorClassName(
 					'background-color',
 					labelBackgroundColor
@@ -140,10 +143,15 @@ export const deprecated116 = [
 			const labelFontSizeClass = getFontSizeClass( labelFontSize );
 
 			const labelFontSizeValue =
-				undefined === customLabelFontSize ? '0.9em' : customLabelFontSize;
+				undefined === customLabelFontSize
+					? '0.9em'
+					: customLabelFontSize;
 
 			const blockProps = useBlockProps.save( {
-				className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
+				className: classnames(
+					blockClassName,
+					`is-box-style--${ boxStyle }`
+				),
 				style: {
 					'--ystdtb-box-border-width': boxBorderSize,
 					'--ystdtb-box-padding-top': getSpacing(
@@ -213,17 +221,27 @@ export const deprecated116 = [
 				},
 			} );
 
-			const boxContainerClass = classnames( 'ystdtb-box__inner-container', {
-				[ colorClass.boxBackgroundColor ]: colorClass.boxBackgroundColor,
-				'has-background':
-					colorClass.boxBackgroundColor || customBoxBackgroundColor,
-				[ colorClass.boxBorderColor ]: colorClass.boxBorderColor,
-				'has-border': colorClass.boxBorderColor || customBoxBorderColor,
-				'has-border-color': colorClass.boxBorderColor || customBoxBorderColor,
-				'show-default-border':
-					! ( colorClass.boxBackgroundColor || customBoxBackgroundColor ) &&
-					! ( colorClass.boxBorderColor || customBoxBorderColor ),
-			} );
+			const boxContainerClass = classnames(
+				'ystdtb-box__inner-container',
+				{
+					[ colorClass.boxBackgroundColor ]:
+						colorClass.boxBackgroundColor,
+					'has-background':
+						colorClass.boxBackgroundColor ||
+						customBoxBackgroundColor,
+					[ colorClass.boxBorderColor ]: colorClass.boxBorderColor,
+					'has-border':
+						colorClass.boxBorderColor || customBoxBorderColor,
+					'has-border-color':
+						colorClass.boxBorderColor || customBoxBorderColor,
+					'show-default-border':
+						! (
+							colorClass.boxBackgroundColor ||
+							customBoxBackgroundColor
+						) &&
+						! ( colorClass.boxBorderColor || customBoxBorderColor ),
+				}
+			);
 
 			const boxBorderColorStyle = colorClass.boxBorderColor
 				? undefined
@@ -277,8 +295,16 @@ export const deprecated116 = [
 				...getDataFallbackProperty( {
 					'border-width': '' === boxBorderSize ? 0 : boxBorderSize,
 					'padding-top': getSpacing( boxPadding, 'top', 'desktop' ),
-					'padding-right': getSpacing( boxPadding, 'right', 'desktop' ),
-					'padding-bottom': getSpacing( boxPadding, 'bottom', 'desktop' ),
+					'padding-right': getSpacing(
+						boxPadding,
+						'right',
+						'desktop'
+					),
+					'padding-bottom': getSpacing(
+						boxPadding,
+						'bottom',
+						'desktop'
+					),
 					'padding-left': getSpacing( boxPadding, 'left', 'desktop' ),
 				} ),
 			};
@@ -291,11 +317,13 @@ export const deprecated116 = [
 					[ labelFontSizeClass ]: labelFontSizeClass,
 					'has-font-size-class': labelFontSizeClass,
 					[ colorClass.labelBackgroundColor ]:
-					colorClass.labelBackgroundColor,
+						colorClass.labelBackgroundColor,
 					'has-background':
-						colorClass.labelBackgroundColor || customLabelBackgroundColor,
+						colorClass.labelBackgroundColor ||
+						customLabelBackgroundColor,
 					[ colorClass.labelTextColor ]: colorClass.labelTextColor,
-					'has-text-color': colorClass.labelTextColor || customLabelTextColor,
+					'has-text-color':
+						colorClass.labelTextColor || customLabelTextColor,
 					'has-font-size': false,
 					[ `is-label-${ labelWeight }` ]: labelWeight,
 				} );
@@ -318,20 +346,22 @@ export const deprecated116 = [
 					backgroundColor: colorClass.labelBackgroundColor
 						? undefined
 						: customLabelBackgroundColor,
-					color: colorClass.labelTextColor ? undefined : customLabelTextColor,
+					color: colorClass.labelTextColor
+						? undefined
+						: customLabelTextColor,
 				};
 				return (
 					<div className={ labelClass } style={ labelStyle }>
 						<div className="ystdtb-box__label-contents">
 							{ labelIcon && (
 								<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon }/>
-						</span>
+									<SVGIcon name={ labelIcon } />
+								</span>
 							) }
 							{ label && (
 								<span className="ystdtb-box__label-text">
-							{ label }
-						</span>
+									{ label }
+								</span>
 							) }
 						</div>
 					</div>
@@ -352,11 +382,11 @@ export const deprecated116 = [
 							style={ boxContentStyle }
 							{ ...boxContentData }
 						>
-							<InnerBlocks.Content/>
+							<InnerBlocks.Content />
 						</div>
 					</div>
 				</div>
 			);
-		}
-	}
+		},
+	},
 ];

@@ -1,17 +1,8 @@
-import {
-	TextControl
-} from '@wordpress/components';
-import classnames from "classnames";
+import { TextControl } from '@wordpress/components';
+import classnames from 'classnames';
 
 const StretchTextControl = ( props ) => {
-
-	const {
-		className,
-		style,
-		value,
-		onChange,
-		placeholder,
-	} = props;
+	const { className, style, value, onChange, placeholder } = props;
 	const inputClassName = classnames(
 		'ystdtb-stretch-text-control__input',
 		className
@@ -22,7 +13,7 @@ const StretchTextControl = ( props ) => {
 	);
 	const dummyText = value ? value : placeholder;
 	return (
-		<div className='ystdtb-stretch-text-control'>
+		<div className="ystdtb-stretch-text-control">
 			<div
 				className={ dummyClassName }
 				style={ style }
@@ -39,6 +30,6 @@ const StretchTextControl = ( props ) => {
 			/>
 		</div>
 	);
-}
+};
 
 export default StretchTextControl;

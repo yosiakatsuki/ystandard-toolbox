@@ -1,20 +1,11 @@
-import {
-	BaseControl,
-	Button,
-} from '@wordpress/components';
+import { BaseControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { fontWeightList } from "../config";
+import { fontWeightList } from '../config';
 
 const LabelFontWeight = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		labelWeight,
-	} = attributes;
+	const { labelWeight } = attributes;
 
 	return (
 		<BaseControl
@@ -26,9 +17,7 @@ const LabelFontWeight = ( props ) => {
 					return (
 						<Button
 							key={ item.value }
-							isSecondary={
-								labelWeight !== item.value
-							}
+							isSecondary={ labelWeight !== item.value }
 							isPrimary={ labelWeight === item.value }
 							onClick={ () => {
 								setAttributes( {
@@ -43,6 +32,6 @@ const LabelFontWeight = ( props ) => {
 			</div>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelFontWeight;

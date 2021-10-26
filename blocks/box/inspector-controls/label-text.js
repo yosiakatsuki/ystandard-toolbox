@@ -1,21 +1,11 @@
-import {
-	BaseControl,
-} from '@wordpress/components';
-import {
-	PlainText,
-} from '@wordpress/block-editor';
+import { BaseControl } from '@wordpress/components';
+import { PlainText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 const LabelText = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		label,
-	} = attributes;
+	const { label } = attributes;
 
 	return (
 		<BaseControl
@@ -29,11 +19,11 @@ const LabelText = ( props ) => {
 						label: value,
 					} );
 				} }
-				placeholder={ __( 'ラベルを入力...', 'ystandard-toolbox' ) }
-				aria-label={ __( 'ラベルを入力...', 'ystandard-toolbox' ) }
+				placeholder={ __( 'ラベルを入力…', 'ystandard-toolbox' ) }
+				aria-label={ __( 'ラベルを入力…', 'ystandard-toolbox' ) }
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default LabelText;

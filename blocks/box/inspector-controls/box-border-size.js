@@ -4,19 +4,12 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { units } from "../config";
-
+import { units } from '../config';
 
 const BoxBorderSize = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		boxBorderSize
-	} = attributes;
+	const { boxBorderSize } = attributes;
 
 	return (
 		<BaseControl>
@@ -32,6 +25,6 @@ const BoxBorderSize = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BoxBorderSize;

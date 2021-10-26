@@ -1,22 +1,12 @@
-import {
-	BaseControl,
-	SelectControl,
-} from '@wordpress/components';
+import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { borderStyles } from "../config";
-
+import { borderStyles } from '../config';
 
 const BoxBorderStyle = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		boxBorderStyle
-	} = attributes;
+	const { boxBorderStyle } = attributes;
 
 	return (
 		<BaseControl>
@@ -32,6 +22,6 @@ const BoxBorderStyle = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BoxBorderStyle;

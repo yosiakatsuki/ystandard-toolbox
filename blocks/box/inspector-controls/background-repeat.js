@@ -1,29 +1,17 @@
-import {
-	BaseControl,
-	SelectControl,
-} from '@wordpress/components';
+import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { getComponentConfig } from "@ystdtb/helper/config";
-
+import { getComponentConfig } from '@ystdtb/helper/config';
 
 const BackgroundRepeat = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		backgroundImageRepeat,
-	} = attributes;
+	const { backgroundImageRepeat } = attributes;
 
 	const repeatOptions = getComponentConfig( 'backgroundRepeat' );
 
 	const handleOnChange = ( value ) => {
-		setAttributes(
-			{ backgroundImageRepeat: value }
-		);
-	}
+		setAttributes( { backgroundImageRepeat: value } );
+	};
 
 	return (
 		<BaseControl>
@@ -35,6 +23,6 @@ const BackgroundRepeat = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BackgroundRepeat;

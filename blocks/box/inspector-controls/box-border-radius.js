@@ -4,19 +4,12 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { units } from "../config";
-
+import { units } from '../config';
 
 const BoxBorderRadius = ( props ) => {
+	const { attributes, setAttributes } = props;
 
-	const {
-		attributes,
-		setAttributes,
-	} = props;
-
-	const {
-		boxBorderRadius
-	} = attributes;
+	const { boxBorderRadius } = attributes;
 
 	return (
 		<BaseControl>
@@ -32,6 +25,6 @@ const BoxBorderRadius = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default BoxBorderRadius;

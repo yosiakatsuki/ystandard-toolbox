@@ -6,9 +6,7 @@ import {
 	withFontSizes,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import {
-	PanelBody,
-} from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { blockClassName } from './config';
@@ -20,7 +18,7 @@ import {
 } from './function';
 import { getSpacing } from '@ystdtb/helper/spacing';
 import * as BlockOption from './inspector-controls';
-import StretchTextControl from "@ystdtb/components/stretch-text-control";
+import StretchTextControl from '@ystdtb/components/stretch-text-control';
 
 function Box( props ) {
 	const {
@@ -205,7 +203,7 @@ function Box( props ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon }/>
+							<SVGIcon name={ labelIcon } />
 						</span>
 					) }
 					{ ( label || isSelected ) && (
@@ -215,7 +213,10 @@ function Box( props ) {
 							onChange={ ( value ) => {
 								setAttributes( { label: value } );
 							} }
-							placeholder={ __( 'ラベルテキスト...', 'ystandard-toolbox' ) }
+							placeholder={ __(
+								'ラベルテキスト…',
+								'ystandard-toolbox'
+							) }
 						/>
 					) }
 				</div>
@@ -226,22 +227,24 @@ function Box( props ) {
 	const backgroundClass = classnames( 'ystdtb-box__background' );
 
 	const backgroundStyle = {
-		backgroundImage: backgroundImage?.url ? `url('${ backgroundImage.url }')` : undefined,
+		backgroundImage: backgroundImage?.url
+			? `url('${ backgroundImage.url }')`
+			: undefined,
 		backgroundRepeat: backgroundImageRepeat,
-		backgroundSize: 'no-repeat' === backgroundImageRepeat ? undefined : 'auto',
+		backgroundSize:
+			'no-repeat' === backgroundImageRepeat ? undefined : 'auto',
 	};
 
-	const backgroundCoverClass = classnames(
-		'ystdtb-box__background-cover',
-		{
-			'has-background': hasBackgroundImage && boxBackgroundColor.color,
-		}
-	);
+	const backgroundCoverClass = classnames( 'ystdtb-box__background-cover', {
+		'has-background': hasBackgroundImage && boxBackgroundColor.color,
+	} );
 	const backgroundCoverStyle = {
-		backgroundColor: hasBackgroundImage && boxBackgroundColor.color ? boxBackgroundColor.color : undefined,
-		opacity: backgroundImageCoverOpacity
+		backgroundColor:
+			hasBackgroundImage && boxBackgroundColor.color
+				? boxBackgroundColor.color
+				: undefined,
+		opacity: backgroundImageCoverOpacity,
 	};
-
 
 	return (
 		<>
@@ -281,7 +284,7 @@ function Box( props ) {
 						className={ boxContainerClass }
 						style={ boxContainerStyle }
 					>
-						{ ( hasBackgroundImage &&
+						{ hasBackgroundImage && (
 							<div
 								className={ backgroundClass }
 								style={ backgroundStyle }
@@ -298,7 +301,7 @@ function Box( props ) {
 							className={ boxContentClass }
 							style={ boxContentStyle }
 						>
-							<InnerBlocks/>
+							<InnerBlocks />
 						</div>
 					</div>
 				</div>
