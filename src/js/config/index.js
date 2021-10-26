@@ -21,15 +21,7 @@ export const ystdtbConfig = {
 			{
 				value: 'repeat',
 				label: _x( '繰り返す', 'component-config', 'ystandard-toolbox' ),
-			},
-			{
-				value: 'repeat-x',
-				label: _x( '横に繰り返す', 'component-config', 'ystandard-toolbox' ),
-			},
-			{
-				value: 'repeat-y',
-				label: _x( '縦に繰り返す', 'component-config', 'ystandard-toolbox' ),
-			},
+			}
 		]
 	}
 };

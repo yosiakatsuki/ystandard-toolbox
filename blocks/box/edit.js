@@ -21,7 +21,6 @@ import {
 import { getSpacing } from '@ystdtb/helper/spacing';
 import * as BlockOption from './inspector-controls';
 import StretchTextControl from "@ystdtb/components/stretch-text-control";
-import { BackgroundOpacity } from "./inspector-controls";
 
 function Box( props ) {
 	const {
@@ -47,6 +46,7 @@ function Box( props ) {
 		labelBorderRadius,
 		backgroundImage,
 		backgroundImageCoverOpacity,
+		backgroundImageRepeat,
 	} = attributes;
 
 	const hasLabel = label || labelIcon || isSelected;
@@ -224,6 +224,8 @@ function Box( props ) {
 
 	const backgroundStyle = {
 		backgroundImage: backgroundImage?.url ? `url('${ backgroundImage.url }')` : undefined,
+		backgroundRepeat: backgroundImageRepeat,
+		backgroundSize: 'no-repeat' === backgroundImageRepeat ? undefined : 'auto',
 	};
 
 	const backgroundCoverClass = classnames(
@@ -265,6 +267,7 @@ function Box( props ) {
 				<PanelBody title={ __( '背景画像', 'ystandard-toolbox' ) }>
 					<BlockOption.BackgroundImage { ...props } />
 					<BlockOption.BackgroundOpacity { ...props } />
+					<BlockOption.BackgroundRepeat { ...props } />
 				</PanelBody>
 			</InspectorControls>
 

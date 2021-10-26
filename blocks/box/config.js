@@ -80,7 +80,11 @@ export const attributes = {
 	},
 	backgroundImageCoverOpacity: {
 		type: 'number',
-		default: 0.8
+		default: 0.8,
+	},
+	backgroundImageRepeat: {
+		type: 'string',
+		default: 'no-repeat',
 	},
 };
 

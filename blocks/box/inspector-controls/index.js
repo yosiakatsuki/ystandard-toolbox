@@ -15,3 +15,4 @@ export { default as LabelTextColor } from './label-text-color';
 export { default as LabelBorderRadius } from './label-border-radius';
 export { default as BackgroundImage } from './background-image';
 export { default as BackgroundOpacity } from './background-opacity';
+export { default as BackgroundRepeat } from './background-repeat';
