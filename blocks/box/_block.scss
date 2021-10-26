@@ -36,12 +36,6 @@ $box_color_default: #666;
   background-position: center center;
 }
 
-.ystdtb-box__background-cover {
-  &:not(.has-opacity) {
-    opacity: 0.8;
-  }
-}
-
 .ystdtb-box__content {
   padding: #{$default_padding};
   padding-top: var(--ystdtb-box-padding-top);

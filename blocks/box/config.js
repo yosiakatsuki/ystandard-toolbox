@@ -78,6 +78,10 @@ export const attributes = {
 	backgroundImage: {
 		type: 'object',
 	},
+	backgroundImageCoverOpacity: {
+		type: 'number',
+		default: 0.8
+	},
 };
 
 export const supports = {
