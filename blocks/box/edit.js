@@ -1,39 +1,15 @@
 import classnames from 'classnames';
 import {
 	InnerBlocks,
-	PlainText,
 	InspectorControls,
 	withColors,
-	FontSizePicker,
 	withFontSizes,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import {
-	PanelBody,
-	BaseControl,
-	ToggleControl,
-	Button,
-	ColorPalette,
-	SelectControl,
-	__experimentalBoxControl as BoxControl,
-	__experimentalUnitControl as UnitControl,
-} from '@wordpress/components';
-import { select } from '@wordpress/data';
+import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import {
-	units,
-	blockClassName,
-	boxStyleList,
-	borderStyles,
-	fontWeightList,
-} from './config';
-import {
-	getResponsiveProperty,
-	addResponsiveProperty,
-	deleteResponsiveProperty,
-} from '@ystdtb/helper/responsive';
-import SVGIconSelect from '@ystdtb/components/icon-picker';
+import { blockClassName } from './config';
 import SVGIcon from '@ystdtb/components/svg-icon';
 import {
 	getBoxBorderRadius,
@@ -41,23 +17,20 @@ import {
 	getLabelBorderRadius,
 } from './function';
 import { getSpacing } from '@ystdtb/helper/spacing';
+import * as BlockOption from './inspector-controls';
+import StretchTextControl from '@ystdtb/components/stretch-text-control';
 
 function Box( props ) {
 	const {
 		attributes,
 		setAttributes,
 		boxBackgroundColor,
-		setBoxBackgroundColor,
 		boxTextColor,
-		setBoxTextColor,
 		boxBorderColor,
-		setBoxBorderColor,
 		labelBackgroundColor,
-		setLabelBackgroundColor,
 		labelTextColor,
-		setLabelTextColor,
 		labelFontSize,
-		setLabelFontSize,
+		isSelected,
 	} = props;
 	const {
 		boxStyle,
@@ -65,16 +38,20 @@ function Box( props ) {
 		boxBorderStyle,
 		boxBorderRadius,
 		boxPadding,
-		isResponsiveBoxPadding,
 		label,
 		labelIcon,
 		labelWeight,
 		labelBorderRadius,
+		backgroundImage,
+		backgroundImageCoverOpacity,
+		backgroundImageRepeat,
 	} = attributes;
 
-	const { colors } = select( 'core/block-editor' ).getSettings();
-
-	const hasLabel = label || labelIcon;
+	let hasLabel = label || labelIcon || isSelected;
+	if ( 'label-none' === boxStyle ) {
+		hasLabel = false;
+	}
+	const hasBackgroundImage = !! backgroundImage?.url;
 
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
@@ -145,14 +122,14 @@ function Box( props ) {
 	} );
 
 	const boxContainerClass = classnames( 'ystdtb-box__inner-container', {
-		'has-background': boxBackgroundColor.color,
+		'has-background': ! hasBackgroundImage && boxBackgroundColor.color,
 		'has-border': boxBorderColor.color,
 		'show-default-border':
 			! boxBorderColor.color && ! boxBackgroundColor.color,
 	} );
 
 	const boxContainerStyle = {
-		backgroundColor: boxBackgroundColor.color,
+		backgroundColor: ! hasBackgroundImage && boxBackgroundColor.color,
 		borderColor: boxBorderColor.color,
 		borderStyle: boxBorderStyle,
 		borderTopLeftRadius: getBoxBorderRadius(
@@ -229,335 +206,74 @@ function Box( props ) {
 							<SVGIcon name={ labelIcon } />
 						</span>
 					) }
-					{ label && (
-						<span className="ystdtb-box__label-text">
-							{ label }
-						</span>
+					{ ( label || isSelected ) && (
+						<StretchTextControl
+							className="ystdtb-box__label-text"
+							value={ label }
+							onChange={ ( value ) => {
+								setAttributes( { label: value } );
+							} }
+							placeholder={ __(
+								'ラベルテキスト…',
+								'ystandard-toolbox'
+							) }
+						/>
 					) }
 				</div>
 			</div>
 		);
 	};
 
+	const backgroundClass = classnames( 'ystdtb-box__background' );
+
+	const backgroundStyle = {
+		backgroundImage: backgroundImage?.url
+			? `url('${ backgroundImage.url }')`
+			: undefined,
+		backgroundRepeat: backgroundImageRepeat,
+		backgroundSize:
+			'no-repeat' === backgroundImageRepeat ? undefined : 'auto',
+	};
+
+	const backgroundCoverClass = classnames( 'ystdtb-box__background-cover', {
+		'has-background': hasBackgroundImage && boxBackgroundColor.color,
+	} );
+	const backgroundCoverStyle = {
+		backgroundColor:
+			hasBackgroundImage && boxBackgroundColor.color
+				? boxBackgroundColor.color
+				: undefined,
+		opacity: backgroundImageCoverOpacity,
+	};
+
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'タイプ', 'ystandard-toolbox' ) }>
-					<div className="ystdtb-box__type-select">
-						{ boxStyleList.map( ( item ) => {
-							return (
-								<Button
-									className={ classnames(
-										'ystdtb-box__type-button',
-										'ystdtb__shadow-button',
-										{
-											'is-selected':
-												boxStyle === item.value,
-										}
-									) }
-									key={ item.value }
-									isPrimary={ boxStyle === item.value }
-									onClick={ () => {
-										setAttributes( {
-											boxStyle: item.value,
-										} );
-									} }
-								>
-									<span
-										className={ classnames(
-											'ystdtb-box__type-wrap',
-											`is-${ item.value }`
-										) }
-									>
-										<span
-											className="ystdtb-box__type-label"
-											aria-hidden="true"
-										>
-											　
-										</span>
-										<span className="ystdtb-box__type-box">
-											<span className="ystdtb-box__type-name">
-												{ item.label }
-											</span>
-										</span>
-									</span>
-								</Button>
-							);
-						} ) }
-					</div>
+					<BlockOption.BoxType { ...props } />
 				</PanelBody>
 				<PanelBody title={ __( 'ボックス設定', 'ystandard-toolbox' ) }>
-					<BaseControl
-						id={ 'box-background-color' }
-						label={ __( '背景色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setBoxBackgroundColor( color );
-							} }
-							value={ boxBackgroundColor.color }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'box-background-color' }
-						label={ __( '文字色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setBoxTextColor( color );
-							} }
-							value={ boxTextColor.color }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'box-background-color' }
-						label={ __( '枠線色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setBoxBorderColor( color );
-							} }
-							value={ boxBorderColor.color }
-						/>
-					</BaseControl>
-					<BaseControl>
-						<UnitControl
-							label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
-							value={ boxBorderSize }
-							onChange={ ( value ) => {
-								setAttributes( {
-									boxBorderSize: value,
-								} );
-							} }
-							units={ units }
-						/>
-					</BaseControl>
-					<BaseControl>
-						<SelectControl
-							label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
-							value={ boxBorderStyle }
-							options={ borderStyles }
-							onChange={ ( value ) => {
-								setAttributes( {
-									boxBorderStyle: value,
-								} );
-							} }
-						/>
-					</BaseControl>
-					<BaseControl>
-						<UnitControl
-							label={ __( '枠線角丸', 'ystandard-toolbox' ) }
-							value={ boxBorderRadius }
-							onChange={ ( value ) => {
-								setAttributes( {
-									boxBorderRadius: value,
-								} );
-							} }
-							units={ units }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'box-padding' }
-						label={ __( '余白設定', 'ystandard-toolbox' ) }
-					>
-						<BaseControl>
-							<BoxControl
-								label={ __(
-									'ボックス内側余白',
-									'ystandard-toolbox'
-								) }
-								values={ getResponsiveProperty(
-									boxPadding,
-									'desktop'
-								) }
-								onChange={ ( nextValues ) => {
-									setAttributes( {
-										boxPadding: {
-											...boxPadding,
-											desktop: nextValues,
-										},
-									} );
-								} }
-								units={ units }
-							/>
-							<ToggleControl
-								label={ __(
-									'タブレット・モバイル設定',
-									'ystandard-toolbox'
-								) }
-								onChange={ ( value ) => {
-									let newBoxPadding;
-									if ( value ) {
-										newBoxPadding = addResponsiveProperty(
-											boxPadding
-										);
-									} else {
-										newBoxPadding = deleteResponsiveProperty(
-											boxPadding
-										);
-									}
-									setAttributes( {
-										isResponsiveBoxPadding: value,
-										boxPadding: newBoxPadding,
-									} );
-								} }
-								checked={ isResponsiveBoxPadding }
-							/>
-						</BaseControl>
-						{ isResponsiveBoxPadding && (
-							<BaseControl>
-								<BoxControl
-									label={ __(
-										'タブレット',
-										'ystandard-toolbox'
-									) }
-									values={ getResponsiveProperty(
-										boxPadding,
-										'tablet'
-									) }
-									onChange={ ( nextValues ) => {
-										setAttributes( {
-											boxPadding: {
-												...boxPadding,
-												tablet: nextValues,
-											},
-										} );
-									} }
-									units={ units }
-								/>
-								<BoxControl
-									label={ __(
-										'モバイル',
-										'ystandard-toolbox'
-									) }
-									values={ getResponsiveProperty(
-										boxPadding,
-										'mobile'
-									) }
-									onChange={ ( nextValues ) => {
-										setAttributes( {
-											boxPadding: {
-												...boxPadding,
-												mobile: nextValues,
-											},
-										} );
-									} }
-									units={ units }
-								/>
-							</BaseControl>
-						) }
-					</BaseControl>
+					<BlockOption.BoxBackgroundColor { ...props } />
+					<BlockOption.BoxTextColor { ...props } />
+					<BlockOption.BoxBorderColor { ...props } />
+					<BlockOption.BoxBorderSize { ...props } />
+					<BlockOption.BoxBorderStyle { ...props } />
+					<BlockOption.BoxBorderRadius { ...props } />
+					<BlockOption.BoxPadding { ...props } />
 				</PanelBody>
 				<PanelBody title={ __( 'ラベル設定', 'ystandard-toolbox' ) }>
-					<BaseControl
-						id={ 'label' }
-						label={ __( 'テキスト', 'ystandard-toolbox' ) }
-					>
-						<PlainText
-							value={ label }
-							onChange={ ( value ) => {
-								setAttributes( {
-									label: value,
-								} );
-							} }
-							placeholder={ 'ラベル' }
-							aria-label={ 'ラベル' }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-icon' }
-						label={ __( 'アイコン', 'ystandard-toolbox' ) }
-					>
-						<SVGIconSelect
-							iconControlTitle={ '' }
-							selectedIcon={ labelIcon }
-							onClickIcon={ ( value ) => {
-								setAttributes( { labelIcon: value } );
-							} }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-size' }
-						label={ __( '文字サイズ', 'ystandard-toolbox' ) }
-					>
-						<FontSizePicker
-							value={ labelFontSize.size }
-							onChange={ ( font ) => {
-								setLabelFontSize( font );
-							} }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-font-weight' }
-						label={ __( '文字の太さ', 'ystandard-toolbox' ) }
-					>
-						<div className="ystdtb__horizon-buttons">
-							{ fontWeightList.map( ( item ) => {
-								return (
-									<Button
-										key={ item.value }
-										isSecondary={
-											labelWeight !== item.value
-										}
-										isPrimary={ labelWeight === item.value }
-										onClick={ () => {
-											setAttributes( {
-												labelWeight: item.value,
-											} );
-										} }
-									>
-										<span>{ item.label }</span>
-									</Button>
-								);
-							} ) }
-						</div>
-					</BaseControl>
-					<BaseControl
-						id={ 'label' }
-						label={ __( '背景色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setLabelBackgroundColor( color );
-							} }
-							value={ labelBackgroundColor.color }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label' }
-						label={ __( '文字色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setLabelTextColor( color );
-							} }
-							value={ labelTextColor.color }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-border-radius' }
-						label={ __( '角丸', 'ystandard-toolbox' ) }
-					>
-						<UnitControl
-							value={ labelBorderRadius }
-							onChange={ ( value ) => {
-								setAttributes( {
-									labelBorderRadius: value,
-								} );
-							} }
-							units={ units }
-						/>
-					</BaseControl>
+					<BlockOption.LabelText { ...props } />
+					<BlockOption.LabelIcon { ...props } />
+					<BlockOption.LabelSize { ...props } />
+					<BlockOption.LabelFontWeight { ...props } />
+					<BlockOption.LabelBackgroundColor { ...props } />
+					<BlockOption.LabelTextColor { ...props } />
+					<BlockOption.LabelBorderRadius { ...props } />
+				</PanelBody>
+				<PanelBody title={ __( '背景画像', 'ystandard-toolbox' ) }>
+					<BlockOption.BackgroundImage { ...props } />
+					<BlockOption.BackgroundOpacity { ...props } />
+					<BlockOption.BackgroundRepeat { ...props } />
 				</PanelBody>
 			</InspectorControls>
 
@@ -568,6 +284,18 @@ function Box( props ) {
 						className={ boxContainerClass }
 						style={ boxContainerStyle }
 					>
+						{ hasBackgroundImage && (
+							<div
+								className={ backgroundClass }
+								style={ backgroundStyle }
+								aria-hidden="true"
+							>
+								<div
+									className={ backgroundCoverClass }
+									style={ backgroundCoverStyle }
+								/>
+							</div>
+						) }
 						{ ! isLabelOutside( boxStyle ) && getLabelContents() }
 						<div
 							className={ boxContentClass }

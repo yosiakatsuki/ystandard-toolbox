@@ -86,4 +86,17 @@
       }
     }
   }
+  &.is-label-none {
+    .ystdtb-box__type-label {
+      display: none;
+    }
+  }
+}
+
+.ystdtb-box__label {
+  max-width: 100%;
+  overflow: hidden;
+}
+.ystdtb-box__label-text {
+  font-size: var(--ystdtb-box-label-font-size);
 }

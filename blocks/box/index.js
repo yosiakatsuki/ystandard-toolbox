@@ -1,11 +1,12 @@
-import { ystdtbConfig } from '@ystdtb/config/config';
-import edit from './edit';
-import save from './save';
 import { Box } from 'react-feather';
-import { attributes, supports } from './config';
 import { registerBlockType } from '@wordpress/blocks';
+import { ystdtbConfig } from '@ystdtb/config';
 import { __, _x } from '@wordpress/i18n';
 import { mergeDefaultAttributes } from '@ystdtb/helper/attribute';
+import edit from './edit';
+import save from './save';
+import { attributes, supports } from './config';
+import { deprecated } from './deprecated';
 
 const blockName = 'ystdtb/box';
 const blockAttributes = mergeDefaultAttributes( blockName, attributes );
@@ -26,6 +27,7 @@ registerBlockType( blockName, {
 	supports,
 	edit,
 	save,
+	deprecated,
 	example: {
 		attributes: {
 			label: __( 'ボックスラベル', 'ystandard-toolbox' ),

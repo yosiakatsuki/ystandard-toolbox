@@ -1,4 +1,4 @@
-import { ystdtbConfig } from '../../../src/js/blocks/config/config';
+import { ystdtbConfig } from '@ystdtb/config';
 import edit from './edit';
 import save from './save';
 import { MessageCircle } from 'react-feather';
