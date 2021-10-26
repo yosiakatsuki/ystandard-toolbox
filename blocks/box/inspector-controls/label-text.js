@@ -20,7 +20,7 @@ const LabelText = ( props ) => {
 	return (
 		<BaseControl
 			id={ 'label' }
-			label={ __( 'テキスト', 'ystandard-toolbox' ) }
+			label={ __( 'ラベルテキスト', 'ystandard-toolbox' ) }
 		>
 			<PlainText
 				value={ label }
@@ -29,8 +29,8 @@ const LabelText = ( props ) => {
 						label: value,
 					} );
 				} }
-				placeholder={ 'ラベル' }
-				aria-label={ 'ラベル' }
+				placeholder={ __( 'ラベルを入力...', 'ystandard-toolbox' ) }
+				aria-label={ __( 'ラベルを入力...', 'ystandard-toolbox' ) }
 			/>
 		</BaseControl>
 	);

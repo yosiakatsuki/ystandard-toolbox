@@ -5,7 +5,7 @@ export const blockClassName = 'ystdtb-box';
 export const attributes = {
 	boxStyle: {
 		type: 'string',
-		default: 'label-out',
+		default: 'label-none',
 	},
 	boxBackgroundColor: {
 		type: 'string',
@@ -96,6 +96,7 @@ export const supports = {
 };
 
 export const boxStyleList = [
+	{ value: 'label-none', label: __( 'ラベル無し', 'ystandard-toolbox' ) },
 	{ value: 'label-out', label: __( '外側ラベル', 'ystandard-toolbox' ) },
 	{ value: 'label-in', label: __( '内側ラベル', 'ystandard-toolbox' ) },
 	{ value: 'label-wide', label: __( '全幅ラベル', 'ystandard-toolbox' ) },

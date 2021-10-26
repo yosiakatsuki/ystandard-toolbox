@@ -86,6 +86,11 @@
       }
     }
   }
+  &.is-label-none {
+    .ystdtb-box__type-label {
+      display: none;
+    }
+  }
 }
 
 .ystdtb-box__label {

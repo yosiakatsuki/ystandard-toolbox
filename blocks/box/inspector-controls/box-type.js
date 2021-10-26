@@ -45,9 +45,7 @@ const BoxType = ( props ) => {
 										<span
 											className="ystdtb-box__type-label"
 											aria-hidden="true"
-										>
-											　
-										</span>
+										/>
 										<span className="ystdtb-box__type-box">
 											<span className="ystdtb-box__type-name">
 												{ item.label }

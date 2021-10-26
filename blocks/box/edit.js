@@ -49,7 +49,10 @@ function Box( props ) {
 		backgroundImageRepeat,
 	} = attributes;
 
-	const hasLabel = label || labelIcon || isSelected;
+	let hasLabel = label || labelIcon || isSelected;
+	if ( 'label-none' === boxStyle ) {
+		hasLabel = false;
+	}
 	const hasBackgroundImage = !! backgroundImage?.url;
 
 	const blockProps = useBlockProps( {
