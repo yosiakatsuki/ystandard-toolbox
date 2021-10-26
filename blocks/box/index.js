@@ -1,4 +1,4 @@
-import { ystdtbConfig } from '@ystdtb/config/config';
+import { ystdtbConfig } from '@ystdtb/config';
 import edit from './edit';
 import save from './save';
 import { Box } from 'react-feather';

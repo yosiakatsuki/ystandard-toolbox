@@ -49,7 +49,7 @@ module.exports = {
 		alias: {
 			...defaultConfig.alias,
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
-			'@ystdtb/config': path.resolve( __dirname, 'src/js/blocks/config' ),
+			'@ystdtb/config': path.resolve( __dirname, 'src/js/config' ),
 			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
 			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
