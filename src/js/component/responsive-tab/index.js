@@ -2,6 +2,12 @@ import classnames from 'classnames';
 import { Monitor, Tablet, Smartphone } from 'react-feather';
 import { TabPanel } from '@wordpress/components';
 
+export const tabType = {
+	desktop: 'desktop',
+	tablet: 'tablet',
+	mobile: 'mobile',
+}
+
 const ResponsiveTab = ( props ) => {
 
 	const {
@@ -31,17 +37,17 @@ const ResponsiveTab = ( props ) => {
 				onSelect={ onSelect }
 				tabs={ [
 					{
-						name: 'desktop',
+						name: tabType.desktop,
 						title: ( <Monitor/> ),
 						className: classnames( 'ystdtb-responsive-tab__tab-button' )
 					},
 					{
-						name: 'tablet',
+						name: tabType.tablet,
 						title: ( <Tablet/> ),
 						className: classnames( 'ystdtb-responsive-tab__tab-button' )
 					},
 					{
-						name: 'mobile',
+						name: tabType.mobile,
 						title: ( <Smartphone/> ),
 						className: classnames( 'ystdtb-responsive-tab__tab-button' )
 					},
