@@ -17,6 +17,7 @@ module.exports = {
 		'icon-list': './blocks/icon-list/index.js',
 		'box': './blocks/box/index.js',
 		'parts': './blocks/parts/index.js',
+		'banner-link': './blocks/banner-link/index.js',
 	},
 	output: {
 		filename: '[name].js',
