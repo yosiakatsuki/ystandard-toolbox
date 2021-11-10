@@ -8,8 +8,11 @@ export const attributes = {
 	},
 	padding: {
 		type: 'object',
-	}
-}
+	},
+	boxShadow: {
+		type: 'object',
+	},
+};
 
 export const supports = {
 	anchor: false,

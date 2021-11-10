@@ -3,6 +3,7 @@ import {
 } from '@wordpress/block-editor';
 import PanelPadding from "./padding/index";
 import PanelMainText from "./main-text";
+import PanelBoxShadow from "./box-shadow";
 
 export const BannerLinkInspectorControls = ( props ) => {
 
@@ -10,6 +11,7 @@ export const BannerLinkInspectorControls = ( props ) => {
 		<InspectorControls>
 			<PanelMainText { ...props } />
 			<PanelPadding { ...props } />
+			<PanelBoxShadow { ...props } />
 		</InspectorControls>
 	);
 }
