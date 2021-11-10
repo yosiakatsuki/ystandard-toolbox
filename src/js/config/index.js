@@ -43,6 +43,50 @@ export const ystdtbConfig = {
 			{ value: 'px', label: 'px' },
 			{ value: 'em', label: 'em' },
 			{ value: 'rem', label: 'rem' },
-		]
+		],
+		boxShadowPreset: [
+			{
+				label: _x(
+					'小',
+					'component-config',
+					'ystandard-toolbox'
+				),
+				value: {
+					offsetX: '0',
+					offsetY: '2px',
+					blurRadius: '8px',
+					color: '#bdc3c7',
+					opacity: 0.7
+				},
+			},
+			{
+				label: _x(
+					'中',
+					'component-config',
+					'ystandard-toolbox'
+				),
+				value: {
+					offsetX: '0',
+					offsetY: '4px',
+					blurRadius: '16px',
+					color: '#bdc3c7',
+					opacity: 0.7
+				},
+			},
+			{
+				label: _x(
+					'大',
+					'component-config',
+					'ystandard-toolbox'
+				),
+				value: {
+					offsetX: '0',
+					offsetY: '8px',
+					blurRadius: '24px',
+					color: '#bdc3c7',
+					opacity: 0.7
+				},
+			},
+		],
 	},
 };
