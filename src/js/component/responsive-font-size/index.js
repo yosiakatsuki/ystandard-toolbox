@@ -1,14 +1,15 @@
 import { _x } from '@wordpress/i18n';
-import BoxControl from "@ystdtb/components/box-control";
+import { FontSizePicker } from '@wordpress/block-editor';
+import UnitControl from "@ystdtb/components/unit-control";
 import ResponsiveTab, { tabType } from "@ystdtb/components/responsive-tab";
-import { getComponentConfig } from "@ystdtb/helper/config";
 import {
 	responsiveKeys as responsive,
 	getResponsiveProperty
 } from "@ystdtb/helper/responsive";
-import { getSpacing } from "@ystdtb/helper/spacing";
+import { getComponentConfig } from "@ystdtb/helper/config";
+import { createFontSizeObject, getFontSizes, getFontSizeValue } from "@ystdtb/helper/fontSize";
 
-const ResponsiveSpacing = ( props ) => {
+const ResponsiveFontSize = ( props ) => {
 	const {
 		label,
 		values,
@@ -16,27 +17,35 @@ const ResponsiveSpacing = ( props ) => {
 		units,
 	} = props;
 
-	const _units = units ?? getComponentConfig( 'units' );
-	const valueDesktop = getResponsiveProperty( values, responsive.desktop );
+	const fontSizes = getFontSizes();
+
+	const _units = units ?? getComponentConfig( 'fontSizeUnits' );
+	const valueDesktop = getFontSizeValue(
+		getResponsiveProperty( values, responsive.desktop ),
+		fontSizes
+	);
 	const valueTablet = getResponsiveProperty( values, responsive.tablet );
 	const valueMobile = getResponsiveProperty( values, responsive.mobile );
 
-	const handleOnChangeDesktop = ( nextValues ) => {
+	const handleOnChangeDesktop = ( value ) => {
 		onChange( {
 			...values,
-			[ responsive.desktop ]: getSpacing( nextValues ),
+			[ responsive.desktop ]: createFontSizeObject( value, fontSizes ),
 		} );
 	};
-	const handleOnChangeTablet = ( nextValues ) => {
+	const handleOnChangeTablet = ( value ) => {
+		console.log( {
+			handleOnChangeTablet: value,
+		} )
 		onChange( {
 			...values,
-			[ responsive.tablet ]: getSpacing( nextValues ),
+			[ responsive.tablet ]: value,
 		} );
 	};
-	const handleOnChangeMobile = ( nextValues ) => {
+	const handleOnChangeMobile = ( value ) => {
 		onChange( {
 			...values,
-			[ responsive.mobile ]: getSpacing( nextValues ),
+			[ responsive.mobile ]: value,
 		} );
 	};
 
@@ -49,25 +58,26 @@ const ResponsiveSpacing = ( props ) => {
 					return (
 						<>
 							{ ( tabType.desktop === tab.name &&
-								<BoxControl
+								<FontSizePicker
 									label={ _x( 'デスクトップ', 'responsive-component', 'ystandard-toolbox' ) }
-									values={ valueDesktop }
+									value={ valueDesktop }
 									onChange={ handleOnChangeDesktop }
-									units={ _units }
 								/>
 							) }
 							{ ( tabType.tablet === tab.name &&
-								<BoxControl
+								<UnitControl
+									className={ 'ystdtb-responsive-font-size-unit-control' }
 									label={ _x( 'タブレット', 'responsive-component', 'ystandard-toolbox' ) }
-									values={ valueTablet }
+									value={ valueTablet }
 									onChange={ handleOnChangeTablet }
 									units={ _units }
 								/>
 							) }
 							{ ( tabType.mobile === tab.name &&
-								<BoxControl
+								<UnitControl
+									className={ 'ystdtb-responsive-font-size-unit-control' }
 									label={ _x( 'モバイル', 'responsive-component', 'ystandard-toolbox' ) }
-									values={ valueMobile }
+									value={ valueMobile }
 									onChange={ handleOnChangeMobile }
 									units={ _units }
 								/>
@@ -78,6 +88,5 @@ const ResponsiveSpacing = ( props ) => {
 			</ResponsiveTab>
 		</>
 	);
-};
-
-export default ResponsiveSpacing;
+}
+export default ResponsiveFontSize;

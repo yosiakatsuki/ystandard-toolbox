@@ -38,6 +38,11 @@ export const ystdtbConfig = {
 			{ value: '%', label: '%' },
 			{ value: 'vw', label: 'vw' },
 			{ value: 'vh', label: 'vh' },
+		],
+		fontSizeUnits: [
+			{ value: 'px', label: 'px' },
+			{ value: 'em', label: 'em' },
+			{ value: 'rem', label: 'rem' },
 		]
 	},
 };
