@@ -4,6 +4,7 @@ import {
 	withFontSizes,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { compose } from '@wordpress/compose';
 import { blockClassName } from "./config";
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 
@@ -24,4 +25,4 @@ const BannerLink = ( props ) => {
 	);
 };
 
-export default BannerLink;
+export default compose( [] )( BannerLink );

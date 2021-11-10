@@ -3,6 +3,9 @@ import { __ } from '@wordpress/i18n';
 export const blockClassName = 'ystdtb-banner-link';
 
 export const attributes = {
+	mainTextFontSize: {
+		type: 'object',
+	},
 	padding: {
 		type: 'object',
 	}
