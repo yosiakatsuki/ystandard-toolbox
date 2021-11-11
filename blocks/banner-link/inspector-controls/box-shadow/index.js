@@ -6,6 +6,7 @@ const PanelBoxShadow = ( props ) => {
 	return (
 		<PanelBody
 			title={ __( '影', 'ystandard-toolbox' ) }
+			initialOpen={false}
 		>
 			<BoxShadow { ...props } />
 		</PanelBody>
