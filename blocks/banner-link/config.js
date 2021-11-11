@@ -21,6 +21,21 @@ export const attributes = {
 	borderRadius: {
 		type: 'string',
 	},
+	backgroundColor: {
+		type: 'string',
+	},
+	customBackgroundColor: {
+		type: 'string',
+	},
+	gradient: {
+		type: 'string',
+	},
+	customGradient: {
+		type: 'string',
+	},
+	backgroundOpacity: {
+		type: 'number',
+	},
 	mainTextFontSize: {
 		type: 'object',
 	},

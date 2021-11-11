@@ -47,4 +47,6 @@ const BannerLink = ( props ) => {
 	);
 };
 
-export default compose( [] )( BannerLink );
+export default compose( [
+	withColors( { backgroundColor: 'background-color' } ),
+] )( BannerLink );
