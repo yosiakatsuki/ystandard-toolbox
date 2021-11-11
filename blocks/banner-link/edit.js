@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import {
 	withColors,
-	withFontSizes,
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { blockClassName } from "./config";
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
+import { BannerLinkBlockControls as BlockControls } from './block-controls';
 import { getBoxShadowStyle } from "@ystdtb/components/box-shadow-control";
 
 const BannerLink = ( props ) => {
@@ -30,6 +30,12 @@ const BannerLink = ( props ) => {
 
 	return (
 		<>
+			<BlockControls
+				{ ...{
+					anchorRef: blockWrapProps.ref,
+					...props,
+				} }
+			/>
 			<InspectorControls { ...props } />
 
 			<div { ...blockWrapProps }>

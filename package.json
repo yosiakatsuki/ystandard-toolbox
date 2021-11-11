@@ -8,6 +8,7 @@
     "@babel/preset-env": "^7.14.8",
     "@wordpress/browserslist-config": "^4.1.0",
     "@wordpress/element": "^4.0.0",
+    "@wordpress/icons": "^6.1.0",
     "@wordpress/scripts": "^17.1.0",
     "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
