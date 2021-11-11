@@ -16,7 +16,7 @@ export const getFontSizes = () => {
 	return fontSizes;
 };
 
-export const getFontSizeClassByObject = (value) => {
+export const getFontSizeClassByObject = ( value ) => {
 	return getFontSizeClass( value?.slug );
 }
 export const getFontSizeValue = ( value, fontSizes ) => {
@@ -32,10 +32,16 @@ export const getFontSizeValue = ( value, fontSizes ) => {
 }
 export const createFontSizeObject = ( value, fontSizes ) => {
 
+	if ( ! value ) {
+		return undefined;
+	}
+
 	const fontSize = fontSizes.find( ( size ) => size.size === value );
 
-	return {
+	const result = {
 		size: fontSize ? undefined : value,
 		slug: fontSize?.slug,
-	}
+	};
+
+	return 0 < Object.keys( result ).length ? result : undefined;
 }

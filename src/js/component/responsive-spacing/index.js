@@ -4,7 +4,7 @@ import ResponsiveTab, { tabType } from "@ystdtb/components/responsive-tab";
 import { getComponentConfig } from "@ystdtb/helper/config";
 import {
 	responsiveKeys as responsive,
-	getResponsiveProperty
+	getResponsiveValue
 } from "@ystdtb/helper/responsive";
 import { getSpacing } from "@ystdtb/helper/spacing";
 
@@ -17,9 +17,9 @@ const ResponsiveSpacing = ( props ) => {
 	} = props;
 
 	const _units = units ?? getComponentConfig( 'units' );
-	const valueDesktop = getResponsiveProperty( values, responsive.desktop );
-	const valueTablet = getResponsiveProperty( values, responsive.tablet );
-	const valueMobile = getResponsiveProperty( values, responsive.mobile );
+	const valueDesktop = getResponsiveValue( values, responsive.desktop );
+	const valueTablet = getResponsiveValue( values, responsive.tablet );
+	const valueMobile = getResponsiveValue( values, responsive.mobile );
 
 	const handleOnChangeDesktop = ( nextValues ) => {
 		onChange( {

@@ -13,7 +13,10 @@ const Image = ( props ) => {
 		setAttributes( { backgroundImage: media } );
 	};
 	const handleOnClear = () => {
-		setAttributes( { backgroundImage: undefined } );
+		setAttributes( {
+			backgroundImage: undefined,
+			backgroundImageFocalPoint: undefined
+		} );
 	};
 	return (
 		<BaseControl

@@ -6,7 +6,7 @@ const BorderRadius = ( { attributes, setAttributes } ) => {
 	const { borderRadius } = attributes;
 
 	const handleOnChange = ( value ) => {
-		setAttributes( { borderRadius: value } );
+		setAttributes( { borderRadius: value || undefined } );
 	}
 
 	return (

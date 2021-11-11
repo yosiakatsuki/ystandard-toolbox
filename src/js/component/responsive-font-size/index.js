@@ -4,7 +4,7 @@ import UnitControl from "@ystdtb/components/unit-control";
 import ResponsiveTab, { tabType } from "@ystdtb/components/responsive-tab";
 import {
 	responsiveKeys as responsive,
-	getResponsiveProperty
+	getResponsiveValue
 } from "@ystdtb/helper/responsive";
 import { getComponentConfig } from "@ystdtb/helper/config";
 import { createFontSizeObject, getFontSizes, getFontSizeValue } from "@ystdtb/helper/fontSize";
@@ -21,11 +21,11 @@ const ResponsiveFontSize = ( props ) => {
 
 	const _units = units ?? getComponentConfig( 'fontSizeUnits' );
 	const valueDesktop = getFontSizeValue(
-		getResponsiveProperty( values, responsive.desktop ),
+		getResponsiveValue( values, responsive.desktop ),
 		fontSizes
 	);
-	const valueTablet = getResponsiveProperty( values, responsive.tablet );
-	const valueMobile = getResponsiveProperty( values, responsive.mobile );
+	const valueTablet = getResponsiveValue( values, responsive.tablet );
+	const valueMobile = getResponsiveValue( values, responsive.mobile );
 
 	const handleOnChangeDesktop = ( value ) => {
 		onChange( {

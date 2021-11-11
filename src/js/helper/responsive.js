@@ -3,15 +3,27 @@ export const responsiveKeys = {
 	tablet: 'tablet',
 	mobile: 'mobile',
 };
-export const isResponsive = ( attributes ) => {
-	if ( ! attributes || 'object' !== typeof attributes ) {
+
+export const isResponsive = ( values ) => {
+	if ( ! values || 'object' !== typeof values ) {
 		return false;
 	}
 	return (
-		attributes.hasOwnProperty( responsiveKeys.tablet ) &&
-		attributes.hasOwnProperty( responsiveKeys.mobile )
+		values.hasOwnProperty( responsiveKeys.tablet ) &&
+		values.hasOwnProperty( responsiveKeys.mobile )
 	);
 };
+
+export const getResponsiveValue = ( values, key ) => {
+	if ( ! values || 'object' !== typeof values ) {
+		return undefined;
+	}
+	let result = values.hasOwnProperty( key ) ? values[ key ] : {};
+	if ( 'object' === typeof result ) {
+		result = 0 < Object.keys( result ).length ? result : undefined;
+	}
+	return result;
+}
 
 export const getResponsiveValues = ( values ) => {
 	let result = {};
@@ -36,6 +48,9 @@ export const getResponsiveValues = ( values ) => {
 	return 0 < Object.keys( result ).length ? result : undefined;
 }
 
+/**
+ * TODO:廃止
+ */
 export const getResponsiveProperty = ( attributes, key ) => {
 	let result = ! attributes ? { desktop: undefined } : attributes;
 	switch ( key ) {
@@ -61,6 +76,9 @@ export const getResponsiveProperty = ( attributes, key ) => {
 	return result;
 };
 
+/**
+ * TODO:廃止
+ */
 export const addResponsiveProperty = ( attributes ) => {
 	let newAttributes = ! attributes ? {} : attributes;
 	if ( ! newAttributes.hasOwnProperty( responsiveKeys.desktop ) ) {
@@ -81,6 +99,9 @@ export const addResponsiveProperty = ( attributes ) => {
 	return newAttributes;
 };
 
+/**
+ * TODO:廃止
+ */
 export const deleteResponsiveProperty = ( attributes ) => {
 	attributes = ! attributes ? {} : attributes;
 	if ( attributes.hasOwnProperty( responsiveKeys.tablet ) ) {

@@ -16,6 +16,7 @@ const Opacity = ( { attributes, setAttributes } ) => {
 				min={ 0 }
 				max={ 1 }
 				step={ 0.1 }
+				allowReset
 			/>
 		</BaseControl>
 	);

@@ -1,6 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsiveValues from "@ystdtb/components/responsive-values";
+import { parseSize } from "../../function/edit";
 
 const MinHeight = ( { attributes, setAttributes } ) => {
 	const {
@@ -10,10 +11,10 @@ const MinHeight = ( { attributes, setAttributes } ) => {
 
 	const handleOnChange = ( newValue ) => {
 		setAttributes( {
-			size: {
+			size: parseSize( {
 				...size,
 				minHeight: newValue,
-			}
+			} )
 		} );
 	}
 	return (

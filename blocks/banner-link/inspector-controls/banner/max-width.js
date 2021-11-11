@@ -1,6 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsiveValues from "@ystdtb/components/responsive-values";
+import { parseSize } from "../../function/edit";
 
 
 const MaxWidth = ( { attributes, setAttributes } ) => {
@@ -11,10 +12,10 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 
 	const handleOnChange = ( newValue ) => {
 		setAttributes( {
-			size: {
+			size: parseSize( {
 				...size,
 				maxWidth: newValue,
-			}
+			} )
 		} );
 	}
 	return (
