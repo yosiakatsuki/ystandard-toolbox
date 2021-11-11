@@ -1,3 +1,4 @@
+import { BaseControl } from '@wordpress/components';
 import BoxShadowControl from "@ystdtb/components/box-shadow-control";
 
 const BoxShadow = ( props ) => {
@@ -15,10 +16,12 @@ const BoxShadow = ( props ) => {
 		} );
 	}
 	return (
-		<BoxShadowControl
-			onChange={ handleOnChange }
-			value={ boxShadow }
-		/>
+		<BaseControl>
+			<BoxShadowControl
+				onChange={ handleOnChange }
+				value={ boxShadow }
+			/>
+		</BaseControl>
 	);
 }
 export default BoxShadow;

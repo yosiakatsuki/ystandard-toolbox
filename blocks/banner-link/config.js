@@ -3,8 +3,23 @@ import { __ } from '@wordpress/i18n';
 export const blockClassName = 'ystdtb-banner-link';
 
 export const attributes = {
-	link:{
+	link: {
 		type: 'object',
+	},
+	backgroundImage: {
+		type: 'object',
+	},
+	backgroundImageFocalPoint: {
+		type: 'object',
+	},
+	ratio: {
+		type: 'string',
+	},
+	size: {
+		type: 'object',
+	},
+	borderRadius: {
+		type: 'string',
 	},
 	mainTextFontSize: {
 		type: 'object',

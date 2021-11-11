@@ -1,3 +1,4 @@
+import { BaseControl } from '@wordpress/components';
 import InputControl from "@ystdtb/components/input-controls";
 import { __ } from '@wordpress/i18n';
 
@@ -14,11 +15,13 @@ const Rel = ( { attributes, setAttributes } ) => {
 		} );
 	}
 	return (
-		<InputControl
-			label={ __( 'rel', 'ystandard-toolbox' ) }
-			value={ link?.rel }
-			onChange={ handleOnChange }
-		/>
+		<BaseControl>
+			<InputControl
+				label={ __( 'rel', 'ystandard-toolbox' ) }
+				value={ link?.rel }
+				onChange={ handleOnChange }
+			/>
+		</BaseControl>
 	);
 };
 export default Rel;

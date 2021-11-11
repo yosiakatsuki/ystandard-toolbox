@@ -44,6 +44,10 @@ export const ystdtbConfig = {
 			{ value: 'em', label: 'em' },
 			{ value: 'rem', label: 'rem' },
 		],
+		borderRadiusUnits: [
+			{ value: 'px', label: 'px' },
+			{ value: '%', label: '%' },
+		],
 		boxShadowPreset: [
 			{
 				label: _x(
@@ -88,5 +92,13 @@ export const ystdtbConfig = {
 				},
 			},
 		],
+		ratioOptions: [
+			{ value: '1-1', label: '1-1' },
+			{ value: '2-1', label: '2-1' },
+			{ value: '3-1', label: '3-1' },
+			{ value: '3-2', label: '3-2' },
+			{ value: '4-3', label: '4-3' },
+			{ value: '16-9', label: '16-9' },
+		]
 	},
 };

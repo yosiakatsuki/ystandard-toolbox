@@ -2,22 +2,36 @@ import { MediaUpload } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-const MediaUploadControl = ( props ) => {
+const MediaUploadControl = ( {
+	 media,
+	 mediaTypes,
+	 onSelect,
+	 onSelectRaw,
+	 onClear,
+	 value,
+	 clearLabel,
+	 selectLabel,
+ } ) => {
 	const MEDIA_TYPES = [ 'image' ];
-	const {
-		media,
-		mediaTypes,
-		onSelect,
-		onClear,
-		value,
-		clearLabel,
-		selectLabel,
-	} = props;
 
 	const _mediaTypes = mediaTypes || MEDIA_TYPES;
 
 	const _clearLabel = clearLabel || __( '画像をクリア', 'ystandard-blocks' );
 	const _selectLabel = selectLabel || __( '画像を選択', 'ystandard-blocks' );
+
+	const handleOnSelect = ( media ) => {
+
+		if ( onSelectRaw ) {
+			onSelectRaw( media );
+			return;
+		}
+		onSelect( {
+			type: media?.type,
+			id: media?.id,
+			url: media?.url,
+			alt: media?.alt,
+		} );
+	}
 
 	const _render = ( obj ) => {
 		const mediaType = media?.type || 'image';
@@ -41,7 +55,7 @@ const MediaUploadControl = ( props ) => {
 					className={ 'ystdtb-media-upload-control__preview' }
 				>
 					{ 'image' === mediaType && (
-						<img src={ media?.url } alt={ media?.alt } />
+						<img src={ media?.url } alt={ media?.alt }/>
 					) }
 					{ 'video' === mediaType && (
 						<video
@@ -67,7 +81,7 @@ const MediaUploadControl = ( props ) => {
 	return (
 		<div className="ystdtb-media-upload-control">
 			<MediaUpload
-				onSelect={ onSelect }
+				onSelect={ handleOnSelect }
 				type={ _mediaTypes }
 				value={ value }
 				render={ _render }

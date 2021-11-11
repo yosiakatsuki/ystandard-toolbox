@@ -8,14 +8,12 @@ export const tabType = {
 	mobile: 'mobile',
 }
 
-const ResponsiveTab = ( props ) => {
-
-	const {
-		label,
-		activeClass,
-		onSelect,
-		children
-	} = props;
+const ResponsiveTab = ( {
+	label,
+	activeClass,
+	onSelect,
+	children
+} ) => {
 
 	return (
 		<div className="ystdtb-responsive-tab">

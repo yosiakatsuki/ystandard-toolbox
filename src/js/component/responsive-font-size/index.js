@@ -34,9 +34,6 @@ const ResponsiveFontSize = ( props ) => {
 		} );
 	};
 	const handleOnChangeTablet = ( value ) => {
-		console.log( {
-			handleOnChangeTablet: value,
-		} )
 		onChange( {
 			...values,
 			[ responsive.tablet ]: value,

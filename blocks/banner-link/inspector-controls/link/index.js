@@ -1,7 +1,8 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import BannerLinkLinkControl from "../../controls/link";
+
 import Rel from "./rel";
+import Link from "./link";
 
 const PanelLink = ( props ) => {
 	return (
@@ -9,7 +10,7 @@ const PanelLink = ( props ) => {
 			title={ __( 'リンク', 'ystandard-toolbox' ) }
 		>
 			<div className="ystdtb-banner-link-inspector-controls__link">
-				<BannerLinkLinkControl { ...props }/>
+				<Link { ...props }/>
 				<Rel { ...props }/>
 			</div>
 		</PanelBody>
