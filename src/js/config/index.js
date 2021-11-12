@@ -48,6 +48,12 @@ export const ystdtbConfig = {
 			{ value: 'px', label: 'px' },
 			{ value: '%', label: '%' },
 		],
+		borderStyles: [
+			{ value: 'solid', label: _x( '直線', 'component-config', 'ystandard-toolbox' ) },
+			{ value: 'dotted', label: _x( '点線', 'component-config', 'ystandard-toolbox' ) },
+			{ value: 'dashed', label: _x( '破線', 'component-config', 'ystandard-toolbox' ) },
+			{ value: 'double', label: _x( '二重線', 'component-config', 'ystandard-toolbox' ) },
+		],
 		boxShadowPreset: [
 			{
 				label: _x(

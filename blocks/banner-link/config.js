@@ -36,6 +36,9 @@ export const attributes = {
 	backgroundOpacity: {
 		type: 'number',
 	},
+	border: {
+		type: 'object',
+	},
 	mainTextFontSize: {
 		type: 'object',
 	},

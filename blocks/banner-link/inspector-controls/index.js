@@ -5,6 +5,7 @@ import PanelBoxShadow from "./box-shadow";
 import PanelLink from "./link";
 import PanelBanner from "./banner";
 import PanelBackground from "./background";
+import PanelBorder from "./border";
 
 export const BannerLinkInspectorControls = ( props ) => {
 
@@ -13,6 +14,7 @@ export const BannerLinkInspectorControls = ( props ) => {
 			<PanelLink { ...props } />
 			<PanelBanner { ...props } />
 			<PanelBackground  { ...props } />
+			<PanelBorder  { ...props } />
 			<PanelMainText { ...props } />
 			<PanelPadding { ...props } />
 			<PanelBoxShadow { ...props } />
