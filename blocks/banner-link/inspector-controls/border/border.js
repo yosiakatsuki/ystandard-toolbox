@@ -1,5 +1,4 @@
 import { BaseControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
 
 import BorderControl from "@ystdtb/components/border-control";
 

@@ -48,6 +48,9 @@ export const attributes = {
 	boxShadow: {
 		type: 'object',
 	},
+	contentPosition: {
+		type: 'object',
+	}
 };
 
 export const supports = {

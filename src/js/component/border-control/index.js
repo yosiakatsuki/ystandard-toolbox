@@ -13,16 +13,14 @@ const BorderControl = ( { value, onChange } ) => {
 			return;
 		}
 		let result = border;
-		if ( result.hasOwnProperty( 'width' ) && ! result.width ) {
+		if ( ! result?.width ) {
 			delete result.width;
 		}
-		if ( result.hasOwnProperty( 'color' ) && ! result.color ) {
+		if ( ! result?.color ) {
 			delete result.color;
 		}
-		if ( result.hasOwnProperty( 'style' ) ) {
-			if ( ! result.style || ( ! result?.width && ! result?.color ) ) {
-				delete result.style;
-			}
+		if ( ! result?.style || ( ! result?.width && ! result?.color ) ) {
+			delete result.style;
 		}
 
 		onChange( parseObject( result ) );
