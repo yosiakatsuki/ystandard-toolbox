@@ -4,6 +4,7 @@ export const blockClassName = 'ystdtb-banner-link';
 
 export const blockControlClasses = {
 	mainText: 'ystdtb-banner-link__main-text',
+	subText: 'ystdtb-banner-link__sub-text',
 };
 
 export const attributes = {
@@ -69,6 +70,36 @@ export const attributes = {
 	mainTextStyleClear: {
 		type: 'bool',
 		default: true,
+	},
+	subText: {
+		type: 'string',
+		source: 'html',
+		selector: '.ystdtb-banner-link__sub-text'
+	},
+	subTextFontSize: {
+		type: 'object',
+	},
+	subTextColor: {
+		type: 'string',
+	},
+	customSubTextColor: {
+		type: 'string',
+	},
+	subTextLineHeight: {
+		type: 'number',
+	},
+	subTextLetterSpacing: {
+		type: 'string',
+	},
+	subTextHtml: {
+		type: 'string',
+	},
+	subTextStyleClear: {
+		type: 'bool',
+		default: true,
+	},
+	subTextMargin: {
+		type: 'object',
 	},
 	padding: {
 		type: 'object',

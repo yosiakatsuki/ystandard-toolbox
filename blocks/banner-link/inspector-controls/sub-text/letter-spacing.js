@@ -4,19 +4,19 @@ import UnitControl from "@ystdtb/components/unit-control";
 
 const LetterSpacing = ( { attributes, setAttributes } ) => {
 
-	const { mainTextLetterSpacing } = attributes;
+	const { subTextLetterSpacing } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( {
-			mainTextLetterSpacing: value || undefined,
+			subTextLetterSpacing: value || undefined,
 		} );
 	}
 	return (
 		<BaseControl
-			id={ 'mainTextLetterSpacing' }
+			id={ 'subTextLetterSpacing' }
 			label={ __( 'letter spacing', 'ystandard-toolbox' ) }
 		>
 			<UnitControl
-				value={ mainTextLetterSpacing }
+				value={ subTextLetterSpacing }
 				onChange={ handleOnChange }
 				units={ [
 					{ value: 'em', label: 'em' },

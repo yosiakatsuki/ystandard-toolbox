@@ -2,7 +2,11 @@ import { _x } from '@wordpress/i18n';
 
 import ResponsiveTab, { tabType } from "@ystdtb/components/responsive-tab";
 import { getComponentConfig } from "@ystdtb/helper/config";
-import { getResponsiveValue, getResponsiveValues, responsiveKeys as responsive } from "@ystdtb/helper/responsive";
+import {
+	getResponsiveValue,
+	parseResponsiveValues,
+	responsiveKeys as responsive
+} from "@ystdtb/helper/responsive";
 import UnitControl from "@ystdtb/components/unit-control";
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
@@ -11,22 +15,24 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const valueDesktop = getResponsiveValue( values, responsive.desktop );
 	const valueTablet = getResponsiveValue( values, responsive.tablet );
 	const valueMobile = getResponsiveValue( values, responsive.mobile );
+
+
 	const handleOnChangeDesktop = ( value ) => {
-		onChange( getResponsiveValues( {
+		onChange( parseResponsiveValues( {
 			...values,
-			[ responsive.desktop ]: value || undefined,
+			desktop: value || undefined,
 		} ) );
 	};
 	const handleOnChangeTablet = ( value ) => {
-		onChange( getResponsiveValues( {
+		onChange( parseResponsiveValues( {
 			...values,
-			[ responsive.tablet ]: value || undefined,
+			tablet: value || undefined,
 		} ) );
 	};
 	const handleOnChangeMobile = ( value ) => {
-		onChange( getResponsiveValues( {
+		onChange( parseResponsiveValues( {
 			...values,
-			[ responsive.mobile ]: value || undefined,
+			mobile: value || undefined,
 		} ) );
 	};
 	return (

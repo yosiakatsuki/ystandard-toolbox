@@ -25,6 +25,7 @@ export const getResponsiveValue = ( values, key ) => {
 	return result;
 }
 
+
 export const getResponsiveValues = ( values ) => {
 	let result = {};
 	if ( values[ responsiveKeys.desktop ] ) {
@@ -45,6 +46,26 @@ export const getResponsiveValues = ( values ) => {
 			[ responsiveKeys.mobile ]: values[ responsiveKeys.mobile ],
 		}
 	}
+	return 0 < Object.keys( result ).length ? result : undefined;
+}
+
+export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
+	let result = {};
+	Object.keys( responsiveKeys ).map( ( key ) => {
+		if ( values.hasOwnProperty( key ) ) {
+			if ( arrowFalsy ) {
+				result = {
+					...result,
+					[ key ]: values[ key ]
+				}
+			} else if ( values?.desktop ) {
+				result = {
+					...result,
+					[ key ]: values[ key ]
+				}
+			}
+		}
+	} );
 	return 0 < Object.keys( result ).length ? result : undefined;
 }
 

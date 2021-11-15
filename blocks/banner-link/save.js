@@ -12,6 +12,8 @@ const save = ( { attributes } ) => {
 	const {
 		mainText,
 		mainTextFontSize,
+		subText,
+		subTextFontSize,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
@@ -36,10 +38,29 @@ const save = ( { attributes } ) => {
 				mainTextFontSize?.desktop?.size : undefined,
 		}
 	}
+	const subTextProps = {
+		value: subText,
+		tagName: 'div',
+		className: classnames(
+			blockControlClasses.subText,
+			{
+				[ fontSizeClass.subText ]: fontSizeClass.subText
+			}
+		),
+		style: {
+			fontSize: ! fontSizeClass.subText && mainTextFontSize?.desktop?.size ?
+				mainTextFontSize?.desktop?.size : undefined,
+		}
+	}
 
 	return (
 		<div { ...blockProps }>
-			<RichText.Content { ...mainTextProps }/>
+			{ ( mainText &&
+				<RichText.Content { ...mainTextProps }/>
+			) }
+			{ ( subText &&
+				<RichText.Content { ...subTextProps }/>
+			) }
 		</div>
 	);
 };

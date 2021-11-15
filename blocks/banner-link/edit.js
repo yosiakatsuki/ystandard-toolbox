@@ -19,9 +19,11 @@ const BannerLink = ( props ) => {
 	} = props;
 
 	const {
-		boxShadow,
 		mainText,
 		mainTextFontSize,
+		subText,
+		subTextFontSize,
+		boxShadow,
 	} = attributes;
 
 	const blockWrapProps = useBlockProps( {} );
@@ -37,6 +39,12 @@ const BannerLink = ( props ) => {
 	);
 	const mainTextStyles = {
 		fontSize: mainTextFontSize?.desktop?.size,
+	};
+	const subTextClass = classnames(
+		blockControlClasses.subText,
+	);
+	const subTextStyles = {
+		fontSize: subTextFontSize?.desktop?.size,
 	};
 
 	return (
@@ -61,6 +69,16 @@ const BannerLink = ( props ) => {
 						placeholder={ __( 'メインテキスト', 'ystandard-toolbox' ) }
 						withoutInteractiveFormatting
 					/>
+					<p>---</p>
+					<RichText
+						className={ subTextClass }
+						style={ subTextStyles }
+						value={ subText }
+						onChange={ ( value ) => setAttributes( { subText: value } ) }
+						identifier="subText"
+						placeholder={ __( 'サブテキスト', 'ystandard-toolbox' ) }
+						withoutInteractiveFormatting
+					/>
 				</div>
 			</div>
 		</>
@@ -71,5 +89,6 @@ export default compose( [
 	withColors( {
 		backgroundColor: 'background-color',
 		mainTextColor: 'color',
+		subTextColor: 'color',
 	} ),
 ] )( BannerLink );
