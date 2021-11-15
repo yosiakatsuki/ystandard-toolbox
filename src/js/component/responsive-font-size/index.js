@@ -7,7 +7,7 @@ import {
 	getResponsiveValue
 } from "@ystdtb/helper/responsive";
 import { getComponentConfig } from "@ystdtb/helper/config";
-import { createFontSizeObject, getFontSizes, getFontSizeValue } from "@ystdtb/helper/fontSize";
+import { createFontSizeObject, getFontSizeValue } from "@ystdtb/helper/fontSize";
 
 const ResponsiveFontSize = ( props ) => {
 	const {
@@ -17,20 +17,15 @@ const ResponsiveFontSize = ( props ) => {
 		units,
 	} = props;
 
-	const fontSizes = getFontSizes();
-
 	const _units = units ?? getComponentConfig( 'fontSizeUnits' );
-	const valueDesktop = getFontSizeValue(
-		getResponsiveValue( values, responsive.desktop ),
-		fontSizes
-	);
+	const valueDesktop = getFontSizeValue( getResponsiveValue( values, responsive.desktop ) );
 	const valueTablet = getResponsiveValue( values, responsive.tablet );
 	const valueMobile = getResponsiveValue( values, responsive.mobile );
 
 	const handleOnChangeDesktop = ( value ) => {
 		onChange( {
 			...values,
-			[ responsive.desktop ]: createFontSizeObject( value, fontSizes ),
+			[ responsive.desktop ]: createFontSizeObject( value ),
 		} );
 	};
 	const handleOnChangeTablet = ( value ) => {

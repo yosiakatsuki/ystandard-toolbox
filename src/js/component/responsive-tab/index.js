@@ -21,9 +21,6 @@ const ResponsiveTab = ( {
 				<div
 					className={ classnames(
 						'ystdtb-responsive-tab__label',
-						{
-							'is-bold': true
-						}
 					) }
 				>
 					{ label }

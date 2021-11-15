@@ -1,45 +1,33 @@
-import { useSelect } from '@wordpress/data';
+import { select } from '@wordpress/data';
 import { getFontSizeClass } from '@wordpress/block-editor';
-
-export const getFontSizes = () => {
-
-	const {
-		fontSizes
-	} = useSelect( ( select ) => {
-		const { getSettings } = select( 'core/block-editor' );
-
-		return {
-			fontSizes: getSettings().fontSizes,
-		}
-	} );
-
-	return fontSizes;
-};
 
 export const getFontSizeClassByObject = ( value ) => {
 	return getFontSizeClass( value?.slug );
 }
-export const getFontSizeValue = ( value, fontSizes ) => {
+export const getFontSizeValue = ( value ) => {
 
 	if ( value?.size ) {
 		return value.size;
 	}
+	const { fontSizes } = select( 'core/block-editor' ).getSettings();
+
 	if ( value?.slug ) {
 		const fontSize = fontSizes.find( ( size ) => size.slug === value.slug );
 		return fontSize ? fontSize.size : undefined;
 	}
 	return undefined;
 }
-export const createFontSizeObject = ( value, fontSizes ) => {
+export const createFontSizeObject = ( value ) => {
 
 	if ( ! value ) {
 		return undefined;
 	}
+	const { fontSizes } = select( 'core/block-editor' ).getSettings();
 
 	const fontSize = fontSizes.find( ( size ) => size.size === value );
 
 	const result = {
-		size: fontSize ? undefined : value,
+		size: value,
 		slug: fontSize?.slug,
 	};
 

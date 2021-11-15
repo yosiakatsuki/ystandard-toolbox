@@ -1,27 +1,47 @@
+import classnames from "classnames";
 import {
-	InnerBlocks,
+	RichText,
 	getColorClassName,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import {
-	responsiveKeys as keys,
-	getResponsiveProperty
-} from "@ystdtb/helper/responsive";
 import { getFontSizeClassByObject } from "@ystdtb/helper/fontSize";
+import { blockClassName, blockControlClasses } from "./config";
 
-const Save = ( { attributes } ) => {
+const save = ( { attributes } ) => {
 
 	const {
+		mainText,
 		mainTextFontSize,
 	} = attributes;
 
+	const blockProps = useBlockProps.save( {
+		className: classnames( blockClassName ),
+	} );
+
 	const fontSizeClass = {
-		mainText: getFontSizeClassByObject( getResponsiveProperty( mainTextFontSize, keys.desktop ) ),
+		mainText: getFontSizeClassByObject( mainTextFontSize?.desktop ),
+	}
+
+	const mainTextProps = {
+		value: mainText,
+		tagName: 'div',
+		className: classnames(
+			blockControlClasses.mainText,
+			{
+				[ fontSizeClass.mainText ]: fontSizeClass.mainText
+			}
+		),
+		style: {
+			fontSize: ! fontSizeClass.mainText && mainTextFontSize?.desktop?.size ?
+				mainTextFontSize?.desktop?.size : undefined,
+		}
 	}
 
 	return (
-		<div>テスト</div>
+		<div { ...blockProps }>
+			<RichText.Content { ...mainTextProps }/>
+		</div>
 	);
 };
 
-export default Save;
+export default save;

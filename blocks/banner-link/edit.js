@@ -1,10 +1,12 @@
 import classnames from 'classnames';
 import {
+	RichText,
 	withColors,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { blockClassName } from "./config";
+import { blockClassName, blockControlClasses } from "./config";
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
 import { getBoxShadowStyle } from "@ystdtb/components/box-shadow-control";
@@ -13,10 +15,13 @@ const BannerLink = ( props ) => {
 
 	const {
 		attributes,
+		setAttributes,
 	} = props;
 
 	const {
 		boxShadow,
+		mainText,
+		mainTextFontSize,
 	} = attributes;
 
 	const blockWrapProps = useBlockProps( {} );
@@ -27,6 +32,12 @@ const BannerLink = ( props ) => {
 			...getBoxShadowStyle( boxShadow )
 		}
 	}
+	const mainTextClass = classnames(
+		blockControlClasses.mainText,
+	);
+	const mainTextStyles = {
+		fontSize: mainTextFontSize?.desktop?.size,
+	};
 
 	return (
 		<>
@@ -40,7 +51,16 @@ const BannerLink = ( props ) => {
 
 			<div { ...blockWrapProps }>
 				<div { ...blockProps }>
-					<p>開発中。。。</p>
+					<p>---</p>
+					<RichText
+						className={ mainTextClass }
+						style={ mainTextStyles }
+						value={ mainText }
+						onChange={ ( value ) => setAttributes( { mainText: value } ) }
+						identifier="mainText"
+						placeholder={ __( 'メインテキスト', 'ystandard-toolbox' ) }
+						withoutInteractiveFormatting
+					/>
 				</div>
 			</div>
 		</>
@@ -48,5 +68,8 @@ const BannerLink = ( props ) => {
 };
 
 export default compose( [
-	withColors( { backgroundColor: 'background-color' } ),
+	withColors( {
+		backgroundColor: 'background-color',
+		mainTextColor: 'color',
+	} ),
 ] )( BannerLink );
