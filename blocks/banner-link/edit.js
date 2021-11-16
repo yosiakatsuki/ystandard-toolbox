@@ -7,25 +7,33 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { blockClassName, blockClasses } from "./config";
+import { blockClassName, blockClasses } from './config';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
-import { getBoxShadowStyle } from "@ystdtb/components/box-shadow-control";
+import { getBoxShadowStyle } from '@ystdtb/components/box-shadow-control';
 import {
 	getBackgroundImage,
-	getBackgroundPosition, getBlockPositionStyle, getContentPositionStyle,
+	getBackgroundPosition,
+	getBlockPositionStyle,
+	getContentPositionStyle,
 	getCustomProperty,
 	getFontSizeStyle,
-	getOverlayBackGround, getPaddingStyle, isClearStyle
-} from "./function/style";
-import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
-import { getBorderColorClass, getBorderStyle } from "@ystdtb/components/border-control";
-import { getFontSizeClassByObject } from "@ystdtb/helper/fontSize";
-import { getComponentConfig } from "@ystdtb/helper/config";
-import { getResponsiveCustomProperties } from "@ystdtb/helper/responsive";
+	getOverlayBackGround,
+	getPaddingStyle,
+	isClearStyle,
+} from './function/style';
+import {
+	getRatioClassName,
+	getRatioInnerClassName,
+} from '@ystdtb/helper/ratio';
+import {
+	getBorderColorClass,
+	getBorderStyle,
+} from '@ystdtb/components/border-control';
+import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
+import { getComponentConfig } from '@ystdtb/helper/config';
 
 const BannerLink = ( props ) => {
-
 	const {
 		attributes,
 		setAttributes,
@@ -62,8 +70,7 @@ const BannerLink = ( props ) => {
 		blockPosition,
 	} = attributes;
 
-	const { gradientClass, gradientValue } =
-		__experimentalUseGradient();
+	const { gradientClass, gradientValue } = __experimentalUseGradient();
 	const clearStyle = getComponentConfig( 'headingClearStyle' );
 
 	const fontSizeClasses = {
@@ -78,20 +85,18 @@ const BannerLink = ( props ) => {
 	 * Block
 	 */
 	const blockProps = {
-		className: classnames(
-			blockClassName,
-			getRatioClassName( ratio ),
-			{}
-		),
+		className: classnames( blockClassName, getRatioClassName( ratio ), {} ),
 		style: {
 			backgroundImage: getBackgroundImage( backgroundImage ),
-			backgroundPosition: getBackgroundPosition( backgroundImageFocalPoint ),
+			backgroundPosition: getBackgroundPosition(
+				backgroundImageFocalPoint
+			),
 			...getBoxShadowStyle( boxShadow ),
 			...getCustomProperty( 'max-width', size?.maxWidth ),
 			...getCustomProperty( 'min-height', size?.minHeight ),
 			borderRadius: borderRadius || undefined,
 			...getBlockPositionStyle( blockPosition ),
-		}
+		},
 	};
 
 	/**
@@ -108,65 +113,57 @@ const BannerLink = ( props ) => {
 		style: {
 			...getPaddingStyle( padding ),
 			...getContentPositionStyle( contentPosition ),
-		}
-	}
+		},
+	};
 	/**
 	 * Overlay
 	 */
-	const hasOverlayBackground = backgroundImage || backgroundColor || gradientClass || gradientValue;
+	const hasOverlayBackground =
+		backgroundImage || backgroundColor || gradientClass || gradientValue;
 	const overlayBackgroundProps = {
-		className: classnames(
-			blockClasses.overlayBackground,
-			{
-				'has-background': backgroundColor.color,
-				[ backgroundColor.class ]: backgroundColor.class,
-				'has-background-gradient': gradientValue,
-				[ gradientClass ]: gradientClass,
-			}
-		),
+		className: classnames( blockClasses.overlayBackground, {
+			'has-background': backgroundColor.color,
+			[ backgroundColor.class ]: backgroundColor.class,
+			'has-background-gradient': gradientValue,
+			[ gradientClass ]: gradientClass,
+		} ),
 		style: {
-			background: getOverlayBackGround( backgroundColor.color, gradientValue ),
+			background: getOverlayBackGround(
+				backgroundColor.color,
+				gradientValue
+			),
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
 		},
-		[ 'aria-hidden' ]: true,
+		'aria-hidden': true,
 	};
 	const borderColorClass = getBorderColorClass( border?.color );
 	const hasOverlayBorder = borderColorClass || border;
 	const overlayBorderProps = {
-		className: classnames(
-			blockClasses.overlayBorder,
-			{
-				'has-border': hasOverlayBorder,
-				[ borderColorClass ]: borderColorClass,
-			}
-		),
+		className: classnames( blockClasses.overlayBorder, {
+			'has-border': hasOverlayBorder,
+			[ borderColorClass ]: borderColorClass,
+		} ),
 		style: {
 			borderRadius: borderRadius || undefined,
 			...getBorderStyle( border ),
 		},
-		[ 'aria-hidden' ]: true,
-	}
+		'aria-hidden': true,
+	};
 	/**
 	 * Text
 	 */
 	const textWrapProps = {
-		className: classnames(
-			blockClasses.text,
-			{}
-		),
-	}
+		className: classnames( blockClasses.text, {} ),
+	};
 	/**
 	 * Main Text
 	 */
-	const mainTextClass = classnames(
-		blockClasses.mainText,
-		{
-			'has-font-size': mainTextFontSize,
-			[ fontSizeClasses.mainText ]: fontSizeClasses.mainText,
-			[ clearStyle ]: isClearStyle( mainTextHtml, mainTextStyleClear ),
-		}
-	);
+	const mainTextClass = classnames( blockClasses.mainText, {
+		'has-font-size': mainTextFontSize,
+		[ fontSizeClasses.mainText ]: fontSizeClasses.mainText,
+		[ clearStyle ]: isClearStyle( mainTextHtml, mainTextStyleClear ),
+	} );
 	const mainTextStyles = {
 		color: mainTextColor.color,
 		...getFontSizeStyle( mainTextFontSize, fontSizeClasses.mainText ),
@@ -176,21 +173,18 @@ const BannerLink = ( props ) => {
 	/**
 	 * Sub Text
 	 */
-	const subTextClass = classnames(
-		blockClasses.subText,
-		{
-			'has-margin-top': getCustomProperty( 'margin-top', subTextMargin ),
-			'has-font-size': subTextFontSize,
-			[ fontSizeClasses.subText ]: fontSizeClasses.subText,
-			[ clearStyle ]: isClearStyle( subTextHtml, subTextStyleClear ),
-		}
-	);
+	const subTextClass = classnames( blockClasses.subText, {
+		'has-margin-top': getCustomProperty( 'margin-top', subTextMargin ),
+		'has-font-size': subTextFontSize,
+		[ fontSizeClasses.subText ]: fontSizeClasses.subText,
+		[ clearStyle ]: isClearStyle( subTextHtml, subTextStyleClear ),
+	} );
 	const subTextStyles = {
 		color: subTextColor.color,
 		...getFontSizeStyle( subTextFontSize, fontSizeClasses.subText ),
 		lineHeight: subTextLineHeight,
 		letterSpacing: subTextLetterSpacing,
-		...getCustomProperty( 'margin-top', subTextMargin )
+		...getCustomProperty( 'margin-top', subTextMargin ),
 	};
 
 	return (
@@ -205,12 +199,10 @@ const BannerLink = ( props ) => {
 
 			<div { ...wrapProps }>
 				<div { ...blockProps }>
-					{ ( hasOverlayBackground &&
-						<div { ...overlayBackgroundProps }/>
+					{ hasOverlayBackground && (
+						<div { ...overlayBackgroundProps } />
 					) }
-					{ ( hasOverlayBorder &&
-						<div { ...overlayBorderProps }/>
-					) }
+					{ hasOverlayBorder && <div { ...overlayBorderProps } /> }
 					<div { ...containerProps }>
 						<div { ...textWrapProps }>
 							<RichText
@@ -218,9 +210,14 @@ const BannerLink = ( props ) => {
 								className={ mainTextClass }
 								style={ mainTextStyles }
 								value={ mainText }
-								onChange={ ( value ) => setAttributes( { mainText: value } ) }
+								onChange={ ( value ) =>
+									setAttributes( { mainText: value } )
+								}
 								identifier="mainText"
-								placeholder={ __( 'メインテキスト', 'ystandard-toolbox' ) }
+								placeholder={ __(
+									'メインテキスト',
+									'ystandard-toolbox'
+								) }
 								withoutInteractiveFormatting
 							/>
 							<RichText
@@ -228,9 +225,14 @@ const BannerLink = ( props ) => {
 								className={ subTextClass }
 								style={ subTextStyles }
 								value={ subText }
-								onChange={ ( value ) => setAttributes( { subText: value } ) }
+								onChange={ ( value ) =>
+									setAttributes( { subText: value } )
+								}
 								identifier="subText"
-								placeholder={ __( 'サブテキスト', 'ystandard-toolbox' ) }
+								placeholder={ __(
+									'サブテキスト',
+									'ystandard-toolbox'
+								) }
 								withoutInteractiveFormatting
 							/>
 						</div>

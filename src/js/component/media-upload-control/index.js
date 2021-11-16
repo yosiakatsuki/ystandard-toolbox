@@ -3,15 +3,15 @@ import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const MediaUploadControl = ( {
-	 media,
-	 mediaTypes,
-	 onSelect,
-	 onSelectRaw,
-	 onClear,
-	 value,
-	 clearLabel,
-	 selectLabel,
- } ) => {
+	media,
+	mediaTypes,
+	onSelect,
+	onSelectRaw,
+	onClear,
+	value,
+	clearLabel,
+	selectLabel,
+} ) => {
 	const MEDIA_TYPES = [ 'image' ];
 
 	const _mediaTypes = mediaTypes || MEDIA_TYPES;
@@ -19,19 +19,18 @@ const MediaUploadControl = ( {
 	const _clearLabel = clearLabel || __( '画像をクリア', 'ystandard-blocks' );
 	const _selectLabel = selectLabel || __( '画像を選択', 'ystandard-blocks' );
 
-	const handleOnSelect = ( media ) => {
-
+	const handleOnSelect = ( newMedia ) => {
 		if ( onSelectRaw ) {
-			onSelectRaw( media );
+			onSelectRaw( newMedia );
 			return;
 		}
 		onSelect( {
-			type: media?.type,
-			id: media?.id,
-			url: media?.url,
-			alt: media?.alt,
+			type: newMedia?.type,
+			id: newMedia?.id,
+			url: newMedia?.url,
+			alt: newMedia?.alt,
 		} );
-	}
+	};
 
 	const _render = ( obj ) => {
 		const mediaType = media?.type || 'image';
@@ -55,7 +54,7 @@ const MediaUploadControl = ( {
 					className={ 'ystdtb-media-upload-control__preview' }
 				>
 					{ 'image' === mediaType && (
-						<img src={ media?.url } alt={ media?.alt }/>
+						<img src={ media?.url } alt={ media?.alt } />
 					) }
 					{ 'video' === mediaType && (
 						<video

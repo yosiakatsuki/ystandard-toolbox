@@ -1,11 +1,11 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import FontSize from "./font-size";
-import Color from "./color";
-import HtmlTag from "./html-tag";
-import LineHeight from "./line-height";
-import LetterSpacing from "./letter-spacing";
-import Margin from "./margin";
+import FontSize from './font-size';
+import Color from './color';
+import HtmlTag from './html-tag';
+import LineHeight from './line-height';
+import LetterSpacing from './letter-spacing';
+import Margin from './margin';
 
 const PanelSubText = ( props ) => {
 	return (
@@ -21,5 +21,5 @@ const PanelSubText = ( props ) => {
 			<Margin { ...props } />
 		</PanelBody>
 	);
-}
+};
 export default PanelSubText;

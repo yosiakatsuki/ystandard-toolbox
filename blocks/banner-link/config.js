@@ -1,5 +1,3 @@
-import { __ } from '@wordpress/i18n';
-
 export const blockClassName = 'ystdtb-banner-link';
 
 export const blockClasses = {
@@ -51,7 +49,7 @@ export const attributes = {
 	mainText: {
 		type: 'string',
 		source: 'html',
-		selector: '.ystdtb-banner-link__main-text'
+		selector: '.ystdtb-banner-link__main-text',
 	},
 	mainTextFontSize: {
 		type: 'object',
@@ -78,7 +76,7 @@ export const attributes = {
 	subText: {
 		type: 'string',
 		source: 'html',
-		selector: '.ystdtb-banner-link__sub-text'
+		selector: '.ystdtb-banner-link__sub-text',
 	},
 	subTextFontSize: {
 		type: 'object',
@@ -116,7 +114,7 @@ export const attributes = {
 	},
 	blockPosition: {
 		type: 'string',
-	}
+	},
 };
 
 export const supports = {
@@ -137,11 +135,4 @@ export const textHtmlTag = [
 	{ value: 'p', label: 'p' },
 ];
 
-export const headingTag = [
-	'h1',
-	'h2',
-	'h3',
-	'h4',
-	'h5',
-	'h6',
-];
+export const headingTag = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ];

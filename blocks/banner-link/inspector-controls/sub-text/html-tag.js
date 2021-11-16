@@ -1,21 +1,26 @@
-import { BaseControl, SelectControl, ToggleControl } from '@wordpress/components';
+import {
+	BaseControl,
+	SelectControl,
+	ToggleControl,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { headingTag, textHtmlTag } from "../../config";
+import { headingTag, textHtmlTag } from '../../config';
 
 const HtmlTag = ( { attributes, setAttributes } ) => {
-
 	const { subTextHtml, subTextStyleClear } = attributes;
 	const handleHtmlTagOnChange = ( value ) => {
 		setAttributes( {
 			subTextHtml: value,
-			subTextStyleClear: ! headingTag.includes( value ) ? undefined : subTextStyleClear,
+			subTextStyleClear: ! headingTag.includes( value )
+				? undefined
+				: subTextStyleClear,
 		} );
-	}
+	};
 	const handleStyleClearOnChange = ( value ) => {
 		setAttributes( {
 			subTextStyleClear: value,
 		} );
-	}
+	};
 	return (
 		<>
 			<BaseControl
@@ -27,12 +32,14 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 					options={ textHtmlTag }
 					onChange={ handleHtmlTagOnChange }
 				/>
-
 			</BaseControl>
-			{ ( headingTag.includes( subTextHtml ) &&
+			{ headingTag.includes( subTextHtml ) && (
 				<BaseControl>
 					<ToggleControl
-						label={ __( '見出しスタイル削除', 'ystandard-toolbox' ) }
+						label={ __(
+							'見出しスタイル削除',
+							'ystandard-toolbox'
+						) }
 						onChange={ handleStyleClearOnChange }
 						checked={ subTextStyleClear ?? true }
 					/>
@@ -40,5 +47,5 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 			) }
 		</>
 	);
-}
+};
 export default HtmlTag;

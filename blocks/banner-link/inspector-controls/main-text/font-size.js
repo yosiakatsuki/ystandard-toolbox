@@ -1,14 +1,11 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import ResponsiveFontSize from "@ystdtb/components/responsive-font-size";
-import { getResponsiveValues } from "@ystdtb/helper/responsive";
+import ResponsiveFontSize from '@ystdtb/components/responsive-font-size';
+import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
 const FontSize = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-	} = props;
+	const { attributes, setAttributes } = props;
 
 	const { mainTextFontSize } = attributes;
 
@@ -16,7 +13,7 @@ const FontSize = ( props ) => {
 		setAttributes( {
 			mainTextFontSize: getResponsiveValues( values ),
 		} );
-	}
+	};
 
 	return (
 		<BaseControl>
@@ -27,5 +24,5 @@ const FontSize = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 export default FontSize;

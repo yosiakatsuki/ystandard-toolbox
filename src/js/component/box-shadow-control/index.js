@@ -1,18 +1,18 @@
-import {
-	BaseControl,
-	RangeControl,
-	Button,
-} from '@wordpress/components';
+import { BaseControl, RangeControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import HorizonButtons from "@ystdtb/components/horizon-buttons";
-import { getComponentConfig } from "@ystdtb/helper/config";
-import UnitControl from "@ystdtb/components/unit-control";
-import ColorPaletteControl from "@ystdtb/components/color-palette-control";
-import { hex2rgb } from "@ystdtb/helper/color";
+import HorizonButtons from '@ystdtb/components/horizon-buttons';
+import { getComponentConfig } from '@ystdtb/helper/config';
+import UnitControl from '@ystdtb/components/unit-control';
+import ColorPaletteControl from '@ystdtb/components/color-palette-control';
+import { hex2rgb } from '@ystdtb/helper/color';
 
 export const getBoxShadowStyle = ( value ) => {
-	if ( undefined === value?.offsetX || undefined === value?.offsetY || undefined === value?.blurRadius ) {
+	if (
+		undefined === value?.offsetX ||
+		undefined === value?.offsetY ||
+		undefined === value?.blurRadius
+	) {
 		return undefined;
 	}
 	const color = hex2rgb( value?.color ?? '#000' );
@@ -20,43 +20,41 @@ export const getBoxShadowStyle = ( value ) => {
 
 	return {
 		boxShadow: `${ value?.offsetX } ${ value?.offsetY } ${ value?.blurRadius } rgba(${ color[ 0 ] },${ color[ 1 ] },${ color[ 2 ] },${ opacity })`,
-	}
-
+	};
 };
 
 const BoxShadowControl = ( { label = undefined, value, onChange } ) => {
-
 	const units = [ { value: 'px', label: 'px' } ];
-	const _label = label ?? __( '影', 'ystandard-toolbox' )
+	const _label = label ?? __( '影', 'ystandard-toolbox' );
 
 	const setNewValue = ( newValue ) => {
 		onChange( {
 			...value,
-			...newValue
+			...newValue,
 		} );
-	}
+	};
 
 	const handleResetOnClick = () => {
 		onChange( undefined );
-	}
-	const handlePresetOnChange = ( { value } ) => {
-		onChange( value );
-	}
+	};
+	const handlePresetOnChange = ( preset ) => {
+		onChange( preset?.value );
+	};
 	const handleColorOnChange = ( color ) => {
-		setNewValue( { color: color } );
-	}
-	const handleOpacityOnChange = ( value ) => {
-		setNewValue( { opacity: value } );
-	}
-	const handleOffsetXOnChange = ( value ) => {
-		setNewValue( { offsetX: value } );
-	}
-	const handleOffsetYOnChange = ( value ) => {
-		setNewValue( { offsetY: value } );
-	}
-	const handleBlurRadiusOnChange = ( value ) => {
-		setNewValue( { blurRadius: value } );
-	}
+		setNewValue( { color } );
+	};
+	const handleOpacityOnChange = ( newValue ) => {
+		setNewValue( { opacity: newValue } );
+	};
+	const handleOffsetXOnChange = ( newValue ) => {
+		setNewValue( { offsetX: newValue } );
+	};
+	const handleOffsetYOnChange = ( newValue ) => {
+		setNewValue( { offsetY: newValue } );
+	};
+	const handleBlurRadiusOnChange = ( newValue ) => {
+		setNewValue( { blurRadius: newValue } );
+	};
 
 	return (
 		<BaseControl>
@@ -126,5 +124,5 @@ const BoxShadowControl = ( { label = undefined, value, onChange } ) => {
 			</div>
 		</BaseControl>
 	);
-}
+};
 export default BoxShadowControl;

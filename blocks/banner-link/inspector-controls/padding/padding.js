@@ -1,14 +1,11 @@
 import { BaseControl } from '@wordpress/components';
-import ResponsiveSpacing from "@ystdtb/components/responsive-spacing";
+import ResponsiveSpacing from '@ystdtb/components/responsive-spacing';
 import { __ } from '@wordpress/i18n';
 
-import { getResponsiveValues } from "@ystdtb/helper/responsive";
+import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
 const Padding = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-	} = props;
+	const { attributes, setAttributes } = props;
 
 	const { padding } = attributes;
 
@@ -16,7 +13,7 @@ const Padding = ( props ) => {
 		setAttributes( {
 			padding: getResponsiveValues( values ),
 		} );
-	}
+	};
 
 	return (
 		<BaseControl>
@@ -27,6 +24,6 @@ const Padding = ( props ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default Padding;

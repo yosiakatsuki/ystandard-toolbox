@@ -1,16 +1,13 @@
 import { BlockAlignmentToolbar } from '@wordpress/block-editor';
 
 const BlockPosition = ( { attributes, setAttributes } ) => {
-	const {
-		blockPosition,
-		size,
-	} = attributes;
+	const { blockPosition, size } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { blockPosition: value } );
 	};
 	return (
 		<>
-			{ ( size?.maxWidth &&
+			{ size?.maxWidth && (
 				<BlockAlignmentToolbar
 					value={ blockPosition ?? 'left' }
 					onChange={ handleOnChange }
@@ -19,5 +16,5 @@ const BlockPosition = ( { attributes, setAttributes } ) => {
 			) }
 		</>
 	);
-}
+};
 export default BlockPosition;

@@ -1,8 +1,12 @@
-import {
-	__experimentalBlockAlignmentMatrixToolbar as WPBlockAlignmentMatrixToolbar,
-} from '@wordpress/block-editor';
+import { __experimentalBlockAlignmentMatrixToolbar as WPBlockAlignmentMatrixToolbar } from '@wordpress/block-editor';
 
-const BlockAlignmentMatrixToolbar = ( { label, value, onChange, isDisabled, ...props } ) => {
+const BlockAlignmentMatrixToolbar = ( {
+	label,
+	value,
+	onChange,
+	isDisabled,
+	...props
+} ) => {
 	return (
 		<WPBlockAlignmentMatrixToolbar
 			label={ label }
@@ -12,5 +16,5 @@ const BlockAlignmentMatrixToolbar = ( { label, value, onChange, isDisabled, ...p
 			{ ...props }
 		/>
 	);
-}
+};
 export default BlockAlignmentMatrixToolbar;

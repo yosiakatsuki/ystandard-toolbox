@@ -13,7 +13,10 @@ const blockAttributes = mergeDefaultAttributes( blockName, attributes );
 registerBlockType( blockName, {
 	apiVersion: 2,
 	title: __( 'バナーリンク', 'ystandard-toolbox' ),
-	description: __( '画像の上にテキストを配置したバナー型のリンクを作れるブロック', 'ystandard-toolbox' ),
+	description: __(
+		'画像の上にテキストを配置したバナー型のリンクを作れるブロック',
+		'ystandard-toolbox'
+	),
 	icon: (
 		<Image
 			stroke={ ystdtbConfig.color.iconForeground }
@@ -25,12 +28,12 @@ registerBlockType( blockName, {
 		_x( 'banner', 'block-keywords', 'ystandard-toolbox' ),
 		'banner-link',
 		'banner',
-		'link'
+		'link',
 	],
 	category: ystdtbConfig.category.common,
 	attributes: blockAttributes,
 	supports,
 	edit,
 	save,
-	example: {}
+	example: {},
 } );

@@ -1,7 +1,6 @@
 import { Button } from '@wordpress/components';
 
-const HorizonButtons = ( { items, onChange, primary = undefined} ) => {
-
+const HorizonButtons = ( { items, onChange, primary = undefined } ) => {
 	const handleOnClick = ( item ) => {
 		onChange( item );
 	};
@@ -12,7 +11,9 @@ const HorizonButtons = ( { items, onChange, primary = undefined} ) => {
 					<Button
 						key={ item.name }
 						isSecondary={ ! primary || primary !== item.name }
-						isPrimary={ undefined !== primary && primary === item.name }
+						isPrimary={
+							undefined !== primary && primary === item.name
+						}
 						onClick={ () => {
 							handleOnClick( item );
 						} }
@@ -23,5 +24,5 @@ const HorizonButtons = ( { items, onChange, primary = undefined} ) => {
 			} ) }
 		</div>
 	);
-}
+};
 export default HorizonButtons;

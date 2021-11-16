@@ -1,14 +1,10 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveValues from "@ystdtb/components/responsive-values";
-import { parseSize } from "../../function/edit";
-
+import ResponsiveValues from '@ystdtb/components/responsive-values';
+import { parseSize } from '../../function/edit';
 
 const MaxWidth = ( { attributes, setAttributes } ) => {
-	const {
-		size,
-	} = attributes;
-
+	const { size } = attributes;
 
 	const handleOnChange = ( newValue ) => {
 		const newSize = parseSize( {
@@ -23,7 +19,7 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 				blockPosition: undefined,
 			} );
 		}
-	}
+	};
 	return (
 		<>
 			<BaseControl>
@@ -35,5 +31,5 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 			</BaseControl>
 		</>
 	);
-}
+};
 export default MaxWidth;

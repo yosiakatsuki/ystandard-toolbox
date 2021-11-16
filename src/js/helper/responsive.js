@@ -25,8 +25,7 @@ export const getResponsiveValue = ( values, key ) => {
 		result = 0 < Object.keys( result ).length ? result : undefined;
 	}
 	return result;
-}
-
+};
 
 export const getResponsiveValues = ( values ) => {
 	if ( ! values || 'object' !== typeof values ) {
@@ -37,22 +36,22 @@ export const getResponsiveValues = ( values ) => {
 		result = {
 			...result,
 			[ responsiveKeys.desktop ]: values[ responsiveKeys.desktop ],
-		}
+		};
 	}
 	if ( values[ responsiveKeys.tablet ] ) {
 		result = {
 			...result,
 			[ responsiveKeys.tablet ]: values[ responsiveKeys.tablet ],
-		}
+		};
 	}
 	if ( values[ responsiveKeys.mobile ] ) {
 		result = {
 			...result,
 			[ responsiveKeys.mobile ]: values[ responsiveKeys.mobile ],
-		}
+		};
 	}
 	return 0 < Object.keys( result ).length ? result : undefined;
-}
+};
 
 export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 	if ( ! values || 'object' !== typeof values ) {
@@ -64,26 +63,33 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 			if ( arrowFalsy ) {
 				result = {
 					...result,
-					[ key ]: values[ key ]
-				}
+					[ key ]: values[ key ],
+				};
 			} else if ( !! values[ key ] ) {
 				result = {
 					...result,
-					[ key ]: values[ key ]
-				}
+					[ key ]: values[ key ],
+				};
 			}
 		}
+		return true;
 	} );
 	return 0 < Object.keys( result ).length ? result : undefined;
-}
+};
 
-export const getResponsiveCustomProperties = ( property, prefix, value, ignoreDesktop = false ) => {
+export const getResponsiveCustomProperties = (
+	property,
+	prefix,
+	value,
+	ignoreDesktop = false
+) => {
 	if ( ! value || 'object' !== typeof value ) {
 		return undefined;
 	}
 	let result = {};
 	const customProperty = `${ responsiveCustomPropertyPrefix }-${ prefix }-${ property }`;
-	const hasDesktop = value.hasOwnProperty( responsiveKeys.desktop ) && ! ignoreDesktop;
+	const hasDesktop =
+		value.hasOwnProperty( responsiveKeys.desktop ) && ! ignoreDesktop;
 	const hasTablet = value.hasOwnProperty( responsiveKeys.tablet );
 	const hasMobile = value.hasOwnProperty( responsiveKeys.mobile );
 	if ( hasDesktop ) {
@@ -91,32 +97,30 @@ export const getResponsiveCustomProperties = ( property, prefix, value, ignoreDe
 			result = {
 				...result,
 				[ property ]: value.desktop,
-			}
+			};
 		} else {
 			result = {
 				...result,
 				[ `${ customProperty }-desktop` ]: value.desktop,
-			}
+			};
 		}
 	}
 	if ( hasTablet ) {
 		result = {
 			...result,
 			[ `${ customProperty }-tablet` ]: value.tablet,
-		}
+		};
 	}
 	if ( hasMobile ) {
 		result = {
 			...result,
 			[ `${ customProperty }-mobile` ]: value.mobile,
-		}
+		};
 	}
 	return 0 < Object.keys( result ).length ? result : undefined;
-}
+};
 
-/**
- * TODO:廃止
- */
+// TODO:廃止.
 export const getResponsiveProperty = ( attributes, key ) => {
 	let result = ! attributes ? { desktop: undefined } : attributes;
 	switch ( key ) {
@@ -142,9 +146,7 @@ export const getResponsiveProperty = ( attributes, key ) => {
 	return result;
 };
 
-/**
- * TODO:廃止
- */
+// TODO:廃止
 export const addResponsiveProperty = ( attributes ) => {
 	let newAttributes = ! attributes ? {} : attributes;
 	if ( ! newAttributes.hasOwnProperty( responsiveKeys.desktop ) ) {
@@ -165,9 +167,7 @@ export const addResponsiveProperty = ( attributes ) => {
 	return newAttributes;
 };
 
-/**
- * TODO:廃止
- */
+// TODO:廃止.
 export const deleteResponsiveProperty = ( attributes ) => {
 	attributes = ! attributes ? {} : attributes;
 	if ( attributes.hasOwnProperty( responsiveKeys.tablet ) ) {

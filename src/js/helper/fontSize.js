@@ -3,9 +3,8 @@ import { getFontSizeClass } from '@wordpress/block-editor';
 
 export const getFontSizeClassByObject = ( value ) => {
 	return getFontSizeClass( value?.slug ) ?? '';
-}
+};
 export const getFontSizeValue = ( value ) => {
-
 	if ( value?.size ) {
 		return value.size;
 	}
@@ -16,9 +15,8 @@ export const getFontSizeValue = ( value ) => {
 		return fontSize ? fontSize.size : undefined;
 	}
 	return undefined;
-}
+};
 export const createFontSizeObject = ( value ) => {
-
 	if ( ! value ) {
 		return undefined;
 	}
@@ -32,4 +30,4 @@ export const createFontSizeObject = ( value ) => {
 	};
 
 	return 0 < Object.keys( result ).length ? result : undefined;
-}
+};

@@ -2,7 +2,7 @@ import {
 	AlignmentToolbar,
 	BlockVerticalAlignmentToolbar,
 } from '@wordpress/block-editor';
-import { parseObject } from "@ystdtb/helper/object";
+import { parseObject } from '@ystdtb/helper/object';
 
 const ContentPosition = ( { attributes, setAttributes } ) => {
 	const { contentPosition } = attributes;
@@ -20,13 +20,13 @@ const ContentPosition = ( { attributes, setAttributes } ) => {
 	const handleHorizontalOnChange = ( value ) => {
 		setPosition( {
 			...contentPosition,
-			horizontal: value || undefined
+			horizontal: value || undefined,
 		} );
 	};
 	const handleVerticalOnChange = ( value ) => {
 		setPosition( {
 			...contentPosition,
-			vertical: value || undefined
+			vertical: value || undefined,
 		} );
 	};
 	return (
@@ -41,5 +41,5 @@ const ContentPosition = ( { attributes, setAttributes } ) => {
 			/>
 		</>
 	);
-}
+};
 export default ContentPosition;

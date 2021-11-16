@@ -2,21 +2,16 @@ import {
 	__experimentalUseGradient,
 	__experimentalColorGradientControl as WPColorGradientControl,
 } from '@wordpress/block-editor';
-import { select } from '@wordpress/data';
+import { getColorSetting } from '@ystdtb/helper/color';
 
 const ColorGradientControl = ( {
-								   colors,
-								   onColorChange,
-								   onGradientChange,
-								   colorValue,
-								   ...props
-							   } ) => {
-
+	colors,
+	onColorChange,
+	onGradientChange,
+	colorValue,
+	...props
+} ) => {
 	const { gradientValue, setGradient } = __experimentalUseGradient();
-	const getColorSetting = () => {
-		const { colors } = select( 'core/block-editor' ).getSettings();
-		return colors;
-	};
 	const _colors = colors ?? getColorSetting();
 	const _gradientValue = props?.gradientValue ?? gradientValue;
 	const _onGradientChange = onGradientChange ?? setGradient;
@@ -32,6 +27,6 @@ const ColorGradientControl = ( {
 			/>
 		</div>
 	);
-}
+};
 
 export default ColorGradientControl;

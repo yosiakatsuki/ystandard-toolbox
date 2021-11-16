@@ -1,26 +1,35 @@
-import classnames from "classnames";
+import classnames from 'classnames';
 import {
 	RichText,
 	getColorClassName,
 	__experimentalGetGradientClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { getFontSizeClassByObject } from "@ystdtb/helper/fontSize";
-import { blockClassName, blockClasses } from "./config";
-import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
+import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
+import { blockClassName, blockClasses } from './config';
+import {
+	getRatioClassName,
+	getRatioInnerClassName,
+} from '@ystdtb/helper/ratio';
 import {
 	getBackgroundImage,
-	getBackgroundPosition, getBlockPositionStyle, getContentPositionStyle,
+	getBackgroundPosition,
+	getBlockPositionStyle,
+	getContentPositionStyle,
 	getCustomProperty,
 	getFontSizeStyle,
-	getOverlayBackGround, getPaddingStyle, isClearStyle
-} from "./function/style";
-import { getBoxShadowStyle } from "@ystdtb/components/box-shadow-control";
-import { getBorderColorClass, getBorderStyle } from "@ystdtb/components/border-control";
-import { getComponentConfig } from "@ystdtb/helper/config";
+	getOverlayBackGround,
+	getPaddingStyle,
+	isClearStyle,
+} from './function/style';
+import { getBoxShadowStyle } from '@ystdtb/components/box-shadow-control';
+import {
+	getBorderColorClass,
+	getBorderStyle,
+} from '@ystdtb/components/border-control';
+import { getComponentConfig } from '@ystdtb/helper/config';
 
 const save = ( { attributes } ) => {
-
 	const {
 		link,
 		backgroundImage,
@@ -60,7 +69,8 @@ const save = ( { attributes } ) => {
 	const clearStyle = getComponentConfig( 'headingClearStyle' );
 
 	const colorClasses = {
-		backgroundColor: getColorClassName( 'background-color', backgroundColor ) ?? '',
+		backgroundColor:
+			getColorClassName( 'background-color', backgroundColor ) ?? '',
 		borderColor: getBorderColorClass( border?.color ) ?? '',
 		gradient: __experimentalGetGradientClass( gradient ) ?? '',
 		mainText: getColorClassName( 'color', mainTextColor ) ?? '',
@@ -79,13 +89,12 @@ const save = ( { attributes } ) => {
 		href: link?.url,
 		target: link?.linkTarget || undefined,
 		rel: link?.rel || undefined,
-		className: classnames(
-			blockClassName,
-			getRatioClassName( ratio ),
-		),
+		className: classnames( blockClassName, getRatioClassName( ratio ) ),
 		style: {
 			backgroundImage: getBackgroundImage( backgroundImage ),
-			backgroundPosition: getBackgroundPosition( backgroundImageFocalPoint ),
+			backgroundPosition: getBackgroundPosition(
+				backgroundImageFocalPoint
+			),
 			...getBoxShadowStyle( boxShadow ),
 			...getCustomProperty( 'max-width', size?.maxWidth ),
 			...getCustomProperty( 'min-height', size?.minHeight ),
@@ -108,8 +117,8 @@ const save = ( { attributes } ) => {
 		style: {
 			...getPaddingStyle( padding ),
 			...getContentPositionStyle( contentPosition ),
-		}
-	}
+		},
+	};
 
 	/**
 	 * Overlay
@@ -119,47 +128,42 @@ const save = ( { attributes } ) => {
 	 */
 	const hasBackgroundColor = backgroundColor || customBackgroundColor;
 	const hasGradient = gradient || customGradient;
-	const hasOverlayBackground = backgroundImage || hasBackgroundColor || hasGradient;
+	const hasOverlayBackground =
+		backgroundImage || hasBackgroundColor || hasGradient;
 	const overlayBackgroundProps = {
-		className: classnames(
-			blockClasses.overlayBackground,
-			{
-				'has-background': hasBackgroundColor,
-				[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
-				'has-background-gradient': hasGradient,
-				[ colorClasses.gradient ]: colorClasses.gradient,
-			}
-		),
+		className: classnames( blockClasses.overlayBackground, {
+			'has-background': hasBackgroundColor,
+			[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
+			'has-background-gradient': hasGradient,
+			[ colorClasses.gradient ]: colorClasses.gradient,
+		} ),
 		style: {
-			background: getOverlayBackGround( customBackgroundColor, customGradient ),
+			background: getOverlayBackGround(
+				customBackgroundColor,
+				customGradient
+			),
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
-		}
-	}
+		},
+	};
 	const hasOverlayBorder = colorClasses.borderColor || border;
 	const overlayBorderProps = {
-		className: classnames(
-			blockClasses.overlayBorder,
-			{
-				'has-border': hasOverlayBorder,
-				[ colorClasses.borderColor ]: colorClasses.borderColor,
-			}
-		),
+		className: classnames( blockClasses.overlayBorder, {
+			'has-border': hasOverlayBorder,
+			[ colorClasses.borderColor ]: colorClasses.borderColor,
+		} ),
 		style: {
 			borderRadius: borderRadius || undefined,
 			...getBorderStyle( border ),
 		},
-		[ 'aria-hidden' ]: true,
-	}
+		'aria-hidden': true,
+	};
 	/**
 	 * Text
 	 */
 	const textWrapProps = {
-		className: classnames(
-			blockClasses.text,
-			{}
-		),
-	}
+		className: classnames( blockClasses.text, {} ),
+	};
 
 	/**
 	 * Main Text
@@ -168,23 +172,20 @@ const save = ( { attributes } ) => {
 	const mainTextProps = {
 		value: mainText,
 		tagName: mainTextHtml,
-		className: classnames(
-			blockClasses.mainText,
-			{
-				'has-font-size': mainTextFontSize,
-				'has-text-color': hasMainTextColor,
-				[ colorClasses.mainText ]: colorClasses.mainText,
-				[ fontSizeClasses.mainText ]: fontSizeClasses.mainText,
-				[ clearStyle ]: isClearStyle( mainTextHtml, mainTextStyleClear ),
-			}
-		),
+		className: classnames( blockClasses.mainText, {
+			'has-font-size': mainTextFontSize,
+			'has-text-color': hasMainTextColor,
+			[ colorClasses.mainText ]: colorClasses.mainText,
+			[ fontSizeClasses.mainText ]: fontSizeClasses.mainText,
+			[ clearStyle ]: isClearStyle( mainTextHtml, mainTextStyleClear ),
+		} ),
 		style: {
 			color: customMainTextColor,
 			...getFontSizeStyle( mainTextFontSize, fontSizeClasses.mainText ),
 			lineHeight: mainTextLineHeight,
 			letterSpacing: mainTextLetterSpacing,
-		}
-	}
+		},
+	};
 
 	/**
 	 * Sub Text
@@ -193,42 +194,31 @@ const save = ( { attributes } ) => {
 	const subTextProps = {
 		value: subText,
 		tagName: 'div',
-		className: classnames(
-			blockClasses.subText,
-			{
-				'has-margin-top': getCustomProperty( 'margin-top', subTextMargin ),
-				'has-font-size': subTextFontSize,
-				'has-text-color': hasSubTextColor,
-				[ colorClasses.subText ]: colorClasses.subText,
-				[ fontSizeClasses.subText ]: fontSizeClasses.subText,
-				[ clearStyle ]: isClearStyle( subTextHtml, subTextStyleClear ),
-			}
-		),
+		className: classnames( blockClasses.subText, {
+			'has-margin-top': getCustomProperty( 'margin-top', subTextMargin ),
+			'has-font-size': subTextFontSize,
+			'has-text-color': hasSubTextColor,
+			[ colorClasses.subText ]: colorClasses.subText,
+			[ fontSizeClasses.subText ]: fontSizeClasses.subText,
+			[ clearStyle ]: isClearStyle( subTextHtml, subTextStyleClear ),
+		} ),
 		style: {
 			color: customSubTextColor,
 			...getFontSizeStyle( subTextFontSize, fontSizeClasses.subText ),
 			lineHeight: subTextLineHeight,
 			letterSpacing: subTextLetterSpacing,
-			...getCustomProperty( 'margin-top', subTextMargin )
-		}
-	}
+			...getCustomProperty( 'margin-top', subTextMargin ),
+		},
+	};
 
 	return (
 		<a { ...blockProps }>
-			{ ( hasOverlayBackground &&
-				<div { ...overlayBackgroundProps }/>
-			) }
-			{ ( hasOverlayBorder &&
-				<div { ...overlayBorderProps }/>
-			) }
+			{ hasOverlayBackground && <div { ...overlayBackgroundProps } /> }
+			{ hasOverlayBorder && <div { ...overlayBorderProps } /> }
 			<div { ...containerProps }>
 				<div { ...textWrapProps }>
-					{ ( mainText &&
-						<RichText.Content { ...mainTextProps }/>
-					) }
-					{ ( subText &&
-						<RichText.Content { ...subTextProps }/>
-					) }
+					{ mainText && <RichText.Content { ...mainTextProps } /> }
+					{ subText && <RichText.Content { ...subTextProps } /> }
 				</div>
 			</div>
 		</a>

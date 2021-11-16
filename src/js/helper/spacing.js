@@ -9,12 +9,12 @@ export const getSpacingCSS = ( value ) => {
 	const bottom = value?.bottom || '';
 	const left = value?.left || '';
 	let result = top;
-	if ( ! [ right, bottom, left ].every( x => x === top ) ) {
+	if ( ! [ right, bottom, left ].every( ( x ) => x === top ) ) {
 		result = `${ top } ${ right } ${ bottom } ${ left }`;
 	}
 
 	return result || undefined;
-}
+};
 
 export const hasSpacing = ( spacing, media = null ) => {
 	let value = spacing;

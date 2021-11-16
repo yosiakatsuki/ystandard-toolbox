@@ -12,7 +12,7 @@ export const getColorSlug = ( color, colors = undefined ) => {
 		return selected[ 0 ].slug;
 	}
 	return undefined;
-}
+};
 
 export const hex2rgb = ( hex ) => {
 	if ( hex.slice( 0, 1 ) === '#' ) hex = hex.slice( 1 );
@@ -25,7 +25,9 @@ export const hex2rgb = ( hex ) => {
 			hex.slice( 2, 3 ) +
 			hex.slice( 2, 3 );
 
-	return [ hex.slice( 0, 2 ), hex.slice( 2, 4 ), hex.slice( 4, 6 ) ].map( ( str ) => {
-		return parseInt( str, 16 );
-	} );
-}
+	return [ hex.slice( 0, 2 ), hex.slice( 2, 4 ), hex.slice( 4, 6 ) ].map(
+		( str ) => {
+			return parseInt( str, 16 );
+		}
+	);
+};

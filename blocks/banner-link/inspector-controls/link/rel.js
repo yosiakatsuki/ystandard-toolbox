@@ -1,9 +1,8 @@
 import { BaseControl } from '@wordpress/components';
-import InputControl from "@ystdtb/components/input-controls";
+import InputControl from '@ystdtb/components/input-controls';
 import { __ } from '@wordpress/i18n';
 
 const Rel = ( { attributes, setAttributes } ) => {
-
 	const { link } = attributes;
 
 	const handleOnChange = ( value ) => {
@@ -11,9 +10,9 @@ const Rel = ( { attributes, setAttributes } ) => {
 			link: {
 				...link,
 				rel: value,
-			}
+			},
 		} );
-	}
+	};
 	return (
 		<BaseControl>
 			<InputControl

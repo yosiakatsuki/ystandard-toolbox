@@ -1,14 +1,14 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveValues from "@ystdtb/components/responsive-values";
+import ResponsiveValues from '@ystdtb/components/responsive-values';
 
 const Margin = ( { attributes, setAttributes } ) => {
-	const { subTextMargin } = attributes
+	const { subTextMargin } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( {
 			subTextMargin: value,
 		} );
-	}
+	};
 	return (
 		<BaseControl
 			id={ subTextMargin }
@@ -20,5 +20,5 @@ const Margin = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 export default Margin;

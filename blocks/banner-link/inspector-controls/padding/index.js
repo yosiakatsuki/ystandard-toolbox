@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import Padding from "./padding";
+import Padding from './padding';
 
 const PanelPadding = ( props ) => {
 	return (
@@ -11,5 +11,5 @@ const PanelPadding = ( props ) => {
 			<Padding { ...props } />
 		</PanelBody>
 	);
-}
+};
 export default PanelPadding;

@@ -1,7 +1,10 @@
-import { getResponsiveCustomProperties, parseResponsiveValues } from "@ystdtb/helper/responsive";
-import { headingTag } from "../config";
-import { getSpacingCSS } from "@ystdtb/helper/spacing";
-import { isObject, parseObject } from "@ystdtb/helper/object";
+import {
+	getResponsiveCustomProperties,
+	parseResponsiveValues,
+} from '@ystdtb/helper/responsive';
+import { headingTag } from '../config';
+import { getSpacingCSS } from '@ystdtb/helper/spacing';
+import { isObject, parseObject } from '@ystdtb/helper/object';
 
 export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 	return getResponsiveCustomProperties(
@@ -10,11 +13,11 @@ export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 		value,
 		ignoreDesktop
 	);
-}
+};
 
 export const getBackgroundImage = ( value ) => {
 	return value?.url ? `url('${ value?.url }')` : undefined;
-}
+};
 export const getBackgroundPosition = ( value ) => {
 	if ( ! value || ( ! value?.x && ! value?.y ) ) {
 		return undefined;
@@ -24,8 +27,10 @@ export const getBackgroundPosition = ( value ) => {
 	if ( 50 === x && 50 === y ) {
 		return undefined;
 	}
-	return `${ ( Math.round( x * 100 ) / 100 ) }% ${ ( Math.round( y * 100 ) / 100 ) }%`;
-}
+	return `${ Math.round( x * 100 ) / 100 }% ${
+		Math.round( y * 100 ) / 100
+	}%`;
+};
 
 export const getOverlayBackGround = ( color, gradient ) => {
 	if ( gradient ) {
@@ -35,7 +40,7 @@ export const getOverlayBackGround = ( color, gradient ) => {
 		return color;
 	}
 	return undefined;
-}
+};
 
 export const getFontSizeStyle = ( fontSize, fontSizeClass ) => {
 	const value = {
@@ -49,15 +54,14 @@ export const getFontSizeStyle = ( fontSize, fontSizeClass ) => {
 		parseResponsiveValues( value ),
 		!! fontSizeClass
 	);
-}
-
+};
 
 export const isClearStyle = ( tagName, isClear ) => {
 	if ( ! headingTag.includes( tagName ) ) {
 		return false;
 	}
 	return undefined === isClear ? true : isClear;
-}
+};
 
 export const getPaddingStyle = ( padding ) => {
 	const value = parseResponsiveValues( {
@@ -66,7 +70,7 @@ export const getPaddingStyle = ( padding ) => {
 		mobile: getSpacingCSS( padding?.mobile ),
 	} );
 	return getCustomProperty( 'padding', value );
-}
+};
 
 export const getContentPositionStyle = ( position ) => {
 	if ( ! isObject( position ) ) {
@@ -84,29 +88,28 @@ export const getContentPositionStyle = ( position ) => {
 			...result,
 			justifyContent: list[ position?.horizontal ],
 			textAlign: position?.horizontal,
-		}
+		};
 	}
 	if ( list[ position?.vertical ] ) {
 		result = {
 			...result,
 			alignItems: list[ position?.vertical ],
-		}
+		};
 	}
 	return parseObject( result );
-}
+};
 
 export const getBlockPositionStyle = ( value ) => {
-
 	if ( 'center' === value ) {
 		return {
 			marginRight: 'auto',
 			marginLeft: 'auto',
-		}
+		};
 	}
 	if ( 'right' === value ) {
 		return {
 			marginLeft: 'auto',
-		}
+		};
 	}
 	return undefined;
-}
+};

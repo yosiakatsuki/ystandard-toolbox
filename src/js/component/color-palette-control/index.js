@@ -1,17 +1,12 @@
 import { ColorPalette } from '@wordpress/components';
-import { select } from '@wordpress/data';
+import { getColorSetting } from '@ystdtb/helper/color';
 
 const ColorPaletteControl = ( { value, onChange, colors, ...props } ) => {
-
-	const getColorSetting = () => {
-		const { colors } = select( 'core/block-editor' ).getSettings();
-		return colors;
-	};
 	const _colors = colors ?? getColorSetting();
 
 	const handleOnChange = ( color ) => {
 		onChange( color );
-	}
+	};
 
 	return (
 		<ColorPalette
@@ -21,5 +16,5 @@ const ColorPaletteControl = ( { value, onChange, colors, ...props } ) => {
 			{ ...props }
 		/>
 	);
-}
+};
 export default ColorPaletteControl;

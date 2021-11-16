@@ -10,5 +10,5 @@ const NumberControl = ( { value, onChange, step, shiftStep, ...props } ) => {
 			{ ...props }
 		/>
 	);
-}
+};
 export default NumberControl;

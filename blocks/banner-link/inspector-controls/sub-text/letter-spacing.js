@@ -1,15 +1,14 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import UnitControl from "@ystdtb/components/unit-control";
+import UnitControl from '@ystdtb/components/unit-control';
 
 const LetterSpacing = ( { attributes, setAttributes } ) => {
-
 	const { subTextLetterSpacing } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( {
 			subTextLetterSpacing: value || undefined,
 		} );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'subTextLetterSpacing' }
@@ -23,9 +22,9 @@ const LetterSpacing = ( { attributes, setAttributes } ) => {
 					{ value: 'px', label: 'px' },
 				] }
 				step={ 0.01 }
-				isShiftStepEnabled={false}
+				isShiftStepEnabled={ false }
 			/>
 		</BaseControl>
 	);
-}
+};
 export default LetterSpacing;

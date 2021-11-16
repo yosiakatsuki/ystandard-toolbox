@@ -2,11 +2,10 @@ import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Opacity = ( { attributes, setAttributes } ) => {
-
 	const { backgroundOpacity } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { backgroundOpacity: value } );
-	}
+	};
 	return (
 		<BaseControl>
 			<RangeControl
@@ -20,5 +19,5 @@ const Opacity = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 export default Opacity;

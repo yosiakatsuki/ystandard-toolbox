@@ -1,25 +1,22 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveValues from "@ystdtb/components/responsive-values";
-import { parseSize } from "../../function/edit";
+import ResponsiveValues from '@ystdtb/components/responsive-values';
+import { parseSize } from '../../function/edit';
 
 const MinHeight = ( { attributes, setAttributes } ) => {
-	const {
-		size,
-		ratio,
-	} = attributes;
+	const { size, ratio } = attributes;
 
 	const handleOnChange = ( newValue ) => {
 		setAttributes( {
 			size: parseSize( {
 				...size,
 				minHeight: newValue,
-			} )
+			} ),
 		} );
-	}
+	};
 	return (
 		<>
-			{ ( ! ratio &&
+			{ ! ratio && (
 				<BaseControl>
 					<ResponsiveValues
 						label={ __( '最小高さ', 'ystandard-toolbox' ) }

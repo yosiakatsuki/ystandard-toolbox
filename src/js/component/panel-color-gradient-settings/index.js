@@ -4,17 +4,17 @@ import {
 } from '@wordpress/block-editor';
 
 const PanelColorGradientSettings = ( {
-										 title,
-										 initialOpen,
-										 value,
-										 onChange,
-										 label,
-										 gradientColorValue = undefined,
-										 onGradientChange = undefined,
-										 settings = undefined,
-										 children,
-										 ...props
-									 } ) => {
+	title,
+	initialOpen,
+	value,
+	onChange,
+	label,
+	gradientColorValue = undefined,
+	onGradientChange = undefined,
+	settings = undefined,
+	children,
+	...props
+} ) => {
 	const { gradientValue, setGradient } = __experimentalUseGradient();
 	const _settings = [
 		{
@@ -23,8 +23,8 @@ const PanelColorGradientSettings = ( {
 			onColorChange: onChange,
 			onGradientChange: onGradientChange ?? setGradient,
 			label,
-			...settings
-		}
+			...settings,
+		},
 	];
 	return (
 		<WPPanelColorGradientSettings
@@ -36,5 +36,5 @@ const PanelColorGradientSettings = ( {
 			{ children }
 		</WPPanelColorGradientSettings>
 	);
-}
+};
 export default PanelColorGradientSettings;

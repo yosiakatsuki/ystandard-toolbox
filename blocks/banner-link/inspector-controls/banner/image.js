@@ -1,22 +1,18 @@
 import { BaseControl, TabPanel, FocalPointPicker } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import MediaUploadControl from "@ystdtb/components/media-upload-control";
+import MediaUploadControl from '@ystdtb/components/media-upload-control';
 
 const Image = ( props ) => {
-
 	const { attributes, setAttributes } = props;
 
-	const {
-		backgroundImage,
-		backgroundImageFocalPoint,
-	} = attributes;
+	const { backgroundImage, backgroundImageFocalPoint } = attributes;
 
 	let tabs = [
 		{
 			name: 'image',
 			title: __( '画像', 'ystandard-toolbox' ),
-		}
+		},
 	];
 	if ( backgroundImage?.url ) {
 		tabs = [
@@ -24,8 +20,8 @@ const Image = ( props ) => {
 			{
 				name: 'focalPoint',
 				title: __( '焦点', 'ystandard-toolbox' ),
-			}
-		]
+			},
+		];
 	}
 
 	const handleImageOnSelect = ( media ) => {
@@ -34,7 +30,7 @@ const Image = ( props ) => {
 	const handleImageOnClear = () => {
 		setAttributes( {
 			backgroundImage: undefined,
-			backgroundImageFocalPoint: undefined
+			backgroundImageFocalPoint: undefined,
 		} );
 	};
 	const handleFocalPointOnChange = ( value ) => {
@@ -42,7 +38,7 @@ const Image = ( props ) => {
 		setAttributes( {
 			backgroundImageFocalPoint: isReset ? undefined : value,
 		} );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'backgroundImage' }
@@ -55,7 +51,7 @@ const Image = ( props ) => {
 				{ ( tab ) => {
 					return (
 						<>
-							{ ( 'image' === tab.name &&
+							{ 'image' === tab.name && (
 								<BaseControl>
 									<MediaUploadControl
 										media={ backgroundImage }
@@ -65,7 +61,7 @@ const Image = ( props ) => {
 									/>
 								</BaseControl>
 							) }
-							{ ( 'focalPoint' === tab.name &&
+							{ 'focalPoint' === tab.name && (
 								<BaseControl>
 									<FocalPointPicker
 										value={ backgroundImageFocalPoint }
@@ -80,5 +76,5 @@ const Image = ( props ) => {
 			</TabPanel>
 		</BaseControl>
 	);
-}
+};
 export default Image;

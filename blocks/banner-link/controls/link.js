@@ -1,19 +1,17 @@
-import LinkControl from "@ystdtb/components/link-control";
-import { isOpenInNewTab, toggleOpenInNewTab, getLinkRel } from "@ystdtb/helper/link";
+import LinkControl from '@ystdtb/components/link-control';
+import {
+	isOpenInNewTab,
+	toggleOpenInNewTab,
+	getLinkRel,
+} from '@ystdtb/helper/link';
 
 const BannerLinkLinkControl = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-	} = props;
+	const { attributes, setAttributes } = props;
 
 	const { link } = attributes;
 
 	const handleOnChange = ( value ) => {
-		const {
-			url: newURL = '',
-			opensInNewTab: newOpensInNewTab,
-		} = value;
+		const { url: newURL = '', opensInNewTab: newOpensInNewTab } = value;
 		if ( ! newURL ) {
 			setAttributes( { link: undefined } );
 			return;
@@ -25,18 +23,18 @@ const BannerLinkLinkControl = ( props ) => {
 		const newLink = {
 			url: newURL,
 			linkTarget: target,
-			rel: getLinkRel( target, link?.rel )
+			rel: getLinkRel( target, link?.rel ),
 		};
 
 		setAttributes( {
 			link: newLink,
 		} );
-	}
+	};
 	return (
 		<LinkControl
 			value={ {
 				url: link?.url,
-				opensInNewTab: isOpenInNewTab( link?.linkTarget )
+				opensInNewTab: isOpenInNewTab( link?.linkTarget ),
 			} }
 			onChange={ handleOnChange }
 		/>

@@ -1,11 +1,11 @@
 import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { getColorClassName } from '@wordpress/block-editor';
-import ColorPaletteControl from "@ystdtb/components/color-palette-control";
-import { isObject, parseObject } from "@ystdtb/helper/object";
-import UnitControl from "@ystdtb/components/unit-control";
-import { getComponentConfig } from "@ystdtb/helper/config";
-import { getColorSlug } from "@ystdtb/helper/color";
+import ColorPaletteControl from '@ystdtb/components/color-palette-control';
+import { isObject, parseObject } from '@ystdtb/helper/object';
+import UnitControl from '@ystdtb/components/unit-control';
+import { getComponentConfig } from '@ystdtb/helper/config';
+import { getColorSlug } from '@ystdtb/helper/color';
 
 export const getBorderStyle = ( border, position = undefined ) => {
 	if ( ! isObject( border ) ) {
@@ -20,29 +20,30 @@ export const getBorderStyle = ( border, position = undefined ) => {
 		return {
 			[ `${ property }-width` ]: border.width,
 			[ `${ property }-style` ]: borderStyle,
-		}
+		};
 	}
 	return {
 		[ property ]: `${ border.width } ${ borderStyle } ${ border.color?.hex }`,
-	}
-}
+	};
+};
 
 export const getBorderColorClass = ( color ) => {
 	if ( ! isObject( color ) ) {
 		return undefined;
 	}
 
-	return color?.slug ? getColorClassName( 'border-color', color?.slug ) : undefined;
+	return color?.slug
+		? getColorClassName( 'border-color', color?.slug )
+		: undefined;
 };
 
 const BorderControl = ( { value, onChange } ) => {
-
 	const setBorder = ( border ) => {
 		if ( ! border || ! isObject( border ) ) {
 			onChange( undefined );
 			return;
 		}
-		let result = border;
+		const result = border;
 		if ( ! result?.width ) {
 			delete result.width;
 		}
@@ -52,7 +53,6 @@ const BorderControl = ( { value, onChange } ) => {
 		if ( ! result?.style || ( ! result?.width && ! result?.color ) ) {
 			delete result.style;
 		}
-		console.log( { result } );
 		onChange( parseObject( result ) );
 	};
 	const handleWidthOnChange = ( newValue ) => {
@@ -60,23 +60,25 @@ const BorderControl = ( { value, onChange } ) => {
 			...value,
 			width: newValue || undefined,
 		} );
-	}
+	};
 	const handleStyleOnChange = ( newValue ) => {
 		setBorder( {
 			...value,
 			style: newValue || undefined,
 		} );
-	}
+	};
 	const handleColorOnChange = ( color ) => {
-		const newColor = ! color ? undefined : {
-			hex: color,
-			slug: getColorSlug( color ),
-		}
+		const newColor = ! color
+			? undefined
+			: {
+					hex: color,
+					slug: getColorSlug( color ),
+			  };
 		setBorder( {
 			...value,
-			color: newColor
+			color: newColor,
 		} );
-	}
+	};
 	return (
 		<div className="ystdtb-component-border-control">
 			<BaseControl>
@@ -84,9 +86,7 @@ const BorderControl = ( { value, onChange } ) => {
 					label={ __( '太さ', 'ystandard-toolbox' ) }
 					value={ value?.width }
 					onChange={ handleWidthOnChange }
-					units={ [
-						{ value: 'px', label: 'px' }
-					] }
+					units={ [ { value: 'px', label: 'px' } ] }
 				/>
 			</BaseControl>
 			<BaseControl>
@@ -106,6 +106,6 @@ const BorderControl = ( { value, onChange } ) => {
 			</BaseControl>
 		</div>
 	);
-}
+};
 
 export default BorderControl;
