@@ -10,7 +10,7 @@ import { blockClassName, blockClasses } from "./config";
 import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
 import {
 	getBackgroundImage,
-	getBackgroundPosition, getContentPositionStyle,
+	getBackgroundPosition, getBlockPositionStyle, getContentPositionStyle,
 	getCustomProperty,
 	getFontSizeStyle,
 	getOverlayBackGround, getPaddingStyle, isClearStyle
@@ -54,6 +54,7 @@ const save = ( { attributes } ) => {
 		padding,
 		boxShadow,
 		contentPosition,
+		blockPosition,
 	} = attributes;
 
 	const clearStyle = getComponentConfig( 'headingClearStyle' );
@@ -89,6 +90,7 @@ const save = ( { attributes } ) => {
 			...getCustomProperty( 'max-width', size?.maxWidth ),
 			...getCustomProperty( 'min-height', size?.minHeight ),
 			borderRadius: borderRadius || undefined,
+			...getBlockPositionStyle( blockPosition ),
 		},
 	} );
 

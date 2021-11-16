@@ -94,3 +94,19 @@ export const getContentPositionStyle = ( position ) => {
 	}
 	return parseObject( result );
 }
+
+export const getBlockPositionStyle = ( value ) => {
+
+	if ( 'center' === value ) {
+		return {
+			marginRight: 'auto',
+			marginLeft: 'auto',
+		}
+	}
+	if ( 'right' === value ) {
+		return {
+			marginLeft: 'auto',
+		}
+	}
+	return undefined;
+}

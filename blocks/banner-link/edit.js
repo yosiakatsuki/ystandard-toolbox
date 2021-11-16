@@ -13,7 +13,7 @@ import { BannerLinkBlockControls as BlockControls } from './block-controls';
 import { getBoxShadowStyle } from "@ystdtb/components/box-shadow-control";
 import {
 	getBackgroundImage,
-	getBackgroundPosition, getContentPositionStyle,
+	getBackgroundPosition, getBlockPositionStyle, getContentPositionStyle,
 	getCustomProperty,
 	getFontSizeStyle,
 	getOverlayBackGround, getPaddingStyle, isClearStyle
@@ -59,6 +59,7 @@ const BannerLink = ( props ) => {
 		boxShadow,
 		padding,
 		contentPosition,
+		blockPosition,
 	} = attributes;
 
 	const { gradientClass, gradientValue } =
@@ -89,6 +90,7 @@ const BannerLink = ( props ) => {
 			...getCustomProperty( 'max-width', size?.maxWidth ),
 			...getCustomProperty( 'min-height', size?.minHeight ),
 			borderRadius: borderRadius || undefined,
+			...getBlockPositionStyle(blockPosition),
 		}
 	};
 

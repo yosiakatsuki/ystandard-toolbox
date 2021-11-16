@@ -112,6 +112,9 @@ export const attributes = {
 	},
 	contentPosition: {
 		type: 'object',
+	},
+	blockPosition: {
+		type: 'string',
 	}
 };
 

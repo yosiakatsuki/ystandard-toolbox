@@ -11,12 +11,18 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 
 
 	const handleOnChange = ( newValue ) => {
-		setAttributes( {
-			size: parseSize( {
-				...size,
-				maxWidth: newValue,
-			} )
+		const newSize = parseSize( {
+			...size,
+			maxWidth: newValue,
 		} );
+		setAttributes( {
+			size: newSize,
+		} );
+		if ( ! newSize ) {
+			setAttributes( {
+				blockPosition: undefined,
+			} );
+		}
 	}
 	return (
 		<>
