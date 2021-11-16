@@ -2,4 +2,11 @@
   .components-input-control__container {
     max-width: 100px;
   }
+
+  .components-input-control__label,
+  .components-custom-select-control__label {
+    font-size: 0.8em;
+    line-height: 1.4;
+    color: #757575;
+  }
 }

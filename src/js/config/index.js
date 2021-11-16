@@ -13,6 +13,7 @@ export const ystdtbConfig = {
 		iconBeta: '#9CADBC',
 	},
 	component: {
+		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [
 			{
 				value: 'no-repeat',

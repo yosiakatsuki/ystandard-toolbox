@@ -22,6 +22,8 @@ const LetterSpacing = ( { attributes, setAttributes } ) => {
 					{ value: 'em', label: 'em' },
 					{ value: 'px', label: 'px' },
 				] }
+				step={ 0.01 }
+				isShiftStepEnabled={false}
 			/>
 		</BaseControl>
 	);

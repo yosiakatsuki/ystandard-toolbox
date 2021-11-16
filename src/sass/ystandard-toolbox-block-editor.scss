@@ -1,10 +1,14 @@
 @use "component/blocks/inspector-controls";
+@use "component/ratio";
 @use "../js/component/icon-picker/edit" as icon-picker;
 @use "../js/component/stretch-text-control/edit" as stretch-text-control;
 @use "../js/component/media-upload-control/edit" as media-upload-control;
 @use "../js/component/responsive-tab/edit" as responsive-tab;
 @use "../js/component/responsive-font-size/edit" as responsive-font-size;
+@use "../js/component/responsive-spacing/edit" as responsive-spacing;
+@use "../js/component/responsive-values/edit" as responsive-values;
 @use "../js/component/box-shadow-control/edit" as box-shadow;
+@use "../js/component/color-gradient-control/edit" as color-gradient-control;
 @use "../../blocks/posts/edit" as posts-edit;
 @use "../../blocks/styles/columns/block" as column;
 @use "../../blocks/styles/table/block" as table;

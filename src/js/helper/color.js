@@ -1,3 +1,19 @@
+import { select } from '@wordpress/data';
+
+export const getColorSetting = () => {
+	const { colors } = select( 'core/block-editor' ).getSettings();
+	return colors;
+};
+
+export const getColorSlug = ( color, colors = undefined ) => {
+	const _colors = colors ? colors : getColorSetting();
+	const selected = _colors.filter( ( data ) => data.color === color );
+	if ( 0 < selected.length ) {
+		return selected[ 0 ].slug;
+	}
+	return undefined;
+}
+
 export const hex2rgb = ( hex ) => {
 	if ( hex.slice( 0, 1 ) === '#' ) hex = hex.slice( 1 );
 	if ( hex.length === 3 )

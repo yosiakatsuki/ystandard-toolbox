@@ -2,7 +2,10 @@ import { __ } from '@wordpress/i18n';
 
 export const blockClassName = 'ystdtb-banner-link';
 
-export const blockControlClasses = {
+export const blockClasses = {
+	container: 'ystdtb-banner-link__container',
+	overlay: 'ystdtb-banner-link__overlay',
+	text: 'ystdtb-banner-link__text',
 	mainText: 'ystdtb-banner-link__main-text',
 	subText: 'ystdtb-banner-link__sub-text',
 };
@@ -16,15 +19,6 @@ export const attributes = {
 	},
 	backgroundImageFocalPoint: {
 		type: 'object',
-	},
-	ratio: {
-		type: 'string',
-	},
-	size: {
-		type: 'object',
-	},
-	borderRadius: {
-		type: 'string',
 	},
 	backgroundColor: {
 		type: 'string',
@@ -40,6 +34,15 @@ export const attributes = {
 	},
 	backgroundOpacity: {
 		type: 'number',
+	},
+	ratio: {
+		type: 'string',
+	},
+	size: {
+		type: 'object',
+	},
+	borderRadius: {
+		type: 'string',
 	},
 	border: {
 		type: 'object',

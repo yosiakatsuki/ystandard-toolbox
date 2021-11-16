@@ -51,11 +51,15 @@ const ResponsiveFontSize = ( props ) => {
 					return (
 						<>
 							{ ( tabType.desktop === tab.name &&
-								<FontSizePicker
-									label={ _x( 'デスクトップ', 'responsive-component', 'ystandard-toolbox' ) }
-									value={ valueDesktop }
-									onChange={ handleOnChangeDesktop }
-								/>
+								<div
+									className={ 'ystdtb-responsive-font-size-unit-control' }
+								>
+									<FontSizePicker
+										label={ _x( 'デスクトップ', 'responsive-component', 'ystandard-toolbox' ) }
+										value={ valueDesktop }
+										onChange={ handleOnChangeDesktop }
+									/>
+								</div>
 							) }
 							{ ( tabType.tablet === tab.name &&
 								<UnitControl

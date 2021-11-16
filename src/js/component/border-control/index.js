@@ -1,9 +1,39 @@
 import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { getColorClassName } from '@wordpress/block-editor';
 import ColorPaletteControl from "@ystdtb/components/color-palette-control";
 import { isObject, parseObject } from "@ystdtb/helper/object";
 import UnitControl from "@ystdtb/components/unit-control";
 import { getComponentConfig } from "@ystdtb/helper/config";
+import { getColorSlug } from "@ystdtb/helper/color";
+
+export const getBorderStyle = ( border, position = undefined ) => {
+	if ( ! isObject( border ) ) {
+		return undefined;
+	}
+	if ( ! border?.width || ! border?.color ) {
+		return undefined;
+	}
+	const borderStyle = border?.style || 'solid';
+	const property = position ? `border-${ position }` : 'border';
+	if ( getBorderColorClass( border.color ) ) {
+		return {
+			[ `${ property }-width` ]: border.width,
+			[ `${ property }-style` ]: borderStyle,
+		}
+	}
+	return {
+		[ property ]: `${ border.width } ${ borderStyle } ${ border.color?.hex }`,
+	}
+}
+
+export const getBorderColorClass = ( color ) => {
+	if ( ! isObject( color ) ) {
+		return undefined;
+	}
+
+	return color?.slug ? getColorClassName( 'border-color', color?.slug ) : undefined;
+};
 
 const BorderControl = ( { value, onChange } ) => {
 
@@ -38,9 +68,13 @@ const BorderControl = ( { value, onChange } ) => {
 		} );
 	}
 	const handleColorOnChange = ( color ) => {
+		const newColor = ! color ? undefined : {
+			hex: color,
+			slug: getColorSlug( color ),
+		}
 		setBorder( {
 			...value,
-			color: color || undefined
+			color: newColor
 		} );
 	}
 	return (
@@ -66,7 +100,7 @@ const BorderControl = ( { value, onChange } ) => {
 			<BaseControl>
 				<ColorPaletteControl
 					label={ __( '色', 'ystandard-toolbox' ) }
-					value={ value?.color }
+					value={ value?.color?.hex }
 					onChange={ handleColorOnChange }
 				/>
 			</BaseControl>

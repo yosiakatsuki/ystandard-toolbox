@@ -1,3 +1,5 @@
+export const responsiveCustomPropertyPrefix = '--ystdtb';
+
 export const responsiveKeys = {
 	desktop: 'desktop',
 	tablet: 'tablet',
@@ -27,6 +29,9 @@ export const getResponsiveValue = ( values, key ) => {
 
 
 export const getResponsiveValues = ( values ) => {
+	if ( ! values || 'object' !== typeof values ) {
+		return undefined;
+	}
 	let result = {};
 	if ( values[ responsiveKeys.desktop ] ) {
 		result = {
@@ -50,6 +55,9 @@ export const getResponsiveValues = ( values ) => {
 }
 
 export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
+	if ( ! values || 'object' !== typeof values ) {
+		return undefined;
+	}
 	let result = {};
 	Object.keys( responsiveKeys ).map( ( key ) => {
 		if ( values.hasOwnProperty( key ) ) {
@@ -58,7 +66,7 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 					...result,
 					[ key ]: values[ key ]
 				}
-			} else if ( values?.desktop ) {
+			} else if ( !! values[ key ] ) {
 				result = {
 					...result,
 					[ key ]: values[ key ]
@@ -66,6 +74,43 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 			}
 		}
 	} );
+	return 0 < Object.keys( result ).length ? result : undefined;
+}
+
+export const getResponsiveCustomProperties = ( property, prefix, value, ignoreDesktop = false ) => {
+	if ( ! value || 'object' !== typeof value ) {
+		return undefined;
+	}
+	let result = {};
+	const customProperty = `${ responsiveCustomPropertyPrefix }-${ prefix }-${ property }`;
+	const hasDesktop = value.hasOwnProperty( responsiveKeys.desktop ) && ! ignoreDesktop;
+	const hasTablet = value.hasOwnProperty( responsiveKeys.tablet );
+	const hasMobile = value.hasOwnProperty( responsiveKeys.mobile );
+	if ( hasDesktop ) {
+		if ( ! hasTablet && ! hasMobile ) {
+			result = {
+				...result,
+				[ property ]: value.desktop,
+			}
+		} else {
+			result = {
+				...result,
+				[ `${ customProperty }-desktop` ]: value.desktop,
+			}
+		}
+	}
+	if ( hasTablet ) {
+		result = {
+			...result,
+			[ `${ customProperty }-tablet` ]: value.tablet,
+		}
+	}
+	if ( hasMobile ) {
+		result = {
+			...result,
+			[ `${ customProperty }-mobile` ]: value.mobile,
+		}
+	}
 	return 0 < Object.keys( result ).length ? result : undefined;
 }
 

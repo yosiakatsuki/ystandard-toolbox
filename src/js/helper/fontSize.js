@@ -2,7 +2,7 @@ import { select } from '@wordpress/data';
 import { getFontSizeClass } from '@wordpress/block-editor';
 
 export const getFontSizeClassByObject = ( value ) => {
-	return getFontSizeClass( value?.slug );
+	return getFontSizeClass( value?.slug ) ?? '';
 }
 export const getFontSizeValue = ( value ) => {
 
