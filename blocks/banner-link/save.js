@@ -119,24 +119,37 @@ const save = ( { attributes } ) => {
 	 */
 	const hasBackgroundColor = backgroundColor || customBackgroundColor;
 	const hasGradient = gradient || customGradient;
-	const hasOverlay = backgroundImage || hasBackgroundColor || hasGradient;
-	const overlayProps = {
+	const hasOverlayBackground = backgroundImage || hasBackgroundColor || hasGradient;
+	const overlayBackgroundProps = {
 		className: classnames(
-			blockClasses.overlay,
+			blockClasses.overlayBackground,
 			{
 				'has-background': hasBackgroundColor,
 				[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
 				'has-background-gradient': hasGradient,
 				[ colorClasses.gradient ]: colorClasses.gradient,
-				[ colorClasses.borderColor ]: colorClasses.borderColor,
 			}
 		),
 		style: {
 			background: getOverlayBackGround( customBackgroundColor, customGradient ),
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
-			...getBorderStyle( border ),
 		}
+	}
+	const hasOverlayBorder = colorClasses.borderColor || border;
+	const overlayBorderProps = {
+		className: classnames(
+			blockClasses.overlayBorder,
+			{
+				'has-border': hasOverlayBorder,
+				[ colorClasses.borderColor ]: colorClasses.borderColor,
+			}
+		),
+		style: {
+			borderRadius: borderRadius || undefined,
+			...getBorderStyle( border ),
+		},
+		[ 'aria-hidden' ]: true,
 	}
 	/**
 	 * Text
@@ -202,11 +215,11 @@ const save = ( { attributes } ) => {
 
 	return (
 		<a { ...blockProps }>
-			{ ( hasOverlay &&
-				<div
-					aria-hidden="true"
-					{ ...overlayProps }
-				/>
+			{ ( hasOverlayBackground &&
+				<div { ...overlayBackgroundProps }/>
+			) }
+			{ ( hasOverlayBorder &&
+				<div { ...overlayBorderProps }/>
 			) }
 			<div { ...containerProps }>
 				<div { ...textWrapProps }>

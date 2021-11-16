@@ -90,7 +90,7 @@ const BannerLink = ( props ) => {
 			...getCustomProperty( 'max-width', size?.maxWidth ),
 			...getCustomProperty( 'min-height', size?.minHeight ),
 			borderRadius: borderRadius || undefined,
-			...getBlockPositionStyle(blockPosition),
+			...getBlockPositionStyle( blockPosition ),
 		}
 	};
 
@@ -107,31 +107,45 @@ const BannerLink = ( props ) => {
 		),
 		style: {
 			...getPaddingStyle( padding ),
-			...getContentPositionStyle(contentPosition),
+			...getContentPositionStyle( contentPosition ),
 		}
 	}
 	/**
 	 * Overlay
 	 */
-	const hasOverlay = backgroundImage || backgroundColor || gradientClass || gradientValue;
-	const borderColorClass = getBorderColorClass( border?.color );
-	const overlayProps = {
+	const hasOverlayBackground = backgroundImage || backgroundColor || gradientClass || gradientValue;
+	const overlayBackgroundProps = {
 		className: classnames(
-			blockClasses.overlay,
+			blockClasses.overlayBackground,
 			{
 				'has-background': backgroundColor.color,
 				[ backgroundColor.class ]: backgroundColor.class,
 				'has-background-gradient': gradientValue,
 				[ gradientClass ]: gradientClass,
-				[ borderColorClass ]: borderColorClass,
 			}
 		),
 		style: {
 			background: getOverlayBackGround( backgroundColor.color, gradientValue ),
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
+		},
+		[ 'aria-hidden' ]: true,
+	};
+	const borderColorClass = getBorderColorClass( border?.color );
+	const hasOverlayBorder = borderColorClass || border;
+	const overlayBorderProps = {
+		className: classnames(
+			blockClasses.overlayBorder,
+			{
+				'has-border': hasOverlayBorder,
+				[ borderColorClass ]: borderColorClass,
+			}
+		),
+		style: {
+			borderRadius: borderRadius || undefined,
 			...getBorderStyle( border ),
-		}
+		},
+		[ 'aria-hidden' ]: true,
 	}
 	/**
 	 * Text
@@ -191,11 +205,11 @@ const BannerLink = ( props ) => {
 
 			<div { ...wrapProps }>
 				<div { ...blockProps }>
-					{ ( hasOverlay &&
-						<div
-							aria-hidden="true"
-							{ ...overlayProps }
-						/>
+					{ ( hasOverlayBackground &&
+						<div { ...overlayBackgroundProps }/>
+					) }
+					{ ( hasOverlayBorder &&
+						<div { ...overlayBorderProps }/>
 					) }
 					<div { ...containerProps }>
 						<div { ...textWrapProps }>

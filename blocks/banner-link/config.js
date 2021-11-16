@@ -4,7 +4,8 @@ export const blockClassName = 'ystdtb-banner-link';
 
 export const blockClasses = {
 	container: 'ystdtb-banner-link__container',
-	overlay: 'ystdtb-banner-link__overlay',
+	overlayBackground: 'ystdtb-banner-link__overlay-background',
+	overlayBorder: 'ystdtb-banner-link__overlay-border',
 	text: 'ystdtb-banner-link__text',
 	mainText: 'ystdtb-banner-link__main-text',
 	subText: 'ystdtb-banner-link__sub-text',

@@ -52,7 +52,7 @@ const BorderControl = ( { value, onChange } ) => {
 		if ( ! result?.style || ( ! result?.width && ! result?.color ) ) {
 			delete result.style;
 		}
-
+		console.log( { result } );
 		onChange( parseObject( result ) );
 	};
 	const handleWidthOnChange = ( newValue ) => {
@@ -92,7 +92,7 @@ const BorderControl = ( { value, onChange } ) => {
 			<BaseControl>
 				<SelectControl
 					label={ __( 'スタイル', 'ystandard-toolbox' ) }
-					value={ value?.style }
+					value={ value?.style ?? 'solid' }
 					options={ getComponentConfig( 'borderStyles' ) }
 					onChange={ handleStyleOnChange }
 				/>
