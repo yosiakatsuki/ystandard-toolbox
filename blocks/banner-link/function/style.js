@@ -19,9 +19,12 @@ export const getBackgroundPosition = ( value ) => {
 	if ( ! value || ( ! value?.x && ! value?.y ) ) {
 		return undefined;
 	}
-	const x = value?.x ? Math.round( value.x * 100 * 100 ) / 100 : 50;
-	const y = value?.y ? Math.round( value.y * 100 * 100 ) / 100 : 50;
-	return `${ x }% ${ y }%`;
+	const x = value?.x && ! Number.isNaN( value?.x ) ? value.x * 100 : 50;
+	const y = value?.y && ! Number.isNaN( value?.y ) ? value.y * 100 : 50;
+	if ( 50 === x && 50 === y ) {
+		return undefined;
+	}
+	return `${ ( Math.round( x * 100 ) / 100 ) }% ${ ( Math.round( y * 100 ) / 100 ) }%`;
 }
 
 export const getOverlayBackGround = ( color, gradient ) => {

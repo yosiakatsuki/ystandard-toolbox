@@ -1,7 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import Image from "./image";
-import FocalPoint from "./focal-point";
 import RatioSize from "./ratio-size";
 import MaxWidth from "./max-width";
 import MinHeight from "./min-height";
@@ -15,7 +14,6 @@ const PanelBanner = ( props ) => {
 			title={ __( 'バナー設定', 'ystandard-toolbox' ) }
 		>
 			<Image { ...props } />
-			<FocalPoint { ...props } />
 			<BackgroundColor { ...props } />
 			<Opacity { ...props } />
 			<RatioSize { ...props } />
