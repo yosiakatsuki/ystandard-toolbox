@@ -28,6 +28,8 @@ import {
 	getBorderStyle,
 } from '@ystdtb/components/border-control';
 import { getComponentConfig } from '@ystdtb/helper/config';
+import getDataFallbackProperty from "@ystdtb/helper/fallback";
+import { getSpacingCSS } from "@ystdtb/helper/spacing";
 
 const save = ( { attributes } ) => {
 	const {
@@ -101,6 +103,10 @@ const save = ( { attributes } ) => {
 			borderRadius: borderRadius || undefined,
 			...getBlockPositionStyle( blockPosition ),
 		},
+		...getDataFallbackProperty( {
+			'max-width': size?.maxWidth?.desktop,
+			'min-height': size?.minHeight?.desktop,
+		} ),
 	} );
 
 	/**
@@ -118,6 +124,9 @@ const save = ( { attributes } ) => {
 			...getPaddingStyle( padding ),
 			...getContentPositionStyle( contentPosition ),
 		},
+		...getDataFallbackProperty( {
+			'padding': getSpacingCSS( padding?.desktop ),
+		} )
 	};
 
 	/**
@@ -145,6 +154,7 @@ const save = ( { attributes } ) => {
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
 		},
+		'aria-hidden': true,
 	};
 	const hasOverlayBorder = colorClasses.borderColor || border;
 	const overlayBorderProps = {
@@ -185,6 +195,9 @@ const save = ( { attributes } ) => {
 			lineHeight: mainTextLineHeight,
 			letterSpacing: mainTextLetterSpacing,
 		},
+		...getDataFallbackProperty( {
+			'font-size': mainTextFontSize?.desktop?.size,
+		} )
 	};
 
 	/**
@@ -209,6 +222,10 @@ const save = ( { attributes } ) => {
 			letterSpacing: subTextLetterSpacing,
 			...getCustomProperty( 'margin-top', subTextMargin ),
 		},
+		...getDataFallbackProperty( {
+			'font-size': subTextFontSize?.desktop?.size,
+			'margin-top': subTextMargin?.desktop,
+		} )
 	};
 
 	return (
