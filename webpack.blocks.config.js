@@ -19,7 +19,7 @@ module.exports = {
 		'parts': './blocks/parts/index.js',
 		'banner-link': './blocks/banner-link/index.js',
 		'slider': './blocks/slider/index.js',
-		'slider-app': './src/js/blocks/slider/app.js',
+		'slider-app': './blocks/slider/app.js',
 	},
 	output: {
 		filename: '[name].js',
