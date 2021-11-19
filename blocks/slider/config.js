@@ -1,3 +1,5 @@
+import { __ } from '@wordpress/i18n';
+
 export const blockClasses = {
 	blockClass: 'ystdtb-slider',
 	sliderContainer: 'ystdtb-slider__container',
@@ -20,7 +22,10 @@ export const sliderClasses = {
 export const attributes = {
 	sliderId: {
 		type: 'string',
-	}
+	},
+	effect: {
+		type: 'string',
+	},
 };
 
 export const supports = {
@@ -35,4 +40,23 @@ export const ALLOWED_BLOCKS = [
 	'core/cover',
 	'core/video',
 	'ystdtb/slider-item',
+]
+
+export const effectOptions = [
+	{
+		label: __( 'スライド', 'ystandard-blocks' ),
+		value: 'slide',
+	},
+	{
+		label: __( 'フェード', 'ystandard-blocks' ),
+		value: 'fade',
+	},
+	{
+		label: __( 'カバー', 'ystandard-blocks' ),
+		value: 'coverflow',
+	},
+	{
+		label: __( 'キューブ', 'ystandard-blocks' ),
+		value: 'cube',
+	},
 ]
