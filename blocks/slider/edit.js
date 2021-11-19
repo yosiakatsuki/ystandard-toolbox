@@ -9,19 +9,31 @@ import { SliderInspectorControls as InspectorControls } from "./inspector-contro
 
 const edit = ( props ) => {
 
+	const { attributes } = props;
+	const { ratio } = attributes;
+
 	const blockProps = useBlockProps(
 		{
 			className: classnames(
-				sliderClasses.wrap,
 				blockClasses.blockClass,
+				{}
 			),
 		}
 	);
+
+	const sliderProps = {
+		className: classnames(
+			sliderClasses.wrap,
+			blockClasses.slider,
+			{}
+		),
+	}
 
 	const slideContainerProps = {
 		className: classnames(
 			blockClasses.sliderContainer,
 			sliderClasses.container,
+			{}
 		),
 	}
 
@@ -31,14 +43,16 @@ const edit = ( props ) => {
 		<>
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
-				<div { ...slideContainerProps }>
-					<InnerBlocks
-						allowedBlocks={ ALLOWED_BLOCKS }
-						orientation={ innerBlocksOrientation }
-						template={ [
-							[ 'core/image' ]
-						] }
-					/>
+				<div { ...sliderProps }>
+					<div { ...slideContainerProps }>
+						<InnerBlocks
+							allowedBlocks={ ALLOWED_BLOCKS }
+							orientation={ innerBlocksOrientation }
+							template={ [
+								[ 'core/image' ]
+							] }
+						/>
+					</div>
 				</div>
 			</div>
 		</>

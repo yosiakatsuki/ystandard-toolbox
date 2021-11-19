@@ -3,7 +3,7 @@
 [data-type="ystdtb/slider"] {
   .ystdtb-slider__container {
     overflow: auto;
-    padding: 16px 24px 16px 0;
+    box-sizing: border-box;
 
     > .block-editor-inner-blocks {
       width: auto;

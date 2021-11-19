@@ -6,35 +6,55 @@ import {
 } from '@wordpress/block-editor';
 import { blockClasses, sliderClasses } from "./config";
 import { getSliderOptions } from "./function/slider-option";
+import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
 
 const save = ( { attributes } ) => {
 
 	const {
 		sliderId,
+		ratio,
 	} = attributes
+
+	const isFixedHeight = !! ratio;
 
 	const blockProps = useBlockProps.save(
 		{
-			id: `ystdtb-slider-${ sliderId }`,
 			className: classnames(
-				sliderClasses.wrap,
 				blockClasses.blockClass,
+				{
+					[ getRatioClassName( ratio ) ]: getRatioClassName( ratio ),
+				}
 			),
-			'data-slider-options': getSliderOptions( attributes ),
 		}
 	);
+
+	const sliderProps = {
+		id: `ystdtb-slider-${ sliderId }`,
+		className: classnames(
+			sliderClasses.wrap,
+			blockClasses.slider,
+			{
+				'is-fixed-height': isFixedHeight,
+				[ getRatioInnerClassName( ratio ) ]: getRatioInnerClassName( ratio ),
+			}
+		),
+		'data-slider-options': getSliderOptions( attributes ),
+	}
 
 	const slideContainerProps = {
 		className: classnames(
 			sliderClasses.container,
 			blockClasses.sliderContainer,
+			{}
 		),
 	}
 
 	return (
-		<div { ...blockProps }>
-			<div { ...slideContainerProps }>
-				<InnerBlocks.Content/>
+		<div{ ...blockProps }>
+			<div { ...sliderProps }>
+				<div { ...slideContainerProps }>
+					<InnerBlocks.Content/>
+				</div>
 			</div>
 		</div>
 	);

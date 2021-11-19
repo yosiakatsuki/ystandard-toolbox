@@ -1,6 +1,9 @@
 
 .ystdtb-slider {
 
+}
+
+.ystdtb-slider__slider {
   &:not(.swiper-initialized) {
     .ystdtb-slider__container {
       > *:not(:first-child) {
@@ -8,9 +11,12 @@
       }
     }
   }
-
-  &.has-height {
+  &.is-fixed-height {
     .ystdtb-slider__container {
+      > * {
+        height: 100%;
+        min-height: 100%;
+      }
       > .wp-block-image {
         img {
           height: 100%;
@@ -46,5 +52,12 @@
       height: auto;
       object-fit: cover;
     }
+  }
+}
+
+
+.ystdtb-slider__ratio {
+  .ystdtb-slider {
+    height: 100%;
   }
 }

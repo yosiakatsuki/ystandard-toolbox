@@ -18,7 +18,7 @@ Swiper.use( [
 
 // eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
-	let sliders = document.querySelectorAll( '.ystdtb-slider' );
+	let sliders = document.querySelectorAll( '.ystdtb-slider__slider' );
 	sliders = Array.prototype.slice.call( sliders, 0 );
 	sliders.forEach( ( element ) => {
 		let slideItem = element.querySelectorAll( '.ystdtb-slider__container > *' );

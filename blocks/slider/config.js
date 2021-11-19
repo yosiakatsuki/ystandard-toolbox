@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 
 export const blockClasses = {
 	blockClass: 'ystdtb-slider',
+	slider: 'ystdtb-slider__slider',
 	sliderContainer: 'ystdtb-slider__container',
 	sliderPagination: 'ystdtb-slider__pagination',
 	sliderButtonPrev: 'ystdtb-slider__button-prev',
@@ -48,6 +49,9 @@ export const attributes = {
 	autoplayDisableOnInteraction: {
 		type: 'boolean',
 		default: true,
+	},
+	ratio: {
+		type: 'string',
 	},
 };
 
