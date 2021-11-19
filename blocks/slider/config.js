@@ -1,4 +1,3 @@
-
 export const blockClasses = {
 	blockClass: 'ystdtb-slider',
 	sliderContainer: 'ystdtb-slider__container',
@@ -18,7 +17,11 @@ export const sliderClasses = {
 	scrollbar: 'swiper-scrollbar',
 }
 
-export const attributes = {};
+export const attributes = {
+	sliderId: {
+		type: 'string',
+	}
+};
 
 export const supports = {
 	anchor: false,
