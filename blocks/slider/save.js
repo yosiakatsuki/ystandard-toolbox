@@ -1,9 +1,9 @@
+import classnames from 'classnames';
 import {
 	InnerBlocks,
 	getColorClassName,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import classnames from 'classnames';
 import { blockClasses, sliderClasses } from "./config";
 
 const save = ( { attributes } ) => {

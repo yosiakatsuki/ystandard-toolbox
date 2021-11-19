@@ -20,6 +20,7 @@
           }
           @media (min-width: 961px) {
             width: calc(100vw - 300px - 160px - 120px);
+            max-width: calc(830px - 120px);
           }
         }
 
