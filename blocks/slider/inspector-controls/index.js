@@ -1,12 +1,14 @@
 import { InspectorControls } from '@wordpress/block-editor';
-import Basic from "./basic";
-import Advanced from "./advanced";
+import PanelBasic from "./basic";
+import PanelAdvanced from "./advanced";
+import PanelAutoplay from "./autoplay";
 
 export const SliderInspectorControls = ( props ) => {
 	return (
 		<InspectorControls>
-			<Basic { ...props } />
-			<Advanced { ...props } />
+			<PanelBasic { ...props } />
+			<PanelAdvanced { ...props } />
+			<PanelAutoplay { ...props } />
 		</InspectorControls>
 	);
 };

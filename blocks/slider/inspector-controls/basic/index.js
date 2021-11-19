@@ -4,7 +4,7 @@ import Effect from "./effect";
 import Speed from "./speed";
 import Loop from "./loop";
 
-const Basic = ( props ) => {
+const PanelBasic = ( props ) => {
 
 	return (
 		<PanelBody title={ __( '基本設定', 'ystandard-toolbox' ) }>
@@ -14,4 +14,4 @@ const Basic = ( props ) => {
 		</PanelBody>
 	);
 }
-export default Basic;
+export default PanelBasic;

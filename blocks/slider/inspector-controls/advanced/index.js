@@ -2,7 +2,7 @@ import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import SliderId from "./slider-id";
 
-const Advanced = ( props ) => {
+const PanelAdvanced = ( props ) => {
 
 	return (
 		<PanelBody
@@ -13,4 +13,4 @@ const Advanced = ( props ) => {
 		</PanelBody>
 	);
 }
-export default Advanced;
+export default PanelAdvanced;

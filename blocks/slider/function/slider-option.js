@@ -24,6 +24,13 @@ export const getSliderOptions = ( attributes ) => {
 	addOptions( 'speed', secToMs( attributes?.speed, 300 ) );
 	// ループ再生.
 	addOptions( 'loop', attributes?.loop, true );
+	// 自動再生.
+	if ( false !== attributes?.autoplay ) {
+		const autoplayDelay = attributes?.autoplayDelay || 3;
+		addOptions( 'autoplay', {
+			delay: secToMs( autoplayDelay, 3000 )
+		} );
+	}
 
 
 	return JSON.stringify( options );

@@ -33,6 +33,14 @@ export const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	autoplay: {
+		type: 'boolean',
+		default: true,
+	},
+	autoplayDelay: {
+		type: 'number',
+		default: 3,
+	},
 };
 
 export const supports = {
