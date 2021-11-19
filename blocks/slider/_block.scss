@@ -1,3 +1,4 @@
+@use "customProperty";
 
 .ystdtb-slider {
 
@@ -28,6 +29,8 @@
         }
       }
     }
+
+    @include customProperty.slider();
   }
 }
 

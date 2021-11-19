@@ -53,6 +53,9 @@ export const attributes = {
 	ratio: {
 		type: 'string',
 	},
+	height: {
+		type: 'object',
+	},
 };
 
 export const supports = {

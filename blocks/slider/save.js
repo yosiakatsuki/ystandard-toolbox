@@ -7,16 +7,17 @@ import {
 import { blockClasses, sliderClasses } from "./config";
 import { getSliderOptions } from "./function/slider-option";
 import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
+import { getCustomProperty } from "./function/style";
 
 const save = ( { attributes } ) => {
 
 	const {
 		sliderId,
 		ratio,
+		height,
 	} = attributes
 
-	const isFixedHeight = !! ratio;
-
+	const isFixedHeight = !! ratio || !! height;
 	const blockProps = useBlockProps.save(
 		{
 			className: classnames(
@@ -27,6 +28,7 @@ const save = ( { attributes } ) => {
 			),
 		}
 	);
+	console.log( { ratio: getRatioClassName( ratio ), blockProps } );
 
 	const sliderProps = {
 		id: `ystdtb-slider-${ sliderId }`,
@@ -38,6 +40,9 @@ const save = ( { attributes } ) => {
 				[ getRatioInnerClassName( ratio ) ]: getRatioInnerClassName( ratio ),
 			}
 		),
+		style: {
+			...getCustomProperty( 'height', height ),
+		},
 		'data-slider-options': getSliderOptions( attributes ),
 	}
 

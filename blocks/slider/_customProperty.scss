@@ -1,0 +1,20 @@
+@use "../../src/sass/global";
+
+@mixin slider() {
+
+  &[style*="height-desktop"] {
+    height: var(--ystdtb-slide-height-desktop);
+  }
+
+  @include global.media-breakpoint-between(sm, lg) {
+    &[style*="height-tablet"] {
+      height: var(--ystdtb-slide-height-tablet);
+    }
+  }
+
+  @include global.media-breakpoint-down(sm) {
+    &[style*="height-mobile"] {
+      height: var(--ystdtb-slide-height-mobile);
+    }
+  }
+}
