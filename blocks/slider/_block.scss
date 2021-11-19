@@ -8,6 +8,21 @@
       }
     }
   }
+
+  &.has-height {
+    .ystdtb-slider__container {
+      > .wp-block-image {
+        img {
+          height: 100%;
+        }
+      }
+      > .wp-block-video {
+        video {
+          height: 100%;
+        }
+      }
+    }
+  }
 }
 
 .ystdtb-slider__container {
@@ -15,7 +30,7 @@
     width: 100%;
   }
 
-  .wp-block-image {
+  > .wp-block-image {
     img {
       display: block;
       width: 100%;
@@ -24,7 +39,7 @@
     }
   }
 
-  .wp-block-video {
+  > .wp-block-video {
     video {
       display: block;
       width: 100%;

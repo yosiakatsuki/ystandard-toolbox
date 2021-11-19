@@ -45,6 +45,10 @@ export const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	autoplayDisableOnInteraction: {
+		type: 'boolean',
+		default: true,
+	},
 };
 
 export const supports = {

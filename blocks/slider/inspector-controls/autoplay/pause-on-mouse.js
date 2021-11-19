@@ -8,10 +8,7 @@ const PauseOnMouse = ( { attributes, setAttributes } ) => {
 		setAttributes( { autoplayPauseOnMouse: value } );
 	}
 	return (
-		<BaseControl
-			id={ 'autoplayPauseOnMouse' }
-			label={ __( 'マウスホバー', 'ystandard-toolbox' ) }
-		>
+		<BaseControl>
 			<ToggleControl
 				label={ __( 'マウスホバーで再生を止める', 'ystandard-toolbox' ) }
 				onChange={ handleOnChange }

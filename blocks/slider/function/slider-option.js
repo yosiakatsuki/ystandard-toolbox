@@ -37,6 +37,7 @@ export const getSliderOptions = ( attributes ) => {
 		const autoplayOptions = {
 			delay: secToMs( attributes?.autoplayDelay || 3, 3000 ),
 			pauseOnMouseEnter: attributes?.autoplayPauseOnMouse || undefined,
+			disableOnInteraction: true === attributes?.autoplayDisableOnInteraction ? undefined : attributes?.autoplayDisableOnInteraction,
 		};
 		addOptions( 'autoplay', autoplayOptions );
 	}
