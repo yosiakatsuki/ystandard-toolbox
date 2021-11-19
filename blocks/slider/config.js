@@ -41,6 +41,10 @@ export const attributes = {
 		type: 'number',
 		default: 3,
 	},
+	autoplayPauseOnMouse: {
+		type: 'boolean',
+		default: false,
+	},
 };
 
 export const supports = {

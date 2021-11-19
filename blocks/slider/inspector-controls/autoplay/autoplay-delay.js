@@ -10,7 +10,7 @@ const AutoplayDelay = ( { attributes, setAttributes } ) => {
 	return (
 		<BaseControl
 			id={ 'autoplayDelay' }
-			label={ __( '自動再生の間隔(秒)', 'ystandard-toolbox' ) }
+			label={ __( 'スライド切り替えの時間(秒)', 'ystandard-toolbox' ) }
 		>
 			<RangeControl
 				value={ autoplayDelay }

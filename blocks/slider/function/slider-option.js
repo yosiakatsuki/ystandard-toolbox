@@ -1,3 +1,5 @@
+import { parseObject, parseObjectAll } from "@ystdtb/helper/object";
+
 const secToMs = ( value, defaultValue = undefined ) => {
 	if ( ! value || Number.isNaN( parseFloat( value ) ) ) {
 		return defaultValue;
@@ -18,18 +20,25 @@ export const getSliderOptions = ( attributes ) => {
 			[ name ]: value ?? defaultValue,
 		}
 	}
+	/**
+	 * 基本設定
+	 */
 	// エフェクト.
 	addOptions( 'effect', attributes?.effect );
 	// 速さ.
 	addOptions( 'speed', secToMs( attributes?.speed, 300 ) );
 	// ループ再生.
 	addOptions( 'loop', attributes?.loop, true );
+	/**
+	 * オートプレイ
+	 */
 	// 自動再生.
 	if ( false !== attributes?.autoplay ) {
-		const autoplayDelay = attributes?.autoplayDelay || 3;
-		addOptions( 'autoplay', {
-			delay: secToMs( autoplayDelay, 3000 )
-		} );
+		const autoplayOptions = {
+			delay: secToMs( attributes?.autoplayDelay || 3, 3000 ),
+			pauseOnMouseEnter: attributes?.autoplayPauseOnMouse || undefined,
+		};
+		addOptions( 'autoplay', autoplayOptions );
 	}
 
 

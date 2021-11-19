@@ -7,8 +7,10 @@ export const SliderInspectorControls = ( props ) => {
 	return (
 		<InspectorControls>
 			<PanelBasic { ...props } />
-			<PanelAdvanced { ...props } />
 			<PanelAutoplay { ...props } />
+
+
+			<PanelAdvanced { ...props } />
 		</InspectorControls>
 	);
 };
