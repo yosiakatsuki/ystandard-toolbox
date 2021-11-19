@@ -5,7 +5,10 @@ import SliderId from "./slider-id";
 const Advanced = ( props ) => {
 
 	return (
-		<PanelBody title={ __( '上級者向け設定', 'ystandard-toolbox' ) }>
+		<PanelBody
+			title={ __( '上級者向け設定', 'ystandard-toolbox' ) }
+			initialOpen={ false }
+		>
 			<SliderId { ...props } />
 		</PanelBody>
 	);

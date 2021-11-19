@@ -22,6 +22,8 @@ export const getSliderOptions = ( attributes ) => {
 	addOptions( 'effect', attributes?.effect );
 	// 速さ.
 	addOptions( 'speed', secToMs( attributes?.speed, 300 ) );
+	// ループ再生.
+	addOptions( 'loop', attributes?.loop, true );
 
 
 	return JSON.stringify( options );

@@ -29,6 +29,10 @@ export const attributes = {
 	speed: {
 		type: 'number',
 	},
+	loop: {
+		type: 'boolean',
+		default: true,
+	},
 };
 
 export const supports = {
