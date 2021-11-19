@@ -35,7 +35,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				options = {};
 			}
 		}
-		options = JSON.parse( '{"loop":true,"speed":400,"autoplay":{"delay":2000}}' );
 		new Swiper( selector, options );
 		console.log( {
 			selector,

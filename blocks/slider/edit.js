@@ -5,6 +5,7 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { ALLOWED_BLOCKS, sliderClasses, blockClasses } from "./config";
+import { SliderInspectorControls as InspectorControls } from "./inspector-controls";
 
 const edit = ( props ) => {
 
@@ -27,17 +28,20 @@ const edit = ( props ) => {
 	const innerBlocksOrientation = 'horizontal';
 
 	return (
-		<div { ...blockProps }>
-			<div { ...slideContainerProps }>
-				<InnerBlocks
-					allowedBlocks={ ALLOWED_BLOCKS }
-					orientation={ innerBlocksOrientation }
-					template={ [
-						[ 'core/image' ]
-					] }
-				/>
+		<>
+			<InspectorControls { ...props } />
+			<div { ...blockProps }>
+				<div { ...slideContainerProps }>
+					<InnerBlocks
+						allowedBlocks={ ALLOWED_BLOCKS }
+						orientation={ innerBlocksOrientation }
+						template={ [
+							[ 'core/image' ]
+						] }
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 export default edit;

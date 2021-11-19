@@ -5,15 +5,22 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { blockClasses, sliderClasses } from "./config";
+import { getSliderOptions } from "./function/slider-option";
 
 const save = ( { attributes } ) => {
 
+	const {
+		sliderId,
+	} = attributes
+
 	const blockProps = useBlockProps.save(
 		{
+			id: `ystdtb-slider-${ sliderId }`,
 			className: classnames(
 				sliderClasses.wrap,
 				blockClasses.blockClass,
 			),
+			'data-slider-options': getSliderOptions( attributes ),
 		}
 	);
 
@@ -24,10 +31,10 @@ const save = ( { attributes } ) => {
 		),
 	}
 
-	return(
+	return (
 		<div { ...blockProps }>
 			<div { ...slideContainerProps }>
-				<InnerBlocks.Content />
+				<InnerBlocks.Content/>
 			</div>
 		</div>
 	);
