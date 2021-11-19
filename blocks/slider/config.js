@@ -26,6 +26,9 @@ export const attributes = {
 	effect: {
 		type: 'string',
 	},
+	speed: {
+		type: 'number',
+	},
 };
 
 export const supports = {

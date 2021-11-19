@@ -1,3 +1,10 @@
+const secToMs = ( value, defaultValue = undefined ) => {
+	if ( ! value || Number.isNaN( parseFloat( value ) ) ) {
+		return defaultValue;
+	}
+
+	return parseFloat( value ) * 1000;
+}
 export const getSliderOptions = ( attributes ) => {
 
 	let options = {};
@@ -13,6 +20,8 @@ export const getSliderOptions = ( attributes ) => {
 	}
 	// エフェクト.
 	addOptions( 'effect', attributes?.effect );
+	// 速さ.
+	addOptions( 'speed', secToMs( attributes?.speed, 300 ) );
 
 
 	return JSON.stringify( options );

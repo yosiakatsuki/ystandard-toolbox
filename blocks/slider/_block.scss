@@ -1,8 +1,20 @@
 
+.ystdtb-slider {
+
+  &:not(.swiper-initialized) {
+    .ystdtb-slider__container {
+      > *:not(:first-child) {
+        display: none;
+      }
+    }
+  }
+}
+
 .ystdtb-slider__container {
   > * {
     width: 100%;
   }
+
   .wp-block-image {
     img {
       display: block;
@@ -11,6 +23,7 @@
       object-fit: cover;
     }
   }
+
   .wp-block-video {
     video {
       display: block;
