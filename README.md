@@ -255,6 +255,11 @@ Source : <https://github.com/sindresorhus/hex-rgb>
 License: MIT  
 Source : <https://github.com/axios/axios>
 
+### Swiper
+
+License: MIT  
+Source : <https://github.com/nolimits4web/swiper>
+
 ### BGJar.
 
 License: CC BY 4.0  
