@@ -1,4 +1,4 @@
-import { parseObject, parseObjectAll } from "@ystdtb/helper/object";
+import { isObject } from "@ystdtb/helper/object";
 
 const secToMs = ( value, defaultValue = undefined ) => {
 	if ( ! value || Number.isNaN( parseFloat( value ) ) ) {
@@ -8,11 +8,27 @@ const secToMs = ( value, defaultValue = undefined ) => {
 	return parseFloat( value ) * 1000;
 }
 
-export const hasSliderSetting = ( attributes ) => {
+export const hasSlidesOption = ( attributes ) => {
 	const list = [ 'slide', 'coverflow' ];
 	const effect = list.includes( attributes?.effect ?? 'slide' );
 	const loop = false === attributes?.loop;
 	return effect && loop;
+}
+
+export const getSlidesOption = ( slides, type, name ) => {
+	if ( ! isObject( slides ) ) {
+		return undefined;
+	}
+	if ( ! slides.hasOwnProperty( type ) ) {
+		return undefined;
+	}
+	if ( ! isObject( slides[ type ] ) ) {
+		return undefined;
+	}
+	if ( ! slides[ type ].hasOwnProperty( name ) ) {
+		return undefined;
+	}
+	return slides[ type ][ name ];
 }
 
 export const getSliderOptions = ( attributes ) => {

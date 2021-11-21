@@ -16,15 +16,17 @@ export const parseObjectAll = ( value ) => {
 	let result = {};
 	Object.keys( _value ).map( ( key ) => {
 		let hasValue;
-		if ( isObject( _value[ key ] ) ) {
-			hasValue = !! parseObject( _value[ key ] );
+		let parsedValue = _value[ key ];
+		if ( isObject( parsedValue ) ) {
+			parsedValue = parseObjectAll( parsedValue );
+			hasValue = !! parsedValue;
 		} else {
-			hasValue = undefined !== _value[ key ];
+			hasValue = undefined !== parsedValue;
 		}
 		if ( hasValue ) {
 			result = {
 				...result,
-				[ key ]: _value[ key ],
+				[ key ]: parsedValue,
 			}
 		}
 		return true;
