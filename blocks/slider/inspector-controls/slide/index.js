@@ -5,6 +5,7 @@ import { hasSlidesOption } from "../../function/slider-option";
 import SlidesPerView from "./slides-per-view";
 import SpaceBetween from "./space-between";
 import SlidesPerGroup from "./slides-per-group";
+import Reset from "./reset";
 
 const PanelSlide = ( props ) => {
 
@@ -21,6 +22,7 @@ const PanelSlide = ( props ) => {
 										<SlidesPerView type={ tab.name } { ...props } />
 										<SlidesPerGroup type={ tab.name } { ...props } />
 										<SpaceBetween type={ tab.name } { ...props } />
+										<Reset type={ tab.name } { ...props } />
 									</>
 								);
 							} }
