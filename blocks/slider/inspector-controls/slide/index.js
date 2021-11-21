@@ -1,4 +1,4 @@
-import { PanelBody } from '@wordpress/components';
+import { BaseControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsiveTab from "@ystdtb/components/responsive-tab";
 import { hasSlidesOption } from "../../function/slider-option";
@@ -11,13 +11,15 @@ const PanelSlide = ( props ) => {
 		<>
 			{ ( hasSlidesOption( attributes ) &&
 				<PanelBody title={ __( 'スライド表示数設定', 'ystandard-toolbox' ) }>
-					<ResponsiveTab>
-						{ ( tab ) => {
-							return (
-								<SlidesPerView type={ tab.name } { ...props } />
-							);
-						} }
-					</ResponsiveTab>
+					<BaseControl>
+						<ResponsiveTab>
+							{ ( tab ) => {
+								return (
+									<SlidesPerView type={ tab.name } { ...props } />
+								);
+							} }
+						</ResponsiveTab>
+					</BaseControl>
 				</PanelBody>
 			) }
 		</>

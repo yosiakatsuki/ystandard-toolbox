@@ -59,6 +59,9 @@ export const attributes = {
 	slides: {
 		type: 'object',
 	},
+	breakpoints: {
+		type: 'object',
+	}
 };
 
 export const supports = {
@@ -93,3 +96,8 @@ export const effectOptions = [
 		value: 'cube',
 	},
 ];
+
+export const breakpoints = {
+	desktop: 769,
+	tablet: 600,
+};

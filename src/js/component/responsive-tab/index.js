@@ -17,27 +17,32 @@ const ResponsiveTab = ( { label, activeClass, onSelect, children } ) => {
 				</div>
 			) }
 			<TabPanel
-				className={ 'ystdtb-responsive-tab__panel' }
+				className={ classnames(
+					'ystdtb-responsive-tab__panel',
+					{
+						'has-label': !! label
+					}
+				) }
 				activeClass={ activeClass }
 				onSelect={ onSelect }
 				tabs={ [
 					{
 						name: tabType.desktop,
-						title: <Monitor />,
+						title: <Monitor/>,
 						className: classnames(
 							'ystdtb-responsive-tab__tab-button'
 						),
 					},
 					{
 						name: tabType.tablet,
-						title: <Tablet />,
+						title: <Tablet/>,
 						className: classnames(
 							'ystdtb-responsive-tab__tab-button'
 						),
 					},
 					{
 						name: tabType.mobile,
-						title: <Smartphone />,
+						title: <Smartphone/>,
 						className: classnames(
 							'ystdtb-responsive-tab__tab-button'
 						),

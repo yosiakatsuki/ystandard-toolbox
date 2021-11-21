@@ -14,9 +14,9 @@ export const setSlidesOption = ( props ) => {
 	}
 	if ( ! isObject( slides ) ) {
 		setAttributes( {
-			slides: parseResponsiveValues( {
+			slides: {
 				[ type ]: newValue
-			} )
+			}
 		} );
 		return;
 	}
@@ -24,13 +24,13 @@ export const setSlidesOption = ( props ) => {
 		setAttributes( {
 			slides: {
 				...slides,
-				...parseObjectAll( { [ type ]: newValue } )
+				...{ [ type ]: newValue }
 			}
 		} );
 		return;
 	}
 	setAttributes( {
-		slides: parseObjectAll( {
+		slides: {
 			...slides,
 			...{
 				[ type ]: {
@@ -38,6 +38,6 @@ export const setSlidesOption = ( props ) => {
 					...newValue,
 				}
 			}
-		} )
+		}
 	} );
 }

@@ -6,7 +6,9 @@
   }
 
   .ystdtb-responsive-tab__panel {
-    margin-top: -20px;
+    &.has-label {
+      margin-top: -20px;
+    }
 
     .components-tab-panel__tabs {
       justify-content: flex-end;
