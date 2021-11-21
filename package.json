@@ -68,7 +68,8 @@
     "build:deploy-files-beta": "gulp deployFilesBeta",
     "i18n:make-pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,tests\"",
     "i18n:blocks": "po2json languages/ystandard-toolbox-ja.po languages/ystandard-toolbox-ja-ystandard-toolbox-block-editor.json -f jed",
-    "packages-update": "wp-scripts packages-update"
+    "packages-update": "wp-scripts packages-update",
+    "production": "npm run build && npm run build:deploy-files"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",
