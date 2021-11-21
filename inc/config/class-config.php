@@ -93,7 +93,7 @@ class Config {
 	/**
 	 * ブロックカテゴリー名 β
 	 */
-	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(β)';
+	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(beta)';
 
 	/**
 	 * Block CSS Handle

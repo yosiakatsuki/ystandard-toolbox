@@ -19,7 +19,7 @@ registerBlockType( blockName, {
 	),
 	icon: (
 		<Image
-			stroke={ ystdtbConfig.color.iconForeground }
+			stroke={ ystdtbConfig.color.iconBeta }
 			style={ { fill: 'none' } }
 		/>
 	),
@@ -30,7 +30,7 @@ registerBlockType( blockName, {
 		'banner',
 		'link',
 	],
-	category: ystdtbConfig.category.common,
+	category: ystdtbConfig.category.beta,
 	attributes: blockAttributes,
 	supports,
 	edit,

@@ -19,7 +19,7 @@ registerBlockType( blockName, {
 	),
 	icon: (
 		<Sidebar
-			stroke={ ystdtbConfig.color.iconForeground }
+			stroke={ ystdtbConfig.color.iconBeta }
 			style={ { fill: 'none' } }
 		/>
 	),
@@ -27,7 +27,7 @@ registerBlockType( blockName, {
 		_x( 'slider', 'block-keywords', 'ystandard-toolbox' ),
 		'slider',
 	],
-	category: ystdtbConfig.category.common,
+	category: ystdtbConfig.category.beta,
 	attributes: blockAttributes,
 	supports,
 	edit,
