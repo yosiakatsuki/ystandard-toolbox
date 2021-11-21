@@ -61,7 +61,11 @@ export const attributes = {
 	},
 	breakpoints: {
 		type: 'object',
-	}
+	},
+	hasNavigation: {
+		type: 'boolean',
+		default: false,
+	},
 };
 
 export const supports = {

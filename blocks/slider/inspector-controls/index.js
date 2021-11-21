@@ -4,6 +4,7 @@ import PanelAdvanced from "./advanced";
 import PanelAutoplay from "./autoplay";
 import PanelSize from "./size";
 import PanelSlide from "./slide";
+import PanelNavigation from "./navigation";
 
 export const SliderInspectorControls = ( props ) => {
 	return (
@@ -12,6 +13,7 @@ export const SliderInspectorControls = ( props ) => {
 			<PanelAutoplay { ...props } />
 			<PanelSize { ...props } />
 			<PanelSlide { ...props } />
+			<PanelNavigation { ...props } />
 
 
 			<PanelAdvanced { ...props } />

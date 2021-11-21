@@ -15,6 +15,7 @@ const save = ( { attributes } ) => {
 		sliderId,
 		ratio,
 		height,
+		hasNavigation,
 	} = attributes
 
 	const isFixedHeight = !! ratio || !! height;
@@ -59,6 +60,12 @@ const save = ( { attributes } ) => {
 				<div { ...slideContainerProps }>
 					<InnerBlocks.Content/>
 				</div>
+				{ ( hasNavigation &&
+					<>
+						<div className="swiper-button-prev"></div>
+						<div className="swiper-button-next"></div>
+					</>
+				) }
 			</div>
 		</div>
 	);

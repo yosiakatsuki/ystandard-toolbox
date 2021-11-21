@@ -45,6 +45,15 @@ export const getSliderOptions = ( attributes ) => {
 			addOptions
 		} );
 	}
+	/**
+	 * ナビゲーション.
+	 */
+	if ( attributes?.hasNavigation ) {
+		addOptions( 'navigation', {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		} );
+	}
 	console.log( { options } );
 
 	return JSON.stringify( options );
