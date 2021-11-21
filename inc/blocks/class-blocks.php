@@ -73,8 +73,13 @@ class Blocks {
 
 				$asset = include( YSTDTB_PATH . "/js/blocks/${name}.asset.php" );
 				// ダイナミックブロック判定.
-				$render = YSTDTB_PATH . "/blocks/${name}/class-${name}.php";
+				$render = YSTDTB_PATH . "/blocks/${name}/class-${name}-block.php";
 				$type   = file_exists( $render ) ? 'dynamic' : 'normal';
+				// ブロック固有の処理読み込み.
+				$block_php = YSTDTB_PATH . "/blocks/${name}/class-${name}.php";
+				if ( is_file( $block_php ) ) {
+					require_once $block_php;
+				}
 				// セット.
 				$this->register_blocks[ $type ][] = [
 					'name'         => $name,

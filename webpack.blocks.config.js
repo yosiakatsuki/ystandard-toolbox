@@ -6,6 +6,7 @@ module.exports = {
 	mode: 'production',
 	entry: {
 		'app': './src/js/blocks/app.js',
+		'app-slider': './blocks/slider/app.js',
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
 		'posts': './blocks/posts/index.js',
@@ -17,6 +18,9 @@ module.exports = {
 		'icon-list': './blocks/icon-list/index.js',
 		'box': './blocks/box/index.js',
 		'parts': './blocks/parts/index.js',
+		'banner-link': './blocks/banner-link/index.js',
+		'slider': './blocks/slider/index.js',
+		'slider-item': './blocks/slider/item/index.js',
 	},
 	output: {
 		filename: '[name].js',

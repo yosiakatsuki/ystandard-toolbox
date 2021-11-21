@@ -1,0 +1,42 @@
+@use "block";
+
+[data-type="ystdtb/slider"] {
+  .ystdtb-slider__container {
+    overflow: auto;
+    box-sizing: border-box;
+
+    > .block-editor-inner-blocks {
+      width: auto;
+
+      > .block-editor-block-list__layout {
+        display: flex;
+
+        > *:not(.block-list-appender) {
+          width: calc(100vw - 120px);
+          margin: 0 20px 0 0;
+
+          @media (min-width: 783px) {
+            width: calc(100vw - 300px - 36px - 120px);
+          }
+          @media (min-width: 961px) {
+            width: calc(100vw - 300px - 160px - 120px);
+            max-width: calc(830px - 120px);
+          }
+        }
+
+        .block-list-appender {
+          align-self: center;
+        }
+      }
+    }
+  }
+}
+
+
+.ystdtb-slider__slide-option-reset {
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+

@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @package ystandard_toolbox\blocks
  */
-class Parts extends Dynamic_Block {
+class Parts_Block extends Dynamic_Block {
 
 	/**
 	 * Parts constructor.
@@ -148,5 +148,5 @@ class Parts extends Dynamic_Block {
 	}
 }
 
-$block = new Parts();
+$block = new Parts_Block();
 $block->register_block();

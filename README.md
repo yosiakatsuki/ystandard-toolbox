@@ -7,6 +7,10 @@
 
 ## 更新履歴
 
+### v1.17.0
+- [追加] バナーリンクブロック追加
+- [追加] スライダーブロック追加
+
 ### v1.16.0
 - [追加] ボックスブロック：背景画像指定の追加
 - [追加] ボックスブロック：ラベル無しタイプの追加
@@ -254,6 +258,11 @@ Source : <https://github.com/sindresorhus/hex-rgb>
 
 License: MIT  
 Source : <https://github.com/axios/axios>
+
+### Swiper
+
+License: MIT  
+Source : <https://github.com/nolimits4web/swiper>
 
 ### BGJar.
 
