@@ -1,9 +1,11 @@
-import { isObject, parseObjectAll } from "@ystdtb/helper/object";
-import { breakpoints } from "../config";
-import { getResponsiveValue, responsiveKeys as keys } from "@ystdtb/helper/responsive";
+import { isObject, parseObjectAll } from '@ystdtb/helper/object';
+import { breakpoints } from '../config';
+import {
+	getResponsiveValue,
+	responsiveKeys as keys,
+} from '@ystdtb/helper/responsive';
 
 export const getSliderOptions = ( attributes ) => {
-
 	let options = {};
 
 	const addOptions = ( name, value, defaultValue = undefined ) => {
@@ -13,8 +15,8 @@ export const getSliderOptions = ( attributes ) => {
 		options = {
 			...options,
 			[ name ]: value ?? defaultValue,
-		}
-	}
+		};
+	};
 	/**
 	 * 基本設定
 	 */
@@ -32,7 +34,10 @@ export const getSliderOptions = ( attributes ) => {
 		const autoplayOptions = {
 			delay: secToMs( attributes?.autoplayDelay || 3, 3000 ),
 			pauseOnMouseEnter: attributes?.autoplayPauseOnMouse || undefined,
-			disableOnInteraction: true === attributes?.autoplayDisableOnInteraction ? undefined : attributes?.autoplayDisableOnInteraction,
+			disableOnInteraction:
+				true === attributes?.autoplayDisableOnInteraction
+					? undefined
+					: attributes?.autoplayDisableOnInteraction,
 		};
 		addOptions( 'autoplay', autoplayOptions );
 	}
@@ -42,7 +47,7 @@ export const getSliderOptions = ( attributes ) => {
 	if ( hasSlidesOption( attributes ) ) {
 		addOptionsSlides( {
 			...attributes,
-			addOptions
+			addOptions,
 		} );
 	}
 	/**
@@ -59,16 +64,18 @@ export const getSliderOptions = ( attributes ) => {
 	 */
 	if ( attributes?.paginationType ) {
 		const pagination = {
-			type: 'dynamicBullets' === attributes?.paginationType ? 'bullets' : attributes?.paginationType,
+			type:
+				'dynamicBullets' === attributes?.paginationType
+					? 'bullets'
+					: attributes?.paginationType,
 			el: '.swiper-pagination',
 			dynamicBullets: 'dynamicBullets' === attributes?.paginationType,
-		}
+		};
 		addOptions( 'pagination', pagination );
 	}
-	console.log( { options } );
 
 	return JSON.stringify( options );
-}
+};
 
 const secToMs = ( value, defaultValue = undefined ) => {
 	if ( ! value || Number.isNaN( parseFloat( value ) ) ) {
@@ -76,12 +83,12 @@ const secToMs = ( value, defaultValue = undefined ) => {
 	}
 
 	return parseFloat( value ) * 1000;
-}
+};
 
 export const hasSlidesOption = ( attributes ) => {
 	const list = [ 'slide', 'coverflow' ];
 	return list.includes( attributes?.effect ?? 'slide' );
-}
+};
 
 export const getSlidesOption = ( slides, type, name ) => {
 	if ( ! isObject( slides ) ) {
@@ -97,7 +104,7 @@ export const getSlidesOption = ( slides, type, name ) => {
 		return undefined;
 	}
 	return slides[ type ][ name ];
-}
+};
 
 const getBreakpoints = ( type, attributes ) => {
 	if ( keys.desktop === type ) {
@@ -108,7 +115,7 @@ const getBreakpoints = ( type, attributes ) => {
 	}
 
 	return 0;
-}
+};
 
 export const addOptionsSlides = ( props ) => {
 	const { slides, addOptions } = props;
@@ -131,32 +138,31 @@ export const addOptionsSlides = ( props ) => {
 	addOptions( 'spaceBetween', mobile?.spaceBetween );
 	addOptions( 'slidesPerGroup', mobile?.slidesPerGroup, 1 );
 
-	let breakpoints = {};
+	let _breakpoints = {};
 	const tabletBreakpoint = getBreakpoints( keys.tablet, props );
 	const tabletValue = {
 		slidesPerView: tablet?.slidesPerView || 1,
 		spaceBetween: tablet?.spaceBetween || undefined,
 		slidesPerGroup: tablet?.slidesPerGroup || 1,
-	}
+	};
 	if ( tabletBreakpoint ) {
-		breakpoints = {
-			...breakpoints,
+		_breakpoints = {
+			..._breakpoints,
 			[ tabletBreakpoint ]: tabletValue,
-		}
+		};
 	}
 	const desktopBreakpoint = getBreakpoints( keys.desktop, props );
-	let desktopValue = {
+	const desktopValue = {
 		slidesPerView: desktop?.slidesPerView || 1,
 		spaceBetween: desktop?.spaceBetween || undefined,
 		slidesPerGroup: desktop?.slidesPerGroup || 1,
-	}
+	};
 	if ( desktopBreakpoint ) {
-		breakpoints = {
-			...breakpoints,
+		_breakpoints = {
+			..._breakpoints,
 			[ desktopBreakpoint ]: desktopValue,
-		}
+		};
 	}
 
-	addOptions( 'breakpoints', parseObjectAll( breakpoints ) );
-
-}
+	addOptions( 'breakpoints', parseObjectAll( _breakpoints ) );
+};

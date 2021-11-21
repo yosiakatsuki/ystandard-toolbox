@@ -2,11 +2,10 @@ import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Speed = ( { attributes, setAttributes } ) => {
-
 	const { speed } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { speed: value } );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'speed' }
@@ -23,6 +22,6 @@ const Speed = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default Speed;

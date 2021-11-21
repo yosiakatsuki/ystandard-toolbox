@@ -28,8 +28,8 @@ import {
 	getBorderStyle,
 } from '@ystdtb/components/border-control';
 import { getComponentConfig } from '@ystdtb/helper/config';
-import getDataFallbackProperty from "@ystdtb/helper/fallback";
-import { getSpacingCSS } from "@ystdtb/helper/spacing";
+import getDataFallbackProperty from '@ystdtb/helper/fallback';
+import { getSpacingCSS } from '@ystdtb/helper/spacing';
 
 const save = ( { attributes } ) => {
 	const {
@@ -125,8 +125,8 @@ const save = ( { attributes } ) => {
 			...getContentPositionStyle( contentPosition ),
 		},
 		...getDataFallbackProperty( {
-			'padding': getSpacingCSS( padding?.desktop ),
-		} )
+			padding: getSpacingCSS( padding?.desktop ),
+		} ),
 	};
 
 	/**
@@ -197,7 +197,7 @@ const save = ( { attributes } ) => {
 		},
 		...getDataFallbackProperty( {
 			'font-size': mainTextFontSize?.desktop?.size,
-		} )
+		} ),
 	};
 
 	/**
@@ -225,7 +225,7 @@ const save = ( { attributes } ) => {
 		...getDataFallbackProperty( {
 			'font-size': subTextFontSize?.desktop?.size,
 			'margin-top': subTextMargin?.desktop,
-		} )
+		} ),
 	};
 
 	return (

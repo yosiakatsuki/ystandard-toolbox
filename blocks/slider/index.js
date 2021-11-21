@@ -13,10 +13,7 @@ const blockAttributes = mergeDefaultAttributes( blockName, attributes );
 registerBlockType( blockName, {
 	apiVersion: 2,
 	title: __( 'スライダー', 'ystandard-toolbox' ),
-	description: __(
-		'スライダーブロック',
-		'ystandard-toolbox'
-	),
+	description: __( 'スライダーブロック', 'ystandard-toolbox' ),
 	icon: (
 		<Sidebar
 			stroke={ ystdtbConfig.color.iconBeta }

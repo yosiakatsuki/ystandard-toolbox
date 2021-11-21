@@ -1,9 +1,8 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ColorPaletteControl from "@ystdtb/components/color-palette-control";
+import ColorPaletteControl from '@ystdtb/components/color-palette-control';
 
 const Color = ( { navigationColor, setNavigationColor } ) => {
-
 	return (
 		<BaseControl
 			id={ 'navigationColor' }
@@ -15,5 +14,5 @@ const Color = ( { navigationColor, setNavigationColor } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 export default Color;

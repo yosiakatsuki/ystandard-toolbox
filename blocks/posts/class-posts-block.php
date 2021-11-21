@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @package ystandard_toolbox\blocks
  */
-class Posts extends Dynamic_Block {
+class Posts_Block extends Dynamic_Block {
 
 	/**
 	 * Posts constructor.

@@ -1,13 +1,12 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ColorPaletteControl from "@ystdtb/components/color-palette-control";
+import ColorPaletteControl from '@ystdtb/components/color-palette-control';
 
 const Color = ( { attributes, setAttributes } ) => {
-
 	const { paginationColor } = attributes;
 	const handleOnChange = ( color ) => {
 		setAttributes( { paginationColor: color } );
-	}
+	};
 
 	return (
 		<BaseControl
@@ -20,5 +19,5 @@ const Color = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 export default Color;

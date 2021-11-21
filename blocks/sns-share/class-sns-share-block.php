@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @package ystandard_toolbox\blocks
  */
-class SNS_Share extends Dynamic_Block {
+class SNS_Share_Block extends Dynamic_Block {
 
 	/**
 	 * SNS Share constructor.

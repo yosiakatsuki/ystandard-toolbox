@@ -1,13 +1,7 @@
-import { isObject, parseObjectAll } from "@ystdtb/helper/object";
-import { parseResponsiveValues } from "@ystdtb/helper/responsive";
+import { isObject } from '@ystdtb/helper/object';
 
 export const setSlidesOption = ( props ) => {
-	const {
-		setAttributes,
-		type,
-		slides,
-		newValue,
-	} = props;
+	const { setAttributes, type, slides, newValue } = props;
 
 	if ( ! isObject( newValue ) ) {
 		return;
@@ -15,8 +9,8 @@ export const setSlidesOption = ( props ) => {
 	if ( ! isObject( slides ) ) {
 		setAttributes( {
 			slides: {
-				[ type ]: newValue
-			}
+				[ type ]: newValue,
+			},
 		} );
 		return;
 	}
@@ -24,8 +18,8 @@ export const setSlidesOption = ( props ) => {
 		setAttributes( {
 			slides: {
 				...slides,
-				...{ [ type ]: newValue }
-			}
+				...{ [ type ]: newValue },
+			},
 		} );
 		return;
 	}
@@ -36,8 +30,8 @@ export const setSlidesOption = ( props ) => {
 				[ type ]: {
 					...slides[ type ],
 					...newValue,
-				}
-			}
-		}
+				},
+			},
+		},
 	} );
-}
+};

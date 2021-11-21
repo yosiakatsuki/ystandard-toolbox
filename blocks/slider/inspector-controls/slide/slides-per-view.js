@@ -1,10 +1,9 @@
 import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { getSlidesOption } from "../../function/slider-option";
-import { setSlidesOption } from "../../function/edit";
+import { getSlidesOption } from '../../function/slider-option';
+import { setSlidesOption } from '../../function/edit';
 
 const SlidesPerView = ( { type, attributes, setAttributes } ) => {
-
 	const optionName = 'slidesPerView';
 	const { slides } = attributes;
 	const slidesPerView = getSlidesOption( slides, type, optionName );
@@ -14,9 +13,9 @@ const SlidesPerView = ( { type, attributes, setAttributes } ) => {
 			setAttributes,
 			type,
 			slides,
-			newValue: { slidesPerView: 1 === newValue ? undefined : newValue }
+			newValue: { slidesPerView: 1 === newValue ? undefined : newValue },
 		} );
-	}
+	};
 
 	return (
 		<BaseControl
@@ -33,6 +32,6 @@ const SlidesPerView = ( { type, attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default SlidesPerView;

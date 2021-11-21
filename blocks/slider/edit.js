@@ -5,27 +5,17 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
-import { ALLOWED_BLOCKS, sliderClasses, blockClasses } from "./config";
-import { SliderInspectorControls as InspectorControls } from "./inspector-controls";
+import { ALLOWED_BLOCKS, sliderClasses, blockClasses } from './config';
+import { SliderInspectorControls as InspectorControls } from './inspector-controls';
 
-const edit = ( props ) => {
-
-	const blockProps = useBlockProps(
-		{
-			className: classnames(
-				blockClasses.blockClass,
-				{}
-			),
-		}
-	);
+const Edit = ( props ) => {
+	const blockProps = useBlockProps( {
+		className: classnames( blockClasses.blockClass, {} ),
+	} );
 
 	const sliderProps = {
-		className: classnames(
-			sliderClasses.wrap,
-			blockClasses.slider,
-			{}
-		),
-	}
+		className: classnames( sliderClasses.wrap, blockClasses.slider, {} ),
+	};
 
 	const slideContainerProps = {
 		className: classnames(
@@ -33,7 +23,7 @@ const edit = ( props ) => {
 			sliderClasses.container,
 			{}
 		),
-	}
+	};
 
 	const innerBlocksOrientation = 'horizontal';
 
@@ -46,18 +36,16 @@ const edit = ( props ) => {
 						<InnerBlocks
 							allowedBlocks={ ALLOWED_BLOCKS }
 							orientation={ innerBlocksOrientation }
-							template={ [
-								[ 'core/image' ]
-							] }
+							template={ [ [ 'core/image' ] ] }
 						/>
 					</div>
 				</div>
 			</div>
 		</>
 	);
-}
+};
 export default compose( [
 	withColors( {
 		navigationColor: 'color',
 	} ),
-] )( edit );
+] )( Edit );

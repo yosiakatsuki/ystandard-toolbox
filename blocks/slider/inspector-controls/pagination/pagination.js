@@ -1,12 +1,12 @@
 import { BaseControl, RadioControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { paginationOptions } from "../../config";
+import { paginationOptions } from '../../config';
 
 const Pagination = ( { attributes, setAttributes } ) => {
 	const { paginationType } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { paginationType: value } );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'paginationType' }
@@ -19,6 +19,6 @@ const Pagination = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default Pagination;

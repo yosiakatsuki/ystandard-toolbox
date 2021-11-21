@@ -27,7 +27,7 @@ export const parseObjectAll = ( value ) => {
 			result = {
 				...result,
 				[ key ]: parsedValue,
-			}
+			};
 		}
 		return true;
 	} );

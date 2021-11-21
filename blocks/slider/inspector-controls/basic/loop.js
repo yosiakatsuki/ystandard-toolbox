@@ -2,11 +2,10 @@ import { BaseControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Loop = ( { attributes, setAttributes } ) => {
-
 	const { loop } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { loop: value } );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'loop' }
@@ -19,6 +18,6 @@ const Loop = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default Loop;

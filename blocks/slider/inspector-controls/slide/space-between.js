@@ -1,11 +1,10 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { getSlidesOption } from "../../function/slider-option";
-import { setSlidesOption } from "../../function/edit";
-import UnitControl from "@ystdtb/components/unit-control";
+import { getSlidesOption } from '../../function/slider-option';
+import { setSlidesOption } from '../../function/edit';
+import UnitControl from '@ystdtb/components/unit-control';
 
 const SpaceBetween = ( { type, attributes, setAttributes } ) => {
-
 	const optionName = 'spaceBetween';
 	const { slides } = attributes;
 	const spaceBetween = getSlidesOption( slides, type, optionName );
@@ -15,9 +14,11 @@ const SpaceBetween = ( { type, attributes, setAttributes } ) => {
 			setAttributes,
 			type,
 			slides,
-			newValue: { spaceBetween: ! newValue ? undefined : parseInt( newValue ) }
+			newValue: {
+				spaceBetween: ! newValue ? undefined : parseInt( newValue ),
+			},
 		} );
-	}
+	};
 
 	return (
 		<BaseControl
@@ -31,6 +32,6 @@ const SpaceBetween = ( { type, attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default SpaceBetween;

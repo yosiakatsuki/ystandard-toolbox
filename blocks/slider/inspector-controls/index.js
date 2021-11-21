@@ -1,11 +1,11 @@
 import { InspectorControls } from '@wordpress/block-editor';
-import PanelBasic from "./basic";
-import PanelAdvanced from "./advanced";
-import PanelAutoplay from "./autoplay";
-import PanelSize from "./size";
-import PanelSlide from "./slide";
-import PanelNavigation from "./navigation";
-import PanelPagination from "./pagination";
+import PanelBasic from './basic';
+import PanelAdvanced from './advanced';
+import PanelAutoplay from './autoplay';
+import PanelSize from './size';
+import PanelSlide from './slide';
+import PanelNavigation from './navigation';
+import PanelPagination from './pagination';
 
 export const SliderInspectorControls = ( props ) => {
 	return (
@@ -16,7 +16,6 @@ export const SliderInspectorControls = ( props ) => {
 			<PanelSlide { ...props } />
 			<PanelNavigation { ...props } />
 			<PanelPagination { ...props } />
-
 
 			<PanelAdvanced { ...props } />
 		</InspectorControls>

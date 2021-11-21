@@ -1,6 +1,6 @@
 export const blockClasses = {
 	blockClass: 'ystdtb-slider-item',
-}
+};
 
 export const attributes = {};
 

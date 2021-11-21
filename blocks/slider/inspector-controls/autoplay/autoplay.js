@@ -2,11 +2,10 @@ import { BaseControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Autoplay = ( { attributes, setAttributes } ) => {
-
 	const { autoplay } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { autoplay: value } );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'autoplay' }
@@ -19,6 +18,6 @@ const Autoplay = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default Autoplay;

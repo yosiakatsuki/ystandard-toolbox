@@ -4,13 +4,15 @@ import {
 	getColorClassName,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { blockClasses, sliderClasses } from "./config";
-import { getSliderOptions } from "./function/slider-option";
-import { getRatioClassName, getRatioInnerClassName } from "@ystdtb/helper/ratio";
-import { getCustomProperty } from "./function/style";
+import { blockClasses, sliderClasses } from './config';
+import { getSliderOptions } from './function/slider-option';
+import {
+	getRatioClassName,
+	getRatioInnerClassName,
+} from '@ystdtb/helper/ratio';
+import { getCustomProperty } from './function/style';
 
 const save = ( { attributes } ) => {
-
 	const {
 		sliderId,
 		ratio,
@@ -20,35 +22,28 @@ const save = ( { attributes } ) => {
 		customNavigationColor,
 		paginationType,
 		paginationColor,
-	} = attributes
+	} = attributes;
 
 	const isFixedHeight = !! ratio || !! height;
-	const blockProps = useBlockProps.save(
-		{
-			className: classnames(
-				blockClasses.blockClass,
-				{
-					[ getRatioClassName( ratio ) ]: getRatioClassName( ratio ),
-				}
-			),
-		}
-	);
+	const blockProps = useBlockProps.save( {
+		className: classnames( blockClasses.blockClass, {
+			[ getRatioClassName( ratio ) ]: getRatioClassName( ratio ),
+		} ),
+	} );
 
 	const sliderProps = {
 		id: `ystdtb-slider-${ sliderId }`,
-		className: classnames(
-			sliderClasses.wrap,
-			blockClasses.slider,
-			{
-				'is-fixed-height': isFixedHeight,
-				[ getRatioInnerClassName( ratio ) ]: getRatioInnerClassName( ratio ),
-			}
-		),
+		className: classnames( sliderClasses.wrap, blockClasses.slider, {
+			'is-fixed-height': isFixedHeight,
+			[ getRatioInnerClassName( ratio ) ]: getRatioInnerClassName(
+				ratio
+			),
+		} ),
 		style: {
 			...getCustomProperty( 'height', height ),
 		},
 		'data-slider-options': getSliderOptions( attributes ),
-	}
+	};
 
 	const slideContainerProps = {
 		className: classnames(
@@ -56,51 +51,44 @@ const save = ( { attributes } ) => {
 			blockClasses.sliderContainer,
 			{}
 		),
-	}
+	};
 
 	const getNavigationProps = ( type ) => {
 		const colorClass = getColorClassName( 'color', navigationColor );
 		return {
-			className: classnames(
-				`swiper-button-${ type }`,
-				{
-					'has-text-color': colorClass || customNavigationColor,
-					[ colorClass ]: colorClass
-				}
-			),
+			className: classnames( `swiper-button-${ type }`, {
+				'has-text-color': colorClass || customNavigationColor,
+				[ colorClass ]: colorClass,
+			} ),
 			style: {
 				color: customNavigationColor || undefined,
 			},
-		}
-	}
+		};
+	};
 	const paginationProps = {
-		className: classnames(
-			'swiper-pagination'
-		),
+		className: classnames( 'swiper-pagination' ),
 		style: {
 			color: paginationColor,
 			'--swiper-pagination-color': paginationColor,
-		}
-	}
+		},
+	};
 
 	return (
-		<div{ ...blockProps }>
+		<div { ...blockProps }>
 			<div { ...sliderProps }>
 				<div { ...slideContainerProps }>
-					<InnerBlocks.Content/>
+					<InnerBlocks.Content />
 				</div>
-				{ ( hasNavigation &&
+				{ hasNavigation && (
 					<>
-						<div { ...getNavigationProps( 'prev' ) }/>
-						<div { ...getNavigationProps( 'next' ) }/>
+						<div { ...getNavigationProps( 'prev' ) } />
+						<div { ...getNavigationProps( 'next' ) } />
 					</>
 				) }
-				{ ( paginationType &&
-					<div { ...paginationProps }/>
-				) }
+				{ paginationType && <div { ...paginationProps } /> }
 			</div>
 		</div>
 	);
-}
+};
 
 export default save;

@@ -20,6 +20,7 @@ class Slider {
 
 	/**
 	 * スクリプトをすでに読み込んだか
+	 *
 	 * @var bool|null
 	 */
 	private $is_enqueue = null;
@@ -31,6 +32,14 @@ class Slider {
 		add_filter( 'render_block', [ $this, 'enqueue_slider_script' ], 100, 2 );
 	}
 
+	/**
+	 * 必要スクリプトの読み込み
+	 *
+	 * @param string $block_content Block Content.
+	 * @param array  $parsed_block  Parsed Block.
+	 *
+	 * @return string
+	 */
 	public function enqueue_slider_script( $block_content, $parsed_block ) {
 		if ( true === $this->is_enqueue ) {
 			return $block_content;

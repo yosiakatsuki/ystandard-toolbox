@@ -2,11 +2,10 @@ import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const AutoplayDelay = ( { attributes, setAttributes } ) => {
-
 	const { autoplayDelay } = attributes;
 	const handleOnChange = ( value ) => {
 		setAttributes( { autoplayDelay: value } );
-	}
+	};
 	return (
 		<BaseControl
 			id={ 'autoplayDelay' }
@@ -23,6 +22,6 @@ const AutoplayDelay = ( { attributes, setAttributes } ) => {
 			/>
 		</BaseControl>
 	);
-}
+};
 
 export default AutoplayDelay;

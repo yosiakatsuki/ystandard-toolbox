@@ -3,16 +3,12 @@ import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 const SliderId = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-		clientId,
-	} = props;
+	const { attributes, setAttributes, clientId } = props;
 	const { sliderId } = attributes;
 	const [ disableIdInput, setDisableIdInput ] = useState( true );
 	const handleOnChange = ( value ) => {
 		setAttributes( { sliderId: value } );
-	}
+	};
 	if ( undefined === sliderId ) {
 		let newId = clientId.split( '-' );
 		newId = newId.length ? newId[ 0 ] : clientId;
@@ -41,5 +37,5 @@ const SliderId = ( props ) => {
 			</div>
 		</BaseControl>
 	);
-}
+};
 export default SliderId;

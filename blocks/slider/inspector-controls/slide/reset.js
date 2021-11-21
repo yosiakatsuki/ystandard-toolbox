@@ -1,20 +1,19 @@
 import { BaseControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { isObject, parseObject } from "@ystdtb/helper/object";
+import { isObject, parseObject } from '@ystdtb/helper/object';
 
 const Reset = ( { type, attributes, setAttributes } ) => {
-
 	const { slides } = attributes;
 
 	const handleOnClick = () => {
-		let _slides = slides;
+		const _slides = slides;
 		if ( isObject( _slides ) && _slides.hasOwnProperty( type ) ) {
 			delete _slides[ type ];
 		}
 		setAttributes( {
-			slides: parseObject( _slides )
+			slides: parseObject( _slides ),
 		} );
-	}
+	};
 
 	return (
 		<BaseControl>
@@ -30,5 +29,5 @@ const Reset = ( { type, attributes, setAttributes } ) => {
 			</div>
 		</BaseControl>
 	);
-}
+};
 export default Reset;

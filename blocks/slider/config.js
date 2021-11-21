@@ -8,7 +8,7 @@ export const blockClasses = {
 	sliderButtonPrev: 'ystdtb-slider__button-prev',
 	sliderButtonNext: 'ystdtb-slider__button-next',
 	sliderScrollbar: 'ystdtb-slider__scrollbar',
-}
+};
 
 export const sliderClasses = {
 	wrap: 'swiper',
@@ -18,7 +18,7 @@ export const sliderClasses = {
 	buttonPrev: 'swiper-button-prev',
 	buttonNext: 'swiper-button-next',
 	scrollbar: 'swiper-scrollbar',
-}
+};
 
 export const attributes = {
 	sliderId: {
@@ -77,7 +77,7 @@ export const attributes = {
 	},
 	paginationColor: {
 		type: 'string',
-	}
+	},
 };
 
 export const supports = {
@@ -92,7 +92,7 @@ export const ALLOWED_BLOCKS = [
 	'core/cover',
 	'core/video',
 	'ystdtb/slider-item',
-]
+];
 
 export const effectOptions = [
 	{
