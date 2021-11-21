@@ -1,6 +1,7 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import Pagination from "./pagination";
+import Color from "./color";
 
 const PanelPagination = ( props ) => {
 
@@ -10,6 +11,7 @@ const PanelPagination = ( props ) => {
 			initialOpen={ false }
 		>
 			<Pagination { ...props } />
+			<Color { ...props } />
 		</PanelBody>
 	);
 };

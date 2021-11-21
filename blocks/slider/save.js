@@ -19,6 +19,7 @@ const save = ( { attributes } ) => {
 		navigationColor,
 		customNavigationColor,
 		paginationType,
+		paginationColor,
 	} = attributes
 
 	const isFixedHeight = !! ratio || !! height;
@@ -76,7 +77,10 @@ const save = ( { attributes } ) => {
 		className: classnames(
 			'swiper-pagination'
 		),
-		style: {}
+		style: {
+			color: paginationColor,
+			'--swiper-pagination-color': paginationColor,
+		}
 	}
 
 	return (

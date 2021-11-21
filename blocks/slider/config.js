@@ -66,13 +66,16 @@ export const attributes = {
 		type: 'boolean',
 		default: false,
 	},
-	navigationColor:{
+	navigationColor: {
 		type: 'string',
 	},
-	customNavigationColor:{
+	customNavigationColor: {
 		type: 'string',
 	},
 	paginationType: {
+		type: 'string',
+	},
+	paginationColor: {
 		type: 'string',
 	}
 };
