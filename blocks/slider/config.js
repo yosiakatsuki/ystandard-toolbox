@@ -66,6 +66,12 @@ export const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	navigationColor:{
+		type: 'string',
+	},
+	customNavigationColor:{
+		type: 'string',
+	},
 };
 
 export const supports = {

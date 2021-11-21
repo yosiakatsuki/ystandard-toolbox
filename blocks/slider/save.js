@@ -16,6 +16,8 @@ const save = ( { attributes } ) => {
 		ratio,
 		height,
 		hasNavigation,
+		navigationColor,
+		customNavigationColor,
 	} = attributes
 
 	const isFixedHeight = !! ratio || !! height;
@@ -54,6 +56,22 @@ const save = ( { attributes } ) => {
 		),
 	}
 
+	const getNavigationProps = ( type ) => {
+		const colorClass = getColorClassName( 'color', navigationColor );
+		return {
+			className: classnames(
+				`swiper-button-${ type }`,
+				{
+					'has-text-color': colorClass || customNavigationColor,
+					[ colorClass ]: colorClass
+				}
+			),
+			style: {
+				color: customNavigationColor || undefined,
+			},
+		}
+	}
+
 	return (
 		<div{ ...blockProps }>
 			<div { ...sliderProps }>
@@ -62,8 +80,8 @@ const save = ( { attributes } ) => {
 				</div>
 				{ ( hasNavigation &&
 					<>
-						<div className="swiper-button-prev"></div>
-						<div className="swiper-button-next"></div>
+						<div { ...getNavigationProps( 'prev' ) }/>
+						<div { ...getNavigationProps( 'next' ) }/>
 					</>
 				) }
 			</div>

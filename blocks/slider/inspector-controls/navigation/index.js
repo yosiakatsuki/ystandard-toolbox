@@ -1,6 +1,7 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import HasNavigation from "./has-navigation";
+import Color from "./color";
 
 const PanelNavigation = ( props ) => {
 
@@ -10,6 +11,7 @@ const PanelNavigation = ( props ) => {
 			initialOpen={ false }
 		>
 			<HasNavigation { ...props } />
+			<Color { ...props } />
 		</PanelBody>
 	);
 };

@@ -4,13 +4,11 @@ import {
 	withColors,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { compose } from '@wordpress/compose';
 import { ALLOWED_BLOCKS, sliderClasses, blockClasses } from "./config";
 import { SliderInspectorControls as InspectorControls } from "./inspector-controls";
 
 const edit = ( props ) => {
-
-	const { attributes } = props;
-	const { ratio } = attributes;
 
 	const blockProps = useBlockProps(
 		{
@@ -58,4 +56,8 @@ const edit = ( props ) => {
 		</>
 	);
 }
-export default edit;
+export default compose( [
+	withColors( {
+		navigationColor: 'color',
+	} ),
+] )( edit );
