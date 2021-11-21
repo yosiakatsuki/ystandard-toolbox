@@ -181,5 +181,5 @@ class Posts_Block extends Dynamic_Block {
 
 }
 
-$block = new Posts();
+$block = new Posts_Block();
 $block->register_block();

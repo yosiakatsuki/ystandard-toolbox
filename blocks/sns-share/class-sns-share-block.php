@@ -131,5 +131,5 @@ class SNS_Share_Block extends Dynamic_Block {
 
 }
 
-$block = new SNS_Share();
+$block = new SNS_Share_Block();
 $block->register_block();

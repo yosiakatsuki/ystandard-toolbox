@@ -16,7 +16,7 @@ registerBlockType( blockName, {
 	description: __( 'スライダーブロック', 'ystandard-toolbox' ),
 	icon: (
 		<Sidebar
-			stroke={ ystdtbConfig.color.iconBeta }
+			stroke={ ystdtbConfig.color.iconForeground }
 			style={ { fill: 'none' } }
 		/>
 	),
@@ -24,7 +24,7 @@ registerBlockType( blockName, {
 		_x( 'slider', 'block-keywords', 'ystandard-toolbox' ),
 		'slider',
 	],
-	category: ystdtbConfig.category.beta,
+	category: ystdtbConfig.category.common,
 	attributes: blockAttributes,
 	supports,
 	edit,
