@@ -56,7 +56,7 @@ class Slider {
 				'ystdtb-slider-css',
 				YSTDTB_URL . '/library/swiper/swiper-bundle.min.css',
 				[],
-				filemtime( YSTDTB_PATH . '/library/swiper/swiper-bundle.min.css' ),
+				filemtime( YSTDTB_PATH . '/library/swiper/swiper-bundle.min.css' )
 			);
 
 			$this->is_enqueue = true;
