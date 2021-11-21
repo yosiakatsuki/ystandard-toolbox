@@ -36,9 +36,5 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			}
 		}
 		new Swiper( selector, options );
-		console.log( {
-			selector,
-			options
-		} );
 	} );
 } );

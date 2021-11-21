@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import ResponsiveTab from "@ystdtb/components/responsive-tab";
 import { hasSlidesOption } from "../../function/slider-option";
 import SlidesPerView from "./slides-per-view";
+import SpaceBetween from "./space-between";
 
 const PanelSlide = ( props ) => {
 
@@ -15,7 +16,10 @@ const PanelSlide = ( props ) => {
 						<ResponsiveTab>
 							{ ( tab ) => {
 								return (
-									<SlidesPerView type={ tab.name } { ...props } />
+									<>
+										<SlidesPerView type={ tab.name } { ...props } />
+										<SpaceBetween type={ tab.name } { ...props } />
+									</>
 								);
 							} }
 						</ResponsiveTab>

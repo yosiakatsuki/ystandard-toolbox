@@ -45,7 +45,7 @@ export const getSliderOptions = ( attributes ) => {
 			addOptions
 		} );
 	}
-
+	console.log( { options } );
 
 	return JSON.stringify( options );
 }
@@ -60,9 +60,7 @@ const secToMs = ( value, defaultValue = undefined ) => {
 
 export const hasSlidesOption = ( attributes ) => {
 	const list = [ 'slide', 'coverflow' ];
-	const effect = list.includes( attributes?.effect ?? 'slide' );
-	const loop = false === attributes?.loop;
-	return effect && loop;
+	return list.includes( attributes?.effect ?? 'slide' );
 }
 
 export const getSlidesOption = ( slides, type, name ) => {
@@ -102,17 +100,20 @@ export const addOptionsSlides = ( props ) => {
 	const mobile = getResponsiveValue( slides, keys.mobile );
 
 	if ( ! tablet && ! mobile ) {
-		addOptions( 'slidesPerView', desktop?.slidesPerView || 1 );
+		addOptions( 'slidesPerView', desktop?.slidesPerView, 1 );
+		addOptions( 'spaceBetween', desktop?.spaceBetween );
 
 		return;
 	}
 
-	addOptions( 'slidesPerView', mobile?.slidesPerView || 1 );
+	addOptions( 'slidesPerView', mobile?.slidesPerView, 1 );
+	addOptions( 'spaceBetween', mobile?.spaceBetween );
 
 	let breakpoints = {};
 	const tabletBreakpoint = getBreakpoints( keys.tablet, props );
 	const tabletValue = {
-		slidesPerView: tablet?.slidesPerView || 1
+		slidesPerView: tablet?.slidesPerView || 1,
+		spaceBetween: tablet?.spaceBetween || undefined,
 	}
 	if ( tabletBreakpoint ) {
 		breakpoints = {
@@ -122,7 +123,8 @@ export const addOptionsSlides = ( props ) => {
 	}
 	const desktopBreakpoint = getBreakpoints( keys.desktop, props );
 	let desktopValue = {
-		slidesPerView: desktop?.slidesPerView || 1
+		slidesPerView: desktop?.slidesPerView || 1,
+		spaceBetween: desktop?.spaceBetween || undefined,
 	}
 	if ( desktopBreakpoint ) {
 		breakpoints = {
