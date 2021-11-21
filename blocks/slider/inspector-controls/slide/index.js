@@ -4,6 +4,7 @@ import ResponsiveTab from "@ystdtb/components/responsive-tab";
 import { hasSlidesOption } from "../../function/slider-option";
 import SlidesPerView from "./slides-per-view";
 import SpaceBetween from "./space-between";
+import SlidesPerGroup from "./slides-per-group";
 
 const PanelSlide = ( props ) => {
 
@@ -18,6 +19,7 @@ const PanelSlide = ( props ) => {
 								return (
 									<>
 										<SlidesPerView type={ tab.name } { ...props } />
+										<SlidesPerGroup type={ tab.name } { ...props } />
 										<SpaceBetween type={ tab.name } { ...props } />
 									</>
 								);

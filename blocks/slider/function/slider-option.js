@@ -102,18 +102,21 @@ export const addOptionsSlides = ( props ) => {
 	if ( ! tablet && ! mobile ) {
 		addOptions( 'slidesPerView', desktop?.slidesPerView, 1 );
 		addOptions( 'spaceBetween', desktop?.spaceBetween );
+		addOptions( 'slidesPerGroup', desktop?.slidesPerGroup, 1 );
 
 		return;
 	}
 
 	addOptions( 'slidesPerView', mobile?.slidesPerView, 1 );
 	addOptions( 'spaceBetween', mobile?.spaceBetween );
+	addOptions( 'slidesPerGroup', mobile?.slidesPerGroup, 1 );
 
 	let breakpoints = {};
 	const tabletBreakpoint = getBreakpoints( keys.tablet, props );
 	const tabletValue = {
 		slidesPerView: tablet?.slidesPerView || 1,
 		spaceBetween: tablet?.spaceBetween || undefined,
+		slidesPerGroup: tablet?.slidesPerGroup || 1,
 	}
 	if ( tabletBreakpoint ) {
 		breakpoints = {
@@ -125,6 +128,7 @@ export const addOptionsSlides = ( props ) => {
 	let desktopValue = {
 		slidesPerView: desktop?.slidesPerView || 1,
 		spaceBetween: desktop?.spaceBetween || undefined,
+		slidesPerGroup: desktop?.slidesPerGroup || 1,
 	}
 	if ( desktopBreakpoint ) {
 		breakpoints = {
