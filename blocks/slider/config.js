@@ -56,6 +56,9 @@ export const attributes = {
 	height: {
 		type: 'object',
 	},
+	slides: {
+		type: 'object',
+	},
 };
 
 export const supports = {
@@ -89,4 +92,4 @@ export const effectOptions = [
 		label: __( 'キューブ', 'ystandard-blocks' ),
 		value: 'cube',
 	},
-]
+];

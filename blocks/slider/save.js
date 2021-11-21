@@ -28,7 +28,6 @@ const save = ( { attributes } ) => {
 			),
 		}
 	);
-	console.log( { ratio: getRatioClassName( ratio ), blockProps } );
 
 	const sliderProps = {
 		id: `ystdtb-slider-${ sliderId }`,

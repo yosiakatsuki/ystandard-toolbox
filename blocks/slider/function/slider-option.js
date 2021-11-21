@@ -7,6 +7,14 @@ const secToMs = ( value, defaultValue = undefined ) => {
 
 	return parseFloat( value ) * 1000;
 }
+
+export const hasSliderSetting = ( attributes ) => {
+	const list = [ 'slide', 'coverflow' ];
+	const effect = list.includes( attributes?.effect ?? 'slide' );
+	const loop = false === attributes?.loop;
+	return effect && loop;
+}
+
 export const getSliderOptions = ( attributes ) => {
 
 	let options = {};
