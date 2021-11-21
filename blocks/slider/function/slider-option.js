@@ -54,6 +54,17 @@ export const getSliderOptions = ( attributes ) => {
 			prevEl: '.swiper-button-prev',
 		} );
 	}
+	/**
+	 * ページネーション
+	 */
+	if ( attributes?.paginationType ) {
+		const pagination = {
+			type: 'dynamicBullets' === attributes?.paginationType ? 'bullets' : attributes?.paginationType,
+			el: '.swiper-pagination',
+			dynamicBullets: 'dynamicBullets' === attributes?.paginationType,
+		}
+		addOptions( 'pagination', pagination );
+	}
 	console.log( { options } );
 
 	return JSON.stringify( options );

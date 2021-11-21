@@ -72,6 +72,9 @@ export const attributes = {
 	customNavigationColor:{
 		type: 'string',
 	},
+	paginationType: {
+		type: 'string',
+	}
 };
 
 export const supports = {
@@ -104,6 +107,28 @@ export const effectOptions = [
 	{
 		label: __( 'キューブ', 'ystandard-blocks' ),
 		value: 'cube',
+	},
+];
+export const paginationOptions = [
+	{
+		label: __( 'なし', 'ystandard-blocks' ),
+		value: '',
+	},
+	{
+		label: __( 'ドット', 'ystandard-blocks' ),
+		value: 'bullets',
+	},
+	{
+		label: __( 'ダイナミック', 'ystandard-blocks' ),
+		value: 'dynamicBullets',
+	},
+	{
+		label: __( 'プログレスバー', 'ystandard-blocks' ),
+		value: 'progressbar',
+	},
+	{
+		label: __( 'スライド / 総スライド数', 'ystandard-blocks' ),
+		value: 'fraction',
 	},
 ];
 

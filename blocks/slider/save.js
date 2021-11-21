@@ -18,6 +18,7 @@ const save = ( { attributes } ) => {
 		hasNavigation,
 		navigationColor,
 		customNavigationColor,
+		paginationType,
 	} = attributes
 
 	const isFixedHeight = !! ratio || !! height;
@@ -71,6 +72,12 @@ const save = ( { attributes } ) => {
 			},
 		}
 	}
+	const paginationProps = {
+		className: classnames(
+			'swiper-pagination'
+		),
+		style: {}
+	}
 
 	return (
 		<div{ ...blockProps }>
@@ -83,6 +90,9 @@ const save = ( { attributes } ) => {
 						<div { ...getNavigationProps( 'prev' ) }/>
 						<div { ...getNavigationProps( 'next' ) }/>
 					</>
+				) }
+				{ ( paginationType &&
+					<div { ...paginationProps }/>
 				) }
 			</div>
 		</div>
