@@ -22,7 +22,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	sliders = Array.prototype.slice.call( sliders, 0 );
 	sliders.forEach( ( element ) => {
 		let slideItem = element.querySelectorAll(
-			'.ystdtb-slider__container > *'
+			'.ystdtb-slider__container > .wp-block-image,' +
+			'.ystdtb-slider__container > .wp-block-video,' +
+			'.ystdtb-slider__container > .wp-block-cover,' +
+			'.ystdtb-slider__container > .ystdtb-slider-item'
 		);
 		slideItem = Array.prototype.slice.call( slideItem, 0 );
 		slideItem.forEach( ( slideItemElement ) => {
