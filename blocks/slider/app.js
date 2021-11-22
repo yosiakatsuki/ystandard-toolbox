@@ -23,9 +23,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	sliders.forEach( ( element ) => {
 		let slideItem = element.querySelectorAll(
 			'.ystdtb-slider__container > .wp-block-image,' +
-			'.ystdtb-slider__container > .wp-block-video,' +
-			'.ystdtb-slider__container > .wp-block-cover,' +
-			'.ystdtb-slider__container > .ystdtb-slider-item'
+				'.ystdtb-slider__container > .wp-block-video,' +
+				'.ystdtb-slider__container > .wp-block-cover,' +
+				'.ystdtb-slider__container > .ystdtb-slider-item'
 		);
 		slideItem = Array.prototype.slice.call( slideItem, 0 );
 		slideItem.forEach( ( slideItemElement ) => {

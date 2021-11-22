@@ -7,10 +7,18 @@ import {
 import { compose } from '@wordpress/compose';
 import { ALLOWED_BLOCKS, sliderClasses, blockClasses } from './config';
 import { SliderInspectorControls as InspectorControls } from './inspector-controls';
+import { SliderBlockControls as BlockControls } from './block-controls';
 
 const Edit = ( props ) => {
+	const { attributes } = props;
+	const { previewType } = attributes;
+
 	const blockProps = useBlockProps( {
-		className: classnames( blockClasses.blockClass, {} ),
+		className: classnames(
+			blockClasses.blockClass,
+			`preview--${ previewType || 'grid' }`,
+			{}
+		),
 	} );
 
 	const sliderProps = {
@@ -29,6 +37,7 @@ const Edit = ( props ) => {
 
 	return (
 		<>
+			<BlockControls { ...props } />
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
 				<div { ...sliderProps }>

@@ -78,6 +78,10 @@ export const attributes = {
 	paginationColor: {
 		type: 'string',
 	},
+	previewType: {
+		type: 'string',
+		default: 'grid',
+	},
 };
 
 export const supports = {
