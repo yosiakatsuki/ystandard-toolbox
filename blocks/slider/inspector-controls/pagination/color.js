@@ -11,7 +11,7 @@ const Color = ( { attributes, setAttributes } ) => {
 	return (
 		<BaseControl
 			id={ 'paginationColor' }
-			label={ __( 'ページネーション色', 'ystandard-toolbox' ) }
+			label={ __( '色', 'ystandard-toolbox' ) }
 		>
 			<ColorPaletteControl
 				value={ paginationColor }

@@ -20,5 +20,5 @@ defined( 'ABSPATH' ) || die();
 		</svg>
 	</figure>
 	<p>シンプルなスライドショーを作成できるブロック</p>
-	<?php echo Utility::manual_link( 'manual/ystdtb-slider', '', 'button is-primary is-small' ); ?>
+	<?php echo Utility::manual_link( 'manual/ystdtb-block-slider', '', 'button is-primary is-small' ); ?>
 </div>
