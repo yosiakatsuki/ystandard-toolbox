@@ -83,6 +83,13 @@ function cleanTemp( cb ) {
 		],
 		cb );
 }
+function deleteVendor( cb ) {
+	return del(
+		[
+			'./ystandard-toolbox/vendor',
+		],
+		cb );
+}
 
 /**
  * 必要ファイルのコピー
@@ -169,8 +176,31 @@ function watchFiles() {
 	watch( [ './src/js/app/*.js' ], buildJs );
 }
 
-exports.deployFiles = series( cleanFiles, copyJson, copyProductionFiles, zip, copyUpdateJson, cleanTemp );
-exports.deployFilesBeta = series( cleanFiles, copyJson, copyProductionFiles, zip, copyUpdateJsonBeta, cleanTemp );
+exports.deployFiles = series(
+	cleanFiles,
+	copyJson,
+	copyProductionFiles,
+	zip,
+	copyUpdateJson,
+	cleanTemp
+);
+exports.deployFilesBeta = series(
+	cleanFiles,
+	copyJson,
+	copyProductionFiles,
+	zip,
+	copyUpdateJsonBeta,
+	cleanTemp
+);
+exports.manualProduction =  series(
+	cleanFiles,
+	copyJson,
+	copyProductionFiles,
+	deleteVendor,
+	zip,
+	copyUpdateJsonBeta,
+	cleanTemp
+);
 
 exports.sass = series( sass );
 exports.watch = series( watchFiles );
