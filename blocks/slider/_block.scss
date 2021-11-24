@@ -1,8 +1,13 @@
 @use "customProperty";
 
 .ystdtb-slider {
-
+  &.alignfull,
+  &.alignwide {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
+
 
 .ystdtb-slider__slider {
   &:not(.swiper-initialized) {

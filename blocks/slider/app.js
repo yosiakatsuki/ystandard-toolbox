@@ -18,6 +18,7 @@ Swiper.use( [
 
 // eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
+	window.ystdtbSlider = [];
 	let sliders = document.querySelectorAll( '.ystdtb-slider__slider' );
 	sliders = Array.prototype.slice.call( sliders, 0 );
 	sliders.forEach( ( element ) => {
@@ -31,7 +32,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		slideItem.forEach( ( slideItemElement ) => {
 			slideItemElement.classList.add( 'swiper-slide' );
 		} );
-		const selector = element?.id ? `#${ element.id }` : '.swiper';
 		let options = {};
 		if ( element.hasAttribute( 'data-slider-options' ) ) {
 			try {
@@ -42,6 +42,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				options = {};
 			}
 		}
-		new Swiper( selector, options );
+		const slider = new Swiper( element, options );
+		window.ystdtbSlider = [ ...window.ystdtbSlider, slider ];
 	} );
 } );

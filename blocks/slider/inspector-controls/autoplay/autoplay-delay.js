@@ -12,11 +12,11 @@ const AutoplayDelay = ( { attributes, setAttributes } ) => {
 			label={ __( 'スライド切り替えの時間(秒)', 'ystandard-toolbox' ) }
 		>
 			<RangeControl
-				value={ autoplayDelay }
+				value={ autoplayDelay ?? 8 }
 				onChange={ handleOnChange }
-				initialPosition={ 3 }
+				initialPosition={ 8 }
 				min={ 1 }
-				max={ 10 }
+				max={ 15 }
 				step={ 0.1 }
 				allowReset={ true }
 			/>

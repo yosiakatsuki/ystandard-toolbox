@@ -40,7 +40,7 @@ export const attributes = {
 	},
 	autoplayDelay: {
 		type: 'number',
-		default: 3,
+		default: 8,
 	},
 	autoplayPauseOnMouse: {
 		type: 'boolean',

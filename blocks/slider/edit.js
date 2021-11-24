@@ -10,8 +10,14 @@ import { SliderInspectorControls as InspectorControls } from './inspector-contro
 import { SliderBlockControls as BlockControls } from './block-controls';
 
 const Edit = ( props ) => {
-	const { attributes } = props;
-	const { previewType } = attributes;
+	const { attributes, setAttributes, clientId } = props;
+	const { previewType, sliderId } = attributes;
+
+	if ( ! sliderId ) {
+		let newId = clientId.split( '-' );
+		newId = newId.length ? newId[ 0 ] : clientId;
+		setAttributes( { sliderId: newId } );
+	}
 
 	const blockProps = useBlockProps( {
 		className: classnames(

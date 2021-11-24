@@ -21,5 +21,5 @@ defined( 'ABSPATH' ) || die();
 		</svg>
 	</figure>
 	<p>画像の上にテキストを配置したバナータイプのリンクを作成できるブロック</p>
-	<?php echo Utility::manual_link( 'manual/ystdtb-banner-link', '', 'button is-primary is-small' ); ?>
+	<?php echo Utility::manual_link( 'manual/ystdtb-block-banner-link', '', 'button is-primary is-small' ); ?>
 </div>

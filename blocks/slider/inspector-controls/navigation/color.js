@@ -6,7 +6,7 @@ const Color = ( { navigationColor, setNavigationColor } ) => {
 	return (
 		<BaseControl
 			id={ 'navigationColor' }
-			label={ __( '矢印色', 'ystandard-toolbox' ) }
+			label={ __( '色', 'ystandard-toolbox' ) }
 		>
 			<ColorPaletteControl
 				value={ navigationColor.color }
