@@ -47,9 +47,9 @@ class Slider {
 		if ( $parsed_block && 'ystdtb/slider' === $parsed_block['blockName'] ) {
 			wp_enqueue_script(
 				'ystdtb-slider-app',
-				YSTDTB_URL . '/js/blocks/app-slider.js',
+				YSTDTB_URL . '/js/app/app-slider.js',
 				[],
-				filemtime( YSTDTB_PATH . '/js/blocks/app-slider.js' ),
+				filemtime( YSTDTB_PATH . '/js/app/app-slider.js' ),
 				true
 			);
 			wp_enqueue_style(
