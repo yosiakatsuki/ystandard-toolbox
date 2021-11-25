@@ -71,9 +71,9 @@ const BorderControl = ( { value, onChange } ) => {
 		const newColor = ! color
 			? undefined
 			: {
-					hex: color,
-					slug: getColorSlug( color ),
-			  };
+				hex: color,
+				slug: getColorSlug( color ),
+			};
 		setBorder( {
 			...value,
 			color: newColor,
@@ -97,9 +97,11 @@ const BorderControl = ( { value, onChange } ) => {
 					onChange={ handleStyleOnChange }
 				/>
 			</BaseControl>
-			<BaseControl>
+			<BaseControl
+				id={ 'ystdtb-component-border-color' }
+				label={ __( '色', 'ystandard-toolbox' ) }
+			>
 				<ColorPaletteControl
-					label={ __( '色', 'ystandard-toolbox' ) }
 					value={ value?.color?.hex }
 					onChange={ handleColorOnChange }
 				/>

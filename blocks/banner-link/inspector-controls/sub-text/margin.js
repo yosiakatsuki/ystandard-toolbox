@@ -12,7 +12,7 @@ const Margin = ( { attributes, setAttributes } ) => {
 	return (
 		<BaseControl
 			id={ subTextMargin }
-			label={ __( 'テキスト(上段)との間隔', 'ystandard-toolbox' ) }
+			label={ __( 'メインテキストとの間隔', 'ystandard-toolbox' ) }
 		>
 			<ResponsiveValues
 				values={ subTextMargin }

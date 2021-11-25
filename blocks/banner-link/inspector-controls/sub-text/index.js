@@ -10,7 +10,7 @@ import Margin from './margin';
 const PanelSubText = ( props ) => {
 	return (
 		<PanelBody
-			title={ __( 'テキスト（下段）', 'ystandard-toolbox' ) }
+			title={ __( 'サブテキスト', 'ystandard-toolbox' ) }
 			initialOpen={ false }
 		>
 			<FontSize { ...props } />
