@@ -71,9 +71,9 @@ const BorderControl = ( { value, onChange } ) => {
 		const newColor = ! color
 			? undefined
 			: {
-				hex: color,
-				slug: getColorSlug( color ),
-			};
+					hex: color,
+					slug: getColorSlug( color ),
+			  };
 		setBorder( {
 			...value,
 			color: newColor,
