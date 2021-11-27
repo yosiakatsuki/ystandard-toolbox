@@ -5,8 +5,6 @@ module.exports = {
 	...defaultConfig,
 	mode: 'production',
 	entry: {
-		'app': './src/js/blocks/app.js',
-		'app-slider': './blocks/slider/app.js',
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
 		'posts': './blocks/posts/index.js',

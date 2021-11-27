@@ -12,8 +12,10 @@ const plumber = require( 'gulp-plumber' );
 const babel = require( 'gulp-babel' );
 const rename = require( 'gulp-rename' );
 
-const webpackConfig = require( './webpack.menu.config.js' );
-const webpackConfigDev = require( './webpack.menu.config.dev.js' );
+const webpackMenuConfig = require( './webpack.menu.config.js' );
+const webpackMenuConfigDev = require( './webpack.menu.config.dev.js' );
+const webpackAppConfig = require( './webpack.block-app.config.js' );
+const webpackAppConfigDev = require( './webpack.block-app.config.dev.js' );
 
 
 const postcssPlugins = [
@@ -39,14 +41,26 @@ function sass() {
 
 function buildAdminApp() {
 	return plumber()
-		.pipe( webpackStream( webpackConfig, webpack ) )
+		.pipe( webpackStream( webpackMenuConfig, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
 }
 
 function watchBuildAdminApp() {
 	return plumber()
-		.pipe( webpackStream( webpackConfigDev, webpack ) )
+		.pipe( webpackStream( webpackMenuConfigDev, webpack ) )
 		.pipe( dest( 'js/admin/' ) )
+}
+
+function buildApp() {
+	return plumber()
+		.pipe( webpackStream( webpackAppConfig, webpack ) )
+		.pipe( dest( 'js/app/' ) )
+}
+
+function BuildAppDev() {
+	return plumber()
+		.pipe( webpackStream( webpackAppConfigDev, webpack ) )
+		.pipe( dest( 'js/app/' ) )
 }
 
 const buildJs = () => {
@@ -83,6 +97,7 @@ function cleanTemp( cb ) {
 		],
 		cb );
 }
+
 function deleteVendor( cb ) {
 	return del(
 		[
@@ -172,6 +187,13 @@ function watchFiles() {
 		sass
 	);
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], watchBuildAdminApp );
+	watch(
+		[
+			'./src/js/blocks/app.js',
+			'./blocks/**/app.js',
+		],
+		BuildAppDev
+	);
 	watch( [ './src/js/admin/**/*.json' ], copyJson );
 	watch( [ './src/js/app/*.js' ], buildJs );
 }
@@ -192,7 +214,7 @@ exports.deployFilesBeta = series(
 	copyUpdateJsonBeta,
 	cleanTemp
 );
-exports.manualProduction =  series(
+exports.manualProduction = series(
 	cleanFiles,
 	copyJson,
 	copyProductionFiles,
@@ -208,6 +230,6 @@ exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
 exports.buildApp = series( buildJs );
 exports.copyJson = series( copyJson );
-exports.build = series( sass, buildAdminApp, buildJs, copyJson );
+exports.build = series( sass, buildApp, buildAdminApp, buildJs, copyJson );
 
 exports.default = series( watchFiles );

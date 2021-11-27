@@ -9,7 +9,7 @@ import HtmlTag from './html-tag';
 const PanelMainText = ( props ) => {
 	return (
 		<PanelBody
-			title={ __( 'テキスト（上段）', 'ystandard-toolbox' ) }
+			title={ __( 'メインテキスト', 'ystandard-toolbox' ) }
 			initialOpen={ false }
 		>
 			<FontSize { ...props } />

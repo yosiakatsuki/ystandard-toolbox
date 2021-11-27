@@ -84,7 +84,7 @@ const BoxShadowControl = ( { label = undefined, value, onChange } ) => {
 				</div>
 				<div className="ystdtb-box-shadow-control__color-settings">
 					<div className="ystdtb-box-shadow-control__color-settings-label">
-						{ __( '色設定', 'ystandard-toolbox' ) }
+						{ __( '色', 'ystandard-toolbox' ) }
 					</div>
 					<ColorPaletteControl
 						onChange={ handleColorOnChange }

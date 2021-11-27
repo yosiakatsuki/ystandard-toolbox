@@ -1,10 +1,22 @@
+import { URLInput } from '@wordpress/block-editor';
 import { BaseControl } from '@wordpress/components';
-import BannerLinkLinkControl from '../../controls/link';
 
 const Link = ( props ) => {
+	const { attributes, setAttributes } = props;
+
+	const { link } = attributes;
+
+	const handleOnChange = ( value ) => {
+		setAttributes( {
+			link: {
+				...link,
+				url: value,
+			},
+		} );
+	};
 	return (
 		<BaseControl>
-			<BannerLinkLinkControl { ...props } />
+			<URLInput value={ link?.url ?? '' } onChange={ handleOnChange } />
 		</BaseControl>
 	);
 };

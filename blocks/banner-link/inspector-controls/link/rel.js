@@ -17,7 +17,7 @@ const Rel = ( { attributes, setAttributes } ) => {
 		<BaseControl>
 			<InputControl
 				label={ __( 'rel', 'ystandard-toolbox' ) }
-				value={ link?.rel }
+				value={ link?.rel ?? '' }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>
