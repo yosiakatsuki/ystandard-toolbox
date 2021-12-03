@@ -1,12 +1,10 @@
 window.ysOverlayTimer = null;
-// eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
 	const bodyClasses = document.body.classList;
 	if ( bodyClasses.contains( 'has-fixed-header' ) ) {
 		const header = document.getElementById( 'masthead' );
 		if ( header ) {
 			if ( bodyClasses.contains( 'is-overlay' ) ) {
-				// eslint-disable-next-line @wordpress/no-global-event-listener
 				document.addEventListener(
 					'scroll',
 					() => {
