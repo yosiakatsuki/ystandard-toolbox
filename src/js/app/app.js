@@ -1,5 +1,4 @@
 // widget accordion/
-// eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
 	const list = [ '.children', '.sub-menu' ];
 	list.forEach( ( target ) => {

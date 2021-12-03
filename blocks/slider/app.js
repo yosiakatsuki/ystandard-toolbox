@@ -16,7 +16,6 @@ Swiper.use( [
 	EffectCube,
 ] );
 
-// eslint-disable-next-line @wordpress/no-global-event-listener
 document.addEventListener( 'DOMContentLoaded', () => {
 	window.ystdtbSlider = [];
 	let sliders = document.querySelectorAll( '.ystdtb-slider__slider' );

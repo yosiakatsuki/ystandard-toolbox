@@ -11,5 +11,9 @@ module.exports = {
 		...defaultConfig.rules,
 		'import/no-unresolved': 'off',
 		'@wordpress/no-unsafe-wp-apis': 'off'
+	},
+	parser: "babel-eslint",
+	parserOptions: {
+		requireConfigFile: false
 	}
 };
