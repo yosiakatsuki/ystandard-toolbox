@@ -58,7 +58,7 @@ class Sub_Header {
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( Utility::add_media_query( $css, 'lg' ) )
+			Utility::minify( Utility::add_media_query( $css, 'md' ) )
 		);
 	}
 
