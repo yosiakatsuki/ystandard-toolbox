@@ -34,7 +34,7 @@ class Navigation {
 	 * 関連ファイルの読み込み
 	 */
 	private function load_files() {
-		require_once __DIR__ . '/class-mobile-nav.php';
+		require_once __DIR__ . '/class-drawer-menu.php';
 	}
 }
 

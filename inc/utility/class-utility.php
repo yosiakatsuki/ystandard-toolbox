@@ -126,6 +126,22 @@ class Utility {
 	}
 
 	/**
+	 * バージョン文字列からベータ・アルファ情報の削除.
+	 *
+	 * @param string $version バージョン文字列.
+	 *
+	 * @return string
+	 */
+	public static function remove_beta_version( $version ) {
+
+		return preg_replace(
+			'/\-(beta|alpha)\-\d+/i',
+			'',
+			$version
+		);
+	}
+
+	/**
 	 * Bool値に変換
 	 *
 	 * @param mixed $value value.

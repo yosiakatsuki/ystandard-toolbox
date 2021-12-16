@@ -64,13 +64,13 @@ class Init {
 	 */
 	private function check_versions() {
 		if ( ! Utility::wordpress_version_compare( Config::REQUIRE_WORDPRESS_VERSION ) ) {
-			$this->version_warning .= '<li>WordPress : ' . Config::REQUIRE_WORDPRESS_VERSION . '</li>';
+			$this->version_warning .= '<li>WordPress : ' . Utility::remove_beta_version( Config::REQUIRE_WORDPRESS_VERSION ) . '</li>';
 		}
 		if ( ! Utility::ystandard_version_compare( Config::REQUIRE_YSTANDARD_VERSION ) ) {
-			$this->version_warning .= '<li>yStandard : ' . Config::REQUIRE_YSTANDARD_VERSION . '</li>';
+			$this->version_warning .= '<li>yStandard : ' . Utility::remove_beta_version( Config::REQUIRE_YSTANDARD_VERSION ) . '</li>';
 		}
 		if ( ! Utility::ystandard_blocks_version_compare( Config::REQUIRE_YSTANDARD_BLOCKS_VERSION ) ) {
-			$this->version_warning .= '<li>yStandard Blocks : ' . Config::REQUIRE_YSTANDARD_BLOCKS_VERSION . '</li>';
+			$this->version_warning .= '<li>yStandard Blocks : ' . Utility::remove_beta_version( Config::REQUIRE_YSTANDARD_BLOCKS_VERSION ) . '</li>';
 		}
 		if ( '' === $this->version_warning ) {
 			return;
