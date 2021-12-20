@@ -1,6 +1,6 @@
 <?php
 /**
- * モバイルナビゲーション
+ * ドロワーメニュー
  *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
@@ -12,11 +12,11 @@ namespace ystandard_toolbox;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Mobile_Nav
+ * Class Drawer_Menu
  *
  * @package ystandard_toolbox
  */
-class Mobile_Nav {
+class Drawer_Menu {
 
 	/**
 	 * Mobile_Nav constructor.
@@ -26,20 +26,20 @@ class Mobile_Nav {
 			return;
 		}
 		add_action( 'widgets_init', [ $this, 'widget_init' ], 11 );
-		add_action( 'ys_before_global_nav_menu', [ $this, 'mobile_nav_menu_top' ] );
-		add_action( 'ys_after_global_nav_menu', [ $this, 'mobile_nav_menu_bottom' ] );
-		add_filter( 'ys_get_inline_css', [ $this, 'mobile_nav_styles' ] );
+		add_action( 'ys_before_global_nav_menu', [ $this, 'drawer_menu_top' ] );
+		add_action( 'ys_after_global_nav_menu', [ $this, 'drawer_menu_bottom' ] );
+		add_filter( 'ys_get_inline_css', [ $this, 'inline_css' ], 100 );
 	}
 
 	/**
-	 * モバイルメニューウィジェット追加
+	 * ドロワーメニューウィジェット追加
 	 */
 	public function widget_init() {
 		register_sidebar(
 			[
-				'name'          => 'モバイルメニュー(上)',
+				'name'          => 'ドロワーメニュー(上)',
 				'id'            => 'mobile-nav-top',
-				'description'   => 'モバイルメニュー内に表示されるウィジェット(上側)',
+				'description'   => 'ドロワーメニュー内に表示されるウィジェット(上側)',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</div>',
 				'before_title'  => '<h2 class="widget-title">',
@@ -48,9 +48,9 @@ class Mobile_Nav {
 		);
 		register_sidebar(
 			[
-				'name'          => 'モバイルメニュー(下)',
+				'name'          => 'ドロワーメニュー(下)',
 				'id'            => 'mobile-nav-bottom',
-				'description'   => 'モバイルメニュー内に表示されるウィジェット（下側）',
+				'description'   => 'ドロワーメニュー内に表示されるウィジェット（下側）',
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</div>',
 				'before_title'  => '<h2 class="widget-title">',
@@ -60,9 +60,9 @@ class Mobile_Nav {
 	}
 
 	/**
-	 * モバイルナビゲーション上
+	 * ドロワーメニュー上
 	 */
-	public function mobile_nav_menu_top() {
+	public function drawer_menu_top() {
 		if ( is_active_sidebar( 'mobile-nav-top' ) ) {
 			echo '<div class="widget-mobile-nav widget-mobile-nav__top">';
 			dynamic_sidebar( 'mobile-nav-top' );
@@ -71,9 +71,9 @@ class Mobile_Nav {
 	}
 
 	/**
-	 * モバイルナビゲーション下
+	 * ドロワーメニュー下
 	 */
-	public function mobile_nav_menu_bottom() {
+	public function drawer_menu_bottom() {
 		if ( is_active_sidebar( 'mobile-nav-bottom' ) ) {
 			echo '<div class="widget-mobile-nav widget-mobile-nav__bottom">';
 			dynamic_sidebar( 'mobile-nav-bottom' );
@@ -88,10 +88,10 @@ class Mobile_Nav {
 	 *
 	 * @return string
 	 */
-	public function mobile_nav_styles( $css ) {
+	public function inline_css( $css ) {
 
-		$expand = 769;
-		$close  = $expand - 1;
+		$close  = helper\Drawer_Menu::get_drawer_menu_start();
+		$expand = $close + 1;
 
 		$style = "
 		.widget-mobile-nav {
@@ -140,5 +140,5 @@ class Mobile_Nav {
 
 }
 
-new Mobile_Nav();
+new Drawer_Menu();
 

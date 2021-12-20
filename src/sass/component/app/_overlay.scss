@@ -2,12 +2,6 @@
 
 .ystdtb.is-overlay {
 
-  @include global.media-breakpoint(md) {
-    .global-nav {
-      background-color: transparent;
-    }
-  }
-
   &.is-transparent {
     --header-text: var(--overlay-text-color);
     --header-dscr: var(--overlay-text-color);
@@ -36,7 +30,7 @@
 
   .site-header,
   .global-nav {
-    transition: background-color .3s, box-shadow .3s;
+    transition: background-color .3s, box-shadow .3s,opacity .3s;
   }
 
   &.has-fixed-header {

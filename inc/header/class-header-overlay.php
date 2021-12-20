@@ -29,6 +29,7 @@ class Header_Overlay {
 		add_filter( 'ys_get_header_logo', [ $this, 'add_overlay_logo' ] );
 		add_action( 'ystdtb_term_edit_form', [ $this, 'term_overlay_edit' ], 11, 2 );
 		add_action( 'ystdtb_term_edit_save', [ $this, 'term_overlay_save' ], 11 );
+		add_filter( 'ys_get_inline_css', [ $this, 'inline_css' ] );
 		new Meta_Box(
 			'overlay',
 			'オーバーレイ',
@@ -126,6 +127,22 @@ class Header_Overlay {
 			true
 		);
 		wp_script_add_data( $handle, 'defer', true );
+	}
+
+	public function inline_css( $css ) {
+		if ( ! self::is_header_overlay() ) {
+			return $css;
+		}
+		$close  = helper\Drawer_Menu::get_drawer_menu_start();
+		$expand = $close + 1;
+		$style  = "
+		@media (min-width: ${expand}px) {
+			.global-nav {
+				background-color: transparent;
+			}
+		}";
+
+		return $css . $style;
 	}
 
 	/**
