@@ -129,6 +129,13 @@ class Header_Overlay {
 		wp_script_add_data( $handle, 'defer', true );
 	}
 
+	/**
+	 * インラインCSS.
+	 *
+	 * @param string $css CSS.
+	 *
+	 * @return string
+	 */
 	public function inline_css( $css ) {
 		if ( ! self::is_header_overlay() ) {
 			return $css;
