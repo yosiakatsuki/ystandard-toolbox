@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-menu">
-    <h3 class="ystdtb-menu__section-title">ドロワーメニュー</h3>
+    <h3 class="ystdtb-menu__section-title">リッチドロワーメニュー</h3>
     <div class="ystdtb-menu__section is-w-600">
       <div class="ystdtb-menu__table">
         <div class="is-label">有効化</div>
