@@ -140,7 +140,6 @@ export const addOptionsSlides = ( props ) => {
 	addOptions( 'slidesPerGroup', mobile?.slidesPerGroup, 1 );
 	addOptions( 'centeredSlides', mobile?.centeredSlides );
 
-
 	let _breakpoints = {};
 	const tabletBreakpoint = getBreakpoints( keys.tablet, props );
 	const tabletValue = {
