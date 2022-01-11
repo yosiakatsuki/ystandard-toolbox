@@ -73,7 +73,7 @@ export const getSliderOptions = ( attributes ) => {
 		};
 		addOptions( 'pagination', pagination );
 	}
-
+	
 	return JSON.stringify( options );
 };
 
@@ -123,8 +123,8 @@ export const addOptionsSlides = ( props ) => {
 		return;
 	}
 	const desktop = getResponsiveValue( slides, keys.desktop );
-	const tablet = getResponsiveValue( slides, keys.tablet );
-	const mobile = getResponsiveValue( slides, keys.mobile );
+	const tablet = parseObjectAll( getResponsiveValue( slides, keys.tablet ) );
+	const mobile = parseObjectAll( getResponsiveValue( slides, keys.mobile ) );
 
 	if ( ! tablet && ! mobile ) {
 		addOptions( 'slidesPerView', desktop?.slidesPerView, 1 );
