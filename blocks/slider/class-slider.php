@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox\blocks;
 
+use ystandard_toolbox\Utility;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -45,13 +47,15 @@ class Slider {
 			return $block_content;
 		}
 		if ( $parsed_block && 'ystdtb/slider' === $parsed_block['blockName'] ) {
-			wp_enqueue_script(
-				'ystdtb-slider-app',
-				YSTDTB_URL . '/js/app/app-slider.js',
-				[],
-				filemtime( YSTDTB_PATH . '/js/app/app-slider.js' ),
-				true
-			);
+			if ( ! Utility::is_amp() ) {
+				wp_enqueue_script(
+					'ystdtb-slider-app',
+					YSTDTB_URL . '/js/app/app-slider.js',
+					[],
+					filemtime( YSTDTB_PATH . '/js/app/app-slider.js' ),
+					true
+				);
+			}
 			wp_enqueue_style(
 				'ystdtb-slider-css',
 				YSTDTB_URL . '/library/swiper/swiper-bundle.min.css',

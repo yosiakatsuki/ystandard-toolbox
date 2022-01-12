@@ -51,6 +51,9 @@ export const attributes = {
 		type: 'bool',
 		default: false,
 	},
+	excerptLength: {
+		type: 'number',
+	},
 	thumbnailSize: {
 		type: 'string',
 		default: 'full',

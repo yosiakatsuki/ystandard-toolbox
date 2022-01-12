@@ -123,13 +123,14 @@ export const addOptionsSlides = ( props ) => {
 		return;
 	}
 	const desktop = getResponsiveValue( slides, keys.desktop );
-	const tablet = getResponsiveValue( slides, keys.tablet );
-	const mobile = getResponsiveValue( slides, keys.mobile );
+	const tablet = parseObjectAll( getResponsiveValue( slides, keys.tablet ) );
+	const mobile = parseObjectAll( getResponsiveValue( slides, keys.mobile ) );
 
 	if ( ! tablet && ! mobile ) {
 		addOptions( 'slidesPerView', desktop?.slidesPerView, 1 );
 		addOptions( 'spaceBetween', desktop?.spaceBetween );
 		addOptions( 'slidesPerGroup', desktop?.slidesPerGroup, 1 );
+		addOptions( 'centeredSlides', desktop?.centeredSlides );
 
 		return;
 	}
@@ -137,6 +138,7 @@ export const addOptionsSlides = ( props ) => {
 	addOptions( 'slidesPerView', mobile?.slidesPerView, 1 );
 	addOptions( 'spaceBetween', mobile?.spaceBetween );
 	addOptions( 'slidesPerGroup', mobile?.slidesPerGroup, 1 );
+	addOptions( 'centeredSlides', mobile?.centeredSlides );
 
 	let _breakpoints = {};
 	const tabletBreakpoint = getBreakpoints( keys.tablet, props );
@@ -144,6 +146,7 @@ export const addOptionsSlides = ( props ) => {
 		slidesPerView: tablet?.slidesPerView || 1,
 		spaceBetween: tablet?.spaceBetween || undefined,
 		slidesPerGroup: tablet?.slidesPerGroup || 1,
+		centeredSlides: tablet?.centeredSlides || undefined,
 	};
 	if ( tabletBreakpoint ) {
 		_breakpoints = {
@@ -156,6 +159,7 @@ export const addOptionsSlides = ( props ) => {
 		slidesPerView: desktop?.slidesPerView || 1,
 		spaceBetween: desktop?.spaceBetween || undefined,
 		slidesPerGroup: desktop?.slidesPerGroup || 1,
+		centeredSlides: desktop?.centeredSlides || undefined,
 	};
 	if ( desktopBreakpoint ) {
 		_breakpoints = {

@@ -82,6 +82,10 @@ class Posts_Block extends Dynamic_Block {
 				'type'    => 'boolean',
 				'default' => false,
 			],
+			'excerptLength'  => [
+				'type'    => 'number',
+				'default' => 0,
+			],
 			'thumbnailSize'  => [
 				'type'    => 'string',
 				'default' => 'full',
@@ -169,6 +173,7 @@ class Posts_Block extends Dynamic_Block {
 		$attributes['show_date']       = $attributes['showDate'];
 		$attributes['show_category']   = $attributes['showCategory'];
 		$attributes['show_excerpt']    = $attributes['showExcerpt'];
+		$attributes['excerpt_length']  = $attributes['excerptLength'];
 		$attributes['thumbnail_size']  = $attributes['thumbnailSize'];
 		$attributes['thumbnail_ratio'] = $attributes['thumbnailRatio'];
 		$attributes['post_type']       = $attributes['postType'];

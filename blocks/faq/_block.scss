@@ -1,6 +1,13 @@
 @use "../../src/sass/global";
 
 .ystdtb-faq {
+  --ystdtb-faq-padding: 0.75em;
+  --ystdtb-faq-padding-wide: 1.5em;
+  --ystdtb-faq-item-padding-vertical: var(--ystdtb-faq-padding);
+  --ystdtb-faq-item-padding-horizon: 0;
+  --ystdtb-faq-padding-q-top: 1.5em;
+  --ystdtb-faq-padding-a-bottom: 1.5em;
+
   border: 0;
 
   & + .ystdtb-faq {
@@ -9,8 +16,7 @@
 
   &.has-padding {
     .ystdtb-faq-item {
-      padding-right: 1.5em;
-      padding-left: 1.5em;
+      --ystdtb-faq-item-padding-horizon: 1.5em;
     }
   }
 
@@ -51,8 +57,8 @@
       &.is-open {
         + .is-faq--a {
           height: auto;
-          padding-top: 1.5em;
-          padding-bottom: 1.5em;
+          padding-top: var(--ystdtb-faq-item-padding-vertical);
+          padding-bottom: var(--ystdtb-faq-padding-q-top);
           opacity: 1;
           visibility: visible;
         }
@@ -64,8 +70,15 @@
 .ystdtb-faq-item {
   display: flex;
   margin: 0;
-  padding: 1.5em 0;
+  padding: var(--ystdtb-faq-item-padding-vertical) var(--ystdtb-faq-item-padding-horizon);
   align-items: center;
+
+  &.is-faq--q {
+    padding-top: var(--ystdtb-faq-padding-q-top);
+  }
+  &.is-faq--a {
+    padding-bottom: var(--ystdtb-faq-padding-a-bottom);
+  }
 
   &.has-border-bottom {
     border-bottom-width: 1px;
@@ -77,8 +90,11 @@
   }
 
   &.has-background {
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    --ystdtb-faq-item-padding-vertical: 1.5em;
+  }
+
+  &.has-background {
+    --ystdtb-faq-item-padding-horizon: 1.5em;
   }
 }
 

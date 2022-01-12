@@ -309,6 +309,7 @@ const Posts = ( props ) => {
 							} }
 							checked={ showExcerpt }
 						/>
+						<BlockOption.ExcerptLength { ...props } />
 					</PanelBody>
 					<PanelBody
 						initialOpen={ false }
