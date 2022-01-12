@@ -32,7 +32,7 @@ class Config {
 	/**
 	 * 必要なyStandardバージョン
 	 */
-	const REQUIRE_YSTANDARD_VERSION = '4.31.0-beta-1';
+	const REQUIRE_YSTANDARD_VERSION = '4.32.0-beta-1';
 
 	/**
 	 * 必要なyStandard Blocksバージョン
