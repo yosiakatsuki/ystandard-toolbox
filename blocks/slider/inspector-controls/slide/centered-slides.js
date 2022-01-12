@@ -25,7 +25,10 @@ const CenteredSlides = ( { type, attributes, setAttributes } ) => {
 			label={ __( 'スライドの中央表示', 'ystandard-toolbox' ) }
 		>
 			<ToggleControl
-				label={ __( '中央からスライドを表示する', 'ystandard-toolbox' ) }
+				label={ __(
+					'中央からスライドを表示する',
+					'ystandard-toolbox'
+				) }
 				onChange={ handleOnChange }
 				checked={ centeredSlides ?? false }
 			/>

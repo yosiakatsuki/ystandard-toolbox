@@ -6,7 +6,7 @@ import SlidesPerView from './slides-per-view';
 import SpaceBetween from './space-between';
 import SlidesPerGroup from './slides-per-group';
 import Reset from './reset';
-import CenteredSlides from "./centered-slides";
+import CenteredSlides from './centered-slides';
 
 const PanelSlide = ( props ) => {
 	const { attributes } = props;

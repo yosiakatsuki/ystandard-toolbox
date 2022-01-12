@@ -1,4 +1,4 @@
-import { listTypeSelect } from '../config';
+import { listTypeSelect } from '../../config';
 import { __ } from '@wordpress/i18n';
 import { SelectControl } from '@wordpress/components';
 import { getBlockConfig } from '@ystdtb/helper/blockConfig';

@@ -73,7 +73,7 @@ export const getSliderOptions = ( attributes ) => {
 		};
 		addOptions( 'pagination', pagination );
 	}
-	
+
 	return JSON.stringify( options );
 };
 
