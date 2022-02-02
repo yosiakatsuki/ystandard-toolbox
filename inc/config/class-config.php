@@ -27,7 +27,7 @@ class Config {
 	/**
 	 * 必要なWordPressバージョン
 	 */
-	const REQUIRE_WORDPRESS_VERSION = '5.5.0';
+	const REQUIRE_WORDPRESS_VERSION = '5.7.0';
 
 	/**
 	 * 必要なyStandardバージョン

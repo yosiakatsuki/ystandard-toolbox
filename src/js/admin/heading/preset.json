@@ -243,7 +243,9 @@
       "paddingBottom": 0.5,
       "paddingBottomUnit": "em",
       "paddingLeft": 0.5,
-      "paddingLeftUnit": "em"
+      "paddingLeftUnit": "em",
+      "marginTop": 0.5,
+      "marginTopUnit": "em"
     },
     "clearPseudoElements": true,
     "additionalStyle": {
