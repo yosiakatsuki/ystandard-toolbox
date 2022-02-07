@@ -63,7 +63,7 @@ class Blocks {
 			'dynamic' => [],
 		];
 
-		foreach ( glob( YSTDTB_PATH . '/js/blocks/*.js' ) as $file ) {
+		foreach ( glob( YSTDTB_PATH . '/dist/blocks/*.js' ) as $file ) {
 			if ( is_file( $file ) ) {
 				// ブロックの情報.
 				$name = basename( $file, '.js' );
@@ -71,7 +71,7 @@ class Blocks {
 					continue;
 				}
 
-				$asset = include( YSTDTB_PATH . "/js/blocks/${name}.asset.php" );
+				$asset = include( YSTDTB_PATH . "/dist/blocks/${name}.asset.php" );
 				// ダイナミックブロック判定.
 				$render = YSTDTB_PATH . "/blocks/${name}/class-${name}-block.php";
 				$type   = file_exists( $render ) ? 'dynamic' : 'normal';
@@ -138,10 +138,10 @@ class Blocks {
 		if ( ! is_admin() ) {
 			return;
 		}
-		$asset_file = include( YSTDTB_PATH . '/js/blocks/block.asset.php' );
+		$asset_file = include( YSTDTB_PATH . '/dist/blocks/block.asset.php' );
 		wp_enqueue_script(
 			self::BLOCK_EDITOR_SCRIPT_HANDLE,
-			YSTDTB_URL . '/js/blocks/block.js',
+			YSTDTB_URL . '/dist/blocks/block.js',
 			$asset_file['dependencies'],
 			$asset_file['version']
 		);

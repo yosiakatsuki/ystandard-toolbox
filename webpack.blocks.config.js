@@ -3,7 +3,6 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
-	mode: 'production',
 	entry: {
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
@@ -22,7 +21,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: `${ __dirname }/js/blocks`
+		path: `${ __dirname }/dist/blocks`
 	},
 	module: {
 		...defaultConfig.module,
