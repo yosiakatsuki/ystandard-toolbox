@@ -157,29 +157,30 @@ class Blocks {
 	 * ブロックの登録.
 	 */
 	public function register_block() {
-		if ( ! is_admin() ) {
-			return;
-		}
-		$asset_file = include( YSTDTB_PATH . '/dist/blocks/block.asset.php' );
-		wp_enqueue_script(
-			self::BLOCK_EDITOR_SCRIPT_HANDLE,
-			YSTDTB_URL . '/dist/blocks/block.js',
-			$asset_file['dependencies'],
-			$asset_file['version']
-		);
-		wp_localize_script(
-			self::BLOCK_EDITOR_SCRIPT_HANDLE,
-			'ystdtbBlockEditor',
-			$this->create_block_option()
-		);
+		if ( is_admin() ) {
 
-		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations(
+			$asset_file = include( YSTDTB_PATH . '/dist/blocks/block.asset.php' );
+			wp_enqueue_script(
 				self::BLOCK_EDITOR_SCRIPT_HANDLE,
-				'ystandard-toolbox',
-				YSTDTB_PATH . '/languages'
+				YSTDTB_URL . '/dist/blocks/block.js',
+				$asset_file['dependencies'],
+				$asset_file['version']
 			);
+			wp_localize_script(
+				self::BLOCK_EDITOR_SCRIPT_HANDLE,
+				'ystdtbBlockEditor',
+				$this->create_block_option()
+			);
+
+			if ( function_exists( 'wp_set_script_translations' ) ) {
+				wp_set_script_translations(
+					self::BLOCK_EDITOR_SCRIPT_HANDLE,
+					'ystandard-toolbox',
+					YSTDTB_PATH . '/languages'
+				);
+			}
 		}
+
 		foreach ( $this->register_blocks['normal'] as $block ) {
 			$handle              = 'ystandard-toolbox-' . $block['name'];
 			$block_type          = Config::BLOCK_CATEGORY . '/' . $block['name'];

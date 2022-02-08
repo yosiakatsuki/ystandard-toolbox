@@ -18,6 +18,7 @@ module.exports = {
 		'banner-link': './blocks/banner-link/index.js',
 		'slider': './blocks/slider/index.js',
 		'slider-item': './blocks/slider/item/index.js',
+		'description-list': './blocks/description-list/index.js',
 	},
 	output: {
 		filename: '[name].js',

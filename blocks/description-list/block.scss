@@ -1,0 +1,7 @@
+@use "customProperty";
+
+.ystdtb-dl {
+  &.has-margin {
+    @include customProperty.dl-margin;
+  }
+}

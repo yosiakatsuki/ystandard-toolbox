@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+  "apiVersion": 2,
+  "name": "ystdtb/description-list",
+  "title": "dl",
+  "description": "定義リスト ブロック",
+  "keywords": [
+    "定義リスト",
+    "dl",
+    "description list",
+    "definition list"
+  ],
+  "attributes": {
+    "margin": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "anchor": false,
+    "align": false,
+    "className": false
+  }
+}

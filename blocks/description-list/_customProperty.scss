@@ -1,0 +1,20 @@
+@use "../../src/sass/global";
+
+@mixin dl-margin() {
+
+  &[style*="dl-margin-desktop"] {
+    margin: var(--ystdtb-dl-margin-desktop);
+  }
+
+  @include global.media-breakpoint-between(sm, lg) {
+    &[style*="dl-margin-tablet"] {
+      margin: var(--ystdtb-dl-margin-tablet);
+    }
+  }
+
+  @include global.media-breakpoint-down(sm) {
+    &[style*="dl-margin-mobile"] {
+      margin: var(--ystdtb-dl-margin-mobile);
+    }
+  }
+}
