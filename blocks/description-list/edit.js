@@ -9,7 +9,7 @@ import { getDLMarginStyle } from "./function/style";
 
 
 const edit = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes } = props;
 	const { margin } = attributes
 	const blockProps = useBlockProps( {
 		className: classnames(
@@ -38,8 +38,10 @@ const edit = ( props ) => {
 			<div { ...blockProps }>
 				<dl { ...dlProps }>
 					<InnerBlocks
-						// allowedBlocks={ config.allowedBlocks }
-						// template={ [] }
+						allowedBlocks={ config.allowedBlocks }
+						template={ [
+							[ 'ystdtb/description-list-dt' ]
+						] }
 					/>
 				</dl>
 			</div>

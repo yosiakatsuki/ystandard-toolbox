@@ -19,6 +19,7 @@ module.exports = {
 		'slider': './blocks/slider/index.js',
 		'slider-item': './blocks/slider/item/index.js',
 		'description-list': './blocks/description-list/index.js',
+		'description-list-dt': './blocks/description-list/dt/index.js',
 	},
 	output: {
 		filename: '[name].js',

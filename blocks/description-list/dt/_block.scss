@@ -1,0 +1,12 @@
+@use "../customProperty";
+
+.ystdtb-dt {
+  &.has-padding {
+    @include customProperty.dt-font-size();
+    @include customProperty.dt-padding();
+  }
+
+  &.has-background:not(.has-padding) {
+    padding: 1em 1.5em
+  }
+}

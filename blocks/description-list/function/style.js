@@ -10,7 +10,6 @@ export const getDLMarginStyle = ( margin ) => {
 		tablet: getSpacingCSS( margin?.tablet ),
 		mobile: getSpacingCSS( margin?.mobile ),
 	} );
-	console.log( { value,margin } );
 	return getResponsiveCustomProperties(
 		'margin',
 		'dl',

@@ -18,3 +18,40 @@
     }
   }
 }
+
+@mixin dt-font-size() {
+
+  &[style*="dt-font-size-desktop"] {
+    font-size: var(--ystdtb-dt-font-size-desktop);
+  }
+
+  @include global.media-breakpoint-between(sm, lg) {
+    &[style*="dt-font-size-tablet"] {
+      font-size: var(--ystdtb-dt-font-size-tablet);
+    }
+  }
+
+  @include global.media-breakpoint-down(sm) {
+    &[style*="dt-font-size-mobile"] {
+      font-size: var(--ystdtb-dt-font-size-mobile);
+    }
+  }
+}
+@mixin dt-padding() {
+
+  &[style*="dt-padding-desktop"] {
+    padding: var(--ystdtb-dt-padding-desktop);
+  }
+
+  @include global.media-breakpoint-between(sm, lg) {
+    &[style*="dt-padding-tablet"] {
+      padding: var(--ystdtb-dt-padding-tablet);
+    }
+  }
+
+  @include global.media-breakpoint-down(sm) {
+    &[style*="dt-padding-mobile"] {
+      padding: var(--ystdtb-dt-padding-mobile);
+    }
+  }
+}

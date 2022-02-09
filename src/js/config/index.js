@@ -12,6 +12,16 @@ export const ystdtbConfig = {
 		iconDeprecatedForeground: '#be4141',
 		iconBeta: '#9CADBC',
 	},
+	hasClasses: {
+		textColor: 'has-text-color',
+		fontSize: 'has-font-size',
+		background: 'has-background',
+		backgroundGradient: 'has-background-gradient',
+		padding: 'has-padding',
+		margin: 'has-margin',
+		border: 'has-border',
+		borderColor: 'has-border-color',
+	},
 	component: {
 		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [
