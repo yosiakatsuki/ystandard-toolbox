@@ -1,9 +1,18 @@
+import classnames from 'classnames';
+/**
+ * WordPress
+ */
 import {
 	InnerBlocks,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import classnames from 'classnames';
-import { getDLMarginStyle } from "./function/style";
+/**
+ * yStandard
+ */
+import { getResponsiveMarginStyle } from "@ystdtb/components/responsive-spacing";
+/**
+ * Block
+ */
 import { config } from "./config";
 
 export default function save( { attributes } ) {
@@ -12,11 +21,11 @@ export default function save( { attributes } ) {
 		className: classnames(
 			config.blockClasses,
 			{
-				'has-margin': !! getDLMarginStyle( margin )
+				'has-margin': !! getResponsiveMarginStyle( 'dl', margin )
 			}
 		),
 		style: {
-			...getDLMarginStyle( margin )
+			...getResponsiveMarginStyle( 'dl', margin )
 		}
 	} );
 

@@ -5,12 +5,18 @@ import { getComponentConfig } from '@ystdtb/helper/config';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
-	parseResponsiveValues,
+	parseResponsiveValues, getResponsiveCustomProperties,
 } from '@ystdtb/helper/responsive';
-import { getSpacing } from '@ystdtb/helper/spacing';
+import { getSpacing, getSpacingCSS } from '@ystdtb/helper/spacing';
 
 const ResponsiveSpacing = ( props ) => {
-	const { label, values, onChange, units } = props;
+	const {
+		label,
+		values,
+		onChange,
+		units,
+		inputProps,
+	} = props;
 
 	const _units = units ?? getComponentConfig( 'units' );
 	const valueDesktop = getResponsiveValue( values, responsive.desktop );
@@ -63,6 +69,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueDesktop }
 										onChange={ handleOnChangeDesktop }
 										units={ _units }
+										inputProps={inputProps}
 									/>
 								</div>
 							) }
@@ -81,6 +88,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueTablet }
 										onChange={ handleOnChangeTablet }
 										units={ _units }
+										inputProps={inputProps}
 									/>
 								</div>
 							) }
@@ -99,6 +107,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueMobile }
 										onChange={ handleOnChangeMobile }
 										units={ _units }
+										inputProps={inputProps}
 									/>
 								</div>
 							) }
@@ -110,3 +119,23 @@ const ResponsiveSpacing = ( props ) => {
 	);
 };
 export default ResponsiveSpacing;
+
+export const getResponsiveSpacingStyle = ( propertyName, prefix, values ) => {
+	const parsedValue = parseResponsiveValues( {
+		desktop: getSpacingCSS( values?.desktop ),
+		tablet: getSpacingCSS( values?.tablet ),
+		mobile: getSpacingCSS( values?.mobile ),
+	} );
+	return getResponsiveCustomProperties(
+		propertyName,
+		prefix,
+		parsedValue
+	);
+};
+export const getResponsivePaddingStyle = ( prefix, values ) => {
+	return getResponsiveSpacingStyle( 'padding', prefix, values );
+}
+export const getResponsiveMarginStyle = ( prefix, values ) => {
+	return getResponsiveSpacingStyle( 'margin', prefix, values );
+}
+

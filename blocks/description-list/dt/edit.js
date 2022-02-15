@@ -1,4 +1,7 @@
 import classnames from 'classnames';
+/**
+ * WordPress
+ */
 import {
 	RichText,
 	withColors,
@@ -7,11 +10,18 @@ import {
 } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import { DescriptionListDtInspectorControls as InspectorControls } from './inspector-controls';
-import { getDTPaddingStyle, getFontSizeStyle } from "./function/style";
+/**
+ * yStandard
+ */
+import { getResponsivePaddingStyle } from "@ystdtb/components/responsive-spacing";
+import { getResponsiveFontSizeStyle } from "@ystdtb/components/responsive-font-size";
 import { getFontSizeClassByObject } from "@ystdtb/helper/fontSize";
 import { getBackGroundStyle } from "@ystdtb/helper/color";
 import { ystdtbConfig } from "@ystdtb/config";
+/**
+ * Block
+ */
+import { DescriptionListDtInspectorControls as InspectorControls } from './inspector-controls';
 import { config } from './config';
 
 
@@ -41,19 +51,19 @@ const edit = ( props ) => {
 			{
 				[ hasClasses.fontSize ]: fontSizeClass,
 				[ fontSizeClass ]: fontSizeClass,
-				[ hasClasses.background ]: backgroundColor.color,
+				[ hasClasses.background ]: backgroundColor.color || gradientValue,
 				[ backgroundColor.class ]: backgroundColor.class,
 				[ hasClasses.textColor ]: textColor.color,
 				[ textColor.class ]: textColor.class,
 				[ hasClasses.backgroundGradient ]: gradientValue,
 				[ gradientClass ]: gradientClass,
-				[ hasClasses.padding ]: getDTPaddingStyle( padding ),
+				[ hasClasses.padding ]: getResponsivePaddingStyle( 'dt', padding ),
 			}
 		),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
-			...getDTPaddingStyle( padding ),
-			...getFontSizeStyle( textSize, fontSizeClass ),
+			...getResponsivePaddingStyle( 'dt', padding ),
+			...getResponsiveFontSizeStyle( 'dt', textSize, fontSizeClass ),
 		}
 	} );
 	return (

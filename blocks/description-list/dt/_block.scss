@@ -2,8 +2,11 @@
 
 .ystdtb-dt {
   &.has-padding {
-    @include customProperty.dt-font-size();
     @include customProperty.dt-padding();
+  }
+
+  &.has-font-size {
+    @include customProperty.dt-font-size();
   }
 
   &.has-background:not(.has-padding) {

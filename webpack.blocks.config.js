@@ -54,6 +54,7 @@ module.exports = {
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
 			'@ystdtb/config': path.resolve( __dirname, 'src/js/config' ),
 			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
+			'@ystdtb/controls': path.resolve( __dirname, 'src/js/controls' ),
 			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
 	},

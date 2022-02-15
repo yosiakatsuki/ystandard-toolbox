@@ -4,26 +4,22 @@ import { __ } from '@wordpress/i18n';
 
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
-const Padding = ( props ) => {
-	const { attributes, setAttributes } = props;
+const ResponsivePaddingControl = ( { label, values, onChange, ...props } ) => {
 
-	const { padding } = attributes;
-
-	const handleOnChange = ( values ) => {
-		setAttributes( {
-			padding: getResponsiveValues( values ),
-		} );
+	const handleOnChange = ( newValue ) => {
+		onChange( getResponsiveValues( newValue ) );
 	};
 
 	return (
 		<BaseControl>
 			<ResponsiveSpacing
-				label={ __( '内側余白(padding)', 'ystandard-toolbox' ) }
-				values={ padding }
+				label={ label ? label : __( '内側余白(padding)', 'ystandard-toolbox' ) }
+				values={ values }
 				onChange={ handleOnChange }
+				{ ...props }
 			/>
 		</BaseControl>
 	);
 };
 
-export default Padding;
+export default ResponsivePaddingControl;

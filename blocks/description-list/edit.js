@@ -1,12 +1,20 @@
 import classnames from 'classnames';
+/**
+ * WordPress
+ */
 import {
 	InnerBlocks,
 	useBlockProps,
 } from '@wordpress/block-editor';
+/**
+ * yStandard
+ */
+import { getResponsiveMarginStyle } from "@ystdtb/components/responsive-spacing";
+/**
+ * Block
+ */
 import { config } from './config';
 import { DescriptionListInspectorControls as InspectorControls } from './inspector-controls';
-import { getDLMarginStyle } from "./function/style";
-
 
 const edit = ( props ) => {
 	const { attributes } = props;
@@ -15,7 +23,7 @@ const edit = ( props ) => {
 		className: classnames(
 			'ystdtb-dl-editor',
 			{
-				'has-margin': !! getDLMarginStyle( margin )
+				'has-margin': !! getResponsiveMarginStyle( 'dl', margin )
 			}
 		)
 	} );
@@ -24,11 +32,11 @@ const edit = ( props ) => {
 		className: classnames(
 			config.blockClasses,
 			{
-				'has-margin': !! getDLMarginStyle( margin )
+				'has-margin': !! getResponsiveMarginStyle( 'dl', margin )
 			}
 		),
 		style: {
-			...getDLMarginStyle( margin )
+			...getResponsiveMarginStyle( 'dl', margin )
 		}
 	}
 

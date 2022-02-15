@@ -39,7 +39,7 @@ export const getBackGroundStyle = ( backgroundColor, gradient = undefined ) => {
 	if ( backgroundColor?.color ) {
 		return backgroundColor.color;
 	}
-	if ( backgroundColor ) {
+	if ( 'object' !== typeof backgroundColor && backgroundColor ) {
 		return backgroundColor;
 	}
 	return undefined;

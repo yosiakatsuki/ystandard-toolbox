@@ -1,14 +1,19 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import BackgroundColor from "./background-color";
+import BackgroundColorControl from "@ystdtb/controls/background-color-control";
 
 const PanelBackgroundColor = ( props ) => {
+	const { backgroundColor, setBackgroundColor } = props;
 	return (
 		<PanelBody
-			title={ __( '余白', 'ystandard-toolbox' ) }
+			title={ __( '背景色', 'ystandard-toolbox' ) }
 			initialOpen={ true }
 		>
-			<BackgroundColor { ...props }/>
+			<BackgroundColorControl
+				color={ backgroundColor }
+				onChange={ setBackgroundColor }
+				{ ...props }
+			/>
 		</PanelBody>
 	);
 };

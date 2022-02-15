@@ -1,15 +1,25 @@
 import classnames from 'classnames';
+/**
+ * WordPress
+ */
 import {
 	RichText,
 	getColorClassName,
 	__experimentalGetGradientClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
+/**
+ * yStandard
+ */
+import { getResponsiveFontSizeStyle } from "@ystdtb/components/responsive-font-size";
+import { getResponsivePaddingStyle } from "@ystdtb/components/responsive-spacing";
 import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
-import { config } from "./config";
-import { getDTPaddingStyle, getFontSizeStyle } from "./function/style";
 import { getBackGroundStyle } from "@ystdtb/helper/color";
 import { ystdtbConfig } from "@ystdtb/config";
+/**
+ * Block
+ */
+import { config } from "./config";
 
 const save = ( { attributes } ) => {
 	const {
@@ -39,20 +49,20 @@ const save = ( { attributes } ) => {
 			{
 				[ hasClasses.fontSize ]: fontSizeClass,
 				[ fontSizeClass ]: fontSizeClass,
-				[ hasClasses.background ]: backgroundColor || customBackgroundColor,
+				[ hasClasses.background ]: backgroundColor || customBackgroundColor || gradient || customGradient,
 				[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
 				[ hasClasses.textColor ]: textColor || customTextColor,
 				[ colorClasses.text ]: colorClasses.text,
 				[ hasClasses.backgroundGradient ]: gradient || customGradient,
 				[ colorClasses.gradient ]: colorClasses.gradient,
-				[ hasClasses.padding ]: getDTPaddingStyle( padding ),
+				[ hasClasses.padding ]: getResponsivePaddingStyle( 'dt', padding ),
 			}
 		),
 		style: {
 			background: getBackGroundStyle( customBackgroundColor, customGradient ),
 			color: customTextColor,
-			...getDTPaddingStyle( padding ),
-			...getFontSizeStyle( textSize, fontSizeClass ),
+			...getResponsivePaddingStyle( 'dt', padding ),
+			...getResponsiveFontSizeStyle( 'dt', textSize, fontSizeClass ),
 		}
 	} );
 
