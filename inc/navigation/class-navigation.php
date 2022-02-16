@@ -35,6 +35,7 @@ class Navigation {
 	 */
 	private function load_files() {
 		require_once __DIR__ . '/class-drawer-menu.php';
+		require_once __DIR__ . '/class-menu-replace.php';
 	}
 }
 
