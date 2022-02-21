@@ -4,25 +4,21 @@ import { __ } from '@wordpress/i18n';
 import ResponsiveFontSize from '@ystdtb/components/responsive-font-size';
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
-const FontSize = ( props ) => {
-	const { attributes, setAttributes } = props;
-
-	const { textSize } = attributes;
+const ResponsiveFontSizeControl = ( { label, values, onChange, ...props } ) => {
 
 	const handleOnChange = ( values ) => {
-		setAttributes( {
-			textSize: getResponsiveValues( values ),
-		} );
+		onChange( getResponsiveValues( values ) );
 	};
 
 	return (
 		<BaseControl>
 			<ResponsiveFontSize
-				label={ __( 'フォントサイズ', 'ystandard-toolbox' ) }
-				values={ textSize }
+				label={ label ? label : __( 'フォントサイズ', 'ystandard-toolbox' ) }
+				values={ values }
 				onChange={ handleOnChange }
+				{ ...props }
 			/>
 		</BaseControl>
 	);
 };
-export default FontSize;
+export default ResponsiveFontSizeControl;

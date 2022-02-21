@@ -49,7 +49,7 @@ const edit = ( props ) => {
 			config.blockClasses,
 			'ystdtb-dt-editor',
 			{
-				[ hasClasses.fontSize ]: fontSizeClass,
+				[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
 				[ fontSizeClass ]: fontSizeClass,
 				[ hasClasses.background ]: backgroundColor.color || gradientValue,
 				[ backgroundColor.class ]: backgroundColor.class,

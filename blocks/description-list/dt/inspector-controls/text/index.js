@@ -1,17 +1,33 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import FontSize from "./font-size";
-import TextColor from "./text-color";
+import ResponsiveFontSizeControl from "@ystdtb/controls/responsive-font-size-control";
+import TextColorControl from "@ystdtb/controls/text-color-control";
 
 
 const PanelText = ( props ) => {
+	const {
+		attributes,
+		setAttributes,
+		textColor,
+		setTextColor
+	} = props;
+
+	const { textSize } = attributes;
 	return (
 		<PanelBody
 			title={ __( 'テキスト', 'ystandard-toolbox' ) }
 			initialOpen={ true }
 		>
-			<FontSize { ...props } />
-			<TextColor { ...props } />
+			<ResponsiveFontSizeControl
+				values={ textSize }
+				onChange={ ( newValue ) => {
+					setAttributes( { textSize: newValue } );
+				} }
+			/>
+			<TextColorControl
+				value={ textColor }
+				onChange={ setTextColor }
+			/>
 		</PanelBody>
 	);
 };

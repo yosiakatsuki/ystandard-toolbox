@@ -10,7 +10,7 @@ const PanelBackgroundColor = ( props ) => {
 			initialOpen={ true }
 		>
 			<BackgroundColorControl
-				color={ backgroundColor }
+				value={ backgroundColor }
 				onChange={ setBackgroundColor }
 				{ ...props }
 			/>

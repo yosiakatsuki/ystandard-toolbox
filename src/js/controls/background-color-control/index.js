@@ -2,8 +2,8 @@ import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ColorGradientControl from '@ystdtb/components/color-gradient-control';
 
-const BackgroundColorControl = ( { color, onChange, label, ...props } ) => {
-	const _color = color?.color ?? color;
+const BackgroundColorControl = ( { value, onChange, label, ...props } ) => {
+	const _color = value?.color ?? value;
 	return (
 		<BaseControl>
 			<ColorGradientControl
