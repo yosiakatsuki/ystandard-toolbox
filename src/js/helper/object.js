@@ -7,6 +7,12 @@ export const parseObject = ( value ) => {
 	}
 	return 0 < Object.keys( value ).length ? { ...value } : undefined;
 };
+export const hasObjectKey = ( value, key ) => {
+	if ( ! isObject( value ) ) {
+		return false;
+	}
+	return value.hasOwnProperty( key );
+}
 
 export const parseObjectAll = ( value ) => {
 	const _value = parseObject( value );

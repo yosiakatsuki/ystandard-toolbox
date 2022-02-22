@@ -12,7 +12,6 @@ const PanelBackgroundColor = ( props ) => {
 			<BackgroundColorControl
 				value={ backgroundColor }
 				onChange={ setBackgroundColor }
-				{ ...props }
 			/>
 		</PanelBody>
 	);
