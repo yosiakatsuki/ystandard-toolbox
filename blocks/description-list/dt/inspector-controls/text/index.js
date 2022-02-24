@@ -2,6 +2,7 @@ import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsiveFontSizeControl from "@ystdtb/controls/responsive-font-size-control";
 import TextColorControl from "@ystdtb/controls/text-color-control";
+import TypographySettingsControl from "@ystdtb/controls/typography-settings-control";
 
 
 const PanelText = ( props ) => {
@@ -12,7 +13,22 @@ const PanelText = ( props ) => {
 		setTextColor
 	} = props;
 
-	const { textSize } = attributes;
+	const {
+		textSize,
+		fontWeight,
+		fontStyle,
+		lineHeight,
+		letterSpacing,
+	} = attributes;
+
+	const handleTypographySettingsOnChange = ( newValue ) => {
+		setAttributes( {
+			fontWeight: newValue?.fontWeight,
+			fontStyle: newValue?.fontStyle,
+			lineHeight: newValue?.lineHeight,
+			letterSpacing: newValue?.letterSpacing,
+		} );
+	}
 	return (
 		<PanelBody
 			title={ __( 'テキスト', 'ystandard-toolbox' ) }
@@ -27,6 +43,15 @@ const PanelText = ( props ) => {
 			<TextColorControl
 				value={ textColor }
 				onChange={ setTextColor }
+			/>
+			<TypographySettingsControl
+				values={ {
+					fontWeight,
+					fontStyle,
+					lineHeight,
+					letterSpacing,
+				} }
+				onChange={ handleTypographySettingsOnChange }
 			/>
 		</PanelBody>
 	);

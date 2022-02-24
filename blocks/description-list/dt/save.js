@@ -32,6 +32,10 @@ const save = ( { attributes } ) => {
 		textColor,
 		customTextColor,
 		textSize,
+		fontWeight,
+		fontStyle,
+		lineHeight,
+		letterSpacing,
 	} = attributes;
 
 	const hasClasses = ystdtbConfig.hasClasses;
@@ -63,6 +67,10 @@ const save = ( { attributes } ) => {
 			color: customTextColor,
 			...getResponsivePaddingStyle( 'dt', padding ),
 			...getResponsiveFontSizeStyle( 'dt', textSize, fontSizeClass ),
+			fontWeight: fontWeight || undefined,
+			fontStyle: fontStyle || undefined,
+			lineHeight: lineHeight || undefined,
+			letterSpacing: letterSpacing || undefined,
 		}
 	} );
 

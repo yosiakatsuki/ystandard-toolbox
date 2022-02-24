@@ -54,6 +54,17 @@ export const ystdtbConfig = {
 			{ value: 'px', label: 'px' },
 			{ value: 'em', label: 'em' },
 			{ value: 'rem', label: 'rem' },
+			{ value: '%', label: '%' },
+			{ value: 'vw', label: 'vw' },
+			{ value: 'vh', label: 'vh' },
+		],
+		letterSpacingUnits: [
+			{ value: 'em', label: 'em', step: 0.1 },
+			{ value: 'px', label: 'px' },
+			{ value: 'rem', label: 'rem', step: 0.1 },
+			{ value: '%', label: '%' },
+			{ value: 'vw', label: 'vw' },
+			{ value: 'vh', label: 'vh' },
 		],
 		borderRadiusUnits: [
 			{ value: 'px', label: 'px' },

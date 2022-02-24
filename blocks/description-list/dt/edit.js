@@ -37,6 +37,10 @@ const edit = ( props ) => {
 		text,
 		textSize,
 		padding,
+		fontWeight,
+		fontStyle,
+		lineHeight,
+		letterSpacing,
 	} = attributes
 
 	const hasClasses = ystdtbConfig.hasClasses;
@@ -64,6 +68,10 @@ const edit = ( props ) => {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
 			...getResponsivePaddingStyle( 'dt', padding ),
 			...getResponsiveFontSizeStyle( 'dt', textSize, fontSizeClass ),
+			fontWeight,
+			fontStyle,
+			lineHeight,
+			letterSpacing,
 		}
 	} );
 	return (

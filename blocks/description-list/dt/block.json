@@ -37,14 +37,14 @@
     "textSize": {
       "type": "object"
     },
-    "lineHeight": {
-      "type": "number"
-    },
     "fontWeight": {
       "type": "string"
     },
     "fontStyle": {
       "type": "string"
+    },
+    "lineHeight": {
+      "type": "number"
     },
     "letterSpacing": {
       "type": "string"
