@@ -48,7 +48,8 @@ const edit = ( props ) => {
 					<InnerBlocks
 						allowedBlocks={ config.allowedBlocks }
 						template={ [
-							[ 'ystdtb/description-list-dt' ]
+							[ 'ystdtb/description-list-dt' ],
+							[ 'ystdtb/description-list-dd-simple' ]
 						] }
 					/>
 				</dl>

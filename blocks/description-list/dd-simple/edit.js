@@ -51,7 +51,7 @@ const edit = ( props ) => {
 	const blockProps = useBlockProps( {
 		className: classnames(
 			config.blockClasses,
-			'ystdtb-dt-editor',
+			'ystdtb-dd-simple-editor',
 			{
 				[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
 				[ fontSizeClass ]: fontSizeClass,
@@ -78,14 +78,14 @@ const edit = ( props ) => {
 		<>
 			<InspectorControls { ...props } />
 			<RichText
-				tagName="dt"
+				tagName="dd"
 				value={ text }
 				onChange={ ( value ) =>
 					setAttributes( { text: value } )
 				}
 				identifier="text"
 				placeholder={ __(
-					'説明タイトル',
+					'説明文',
 					'ystandard-toolbox'
 				) }
 				{ ...blockProps }

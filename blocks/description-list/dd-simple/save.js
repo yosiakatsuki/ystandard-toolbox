@@ -75,9 +75,9 @@ const save = ( { attributes } ) => {
 	} );
 
 	return (
-		<dt { ...blockProps }>
+		<dd { ...blockProps }>
 			<RichText.Content value={ text }/>
-		</dt>
+		</dd>
 	);
 };
 

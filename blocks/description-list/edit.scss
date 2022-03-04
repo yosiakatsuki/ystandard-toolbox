@@ -1,4 +1,5 @@
-@use "./dt/edit";
+@use "./dt/edit" as dt;
+@use "./dd-simple/edit" as dd-simple;
 
 .ystdtb-dl-editor {
   &.has-margin {

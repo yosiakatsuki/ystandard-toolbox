@@ -1,12 +1,12 @@
-@use "../customProperty";
+@use "../../../src/sass/global";
 
 .ystdtb-dt {
   &.has-padding {
-    @include customProperty.dt-padding();
+    @include global.responsive-custom-property("dt", "padding");
   }
 
   &.has-font-size {
-    @include customProperty.dt-font-size();
+    @include global.responsive-custom-property("dt", "font-size");
   }
 
   &.has-background:not(.has-padding) {

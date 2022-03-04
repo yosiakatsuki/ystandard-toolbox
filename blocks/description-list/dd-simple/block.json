@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
   "apiVersion": 2,
-  "name": "ystdtb/description-list-dt",
-  "title": "dt",
-  "description": "定義リスト 用語(dt)ブロック",
+  "name": "ystdtb/description-list-dd-simple",
+  "title": "dd-simple",
+  "description": "定義リスト 用語(dd)ブロック シンプル",
   "keywords": [
-    "dt"
+    "dd"
   ],
   "parent": [
     "ystdtb/description-list"
@@ -14,7 +14,7 @@
     "text": {
       "type": "string",
       "source": "html",
-      "selector": "dt"
+      "selector": "dd"
     },
     "backgroundColor": {
       "type": "string"

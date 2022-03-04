@@ -1,8 +1,9 @@
-@use "customProperty";
-@use "./dt/block";
+@use "../../src/sass/global";
+@use "./dt/block" as dt;
+@use "./dd-simple/block" as dd-simple;
 
 .ystdtb-dl {
   &.has-margin {
-    @include customProperty.dl-margin;
+    @include global.responsive-custom-property("dl", "margin");
   }
 }

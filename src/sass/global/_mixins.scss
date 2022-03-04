@@ -43,3 +43,22 @@
 		+ "Please make sure it is defined in `$breakpoints-setting` map.";
   }
 }
+
+@mixin responsive-custom-property($prefix,$property) {
+  $_prefix: "#{$prefix}-#{$property}";
+  &[style*="#{$_prefix}-desktop"] {
+    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    &[style*="#{$_prefix}-tablet"] {
+      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    &[style*="#{$_prefix}-mobile"] {
+      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
+    }
+  }
+}
