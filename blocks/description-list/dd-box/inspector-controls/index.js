@@ -3,7 +3,7 @@ import PanelPadding from "./padding";
 import PanelBackgroundColor from "./backgroundColor";
 import PanelText from "./text";
 
-export const DescriptionListDdSimpleInspectorControls = ( props ) => {
+export const DescriptionListDdBoxInspectorControls = ( props ) => {
 	return (
 		<InspectorControls>
 			<PanelBackgroundColor { ...props } />

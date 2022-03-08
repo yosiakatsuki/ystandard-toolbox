@@ -1,6 +1,7 @@
 @use "../../../src/sass/global";
 
 .ystdtb-dt {
+
   &.has-padding {
     @include global.responsive-custom-property("dt", "padding");
   }

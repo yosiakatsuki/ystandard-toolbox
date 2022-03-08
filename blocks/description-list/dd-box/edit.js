@@ -3,13 +3,12 @@ import classnames from 'classnames';
  * WordPress
  */
 import {
-	RichText,
+	InnerBlocks,
 	withColors,
 	useBlockProps,
 	__experimentalUseGradient,
 } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
@@ -21,40 +20,29 @@ import { ystdtbConfig } from "@ystdtb/config";
 /**
  * Block
  */
-import { DescriptionListDdSimpleInspectorControls as InspectorControls } from './inspector-controls';
+import { DescriptionListDdBoxInspectorControls as InspectorControls } from './inspector-controls';
 import { config } from './config';
 
 
 const edit = ( props ) => {
 	const {
 		attributes,
-		setAttributes,
 		backgroundColor,
 		textColor,
 	} = props;
 
 	const {
-		text,
-		textSize,
 		padding,
-		fontWeight,
-		fontStyle,
-		lineHeight,
-		letterSpacing,
 	} = attributes
 
 	const hasClasses = ystdtbConfig.hasClasses;
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
 
-	const fontSizeClass = getFontSizeClassByObject( textSize?.desktop );
-
 	const blockProps = useBlockProps( {
 		className: classnames(
 			config.blockClasses,
-			'ystdtb-dd-simple-editor',
+			'ystdtb-dd-box-editor',
 			{
-				[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
-				[ fontSizeClass ]: fontSizeClass,
 				[ hasClasses.background ]: backgroundColor.color || gradientValue,
 				[ backgroundColor.class ]: backgroundColor.class,
 				[ hasClasses.textColor ]: textColor.color,
@@ -67,29 +55,14 @@ const edit = ( props ) => {
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
 			...getResponsivePaddingStyle( config.responsiveStyleClassPrefix, padding ),
-			...getResponsiveFontSizeStyle( config.responsiveStyleClassPrefix, textSize, fontSizeClass ),
-			fontWeight,
-			fontStyle,
-			lineHeight,
-			letterSpacing,
 		}
 	} );
 	return (
 		<>
 			<InspectorControls { ...props } />
-			<RichText
-				tagName="dd"
-				value={ text }
-				onChange={ ( value ) =>
-					setAttributes( { text: value } )
-				}
-				identifier="text"
-				placeholder={ __(
-					'説明文',
-					'ystandard-toolbox'
-				) }
-				{ ...blockProps }
-			/>
+			<dd { ...blockProps }>
+				<InnerBlocks/>
+			</dd>
 		</>
 	);
 }
