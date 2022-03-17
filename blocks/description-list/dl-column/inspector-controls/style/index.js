@@ -1,6 +1,7 @@
 import { BaseControl, ToggleControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsiveWidthControl from "@ystdtb/controls/responsive-width-control";
+import BorderControl from "@ystdtb/controls/border-control";
 
 const PanelStyle = ( props ) => {
 	const {
@@ -12,6 +13,7 @@ const PanelStyle = ( props ) => {
 		isStackedOnMobile,
 		isStackedOnTablet,
 		dtWidth,
+		border,
 	} = attributes;
 
 	const isStackedOnMobileOnChange = ( value ) => {
@@ -23,6 +25,10 @@ const PanelStyle = ( props ) => {
 
 	const dtWidthOnChange = ( value ) => {
 		setAttributes( { dtWidth: value } );
+	}
+
+	const borderOnChange = ( value ) => {
+		setAttributes( { border: value } );
 	}
 
 	return (
@@ -53,6 +59,11 @@ const PanelStyle = ( props ) => {
 				values={ dtWidth }
 				label={ __( '説明(dt)の幅', 'ystandard-toolbox' ) }
 				onChange={ dtWidthOnChange }
+			/>
+			<BorderControl
+				label={ __( '枠線', 'ystandard-toolbox' ) }
+				value={ border }
+				onChange={ borderOnChange }
 			/>
 		</PanelBody>
 	);

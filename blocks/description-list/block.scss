@@ -2,7 +2,7 @@
 @use "./dt/block" as dt;
 @use "./dd-simple/block" as dd-simple;
 @use "./dd-box/block" as dd-box;
-@use "./column/block" as column;
+@use "./dl-column/block" as column;
 
 .ystdtb-dl {
   > * {

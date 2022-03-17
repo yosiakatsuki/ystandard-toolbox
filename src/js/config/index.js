@@ -22,6 +22,7 @@ export const ystdtbConfig = {
 		border: 'has-border',
 		borderColor: 'has-border-color',
 	},
+	customPropertyPrefix: '--ystdtb',
 	component: {
 		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [

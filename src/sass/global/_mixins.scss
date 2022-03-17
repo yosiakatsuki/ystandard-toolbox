@@ -1,6 +1,10 @@
 @use "variables" as var;
 
-@mixin media-breakpoint($name,$breakpoints: var.$breakpoints) {
+@mixin media-breakpoint($name,$editor: false) {
+  $breakpoints: var.$breakpoints;
+  @if  true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -13,7 +17,11 @@
   }
 }
 
-@mixin media-breakpoint-down($name,$breakpoints: var.$breakpoints) {
+@mixin media-breakpoint-down($name,$editor: false) {
+  $breakpoints: var.$breakpoints;
+  @if  true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -29,8 +37,12 @@
 @mixin media-breakpoint-between(
   $name_up,
   $name_down,
-  $breakpoints: var.$breakpoints
+  $editor: false
 ) {
+  $breakpoints: var.$breakpoints;
+  @if true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint_up: map-get($breakpoints, $name_up);
   $breakpoint_down: map-get($breakpoints, $name_down);
 
@@ -43,6 +55,7 @@
 		+ "Please make sure it is defined in `$breakpoints-setting` map.";
   }
 }
+
 
 @mixin responsive-custom-property($prefix,$property) {
   $_prefix: "#{$prefix}-#{$property}";

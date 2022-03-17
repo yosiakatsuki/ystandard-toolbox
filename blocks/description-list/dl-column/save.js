@@ -14,6 +14,7 @@ import {
  */
 import { config } from "./config";
 import { getResponsiveWidthStyle } from "@ystdtb/components/responsive-values";
+import { getBorderCustomProperty } from "@ystdtb/controls/border-control";
 
 export default function save( { attributes } ) {
 	const {
@@ -22,22 +23,27 @@ export default function save( { attributes } ) {
 		dtWidth,
 		border,
 	} = attributes
+
+	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
+
 	const blockProps = useBlockProps.save( {
 		className: classnames(
 			config.blockClasses,
 			{
 				'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
 				'is-not-stacked-on-tablet': ! isStackedOnTablet,
+				'has-border': !! borderProperty
 			}
 		),
 		style: {
-			...getResponsiveWidthStyle( config.responsiveStyleClassPrefix, dtWidth )
+			...getResponsiveWidthStyle( config.responsiveStyleClassPrefix, dtWidth ),
+			...borderProperty
 		}
 	} );
 
 	return (
-		<dl { ...blockProps }>
+		<div { ...blockProps }>
 			<InnerBlocks.Content/>
-		</dl>
+		</div>
 	);
 }

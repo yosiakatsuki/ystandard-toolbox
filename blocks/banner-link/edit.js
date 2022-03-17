@@ -29,7 +29,7 @@ import {
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystdtb/components/border-control';
+} from '@ystdtb/controls/border-control';
 import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
 import { getComponentConfig } from '@ystdtb/helper/config';
 

@@ -9,6 +9,7 @@
 @use "../js/component/responsive-values/edit" as responsive-values;
 @use "../js/component/box-shadow-control/edit" as box-shadow;
 @use "../js/component/color-gradient-control/edit" as color-gradient-control;
+@use "../js/controls/border-control/edit" as border-control;
 @use "../js/controls/typography-settings-control/edit" as typography-settings-control;
 @use "../../blocks/posts/edit" as posts-edit;
 @use "../../blocks/styles/columns/block" as column;

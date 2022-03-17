@@ -26,7 +26,7 @@ import { getBoxShadowStyle } from '@ystdtb/components/box-shadow-control';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystdtb/components/border-control';
+} from '@ystdtb/controls/border-control';
 import { getComponentConfig } from '@ystdtb/helper/config';
 import getDataFallbackProperty from '@ystdtb/helper/fallback';
 import { getSpacingCSS } from '@ystdtb/helper/spacing';
