@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+  "apiVersion": 2,
+  "name": "ystdtb/description-list-column",
+  "title": "dl",
+  "description": "定義リスト 横並びブロック",
+  "keywords": [
+    "定義リスト",
+    "dl",
+    "dt",
+    "dd",
+    "description list",
+    "definition list"
+  ],
+  "parent": [
+    "ystdtb/description-list"
+  ],
+  "attributes": {
+    "isStackedOnMobile": {
+      "type": "boolean",
+      "default": true
+    },
+    "isStackedOnTablet": {
+      "type": "boolean"
+    },
+    "dtWidth": {
+      "type": "object"
+    },
+    "border": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "anchor": false,
+    "align": false,
+    "className": false
+  }
+}

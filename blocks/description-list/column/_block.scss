@@ -1,0 +1,50 @@
+@use "../../../src/sass/global";
+
+.ystdtb-dl-column {
+
+  @include global.media-breakpoint(md) {
+    display: flex;
+  }
+
+  > dt {
+    margin-top: 0;
+
+    @include global.media-breakpoint(md) {
+      margin-right: 1em;
+    }
+  }
+
+  > dd {
+
+    margin-top: 1em;
+    @include global.media-breakpoint(md) {
+      margin-top: 0;
+    }
+  }
+
+  &.is-not-stacked-on-mobile {
+    @include global.media-breakpoint-down(sm) {
+      display: flex;
+
+      > dt {
+        margin-right: 1em;
+      }
+      > dd {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.is-not-stacked-on-tablet {
+    @include global.media-breakpoint-between(sm, md) {
+      display: flex;
+
+      > dt {
+        margin-right: 1em;
+      }
+      > dd {
+        margin-top: 0;
+      }
+    }
+  }
+}

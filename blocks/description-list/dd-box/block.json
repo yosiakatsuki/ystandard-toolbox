@@ -8,7 +8,8 @@
     "dd"
   ],
   "parent": [
-    "ystdtb/description-list"
+    "ystdtb/description-list",
+    "ystdtb/description-list-column"
   ],
   "attributes": {
     "backgroundColor": {

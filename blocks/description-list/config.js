@@ -3,7 +3,7 @@ export const config = {
 	allowedBlocks:[
 		'ystdtb/description-list-dt',
 		'ystdtb/description-list-dd-simple',
-		'ystdtb/description-list-dd-group',
-		'ystdtb/description-list-dl-table',
+		'ystdtb/description-list-dd-box',
+		'ystdtb/description-list-column',
 	]
 }

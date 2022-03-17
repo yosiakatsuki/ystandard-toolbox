@@ -1,0 +1,63 @@
+@use "../../../src/sass/global";
+
+.ystdtb-dl-column {
+  display: block;
+
+  > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    @include global.media-breakpoint(md) {
+      display: flex;
+    }
+
+    > dt,
+    > dd {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    > dd {
+      margin-top: 1em;
+    }
+
+    > dt {
+      @include global.media-breakpoint(md) {
+        margin-right: 1em;
+      }
+    }
+
+    > dd {
+      @include global.media-breakpoint(md) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.is-not-stacked-on-mobile {
+    > .block-editor-inner-blocks > .block-editor-block-list__layout {
+      @include global.media-breakpoint-down(sm) {
+        display: flex;
+
+        > dt {
+          margin-right: 1em;
+        }
+        > dd {
+          margin-top: 1em;
+        }
+      }
+    }
+  }
+
+  &.is-not-stacked-on-tablet {
+    > .block-editor-inner-blocks > .block-editor-block-list__layout {
+      @include global.media-breakpoint-between(sm, md) {
+        display: flex;
+
+        > dt {
+          margin-right: 1em;
+        }
+        > dd {
+          margin-top: 1em;
+        }
+      }
+    }
+  }
+}

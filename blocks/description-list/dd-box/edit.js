@@ -61,7 +61,11 @@ const edit = ( props ) => {
 		<>
 			<InspectorControls { ...props } />
 			<dd { ...blockProps }>
-				<InnerBlocks/>
+				<InnerBlocks
+					template={ [
+						[ 'core/paragraph' ]
+					] }
+				/>
 			</dd>
 		</>
 	);

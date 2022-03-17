@@ -22,6 +22,7 @@ module.exports = {
 		'description-list-dt': './blocks/description-list/dt/index.js',
 		'description-list-dd-simple': './blocks/description-list/dd-simple/index.js',
 		'description-list-dd-box': './blocks/description-list/dd-box/index.js',
+		'description-list-column': './blocks/description-list/column/index.js',
 	},
 	output: {
 		filename: '[name].js',

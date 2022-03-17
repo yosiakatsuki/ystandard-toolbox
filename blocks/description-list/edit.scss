@@ -1,6 +1,7 @@
 @use "./dt/edit" as dt;
 @use "./dd-simple/edit" as dd-simple;
 @use "./dd-box/edit" as dd-box;
+@use "./column/edit" as column;
 
 .ystdtb-dl-editor {
   &.has-margin {
