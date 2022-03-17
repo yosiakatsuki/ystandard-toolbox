@@ -1,5 +1,6 @@
 import { BaseControl, ToggleControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import ResponsiveWidthControl from "@ystdtb/controls/responsive-width-control";
 
 const PanelStyle = ( props ) => {
 	const {
@@ -7,7 +8,11 @@ const PanelStyle = ( props ) => {
 		setAttributes
 	} = props;
 
-	const { isStackedOnMobile, isStackedOnTablet } = attributes;
+	const {
+		isStackedOnMobile,
+		isStackedOnTablet,
+		dtWidth,
+	} = attributes;
 
 	const isStackedOnMobileOnChange = ( value ) => {
 		setAttributes( { isStackedOnMobile: value } );
@@ -15,6 +20,10 @@ const PanelStyle = ( props ) => {
 	const isStackedOnTabletOnChange = ( value ) => {
 		setAttributes( { isStackedOnTablet: value } );
 	};
+
+	const dtWidthOnChange = ( value ) => {
+		setAttributes( { dtWidth: value } );
+	}
 
 	return (
 		<PanelBody
@@ -40,7 +49,11 @@ const PanelStyle = ( props ) => {
 					/>
 				</div>
 			</BaseControl>
-
+			<ResponsiveWidthControl
+				values={ dtWidth }
+				label={ __( '説明(dt)の幅', 'ystandard-toolbox' ) }
+				onChange={ dtWidthOnChange }
+			/>
 		</PanelBody>
 	);
 };

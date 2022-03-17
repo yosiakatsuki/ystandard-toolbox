@@ -6,6 +6,8 @@
     display: flex;
   }
 
+  @include global.responsive-custom-property-child("> dt", "dl-column", "width");
+
   > dt {
     margin-top: 0;
 

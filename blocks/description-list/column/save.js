@@ -13,13 +13,14 @@ import {
  * Block
  */
 import { config } from "./config";
+import { getResponsiveWidthStyle } from "@ystdtb/components/responsive-values";
 
 export default function save( { attributes } ) {
 	const {
 		isStackedOnMobile,
 		isStackedOnTablet,
 		dtWidth,
-		border
+		border,
 	} = attributes
 	const blockProps = useBlockProps.save( {
 		className: classnames(
@@ -29,7 +30,9 @@ export default function save( { attributes } ) {
 				'is-not-stacked-on-tablet': ! isStackedOnTablet,
 			}
 		),
-		style: {}
+		style: {
+			...getResponsiveWidthStyle( config.responsiveStyleClassPrefix, dtWidth )
+		}
 	} );
 
 	return (

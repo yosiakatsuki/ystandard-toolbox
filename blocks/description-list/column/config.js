@@ -3,5 +3,6 @@ export const config = {
 	allowedBlocks: [
 		'ystdtb/description-list-dt',
 		'ystdtb/description-list-dd-box',
-	]
+	],
+	responsiveStyleClassPrefix : 'dl-column'
 }

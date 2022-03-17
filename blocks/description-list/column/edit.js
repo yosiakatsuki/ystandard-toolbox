@@ -14,6 +14,7 @@ import {
  */
 import { config } from './config';
 import { DescriptionListColumnInspectorControls as InspectorControls } from './inspector-controls';
+import { getResponsiveWidthStyle } from "@ystdtb/components/responsive-values";
 
 const edit = ( props ) => {
 	const { attributes } = props;
@@ -31,7 +32,10 @@ const edit = ( props ) => {
 				'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
 				'is-not-stacked-on-tablet': ! isStackedOnTablet,
 			}
-		)
+		),
+		style: {
+			...getResponsiveWidthStyle( config.responsiveStyleClassPrefix, dtWidth )
+		}
 	} );
 
 	return (

@@ -3,6 +3,8 @@
 .ystdtb-dl-column {
   display: block;
 
+  @include global.responsive-custom-property-child("> .block-editor-inner-blocks > .block-editor-block-list__layout > dt", "dl-column", "width");
+
   > .block-editor-inner-blocks > .block-editor-block-list__layout {
     @include global.media-breakpoint(md) {
       display: flex;

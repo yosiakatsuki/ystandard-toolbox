@@ -62,3 +62,22 @@
     }
   }
 }
+
+@mixin responsive-custom-property-child($child_selector,$prefix,$property) {
+  $_prefix: "#{$prefix}-#{$property}";
+  &[style*="#{$_prefix}-desktop"] #{$child_selector} {
+    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    &[style*="#{$_prefix}-tablet"] #{$child_selector} {
+      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    &[style*="#{$_prefix}-mobile"] #{$child_selector} {
+      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
+    }
+  }
+}
