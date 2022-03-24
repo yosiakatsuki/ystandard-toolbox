@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
 const ResponsivePaddingControl = ( { label, values, onChange, ...props } ) => {
-
 	const handleOnChange = ( newValue ) => {
 		onChange( getResponsiveValues( newValue ) );
 	};
@@ -13,7 +12,11 @@ const ResponsivePaddingControl = ( { label, values, onChange, ...props } ) => {
 	return (
 		<BaseControl>
 			<ResponsiveSpacing
-				label={ label ? label : __( '内側余白(padding)', 'ystandard-toolbox' ) }
+				label={
+					label
+						? label
+						: __( '内側余白(padding)', 'ystandard-toolbox' )
+				}
 				values={ values }
 				onChange={ handleOnChange }
 				{ ...props }

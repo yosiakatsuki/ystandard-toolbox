@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import BackgroundColorControl from "@ystdtb/controls/background-color-control";
+import BackgroundColorControl from '@ystdtb/controls/background-color-control';
 
 const PanelBackgroundColor = ( props ) => {
 	const { backgroundColor, setBackgroundColor } = props;

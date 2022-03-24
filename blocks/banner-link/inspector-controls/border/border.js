@@ -11,7 +11,7 @@ const Border = ( { attributes, setAttributes } ) => {
 	};
 	return (
 		<BaseControl>
-			<BorderControl value={ border } onChange={ handleOnChange }/>
+			<BorderControl value={ border } onChange={ handleOnChange } />
 		</BaseControl>
 	);
 };

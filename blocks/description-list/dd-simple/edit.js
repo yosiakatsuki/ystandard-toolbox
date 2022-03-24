@@ -13,25 +13,19 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import { getResponsivePaddingStyle } from "@ystdtb/components/responsive-spacing";
-import { getResponsiveFontSizeStyle } from "@ystdtb/components/responsive-font-size";
-import { getFontSizeClassByObject } from "@ystdtb/helper/fontSize";
-import { getBackGroundStyle } from "@ystdtb/helper/color";
-import { ystdtbConfig } from "@ystdtb/config";
+import { getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
+import { getResponsiveFontSizeStyle } from '@ystdtb/components/responsive-font-size';
+import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
+import { getBackGroundStyle } from '@ystdtb/helper/color';
+import { ystdtbConfig } from '@ystdtb/config';
 /**
  * Block
  */
 import { DescriptionListDdSimpleInspectorControls as InspectorControls } from './inspector-controls';
 import { config } from './config';
 
-
-const edit = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-		backgroundColor,
-		textColor,
-	} = props;
+const Edit = ( props ) => {
+	const { attributes, setAttributes, backgroundColor, textColor } = props;
 
 	const {
 		text,
@@ -41,7 +35,7 @@ const edit = ( props ) => {
 		fontStyle,
 		lineHeight,
 		letterSpacing,
-	} = attributes
+	} = attributes;
 
 	const hasClasses = ystdtbConfig.hasClasses;
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
@@ -49,30 +43,36 @@ const edit = ( props ) => {
 	const fontSizeClass = getFontSizeClassByObject( textSize?.desktop );
 
 	const blockProps = useBlockProps( {
-		className: classnames(
-			config.blockClasses,
-			'ystdtb-dd-simple-editor',
-			{
-				[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
-				[ fontSizeClass ]: fontSizeClass,
-				[ hasClasses.background ]: backgroundColor.color || gradientValue,
-				[ backgroundColor.class ]: backgroundColor.class,
-				[ hasClasses.textColor ]: textColor.color,
-				[ textColor.class ]: textColor.class,
-				[ hasClasses.backgroundGradient ]: gradientValue,
-				[ gradientClass ]: gradientClass,
-				[ hasClasses.padding ]: getResponsivePaddingStyle( config.responsiveStyleClassPrefix, padding ),
-			}
-		),
+		className: classnames( config.blockClasses, 'ystdtb-dd-simple-editor', {
+			[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
+			[ fontSizeClass ]: fontSizeClass,
+			[ hasClasses.background ]: backgroundColor.color || gradientValue,
+			[ backgroundColor.class ]: backgroundColor.class,
+			[ hasClasses.textColor ]: textColor.color,
+			[ textColor.class ]: textColor.class,
+			[ hasClasses.backgroundGradient ]: gradientValue,
+			[ gradientClass ]: gradientClass,
+			[ hasClasses.padding ]: getResponsivePaddingStyle(
+				config.responsiveStyleClassPrefix,
+				padding
+			),
+		} ),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
-			...getResponsivePaddingStyle( config.responsiveStyleClassPrefix, padding ),
-			...getResponsiveFontSizeStyle( config.responsiveStyleClassPrefix, textSize, fontSizeClass ),
+			...getResponsivePaddingStyle(
+				config.responsiveStyleClassPrefix,
+				padding
+			),
+			...getResponsiveFontSizeStyle(
+				config.responsiveStyleClassPrefix,
+				textSize,
+				fontSizeClass
+			),
 			fontWeight,
 			fontStyle,
 			lineHeight,
 			letterSpacing,
-		}
+		},
 	} );
 	return (
 		<>
@@ -80,23 +80,18 @@ const edit = ( props ) => {
 			<RichText
 				tagName="dd"
 				value={ text }
-				onChange={ ( value ) =>
-					setAttributes( { text: value } )
-				}
+				onChange={ ( value ) => setAttributes( { text: value } ) }
 				identifier="text"
-				placeholder={ __(
-					'説明文',
-					'ystandard-toolbox'
-				) }
+				placeholder={ __( '説明文', 'ystandard-toolbox' ) }
 				{ ...blockProps }
 			/>
 		</>
 	);
-}
+};
 
 export default compose( [
 	withColors( {
 		backgroundColor: 'background-color',
 		textColor: 'color',
 	} ),
-] )( edit );
+] )( Edit );

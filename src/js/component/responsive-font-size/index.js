@@ -5,7 +5,8 @@ import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
-	parseResponsiveValues, getResponsiveCustomProperties,
+	parseResponsiveValues,
+	getResponsiveCustomProperties,
 } from '@ystdtb/helper/responsive';
 import { getComponentConfig } from '@ystdtb/helper/config';
 import {
@@ -110,7 +111,11 @@ const ResponsiveFontSize = ( props ) => {
 };
 export default ResponsiveFontSize;
 
-export const getResponsiveFontSizeStyle = ( prefix, fontSize, fontSizeClass = false ) => {
+export const getResponsiveFontSizeStyle = (
+	prefix,
+	fontSize,
+	fontSizeClass = false
+) => {
 	const value = {
 		desktop: fontSize?.desktop?.size,
 		tablet: fontSize?.tablet,

@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsivePaddingControl from "@ystdtb/controls/responsive-padding-control";
+import ResponsivePaddingControl from '@ystdtb/controls/responsive-padding-control';
 
 const PanelPadding = ( props ) => {
 	const { attributes, setAttributes } = props;

@@ -8,8 +8,8 @@ import ColorPaletteControl from '@ystdtb/components/color-palette-control';
 import { isObject, parseObject } from '@ystdtb/helper/object';
 import UnitControl from '@ystdtb/components/unit-control';
 import { getColorSlug } from '@ystdtb/helper/color';
-import BorderStyleControl from "@ystdtb/components/border-style-control";
-import { ystdtbConfig } from "@ystdtb/config";
+import BorderStyleControl from '@ystdtb/components/border-style-control';
+import { ystdtbConfig } from '@ystdtb/config';
 
 export const getBorderStyle = ( border, position = undefined ) => {
 	if ( ! isObject( border ) ) {
@@ -96,19 +96,16 @@ const BorderControl = ( { value, onChange, id, label } ) => {
 		const newColor = ! color
 			? undefined
 			: {
-				hex: color,
-				slug: getColorSlug( color ),
-			};
+					hex: color,
+					slug: getColorSlug( color ),
+			  };
 		setBorder( {
 			...value,
 			color: newColor,
 		} );
 	};
 	return (
-		<BaseControl
-			id={ _id }
-			label={ label }
-		>
+		<BaseControl id={ _id } label={ label }>
 			<div className="ystdtb-component-border-control">
 				<div className="ystdtb-component-border-control__columns">
 					<div className="ystdtb-component-border-control__column">

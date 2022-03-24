@@ -57,12 +57,17 @@ const FONT_WEIGHTS = [
 	},
 ];
 
-const FontWeightControl = ( { value, onChange, label = undefined, ...props } ) => {
+const FontWeightControl = ( {
+	value,
+	onChange,
+	label = undefined,
+	...props
+} ) => {
 	const _label = label ?? __( '太さ', 'ystandard-toolbox' );
 	const _value = value || '';
 	const handleOnChange = ( { selectedItem } ) => {
-		onChange( selectedItem.key )
-	}
+		onChange( selectedItem.key );
+	};
 	const currentSelection = FONT_WEIGHTS.find( ( option ) => {
 		return option.key === _value;
 	} );
@@ -75,5 +80,5 @@ const FontWeightControl = ( { value, onChange, label = undefined, ...props } ) =
 			{ ...props }
 		/>
 	);
-}
+};
 export default FontWeightControl;

@@ -5,15 +5,16 @@ import ResponsiveFontSize from '@ystdtb/components/responsive-font-size';
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
 const ResponsiveFontSizeControl = ( { label, values, onChange, ...props } ) => {
-
-	const handleOnChange = ( values ) => {
-		onChange( getResponsiveValues( values ) );
+	const handleOnChange = ( newValues ) => {
+		onChange( getResponsiveValues( newValues ) );
 	};
 
 	return (
 		<BaseControl>
 			<ResponsiveFontSize
-				label={ label ? label : __( 'フォントサイズ', 'ystandard-toolbox' ) }
+				label={
+					label ? label : __( 'フォントサイズ', 'ystandard-toolbox' )
+				}
 				values={ values }
 				onChange={ handleOnChange }
 				{ ...props }

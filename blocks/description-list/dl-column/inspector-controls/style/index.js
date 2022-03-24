@@ -1,13 +1,10 @@
 import { BaseControl, ToggleControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveWidthControl from "@ystdtb/controls/responsive-width-control";
-import BorderControl from "@ystdtb/controls/border-control";
+import ResponsiveWidthControl from '@ystdtb/controls/responsive-width-control';
+import BorderControl from '@ystdtb/controls/border-control';
 
 const PanelStyle = ( props ) => {
-	const {
-		attributes,
-		setAttributes
-	} = props;
+	const { attributes, setAttributes } = props;
 
 	const {
 		isStackedOnMobile,
@@ -25,11 +22,11 @@ const PanelStyle = ( props ) => {
 
 	const dtWidthOnChange = ( value ) => {
 		setAttributes( { dtWidth: value } );
-	}
+	};
 
 	const borderOnChange = ( value ) => {
 		setAttributes( { border: value } );
-	}
+	};
 
 	return (
 		<PanelBody
@@ -42,14 +39,20 @@ const PanelStyle = ( props ) => {
 			>
 				<div>
 					<ToggleControl
-						label={ __( 'モバイルで縦に並べる', 'ystandard-toolbox' ) }
+						label={ __(
+							'モバイルで縦に並べる',
+							'ystandard-toolbox'
+						) }
 						onChange={ isStackedOnMobileOnChange }
 						checked={ isStackedOnMobile ?? true }
 					/>
 				</div>
 				<div>
 					<ToggleControl
-						label={ __( 'タブレットで縦に並べる', 'ystandard-toolbox' ) }
+						label={ __(
+							'タブレットで縦に並べる',
+							'ystandard-toolbox'
+						) }
 						onChange={ isStackedOnTabletOnChange }
 						checked={ isStackedOnTablet ?? true }
 					/>

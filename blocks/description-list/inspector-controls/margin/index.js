@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveMarginControl from "@ystdtb/controls/responsive-margin-control";
+import ResponsiveMarginControl from '@ystdtb/controls/responsive-margin-control';
 
 const PanelMargin = ( props ) => {
 	const { attributes, setAttributes } = props;

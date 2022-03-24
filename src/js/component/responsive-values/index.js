@@ -104,16 +104,12 @@ export const getResponsiveValueStyle = ( propertyName, prefix, values ) => {
 		tablet: values?.tablet,
 		mobile: values?.mobile,
 	} );
-	return getResponsiveCustomProperties(
-		propertyName,
-		prefix,
-		parsedValue
-	);
+	return getResponsiveCustomProperties( propertyName, prefix, parsedValue );
 };
 
 export const getResponsiveWidthStyle = ( prefix, values ) => {
 	return getResponsiveValueStyle( 'width', prefix, values );
-}
+};
 export const getResponsiveHeightStyle = ( prefix, values ) => {
 	return getResponsiveValueStyle( 'height', prefix, values );
-}
+};

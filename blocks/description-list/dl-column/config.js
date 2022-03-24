@@ -4,5 +4,5 @@ export const config = {
 		'ystdtb/description-list-dt',
 		'ystdtb/description-list-dd-box',
 	],
-	responsiveStyleClassPrefix : 'dl-column'
-}
+	responsiveStyleClassPrefix: 'dl-column',
+};

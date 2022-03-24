@@ -1,5 +1,5 @@
 import { InspectorControls } from '@wordpress/block-editor';
-import PanelMargin from "./margin";
+import PanelMargin from './margin';
 
 export const DescriptionListInspectorControls = ( props ) => {
 	return (

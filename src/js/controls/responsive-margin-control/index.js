@@ -4,8 +4,13 @@ import { __ } from '@wordpress/i18n';
 
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
 
-const ResponsiveMarginControl = ( { label, values, onChange, min = -9999, ...props } ) => {
-
+const ResponsiveMarginControl = ( {
+	label,
+	values,
+	onChange,
+	min = -9999,
+	...props
+} ) => {
 	const handleOnChange = ( newValue ) => {
 		onChange( getResponsiveValues( newValue ) );
 	};
@@ -14,11 +19,15 @@ const ResponsiveMarginControl = ( { label, values, onChange, min = -9999, ...pro
 		<BaseControl>
 			<ResponsiveSpacing
 				{ ...props }
-				label={ label ? label : __( '外側余白(margin)', 'ystandard-toolbox' ) }
+				label={
+					label
+						? label
+						: __( '外側余白(margin)', 'ystandard-toolbox' )
+				}
 				values={ values }
 				onChange={ handleOnChange }
 				inputProps={ {
-					min
+					min,
 				} }
 			/>
 		</BaseControl>

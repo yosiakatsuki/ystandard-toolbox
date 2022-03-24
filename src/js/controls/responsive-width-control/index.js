@@ -2,10 +2,9 @@ import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import { getResponsiveValues } from '@ystdtb/helper/responsive';
-import ResponsiveValues from "@ystdtb/components/responsive-values";
+import ResponsiveValues from '@ystdtb/components/responsive-values';
 
 const ResponsiveWidthControl = ( { label, values, onChange, ...props } ) => {
-
 	const handleOnChange = ( newValue ) => {
 		onChange( getResponsiveValues( newValue ) );
 	};

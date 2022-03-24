@@ -7,8 +7,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import UnitControl from "@ystdtb/components/unit-control";
-import { ystdtbConfig } from "@ystdtb/config";
+import UnitControl from '@ystdtb/components/unit-control';
+import { ystdtbConfig } from '@ystdtb/config';
 
 const LetterSpacingControl = ( { value, onChange } ) => {
 	const [ currentUnit, setCurrentUnit ] = useState( 'em' );
@@ -25,12 +25,12 @@ const LetterSpacingControl = ( { value, onChange } ) => {
 				onChange={ onChange }
 				units={ units }
 				unit={ currentUnit }
-				onUnitChange={ ( selectedUnit ) => {
-					setCurrentUnit( selectedUnit );
+				onUnitChange={ ( newSelectedUnit ) => {
+					setCurrentUnit( newSelectedUnit );
 				} }
 				step={ selectedUnit?.step || 1 }
 			/>
 		</BaseControl>
 	);
-}
+};
 export default LetterSpacingControl;
