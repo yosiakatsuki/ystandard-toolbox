@@ -12,6 +12,17 @@ export const ystdtbConfig = {
 		iconDeprecatedForeground: '#be4141',
 		iconBeta: '#9CADBC',
 	},
+	hasClasses: {
+		textColor: 'has-text-color',
+		fontSize: 'has-font-size',
+		background: 'has-background',
+		backgroundGradient: 'has-background-gradient',
+		padding: 'has-padding',
+		margin: 'has-margin',
+		border: 'has-border',
+		borderColor: 'has-border-color',
+	},
+	customPropertyPrefix: '--ystdtb',
 	component: {
 		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [
@@ -44,6 +55,17 @@ export const ystdtbConfig = {
 			{ value: 'px', label: 'px' },
 			{ value: 'em', label: 'em' },
 			{ value: 'rem', label: 'rem' },
+			{ value: '%', label: '%' },
+			{ value: 'vw', label: 'vw' },
+			{ value: 'vh', label: 'vh' },
+		],
+		letterSpacingUnits: [
+			{ value: 'em', label: 'em', step: 0.1 },
+			{ value: 'px', label: 'px' },
+			{ value: 'rem', label: 'rem', step: 0.1 },
+			{ value: '%', label: '%' },
+			{ value: 'vw', label: 'vw' },
+			{ value: 'vh', label: 'vh' },
 		],
 		borderRadiusUnits: [
 			{ value: 'px', label: 'px' },

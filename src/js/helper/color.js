@@ -31,3 +31,16 @@ export const hex2rgb = ( hex ) => {
 		}
 	);
 };
+
+export const getBackGroundStyle = ( backgroundColor, gradient = undefined ) => {
+	if ( gradient ) {
+		return gradient;
+	}
+	if ( backgroundColor?.color ) {
+		return backgroundColor.color;
+	}
+	if ( 'object' !== typeof backgroundColor && backgroundColor ) {
+		return backgroundColor;
+	}
+	return undefined;
+};

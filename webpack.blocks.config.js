@@ -3,7 +3,6 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
-	mode: 'production',
 	entry: {
 		'block': './src/js/blocks/block.js',
 		'styles': './blocks/styles/index.js',
@@ -19,10 +18,15 @@ module.exports = {
 		'banner-link': './blocks/banner-link/index.js',
 		'slider': './blocks/slider/index.js',
 		'slider-item': './blocks/slider/item/index.js',
+		'description-list': './blocks/description-list/index.js',
+		'description-list-dt': './blocks/description-list/dt/index.js',
+		'description-list-dd-simple': './blocks/description-list/dd-simple/index.js',
+		'description-list-dd-box': './blocks/description-list/dd-box/index.js',
+		'description-list-column': './blocks/description-list/dl-column/index.js',
 	},
 	output: {
 		filename: '[name].js',
-		path: `${ __dirname }/js/blocks`
+		path: `${ __dirname }/dist/blocks`
 	},
 	module: {
 		...defaultConfig.module,
@@ -53,6 +57,7 @@ module.exports = {
 			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
 			'@ystdtb/config': path.resolve( __dirname, 'src/js/config' ),
 			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
+			'@ystdtb/controls': path.resolve( __dirname, 'src/js/controls' ),
 			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
 	},

@@ -1,0 +1,11 @@
+@use "./dt/edit" as dt;
+@use "./dd-simple/edit" as dd-simple;
+@use "./dd-box/edit" as dd-box;
+@use "./dl-column/edit" as column;
+
+.ystdtb-dl-editor {
+  &.has-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

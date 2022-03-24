@@ -34,6 +34,7 @@ class Font {
 		add_filter( 'ys_css_vars', [ $this, 'add_font_family' ], 20 );
 		add_action( 'admin_head', [ $this, 'wp_head' ], 11 );
 		add_action( 'enqueue_block_assets', [ $this, 'add_editor_font_styles' ], 11 );
+		add_action( 'ys_customizer_parse_args__ys_design_font_type', [ $this, 'remove_customizer_font_setting' ] );
 	}
 
 	/**
@@ -112,6 +113,23 @@ class Font {
 		}
 
 		return esc_attr( $fonts[ $option ]['family'] );
+	}
+
+	/**
+	 * フォント設定削除
+	 *
+	 * @param array $args 設定.
+	 */
+	public function remove_customizer_font_setting( $args ) {
+		$font_family = self::get_font_family();
+
+		if ( empty( $font_family ) ) {
+			return $args;
+		}
+		$args['control_type'] = 'hidden';
+		$args['description']  = Notice::customizer_notice( '※ yStandard ToolboxのWebフォント設定でフォントが指定されています。' );
+
+		return $args;
 	}
 }
 

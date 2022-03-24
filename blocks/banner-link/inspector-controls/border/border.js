@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 
-import BorderControl from '@ystdtb/components/border-control';
+import BorderControl from '@ystdtb/controls/border-control';
 
 const Border = ( { attributes, setAttributes } ) => {
 	const { border } = attributes;
@@ -11,7 +11,7 @@ const Border = ( { attributes, setAttributes } ) => {
 	};
 	return (
 		<BaseControl>
-			<BorderControl value={ border } onChange={ handleOnChange } />
+			<BorderControl value={ border } onChange={ handleOnChange }/>
 		</BaseControl>
 	);
 };

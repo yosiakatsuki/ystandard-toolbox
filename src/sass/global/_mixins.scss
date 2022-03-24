@@ -1,6 +1,10 @@
 @use "variables" as var;
 
-@mixin media-breakpoint($name,$breakpoints: var.$breakpoints) {
+@mixin media-breakpoint($name,$editor: false) {
+  $breakpoints: var.$breakpoints;
+  @if  true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -13,7 +17,11 @@
   }
 }
 
-@mixin media-breakpoint-down($name,$breakpoints: var.$breakpoints) {
+@mixin media-breakpoint-down($name,$editor: false) {
+  $breakpoints: var.$breakpoints;
+  @if  true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint: map-get($breakpoints, $name);
 
   @if $breakpoint {
@@ -29,8 +37,12 @@
 @mixin media-breakpoint-between(
   $name_up,
   $name_down,
-  $breakpoints: var.$breakpoints
+  $editor: false
 ) {
+  $breakpoints: var.$breakpoints;
+  @if true == $editor {
+    $breakpoints: var.$breakpoints_editor;
+  }
   $breakpoint_up: map-get($breakpoints, $name_up);
   $breakpoint_down: map-get($breakpoints, $name_down);
 
@@ -41,5 +53,44 @@
   } @else {
     @warn "`#{$name_up}` is not found. "
 		+ "Please make sure it is defined in `$breakpoints-setting` map.";
+  }
+}
+
+
+@mixin responsive-custom-property($prefix,$property) {
+  $_prefix: "#{$prefix}-#{$property}";
+  &[style*="#{$_prefix}-desktop"] {
+    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    &[style*="#{$_prefix}-tablet"] {
+      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    &[style*="#{$_prefix}-mobile"] {
+      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
+    }
+  }
+}
+
+@mixin responsive-custom-property-child($child_selector,$prefix,$property) {
+  $_prefix: "#{$prefix}-#{$property}";
+  &[style*="#{$_prefix}-desktop"] #{$child_selector} {
+    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    &[style*="#{$_prefix}-tablet"] #{$child_selector} {
+      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    &[style*="#{$_prefix}-mobile"] #{$child_selector} {
+      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
+    }
   }
 }

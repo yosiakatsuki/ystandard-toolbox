@@ -39,6 +39,13 @@ function sass() {
 		.pipe( dest( './css' ) );
 }
 
+function sassBlocks() {
+	return src( './blocks/**/*.scss' )
+		.pipe( gulpSass( { outputStyle: 'compressed' } ) )
+		.pipe( postcss( postcssPlugins ) )
+		.pipe( dest( './css/blocks/' ) );
+}
+
 function buildAdminApp() {
 	return plumber()
 		.pipe( webpackStream( webpackMenuConfig, webpack ) )
@@ -184,7 +191,7 @@ function watchFiles() {
 			'./src/js/**/*.scss',
 			'./blocks/**/*.scss',
 		],
-		sass
+		series( sass, sassBlocks )
 	);
 	watch( [ './src/js/admin/**/*.js', './src/js/admin/**/*.vue', './src/js/admin/**/*.json' ], watchBuildAdminApp );
 	watch(

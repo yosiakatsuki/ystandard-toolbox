@@ -1,6 +1,7 @@
 *.zip
 /css
 /js
+/dist
 /build
 ystandard-toolbox/
 /vendor/

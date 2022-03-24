@@ -101,6 +101,20 @@ class Meta_Box {
 	}
 
 	/**
+	 * メタボックス削除.
+	 *
+	 * @param string     $id     ID.
+	 * @param array|null $screen ページタイプ.
+	 */
+	public static function remove_meta_box( $id, $screen = null ) {
+		remove_meta_box(
+			'ystdtb_' . $id,
+			$screen,
+			'side'
+		);
+	}
+
+	/**
 	 * Meta box フォーム
 	 *
 	 * @param \WP_Post $post The object for the current post/page.

@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @package ystandard_toolbox\blocks\icon_list
  */
-class Block_Config {
+class Icon_List {
 	/**
 	 * Block_Config constructor.
 	 */
@@ -41,4 +41,4 @@ class Block_Config {
 	}
 }
 
-new Block_Config();
+new Icon_List();

@@ -8,3 +8,28 @@
     }
   }
 }
+
+.ystdtb-customizer-notice {
+  padding: 8px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+
+  &.notice-warning {
+    border-color: #e29e21;
+    background-color: #ffedcc;
+    color: #e29e21;
+  }
+
+  &.notice-error {
+    border-color: #ae3b43;
+    background-color: #f2d9db;
+    color: #ae3b43;
+  }
+
+  &.notice-info {
+    border-color: #007660;
+    background-color: #c8eae4;
+    color: #007660;
+  }
+}

@@ -1,0 +1,17 @@
+@use "../../../src/sass/global";
+
+.ystdtb-dd-simple {
+  margin-left: 0;
+
+  &.has-padding {
+    @include global.responsive-custom-property("dd-simple", "padding");
+  }
+
+  &.has-font-size {
+    @include global.responsive-custom-property("dd-simple", "font-size");
+  }
+
+  &.has-background:not(.has-padding) {
+    padding: 1em 1.5em
+  }
+}

@@ -1,0 +1,136 @@
+@use "../../../src/sass/global";
+
+.ystdtb-dl-column {
+
+  @include global.media-breakpoint(md) {
+    display: flex;
+  }
+
+  @include global.responsive-custom-property-child("> dt", "dl-column", "width");
+
+
+  > dt,
+  > dd {
+    min-width: 0;
+  }
+
+  > dt {
+    margin-top: 0;
+
+    @include global.media-breakpoint(md) {
+      margin-right: 1em;
+    }
+  }
+
+  > dd {
+    margin-top: 1em;
+    flex-grow: 1;
+
+    @include global.media-breakpoint(md) {
+      margin-top: 0;
+    }
+  }
+
+  &.is-not-stacked-on-mobile {
+    @include global.media-breakpoint-down(sm) {
+      display: flex;
+
+      > dt {
+        margin-right: 1em;
+      }
+      > dd {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.is-not-stacked-on-tablet {
+    @include global.media-breakpoint-between(sm, md) {
+      display: flex;
+
+      > dt {
+        margin-right: 1em;
+      }
+      > dd {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.has-border {
+    > dt,
+    > dd {
+      margin: 0;
+      padding: 1em;
+      border: var(--ystdtb-dl-column-border);
+    }
+
+    > dt {
+      @include global.media-breakpoint(md) {
+        border-right: 0;
+      }
+    }
+
+    > dd {
+      border-top: 0;
+
+      @include global.media-breakpoint(md) {
+        border-top: var(--ystdtb-dl-column-border);
+      }
+    }
+
+    &.is-not-stacked-on-mobile {
+      @include global.media-breakpoint-down(sm) {
+        > dt {
+          border-right: 0;
+        }
+
+        > dd {
+          border-top: var(--ystdtb-dl-column-border);
+        }
+      }
+    }
+
+    &.is-not-stacked-on-tablet {
+      @include global.media-breakpoint-between(sm, md) {
+        > dt {
+          border-right: 0;
+        }
+
+        > dd {
+          border-top: var(--ystdtb-dl-column-border);
+        }
+      }
+    }
+
+    & + & {
+      margin-top: 0;
+
+      > dt {
+        border-top: 0;
+      }
+
+      > dd {
+        @include global.media-breakpoint(md) {
+          border-top: 0;
+        }
+      }
+
+      &.is-not-stacked-on-mobile {
+        @include global.media-breakpoint-down(sm) {
+          > dd {
+            border-top: 0;
+          }
+        }
+      }
+
+      &.is-not-stacked-on-tablet {
+        @include global.media-breakpoint-between(sm, md) {
+          > dd {
+            border-top: 0;
+          }
+        }
+      }
+    }
+  }
+}

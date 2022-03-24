@@ -74,14 +74,56 @@ abstract class Dynamic_Block {
 		if ( ! apply_filters( self::REGISTER_DYNAMIC_BLOCK_HOOK . $this->block_name, true ) ) {
 			return;
 		}
-		register_block_type(
-			"ystdtb/{$this->block_name}",
-			[
-				'editor_script'   => "ystandard-toolbox-{$this->block_name}",
-				'attributes'      => $this->block_attributes,
-				'render_callback' => [ $this, '_render' ],
-			]
-		);
+		$block_type      = "ystdtb/{$this->block_name}";
+		$block_type_args = [
+			'attributes'      => $this->block_attributes,
+			'render_callback' => [ $this, '_render' ],
+		];
+		/**
+		 * Editor Script.
+		 */
+		if ( is_file( YSTDTB_PATH . "/dist/blocks/{$this->block_name}.js" ) ) {
+			$handle = "ystandard-toolbox-{$this->block_name}";
+			// 依存関係.
+			$asset = include( YSTDTB_PATH . "/dist/blocks/{$this->block_name}.asset.php" );
+			// 登録.
+			wp_register_script(
+				"ystandard-toolbox-{$this->block_name}",
+				YSTDTB_URL . "/dist/blocks/{$this->block_name}.js",
+				$asset['dependencies'],
+				$asset['version']
+			);
+			$block_type_args['editor_script'] = $handle;
+		} else {
+			return;
+		}
+		/**
+		 * Front Style.
+		 */
+		if ( is_file( YSTDTB_PATH . "/css/blocks/{$this->block_name}/block.css" ) ) {
+			$handle = "ystdtb-block-style-{$this->block_name}";
+			wp_register_style(
+				$handle,
+				YSTDTB_URL . "/css/blocks/{$this->block_name}/block.css",
+				[],
+				filemtime( YSTDTB_PATH . "/css/blocks/{$this->block_name}/block.css" )
+			);
+			$block_type_args['style'] = $handle;
+		}
+		/**
+		 * Editor Style.
+		 */
+		if ( is_file( YSTDTB_PATH . "/css/blocks/{$this->block_name}/edit.css" ) ) {
+			$handle = "ystdtb-block-editor-style-{$this->block_name}";
+			wp_register_style(
+				$handle,
+				YSTDTB_URL . "/css/blocks/{$this->block_name}/edit.css",
+				[],
+				filemtime( YSTDTB_PATH . "/css/blocks/{$this->block_name}/edit.css" )
+			);
+			$block_type_args['editor_style'] = $handle;
+		}
+		register_block_type( $block_type, $block_type_args );
 	}
 
 	/**
