@@ -96,4 +96,16 @@ class Notice {
 		echo "<div class=\"notice ystdtb-notice\">${content}</div>";
 	}
 
+	/**
+	 * カスタマイザー用通知
+	 *
+	 * @param string $content notice content.
+	 * @param string $type    type.
+	 *
+	 * @return string;
+	 */
+	public static function customizer_notice( $content, $type = 'warning' ) {
+		return "<div class=\"ystdtb-customizer-notice notice-${type}\">${content}</div>";
+	}
+
 }
