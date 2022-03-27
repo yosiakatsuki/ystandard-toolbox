@@ -5,8 +5,8 @@
 @use "./dl-column/block" as column;
 
 .ystdtb-dl {
-  > * {
-    margin-top: var(--ystd-layout-gap, 1.5em);
+  > dt,
+  > dd {
     margin-bottom: 0;
 
     &:first-child {
@@ -16,6 +16,17 @@
     &.has-background {
       margin-top: 0;
     }
+  }
+
+  > dt {
+    margin-top: var(--ystd-layout-gap, 1.5em);
+  }
+
+  > dd {
+    margin-top: 0.5em;
+  }
+  > .ystdtb-dl-column {
+    margin-top: 0.5em;
   }
 
   &.has-margin {

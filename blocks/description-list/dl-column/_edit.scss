@@ -1,14 +1,19 @@
 @use "../../../src/sass/global";
 
-.ystdtb-dl-column {
+.ystdtb-dl-column.ystdtb-dl-column-editor {
   display: block;
-
+  &[style*="dl-column-width"] {
+    > .block-editor-inner-blocks > .block-editor-block-list__layout > dt {
+      flex-shrink: 0;
+    }
+  }
   @include global.responsive-custom-property-child("> .block-editor-inner-blocks > .block-editor-block-list__layout > dt", "dl-column", "width");
 
   > .block-editor-inner-blocks > .block-editor-block-list__layout {
     @include global.media-breakpoint(md, true) {
       display: flex;
     }
+
 
     > dt,
     > dd {
@@ -118,8 +123,9 @@
     }
 
     & + & {
+      margin-top: 0;
+
       > .block-editor-inner-blocks > .block-editor-block-list__layout {
-        margin-top: -28px;
 
         > dt {
           border-top: 0;

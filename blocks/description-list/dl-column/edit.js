@@ -13,6 +13,7 @@ import { config } from './config';
 import { DescriptionListColumnInspectorControls as InspectorControls } from './inspector-controls';
 import { getResponsiveWidthStyle } from '@ystdtb/components/responsive-values';
 import { getBorderCustomProperty } from '@ystdtb/controls/border-control';
+import { isResponsive } from "@ystdtb/helper/responsive";
 
 const Edit = ( props ) => {
 	const { attributes } = props;
@@ -25,6 +26,12 @@ const Edit = ( props ) => {
 
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
 
+	const dtWidthStyles = isResponsive( dtWidth ) ? dtWidth : {
+		desktop: dtWidth?.desktop,
+		tablet: dtWidth?.desktop,
+		mobile: dtWidth?.desktop,
+	}
+
 	const blockProps = useBlockProps( {
 		className: classnames( config.blockClasses, 'ystdtb-dl-column-editor', {
 			'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
@@ -34,7 +41,7 @@ const Edit = ( props ) => {
 		style: {
 			...getResponsiveWidthStyle(
 				config.responsiveStyleClassPrefix,
-				dtWidth
+				dtWidthStyles
 			),
 			...borderProperty,
 		},
