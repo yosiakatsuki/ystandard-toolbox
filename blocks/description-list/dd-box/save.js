@@ -11,7 +11,7 @@ import {
 /**
  * yStandard
  */
-import { getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
+import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
 import { getBackGroundStyle } from '@ystdtb/helper/color';
 import { ystdtbConfig } from '@ystdtb/config';
 /**
@@ -22,6 +22,7 @@ import { config } from './config';
 const save = ( { attributes } ) => {
 	const {
 		padding,
+		margin,
 		backgroundColor,
 		customBackgroundColor,
 		gradient,
@@ -54,6 +55,10 @@ const save = ( { attributes } ) => {
 				config.responsiveStyleClassPrefix,
 				padding
 			),
+			[ hasClasses.margin ]: getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
 		} ),
 		style: {
 			background: getBackGroundStyle(
@@ -64,6 +69,10 @@ const save = ( { attributes } ) => {
 			...getResponsivePaddingStyle(
 				config.responsiveStyleClassPrefix,
 				padding
+			),
+			...getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
 			),
 		},
 	} );

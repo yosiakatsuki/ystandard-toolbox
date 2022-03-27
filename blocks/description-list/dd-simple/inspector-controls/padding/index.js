@@ -1,6 +1,7 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ResponsivePaddingControl from '@ystdtb/controls/responsive-padding-control';
+import ResponsiveMarginControl from "@ystdtb/controls/responsive-margin-control";
 
 const PanelPadding = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -10,6 +11,12 @@ const PanelPadding = ( props ) => {
 			title={ __( '余白', 'ystandard-toolbox' ) }
 			initialOpen={ true }
 		>
+			<ResponsiveMarginControl
+				values={ attributes.margin }
+				onChange={ ( newValue ) => {
+					setAttributes( { margin: newValue } );
+				} }
+			/>
 			<ResponsivePaddingControl
 				values={ attributes.padding }
 				onChange={ ( newValue ) => {

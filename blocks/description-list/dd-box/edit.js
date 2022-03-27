@@ -12,7 +12,7 @@ import { compose } from '@wordpress/compose';
 /**
  * yStandard
  */
-import { getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
+import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
 import { getBackGroundStyle } from '@ystdtb/helper/color';
 import { ystdtbConfig } from '@ystdtb/config';
 /**
@@ -24,7 +24,7 @@ import { config } from './config';
 const Edit = ( props ) => {
 	const { attributes, backgroundColor, textColor } = props;
 
-	const { padding } = attributes;
+	const { padding, margin } = attributes;
 
 	const hasClasses = ystdtbConfig.hasClasses;
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
@@ -41,6 +41,10 @@ const Edit = ( props ) => {
 				config.responsiveStyleClassPrefix,
 				padding
 			),
+			[ hasClasses.margin ]: getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
 		} ),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
@@ -48,13 +52,17 @@ const Edit = ( props ) => {
 				config.responsiveStyleClassPrefix,
 				padding
 			),
+			...getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
 		},
 	} );
 	return (
 		<>
 			<InspectorControls { ...props } />
 			<dd { ...blockProps }>
-				<InnerBlocks template={ [ [ 'core/paragraph' ] ] } />
+				<InnerBlocks template={ [ [ 'core/paragraph' ] ] }/>
 			</dd>
 		</>
 	);

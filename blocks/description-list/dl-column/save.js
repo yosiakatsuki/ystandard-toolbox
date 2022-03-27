@@ -13,6 +13,8 @@ import { config } from './config';
 import { getResponsiveWidthStyle } from '@ystdtb/components/responsive-values';
 import { getBorderCustomProperty } from '@ystdtb/controls/border-control';
 import { isResponsive } from "@ystdtb/helper/responsive";
+import { ystdtbConfig } from "@ystdtb/config";
+import { getResponsiveMarginStyle } from "@ystdtb/components/responsive-spacing";
 
 export default function save( { attributes } ) {
 	const {
@@ -20,8 +22,9 @@ export default function save( { attributes } ) {
 		isStackedOnTablet,
 		dtWidth,
 		border,
+		margin,
 	} = attributes;
-
+	const hasClasses = ystdtbConfig.hasClasses;
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
 	const dtWidthStyles = isResponsive( dtWidth ) ? dtWidth : {
 		desktop: dtWidth?.desktop,
@@ -33,11 +36,19 @@ export default function save( { attributes } ) {
 			'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
 			'is-not-stacked-on-tablet': ! isStackedOnTablet,
 			'has-border': !! borderProperty,
+			[ hasClasses.margin ]: getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
 		} ),
 		style: {
 			...getResponsiveWidthStyle(
 				config.responsiveStyleClassPrefix,
 				dtWidthStyles
+			),
+			...getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
 			),
 			...borderProperty,
 		},

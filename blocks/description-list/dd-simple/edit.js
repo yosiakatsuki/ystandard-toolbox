@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import { getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
+import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
 import { getResponsiveFontSizeStyle } from '@ystdtb/components/responsive-font-size';
 import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
 import { getBackGroundStyle } from '@ystdtb/helper/color';
@@ -31,6 +31,7 @@ const Edit = ( props ) => {
 		text,
 		textSize,
 		padding,
+		margin,
 		fontWeight,
 		fontStyle,
 		lineHeight,
@@ -56,12 +57,20 @@ const Edit = ( props ) => {
 				config.responsiveStyleClassPrefix,
 				padding
 			),
+			[ hasClasses.margin ]: getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
 		} ),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
 			...getResponsivePaddingStyle(
 				config.responsiveStyleClassPrefix,
 				padding
+			),
+			...getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
 			),
 			...getResponsiveFontSizeStyle(
 				config.responsiveStyleClassPrefix,

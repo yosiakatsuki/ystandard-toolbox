@@ -16,6 +16,10 @@
     @include global.responsive-custom-property("dd-box", "padding");
   }
 
+  &.has-margin {
+    @include global.responsive-custom-property("dd-box", "margin");
+  }
+
   &.has-background:not(.has-padding) {
     padding: 1em 1.5em
   }
