@@ -11,11 +11,11 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
  */
 import { config } from './config';
 import { DescriptionListColumnInspectorControls as InspectorControls } from './inspector-controls';
-import { getResponsiveWidthStyle } from '@ystdtb/components/responsive-values';
-import { getBorderCustomProperty } from '@ystdtb/controls/border-control';
-import { isResponsive } from "@ystdtb/helper/responsive";
-import { getResponsiveMarginStyle } from "@ystdtb/components/responsive-spacing";
-import { ystdtbConfig } from "@ystdtb/config";
+import { getResponsiveWidthStyle } from '@ystd/components/responsive-values';
+import { getBorderCustomProperty } from '@ystd/controls/border-control';
+import { isResponsive } from "@ystd/helper/responsive";
+import { getResponsiveMarginStyle } from "@ystd/components/responsive-spacing";
+import { ystdtbConfig } from "@ystd/config";
 
 const Edit = ( props ) => {
 	const { attributes } = props;

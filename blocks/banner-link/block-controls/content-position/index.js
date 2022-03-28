@@ -2,7 +2,7 @@ import {
 	AlignmentToolbar,
 	BlockVerticalAlignmentToolbar,
 } from '@wordpress/block-editor';
-import { parseObject } from '@ystdtb/helper/object';
+import { parseObject } from '@ystd/helper/object';
 
 const ContentPosition = ( { attributes, setAttributes } ) => {
 	const { contentPosition } = attributes;

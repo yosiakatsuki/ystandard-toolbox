@@ -13,11 +13,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
-import { getResponsiveFontSizeStyle } from '@ystdtb/components/responsive-font-size';
-import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
-import { getBackGroundStyle } from '@ystdtb/helper/color';
-import { ystdtbConfig } from '@ystdtb/config';
+import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import { getResponsiveFontSizeStyle } from '@ystd/components/responsive-font-size';
+import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
+import { getBackGroundStyle } from '@ystd/helper/color';
+import { ystdtbConfig } from '@ystd/config';
 /**
  * Block
  */

@@ -1,14 +1,14 @@
 import { _x } from '@wordpress/i18n';
 
-import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getComponentConfig } from '@ystd/helper/config';
 import {
 	getResponsiveCustomProperties,
 	getResponsiveValue,
 	parseResponsiveValues,
 	responsiveKeys as responsive,
-} from '@ystdtb/helper/responsive';
-import UnitControl from '@ystdtb/components/unit-control';
+} from '@ystd/helper/responsive';
+import UnitControl from '@ystd/components/unit-control';
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );

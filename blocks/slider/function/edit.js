@@ -1,4 +1,4 @@
-import { isObject } from '@ystdtb/helper/object';
+import { isObject } from '@ystd/helper/object';
 
 export const setSlidesOption = ( props ) => {
 	const { setAttributes, type, slides, newValue } = props;

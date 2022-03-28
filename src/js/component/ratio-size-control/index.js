@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl } from '@wordpress/components';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import { getComponentConfig } from '@ystd/helper/config';
 
 const RatioSizeControl = ( {
 	label,

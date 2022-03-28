@@ -1,5 +1,5 @@
 import { ColorPalette } from '@wordpress/components';
-import { getColorSetting } from '@ystdtb/helper/color';
+import { getColorSetting } from '@ystd/helper/color';
 
 const ColorPaletteControl = ( { value, onChange, colors, ...props } ) => {
 	const _colors = colors ?? getColorSetting();

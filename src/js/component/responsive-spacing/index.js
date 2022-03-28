@@ -1,14 +1,14 @@
 import { _x } from '@wordpress/i18n';
-import BoxControl from '@ystdtb/components/box-control';
-import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import BoxControl from '@ystd/components/box-control';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getComponentConfig } from '@ystd/helper/config';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
 	parseResponsiveValues,
 	getResponsiveCustomProperties,
-} from '@ystdtb/helper/responsive';
-import { getSpacing, getSpacingCSS } from '@ystdtb/helper/spacing';
+} from '@ystd/helper/responsive';
+import { getSpacing, getSpacingCSS } from '@ystd/helper/spacing';
 
 const ResponsiveSpacing = ( props ) => {
 	const { label, values, onChange, units, inputProps } = props;

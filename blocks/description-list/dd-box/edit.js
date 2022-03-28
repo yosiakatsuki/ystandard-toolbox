@@ -12,9 +12,9 @@ import { compose } from '@wordpress/compose';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystdtb/components/responsive-spacing';
-import { getBackGroundStyle } from '@ystdtb/helper/color';
-import { ystdtbConfig } from '@ystdtb/config';
+import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import { getBackGroundStyle } from '@ystd/helper/color';
+import { ystdtbConfig } from '@ystd/config';
 /**
  * Block
  */

@@ -1,7 +1,7 @@
 import { BaseControl, ToggleControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveWidthControl from '@ystdtb/controls/responsive-width-control';
-import BorderControl from '@ystdtb/controls/border-control';
+import ResponsiveWidthControl from '@ystd/controls/responsive-width-control';
+import BorderControl from '@ystd/controls/border-control';
 
 const PanelStyle = ( props ) => {
 	const { attributes, setAttributes } = props;

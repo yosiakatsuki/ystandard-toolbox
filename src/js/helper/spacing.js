@@ -1,4 +1,4 @@
-import { getResponsiveProperty } from '@ystdtb/helper/responsive';
+import { getResponsiveProperty } from '@ystd/helper/responsive';
 
 export const getSpacingCSS = ( value ) => {
 	if ( ! value || 'object' !== typeof value ) {

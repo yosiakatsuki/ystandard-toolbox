@@ -1,6 +1,6 @@
 import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import { getComponentConfig } from '@ystd/helper/config';
 
 const BackgroundRepeat = ( props ) => {
 	const { attributes, setAttributes } = props;

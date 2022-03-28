@@ -1,18 +1,18 @@
 import { _x } from '@wordpress/i18n';
 import { FontSizePicker } from '@wordpress/block-editor';
-import UnitControl from '@ystdtb/components/unit-control';
-import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
+import UnitControl from '@ystd/components/unit-control';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
 	parseResponsiveValues,
 	getResponsiveCustomProperties,
-} from '@ystdtb/helper/responsive';
-import { getComponentConfig } from '@ystdtb/helper/config';
+} from '@ystd/helper/responsive';
+import { getComponentConfig } from '@ystd/helper/config';
 import {
 	createFontSizeObject,
 	getFontSizeValue,
-} from '@ystdtb/helper/fontSize';
+} from '@ystd/helper/fontSize';
 
 const ResponsiveFontSize = ( props ) => {
 	const { label, values, onChange, units } = props;

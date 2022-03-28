@@ -1,8 +1,8 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveFontSizeControl from '@ystdtb/controls/responsive-font-size-control';
-import TextColorControl from '@ystdtb/controls/text-color-control';
-import TypographySettingsControl from '@ystdtb/controls/typography-settings-control';
+import ResponsiveFontSizeControl from '@ystd/controls/responsive-font-size-control';
+import TextColorControl from '@ystd/controls/text-color-control';
+import TypographySettingsControl from '@ystd/controls/typography-settings-control';
 
 const PanelText = ( props ) => {
 	const { attributes, setAttributes, textColor, setTextColor } = props;

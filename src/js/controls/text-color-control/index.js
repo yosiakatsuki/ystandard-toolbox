@@ -1,8 +1,8 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import ColorPaletteControl from '@ystdtb/components/color-palette-control';
-import { hasObjectKey } from '@ystdtb/helper/object';
+import ColorPaletteControl from '@ystd/components/color-palette-control';
+import { hasObjectKey } from '@ystd/helper/object';
 
 const TextColorControl = ( { id, value, onChange, label, ...props } ) => {
 	const _color = hasObjectKey( value, 'color' ) ? value.color : value;

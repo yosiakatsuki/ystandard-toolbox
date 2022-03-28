@@ -5,7 +5,7 @@ import {
 	isOpenInNewTab,
 	toggleOpenInNewTab,
 	getLinkRel,
-} from '@ystdtb/helper/link';
+} from '@ystd/helper/link';
 
 const Target = ( props ) => {
 	const { attributes, setAttributes } = props;

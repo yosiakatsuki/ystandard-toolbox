@@ -46,9 +46,13 @@
 
   > div {
     > * {
-      max-width: 830px;
+      max-width: var(--ystd-content-default-width, 800px);
       margin-right: auto;
       margin-left: auto;
+    }
+
+    > p:empty {
+      display: none;
     }
 
     > *.alignfull,

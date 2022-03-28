@@ -9,7 +9,7 @@ import { getSliderOptions } from './function/slider-option';
 import {
 	getRatioClassName,
 	getRatioInnerClassName,
-} from '@ystdtb/helper/ratio';
+} from '@ystd/helper/ratio';
 import { getCustomProperty } from './function/style';
 
 const save = ( { attributes } ) => {

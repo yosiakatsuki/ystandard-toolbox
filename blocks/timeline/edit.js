@@ -19,8 +19,8 @@ import { withDispatch, select } from '@wordpress/data';
 import { innerMargin } from './item/config';
 import { calcContentMarginTop } from './item/function';
 import { __ } from '@wordpress/i18n';
-import { getColorSlug, getColorCode } from '@ystdtb/function/_getColorSlug';
-import { getFontSize, getFontSlug } from '@ystdtb/function/_getFontSlug';
+import { getColorSlug, getColorCode } from '@ystd/function/_getColorSlug';
+import { getFontSize, getFontSlug } from '@ystd/function/_getFontSlug';
 
 function Timeline( props ) {
 	const {

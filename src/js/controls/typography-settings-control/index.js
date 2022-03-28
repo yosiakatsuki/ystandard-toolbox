@@ -6,10 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import FontWeightControl from '@ystdtb/components/font-wheight-control';
-import FontStyleControl from '@ystdtb/components/font-style-control';
-import NumberControl from '@ystdtb/components/number-control';
-import LetterSpacingControl from '@ystdtb/controls/letter-spacing-control';
+import FontWeightControl from '@ystd/components/font-wheight-control';
+import FontStyleControl from '@ystd/components/font-style-control';
+import NumberControl from '@ystd/components/number-control';
+import LetterSpacingControl from '@ystd/controls/letter-spacing-control';
 
 const TypographySettingsControl = ( { values, onChange } ) => {
 	const _values = {

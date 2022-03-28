@@ -54,11 +54,11 @@ module.exports = {
 		...defaultConfig.resolve,
 		alias: {
 			...defaultConfig.alias,
-			'@ystdtb/function': path.resolve( __dirname, 'src/js/blocks/function' ),
-			'@ystdtb/config': path.resolve( __dirname, 'src/js/config' ),
-			'@ystdtb/components': path.resolve( __dirname, 'src/js/component' ),
-			'@ystdtb/controls': path.resolve( __dirname, 'src/js/controls' ),
-			'@ystdtb/helper': path.resolve( __dirname, 'src/js/helper' ),
+			'@ystd/function': path.resolve( __dirname, 'src/js/blocks/function' ),
+			'@ystd/config': path.resolve( __dirname, 'src/js/config' ),
+			'@ystd/components': path.resolve( __dirname, 'src/js/component' ),
+			'@ystd/controls': path.resolve( __dirname, 'src/js/controls' ),
+			'@ystd/helper': path.resolve( __dirname, 'src/js/helper' ),
 		}
 	},
 };

@@ -1,8 +1,8 @@
 import { Square } from 'react-feather';
 import { registerBlockType } from '@wordpress/blocks';
-import { ystdtbConfig } from '@ystdtb/config';
+import { ystdtbConfig } from '@ystd/config';
 import { __ } from '@wordpress/i18n';
-import { mergeDefaultAttributes } from '@ystdtb/helper/attribute';
+import { mergeDefaultAttributes } from '@ystd/helper/attribute';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
