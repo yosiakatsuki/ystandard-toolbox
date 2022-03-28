@@ -6,6 +6,7 @@ import { mergeDefaultAttributes } from '@ystd/helper/attribute';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
+import variations from './variations';
 
 const attributes = mergeDefaultAttributes( metadata.name, metadata.attributes );
 
@@ -24,5 +25,6 @@ registerBlockType( metadata.name, {
 		attributes,
 		edit,
 		save,
+		variations,
 	},
 } );

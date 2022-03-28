@@ -39,5 +39,10 @@
     > .ystdtb-dl-column:not(.has-margin) {
       margin-top: 0.5em;
     }
+
+    > .block-list-appender {
+      margin: 8px 0 !important;
+    }
   }
+  // > .block-editor-inner-blocks > .block-editor-block-list__layout
 }
