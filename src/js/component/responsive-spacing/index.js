@@ -9,6 +9,7 @@ import {
 	getResponsiveCustomProperties,
 } from '@ystd/helper/responsive';
 import { getSpacing, getSpacingCSS } from '@ystd/helper/spacing';
+import ResponsiveValuesInfo from "@ystd/components/responsive-values-info";
 
 const ResponsiveSpacing = ( props ) => {
 	const { label, values, onChange, units, inputProps } = props;
@@ -42,7 +43,11 @@ const ResponsiveSpacing = ( props ) => {
 			} )
 		);
 	};
-
+	console.log( {
+		valueDesktop,
+		valueTablet,
+		valueMobile
+	} )
 	return (
 		<>
 			<ResponsiveTab label={ label }>
@@ -110,6 +115,12 @@ const ResponsiveSpacing = ( props ) => {
 					);
 				} }
 			</ResponsiveTab>
+			<ResponsiveValuesInfo
+				desktop={ getSpacingCSS( valueDesktop ) }
+				tablet={ getSpacingCSS( valueTablet ) }
+				mobile={ getSpacingCSS( valueMobile ) }
+				style={ { marginTop: 0 } }
+			/>
 		</>
 	);
 };

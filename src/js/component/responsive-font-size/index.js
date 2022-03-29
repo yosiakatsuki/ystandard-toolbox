@@ -10,6 +10,7 @@ import {
 } from '@ystd/helper/responsive';
 import { getComponentConfig } from '@ystd/helper/config';
 import { createFontSizeObject, getFontSizeValue } from '@ystd/helper/fontSize';
+import ResponsiveValuesInfo from "@ystd/components/responsive-values-info";
 
 const ResponsiveFontSize = ( props ) => {
 	const { label, values, onChange, units } = props;
@@ -103,6 +104,11 @@ const ResponsiveFontSize = ( props ) => {
 					);
 				} }
 			</ResponsiveTab>
+			<ResponsiveValuesInfo
+				desktop={ valueDesktop }
+				tablet={ valueTablet }
+				mobile={ valueMobile }
+			/>
 		</>
 	);
 };

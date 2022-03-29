@@ -1,5 +1,10 @@
+/**
+ * WordPress
+ */
 import { _x } from '@wordpress/i18n';
-
+/**
+ * yStandard
+ */
 import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
 import { getComponentConfig } from '@ystd/helper/config';
 import {
@@ -9,6 +14,8 @@ import {
 	responsiveKeys as responsive,
 } from '@ystd/helper/responsive';
 import UnitControl from '@ystd/components/unit-control';
+import ResponsiveValuesInfo from "@ystd/components/responsive-values-info";
+import { getSpacingCSS } from "@ystd/helper/spacing";
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );
@@ -41,59 +48,66 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 		);
 	};
 	return (
-		<ResponsiveTab label={ label }>
-			{ ( tab ) => {
-				return (
-					<>
-						{ tabType.desktop === tab.name && (
-							<UnitControl
-								className={
-									'ystdtb-responsive-values-unit-control'
-								}
-								label={ _x(
-									'デスクトップ',
-									'responsive-component',
-									'ystandard-toolbox'
-								) }
-								value={ valueDesktop }
-								onChange={ handleOnChangeDesktop }
-								units={ _units }
-							/>
-						) }
-						{ tabType.tablet === tab.name && (
-							<UnitControl
-								className={
-									'ystdtb-responsive-values-unit-control'
-								}
-								label={ _x(
-									'タブレット',
-									'responsive-component',
-									'ystandard-toolbox'
-								) }
-								value={ valueTablet }
-								onChange={ handleOnChangeTablet }
-								units={ _units }
-							/>
-						) }
-						{ tabType.mobile === tab.name && (
-							<UnitControl
-								className={
-									'ystdtb-responsive-values-unit-control'
-								}
-								label={ _x(
-									'モバイル',
-									'responsive-component',
-									'ystandard-toolbox'
-								) }
-								value={ valueMobile }
-								onChange={ handleOnChangeMobile }
-								units={ _units }
-							/>
-						) }
-					</>
-				);
-			} }
-		</ResponsiveTab>
+		<>
+			<ResponsiveTab label={ label }>
+				{ ( tab ) => {
+					return (
+						<>
+							{ tabType.desktop === tab.name && (
+								<UnitControl
+									className={
+										'ystdtb-responsive-values-unit-control'
+									}
+									label={ _x(
+										'デスクトップ',
+										'responsive-component',
+										'ystandard-toolbox'
+									) }
+									value={ valueDesktop }
+									onChange={ handleOnChangeDesktop }
+									units={ _units }
+								/>
+							) }
+							{ tabType.tablet === tab.name && (
+								<UnitControl
+									className={
+										'ystdtb-responsive-values-unit-control'
+									}
+									label={ _x(
+										'タブレット',
+										'responsive-component',
+										'ystandard-toolbox'
+									) }
+									value={ valueTablet }
+									onChange={ handleOnChangeTablet }
+									units={ _units }
+								/>
+							) }
+							{ tabType.mobile === tab.name && (
+								<UnitControl
+									className={
+										'ystdtb-responsive-values-unit-control'
+									}
+									label={ _x(
+										'モバイル',
+										'responsive-component',
+										'ystandard-toolbox'
+									) }
+									value={ valueMobile }
+									onChange={ handleOnChangeMobile }
+									units={ _units }
+								/>
+							) }
+						</>
+					);
+				} }
+			</ResponsiveTab>
+			<ResponsiveValuesInfo
+				desktop={ valueDesktop }
+				tablet={ valueTablet }
+				mobile={ valueMobile }
+			/>
+		</>
 	);
 };
 export default ResponsiveValues;

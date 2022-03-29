@@ -9,4 +9,11 @@
     line-height: 1.4;
     color: #757575;
   }
+
+  .components-font-size-picker__controls {
+    margin-bottom: 0;
+    .components-button.components-color-palette__clear {
+      margin-top: 8px;
+    }
+  }
 }
