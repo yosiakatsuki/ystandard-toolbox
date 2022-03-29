@@ -151,6 +151,8 @@ function copyProductionFiles() {
 			'!.github/**',
 			'!build',
 			'!build/**',
+			'!vendor',
+			'!vendor/**',
 			'!*.zip',
 			'!ystandard-toolbox',
 			'!ystandard-toolbox/**',
