@@ -10,7 +10,7 @@ import {
 	addResponsiveProperty,
 	deleteResponsiveProperty,
 	getResponsiveProperty,
-} from '@ystdtb/helper/responsive';
+} from '@ystd/helper/responsive';
 
 const BoxPadding = ( props ) => {
 	const { attributes, setAttributes } = props;

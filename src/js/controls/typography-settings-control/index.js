@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import FontWeightControl from "@ystdtb/components/font-wheight-control";
-import FontStyleControl from "@ystdtb/components/font-style-control";
-import NumberControl from "@ystdtb/components/number-control";
-import LetterSpacingControl from "@ystdtb/controls/letter-spacing-control";
-
+import FontWeightControl from '@ystd/components/font-wheight-control';
+import FontStyleControl from '@ystd/components/font-style-control';
+import NumberControl from '@ystd/components/number-control';
+import LetterSpacingControl from '@ystd/controls/letter-spacing-control';
 
 const TypographySettingsControl = ( { values, onChange } ) => {
 	const _values = {
@@ -18,39 +17,37 @@ const TypographySettingsControl = ( { values, onChange } ) => {
 		fontStyle: values?.fontStyle,
 		lineHeight: values?.lineHeight,
 		letterSpacing: values?.letterSpacing,
-	}
+	};
 
 	const handleOnChange = ( newValue ) => {
 		onChange( {
 			..._values,
 			...newValue,
 		} );
-	}
+	};
 	const handleFontWeightOnChange = ( newValue ) => {
 		handleOnChange( {
 			fontWeight: newValue,
 		} );
-	}
+	};
 	const handleFontStyleOnChange = ( newValue ) => {
 		handleOnChange( {
 			fontStyle: newValue,
 		} );
-	}
+	};
 	const handleLineHeightOnChange = ( newValue ) => {
 		handleOnChange( {
 			lineHeight: newValue,
 		} );
-	}
+	};
 	const handleLetterSpacingOnChange = ( newValue ) => {
 		handleOnChange( {
 			letterSpacing: newValue,
 		} );
-	}
+	};
 
 	return (
-		<BaseControl
-			className={ 'ystdtb-typography-control' }
-		>
+		<BaseControl className={ 'ystdtb-typography-control' }>
 			<div className={ 'ystdtb-typography-control__row' }>
 				<div>
 					<FontWeightControl
@@ -88,5 +85,5 @@ const TypographySettingsControl = ( { values, onChange } ) => {
 			</div>
 		</BaseControl>
 	);
-}
+};
 export default TypographySettingsControl;

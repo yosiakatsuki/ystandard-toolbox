@@ -2,7 +2,7 @@ import { BaseControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import { iconTypes } from '../config';
-import { getBlockConfig } from '@ystdtb/helper/blockConfig';
+import { getBlockConfig } from '@ystd/helper/blockConfig';
 import classnames from 'classnames';
 
 const ListIcon = ( { attributes, setAttributes } ) => {

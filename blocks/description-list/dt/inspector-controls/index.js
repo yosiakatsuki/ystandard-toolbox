@@ -1,7 +1,7 @@
 import { InspectorControls } from '@wordpress/block-editor';
-import PanelPadding from "./padding";
-import PanelBackgroundColor from "./backgroundColor";
-import PanelText from "./text";
+import PanelPadding from './padding';
+import PanelBackgroundColor from './backgroundColor';
+import PanelText from './text';
 
 export const DescriptionListDtInspectorControls = ( props ) => {
 	return (

@@ -119,7 +119,7 @@ class Drawer_Menu {
 		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideGlobalMenu', false ) ) {
 			$style .= "
 			@media (max-width: ${close}px) {
-				.global-nav__menu {
+				.global-nav__menu:not(#global-nav__menu-amp) {
 					display:none;
 				}
 			}

@@ -1,22 +1,17 @@
 import { _x } from '@wordpress/i18n';
-import BoxControl from '@ystdtb/components/box-control';
-import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import BoxControl from '@ystd/components/box-control';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getComponentConfig } from '@ystd/helper/config';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
-	parseResponsiveValues, getResponsiveCustomProperties,
-} from '@ystdtb/helper/responsive';
-import { getSpacing, getSpacingCSS } from '@ystdtb/helper/spacing';
+	parseResponsiveValues,
+	getResponsiveCustomProperties,
+} from '@ystd/helper/responsive';
+import { getSpacing, getSpacingCSS } from '@ystd/helper/spacing';
 
 const ResponsiveSpacing = ( props ) => {
-	const {
-		label,
-		values,
-		onChange,
-		units,
-		inputProps,
-	} = props;
+	const { label, values, onChange, units, inputProps } = props;
 
 	const _units = units ?? getComponentConfig( 'units' );
 	const valueDesktop = getResponsiveValue( values, responsive.desktop );
@@ -69,7 +64,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueDesktop }
 										onChange={ handleOnChangeDesktop }
 										units={ _units }
-										inputProps={inputProps}
+										inputProps={ inputProps }
 									/>
 								</div>
 							) }
@@ -88,7 +83,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueTablet }
 										onChange={ handleOnChangeTablet }
 										units={ _units }
-										inputProps={inputProps}
+										inputProps={ inputProps }
 									/>
 								</div>
 							) }
@@ -107,7 +102,7 @@ const ResponsiveSpacing = ( props ) => {
 										values={ valueMobile }
 										onChange={ handleOnChangeMobile }
 										units={ _units }
-										inputProps={inputProps}
+										inputProps={ inputProps }
 									/>
 								</div>
 							) }
@@ -126,16 +121,11 @@ export const getResponsiveSpacingStyle = ( propertyName, prefix, values ) => {
 		tablet: getSpacingCSS( values?.tablet ),
 		mobile: getSpacingCSS( values?.mobile ),
 	} );
-	return getResponsiveCustomProperties(
-		propertyName,
-		prefix,
-		parsedValue
-	);
+	return getResponsiveCustomProperties( propertyName, prefix, parsedValue );
 };
 export const getResponsivePaddingStyle = ( prefix, values ) => {
 	return getResponsiveSpacingStyle( 'padding', prefix, values );
-}
+};
 export const getResponsiveMarginStyle = ( prefix, values ) => {
 	return getResponsiveSpacingStyle( 'margin', prefix, values );
-}
-
+};

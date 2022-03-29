@@ -11,20 +11,24 @@ import {
 /**
  * yStandard
  */
-import { getResponsiveFontSizeStyle } from "@ystdtb/components/responsive-font-size";
-import { getResponsivePaddingStyle } from "@ystdtb/components/responsive-spacing";
-import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
-import { getBackGroundStyle } from "@ystdtb/helper/color";
-import { ystdtbConfig } from "@ystdtb/config";
+import { getResponsiveFontSizeStyle } from '@ystd/components/responsive-font-size';
+import {
+	getResponsiveMarginStyle,
+	getResponsivePaddingStyle,
+} from '@ystd/components/responsive-spacing';
+import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
+import { getBackGroundStyle } from '@ystd/helper/color';
+import { ystdtbConfig } from '@ystd/config';
 /**
  * Block
  */
-import { config } from "./config";
+import { config } from './config';
 
 const save = ( { attributes } ) => {
 	const {
 		text,
 		padding,
+		margin,
 		backgroundColor,
 		customBackgroundColor,
 		gradient,
@@ -48,35 +52,57 @@ const save = ( { attributes } ) => {
 	const fontSizeClass = getFontSizeClassByObject( textSize?.desktop );
 
 	const blockProps = useBlockProps.save( {
-		className: classnames(
-			config.blockClasses,
-			{
-				[ hasClasses.fontSize ]: fontSizeClass,
-				[ fontSizeClass ]: fontSizeClass,
-				[ hasClasses.background ]: backgroundColor || customBackgroundColor || gradient || customGradient,
-				[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
-				[ hasClasses.textColor ]: textColor || customTextColor,
-				[ colorClasses.text ]: colorClasses.text,
-				[ hasClasses.backgroundGradient ]: gradient || customGradient,
-				[ colorClasses.gradient ]: colorClasses.gradient,
-				[ hasClasses.padding ]: getResponsivePaddingStyle( config.responsiveStyleClassPrefix, padding ),
-			}
-		),
+		className: classnames( config.blockClasses, {
+			[ hasClasses.fontSize ]: fontSizeClass,
+			[ fontSizeClass ]: fontSizeClass,
+			[ hasClasses.background ]:
+				backgroundColor ||
+				customBackgroundColor ||
+				gradient ||
+				customGradient,
+			[ colorClasses.backgroundColor ]: colorClasses.backgroundColor,
+			[ hasClasses.textColor ]: textColor || customTextColor,
+			[ colorClasses.text ]: colorClasses.text,
+			[ hasClasses.backgroundGradient ]: gradient || customGradient,
+			[ colorClasses.gradient ]: colorClasses.gradient,
+			[ hasClasses.padding ]: getResponsivePaddingStyle(
+				config.responsiveStyleClassPrefix,
+				padding
+			),
+			[ hasClasses.margin ]: getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
+		} ),
 		style: {
-			background: getBackGroundStyle( customBackgroundColor, customGradient ),
+			background: getBackGroundStyle(
+				customBackgroundColor,
+				customGradient
+			),
 			color: customTextColor,
-			...getResponsivePaddingStyle( config.responsiveStyleClassPrefix, padding ),
-			...getResponsiveFontSizeStyle( config.responsiveStyleClassPrefix, textSize, fontSizeClass ),
+			...getResponsivePaddingStyle(
+				config.responsiveStyleClassPrefix,
+				padding
+			),
+			...getResponsiveMarginStyle(
+				config.responsiveStyleClassPrefix,
+				margin
+			),
+			...getResponsiveFontSizeStyle(
+				config.responsiveStyleClassPrefix,
+				textSize,
+				fontSizeClass
+			),
 			fontWeight: fontWeight || undefined,
 			fontStyle: fontStyle || undefined,
 			lineHeight: lineHeight || undefined,
 			letterSpacing: letterSpacing || undefined,
-		}
+		},
 	} );
 
 	return (
 		<dt { ...blockProps }>
-			<RichText.Content value={ text }/>
+			<RichText.Content value={ text } />
 		</dt>
 	);
 };

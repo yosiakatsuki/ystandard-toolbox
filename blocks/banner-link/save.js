@@ -5,12 +5,9 @@ import {
 	__experimentalGetGradientClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { getFontSizeClassByObject } from '@ystdtb/helper/fontSize';
+import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
 import { blockClassName, blockClasses } from './config';
-import {
-	getRatioClassName,
-	getRatioInnerClassName,
-} from '@ystdtb/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
 import {
 	getBackgroundImage,
 	getBackgroundPosition,
@@ -22,14 +19,14 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getBoxShadowStyle } from '@ystdtb/components/box-shadow-control';
+import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystdtb/controls/border-control';
-import { getComponentConfig } from '@ystdtb/helper/config';
-import getDataFallbackProperty from '@ystdtb/helper/fallback';
-import { getSpacingCSS } from '@ystdtb/helper/spacing';
+} from '@ystd/controls/border-control';
+import { getComponentConfig } from '@ystd/helper/config';
+import getDataFallbackProperty from '@ystd/helper/fallback';
+import { getSpacingCSS } from '@ystd/helper/spacing';
 
 const save = ( { attributes } ) => {
 	const {

@@ -2,7 +2,7 @@ import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { getSlidesOption } from '../../function/slider-option';
 import { setSlidesOption } from '../../function/edit';
-import UnitControl from '@ystdtb/components/unit-control';
+import UnitControl from '@ystd/components/unit-control';
 
 const SpaceBetween = ( { type, attributes, setAttributes } ) => {
 	const optionName = 'spaceBetween';

@@ -1,7 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import NumberControl from '@ystdtb/components/number-control';
-import { toNumber } from '@ystdtb/helper/number';
+import NumberControl from '@ystd/components/number-control';
+import { toNumber } from '@ystd/helper/number';
 
 const LineHeight = ( { attributes, setAttributes } ) => {
 	const { mainTextLineHeight } = attributes;

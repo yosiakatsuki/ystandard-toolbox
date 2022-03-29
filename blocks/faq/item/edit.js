@@ -22,7 +22,7 @@ import {
 	ToggleControl,
 	ColorPalette,
 } from '@wordpress/components';
-import { withSelect, select } from '@wordpress/data';
+import { select } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import { ChevronDown } from 'react-feather';
@@ -30,9 +30,9 @@ import { ChevronDown } from 'react-feather';
 function FAQItem( props ) {
 	const {
 		className,
+		isSelected,
 		attributes,
 		setAttributes,
-		hasChildBlocks,
 		faqTextColor,
 		setFaqTextColor,
 		faqBackgroundColor,
@@ -453,9 +453,9 @@ function FAQItem( props ) {
 							templateLock={ false }
 							template={ template }
 							renderAppender={
-								hasChildBlocks
-									? undefined
-									: () => <InnerBlocks.ButtonBlockAppender />
+								isSelected
+									? InnerBlocks.ButtonBlockAppender
+									: false
 							}
 						/>
 					</div>
@@ -483,12 +483,4 @@ export default compose( [
 		labelBorderColor: 'borderColor',
 	} ),
 	withFontSizes( 'labelSize' ),
-	withSelect( ( ownSelect, ownProps ) => {
-		const { clientId } = ownProps;
-		const { getBlockOrder } = ownSelect( 'core/block-editor' );
-
-		return {
-			hasChildBlocks: getBlockOrder( clientId ).length > 0,
-		};
-	} ),
 ] )( FAQItem );

@@ -8,6 +8,15 @@
 
   @include global.responsive-custom-property-child("> dt", "dl-column", "width");
 
+  &[style*="dl-column-width"] {
+    > dt {
+      flex-shrink: 0;
+    }
+  }
+
+  &.has-margin {
+    @include global.responsive-custom-property("dl-column", "margin");
+  }
 
   > dt,
   > dd {

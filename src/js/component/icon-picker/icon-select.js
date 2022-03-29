@@ -2,7 +2,7 @@ import { Component } from '@wordpress/element';
 import { withState, compose } from '@wordpress/compose';
 import { Button } from '@wordpress/components';
 import classnames from 'classnames';
-import { getIcons } from '@ystdtb/function/icons';
+import { getIcons } from '@ystd/function/icons';
 import SVGIcon from '../svg-icon';
 import { __ } from '@wordpress/i18n';
 

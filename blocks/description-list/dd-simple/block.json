@@ -51,6 +51,9 @@
     },
     "padding": {
       "type": "object"
+    },
+    "margin": {
+      "type": "object"
     }
   },
   "supports": {

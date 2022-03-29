@@ -1,8 +1,8 @@
 import { Box } from 'react-feather';
 import { registerBlockType } from '@wordpress/blocks';
-import { ystdtbConfig } from '@ystdtb/config';
+import { ystdtbConfig } from '@ystd/config';
 import { __, _x } from '@wordpress/i18n';
-import { mergeDefaultAttributes } from '@ystdtb/helper/attribute';
+import { mergeDefaultAttributes } from '@ystd/helper/attribute';
 import edit from './edit';
 import save from './save';
 import { attributes, supports } from './config';

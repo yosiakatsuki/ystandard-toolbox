@@ -2,7 +2,7 @@ import {
 	__experimentalUseGradient,
 	__experimentalColorGradientControl as WPColorGradientControl,
 } from '@wordpress/block-editor';
-import { getColorSetting } from '@ystdtb/helper/color';
+import { getColorSetting } from '@ystd/helper/color';
 
 const ColorGradientControl = ( {
 	colors,

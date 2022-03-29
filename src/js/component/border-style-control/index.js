@@ -23,12 +23,17 @@ const BORDER_STYLES = [
 	},
 ];
 
-const BorderStyleControl = ( { value, onChange, label = undefined, ...props } ) => {
+const BorderStyleControl = ( {
+	value,
+	onChange,
+	label = undefined,
+	...props
+} ) => {
 	const _label = label ?? __( 'スタイル', 'ystandard-toolbox' );
 	const _value = value || '';
 	const handleOnChange = ( { selectedItem } ) => {
-		onChange( selectedItem.key )
-	}
+		onChange( selectedItem.key );
+	};
 	const currentSelection = BORDER_STYLES.find( ( option ) => {
 		return option.key === _value;
 	} );
@@ -41,5 +46,5 @@ const BorderStyleControl = ( { value, onChange, label = undefined, ...props } ) 
 			{ ...props }
 		/>
 	);
-}
+};
 export default BorderStyleControl;

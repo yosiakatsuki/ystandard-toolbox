@@ -12,7 +12,7 @@ export const hasObjectKey = ( value, key ) => {
 		return false;
 	}
 	return value.hasOwnProperty( key );
-}
+};
 
 export const parseObjectAll = ( value ) => {
 	const _value = parseObject( value );

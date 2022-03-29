@@ -1,14 +1,14 @@
 import { _x } from '@wordpress/i18n';
 
-import ResponsiveTab, { tabType } from '@ystdtb/components/responsive-tab';
-import { getComponentConfig } from '@ystdtb/helper/config';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getComponentConfig } from '@ystd/helper/config';
 import {
 	getResponsiveCustomProperties,
 	getResponsiveValue,
 	parseResponsiveValues,
 	responsiveKeys as responsive,
-} from '@ystdtb/helper/responsive';
-import UnitControl from '@ystdtb/components/unit-control';
+} from '@ystd/helper/responsive';
+import UnitControl from '@ystd/components/unit-control';
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );
@@ -104,16 +104,12 @@ export const getResponsiveValueStyle = ( propertyName, prefix, values ) => {
 		tablet: values?.tablet,
 		mobile: values?.mobile,
 	} );
-	return getResponsiveCustomProperties(
-		propertyName,
-		prefix,
-		parsedValue
-	);
+	return getResponsiveCustomProperties( propertyName, prefix, parsedValue );
 };
 
 export const getResponsiveWidthStyle = ( prefix, values ) => {
 	return getResponsiveValueStyle( 'width', prefix, values );
-}
+};
 export const getResponsiveHeightStyle = ( prefix, values ) => {
 	return getResponsiveValueStyle( 'height', prefix, values );
-}
+};
