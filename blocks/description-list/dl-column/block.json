@@ -21,7 +21,8 @@
       "default": true
     },
     "isStackedOnTablet": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "dtWidth": {
       "type": "object"
