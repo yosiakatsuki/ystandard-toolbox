@@ -239,6 +239,6 @@ exports.clean = series( cleanFiles );
 exports.adminApp = series( buildAdminApp );
 exports.buildApp = series( buildJs );
 exports.copyJson = series( copyJson );
-exports.build = series( sass, buildApp, buildAdminApp, buildJs, copyJson );
+exports.build = series( sass, sassBlocks, buildApp, buildAdminApp, buildJs, copyJson );
 
 exports.default = series( watchFiles );
