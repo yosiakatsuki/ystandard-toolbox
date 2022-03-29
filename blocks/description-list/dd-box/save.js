@@ -11,7 +11,10 @@ import {
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import {
+	getResponsiveMarginStyle,
+	getResponsivePaddingStyle,
+} from '@ystd/components/responsive-spacing';
 import { getBackGroundStyle } from '@ystd/helper/color';
 import { ystdtbConfig } from '@ystd/config';
 /**

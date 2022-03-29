@@ -22,10 +22,7 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import {
-	getRatioClassName,
-	getRatioInnerClassName,
-} from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
 import {
 	getBorderColorClass,
 	getBorderStyle,

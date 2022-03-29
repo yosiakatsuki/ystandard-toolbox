@@ -7,10 +7,7 @@ import {
 } from '@wordpress/block-editor';
 import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
 import { blockClassName, blockClasses } from './config';
-import {
-	getRatioClassName,
-	getRatioInnerClassName,
-} from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
 import {
 	getBackgroundImage,
 	getBackgroundPosition,

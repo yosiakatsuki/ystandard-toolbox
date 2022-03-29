@@ -12,7 +12,10 @@ import {
  * yStandard
  */
 import { getResponsiveFontSizeStyle } from '@ystd/components/responsive-font-size';
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import {
+	getResponsiveMarginStyle,
+	getResponsivePaddingStyle,
+} from '@ystd/components/responsive-spacing';
 import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
 import { getBackGroundStyle } from '@ystd/helper/color';
 import { ystdtbConfig } from '@ystd/config';
@@ -81,7 +84,7 @@ const save = ( { attributes } ) => {
 				config.responsiveStyleClassPrefix,
 				padding
 			),
-			... getResponsiveMarginStyle(
+			...getResponsiveMarginStyle(
 				config.responsiveStyleClassPrefix,
 				margin
 			),

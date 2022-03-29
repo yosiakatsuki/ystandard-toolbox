@@ -12,7 +12,10 @@ import { compose } from '@wordpress/compose';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import {
+	getResponsiveMarginStyle,
+	getResponsivePaddingStyle,
+} from '@ystd/components/responsive-spacing';
 import { getBackGroundStyle } from '@ystd/helper/color';
 import { ystdtbConfig } from '@ystd/config';
 /**
@@ -62,7 +65,7 @@ const Edit = ( props ) => {
 		<>
 			<InspectorControls { ...props } />
 			<dd { ...blockProps }>
-				<InnerBlocks template={ [ [ 'core/paragraph' ] ] }/>
+				<InnerBlocks template={ [ [ 'core/paragraph' ] ] } />
 			</dd>
 		</>
 	);

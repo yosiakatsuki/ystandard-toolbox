@@ -162,8 +162,8 @@ function FAQItem( props ) {
 															.labelBorderColor
 													),
 													accordionArrowColor:
-													item.attributes
-														.labelColor,
+														item.attributes
+															.labelColor,
 												},
 											} );
 										} }
@@ -452,7 +452,11 @@ function FAQItem( props ) {
 						<InnerBlocks
 							templateLock={ false }
 							template={ template }
-							renderAppender={ isSelected ? InnerBlocks.ButtonBlockAppender : false }
+							renderAppender={
+								isSelected
+									? InnerBlocks.ButtonBlockAppender
+									: false
+							}
 						/>
 					</div>
 					{ 'q' === faqType && (
@@ -460,7 +464,7 @@ function FAQItem( props ) {
 							className={ accordionArrowClass }
 							style={ accordionArrowStyle }
 						>
-							<ChevronDown/>
+							<ChevronDown />
 						</div>
 					) }
 				</div>

@@ -13,7 +13,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle, getResponsivePaddingStyle } from '@ystd/components/responsive-spacing';
+import {
+	getResponsiveMarginStyle,
+	getResponsivePaddingStyle,
+} from '@ystd/components/responsive-spacing';
 import { getResponsiveFontSizeStyle } from '@ystd/components/responsive-font-size';
 import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
 import { getBackGroundStyle } from '@ystd/helper/color';

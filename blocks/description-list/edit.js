@@ -5,11 +5,10 @@ import classnames from 'classnames';
 import {
 	InnerBlocks,
 	useBlockProps,
-	__experimentalBlockVariationPicker,
+	__experimentalBlockVariationPicker as BlockVariationPicker,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
-	createBlock,
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
 } from '@wordpress/blocks';
@@ -47,9 +46,7 @@ const Edit = ( props ) => {
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
 				<dl { ...dlProps }>
-					<InnerBlocks
-						allowedBlocks={ config.allowedBlocks }
-					/>
+					<InnerBlocks allowedBlocks={ config.allowedBlocks } />
 				</dl>
 			</div>
 		</>
@@ -80,7 +77,7 @@ function Placeholder( { clientId, name, setAttributes } ) {
 
 	return (
 		<div { ...blockProps }>
-			<__experimentalBlockVariationPicker
+			<BlockVariationPicker
 				icon={ blockType?.icon?.src }
 				label={ blockType?.title }
 				variations={ variations }
@@ -111,9 +108,7 @@ const DtEdit = ( props ) => {
 			select( blockEditorStore ).getBlocks( clientId ).length > 0,
 		[ clientId ]
 	);
-	const Component = hasInnerBlocks
-		? Edit
-		: Placeholder;
+	const Component = hasInnerBlocks ? Edit : Placeholder;
 
 	return <Component { ...props } />;
 };

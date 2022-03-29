@@ -9,10 +9,7 @@ import {
 	getResponsiveCustomProperties,
 } from '@ystd/helper/responsive';
 import { getComponentConfig } from '@ystd/helper/config';
-import {
-	createFontSizeObject,
-	getFontSizeValue,
-} from '@ystd/helper/fontSize';
+import { createFontSizeObject, getFontSizeValue } from '@ystd/helper/fontSize';
 
 const ResponsiveFontSize = ( props ) => {
 	const { label, values, onChange, units } = props;

@@ -12,9 +12,9 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { config } from './config';
 import { getResponsiveWidthStyle } from '@ystd/components/responsive-values';
 import { getBorderCustomProperty } from '@ystd/controls/border-control';
-import { isResponsive } from "@ystd/helper/responsive";
-import { ystdtbConfig } from "@ystd/config";
-import { getResponsiveMarginStyle } from "@ystd/components/responsive-spacing";
+import { isResponsive } from '@ystd/helper/responsive';
+import { ystdtbConfig } from '@ystd/config';
+import { getResponsiveMarginStyle } from '@ystd/components/responsive-spacing';
 
 export default function save( { attributes } ) {
 	const {
@@ -26,11 +26,13 @@ export default function save( { attributes } ) {
 	} = attributes;
 	const hasClasses = ystdtbConfig.hasClasses;
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
-	const dtWidthStyles = isResponsive( dtWidth ) ? dtWidth : {
-		desktop: dtWidth?.desktop,
-		tablet: dtWidth?.desktop,
-		mobile: dtWidth?.desktop,
-	}
+	const dtWidthStyles = isResponsive( dtWidth )
+		? dtWidth
+		: {
+				desktop: dtWidth?.desktop,
+				tablet: dtWidth?.desktop,
+				mobile: dtWidth?.desktop,
+		  };
 	const blockProps = useBlockProps.save( {
 		className: classnames( config.blockClasses, {
 			'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
