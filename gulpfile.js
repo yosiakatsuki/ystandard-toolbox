@@ -186,6 +186,7 @@ function copyUpdateJsonBeta() {
 function watchFiles() {
 	cleanFiles();
 	sass();
+	sassBlocks();
 	series( watchBuildAdminApp, copyJson, buildJs );
 	watch(
 		[

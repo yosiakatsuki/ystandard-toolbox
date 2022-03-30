@@ -1,0 +1,14 @@
+{
+  "ystdtbIsHiddenMobile": {
+    "type": "boolean",
+    "default": false
+  },
+  "ystdtbIsHiddenTablet": {
+    "type": "boolean",
+    "default": false
+  },
+  "ystdtbIsHiddenDesktop": {
+    "type": "boolean",
+    "default": false
+  }
+}

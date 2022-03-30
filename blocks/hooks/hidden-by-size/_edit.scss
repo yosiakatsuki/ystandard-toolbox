@@ -1,0 +1,17 @@
+@use "../../../src/sass/global";
+
+.ystdtb-hidden-mobile,
+.ystdtb-hidden-tablet,
+.ystdtb-hidden-desktop {
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px dashed rgba(#000,0.1);
+  }
+}
