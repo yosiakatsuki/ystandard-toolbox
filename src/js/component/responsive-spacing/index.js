@@ -43,11 +43,6 @@ const ResponsiveSpacing = ( props ) => {
 			} )
 		);
 	};
-	console.log( {
-		valueDesktop,
-		valueTablet,
-		valueMobile
-	} )
 	return (
 		<>
 			<ResponsiveTab label={ label }>
