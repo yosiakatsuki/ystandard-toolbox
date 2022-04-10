@@ -28,8 +28,4 @@
   > .ystdtb-dl-column {
     margin-top: 0.5em;
   }
-
-  &.has-margin {
-    @include global.responsive-custom-property("dl", "margin");
-  }
 }

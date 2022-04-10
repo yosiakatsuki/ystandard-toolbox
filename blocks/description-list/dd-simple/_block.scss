@@ -7,10 +7,6 @@
     @include global.responsive-custom-property("dd-simple", "padding");
   }
 
-  &.has-margin {
-    @include global.responsive-custom-property("dd-simple", "margin");
-  }
-
   &.has-font-size {
     @include global.responsive-custom-property("dd-simple", "font-size");
   }

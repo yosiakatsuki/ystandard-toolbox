@@ -28,16 +28,20 @@ const Edit = ( props ) => {
 	const { margin } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( 'ystdtb-dl-editor', {
-			'has-margin': !! getResponsiveMarginStyle( 'dl', margin ),
+			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
+	} );
+	console.log( {
+		margin,
+		style: getResponsiveMarginStyle( margin ),
 	} );
 
 	const dlProps = {
 		className: classnames( config.blockClasses, {
-			'has-margin': !! getResponsiveMarginStyle( 'dl', margin ),
+			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
-			...getResponsiveMarginStyle( 'dl', margin ),
+			...getResponsiveMarginStyle( margin ),
 		},
 	};
 
@@ -46,7 +50,7 @@ const Edit = ( props ) => {
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
 				<dl { ...dlProps }>
-					<InnerBlocks allowedBlocks={ config.allowedBlocks } />
+					<InnerBlocks allowedBlocks={ config.allowedBlocks }/>
 				</dl>
 			</div>
 		</>

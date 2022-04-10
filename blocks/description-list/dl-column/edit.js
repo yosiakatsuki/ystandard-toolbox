@@ -43,20 +43,14 @@ const Edit = ( props ) => {
 			'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
 			'is-not-stacked-on-tablet': ! isStackedOnTablet,
 			'has-border': !! borderProperty,
-			[ hasClasses.margin ]: getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
+			[ hasClasses.margin ]: getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
 			...getResponsiveWidthStyle(
 				config.responsiveStyleClassPrefix,
 				dtWidthStyles
 			),
-			...getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
+			...getResponsiveMarginStyle( margin ),
 			...borderProperty,
 		},
 	} );

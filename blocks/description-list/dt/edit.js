@@ -56,25 +56,13 @@ const Edit = ( props ) => {
 			[ textColor.class ]: textColor.class,
 			[ hasClasses.backgroundGradient ]: gradientValue,
 			[ gradientClass ]: gradientClass,
-			[ hasClasses.padding ]: getResponsivePaddingStyle(
-				config.responsiveStyleClassPrefix,
-				padding
-			),
-			[ hasClasses.margin ]: getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
+			[ hasClasses.padding ]: getResponsivePaddingStyle( padding ),
+			[ hasClasses.margin ]: getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
-			...getResponsivePaddingStyle(
-				config.responsiveStyleClassPrefix,
-				padding
-			),
-			...getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
+			...getResponsivePaddingStyle( padding ),
+			...getResponsiveMarginStyle( margin ),
 			...getResponsiveFontSizeStyle(
 				config.responsiveStyleClassPrefix,
 				textSize,
