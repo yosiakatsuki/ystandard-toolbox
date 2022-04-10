@@ -50,7 +50,9 @@ const Edit = ( props ) => {
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
 				<dl { ...dlProps }>
-					<InnerBlocks allowedBlocks={ config.allowedBlocks }/>
+					<InnerBlocks
+						allowedBlocks={ config.allowedBlocks }
+					/>
 				</dl>
 			</div>
 		</>
