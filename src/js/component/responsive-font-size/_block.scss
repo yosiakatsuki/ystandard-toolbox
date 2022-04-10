@@ -1,0 +1,21 @@
+@use "../../../sass/global";
+
+$editor: false !default;
+
+@include global.media-breakpoint(lg, $editor) {
+  [style*="--ystdtb-font-size-desktop"] {
+    font-size: var(--ystdtb-font-size-desktop) !important;
+  }
+}
+
+@include global.media-breakpoint-between(sm, lg, $editor) {
+  [style*="--ystdtb-font-size-tablet"] {
+    font-size: var(--ystdtb-font-size-tablet) !important;
+  }
+}
+
+@include global.media-breakpoint-down(sm, $editor) {
+  [style*="--ystdtb-font-size-mobile"] {
+    font-size: var(--ystdtb-font-size-mobile) !important;
+  }
+}

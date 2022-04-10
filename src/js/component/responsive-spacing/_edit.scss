@@ -1,4 +1,4 @@
-@use "block";
+@use "block" with ($editor:true);
 
 .ystdtb-responsive-spacing-box-control {
   .component-box-control__label {

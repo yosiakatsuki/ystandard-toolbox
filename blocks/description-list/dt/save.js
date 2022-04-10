@@ -76,11 +76,7 @@ const save = ( { attributes } ) => {
 			color: customTextColor,
 			...getResponsivePaddingStyle( padding ),
 			...getResponsiveMarginStyle( margin ),
-			...getResponsiveFontSizeStyle(
-				config.responsiveStyleClassPrefix,
-				textSize,
-				fontSizeClass
-			),
+			...getResponsiveFontSizeStyle( textSize, fontSizeClass ),
 			fontWeight: fontWeight || undefined,
 			fontStyle: fontStyle || undefined,
 			lineHeight: lineHeight || undefined,

@@ -115,7 +115,6 @@ const ResponsiveFontSize = ( props ) => {
 export default ResponsiveFontSize;
 
 export const getResponsiveFontSizeStyle = (
-	prefix,
 	fontSize,
 	fontSizeClass = false
 ) => {
@@ -126,8 +125,8 @@ export const getResponsiveFontSizeStyle = (
 	};
 	return getResponsiveCustomProperties(
 		'font-size',
-		prefix,
 		parseResponsiveValues( value ),
+		'',
 		!! fontSizeClass
 	);
 };

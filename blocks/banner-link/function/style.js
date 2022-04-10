@@ -9,8 +9,8 @@ import { isObject, parseObject } from '@ystd/helper/object';
 export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 	return getResponsiveCustomProperties(
 		property,
-		'banner-link',
 		value,
+		'banner-link',
 		ignoreDesktop
 	);
 };
@@ -50,8 +50,8 @@ export const getFontSizeStyle = ( fontSize, fontSizeClass ) => {
 	};
 	return getResponsiveCustomProperties(
 		'font-size',
-		'banner-link',
 		parseResponsiveValues( value ),
+		'banner-link',
 		!! fontSizeClass
 	);
 };

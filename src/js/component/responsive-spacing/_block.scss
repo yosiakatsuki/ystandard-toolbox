@@ -1,8 +1,8 @@
 @use "../../../sass/global";
 
-$editor: false;
+$editor: false !default;
 
-@include global.media-breakpoint(md, $editor) {
+@include global.media-breakpoint(lg, $editor) {
   /**
    * Margin
    */
@@ -41,7 +41,7 @@ $editor: false;
   }
 }
 
-@include global.media-breakpoint-between(sm, md, $editor) {
+@include global.media-breakpoint-between(sm, lg, $editor) {
   /**
    * Margin
    */

@@ -63,11 +63,7 @@ const Edit = ( props ) => {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
 			...getResponsivePaddingStyle( padding ),
 			...getResponsiveMarginStyle( margin ),
-			...getResponsiveFontSizeStyle(
-				config.responsiveStyleClassPrefix,
-				textSize,
-				fontSizeClass
-			),
+			...getResponsiveFontSizeStyle( textSize, fontSizeClass ),
 			fontWeight,
 			fontStyle,
 			lineHeight,

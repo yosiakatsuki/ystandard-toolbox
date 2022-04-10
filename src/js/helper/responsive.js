@@ -79,15 +79,16 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 
 export const getResponsiveCustomProperties = (
 	property,
-	prefix,
 	value,
+	prefix = '',
 	ignoreDesktop = false
 ) => {
 	if ( ! value || 'object' !== typeof value ) {
 		return undefined;
 	}
 	let result = {};
-	const customProperty = `${ responsiveCustomPropertyPrefix }-${ prefix }-${ property }`;
+	const _prefix = !! prefix ? `-${ prefix }` : '';
+	const customProperty = `${ responsiveCustomPropertyPrefix }${ _prefix }-${ property }`;
 	const hasDesktop =
 		value.hasOwnProperty( responsiveKeys.desktop ) && ! ignoreDesktop;
 	const hasTablet = value.hasOwnProperty( responsiveKeys.tablet );

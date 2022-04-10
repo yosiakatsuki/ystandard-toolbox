@@ -118,7 +118,7 @@ export const getResponsiveValueStyle = ( propertyName, prefix, values ) => {
 		tablet: values?.tablet,
 		mobile: values?.mobile,
 	} );
-	return getResponsiveCustomProperties( propertyName, prefix, parsedValue );
+	return getResponsiveCustomProperties( propertyName, parsedValue, prefix );
 };
 
 export const getResponsiveWidthStyle = ( prefix, values ) => {
