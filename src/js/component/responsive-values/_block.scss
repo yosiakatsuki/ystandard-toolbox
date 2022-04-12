@@ -1,0 +1,8 @@
+@use "../../../sass/global";
+
+$editor: false !default;
+
+/**
+ * Width.
+ */
+@include global.responsive-custom-property-component('width', $editor);

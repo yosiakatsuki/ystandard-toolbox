@@ -112,7 +112,7 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 };
 export default ResponsiveValues;
 
-export const getResponsiveValueStyle = ( propertyName, prefix, values ) => {
+export const getResponsiveValueStyle = ( propertyName, values, prefix = '' ) => {
 	const parsedValue = parseResponsiveValues( {
 		desktop: values?.desktop,
 		tablet: values?.tablet,
@@ -121,9 +121,9 @@ export const getResponsiveValueStyle = ( propertyName, prefix, values ) => {
 	return getResponsiveCustomProperties( propertyName, parsedValue, prefix );
 };
 
-export const getResponsiveWidthStyle = ( prefix, values ) => {
-	return getResponsiveValueStyle( 'width', prefix, values );
+export const getResponsiveWidthStyle = ( values, prefix = '' ) => {
+	return getResponsiveValueStyle( 'width', values, prefix );
 };
-export const getResponsiveHeightStyle = ( prefix, values ) => {
-	return getResponsiveValueStyle( 'height', prefix, values );
+export const getResponsiveHeightStyle = ( values, prefix = '' ) => {
+	return getResponsiveValueStyle( 'height', values, prefix );
 };

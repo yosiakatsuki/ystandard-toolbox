@@ -8,4 +8,5 @@
 @use "../../blocks/banner-link/block" as banner-link;
 @use "../../blocks/slider/block" as slider;
 @use "../js/component/responsive-spacing/block" as responsive-spacing;
-@use "../js/component/responsive-font-size/block" as responsive-fon-size;
+@use "../js/component/responsive-font-size/block" as responsive-font-size;
+@use "../js/component/responsive-values/block" as responsive-values;

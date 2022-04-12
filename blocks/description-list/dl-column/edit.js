@@ -47,8 +47,8 @@ const Edit = ( props ) => {
 		} ),
 		style: {
 			...getResponsiveWidthStyle(
-				config.responsiveStyleClassPrefix,
-				dtWidthStyles
+				dtWidthStyles,
+				config.responsiveStyleClassPrefix
 			),
 			...getResponsiveMarginStyle( margin ),
 			...borderProperty,
