@@ -1,4 +1,4 @@
-import { Monitor, Smartphone, Tablet } from "react-feather";
+import { Monitor, Smartphone, Tablet } from 'react-feather';
 
 const ResponsiveValuesInfo = ( { desktop, tablet, mobile, ...props } ) => {
 	if ( ! tablet && ! mobile ) {
@@ -6,21 +6,21 @@ const ResponsiveValuesInfo = ( { desktop, tablet, mobile, ...props } ) => {
 	}
 
 	return (
-		<div
-			className={ 'ystdtb-responsive-values-info' }
-			{ ...props }
-		>
+		<div className={ 'ystdtb-responsive-values-info' } { ...props }>
 			<div>
-				<Monitor/>{ desktop || '-' }
+				<Monitor />
+				{ desktop || '-' }
 			</div>
 			<div>
-				<Tablet/>{ tablet || '-' }
+				<Tablet />
+				{ tablet || '-' }
 			</div>
 			<div>
-				<Smartphone/>{ mobile || '-' }
+				<Smartphone />
+				{ mobile || '-' }
 			</div>
 		</div>
 	);
-}
+};
 
 export default ResponsiveValuesInfo;

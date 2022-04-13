@@ -7,9 +7,13 @@ import {
 	getResponsiveValue,
 	parseResponsiveValues,
 } from '@ystd/helper/responsive';
-import { getSpacingInfo, getSpacingProps, parseSpacing } from '@ystd/helper/spacing';
-import ResponsiveValuesInfo from "@ystd/components/responsive-values-info";
-import { parseObject } from "@ystd/helper/object";
+import {
+	getSpacingInfo,
+	getSpacingProps,
+	parseSpacing,
+} from '@ystd/helper/spacing';
+import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
+import { parseObject } from '@ystd/helper/object';
 
 const ResponsiveSpacing = ( props ) => {
 	const { label, values, onChange, units, inputProps } = props;
@@ -133,30 +137,38 @@ const getResponsiveSpacingCustomProps = ( type, value, suffix = '' ) => {
 		}
 		let result = {};
 		Object.keys( spacing ).map( ( key ) => {
-			const customProp = isResponsive ? `${ prefix }-${ key }${ _suffix }-${ device }` : key;
+			const customProp = isResponsive
+				? `${ prefix }-${ key }${ _suffix }-${ device }`
+				: key;
 			result = {
 				...result,
-				[ customProp ]: spacing[ key ]
-			}
+				[ customProp ]: spacing[ key ],
+			};
+			return true;
 		} );
 		return result;
-	}
+	};
 	return {
-		...getProps( value?.desktop, 'desktop', !! ( value?.tablet || value?.mobile ) ),
+		...getProps(
+			value?.desktop,
+			'desktop',
+			!! ( value?.tablet || value?.mobile )
+		),
 		...getProps( value?.tablet, 'tablet' ),
 		...getProps( value?.mobile, 'mobile' ),
-	}
-}
+	};
+};
 
 export const getResponsiveSpacingStyle = ( type, values, suffix = '' ) => {
-
 	const parsedValue = parseResponsiveValues( {
 		desktop: getSpacingProps( type, values?.desktop ),
 		tablet: getSpacingProps( type, values?.tablet ),
 		mobile: getSpacingProps( type, values?.mobile ),
 	} );
 
-	return parseObject( getResponsiveSpacingCustomProps( type, parsedValue, suffix ) );
+	return parseObject(
+		getResponsiveSpacingCustomProps( type, parsedValue, suffix )
+	);
 };
 export const getResponsivePaddingStyle = ( values, suffix = '' ) => {
 	return getResponsiveSpacingStyle( 'padding', values, suffix );

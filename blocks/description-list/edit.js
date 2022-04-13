@@ -31,10 +31,6 @@ const Edit = ( props ) => {
 			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
 	} );
-	console.log( {
-		margin,
-		style: getResponsiveMarginStyle( margin ),
-	} );
 
 	const dlProps = {
 		className: classnames( config.blockClasses, {
@@ -50,9 +46,7 @@ const Edit = ( props ) => {
 			<InspectorControls { ...props } />
 			<div { ...blockProps }>
 				<dl { ...dlProps }>
-					<InnerBlocks
-						allowedBlocks={ config.allowedBlocks }
-					/>
+					<InnerBlocks allowedBlocks={ config.allowedBlocks } />
 				</dl>
 			</div>
 		</>

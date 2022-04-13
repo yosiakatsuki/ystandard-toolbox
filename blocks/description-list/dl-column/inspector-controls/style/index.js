@@ -4,10 +4,7 @@ import { __ } from '@wordpress/i18n';
 const PanelStyle = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const {
-		isStackedOnMobile,
-		isStackedOnTablet,
-	} = attributes;
+	const { isStackedOnMobile, isStackedOnTablet } = attributes;
 
 	const isStackedOnMobileOnChange = ( value ) => {
 		setAttributes( { isStackedOnMobile: value } );

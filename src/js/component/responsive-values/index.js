@@ -14,8 +14,7 @@ import {
 	responsiveKeys as responsive,
 } from '@ystd/helper/responsive';
 import UnitControl from '@ystd/components/unit-control';
-import ResponsiveValuesInfo from "@ystd/components/responsive-values-info";
-import { getSpacingCSS } from "@ystd/helper/spacing";
+import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );
@@ -112,7 +111,11 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 };
 export default ResponsiveValues;
 
-export const getResponsiveValueStyle = ( propertyName, values, prefix = '' ) => {
+export const getResponsiveValueStyle = (
+	propertyName,
+	values,
+	prefix = ''
+) => {
 	const parsedValue = parseResponsiveValues( {
 		desktop: values?.desktop,
 		tablet: values?.tablet,

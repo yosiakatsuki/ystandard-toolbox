@@ -29,10 +29,10 @@ export default function save( { attributes } ) {
 	const dtWidthStyles = isResponsive( dtWidth )
 		? dtWidth
 		: {
-			desktop: dtWidth?.desktop,
-			tablet: dtWidth?.desktop,
-			mobile: dtWidth?.desktop,
-		};
+				desktop: dtWidth?.desktop,
+				tablet: dtWidth?.desktop,
+				mobile: dtWidth?.desktop,
+		  };
 	const blockProps = useBlockProps.save( {
 		className: classnames( config.blockClasses, {
 			'is-not-stacked-on-mobile': ! ( isStackedOnMobile ?? true ),
@@ -52,7 +52,7 @@ export default function save( { attributes } ) {
 
 	return (
 		<div { ...blockProps }>
-			<InnerBlocks.Content/>
+			<InnerBlocks.Content />
 		</div>
 	);
 }

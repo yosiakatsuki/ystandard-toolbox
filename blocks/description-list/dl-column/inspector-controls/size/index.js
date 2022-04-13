@@ -5,9 +5,7 @@ import ResponsiveWidthControl from '@ystd/controls/responsive-width-control';
 const PanelSize = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const {
-		dtWidth,
-	} = attributes;
+	const { dtWidth } = attributes;
 
 	const dtWidthOnChange = ( value ) => {
 		setAttributes( { dtWidth: value } );

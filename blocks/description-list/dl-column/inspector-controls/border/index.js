@@ -5,9 +5,7 @@ import BorderControl from '@ystd/controls/border-control';
 const PanelBorder = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const {
-		border,
-	} = attributes;
+	const { border } = attributes;
 
 	const borderOnChange = ( value ) => {
 		setAttributes( { border: value } );
@@ -18,10 +16,7 @@ const PanelBorder = ( props ) => {
 			title={ __( '枠線', 'ystandard-toolbox' ) }
 			initialOpen={ true }
 		>
-			<BorderControl
-				value={ border }
-				onChange={ borderOnChange }
-			/>
+			<BorderControl value={ border } onChange={ borderOnChange } />
 		</PanelBody>
 	);
 };

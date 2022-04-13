@@ -11,48 +11,48 @@ export const getSpacingProps = ( type, value ) => {
 	// 全部共通.
 	if ( !! top && [ right, bottom, left ].every( ( x ) => x === top ) ) {
 		return {
-			[ `${ type }` ]: top
-		}
+			[ `${ type }` ]: top,
+		};
 	}
 	// 上下・左右.
 	if ( !! top && top === bottom && !! right && right === left ) {
 		return {
-			[ `${ type }` ]: `${ top } ${ right }`
-		}
+			[ `${ type }` ]: `${ top } ${ right }`,
+		};
 	}
 	// 上・左右・下
 	if ( !! top && !! right && right === left && !! bottom ) {
 		return {
-			[ `${ type }` ]: `${ top } ${ right } ${ bottom }`
-		}
+			[ `${ type }` ]: `${ top } ${ right } ${ bottom }`,
+		};
 	}
 	let result = {};
 	if ( top ) {
 		result = {
 			...result,
 			[ `${ type }-top` ]: top,
-		}
+		};
 	}
 	if ( right ) {
 		result = {
 			...result,
 			[ `${ type }-right` ]: right,
-		}
+		};
 	}
 	if ( bottom ) {
 		result = {
 			...result,
 			[ `${ type }-bottom` ]: bottom,
-		}
+		};
 	}
 	if ( left ) {
 		result = {
 			...result,
 			[ `${ type }-left` ]: left,
-		}
+		};
 	}
 	return result;
-}
+};
 
 // TODO:廃止.
 export const getSpacingCSS = ( value ) => {
@@ -101,12 +101,16 @@ export const parseSpacing = ( spacing ) => {
 	if ( ! spacing || 'object' !== typeof spacing ) {
 		return undefined;
 	}
-	if ( ! spacing?.top && ! spacing?.right && ! spacing?.bottom && ! spacing?.left ) {
+	if (
+		! spacing?.top &&
+		! spacing?.right &&
+		! spacing?.bottom &&
+		! spacing?.left
+	) {
 		return undefined;
 	}
 	return spacing;
-}
-
+};
 
 export const getSpacingInfo = ( spacing ) => {
 	if ( ! spacing || 'object' !== typeof spacing ) {
@@ -128,4 +132,4 @@ export const getSpacingInfo = ( spacing ) => {
 	}
 
 	return `${ top } ${ right } ${ bottom } ${ left }`;
-}
+};

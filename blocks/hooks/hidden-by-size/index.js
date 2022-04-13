@@ -1,4 +1,4 @@
-import classnames from "classnames/dedupe";
+import classnames from 'classnames/dedupe';
 /**
  * WordPress.
  */
@@ -18,15 +18,12 @@ import { panelIcon } from '@ystd/components/ystandard-icon';
  */
 import { getPanelClassName, isEnableHook } from '../helper';
 import hookAttributes from './attributes.json';
-import ManualLink from "@ystd/components/manual-link";
+import ManualLink from '@ystd/components/manual-link';
 
 const HOOK_NAME = 'hidden-by-size';
 
 const addBlockAttributes = ( settings ) => {
-	const isEnable = isEnableHook(
-		settings.name,
-		HOOK_NAME
-	);
+	const isEnable = isEnableHook( settings.name, HOOK_NAME );
 	if ( ! isEnable ) {
 		return settings;
 	}
@@ -82,7 +79,9 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 
 		const panelClassName = getPanelClassName(
 			HOOK_NAME,
-			ystdtbIsHiddenMobile || ystdtbIsHiddenTablet || ystdtbIsHiddenDesktop
+			ystdtbIsHiddenMobile ||
+				ystdtbIsHiddenTablet ||
+				ystdtbIsHiddenDesktop
 		);
 
 		const handleOnChangeIsHiddenMobile = ( value ) => {
@@ -126,7 +125,9 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 						icon={ panelIcon }
 						className={ panelClassName }
 					>
-						<ManualLink path={ '/ystdtb-block-option-hidden-by-size/' } />
+						<ManualLink
+							path={ '/ystdtb-block-option-hidden-by-size/' }
+						/>
 						<ToggleControl
 							label={ __(
 								'モバイルで非表示',
@@ -146,10 +147,7 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 						/>
 
 						<ToggleControl
-							label={ __(
-								'PCで非表示',
-								'ystandard-toolbox'
-							) }
+							label={ __( 'PCで非表示', 'ystandard-toolbox' ) }
 							checked={ ystdtbIsHiddenDesktop }
 							onChange={ handleOnChangeIsHiddenDesktop }
 						/>

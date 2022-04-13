@@ -1,4 +1,4 @@
-import { Book } from "react-feather";
+import { Book } from 'react-feather';
 import { __ } from '@wordpress/i18n';
 
 function getManualUrl( path ) {
@@ -16,10 +16,10 @@ const ManualLink = ( { path, ...props } ) => {
 				target={ '_blank' }
 				rel={ 'noreferrer noopener nofollow' }
 			>
-				<Book/>
+				<Book />
 				{ __( 'マニュアル', 'ystandard-toolbox' ) }
 			</a>
 		</div>
 	);
-}
+};
 export default ManualLink;

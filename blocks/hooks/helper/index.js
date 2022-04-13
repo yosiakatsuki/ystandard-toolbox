@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classnames from 'classnames';
 import { applyFilters } from '@wordpress/hooks';
 
 export const isEnableHook = ( blockName, hookName, disableBlocks = false ) => {
@@ -20,15 +20,10 @@ export const isEnableHook = ( blockName, hookName, disableBlocks = false ) => {
 	}
 
 	return true;
-}
-
+};
 
 export const getPanelClassName = ( hookName, isEnabled = false ) => {
-	return classnames(
-		'ystdtb-hook-panel',
-		hookName,
-		{
-			'is-enabled': isEnabled
-		}
-	);
-}
+	return classnames( 'ystdtb-hook-panel', hookName, {
+		'is-enabled': isEnabled,
+	} );
+};
