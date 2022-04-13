@@ -11,6 +11,8 @@ import {
 import { getComponentConfig } from '@ystd/helper/config';
 import { createFontSizeObject, getFontSizeValue } from '@ystd/helper/fontSize';
 import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
+import ButtonReset from '@ystd/components/button-reset';
+import { Flex } from '@ystd/components/flex';
 
 const ResponsiveFontSize = ( props ) => {
 	const { label, values, onChange, units } = props;
@@ -71,34 +73,50 @@ const ResponsiveFontSize = ( props ) => {
 								</div>
 							) }
 							{ tabType.tablet === tab.name && (
-								<UnitControl
-									className={
-										'ystdtb-responsive-font-size-unit-control'
-									}
-									label={ _x(
-										'タブレット',
-										'responsive-component',
-										'ystandard-toolbox'
-									) }
-									value={ valueTablet }
-									onChange={ handleOnChangeTablet }
-									units={ _units }
-								/>
+								<Flex isGapSmall alignBottom>
+									<UnitControl
+										className={
+											'ystdtb-responsive-font-size-unit-control'
+										}
+										label={ _x(
+											'タブレット',
+											'responsive-component',
+											'ystandard-toolbox'
+										) }
+										value={ valueTablet }
+										onChange={ handleOnChangeTablet }
+										units={ _units }
+									/>
+									<ButtonReset
+										isDisable={ ! valueTablet }
+										onClick={ () => {
+											handleOnChangeTablet( undefined );
+										} }
+									/>
+								</Flex>
 							) }
 							{ tabType.mobile === tab.name && (
-								<UnitControl
-									className={
-										'ystdtb-responsive-font-size-unit-control'
-									}
-									label={ _x(
-										'モバイル',
-										'responsive-component',
-										'ystandard-toolbox'
-									) }
-									value={ valueMobile }
-									onChange={ handleOnChangeMobile }
-									units={ _units }
-								/>
+								<Flex isGapSmall alignBottom>
+									<UnitControl
+										className={
+											'ystdtb-responsive-font-size-unit-control'
+										}
+										label={ _x(
+											'モバイル',
+											'responsive-component',
+											'ystandard-toolbox'
+										) }
+										value={ valueMobile }
+										onChange={ handleOnChangeMobile }
+										units={ _units }
+									/>
+									<ButtonReset
+										isDisable={ ! valueMobile }
+										onClick={ () => {
+											handleOnChangeMobile( undefined );
+										} }
+									/>
+								</Flex>
 							) }
 						</>
 					);
