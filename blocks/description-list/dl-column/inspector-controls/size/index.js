@@ -18,7 +18,7 @@ const PanelSize = ( props ) => {
 		>
 			<ResponsiveWidthControl
 				values={ dtWidth }
-				label={ __( '説明(dt)の幅', 'ystandard-toolbox' ) }
+				label={ __( '用語(dt)の幅', 'ystandard-toolbox' ) }
 				onChange={ dtWidthOnChange }
 			/>
 		</PanelBody>

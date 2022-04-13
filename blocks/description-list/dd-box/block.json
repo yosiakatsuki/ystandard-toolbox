@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "name": "ystdtb/description-list-dd-box",
   "title": "dd-box",
-  "description": "定義リスト 用語(dd)ブロック 入れ子",
+  "description": "定義リスト 説明(dd)ブロック 入れ子",
   "keywords": [
     "dd"
   ],
