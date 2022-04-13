@@ -44,6 +44,26 @@ class Filesystem {
 	}
 
 	/**
+	 * Jsonファイルの中身を取得
+	 *
+	 * @param string $path json file path.
+	 *
+	 * @return array|mixed
+	 */
+	public static function get_json_file_contents( $path ) {
+		$contents = self::file_get_contents( $path );
+		if ( ! $contents ) {
+			return [];
+		}
+		$json = json_decode( $contents, true );
+		if ( is_null( $json ) ) {
+			return [];
+		}
+
+		return $json;
+	}
+
+	/**
 	 * ファイルシステムの初期化
 	 *
 	 * @return \WP_Filesystem_Direct

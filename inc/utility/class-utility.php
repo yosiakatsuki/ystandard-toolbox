@@ -157,41 +157,6 @@ class Utility {
 	}
 
 	/**
-	 * Jsonファイルの中身を取得
-	 *
-	 * @param string $path json file path.
-	 *
-	 * @return array|mixed
-	 */
-	public static function get_json_file_contents( $path ) {
-		$contents = self::get_file_contents( $path );
-		if ( ! $contents ) {
-			return [];
-		}
-		$json = json_decode( $contents, true );
-		if ( is_null( $json ) ) {
-			return [];
-		}
-
-		return $json;
-	}
-
-
-	/**
-	 * ファイル取得
-	 *
-	 * @param string $path File path.
-	 *
-	 * @return bool|string
-	 */
-	public static function get_file_contents( $path ) {
-
-		$content = Filesystem::file_get_contents( $path );
-
-		return $content;
-	}
-
-	/**
 	 * CSSの圧縮
 	 *
 	 * @param string $style inline css styles.
@@ -348,7 +313,7 @@ class Utility {
 	 * @return string
 	 */
 	public static function get_menu_icon() {
-		$icon = Utility::get_file_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
+		$icon = Filesystem::file_get_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
 	}
