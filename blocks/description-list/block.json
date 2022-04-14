@@ -21,5 +21,22 @@
     "anchor": false,
     "align": false,
     "className": false
+  },
+  "example": {
+    "attributes": {},
+    "innerBlocks": [
+      {
+        "name": "ystdtb/description-list-dt",
+        "attributes": {
+          "text": "Title..."
+        }
+      },
+      {
+        "name": "ystdtb/description-list-dd-simple",
+        "attributes": {
+          "text": "Text..."
+        }
+      }
+    ]
   }
 }
