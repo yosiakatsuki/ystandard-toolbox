@@ -107,6 +107,9 @@ class Posts_Block extends Dynamic_Block {
 			'postParent'     => [
 				'type' => 'string',
 			],
+			'className'      => [
+				'type' => 'string',
+			],
 		];
 		add_filter(
 			self::REGISTER_DYNAMIC_BLOCK_HOOK . $this->block_name,
@@ -140,19 +143,20 @@ class Posts_Block extends Dynamic_Block {
 	 * @return false|string
 	 */
 	public function render( $attributes, $content = null ) {
-		$classes = 'ystdtb-posts';
+		$this->add_class_name( 'ystdtb-posts' );
 		if ( isset( $attributes['align'] ) && '' !== $attributes['align'] ) {
-			$classes .= ' alignfull';
+			$this->add_class_name( 'alignfull' );
 		}
 		if ( isset( $attributes['orderby'] ) && 'ranking' === $attributes['orderby'] ) {
 			$attributes['filter'] = 'sga';
 		}
+		$classes = $this->get_class_name( $attributes );
 
-		$attributes = Utility::parse_shortcode_attributes(
+		$short_code_attributes = Utility::parse_shortcode_attributes(
 			$this->migration_attributes( $attributes )
 		);
 
-		return "<div class=\"${classes}\">" . do_shortcode( "[ys_recent_posts ${attributes}]" ) . '</div>';
+		return "<div class=\"${classes}\">" . do_shortcode( "[ys_recent_posts ${short_code_attributes}]" ) . '</div>';
 	}
 
 	/**
