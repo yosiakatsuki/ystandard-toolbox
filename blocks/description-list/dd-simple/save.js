@@ -65,14 +65,8 @@ const save = ( { attributes } ) => {
 			[ colorClasses.text ]: colorClasses.text,
 			[ hasClasses.backgroundGradient ]: gradient || customGradient,
 			[ colorClasses.gradient ]: colorClasses.gradient,
-			[ hasClasses.padding ]: getResponsivePaddingStyle(
-				config.responsiveStyleClassPrefix,
-				padding
-			),
-			[ hasClasses.margin ]: getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
+			[ hasClasses.padding ]: getResponsivePaddingStyle( padding ),
+			[ hasClasses.margin ]: getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
 			background: getBackGroundStyle(
@@ -80,19 +74,9 @@ const save = ( { attributes } ) => {
 				customGradient
 			),
 			color: customTextColor,
-			...getResponsivePaddingStyle(
-				config.responsiveStyleClassPrefix,
-				padding
-			),
-			...getResponsiveMarginStyle(
-				config.responsiveStyleClassPrefix,
-				margin
-			),
-			...getResponsiveFontSizeStyle(
-				config.responsiveStyleClassPrefix,
-				textSize,
-				fontSizeClass
-			),
+			...getResponsivePaddingStyle( padding ),
+			...getResponsiveMarginStyle( margin ),
+			...getResponsiveFontSizeStyle( textSize, fontSizeClass ),
 			fontWeight: fontWeight || undefined,
 			fontStyle: fontStyle || undefined,
 			lineHeight: lineHeight || undefined,

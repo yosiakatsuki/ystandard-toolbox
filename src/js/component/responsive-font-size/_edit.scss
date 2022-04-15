@@ -1,3 +1,5 @@
+@use "block" with ($editor:true);
+
 .ystdtb-responsive-font-size-unit-control {
   .components-input-control__container {
     max-width: 100px;
@@ -8,5 +10,12 @@
     font-size: 0.8em;
     line-height: 1.4;
     color: #757575;
+  }
+
+  .components-font-size-picker__controls {
+    margin-bottom: 0;
+    .components-button.components-color-palette__clear {
+      margin-top: 8px;
+    }
   }
 }

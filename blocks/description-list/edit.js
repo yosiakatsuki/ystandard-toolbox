@@ -28,16 +28,16 @@ const Edit = ( props ) => {
 	const { margin } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( 'ystdtb-dl-editor', {
-			'has-margin': !! getResponsiveMarginStyle( 'dl', margin ),
+			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
 	} );
 
 	const dlProps = {
 		className: classnames( config.blockClasses, {
-			'has-margin': !! getResponsiveMarginStyle( 'dl', margin ),
+			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
-			...getResponsiveMarginStyle( 'dl', margin ),
+			...getResponsiveMarginStyle( margin ),
 		},
 	};
 

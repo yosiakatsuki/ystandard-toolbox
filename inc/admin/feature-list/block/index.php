@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || die();
 		include __DIR__ . '/block-pattern.php';
 		include __DIR__ . '/slider.php';
 		include __DIR__ . '/box.php';
+		include __DIR__ . '/description-list.php';
 		include __DIR__ . '/icon-list.php';
 		include __DIR__ . '/timeline.php';
 		include __DIR__ . '/faq.php';
@@ -26,6 +27,7 @@ defined( 'ABSPATH' ) || die();
 		include __DIR__ . '/parts.php';
 		include __DIR__ . '/share-button.php';
 		include __DIR__ . '/block-style.php';
+		include __DIR__ . '/hidden-by-size.php';
 		include __DIR__ . '/banner-link.php';
 		?>
 	</div>

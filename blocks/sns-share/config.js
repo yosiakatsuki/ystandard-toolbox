@@ -51,7 +51,6 @@ export const attributes = {
 	},
 };
 export const supports = {
-	customClassName: false,
 	className: false,
 	html: false,
 	align: false,

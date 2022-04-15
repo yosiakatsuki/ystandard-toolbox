@@ -10,14 +10,14 @@ const TextColorControl = ( { id, value, onChange, label, ...props } ) => {
 	const handleOnChange = ( newValue ) => {
 		onChange( newValue );
 	};
+
 	return (
-		<BaseControl
-			id={ _id }
-			label={ label ? label : __( '色', 'ystandard-toolbox' ) }
-		>
+		<BaseControl>
 			<ColorPaletteControl
 				value={ _color }
 				onChange={ handleOnChange }
+				label={ label ?? __( '文字色', 'ystandard-toolbox' ) }
+				key={ _id }
 				{ ...props }
 			/>
 		</BaseControl>

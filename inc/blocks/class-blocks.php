@@ -191,7 +191,7 @@ class Blocks {
 				$block['dependencies'],
 				$block['version']
 			);
-			if ( ! is_null( $block['style'] ) ) {
+			if ( ! is_null( $block['style'] ) && ! is_admin() ) {
 				wp_register_style(
 					$block['style']['handle'],
 					$block['style']['src'],

@@ -12,9 +12,9 @@ const attributes = mergeDefaultAttributes( metadata.name, metadata.attributes );
 registerBlockType( metadata.name, {
 	...metadata,
 	...{
-		title: __( '定義リスト(dd) 入れ子', 'ystandard-toolbox' ),
+		title: __( '定義リスト 説明(dd)入れ子', 'ystandard-toolbox' ),
 		description: __(
-			'定義リスト 用語(dd)ブロック 入れ子版',
+			'定義リスト 説明(dd)ブロック 入れ子版',
 			'ystandard-toolbox'
 		),
 		icon: (

@@ -16,10 +16,10 @@ export default function save( { attributes } ) {
 	const { margin } = attributes;
 	const blockProps = useBlockProps.save( {
 		className: classnames( config.blockClasses, {
-			'has-margin': !! getResponsiveMarginStyle( 'dl', margin ),
+			'has-margin': !! getResponsiveMarginStyle( margin ),
 		} ),
 		style: {
-			...getResponsiveMarginStyle( 'dl', margin ),
+			...getResponsiveMarginStyle( margin ),
 		},
 	} );
 

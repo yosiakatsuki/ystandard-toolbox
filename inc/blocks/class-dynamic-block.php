@@ -38,6 +38,20 @@ abstract class Dynamic_Block {
 	protected $block_attributes = [];
 
 	/**
+	 * クラス名
+	 *
+	 * @var array
+	 */
+	protected $class_names = [];
+
+	/**
+	 * スタイル
+	 *
+	 * @var array
+	 */
+	protected $styles = [];
+
+	/**
 	 * Dynamic_Block constructor.
 	 */
 	public function __construct() {
@@ -144,5 +158,39 @@ abstract class Dynamic_Block {
 		}
 
 		return $attributes;
+	}
+
+	/**
+	 * クラス名追加.
+	 *
+	 * @param string|array $class Class Names.
+	 * @param bool         $flag  Flag.
+	 *
+	 * @return void
+	 */
+	protected function add_class_name( $class, $flag = true ) {
+		if ( ! is_array( $class ) ) {
+			$class = explode( ' ', $class );
+		}
+		if ( $flag ) {
+			$this->class_names = array_unique( array_merge( $this->class_names, $class ) );
+		}
+	}
+
+	/**
+	 * クラス名取得.
+	 *
+	 * @param array $attributes ブロックパラメーター.
+	 *
+	 * @return string
+	 */
+	protected function get_class_name( $attributes = [] ) {
+		$classes = [];
+		if ( array_key_exists( 'className', $attributes ) ) {
+			$classes[] = $attributes['className'];
+		}
+		$classes = array_merge( $classes, $this->class_names );
+
+		return implode( ' ', array_filter( $classes ) );
 	}
 }

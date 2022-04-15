@@ -13,7 +13,10 @@ registerBlockType( metadata.name, {
 	...metadata,
 	...{
 		title: __( '定義リスト(横並び)', 'ystandard-toolbox' ),
-		description: __( '定義リスト(横並び)ブロック', 'ystandard-toolbox' ),
+		description: __(
+			'定義リスト 用語(dt)と説明(dd)を横並びに表示するブロック',
+			'ystandard-toolbox'
+		),
 		icon: (
 			<Columns
 				stroke={ ystdtbConfig.color.iconForeground }

@@ -2,7 +2,7 @@
 
 @mixin media-breakpoint($name,$editor: false) {
   $breakpoints: var.$breakpoints;
-  @if  true == $editor {
+  @if true == $editor {
     $breakpoints: var.$breakpoints_editor;
   }
   $breakpoint: map-get($breakpoints, $name);
@@ -19,7 +19,7 @@
 
 @mixin media-breakpoint-down($name,$editor: false) {
   $breakpoints: var.$breakpoints;
-  @if  true == $editor {
+  @if true == $editor {
     $breakpoints: var.$breakpoints_editor;
   }
   $breakpoint: map-get($breakpoints, $name);
@@ -56,6 +56,26 @@
   }
 }
 
+
+@mixin responsive-custom-property-component($property,$editor:false) {
+  @include media-breakpoint(lg, $editor) {
+    [style*="--ystdtb-#{$property}-desktop"] {
+      #{$property}: var(--ystdtb-#{$property}-desktop) !important;
+    }
+  }
+
+  @include media-breakpoint-between(sm, lg, $editor) {
+    [style*="--ystdtb-#{$property}-tablet"] {
+      #{$property}: var(--ystdtb-#{$property}-tablet) !important;
+    }
+  }
+
+  @include media-breakpoint-down(sm, $editor) {
+    [style*="--ystdtb-#{$property}-mobile"] {
+      #{$property}: var(--ystdtb-#{$property}-mobile) !important;
+    }
+  }
+}
 
 @mixin responsive-custom-property($prefix,$property) {
   $_prefix: "#{$prefix}-#{$property}";

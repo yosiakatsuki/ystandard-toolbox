@@ -75,6 +75,9 @@ class SNS_Share_Block extends Dynamic_Block {
 				'type'    => 'string',
 				'default' => '',
 			],
+			'className'          => [
+				'type' => 'string',
+			],
 		];
 		add_filter(
 			self::REGISTER_DYNAMIC_BLOCK_HOOK . $this->block_name,
@@ -93,10 +96,11 @@ class SNS_Share_Block extends Dynamic_Block {
 	 * @return false|string
 	 */
 	public function render( $attributes, $content = null ) {
-		$classes = 'ystdtb-sns-share';
+		$this->add_class_name( 'ystdtb-sns-share' );
 		if ( isset( $attributes['align'] ) && '' !== $attributes['align'] ) {
-			$classes .= ' has-align-' . $attributes['align'];
+			$this->add_class_name( ' has-align-' . $attributes['align'] );
 		}
+		$classes = $this->get_class_name( $attributes );
 
 		$attributes = Utility::parse_shortcode_attributes(
 			$this->migration_attributes( $attributes )

@@ -1,13 +1,11 @@
+@use "./block";
 @use "./dt/edit" as dt;
 @use "./dd-simple/edit" as dd-simple;
 @use "./dd-box/edit" as dd-box;
 @use "./dl-column/edit" as column;
 
 .ystdtb-dl-editor {
-  &.has-margin {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+
 }
 
 .ystdtb-dl {
@@ -15,32 +13,31 @@
     > dt,
     > dd,
     > .ystdtb-dl-column {
-      &:not(.has-margin) {
         margin-bottom: 0;
-      }
 
-      &:not(.has-margin):first-child {
+      &:first-child {
         margin-top: 0;
       }
 
-      &:not(.has-margin).has-background {
+      &.has-background {
         margin-top: 0;
       }
     }
 
-    > dt:not(.has-margin) {
+    > dt {
       margin-top: var(--ystd-layout-gap, 1.5em);
     }
 
-    > dd:not(.has-margin) {
+    > dd {
       margin-top: 0.5em;
     }
 
-    > .ystdtb-dl-column:not(.has-margin) {
+    > .ystdtb-dl-column {
       margin-top: 0.5em;
     }
 
     > .block-list-appender {
+      position: relative;
       margin: 8px 0 !important;
     }
   }

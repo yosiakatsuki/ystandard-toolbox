@@ -6,14 +6,6 @@
     @include global.responsive-custom-property("dt", "padding");
   }
 
-  &.has-margin {
-    @include global.responsive-custom-property("dt", "margin");
-  }
-
-  &.has-font-size {
-    @include global.responsive-custom-property("dt", "font-size");
-  }
-
   &.has-background:not(.has-padding) {
     padding: 1em 1.5em
   }

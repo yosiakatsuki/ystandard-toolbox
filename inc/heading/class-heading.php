@@ -147,10 +147,10 @@ class Heading {
 	private function get_heading_css() {
 		$options = self::get_option();
 		// 初期値等取得.
-		$this->schema = Utility::get_json_file_contents(
+		$this->schema = Filesystem::get_json_file_contents(
 			YSTDTB_PATH . '/js/admin/heading/schema.json'
 		);
-		$this->preset = Utility::get_json_file_contents(
+		$this->preset = Filesystem::get_json_file_contents(
 			YSTDTB_PATH . '/js/admin/heading/preset.json'
 		);
 

@@ -14,10 +14,6 @@
     }
   }
 
-  &.has-margin {
-    @include global.responsive-custom-property("dl-column", "margin");
-  }
-
   > dt,
   > dd {
     min-width: 0;

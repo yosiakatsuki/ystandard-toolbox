@@ -128,10 +128,7 @@ const BorderControl = ( { value, onChange, id, label } ) => {
 						</BaseControl>
 					</div>
 				</div>
-				<BaseControl
-					id={ 'ystdtb-component-border-color' }
-					label={ __( '色', 'ystandard-toolbox' ) }
-				>
+				<BaseControl>
 					<ColorPaletteControl
 						value={ value?.color?.hex }
 						onChange={ handleColorOnChange }

@@ -6,9 +6,14 @@ import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
 	parseResponsiveValues,
-	getResponsiveCustomProperties,
 } from '@ystd/helper/responsive';
-import { getSpacing, getSpacingCSS } from '@ystd/helper/spacing';
+import {
+	getSpacingInfo,
+	getSpacingProps,
+	parseSpacing,
+} from '@ystd/helper/spacing';
+import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
+import { parseObject } from '@ystd/helper/object';
 
 const ResponsiveSpacing = ( props ) => {
 	const { label, values, onChange, units, inputProps } = props;
@@ -22,7 +27,7 @@ const ResponsiveSpacing = ( props ) => {
 		onChange(
 			parseResponsiveValues( {
 				...values,
-				[ responsive.desktop ]: getSpacing( nextValues ),
+				[ responsive.desktop ]: parseSpacing( nextValues ),
 			} )
 		);
 	};
@@ -30,7 +35,7 @@ const ResponsiveSpacing = ( props ) => {
 		onChange(
 			parseResponsiveValues( {
 				...values,
-				[ responsive.tablet ]: getSpacing( nextValues ),
+				[ responsive.tablet ]: parseSpacing( nextValues ),
 			} )
 		);
 	};
@@ -38,11 +43,10 @@ const ResponsiveSpacing = ( props ) => {
 		onChange(
 			parseResponsiveValues( {
 				...values,
-				[ responsive.mobile ]: getSpacing( nextValues ),
+				[ responsive.mobile ]: parseSpacing( nextValues ),
 			} )
 		);
 	};
-
 	return (
 		<>
 			<ResponsiveTab label={ label }>
@@ -110,22 +114,65 @@ const ResponsiveSpacing = ( props ) => {
 					);
 				} }
 			</ResponsiveTab>
+			<ResponsiveValuesInfo
+				desktop={ getSpacingInfo( valueDesktop ) }
+				tablet={ getSpacingInfo( valueTablet ) }
+				mobile={ getSpacingInfo( valueMobile ) }
+				style={ { marginTop: 0 } }
+			/>
 		</>
 	);
 };
 export default ResponsiveSpacing;
 
-export const getResponsiveSpacingStyle = ( propertyName, prefix, values ) => {
+const getResponsiveSpacingCustomProps = ( type, value, suffix = '' ) => {
+	const prefix = '--ystdtb';
+	const _suffix = suffix ? `-${ suffix }` : '';
+	if ( ! value || 'object' !== typeof value ) {
+		return undefined;
+	}
+	const getProps = ( spacing, device, isResponsive = true ) => {
+		if ( ! spacing || 'object' !== typeof spacing ) {
+			return undefined;
+		}
+		let result = {};
+		Object.keys( spacing ).map( ( key ) => {
+			const customProp = isResponsive
+				? `${ prefix }-${ key }${ _suffix }-${ device }`
+				: key;
+			result = {
+				...result,
+				[ customProp ]: spacing[ key ],
+			};
+			return true;
+		} );
+		return result;
+	};
+	return {
+		...getProps(
+			value?.desktop,
+			'desktop',
+			!! ( value?.tablet || value?.mobile )
+		),
+		...getProps( value?.tablet, 'tablet' ),
+		...getProps( value?.mobile, 'mobile' ),
+	};
+};
+
+export const getResponsiveSpacingStyle = ( type, values, suffix = '' ) => {
 	const parsedValue = parseResponsiveValues( {
-		desktop: getSpacingCSS( values?.desktop ),
-		tablet: getSpacingCSS( values?.tablet ),
-		mobile: getSpacingCSS( values?.mobile ),
+		desktop: getSpacingProps( type, values?.desktop ),
+		tablet: getSpacingProps( type, values?.tablet ),
+		mobile: getSpacingProps( type, values?.mobile ),
 	} );
-	return getResponsiveCustomProperties( propertyName, prefix, parsedValue );
+
+	return parseObject(
+		getResponsiveSpacingCustomProps( type, parsedValue, suffix )
+	);
 };
-export const getResponsivePaddingStyle = ( prefix, values ) => {
-	return getResponsiveSpacingStyle( 'padding', prefix, values );
+export const getResponsivePaddingStyle = ( values, suffix = '' ) => {
+	return getResponsiveSpacingStyle( 'padding', values, suffix );
 };
-export const getResponsiveMarginStyle = ( prefix, values ) => {
-	return getResponsiveSpacingStyle( 'margin', prefix, values );
+export const getResponsiveMarginStyle = ( values, suffix = '' ) => {
+	return getResponsiveSpacingStyle( 'margin', values, suffix );
 };
