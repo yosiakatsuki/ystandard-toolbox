@@ -48,8 +48,8 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: npm run lint-js
-        run: npm run lint-js
+      - name: npm run lint:js
+        run: npm run lint:js
 
       - name: Notify Lint
         uses: 8398a7/action-slack@v3.8.0
