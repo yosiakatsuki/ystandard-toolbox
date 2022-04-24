@@ -10,7 +10,7 @@
   @include global.responsive-custom-property-child("> .block-editor-inner-blocks > .block-editor-block-list__layout > dt", "dl-column", "width");
 
   > .block-editor-inner-blocks > .block-editor-block-list__layout {
-    @include global.media-breakpoint(md, true) {
+    @include global.media-breakpoint(lg, true) {
       display: flex;
     }
 
@@ -28,13 +28,13 @@
     }
 
     > dt {
-      @include global.media-breakpoint(md, true) {
+      @include global.media-breakpoint(lg, true) {
         margin-right: 1em;
       }
     }
 
     > dd {
-      @include global.media-breakpoint(md, true) {
+      @include global.media-breakpoint(lg, true) {
         margin-top: 0;
       }
     }
@@ -57,7 +57,7 @@
 
   &.is-not-stacked-on-tablet {
     > .block-editor-inner-blocks > .block-editor-block-list__layout {
-      @include global.media-breakpoint-between(sm, md, true) {
+      @include global.media-breakpoint-between(sm, lg, true) {
         display: flex;
 
         > dt {
@@ -80,7 +80,7 @@
       }
 
       > dt {
-        @include global.media-breakpoint(md, true) {
+        @include global.media-breakpoint(lg, true) {
           border-right: 0;
         }
       }
@@ -88,7 +88,7 @@
       > dd {
         border-top: 0;
 
-        @include global.media-breakpoint(md, true) {
+        @include global.media-breakpoint(lg, true) {
           border-top: var(--ystdtb-dl-column-border);
         }
       }
@@ -110,7 +110,7 @@
 
     &.is-not-stacked-on-tablet {
       > .block-editor-inner-blocks > .block-editor-block-list__layout {
-        @include global.media-breakpoint-between(sm, md, true) {
+        @include global.media-breakpoint-between(sm, lg, true) {
           > dt {
             border-right: 0;
           }
@@ -132,7 +132,7 @@
         }
 
         > dd {
-          @include global.media-breakpoint(md, true) {
+          @include global.media-breakpoint(lg, true) {
             border-top: 0;
           }
         }
@@ -150,7 +150,7 @@
 
       &.is-not-stacked-on-tablet {
         > .block-editor-inner-blocks > .block-editor-block-list__layout {
-          @include global.media-breakpoint-between(sm, md, true) {
+          @include global.media-breakpoint-between(sm, lg, true) {
             > dd {
               border-top: 0;
             }
