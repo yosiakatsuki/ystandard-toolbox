@@ -17,15 +17,19 @@
       margin-top: 0;
     }
   }
+  > .ystdtb-dl-column {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 
-  > dt {
+  > dt,
+  > .ystdtb-dl-column {
     margin-top: var(--ystd-layout-gap, 1.5em);
   }
 
-  > dd {
-    margin-top: 0.5em;
-  }
-  > .ystdtb-dl-column {
+  > dd,
+  > .ystdtb-dl-column + .ystdtb-dl-column {
     margin-top: 0.5em;
   }
 }

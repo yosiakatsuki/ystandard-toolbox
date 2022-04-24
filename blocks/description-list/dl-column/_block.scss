@@ -2,7 +2,7 @@
 
 .ystdtb-dl-column {
 
-  @include global.media-breakpoint(md) {
+  @include global.media-breakpoint(lg) {
     display: flex;
   }
 
@@ -20,18 +20,19 @@
   }
 
   > dt {
-    margin-top: 0;
+    margin-top: var(--ystd-layout-gap, 1.5em);
 
-    @include global.media-breakpoint(md) {
+    @include global.media-breakpoint(lg) {
+      margin-top: 0;
       margin-right: 1em;
     }
   }
 
   > dd {
-    margin-top: 1em;
+    margin-top: 0.5em;
     flex-grow: 1;
 
-    @include global.media-breakpoint(md) {
+    @include global.media-breakpoint(lg) {
       margin-top: 0;
     }
   }
@@ -41,6 +42,7 @@
       display: flex;
 
       > dt {
+        margin-top: 0;
         margin-right: 1em;
       }
       > dd {
@@ -50,10 +52,11 @@
   }
 
   &.is-not-stacked-on-tablet {
-    @include global.media-breakpoint-between(sm, md) {
+    @include global.media-breakpoint-between(sm, lg) {
       display: flex;
 
       > dt {
+        margin-top: 0;
         margin-right: 1em;
       }
       > dd {
@@ -71,7 +74,7 @@
     }
 
     > dt {
-      @include global.media-breakpoint(md) {
+      @include global.media-breakpoint(lg) {
         border-right: 0;
       }
     }
@@ -79,7 +82,7 @@
     > dd {
       border-top: 0;
 
-      @include global.media-breakpoint(md) {
+      @include global.media-breakpoint(lg) {
         border-top: var(--ystdtb-dl-column-border);
       }
     }
@@ -97,7 +100,7 @@
     }
 
     &.is-not-stacked-on-tablet {
-      @include global.media-breakpoint-between(sm, md) {
+      @include global.media-breakpoint-between(sm, lg) {
         > dt {
           border-right: 0;
         }
@@ -116,7 +119,7 @@
       }
 
       > dd {
-        @include global.media-breakpoint(md) {
+        @include global.media-breakpoint(lg) {
           border-top: 0;
         }
       }
@@ -130,7 +133,7 @@
       }
 
       &.is-not-stacked-on-tablet {
-        @include global.media-breakpoint-between(sm, md) {
+        @include global.media-breakpoint-between(sm, lg) {
           > dd {
             border-top: 0;
           }
