@@ -53,8 +53,10 @@ const Posts = ( props ) => {
 		const { getPostTypes, getTaxonomy, getEntityRecords } = select(
 			'core'
 		);
-		const _postTypes = getPostTypes() ? getPostTypes() : [];
-		const _taxonomy = getTaxonomy() ? getTaxonomy() : [];
+		const getPostTypesResult = getPostTypes( { per_page: -1 } );
+		const getTaxonomyResult = getTaxonomy();
+		const _postTypes = getPostTypesResult || [];
+		const _taxonomy = getTaxonomyResult || [];
 		const hierarchicalPostType = _postTypes
 			.filter( ( type ) => {
 				return type.hierarchical;
