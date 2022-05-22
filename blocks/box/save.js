@@ -71,7 +71,7 @@ export default function save( { attributes } ) {
 	const blockProps = useBlockProps.save( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
-			'--ystdtb-box-border-width': boxBorderSize,
+			'--ystdtb-box-border-width': boxBorderSize || undefined,
 			'--ystdtb-box-padding-top': getSpacing(
 				boxPadding,
 				'top',
