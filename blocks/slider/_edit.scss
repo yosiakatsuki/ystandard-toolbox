@@ -76,6 +76,9 @@
           > *:not(.block-list-appender) {
             width: calc(100vw - 120px);
             margin: 0 20px 0 0;
+            flex-shrink: 0;
+            flex-grow: 0;
+            min-width: 1px;
 
             @media (min-width: 783px) {
               width: calc(100vw - 300px - 36px - 120px);
