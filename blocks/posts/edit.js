@@ -1,12 +1,8 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
-	BaseControl,
 	ToggleControl,
-	TextControl,
 	RangeControl,
 	SelectControl,
 	Disabled,
@@ -15,11 +11,10 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 import { orderbySelect } from './config';
 import _toNumber from '../../src/js/blocks/function/_toNumber';
-import _getOptionsDefault from '../../src/js/blocks/function/_getOptionsDefault';
-import _getTermTree from '../../src/js/blocks/function/_getTermTree';
-import _getParentPages from '../../src/js/blocks/function/_getParentPages';
 import * as BlockOption from './inspector-controls';
 import PanelThumbnail from './inspector-controls/thumbnail';
+import PanelSearchOption from './inspector-controls/search-option';
+import AdvancedSearch from './inspector-controls/advanced-search';
 
 const Posts = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -30,118 +25,11 @@ const Posts = ( props ) => {
 		colMobile,
 		colTablet,
 		colPc,
-		taxonomy,
-		termSlug,
 		showDate,
 		showCategory,
 		showExcerpt,
-		postType,
-		postIn,
-		postNameIn,
-		postParent,
 		listType,
 	} = attributes;
-
-	const { postTypes, taxonomyList, hierarchicalPosts } = useSelect(
-		( select ) => {
-			const { getPostTypes, getTaxonomy, getEntityRecords } = select(
-				'core'
-			);
-			const getPostTypesResult = getPostTypes( { per_page: -1 } );
-			const getTaxonomyResult = getTaxonomy();
-			const _postTypes = getPostTypesResult || [];
-			const _taxonomy = getTaxonomyResult || [];
-			const hierarchicalPostType = _postTypes
-				.filter( ( type ) => {
-					return type.hierarchical;
-				} )
-				.map( ( { slug } ) => {
-					return slug;
-				} );
-			let _hierarchicalPosts = [];
-			if ( hierarchicalPostType.includes( postType ) ) {
-				_hierarchicalPosts = _getParentPages(
-					getEntityRecords( 'postType', postType, {
-						per_page: -1,
-					} ),
-					0,
-					0
-				);
-				if ( 0 < _hierarchicalPosts.length ) {
-					_hierarchicalPosts = [
-						_getOptionsDefault(),
-						..._hierarchicalPosts,
-					];
-				}
-			}
-
-			return {
-				postTypes: _postTypes.filter( ( type ) => {
-					return ! (
-						! type.viewable ||
-						'ys-parts' === type.slug ||
-						'attachment' === type.slug
-					);
-				} ),
-				taxonomyList: _taxonomy,
-				hierarchicalPosts: _hierarchicalPosts,
-			};
-		}
-	);
-
-	const postTypesOptions = postTypes.map( ( { name, slug } ) => ( {
-		value: slug,
-		label: name,
-	} ) );
-
-	const selectedPostType = postTypes.filter( ( type ) => {
-		return type.slug === postType;
-	} );
-
-	const taxonomyOptions = () => {
-		const _taxonomy = selectedPostType.length
-			? selectedPostType[ 0 ].taxonomies
-			: [];
-		return [
-			_getOptionsDefault(),
-			..._taxonomy.map( ( value ) => {
-				if ( taxonomyList.hasOwnProperty( value ) ) {
-					return {
-						value: taxonomyList[ value ].slug,
-						label: taxonomyList[ value ].name,
-					};
-				}
-				return {};
-			} ),
-		];
-	};
-	const { termOptions } = useSelect( ( select ) => {
-		const { getEntityRecords } = select( 'core' );
-		let terms = getEntityRecords( 'taxonomy', taxonomy, {
-			per_page: -1,
-		} );
-		if ( ! terms ) {
-			terms = [];
-		}
-		let tree = terms;
-		if (
-			taxonomyList.hasOwnProperty( taxonomy ) &&
-			taxonomyList[ taxonomy ].hierarchical
-		) {
-			tree = _getTermTree( terms, 0, 0 );
-		} else {
-			tree = tree.map( ( value ) => {
-				return {
-					value: value.slug,
-					label: value.name,
-				};
-			} );
-		}
-
-		return {
-			termOptions: [ _getOptionsDefault(), ...tree ],
-		};
-	} );
 
 	const orderSelected = `${ orderby }/${ order }`;
 
@@ -278,117 +166,9 @@ const Posts = ( props ) => {
 							</>
 						) }
 					</PanelBody>
-					<PanelBody
-						initialOpen={ false }
-						title={ __( '絞り込み設定', 'ystandard-toolbox' ) }
-					>
-						<SelectControl
-							label={ __( '投稿タイプ', 'ystandard-toolbox' ) }
-							value={ postType }
-							options={ postTypesOptions }
-							onChange={ ( value ) => {
-								setAttributes( {
-									postType: value,
-									postIn: '',
-									postNameIn: '',
-									postParent: '',
-								} );
-							} }
-						/>
-						<SelectControl
-							label={ __( '分類', 'ystandard-toolbox' ) }
-							value={ taxonomy }
-							options={ taxonomyOptions() }
-							onChange={ ( value ) => {
-								setAttributes( {
-									taxonomy: value,
-									postIn: '',
-									postNameIn: '',
-									postParent: '',
-								} );
-							} }
-						/>
-						{ !! taxonomy && (
-							<SelectControl
-								label={ __(
-									'カテゴリー・タグ',
-									'ystandard-toolbox'
-								) }
-								value={ termSlug }
-								options={ termOptions }
-								onChange={ ( value ) => {
-									setAttributes( {
-										termSlug: value,
-										postIn: '',
-										postNameIn: '',
-										postParent: '',
-									} );
-								} }
-							/>
-						) }
-					</PanelBody>
-					<PanelBody
-						initialOpen={ false }
-						title={ __( '高度な絞り込み', 'ystandard-toolbox' ) }
-					>
-						<BaseControl>
-							<TextControl
-								label={ __(
-									'投稿ID指定',
-									'ystandard-toolbox'
-								) }
-								value={ postIn }
-								onChange={ ( value ) => {
-									setAttributes( {
-										taxonomy: '',
-										termSlug: '',
-										postIn: value,
-										postNameIn: '',
-										postParent: '',
-									} );
-								} }
-							/>
-						</BaseControl>
-						<BaseControl>
-							<TextControl
-								label={ __(
-									'投稿名指定',
-									'ystandard-toolbox'
-								) }
-								value={ postNameIn }
-								onChange={ ( value ) => {
-									setAttributes( {
-										taxonomy: '',
-										termSlug: '',
-										postIn: '',
-										postNameIn: value,
-										postParent: '',
-									} );
-								} }
-							/>
-						</BaseControl>
-						{ 0 < hierarchicalPosts.length && (
-							<BaseControl>
-								<SelectControl
-									label={ __(
-										'親ページ指定',
-										'ystandard-toolbox'
-									) }
-									value={ postParent }
-									options={ hierarchicalPosts }
-									onChange={ ( value ) => {
-										setAttributes( {
-											taxonomy: '',
-											termSlug: '',
-											postIn: '',
-											postNameIn: '',
-											postParent: value,
-										} );
-									} }
-								/>
-							</BaseControl>
-						) }
-					</PanelBody>
+
+					<PanelSearchOption { ...props } />
+					<AdvancedSearch { ...props } />
 				</InspectorControls>
 			</>
 			<Disabled>
