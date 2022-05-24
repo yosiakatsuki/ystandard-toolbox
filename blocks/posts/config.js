@@ -78,6 +78,12 @@ export const attributes = {
 	postParent: {
 		type: 'string',
 	},
+	offset: {
+		type: 'number',
+	},
+	offsetMobile: {
+		type: 'number',
+	},
 	align: {
 		type: 'string',
 		default: '',

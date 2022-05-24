@@ -111,6 +111,12 @@ class Posts_Block extends Dynamic_Block {
 			'postParent'     => [
 				'type' => 'string',
 			],
+			'offset'         => [
+				'type' => 'number',
+			],
+			'offsetMobile'   => [
+				'type' => 'number',
+			],
 			'className'      => [
 				'type' => 'string',
 			],
@@ -172,23 +178,24 @@ class Posts_Block extends Dynamic_Block {
 	 */
 	private function migration_attributes( $attributes ) {
 
-		$attributes['list_type']        = $attributes['listType'];
+		$attributes['list_type']           = $attributes['listType'];
 		$attributes['list_type_mobile   '] = $attributes['listTypeMobile'];
-		$attributes['col_sp']           = $attributes['colMobile'];
-		$attributes['col_tablet']       = $attributes['colTablet'];
-		$attributes['col_pc']           = $attributes['colPc'];
-		$attributes['term_slug']        = $attributes['termSlug'];
-		$attributes['show_img']         = $attributes['showImg'];
-		$attributes['show_date']        = $attributes['showDate'];
-		$attributes['show_category']    = $attributes['showCategory'];
-		$attributes['show_excerpt']     = $attributes['showExcerpt'];
-		$attributes['excerpt_length']   = $attributes['excerptLength'];
-		$attributes['thumbnail_size']   = $attributes['thumbnailSize'];
-		$attributes['thumbnail_ratio']  = $attributes['thumbnailRatio'];
-		$attributes['post_type']        = $attributes['postType'];
-		$attributes['post__in']         = $attributes['postIn'];
-		$attributes['post_name__in']    = $attributes['postNameIn'];
-		$attributes['post_parent']      = $attributes['postParent'];
+		$attributes['col_sp']              = $attributes['colMobile'];
+		$attributes['col_tablet']          = $attributes['colTablet'];
+		$attributes['col_pc']              = $attributes['colPc'];
+		$attributes['term_slug']           = $attributes['termSlug'];
+		$attributes['show_img']            = $attributes['showImg'];
+		$attributes['show_date']           = $attributes['showDate'];
+		$attributes['show_category']       = $attributes['showCategory'];
+		$attributes['show_excerpt']        = $attributes['showExcerpt'];
+		$attributes['excerpt_length']      = $attributes['excerptLength'];
+		$attributes['thumbnail_size']      = $attributes['thumbnailSize'];
+		$attributes['thumbnail_ratio']     = $attributes['thumbnailRatio'];
+		$attributes['post_type']           = $attributes['postType'];
+		$attributes['post__in']            = $attributes['postIn'];
+		$attributes['post_name__in']       = $attributes['postNameIn'];
+		$attributes['post_parent']         = $attributes['postParent'];
+		$attributes['offset_mobile']       = $attributes['offsetMobile'];
 
 		return $attributes;
 	}

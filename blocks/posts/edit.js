@@ -15,6 +15,7 @@ import * as BlockOption from './inspector-controls';
 import PanelThumbnail from './inspector-controls/thumbnail';
 import PanelSearchOption from './inspector-controls/search-option';
 import AdvancedSearch from './inspector-controls/advanced-search';
+import AdvancedDesign from './inspector-controls/advanced-design';
 
 const Posts = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -169,6 +170,7 @@ const Posts = ( props ) => {
 
 					<PanelSearchOption { ...props } />
 					<AdvancedSearch { ...props } />
+					<AdvancedDesign { ...props } />
 				</InspectorControls>
 			</>
 			<Disabled>

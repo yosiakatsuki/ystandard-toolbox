@@ -1,5 +1,11 @@
+/**
+ * WordPress.
+ */
 import { __ } from '@wordpress/i18n';
-import { SelectControl } from '@wordpress/components';
+import { BaseControl, SelectControl } from '@wordpress/components';
+/**
+ * yStandard Toolbox.
+ */
 import { getBlockConfig } from '@ystd/helper/blockConfig';
 import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
 
@@ -18,35 +24,39 @@ const ListDesign = ( { attributes, setAttributes } ) => {
 	}
 
 	return (
-		<ResponsiveTab
-			label={ __( 'デザイン', 'ystandard-toolbox' ) }
-			hasTablet={ false }
-		>
-			{ ( tab ) => {
-				return (
-					<>
-						{ tabType.desktop === tab.name && (
-							<SelectControl
-								value={ listType }
-								options={ options }
-								onChange={ ( value ) => {
-									setAttributes( { listType: value } );
-								} }
-							/>
-						) }
-						{ tabType.mobile === tab.name && (
-							<SelectControl
-								value={ listTypeMobile }
-								options={ options }
-								onChange={ ( value ) => {
-									setAttributes( { listTypeMobile: value } );
-								} }
-							/>
-						) }
-					</>
-				);
-			} }
-		</ResponsiveTab>
+		<BaseControl>
+			<ResponsiveTab
+				label={ __( 'デザイン', 'ystandard-toolbox' ) }
+				hasTablet={ false }
+			>
+				{ ( tab ) => {
+					return (
+						<>
+							{ tabType.desktop === tab.name && (
+								<SelectControl
+									value={ listType }
+									options={ options }
+									onChange={ ( value ) => {
+										setAttributes( { listType: value } );
+									} }
+								/>
+							) }
+							{ tabType.mobile === tab.name && (
+								<SelectControl
+									value={ listTypeMobile }
+									options={ options }
+									onChange={ ( value ) => {
+										setAttributes( {
+											listTypeMobile: value,
+										} );
+									} }
+								/>
+							) }
+						</>
+					);
+				} }
+			</ResponsiveTab>
+		</BaseControl>
 	);
 };
 
