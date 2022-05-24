@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl } from '@wordpress/components';
 import { getBlockConfig } from '@ystd/helper/blockConfig';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
 
 const listTypes = [
 	{ label: __( 'カード', 'ystandard-toolbox' ), value: 'card' },
@@ -9,7 +10,7 @@ const listTypes = [
 ];
 
 const ListDesign = ( { attributes, setAttributes } ) => {
-	const { listType } = attributes;
+	const { listType, listTypeMobile } = attributes;
 	const config = getBlockConfig( 'postsDesign', [] );
 	let options = listTypes;
 	if ( config ) {
@@ -17,16 +18,35 @@ const ListDesign = ( { attributes, setAttributes } ) => {
 	}
 
 	return (
-		<>
-			<SelectControl
-				label={ __( 'デザイン', 'ystandard-toolbox' ) }
-				value={ listType }
-				options={ options }
-				onChange={ ( value ) => {
-					setAttributes( { listType: value } );
-				} }
-			/>
-		</>
+		<ResponsiveTab
+			label={ __( 'デザイン', 'ystandard-toolbox' ) }
+			hasTablet={ false }
+		>
+			{ ( tab ) => {
+				return (
+					<>
+						{ tabType.desktop === tab.name && (
+							<SelectControl
+								value={ listType }
+								options={ options }
+								onChange={ ( value ) => {
+									setAttributes( { listType: value } );
+								} }
+							/>
+						) }
+						{ tabType.mobile === tab.name && (
+							<SelectControl
+								value={ listTypeMobile }
+								options={ options }
+								onChange={ ( value ) => {
+									setAttributes( { listTypeMobile: value } );
+								} }
+							/>
+						) }
+					</>
+				);
+			} }
+		</ResponsiveTab>
 	);
 };
 

@@ -17,6 +17,9 @@ export const attributes = {
 		type: 'string',
 		default: 'card',
 	},
+	listTypeMobile: {
+		type: 'string',
+	},
 	colMobile: {
 		type: 'number',
 		default: 1,

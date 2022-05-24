@@ -8,7 +8,58 @@ export const tabType = {
 	mobile: 'mobile',
 };
 
-const ResponsiveTab = ( { label, activeClass, onSelect, children } ) => {
+const ResponsiveTab = ( {
+	label,
+	activeClass,
+	onSelect,
+	children,
+	hasDesktop = true,
+	hasTablet = true,
+	hasMobile = true,
+} ) => {
+	let tabs = [];
+	if ( hasDesktop ) {
+		tabs = [
+			...tabs,
+			...[
+				{
+					name: tabType.desktop,
+					title: <Monitor />,
+					className: classnames(
+						'ystdtb-responsive-tab__tab-button'
+					),
+				},
+			],
+		];
+	}
+	if ( hasTablet ) {
+		tabs = [
+			...tabs,
+			...[
+				{
+					name: tabType.tablet,
+					title: <Tablet />,
+					className: classnames(
+						'ystdtb-responsive-tab__tab-button'
+					),
+				},
+			],
+		];
+	}
+	if ( hasMobile ) {
+		tabs = [
+			...tabs,
+			...[
+				{
+					name: tabType.mobile,
+					title: <Smartphone />,
+					className: classnames(
+						'ystdtb-responsive-tab__tab-button'
+					),
+				},
+			],
+		];
+	}
 	return (
 		<div className="ystdtb-responsive-tab">
 			{ !! label && (
@@ -22,29 +73,7 @@ const ResponsiveTab = ( { label, activeClass, onSelect, children } ) => {
 				} ) }
 				activeClass={ activeClass }
 				onSelect={ onSelect }
-				tabs={ [
-					{
-						name: tabType.desktop,
-						title: <Monitor />,
-						className: classnames(
-							'ystdtb-responsive-tab__tab-button'
-						),
-					},
-					{
-						name: tabType.tablet,
-						title: <Tablet />,
-						className: classnames(
-							'ystdtb-responsive-tab__tab-button'
-						),
-					},
-					{
-						name: tabType.mobile,
-						title: <Smartphone />,
-						className: classnames(
-							'ystdtb-responsive-tab__tab-button'
-						),
-					},
-				] }
+				tabs={ tabs }
 			>
 				{ children }
 			</TabPanel>
