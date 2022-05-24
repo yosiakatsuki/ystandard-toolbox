@@ -181,7 +181,7 @@ class Posts_Block extends Dynamic_Block {
 	 */
 	private function migration_attributes( $attributes ) {
 
-		$attributes['count_mobile']           = $attributes['countMobile'];
+		$attributes['count_mobile']        = $attributes['countMobile'];
 		$attributes['list_type']           = $attributes['listType'];
 		$attributes['list_type_mobile   '] = $attributes['listTypeMobile'];
 		$attributes['col_sp']              = $attributes['colMobile'];
