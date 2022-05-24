@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody } from '@wordpress/components';
 import Offset from './offset';
 
-const AdvancedDesign = ( props ) => {
+const PanelAdvancedDesign = ( props ) => {
 	return (
 		<PanelBody
 			initialOpen={ false }
@@ -15,4 +15,4 @@ const AdvancedDesign = ( props ) => {
 		</PanelBody>
 	);
 };
-export default AdvancedDesign;
+export default PanelAdvancedDesign;

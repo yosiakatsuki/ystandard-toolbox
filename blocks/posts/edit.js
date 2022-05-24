@@ -4,25 +4,21 @@ import {
 	PanelBody,
 	ToggleControl,
 	RangeControl,
-	SelectControl,
 	Disabled,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
-import { orderbySelect } from './config';
 import _toNumber from '../../src/js/blocks/function/_toNumber';
 import * as BlockOption from './inspector-controls';
 import PanelThumbnail from './inspector-controls/thumbnail';
 import PanelSearchOption from './inspector-controls/search-option';
-import AdvancedSearch from './inspector-controls/advanced-search';
-import AdvancedDesign from './inspector-controls/advanced-design';
+import PanelAdvancedSearch from './inspector-controls/advanced-search';
+import PanelAdvancedDesign from './inspector-controls/advanced-design';
+import PanelBasicOption from './inspector-controls/basic-option';
 
 const Posts = ( props ) => {
 	const { attributes, setAttributes } = props;
 	const {
-		count,
-		orderby,
-		order,
 		colMobile,
 		colTablet,
 		colPc,
@@ -31,50 +27,11 @@ const Posts = ( props ) => {
 		showExcerpt,
 		listType,
 	} = attributes;
-
-	const orderSelected = `${ orderby }/${ order }`;
-
-	// if (
-	// 	window.ystdtbBlockEditor.isEnableSga &&
-	// 	! orderbySelect.some(
-	// 		( orderItem ) => 'ranking/DESC' === orderItem.value
-	// 	)
-	// ) {
-	// 	orderbySelect.push( {
-	// 		label: __( 'ランキング(β)', 'ystandard-toolbox' ),
-	// 		value: 'ranking/DESC',
-	// 	} );
-	// }
-
 	return (
 		<div className={ 'ystdtb-posts' }>
 			<>
 				<InspectorControls>
-					<PanelBody title={ __( '基本設定', 'ystandard-toolbox' ) }>
-						<RangeControl
-							label={ __( '表示件数', 'ystandard-toolbox' ) }
-							value={ count }
-							onChange={ ( value ) => {
-								setAttributes( {
-									count: _toNumber( value, 1, 20, 3 ),
-								} );
-							} }
-							min={ 1 }
-							max={ 20 }
-						/>
-						<SelectControl
-							label={ __( '並び順', 'ystandard-toolbox' ) }
-							value={ orderSelected }
-							options={ orderbySelect }
-							onChange={ ( value ) => {
-								const _order = value.split( '/' );
-								setAttributes( {
-									orderby: _order[ 0 ],
-									order: _order[ 1 ],
-								} );
-							} }
-						/>
-					</PanelBody>
+					<PanelBasicOption { ...props } />
 					<PanelBody title={ __( '表示設定', 'ystandard-toolbox' ) }>
 						<BlockOption.ListDesign { ...props } />
 						<div className="ystdtb-block-label">
@@ -167,10 +124,9 @@ const Posts = ( props ) => {
 							</>
 						) }
 					</PanelBody>
-
 					<PanelSearchOption { ...props } />
-					<AdvancedSearch { ...props } />
-					<AdvancedDesign { ...props } />
+					<PanelAdvancedSearch { ...props } />
+					<PanelAdvancedDesign { ...props } />
 				</InspectorControls>
 			</>
 			<Disabled>

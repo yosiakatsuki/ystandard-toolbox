@@ -7,7 +7,7 @@ import PostId from './post-id';
 import PostName from './post-name';
 import PostParent from './post-parent';
 
-const AdvancedSearch = ( props ) => {
+const PanelAdvancedSearch = ( props ) => {
 	return (
 		<PanelBody
 			initialOpen={ false }
@@ -19,4 +19,4 @@ const AdvancedSearch = ( props ) => {
 		</PanelBody>
 	);
 };
-export default AdvancedSearch;
+export default PanelAdvancedSearch;
