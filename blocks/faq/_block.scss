@@ -69,13 +69,15 @@
 
 .ystdtb-faq-item {
   display: flex;
+  align-items: center;
   margin: 0;
   padding: var(--ystdtb-faq-item-padding-vertical) var(--ystdtb-faq-item-padding-horizon);
-  align-items: center;
+  border: 0;
 
   &.is-faq--q {
     padding-top: var(--ystdtb-faq-padding-q-top);
   }
+
   &.is-faq--a {
     padding-bottom: var(--ystdtb-faq-padding-a-bottom);
   }

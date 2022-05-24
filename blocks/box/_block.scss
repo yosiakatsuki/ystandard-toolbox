@@ -10,11 +10,12 @@ $box_color_default: #666;
   --ystdtb-box-padding-left: #{$default_padding};
   --ystdtb-box-border-width: 0;
   --ystdtb-box-label-font-size: 0.9em;
+  border: 0;
 }
 
 .ystdtb-box__inner-container {
   position: relative;
-  border-width: var(--ystdtb-box-border-width);
+  border-width: var(--ystdtb-box-border-width, 0);
 
   &.show-default-border {
     border-color: $box_color_default;
@@ -130,6 +131,7 @@ $box_color_default: #666;
       display: none;
     }
   }
+
   &.is-box-style--label-in {
     .ystdtb-box__inner-container {
       overflow: hidden;

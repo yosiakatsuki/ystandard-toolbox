@@ -56,7 +56,7 @@ function Box( props ) {
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
-			'--ystdtb-box-border-width': boxBorderSize,
+			'--ystdtb-box-border-width': boxBorderSize || undefined,
 			'--ystdtb-box-padding-top': getSpacing(
 				boxPadding,
 				'top',

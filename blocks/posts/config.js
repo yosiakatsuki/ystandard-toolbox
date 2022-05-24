@@ -1,9 +1,10 @@
-import { __ } from '@wordpress/i18n';
-
 export const attributes = {
 	count: {
 		type: 'number',
 		default: 3,
+	},
+	countMobile: {
+		type: 'number',
 	},
 	orderby: {
 		type: 'string',
@@ -16,6 +17,9 @@ export const attributes = {
 	listType: {
 		type: 'string',
 		default: 'card',
+	},
+	listTypeMobile: {
+		type: 'string',
 	},
 	colMobile: {
 		type: 'number',
@@ -75,6 +79,12 @@ export const attributes = {
 	postParent: {
 		type: 'string',
 	},
+	offset: {
+		type: 'number',
+	},
+	offsetMobile: {
+		type: 'number',
+	},
 	align: {
 		type: 'string',
 		default: '',
@@ -85,32 +95,3 @@ export const supports = {
 	html: false,
 	align: [ 'full' ],
 };
-
-export const orderbySelect = [
-	{
-		label: __( '公開日 / 新しい順', 'ystandard-toolbox' ),
-		value: 'date/DESC',
-	},
-	{ label: __( '公開日 / 古い順', 'ystandard-toolbox' ), value: 'date/ASC' },
-	{
-		label: __( '更新日 / 新しい順', 'ystandard-toolbox' ),
-		value: 'modified/DESC',
-	},
-	{
-		label: __( '更新日 / 古い順', 'ystandard-toolbox' ),
-		value: 'modified/ASC',
-	},
-	{ label: __( 'タイトル / A→Z', 'ystandard-toolbox' ), value: 'title/ASC' },
-	{ label: __( 'タイトル / Z→A', 'ystandard-toolbox' ), value: 'title/DESC' },
-	{ label: __( 'ランダム', 'ystandard-toolbox' ), value: 'rand/DESC' },
-];
-export const listTypeSelect = [
-	{ label: __( 'カード', 'ystandard-toolbox' ), value: 'card' },
-	{ label: __( 'リスト', 'ystandard-toolbox' ), value: 'list' },
-];
-
-export const thumbnailRatioSelect = [
-	{ label: __( '16-9', 'ystandard-toolbox' ), value: '16-9' },
-	{ label: __( '4-3', 'ystandard-toolbox' ), value: '4-3' },
-	{ label: __( '1-1', 'ystandard-toolbox' ), value: '1-1' },
-];
