@@ -13,12 +13,13 @@ import {
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
-import { orderbySelect, thumbnailRatioSelect } from './config';
+import { orderbySelect } from './config';
 import _toNumber from '../../src/js/blocks/function/_toNumber';
 import _getOptionsDefault from '../../src/js/blocks/function/_getOptionsDefault';
 import _getTermTree from '../../src/js/blocks/function/_getTermTree';
 import _getParentPages from '../../src/js/blocks/function/_getParentPages';
 import * as BlockOption from './inspector-controls';
+import PanelThumbnail from './inspector-controls/thumbnail';
 
 const Posts = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -31,74 +32,63 @@ const Posts = ( props ) => {
 		colPc,
 		taxonomy,
 		termSlug,
-		showImg,
 		showDate,
 		showCategory,
 		showExcerpt,
-		thumbnailSize,
-		thumbnailRatio,
 		postType,
 		postIn,
 		postNameIn,
 		postParent,
+		listType,
 	} = attributes;
 
-	const {
-		imageSizes,
-		postTypes,
-		taxonomyList,
-		hierarchicalPosts,
-	} = useSelect( ( select ) => {
-		const { getSettings } = select( 'core/block-editor' );
-		const { getPostTypes, getTaxonomy, getEntityRecords } = select(
-			'core'
-		);
-		const getPostTypesResult = getPostTypes( { per_page: -1 } );
-		const getTaxonomyResult = getTaxonomy();
-		const _postTypes = getPostTypesResult || [];
-		const _taxonomy = getTaxonomyResult || [];
-		const hierarchicalPostType = _postTypes
-			.filter( ( type ) => {
-				return type.hierarchical;
-			} )
-			.map( ( { slug } ) => {
-				return slug;
-			} );
-		let _hierarchicalPosts = [];
-		if ( hierarchicalPostType.includes( postType ) ) {
-			_hierarchicalPosts = _getParentPages(
-				getEntityRecords( 'postType', postType, {
-					per_page: -1,
-				} ),
-				0,
-				0
+	const { postTypes, taxonomyList, hierarchicalPosts } = useSelect(
+		( select ) => {
+			const { getPostTypes, getTaxonomy, getEntityRecords } = select(
+				'core'
 			);
-			if ( 0 < _hierarchicalPosts.length ) {
-				_hierarchicalPosts = [
-					_getOptionsDefault(),
-					..._hierarchicalPosts,
-				];
-			}
-		}
-
-		return {
-			imageSizes: getSettings().imageSizes,
-			postTypes: _postTypes.filter( ( type ) => {
-				return ! (
-					! type.viewable ||
-					'ys-parts' === type.slug ||
-					'attachment' === type.slug
+			const getPostTypesResult = getPostTypes( { per_page: -1 } );
+			const getTaxonomyResult = getTaxonomy();
+			const _postTypes = getPostTypesResult || [];
+			const _taxonomy = getTaxonomyResult || [];
+			const hierarchicalPostType = _postTypes
+				.filter( ( type ) => {
+					return type.hierarchical;
+				} )
+				.map( ( { slug } ) => {
+					return slug;
+				} );
+			let _hierarchicalPosts = [];
+			if ( hierarchicalPostType.includes( postType ) ) {
+				_hierarchicalPosts = _getParentPages(
+					getEntityRecords( 'postType', postType, {
+						per_page: -1,
+					} ),
+					0,
+					0
 				);
-			} ),
-			taxonomyList: _taxonomy,
-			hierarchicalPosts: _hierarchicalPosts,
-		};
-	} );
+				if ( 0 < _hierarchicalPosts.length ) {
+					_hierarchicalPosts = [
+						_getOptionsDefault(),
+						..._hierarchicalPosts,
+					];
+				}
+			}
 
-	const imageSizesOptions = imageSizes.map( ( { name, slug } ) => ( {
-		value: slug,
-		label: name,
-	} ) );
+			return {
+				postTypes: _postTypes.filter( ( type ) => {
+					return ! (
+						! type.viewable ||
+						'ys-parts' === type.slug ||
+						'attachment' === type.slug
+					);
+				} ),
+				taxonomyList: _taxonomy,
+				hierarchicalPosts: _hierarchicalPosts,
+			};
+		}
+	);
+
 	const postTypesOptions = postTypes.map( ( { name, slug } ) => ( {
 		value: slug,
 		label: name,
@@ -238,36 +228,7 @@ const Posts = ( props ) => {
 							max={ 6 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __( '画像設定', 'ystandard-toolbox' ) }>
-						<ToggleControl
-							label={ __(
-								'画像を表示する',
-								'ystandard-toolbox'
-							) }
-							onChange={ () => {
-								setAttributes( {
-									showImg: ! showImg,
-								} );
-							} }
-							checked={ showImg }
-						/>
-						<SelectControl
-							label={ __( '画像サイズ', 'ystandard-toolbox' ) }
-							value={ thumbnailSize }
-							options={ imageSizesOptions }
-							onChange={ ( value ) => {
-								setAttributes( { thumbnailSize: value } );
-							} }
-						/>
-						<SelectControl
-							label={ __( '画像縦横比', 'ystandard-toolbox' ) }
-							value={ thumbnailRatio }
-							options={ thumbnailRatioSelect }
-							onChange={ ( value ) => {
-								setAttributes( { thumbnailRatio: value } );
-							} }
-						/>
-					</PanelBody>
+					<PanelThumbnail { ...props } />
 					<PanelBody
 						initialOpen={ false }
 						title={ __(
@@ -299,19 +260,23 @@ const Posts = ( props ) => {
 							} }
 							checked={ showCategory }
 						/>
-						<ToggleControl
-							label={ __(
-								'概要を表示する',
-								'ystandard-toolbox'
-							) }
-							onChange={ () => {
-								setAttributes( {
-									showExcerpt: ! showExcerpt,
-								} );
-							} }
-							checked={ showExcerpt }
-						/>
-						<BlockOption.ExcerptLength { ...props } />
+						{ 'simple' !== listType && (
+							<>
+								<ToggleControl
+									label={ __(
+										'概要を表示する',
+										'ystandard-toolbox'
+									) }
+									onChange={ () => {
+										setAttributes( {
+											showExcerpt: ! showExcerpt,
+										} );
+									} }
+									checked={ showExcerpt }
+								/>
+								<BlockOption.ExcerptLength { ...props } />
+							</>
+						) }
 					</PanelBody>
 					<PanelBody
 						initialOpen={ false }
