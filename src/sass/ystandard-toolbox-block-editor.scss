@@ -13,3 +13,9 @@
 @use "../../blocks/parts/edit" as parts-edit;
 @use "../../blocks/banner-link/edit" as banner-link;
 @use "../../blocks/slider/edit" as slider;
+
+.wp-block {
+  &[class*="ystdtb-"] {
+    box-sizing: border-box;
+  }
+}
