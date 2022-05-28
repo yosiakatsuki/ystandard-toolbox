@@ -18,6 +18,9 @@
 						<button type="button" :class="desktopLayoutButtonClass('list')" @click="selectDesktopLayout('list')">
 							<img :src="`${pluginUrl}/assets/menu-page/archive/list.png`" alt="" width="100" height="100"/>
 						</button>
+						<button type="button" :class="desktopLayoutButtonClass('simple')" @click="selectDesktopLayout('simple')">
+							<img :src="`${pluginUrl}/assets/menu-page/archive/simple.png`" alt="" width="100" height="100"/>
+						</button>
 					</div>
 					<p class="ystdtb-menu__subtext">※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。</p>
 				</div>
@@ -36,6 +39,9 @@
 						</button>
 						<button type="button" :class="mobileLayoutButtonClass('list')" @click="selectMobileLayout('list')">
 							<img :src="`${pluginUrl}/assets/menu-page/archive/list.png`" alt="" width="100" height="100"/>
+						</button>
+						<button type="button" :class="mobileLayoutButtonClass('simple')" @click="selectMobileLayout('simple')">
+							<img :src="`${pluginUrl}/assets/menu-page/archive/simple.png`" alt="" width="100" height="100"/>
 						</button>
 					</div>
 					<button type="button" class="is-small is-cancel is-small" @click="clearMobileLayout" style="margin-top: .5em;">クリア</button>
