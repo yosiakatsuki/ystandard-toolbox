@@ -34,6 +34,9 @@ export const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	slideFunction: {
+		type: 'string',
+	},
 	autoplay: {
 		type: 'boolean',
 		default: true,

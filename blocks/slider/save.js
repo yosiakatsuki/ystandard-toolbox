@@ -12,6 +12,7 @@ import { getCustomProperty } from './function/style';
 const save = ( { attributes } ) => {
 	const {
 		sliderId,
+		slideFunction,
 		ratio,
 		height,
 		hasNavigation,
@@ -48,6 +49,9 @@ const save = ( { attributes } ) => {
 			blockClasses.sliderContainer,
 			{}
 		),
+		style: {
+			transitionTimingFunction: slideFunction || undefined,
+		},
 	};
 
 	const getNavigationProps = ( type ) => {

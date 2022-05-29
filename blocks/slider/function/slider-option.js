@@ -31,8 +31,12 @@ export const getSliderOptions = ( attributes ) => {
 	 */
 	// 自動再生.
 	if ( false !== attributes?.autoplay ) {
+		const delay =
+			0 === attributes?.autoplayDelay
+				? 0
+				: secToMs( attributes?.autoplayDelay ?? 3, 3000 );
 		const autoplayOptions = {
-			delay: secToMs( attributes?.autoplayDelay || 3, 3000 ),
+			delay,
 			pauseOnMouseEnter: attributes?.autoplayPauseOnMouse || undefined,
 			disableOnInteraction:
 				true === attributes?.autoplayDisableOnInteraction
