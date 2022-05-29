@@ -15,7 +15,7 @@ const AutoplayDelay = ( { attributes, setAttributes } ) => {
 				value={ autoplayDelay ?? 8 }
 				onChange={ handleOnChange }
 				initialPosition={ 8 }
-				min={ 1 }
+				min={ 0 }
 				max={ 15 }
 				step={ 0.1 }
 				allowReset={ true }

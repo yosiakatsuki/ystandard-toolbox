@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import Effect from './effect';
 import Speed from './speed';
 import Loop from './loop';
+import SlideFunction from './slide-function';
 
 const PanelBasic = ( props ) => {
 	return (
@@ -10,6 +11,7 @@ const PanelBasic = ( props ) => {
 			<Effect { ...props } />
 			<Speed { ...props } />
 			<Loop { ...props } />
+			<SlideFunction { ...props } />
 		</PanelBody>
 	);
 };
