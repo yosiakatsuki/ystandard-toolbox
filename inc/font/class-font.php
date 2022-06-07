@@ -98,11 +98,21 @@ class Font {
 	}
 
 	/**
-	 * 現在の設定で取得できるfont-familyの指定
+	 * テーマ設定表示用
 	 *
 	 * @return string
 	 */
 	public static function get_sample_font_family() {
+
+		return esc_attr( self::get_theme_font() );
+	}
+
+	/**
+	 * 現在のテーマ設定で取得できるfont-familyの指定
+	 *
+	 * @return string
+	 */
+	public static function get_theme_font() {
 		if ( ! method_exists( '\ystandard\Font', 'get_usable_fonts' ) ) {
 			return '';
 		}
@@ -112,7 +122,7 @@ class Font {
 			return '';
 		}
 
-		return esc_attr( $fonts[ $option ]['family'] );
+		return $fonts[ $option ]['family'];
 	}
 
 	/**
