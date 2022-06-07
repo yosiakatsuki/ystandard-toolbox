@@ -795,7 +795,7 @@ class Heading {
 	public static function get_option() {
 		$option = get_option( self::OPTION_NAME, null );
 
-		return is_array( $option ) ? $option : [];
+		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 
 }

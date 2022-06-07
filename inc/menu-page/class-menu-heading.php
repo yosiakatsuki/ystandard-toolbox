@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox\menu;
 
+use ystandard_toolbox\Font;
 use ystandard_toolbox\Heading;
 use ystandard_toolbox\Plugin_Menu;
 
@@ -32,6 +33,7 @@ class Menu_Heading extends Menu_Page_Base {
 		$this->template_name = 'heading';
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_style' ], 51 );
 	}
 
 	/**
@@ -60,6 +62,26 @@ class Menu_Heading extends Menu_Page_Base {
 			'ystdtb-heading',
 			'ystdtbHeadingActive',
 			[ 'active' => $active_panel ]
+		);
+	}
+
+	/**
+	 * 管理画面-CSSの読み込み
+	 *
+	 * @param string $hook_suffix suffix.
+	 *
+	 * @return void
+	 */
+	public function enqueue_style( $hook_suffix ) {
+		if ( ! $this->is_toolbox_menu_page( $hook_suffix ) ) {
+			return;
+		}
+		$theme_font     = Font::get_theme_font();
+		$toolbox_family = Font::get_font_family();
+		$font           = ! empty( $toolbox_family ) ? $toolbox_family : $theme_font;
+		wp_add_inline_style(
+			'ystdtb-admin',
+			".heading-editor-preview {font-family:${font};}"
 		);
 	}
 
