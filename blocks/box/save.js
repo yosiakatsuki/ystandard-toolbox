@@ -4,7 +4,7 @@ import {
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import SVGIcon from '@ystd/components/svg-icon';
+import SVGIcon from '@aktk/components/svg-icon';
 import {
 	getBoxBorderRadius,
 	isLabelOutside,
@@ -12,8 +12,8 @@ import {
 } from './function';
 import classnames from 'classnames';
 import { blockClassName } from './config';
-import getDataFallbackProperty from '@ystd/helper/fallback';
-import { getSpacing } from '@ystd/helper/spacing';
+import getDataFallbackProperty from '@aktk/helper/fallback';
+import { getSpacing } from '@aktk/helper/spacing';
 
 export default function save( { attributes } ) {
 	const {

@@ -1,9 +1,9 @@
-import { isObject, parseObjectAll } from '@ystd/helper/object';
+import { isObject, parseObjectAll } from '@aktk/helper/object';
 import { breakpoints } from '../config';
 import {
 	getResponsiveValue,
 	responsiveKeys as keys,
-} from '@ystd/helper/responsive';
+} from '@aktk/helper/responsive';
 
 export const getSliderOptions = ( attributes ) => {
 	let options = {};

@@ -1,6 +1,6 @@
 import { useMemo } from '@wordpress/element';
 import { transformStyles } from '@wordpress/block-editor';
-import { getBlockConfig } from '@ystd/helper/blockConfig';
+import { getBlockConfig } from '@aktk/helper/blockConfig';
 
 export default function EditorStyles() {
 	const styles = getBlockConfig( 'partsPreviewStyles', [] );

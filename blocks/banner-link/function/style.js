@@ -1,10 +1,10 @@
 import {
 	getResponsiveCustomProperties,
 	parseResponsiveValues,
-} from '@ystd/helper/responsive';
+} from '@aktk/helper/responsive';
 import { headingTag } from '../config';
-import { getSpacingCSS } from '@ystd/helper/spacing';
-import { isObject, parseObject } from '@ystd/helper/object';
+import { getSpacingCSS } from '@aktk/helper/spacing';
+import { isObject, parseObject } from '@aktk/helper/object';
 
 export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 	return getResponsiveCustomProperties(

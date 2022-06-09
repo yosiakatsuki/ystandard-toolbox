@@ -10,7 +10,7 @@ import { compose } from '@wordpress/compose';
 import { blockClassName, blockClasses } from './config';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
-import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';
+import { getBoxShadowStyle } from '@aktk/components/box-shadow-control';
 import {
 	getBackgroundImage,
 	getBackgroundPosition,
@@ -22,13 +22,13 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystd/controls/border-control';
-import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
-import { getComponentConfig } from '@ystd/helper/config';
+} from '@aktk/controls/border-control';
+import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
+import { getComponentConfig } from '@aktk/helper/config';
 
 const BannerLink = ( props ) => {
 	const {

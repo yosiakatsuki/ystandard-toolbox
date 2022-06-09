@@ -6,8 +6,8 @@ import { BaseControl, SelectControl } from '@wordpress/components';
 /**
  * yStandard Toolbox.
  */
-import { getBlockConfig } from '@ystd/helper/blockConfig';
-import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getBlockConfig } from '@aktk/helper/blockConfig';
+import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
 
 const listTypes = [
 	{ label: __( 'カード', 'ystandard-toolbox' ), value: 'card' },

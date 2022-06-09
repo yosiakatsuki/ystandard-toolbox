@@ -3,7 +3,7 @@
  */
 import { SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { filterSelectPostTypes } from '@ystd/helper/post-type';
+import { filterSelectPostTypes } from '@aktk/helper/post-type';
 
 const PostTypeSelect = ( { label, value, onChange } ) => {
 	const { postTypes } = useSelect( ( select ) => {

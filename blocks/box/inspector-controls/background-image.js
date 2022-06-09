@@ -1,5 +1,5 @@
 import { BaseControl } from '@wordpress/components';
-import MediaUploadControl from '@ystd/components/media-upload-control';
+import MediaUploadControl from '@aktk/components/media-upload-control';
 
 const BackgroundImage = ( props ) => {
 	const { attributes, setAttributes } = props;

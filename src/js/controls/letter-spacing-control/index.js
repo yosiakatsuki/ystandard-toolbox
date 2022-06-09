@@ -7,8 +7,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import UnitControl from '@ystd/components/unit-control';
-import { ystdtbConfig } from '@ystd/config';
+import UnitControl from '@aktk/components/unit-control';
+import { ystdtbConfig } from '@aktk/config';
 
 const LetterSpacingControl = ( { value, onChange } ) => {
 	const [ currentUnit, setCurrentUnit ] = useState( 'em' );

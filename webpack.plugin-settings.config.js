@@ -36,14 +36,14 @@ module.exports = {
 		...defaultConfig.resolve,
 		alias: {
 			...defaultConfig.alias,
-			'@ystd/function': path.resolve(
+			'@aktk/function': path.resolve(
 				__dirname,
 				'src/js/blocks/function'
 			),
-			'@ystd/config': path.resolve( __dirname, 'src/js/config' ),
-			'@ystd/components': path.resolve( __dirname, 'src/js/component' ),
-			'@ystd/controls': path.resolve( __dirname, 'src/js/controls' ),
-			'@ystd/helper': path.resolve( __dirname, 'src/js/helper' ),
+			'@aktk/config': path.resolve( __dirname, 'src/js/config' ),
+			'@aktk/components': path.resolve( __dirname, 'src/js/component' ),
+			'@aktk/controls': path.resolve( __dirname, 'src/js/controls' ),
+			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
 		},
 	},
 };

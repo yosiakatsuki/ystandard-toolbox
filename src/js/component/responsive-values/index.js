@@ -5,18 +5,18 @@ import { _x } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
-import { getComponentConfig } from '@ystd/helper/config';
+import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
+import { getComponentConfig } from '@aktk/helper/config';
 import {
 	getResponsiveCustomProperties,
 	getResponsiveValue,
 	parseResponsiveValues,
 	responsiveKeys as responsive,
-} from '@ystd/helper/responsive';
-import UnitControl from '@ystd/components/unit-control';
-import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
-import ButtonReset from '@ystd/components/button-reset';
-import { Flex } from '@ystd/components/flex';
+} from '@aktk/helper/responsive';
+import UnitControl from '@aktk/components/unit-control';
+import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
+import ButtonReset from '@aktk/components/button-reset';
+import { Flex } from '@aktk/components/flex';
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );

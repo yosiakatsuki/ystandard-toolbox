@@ -1,9 +1,9 @@
-import LinkControl from '@ystd/components/link-control';
+import LinkControl from '@aktk/components/link-control';
 import {
 	isOpenInNewTab,
 	toggleOpenInNewTab,
 	getLinkRel,
-} from '@ystd/helper/link';
+} from '@aktk/helper/link';
 
 const BannerLinkLinkControl = ( props ) => {
 	const { attributes, setAttributes } = props;

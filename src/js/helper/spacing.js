@@ -1,4 +1,4 @@
-import { getResponsiveProperty } from '@ystd/helper/responsive';
+import { getResponsiveProperty } from '@aktk/helper/responsive';
 
 export const getSpacingProps = ( type, value ) => {
 	if ( ! value || 'object' !== typeof value ) {

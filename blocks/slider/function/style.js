@@ -1,4 +1,4 @@
-import { getResponsiveCustomProperties } from '@ystd/helper/responsive';
+import { getResponsiveCustomProperties } from '@aktk/helper/responsive';
 
 export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 	return getResponsiveCustomProperties(

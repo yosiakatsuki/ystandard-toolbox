@@ -11,14 +11,14 @@ import { __ } from '@wordpress/i18n';
 /**
  * yStandard.
  */
-import { panelIcon } from '@ystd/components/ystandard-icon';
+import { panelIcon } from '@aktk/components/ystandard-icon';
 
 /**
  * Hook
  */
 import { getPanelClassName, isEnableHook } from '../helper';
 import hookAttributes from './attributes.json';
-import ManualLink from '@ystd/components/manual-link';
+import ManualLink from '@aktk/components/manual-link';
 
 const HOOK_NAME = 'hidden-by-size';
 

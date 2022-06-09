@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ColorGradientControl from '@ystd/components/color-gradient-control';
+import ColorGradientControl from '@aktk/components/color-gradient-control';
 
 const BackgroundColor = ( props ) => {
 	const { backgroundColor, setBackgroundColor } = props;

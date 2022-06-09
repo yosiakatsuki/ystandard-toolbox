@@ -1,5 +1,5 @@
 import { BaseControl } from '@wordpress/components';
-import InputControl from '@ystd/components/input-controls';
+import InputControl from '@aktk/components/input-controls';
 import { __ } from '@wordpress/i18n';
 
 const Rel = ( { attributes, setAttributes } ) => {

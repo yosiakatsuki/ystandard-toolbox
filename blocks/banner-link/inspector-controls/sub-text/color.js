@@ -1,7 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import ColorPaletteControl from '@ystd/components/color-palette-control';
+import ColorPaletteControl from '@aktk/components/color-palette-control';
 
 const Color = ( { subTextColor, setSubTextColor } ) => {
 	return (

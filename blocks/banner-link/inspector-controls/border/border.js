@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 
-import BorderControl from '@ystd/controls/border-control';
+import BorderControl from '@aktk/controls/border-control';
 
 const Border = ( { attributes, setAttributes } ) => {
 	const { border } = attributes;

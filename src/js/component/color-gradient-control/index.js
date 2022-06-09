@@ -2,8 +2,8 @@ import {
 	__experimentalUseGradient,
 	__experimentalColorGradientControl as WPColorGradientControl,
 } from '@wordpress/block-editor';
-import { getColorSetting } from '@ystd/helper/color';
-import ColorDropdown from '@ystd/components/color-dropdown';
+import { getColorSetting } from '@aktk/helper/color';
+import ColorDropdown from '@aktk/components/color-dropdown';
 
 const ColorGradientControl = ( {
 	colors,

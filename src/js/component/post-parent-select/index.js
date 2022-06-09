@@ -3,8 +3,8 @@
  */
 import { SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { getParentPages } from '@ystd/helper/page';
-import { addDefaultSelect } from '@ystd/helper/select-control';
+import { getParentPages } from '@aktk/helper/page';
+import { addDefaultSelect } from '@aktk/helper/select-control';
 
 const PostParentSelect = ( { label, value, postType, onChange } ) => {
 	const { hierarchicalPages } = useSelect( ( select ) => {

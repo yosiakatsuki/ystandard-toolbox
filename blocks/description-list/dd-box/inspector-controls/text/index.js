@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import TextColorControl from '@ystd/controls/text-color-control';
+import TextColorControl from '@aktk/controls/text-color-control';
 
 const PanelText = ( props ) => {
 	const { textColor, setTextColor } = props;

@@ -1,4 +1,4 @@
-import { isObject } from '@ystd/helper/object';
+import { isObject } from '@aktk/helper/object';
 
 export const setSlidesOption = ( props ) => {
 	const { setAttributes, type, slides, newValue } = props;

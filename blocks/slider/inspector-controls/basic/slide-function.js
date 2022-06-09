@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import CustomSelectControl from '@ystd/components/custom-select-control';
+import CustomSelectControl from '@aktk/components/custom-select-control';
 
 const SELECT_FUNCTION = [
 	{

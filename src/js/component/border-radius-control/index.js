@@ -1,5 +1,5 @@
-import UnitControl from '@ystd/components/unit-control';
-import { getComponentConfig } from '@ystd/helper/config';
+import UnitControl from '@aktk/components/unit-control';
+import { getComponentConfig } from '@aktk/helper/config';
 
 const BorderRadiusControl = ( { label, value, onChange, units } ) => {
 	const _units = units ?? getComponentConfig( 'borderRadiusUnits' );

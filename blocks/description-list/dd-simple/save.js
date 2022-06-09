@@ -11,14 +11,14 @@ import {
 /**
  * yStandard
  */
-import { getResponsiveFontSizeStyle } from '@ystd/components/responsive-font-size';
+import { getResponsiveFontSizeStyle } from '@aktk/components/responsive-font-size';
 import {
 	getResponsiveMarginStyle,
 	getResponsivePaddingStyle,
-} from '@ystd/components/responsive-spacing';
-import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
-import { getBackGroundStyle } from '@ystd/helper/color';
-import { ystdtbConfig } from '@ystd/config';
+} from '@aktk/components/responsive-spacing';
+import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
+import { getBackGroundStyle } from '@aktk/helper/color';
+import { ystdtbConfig } from '@aktk/config';
 /**
  * Block
  */

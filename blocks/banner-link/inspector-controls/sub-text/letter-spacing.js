@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import UnitControl from '@ystd/components/unit-control';
+import UnitControl from '@aktk/components/unit-control';
 
 const LetterSpacing = ( { attributes, setAttributes } ) => {
 	const { subTextLetterSpacing } = attributes;

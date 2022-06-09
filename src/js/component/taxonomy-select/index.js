@@ -3,7 +3,7 @@
  */
 import { SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { addDefaultSelect } from '@ystd/helper/select-control';
+import { addDefaultSelect } from '@aktk/helper/select-control';
 
 const TaxonomySelect = ( { label, value, postType, onChange } ) => {
 	const { selectedPostType, taxonomy } = useSelect( ( select ) => {

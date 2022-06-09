@@ -10,7 +10,7 @@ import {
 	addResponsiveProperty,
 	deleteResponsiveProperty,
 	getResponsiveProperty,
-} from '@ystd/helper/responsive';
+} from '@aktk/helper/responsive';
 
 const BoxPadding = ( props ) => {
 	const { attributes, setAttributes } = props;

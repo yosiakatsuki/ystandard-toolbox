@@ -1,6 +1,6 @@
 import { ColorPalette } from '@wordpress/components';
-import { getColorSetting } from '@ystd/helper/color';
-import ColorDropdown from '@ystd/components/color-dropdown';
+import { getColorSetting } from '@aktk/helper/color';
+import ColorDropdown from '@aktk/components/color-dropdown';
 
 const ColorPaletteControl = ( {
 	value,

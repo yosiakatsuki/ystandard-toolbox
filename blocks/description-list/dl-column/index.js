@@ -1,8 +1,8 @@
 import { Columns } from 'react-feather';
 import { registerBlockType } from '@wordpress/blocks';
-import { ystdtbConfig } from '@ystd/config';
+import { ystdtbConfig } from '@aktk/config';
 import { __ } from '@wordpress/i18n';
-import { mergeDefaultAttributes } from '@ystd/helper/attribute';
+import { mergeDefaultAttributes } from '@aktk/helper/attribute';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';

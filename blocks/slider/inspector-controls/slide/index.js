@@ -1,6 +1,6 @@
 import { BaseControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveTab from '@ystd/components/responsive-tab';
+import ResponsiveTab from '@aktk/components/responsive-tab';
 import { hasSlidesOption } from '../../function/slider-option';
 import SlidesPerView from './slides-per-view';
 import SpaceBetween from './space-between';

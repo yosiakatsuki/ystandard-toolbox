@@ -1,5 +1,5 @@
 import { BaseControl } from '@wordpress/components';
-import BoxShadowControl from '@ystd/components/box-shadow-control';
+import BoxShadowControl from '@aktk/components/box-shadow-control';
 
 const BoxShadow = ( props ) => {
 	const { attributes, setAttributes } = props;

@@ -1,7 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import RatioSizeControl from '@ystd/components/ratio-size-control';
+import RatioSizeControl from '@aktk/components/ratio-size-control';
 
 const RatioSize = ( { attributes, setAttributes } ) => {
 	const { ratio } = attributes;

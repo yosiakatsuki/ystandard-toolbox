@@ -1,4 +1,4 @@
-import { ystdtbConfig } from '@ystd/config';
+import { ystdtbConfig } from '@aktk/config';
 import edit from './edit';
 import save from './save';
 import transforms from './transforms';

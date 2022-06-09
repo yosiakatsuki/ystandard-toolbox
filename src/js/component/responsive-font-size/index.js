@@ -1,18 +1,18 @@
 import { _x } from '@wordpress/i18n';
 import { FontSizePicker } from '@wordpress/block-editor';
-import UnitControl from '@ystd/components/unit-control';
-import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import UnitControl from '@aktk/components/unit-control';
+import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
 import {
 	responsiveKeys as responsive,
 	getResponsiveValue,
 	parseResponsiveValues,
 	getResponsiveCustomProperties,
-} from '@ystd/helper/responsive';
-import { getComponentConfig } from '@ystd/helper/config';
-import { createFontSizeObject, getFontSizeValue } from '@ystd/helper/fontSize';
-import ResponsiveValuesInfo from '@ystd/components/responsive-values-info';
-import ButtonReset from '@ystd/components/button-reset';
-import { Flex } from '@ystd/components/flex';
+} from '@aktk/helper/responsive';
+import { getComponentConfig } from '@aktk/helper/config';
+import { createFontSizeObject, getFontSizeValue } from '@aktk/helper/fontSize';
+import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
+import ButtonReset from '@aktk/components/button-reset';
+import { Flex } from '@aktk/components/flex';
 
 const ResponsiveFontSize = ( props ) => {
 	const { label, values, onChange, units } = props;

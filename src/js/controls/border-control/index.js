@@ -4,12 +4,12 @@ import { getColorClassName } from '@wordpress/block-editor';
 /**
  * yStandard
  */
-import ColorPaletteControl from '@ystd/components/color-palette-control';
-import { isObject, parseObject } from '@ystd/helper/object';
-import UnitControl from '@ystd/components/unit-control';
-import { getColorSlug } from '@ystd/helper/color';
-import BorderStyleControl from '@ystd/components/border-style-control';
-import { ystdtbConfig } from '@ystd/config';
+import ColorPaletteControl from '@aktk/components/color-palette-control';
+import { isObject, parseObject } from '@aktk/helper/object';
+import UnitControl from '@aktk/components/unit-control';
+import { getColorSlug } from '@aktk/helper/color';
+import BorderStyleControl from '@aktk/components/border-style-control';
+import { ystdtbConfig } from '@aktk/config';
 
 export const getBorderStyle = ( border, position = undefined ) => {
 	if ( ! isObject( border ) ) {

@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import SVGIconSelect from '@ystd/components/icon-picker';
+import SVGIconSelect from '@aktk/components/icon-picker';
 
 const LabelIcon = ( props ) => {
 	const { attributes, setAttributes } = props;

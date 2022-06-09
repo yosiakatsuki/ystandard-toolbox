@@ -1,11 +1,11 @@
 import { BaseControl, RangeControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import HorizonButtons from '@ystd/components/horizon-buttons';
-import { getComponentConfig } from '@ystd/helper/config';
-import UnitControl from '@ystd/components/unit-control';
-import ColorPaletteControl from '@ystd/components/color-palette-control';
-import { hex2rgb } from '@ystd/helper/color';
+import HorizonButtons from '@aktk/components/horizon-buttons';
+import { getComponentConfig } from '@aktk/helper/config';
+import UnitControl from '@aktk/components/unit-control';
+import ColorPaletteControl from '@aktk/components/color-palette-control';
+import { hex2rgb } from '@aktk/helper/color';
 
 export const getBoxShadowStyle = ( value ) => {
 	if (

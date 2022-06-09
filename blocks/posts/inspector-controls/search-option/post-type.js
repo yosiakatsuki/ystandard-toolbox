@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
-import PostTypeSelect from '@ystd/components/post-type-select';
+import PostTypeSelect from '@aktk/components/post-type-select';
 
 const PostType = ( { attributes, setAttributes } ) => {
 	const { postType } = attributes;

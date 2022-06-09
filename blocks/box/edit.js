@@ -10,15 +10,15 @@ import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { blockClassName } from './config';
-import SVGIcon from '@ystd/components/svg-icon';
+import SVGIcon from '@aktk/components/svg-icon';
 import {
 	getBoxBorderRadius,
 	isLabelOutside,
 	getLabelBorderRadius,
 } from './function';
-import { getSpacing } from '@ystd/helper/spacing';
+import { getSpacing } from '@aktk/helper/spacing';
 import * as BlockOption from './inspector-controls';
-import StretchTextControl from '@ystd/components/stretch-text-control';
+import StretchTextControl from '@aktk/components/stretch-text-control';
 
 function Box( props ) {
 	const {

@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
-import TermSelect from '@ystd/components/term-select';
+import TermSelect from '@aktk/components/term-select';
 
 const Term = ( { attributes, setAttributes } ) => {
 	const { taxonomy, termSlug } = attributes;

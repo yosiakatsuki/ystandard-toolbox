@@ -3,8 +3,8 @@
  */
 import { SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { getTermTree } from '@ystd/helper/terms';
-import { addDefaultSelect } from '@ystd/helper/select-control';
+import { getTermTree } from '@aktk/helper/terms';
+import { addDefaultSelect } from '@aktk/helper/select-control';
 
 const TermSelect = ( { label, value, taxonomy, onChange } ) => {
 	const { terms } = useSelect( ( select ) => {

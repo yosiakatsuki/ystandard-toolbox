@@ -17,7 +17,7 @@ import {
 import { compose } from '@wordpress/compose';
 import { withDispatch, select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { getColorCode, getColorSlug } from '@ystd/function/_getColorSlug';
+import { getColorCode, getColorSlug } from '@aktk/function/_getColorSlug';
 
 function FAQ( props ) {
 	const {

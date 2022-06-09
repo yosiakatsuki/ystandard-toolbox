@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
-import TaxonomySelect from '@ystd/components/taxonomy-select';
+import TaxonomySelect from '@aktk/components/taxonomy-select';
 
 const Taxonomy = ( { attributes, setAttributes } ) => {
 	const { taxonomy, postType } = attributes;

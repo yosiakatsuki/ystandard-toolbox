@@ -1,6 +1,6 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import BorderRadiusControl from '@ystd/components/border-radius-control';
+import BorderRadiusControl from '@aktk/components/border-radius-control';
 
 const BorderRadius = ( { attributes, setAttributes } ) => {
 	const { borderRadius } = attributes;

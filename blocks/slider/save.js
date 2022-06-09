@@ -6,7 +6,7 @@ import {
 } from '@wordpress/block-editor';
 import { blockClasses, sliderClasses } from './config';
 import { getSliderOptions } from './function/slider-option';
-import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import { getCustomProperty } from './function/style';
 
 const save = ( { attributes } ) => {

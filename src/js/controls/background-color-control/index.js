@@ -1,7 +1,7 @@
 import { BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ColorGradientControl from '@ystd/components/color-gradient-control';
-import { hasObjectKey } from '@ystd/helper/object';
+import ColorGradientControl from '@aktk/components/color-gradient-control';
+import { hasObjectKey } from '@aktk/helper/object';
 
 const BackgroundColorControl = ( { value, onChange, label, ...props } ) => {
 	const _color = hasObjectKey( value, 'color' ) ? value.color : value;
