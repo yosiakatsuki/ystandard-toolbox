@@ -5,6 +5,7 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		'plugin-settings': './src/js/plugin-settings/index.js',
+		'ystdtb-settings-v2': './src/js/plugin-settings/start-page/index.js',
 	},
 	output: {
 		filename: '[name].js',

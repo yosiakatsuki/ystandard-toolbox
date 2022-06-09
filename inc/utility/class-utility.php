@@ -9,6 +9,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\AMP;
+use ystandard_toolbox\helper\Version_Compare;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -22,21 +25,19 @@ class Utility {
 	 * AMPが有効か
 	 *
 	 * @return bool
+	 * @deprecated 1.24.0
 	 */
 	public static function is_amp() {
 
-		if ( function_exists( 'ys_is_amp' ) && ys_is_amp() ) {
-			return ys_is_amp();
-		}
-
-		return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
+		return AMP::is_amp();
 	}
 
 	/**
 	 * AMPが使えるか
+	 * @deprecated 1.24.0
 	 */
 	public static function is_amp_enable() {
-		return function_exists( 'is_amp_endpoint' );
+		return AMP::is_amp_enable();
 	}
 
 	/**
@@ -67,12 +68,12 @@ class Utility {
 	 * @param string $version バージョン.
 	 *
 	 * @return bool|int
+	 * @deprecated 1.24.0
+	 *
 	 */
 	public static function wordpress_version_compare( $version ) {
 
-		$wp_version = get_bloginfo( 'version' );
-
-		return version_compare( $wp_version, $version, '>=' );
+		return Version_Compare::wordpress_version_compare( $version );
 	}
 
 	/**
@@ -81,27 +82,12 @@ class Utility {
 	 * @param string $version バージョン.
 	 *
 	 * @return bool|int
+	 * @deprecated 1.24.0
+	 *
 	 */
 	public static function ystandard_version_compare( $version = '' ) {
-		if ( 'ystandard' !== get_template() ) {
-			return false;
-		}
-		// バージョンの確認不要であればテーマの確認のみ.
-		if ( '' === $version ) {
-			return true;
-		}
-		$pre_version = apply_filters( 'ys_ystandard_version', null );
-		if ( is_null( $pre_version ) ) {
-			$theme = wp_get_theme( get_template() );
-			if ( is_null( $theme ) ) {
-				return false;
-			}
-			$theme_version = $theme->version;
-		} else {
-			$theme_version = $pre_version;
-		}
 
-		return version_compare( $theme_version, $version, '>=' );
+		return Version_Compare::ystandard_version_compare( $version );
 	}
 
 	/**
@@ -110,19 +96,11 @@ class Utility {
 	 * @param string $version バージョン.
 	 *
 	 * @return bool|int
+	 * @deprecated 1.24.0
 	 */
 	public static function ystandard_blocks_version_compare( $version = '' ) {
 
-		$blocks = apply_filters( 'ystdb_get_version', '' );
-		if ( '' === $blocks ) {
-			return false;
-		}
-		// バージョンの確認不要であればプラグインの確認のみ.
-		if ( '' === $version ) {
-			return true;
-		}
-
-		return version_compare( $blocks, $version, '>=' );
+		return Version_Compare::ystandard_blocks_version_compare( $version );
 	}
 
 	/**

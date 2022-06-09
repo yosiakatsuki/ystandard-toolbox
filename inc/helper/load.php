@@ -10,3 +10,5 @@
 defined( 'ABSPATH' ) || die();
 
 require_once __DIR__ . '/class-drawer-menu.php';
+require_once __DIR__ . '/class-version-compare.php';
+require_once __DIR__ . '/class-amp.php';

@@ -36,7 +36,7 @@ class Plugin_Menu {
 	public function add_menu_page() {
 		add_menu_page(
 			'yStandard Toolbox',
-			'[ys] Toolbox',
+			'[ys] Toolbox v1',
 			'manage_options',
 			Config::ADMIN_MENU_PARENT_SLUG,
 			'',
@@ -67,8 +67,6 @@ class Plugin_Menu {
 			<h1 class="ystdtb-menu__title">yStandard Toolbox</h1>
 			<?php
 			include __DIR__ . '/feature-list/design/index.php';
-			include __DIR__ . '/feature-list/block/index.php';
-			include __DIR__ . '/feature-list/seo/index.php';
 			include __DIR__ . '/feature-list/other/index.php';
 			?>
 		</div>

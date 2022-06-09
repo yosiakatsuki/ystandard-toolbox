@@ -126,11 +126,20 @@ class Config {
 	 * 設定画面親スラッグ
 	 */
 	const ADMIN_MENU_PARENT_SLUG = 'ystandard-toolbox';
+	/**
+	 * 設定画面親スラッグ v2
+	 */
+	const ADMIN_MENU_SLUG_V2 = 'ystdtb-settings-v2';
 
 	/**
 	 * 設定画面メニュープレフィックス
 	 */
 	const ADMIN_MENU_PAGE_PREFIX = 'ystdtb-menu';
+
+	/**
+	 * 設定画面メニュープレフィックス v2
+	 */
+	const ADMIN_MENU_PREFIX_V2 = 'ystdtb-settings-v2';
 
 	/**
 	 * 設定メニュー追加用フック

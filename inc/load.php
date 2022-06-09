@@ -10,9 +10,9 @@
 defined( 'ABSPATH' ) || die();
 
 require_once __DIR__ . '/config/class-config.php';
+require_once __DIR__ . '/helper/load.php';
 require_once __DIR__ . '/utility/class-filesystem.php';
 require_once __DIR__ . '/utility/class-utility.php';
-require_once __DIR__ . '/helper/load.php';
 require_once __DIR__ . '/option/class-option.php';
 require_once __DIR__ . '/notice/class-notice.php';
 require_once __DIR__ . '/init/class-init.php';

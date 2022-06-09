@@ -1,0 +1,13 @@
+@use "component";
+@use "start-page";
+
+.ystdtb-settings-v2 {
+  background: #fff;
+
+  #wpcontent {
+    padding-left:0;
+  }
+  .wrap {
+    margin: 0;
+  }
+}

@@ -1,0 +1,32 @@
+.ystdtb-settings__base {
+  font-size: 16px;
+}
+
+.ystdtb-settings__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #07689f;
+  color: #fff;
+
+  .ystdtb-settings__title {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+
+  .ystdtb-settings__brand {
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    font-family: Orbitron, sans-serif;
+  }
+}
+
+.ystdtb-settings__content {
+  padding: 40px 20px;
+}
