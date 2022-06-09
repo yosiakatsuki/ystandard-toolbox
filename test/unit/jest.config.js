@@ -12,6 +12,7 @@ module.exports = {
 		'/.git/',
 		'/node_modules/',
 		'<rootDir>/js/',
+		'<rootDir>/src/js/admin/',
 		'<rootDir>/library/',
 		'<rootDir>/vendor/',
 		'<rootDir>/temp/',
