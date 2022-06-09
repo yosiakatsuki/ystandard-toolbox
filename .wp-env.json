@@ -1,0 +1,19 @@
+{
+  "port": 10020,
+  "core": "https://ja.wordpress.org/latest-ja.zip",
+  "themes": [
+    "https://wp-ystandard.com/download/ystandard/v4/ystandard.zip"
+  ],
+  "plugins": [
+    ".",
+    "https://downloads.wordpress.org/plugin/wp-multibyte-patch.zip"
+  ],
+  "env": {
+    "tests": {
+      "port": 10021
+    }
+  },
+  "mappings": {
+    ".wp-content": "./.wp-content"
+  }
+}

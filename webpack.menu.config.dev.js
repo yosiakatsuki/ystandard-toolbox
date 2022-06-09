@@ -1,4 +1,4 @@
-const productionConfig = require( "./webpack.menu.config.js" );
+const productionConfig = require( './webpack.menu.config.js' );
 
 module.exports = {
 	...productionConfig,

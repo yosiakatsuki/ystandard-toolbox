@@ -1,4 +1,4 @@
-const defaultConfig = require( "@wordpress/scripts/config/.eslintrc.js" );
+const defaultConfig = require( '@wordpress/scripts/config/.eslintrc.js' );
 
 module.exports = {
 	...defaultConfig,
@@ -10,10 +10,9 @@ module.exports = {
 	rules: {
 		...defaultConfig.rules,
 		'import/no-unresolved': 'off',
-		'@wordpress/no-unsafe-wp-apis': 'off'
+		'@wordpress/no-unsafe-wp-apis': 'off',
 	},
-	parser: "babel-eslint",
 	parserOptions: {
-		requireConfigFile: false
-	}
+		requireConfigFile: false,
+	},
 };
