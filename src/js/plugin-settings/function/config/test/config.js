@@ -11,15 +11,15 @@ describe( 'getAdminConfig', () => {
 		expect( getAdminConfig() ).toBeUndefined();
 	} );
 	test( 'get all', () => {
-		window.ystdtbPluginSettings = config;
+		window.ystdtbAdminConfig = config;
 		expect( getAdminConfig() ).toEqual( config );
 	} );
 	test( 'get siteUrl', () => {
-		window.ystdtbPluginSettings = config;
+		window.ystdtbAdminConfig = config;
 		expect( getAdminConfig( 'siteUrl' ) ).toBe( 'https://example.com/' );
 	} );
 	test( 'has not key', () => {
-		window.ystdtbPluginSettings = config;
+		window.ystdtbAdminConfig = config;
 		expect( getAdminConfig( 'notHasKey' ) ).toBeUndefined();
 	} );
 } );

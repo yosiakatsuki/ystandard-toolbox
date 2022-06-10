@@ -94,7 +94,7 @@ class Menu_Navigation extends Menu_Page_Base {
 			return true;
 		}
 
-		return Option::update_option( Navigation::OPTION_NAME, $input );
+		return Option::update_plugin_option( Navigation::OPTION_NAME, $input );
 	}
 }
 

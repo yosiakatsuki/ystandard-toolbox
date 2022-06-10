@@ -12,6 +12,7 @@ import {
 	Share2,
 	Image,
 	CheckCircle,
+	Code,
 } from 'react-feather';
 
 const fatureList = {
@@ -129,7 +130,16 @@ const fatureList = {
 	},
 	utility: {
 		title: '便利機能',
-		items: [],
+		items: [
+			{
+				name: 'head,footerコード追加',
+				icon: () => <Code />,
+				description:
+					'<head>内や</body>直前などにJavaScriptなどを追加できる機能',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-add-code/',
+				settingPage: 'ystdtb-settings-v2-add-code',
+			},
+		],
 	},
 };
 export default fatureList;

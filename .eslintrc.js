@@ -6,6 +6,7 @@ module.exports = {
 		...defaultConfig.globals,
 		ystdtbBlockEditor: true,
 		ystdtbIconList: true,
+		ystdtbAdminConfig: true,
 		ystdtbPluginSettings: true,
 	},
 	rules: {

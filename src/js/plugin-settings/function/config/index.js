@@ -1,9 +1,9 @@
-export function getAdminConfig( name = undefined ) {
-	if ( ! name || ! window?.ystdtbPluginSettings ) {
-		return window?.ystdtbPluginSettings;
+export function getAdminConfig( name = undefined, defaultValue = undefined ) {
+	if ( ! name || ! window?.ystdtbAdminConfig ) {
+		return window?.ystdtbAdminConfig;
 	}
-	if ( ! window.ystdtbPluginSettings.hasOwnProperty( name ) ) {
-		return undefined;
+	if ( ! window.ystdtbAdminConfig.hasOwnProperty( name ) ) {
+		return defaultValue;
 	}
-	return window.ystdtbPluginSettings[ name ];
+	return window.ystdtbAdminConfig[ name ];
 }

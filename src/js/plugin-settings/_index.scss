@@ -1,11 +1,15 @@
 @use "component";
 @use "start-page";
+@use "add-code";
 
 .ystdtb-settings-v2 {
   background: #fff;
 
   #wpcontent {
     padding-left:0;
+  }
+  #wpbody {
+    height: 100%;
   }
   .wrap {
     margin: 0;

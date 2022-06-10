@@ -1,0 +1,17 @@
+.aktk-settings-update-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aktk-settings-update-buttons__button {
+  &.has-icon {
+    padding-right: 10px !important;
+  }
+
+  &.has-text {
+    svg {
+      margin-right: 4px !important;
+    }
+  }
+}

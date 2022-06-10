@@ -13,17 +13,17 @@ const StartPage = () => {
 	const sections = Object.keys( featureList );
 	return (
 		<PageBase title={ 'Toolbox機能' }>
-			<div className="ystdtb-settings-start-page">
+			<div className="aktk-settings-start-page">
 				{ sections.map( ( section ) => {
 					const sectionTitle = featureList[ section ]?.title;
 					const gridItems = featureList[ section ]?.items;
 					return (
 						<div
 							key={ section }
-							className="ystdtb-settings-start-page__section"
+							className="aktk-settings-start-page__section"
 						>
 							<h2>{ sectionTitle }</h2>
-							<div className="ystdtb-settings-start-page__grid">
+							<div className="aktk-settings-start-page__grid">
 								{ gridItems.map( ( item ) => {
 									return (
 										<GridItem

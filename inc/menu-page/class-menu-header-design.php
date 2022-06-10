@@ -74,7 +74,7 @@ class Menu_Header_Design extends Menu_Page_Base {
 		}
 		$input = $_post[ Header_Design::OPTION_NAME ];
 
-		return Option::update_option( Header_Design::OPTION_NAME, $input );
+		return Option::update_plugin_option( Header_Design::OPTION_NAME, $input );
 	}
 }
 

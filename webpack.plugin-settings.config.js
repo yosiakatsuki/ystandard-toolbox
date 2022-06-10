@@ -6,32 +6,11 @@ module.exports = {
 	entry: {
 		'plugin-settings': './src/js/plugin-settings/index.js',
 		'ystdtb-settings-v2': './src/js/plugin-settings/start-page/index.js',
+		'add-code': './src/js/plugin-settings/add-code/index.js',
 	},
 	output: {
 		filename: '[name].js',
 		path: `${ __dirname }/dist/plugin-settings`,
-	},
-	module: {
-		...defaultConfig.module,
-		rules: [
-			...defaultConfig.module.rules,
-			{
-				test: /\.css$/,
-				use: [
-					'style-loader',
-					{
-						loader: 'css-loader',
-					},
-				],
-			},
-			{
-				test: /\.(woff|woff2|eot|ttf|svg)$/,
-				loader: 'file-loader',
-				options: {
-					name: '../font/[name].[ext]',
-				},
-			},
-		],
 	},
 	resolve: {
 		...defaultConfig.resolve,
@@ -45,6 +24,12 @@ module.exports = {
 			'@aktk/components': path.resolve( __dirname, 'src/js/component' ),
 			'@aktk/controls': path.resolve( __dirname, 'src/js/controls' ),
 			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
+			'@aktk/api': path.resolve( __dirname, 'src/js/api' ),
 		},
 	},
+	performance: {
+		maxEntrypointSize: 500000,
+		maxAssetSize: 500000,
+	},
+	cache: false,
 };

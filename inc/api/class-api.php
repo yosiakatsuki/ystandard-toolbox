@@ -27,6 +27,9 @@ class Api {
 	 */
 	const STATUS_ERROR = 'error';
 
+	/**
+	 * API Namespace
+	 */
 	const API_NAMESPACE = 'ystdtb-api';
 
 	/**
@@ -40,7 +43,12 @@ class Api {
 	 * Register REST API route
 	 */
 	public function register_routes() {
-		$this->register_rest_route( 'get_plugin_settings' );
+		// プラグイン設定取得.
+		self::register_rest_route(
+			'get_plugin_settings',
+			[ $this, 'get_plugin_settings' ],
+			'GET'
+		);
 	}
 
 	/**
@@ -57,20 +65,35 @@ class Api {
 	}
 
 	/**
+	 * コード追加設定取得.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function get_code_settings() {
+		return rest_ensure_response(
+			[
+				'code' => Code::get_all_code(),
+			]
+		);
+	}
+
+	/**
 	 * エンドポイントの追加
 	 *
-	 * @param string $function_name Function Name.
+	 * @param string   $route    Route.
+	 * @param callable $function Callback.
+	 * @param string   $type     Methods.
 	 *
 	 * @return void
 	 */
-	private function register_rest_route( $function_name ) {
+	public static function register_rest_route( $route, $function, $type = 'POST' ) {
 		register_rest_route(
 			self::API_NAMESPACE . '/v1',
-			"/${function_name}",
+			"/${route}",
 			[
 				[
-					'methods'             => 'POST',
-					'callback'            => [ $this, "${function_name}" ],
+					'methods'             => $type,
+					'callback'            => $function,
 					'permission_callback' => function () {
 						return current_user_can( 'manage_options' );
 					},
@@ -123,3 +146,5 @@ class Api {
 		return self::STATUS_ERROR;
 	}
 }
+
+new Api();

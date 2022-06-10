@@ -20,6 +20,7 @@ require_once __DIR__ . '/init/class-init.php';
 if ( ! \ystandard_toolbox\Init::check_build_files() ) {
 	return;
 }
+require_once __DIR__ . '/api/class-api.php';
 require_once __DIR__ . '/meta-box/class-meta-box.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
 
@@ -66,5 +67,4 @@ require_once __DIR__ . '/admin/class-plugin-menu.php';
 if ( file_exists( __DIR__ . '/update/class-update.php' ) ) {
 	require_once __DIR__ . '/update/class-update.php';
 }
-require_once __DIR__ . '/api/class-api.php';
 require_once __DIR__ . '/settings/class-settings.php';

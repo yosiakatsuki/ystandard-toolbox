@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\AMP;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -30,6 +32,7 @@ class Code {
 		add_action( 'wp_head', [ $this, 'add_head' ] );
 		add_action( 'wp_body_open', [ $this, 'add_body_open' ] );
 		add_action( 'wp_footer', [ $this, 'add_footer' ] );
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 	}
 
 	/**
@@ -62,7 +65,7 @@ class Code {
 	private function echo_code( $option, $option_amp ) {
 		$normal = self::get_option( $option );
 		$amp    = self::get_option( $option_amp );
-		$code   = Utility::is_amp() ? $amp : $normal;
+		$code   = AMP::is_amp() ? $amp : $normal;
 		if ( ! empty( trim( $code ) ) ) {
 			echo trim( $code ) . PHP_EOL;
 		}
@@ -87,7 +90,55 @@ class Code {
 		return wp_unslash( $option[ $name ] );
 	}
 
+	/**
+	 * 全設定取得
+	 *
+	 * @return boolean | array
+	 */
+	public static function get_all_code() {
+		$option = get_option( self::OPTION_NAME, null );
+		$result = [];
+		if ( ! is_array( $option ) ) {
+			return false;
+		}
+		foreach ( array_keys( $option ) as $key ) {
+			$result[ $key ] = wp_unslash( $option[ $key ] );
+		}
 
+		return $result;
+	}
+
+	/**
+	 * Register REST API route
+	 */
+	public function register_routes() {
+		Api::register_rest_route( 'update_code', [ $this, 'update_option' ] );
+	}
+
+	/**
+	 * 設定更新
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_option( $request ) {
+		$data       = $request->get_json_params();
+		$result     = false;
+		$new_option = [];
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $value ) {
+				$new_option[ $key ] = trim( $value );
+			}
+			$result = Option::update_option( self::OPTION_NAME, $new_option );
+		}
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
+	}
 }
 
 new Code();

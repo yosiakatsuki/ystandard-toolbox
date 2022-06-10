@@ -50,7 +50,7 @@ class Menu_Font extends Menu_Page_Base {
 		$input['html']   = $this->sanitize_code( $input['html'] );
 		$input['family'] = $this->sanitize_code( $input['family'] );
 
-		return Option::update_option( Font::OPTION_NAME, $input );
+		return Option::update_plugin_option( Font::OPTION_NAME, $input );
 	}
 
 	/**

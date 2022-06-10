@@ -145,7 +145,7 @@ class Menu_CTA extends Menu_Page_Base {
 			return false;
 		}
 
-		$update_result = Option::update_option( CTA::OPTION_NAME, $result );
+		$update_result = Option::update_plugin_option( CTA::OPTION_NAME, $result );
 
 		if ( isset( $input[ CTA_Sort::OPTION_NAME ]['header'] ) && empty( $input[ CTA_Sort::OPTION_NAME ]['header'] ) ) {
 			return true;

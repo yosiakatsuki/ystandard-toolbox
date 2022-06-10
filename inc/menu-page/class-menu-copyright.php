@@ -50,7 +50,7 @@ class Menu_Copyright extends Menu_Page_Base {
 		$input['copyright']          = isset( $input['copyright'] ) ? $this->sanitize_copyright( $input['copyright'] ) : '';
 		$input['disable_theme_info'] = isset( $input['disable_theme_info'] ) ? Utility::to_bool( $input['disable_theme_info'] ) : false;
 
-		return Option::update_option( Copyright::OPTION_NAME, $input );
+		return Option::update_plugin_option( Copyright::OPTION_NAME, $input );
 	}
 
 	/**

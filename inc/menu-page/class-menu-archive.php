@@ -75,7 +75,7 @@ class Menu_Archive extends Menu_Page_Base {
 		}
 		$input = $_post[ Archive::OPTION_NAME ];
 
-		return Option::update_option( Archive::OPTION_NAME, $input );
+		return Option::update_plugin_option( Archive::OPTION_NAME, $input );
 	}
 }
 

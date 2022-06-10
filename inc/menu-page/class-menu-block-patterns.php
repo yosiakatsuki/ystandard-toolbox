@@ -49,7 +49,7 @@ class Menu_Block_Patterns extends Menu_Page_Base {
 		$input                         = $_post[ Block_Patterns::OPTION_NAME ];
 		$input['disable_core_pattern'] = isset( $input['disable_core_pattern'] ) ? Utility::to_bool( $input['disable_core_pattern'] ) : false;
 
-		return Option::update_option( Block_Patterns::OPTION_NAME, $input );
+		return Option::update_plugin_option( Block_Patterns::OPTION_NAME, $input );
 	}
 
 

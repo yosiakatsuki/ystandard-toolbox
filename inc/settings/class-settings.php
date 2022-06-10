@@ -24,9 +24,14 @@ class Settings {
 	 */
 	const SUBMENU = [
 		[
-			'slug'       => Config::ADMIN_MENU_SLUG_V2,
+			'slug'       => '',
 			'page-title' => 'yStandard Toolbox',
 			'menu-title' => 'yStandard Toolbox',
+		],
+		[
+			'slug'       => 'add-code',
+			'page-title' => 'コード追加',
+			'menu-title' => 'コード追加',
 		],
 	];
 
@@ -83,12 +88,21 @@ class Settings {
 		);
 		wp_localize_script(
 			'ystdtb-plugin-settings',
-			'ystdtbPluginSettings',
+			'ystdtbAdminConfig',
 			[
 				'siteUrl'     => esc_url_raw( home_url() ),
 				'pluginUrl'   => YSTDTB_URL,
 				'menuPageUrl' => esc_url_raw( admin_url( 'admin.php?page=' ) ),
 				'isAmpEnable' => AMP::is_amp_enable(),
+			]
+		);
+		wp_localize_script(
+			'ystdtb-plugin-settings',
+			'ystdtbPluginSettings',
+			[
+				'settings'   => Option::get_all_option(),
+				'code'       => Code::get_all_code(),
+				'heading-v1' => Heading::get_option(),
 			]
 		);
 
@@ -100,6 +114,12 @@ class Settings {
 			if ( 'plugin-settings' === $name ) {
 				continue;
 			}
+			if ( $name !== $this->get_menu_page_slug( $hook_suffix ) ) {
+				continue;
+			}
+			if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PREFIX_V2 ) ) {
+				return;
+			}
 			$asset = include( YSTDTB_PATH . "/dist/plugin-settings/${name}.asset.php" );
 			wp_enqueue_script(
 				"ystdtb-plugin-settings-${name}",
@@ -108,6 +128,14 @@ class Settings {
 				$asset['version'],
 				true
 			);
+			if ( file_exists( YSTDTB_PATH . "/dist/plugin-settings/${name}.css" ) ) {
+				wp_enqueue_style(
+					"ystdtb-plugin-settings-${name}",
+					YSTDTB_URL . "/dist/plugin-settings/${name}.css",
+					[],
+					$asset['version'],
+				);
+			}
 		}
 
 	}
@@ -126,12 +154,16 @@ class Settings {
 			59
 		);
 		foreach ( self::SUBMENU as $menu ) {
+			$slug = Config::ADMIN_MENU_SLUG_V2;
+			if ( ! empty( $menu['slug'] ) ) {
+				$slug .= '-' . $menu['slug'];
+			}
 			add_submenu_page(
 				Config::ADMIN_MENU_SLUG_V2,
 				$menu['page-title'],
 				$menu['menu-title'],
 				'manage_options',
-				$menu['slug'],
+				$slug,
 				[ $this, 'menu_page' ],
 			);
 		}
@@ -156,14 +188,19 @@ class Settings {
 	/**
 	 * メニューページスラッグの取得.
 	 *
+	 * @param string $_hook_suffix Hook Suffix.
+	 *
 	 * @return string
 	 */
-	private function get_menu_page_slug() {
+	private function get_menu_page_slug( $_hook_suffix = '' ) {
 		global $hook_suffix;
-		$slug = $hook_suffix;
+		$slug = ! $_hook_suffix ? $hook_suffix : $_hook_suffix;
 
 		if ( false !== strpos( $slug, 'toplevel_page_' ) ) {
 			$slug = str_replace( 'toplevel_page_', '', $slug );
+		}
+		if ( false !== strpos( $slug, 'page_ystdtb-settings-v2-' ) ) {
+			$slug = preg_replace( '/^.+page_ystdtb-settings-v2-/i', '', $slug );
 		}
 
 		return $slug;

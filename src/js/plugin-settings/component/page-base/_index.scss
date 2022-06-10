@@ -1,8 +1,8 @@
-.ystdtb-settings__base {
+.aktk-settings__base {
   font-size: 16px;
 }
 
-.ystdtb-settings__header {
+.aktk-settings__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -11,7 +11,7 @@
   background-color: #07689f;
   color: #fff;
 
-  .ystdtb-settings__title {
+  .aktk-settings__title {
     margin: 0;
     padding: 0;
     font-size: 1.4em;
@@ -20,13 +20,36 @@
     letter-spacing: 0.05em;
   }
 
-  .ystdtb-settings__brand {
+  .aktk-settings__brand {
     font-size: 0.8em;
     letter-spacing: 0.05em;
     font-family: Orbitron, sans-serif;
   }
 }
 
-.ystdtb-settings__content {
+.aktk-settings__content {
   padding: 40px 20px;
+}
+
+.aktk-settings__base-loading-panel {
+  display: none;
+
+  &.is-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(#fff, 0.7);
+    z-index: 10000;
+
+    svg {
+      margin: 0;
+      width: 50px;
+      height: 50px;
+    }
+  }
 }

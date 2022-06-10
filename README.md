@@ -332,3 +332,9 @@ Source : <https://bgjar.com/>
 
 License: CC BY 4.0  
 Source : <https://www.heropatterns.com/>
+
+
+### React-Toastify
+
+License: MIT  
+Source : <https://github.com/fkhadra/react-toastify>

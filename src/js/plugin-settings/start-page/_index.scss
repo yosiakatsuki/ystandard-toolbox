@@ -1,4 +1,4 @@
-.ystdtb-settings-start-page__section {
+.aktk-settings-start-page__section {
   margin-top: 80px;
 
   &:first-child {
@@ -14,13 +14,13 @@
   }
 }
 
-.ystdtb-settings-start-page__grid {
+.aktk-settings-start-page__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   grid-gap: 20px;
 }
 
-.ystdtb-settings-start-page__grid-item {
+.aktk-settings-start-page__grid-item {
   padding: 20px;
   box-shadow: 0 0 8px rgba(#000, 0.1);
   display: flex;
@@ -36,7 +36,7 @@
     text-align: center;
   }
 
-  .ystdtb-settings-start-page__grid-icon {
+  .aktk-settings-start-page__grid-icon {
     text-align: center;
     svg {
       width: 40px;
@@ -45,13 +45,13 @@
       stroke-width: 0.08em;
     }
   }
-  .ystdtb-settings-start-page__grid-text {
+  .aktk-settings-start-page__grid-text {
     font-size: 0.8em;
     color: #333;
   }
 }
 
-.ystdtb-settings-start-page__grid-buttons {
+.aktk-settings-start-page__grid-buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
   grid-gap: 20px;

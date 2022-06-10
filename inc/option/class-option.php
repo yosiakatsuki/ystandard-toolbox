@@ -92,14 +92,14 @@ class Option {
 	}
 
 	/**
-	 * 設定更新
+	 * プラグイン設定更新
 	 *
-	 * @param string $name  Name.
+	 * @param string $name  セクション名.
 	 * @param mixed  $value Value.
 	 *
 	 * @return bool
 	 */
-	public static function update_option( $name, $value ) {
+	public static function update_plugin_option( $name, $value ) {
 		$option = self::get_all_option();
 		if ( ! is_array( $option ) ) {
 			$option = [];
@@ -119,7 +119,25 @@ class Option {
 
 		$option[ $name ] = $value;
 
-		return update_option( Config::OPTION_NAME, $option );
+		return self::update_option( Config::OPTION_NAME, $option );
+	}
+
+	/**
+	 * プラグイン設定更新
+	 *
+	 * @param string $name  設定名.
+	 * @param mixed  $value Value.
+	 *
+	 * @return bool
+	 */
+	public static function update_option( $name, $value ) {
+		$old_value = get_option( $name );
+		// 値が変更されていない場合、更新はしないけどtrueを返す.
+		if ( $value === $old_value || maybe_serialize( $value ) === maybe_serialize( $old_value ) ) {
+			return true;
+		}
+
+		return update_option( $name, $value );
 	}
 
 	/**
@@ -139,7 +157,7 @@ class Option {
 		}
 		unset( $option[ $name ] );
 
-		return update_option( Config::OPTION_NAME, $option );
+		return self::update_option( Config::OPTION_NAME, $option );
 	}
 
 	/**
