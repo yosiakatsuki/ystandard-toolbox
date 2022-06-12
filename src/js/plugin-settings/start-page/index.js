@@ -7,7 +7,7 @@ import { render } from '@wordpress/element';
  */
 import PageBase from '../component/page-base';
 import featureList from './feature-list.js';
-import GridItem from './item';
+import GridItem from './grid-item';
 
 const StartPage = () => {
 	const sections = Object.keys( featureList );

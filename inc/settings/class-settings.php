@@ -55,7 +55,16 @@ class Settings {
 		if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PREFIX_V2 ) ) {
 			return;
 		}
+		self::enqueue_setting_base_scripts();
+		$this->enqueue_setting_page_scripts( $hook_suffix );
+	}
 
+	/**
+	 * 設定ページに必要な基本スクリプト読み込み
+	 *
+	 * @return void
+	 */
+	public static function enqueue_setting_base_scripts() {
 		if ( ! Version_Compare::ystandard_version_compare() ) {
 			wp_enqueue_style(
 				'ystdtb-plugin-settings-orbitron',
@@ -105,7 +114,16 @@ class Settings {
 				'heading-v1' => Heading::get_option(),
 			]
 		);
+	}
 
+	/**
+	 * 設定ページ用スクリプト読み込み
+	 *
+	 * @param string $hook_suffix Hook Suffix.
+	 *
+	 * @return void
+	 */
+	private function enqueue_setting_page_scripts( $hook_suffix ) {
 		foreach ( glob( YSTDTB_PATH . '/dist/plugin-settings/*.js' ) as $file ) {
 			if ( ! is_file( $file ) ) {
 				continue;
@@ -137,7 +155,6 @@ class Settings {
 				);
 			}
 		}
-
 	}
 
 	/**
@@ -169,6 +186,11 @@ class Settings {
 		}
 	}
 
+	/**
+	 * メニューページHTML
+	 *
+	 * @return void
+	 */
 	public function menu_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );

@@ -129,7 +129,7 @@ const fatureList = {
 		],
 	},
 	utility: {
-		title: '便利機能',
+		title: '便利機能・その他',
 		items: [
 			{
 				name: 'head,footerコード追加',

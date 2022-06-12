@@ -18,14 +18,16 @@ const GridItem = ( { name, icon, description, manual, settingPage } ) => {
 				{ description }
 			</div>
 			<div className="aktk-settings-start-page__grid-buttons">
-				<a
-					href={ manual }
-					target={ '_blank' }
-					rel={ 'noreferrer noopener nofollow' }
-				>
-					<Book />
-					マニュアル
-				</a>
+				{ !! manual && (
+					<a
+						href={ manual }
+						target={ '_blank' }
+						rel={ 'noreferrer noopener nofollow' }
+					>
+						<Book />
+						マニュアル
+					</a>
+				) }
 				{ !! settingPage && (
 					<a href={ getSettingPageUrl( settingPage ) }>
 						<Settings />
