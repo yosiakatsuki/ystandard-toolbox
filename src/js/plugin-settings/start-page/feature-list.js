@@ -15,7 +15,7 @@ import {
 	Code,
 } from 'react-feather';
 
-const fatureList = {
+const featureList = {
 	block: {
 		title: 'カスタムブロック',
 		items: [
@@ -95,6 +95,8 @@ const fatureList = {
 				description:
 					'よく使う定型文などを登録してブロックエディターで簡単に利用できる機能',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-block-patterns/',
+				settingPage:
+					'edit.php?post_type=ystdtb-patterns&page=ystdtb-settings-v2-block-patterns',
 			},
 			{
 				name: '画面サイズ別非表示機能',
@@ -142,4 +144,4 @@ const fatureList = {
 		],
 	},
 };
-export default fatureList;
+export default featureList;

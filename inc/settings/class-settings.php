@@ -101,7 +101,7 @@ class Settings {
 			[
 				'siteUrl'     => esc_url_raw( home_url() ),
 				'pluginUrl'   => YSTDTB_URL,
-				'menuPageUrl' => esc_url_raw( admin_url( 'admin.php?page=' ) ),
+				'adminUrl'    => esc_url_raw( admin_url() ),
 				'isAmpEnable' => AMP::is_amp_enable(),
 			]
 		);
