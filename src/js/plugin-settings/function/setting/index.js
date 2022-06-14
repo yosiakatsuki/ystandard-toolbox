@@ -1,17 +1,20 @@
 import { hasObjectKey } from '@aktk/helper/object.js';
 
-export function getPluginSetting( name = undefined, defaultValue = undefined ) {
+export function getPluginSetting(
+	section = undefined,
+	defaultValue = undefined
+) {
 	if ( ! window?.ystdtbPluginSettings ) {
 		return defaultValue;
 	}
-	if ( ! name ) {
+	if ( ! section ) {
 		return window?.ystdtbPluginSettings?.settings;
 	}
 	const settings = window?.ystdtbPluginSettings?.settings;
-	if ( ! hasObjectKey( settings, name ) ) {
+	if ( ! hasObjectKey( settings, section ) ) {
 		return defaultValue;
 	}
-	return settings[ name ];
+	return settings[ section ];
 }
 
 export function getCodeSetting() {

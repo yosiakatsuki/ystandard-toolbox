@@ -44,6 +44,8 @@ class Block_Patterns {
 		if ( Option::get_option_by_bool( Block_Patterns::OPTION_NAME, 'disable_core_pattern', false ) ) {
 			add_action( 'init', [ $this, 'remove_core_patterns' ], 9 );
 		}
+		add_action( 'admin_menu', [ $this, 'add_menu_page' ], 50 );
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 	}
 
 	/**
@@ -275,6 +277,47 @@ class Block_Patterns {
 	 */
 	public function remove_core_patterns() {
 		remove_theme_support( 'core-block-patterns' );
+	}
+
+	/**
+	 * ブロックパターン設定ページ追加
+	 *
+	 * @return void
+	 */
+	public function add_menu_page() {
+		add_submenu_page(
+			'edit.php?post_type=ystdtb-patterns',
+			__( 'ブロックパターン設定', 'ystandard-toolbox' ),
+			__( 'パターン設定', 'ystandard-toolbox' ),
+			'manage_options',
+			Config::ADMIN_MENU_SLUG_V2 . '-block-patterns',
+			[ '\ystandard_toolbox\Settings', 'menu_page' ]
+		);
+	}
+
+	/**
+	 * Register REST API route
+	 */
+	public function register_routes() {
+		Api::register_rest_route( 'update_block_pattern', [ $this, 'update_option' ] );
+	}
+
+	/**
+	 * 設定更新
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_option( $request ) {
+		$data   = $request->get_json_params();
+		$result = Option::update_plugin_option( self::OPTION_NAME, $data );
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
 	}
 }
 

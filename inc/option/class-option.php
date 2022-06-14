@@ -94,12 +94,12 @@ class Option {
 	/**
 	 * プラグイン設定更新
 	 *
-	 * @param string $name  セクション名.
-	 * @param mixed  $value Value.
+	 * @param string $section_name セクション名.
+	 * @param mixed  $value        Value.
 	 *
 	 * @return bool
 	 */
-	public static function update_plugin_option( $name, $value ) {
+	public static function update_plugin_option( $section_name, $value ) {
 		$option = self::get_all_option();
 		if ( ! is_array( $option ) ) {
 			$option = [];
@@ -117,7 +117,7 @@ class Option {
 			}
 		}
 
-		$option[ $name ] = $value;
+		$option[ $section_name ] = $value;
 
 		return self::update_option( Config::OPTION_NAME, $option );
 	}

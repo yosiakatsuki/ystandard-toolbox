@@ -181,7 +181,7 @@ class Settings {
 				$menu['menu-title'],
 				'manage_options',
 				$slug,
-				[ $this, 'menu_page' ],
+				[ '\ystandard_toolbox\Settings', 'menu_page' ],
 			);
 		}
 	}
@@ -191,11 +191,11 @@ class Settings {
 	 *
 	 * @return void
 	 */
-	public function menu_page() {
+	public static function menu_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
-		$slug = $this->get_menu_page_slug();
+		$slug = self::get_menu_page_slug();
 		?>
 		<div class="wrap">
 			<div class="ystdtb-settings-v2">
@@ -214,7 +214,7 @@ class Settings {
 	 *
 	 * @return string
 	 */
-	private function get_menu_page_slug( $_hook_suffix = '' ) {
+	public static function get_menu_page_slug( $_hook_suffix = '' ) {
 		global $hook_suffix;
 		$slug = ! $_hook_suffix ? $hook_suffix : $_hook_suffix;
 

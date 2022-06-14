@@ -1,11 +1,20 @@
 import { Button } from '@wordpress/components';
+import classnames from 'classnames';
 
-const HorizonButtons = ( { items, onChange, primary = undefined } ) => {
+const HorizonButtons = ( {
+	items,
+	onChange,
+	primary = undefined,
+	isFullWidth,
+} ) => {
+	const classNames = classnames( 'ystdtb__horizon-buttons', {
+		'is-full-width': isFullWidth,
+	} );
 	const handleOnClick = ( item ) => {
 		onChange( item );
 	};
 	return (
-		<div className="ystdtb__horizon-buttons">
+		<div className={ classNames }>
 			{ items.map( ( item ) => {
 				return (
 					<Button
