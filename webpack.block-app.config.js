@@ -9,7 +9,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: `${ __dirname }/js/app`,
+		path: `${ __dirname }/js/block-app`,
 	},
 	module: {
 		...defaultConfig.module,

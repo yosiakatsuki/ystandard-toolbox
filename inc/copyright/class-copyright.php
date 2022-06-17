@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Version_Compare;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,7 +29,7 @@ class Copyright {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare() ) {
+		if ( ! Version_Compare::ystandard_version_compare() ) {
 			return;
 		}
 		add_filter( 'ys_copyright', [ $this, '_copyright' ], 11 );
@@ -39,7 +41,7 @@ class Copyright {
 			},
 			11
 		);
-
+		add_filter( 'ystdtb_admin_config', [ $this, 'add_admin_config' ] );
 	}
 
 	/**
@@ -82,16 +84,7 @@ class Copyright {
 	 */
 	public static function get_default() {
 
-		$year      = date_i18n( 'Y' );
-		$url       = esc_url( home_url( '/' ) );
-		$blog_name = get_bloginfo( 'name' );
-
-		return sprintf(
-			'&copy; %s <a href="%s" rel="home">%s</a>',
-			esc_html( $year ),
-			$url,
-			$blog_name
-		);
+		return '&copy; {year} <a href="{url}" rel="home">{site}</a>';
 	}
 
 	/**
@@ -113,6 +106,19 @@ class Copyright {
 	public static function get_disable_theme_info() {
 
 		return Option::get_option_by_bool( Copyright::OPTION_NAME, 'disable_theme_info', false );
+	}
+
+	/**
+	 * Copyright設定用データ追加
+	 *
+	 * @param array $config Configs.
+	 *
+	 * @return array
+	 */
+	public function add_admin_config( $config ) {
+		$config['copyrightDefault'] = self::get_default();
+
+		return $config;
 	}
 }
 

@@ -36,45 +36,6 @@ class Api {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
-	}
-
-	/**
-	 * Register REST API route
-	 */
-	public function register_routes() {
-		// プラグイン設定取得.
-		self::register_rest_route(
-			'get_plugin_settings',
-			[ $this, 'get_plugin_settings' ],
-			'GET'
-		);
-	}
-
-	/**
-	 * プラグイン設定取得.
-	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
-	 */
-	public function get_plugin_settings() {
-		return rest_ensure_response(
-			[
-				'plugin' => Option::get_all_option(),
-			]
-		);
-	}
-
-	/**
-	 * コード追加設定取得.
-	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
-	 */
-	public function get_code_settings() {
-		return rest_ensure_response(
-			[
-				'code' => Code::get_all_code(),
-			]
-		);
 	}
 
 	/**

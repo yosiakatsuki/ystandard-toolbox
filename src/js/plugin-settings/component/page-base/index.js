@@ -17,7 +17,7 @@ const PageBase = ( { title, manual, loading = false, children } ) => {
 		<div className="aktk-settings__base">
 			<div className="aktk-settings__header">
 				<h1 className="aktk-settings__title">{ title }</h1>
-				<div>
+				<div className="aktk-settings__header-sub">
 					{ manual && <ManualLink path={ manual } /> }
 					<div className="aktk-settings__brand">
 						yStandard Toolbox

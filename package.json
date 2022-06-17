@@ -59,10 +59,10 @@
     "webpack": "^5.73.0"
   },
   "scripts": {
-    "open:site": "open http://localhost:10020/",
+    "open": "open http://localhost:10020/",
     "activate:theme": "wp-env run cli 'wp theme activate ystandard'",
     "start:update": "wp-env start --xdebug -- --update && npm run activate:theme && npm run import",
-    "start": "wp-env start --xdebug && npm run import && npm run open:site",
+    "start": "wp-env start --xdebug && npm run import && npm run open",
     "stop": "npm run export && wp-env stop",
     "lint:js:src": "wp-scripts lint-js src/js/**/*.js ./src/js --fix",
     "lint:js:blocks": "wp-scripts lint-js blocks ./src/js --fix",

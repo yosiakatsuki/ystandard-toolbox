@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\AMP;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -43,7 +45,7 @@ class Enqueue {
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox.css' )
 		);
 		do_action( Config::AFTER_ENQUEUE_CSS_HOOK );
-		if ( Utility::is_amp() ) {
+		if ( AMP::is_amp() ) {
 			wp_enqueue_style(
 				Config::CSS_HANDLE . '-no-script',
 				YSTDTB_URL . '/css/ystandard-toolbox-no-script.css',
@@ -57,14 +59,14 @@ class Enqueue {
 	 * Enqueue Scripts
 	 */
 	public function enqueue_script() {
-		if ( Utility::is_amp() ) {
+		if ( AMP::is_amp() ) {
 			return;
 		}
 		wp_enqueue_script(
 			Config::JS_BLOCK_APP_HANDLE,
-			YSTDTB_URL . '/js/app/block-app.js',
+			YSTDTB_URL . '/js/block-app/block-app.js',
 			[],
-			filemtime( YSTDTB_PATH . '/js/app/block-app.js' ),
+			filemtime( YSTDTB_PATH . '/js/block-app/block-app.js' ),
 			true
 		);
 		wp_script_add_data( Config::JS_BLOCK_APP_HANDLE, 'defer', true );

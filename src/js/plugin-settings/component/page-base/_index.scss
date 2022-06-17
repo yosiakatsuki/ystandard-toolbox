@@ -9,7 +9,15 @@
   flex-wrap: wrap;
   padding: 20px;
   background-color: #07689f;
-  color: #fff;
+
+  .aktk-settings__title,
+  .aktk-settings__header-sub {
+    color: #fff;
+  }
+
+  .notice {
+    display: none;
+  }
 
   .aktk-settings__title {
     margin: 0;
@@ -25,8 +33,10 @@
     letter-spacing: 0.05em;
     font-family: Orbitron, sans-serif;
   }
+
   .ystdtb-component-manual-link {
     margin-bottom: 0.5em;
+
     a {
       color: currentColor;
     }

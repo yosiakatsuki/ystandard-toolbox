@@ -689,6 +689,13 @@
   border-radius: 0 4px 4px 0;
 }
 
+.aktk-code-input {
+  border: 1px solid #ddd;
+}
+.aktk-code-input .cm-focused {
+  outline: none !important;
+}
+
 .ystdtb-component-border-control__columns {
   display: flex;
   gap: 10px;

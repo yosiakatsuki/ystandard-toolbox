@@ -33,6 +33,7 @@ class Code {
 		add_action( 'wp_body_open', [ $this, 'add_body_open' ] );
 		add_action( 'wp_footer', [ $this, 'add_footer' ] );
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 	}
 
 	/**
@@ -106,6 +107,19 @@ class Code {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * 設定画面用データ追加
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_plugin_settings( $settings ) {
+		$settings['code'] = self::get_all_code();
+
+		return $settings;
 	}
 
 	/**

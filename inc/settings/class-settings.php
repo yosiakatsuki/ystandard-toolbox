@@ -29,6 +29,11 @@ class Settings {
 			'menu-title' => 'yStandard Toolbox',
 		],
 		[
+			'slug'       => 'design',
+			'page-title' => 'サイトデザイン拡張',
+			'menu-title' => 'サイトデザイン拡張',
+		],
+		[
 			'slug'       => 'add-code',
 			'page-title' => 'コード追加',
 			'menu-title' => 'コード追加',
@@ -42,6 +47,54 @@ class Settings {
 		add_action( 'admin_menu', [ $this, 'add_menu_page' ], 50 );
 		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+	}
+
+	/**
+	 * Register REST API route
+	 */
+	public function register_routes() {
+		// プラグイン設定取得.
+		Api::register_rest_route(
+			'get_plugin_settings',
+			[ $this, 'get_plugin_settings' ],
+			'GET'
+		);
+		Api::register_rest_route(
+			'update_plugin_settings_all',
+			[ $this, 'update_plugin_settings_all' ],
+		);
+	}
+
+	/**
+	 * プラグイン設定取得.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function get_plugin_settings() {
+		return rest_ensure_response(
+			[
+				'plugin' => Option::get_all_option(),
+			]
+		);
+	}
+
+	/**
+	 * 設定更新
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_plugin_settings_all( $request ) {
+		$data   = $request->get_json_params();
+		$result = Option::update_option( Config::OPTION_NAME, $data );
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
 	}
 
 	/**
@@ -98,21 +151,26 @@ class Settings {
 		wp_localize_script(
 			'ystdtb-plugin-settings',
 			'ystdtbAdminConfig',
-			[
-				'siteUrl'     => esc_url_raw( home_url() ),
-				'pluginUrl'   => YSTDTB_URL,
-				'adminUrl'    => esc_url_raw( admin_url() ),
-				'isAmpEnable' => AMP::is_amp_enable(),
-			]
+			apply_filters(
+				'ystdtb_admin_config',
+				[
+					'siteUrl'     => esc_url_raw( home_url() ),
+					'pluginUrl'   => YSTDTB_URL,
+					'adminUrl'    => esc_url_raw( admin_url() ),
+					'isAmpEnable' => AMP::is_amp_enable(),
+				]
+			)
 		);
 		wp_localize_script(
 			'ystdtb-plugin-settings',
 			'ystdtbPluginSettings',
-			[
-				'settings'   => Option::get_all_option(),
-				'code'       => Code::get_all_code(),
-				'heading-v1' => Heading::get_option(),
-			]
+			apply_filters(
+				'ystdtb_plugin_settings',
+				[
+					'settings'   => Option::get_all_option(),
+					'heading-v1' => Heading::get_option(),
+				]
+			)
 		);
 	}
 

@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox\blocks;
 
-use ystandard_toolbox\Utility;
+use ystandard_toolbox\helper\AMP;
 
 defined( 'ABSPATH' ) || die();
 
@@ -47,12 +47,12 @@ class Slider {
 			return $block_content;
 		}
 		if ( $parsed_block && 'ystdtb/slider' === $parsed_block['blockName'] ) {
-			if ( ! Utility::is_amp() ) {
+			if ( ! AMP::is_amp() ) {
 				wp_enqueue_script(
 					'ystdtb-slider-app',
-					YSTDTB_URL . '/js/app/app-slider.js',
+					YSTDTB_URL . '/js/block-app/app-slider.js',
 					[],
-					filemtime( YSTDTB_PATH . '/js/app/app-slider.js' ),
+					filemtime( YSTDTB_PATH . '/js/block-app/app-slider.js' ),
 					true
 				);
 			}

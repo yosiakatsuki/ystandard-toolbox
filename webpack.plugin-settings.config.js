@@ -7,6 +7,7 @@ module.exports = {
 		'plugin-settings': './src/js/plugin-settings/index.js',
 		'ystdtb-settings-v2': './src/js/plugin-settings/start-page/index.js',
 		'add-code': './src/js/plugin-settings/add-code/index.js',
+		design: './src/js/plugin-settings/design/index.js',
 		'block-patterns': './src/js/plugin-settings/block-patterns/index.js',
 	},
 	output: {

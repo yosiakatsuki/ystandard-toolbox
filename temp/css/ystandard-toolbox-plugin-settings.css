@@ -567,6 +567,13 @@
   border-radius: 0 4px 4px 0;
 }
 
+.aktk-code-input {
+  border: 1px solid #ddd;
+}
+.aktk-code-input .cm-focused {
+  outline: none !important;
+}
+
 .aktk-settings__base {
   font-size: 16px;
 }
@@ -578,7 +585,13 @@
   flex-wrap: wrap;
   padding: 20px;
   background-color: #07689f;
+}
+.aktk-settings__header .aktk-settings__title,
+.aktk-settings__header .aktk-settings__header-sub {
   color: #fff;
+}
+.aktk-settings__header .notice {
+  display: none;
 }
 .aktk-settings__header .aktk-settings__title {
   margin: 0;
