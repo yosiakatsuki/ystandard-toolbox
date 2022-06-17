@@ -7,6 +7,21 @@ const NAMESPACE = 'ystdtb-api/v1';
 const SUCCESS = 'success';
 const ERROR = 'error';
 
+function getResponseData( response ) {
+	if ( response?.data && 'string' === typeof response?.data ) {
+		try {
+			return JSON.parse( response.data );
+		} catch ( e ) {
+			/* eslint-disable no-console */
+			console.error( 'レスポンスの解析中にエラーが発生しました' );
+			console.log( e.message );
+			/* eslint-enable */
+		}
+	}
+
+	return undefined;
+}
+
 export function isSuccess( status ) {
 	return SUCCESS === status;
 }
@@ -31,6 +46,7 @@ export function apiPost( props ) {
 				if ( 'function' === typeof callback ) {
 					callback( {
 						status: SUCCESS,
+						data: getResponseData( response ),
 						response,
 					} );
 				}
@@ -45,6 +61,7 @@ export function apiPost( props ) {
 				if ( 'function' === typeof callback ) {
 					callback( {
 						status: ERROR,
+						data: getResponseData( response ),
 						response,
 					} );
 				}

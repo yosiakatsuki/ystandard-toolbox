@@ -87,8 +87,14 @@ class Settings {
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_plugin_settings_all( $request ) {
-		$data   = $request->get_json_params();
-		$result = Option::update_option( Config::OPTION_NAME, $data );
+		$data   = apply_filters(
+			'ystdtb_update_plugin_settings_all_data',
+			$request->get_json_params()
+		);
+		$result = Option::update_option(
+			Config::OPTION_NAME,
+			$data
+		);
 
 		return Api::create_response(
 			$result,

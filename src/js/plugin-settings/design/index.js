@@ -49,7 +49,10 @@ const Design = () => {
 		setIsLoading( true );
 		update( {
 			data: settings,
-			callback: () => {
+			callback: ( response ) => {
+				if ( response?.data ) {
+					setSettings( response?.data );
+				}
 				setIsUpdate( false );
 				setIsLoading( false );
 			},
@@ -60,8 +63,20 @@ const Design = () => {
 
 	const tabs = [
 		{
+			name: 'header',
+			title: 'ヘッダー',
+		},
+		{
+			name: 'menu',
+			title: 'メニュー',
+		},
+		{
+			name: 'archive',
+			title: 'アーカイブ',
+		},
+		{
 			name: 'copyright',
-			title: 'Copyright編集',
+			title: 'Copyright',
 		},
 	];
 

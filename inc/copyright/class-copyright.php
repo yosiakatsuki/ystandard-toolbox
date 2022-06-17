@@ -42,6 +42,7 @@ class Copyright {
 			11
 		);
 		add_filter( 'ystdtb_admin_config', [ $this, 'add_admin_config' ] );
+		add_filter( 'ystdtb_update_plugin_settings_all_data', [ $this, 'sanitize_copyright' ] );
 	}
 
 	/**
@@ -119,6 +120,41 @@ class Copyright {
 		$config['copyrightDefault'] = self::get_default();
 
 		return $config;
+	}
+
+	/**
+	 * Copyrightのサニタイズ
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function sanitize_copyright( $settings ) {
+
+		if ( ! array_key_exists( 'copyright', $settings ) ) {
+			return $settings;
+		}
+		if ( ! array_key_exists( 'copyright', $settings['copyright'] ) ) {
+			return $settings;
+		}
+
+		$allowed_html     = wp_kses_allowed_html( 'post' );
+		$new_allowed_html = [];
+		if ( isset( $allowed_html['a'] ) ) {
+			$new_allowed_html['a'] = $allowed_html['a'];
+		}
+		if ( isset( $allowed_html['span'] ) ) {
+			$new_allowed_html['span'] = $allowed_html['span'];
+		}
+		if ( isset( $allowed_html['br'] ) ) {
+			$new_allowed_html['br'] = $allowed_html['br'];
+		}
+		if ( isset( $allowed_html['strong'] ) ) {
+			$new_allowed_html['strong'] = $allowed_html['strong'];
+		}
+		$settings['copyright']['copyright'] = wp_kses( $settings['copyright']['copyright'], $new_allowed_html );
+
+		return $settings;
 	}
 }
 
