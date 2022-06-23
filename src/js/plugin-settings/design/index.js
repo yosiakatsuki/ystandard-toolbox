@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 /**
  * WordPress
  */
@@ -28,6 +29,10 @@ const Design = () => {
 		setSettings( getPluginSetting() );
 		setIsLoading( false );
 	}, [] );
+
+	// eslint-disable-next-line no-undef
+	const parsed = queryString.parse( location.search );
+	const initialTabName = parsed?.tab;
 
 	const getSettings = ( section = undefined ) => {
 		if ( ! section || ! hasObjectKey( settings, section ) ) {
@@ -93,7 +98,7 @@ const Design = () => {
 					updateSettings,
 				} }
 			>
-				<SettingsTab tabs={ tabs }>
+				<SettingsTab tabs={ tabs } initialTabName={ initialTabName }>
 					{ ( tab ) => {
 						return (
 							<>

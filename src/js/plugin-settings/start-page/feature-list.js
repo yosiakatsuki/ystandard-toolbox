@@ -13,6 +13,7 @@ import {
 	Image,
 	CheckCircle,
 	Code,
+	Award,
 } from 'react-feather';
 
 const featureList = {
@@ -109,7 +110,17 @@ const featureList = {
 	},
 	design: {
 		title: 'デザイン機能',
-		items: [],
+		items: [
+			{
+				name: 'Copyright編集',
+				icon: () => <Award />,
+				description:
+					'サイトフッターに表示されるCopyright表記の編集、「yStandard Theme by yosiakatsuki Powered by WordPress」の削除機能',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-copyright/',
+				settingPage:
+					'admin.php?page=ystdtb-settings-v2-design&tab=copyright',
+			},
+		],
 	},
 	'theme-extension': {
 		title: 'テーマ拡張機能',
@@ -139,7 +150,7 @@ const featureList = {
 				description:
 					'<head>内や</body>直前などにJavaScriptなどを追加できる機能',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-add-code/',
-				settingPage: 'ystdtb-settings-v2-add-code',
+				settingPage: 'admin.php?page=ystdtb-settings-v2-add-code',
 			},
 		],
 	},
