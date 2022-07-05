@@ -1,6 +1,8 @@
 import { TabPanel } from '@wordpress/components';
 import classnames from 'classnames';
 
+import './_index.scss';
+
 const SettingsTab = ( {
 	className,
 	children,

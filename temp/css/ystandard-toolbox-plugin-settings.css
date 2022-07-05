@@ -574,112 +574,6 @@
   outline: none !important;
 }
 
-.aktk-settings__base {
-  font-size: 16px;
-}
-
-.aktk-settings__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  padding: 20px;
-  background-color: #07689f;
-}
-.aktk-settings__header .aktk-settings__title,
-.aktk-settings__header .aktk-settings__header-sub {
-  color: #fff;
-}
-.aktk-settings__header .notice {
-  display: none;
-}
-.aktk-settings__header .aktk-settings__title {
-  margin: 0;
-  padding: 0;
-  font-size: 1.4em;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-.aktk-settings__header .aktk-settings__brand {
-  font-size: 0.8em;
-  letter-spacing: 0.05em;
-  font-family: Orbitron, sans-serif;
-}
-.aktk-settings__header .ystdtb-component-manual-link {
-  margin-bottom: 0.5em;
-}
-.aktk-settings__header .ystdtb-component-manual-link a {
-  color: currentColor;
-}
-
-.aktk-settings__content {
-  padding: 40px 20px;
-}
-
-.aktk-settings__base-loading-panel {
-  display: none;
-}
-.aktk-settings__base-loading-panel.is-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 10000;
-}
-.aktk-settings__base-loading-panel.is-loading svg {
-  margin: 0;
-  width: 50px;
-  height: 50px;
-}
-
-.aktk-settings-tab-panel .components-tab-panel__tab-content {
-  padding: 20px 0;
-}
-.aktk-settings-tab-panel .components-tab-panel__tabs-item {
-  height: auto;
-  padding: 1em 1.5em;
-}
-.aktk-settings-tab-panel .components-tab-panel__tabs-item:not(.is-active) {
-  box-shadow: inset 0 0 0 1px transparent, inset 0 -4px 0 0 #f1f1f1;
-}
-
-.aktk-settings-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--aktk-settings-stack-gap, 20px);
-}
-
-.aktk-settings-update-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.aktk-settings-update-buttons__button.has-icon {
-  padding-right: 10px !important;
-}
-.aktk-settings-update-buttons__button.has-text svg {
-  margin-right: 4px !important;
-}
-
-.aktk-settings-section-label {
-  display: block;
-  margin: 2em 0 0.5em;
-  padding: 0;
-  color: #07689f;
-  font-weight: 700;
-  font-size: 1.2em;
-}
-.aktk-settings-section-label:first-child {
-  margin-top: 0;
-}
-
 .aktk-settings-start-page__section {
   margin-top: 80px;
 }
@@ -770,6 +664,9 @@
 
 .ystdtb-settings-v2 {
   background: #fff;
+}
+.ystdtb-settings-v2 *, .ystdtb-settings-v2 *::before, .ystdtb-settings-v2 *::after {
+  box-sizing: border-box;
 }
 .ystdtb-settings-v2 #wpcontent {
   padding-left: 0;

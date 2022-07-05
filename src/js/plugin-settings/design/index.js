@@ -12,12 +12,16 @@ import {
 	notifySuccess,
 	notifyError,
 } from '@aktk/components/toast-message';
-import Buttons from '../component/buttons';
 import { getPluginSetting } from '../function/setting';
-import SettingsTab from '../component/settings-tab';
 import { hasObjectKey } from '@aktk/helper/object.js';
-import Copyright from './copyright';
 import { update } from './update';
+/**
+ * Admin
+ */
+import Buttons from '../component/buttons';
+import SettingsTab from '../component/settings-tab';
+import Copyright from './copyright';
+import Header from './header';
 
 export const DesignContext = createContext();
 const Design = () => {
@@ -84,7 +88,7 @@ const Design = () => {
 			title: 'Copyright',
 		},
 	];
-
+	console.log( { designTab: settings } );
 	return (
 		<PageBase title={ 'サイトデザイン拡張' }>
 			<DesignContext.Provider
@@ -103,6 +107,7 @@ const Design = () => {
 						return (
 							<>
 								<Copyright tab={ tab } />
+								<Header tab={ tab } />
 							</>
 						);
 					} }

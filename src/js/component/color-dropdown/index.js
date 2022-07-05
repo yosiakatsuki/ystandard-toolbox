@@ -8,7 +8,13 @@ import {
 	__experimentalItemGroup as ItemGroup,
 } from '@wordpress/components';
 
-const ColorDropdown = ( { key, value, label, renderContent } ) => {
+const ColorDropdown = ( {
+	key,
+	value,
+	label,
+	position = 'bottom left',
+	renderContent,
+} ) => {
 	const _buttonLabel = label ?? '色';
 
 	return (
@@ -19,7 +25,7 @@ const ColorDropdown = ( { key, value, label, renderContent } ) => {
 		>
 			<Dropdown
 				key={ key }
-				position={ 'bottom left' }
+				position={ position }
 				className="block-editor-panel-color-gradient-settings__dropdown"
 				contentClassName="block-editor-panel-color-gradient-settings__dropdown-content"
 				style={ { display: 'block' } }

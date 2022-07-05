@@ -1,5 +1,6 @@
 import { Button } from '@wordpress/components';
 import classnames from 'classnames';
+import './_edit.scss';
 
 const HorizonButtons = ( {
 	items,

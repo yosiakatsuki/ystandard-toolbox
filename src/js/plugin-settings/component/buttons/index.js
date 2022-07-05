@@ -1,6 +1,8 @@
 import { Button } from '@wordpress/components';
 import { cloudUpload } from '@wordpress/icons';
 
+import './_index.scss';
+
 const Buttons = ( {
 	onClickUpdate,
 	onClickDelete = undefined,

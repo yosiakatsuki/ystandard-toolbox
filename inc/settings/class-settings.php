@@ -139,6 +139,7 @@ class Settings {
 		);
 
 		wp_enqueue_style( 'wp-components' );
+		wp_enqueue_style( 'wp-block-editor' );
 		wp_enqueue_media();
 
 		$asset_file                 = include( YSTDTB_PATH . '/dist/plugin-settings/plugin-settings.asset.php' );
@@ -160,10 +161,11 @@ class Settings {
 			apply_filters(
 				'ystdtb_admin_config',
 				[
-					'siteUrl'     => esc_url_raw( home_url() ),
-					'pluginUrl'   => YSTDTB_URL,
-					'adminUrl'    => esc_url_raw( admin_url() ),
-					'isAmpEnable' => AMP::is_amp_enable(),
+					'siteUrl'      => esc_url_raw( home_url() ),
+					'pluginUrl'    => YSTDTB_URL,
+					'adminUrl'     => esc_url_raw( admin_url() ),
+					'isAmpEnable'  => AMP::is_amp_enable(),
+					'editorColors' => self::get_editor_colors(),
 				]
 			)
 		);
@@ -309,6 +311,20 @@ class Settings {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * カラーパレットの取得
+	 *
+	 * @return array
+	 */
+	private static function get_editor_colors() {
+		$palette = get_theme_support( 'editor-color-palette' );
+		if ( ! is_array( $palette ) || empty( $palette ) ) {
+			return [];
+		}
+
+		return $palette[0];
 	}
 }
 

@@ -1,9 +1,17 @@
-@use "component";
 @use "start-page";
 @use "add-code";
 
 .ystdtb-settings-v2 {
   background: #fff;
+
+  * {
+    &,
+    &::before,
+    &::after {
+      box-sizing: border-box;
+    }
+
+  }
 
   #wpcontent {
     padding-left: 0;

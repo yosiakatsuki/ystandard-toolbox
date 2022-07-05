@@ -7,3 +7,7 @@ export function getAdminConfig( name = undefined, defaultValue = undefined ) {
 	}
 	return window.ystdtbAdminConfig[ name ];
 }
+
+export function getEditorColors() {
+	return getAdminConfig( 'editorColors' );
+}

@@ -3,6 +3,7 @@ import { Spinner } from '@wordpress/components';
 import { useMemo } from '@wordpress/element';
 
 import ManualLink from '@aktk/components/manual-link';
+import './_index.scss';
 
 const PageBase = ( { title, manual, loading = false, children } ) => {
 	const isLoading = useMemo( () => {
