@@ -17,12 +17,13 @@ const HorizonButtons = ( {
 	return (
 		<div className={ classNames }>
 			{ items.map( ( item ) => {
+				const itemValue = item?.value ?? item.name;
 				return (
 					<Button
 						key={ item.name }
-						isSecondary={ ! primary || primary !== item.name }
+						isSecondary={ ! primary || primary !== itemValue }
 						isPrimary={
-							undefined !== primary && primary === item.name
+							undefined !== primary && primary === itemValue
 						}
 						onClick={ () => {
 							handleOnClick( item );

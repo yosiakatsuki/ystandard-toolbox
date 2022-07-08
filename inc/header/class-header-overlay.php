@@ -36,6 +36,7 @@ class Header_Overlay {
 			[ $this, 'meta_box' ],
 			[ $this, 'save_meta' ]
 		);
+		add_filter( 'ystdtb_plugin_settings', [ $this, 'add_overlay_plugin_settings' ] );
 	}
 
 
@@ -250,6 +251,23 @@ class Header_Overlay {
 		}
 
 		return true;
+	}
+
+	/**
+	 * オーバーレイ設定の追加.
+	 *
+	 * @param array $args Settings.
+	 *
+	 * @return array
+	 */
+	public function add_overlay_plugin_settings( $args ) {
+
+		if ( ! Option::get_option( Header_Design::OPTION_NAME, 'overlayImageId' ) ) {
+			$image_id                     = url_to_postid( Option::get_option( Header_Design::OPTION_NAME, 'overlayImage' ) );
+			$args['headerOverlayImageId'] = $image_id;
+		}
+
+		return $args;
 	}
 
 	/**

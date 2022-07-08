@@ -37,6 +37,7 @@ const SubHeader = ( props ) => {
 			align: _settings?.subHeaderAlignDesktop ?? 'right',
 			fontSize,
 		} );
+		return subHeaderSettings;
 	};
 	useEffect( getSubHeaderSettings, [ settings ] );
 

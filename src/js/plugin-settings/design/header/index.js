@@ -11,6 +11,7 @@ import { DesignContext } from '../index';
  * Section
  */
 import SubHeader from './sub-header';
+import Overlay from './overlay';
 
 const SECTION_NAME = 'header';
 
@@ -36,6 +37,7 @@ const Header = ( { tab } ) => {
 	return (
 		<>
 			<SubHeader { ...panelProps } />
+			<Overlay { ...panelProps } />
 		</>
 	);
 };

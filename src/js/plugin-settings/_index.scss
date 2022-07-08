@@ -38,6 +38,14 @@
         margin-bottom: 1em;
       }
     }
+
+    > .components-base-control {
+      margin-top: 2em;
+
+      > .components-base-control__field > .components-base-control__label {
+        font-weight: 700;
+      }
+    }
   }
 
   .components-panel__body-title {
@@ -46,6 +54,9 @@
     .components-panel__body-toggle {
       font-weight: 700;
     }
-  }
 
+    + .components-base-control {
+      margin-top: 0;
+    }
+  }
 }

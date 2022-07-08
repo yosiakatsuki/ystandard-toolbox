@@ -293,6 +293,10 @@
   width: 100%;
   text-align: center;
 }
+.ystdtb-media-upload-control img {
+  max-width: 100%;
+  height: auto;
+}
 
 .ystdtb-responsive-tab .ystdtb-responsive-tab__label.is-bold {
   font-weight: bold;

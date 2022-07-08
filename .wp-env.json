@@ -6,6 +6,7 @@
   ],
   "plugins": [
     ".",
+    "https://wp-ystandard.com/download/ystandard/plugin/ystandard-blocks/ystandard-blocks.zip ",
     "https://downloads.wordpress.org/plugin/wp-multibyte-patch.zip"
   ],
   "env": {

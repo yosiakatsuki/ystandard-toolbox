@@ -1,4 +1,5 @@
 import { MediaUpload } from '@wordpress/block-editor';
+import { MediaUpload as MediaUploadUtils } from '@wordpress/media-utils';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -11,7 +12,10 @@ const MediaUploadControl = ( {
 	value,
 	clearLabel,
 	selectLabel,
+	useUtils,
 } ) => {
+	const MediaComponent = !! useUtils ? MediaUploadUtils : MediaUpload;
+
 	const MEDIA_TYPES = [ 'image' ];
 
 	const _mediaTypes = mediaTypes || MEDIA_TYPES;
@@ -76,10 +80,9 @@ const MediaUploadControl = ( {
 			</div>
 		);
 	};
-
 	return (
 		<div className="ystdtb-media-upload-control">
-			<MediaUpload
+			<MediaComponent
 				onSelect={ handleOnSelect }
 				type={ _mediaTypes }
 				value={ value }
@@ -87,6 +90,9 @@ const MediaUploadControl = ( {
 			/>
 		</div>
 	);
+};
+MediaUploadControl.Utils = ( props ) => {
+	return <MediaUploadControl useUtils={ true } { ...props } />;
 };
 
 export default MediaUploadControl;

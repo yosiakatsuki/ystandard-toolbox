@@ -4,17 +4,28 @@ export function getPluginSetting(
 	section = undefined,
 	defaultValue = undefined
 ) {
-	if ( ! window?.ystdtbPluginSettings ) {
+	const settings = getPluginSettings( 'settings' );
+	if ( ! settings ) {
 		return defaultValue;
 	}
 	if ( ! section ) {
-		return window?.ystdtbPluginSettings?.settings;
+		return settings;
 	}
-	const settings = window?.ystdtbPluginSettings?.settings;
 	if ( ! hasObjectKey( settings, section ) ) {
 		return defaultValue;
 	}
 	return settings[ section ];
+}
+
+export function getPluginSettings( name ) {
+	if ( ! window?.ystdtbPluginSettings ) {
+		return undefined;
+	}
+	const pluginSettings = window?.ystdtbPluginSettings;
+	if ( ! Object.prototype.hasOwnProperty.call( pluginSettings, name ) ) {
+		return undefined;
+	}
+	return pluginSettings[ name ];
 }
 
 export function getCodeSetting() {
