@@ -18,15 +18,12 @@ defined( 'ABSPATH' ) || die();
 		<?php
 		include __DIR__ . '/heading.php';
 		include __DIR__ . '/lp.php';
-		include __DIR__ . '/overlay.php';
 		include __DIR__ . '/web-font.php';
 		include __DIR__ . '/archive.php';
 		include __DIR__ . '/mobile-menu.php';
-		include __DIR__ . '/sub-header-menu.php';
 		include __DIR__ . '/front-page-menu.php';
 		include __DIR__ . '/cta.php';
 		include __DIR__ . '/add-css.php';
-		include __DIR__ . '/copyright.php';
 		include __DIR__ . '/widget-accordion.php';
 		?>
 	</div>

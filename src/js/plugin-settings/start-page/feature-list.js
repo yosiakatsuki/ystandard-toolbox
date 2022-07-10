@@ -14,6 +14,8 @@ import {
 	CheckCircle,
 	Code,
 	Award,
+	Menu,
+	Layers,
 } from 'react-feather';
 
 const featureList = {
@@ -111,6 +113,25 @@ const featureList = {
 	design: {
 		title: 'デザイン機能',
 		items: [
+			{
+				name: 'ヘッダーオーバーレイ',
+				icon: () => <Layers />,
+				description:
+					'ヘッダーを透明にしてコンテンツに重ねて表示できる機能\n' +
+					'ページ先頭に大きく画像や動画を表示するレイアウトに便利です。',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-header-overlay/',
+				settingPage:
+					'admin.php?page=ystdtb-settings-v2-design&tab=header',
+			},
+			{
+				name: 'サブヘッダーメニュー',
+				icon: () => <Menu />,
+				description:
+					'ヘッダーの上に追加で小さくメニューを表示できる機能',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-sub-header/',
+				settingPage:
+					'admin.php?page=ystdtb-settings-v2-design&tab=header',
+			},
 			{
 				name: 'Copyright編集',
 				icon: () => <Award />,

@@ -67,7 +67,6 @@ class Plugin_Menu {
 			<h1 class="ystdtb-menu__title">yStandard Toolbox</h1>
 			<?php
 			include __DIR__ . '/feature-list/design/index.php';
-			include __DIR__ . '/feature-list/other/index.php';
 			?>
 		</div>
 		<?php
