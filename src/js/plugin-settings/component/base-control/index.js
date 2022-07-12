@@ -1,7 +1,11 @@
+import classnames from 'classnames';
 import { BaseControl as WPBaseControl } from '@wordpress/components';
 import './_index.scss';
 
-const BaseControl = ( { label, id, children, ...props } ) => {
+const BaseControl = ( { label, id, children, isFullWidth, ...props } ) => {
+	const className = classnames( 'aktk-settings__base-control', {
+		'is-full-width': isFullWidth,
+	} );
 	return (
 		<WPBaseControl
 			{ ...{
@@ -10,7 +14,7 @@ const BaseControl = ( { label, id, children, ...props } ) => {
 				...props,
 			} }
 		>
-			<div className={ 'aktk-settings__base-control' }>{ children }</div>
+			<div className={ className }>{ children }</div>
 		</WPBaseControl>
 	);
 };

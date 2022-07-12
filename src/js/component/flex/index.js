@@ -1,16 +1,17 @@
-export const Flex = ( { children, ...props } ) => {
-	const {
-		justifyBetween,
-		justifyCenter,
-		justifyRight,
-		justifyLeft,
-		alignTop,
-		alignCenter,
-		alignBottom,
-		gap,
-		isGapSmall,
-		isGapLarge,
-	} = props;
+export const Flex = ( {
+	children,
+	justifyBetween,
+	justifyCenter,
+	justifyRight,
+	justifyLeft,
+	alignTop,
+	alignCenter,
+	alignBottom,
+	gap,
+	isGapSmall,
+	isGapLarge,
+	...props
+} ) => {
 	let justifyContent;
 	let alignItems;
 	let _gap;
@@ -56,8 +57,13 @@ export const Flex = ( { children, ...props } ) => {
 	return <div { ...blockProps }>{ children }</div>;
 };
 
-export const FlexItem = ( { children, ...props } ) => {
-	const { flexGrow, flexShrink, flexBasis } = props;
+export const FlexItem = ( {
+	flexGrow,
+	flexShrink,
+	flexBasis,
+	children,
+	...props
+} ) => {
 	const blockProps = {
 		style: {
 			flexGrow,

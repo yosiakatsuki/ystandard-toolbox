@@ -23,6 +23,7 @@ import SettingsTab from '../component/settings-tab';
 import Copyright from './copyright';
 import Header from './header';
 import Menu from './menu';
+import Archive from './archive';
 
 export const DesignContext = createContext();
 const Design = () => {
@@ -109,6 +110,7 @@ const Design = () => {
 							<>
 								<Header tab={ tab } />
 								<Menu tab={ tab } />
+								<Archive tab={ tab } />
 								<Copyright tab={ tab } />
 							</>
 						);

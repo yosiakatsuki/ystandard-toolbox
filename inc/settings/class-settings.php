@@ -87,14 +87,22 @@ class Settings {
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_plugin_settings_all( $request ) {
-		$data   = apply_filters(
+		$data = apply_filters(
 			'ystdtb_update_plugin_settings_all_data',
 			$request->get_json_params()
 		);
-		$result = Option::update_option(
-			Config::OPTION_NAME,
-			$data
-		);
+		if ( is_array( $data ) ) {
+			$result = [];
+			foreach ( $data as $section => $value ) {
+				$result[] = Option::update_plugin_option( $section, $value );
+			}
+			$result = 1 === count( array_values( array_unique( $result ) ) ) ? $result[0] : false;
+		} else {
+			$result = Option::update_option(
+				Config::OPTION_NAME,
+				$data
+			);
+		}
 
 		return Api::create_response(
 			$result,

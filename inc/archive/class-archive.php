@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Version_Compare;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,9 +29,7 @@ class Archive {
 	 * Archive constructor.
 	 */
 	public function __construct() {
-		$this->load_files();
-
-		if ( Utility::ystandard_version_compare( '4.13.1' ) ) {
+		if ( Version_Compare::ystandard_version_compare( '4.13.1' ) ) {
 			add_filter( 'ys_get_archive_default_image', [ $this, 'get_archive_default_image' ], 10, 4 );
 		}
 		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
@@ -41,16 +41,10 @@ class Archive {
 		if ( Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' ) ) {
 			add_filter( 'ys_archive_image_ratio', [ $this, 'archive_image_ratio' ] );
 		}
-		if ( Utility::ystandard_version_compare( '4.13.2' ) ) {
+		if ( Version_Compare::ystandard_version_compare( '4.13.2' ) ) {
 			add_filter( 'ys_get_archive_detail_date', [ $this, 'get_archive_detail_date' ], 10, 4 );
 		}
-	}
-
-	/**
-	 * 必要ファイルの読み込み
-	 */
-	private function load_files() {
-
+		add_filter( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 	}
 
 	/**
@@ -170,6 +164,20 @@ class Archive {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 設定追加
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_plugin_settings( $settings ) {
+
+		$settings['settings']['archive']['theme_ys_archive_type'] = get_option( 'ys_archive_type', 'card' );
+
+		return $settings;
 	}
 
 }

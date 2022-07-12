@@ -11,3 +11,8 @@ export function getAdminConfig( name = undefined, defaultValue = undefined ) {
 export function getEditorColors() {
 	return getAdminConfig( 'editorColors' );
 }
+
+export function getPluginAssetsUrl() {
+	const pluginUrl = getAdminConfig( 'pluginUrl' );
+	return `${ pluginUrl }/assets/settings`;
+}
