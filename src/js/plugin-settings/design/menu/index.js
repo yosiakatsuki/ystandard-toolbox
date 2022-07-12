@@ -6,15 +6,11 @@ import { useContext } from '@wordpress/element';
  * yStandard
  */
 import { DesignContext } from '../index';
-/**
- * Section
- */
-import SubHeader from './sub-header';
-import Overlay from './overlay';
+import RichDrawerMenu from './rich-drawer-menu';
 
-const TAB_NAME = 'header';
+const TAB_NAME = 'menu';
 
-const Header = ( { tab } ) => {
+const Menu = ( { tab } ) => {
 	const { getSettings, updateSettings } = useContext( DesignContext );
 
 	// 設定更新.
@@ -29,15 +25,13 @@ const Header = ( { tab } ) => {
 	if ( TAB_NAME !== tab?.name ) {
 		return <></>;
 	}
-
 	const panelProps = {
 		updateSection,
 	};
 	return (
 		<>
-			<SubHeader { ...panelProps } />
-			<Overlay { ...panelProps } />
+			<RichDrawerMenu { ...panelProps } />
 		</>
 	);
 };
-export default Header;
+export default Menu;

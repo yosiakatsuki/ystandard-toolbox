@@ -1,21 +1,21 @@
 import {
-	Grid,
-	Smartphone,
-	Sidebar,
-	Box,
-	Square,
-	List,
-	Clock,
-	MessageCircle,
 	Archive,
-	HardDrive,
-	Share2,
-	Image,
+	Award,
+	Box,
+	Clock,
 	CheckCircle,
 	Code,
-	Award,
-	Menu,
+	Grid,
+	HardDrive,
+	Image,
+	List,
 	Layers,
+	MessageCircle,
+	Menu,
+	Smartphone,
+	Sidebar,
+	Square,
+	Share2,
 } from 'react-feather';
 
 const featureList = {
@@ -131,6 +131,15 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-sub-header/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=header',
+			},
+			{
+				name: 'ドロワーメニュー拡張',
+				icon: () => <Menu />,
+				description:
+					'ウィジェットを使ってモバイルメニュー内にボタンや記事一覧などを配置できる機能',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-mobile-menu-widget/',
+				settingPage:
+					'admin.php?page=ystdtb-settings-v2-design&tab=menu',
 			},
 			{
 				name: 'Copyright編集',

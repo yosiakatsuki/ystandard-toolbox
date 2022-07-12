@@ -13,6 +13,7 @@ import HorizonButtons from '@aktk/components/horizon-buttons';
 import { getObjectValue } from '@aktk/helper/object.js';
 import { getAdminConfig } from '../../function/config';
 
+const TAB_NAME = 'copyright';
 const SECTION_NAME = 'copyright';
 
 const Copyright = ( { tab } ) => {
@@ -33,7 +34,7 @@ const Copyright = ( { tab } ) => {
 	};
 	useEffect( getCopyrightSettings, [ settings ] );
 	// タブチェック.
-	if ( SECTION_NAME !== tab?.name ) {
+	if ( TAB_NAME !== tab?.name ) {
 		return <></>;
 	}
 	// 設定更新.

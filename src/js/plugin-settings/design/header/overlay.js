@@ -111,7 +111,7 @@ const Overlay = ( props ) => {
 	};
 	return (
 		<PanelBody title={ 'ヘッダーオーバーレイ' }>
-			<BaseControl label={ '有効化' } id={ 'enable-overlay' }>
+			<BaseControl label={ '有効 / 無効' } id={ 'enable-overlay' }>
 				<HorizonButtons
 					items={ [
 						{
