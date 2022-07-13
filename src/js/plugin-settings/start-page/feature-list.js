@@ -142,6 +142,15 @@ const featureList = {
 					'admin.php?page=ystdtb-settings-v2-design&tab=menu',
 			},
 			{
+				name: 'ドロワーメニュー拡張',
+				icon: () => <Grid />,
+				description:
+					'投稿一覧のデフォルト画像や一覧画像サイズ、一覧レイアウトを変更できる機能',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-archive/',
+				settingPage:
+					'admin.php?page=ystdtb-settings-v2-design&tab=archive',
+			},
+			{
 				name: 'Copyright編集',
 				icon: () => <Award />,
 				description:

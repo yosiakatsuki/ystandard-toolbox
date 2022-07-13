@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || die();
 		include __DIR__ . '/heading.php';
 		include __DIR__ . '/lp.php';
 		include __DIR__ . '/web-font.php';
-		include __DIR__ . '/archive.php';
 		include __DIR__ . '/front-page-menu.php';
 		include __DIR__ . '/cta.php';
 		include __DIR__ . '/add-css.php';
