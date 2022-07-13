@@ -2,11 +2,10 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useContext, useState, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
-import { DesignContext } from '../index';
 import { Flex, FlexItem } from '@aktk/components/flex';
 import ButtonImage from '@aktk/components/button-image';
 import ButtonReset from '@aktk/components/button-reset';
@@ -14,24 +13,21 @@ import BaseControl from '../../component/base-control';
 import Notice from '@aktk/components/notice';
 import { getPluginAssetsUrl } from '../../function/config';
 
-const SECTION_NAME = 'archive';
-
 const Layout = ( props ) => {
-	const { updateSection } = props;
+	const { updateSection, sectionSettings } = props;
 	const [ layoutSettings, setLayoutSettings ] = useState( {} );
-	const { getSettings, settings } = useContext( DesignContext );
 	const assetsUrl = getPluginAssetsUrl();
 
 	const getLayoutSettings = () => {
-		const _settings = getSettings( SECTION_NAME );
 		setLayoutSettings( {
-			desktop: _settings?.theme_ys_archive_type ?? 'card',
-			mobile: _settings?.archiveMobileLayout,
+			desktop: sectionSettings?.theme_ys_archive_type ?? 'card',
+			mobile: sectionSettings?.archiveMobileLayout,
+			ratioMobile: sectionSettings?.archiveImageRatioMobile,
 		} );
 
 		return layoutSettings;
 	};
-	useEffect( getLayoutSettings, [ settings ] );
+	useEffect( getLayoutSettings, [ sectionSettings ] );
 
 	const layoutTypes = [
 		{
@@ -51,17 +47,17 @@ const Layout = ( props ) => {
 		},
 	];
 
-	const updateLayout = ( newValue ) => {
-		updateSection( SECTION_NAME, newValue );
-	};
-	const onChangeDesktopLayout = ( newValue ) => {
-		updateLayout( {
+	const handleOnChangeDesktopLayout = ( newValue ) => {
+		updateSection( {
 			theme_ys_archive_type: newValue.name,
 		} );
 	};
-	const onChangeMobileLayout = ( newValue ) => {
-		updateLayout( {
+	const handleOnChangeMobileLayout = ( newValue ) => {
+		updateSection( {
 			archiveMobileLayout: newValue.name,
+			archiveImageRatioMobile: !! newValue.name
+				? layoutSettings.ratioMobile
+				: undefined,
 		} );
 	};
 	return (
@@ -79,7 +75,7 @@ const Layout = ( props ) => {
 										layoutSettings.desktop === item.name
 									}
 									onClick={ () =>
-										onChangeDesktopLayout( item )
+										handleOnChangeDesktopLayout( item )
 									}
 									imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
 									alt={ item.label }
@@ -102,7 +98,7 @@ const Layout = ( props ) => {
 										layoutSettings.mobile === item.name
 									}
 									onClick={ () =>
-										onChangeMobileLayout( item )
+										handleOnChangeMobileLayout( item )
 									}
 									imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
 									alt={ item.label }
@@ -115,7 +111,7 @@ const Layout = ( props ) => {
 					<ButtonReset
 						label={ 'クリア' }
 						onClick={ () => {
-							onChangeMobileLayout( { name: undefined } );
+							handleOnChangeMobileLayout( { name: undefined } );
 						} }
 					/>
 				</div>

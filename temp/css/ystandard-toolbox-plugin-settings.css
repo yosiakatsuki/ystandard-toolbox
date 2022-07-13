@@ -666,6 +666,10 @@
   outline: none !important;
 }
 
+#wpbody-content > .notice {
+  display: none;
+}
+
 .ystdtb-settings-v2 {
   background: #fff;
 }

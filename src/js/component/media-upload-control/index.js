@@ -39,7 +39,8 @@ const MediaUploadControl = ( {
 	const _render = ( obj ) => {
 		const mediaType = media?.type || 'image';
 		const mediaId = media?.id || 0;
-		if ( ! mediaId || 0 === mediaId ) {
+		const mediaUrl = media?.url || '';
+		if ( ! mediaId && ! mediaUrl ) {
 			return (
 				<Button
 					className={ 'ystdtb-media-upload-control__select' }
@@ -58,7 +59,7 @@ const MediaUploadControl = ( {
 					className={ 'ystdtb-media-upload-control__preview' }
 				>
 					{ 'image' === mediaType && (
-						<img src={ media?.url } alt={ media?.alt } />
+						<img src={ mediaUrl } alt={ media?.alt } />
 					) }
 					{ 'video' === mediaType && (
 						<video
@@ -66,7 +67,7 @@ const MediaUploadControl = ( {
 							muted
 							loop
 							playsInline
-							src={ media?.url }
+							src={ mediaUrl }
 						/>
 					) }
 				</Button>
@@ -91,8 +92,31 @@ const MediaUploadControl = ( {
 		</div>
 	);
 };
-MediaUploadControl.Utils = ( props ) => {
-	return <MediaUploadControl useUtils={ true } { ...props } />;
+MediaUploadControl.Utils = ( {
+	media,
+	mediaTypes,
+	onSelect,
+	onSelectRaw,
+	onClear,
+	value,
+	clearLabel,
+	selectLabel,
+	...props
+} ) => {
+	return (
+		<MediaUploadControl
+			media={ media }
+			mediaTypes={ mediaTypes }
+			onSelect={ onSelect }
+			onSelectRaw={ onSelectRaw }
+			onClear={ onClear }
+			value={ value }
+			clearLabel={ clearLabel }
+			selectLabel={ selectLabel }
+			useUtils={ true }
+			{ ...props }
+		/>
+	);
 };
 
 export default MediaUploadControl;

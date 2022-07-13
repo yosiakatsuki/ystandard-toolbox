@@ -1,6 +1,12 @@
 @use "start-page";
 @use "add-code";
 
+#wpbody-content {
+  > .notice {
+    display: none;
+  }
+}
+
 .ystdtb-settings-v2 {
   background: #fff;
 

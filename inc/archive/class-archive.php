@@ -176,6 +176,12 @@ class Archive {
 	public function add_plugin_settings( $settings ) {
 
 		$settings['settings']['archive']['theme_ys_archive_type'] = get_option( 'ys_archive_type', 'card' );
+		if ( ! Option::get_option( self::OPTION_NAME, 'archiveDefaultImageId' ) ) {
+			$image    = Option::get_option( self::OPTION_NAME, 'archiveDefaultImage' );
+			$image_id = url_to_postid( $image );
+			// 画像id追加.
+			$settings['settings']['archive']['archiveDefaultImageId'] = $image_id;
+		}
 
 		return $settings;
 	}

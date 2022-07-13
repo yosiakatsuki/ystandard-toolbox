@@ -1,22 +1,32 @@
 /**
  * WordPress
  */
-import { useContext } from '@wordpress/element';
+import { useContext, useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
 import { DesignContext } from '../index';
 import Layout from './layout';
+import Image from './image';
+import Date from './date';
+import Sort from './sort';
 
 const TAB_NAME = 'archive';
+const SECTION_NAME = 'archive';
 
 const Archive = ( { tab } ) => {
-	const { getSettings, updateSettings } = useContext( DesignContext );
+	const { getSettings, settings, updateSettings } =
+		useContext( DesignContext );
+	const [ sectionSettings, setSectionSettings ] = useState( {} );
+	const getSectionSettings = () => {
+		setSectionSettings( getSettings( SECTION_NAME ) );
+	};
+	useEffect( getSectionSettings, [ settings ] );
 
 	// 設定更新.
-	const updateSection = ( section, value ) => {
-		updateSettings( section, {
-			...getSettings( section ),
+	const updateSection = ( value ) => {
+		updateSettings( SECTION_NAME, {
+			...sectionSettings,
 			...value,
 		} );
 	};
@@ -27,10 +37,14 @@ const Archive = ( { tab } ) => {
 	}
 	const panelProps = {
 		updateSection,
+		sectionSettings,
 	};
 	return (
 		<>
 			<Layout { ...panelProps } />
+			<Image { ...panelProps } />
+			<Date { ...panelProps } />
+			<Sort { ...panelProps } />
 		</>
 	);
 };
