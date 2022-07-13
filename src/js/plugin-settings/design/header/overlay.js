@@ -3,40 +3,21 @@ import { unescape as unescapeString, without } from 'lodash';
  * WordPress
  */
 import { PanelBody, CheckboxControl } from '@wordpress/components';
-import { useContext, useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 /**
  * yStandard
  */
-import { DesignContext } from '../index';
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import ColorPaletteControl from '@aktk/components/color-palette-control';
 import { toBool } from '@aktk/helper/boolean.js';
 import MediaUploadControl from '@aktk/components/media-upload-control';
 import BaseControl from '../../component/base-control';
 import { getEditorColors } from '../../function/config';
-import { getOverlayImageId } from './function/overlay';
 
-const SECTION_NAME = 'header_design';
-
-const Overlay = ( props ) => {
-	const { updateSection } = props;
-	const [ overlaySettings, setOverlaySettings ] = useState( {} );
-	const { getSettings, settings } = useContext( DesignContext );
-	const getOverlaySettings = () => {
-		const _settings = getSettings( SECTION_NAME );
-		const imageId = _settings?.overlayImageId ?? getOverlayImageId();
-		setOverlaySettings( {
-			enable: _settings?.enableOverlay ?? false,
-			image: _settings?.overlayImage,
-			imageId,
-			pageType: _settings?.overlayPageType || [],
-			color: _settings?.overlayTextColor,
-		} );
-		return overlaySettings;
-	};
-	useEffect( getOverlaySettings, [ settings ] );
+const Overlay = ( { updateSection, sectionSettings } ) => {
+	const overlayEnable = sectionSettings?.enableOverlay ?? false;
+	const overlayPageType = sectionSettings?.overlayPageType || [];
 
 	const { postTypes } = useSelect( ( select ) => {
 		const { getPostTypes } = select( coreStore );
@@ -72,40 +53,37 @@ const Overlay = ( props ) => {
 		];
 	};
 
-	const overlayImage = !! overlaySettings.image
+	const overlayImage = !! sectionSettings?.overlayImage
 		? {
-				id: overlaySettings.imageId,
-				url: overlaySettings.image,
+				id: sectionSettings?.overlayImageId,
+				url: sectionSettings?.overlayImage,
 		  }
 		: undefined;
 
-	const updateOverlay = ( newValue ) => {
-		updateSection( SECTION_NAME, newValue );
-	};
 	const handleOnChangeEnable = ( newValue ) => {
-		updateOverlay( { enableOverlay: toBool( newValue?.value ) } );
+		updateSection( { enableOverlay: toBool( newValue?.value ) } );
 	};
 	const handleOnChangeTypes = ( checked ) => {
-		const hasType = overlaySettings.pageType.includes( checked );
+		const hasType = overlayPageType.includes( checked );
 		const newTypes = hasType
-			? without( overlaySettings.pageType, checked )
-			: [ ...overlaySettings.pageType, checked ];
-		updateOverlay( { overlayPageType: newTypes } );
+			? without( overlayPageType, checked )
+			: [ ...overlayPageType, checked ];
+		updateSection( { overlayPageType: newTypes } );
 	};
 	const handleOnSelectLogo = ( newValue ) => {
-		updateOverlay( {
+		updateSection( {
 			overlayImage: newValue.url,
 			overlayImageId: newValue.id,
 		} );
 	};
 	const handleOnClearLogo = () => {
-		updateOverlay( {
+		updateSection( {
 			overlayImage: undefined,
 			overlayImageId: undefined,
 		} );
 	};
 	const handleOnChangeTextColor = ( newValue ) => {
-		updateOverlay( {
+		updateSection( {
 			overlayTextColor: newValue,
 		} );
 	};
@@ -125,11 +103,11 @@ const Overlay = ( props ) => {
 							value: false,
 						},
 					] }
-					primary={ toBool( overlaySettings?.enable ) }
+					primary={ toBool( overlayEnable ) }
 					onChange={ handleOnChangeEnable }
 				/>
 			</BaseControl>
-			{ toBool( overlaySettings?.enable ) && (
+			{ toBool( overlayEnable ) && (
 				<>
 					<BaseControl label={ 'ページタイプ' } id={ 'page-type' }>
 						{ getOverlayTypes().map( ( type ) => {
@@ -137,9 +115,8 @@ const Overlay = ( props ) => {
 								<CheckboxControl
 									key={ type.slug }
 									checked={
-										overlaySettings.pageType.indexOf(
-											type.slug
-										) !== -1
+										overlayPageType.indexOf( type.slug ) !==
+										-1
 									}
 									onChange={ () => {
 										handleOnChangeTypes( type.slug );
@@ -160,7 +137,7 @@ const Overlay = ( props ) => {
 					<BaseControl label={ '文字色' } id={ 'text-color' }>
 						<ColorPaletteControl
 							label={ '文字色' }
-							value={ overlaySettings?.color }
+							value={ sectionSettings?.overlayTextColor }
 							onChange={ handleOnChangeTextColor }
 							position={ 'right bottom' }
 							colors={ getEditorColors() }

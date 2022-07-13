@@ -2,11 +2,9 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useContext, useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
-import { DesignContext } from '../index';
 import ColorPaletteControl from '@aktk/components/color-palette-control';
 import UnitControl from '@aktk/components/unit-control';
 import HorizonButtons from '@aktk/components/horizon-buttons';
@@ -14,54 +12,33 @@ import BaseControl from '../../component/base-control';
 import { migrateSubHeaderFontSize } from './function/sub-header';
 import { getEditorColors } from '../../function/config';
 
-const SECTION_NAME = 'header_design';
-
-const SubHeader = ( props ) => {
-	const { updateSection } = props;
-	const [ subHeaderSettings, setSubHeaderSettings ] = useState( {} );
-	const { getSettings, settings } = useContext( DesignContext );
-	const getSubHeaderSettings = () => {
-		const _settings = getSettings( SECTION_NAME );
-		const fontSize =
-			_settings?.subHeaderFontSize ??
-			migrateSubHeaderFontSize(
-				{
-					size: _settings?.subHeaderFontSizeDesktop,
-					unit: _settings?.subHeaderFontSizeUnitDesktop,
-				},
-				'0.7em'
-			);
-		setSubHeaderSettings( {
-			background: _settings?.subHeaderBackgroundColorDesktop ?? '#f1f1f3',
-			textColor: _settings?.subHeaderColorDesktop ?? '#666666',
-			align: _settings?.subHeaderAlignDesktop ?? 'right',
-			fontSize,
-		} );
-		return subHeaderSettings;
-	};
-	useEffect( getSubHeaderSettings, [ settings ] );
-
-	const updateSubHeader = ( newValue ) => {
-		updateSection( SECTION_NAME, newValue );
-	};
-
+const SubHeader = ( { updateSection, sectionSettings } ) => {
+	const subHeaderFontSize =
+		sectionSettings?.subHeaderFontSize ??
+		migrateSubHeaderFontSize(
+			{
+				size: sectionSettings?.subHeaderFontSizeDesktop,
+				unit: sectionSettings?.subHeaderFontSizeUnitDesktop,
+			},
+			'0.7em'
+		);
 	const handleOnChangeBackgroundColor = ( newValue ) => {
-		updateSubHeader( {
+		updateSection( {
 			subHeaderBackgroundColorDesktop: newValue,
 		} );
 	};
 	const handleOnChangeTextColor = ( newValue ) => {
-		updateSubHeader( {
+		updateSection( {
 			subHeaderColorDesktop: newValue,
 		} );
 	};
 	const handleOnChangeFontSize = ( newValue ) => {
-		updateSubHeader( {
+		updateSection( {
 			subHeaderFontSize: newValue,
 		} );
 	};
 	const handleOnChangeAlign = ( newValue ) => {
-		updateSubHeader( {
+		updateSection( {
 			subHeaderAlignDesktop: newValue.name,
 		} );
 	};
@@ -70,7 +47,10 @@ const SubHeader = ( props ) => {
 			<BaseControl label={ '背景色' } id={ 'background-color' }>
 				<ColorPaletteControl
 					label={ '背景色' }
-					value={ subHeaderSettings?.background }
+					value={
+						sectionSettings?.subHeaderBackgroundColorDesktop ??
+						'#f1f1f3'
+					}
 					onChange={ handleOnChangeBackgroundColor }
 					position={ 'right bottom' }
 					colors={ getEditorColors() }
@@ -79,7 +59,9 @@ const SubHeader = ( props ) => {
 			<BaseControl label={ '文字色' } id={ 'text-color' }>
 				<ColorPaletteControl
 					label={ '文字色' }
-					value={ subHeaderSettings?.textColor }
+					value={
+						sectionSettings?.subHeaderColorDesktop ?? '#666666'
+					}
 					onChange={ handleOnChangeTextColor }
 					position={ 'right bottom' }
 					colors={ getEditorColors() }
@@ -87,7 +69,9 @@ const SubHeader = ( props ) => {
 			</BaseControl>
 			<BaseControl label={ '表示位置' } id={ 'position' }>
 				<HorizonButtons
-					primary={ subHeaderSettings?.align }
+					primary={
+						sectionSettings?.subHeaderAlignDesktop ?? 'right'
+					}
 					items={ [
 						{
 							name: 'left',
@@ -107,7 +91,7 @@ const SubHeader = ( props ) => {
 			</BaseControl>
 			<BaseControl label={ '文字サイズ' } id={ 'font-size' }>
 				<UnitControl
-					value={ subHeaderSettings?.fontSize }
+					value={ subHeaderFontSize }
 					onChange={ handleOnChangeFontSize }
 				/>
 			</BaseControl>

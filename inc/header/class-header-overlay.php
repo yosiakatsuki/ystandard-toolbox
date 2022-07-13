@@ -260,14 +260,15 @@ class Header_Overlay {
 	 *
 	 * @return array
 	 */
-	public function add_overlay_plugin_settings( $args ) {
+	public function add_overlay_plugin_settings( $settings ) {
 
 		if ( ! Option::get_option( Header_Design::OPTION_NAME, 'overlayImageId' ) ) {
-			$image_id                     = url_to_postid( Option::get_option( Header_Design::OPTION_NAME, 'overlayImage' ) );
-			$args['headerOverlayImageId'] = $image_id;
+			$image_id = url_to_postid( Option::get_option( Header_Design::OPTION_NAME, 'overlayImage' ) );
+			// 画像id追加.
+			$settings['settings'][ Header_Design::OPTION_NAME ]['overlayImageId'] = $image_id;
 		}
 
-		return $args;
+		return $settings;
 	}
 
 	/**

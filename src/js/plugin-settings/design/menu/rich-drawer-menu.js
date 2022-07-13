@@ -2,51 +2,31 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useContext, useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import Notice from '@aktk/components/notice';
 import BaseControl from '../../component/base-control';
-import { DesignContext } from '../index';
 import { toBool } from '@aktk/helper/boolean.js';
 
-const SECTION_NAME = 'navigation';
-
-const RichDrawerMenu = ( props ) => {
-	const { updateSection } = props;
-	const [ richDrawerMenuSettings, setRichDrawerMenuSettings ] = useState(
-		{}
+const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
+	const enableRichDrawerMenu = toBool(
+		sectionSettings?.mobileMenuEnable ?? false
 	);
-	const { getSettings, settings } = useContext( DesignContext );
-	const getRichDrawerMenuSettings = () => {
-		const _settings = getSettings( SECTION_NAME );
-		setRichDrawerMenuSettings( {
-			enable: toBool( _settings?.mobileMenuEnable ?? false ),
-			hideGlobalMenu: toBool(
-				_settings?.mobileMenuHideGlobalMenu ?? false
-			),
-			hideSearch: toBool( _settings?.mobileMenuHideSearch ?? false ),
-		} );
-		return richDrawerMenuSettings;
-	};
-	useEffect( getRichDrawerMenuSettings, [ settings ] );
-	const updateRichDrawerMenu = ( newValue ) => {
-		updateSection( SECTION_NAME, newValue );
-	};
+
 	const handleOnChangeEnable = ( newValue ) => {
-		updateRichDrawerMenu( {
+		updateSection( {
 			mobileMenuEnable: newValue.value,
 		} );
 	};
 	const handleOnChangeHideGlobalMenu = ( newValue ) => {
-		updateRichDrawerMenu( {
+		updateSection( {
 			mobileMenuHideGlobalMenu: newValue.value,
 		} );
 	};
 	const handleOnChangeHideSearch = ( newValue ) => {
-		updateRichDrawerMenu( {
+		updateSection( {
 			mobileMenuHideSearch: newValue.value,
 		} );
 	};
@@ -54,7 +34,7 @@ const RichDrawerMenu = ( props ) => {
 		<PanelBody title={ 'リッチドロワーメニュー' }>
 			<BaseControl label={ '有効 / 無効' } id={ 'enable' }>
 				<HorizonButtons
-					primary={ richDrawerMenuSettings?.enable }
+					primary={ enableRichDrawerMenu }
 					items={ [
 						{
 							name: 'true',
@@ -70,7 +50,7 @@ const RichDrawerMenu = ( props ) => {
 					onChange={ handleOnChangeEnable }
 				/>
 			</BaseControl>
-			{ toBool( richDrawerMenuSettings?.enable ) && (
+			{ toBool( enableRichDrawerMenu ) && (
 				<>
 					<BaseControl
 						label={ 'グローバルメニューの表示' }
@@ -83,17 +63,20 @@ const RichDrawerMenu = ( props ) => {
 							ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。
 						</Notice>
 						<HorizonButtons
-							primary={ richDrawerMenuSettings?.hideGlobalMenu }
+							primary={ toBool(
+								sectionSettings?.mobileMenuHideGlobalMenu ??
+									false
+							) }
 							items={ [
 								{
-									name: 'true',
+									name: 'false',
 									label: '表示',
-									value: true,
+									value: false,
 								},
 								{
-									name: 'false',
+									name: 'true',
 									label: '非表示',
-									value: false,
+									value: true,
 								},
 							] }
 							onChange={ handleOnChangeHideGlobalMenu }
@@ -107,17 +90,19 @@ const RichDrawerMenu = ( props ) => {
 							ドロワーメニュー内の検索フォームの表示/非表示を設定します。
 						</Notice>
 						<HorizonButtons
-							primary={ richDrawerMenuSettings?.hideSearch }
+							primary={ toBool(
+								sectionSettings?.mobileMenuHideSearch ?? false
+							) }
 							items={ [
 								{
-									name: 'true',
+									name: 'false',
 									label: '表示',
-									value: true,
+									value: false,
 								},
 								{
-									name: 'false',
+									name: 'true',
 									label: '非表示',
-									value: false,
+									value: true,
 								},
 							] }
 							onChange={ handleOnChangeHideSearch }

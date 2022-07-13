@@ -1,7 +1,7 @@
 /**
  * WordPress
  */
-import { useContext } from '@wordpress/element';
+import { useContext, useEffect, useState } from '@wordpress/element';
 /**
  * yStandard
  */
@@ -13,14 +13,21 @@ import SubHeader from './sub-header';
 import Overlay from './overlay';
 
 const TAB_NAME = 'header';
+const SECTION_NAME = 'header_design';
 
 const Header = ( { tab } ) => {
-	const { getSettings, updateSettings } = useContext( DesignContext );
+	const { settings, getSettings, updateSettings } =
+		useContext( DesignContext );
+	const [ sectionSettings, setSectionSettings ] = useState( {} );
+	const getSectionSettings = () => {
+		setSectionSettings( getSettings( SECTION_NAME ) );
+	};
+	useEffect( getSectionSettings, [ settings ] );
 
 	// 設定更新.
-	const updateSection = ( section, value ) => {
-		updateSettings( section, {
-			...getSettings( section ),
+	const updateSection = ( value ) => {
+		updateSettings( SECTION_NAME, {
+			...sectionSettings,
 			...value,
 		} );
 	};
@@ -32,6 +39,7 @@ const Header = ( { tab } ) => {
 
 	const panelProps = {
 		updateSection,
+		sectionSettings,
 	};
 	return (
 		<>

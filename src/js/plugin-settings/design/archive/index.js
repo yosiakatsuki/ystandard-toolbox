@@ -15,7 +15,7 @@ const TAB_NAME = 'archive';
 const SECTION_NAME = 'archive';
 
 const Archive = ( { tab } ) => {
-	const { getSettings, settings, updateSettings } =
+	const { settings, getSettings, updateSettings } =
 		useContext( DesignContext );
 	const [ sectionSettings, setSectionSettings ] = useState( {} );
 	const getSectionSettings = () => {

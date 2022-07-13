@@ -26,6 +26,26 @@ import Menu from './menu';
 import Archive from './archive';
 
 export const DesignContext = createContext();
+
+const TABS = [
+	{
+		name: 'header',
+		title: 'ヘッダー',
+	},
+	{
+		name: 'menu',
+		title: 'メニュー',
+	},
+	{
+		name: 'archive',
+		title: 'アーカイブ',
+	},
+	{
+		name: 'copyright',
+		title: 'Copyright',
+	},
+];
+
 const Design = () => {
 	const [ isLoading, setIsLoading ] = useState( true );
 	const [ isUpdate, setIsUpdate ] = useState( false );
@@ -42,7 +62,7 @@ const Design = () => {
 
 	const getSettings = ( section = undefined ) => {
 		if ( ! section || ! hasObjectKey( settings, section ) ) {
-			return settings;
+			return {};
 		}
 		return settings[ section ];
 	};
@@ -72,25 +92,6 @@ const Design = () => {
 		} );
 	};
 
-	const tabs = [
-		{
-			name: 'header',
-			title: 'ヘッダー',
-		},
-		{
-			name: 'menu',
-			title: 'メニュー',
-		},
-		{
-			name: 'archive',
-			title: 'アーカイブ',
-		},
-		{
-			name: 'copyright',
-			title: 'Copyright',
-		},
-	];
-	console.log( { designTab: settings } );
 	return (
 		<PageBase title={ 'サイトデザイン拡張' }>
 			<DesignContext.Provider
@@ -104,7 +105,7 @@ const Design = () => {
 					updateSettings,
 				} }
 			>
-				<SettingsTab tabs={ tabs } initialTabName={ initialTabName }>
+				<SettingsTab tabs={ TABS } initialTabName={ initialTabName }>
 					{ ( tab ) => {
 						return (
 							<>

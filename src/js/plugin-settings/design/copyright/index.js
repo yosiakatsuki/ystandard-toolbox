@@ -16,21 +16,30 @@ import { getAdminConfig } from '../../function/config';
 const TAB_NAME = 'copyright';
 const SECTION_NAME = 'copyright';
 
+const POWERED_BY_BUTTONS = [
+	{
+		name: true,
+		label: '削除する',
+	},
+	{
+		name: false,
+		label: '表示する',
+	},
+];
+
 const Copyright = ( { tab } ) => {
-	const [ copyright, setCopyright ] = useState( '' );
-	const [ poweredBy, setPoweredBy ] = useState( false );
+	const [ sectionSettings, setSectionSettings ] = useState( {} );
 	const { getSettings, updateSettings, settings } =
 		useContext( DesignContext );
 	// 設定取得.
 	const getCopyrightSettings = () => {
 		const defaultCopyright = getAdminConfig( 'copyrightDefault' );
 		const _settings = getSettings( SECTION_NAME );
-		setCopyright(
-			getObjectValue( _settings, 'copyright', defaultCopyright )
-		);
-		setPoweredBy(
-			getObjectValue( _settings, 'disable_theme_info', false )
-		);
+		setSectionSettings( {
+			copyright: _settings?.copyright ?? defaultCopyright,
+			poweredBy: _settings?.disable_theme_info ?? false,
+		} );
+		return sectionSettings;
 	};
 	useEffect( getCopyrightSettings, [ settings ] );
 	// タブチェック.
@@ -53,16 +62,6 @@ const Copyright = ( { tab } ) => {
 		updateSection( { disable_theme_info: value?.name || false } );
 	};
 
-	const poweredByButtons = [
-		{
-			name: true,
-			label: '削除する',
-		},
-		{
-			name: false,
-			label: '表示する',
-		},
-	];
 	return (
 		<div>
 			<PanelBody title={ 'Copyright編集' }>
@@ -70,7 +69,7 @@ const Copyright = ( { tab } ) => {
 					<CodeInput
 						minHeight={ '63px' }
 						maxHeight={ '100px' }
-						value={ copyright }
+						value={ sectionSettings.copyright }
 						onChange={ handleCopyrightOnChange }
 					/>
 					<Notice isHelp style={ { fontSize: '12px' } }>
@@ -88,8 +87,8 @@ const Copyright = ( { tab } ) => {
 				<BaseControl label={ 'Powered by の削除' } id={ 'powered-by' }>
 					<HorizonButtons
 						onChange={ handlePoweredByOnChange }
-						items={ poweredByButtons }
-						primary={ poweredBy }
+						items={ POWERED_BY_BUTTONS }
+						primary={ sectionSettings.poweredBy }
 					/>
 				</BaseControl>
 			</PanelBody>

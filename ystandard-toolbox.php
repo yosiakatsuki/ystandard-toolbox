@@ -39,3 +39,5 @@ define( 'YSTDTB_NAME', plugin_basename( __FILE__ ) );
 define( 'YSTDTB_VERSION', '1.24.1' );
 
 require_once __DIR__ . '/inc/load.php';
+
+//delete_option( \ystandard_toolbox\Config::OPTION_NAME);
