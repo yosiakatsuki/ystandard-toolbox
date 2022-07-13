@@ -2,7 +2,6 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
@@ -20,19 +19,7 @@ const DISPLAY_DATE = [
 	},
 ];
 
-const Date = ( props ) => {
-	const { updateSection, sectionSettings } = props;
-	const [ dateSettings, setDateSettings ] = useState( {} );
-
-	const getDateSettings = () => {
-		setDateSettings( {
-			displayDate: sectionSettings?.archiveDisplayDate,
-		} );
-
-		return dateSettings;
-	};
-	useEffect( getDateSettings, [ sectionSettings ] );
-
+const Date = ( { updateSection, sectionSettings } ) => {
 	const handleOnChangeDisplayDate = ( newValue ) => {
 		updateSection( {
 			archiveDisplayDate: newValue,
@@ -44,7 +31,7 @@ const Date = ( props ) => {
 				<CustomSelectControl
 					label={ '日付表示' }
 					options={ DISPLAY_DATE }
-					value={ dateSettings?.displayDate }
+					value={ sectionSettings?.archiveDisplayDate }
 					onChange={ handleOnChangeDisplayDate }
 					isHorizon
 				/>

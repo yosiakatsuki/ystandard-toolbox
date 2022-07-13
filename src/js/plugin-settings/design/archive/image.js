@@ -38,27 +38,11 @@ const RATIO = [
 	},
 ];
 
-const Image = ( props ) => {
-	const { updateSection, sectionSettings } = props;
-	const [ imageSettings, setImageSettings ] = useState( {} );
-
-	const getImageSettings = () => {
-		setImageSettings( {
-			image: sectionSettings?.archiveDefaultImage,
-			imageId: sectionSettings?.archiveDefaultImageId ?? 0,
-			ratio: sectionSettings?.archiveImageRatio ?? '16-9',
-			ratioMobile: sectionSettings?.archiveImageRatioMobile,
-			layoutMobile: sectionSettings?.archiveMobileLayout,
-		} );
-
-		return imageSettings;
-	};
-	useEffect( getImageSettings, [ sectionSettings ] );
-
-	const defaultImage = !! imageSettings.image
+const Image = ( { updateSection, sectionSettings } ) => {
+	const defaultImage = !! sectionSettings?.archiveDefaultImage
 		? {
-				id: imageSettings.imageId,
-				url: imageSettings.image,
+				id: sectionSettings?.archiveDefaultImageId ?? 0,
+				url: sectionSettings?.archiveDefaultImage,
 		  }
 		: undefined;
 
@@ -128,15 +112,15 @@ const Image = ( props ) => {
 					<CustomSelectControl
 						label={ 'デスクトップ・タブレット' }
 						options={ RATIO }
-						value={ imageSettings?.ratio }
+						value={ sectionSettings?.archiveImageRatio ?? '16-9' }
 						onChange={ handleOnChangeRatioDesktop }
 						isHorizon
 					/>
-					{ !! imageSettings?.layoutMobile && (
+					{ !! sectionSettings?.archiveMobileLayout && (
 						<CustomSelectControl
 							label={ 'モバイル' }
 							options={ RATIO }
-							value={ imageSettings?.ratioMobile }
+							value={ sectionSettings?.archiveImageRatioMobile }
 							onChange={ handleOnChangeRatioMobile }
 							isHorizon
 						/>

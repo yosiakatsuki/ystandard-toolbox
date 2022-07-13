@@ -2,7 +2,6 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */
@@ -13,39 +12,27 @@ import BaseControl from '../../component/base-control';
 import Notice from '@aktk/components/notice';
 import { getPluginAssetsUrl } from '../../function/config';
 
-const Layout = ( props ) => {
-	const { updateSection, sectionSettings } = props;
-	const [ layoutSettings, setLayoutSettings ] = useState( {} );
+const LAYOUT_TYPES = [
+	{
+		name: 'card',
+		label: 'カード',
+		image: 'card.png',
+	},
+	{
+		name: 'list',
+		label: 'リスト',
+		image: 'list.png',
+	},
+	{
+		name: 'simple',
+		label: 'シンプル',
+		image: 'simple.png',
+	},
+];
+
+const Layout = ( { updateSection, sectionSettings } ) => {
 	const assetsUrl = getPluginAssetsUrl();
-
-	const getLayoutSettings = () => {
-		setLayoutSettings( {
-			desktop: sectionSettings?.theme_ys_archive_type ?? 'card',
-			mobile: sectionSettings?.archiveMobileLayout,
-			ratioMobile: sectionSettings?.archiveImageRatioMobile,
-		} );
-
-		return layoutSettings;
-	};
-	useEffect( getLayoutSettings, [ sectionSettings ] );
-
-	const layoutTypes = [
-		{
-			name: 'card',
-			label: 'カード',
-			image: 'card.png',
-		},
-		{
-			name: 'list',
-			label: 'リスト',
-			image: 'list.png',
-		},
-		{
-			name: 'simple',
-			label: 'シンプル',
-			image: 'simple.png',
-		},
-	];
+	const layoutDesktop = sectionSettings?.theme_ys_archive_type ?? 'card';
 
 	const handleOnChangeDesktopLayout = ( newValue ) => {
 		updateSection( {
@@ -56,7 +43,7 @@ const Layout = ( props ) => {
 		updateSection( {
 			archiveMobileLayout: newValue.name,
 			archiveImageRatioMobile: !! newValue.name
-				? layoutSettings.ratioMobile
+				? sectionSettings?.archiveImageRatioMobile
 				: undefined,
 		} );
 	};
@@ -67,13 +54,11 @@ const Layout = ( props ) => {
 				id={ 'desktop-tablet' }
 			>
 				<Flex isGapSmall>
-					{ layoutTypes.map( ( item ) => {
+					{ LAYOUT_TYPES.map( ( item ) => {
 						return (
 							<FlexItem key={ item.name }>
 								<ButtonImage
-									isPrimary={
-										layoutSettings.desktop === item.name
-									}
+									isPrimary={ layoutDesktop === item.name }
 									onClick={ () =>
 										handleOnChangeDesktopLayout( item )
 									}
@@ -90,12 +75,13 @@ const Layout = ( props ) => {
 			</BaseControl>
 			<BaseControl label={ 'モバイル' } id={ 'mobile' }>
 				<Flex isGapSmall>
-					{ layoutTypes.map( ( item ) => {
+					{ LAYOUT_TYPES.map( ( item ) => {
 						return (
 							<FlexItem key={ item.name }>
 								<ButtonImage
 									isPrimary={
-										layoutSettings.mobile === item.name
+										sectionSettings?.archiveMobileLayout ===
+										item.name
 									}
 									onClick={ () =>
 										handleOnChangeMobileLayout( item )
