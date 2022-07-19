@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\AMP;
+use ystandard_toolbox\helper\Version_Compare;
 
 defined( 'ABSPATH' ) || die();
 
@@ -28,7 +29,7 @@ class Enqueue {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_css' ], 11 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_script' ], 11 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 50 );
-		if ( ! Utility::ystandard_blocks_version_compare() ) {
+		if ( ! Version_Compare::ystandard_blocks_version_compare() ) {
 			add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'enqueue_block_style' ], 11 );
 		}
 		add_action( 'wp_head', [ $this, 'enqueue_no_script_css' ], PHP_INT_MAX );

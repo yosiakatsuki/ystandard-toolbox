@@ -21,7 +21,6 @@ defined( 'ABSPATH' ) || die();
 		include __DIR__ . '/web-font.php';
 		include __DIR__ . '/front-page-menu.php';
 		include __DIR__ . '/cta.php';
-		include __DIR__ . '/add-css.php';
 		include __DIR__ . '/widget-accordion.php';
 		?>
 	</div>

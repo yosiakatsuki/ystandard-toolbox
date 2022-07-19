@@ -9,6 +9,7 @@ module.exports = {
 		'add-code': './src/js/plugin-settings/add-code/index.js',
 		design: './src/js/plugin-settings/design/index.js',
 		'block-patterns': './src/js/plugin-settings/block-patterns/index.js',
+		'custom-css': './src/js/plugin-settings/custom-css/index.js',
 	},
 	output: {
 		filename: '[name].js',

@@ -2,7 +2,6 @@
  * WordPress
  */
 import { PanelBody } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
 /**
  * yStandard
  */

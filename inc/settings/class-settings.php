@@ -34,6 +34,11 @@ class Settings {
 			'menu-title' => 'サイトデザイン拡張',
 		],
 		[
+			'slug'       => 'custom-css',
+			'page-title' => 'カスタムCSS',
+			'menu-title' => 'カスタムCSS',
+		],
+		[
 			'slug'       => 'add-code',
 			'page-title' => 'コード追加',
 			'menu-title' => 'コード追加',

@@ -1,5 +1,3 @@
-import CodeMirror from '@uiw/react-codemirror';
-import { html } from '@codemirror/lang-html';
 /**
  * WordPress
  */
@@ -7,12 +5,13 @@ import { useContext } from '@wordpress/element';
 /**
  * yStandard
  */
-import { AddCodeContext } from './index';
+import CodeEditor from '@aktk/controls/code-editor';
+import Notice from '@aktk/components/notice';
 import { getObjectValue } from '@aktk/helper/object.js';
+import { AddCodeContext } from './index';
 import { getAdminConfig } from '../function/config';
 import Stack from '../component/stack';
 import SectionLabel from '../component/section-label';
-import Notice from '@aktk/components/notice';
 
 const EditorPanel = ( { tab } ) => {
 	const { settings, setSettings } = useContext( AddCodeContext );
@@ -43,15 +42,10 @@ const EditorPanel = ( { tab } ) => {
 			<div className="aktk-settings-add-code__editor-panel">
 				<Stack>
 					<div>
-						<div className="aktk-settings-add-code__editor-input">
-							<CodeMirror
-								value={ code }
-								minHeight="200px"
-								maxHeight="500px"
-								onChange={ handleCodeOnChange }
-								extensions={ [ html() ] }
-							/>
-						</div>
+						<CodeEditor
+							value={ code }
+							onChange={ handleCodeOnChange }
+						/>
 						{ useAmp && (
 							<Notice isHelp style={ { fontSize: '12px' } }>
 								入力したコードはAMPページでは出力されません。
@@ -63,15 +57,10 @@ const EditorPanel = ( { tab } ) => {
 					{ useAmp && (
 						<div>
 							<SectionLabel>AMP用コード追加</SectionLabel>
-							<div className="aktk-settings-add-code__editor-input">
-								<CodeMirror
-									value={ codeAmp }
-									minHeight="200px"
-									maxHeight="500px"
-									onChange={ handleCodeAmpOnChange }
-									extensions={ [ html() ] }
-								/>
-							</div>
+							<CodeEditor
+								value={ codeAmp }
+								onChange={ handleCodeAmpOnChange }
+							/>
 						</div>
 					) }
 				</Stack>

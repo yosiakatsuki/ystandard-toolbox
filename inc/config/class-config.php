@@ -58,6 +58,10 @@ class Config {
 	 * CSS Hook
 	 */
 	const AFTER_ENQUEUE_CSS_HOOK = 'ystdtb_enqueue_css';
+	/**
+	 * CSS Hook
+	 */
+	const AFTER_ENQUEUE_BLOCK_ASSETS_CSS_HOOK = 'ystdtb_enqueue_block_assets_css';
 
 	/**
 	 * Body class.

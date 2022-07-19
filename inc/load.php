@@ -56,6 +56,8 @@ require_once __DIR__ . '/widget/class-accordion.php';
 require_once __DIR__ . '/cta/class-cta.php';
 // LP.
 require_once __DIR__ . '/lp/class-lp.php';
+// Custom CSS.
+require_once __DIR__ . '/custom-css/class-custom-css.php';
 // Polyfill.
 require_once __DIR__ . '/polyfill/class-polyfill.php';
 

@@ -658,14 +658,6 @@
   height: auto;
 }
 
-.aktk-settings-add-code__editor-input {
-  border: 1px solid #ddd;
-  font-size: 14px;
-}
-.aktk-settings-add-code__editor-input .cm-focused {
-  outline: none !important;
-}
-
 #wpbody-content > .notice {
   display: none;
 }

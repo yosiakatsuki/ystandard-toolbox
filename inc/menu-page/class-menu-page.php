@@ -26,6 +26,5 @@ class Menu_Page {
 		require_once __DIR__ . '/class-menu-heading.php';
 		require_once __DIR__ . '/class-menu-font.php';
 		require_once __DIR__ . '/class-menu-cta.php';
-		require_once __DIR__ . '/class-menu-custom-css.php';
 	}
 }

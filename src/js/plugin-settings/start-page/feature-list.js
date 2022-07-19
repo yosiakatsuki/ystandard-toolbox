@@ -191,6 +191,14 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-add-code/',
 				settingPage: 'admin.php?page=ystdtb-settings-v2-add-code',
 			},
+			{
+				name: 'カスタムCSS編集',
+				icon: () => <Code />,
+				description:
+					'公開ページ・ブロックエディターに反映するCSSを追加できる機能',
+				manual: 'https://wp-ystandard.com/manual/custom-css-v2/',
+				settingPage: 'admin.php?page=ystdtb-settings-v2-custom-css',
+			},
 		],
 	},
 };

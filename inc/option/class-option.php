@@ -192,4 +192,22 @@ class Option {
 
 		return self::get_ystd_option( $name, $default, 'boolean' );
 	}
+
+	/**
+	 * プラグインの全設定削除.
+	 *
+	 * @return void
+	 */
+	public static function delete_all_plugin_data() {
+		$keys = [
+			Config::OPTION_NAME,
+			Heading::OPTION_NAME,
+			Custom_Css::OPTION_NAME,
+			Code::OPTION_NAME,
+		];
+
+		foreach ( $keys as $key ) {
+			delete_option( $key );
+		}
+	}
 }
