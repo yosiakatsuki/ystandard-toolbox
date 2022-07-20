@@ -5,7 +5,7 @@ import {
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import SVGIcon from '../../../src/js/component/svg-icon';
+import SVGIcon from '@aktk/components/svg-icon';
 
 export default function ( { attributes } ) {
 	const {
@@ -88,7 +88,8 @@ export default function ( { attributes } ) {
 	};
 
 	const contentsClass = classnames( 'ystdtb-timeline__contents', {
-		[ `is-margin-${ selectContentsInnerMargin }` ]: selectContentsInnerMargin,
+		[ `is-margin-${ selectContentsInnerMargin }` ]:
+			selectContentsInnerMargin,
 	} );
 	const contentMarginTopCalc = 0 > contentMarginTop ? '-' : '+';
 	const contentsStyle = {

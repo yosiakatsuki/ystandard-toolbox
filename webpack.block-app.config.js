@@ -1,5 +1,5 @@
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const path = require( 'path' );
+const ystdtbConfig = require( './webpack.blocks.config' );
 
 module.exports = {
 	...defaultConfig,
@@ -33,16 +33,6 @@ module.exports = {
 		],
 	},
 	resolve: {
-		...defaultConfig.resolve,
-		alias: {
-			...defaultConfig.alias,
-			'@aktk/function': path.resolve(
-				__dirname,
-				'src/js/blocks/function'
-			),
-			'@aktk/config': path.resolve( __dirname, 'src/js/config' ),
-			'@aktk/components': path.resolve( __dirname, 'src/js/component' ),
-			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
-		},
+		...ystdtbConfig.resolve,
 	},
 };

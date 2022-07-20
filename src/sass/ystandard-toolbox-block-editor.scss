@@ -1,7 +1,7 @@
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
-@use "../js/component/edit" as component;
-@use "../js/controls/edit" as controls;
+@use "../block-components/edit" as component;
+@use "../block-controls/edit" as controls;
 @use "../../blocks/posts/edit" as posts-edit;
 @use "../../blocks/styles/table/block" as table;
 @use "../../blocks/styles/table/edit" as table-edit;

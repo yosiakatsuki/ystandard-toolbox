@@ -291,7 +291,7 @@ class Block_Patterns {
 			__( 'パターン設定', 'ystandard-toolbox' ),
 			'manage_options',
 			Config::ADMIN_MENU_SLUG_V2 . '-block-patterns',
-			[ '\ystandard_toolbox\Settings', 'menu_page' ]
+			[ '\ystandard_toolbox\Plugin_Settings', 'menu_page' ]
 		);
 	}
 

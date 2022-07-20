@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Version_Compare;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,7 +29,7 @@ class Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare() ) {
+		if ( ! Version_Compare::ystandard_version_compare() ) {
 			return;
 		}
 		add_action( 'wp_head', [ $this, 'wp_head' ], 11 );
@@ -35,6 +37,8 @@ class Font {
 		add_action( 'admin_head', [ $this, 'wp_head' ], 11 );
 		add_action( 'enqueue_block_assets', [ $this, 'add_editor_font_styles' ], 11 );
 		add_action( 'ys_customizer_parse_args__ys_design_font_type', [ $this, 'remove_customizer_font_setting' ] );
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 	}
 
 	/**
@@ -137,9 +141,74 @@ class Font {
 			return $args;
 		}
 		$args['control_type'] = 'hidden';
-		$args['description']  = Notice::customizer_notice( '※ yStandard ToolboxのWebフォント設定でフォントが指定されています。' );
+		$args['description']  = Notice::customizer_notice( '※ yStandard Toolboxのフォント設定でフォントが指定されています。' );
 
 		return $args;
+	}
+
+	/**
+	 * 設定取得
+	 *
+	 * @param string $name 設定名.
+	 *
+	 * @return array
+	 */
+	public static function get_option() {
+		$default = [
+			'html'        => '',
+			'family'      => '',
+			'customFonts' => [],
+		];
+		$option  = Option::get_option( self::OPTION_NAME );
+		if ( ! is_array( $option ) ) {
+			return $default;
+		}
+		$option                     = array_merge( $default, $option );
+		$option['html']             = wp_unslash( $option['html'] );
+		$option['family']           = wp_unslash( $option['family'] );
+		$option['customFonts']      = stripslashes_deep( $option['customFonts'] );
+		$option['themeFontSetting'] = self::get_theme_font();
+
+		return $option;
+	}
+
+	/**
+	 * 設定画面用データ追加
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_plugin_settings( $settings ) {
+		$settings['font'] = self::get_option();
+
+		return $settings;
+	}
+
+	/**
+	 * Register REST API route
+	 */
+	public function register_routes() {
+		Api::register_rest_route( 'update_font', [ $this, 'update_option' ] );
+	}
+
+	/**
+	 * 設定更新
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_option( $request ) {
+		$data = $request->get_json_params();
+		unset( $data['themeFontSetting'] );
+		$result = Option::update_plugin_option( self::OPTION_NAME, $data );
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
 	}
 }
 

@@ -1,0 +1,5 @@
+@use "../global";
+
+$editor: false !default;
+
+@include global.responsive-custom-property-component('font-size', $editor);

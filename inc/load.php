@@ -68,4 +68,4 @@ require_once __DIR__ . '/admin/class-plugin-menu.php';
 if ( file_exists( __DIR__ . '/update/class-update.php' ) ) {
 	require_once __DIR__ . '/update/class-update.php';
 }
-require_once __DIR__ . '/settings/class-settings.php';
+require_once __DIR__ . '/plugin-settings/class-plugin-settings.php';
