@@ -80,24 +80,27 @@ class Config {
 	];
 
 	/**
+	 * Block Namespace.
+	 */
+	const BLOCK_NAMESPACE = 'ystdtb';
+
+	/**
 	 * ブロックカテゴリー スラッグ
 	 */
-	const BLOCK_CATEGORY = 'ystdtb';
-
-	/**
-	 * ブロックカテゴリー名
-	 */
-	const BLOCK_CATEGORY_NAME = '[ys]yStandard Toolbox';
-
-	/**
-	 * ブロックカテゴリー β スラッグ
-	 */
-	const BLOCK_CATEGORY_BETA = 'ystdtb_beta';
-
-	/**
-	 * ブロックカテゴリー名 β
-	 */
-	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(beta)';
+	const BLOCK_CATEGORIES = [
+		'layout' => [
+			'slug'  => 'ystdtb-layout',
+			'title' => '[Toolbox]レイアウト',
+		],
+		'main'   => [
+			'slug'  => 'ystdtb',
+			'title' => '[Toolbox]yStandard Toolbox',
+		],
+		'beta'   => [
+			'slug'  => 'ystdtb_beta',
+			'title' => '[Toolbox]ベータ版 ブロック',
+		],
+	];
 
 	/**
 	 * Block CSS Handle

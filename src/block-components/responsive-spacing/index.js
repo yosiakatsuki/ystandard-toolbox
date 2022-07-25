@@ -1,6 +1,13 @@
+/**
+ * WordPress
+ */
 import { _x } from '@wordpress/i18n';
+/**
+ * Plugin
+ */
 import BoxControl from '@aktk/components/box-control';
 import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
+import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
 import { getComponentConfig } from '@aktk/helper/config';
 import {
 	responsiveKeys as responsive,
@@ -11,9 +18,10 @@ import {
 	getSpacingInfo,
 	getSpacingProps,
 	parseSpacing,
-} from '@aktk/helper/spacing';
-import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
-import { parseObject } from '@aktk/helper/object';
+	getGapProperty,
+	getResponsiveCustomProperties,
+} from '@aktk/helper';
+import { isObject, parseObject } from '@aktk/helper/object';
 
 const ResponsiveSpacing = ( props ) => {
 	const { label, values, onChange, units, inputProps } = props;
@@ -125,38 +133,25 @@ const ResponsiveSpacing = ( props ) => {
 };
 export default ResponsiveSpacing;
 
-const getResponsiveSpacingCustomProps = ( type, value, suffix = '' ) => {
-	const prefix = '--ystdtb';
-	const _suffix = suffix ? `-${ suffix }` : '';
-	if ( ! value || 'object' !== typeof value ) {
+const getResponsiveSpacingCustomProperty = ( value, suffix = '' ) => {
+	if ( ! isObject( value ) ) {
 		return undefined;
 	}
-	const getProps = ( spacing, device, isResponsive = true ) => {
-		if ( ! spacing || 'object' !== typeof spacing ) {
-			return undefined;
-		}
-		let result = {};
-		Object.keys( spacing ).map( ( key ) => {
-			const customProp = isResponsive
-				? `${ prefix }-${ key }${ _suffix }-${ device }`
-				: key;
-			result = {
-				...result,
-				[ customProp ]: spacing[ key ],
-			};
-			return true;
-		} );
-		return result;
-	};
-	return {
-		...getProps(
-			value?.desktop,
-			'desktop',
-			!! ( value?.tablet || value?.mobile )
-		),
-		...getProps( value?.tablet, 'tablet' ),
-		...getProps( value?.mobile, 'mobile' ),
-	};
+	return getResponsiveCustomProperties( { value, suffix } );
+};
+
+const getResponsiveGapCustomProperty = ( value, suffix = '' ) => {
+	if ( ! isObject( value ) ) {
+		return undefined;
+	}
+	return getResponsiveCustomProperties( {
+		value: {
+			desktop: getGapProperty( value?.desktop ),
+			tablet: getGapProperty( value?.tablet ),
+			mobile: getGapProperty( value?.mobile ),
+		},
+		suffix,
+	} );
 };
 
 export const getResponsiveSpacingStyle = ( type, values, suffix = '' ) => {
@@ -167,7 +162,7 @@ export const getResponsiveSpacingStyle = ( type, values, suffix = '' ) => {
 	} );
 
 	return parseObject(
-		getResponsiveSpacingCustomProps( type, parsedValue, suffix )
+		getResponsiveSpacingCustomProperty( parsedValue, suffix )
 	);
 };
 export const getResponsivePaddingStyle = ( values, suffix = '' ) => {
@@ -175,4 +170,7 @@ export const getResponsivePaddingStyle = ( values, suffix = '' ) => {
 };
 export const getResponsiveMarginStyle = ( values, suffix = '' ) => {
 	return getResponsiveSpacingStyle( 'margin', values, suffix );
+};
+export const getResponsiveGapStyle = ( values, suffix = '' ) => {
+	return parseObject( getResponsiveGapCustomProperty( values, suffix ) );
 };

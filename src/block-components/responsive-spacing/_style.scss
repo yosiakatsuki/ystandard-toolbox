@@ -18,3 +18,9 @@ $editor: false !default;
 @include global.responsive-custom-property-component('padding-right', $editor);
 @include global.responsive-custom-property-component('padding-left', $editor);
 @include global.responsive-custom-property-component('padding-bottom', $editor);
+/**
+ * Gap
+ */
+@include global.responsive-custom-property-component("gap", $editor);
+@include global.responsive-custom-property-component("column-gap", $editor);
+@include global.responsive-custom-property-component("row-gap", $editor);

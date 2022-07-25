@@ -524,6 +524,54 @@
     padding-bottom: var(--ystdtb-padding-bottom-mobile) !important;
   }
 }
+/**
+ * Gap
+ */
+@media (min-width: 1025px) {
+  [style*="--ystdtb-gap-desktop"] {
+    gap: var(--ystdtb-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-gap-tablet"] {
+    gap: var(--ystdtb-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-gap-mobile"] {
+    gap: var(--ystdtb-gap-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-column-gap-desktop"] {
+    column-gap: var(--ystdtb-column-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-column-gap-tablet"] {
+    column-gap: var(--ystdtb-column-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-column-gap-mobile"] {
+    column-gap: var(--ystdtb-column-gap-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-row-gap-desktop"] {
+    row-gap: var(--ystdtb-row-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-row-gap-tablet"] {
+    row-gap: var(--ystdtb-row-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-row-gap-mobile"] {
+    row-gap: var(--ystdtb-row-gap-mobile) !important;
+  }
+}
 .ystdtb-responsive-spacing-box-control .component-box-control__label {
   font-size: 0.8em;
   color: #757575;

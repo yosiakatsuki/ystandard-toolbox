@@ -39,6 +39,7 @@ class Blocks {
 		$this->init();
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
 		add_action( 'init', [ $this, 'register_block' ] );
+		add_action( 'init', [ $this, 'block_init' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
 		if ( Version_Compare::wordpress_version_compare( '5.8-alpha-1' ) ) {
 			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
@@ -53,6 +54,21 @@ class Blocks {
 	private function load_files() {
 		require_once __DIR__ . '/class-dynamic-block.php';
 		require_once __DIR__ . '/extension/class-section.php';
+	}
+
+	/**
+	 * Register Blocks.
+	 *
+	 * @return void
+	 */
+	public function block_init() {
+		$this->register_blocks( 'custom' );
+	}
+
+	private function register_blocks( $name ) {
+		foreach ( glob( YSTDTB_PATH . "/build/blocks/${name}/*", GLOB_ONLYDIR ) as $dir_path ) {
+			register_block_type( $dir_path );
+		}
 	}
 
 	/**
@@ -124,16 +140,10 @@ class Blocks {
 	 * @return array
 	 */
 	public static function add_block_categories( $categories ) {
-		$categories[] = [
-			'slug'  => Config::BLOCK_CATEGORY,
-			'title' => Config::BLOCK_CATEGORY_NAME,
-		];
-		$categories[] = [
-			'slug'  => Config::BLOCK_CATEGORY_BETA,
-			'title' => Config::BLOCK_CATEGORY_NAME_BETA,
-		];
-
-		return $categories;
+		return array_merge(
+			$categories,
+			array_values( Config::BLOCK_CATEGORIES ),
+		);
 	}
 
 	/**
@@ -186,7 +196,7 @@ class Blocks {
 
 		foreach ( $this->register_blocks['normal'] as $block ) {
 			$handle              = 'ystandard-toolbox-' . $block['name'];
-			$block_type          = Config::BLOCK_CATEGORY . '/' . $block['name'];
+			$block_type          = Config::BLOCK_NAMESPACE . '/' . $block['name'];
 			$register_block_args = [ 'editor_script' => $handle ];
 			wp_register_script(
 				$handle,

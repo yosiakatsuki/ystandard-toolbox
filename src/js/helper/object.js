@@ -6,7 +6,17 @@ export const parseObject = ( value ) => {
 	if ( ! value || ! isObject( value ) ) {
 		return undefined;
 	}
-	return 0 < Object.keys( value ).length ? { ...value } : undefined;
+	let result = {};
+	Object.keys( value ).map( ( key ) => {
+		if ( undefined !== value[ key ] ) {
+			result = {
+				...result,
+				...{ [ key ]: value[ key ] },
+			};
+		}
+		return true;
+	} );
+	return 0 < Object.keys( result ).length ? result : undefined;
 };
 
 export const hasObjectKey = ( value, key ) => {
@@ -56,5 +66,5 @@ export const parseObjectAll = ( value ) => {
 		}
 		return true;
 	} );
-	return parseObject( result );
+	return result;
 };

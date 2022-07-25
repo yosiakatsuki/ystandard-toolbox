@@ -1,0 +1,8 @@
+@use "style" with ($editor:true);
+
+.aktk-component-responsive-ratio-select {
+  .components-custom-select-control__label {
+    color: #757575;
+    font-size: .8em;
+  }
+}

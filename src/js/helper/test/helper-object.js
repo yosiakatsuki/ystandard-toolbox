@@ -1,4 +1,4 @@
-import { object2Array, getObjectValue } from '../object.js';
+import { object2Array, getObjectValue, parseObject } from '../object.js';
 
 describe( 'object2Array', () => {
 	test( 'object to Array', () => {
@@ -54,5 +54,29 @@ describe( 'getObjectValue', () => {
 		expect( getObjectValue( 'obj', 'key1234', 'default' ) ).toBe(
 			'default'
 		);
+	} );
+} );
+
+describe( 'parseObject', () => {
+	test( 'string', () => {
+		expect( parseObject( 'test' ) ).toBeUndefined();
+	} );
+	test( 'undefined', () => {
+		expect( parseObject( undefined ) ).toBeUndefined();
+	} );
+	test( 'empty', () => {
+		expect( parseObject( {} ) ).toBeUndefined();
+	} );
+	test( 'object', () => {
+		expect( parseObject( { natsume: 'souseki' } ) ).toStrictEqual( {
+			natsume: 'souseki',
+		} );
+	} );
+	test( 'object has undefined', () => {
+		const input = {
+			natsume: 'souseki',
+			natsume2: undefined,
+		};
+		expect( parseObject( input ) ).toStrictEqual( { natsume: 'souseki' } );
 	} );
 } );

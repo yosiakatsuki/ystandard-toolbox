@@ -6,17 +6,18 @@ import { _x } from '@wordpress/i18n';
  * yStandard
  */
 import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
-import { getComponentConfig } from '@aktk/helper/config';
-import {
-	getResponsiveCustomProperties,
-	getResponsiveValue,
-	parseResponsiveValues,
-	responsiveKeys as responsive,
-} from '@aktk/helper/responsive';
 import UnitControl from '@aktk/components/unit-control';
 import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
 import ButtonReset from '@aktk/components/button-reset';
 import { Flex } from '@aktk/components/flex';
+import { getResponsiveCustomProperties } from '@aktk/helper';
+import { getComponentConfig } from '@aktk/helper/config';
+import {
+	getResponsiveValue,
+	parseResponsiveValues,
+	responsiveKeys as responsive,
+} from '@aktk/helper/responsive';
+import { parseObjectAll } from '@aktk/helper/object.js';
 
 const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 	const _units = units ?? getComponentConfig( 'units' );
@@ -137,22 +138,21 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 };
 export default ResponsiveValues;
 
-export const getResponsiveValueStyle = (
-	propertyName,
-	values,
-	prefix = ''
-) => {
+export const getResponsiveValueStyle = ( property, values, suffix = '' ) => {
 	const parsedValue = parseResponsiveValues( {
-		desktop: values?.desktop,
-		tablet: values?.tablet,
-		mobile: values?.mobile,
+		desktop: { [ property ]: values?.desktop },
+		tablet: { [ property ]: values?.tablet },
+		mobile: { [ property ]: values?.mobile },
 	} );
-	return getResponsiveCustomProperties( propertyName, parsedValue, prefix );
+	return getResponsiveCustomProperties( {
+		value: parseObjectAll( parsedValue ),
+		suffix,
+	} );
 };
 
-export const getResponsiveWidthStyle = ( values, prefix = '' ) => {
-	return getResponsiveValueStyle( 'width', values, prefix );
+export const getResponsiveWidthStyle = ( values, suffix = '' ) => {
+	return getResponsiveValueStyle( 'width', values, suffix );
 };
-export const getResponsiveHeightStyle = ( values, prefix = '' ) => {
-	return getResponsiveValueStyle( 'height', values, prefix );
+export const getResponsiveHeightStyle = ( values, suffix = '' ) => {
+	return getResponsiveValueStyle( 'height', values, suffix );
 };

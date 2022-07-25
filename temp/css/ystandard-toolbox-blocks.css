@@ -792,6 +792,54 @@
     padding-bottom: var(--ystdtb-padding-bottom-mobile) !important;
   }
 }
+/**
+ * Gap
+ */
+@media (min-width: 1025px) {
+  [style*="--ystdtb-gap-desktop"] {
+    gap: var(--ystdtb-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-gap-tablet"] {
+    gap: var(--ystdtb-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-gap-mobile"] {
+    gap: var(--ystdtb-gap-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-column-gap-desktop"] {
+    column-gap: var(--ystdtb-column-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-column-gap-tablet"] {
+    column-gap: var(--ystdtb-column-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-column-gap-mobile"] {
+    column-gap: var(--ystdtb-column-gap-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-row-gap-desktop"] {
+    row-gap: var(--ystdtb-row-gap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-row-gap-tablet"] {
+    row-gap: var(--ystdtb-row-gap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-row-gap-mobile"] {
+    row-gap: var(--ystdtb-row-gap-mobile) !important;
+  }
+}
 @media (min-width: 1025px) {
   [style*="--ystdtb-font-size-desktop"] {
     font-size: var(--ystdtb-font-size-desktop) !important;
@@ -823,5 +871,101 @@
 @media (max-width: 599px) {
   [style*="--ystdtb-width-mobile"] {
     width: var(--ystdtb-width-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-height-desktop"] {
+    height: var(--ystdtb-height-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-height-tablet"] {
+    height: var(--ystdtb-height-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-height-mobile"] {
+    height: var(--ystdtb-height-mobile) !important;
+  }
+}
+/**
+ * Margin
+ */
+@media (min-width: 1025px) {
+  [style*="--ystdtb-aspect-ratio-desktop"] {
+    aspect-ratio: var(--ystdtb-aspect-ratio-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-aspect-ratio-tablet"] {
+    aspect-ratio: var(--ystdtb-aspect-ratio-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-aspect-ratio-mobile"] {
+    aspect-ratio: var(--ystdtb-aspect-ratio-mobile) !important;
+  }
+}
+/**
+ * Margin
+ */
+@media (min-width: 1025px) {
+  [style*="--ystdtb-flex-direction-desktop"] {
+    flex-direction: var(--ystdtb-flex-direction-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-flex-direction-tablet"] {
+    flex-direction: var(--ystdtb-flex-direction-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-flex-direction-mobile"] {
+    flex-direction: var(--ystdtb-flex-direction-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-justify-content-desktop"] {
+    justify-content: var(--ystdtb-justify-content-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-justify-content-tablet"] {
+    justify-content: var(--ystdtb-justify-content-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-justify-content-mobile"] {
+    justify-content: var(--ystdtb-justify-content-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-align-items-desktop"] {
+    align-items: var(--ystdtb-align-items-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-align-items-tablet"] {
+    align-items: var(--ystdtb-align-items-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-align-items-mobile"] {
+    align-items: var(--ystdtb-align-items-mobile) !important;
+  }
+}
+@media (min-width: 1025px) {
+  [style*="--ystdtb-flex-wrap-desktop"] {
+    flex-wrap: var(--ystdtb-flex-wrap-desktop) !important;
+  }
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  [style*="--ystdtb-flex-wrap-tablet"] {
+    flex-wrap: var(--ystdtb-flex-wrap-tablet) !important;
+  }
+}
+@media (max-width: 599px) {
+  [style*="--ystdtb-flex-wrap-mobile"] {
+    flex-wrap: var(--ystdtb-flex-wrap-mobile) !important;
   }
 }

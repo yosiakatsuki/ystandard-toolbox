@@ -1,0 +1,23 @@
+.ystdtb-layout-frame-wrap {
+  &.is-selected,
+  &.has-child-selected {
+    > .ystdtb-layout-frame {
+      outline: 1px solid #ddd;
+
+      > * {
+        outline: 1px solid #ddd;
+      }
+    }
+  }
+
+  > .ystdtb-layout-frame {
+    > * {
+      margin: 0;
+    }
+
+    .block-list-appender:only-child {
+      align-self: auto;
+    }
+  }
+}
+

@@ -1,7 +1,12 @@
 module.exports = {
 	rootDir: '../../',
 	moduleNameMapper: {
-		'^@aktk/(.+)': '<rootDir>/src/js/$1',
+		'^@aktk/function/(.+)': '<rootDir>/src/block-function/$1',
+		'^@aktk/config': '<rootDir>/src/js/config',
+		'^@aktk/config/(.+)': '<rootDir>/src/js/config/$1',
+		'^@aktk/components/(.+)': '<rootDir>/src/block-components/$1',
+		'^@aktk/helper/(.+)': '<rootDir>/src/js/helper/$1',
+		'^@aktk/helper': '<rootDir>/src/js/helper',
 	},
 	preset: '@wordpress/jest-preset-default',
 	transform: {
