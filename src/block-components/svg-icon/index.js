@@ -1,27 +1,22 @@
-import { Component } from '@wordpress/element';
 import classnames from 'classnames';
 import { getIconSvg } from '@aktk/function/icons';
 
-/**
- * SVGIcon
- */
-class SVGIcon extends Component {
-	render() {
-		const { name } = this.props;
-
-		if ( ! name ) {
-			return '';
-		}
-
-		return (
-			<span
-				className={ classnames( 'ys-icon', {
-					'sns-icon': -1 !== name.indexOf( 'sns-' ),
-				} ) }
-				dangerouslySetInnerHTML={ { __html: getIconSvg( name ) } }
-			/>
-		);
+const SVGIcon = ( { name, className, ...props } ) => {
+	if ( ! name ) {
+		return '';
 	}
-}
+
+	const wrapClasses = classnames( 'ys-icon', className, {
+		'sns-icon': -1 !== name.indexOf( 'sns-' ),
+	} );
+
+	return (
+		<span
+			className={ wrapClasses }
+			dangerouslySetInnerHTML={ { __html: getIconSvg( name ) } }
+			{ ...props }
+		/>
+	);
+};
 
 export default SVGIcon;

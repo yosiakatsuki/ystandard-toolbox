@@ -88,7 +88,6 @@ export default function ( { attributes } ) {
 			customLabelBorderColor ||
 			labelBorderSize,
 	} );
-	console.log( { labelSizeClass, customLabelSize, attributes } );
 	const labelStyles = {
 		fontSize: labelSizeClass ? undefined : customLabelSize,
 		color: labelColorClass ? undefined : customLabelColor,

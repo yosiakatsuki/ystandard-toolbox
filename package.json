@@ -88,7 +88,7 @@
     "watch:css:sass": "sass src/sass:temp/css ./blocks:temp/css/blocks src/js:temp/css --no-source-map --no-stop-on-error -w",
     "watch:css": "run-p watch:css:*",
     "watch:clean:cache": "rm -rf ./node_modules/.cache",
-    "watch": "NODE_ENV=development && npm run watch:clean:cache && run-p watch:*",
+    "watch": "npm run watch:clean:cache && NODE_ENV=development run-p watch:*",
     "build:block:custom": "wp-scripts build --webpack-src-dir=src/blocks/custom --output-path=build/blocks/custom --config webpack.blocks.v2.config.js",
     "build:block:app": "wp-scripts build --config webpack.block-app.config.js",
     "build:block:v1": "wp-scripts build --config webpack.blocks.config.js",

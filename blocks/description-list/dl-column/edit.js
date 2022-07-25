@@ -20,13 +20,8 @@ import { ystdtbConfig } from '@aktk/config';
 const Edit = ( props ) => {
 	const { attributes } = props;
 	const hasClasses = ystdtbConfig.hasClasses;
-	const {
-		isStackedOnMobile,
-		isStackedOnTablet,
-		dtWidth,
-		border,
-		margin,
-	} = attributes;
+	const { isStackedOnMobile, isStackedOnTablet, dtWidth, border, margin } =
+		attributes;
 
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
 

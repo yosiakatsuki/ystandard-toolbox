@@ -1,12 +1,9 @@
 .ystdtb-layout-frame-wrap {
-  &.is-selected,
-  &.has-child-selected {
-    > .ystdtb-layout-frame {
-      outline: 1px solid #ddd;
+  > .ystdtb-layout-frame {
+    outline: var(--ystdtb-editor-block-outline);
 
-      > * {
-        outline: 1px solid #ddd;
-      }
+    > * {
+      outline: var(--ystdtb-editor-block-outline);
     }
   }
 

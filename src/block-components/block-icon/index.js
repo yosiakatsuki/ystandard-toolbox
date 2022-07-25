@@ -1,15 +1,14 @@
 import classnames from 'classnames';
 import './_editor.scss';
 
-const COLORS = {
+export const blockIconColor = {
 	main: '#4190be',
 	child: '#A64276',
 	deprecated: '#be4141',
 	beta: '#9CADBC',
 };
 
-const BlockIcon = ( { Icon, type = 'main', ...props } ) => {
-	const color = COLORS.hasOwnProperty( type ) ? COLORS[ type ] : COLORS.main;
+const BlockIcon = ( { Icon, color = '#4190be', ...props } ) => {
 	const iconProps = {
 		className: classnames( 'aktk-block-icon', props?.className ),
 		stroke: color,

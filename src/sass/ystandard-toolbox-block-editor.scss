@@ -14,6 +14,10 @@
 @use "../../blocks/banner-link/edit" as banner-link;
 @use "../../blocks/slider/edit" as slider;
 
+:root {
+  --ystdtb-editor-block-outline:1px solid #ddd;
+}
+
 .wp-block {
   &[class*="ystdtb-"] {
     box-sizing: border-box;
