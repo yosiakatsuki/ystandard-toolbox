@@ -1,5 +1,5 @@
-@use "responsive-spacing/style" as responsive-spacing;
+@use "./responsive-spacing/style" as responsive-spacing;
 @use "./responsive-font-size/block" as responsive-font-size;
-@use "./responsive-values/block" as responsive-values;
+@use "./responsive-values/style" as responsive-values;
 @use "./responsive-ratio/style" as responsive-ratio;
 @use "./responsive-layout/style" as responsive-layout;
