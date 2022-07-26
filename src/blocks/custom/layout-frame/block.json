@@ -39,7 +39,10 @@
   },
   "supports": {
     "html": false,
-    "className": false
+    "className": false,
+    "align": [
+      "full"
+    ]
   },
   "textdomain": "ystandard-toolbox",
   "editorScript": "file:./index.js",
