@@ -340,3 +340,8 @@ Source : <https://www.heropatterns.com/>
 
 License: MIT  
 Source : <https://github.com/fkhadra/react-toastify>
+
+### react-beautiful-dnd
+
+License: Apache License, Version 2.0  
+Source : <https://github.com/atlassian/react-beautiful-dnd>

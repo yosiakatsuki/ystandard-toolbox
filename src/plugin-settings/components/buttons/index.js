@@ -56,6 +56,19 @@ const DeleteButton = ( { text, onClick, icon, isDisabled } ) => {
 		</Button>
 	);
 };
+const DisableButton = ( { text, icon } ) => {
+	return (
+		<Button
+			className={ 'aktk-settings-update-buttons__button' }
+			isDestructive
+			icon={ icon }
+			disabled={ true }
+		>
+			{ text }
+		</Button>
+	);
+};
 Buttons.Update = UpdateButton;
 Buttons.Delete = DeleteButton;
+Buttons.Disable = DisableButton;
 export default Buttons;

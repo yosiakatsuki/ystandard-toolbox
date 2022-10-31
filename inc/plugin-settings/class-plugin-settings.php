@@ -34,6 +34,11 @@ class Plugin_Settings {
 			'menu-title' => 'サイトデザイン拡張',
 		],
 		[
+			'slug'       => 'cta',
+			'page-title' => '投稿詳細ページ上下拡張',
+			'menu-title' => '投稿詳細ページ拡張',
+		],
+		[
 			'slug'       => 'font',
 			'page-title' => 'フォント設定',
 			'menu-title' => 'フォント設定',

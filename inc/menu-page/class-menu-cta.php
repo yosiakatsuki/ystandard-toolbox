@@ -114,8 +114,8 @@ class Menu_CTA extends Menu_Page_Base {
 	 */
 	private function create_priority_schema() {
 		return [
-			'header' => CTA_Sort::get_header_priority_post(),
-			'footer' => CTA_Sort::get_footer_priority_post(),
+			'header' => CTA::get_header_priority_post(),
+			'footer' => CTA::get_footer_priority_post(),
 		];
 	}
 

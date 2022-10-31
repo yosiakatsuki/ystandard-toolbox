@@ -1,0 +1,9 @@
+.ystdtb-settings-cta__list-item {
+  padding: 1em;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background: #fff;
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+}
