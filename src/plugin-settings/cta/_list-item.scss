@@ -13,3 +13,23 @@
   gap: 1em;
   align-items: center;
 }
+
+.ystdtb-settings-cta__list-item-name {
+  font-weight: 700;
+}
+
+.ystdtb-settings-cta__list-item-show {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-left: auto;
+}
+.ystdtb-settings-cta__list-item-show-toggle-label {
+  font-size: 8px;
+}
+.ystdtb-settings-cta__list-item-show-toggle {
+  .components-base-control__field {
+    margin-bottom: 0;
+  }
+}
+

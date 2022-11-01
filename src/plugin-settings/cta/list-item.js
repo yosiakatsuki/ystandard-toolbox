@@ -1,9 +1,10 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { Icon, menu } from '@wordpress/icons';
 /**
  * WordPress.
  */
-import { useRef } from '@wordpress/element';
+import { Icon, menu } from '@wordpress/icons';
+import { useContext, useRef } from '@wordpress/element';
+import { ToggleControl } from '@wordpress/components';
 
 import './_list-item.scss';
 
@@ -14,7 +15,11 @@ export const schema = {
 	priority: { type: 'int' },
 };
 
-const ListItem = ( { id, label, enable, priority, index } ) => {
+const ListItem = ( { item, index, onChange } ) => {
+	const { id, label, enable, priority } = item;
+	const handleOnChangeEnable = ( newValue ) => {
+		onChange( { enable: newValue }, index );
+	};
 	return (
 		<Draggable draggableId={ id } index={ index }>
 			{ ( provided ) => (
@@ -29,7 +34,27 @@ const ListItem = ( { id, label, enable, priority, index } ) => {
 							class={ 'ystdtb-settings-cta__list-item-handle' }
 							icon={ menu }
 						/>
-						<div>{ label }</div>
+						<div
+							className={ 'ystdtb-settings-cta__list-item-name' }
+						>
+							{ label }
+						</div>
+						<div className="ystdtb-settings-cta__list-item-show">
+							<div
+								className={
+									'ystdtb-settings-cta__list-item-show-toggle-label'
+								}
+							>
+								表示 / 非表示
+							</div>
+							<ToggleControl
+								className={
+									'ystdtb-settings-cta__list-item-show-toggle'
+								}
+								checked={ enable }
+								onChange={ handleOnChangeEnable }
+							/>
+						</div>
 					</div>
 				</div>
 			) }

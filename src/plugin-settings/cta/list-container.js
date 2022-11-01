@@ -11,6 +11,15 @@ const ListContainer = ( { items, setItems, position } ) => {
 		newItems.splice( result.destination.index, 0, reorderedItem );
 		setItems( newItems );
 	};
+	const handleOnChangeListItem = ( newValue, index ) => {
+		const newItems = Array.from( items );
+		newItems[ index ] = {
+			...newItems[ index ],
+			...newValue,
+		};
+		console.log( newItems );
+		setItems( newItems );
+	};
 	return (
 		<DragDropContext onDragEnd={ handleOnDragEnd }>
 			<Droppable droppableId={ position }>
@@ -20,20 +29,16 @@ const ListContainer = ( { items, setItems, position } ) => {
 						{ ...provided.droppableProps }
 						ref={ provided.innerRef }
 					>
-						{ items.map(
-							( { id, label, enable, priority }, index ) => {
-								return (
-									<ListItem
-										key={ id }
-										id={ id }
-										label={ label }
-										enable={ enable }
-										priority={ priority }
-										index={ index }
-									/>
-								);
-							}
-						) }
+						{ items.map( ( item, index ) => {
+							return (
+								<ListItem
+									key={ item.id }
+									item={ item }
+									index={ index }
+									onChange={ handleOnChangeListItem }
+								/>
+							);
+						} ) }
 						{ provided.placeholder }
 					</div>
 				) }
