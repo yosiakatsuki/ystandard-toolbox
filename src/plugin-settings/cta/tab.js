@@ -38,7 +38,20 @@ const Tab = () => {
 		isShowTab,
 	} = useContext( CtaContext );
 
-	const handleOnChangeCta = ( newValue, position ) => {};
+	const handleOnChangeCta = ( newValue, position ) => {
+		const newPostTypeCtaItem = {
+			...getPostTypeCta( selectPostType ),
+			...{
+				[ position ]: newValue,
+			},
+		};
+		setCtaItems( {
+			...ctaItems,
+			...{
+				[ selectPostType ]: newPostTypeCtaItem,
+			},
+		} );
+	};
 
 	const getPostTypeCta = ( postType ) => {
 		return Object.hasOwnProperty.call( ctaItems, postType )
@@ -48,8 +61,6 @@ const Tab = () => {
 
 	const getItems = ( position ) => {
 		const items = getPostTypeCta( selectPostType );
-		console.log( { items, ctaItems } );
-
 		return items[ position ];
 	};
 

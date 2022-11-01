@@ -5,7 +5,7 @@ import { CtaContext } from './index';
 const DEFAULT_POST_TYPE_OPTIONS = [ { name: '----', key: '' } ];
 
 const PostTypeSelector = () => {
-	const { settings, selectPostType, setSelectPostType } =
+	const { settings, selectPostType, setSelectPostType, setIsShowTab } =
 		useContext( CtaContext );
 
 	const [ postTypes, setPostTypes ] = useState( DEFAULT_POST_TYPE_OPTIONS );
@@ -15,12 +15,15 @@ const PostTypeSelector = () => {
 			settings?.ctaSelectPostType || DEFAULT_POST_TYPE_OPTIONS;
 		setPostTypes( _postTypes );
 		if ( Array.isArray( _postTypes ) ) {
-			setSelectPostType( _postTypes[ 0 ]?.key );
+			handleOnChangePostType( _postTypes[ 0 ]?.key );
 		}
 	}, [ settings ] );
 
 	const handleOnChangePostType = ( newValue ) => {
 		setSelectPostType( newValue );
+		if ( !! newValue ) {
+			setIsShowTab( true );
+		}
 	};
 
 	return (

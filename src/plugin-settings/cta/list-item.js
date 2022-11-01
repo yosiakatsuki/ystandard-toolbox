@@ -1,4 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd';
+import { Icon, menu } from '@wordpress/icons';
 /**
  * WordPress.
  */
@@ -23,7 +24,13 @@ const ListItem = ( { id, label, enable, priority, index } ) => {
 					{ ...provided.draggableProps }
 					{ ...provided.dragHandleProps }
 				>
-					<div>{ label }</div>
+					<div className="ystdtb-settings-cta__list-item-content">
+						<Icon
+							class={ 'ystdtb-settings-cta__list-item-handle' }
+							icon={ menu }
+						/>
+						<div>{ label }</div>
+					</div>
 				</div>
 			) }
 		</Draggable>
