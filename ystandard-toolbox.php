@@ -3,7 +3,7 @@
  * Plugin Name: yStandard Toolbox
  * Plugin URI: https://wp-ystandard.com/
  * Description: 無料WordPressテーマ「yStandard」用機能拡張プラグイン.
- * Version: 1.23.1
+ * Version: 1.24.1-beta-1
  * Author: yosiakatsuki
  * Author URI: https://yosiakatsuki.net
  * License: GPL-2.0 or later
@@ -11,7 +11,7 @@
  * Text Domain: ystandard-toolbox
  * Domain Path: /languages
  * Requires PHP: 7.3.0
- * Requires at least: 5.6
+ * Requires at least: 5.9
  * Update URI : https://wp-ystandard.com/plugins/ystandard-toolbox/
  *
  * @package yStandard_toolbox
@@ -36,6 +36,6 @@ defined( 'ABSPATH' ) || die();
 define( 'YSTDTB_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'YSTDTB_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'YSTDTB_NAME', plugin_basename( __FILE__ ) );
-define( 'YSTDTB_VERSION', '1.23.1' );
+define( 'YSTDTB_VERSION', '1.24.1-beta-1' );
 
 require_once __DIR__ . '/inc/load.php';
