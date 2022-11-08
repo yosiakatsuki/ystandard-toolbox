@@ -3,6 +3,14 @@
 
 
 .ystdtb-box__type-select {
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -86,6 +94,7 @@
       }
     }
   }
+
   &.is-label-none {
     .ystdtb-box__type-label {
       display: none;
@@ -97,6 +106,7 @@
   max-width: 100%;
   overflow: hidden;
 }
+
 .ystdtb-box__label-text {
   font-size: var(--ystdtb-box-label-font-size);
 }

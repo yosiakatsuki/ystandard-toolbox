@@ -2,3 +2,12 @@
 @use "block";
 @use "inspector-controls/link";
 @use "inspector-controls/banner";
+
+.ystdtb-banner-link {
+    &,
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+}

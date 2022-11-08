@@ -3,6 +3,13 @@
 @use "sass:math";
 
 [data-type="ystdtb/slider"] {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   &.preview--grid {
     .ystdtb-slider__container {
       > .block-editor-inner-blocks {

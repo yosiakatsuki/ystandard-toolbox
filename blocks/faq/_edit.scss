@@ -2,6 +2,14 @@
 
 [data-type="ystdtb/faq"],
 [data-type="ystdtb/faq-item"] {
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   &.is-selected {
     padding: 1em;
   }
@@ -15,17 +23,20 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+
   .ystdtb-faq-item__contents {
-    > .block-editor-inner-blocks > .block-editor-block-list__layout {
-      > * {
+    >.block-editor-inner-blocks>.block-editor-block-list__layout {
+      >* {
         &:first-child {
           margin-top: 0;
         }
+
         &:not(.block-list-appender):last-of-type {
           margin-bottom: 0;
         }
       }
-      > .block-list-appender {
+
+      >.block-list-appender {
         margin: 8px 0 0 !important;
 
         .block-editor-button-block-appender {
