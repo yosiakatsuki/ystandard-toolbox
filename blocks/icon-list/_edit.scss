@@ -1,6 +1,13 @@
 @use "block";
 
 [data-type="ystdtb/icon-list"] {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   &.ystdtb-icon-list {
     list-style: none;
     box-sizing: border-box;

@@ -3,6 +3,13 @@
 @use "block";
 
 .editor-styles-wrapper {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   @include block.block-style;
 
   .ystdtb-sns-share-edit__no-preview {

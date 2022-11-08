@@ -1,6 +1,12 @@
 @use "block";
 
 [data-type="ystdtb/timeline-item"] {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
   &.is-selected {
     padding: 2em 1em;

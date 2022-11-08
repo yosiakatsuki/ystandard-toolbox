@@ -88,7 +88,7 @@ function TimelineItem( props ) {
 		[ labelBorderColor.class ]: labelBorderColor.class,
 	} );
 	const labelStyles = {
-		fontSize: labelFontSize.size ? labelFontSize.size + 'px' : '14px',
+		fontSize: labelFontSize.size ? labelFontSize.size : '14px',
 		fontWeight: labelBold ? 700 : undefined,
 		color: labelColor.color,
 		backgroundColor: labelBackgroundColor.color,

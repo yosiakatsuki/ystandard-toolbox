@@ -1,6 +1,13 @@
 @use "../../src/sass/global";
 
 [data-type="ystdtb/posts"] {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   .ystdtb-posts {
     &:empty {
       &:after {
