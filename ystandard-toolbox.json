@@ -1,13 +1,13 @@
 {
   "name": "yStandard Toolbox",
-  "version": "1.23.1",
+  "version": "1.24.1",
   "download_url": "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/jgtmvhneyxrp/ystandard-toolbox.zip",
   "sections": {
 	"description": "<h2>「yStandard」用 機能拡張プラグイン</h2>",
 	"changelog": "<h2>更新履歴</h2><p>更新履歴は下記ページを参照<br><a href=\"https://wp-ystandard.com/plugins/ystandard-toolbox/\">https://wp-ystandard.com/plugins/ystandard-toolbox/</a></p>"
   },
-  "requires": "5.7",
-  "tested": "6.0.0",
+  "requires": "5.9",
+  "tested": "6.1.0",
   "icons": {
 	"1x": "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/icon.png",
 	"2x": "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/icon@2x.png",
