@@ -27,11 +27,9 @@ export const attributes = {
 	},
 	labelFontSize: {
 		type: 'string',
-		default: 'small',
 	},
 	customLabelFontSize: {
-		type: 'number',
-		default: 14,
+		type: 'string',
 	},
 	labelBorderSize: {
 		type: 'number',
