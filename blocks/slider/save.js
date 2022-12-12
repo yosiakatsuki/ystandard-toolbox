@@ -33,9 +33,8 @@ const save = ( { attributes } ) => {
 		id: `ystdtb-slider-${ sliderId }`,
 		className: classnames( sliderClasses.wrap, blockClasses.slider, {
 			'is-fixed-height': isFixedHeight,
-			[ getRatioInnerClassName( ratio ) ]: getRatioInnerClassName(
-				ratio
-			),
+			[ getRatioInnerClassName( ratio ) ]:
+				getRatioInnerClassName( ratio ),
 		} ),
 		style: {
 			...getCustomProperty( 'height', height ),

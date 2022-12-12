@@ -1,35 +1,40 @@
 .ystdtb-settings-cta__list-item {
-  padding: 1em;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  background: #fff;
-  &:not(:first-child) {
-    margin-top: -1px;
-  }
+	padding: 1em;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	background: #fff;
+
+	&:not(:first-child) {
+		margin-top: -1px;
+	}
 }
 
 .ystdtb-settings-cta__list-item-content {
-  display: flex;
-  gap: 1em;
-  align-items: center;
+	display: flex;
+	gap: 1em;
+	align-items: center;
 }
 
 .ystdtb-settings-cta__list-item-name {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 .ystdtb-settings-cta__list-item-show {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	margin-left: auto;
 }
+
 .ystdtb-settings-cta__list-item-show-toggle-label {
-  font-size: 8px;
+	font-size: 8px;
 }
+
 .ystdtb-settings-cta__list-item-show-toggle {
-  .components-base-control__field {
-    margin-bottom: 0;
-  }
+
+	&,
+	.components-base-control__field {
+		margin-bottom: 0 !important;
+	}
 }
 

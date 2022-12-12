@@ -1,67 +1,70 @@
 @use "start-page";
 
 #wpbody-content {
-  > .notice {
-    display: none;
-  }
+
+	> .notice {
+		display: none;
+	}
 }
 
 .ystdtb-settings-v2 {
-  background: #fff;
+	background: #fff;
 
-  * {
-    &,
-    &::before,
-    &::after {
-      box-sizing: border-box;
-    }
+	* {
 
-  }
+		&,
+		&::before,
+		&::after {
+			box-sizing: border-box;
+		}
 
-  #wpcontent {
-    padding-left: 0;
-  }
+	}
 
-  #wpbody {
-    height: 100%;
-  }
+	#wpcontent {
+		padding-left: 0;
+	}
 
-  .wrap {
-    margin: 0;
-  }
+	#wpbody {
+		height: 100%;
+	}
 
-  .components-panel__body {
-    border: 1px solid #e0e0e0;
-    margin: 2em 0;
+	.wrap {
+		margin: 0;
+	}
 
-    &:first-child {
-      margin-top: 0;
-    }
+	.components-panel__body {
+		border: 1px solid #e0e0e0;
+		margin: 2em 0;
 
-    &.is-opened {
-      > .components-panel__body-title {
-        margin-bottom: 1em;
-      }
-    }
+		&:first-child {
+			margin-top: 0;
+		}
 
-    > .components-base-control {
-      margin-top: 2em;
+		&.is-opened {
 
-      > .components-base-control__field > .components-base-control__label {
-        font-weight: 700;
-      }
-    }
-  }
+			> .components-panel__body-title {
+				margin-bottom: 1em;
+			}
+		}
 
-  .components-panel__body-title {
-    border-bottom: 1px solid #e0e0e0 !important;
+		> .components-base-control {
+			margin-top: 2em;
 
-    .components-panel__body-toggle {
-      font-weight: 700;
-    }
+			> .components-base-control__field > .components-base-control__label {
+				font-weight: 700;
+			}
+		}
+	}
 
-    + .components-base-control {
-      margin-top: 0;
-    }
-  }
+	.components-panel__body-title {
+		border-bottom: 1px solid #e0e0e0 !important;
+
+		.components-panel__body-toggle {
+			font-weight: 700;
+		}
+
+		+ .components-base-control {
+			margin-top: 0;
+		}
+	}
 }

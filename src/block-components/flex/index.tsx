@@ -1,5 +1,32 @@
+import type { HTMLProps, ReactNode } from 'react';
+
+interface FlexProps {
+	justifyBetween?: boolean;
+	justifyCenter?: boolean;
+	justifyRight?: boolean;
+	justifyLeft?: boolean;
+	alignTop?: boolean;
+	alignCenter?: boolean;
+	alignBottom?: boolean;
+	gap?: string;
+	isGapSmall?: boolean;
+	isGapLarge?: boolean;
+	style?: object;
+	children: ReactNode;
+}
+
+type FlexPropsType = HTMLProps< HTMLElement > & FlexProps;
+
+interface FlexItemProps {
+	flexGrow?: boolean;
+	flexShrink?: boolean;
+	flexBasis?: boolean;
+	children: ReactNode;
+}
+
+type FlexItemPropsType = HTMLProps< HTMLElement > & FlexItemProps;
+
 export const Flex = ( {
-	children,
 	justifyBetween,
 	justifyCenter,
 	justifyRight,
@@ -10,8 +37,10 @@ export const Flex = ( {
 	gap,
 	isGapSmall,
 	isGapLarge,
+	style,
+	children,
 	...props
-} ) => {
+}: FlexPropsType ) => {
 	let justifyContent;
 	let alignItems;
 	let _gap;
@@ -46,12 +75,13 @@ export const Flex = ( {
 		_gap = gap;
 	}
 	const blockProps = {
+		...props,
 		style: {
 			display: 'flex',
 			justifyContent,
 			alignItems,
 			gap: _gap,
-			...props?.style,
+			...style,
 		},
 	};
 	return <div { ...blockProps }>{ children }</div>;
@@ -61,15 +91,17 @@ export const FlexItem = ( {
 	flexGrow,
 	flexShrink,
 	flexBasis,
+	style,
 	children,
 	...props
-} ) => {
+}: FlexItemPropsType ) => {
 	const blockProps = {
+		...props,
 		style: {
 			flexGrow,
 			flexShrink,
 			flexBasis,
-			...props?.style,
+			...style,
 		},
 	};
 	return <div { ...blockProps }>{ children }</div>;

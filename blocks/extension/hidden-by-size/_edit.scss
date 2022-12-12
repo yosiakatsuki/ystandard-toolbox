@@ -3,15 +3,16 @@
 .ystdtb-hidden-mobile,
 .ystdtb-hidden-tablet,
 .ystdtb-hidden-desktop {
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    pointer-events: none;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
-    border: 1px dashed rgba(#000,0.1);
-  }
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		pointer-events: none;
+		top: -2px;
+		right: -2px;
+		bottom: -2px;
+		left: -2px;
+		border: 1px dashed rgba(#000, 0.1);
+	}
 }

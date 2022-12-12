@@ -1,92 +1,110 @@
 @use "../../src/sass/global";
 
 @mixin banner-link() {
-  &[style*="max-width-desktop"] {
-    max-width: var(--ystdtb-banner-link-max-width-desktop);
-  }
 
-  &[style*="min-height-desktop"] {
-    min-height: var(--ystdtb-banner-link-min-height-desktop);
-  }
+	&[style*="max-width-desktop"] {
+		max-width: var(--ystdtb-banner-link-max-width-desktop);
+	}
 
-  @include global.media-breakpoint-between(sm, lg) {
-    &[style*="max-width-tablet"] {
-      max-width: var(--ystdtb-banner-link-max-width-tablet);
-    }
-    &[style*="min-height-tablet"] {
-      min-height: var(--ystdtb-banner-link-min-height-tablet);
-    }
-  }
+	&[style*="min-height-desktop"] {
+		min-height: var(--ystdtb-banner-link-min-height-desktop);
+	}
 
-  @include global.media-breakpoint-down(sm) {
-    &[style*="max-width-mobile"] {
-      max-width: var(--ystdtb-banner-link-max-width-mobile);
-    }
-    &[style*="min-height-mobile"] {
-      min-height: var(--ystdtb-banner-link-min-height-mobile);
-    }
-  }
+	@include global.media-breakpoint-between(sm, lg) {
+
+		&[style*="max-width-tablet"] {
+			max-width: var(--ystdtb-banner-link-max-width-tablet);
+		}
+
+		&[style*="min-height-tablet"] {
+			min-height: var(--ystdtb-banner-link-min-height-tablet);
+		}
+	}
+
+	@include global.media-breakpoint-down(sm) {
+
+		&[style*="max-width-mobile"] {
+			max-width: var(--ystdtb-banner-link-max-width-mobile);
+		}
+
+		&[style*="min-height-mobile"] {
+			min-height: var(--ystdtb-banner-link-min-height-mobile);
+		}
+	}
 }
 
 
 @mixin container() {
-  &[style*="padding-desktop"] {
-    padding: var(--ystdtb-banner-link-padding-desktop);
-  }
-  @include global.media-breakpoint-between(sm, lg) {
-    &[style*="padding-tablet"] {
-      padding: var(--ystdtb-banner-link-padding-tablet);
-    }
-  }
 
-  @include global.media-breakpoint-down(sm) {
-    &[style*="padding-mobile"] {
-      padding: var(--ystdtb-banner-link-padding-mobile);
-    }
-  }
+	&[style*="padding-desktop"] {
+		padding: var(--ystdtb-banner-link-padding-desktop);
+	}
+
+	@include global.media-breakpoint-between(sm, lg) {
+
+		&[style*="padding-tablet"] {
+			padding: var(--ystdtb-banner-link-padding-tablet);
+		}
+	}
+
+	@include global.media-breakpoint-down(sm) {
+
+		&[style*="padding-mobile"] {
+			padding: var(--ystdtb-banner-link-padding-mobile);
+		}
+	}
 }
 
 @mixin main-text() {
-  &[style*="font-size-desktop"] {
-    font-size: var(--ystdtb-banner-link-font-size-desktop);
-  }
 
-  @include global.media-breakpoint-between(sm, lg) {
-    &[style*="font-size-tablet"] {
-      font-size: var(--ystdtb-banner-link-font-size-tablet);
-    }
-  }
+	&[style*="font-size-desktop"] {
+		font-size: var(--ystdtb-banner-link-font-size-desktop);
+	}
 
-  @include global.media-breakpoint-down(sm) {
-    &[style*="font-size-mobile"] {
-      font-size: var(--ystdtb-banner-link-font-size-mobile);
-    }
-  }
+	@include global.media-breakpoint-between(sm, lg) {
+
+		&[style*="font-size-tablet"] {
+			font-size: var(--ystdtb-banner-link-font-size-tablet);
+		}
+	}
+
+	@include global.media-breakpoint-down(sm) {
+
+		&[style*="font-size-mobile"] {
+			font-size: var(--ystdtb-banner-link-font-size-mobile);
+		}
+	}
 }
 
 @mixin sub-text() {
-  &[style*="font-size-desktop"] {
-    font-size: var(--ystdtb-banner-link-font-size-desktop);
-  }
-  &[style*="margin-top-desktop"] {
-    margin-top: var(--ystdtb-banner-link-margin-top-desktop);
-  }
 
-  @include global.media-breakpoint-between(sm, lg) {
-    &[style*="font-size-tablet"] {
-      font-size: var(--ystdtb-banner-link-font-size-tablet);
-    }
-    &[style*="margin-top-tablet"] {
-      margin-top: var(--ystdtb-banner-link-margin-top-tablet);
-    }
-  }
+	&[style*="font-size-desktop"] {
+		font-size: var(--ystdtb-banner-link-font-size-desktop);
+	}
 
-  @include global.media-breakpoint-down(sm) {
-    &[style*="font-size-mobile"] {
-      font-size: var(--ystdtb-banner-link-font-size-mobile);
-    }
-    &[style*="margin-top-mobile"] {
-      margin-top: var(--ystdtb-banner-link-margin-top-mobile);
-    }
-  }
+	&[style*="margin-top-desktop"] {
+		margin-top: var(--ystdtb-banner-link-margin-top-desktop);
+	}
+
+	@include global.media-breakpoint-between(sm, lg) {
+
+		&[style*="font-size-tablet"] {
+			font-size: var(--ystdtb-banner-link-font-size-tablet);
+		}
+
+		&[style*="margin-top-tablet"] {
+			margin-top: var(--ystdtb-banner-link-margin-top-tablet);
+		}
+	}
+
+	@include global.media-breakpoint-down(sm) {
+
+		&[style*="font-size-mobile"] {
+			font-size: var(--ystdtb-banner-link-font-size-mobile);
+		}
+
+		&[style*="margin-top-mobile"] {
+			margin-top: var(--ystdtb-banner-link-margin-top-mobile);
+		}
+	}
 }

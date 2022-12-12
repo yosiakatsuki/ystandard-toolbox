@@ -5,4 +5,4 @@ $editor: false !default;
 /**
  * Margin
  */
-@include global.responsive-custom-property-component('aspect-ratio', $editor);
+@include global.responsive-custom-property-component("aspect-ratio", $editor);

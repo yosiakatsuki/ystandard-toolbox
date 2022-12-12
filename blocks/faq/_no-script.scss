@@ -1,18 +1,20 @@
 .ystdtb-faq {
-  &.is-accordion {
-    .ystdtb-faq-item__arrow {
-      display: none;
-    }
 
-    .ystdtb-faq-item {
+	&.is-accordion {
 
-      &.is-faq--a {
-        height: auto;
-        padding-top: 1.5em;
-        padding-bottom: 1.5em;
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
+		.ystdtb-faq-item__arrow {
+			display: none;
+		}
+
+		.ystdtb-faq-item {
+
+			&.is-faq--a {
+				height: auto;
+				padding-top: 1.5em;
+				padding-bottom: 1.5em;
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
 }

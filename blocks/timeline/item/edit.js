@@ -103,7 +103,8 @@ function TimelineItem( props ) {
 
 	const contentsClass = classnames( 'ystdtb-timeline__contents', {
 		'is-no-child': ! hasChildBlocks,
-		[ `is-margin-${ selectContentsInnerMargin }` ]: selectContentsInnerMargin,
+		[ `is-margin-${ selectContentsInnerMargin }` ]:
+			selectContentsInnerMargin,
 	} );
 	const contentMarginTopCalc = 0 > contentMarginTop ? '-' : '+';
 	const contentsStyle = {

@@ -1,5 +1,6 @@
 .aktk-settings__base-control {
-  &:not(.is-full-width) > *:not([style*=max-width]) {
-    max-width: 300px;
-  }
+
+	&:not(.is-full-width) > *:not([style*="max-width"]) {
+		max-width: 300px;
+	}
 }

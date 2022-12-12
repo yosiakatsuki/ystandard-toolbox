@@ -1,18 +1,18 @@
 .ystdtb-component-manual-link {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 
-  a {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    text-decoration: none;
-    color: var(--wp-admin-theme-color);
-  }
+	a {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		text-decoration: none;
+		color: var(--wp-admin-theme-color);
+	}
 
-  svg {
-    width: 12px;
-    height: 12px;
-    margin-right: 4px;
-  }
+	svg {
+		width: 12px;
+		height: 12px;
+		margin-right: 4px;
+	}
 }

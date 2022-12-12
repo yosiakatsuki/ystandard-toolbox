@@ -23,6 +23,8 @@ defined( 'ABSPATH' ) || die();
  */
 class Menu_CTA extends Menu_Page_Base {
 
+	const OLD_OPTION_NAME = 'ctaSort';
+
 	/**
 	 * Menu_CTA constructor.
 	 */
@@ -36,7 +38,6 @@ class Menu_CTA extends Menu_Page_Base {
 		$this->menu_label    = '投稿詳細ページ拡張';
 		$this->template_name = 'cta';
 		$this->option_name   = CTA::OPTION_NAME;
-
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_app' ] );
 		add_action( $this->get_ajax_action_hook(), [ $this, 'save_ajax' ] );
 	}
@@ -114,8 +115,8 @@ class Menu_CTA extends Menu_Page_Base {
 	 */
 	private function create_priority_schema() {
 		return [
-			'header' => CTA::get_header_priority_post(),
-			'footer' => CTA::get_footer_priority_post(),
+			'header' => CTA::get_header_priority(),
+			'footer' => CTA::get_footer_priority(),
 		];
 	}
 
@@ -137,7 +138,7 @@ class Menu_CTA extends Menu_Page_Base {
 		/**
 		 * CTA 変更確認
 		 */
-		if ( ! $this->check_change( CTA_Sort::OPTION_NAME, $input ) ) {
+		if ( ! $this->check_change( self::OLD_OPTION_NAME, $input ) ) {
 			return true;
 		}
 		$result = $this->create_data_cta_sort( $input, $result );
@@ -147,7 +148,7 @@ class Menu_CTA extends Menu_Page_Base {
 
 		$update_result = Option::update_plugin_option( CTA::OPTION_NAME, $result );
 
-		if ( isset( $input[ CTA_Sort::OPTION_NAME ]['header'] ) && empty( $input[ CTA_Sort::OPTION_NAME ]['header'] ) ) {
+		if ( isset( $input[ self::OLD_OPTION_NAME ]['header'] ) && empty( $input[ self::OLD_OPTION_NAME ]['header'] ) ) {
 			return true;
 		}
 
@@ -163,16 +164,16 @@ class Menu_CTA extends Menu_Page_Base {
 	 * @return array
 	 */
 	private function create_data_cta_sort( $input, $options ) {
-		if ( ! isset( $input[ CTA_Sort::OPTION_NAME ] ) ) {
+		if ( ! isset( $input[ self::OLD_OPTION_NAME ] ) ) {
 			return $options;
 		}
-		$input = $input[ CTA_Sort::OPTION_NAME ];
+		$input = $input[ self::OLD_OPTION_NAME ];
 		if ( ! isset( $input['postType'] ) || ! isset( $input['header'] ) || ! isset( $input['footer'] ) ) {
 			return null;
 		}
 		$new = [];
-		if ( isset( $options[ CTA_Sort::OPTION_NAME ] ) ) {
-			$new = $options[ CTA_Sort::OPTION_NAME ];
+		if ( isset( $options[ self::OLD_OPTION_NAME ] ) ) {
+			$new = $options[ self::OLD_OPTION_NAME ];
 		}
 		$post_type = $input['postType'];
 		$header    = $input['header'];
@@ -181,7 +182,7 @@ class Menu_CTA extends Menu_Page_Base {
 		if ( empty( $header ) || empty( $footer ) ) {
 			if ( isset( $new[ $post_type ] ) ) {
 				unset( $new[ $post_type ] );
-				$options[ CTA_Sort::OPTION_NAME ] = $new;
+				$options[ self::OLD_OPTION_NAME ] = $new;
 			}
 
 			return $options;
@@ -192,7 +193,7 @@ class Menu_CTA extends Menu_Page_Base {
 			'footer' => $footer,
 		];
 
-		$options[ CTA_Sort::OPTION_NAME ] = $new;
+		$options[ self::OLD_OPTION_NAME ] = $new;
 
 		return $options;
 	}

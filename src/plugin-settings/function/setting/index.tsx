@@ -1,8 +1,15 @@
-import { hasObjectKey } from '@aktk/helper/object.js';
+import { hasObjectKey } from '@aktk/helper/object';
 
+/**
+ * 設定取得.
+ *
+ * @param {string} section セクション名.
+ * @param {any} defaultValue 初期値.
+ * @returns {object|array|string|number|undefined|any}
+ */
 export function getPluginSetting(
-	section = undefined,
-	defaultValue = undefined
+	section: string | undefined = undefined,
+	defaultValue: any = undefined
 ) {
 	const settings = getPluginSettings( 'settings' );
 	if ( ! settings ) {
@@ -17,7 +24,13 @@ export function getPluginSetting(
 	return settings[ section ];
 }
 
-export function getPluginSettings( name ) {
+/**
+ * プラグイン設定 セクション取得
+ *
+ * @param {string} name 設定名.
+ * @return {object|array|string|number|undefined|any}
+ */
+export function getPluginSettings( name: string ) {
 	if ( ! window?.ystdtbPluginSettings ) {
 		return undefined;
 	}
@@ -28,7 +41,9 @@ export function getPluginSettings( name ) {
 	return pluginSettings[ name ];
 }
 
+
 export function getCodeSetting() {
+	//TODO:移動させる.
 	const defaultSetting = {
 		head: '',
 		head_amp: '',

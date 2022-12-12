@@ -1,29 +1,31 @@
 @use "../../src/sass/global";
-
 @use "block";
 
 .editor-styles-wrapper {
-  &,
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
 
-  @include block.block-style;
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
-  .ystdtb-sns-share-edit__no-preview {
-    padding: 2em;
-    background-color: global.$color__bg-gray-light;
-    border: 1px solid global.$color__border-gray-light;
-    font-size: 0.8em;
-  }
+	@include block.block-style;
 
-  [data-type="ystdtb/sns-share"] {
-    .sns-share__button {
-      .sns-share__link {
-        padding: 0;
-      }
-    }
-  }
+	.ystdtb-sns-share-edit__no-preview {
+		padding: 2em;
+		background-color: global.$color__bg-gray-light;
+		border: 1px solid global.$color__border-gray-light;
+		font-size: 0.8em;
+	}
+
+	[data-type="ystdtb/sns-share"] {
+
+		.sns-share__button {
+
+			.sns-share__link {
+				padding: 0;
+			}
+		}
+	}
 }

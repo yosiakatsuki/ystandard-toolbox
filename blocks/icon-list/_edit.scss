@@ -1,36 +1,38 @@
 @use "block";
 
 [data-type="ystdtb/icon-list"] {
-  &,
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
 
-  &.ystdtb-icon-list {
-    list-style: none;
-    box-sizing: border-box;
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
-    &:not(.has-background) {
-      padding-left: 0;
-    }
-  }
+	&.ystdtb-icon-list {
+		list-style: none;
+		box-sizing: border-box;
+
+		&:not(.has-background) {
+			padding-left: 0;
+		}
+	}
 }
 
 .ystdtb-icon-list-edit {
-  &.ystdtb-icon-list {
-    margin: 0;
-    padding: 0;
 
-    li {
-      margin: 0;
-      padding: 0;
-      font-size: 20px;
+	&.ystdtb-icon-list {
+		margin: 0;
+		padding: 0;
 
-      &::before {
-        position: relative !important;
-      }
-    }
-  }
+		li {
+			margin: 0;
+			padding: 0;
+			font-size: 20px;
+
+			&::before {
+				position: relative !important;
+			}
+		}
+	}
 }

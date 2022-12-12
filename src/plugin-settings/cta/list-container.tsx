@@ -5,11 +5,19 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import ListItem from './list-item';
 
 const ListContainer = ( { items, setItems, position } ) => {
+	const setPriority = ( newItems ) => {
+		newItems.forEach( ( element, index ) => {
+			element.priority = ( index + 1 ) * 10;
+		} );
+		return newItems;
+	};
 	const handleOnDragEnd = ( result ) => {
 		const newItems = Array.from( items );
 		const [ reorderedItem ] = newItems.splice( result.source.index, 1 );
-		newItems.splice( result.destination.index, 0, reorderedItem );
-		setItems( newItems );
+		if ( null !== result.destination ) {
+			newItems.splice( result.destination.index, 0, reorderedItem );
+			setItems( setPriority( newItems ) );
+		}
 	};
 	const handleOnChangeListItem = ( newValue, index ) => {
 		const newItems = Array.from( items );
@@ -17,7 +25,6 @@ const ListContainer = ( { items, setItems, position } ) => {
 			...newItems[ index ],
 			...newValue,
 		};
-		console.log( newItems );
 		setItems( newItems );
 	};
 	return (

@@ -5,5 +5,5 @@ $editor: false !default;
 /**
  * Width.
  */
-@include global.responsive-custom-property-component('width', $editor);
-@include global.responsive-custom-property-component('height', $editor);
+@include global.responsive-custom-property-component("width", $editor);
+@include global.responsive-custom-property-component("height", $editor);

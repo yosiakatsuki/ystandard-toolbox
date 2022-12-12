@@ -89,12 +89,10 @@ function FAQ( props ) {
 								onChange={ ( color ) => {
 									setAccordionArrowColor( color );
 									updateChildAttributes( {
-										accordionArrowColor: getColorSlug(
-											color
-										),
-										customAccordionArrowColor: getColorCode(
-											color
-										),
+										accordionArrowColor:
+											getColorSlug( color ),
+										customAccordionArrowColor:
+											getColorCode( color ),
 									} );
 								} }
 								value={ accordionArrowColor.color }

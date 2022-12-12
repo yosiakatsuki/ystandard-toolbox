@@ -65,6 +65,12 @@ class Blocks {
 		$this->register_blocks( 'custom' );
 	}
 
+	/**
+	 * Register Blocks.
+	 *
+	 * @param string $name Block Type Name.
+	 * @return void
+	 */
 	private function register_blocks( $name ) {
 		foreach ( glob( YSTDTB_PATH . "/build/blocks/${name}/*", GLOB_ONLYDIR ) as $dir_path ) {
 			register_block_type( $dir_path );

@@ -11,6 +11,9 @@ namespace ystandard_toolbox\helper;
 
 defined( 'ABSPATH' ) || die();
 
+/**
+ * Class Version Compare.
+ */
 class Version_Compare {
 	/**
 	 * WordPressのバージョンチェック

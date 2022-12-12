@@ -12,7 +12,7 @@ module.exports = {
 		'block-patterns': './src/plugin-settings/block-patterns/index.js',
 		'custom-css': './src/plugin-settings/custom-css/index.js',
 		font: './src/plugin-settings/font/index.js',
-		cta: './src/plugin-settings/cta/index.js',
+		cta: './src/plugin-settings/cta/index',
 	},
 	output: {
 		filename: '[name].js',

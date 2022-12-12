@@ -149,8 +149,6 @@ class Font {
 	/**
 	 * 設定取得
 	 *
-	 * @param string $name 設定名.
-	 *
 	 * @return array
 	 */
 	public static function get_option() {

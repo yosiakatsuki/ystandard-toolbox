@@ -3,7 +3,6 @@ import { Draggable } from 'react-beautiful-dnd';
  * WordPress.
  */
 import { Icon, menu } from '@wordpress/icons';
-import { useContext, useRef } from '@wordpress/element';
 import { ToggleControl } from '@wordpress/components';
 
 import './_list-item.scss';
@@ -16,7 +15,7 @@ export const schema = {
 };
 
 const ListItem = ( { item, index, onChange } ) => {
-	const { id, label, enable, priority } = item;
+	const { id, label, enable } = item;
 	const handleOnChangeEnable = ( newValue ) => {
 		onChange( { enable: newValue }, index );
 	};

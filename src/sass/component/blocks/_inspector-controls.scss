@@ -1,104 +1,107 @@
 @use "../../global";
 
 .ystdtb-block-label {
-  font-weight: 400;
-  margin-bottom: 8px;
+	font-weight: 400;
+	margin-bottom: 8px;
 }
 
 .ystdtb-block-dscr {
-  font-size: 0.8em;
-  color: global.$color__text-light;
+	font-size: 0.8em;
+	color: global.$color__text-light;
 
-  &.has-margin {
-    margin: 8px 0;
-  }
+	&.has-margin {
+		margin: 8px 0;
+	}
 }
 
 .components-base-control {
-  + .ystdtb-block-dscr {
-    margin-top: -20px;
-  }
+
+	+ .ystdtb-block-dscr {
+		margin-top: -20px;
+	}
 }
 
 .ystdtb__preset-select-buttons {
-  > button {
-    display: block;
-    width: 100%;
-    padding: 1em;
-    height: auto;
-    border: 1px solid var(--wp-admin-theme-color);
-    box-shadow: none !important;
 
-    &:nth-child(n+2) {
-      border-top: 0;
-    }
-  }
+	> button {
+		display: block;
+		width: 100%;
+		padding: 1em;
+		height: auto;
+		border: 1px solid var(--wp-admin-theme-color);
+		box-shadow: none !important;
 
-  .is-block {
-    display: block;
-  }
+		&:nth-child(n+2) {
+			border-top: 0;
+		}
+	}
 
-  .is-flex {
-    display: flex;
-  }
+	.is-block {
+		display: block;
+	}
+
+	.is-flex {
+		display: flex;
+	}
 }
 
 .ystdtb__shadow-button {
-  &.components-button {
-    display: block;
-    height: auto;
-    width: 100%;
-    padding: 1em;
-    margin-top: 1.5em;
-    border: 0;
-    outline: none;
-    box-shadow: 0 0 6px rgba(#000, 0.15);
-    transition: background-color .3s;
 
-    &:hover,
-    &:focus {
-      background-color: global.$color__bg-gray-light;
-    }
+	&.components-button {
+		display: block;
+		height: auto;
+		width: 100%;
+		padding: 1em;
+		margin-top: 1.5em;
+		border: 0;
+		outline: none;
+		box-shadow: 0 0 6px rgba(#000, 0.15);
+		transition: background-color 0.3s;
 
-    &.is-primary {
-      background-color: transparent;
-      color: currentColor;
-      outline: 1px solid var(--wp-admin-theme-color);
+		&:hover,
+		&:focus {
+			background-color: global.$color__bg-gray-light;
+		}
 
-      &:hover,
-      &:focus {
-        background-color: transparent;
-        color: currentColor;
-        outline: 1px solid var(--wp-admin-theme-color);
-      }
-    }
-  }
+		&.is-primary {
+			background-color: transparent;
+			color: currentcolor;
+			outline: 1px solid var(--wp-admin-theme-color);
+
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				color: currentcolor;
+				outline: 1px solid var(--wp-admin-theme-color);
+			}
+		}
+	}
 }
 
 .ystdtb__icon-list-buttons {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 
-  button {
-    width: calc(20% - 5px);
-    flex: 0 0 calc(20% - 5px);
-    margin-right: 5px;
-    margin-bottom: 5px;
+	button {
+		width: calc(20% - 5px);
+		flex: 0 0 calc(20% - 5px);
+		margin-right: 5px;
+		margin-bottom: 5px;
 
-    > * {
-      display: block;
-      max-width: 100%;
-    }
+		> * {
+			display: block;
+			max-width: 100%;
+		}
 
-    svg {
-      fill: none;
-      max-width: 100%;
-    }
-  }
+		svg {
+			fill: none;
+			max-width: 100%;
+		}
+	}
 }
 
 .block-editor-plain-text {
-  padding: 4px 8px;
-  border: 1px solid #666;
-  border-radius: 0;
+	padding: 4px 8px;
+	border: 1px solid #666;
+	border-radius: 0;
 }

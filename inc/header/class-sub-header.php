@@ -44,7 +44,6 @@ class Sub_Header {
 		$align     = Header_Design::get_option( 'subHeaderAlignDesktop', 'right' );
 		$font_size = self::get_font_size();
 
-
 		$menu_align = 'flex-end';
 		if ( 'center' === $align ) {
 			$menu_align = 'center';
@@ -72,7 +71,7 @@ class Sub_Header {
 	public static function get_font_size() {
 		$font_size = Header_Design::get_option( 'subHeaderFontSize' );
 		/**
-		 * deprecated v1.24.0.
+		 * Deprecated v1.24.0.
 		 */
 		$size = Header_Design::get_option( 'subHeaderFontSizeDesktop', 0.7 );
 		$unit = Header_Design::get_option( 'subHeaderFontSizeUnitDesktop', 'em' );

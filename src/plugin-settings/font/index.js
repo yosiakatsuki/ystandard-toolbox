@@ -24,7 +24,6 @@ const Font = () => {
 	const [ isUpdate, setIsUpdate ] = useState( false );
 	const [ settings, setSettings ] = useState( {} );
 	const initSettings = () => {
-		console.log( { font: getPluginSettings( 'font' ) } );
 		setSettings( getPluginSettings( 'font' ) );
 		setIsLoading( false );
 	};

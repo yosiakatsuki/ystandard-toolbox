@@ -1,15 +1,17 @@
 .ystdtb-typography-control__row {
-  display: flex;
-  gap: 5px;
+	display: flex;
+	gap: 5px;
 
-  > * {
-    width: 50%;
-  }
-  .components-custom-select-control__button {
-    width: 100%;
-    min-width: 100%;
-  }
-  & + .ystdtb-typography-control__row {
-    margin-top: 15px;
-  }
+	> * {
+		width: 50%;
+	}
+
+	.components-custom-select-control__button {
+		width: 100%;
+		min-width: 100%;
+	}
+
+	+ .ystdtb-typography-control__row {
+		margin-top: 15px;
+	}
 }

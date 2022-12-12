@@ -33,7 +33,8 @@ class Utility {
 	}
 
 	/**
-	 * AMPが使えるか
+	 * AMPが使えるか.
+	 *
 	 * @deprecated 1.24.0
 	 */
 	public static function is_amp_enable() {
@@ -68,8 +69,8 @@ class Utility {
 	 * @param string $version バージョン.
 	 *
 	 * @return bool|int
-	 * @deprecated 1.24.0
 	 *
+	 * @deprecated 1.24.0
 	 */
 	public static function wordpress_version_compare( $version ) {
 
@@ -83,7 +84,6 @@ class Utility {
 	 *
 	 * @return bool|int
 	 * @deprecated 1.24.0
-	 *
 	 */
 	public static function ystandard_version_compare( $version = '' ) {
 

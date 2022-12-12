@@ -1,9 +1,9 @@
 //テーマカラー
 $color__ystd_blue: #07689f;
-$color__ystd_beta: #9CADBC;
+$color__ystd_beta: #9cadbc;
 
 //文字色
-$color__text-main: #222222 !default;
+$color__text-main: #222 !default;
 $color__text-light: #757575 !default;
 $color__text-danger: #d53939 !default;
 
@@ -13,17 +13,17 @@ $color__bg-gray-dark: #e9ecef !default;
 
 // 罫線
 $color__border-gray: #bdc3c7 !default;
-$color__border-gray-light: #eeeeee !default;
+$color__border-gray-light: #eee !default;
 
 // ブレークポイント
 $breakpoints: (
-        sm : 600px,
-        md : 769px,
-        lg : 1025px,
+	sm : 600px,
+	md : 769px,
+	lg : 1025px,
 ) !default;
 
 $breakpoints_editor: (
-        sm : 600px,
-        md : 782px,
-        lg : 1025px,
+	sm : 600px,
+	md : 782px,
+	lg : 1025px,
 ) !default;

@@ -48,7 +48,7 @@ class Api {
 	 * @return void
 	 */
 	public static function register_rest_route( $route, $function, $type = 'POST' ) {
-		register_rest_route(
+		$result = register_rest_route(
 			self::API_NAMESPACE . '/v1',
 			"/${route}",
 			[

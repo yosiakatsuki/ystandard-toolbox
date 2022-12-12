@@ -1,15 +1,16 @@
 .ystdtb-accordion {
-  outline: 1px solid #ddd;
+	outline: 1px solid #ddd;
 
-  &:not([open]) {
-    .ystdtb-accordion-content {
-      margin-top: 1em;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+	&:not([open]) {
+
+		.ystdtb-accordion-content {
+			margin-top: 1em;
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 }
 
 .ystdtb-accordion__summary {
-  outline: var(--ystdtb-editor-block-outline);
+	outline: var(--ystdtb-editor-block-outline);
 }

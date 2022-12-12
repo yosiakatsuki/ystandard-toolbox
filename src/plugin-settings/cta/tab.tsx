@@ -1,17 +1,15 @@
 /**
  * WordPress
  */
-import { useContext, useState, useEffect } from '@wordpress/element';
+import { useContext } from '@wordpress/element';
 /**
  * yStandard
  */
-import Notice from '@aktk/components/notice';
 import SettingsTab from '@aktk/plugin-settings/components/settings-tab';
 
-import { getPluginSettings } from '../function/setting';
+import { getPluginSetting } from '../function/setting';
 import { CtaContext } from './index';
 import ListContainer from './list-container';
-import { isObject } from '@aktk/helper/object.js';
 import PostTypeSelector from './post-type-selector';
 
 const TABS = [
@@ -25,18 +23,28 @@ const TABS = [
 	},
 ];
 
+export const getTabName = ( name ) => {
+	const currentTab = name || 'footer';
+	const selected = TABS.filter( ( item ) => {
+		return item.name === currentTab;
+	} );
+
+	if ( selected.length === 0 ) {
+		return '';
+	}
+	return selected[ 0 ].title;
+};
+
+export const getCtaDefault = ( postType ) => {
+	const ctaDefault = getPluginSetting( 'ctaDefault', {} );
+	return Object.hasOwnProperty.call( ctaDefault, postType )
+		? ctaDefault[ postType ]
+		: ctaDefault._default;
+};
+
 const Tab = () => {
-	const {
-		settings,
-		ctaItems,
-		setCtaItems,
-		selectPostType,
-		isLoading,
-		setIsLoading,
-		setIsUpdate,
-		updateSettings,
-		isShowTab,
-	} = useContext( CtaContext );
+	const { ctaItems, setCtaItems, selectPostType, isShowTab, setSelectedTab } =
+		useContext( CtaContext );
 
 	const handleOnChangeCta = ( newValue, position ) => {
 		const newPostTypeCtaItem = {
@@ -45,18 +53,19 @@ const Tab = () => {
 				[ position ]: newValue,
 			},
 		};
-		setCtaItems( {
+		const newCtaItems = {
 			...ctaItems,
 			...{
 				[ selectPostType ]: newPostTypeCtaItem,
 			},
-		} );
+		};
+		setCtaItems( newCtaItems );
 	};
 
 	const getPostTypeCta = ( postType ) => {
 		return Object.hasOwnProperty.call( ctaItems, postType )
 			? ctaItems[ postType ]
-			: settings?.ctaDefault;
+			: getCtaDefault( postType );
 	};
 
 	const getItems = ( position ) => {
@@ -64,11 +73,15 @@ const Tab = () => {
 		return items[ position ];
 	};
 
+	const handleOnSelectTab = ( tab ) => {
+		setSelectedTab( tab );
+	};
+
 	return (
 		<div className="ystdtb-settings-cta__tab">
 			<PostTypeSelector />
 			{ isShowTab && (
-				<SettingsTab tabs={ TABS }>
+				<SettingsTab tabs={ TABS } onSelect={ handleOnSelectTab }>
 					{ ( tab ) => {
 						return (
 							<>

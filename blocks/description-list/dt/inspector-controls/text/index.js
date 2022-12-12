@@ -7,13 +7,8 @@ import TypographySettingsControl from '@aktk/controls/typography-settings-contro
 const PanelText = ( props ) => {
 	const { attributes, setAttributes, textColor, setTextColor } = props;
 
-	const {
-		textSize,
-		fontWeight,
-		fontStyle,
-		lineHeight,
-		letterSpacing,
-	} = attributes;
+	const { textSize, fontWeight, fontStyle, lineHeight, letterSpacing } =
+		attributes;
 
 	const handleTypographySettingsOnChange = ( newValue ) => {
 		setAttributes( {

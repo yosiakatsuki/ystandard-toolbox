@@ -1,19 +1,22 @@
 @use "../../../src/sass/global";
 
 .ystdtb-hidden-mobile {
-  @include global.media-breakpoint-down(sm) {
-    display: none !important;
-  }
+
+	@include global.media-breakpoint-down(sm) {
+		display: none !important;
+	}
 }
 
 .ystdtb-hidden-tablet {
-  @include global.media-breakpoint-between(sm, lg) {
-    display: none !important;
-  }
+
+	@include global.media-breakpoint-between(sm, lg) {
+		display: none !important;
+	}
 }
 
 .ystdtb-hidden-desktop {
-  @include global.media-breakpoint(lg) {
-    display: none !important;
-  }
+
+	@include global.media-breakpoint(lg) {
+		display: none !important;
+	}
 }

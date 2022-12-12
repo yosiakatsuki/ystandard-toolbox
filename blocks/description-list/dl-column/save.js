@@ -17,13 +17,8 @@ import { ystdtbConfig } from '@aktk/config';
 import { getResponsiveMarginStyle } from '@aktk/components/responsive-spacing';
 
 export default function save( { attributes } ) {
-	const {
-		isStackedOnMobile,
-		isStackedOnTablet,
-		dtWidth,
-		border,
-		margin,
-	} = attributes;
+	const { isStackedOnMobile, isStackedOnTablet, dtWidth, border, margin } =
+		attributes;
 	const hasClasses = ystdtbConfig.hasClasses;
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
 	const dtWidthStyles = isResponsive( dtWidth )

@@ -2,27 +2,29 @@
 
 .ystdtb-menu__form .button {
 
-  &.ystdtb-button-cancel {
-    border-color: global.$color__border-gray-light;
-    color: global.$color__text-light;
-  }
+	&.ystdtb-button-cancel {
+		border-color: global.$color__border-gray-light;
+		color: global.$color__text-light;
+	}
 
-  &.ystdtb-button-delete {
-    border-color: transparent;
-    color: global.$color__text-danger;
+	&.ystdtb-button-delete {
+		border-color: transparent;
+		color: global.$color__text-danger;
 
-    &:hover {
-      background-color: transparent;
-    }
-    &:focus {
-      border-color: transparent;
-      background-color: transparent;
-      outline: none;
-      box-shadow: none;
-    }
-    &:disabled {
-      border-color: transparent !important;
-      background-color: transparent !important;
-    }
-  }
+		&:hover {
+			background-color: transparent;
+		}
+
+		&:focus {
+			border-color: transparent;
+			background-color: transparent;
+			outline: none;
+			box-shadow: none;
+		}
+
+		&:disabled {
+			border-color: transparent !important;
+			background-color: transparent !important;
+		}
+	}
 }

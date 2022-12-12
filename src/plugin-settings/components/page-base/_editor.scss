@@ -1,71 +1,71 @@
 .aktk-settings__base {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .aktk-settings__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  padding: 20px;
-  background-color: #07689f;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	padding: 20px;
+	background-color: #07689f;
 
-  .aktk-settings__title,
-  .aktk-settings__header-sub {
-    color: #fff;
-  }
+	.aktk-settings__title,
+	.aktk-settings__header-sub {
+		color: #fff;
+	}
 
-  .notice {
-    display: none;
-  }
+	.notice {
+		display: none;
+	}
 
-  .aktk-settings__title {
-    margin: 0;
-    padding: 0;
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.05em;
-  }
+	.aktk-settings__title {
+		margin: 0;
+		padding: 0;
+		font-size: 1.4em;
+		font-weight: 700;
+		color: #fff;
+		letter-spacing: 0.05em;
+	}
 
-  .aktk-settings__brand {
-    font-size: 0.8em;
-    letter-spacing: 0.05em;
-    font-family: Orbitron, sans-serif;
-  }
+	.aktk-settings__brand {
+		font-size: 0.8em;
+		letter-spacing: 0.05em;
+		font-family: Orbitron, sans-serif;
+	}
 
-  .ystdtb-component-manual-link {
-    margin-bottom: 0.5em;
+	.ystdtb-component-manual-link {
+		margin-bottom: 0.5em;
 
-    a {
-      color: currentColor;
-    }
-  }
+		a {
+			color: currentcolor;
+		}
+	}
 }
 
 .aktk-settings__content {
-  padding: 40px 20px;
+	padding: 40px 20px;
 }
 
 .aktk-settings__base-loading-panel {
-  display: none;
+	display: none;
 
-  &.is-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(#fff, 0.7);
-    z-index: 10000;
+	&.is-loading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(#fff, 0.7);
+		z-index: 10000;
 
-    svg {
-      margin: 0;
-      width: 50px;
-      height: 50px;
-    }
-  }
+		svg {
+			margin: 0;
+			width: 50px;
+			height: 50px;
+		}
+	}
 }

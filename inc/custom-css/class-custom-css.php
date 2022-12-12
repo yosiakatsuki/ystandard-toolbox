@@ -11,6 +11,9 @@ namespace ystandard_toolbox;
 
 defined( 'ABSPATH' ) || die();
 
+/**
+ * Class Custom CSS.
+ */
 class Custom_Css {
 
 	/**
@@ -65,8 +68,6 @@ class Custom_Css {
 
 	/**
 	 * 設定取得
-	 *
-	 * @param string $name 設定名.
 	 *
 	 * @return array
 	 */
@@ -151,4 +152,3 @@ class Custom_Css {
 }
 
 new Custom_Css();
-

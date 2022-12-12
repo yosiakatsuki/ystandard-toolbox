@@ -11,6 +11,9 @@ namespace ystandard_toolbox\helper;
 
 defined( 'ABSPATH' ) || die();
 
+/**
+ * Class AMP.
+ */
 class AMP {
 	/**
 	 * AMPが有効か

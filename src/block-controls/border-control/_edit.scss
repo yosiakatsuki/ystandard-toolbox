@@ -1,14 +1,14 @@
 .ystdtb-component-border-control__columns {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+	display: flex;
+	gap: 10px;
+	margin-top: 8px;
+	margin-bottom: 8px;
 
-  .components-input-control__label,
-  .components-custom-select-control__label {
-    padding: 0 !important;
-    margin: 0 0 8px !important;
-    font-size: 13px !important;
-    line-height: 1.3 !important;
-  }
+	.components-input-control__label,
+	.components-custom-select-control__label {
+		padding: 0 !important;
+		margin: 0 0 8px !important;
+		font-size: 13px !important;
+		line-height: 1.3 !important;
+	}
 }

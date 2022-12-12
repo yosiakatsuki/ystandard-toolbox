@@ -256,7 +256,7 @@ class Header_Overlay {
 	/**
 	 * オーバーレイ設定の追加.
 	 *
-	 * @param array $args Settings.
+	 * @param array $settings Settings.
 	 *
 	 * @return array
 	 */

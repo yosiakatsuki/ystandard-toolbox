@@ -15,11 +15,12 @@
 @use "../../blocks/slider/edit" as slider;
 
 :root {
-  --ystdtb-editor-block-outline:1px solid #ddd;
+	--ystdtb-editor-block-outline: 1px solid #ddd;
 }
 
 .wp-block {
-  &[class*="ystdtb-"] {
-    box-sizing: border-box;
-  }
+
+	&[class*="ystdtb-"] {
+		box-sizing: border-box;
+	}
 }

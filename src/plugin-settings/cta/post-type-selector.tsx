@@ -1,23 +1,25 @@
 import CustomSelectControl from '@aktk/components/custom-select-control';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { CtaContext } from './index';
+import { getPluginSetting } from '../function/setting';
 
 const DEFAULT_POST_TYPE_OPTIONS = [ { name: '----', key: '' } ];
 
 const PostTypeSelector = () => {
-	const { settings, selectPostType, setSelectPostType, setIsShowTab } =
+	const { selectPostType, setSelectPostType, setIsShowTab } =
 		useContext( CtaContext );
 
 	const [ postTypes, setPostTypes ] = useState( DEFAULT_POST_TYPE_OPTIONS );
 
 	useEffect( () => {
 		const _postTypes =
-			settings?.ctaSelectPostType || DEFAULT_POST_TYPE_OPTIONS;
+			getPluginSetting( 'ctaSelectPostType' ) ||
+			DEFAULT_POST_TYPE_OPTIONS;
 		setPostTypes( _postTypes );
 		if ( Array.isArray( _postTypes ) ) {
 			handleOnChangePostType( _postTypes[ 0 ]?.key );
 		}
-	}, [ settings ] );
+	}, [] );
 
 	const handleOnChangePostType = ( newValue ) => {
 		setSelectPostType( newValue );
@@ -34,6 +36,7 @@ const PostTypeSelector = () => {
 				value={ selectPostType }
 				onChange={ handleOnChangePostType }
 				isHorizon
+				__nextUnconstrainedWidth
 			/>
 		</div>
 	);

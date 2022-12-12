@@ -79,11 +79,13 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 };
 
 /**
+ * 【廃止予定】カスタムプロパティ作成・取得
+ *
  * @deprecated
- * @param  property
- * @param  value
- * @param  prefix
- * @param  ignoreDesktop
+ * @param {string}  property
+ * @param {Object}  value
+ * @param {string}  prefix
+ * @param {boolean} ignoreDesktop
  * @return {undefined}
  */
 export const getResponsiveCustomProperties = (

@@ -1,116 +1,119 @@
+@use "sass:map";
 @use "variables" as var;
 
-@mixin media-breakpoint($name,$editor: false) {
-  $breakpoints: var.$breakpoints;
-  @if true == $editor {
-    $breakpoints: var.$breakpoints_editor;
-  }
-  $breakpoint: map-get($breakpoints, $name);
+@mixin media-breakpoint($name, $editor: false) {
+	$breakpoints: var.$breakpoints;
 
-  @if $breakpoint {
-    @media (min-width: $breakpoint) {
-      @content;
-    }
-  } @else {
-    @warn "`#{$name}` is not found. "
-		+ "Please make sure it is defined in `$breakpoints-setting` map.";
-  }
+	@if true == $editor {
+		$breakpoints: var.$breakpoints_editor;
+	}
+	$breakpoint: map.get($breakpoints, $name);
+
+	@if $breakpoint {
+
+		@media (min-width: $breakpoint) {
+			@content;
+		}
+	} @else {
+
+		@warn "`#{$name}` is not found. Please make sure it is defined in `$breakpoints-setting` map.";
+	}
 }
 
-@mixin media-breakpoint-down($name,$editor: false) {
-  $breakpoints: var.$breakpoints;
-  @if true == $editor {
-    $breakpoints: var.$breakpoints_editor;
-  }
-  $breakpoint: map-get($breakpoints, $name);
+@mixin media-breakpoint-down($name, $editor: false) {
+	$breakpoints: var.$breakpoints;
 
-  @if $breakpoint {
-    @media (max-width: ($breakpoint - 1px)) {
-      @content;
-    }
-  } @else {
-    @warn "`#{$name}` is not found. "
-		+ "Please make sure it is defined in `$breakpoints-setting` map.";
-  }
+	@if true == $editor {
+		$breakpoints: var.$breakpoints_editor;
+	}
+	$breakpoint: map.get($breakpoints, $name);
+
+	@if $breakpoint {
+
+		@media (max-width: ($breakpoint - 1px)) {
+			@content;
+		}
+	} @else {
+
+		@warn "`#{$name}` is not found. Please make sure it is defined in `$breakpoints-setting` map.";
+	}
 }
 
-@mixin media-breakpoint-between(
-  $name_up,
-  $name_down,
-  $editor: false
-) {
-  $breakpoints: var.$breakpoints;
-  @if true == $editor {
-    $breakpoints: var.$breakpoints_editor;
-  }
-  $breakpoint_up: map-get($breakpoints, $name_up);
-  $breakpoint_down: map-get($breakpoints, $name_down);
+@mixin media-breakpoint-between($name_up, $name_down, $editor: false) {
+	$breakpoints: var.$breakpoints;
 
-  @if ($breakpoint_up and $breakpoint_down) {
-    @media (min-width: $breakpoint_up) and (max-width: ($breakpoint_down - 1px)) {
-      @content;
-    }
-  } @else {
-    @warn "`#{$name_up}` is not found. "
-		+ "Please make sure it is defined in `$breakpoints-setting` map.";
-  }
+	@if true == $editor {
+		$breakpoints: var.$breakpoints_editor;
+	}
+	$breakpoint_up: map.get($breakpoints, $name_up);
+	$breakpoint_down: map.get($breakpoints, $name_down);
+
+	@if ($breakpoint_up and $breakpoint_down) {
+
+		@media (min-width: $breakpoint_up) and (max-width: ($breakpoint_down - 1px)) {
+			@content;
+		}
+	} @else {
+
+		@warn "`#{$name_up}` is not found. Please make sure it is defined in `$breakpoints-setting` map.";
+	}
 }
 
+@mixin responsive-custom-property-component($property, $editor: false) {
 
-@mixin responsive-custom-property-component($property,$editor:false) {
-  @include media-breakpoint(lg, $editor) {
-    [style*="--ystdtb-#{$property}-desktop"] {
-      #{$property}: var(--ystdtb-#{$property}-desktop) !important;
-    }
-  }
+	@include media-breakpoint(lg, $editor) {
+		[style*="--ystdtb-#{$property}-desktop"] {
+			#{$property}: var(--ystdtb-#{$property}-desktop) !important;
+		}
+	}
 
-  @include media-breakpoint-between(sm, lg, $editor) {
-    [style*="--ystdtb-#{$property}-tablet"] {
-      #{$property}: var(--ystdtb-#{$property}-tablet) !important;
-    }
-  }
+	@include media-breakpoint-between(sm, lg, $editor) {
+		[style*="--ystdtb-#{$property}-tablet"] {
+			#{$property}: var(--ystdtb-#{$property}-tablet) !important;
+		}
+	}
 
-  @include media-breakpoint-down(sm, $editor) {
-    [style*="--ystdtb-#{$property}-mobile"] {
-      #{$property}: var(--ystdtb-#{$property}-mobile) !important;
-    }
-  }
+	@include media-breakpoint-down(sm, $editor) {
+		[style*="--ystdtb-#{$property}-mobile"] {
+			#{$property}: var(--ystdtb-#{$property}-mobile) !important;
+		}
+	}
 }
 
-@mixin responsive-custom-property($prefix,$property) {
-  $_prefix: "#{$prefix}-#{$property}";
-  &[style*="#{$_prefix}-desktop"] {
-    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
-  }
+@mixin responsive-custom-property($prefix, $property) {
+	$_prefix: "#{$prefix}-#{$property}";
+	&[style*="#{$_prefix}-desktop"] {
+		#{$property}: var(--ystdtb-#{$_prefix}-desktop);
+	}
 
-  @include media-breakpoint-between(sm, lg) {
-    &[style*="#{$_prefix}-tablet"] {
-      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
-    }
-  }
+	@include media-breakpoint-between(sm, lg) {
+		&[style*="#{$_prefix}-tablet"] {
+			#{$property}: var(--ystdtb-#{$_prefix}-tablet);
+		}
+	}
 
-  @include media-breakpoint-down(sm) {
-    &[style*="#{$_prefix}-mobile"] {
-      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
-    }
-  }
+	@include media-breakpoint-down(sm) {
+		&[style*="#{$_prefix}-mobile"] {
+			#{$property}: var(--ystdtb-#{$_prefix}-mobile);
+		}
+	}
 }
 
-@mixin responsive-custom-property-child($child_selector,$prefix,$property) {
-  $_prefix: "#{$prefix}-#{$property}";
-  &[style*="#{$_prefix}-desktop"] #{$child_selector} {
-    #{$property}: var(--ystdtb-#{$_prefix}-desktop);
-  }
+@mixin responsive-custom-property-child($child_selector, $prefix, $property) {
+	$_prefix: "#{$prefix}-#{$property}";
+	&[style*="#{$_prefix}-desktop"] #{$child_selector} {
+		#{$property}: var(--ystdtb-#{$_prefix}-desktop);
+	}
 
-  @include media-breakpoint-between(sm, lg) {
-    &[style*="#{$_prefix}-tablet"] #{$child_selector} {
-      #{$property}: var(--ystdtb-#{$_prefix}-tablet);
-    }
-  }
+	@include media-breakpoint-between(sm, lg) {
+		&[style*="#{$_prefix}-tablet"] #{$child_selector} {
+			#{$property}: var(--ystdtb-#{$_prefix}-tablet);
+		}
+	}
 
-  @include media-breakpoint-down(sm) {
-    &[style*="#{$_prefix}-mobile"] #{$child_selector} {
-      #{$property}: var(--ystdtb-#{$_prefix}-mobile);
-    }
-  }
+	@include media-breakpoint-down(sm) {
+		&[style*="#{$_prefix}-mobile"] #{$child_selector} {
+			#{$property}: var(--ystdtb-#{$_prefix}-mobile);
+		}
+	}
 }

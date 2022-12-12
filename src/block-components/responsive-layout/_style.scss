@@ -5,7 +5,7 @@ $editor: false !default;
 /**
  * Margin
  */
-@include global.responsive-custom-property-component('flex-direction', $editor);
-@include global.responsive-custom-property-component('justify-content', $editor);
-@include global.responsive-custom-property-component('align-items', $editor);
-@include global.responsive-custom-property-component('flex-wrap', $editor);
+@include global.responsive-custom-property-component("flex-direction", $editor);
+@include global.responsive-custom-property-component("justify-content", $editor);
+@include global.responsive-custom-property-component("align-items", $editor);
+@include global.responsive-custom-property-component("flex-wrap", $editor);

@@ -1,15 +1,16 @@
 .ystdtb-dd-box-editor {
-  margin-top: 0;
-  margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 
-  > .block-editor-inner-blocks > .block-editor-block-list__layout {
-    > * {
-      margin-top: 1em;
-      margin-bottom: 0;
+	> .block-editor-inner-blocks > .block-editor-block-list__layout {
 
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-  }
+		> * {
+			margin-top: 1em;
+			margin-bottom: 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
 }

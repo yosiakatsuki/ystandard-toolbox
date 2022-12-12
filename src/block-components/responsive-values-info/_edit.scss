@@ -1,23 +1,23 @@
 
 .ystdtb-responsive-values-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #f1f1f1;
-  font-size: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 8px;
+	margin-top: 8px;
+	margin-bottom: 16px;
+	padding: 4px 8px;
+	border-radius: 4px;
+	background-color: #f1f1f1;
+	font-size: 12px;
 
-  > div {
-    display: flex;
-    align-items: center;
-  }
+	> div {
+		display: flex;
+		align-items: center;
+	}
 
-  svg {
-    width: 12px;
-    height: 12px;
-    margin-right: 2px;
-  }
+	svg {
+		width: 12px;
+		height: 12px;
+		margin-right: 2px;
+	}
 }
