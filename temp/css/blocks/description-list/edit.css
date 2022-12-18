@@ -356,6 +356,13 @@
   }
 }
 
+.ystdtb-dl-editor,
+.ystdtb-dl-editor *,
+.ystdtb-dl-editor *::before,
+.ystdtb-dl-editor *::after {
+  box-sizing: border-box;
+}
+
 .ystdtb-dl {
   margin-top: 0;
   margin-bottom: 0;

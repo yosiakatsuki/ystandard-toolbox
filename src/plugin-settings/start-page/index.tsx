@@ -2,17 +2,18 @@
  * WordPress
  */
 import { render } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
 import PageBase from '@aktk/plugin-settings/components/page-base';
-import featureList from './feature-list.js';
+import featureList from './feature-list';
 import GridItem from './grid-item';
 
 const StartPage = () => {
 	const sections = Object.keys( featureList );
 	return (
-		<PageBase title={ 'Toolbox機能' }>
+		<PageBase title={ __( 'Toolbox機能', 'ystandard-toolbox' ) }>
 			<div className="aktk-settings-start-page">
 				{ sections.map( ( section ) => {
 					const sectionTitle = featureList[ section ]?.title;

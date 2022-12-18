@@ -133,16 +133,16 @@
   padding: 2em;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.5em;
-  border: 1px solid #eeeeee;
+  border: 1px solid #eee;
 }
 
 .ystdtb-option-box__label {
   margin-top: 0;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #eee;
   color: #07689f;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .ystdtb-option-box__section {
@@ -152,7 +152,7 @@
 .ystdtb-option-box__title {
   margin: 1.5em 0 0.5em;
   padding-bottom: 0.25em;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #eee;
   font-size: 1.2em;
 }
 
@@ -163,7 +163,7 @@
 }
 
 .ystdtb-menu__form .button.ystdtb-button-cancel {
-  border-color: #eeeeee;
+  border-color: #eee;
   color: #757575;
 }
 .ystdtb-menu__form .button.ystdtb-button-delete {

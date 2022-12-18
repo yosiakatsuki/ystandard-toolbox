@@ -22,8 +22,8 @@
   left: 16px;
   top: 50%;
   margin: 0;
-  color: currentColor;
-  fill: currentColor;
+  color: currentcolor;
+  fill: currentcolor;
   transform: translateY(-50%);
 }
 .ystdtb-hook-panel.is-enabled .components-button.components-panel__body-toggle {

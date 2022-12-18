@@ -24,6 +24,5 @@ class Menu_Page {
 	public static function load() {
 		require_once __DIR__ . '/class-menu-page-base.php';
 		require_once __DIR__ . '/class-menu-heading.php';
-		require_once __DIR__ . '/class-menu-cta.php';
 	}
 }
