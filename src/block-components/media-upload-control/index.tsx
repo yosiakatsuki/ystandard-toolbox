@@ -1,7 +1,15 @@
+/**
+ * WordPress.
+ */
 import { MediaUpload } from '@wordpress/block-editor';
 import { MediaUpload as MediaUploadUtils } from '@wordpress/media-utils';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Component.
+ */
+import './_edit.scss';
 
 const MediaUploadControl = ( {
 	media,
@@ -44,7 +52,7 @@ const MediaUploadControl = ( {
 			return (
 				<Button
 					className={ 'ystdtb-media-upload-control__select' }
-					isSecondary
+					variant="secondary"
 					onClick={ obj.open }
 				>
 					{ _selectLabel }

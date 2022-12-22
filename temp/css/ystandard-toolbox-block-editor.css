@@ -286,6 +286,7 @@
 }
 .ystdtb-media-upload-control .ystdtb-media-upload-control__preview {
   height: auto;
+  max-width: 100%;
   padding: 0;
 }
 .ystdtb-media-upload-control .ystdtb-media-upload-control__clear {

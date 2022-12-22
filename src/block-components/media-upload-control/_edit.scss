@@ -1,5 +1,4 @@
 .ystdtb-media-upload-control {
-
 	.ystdtb-media-upload-control__select,
 	.ystdtb-media-upload-control__preview {
 		outline: none !important;
@@ -24,6 +23,7 @@
 
 	.ystdtb-media-upload-control__preview {
 		height: auto;
+		max-width: 100%;
 		padding: 0;
 	}
 
