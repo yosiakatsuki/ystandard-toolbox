@@ -198,8 +198,7 @@ class Plugin_Settings {
 			apply_filters(
 				'ystdtb_plugin_settings',
 				[
-					'settings'   => Option::get_all_option(),
-					'heading-v1' => Heading::get_option(),
+					'settings' => Option::get_all_option(),
 				]
 			)
 		);

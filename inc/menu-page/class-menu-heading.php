@@ -10,7 +10,7 @@
 namespace ystandard_toolbox\menu;
 
 use ystandard_toolbox\Font;
-use ystandard_toolbox\Heading;
+use ystandard_toolbox\Heading_Compatible;
 use ystandard_toolbox\Plugin_Menu;
 
 defined( 'ABSPATH' ) || die();
@@ -52,7 +52,7 @@ class Menu_Heading extends Menu_Page_Base {
 		wp_localize_script(
 			'ystdtb-heading',
 			'ystdtbHeadingData',
-			Heading::get_option()
+			Heading_Compatible::get_option()
 		);
 		$active_panel = '';
 		if ( isset( $_POST['ystdtb_heading_active'] ) ) {
@@ -91,12 +91,12 @@ class Menu_Heading extends Menu_Page_Base {
 	 * @param array $_post 設定値.
 	 */
 	public function save( $_post ) {
-		if ( ! isset( $_post[ Heading::OPTION_NAME ] ) || ! is_array( $_post[ Heading::OPTION_NAME ] ) ) {
+		if ( ! isset( $_post[ Heading_Compatible::OPTION_NAME ] ) || ! is_array( $_post[ Heading_Compatible::OPTION_NAME ] ) ) {
 			return false;
 		}
-		$new_option = $_post[ Heading::OPTION_NAME ];
+		$new_option = $_post[ Heading_Compatible::OPTION_NAME ];
 		if ( is_array( $new_option ) ) {
-			return update_option( Heading::OPTION_NAME, $new_option );
+			return update_option( Heading_Compatible::OPTION_NAME, $new_option );
 		}
 
 		return false;
