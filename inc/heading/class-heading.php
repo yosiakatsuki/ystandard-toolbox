@@ -34,13 +34,117 @@ class Heading {
 	 * Heading constructor.
 	 */
 	public function __construct() {
-		// 設定以降前は下位互換モードで起動する.
+		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
+		// 設定移行前は下位互換モードで起動する.
 		if ( $this->is_compatible_mode() ) {
 			require_once __DIR__ . '/class-heading-compatible.php';
 			return;
 		}
 		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 	}
+
+	/**
+	 * 設定画面用データ追加
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_plugin_settings( $settings ) {
+		$settings['heading_design'] = self::get_heading_design_options();
+		$settings['heading_level'] = self::get_heading_level_options();
+		$settings['heading_is_compatible'] = $this->is_compatible_mode();
+
+		return $settings;
+	}
+
+	/**
+	 * Register REST API route
+	 *
+	 * @return void
+	 */
+	public function register_routes() {
+		Api::register_rest_route( 'add_heading_style', [ $this, 'add_heading_style' ] );
+		Api::register_rest_route( 'update_heading_style', [ $this, 'update_heading_style' ] );
+		Api::register_rest_route( 'update_heading_level', [ $this, 'update_heading_level' ] );
+	}
+
+	/**
+	 * スタイル定義の追加
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function add_heading_style( $request ) {
+		$data       = $request->get_json_params();
+		$result     = false;
+		$new_option = [];
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $value ) {
+				$new_option[ $key ] = trim( $value );
+			}
+//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+		}
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
+	}
+
+	/**
+	 * スタイル関連の設定追加
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_heading_style( $request ) {
+		$data       = $request->get_json_params();
+		$result     = false;
+		$new_option = [];
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $value ) {
+				$new_option[ $key ] = trim( $value );
+			}
+//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+		}
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
+	}
+
+	/**
+	 * 見出しレベル関連の設定追加
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function update_heading_level( $request ) {
+		$data       = $request->get_json_params();
+		$result     = false;
+		$new_option = [];
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $value ) {
+				$new_option[ $key ] = trim( $value );
+			}
+//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+		}
+
+		return Api::create_response(
+			$result,
+			'',
+			json_encode( $data )
+		);
+	}
+
 
 	/**
 	 * 互換性モード起動か判定.

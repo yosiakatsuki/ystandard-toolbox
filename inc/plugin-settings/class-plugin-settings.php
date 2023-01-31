@@ -29,6 +29,11 @@ class Plugin_Settings {
 			'menu-title' => 'yStandard Toolbox',
 		],
 		[
+			'slug'       => 'heading-v2',
+			'page-title' => '見出しデザイン編集',
+			'menu-title' => '見出しデザイン編集',
+		],
+		[
 			'slug'       => 'design',
 			'page-title' => 'サイトデザイン拡張',
 			'menu-title' => 'サイトデザイン拡張',
