@@ -63,7 +63,7 @@ class Extension {
 	 * @return array
 	 */
 	public static function merge_attributes( $args, $attributes ) {
-		if ( array_key_exists( 'attributes', $args ) ) {
+		if ( array_key_exists( 'attributes', $args ) && is_array( $args['attributes'] ) ) {
 			$args['attributes'] = array_merge( $args['attributes'], $attributes );
 		} else {
 			$args['attributes'] = $attributes;
