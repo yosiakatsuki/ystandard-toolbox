@@ -64,7 +64,7 @@
     "build:blockApp": "NODE_ENV=production wp-scripts build --config webpack.block-app.config.js",
     "build:block": "NODE_ENV=production wp-scripts build --config webpack.blocks.config.js",
     "build:icons": "node src/js/script/create-svg-icon-list.js",
-    "build": "gulp build && npm run build:block",
+    "build": "npm run build:menu && npm run build:blockApp && gulp build && npm run build:block",
     "build:deploy-files": "gulp deployFiles",
     "build:deploy-files-beta": "gulp deployFilesBeta",
     "i18n:make-pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,tests\"",
