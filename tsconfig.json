@@ -38,6 +38,9 @@
             "@aktk/controls/*": [
                 "src/block-controls/*"
             ],
+            "@aktk/api": [
+                "src/block-api/index"
+            ],
             "@aktk/api/*": [
                 "src/block-api/*"
             ],
@@ -46,6 +49,9 @@
             ],
             "@aktk/plugin-settings/components/*": [
                 "src/plugin-settings/components/*"
+            ],
+            "@aktk/plugin-settings/function/*": [
+                "src/plugin-settings/function/*"
             ]
         },
 		"typeRoots": [
