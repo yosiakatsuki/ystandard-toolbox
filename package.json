@@ -9,7 +9,7 @@
     "@wordpress/browserslist-config": "^4.1.0",
     "@wordpress/element": "^4.0.0",
     "@wordpress/icons": "^6.1.0",
-    "@wordpress/scripts": "^17.1.0",
+    "@wordpress/scripts": "^18.1.0",
     "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
@@ -51,9 +51,7 @@
     "vue-template-compiler": "^2.6.14",
     "vue-toasted": "^1.1.28",
     "vuedraggable": "^2.24.3",
-    "vuex": "^3.6.2",
-    "webpack": "^4.46.0",
-    "webpack-stream": "^6.1.2"
+    "vuex": "^3.6.2"
   },
   "scripts": {
     "lint:js": "wp-scripts lint-js blocks ./src/js --fix",
@@ -62,6 +60,8 @@
     "lint": "npm run lint:js && npm run lint:php",
     "watch:block": "NODE_ENV=development wp-scripts start --config webpack.blocks.config.js",
     "watch": "gulp watch & npm run watch:block",
+    "build:menu": "NODE_ENV=production wp-scripts build --config ./webpack.menu.config.js",
+    "build:blockApp": "NODE_ENV=production wp-scripts build --config webpack.block-app.config.js",
     "build:block": "NODE_ENV=production wp-scripts build --config webpack.blocks.config.js",
     "build:icons": "node src/js/script/create-svg-icon-list.js",
     "build": "gulp build && npm run build:block",
