@@ -27,6 +27,7 @@ class LP {
 		}
 		add_filter( 'theme_templates', [ $this, 'add_template' ], 20, 4 );
 		add_filter( 'template_include', [ $this, 'load_template' ], 99 );
+		add_filter( 'body_class', [ $this, 'body_class' ], 99 );
 		add_filter( 'ys_show_footer_mobile_nav', [ $this, 'disable_footer_nav' ] );
 		add_filter( 'ys_is_wide_templates', [ $this, 'add_is_wide_templates' ] );
 		add_filter( 'ys_is_no_title_templates', [ $this, 'add_lp_templates' ] );
@@ -34,6 +35,43 @@ class LP {
 		add_filter( 'ys_create_toc', [ $this, 'return_false' ] );
 		add_filter( 'ys_is_active_advertisement', [ $this, 'return_false' ] );
 		add_filter( 'document_title_parts', [ $this, 'lp_document_title' ], 100 );
+		add_filter( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'enqueue_css' ] );
+	}
+
+	/**
+	 * Body クラス追加
+	 *
+	 * @param array $clases Classes.
+	 *
+	 * @return array
+	 */
+	public function body_class( $clases ) {
+
+		if ( self::is_lp_template() ) {
+			$clases[] = 'is-lp-template';
+			$clases[] = 'is-lp-template-body';
+		}
+
+		return $clases;
+	}
+
+	/**
+	 * CSS追加
+	 *
+	 * @return void
+	 */
+	public function enqueue_css() {
+		$css = '
+		body.is-lp-template.is-lp-template-body {
+			margin-top:0;
+			padding-top:0;
+			--ys-site-header-height:0;
+		}
+		';
+		wp_add_inline_style(
+			Config::CSS_HANDLE,
+			Utility::minify( $css )
+		);
 	}
 
 	/**
