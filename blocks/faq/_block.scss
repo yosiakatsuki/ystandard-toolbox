@@ -41,8 +41,12 @@
 
     .ystdtb-faq-item {
 
-      &.is-faq--q:not(.is-open) {
-        border-bottom: 0;
+      &.is-faq--q {
+        &:not(.is-open) {
+          border-bottom: 0;
+        }
+
+        padding-bottom: var(--ystdtb-faq-padding-q-top);
       }
 
       &.is-faq--a {
@@ -64,6 +68,7 @@
         }
       }
     }
+
   }
 }
 
