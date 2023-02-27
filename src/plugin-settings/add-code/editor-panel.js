@@ -9,7 +9,7 @@ import CodeEditor from '@aktk/controls/code-editor';
 import Notice from '@aktk/components/notice';
 import { getObjectValue } from '@aktk/helper/object.js';
 import { AddCodeContext } from './index';
-import { getAdminConfig } from '../function/config';
+import { getAdminConfig } from '@aktk/plugin-settings/function/config';
 import Stack from '@aktk/plugin-settings/components/stack';
 import SectionLabel from '@aktk/plugin-settings/components/section-label';
 

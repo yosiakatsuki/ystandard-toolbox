@@ -10,7 +10,7 @@ import UnitControl from '@aktk/components/unit-control';
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import { migrateSubHeaderFontSize } from './function/sub-header';
-import { getEditorColors } from '../../function/config';
+import { getEditorColors } from '@aktk/plugin-settings/function/config';
 
 const SubHeader = ( { updateSection, sectionSettings } ) => {
 	const subHeaderFontSize =

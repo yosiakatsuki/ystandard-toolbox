@@ -4,8 +4,8 @@
 import apiFetch from '@wordpress/api-fetch';
 
 const NAMESPACE = 'ystdtb-api/v1';
-const SUCCESS = 'success';
-const ERROR = 'error';
+export const SUCCESS = 'success';
+export const ERROR = 'error';
 
 function getResponseData( response ) {
 	if ( response?.data && 'string' === typeof response?.data ) {

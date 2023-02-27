@@ -1,4 +1,7 @@
-export function getAdminConfig( name = undefined, defaultValue = undefined ) {
+export function getAdminConfig(
+	name: string | undefined = undefined,
+	defaultValue: any = undefined
+) {
 	if ( ! name || ! window?.ystdtbAdminConfig ) {
 		return window?.ystdtbAdminConfig;
 	}

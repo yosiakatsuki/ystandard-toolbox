@@ -13,7 +13,7 @@ import ColorPaletteControl from '@aktk/components/color-palette-control';
 import { toBool } from '@aktk/helper/boolean.js';
 import MediaUploadControl from '@aktk/components/media-upload-control';
 import BaseControl from '@aktk/plugin-settings/components/base-control';
-import { getEditorColors } from '../../function/config';
+import { getEditorColors } from '@aktk/plugin-settings/function/config';
 
 const Overlay = ( { updateSection, sectionSettings } ) => {
 	const overlayEnable = sectionSettings?.enableOverlay ?? false;

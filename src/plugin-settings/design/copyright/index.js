@@ -11,7 +11,7 @@ import { DesignContext } from '../index';
 import CodeInput from '@aktk/components/code-input';
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import { getObjectValue } from '@aktk/helper/object.js';
-import { getAdminConfig } from '../../function/config';
+import { getAdminConfig } from '@aktk/plugin-settings/function/config';
 
 const TAB_NAME = 'copyright';
 const SECTION_NAME = 'copyright';

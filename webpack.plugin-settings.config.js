@@ -1,3 +1,4 @@
+// @ts-ignore
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 const ystdtbConfig = require("./webpack.blocks.config");
 

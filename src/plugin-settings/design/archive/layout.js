@@ -10,7 +10,7 @@ import ButtonImage from '@aktk/components/button-image';
 import ButtonReset from '@aktk/components/button-reset';
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import Notice from '@aktk/components/notice';
-import { getPluginAssetsUrl } from '../../function/config';
+import { getPluginAssetsUrl } from '@aktk/plugin-settings/function/config';
 
 const LAYOUT_TYPES = [
 	{

@@ -38,6 +38,7 @@ class Heading {
 		// 設定移行前は下位互換モードで起動する.
 		if ( $this->is_compatible_mode() ) {
 			require_once __DIR__ . '/class-heading-compatible.php';
+			require_once __DIR__ . '/class-heading-migration.php';
 			return;
 		}
 		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
@@ -52,8 +53,8 @@ class Heading {
 	 * @return array
 	 */
 	public function add_plugin_settings( $settings ) {
-		$settings['heading_design'] = self::get_heading_design_options();
-		$settings['heading_level'] = self::get_heading_level_options();
+		$settings['heading_design']        = self::get_heading_design_options();
+		$settings['heading_level']         = self::get_heading_level_options();
 		$settings['heading_is_compatible'] = $this->is_compatible_mode();
 
 		return $settings;
@@ -145,7 +146,6 @@ class Heading {
 		);
 	}
 
-
 	/**
 	 * 互換性モード起動か判定.
 	 *
@@ -188,6 +188,7 @@ class Heading {
 	 */
 	public static function get_heading_design_options() {
 		$option = get_option( self::OPTION_MAIN, [] );
+
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 
@@ -198,6 +199,7 @@ class Heading {
 	 */
 	public static function get_heading_level_options() {
 		$option = get_option( self::OPTION_LEVEL, [] );
+
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 

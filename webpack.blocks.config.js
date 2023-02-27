@@ -70,6 +70,10 @@ module.exports = {
 				__dirname,
 				'src/plugin-settings/components'
 			),
+			'@aktk/plugin-settings/function': path.resolve(
+				__dirname,
+				'src/plugin-settings/function'
+			),
 		},
 	},
 };
