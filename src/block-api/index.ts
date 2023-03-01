@@ -1,12 +1,29 @@
 /**
  * WordPress
  */
+// @ts-ignore
 import apiFetch from '@wordpress/api-fetch';
+
+export interface ApiPostProps {
+	endpoint: string;
+	data?: object;
+	callback?: ( response: ApiPostCallbackProps ) => void;
+	messageSuccess?: ( massage?: string | undefined ) => void;
+	messageError?: ( massage?: string | undefined ) => void;
+}
+
+export interface ApiPostCallbackProps {
+	status: string;
+	data?: object;
+	response?: any;
+	error?: any;
+}
 
 const NAMESPACE = 'ystdtb-api/v1';
 export const SUCCESS = 'success';
 export const ERROR = 'error';
 
+// @ts-ignore
 function getResponseData( response ) {
 	if ( response?.data && 'string' === typeof response?.data ) {
 		try {
@@ -14,6 +31,7 @@ function getResponseData( response ) {
 		} catch ( e ) {
 			/* eslint-disable no-console */
 			console.error( 'レスポンスの解析中にエラーが発生しました' );
+			// @ts-ignore
 			console.log( e.message );
 			/* eslint-enable */
 		}
@@ -22,15 +40,15 @@ function getResponseData( response ) {
 	return undefined;
 }
 
-export function isSuccess( status ) {
+export function isSuccess( status: string ) {
 	return SUCCESS === status;
 }
 
-export function getEndpoint( route ) {
+export function getEndpoint( route: string ) {
 	return `${ NAMESPACE }/${ route }`;
 }
 
-export function apiPost( props ) {
+export function apiPost( props: ApiPostProps ) {
 	const { endpoint, data, callback, messageSuccess, messageError } = props;
 	const options = {
 		path: endpoint,
@@ -38,6 +56,7 @@ export function apiPost( props ) {
 		data,
 	};
 	apiFetch( options )
+		// @ts-ignore
 		.then( ( response ) => {
 			if ( isSuccess( response.status ) ) {
 				if ( 'function' === typeof messageSuccess ) {
@@ -67,6 +86,7 @@ export function apiPost( props ) {
 				}
 			}
 		} )
+		// @ts-ignore
 		.catch( ( error ) => {
 			/* eslint-disable no-console */
 			console.error( 'エラーが発生しました。' );
@@ -84,12 +104,13 @@ export function apiPost( props ) {
 		} );
 }
 
-export function apiGet( props ) {
+export function apiGet( props: ApiPostProps ) {
 	const { endpoint, callback } = props;
 	const options = {
 		path: endpoint,
 	};
 	apiFetch( options )
+		// @ts-ignore
 		.then( ( result ) => {
 			if ( 'function' === typeof callback ) {
 				callback( {
@@ -100,6 +121,7 @@ export function apiGet( props ) {
 				return result;
 			}
 		} )
+		// @ts-ignore
 		.catch( ( error ) => {
 			/* eslint-disable no-console */
 			console.error( 'エラーが発生しました。' );

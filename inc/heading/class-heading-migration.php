@@ -22,13 +22,22 @@ class Heading_Migration {
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 	}
 
+	private function migration( &$data ) {
+
+		$old = Heading_Compatible::get_option();
+
+		$data['v1'] = $old;
+
+		return true;
+	}
+
 	/**
 	 * Register REST API route
 	 *
 	 * @return void
 	 */
 	public function register_routes() {
-		Api::register_rest_route( 'migration_heading_v1_v2', [ $this, 'migration_heading_v1_v2' ] );
+		Api::register_rest_route( 'migration_heading_v1_v2', [ $this, 'api_route' ] );
 	}
 
 
@@ -39,7 +48,7 @@ class Heading_Migration {
 	 *
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
-	public function migration_heading_v1_v2( $request ) {
+	public function api_route( $request ) {
 		$data       = $request->get_json_params();
 		$result     = false;
 		$new_option = [];
@@ -47,24 +56,23 @@ class Heading_Migration {
 			return Api::create_response(
 				$result,
 				'パラメーターが正しくありません。',
-				json_encode( $data )
+				wp_json_encode( $data )
 			);
 		}
 		if ( ! helper\Boolean::to_bool( $data['migration'] ) ) {
 			return Api::create_response(
 				$result,
 				'パラメーターが正しくありません。',
-				json_encode( $data )
+				wp_json_encode( $data )
 			);
 		}
 
-
-		$result = true;
+		$result = $this->migration( $data );
 
 		return Api::create_response(
 			$result,
 			'',
-			json_encode( $data )
+			wp_json_encode( $data )
 		);
 	}
 }

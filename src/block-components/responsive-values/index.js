@@ -5,6 +5,7 @@ import { _x } from '@wordpress/i18n';
 /**
  * yStandard
  */
+export * from './types';
 import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
 import UnitControl from '@aktk/components/unit-control';
 import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';

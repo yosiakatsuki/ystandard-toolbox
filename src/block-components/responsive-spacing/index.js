@@ -5,6 +5,7 @@ import { _x } from '@wordpress/i18n';
 /**
  * Plugin
  */
+export * from './types';
 import BoxControl from '@aktk/components/box-control';
 import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
 import ResponsiveValuesInfo from '@aktk/components/responsive-values-info';
