@@ -15,6 +15,14 @@ defined( 'ABSPATH' ) || die();
  * Class Heading_Migration.
  */
 class Heading_Migration {
+
+	/**
+	 * 新設定.
+	 *
+	 * @var array
+	 */
+	private $new_option = [];
+
 	/**
 	 *  Constructor.
 	 */
@@ -23,10 +31,12 @@ class Heading_Migration {
 	}
 
 	private function migration( &$data ) {
-
-		$old = Heading_Compatible::get_option();
-
+		$old        = Heading_Compatible::get_option();
 		$data['v1'] = $old;
+		// 初期化.
+		$this->new_option = [];
+
+
 
 		return true;
 	}

@@ -39,6 +39,7 @@ class Heading {
 		if ( $this->is_compatible_mode() ) {
 			require_once __DIR__ . '/class-heading-compatible.php';
 			require_once __DIR__ . '/class-heading-migration.php';
+
 			return;
 		}
 		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
@@ -86,13 +87,13 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+			// $result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
 			$result,
 			'',
-			json_encode( $data )
+			wp_json_encode( $data )
 		);
 	}
 
@@ -111,13 +112,13 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+			// $result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
 			$result,
 			'',
-			json_encode( $data )
+			wp_json_encode( $data )
 		);
 	}
 
@@ -136,13 +137,13 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+			// $result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
 			$result,
 			'',
-			json_encode( $data )
+			wp_json_encode( $data )
 		);
 	}
 
@@ -178,6 +179,17 @@ class Heading {
 		$classes[] = self::BODY_CLASS_HEADING;
 
 		return $classes;
+	}
+
+	/**
+	 * 見出しデザイン設定の更新.
+	 *
+	 * @param array $value 設定.
+	 *
+	 * @return bool
+	 */
+	public static function update_heading_design_option( $value ) {
+		return Option::update_option( self::OPTION_MAIN, $value );
 	}
 
 

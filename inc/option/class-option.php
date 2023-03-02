@@ -133,7 +133,7 @@ class Option {
 	public static function update_option( $name, $value ) {
 		$old_value = get_option( $name );
 		// 値が変更されていない場合、更新はしないけどtrueを返す.
-		if ( $value === $old_value || maybe_serialize( $value ) === maybe_serialize( $old_value ) ) {
+		if ( ! self::is_new_value( $value, $old_value ) ) {
 			return true;
 		}
 
@@ -159,6 +159,23 @@ class Option {
 
 		return self::update_option( Config::OPTION_NAME, $option );
 	}
+
+	/**
+	 * 設定が新しいかチェック.
+	 *
+	 * @param mixed $new New.
+	 * @param mixed $old New.
+	 *
+	 * @return bool
+	 */
+	public static function is_new_value( $new, $old ) {
+		if ( $new === $old || maybe_serialize( $new ) === maybe_serialize( $old ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
 
 	/**
 	 * [yStandard]の設定取得
@@ -201,7 +218,8 @@ class Option {
 	public static function delete_all_plugin_data() {
 		$keys = [
 			Config::OPTION_NAME,
-			Heading::OPTION_NAME,
+			Heading::OPTION_MAIN,
+			Heading::OPTION_LEVEL,
 			Custom_Css::OPTION_NAME,
 			Code::OPTION_NAME,
 		];
