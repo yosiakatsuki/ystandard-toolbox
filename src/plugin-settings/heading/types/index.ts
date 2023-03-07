@@ -2,13 +2,15 @@ import type { ResponsiveSpacing } from '@aktk/components/responsive-spacing';
 import type { ResponsiveValues } from '@aktk/components/responsive-values';
 import type { ResponsiveBorder } from '@aktk/components/responsive-border';
 
-export type HeadingOptions = HeadingOption[];
+export type HeadingOptions = {
+	[ name: string ]: HeadingOption;
+};
 
 export interface HeadingOption {
 	slug: string;
 	label: string;
 	enable: boolean;
-	enableParagraph: boolean;
+	enableParagraph?: boolean;
 	style: HeadingStyle;
 	before?: HeadingPseudoElements;
 	after?: HeadingPseudoElements;
@@ -19,7 +21,7 @@ export interface HeadingStyle {
 	fontSize?: ResponsiveValues;
 	color?: string;
 	textAlign?: ResponsiveValues;
-	fontWeight?: string;
+	fontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;

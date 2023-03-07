@@ -34,6 +34,7 @@ class Heading {
 	 * Heading constructor.
 	 */
 	public function __construct() {
+		require_once __DIR__ . '/class-heading-helper.php';
 		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 		// 設定移行前は下位互換モードで起動する.
 		if ( $this->is_compatible_mode() ) {

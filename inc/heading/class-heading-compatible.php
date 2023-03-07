@@ -818,6 +818,15 @@ class Heading_Compatible {
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 
+	/**
+	 * 設定削除
+	 *
+	 * @return void
+	 */
+	public static function delete_option() {
+		delete_option( self::OPTION_NAME );
+	}
+
 }
 
 new Heading_Compatible();
