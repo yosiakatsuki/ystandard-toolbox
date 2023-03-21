@@ -58,6 +58,8 @@
     "lint-js:fix": "npm run lint-js -- --fix",
     "lint:php": "composer phpcs",
     "lint": "npm run lint:js && npm run lint:php",
+    "watch:menu": "NODE_ENV=development wp-scripts start --config ./webpack.menu.config.js",
+    "watch:blockApp": "NODE_ENV=development wp-scripts start --config webpack.block-app.config.js",
     "watch:block": "NODE_ENV=development wp-scripts start --config webpack.blocks.config.js",
     "watch": "gulp watch & npm run watch:block",
     "build:menu": "NODE_ENV=production wp-scripts build --config ./webpack.menu.config.js",
