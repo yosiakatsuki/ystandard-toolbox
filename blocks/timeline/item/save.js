@@ -88,7 +88,8 @@ export default function ( { attributes } ) {
 	};
 
 	const contentsClass = classnames( 'ystdtb-timeline__contents', {
-		[ `is-margin-${ selectContentsInnerMargin }` ]: selectContentsInnerMargin,
+		[ `is-margin-${ selectContentsInnerMargin }` ]:
+			selectContentsInnerMargin,
 	} );
 	const contentMarginTopCalc = 0 > contentMarginTop ? '-' : '+';
 	const contentsStyle = {

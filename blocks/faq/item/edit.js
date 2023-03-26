@@ -137,14 +137,16 @@ function FAQItem( props ) {
 											setAttributes( {
 												...item.attributes,
 												...{
-													faqBackgroundColor: setFaqBackgroundColor(
-														item.attributes
-															.faqBackgroundColor
-													),
-													faqBorderColor: setFaqBorderColor(
-														item.attributes
-															.faqBorderColor
-													),
+													faqBackgroundColor:
+														setFaqBackgroundColor(
+															item.attributes
+																.faqBackgroundColor
+														),
+													faqBorderColor:
+														setFaqBorderColor(
+															item.attributes
+																.faqBorderColor
+														),
 													labelSize: setLabelSize(
 														item.attributes
 															.labelSize
@@ -153,14 +155,16 @@ function FAQItem( props ) {
 														item.attributes
 															.labelColor
 													),
-													labelBackgroundColor: setLabelBackgroundColor(
-														item.attributes
-															.labelBackgroundColor
-													),
-													labelBorderColor: setLabelBorderColor(
-														item.attributes
-															.labelBorderColor
-													),
+													labelBackgroundColor:
+														setLabelBackgroundColor(
+															item.attributes
+																.labelBackgroundColor
+														),
+													labelBorderColor:
+														setLabelBorderColor(
+															item.attributes
+																.labelBorderColor
+														),
 													accordionArrowColor:
 														item.attributes
 															.labelColor,

@@ -46,9 +46,8 @@ const BoxPadding = ( props ) => {
 						if ( value ) {
 							newBoxPadding = addResponsiveProperty( boxPadding );
 						} else {
-							newBoxPadding = deleteResponsiveProperty(
-								boxPadding
-							);
+							newBoxPadding =
+								deleteResponsiveProperty( boxPadding );
 						}
 						setAttributes( {
 							isResponsiveBoxPadding: value,
