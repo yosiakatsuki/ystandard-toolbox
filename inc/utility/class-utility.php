@@ -10,7 +10,10 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\AMP;
+use ystandard_toolbox\helper\Boolean;
+use ystandard_toolbox\helper\Styles;
 use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\helper\Text;
 
 defined( 'ABSPATH' ) || die();
 
@@ -125,13 +128,10 @@ class Utility {
 	 * @param mixed $value value.
 	 *
 	 * @return bool
+	 * @deprecated
 	 */
 	public static function to_bool( $value ) {
-		if ( true === $value || 'true' === $value || 1 === $value || '1' === $value ) {
-			return true;
-		}
-
-		return false;
+		return Boolean::to_bool( $value );
 	}
 
 	/**
@@ -142,12 +142,7 @@ class Utility {
 	 * @return string
 	 */
 	public static function minify( $style ) {
-		$style = preg_replace( '#/\*[^!][^*]*\*+([^/][^*]*\*+)*/#', '', $style );
-		$style = str_replace( ': ', ':', $style );
-		$style = str_replace( [ "\r\n", "\r", "\n", "\t" ], '', $style );
-		$style = str_replace( [ '  ', '   ', '    ' ], ' ', $style );
-
-		return $style;
+		return Text::minify( $style );
 	}
 
 	/**
@@ -158,34 +153,10 @@ class Utility {
 	 * @param string $max Breakpoint.
 	 *
 	 * @return string
+	 * @deprecated
 	 */
 	public static function add_media_query( $css, $min = '', $max = '' ) {
-		$breakpoints = apply_filters( 'ystdtb_css_breakpoints', Config::BREAKPOINTS );
-		if ( ! array_key_exists( $min, $breakpoints ) && ! array_key_exists( $max, $breakpoints ) ) {
-			return $css;
-		}
-		if ( array_key_exists( $min, $breakpoints ) ) {
-			$breakpoint = $breakpoints[ $min ];
-			$min        = "(min-width: ${breakpoint}px)";
-		}
-		if ( array_key_exists( $max, $breakpoints ) ) {
-			$breakpoint = $breakpoints[ $max ] - 1;
-			$max        = "(max-width: ${breakpoint}px)";
-		}
-		$breakpoint = $min . $max;
-		if ( '' !== $min && '' !== $max ) {
-			$breakpoint = $min . ' AND ' . $max;
-		}
-
-		if ( empty( $breakpoint ) ) {
-			return $css;
-		}
-
-		return sprintf(
-			'@media %s {%s}',
-			$breakpoint,
-			$css
-		);
+		return Styles::add_media_query( $css, $min, $max );
 	}
 
 	/**
@@ -294,21 +265,6 @@ class Utility {
 		$icon = Filesystem::file_get_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
-	}
-
-	/**
-	 * カラーコードをrgbに変換
-	 *
-	 * @param string $color カラーコード.
-	 *
-	 * @return array
-	 */
-	public static function hex_2_rgb( $color ) {
-		return [
-			hexdec( substr( $color, 1, 2 ) ),
-			hexdec( substr( $color, 3, 2 ) ),
-			hexdec( substr( $color, 5, 2 ) ),
-		];
 	}
 
 	/**

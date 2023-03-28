@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Styles;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -66,6 +68,7 @@ class Heading_Migration {
 				$option_slug      = $this->get_option_slug( $level );
 				// 基本.
 				$this->set_basic_option( $level );
+				$this->set_preset();
 				$this->set_typography();
 				$this->set_background();
 				$this->set_border();
@@ -92,26 +95,44 @@ class Heading_Migration {
 	private function set_pseudo_elements() {
 		$types = [ 'before', 'after' ];
 		foreach ( $types as $type ) {
+			$preset     = $this->get_old_option( 'preset', '' );
 			$color_type = $this->get_old_option( "{$type}ColorType", '' );
 			$color      = $this->get_old_option( "{$type}Color", '' );
 			$content    = $this->get_old_option( "{$type}Content", null );
 			$icon       = $this->get_old_option( "{$type}Icon", '' );
 			$size       = $this->get_old_option( "{$type}Size", '' );
+			$size_unit  = 'px';
+
+			$preset = Heading_Helper::get_preset( $preset );
+			if ( is_array( $preset ) && ! empty( $preset ) && isset( $preset[ $type ] ) ) {
+				$this->new_option[ $type ] = $preset[ $type ];
+			}
 
 			if ( $this->has_pseudo_elements( $type ) ) {
-				$this->new_option[ $type ]['content'] = $content;
+				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
 			}
 			if ( ! empty( $icon ) ) {
-				$this->new_option[ $type ]['icon'] = $icon;
+				$this->new_option[ $type ]['icon']    = $icon;
+				$this->new_option['style']['display'] = 'flex';
+				$this->new_option['style']['gap']     = '0.5em';
+				// サイズ変更.
+				$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}em" );
+				$size      = 1;
+				$size_unit = 'em';
 			}
 
-			$color_type = 'background' === $color_type ? 'background-color' : $color_type;
+			$color_type = 'background' === $color_type ? 'backgroundColor' : $color_type;
 			$this->add_pseudo_elements_style( $type, $color_type, $color );
 			if ( ! empty( $size ) ) {
-				$this->add_pseudo_elements_style( $type, 'height', "{$size}px" );
+				if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
+					$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
+				}
+				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
+					$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
+				}
 				// アイコンの場合は幅も.
 				if ( ! empty( $icon ) ) {
-					$this->add_pseudo_elements_style( $type, 'width', "{$size}px" );
+					$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
 				}
 			}
 		}
@@ -166,7 +187,7 @@ class Heading_Migration {
 		// 角丸.
 		$radius = $this->get_old_option( 'borderRadius', '' );
 		if ( $radius ) {
-			$this->add_responsive_style( 'borderRadius', $radius );
+			$this->add_responsive_style( 'borderRadius', "{$radius}px" );
 		}
 
 		$border = [];
@@ -204,7 +225,7 @@ class Heading_Migration {
 		// 背景色.
 		$bg_image = $this->get_old_option( 'backgroundImage', '' );
 		if ( $bg_image ) {
-			$this->add_style( 'backgroundImage', $bg_image );
+			$this->add_style( 'backgroundImage', "url('{$bg_image}')" );
 		}
 		// 背景 位置.
 		$bg_pos = $this->get_old_option( 'backgroundPosition', '' );
@@ -220,6 +241,26 @@ class Heading_Migration {
 		$bg_size = $this->get_old_option( 'backgroundSize', '' );
 		if ( $bg_size ) {
 			$this->add_style( 'backgroundSize', $bg_size );
+		}
+	}
+
+	/**
+	 * プリセットコピー.
+	 *
+	 * @return void
+	 */
+	private function set_preset() {
+		$preset = Heading_Helper::get_preset( $this->get_old_option( 'preset' ) );
+		if ( ! isset( $preset['style'] ) ) {
+			return;
+		}
+		$responsive = [ 'fontSize', 'textAlign', 'fontWeight', 'padding', 'margin', 'border' ];
+		foreach ( $preset['style'] as $key => $value ) {
+			if ( in_array( $key, $responsive, true ) ) {
+				$this->add_responsive_style( $key, $value );
+			} else {
+				$this->add_style( $key, $value );
+			}
 		}
 	}
 
@@ -336,7 +377,7 @@ class Heading_Migration {
 		if ( ! $this->has_pseudo_elements( $pos ) ) {
 			return;
 		}
-		$this->new_option[ $pos ]['contentStyles'][ $name ] = $value;
+		$this->new_option[ $pos ][ $name ] = $value;
 	}
 
 	/**
@@ -352,7 +393,7 @@ class Heading_Migration {
 		if ( ! $this->has_pseudo_elements( $pos ) ) {
 			return;
 		}
-		$value = Heading_Helper::get_responsive_value( $value );
+		$value = Styles::get_responsive_value( $value );
 		// セット.
 		$this->new_option[ $pos ]['contentStyles'][ $name ] = $value;
 	}
@@ -378,7 +419,7 @@ class Heading_Migration {
 	 * @return void
 	 */
 	private function add_responsive_style( $name, $value ) {
-		$value = Heading_Helper::get_responsive_value( $value );
+		$value = Styles::get_responsive_value( $value );
 		// セット.
 		$this->new_option['style'][ $name ] = $value;
 	}
@@ -473,19 +514,21 @@ class Heading_Migration {
 			);
 		}
 
-		$update = false;
-		$result = $this->migration( $data );
+		$update       = false;
+		$update_level = false;
+		$result       = $this->migration( $data );
 		if ( ! empty( $result ) ) {
-			$update = Heading::update_heading_design_option( $result );
-//			if ( $update ) {
-//				Heading_Compatible::delete_option();
-//			}
+			$update       = Heading::update_heading_design_option( $result );
+			$update_level = Heading::update_heading_level_option( $data['level'] );
+			// if ( $update && $update_level ) {
+			// Heading_Compatible::delete_option();
+			// }
 		}
 
 		return Api::create_response(
-			$update,
+			$update && $update_level,
 			'',
-			wp_json_encode( $result )
+			wp_json_encode( $data )
 		);
 	}
 }

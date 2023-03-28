@@ -32,15 +32,23 @@ class Filesystem {
 	 * @return string
 	 */
 	public static function file_get_contents( $file ) {
-		$filesystem_direct = self::init_filesystem();
-		$content           = false;
-		if ( $filesystem_direct ) {
-			$content = $filesystem_direct->get_contents( $file );
-		}
-		global $wp_filesystem;
-		$wp_filesystem = self::$filesystem;
 
-		return $content;
+		return self::get_contents( $file );
+	}
+
+	/**
+	 * ファイル取得.
+	 *
+	 * @param string $path file path.
+	 *
+	 * @return false|string
+	 */
+	private static function get_contents( $path ) {
+		if ( ! file_exists( $path ) ) {
+			return '';
+		}
+
+		return file_get_contents( $path );
 	}
 
 	/**
@@ -56,11 +64,23 @@ class Filesystem {
 			return [];
 		}
 		$json = json_decode( $contents, true );
+		if ( JSON_ERROR_NONE !== json_last_error() ) {
+			return [];
+		}
 		if ( is_null( $json ) ) {
 			return [];
 		}
 
 		return $json;
+	}
+
+	/**
+	 * WP_Filesystem_Directを使用
+	 *
+	 * @return string
+	 */
+	public static function filesystem_direct() {
+		return 'direct';
 	}
 
 	/**
@@ -83,14 +103,5 @@ class Filesystem {
 		remove_filter( 'filesystem_method', [ '\ystandard_toolbox\Filesystem', 'filesystem_direct' ] );
 
 		return $wp_filesystem;
-	}
-
-	/**
-	 * WP_Filesystem_Directを使用
-	 *
-	 * @return string
-	 */
-	public static function filesystem_direct() {
-		return 'direct';
 	}
 }

@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -29,13 +31,21 @@ class Heading {
 	 * ブロックスタイル用
 	 */
 	const BODY_CLASS_HEADING = 'ystdtb-heading';
+	/**
+	 * キャッシュキー.
+	 */
+	const CSS_CACHE_KEY = 'ystdtb_heading_v2_css';
+
+	const CSS_HANDLE = 'ystdtb_heading_css';
 
 	/**
 	 * Heading constructor.
 	 */
 	public function __construct() {
+
 		require_once __DIR__ . '/class-heading-helper.php';
 		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
+
 		// 設定移行前は下位互換モードで起動する.
 		if ( $this->is_compatible_mode() ) {
 			require_once __DIR__ . '/class-heading-compatible.php';
@@ -43,8 +53,53 @@ class Heading {
 
 			return;
 		}
-		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
+		add_filter( 'body_class', [ $this, 'body_class' ], 20 );
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ], 11 );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ], 11 );
+
+	}
+
+
+	/**
+	 * CSS作成.
+	 *
+	 * @return string
+	 */
+	public function get_css() {
+		$heading = self::get_heading_design_options();
+		$level   = self::get_heading_level_options();
+		$css     = Heading_Helper::get_heading_css( $heading, $level );
+
+		return $css;
+	}
+
+	/**
+	 * CSS追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_block_assets() {
+		$css = $this->get_css();
+		if ( empty( $css ) ) {
+			return;
+		}
+		wp_register_style( self::CSS_HANDLE, false );
+		wp_add_inline_style(
+			self::CSS_HANDLE,
+			Text::minify( $css )
+		);
+		wp_enqueue_style( self::CSS_HANDLE );
+	}
+
+	/**
+	 * CSS（Editor）追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_editor_assets() {
+		$this->enqueue_block_assets();
 	}
 
 	/**
@@ -138,7 +193,7 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-			// $result = Option::update_option( self::OPTION_NAME, $new_option );
+//			$result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
@@ -151,7 +206,7 @@ class Heading {
 	/**
 	 * 互換性モード起動か判定.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function is_compatible_mode() {
 		$old = get_option( 'ystdtb_heading', null );
@@ -176,7 +231,7 @@ class Heading {
 	 *
 	 * @return array
 	 */
-	public function body_class_heading( $classes ) {
+	public function body_class( $classes ) {
 		$classes[] = self::BODY_CLASS_HEADING;
 
 		return $classes;
@@ -191,6 +246,17 @@ class Heading {
 	 */
 	public static function update_heading_design_option( $value ) {
 		return Option::update_option( self::OPTION_MAIN, $value );
+	}
+
+	/**
+	 * 見出しデザイン設定の更新.
+	 *
+	 * @param array $value 設定.
+	 *
+	 * @return bool
+	 */
+	public static function update_heading_level_option( $value ) {
+		return Option::update_option( self::OPTION_LEVEL, $value );
 	}
 
 

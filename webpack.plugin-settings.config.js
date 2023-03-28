@@ -1,26 +1,26 @@
 // @ts-ignore
-const defaultConfig = require("@wordpress/scripts/config/webpack.config");
-const ystdtbConfig = require("./webpack.blocks.config");
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const pluginConfig = require( './webpack.blocks.config' );
 
 module.exports = {
 	...defaultConfig,
 	entry: {
-		"plugin-settings": "./src/plugin-settings/",
-		"ystdtb-settings-v2": "./src/plugin-settings/start-page/",
-		"add-code": "./src/plugin-settings/add-code/",
-		design: "./src/plugin-settings/design/",
-		"block-patterns": "./src/plugin-settings/block-patterns/",
-		"custom-css": "./src/plugin-settings/custom-css/",
-		font: "./src/plugin-settings/font/",
-		cta: "./src/plugin-settings/cta/",
-		"heading-v2": "./src/plugin-settings/heading/",
+		'plugin-settings': './src/plugin-settings/',
+		'ystdtb-settings-v2': './src/plugin-settings/start-page/',
+		'add-code': './src/plugin-settings/add-code/',
+		design: './src/plugin-settings/design/',
+		'block-patterns': './src/plugin-settings/block-patterns/',
+		'custom-css': './src/plugin-settings/custom-css/',
+		font: './src/plugin-settings/font/',
+		cta: './src/plugin-settings/cta/',
+		'heading-v2': './src/plugin-settings/heading/',
 	},
 	output: {
-		filename: "[name].js",
-		path: `${__dirname}/build/plugin-settings`,
+		filename: '[name].js',
+		path: `${ __dirname }/build/plugin-settings`,
 	},
 	resolve: {
-		...ystdtbConfig.resolve,
+		...pluginConfig.resolve,
 	},
 	performance: {
 		maxEntrypointSize: 500000,

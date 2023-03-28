@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Styles;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -251,19 +253,21 @@ class Heading_Compatible {
 			// サイズ別.
 			$style = $this->get_styles( $this->css_tablet );
 			if ( $style ) {
-				$css .= Utility::add_media_query(
+				$css .= Styles::add_media_query(
 					"${$section} { ${style} }",
-					'md'
+					'tablet'
 				);
 			}
 			$style = $this->get_styles( $this->css_pc );
 			if ( $style ) {
-				$css .= Utility::add_media_query(
+				$css .= Styles::add_media_query(
 					"${$section} { ${style} }",
-					'lg'
+					'desktop'
 				);
+
 			}
 		}
+
 
 		return $css;
 	}
@@ -391,7 +395,7 @@ class Heading_Compatible {
 						if ( isset( $styles[ $section ][ $this->get_css_property( $property ) ] ) ) {
 							$style = $styles[ $section ][ $this->get_css_property( $property ) ];
 							if ( 'rgb' === $convert ) {
-								$rgb   = Utility::hex_2_rgb( $style );
+								$rgb   = Styles::hex_2_rgb( $style );
 								$style = "{$rgb[0]},{$rgb[1]},{$rgb[2]}";
 							}
 							$value = str_replace(

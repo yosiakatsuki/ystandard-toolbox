@@ -74,9 +74,21 @@ class Config {
 	 * @var array
 	 */
 	const BREAKPOINTS = [
-		'sm' => 600,
-		'md' => 769,
-		'lg' => 1025,
+		'sm'      => 600,
+		'mobile'  => '37.5em',
+		'md'      => 769,
+		'tablet'  => '48.0625em',
+		'lg'      => 1025,
+		'desktop' => '64.0625em',
+	];
+
+	/**
+	 * レスポンシブタイプ名.
+	 */
+	const RESPONSIVE_TYPE = [
+		'desktop' => 'desktop',
+		'tablet'  => 'tablet',
+		'mobile'  => 'mobile',
 	];
 
 	/**

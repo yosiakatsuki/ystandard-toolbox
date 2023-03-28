@@ -52,6 +52,9 @@
             ],
             "@aktk/plugin-settings/function/*": [
                 "src/plugin-settings/function/*"
+            ],
+            "@ystdtb/library/*": [
+                "library/*"
             ]
         },
 		"typeRoots": [

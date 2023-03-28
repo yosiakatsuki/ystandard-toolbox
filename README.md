@@ -2,10 +2,13 @@
 
 無料WordPressテーマ「yStandard」用機能拡張プラグイン
 
-詳細・購入はこちら▼  
+詳細・購入はこちら▼
 [https://wp-ystandard.com/plugins/ystandard-toolbox/](https://wp-ystandard.com/plugins/ystandard-toolbox/)
 
 ## 更新履歴
+
+### v2.0.0
+- [変更] `ystdtb_css_breakpoints` キー変更 `sm`-> `mobile`, `md` -> `tablet`, `lg` -> `desktop`、値に単位追加.
 
 ### v1.24.0
 - [追加] レイアウトフレームブロック追加
@@ -257,91 +260,91 @@
 
 ### Plugin Update Checker
 
-License: MIT  
+License: MIT
 Source : <https://github.com/YahnisElsts/plugin-update-checker>
 
 ### React FontIconPicker
 
-License: MIT  
+License: MIT
 Source : <https://github.com/fontIconPicker/react-fonticonpicker>
 
 ### IntersectionObserver
 
-License: W3C Software and Document License  
+License: W3C Software and Document License
 Source : <https://github.com/w3c/IntersectionObserver>
 
 ### Feather
 
-License: MIT  
+License: MIT
 Source : <https://github.com/feathericons/feather>
 
 ### React Feather Icons
 
-License: MIT  
+License: MIT
 Source : <https://github.com/feathericons/react-feather>
 
 ### Vue Feather Icons
 
-License: MIT  
+License: MIT
 Source : <https://github.com/egoist/vue-feather-icons>
 
 ### Simple Icons
 
-License: CC0 - 1.0  
+License: CC0 - 1.0
 Source : <https://github.com/simple-icons/simple-icons>
 
 ### Vue.js
 
-License: MIT  
+License: MIT
 Source : <https://github.com/vuejs/vue>
 
 ### vue-color
 
-License: MIT  
+License: MIT
 Source : <https://github.com/xiaokaike/vue-color>
 
 ### vue-toasted
 
-License: MIT  
+License: MIT
 Source : <https://github.com/shakee93/vue-toasted>
 
 ### Vue.Draggable
 
-License: MIT  
+License: MIT
 Source : <https://github.com/SortableJS/Vue.Draggable>
 
 ### hex-rgb
 
-License: MIT  
+License: MIT
 Source : <https://github.com/sindresorhus/hex-rgb>
 
 ### axios
 
-License: MIT  
+License: MIT
 Source : <https://github.com/axios/axios>
 
 ### Swiper
 
-License: MIT  
+License: MIT
 Source : <https://github.com/nolimits4web/swiper>
 
 ### BGJar.
 
-License: CC BY 4.0  
+License: CC BY 4.0
 Source : <https://bgjar.com/>
 
 ### Hero Patterns.
 
-License: CC BY 4.0  
+License: CC BY 4.0
 Source : <https://www.heropatterns.com/>
 
 
 ### React-Toastify
 
-License: MIT  
+License: MIT
 Source : <https://github.com/fkhadra/react-toastify>
 
 ### react-beautiful-dnd
 
-License: Apache License, Version 2.0  
+License: Apache License, Version 2.0
 Source : <https://github.com/atlassian/react-beautiful-dnd>

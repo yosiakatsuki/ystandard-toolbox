@@ -25,6 +25,16 @@ class Text {
 	}
 
 	/**
+	 * キャメルケースをケバブケースに変換.
+	 *
+	 * @param string $text Text.
+	 *
+	 * @return string
+	 */
+	public static function camel_to_kebab( $text ) {
+		return strtolower( preg_replace( '/[A-Z]/', '-$0', lcfirst( $text ) ) );
+	}
+	/**
 	 * キャメルケースをスネークケースに変換.
 	 *
 	 * @param string $text Text.
@@ -33,5 +43,21 @@ class Text {
 	 */
 	public static function camel_to_snake( $text ) {
 		return strtolower( preg_replace( '/[A-Z]/', '_$0', lcfirst( $text ) ) );
+	}
+
+	/**
+	 * テキスト/CSSの圧縮
+	 *
+	 * @param string $text inline css styles / text.
+	 *
+	 * @return string
+	 */
+	public static function minify( $text ) {
+		$text = preg_replace( '#/\*[^!][^*]*\*+([^/][^*]*\*+)*/#', '', $text );
+		$text = str_replace( ': ', ':', $text );
+		$text = str_replace( [ "\r\n", "\r", "\n", "\t" ], '', $text );
+		$text = str_replace( [ '  ', '   ', '    ' ], ' ', $text );
+
+		return $text;
 	}
 }

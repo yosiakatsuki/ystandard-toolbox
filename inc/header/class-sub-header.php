@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Styles;
 use ystandard_toolbox\helper\Version_Compare;
 
 defined( 'ABSPATH' ) || die();
@@ -59,7 +60,7 @@ class Sub_Header {
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( Utility::add_media_query( $css, 'md' ) )
+			Utility::minify( Styles::add_media_query( $css, 'tablet' ) )
 		);
 	}
 

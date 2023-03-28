@@ -74,6 +74,7 @@ module.exports = {
 				__dirname,
 				'src/plugin-settings/function'
 			),
+			'@ystdtb/library': path.resolve( __dirname, 'library' ),
 		},
 	},
 };
