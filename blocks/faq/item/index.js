@@ -4,7 +4,7 @@ import save from './save';
 import { MessageCircle } from 'react-feather';
 import { attributes, supports } from './config';
 import { registerBlockType } from '@wordpress/blocks';
-import { deprecated } from './_deprecated';
+import { deprecated } from './deprecated';
 import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'ystdtb/faq-item', {

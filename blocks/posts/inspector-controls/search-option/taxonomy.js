@@ -10,6 +10,7 @@ const Taxonomy = ( { attributes, setAttributes } ) => {
 	const handleOnChange = ( newValue ) => {
 		setAttributes( {
 			taxonomy: newValue,
+			termSlug: undefined,
 			postIn: undefined,
 			postNameIn: undefined,
 			postParent: undefined,

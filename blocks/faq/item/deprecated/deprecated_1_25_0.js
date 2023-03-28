@@ -1,9 +1,10 @@
 import classnames from 'classnames';
-import SVGIcon from '../../../src/js/component/svg-icon';
+import SVGIcon from '../../../../src/js/component/svg-icon';
 import {
 	InnerBlocks,
 	getColorClassName,
 	getFontSizeClass,
+	useBlockProps,
 } from '@wordpress/block-editor';
 
 const blockAttributes = {
@@ -85,7 +86,7 @@ const blockAttributes = {
 	},
 };
 
-export const deprecated = [
+export const deprecated_1_25_0 = [
 	{
 		attributes: {
 			...blockAttributes,
@@ -95,6 +96,17 @@ export const deprecated = [
 			className: false,
 			lightBlockWrapper: true,
 			reusable: false,
+		},
+		migrate( attributes ) {
+			let newCustomLabelSize = attributes.customLabelSize;
+			if ( 'number' === typeof newCustomLabelSize ) {
+				newCustomLabelSize =
+					newCustomLabelSize.toString().replace( 'px', '' ) + 'px';
+			}
+			return {
+				...attributes,
+				customLabelSize: newCustomLabelSize,
+			};
 		},
 		save( { attributes } ) {
 			const {
@@ -166,6 +178,8 @@ export const deprecated = [
 					: customFaqBorderColor,
 				borderWidth:
 					0 === faqBorderSize ? undefined : faqBorderSize + 'px',
+				alignItems:
+					'center' === labelPosition ? undefined : labelPosition,
 			};
 
 			const labelClasses = classnames( 'ystdtb-faq-item__label', {
@@ -195,13 +209,13 @@ export const deprecated = [
 					? undefined
 					: customLabelBorderColor,
 				borderWidth:
-					0 === labelBorderSize ? undefined : labelBorderSize + 'px',
+					0 === labelBorderSize || ! labelBorderSize
+						? undefined
+						: labelBorderSize + 'px',
 				borderRadius:
-					0 === labelBorderRadius
+					0 === labelBorderRadius || ! labelBorderRadius
 						? undefined
 						: labelBorderRadius + 'px',
-				alignSelf:
-					'center' === labelPosition ? undefined : labelPosition,
 			};
 
 			const labelTextClasses = classnames(
@@ -231,12 +245,15 @@ export const deprecated = [
 				color: accordionArrowColorClass
 					? undefined
 					: customAccordionArrowColor,
-				alignSelf:
-					'center' === labelPosition ? undefined : labelPosition,
 			};
 
+			const blockProps = useBlockProps.save( {
+				className: itemClasses,
+				style: itemStyles,
+			} );
+
 			return (
-				<div className={ itemClasses } style={ itemStyles }>
+				<div { ...blockProps }>
 					<div className={ labelClasses } style={ labelStyles }>
 						<span className={ labelTextClasses }>{ faqType }</span>
 					</div>

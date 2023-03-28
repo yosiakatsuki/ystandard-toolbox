@@ -39,7 +39,7 @@ export const attributes = {
 		type: 'string',
 	},
 	customLabelSize: {
-		type: 'number',
+		type: 'string',
 	},
 	labelColor: {
 		type: 'string',

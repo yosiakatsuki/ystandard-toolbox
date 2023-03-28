@@ -91,9 +91,8 @@ function Timeline( props ) {
 							onChange={ ( color ) => {
 								updateChildAttributes( {
 									contentsBorderColor: getColorSlug( color ),
-									customContentsBorderColor: getColorCode(
-										color
-									),
+									customContentsBorderColor:
+										getColorCode( color ),
 								} );
 							} }
 						/>
@@ -221,9 +220,8 @@ function Timeline( props ) {
 									onChange={ ( font ) => {
 										updateChildAttributes( {
 											labelFontSize: getFontSlug( font ),
-											customLabelFontSize: getFontSize(
-												font
-											),
+											customLabelFontSize:
+												getFontSize( font ),
 										} );
 										setState( { labelFontSize: font } );
 									} }
@@ -242,9 +240,8 @@ function Timeline( props ) {
 									onChange={ ( color ) => {
 										updateChildAttributes( {
 											labelColor: getColorSlug( color ),
-											customLabelColor: getColorCode(
-												color
-											),
+											customLabelColor:
+												getColorCode( color ),
 										} );
 									} }
 								/>
@@ -261,9 +258,8 @@ function Timeline( props ) {
 							onChange={ ( color ) => {
 								updateChildAttributes( {
 									labelBackgroundColor: getColorSlug( color ),
-									customLabelBackgroundColor: getColorCode(
-										color
-									),
+									customLabelBackgroundColor:
+										getColorCode( color ),
 								} );
 							} }
 						/>
@@ -297,9 +293,8 @@ function Timeline( props ) {
 							onChange={ ( color ) => {
 								updateChildAttributes( {
 									labelBorderColor: getColorSlug( color ),
-									customLabelBorderColor: getColorCode(
-										color
-									),
+									customLabelBorderColor:
+										getColorCode( color ),
 								} );
 							} }
 						/>

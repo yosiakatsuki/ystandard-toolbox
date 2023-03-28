@@ -10,6 +10,8 @@ const PostType = ( { attributes, setAttributes } ) => {
 	const handleOnChange = ( newValue ) => {
 		setAttributes( {
 			postType: newValue,
+			taxonomy: undefined,
+			termSlug: undefined,
 			postIn: undefined,
 			postNameIn: undefined,
 			postParent: undefined,

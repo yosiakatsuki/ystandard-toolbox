@@ -17,13 +17,8 @@ import { ystdtbConfig } from '@ystd/config';
 import { getResponsiveMarginStyle } from '@ystd/components/responsive-spacing';
 
 export default function save( { attributes } ) {
-	const {
-		isStackedOnMobile,
-		isStackedOnTablet,
-		dtWidth,
-		border,
-		margin,
-	} = attributes;
+	const { isStackedOnMobile, isStackedOnTablet, dtWidth, border, margin } =
+		attributes;
 	const hasClasses = ystdtbConfig.hasClasses;
 	const borderProperty = getBorderCustomProperty( border, 'dl-column' );
 	const dtWidthStyles = isResponsive( dtWidth )
