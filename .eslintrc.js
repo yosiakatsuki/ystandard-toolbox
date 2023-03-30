@@ -2,6 +2,7 @@ const defaultConfig = require( '@wordpress/scripts/config/.eslintrc.js' );
 module.exports = {
 	...defaultConfig,
 	globals: {
+		// @ts-ignore
 		...defaultConfig.globals,
 		ystdtbBlockEditor: true,
 		ystdtbIconList: true,
@@ -9,6 +10,7 @@ module.exports = {
 		ystdtbPluginSettings: true,
 	},
 	rules: {
+		// @ts-ignore
 		...defaultConfig.rules,
 		'import/no-unresolved': 'off',
 		'import/no-extraneous-dependencies': 'off',
