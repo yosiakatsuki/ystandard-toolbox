@@ -9,6 +9,10 @@ import { __ } from '@wordpress/i18n';
 import PageBase from '@aktk/plugin-settings/components/page-base';
 import featureList from './feature-list';
 import GridItem from './grid-item';
+/**
+ * Page
+ */
+import './_index.scss';
 
 const StartPage = () => {
 	const sections = Object.keys( featureList );

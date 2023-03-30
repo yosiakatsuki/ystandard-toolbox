@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .aktk-settings-start-page__section {
 	margin-top: 80px;
 
@@ -36,15 +40,9 @@
 		text-align: center;
 	}
 
-	.aktk-settings-start-page__grid-icon {
-		text-align: center;
-
-		svg {
-			width: 40px;
-			height: auto;
-			stroke: #07689f;
-			stroke-width: 0.08em;
-		}
+	svg {
+		width: 1em;
+		height: auto;
 	}
 
 	.aktk-settings-start-page__grid-text {

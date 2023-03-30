@@ -10,7 +10,7 @@ const GridItem = ( { name, icon, description, manual, settingPage } ) => {
 		<div className="aktk-settings-start-page__grid-item">
 			<h3>{ name }</h3>
 			{ icon && (
-				<div className="aktk-settings-start-page__grid-icon">
+				<div className="text-aktk-blue text-4xl flex justify-center">
 					{ icon() }
 				</div>
 			) }
