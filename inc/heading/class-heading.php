@@ -126,6 +126,8 @@ class Heading {
 		Api::register_rest_route( 'add_heading_style', [ $this, 'add_heading_style' ] );
 		Api::register_rest_route( 'update_heading_style', [ $this, 'update_heading_style' ] );
 		Api::register_rest_route( 'update_heading_level', [ $this, 'update_heading_level' ] );
+		Api::register_rest_route( 'get_heading_styles', [ $this, 'get_heading_styles' ], 'GET' );
+		Api::register_rest_route( 'get_heading_level', [ $this, 'get_heading_level' ], 'GET' );
 	}
 
 	/**
@@ -193,7 +195,7 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-//			$result = Option::update_option( self::OPTION_NAME, $new_option );
+			// $result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
@@ -201,6 +203,28 @@ class Heading {
 			'',
 			wp_json_encode( $data )
 		);
+	}
+
+	/**
+	 * 設定情報取得.
+	 *
+	 * @return array
+	 */
+	public function get_heading_styles() {
+		$result = self::get_heading_design_options();
+
+		return $result;
+	}
+
+	/**
+	 * レベル情報取得.
+	 *
+	 * @return array
+	 */
+	public function get_heading_level() {
+		$result = self::get_heading_level_options();
+
+		return $result;
 	}
 
 	/**

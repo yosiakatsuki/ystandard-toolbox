@@ -48,14 +48,14 @@ export function getEndpoint( route: string ) {
 	return `${ NAMESPACE }/${ route }`;
 }
 
-export function apiPost( props: ApiPostProps ) {
+export async function apiPost( props: ApiPostProps ) {
 	const { endpoint, data, callback, messageSuccess, messageError } = props;
 	const options = {
 		path: endpoint,
 		method: 'POST',
 		data,
 	};
-	apiFetch( options )
+	await apiFetch( options )
 		// @ts-ignore
 		.then( ( response ) => {
 			if ( isSuccess( response.status ) ) {
@@ -104,12 +104,18 @@ export function apiPost( props: ApiPostProps ) {
 		} );
 }
 
-export function apiGet( props: ApiPostProps ) {
+export interface ApiGetProps {
+	endpoint: string;
+	data?: object;
+	callback?: ( response: ApiPostCallbackProps ) => void;
+}
+
+export async function apiGet( props: ApiGetProps ) {
 	const { endpoint, callback } = props;
 	const options = {
 		path: endpoint,
 	};
-	apiFetch( options )
+	return await apiFetch( options )
 		// @ts-ignore
 		.then( ( result ) => {
 			if ( 'function' === typeof callback ) {
@@ -117,9 +123,8 @@ export function apiGet( props: ApiPostProps ) {
 					status: SUCCESS,
 					data: result,
 				} );
-			} else {
-				return result;
 			}
+			return result;
 		} )
 		// @ts-ignore
 		.catch( ( error ) => {

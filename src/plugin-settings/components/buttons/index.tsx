@@ -10,7 +10,7 @@ import { cloudUpload } from '@wordpress/icons';
 import './_editor.scss';
 
 interface ButtonProps {
-	text: string | ReactNode;
+	text?: string | ReactNode;
 	onClick?: () => void;
 	icon?: any;
 	isDisabled?: boolean;

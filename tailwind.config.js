@@ -6,6 +6,9 @@ module.exports = {
 			colors: {
 				'aktk-blue': '#07689f',
 			},
+			fontFamily: {
+				orbitron: [ 'Orbitron', 'sans-serif' ],
+			},
 		},
 	},
 	plugins: [],
