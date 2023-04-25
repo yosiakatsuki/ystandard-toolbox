@@ -2,6 +2,7 @@
  * WordPress
  */
 import { useContext, useState, useEffect, useMemo } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
  * Plugin
  */
@@ -12,15 +13,25 @@ import CustomSelectControl, {
  * Component.
  */
 import { HeadingContext } from '../index';
+import { AddButton, CancelLinkButton } from '@aktk/components/buttons';
+import ConfirmSelect from './confirm-select';
 
 export default function LevelSelect() {
 	const [ levelSelect, setLevelSelect ] = useState( [] );
-	// @ts-ignore
-	const { selectedLevel, setSelectedLevel, headingStyles } =
-		useContext( HeadingContext );
+	const [ isConfirmModalOpen, setIsConfirmModalOpen ] = useState( false );
+	const [ tempSelectedStyle, setTempSelectedStyle ] = useState( '' );
+
+	const {
+		selectedStyle,
+		setSelectedStyle,
+		headingStyles,
+		setAppMode,
+		appMode,
+		isEdit,
+	} = useContext( HeadingContext );
 
 	const selectOptions = useMemo( () => {
-		return Object.keys( headingStyles ).map( ( key ) => {
+		return Object.keys( headingStyles ).map( ( key: string ) => {
 			const style = headingStyles[ key ];
 			return {
 				key: style?.slug,
@@ -37,32 +48,81 @@ export default function LevelSelect() {
 		initLevel();
 	}, [ headingStyles ] );
 
+	const changeSelectedStyle = (
+		value: string,
+		checkEdit: boolean = true
+	) => {
+		if ( checkEdit && isEdit ) {
+			return;
+		}
+		setSelectedStyle( value );
+		setAppMode( value ? 'update' : 'select' );
+		setTempSelectedStyle( '' );
+	};
+
 	const handleOnChange = ( value: string ) => {
-		setSelectedLevel( value );
+		if ( isEdit ) {
+			setTempSelectedStyle( value );
+			setIsConfirmModalOpen( true );
+			return;
+		}
+		changeSelectedStyle( value );
 	};
 
 	const handleOnClear = () => {
-		setSelectedLevel( '' );
+		if ( isEdit ) {
+			setTempSelectedStyle( '' );
+			setIsConfirmModalOpen( true );
+			return;
+		}
+		changeSelectedStyle( '' );
+	};
+
+	const handleOnAddButtonClick = () => {
+		setAppMode( 'add' );
 	};
 
 	return (
-		<div className={ 'border border-slate-400 p-5' }>
-			<div className={ 'flex justify-between' }>
-				<div className={ 'flex justify-between items-end gap-3' }>
-					<CustomSelectControl
-						value={ selectedLevel }
-						options={ levelSelect as CustomSelectControlOption[] }
-						onChange={ handleOnChange }
-						label={ 'レベル選択' }
-					/>
-					<button
-						className={ 'border-0 text-slate-400 text-xs py-1' }
-						onClick={ handleOnClear }
-					>
-						クリア
-					</button>
+		<>
+			<div className={ 'border border-slate-400 p-5' }>
+				<div className={ 'flex justify-between' }>
+					<div className={ 'flex justify-between items-end gap-3' }>
+						<CustomSelectControl
+							value={ selectedStyle }
+							options={
+								levelSelect as CustomSelectControlOption[]
+							}
+							onChange={ handleOnChange }
+							label={ __( 'スタイル選択', 'ystandard-toolbox' ) }
+						/>
+						<CancelLinkButton
+							onClick={ handleOnClear }
+							isSmall={ true }
+						>
+							クリア
+						</CancelLinkButton>
+						<AddButton
+							className={ 'ml-5' }
+							onClick={ handleOnAddButtonClick }
+							isSmall={ true }
+							disabled={ !! selectedStyle }
+						>
+							<>{ __( 'スタイル追加', 'ystandard-toolbox' ) }</>
+						</AddButton>
+					</div>
 				</div>
 			</div>
-		</div>
+			<ConfirmSelect
+				isOpen={ isConfirmModalOpen }
+				onCancel={ () => {
+					setIsConfirmModalOpen( false );
+					setTempSelectedStyle( '' );
+				} }
+				onSuccess={ () => {
+					changeSelectedStyle( tempSelectedStyle, false );
+					setIsConfirmModalOpen( false );
+				} }
+			/>
+		</>
 	);
 }

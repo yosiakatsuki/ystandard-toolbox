@@ -11,6 +11,7 @@ import Buttons from '@aktk/plugin-settings/components/buttons';
 import { getPluginSettings } from '@aktk/plugin-settings/function/setting';
 import LevelSelect from './select';
 import { getHeadingStyles, getLevelList } from './api';
+import type { HeadingOption } from '../types';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -18,14 +19,30 @@ interface HeadingAppProps {
 
 type AppMode = 'select' | 'add' | 'update';
 
+interface HeadingContextProps {
+	appMode: AppMode;
+	setAppMode: ( value: AppMode ) => void;
+	selectedStyle: string;
+	setSelectedStyle: ( value: string ) => void;
+	levelList: {};
+	initLevelList: () => void;
+	headingStyles: { [ key: string ]: HeadingOption };
+	initHeadingStyles: () => void;
+	isEdit?: boolean;
+	setIsEdit?: ( value: boolean ) => void;
+}
+
 // @ts-ignore
-export const HeadingContext = createContext();
+export const HeadingContext = createContext< HeadingContextProps >();
 
 export default function HeadingApp( props: HeadingAppProps ) {
 	const { setIsLoading } = props;
+	// ステート関連.
 	const [ isUpdate, setIsUpdate ] = useState( false );
 	const [ appMode, setAppMode ] = useState< AppMode >( 'select' );
-	const [ selectedLevel, setSelectedLevel ] = useState< string >( '' );
+	const [ isEdit, setIsEdit ] = useState( false );
+	// データ関連.
+	const [ selectedStyle, setSelectedStyle ] = useState< string >( '' );
 	const [ levelList, setLevelList ] = useState( {} );
 	const [ headingStyles, setHeadingStyles ] = useState( {} );
 
@@ -64,16 +81,18 @@ export default function HeadingApp( props: HeadingAppProps ) {
 				value={ {
 					appMode,
 					setAppMode,
-					selectedLevel,
-					setSelectedLevel,
+					selectedStyle,
+					setSelectedStyle,
 					levelList,
 					initLevelList,
 					headingStyles,
 					initHeadingStyles,
+					isEdit,
+					setIsEdit,
 				} }
 			>
 				<div className={ 'pb-5' }>
-					{ 'select' === appMode && <LevelSelect /> }
+					<LevelSelect />
 				</div>
 			</HeadingContext.Provider>
 

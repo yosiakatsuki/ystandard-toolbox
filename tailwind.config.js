@@ -5,6 +5,8 @@ module.exports = {
 		extend: {
 			colors: {
 				'aktk-blue': '#07689f',
+				'admin-gray': '#aaaaaa',
+				'notice-error': '#ae3b43',
 			},
 			fontFamily: {
 				orbitron: [ 'Orbitron', 'sans-serif' ],
