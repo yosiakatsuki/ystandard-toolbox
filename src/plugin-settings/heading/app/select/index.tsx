@@ -15,6 +15,7 @@ import { AddButton } from '@aktk/components/buttons';
  */
 import { HeadingContext } from '../index';
 import ConfirmSelect from './confirm-select';
+import AddStyle from './add-style';
 
 export default function LevelSelect() {
 	const [ levelSelect, setLevelSelect ] = useState( [] );
@@ -69,15 +70,6 @@ export default function LevelSelect() {
 		changeSelectedStyle( value );
 	};
 
-	const handleOnClear = () => {
-		if ( isEdit ) {
-			setTempSelectedStyle( '' );
-			setIsConfirmModalOpen( true );
-			return;
-		}
-		changeSelectedStyle( '' );
-	};
-
 	const handleOnAddButtonClick = () => {
 		setAppMode( 'add' );
 	};
@@ -94,6 +86,7 @@ export default function LevelSelect() {
 							}
 							onChange={ handleOnChange }
 							label={ __( 'スタイル選択', 'ystandard-toolbox' ) }
+							className={ 'whitespace-nowrap' }
 						/>
 						<AddButton
 							className={ 'ml-3' }
@@ -116,6 +109,11 @@ export default function LevelSelect() {
 					changeSelectedStyle( tempSelectedStyle, false );
 					setIsConfirmModalOpen( false );
 				} }
+			/>
+			<AddStyle
+				isOpen={ 'add' === appMode }
+				onCancel={ () => setAppMode( 'select' ) }
+				onSuccess={ () => setAppMode( 'select' ) }
 			/>
 		</>
 	);

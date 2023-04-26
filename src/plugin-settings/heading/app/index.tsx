@@ -20,6 +20,7 @@ interface HeadingAppProps {
 type AppMode = 'select' | 'add' | 'update';
 
 interface HeadingContextProps {
+	initApp: () => void;
 	appMode: AppMode;
 	setAppMode: ( value: AppMode ) => void;
 	selectedStyle: string;
@@ -79,6 +80,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			{ /* @ts-ignore */ }
 			<HeadingContext.Provider
 				value={ {
+					initApp,
 					appMode,
 					setAppMode,
 					selectedStyle,

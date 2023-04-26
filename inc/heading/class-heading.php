@@ -138,14 +138,16 @@ class Heading {
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function add_heading_style( $request ) {
-		$data       = $request->get_json_params();
-		$result     = false;
-		$new_option = [];
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => $value ) {
-				$new_option[ $key ] = trim( $value );
-			}
-			// $result = Option::update_option( self::OPTION_NAME, $new_option );
+		$data   = $request->get_json_params();
+		$result = false;
+		if ( is_array( $data ) && isset( $data['style'] ) ) {
+
+			$new_style = [
+				$data['style']['slug'] => $data['style'],
+			];
+			$styles    = $this->get_heading_styles();
+			$styles    = array_merge( $styles, $new_style );
+			$result    = $this->update_heading_design_option( $styles );
 		}
 
 		return Api::create_response(
@@ -166,11 +168,8 @@ class Heading {
 		$data       = $request->get_json_params();
 		$result     = false;
 		$new_option = [];
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => $value ) {
-				$new_option[ $key ] = trim( $value );
-			}
-			// $result = Option::update_option( self::OPTION_NAME, $new_option );
+		if ( is_array( $data ) && isset( $data['style'] ) ) {
+
 		}
 
 		return Api::create_response(

@@ -1,27 +1,27 @@
 /**
  * WordPress dependencies.
  */
-import { Modal, Button } from '@wordpress/components';
+import { Modal as WPModal, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Component.
  */
-interface ConfirmModalProps {
-	title: string;
+interface ModalProps {
+	title?: string;
 	children: React.ReactNode;
 	isOpen: boolean;
-	onSuccess: () => void;
+	onOk: () => void;
 	onCancel: () => void;
 	okText?: string;
 	cancelText?: string;
 }
-export default function ConfirmModal( props: ConfirmModalProps ) {
+export function Modal( props: ModalProps ) {
 	const {
 		title,
 		children,
 		isOpen,
-		onSuccess,
+		onOk,
 		onCancel,
 		okText = 'OK',
 		cancelText = __( 'キャンセル', 'ystandard-toolbox' ),
@@ -33,8 +33,8 @@ export default function ConfirmModal( props: ConfirmModalProps ) {
 		<>
 			{ isOpen && (
 				// @ts-expect-error
-				<Modal
-					title={ title }
+				<WPModal
+					title={ title || '' }
 					onRequestClose={ handleOnClose }
 					shouldCloseOnClickOutside={ false }
 				>
@@ -45,12 +45,20 @@ export default function ConfirmModal( props: ConfirmModalProps ) {
 							{ cancelText }
 						</Button>
 						{ /* @ts-expect-error */ }
-						<Button variant={ 'primary' } onClick={ onSuccess }>
+						<Button variant={ 'primary' } onClick={ onOk }>
 							{ okText }
 						</Button>
 					</div>
-				</Modal>
+				</WPModal>
 			) }
 		</>
+	);
+}
+
+export function ConfirmModal( props: ModalProps ) {
+	return (
+		<Modal { ...props } title={ __( '確認', 'ystandard-toolbox' ) }>
+			{ props.children }
+		</Modal>
 	);
 }

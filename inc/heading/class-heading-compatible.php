@@ -91,6 +91,10 @@ class Heading_Compatible {
 
 
 	public function notice_compatible_mode() {
+		global $hook_suffix;
+		if ( false !== strpos( $hook_suffix, 'ystdtb-settings-v2' ) ) {
+			return;
+		}
 		Notice::warning( '[yStandard Toolbox]見出しデザイン機能は現在互換モードで動作しています。[ys]Toolbox → 見出しデザイン編集 メニューから新方式へ変換してください。' );
 	}
 
@@ -267,7 +271,6 @@ class Heading_Compatible {
 
 			}
 		}
-
 
 		return $css;
 	}

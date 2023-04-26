@@ -2,7 +2,7 @@
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import ConfirmModal from '@aktk/components/confirm-modal';
+import { ConfirmModal } from '@aktk/components/modal';
 
 /**
  * Component.
@@ -18,9 +18,8 @@ export default function ConfirmSelect( props: ConfirmSelectProps ) {
 	return (
 		<>
 			<ConfirmModal
-				title={ __( '確認', 'ystandard-toolbox' ) }
 				isOpen={ isOpen }
-				onSuccess={ onSuccess }
+				onOk={ onSuccess }
 				onCancel={ onCancel }
 				okText={ __(
 					'編集するスタイルを変更する',

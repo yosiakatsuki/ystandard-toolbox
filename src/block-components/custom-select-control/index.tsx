@@ -23,6 +23,7 @@ export interface CustomSelectControlProps {
 	isHorizon?: string;
 	label?: string;
 	deleteEmpty?: boolean;
+	className?: string;
 }
 
 const CustomSelectControl = ( {
