@@ -9,11 +9,11 @@ import { __ } from '@wordpress/i18n';
 import CustomSelectControl, {
 	CustomSelectControlOption,
 } from '@aktk/components/custom-select-control';
+import { AddButton } from '@aktk/components/buttons';
 /**
  * Component.
  */
 import { HeadingContext } from '../index';
-import { AddButton, CancelLinkButton } from '@aktk/components/buttons';
 import ConfirmSelect from './confirm-select';
 
 export default function LevelSelect() {
@@ -95,14 +95,8 @@ export default function LevelSelect() {
 							onChange={ handleOnChange }
 							label={ __( 'スタイル選択', 'ystandard-toolbox' ) }
 						/>
-						<CancelLinkButton
-							onClick={ handleOnClear }
-							isSmall={ true }
-						>
-							クリア
-						</CancelLinkButton>
 						<AddButton
-							className={ 'ml-5' }
+							className={ 'ml-3' }
 							onClick={ handleOnAddButtonClick }
 							isSmall={ true }
 							disabled={ !! selectedStyle }
