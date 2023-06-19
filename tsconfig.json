@@ -38,20 +38,17 @@
             "@aktk/controls/*": [
                 "src/block-controls/*"
             ],
+            "@aktk/utils/*": [
+                "src/block-utils/*"
+            ],
             "@aktk/api": [
                 "src/block-api/index"
             ],
-            "@aktk/api/*": [
-                "src/block-api/*"
-            ],
+			"@aktk/plugin-settings/*": [
+				"src/plugin-settings/*"
+			],
             "@aktk/helper/*": [
                 "src/js/helper/*"
-            ],
-            "@aktk/plugin-settings/components/*": [
-                "src/plugin-settings/components/*"
-            ],
-            "@aktk/plugin-settings/function/*": [
-                "src/plugin-settings/function/*"
             ],
             "@ystdtb/library/*": [
                 "library/*"

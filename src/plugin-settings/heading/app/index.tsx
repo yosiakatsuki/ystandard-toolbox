@@ -1,17 +1,21 @@
+import type { Context } from 'react';
 /**
  * WordPress
  */
 import { useState, useEffect, createContext } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
  * yStandard
  */
-import { apiPost, getEndpoint } from '@aktk/api';
-import { notifySuccess, notifyError } from '@aktk/components/toast-message';
-import Buttons from '@aktk/plugin-settings/components/buttons';
-import { getPluginSettings } from '@aktk/plugin-settings/function/setting';
 import LevelSelect from './select';
 import { getHeadingStyles, getLevelList } from './api';
-import type { HeadingOption } from '../types';
+import type {
+	HeadingOption,
+	HeadingPseudoElementsStyle,
+	HeadingStyle,
+} from '../types';
+import EditContainer from './edit-conteiner';
+import { deleteUndefined } from '@aktk/utils/object';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -29,23 +33,35 @@ interface HeadingContextProps {
 	initLevelList: () => void;
 	headingStyles: { [ key: string ]: HeadingOption };
 	initHeadingStyles: () => void;
-	isEdit?: boolean;
-	setIsEdit?: ( value: boolean ) => void;
+	isEdit: boolean;
+	setIsEdit: ( value: boolean ) => void;
+	previewText: string;
+	setPreviewText: ( value: string ) => void;
+	headingOption?: HeadingOption;
+	setHeadingOption: ( value: HeadingOption ) => void;
+	updateStyle: ( value: HeadingStyle ) => void;
+	updateBeforeStyle: ( value: HeadingPseudoElementsStyle ) => void;
+	updateAfterStyle: ( value: HeadingPseudoElementsStyle ) => void;
 }
 
 // @ts-ignore
-export const HeadingContext = createContext< HeadingContextProps >();
+export const HeadingContext: Context< HeadingContextProps > =
+	// @ts-ignore
+	createContext< HeadingContextProps >();
 
 export default function HeadingApp( props: HeadingAppProps ) {
 	const { setIsLoading } = props;
 	// ステート関連.
-	const [ isUpdate, setIsUpdate ] = useState( false );
 	const [ appMode, setAppMode ] = useState< AppMode >( 'select' );
 	const [ isEdit, setIsEdit ] = useState( false );
 	// データ関連.
 	const [ selectedStyle, setSelectedStyle ] = useState< string >( '' );
 	const [ levelList, setLevelList ] = useState( {} );
 	const [ headingStyles, setHeadingStyles ] = useState( {} );
+	const [ headingOption, setHeadingOption ] = useState< HeadingOption >();
+	const [ previewText, setPreviewText ] = useState(
+		__( 'プレビューテキスト', 'ystandard-toolbox' )
+	);
 
 	const initLevelList = async () => {
 		const level = await getLevelList();
@@ -62,19 +78,59 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		await initHeadingStyles();
 		setIsLoading( false );
 	};
+
+	const updateStyle = ( value: HeadingStyle ) => {
+		if ( ! headingOption ) {
+			return;
+		}
+		const newStyles = deleteUndefined( {
+			...headingOption.style,
+			...value,
+		} );
+		const newOption = { ...headingOption, style: newStyles };
+
+		setHeadingOption( newOption );
+	};
+	const updateBeforeStyle = ( value: HeadingPseudoElementsStyle ) => {
+		if ( ! headingOption ) {
+			return;
+		}
+		const newStyles = deleteUndefined( {
+			...headingOption.before,
+			...value,
+		} );
+		const newOption = { ...headingOption, before: newStyles };
+
+		setHeadingOption( newOption );
+	};
+	const updateAfterStyle = ( value: HeadingPseudoElementsStyle ) => {
+		if ( ! headingOption ) {
+			return;
+		}
+		const newStyles = deleteUndefined( {
+			...headingOption.after,
+			...value,
+		} );
+		const newOption = { ...headingOption, after: newStyles };
+
+		setHeadingOption( newOption );
+	};
+
 	useEffect( () => {
 		initApp();
 	}, [] );
-	const updateSettings = ( value ) => {};
-	const handleOnClickUpdate = () => {
-		setIsLoading( true );
-		setTimeout( () => {
-			setIsLoading( false );
-			notifySuccess();
-		}, 1000 );
-		// setIsUpdate( true );
-		// setIsLoading( true );
-	};
+
+	useEffect( () => {
+		if ( ! selectedStyle ) {
+			setHeadingOption( undefined );
+		}
+		if ( ! headingStyles ) {
+			return;
+		}
+		const option =
+			headingStyles[ selectedStyle as keyof typeof headingStyles ];
+		setHeadingOption( option );
+	}, [ selectedStyle ] );
 	return (
 		<div>
 			{ /* @ts-ignore */ }
@@ -91,17 +147,20 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					initHeadingStyles,
 					isEdit,
 					setIsEdit,
+					previewText,
+					setPreviewText,
+					headingOption,
+					setHeadingOption,
+					updateStyle,
+					updateBeforeStyle,
+					updateAfterStyle,
 				} }
 			>
 				<div className={ 'pb-5' }>
 					<LevelSelect />
+					<EditContainer />
 				</div>
 			</HeadingContext.Provider>
-
-			<Buttons
-				onClickUpdate={ handleOnClickUpdate }
-				isDisabled={ isUpdate }
-			/>
 		</div>
 	);
 }

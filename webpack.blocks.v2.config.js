@@ -16,11 +16,8 @@ module.exports = {
 			),
 			'@aktk/controls': path.resolve( __dirname, 'src/block-controls' ),
 			'@aktk/api': path.resolve( __dirname, 'src/block-api' ),
+			'@aktk/utils': path.resolve( __dirname, 'src/block-utils' ),
 			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
-			'@aktk/plugin-settings/components': path.resolve(
-				__dirname,
-				'src/plugin-settings/components'
-			),
 		},
 	},
 };

@@ -5,7 +5,7 @@ import { hasObjectKey } from '@aktk/helper/object';
  *
  * @param {string} section セクション名.
  * @param {any} defaultValue 初期値.
- * @returns {object|array|string|number|undefined|any}
+ * @return {object | Array | string | number | undefined | any} 設定.
  */
 export function getPluginSetting(
 	section: string | undefined = undefined,
@@ -28,7 +28,7 @@ export function getPluginSetting(
  * プラグイン設定 セクション取得
  *
  * @param {string} name 設定名.
- * @return {object|array|string|number|undefined|any}
+ * @return {object | Array | string | number | undefined | any} 設定.
  */
 export function getPluginSettings( name: string ) {
 	if ( ! window?.ystdtbPluginSettings ) {
@@ -40,7 +40,6 @@ export function getPluginSettings( name: string ) {
 	}
 	return pluginSettings[ name ];
 }
-
 
 export function getCodeSetting() {
 	//TODO:移動させる.

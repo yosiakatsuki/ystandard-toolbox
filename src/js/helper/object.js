@@ -1,3 +1,7 @@
+/* eslint-disable jsdoc/require-param */
+/**
+ * @deprecated
+ */
 export const isObject = ( value ) => {
 	return 'object' === typeof value;
 };

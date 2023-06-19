@@ -6,6 +6,7 @@ export function getHeadingOptions() {
 		design: getPluginSettings( 'heading_design' ),
 		level: getPluginSettings( 'heading_level' ),
 		isCompatible: getPluginSettings( 'heading_is_compatible' ),
+		breakpoints: getPluginSettings( 'heading_breakpoints' ),
 	};
 }
 

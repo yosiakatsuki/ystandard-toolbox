@@ -1,6 +1,7 @@
 // @ts-ignore
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const pluginConfig = require( './webpack.blocks.config' );
+const pluginConfig = require( './webpack.blocks.v2.config.js' );
+const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
@@ -21,6 +22,13 @@ module.exports = {
 	},
 	resolve: {
 		...pluginConfig.resolve,
+		alias: {
+			...pluginConfig.resolve.alias,
+			'@aktk/plugin-settings': path.resolve(
+				__dirname,
+				'src/plugin-settings'
+			),
+		},
 	},
 	performance: {
 		maxEntrypointSize: 500000,

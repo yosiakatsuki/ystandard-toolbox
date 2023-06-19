@@ -53,7 +53,9 @@ export const getResponsiveValues = ( values ) => {
 	}
 	return 0 < Object.keys( result ).length ? result : undefined;
 };
-
+/**
+ * @deprecated
+ */
 export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 	if ( ! values || 'object' !== typeof values ) {
 		return undefined;

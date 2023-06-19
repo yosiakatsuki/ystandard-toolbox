@@ -12,8 +12,8 @@ export interface HeadingOption {
 	enable: boolean;
 	enableParagraph?: boolean;
 	style: HeadingStyle;
-	before?: HeadingPseudoElements;
-	after?: HeadingPseudoElements;
+	before?: HeadingPseudoElementsStyle;
+	after?: HeadingPseudoElementsStyle;
 }
 
 export interface HeadingStyle {
@@ -56,39 +56,35 @@ export interface HeadingStyle {
 	customCss?: string;
 }
 
-export interface HeadingPseudoElementsContent {
+export interface HeadingPseudoElementsStyle {
 	content?: string;
 	icon?: string;
-	contentStyles?: {
-		fontSize?: ResponsiveValues;
-		color?: string;
-		fontWeight?: string;
-		fontStyle?: string;
-		lineHeight?: string;
-		letterSpacing?: string;
-		textDecoration?: string;
-		// Background.
-		backgroundColor?: string;
-		backgroundImage?: string;
-		backgroundPosition?: string;
-		backgroundRepeat?: string;
-		backgroundSize?: string;
-		// Spacing.
-		margin?: ResponsiveSpacing;
-		padding?: ResponsiveSpacing;
-		// Border.
-		border?: ResponsiveBorder;
-		borderRadius?: ResponsiveValues;
-		// Size.
-		minWidth?: ResponsiveValues;
-		maxWidth?: ResponsiveValues;
-		minHeight?: ResponsiveValues;
-		maxHeight?: ResponsiveValues;
-		// advanced.
-		display?: string;
-		fontFamily?: string;
-		customCss?: string;
-	};
+	fontSize?: ResponsiveValues;
+	color?: string;
+	fontWeight?: string;
+	fontStyle?: string;
+	lineHeight?: string;
+	letterSpacing?: string;
+	textDecoration?: string;
+	// Background.
+	backgroundColor?: string;
+	backgroundImage?: string;
+	backgroundPosition?: string;
+	backgroundRepeat?: string;
+	backgroundSize?: string;
+	// Spacing.
+	margin?: ResponsiveSpacing;
+	padding?: ResponsiveSpacing;
+	// Border.
+	border?: ResponsiveBorder;
+	borderRadius?: ResponsiveValues;
+	// Size.
+	minWidth?: ResponsiveValues;
+	maxWidth?: ResponsiveValues;
+	minHeight?: ResponsiveValues;
+	maxHeight?: ResponsiveValues;
+	// advanced.
+	display?: string;
+	fontFamily?: string;
+	customCss?: string;
 }
-
-export type HeadingPseudoElements = HeadingStyle | HeadingPseudoElementsContent;

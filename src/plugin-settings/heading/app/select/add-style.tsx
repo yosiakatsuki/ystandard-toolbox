@@ -27,8 +27,10 @@ export default function AddStyle( props: AddStyleProps ) {
 	const { isOpen, onSuccess, onCancel } = props;
 
 	const { headingStyles, initApp, setSelectedStyle } =
+		// @ts-ignore
 		useContext( HeadingContext );
 	const headingStylesIds = useMemo(
+		// @ts-ignore
 		() => Object.values( headingStyles ).map( ( style ) => style.slug ),
 		[ headingStyles ]
 	);
@@ -134,8 +136,12 @@ export default function AddStyle( props: AddStyleProps ) {
 			data: { style: newStyle },
 			callback: ( response ) => {
 				if ( SUCCESS === response.status ) {
-					initApp();
-					setSelectedStyle( id );
+					if ( initApp ) {
+						initApp();
+					}
+					if ( setSelectedStyle ) {
+						setSelectedStyle( id );
+					}
 					initInput();
 					onSuccess();
 				}

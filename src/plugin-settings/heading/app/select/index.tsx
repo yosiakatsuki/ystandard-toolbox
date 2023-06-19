@@ -29,10 +29,13 @@ export default function LevelSelect() {
 		setAppMode,
 		appMode,
 		isEdit,
+		// @ts-ignore
 	} = useContext( HeadingContext );
 
 	const selectOptions = useMemo( () => {
+		// @ts-ignore
 		return Object.keys( headingStyles ).map( ( key: string ) => {
+			// @ts-ignore
 			const style = headingStyles[ key ];
 			return {
 				key: style?.slug,
@@ -80,7 +83,7 @@ export default function LevelSelect() {
 				<div className={ 'flex justify-between' }>
 					<div className={ 'flex justify-between items-end gap-3' }>
 						<CustomSelectControl
-							value={ selectedStyle }
+							value={ selectedStyle || '' }
 							options={
 								levelSelect as CustomSelectControlOption[]
 							}
