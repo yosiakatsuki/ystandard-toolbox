@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Admin;
+use ystandard_toolbox\Util\Post_Type;
 
 defined( 'ABSPATH' ) || die();
 
@@ -91,7 +92,7 @@ class Meta_Box {
 	public function add_meta_box() {
 		$screen = $this->screen;
 		if ( is_null( $screen ) ) {
-			$screen = array_keys( Utility::get_post_types( [], [ 'ys-parts' ] ) );
+			$screen = array_keys( Post_Type::get_post_types( [], [ 'ys-parts' ] ) );
 		}
 		add_meta_box(
 			'ystdtb_' . $this->id,

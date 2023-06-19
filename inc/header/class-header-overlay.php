@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Post_Type;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -78,7 +80,7 @@ class Header_Overlay {
 			$overlay = true;
 		}
 		// 投稿タイプ関連.
-		$post_type = Utility::get_post_type();
+		$post_type = Post_Type::get_post_type();
 		// 投稿タイプ.
 		if ( ! is_front_page() && ! is_home() ) {
 			if ( is_singular() ) {

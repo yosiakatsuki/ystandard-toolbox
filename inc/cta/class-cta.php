@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Post_Type;
 use ystandard_toolbox\Util\Types;
 use ystandard_toolbox\Util\Version;
 
@@ -86,7 +87,7 @@ class CTA {
 	 * @return array|false
 	 */
 	private function get_custom_priority( $type ) {
-		$post_type = Utility::get_post_type();
+		$post_type = Post_Type::get_post_type();
 		$option    = $this->get_cta_options();
 
 		if ( ! isset( $option[ $post_type ] ) ) {
@@ -221,7 +222,7 @@ class CTA {
 
 		// 投稿タイプ.
 		$post_types = [];
-		$types      = Utility::get_post_types( [], [ 'ys-parts' ] );
+		$types      = Post_Type::get_post_types( [], [ 'ys-parts' ] );
 		if ( ! empty( $types ) ) {
 			foreach ( $types as $key => $value ) {
 				$post_type_object = get_post_type_object( $key );
