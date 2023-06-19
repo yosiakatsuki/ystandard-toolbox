@@ -45,7 +45,7 @@ class Utility {
 	}
 
 	/**
-	 * ショートコードようにパラメーターを展開
+	 * ショートコード用にパラメーターを展開
 	 *
 	 * @param array $attributes Attributes.
 	 *
@@ -322,24 +322,6 @@ class Utility {
 		return $post_type;
 	}
 
-	/**
-	 * 一覧ページを持っている投稿タイプ取得
-	 *
-	 * @param array $args    args.
-	 * @param bool  $exclude 除外.
-	 *
-	 * @return array
-	 */
-	public static function get_has_archive_post_types( $args = [], $exclude = true ) {
-
-		return self::get_post_types(
-			array_merge(
-				[ 'has_archive' => true ],
-				$args
-			),
-			$exclude
-		);
-	}
 
 	/**
 	 * ページテンプレートパス取得
@@ -440,39 +422,6 @@ class Utility {
 		];
 
 		return $sizes;
-	}
-
-	/**
-	 * モバイル判定
-	 *
-	 * @return bool
-	 */
-	public static function is_mobile() {
-		if ( function_exists( 'ys_is_mobile' ) ) {
-			return ys_is_mobile();
-		}
-
-		return wp_is_mobile();
-	}
-
-
-	/**
-	 * 変数の内容をファイルに出力（開発用）
-	 *
-	 * @param mixed  $var  value.
-	 * @param string $file File Name.
-	 * @param string $line Line Number.
-	 */
-	public static function debug_var_dump_file( $var, $file = '', $line = '' ) {
-		ob_start();
-		echo date_i18n( 'Y.m.d H:i:s' ) . '<br>' . PHP_EOL;
-		if ( $file || $line ) {
-			echo $file . ' ' . $line . '<br>' . PHP_EOL;
-		}
-		var_dump( $var );
-		$dump = ob_get_contents();
-		ob_end_clean();
-		file_put_contents( ABSPATH . 'wp-content/uploads/debug.html', $dump . PHP_EOL, FILE_APPEND );
 	}
 
 }

@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\Util\Device;
 
 defined( 'ABSPATH' ) || die();
 
@@ -86,7 +87,7 @@ class Archive {
 	 */
 	public function mobile_archive_type( $type ) {
 		$mobile = Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' );
-		if ( $mobile && Utility::is_mobile() ) {
+		if ( $mobile && Device::is_mobile() ) {
 			$type = $mobile;
 		}
 
@@ -106,7 +107,7 @@ class Archive {
 		$ratio_option = Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' );
 		$new_ratio    = ! empty( $ratio_option ) ? $ratio_option : $new_ratio;
 		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
-			if ( Utility::is_mobile() ) {
+			if ( Device::is_mobile() ) {
 				$mobile_ratio = Option::get_option( self::OPTION_NAME, 'archiveImageRatioMobile', '' );
 
 				$new_ratio = ! empty( $mobile_ratio ) ? $mobile_ratio : $new_ratio;
