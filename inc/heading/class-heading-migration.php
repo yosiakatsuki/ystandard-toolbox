@@ -201,8 +201,9 @@ class Heading_Migration {
 			$size = $this->get_old_option( "padding{$position}", '' );
 			$unit = $this->get_old_option( "padding{$position}Unit", 'em' );
 
-			$size = ! empty( $size ) ? "{$size}{$unit}" : '';
-			if ( $size ) {
+			if ( '' !== $size ) {
+				$size = ! empty( $size ) ? "{$size}{$unit}" : 0;
+				// 追加.
 				$padding[ strtolower( $position ) ] = $size;
 			}
 		}
@@ -215,8 +216,9 @@ class Heading_Migration {
 			$size = $this->get_old_option( "margin{$position}", '' );
 			$unit = $this->get_old_option( "margin{$position}Unit", 'em' );
 
-			$size = ! empty( $size ) ? "{$size}{$unit}" : '';
-			if ( $size ) {
+			if ( '' !== $size ) {
+				$size = ! empty( $size ) ? "{$size}{$unit}" : 0;
+				// 追加.
 				$margin[ strtolower( $position ) ] = $size;
 			}
 		}

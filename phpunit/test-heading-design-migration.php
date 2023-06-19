@@ -18,6 +18,155 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 		update_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME, $value );
 	}
 
+	public function test_margin_right_left() {
+		$input = [
+			'h1' => [
+				'preset'            => 'custom',
+				'useCustomStyle'    => true,
+				'marginTop'        => '',
+				'marginTopUnit'    => 'px',
+				'marginRight'      => '0',
+				'marginRightUnit'  => 'em',
+				'marginBottom'     => '',
+				'marginBottomUnit' => 'rem',
+				'marginLeft'       => '3',
+				'marginLeftUnit'   => 'vw',
+			],
+		];
+		$this->set_option( $input );
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$v2       = $heading->migration( $data );
+		$expected = [
+			'v1-h1' => [
+				'slug'   => 'v1-h1',
+				'label'  => 'v1:h1',
+				'enable' => true,
+				'style'  => [
+					'margin' => [
+						'desktop' => [
+							'right'  => 0,
+							'left'   => '3vw',
+						],
+					],
+				],
+			],
+		];
+		$this->assertEquals( $expected, $v2 );
+	}
+
+	public function test_margin_all() {
+		$input = [
+			'h1' => [
+				'preset'            => 'custom',
+				'useCustomStyle'    => true,
+				'marginTop'        => '0',
+				'marginTopUnit'    => 'px',
+				'marginRight'      => '1',
+				'marginRightUnit'  => 'em',
+				'marginBottom'     => '2',
+				'marginBottomUnit' => 'rem',
+				'marginLeft'       => '3',
+				'marginLeftUnit'   => 'vw',
+			],
+		];
+		$this->set_option( $input );
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$v2       = $heading->migration( $data );
+		$expected = [
+			'v1-h1' => [
+				'slug'   => 'v1-h1',
+				'label'  => 'v1:h1',
+				'enable' => true,
+				'style'  => [
+					'margin' => [
+						'desktop' => [
+							'top'    => 0,
+							'right'  => '1em',
+							'bottom' => '2rem',
+							'left'   => '3vw',
+						],
+					],
+				],
+			],
+		];
+		$this->assertEquals( $expected, $v2 );
+	}
+
+	public function test_padding_top_bottom() {
+		$input = [
+			'h1' => [
+				'preset'            => 'custom',
+				'useCustomStyle'    => true,
+				'paddingTop'        => '1',
+				'paddingTopUnit'    => 'px',
+				'paddingRight'      => '',
+				'paddingRightUnit'  => 'em',
+				'paddingBottom'     => '3',
+				'paddingBottomUnit' => 'rem',
+				'paddingLeft'       => '',
+				'paddingLeftUnit'   => 'vw',
+			],
+		];
+		$this->set_option( $input );
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$v2       = $heading->migration( $data );
+		$expected = [
+			'v1-h1' => [
+				'slug'   => 'v1-h1',
+				'label'  => 'v1:h1',
+				'enable' => true,
+				'style'  => [
+					'padding' => [
+						'desktop' => [
+							'top'    => '1px',
+							'bottom' => '3rem',
+						],
+					],
+				],
+			],
+		];
+		$this->assertEquals( $expected, $v2 );
+	}
+
+
+	public function test_padding_all() {
+		$input = [
+			'h1' => [
+				'preset'            => 'custom',
+				'useCustomStyle'    => true,
+				'paddingTop'        => '0',
+				'paddingTopUnit'    => 'px',
+				'paddingRight'      => '2',
+				'paddingRightUnit'  => 'em',
+				'paddingBottom'     => '3',
+				'paddingBottomUnit' => 'rem',
+				'paddingLeft'       => '4',
+				'paddingLeftUnit'   => 'vw',
+			],
+		];
+		$this->set_option( $input );
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$v2       = $heading->migration( $data );
+		$expected = [
+			'v1-h1' => [
+				'slug'   => 'v1-h1',
+				'label'  => 'v1:h1',
+				'enable' => true,
+				'style'  => [
+					'padding' => [
+						'desktop' => [
+							'top'    => 0,
+							'right'  => '2em',
+							'bottom' => '3rem',
+							'left'   => '4vw',
+						],
+					],
+				],
+			],
+		];
+		$this->assertEquals( $expected, $v2 );
+	}
+
 
 	public function test_border_top_bottom() {
 		$input = [
