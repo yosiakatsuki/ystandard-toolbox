@@ -11,8 +11,7 @@ namespace ystandard_toolbox\blocks;
 
 use ystandard_toolbox\Config;
 use ystandard_toolbox\Dynamic_Block;
-use ystandard_toolbox\Filesystem;
-use ystandard_toolbox\Utility;
+use ystandard_toolbox\Util\Shortcode;
 
 defined( 'ABSPATH' ) || die();
 
@@ -124,7 +123,7 @@ class Parts_Block extends Dynamic_Block {
 	public function render( $attributes, $content = null ) {
 
 		$parts_id   = $attributes['partsId'];
-		$attributes = Utility::parse_shortcode_attributes(
+		$attributes = Shortcode::parse_shortcode_attributes(
 			$this->migration_attributes( $attributes )
 		);
 

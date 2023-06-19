@@ -11,7 +11,7 @@ namespace ystandard_toolbox\blocks;
 
 use ystandard_toolbox\Config;
 use ystandard_toolbox\Dynamic_Block;
-use ystandard_toolbox\Utility;
+use ystandard_toolbox\Util\Shortcode;
 
 defined( 'ABSPATH' ) || die();
 
@@ -165,7 +165,7 @@ class Posts_Block extends Dynamic_Block {
 		}
 		$classes = $this->get_class_name( $attributes );
 
-		$short_code_attributes = Utility::parse_shortcode_attributes(
+		$short_code_attributes = Shortcode::parse_shortcode_attributes(
 			$this->migration_attributes( $attributes )
 		);
 

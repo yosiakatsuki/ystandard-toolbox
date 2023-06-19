@@ -24,28 +24,6 @@ defined( 'ABSPATH' ) || die();
 class Utility {
 
 	/**
-	 * ショートコード用にパラメーターを展開
-	 *
-	 * @param array $attributes Attributes.
-	 *
-	 * @return string
-	 */
-	public static function parse_shortcode_attributes( $attributes ) {
-		$result = '';
-		foreach ( $attributes as $key => $value ) {
-			if ( is_null( $value ) ) {
-				continue;
-			}
-			if ( is_array( $value ) ) {
-				$value = implode( ',', $value );
-			}
-			$result .= "${key}=\"${value}\" ";
-		}
-
-		return $result;
-	}
-
-	/**
 	 * WordPressのバージョンチェック
 	 *
 	 * @param string $version バージョン.
