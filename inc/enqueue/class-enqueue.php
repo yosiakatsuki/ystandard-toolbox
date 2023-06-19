@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\AMP;
+use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -154,7 +155,7 @@ class Enqueue {
 			}";
 		}
 
-		return Utility::minify( $css );
+		return Text::minify( $css );
 	}
 }
 

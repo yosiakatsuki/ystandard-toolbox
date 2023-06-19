@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Styles;
+use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -60,7 +61,7 @@ class Sub_Header {
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( Styles::add_media_query( $css, 'tablet' ) )
+			Text::minify( Styles::add_media_query( $css, 'tablet' ) )
 		);
 	}
 

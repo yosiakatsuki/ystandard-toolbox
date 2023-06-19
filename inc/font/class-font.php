@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -97,7 +98,7 @@ class Font {
 		}";
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
-			Utility::minify( $css )
+			Text::minify( $css )
 		);
 	}
 

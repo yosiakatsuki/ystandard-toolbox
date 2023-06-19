@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -38,7 +40,7 @@ class Custom_Css {
 	 */
 	public function add_front_css() {
 		$option = self::get_option();
-		$css    = Utility::minify( $option['all'] . $option['front'] );
+		$css    = Text::minify( $option['all'] . $option['front'] );
 		if ( empty( $css ) ) {
 			return;
 		}
@@ -56,7 +58,7 @@ class Custom_Css {
 	 */
 	public function add_editor_css() {
 		$option = self::get_option();
-		$css    = Utility::minify( $option['all'] . $option['editor'] );
+		$css    = Text::minify( $option['all'] . $option['editor'] );
 		if ( empty( $css ) ) {
 			return;
 		}

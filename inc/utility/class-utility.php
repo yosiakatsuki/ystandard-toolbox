@@ -10,7 +10,6 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Styles;
-use ystandard_toolbox\helper\Text;
 
 defined( 'ABSPATH' ) || die();
 
@@ -20,17 +19,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-
-	/**
-	 * CSSの圧縮
-	 *
-	 * @param string $style inline css styles.
-	 *
-	 * @return string
-	 */
-	public static function minify( $style ) {
-		return Text::minify( $style );
-	}
 
 	/**
 	 * メディアクエリを追加

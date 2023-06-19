@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Styles;
+use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Types;
 
 defined( 'ABSPATH' ) || die();
@@ -138,7 +139,7 @@ class Heading_Compatible {
 		}
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( $css )
+			Text::minify( $css )
 		);
 	}
 
@@ -162,7 +163,7 @@ class Heading_Compatible {
 
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
-			Utility::minify( $css )
+			Text::minify( $css )
 		);
 	}
 

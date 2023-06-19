@@ -9,7 +9,6 @@
 
 namespace ystandard_toolbox\Util;
 
-
 class Device {
 
 	/**

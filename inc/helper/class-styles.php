@@ -10,6 +10,7 @@
 namespace ystandard_toolbox\helper;
 
 use ystandard_toolbox\Config;
+use ystandard_toolbox\Util\Text;
 
 defined( 'ABSPATH' ) || die();
 
