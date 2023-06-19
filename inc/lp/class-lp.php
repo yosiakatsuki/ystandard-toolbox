@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Template;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -144,7 +145,7 @@ class LP {
 			return $template;
 		}
 
-		return Utility::get_page_template_path( $page_template_slug );
+		return Template::get_page_template_path( $page_template_slug );
 	}
 
 	/**
