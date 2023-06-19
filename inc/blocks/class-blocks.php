@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -41,7 +41,7 @@ class Blocks {
 		add_action( 'init', [ $this, 'register_block' ] );
 		add_action( 'init', [ $this, 'block_init' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
-		if ( Version_Compare::wordpress_version_compare( '5.8-alpha-1' ) ) {
+		if ( Version::wordpress_version_compare( '5.8-alpha-1' ) ) {
 			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
 		} else {
 			add_filter( 'block_categories', [ __CLASS__, 'add_block_categories' ] );
@@ -163,7 +163,7 @@ class Blocks {
 			[],
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-block-editor.css' )
 		);
-		if ( ! Version_Compare::ystandard_blocks_version_compare() ) {
+		if ( ! Version::ystandard_blocks_version_compare() ) {
 			wp_add_inline_style(
 				Config::CSS_HANDLE,
 				Enqueue::get_color_palette_css( '.editor-styles-wrapper ' )

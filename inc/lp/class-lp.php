@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -22,7 +24,7 @@ class LP {
 	 * LP constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare( '4.26.1' ) ) {
+		if ( ! Version::ystandard_version_compare( '4.26.1' ) ) {
 			return;
 		}
 		add_filter( 'theme_templates', [ $this, 'add_template' ], 20, 4 );

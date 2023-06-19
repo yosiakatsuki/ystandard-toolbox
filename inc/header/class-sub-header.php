@@ -10,7 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Styles;
-use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -25,7 +25,7 @@ class Sub_Header {
 	 * Sub_Header constructor.
 	 */
 	public function __construct() {
-		if ( ! Version_Compare::ystandard_version_compare( '4.11.0' ) ) {
+		if ( ! Version::ystandard_version_compare( '4.11.0' ) ) {
 			return;
 		}
 		add_action( 'after_setup_theme', [ $this, 'add_menu' ], 11 );

@@ -1,20 +1,20 @@
 <?php
 /**
- * Helper Version Compare
+ * バージョン関連
  *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
  */
 
-namespace ystandard_toolbox\helper;
+namespace ystandard_toolbox\Util;
 
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Version Compare.
+ * Class Version Utility
  */
-class Version_Compare {
+class Version {
 	/**
 	 * WordPressのバージョンチェック
 	 *
@@ -58,6 +58,7 @@ class Version_Compare {
 		return version_compare( $theme_version, $version, '>=' );
 	}
 
+
 	/**
 	 *  [yStandard Blocks]のバージョンチェック
 	 *
@@ -77,5 +78,21 @@ class Version_Compare {
 		}
 
 		return version_compare( $blocks, $version, '>=' );
+	}
+
+	/**
+	 * バージョン文字列からベータ・アルファ情報の削除.
+	 *
+	 * @param string $version バージョン文字列.
+	 *
+	 * @return string
+	 */
+	public static function remove_beta_version( $version ) {
+
+		return preg_replace(
+			'/\-(beta|alpha)\-\d+/i',
+			'',
+			$version
+		);
 	}
 }

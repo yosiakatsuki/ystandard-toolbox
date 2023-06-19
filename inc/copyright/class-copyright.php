@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -29,7 +29,7 @@ class Copyright {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Version_Compare::ystandard_version_compare() ) {
+		if ( ! Version::ystandard_version_compare() ) {
 			return;
 		}
 		add_filter( 'ys_copyright', [ $this, '_copyright' ], 11 );

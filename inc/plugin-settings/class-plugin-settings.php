@@ -9,8 +9,8 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Version_Compare;
 use ystandard_toolbox\Util\AMP;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -152,7 +152,7 @@ class Plugin_Settings {
 	 * @return void
 	 */
 	public static function enqueue_setting_base_scripts() {
-		if ( ! Version_Compare::ystandard_version_compare() ) {
+		if ( ! Version::ystandard_version_compare() ) {
 			wp_enqueue_style(
 				'ystdtb-plugin-settings-orbitron',
 				'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap',

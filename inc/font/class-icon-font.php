@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,7 +29,7 @@ class Icon_Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare() ) {
+		if ( ! Version::ystandard_version_compare() ) {
 			return;
 		}
 		add_filter( 'ys_get_inline_css', [ $this, 'add_ys_icon_font' ], 1 );

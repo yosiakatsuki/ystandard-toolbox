@@ -12,7 +12,6 @@ namespace ystandard_toolbox;
 use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
 use ystandard_toolbox\helper\Text;
-use ystandard_toolbox\helper\Version_Compare;
 
 defined( 'ABSPATH' ) || die();
 
@@ -22,62 +21,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-
-	/**
-	 * WordPressのバージョンチェック
-	 *
-	 * @param string $version バージョン.
-	 *
-	 * @return bool|int
-	 *
-	 * @deprecated 1.24.0
-	 */
-	public static function wordpress_version_compare( $version ) {
-
-		return Version_Compare::wordpress_version_compare( $version );
-	}
-
-	/**
-	 * テーマのバージョンチェック
-	 *
-	 * @param string $version バージョン.
-	 *
-	 * @return bool|int
-	 * @deprecated 1.24.0
-	 */
-	public static function ystandard_version_compare( $version = '' ) {
-
-		return Version_Compare::ystandard_version_compare( $version );
-	}
-
-	/**
-	 *  [yStandard Blocks]のバージョンチェック
-	 *
-	 * @param string $version バージョン.
-	 *
-	 * @return bool|int
-	 * @deprecated 1.24.0
-	 */
-	public static function ystandard_blocks_version_compare( $version = '' ) {
-
-		return Version_Compare::ystandard_blocks_version_compare( $version );
-	}
-
-	/**
-	 * バージョン文字列からベータ・アルファ情報の削除.
-	 *
-	 * @param string $version バージョン文字列.
-	 *
-	 * @return string
-	 */
-	public static function remove_beta_version( $version ) {
-
-		return preg_replace(
-			'/\-(beta|alpha)\-\d+/i',
-			'',
-			$version
-		);
-	}
 
 	/**
 	 * Bool値に変換

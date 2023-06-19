@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 
@@ -23,7 +25,7 @@ class Post_Meta_SEO {
 	 * Post_Meta_SEO constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare( '4.12.2' ) ) {
+		if ( ! Version::ystandard_version_compare( '4.12.2' ) ) {
 			return;
 		}
 		add_action( 'ys_meta_box_seo', [ $this, 'add_seo_option' ] );

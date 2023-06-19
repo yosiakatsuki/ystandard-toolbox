@@ -12,7 +12,7 @@ namespace ystandard_toolbox\menu;
 use ystandard_toolbox\Admin_Utility;
 use ystandard_toolbox\Config;
 use ystandard_toolbox\Notice;
-use ystandard_toolbox\Utility;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -290,7 +290,7 @@ abstract class Menu_Page_Base {
 		if ( ! $this->menu_slug ) {
 			return false;
 		}
-		if ( $this->ystandard_only && ! Utility::ystandard_version_compare( $this->need_ystandard_version ) ) {
+		if ( $this->ystandard_only && ! Version::ystandard_version_compare( $this->need_ystandard_version ) ) {
 			return false;
 		}
 
@@ -485,7 +485,7 @@ abstract class Menu_Page_Base {
 		wp_localize_script( 'wp-theme-plugin-editor', 'codeEditorSettings', $settings );
 		wp_add_inline_script(
 			'wp-theme-plugin-editor',
-			'jQuery(document).ready(function($) { 
+			'jQuery(document).ready(function($) {
 				var input = $(\'.code-input\');
 				$(\'.code-input\').each(function(index, element) {
 					wp.codeEditor.initialize(element, codeEditorSettings );
