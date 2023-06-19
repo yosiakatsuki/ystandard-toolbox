@@ -84,3 +84,18 @@ require $_tests_dir . '/includes/bootstrap.php';
 
 // Use existing behavior for wp_die during actual test execution.
 remove_filter( 'wp_die_handler', 'fail_if_died' );
+
+if ( ! function_exists( 'put_actual_data' ) ) {
+	function put_actual_data( $value, $name ) {
+		if ( ! is_array( $value ) ) {
+			$value = [ $value ];
+		}
+		$data = @json_encode( $value );
+		if ( ! $data ) {
+			$data = 'error';
+		}
+		$name = "{$name}-" . date( 'His' );
+		@file_put_contents( __DIR__ . "/data/actual/{$name}.json", $data );
+	}
+}
+

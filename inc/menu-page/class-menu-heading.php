@@ -49,10 +49,11 @@ class Menu_Heading extends Menu_Page_Base {
 		}
 		wp_enqueue_media();
 		$this->enqueue_admin_script( 'heading' );
+		$option = get_option('ystdtb_heading',[]);
 		wp_localize_script(
 			'ystdtb-heading',
 			'ystdtbHeadingData',
-			Heading_Compatible::get_option()
+			$option
 		);
 		$active_panel = '';
 		if ( isset( $_POST['ystdtb_heading_active'] ) ) {

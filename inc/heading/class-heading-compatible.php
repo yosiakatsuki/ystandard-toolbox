@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
 
 defined( 'ABSPATH' ) || die();
@@ -184,7 +185,7 @@ class Heading_Compatible {
 		foreach ( $options as $level => $value ) {
 			$this->init_var();
 			$this->option = $value;
-			if ( ! Utility::to_bool( $this->get_value( 'useCustomStyle' ) ) ) {
+			if ( ! Boolean::to_bool( $this->get_value( 'useCustomStyle' ) ) ) {
 				continue;
 			}
 			$this->get_font_css();
@@ -424,7 +425,7 @@ class Heading_Compatible {
 		// font-size.
 		$fz_unit = $this->get_unit( 'fontSizeUnit' );
 		$default = $this->get_value( 'fontSizePc', 1 );
-		if ( Utility::to_bool( $this->get_value( 'fontSizeResponsive' ) ) ) {
+		if ( Boolean::to_bool( $this->get_value( 'fontSizeResponsive' ) ) ) {
 			$this->set_css(
 				'font-size',
 				$this->get_value( 'fontSizeMobile', $default ) . $fz_unit
@@ -464,7 +465,7 @@ class Heading_Compatible {
 			$this->get_value( 'fontStyle' )
 		);
 		// 高度な設定.
-		if ( Utility::to_bool( $this->get_value( 'fontAdvanced' ) ) ) {
+		if ( Boolean::to_bool( $this->get_value( 'fontAdvanced' ) ) ) {
 			// family.
 			$this->set_css(
 				'font-family',

@@ -81,8 +81,10 @@ class Heading_Helper {
 				$styles = $custom_style;
 			} else {
 				$styles['position'] = 'relative';
-				$styles             = Styles::parse_styles( $styles );
+				// desktop,tablet,mobileの形に整形。CSSとして使える形に変換.
+				$styles = Styles::parse_styles( $styles );
 			}
+
 			$style_css = self::create_css( $styles, $css_selector );
 			// before.
 			$before_selector = self::add_pseudo_elements( $block_selector, $level_selector, 'before' );
@@ -172,7 +174,9 @@ class Heading_Helper {
 	 * @return false|int|string
 	 */
 	public static function get_level( $level, $slug ) {
-		return array_search( $slug, $level, true );
+		$result = array_search( $slug, $level, true );
+
+		return empty( $result ) ? '' : $result;
 	}
 
 

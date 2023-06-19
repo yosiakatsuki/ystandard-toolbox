@@ -229,7 +229,8 @@
 				"right": "0.7em",
 				"bottom": "0.5em",
 				"left": "0.7em"
-			}
+			},
+			"position": "relative"
 		},
 		"after": {
 			"border": {
@@ -314,8 +315,8 @@
 		"before": {
 			"icon": "award",
 			"fontSize": "1.2em",
-			"width": "1em",
-			"height": "1em"
+			"width": "1.2em",
+			"height": "1.2em"
 		}
 	}
 }

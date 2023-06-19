@@ -282,7 +282,7 @@ class Styles {
 	public static function get_responsive_value( $value ) {
 		$result = [];
 		if ( ! is_array( $value ) ) {
-			$result = [ 'desktop' => $value ];
+			$value = [ 'desktop' => $value ];
 		}
 		if ( array_key_exists( 'desktop', $value ) ) {
 			$result['desktop'] = $value['desktop'];
@@ -297,6 +297,16 @@ class Styles {
 		return $result;
 	}
 
+
+	/**
+	 * ブレークポイント取得.
+	 *
+	 * @return array|null
+	 */
+	public static function get_breakpoints() {
+		return apply_filters( 'ystdtb_css_breakpoints', Config::BREAKPOINTS );
+	}
+
 	/**
 	 * メディアクエリを追加
 	 *
@@ -307,7 +317,7 @@ class Styles {
 	 * @return string
 	 */
 	public static function add_media_query( $css, $min = '', $max = '' ) {
-		$breakpoints = apply_filters( 'ystdtb_css_breakpoints', Config::BREAKPOINTS );
+		$breakpoints = self::get_breakpoints();
 		if ( ! array_key_exists( $min, $breakpoints ) && ! array_key_exists( $max, $breakpoints ) ) {
 			return $css;
 		}

@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
+	const RESPONSIVE_PROPERTY = [ 'fontSize', 'textAlign', 'fontWeight', 'padding', 'margin', 'border' ];
+
 	/**
 	 * 新設定.
 	 *
@@ -53,7 +55,7 @@ class Heading_Migration {
 	 *
 	 * @return array
 	 */
-	private function migration( &$data ) {
+	public function migration( &$data ) {
 		$v1_options          = Heading_Compatible::get_option();
 		$data['v1']          = $v1_options;
 		$v2_options          = [];
@@ -95,44 +97,89 @@ class Heading_Migration {
 	private function set_pseudo_elements() {
 		$types = [ 'before', 'after' ];
 		foreach ( $types as $type ) {
-			$preset     = $this->get_old_option( 'preset', '' );
+			$preset_name = $this->get_old_option( 'preset', '' );
+			$preset      = Heading_Helper::get_preset( $preset_name );
+			// プリセットの展開.
+			$this->set_pseudo_elements_preset( $type, $preset_name );
+
 			$color_type = $this->get_old_option( "{$type}ColorType", '' );
 			$color      = $this->get_old_option( "{$type}Color", '' );
 			$content    = $this->get_old_option( "{$type}Content", null );
-			$icon       = $this->get_old_option( "{$type}Icon", '' );
+			$icon       = $this->get_pseudo_elements_icon( $type );
 			$size       = $this->get_old_option( "{$type}Size", '' );
 			$size_unit  = 'px';
 
-			$preset = Heading_Helper::get_preset( $preset );
-			if ( is_array( $preset ) && ! empty( $preset ) && isset( $preset[ $type ] ) ) {
-				$this->new_option[ $type ] = $preset[ $type ];
-			}
-
+			// content.
 			if ( $this->has_pseudo_elements( $type ) ) {
 				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
 			}
+			// 色設定.
+			$color_type = 'background' === $color_type ? 'backgroundColor' : $color_type;
+			$this->add_pseudo_elements_style( $type, $color_type, $color );
+
 			if ( ! empty( $icon ) ) {
-				$this->new_option[ $type ]['icon']    = $icon;
-				$this->new_option['style']['display'] = 'flex';
-				$this->new_option['style']['gap']     = '0.5em';
+				$this->new_option[ $type ]['icon']       = $icon;
+				$this->new_option['style']['display']    = 'flex';
+				$this->new_option['style']['gap']        = '0.5em';
+				$this->new_option['style']['alignItems'] = 'center';
+
+				$font_size = "{$size}em";
+				if ( empty( $size ) && isset( $preset[ $type ]['fontSize'] ) && ! empty( $preset[ $type ]['fontSize'] ) ) {
+					$font_size = $preset[ $type ]['fontSize'];
+				}
+
 				// サイズ変更.
-				$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}em" );
-				$size      = 1;
+				$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$font_size}" );
 				$size_unit = 'em';
 			}
 
-			$color_type = 'background' === $color_type ? 'backgroundColor' : $color_type;
-			$this->add_pseudo_elements_style( $type, $color_type, $color );
 			if ( ! empty( $size ) ) {
 				if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
 					$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
 				}
-				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
-					$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
-				}
-				// アイコンの場合は幅も.
-				if ( ! empty( $icon ) ) {
+				if ( isset( $preset[ $type ]['width'] ) && 0 !== $preset[ $type ]['width'] ) {
 					$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
+				}
+				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
+					$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+				}
+			}
+		}
+	}
+
+	/**
+	 * 疑似要素のアイコン設定を取得.
+	 *
+	 * @param string $type before/after.
+	 *
+	 * @return string.
+	 */
+	private function get_pseudo_elements_icon( $type ) {
+		$icon = $this->get_old_option( "{$type}Icon", '' );
+		// 設定にアイコンがない場合、プリセットを参照.
+		if ( empty( $icon ) && isset( $this->new_option[ $type ]['icon'] ) ) {
+			$icon = $this->new_option[ $type ]['icon'];
+		}
+
+		return $icon;
+	}
+
+	/**
+	 * プリセットの展開.
+	 *
+	 * @param string $type   before/after.
+	 * @param string $preset preset name.
+	 *
+	 * @return void
+	 */
+	private function set_pseudo_elements_preset( $type, $preset ) {
+		$preset_value = Heading_Helper::get_preset( $preset );
+		if ( is_array( $preset_value ) && ! empty( $preset_value ) && isset( $preset_value[ $type ] ) ) {
+			foreach ( $preset_value[ $type ] as $key => $value ) {
+				if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
+					$this->add_pseudo_elements_responsive_style( $type, $key, $value );
+				} else {
+					$this->add_pseudo_elements_style( $type, $key, $value );
 				}
 			}
 		}
@@ -208,7 +255,9 @@ class Heading_Migration {
 				];
 			}
 		}
-		$this->add_responsive_style( 'border', [ 'desktop' => $border ] );
+		if ( ! empty( $border ) ) {
+			$this->add_responsive_style( 'border', [ 'desktop' => $border ] );
+		}
 	}
 
 	/**
@@ -222,7 +271,7 @@ class Heading_Migration {
 		if ( $bg_color ) {
 			$this->add_style( 'backgroundColor', $bg_color );
 		}
-		// 背景色.
+		// 画像.
 		$bg_image = $this->get_old_option( 'backgroundImage', '' );
 		if ( $bg_image ) {
 			$this->add_style( 'backgroundImage', "url('{$bg_image}')" );
@@ -254,9 +303,8 @@ class Heading_Migration {
 		if ( ! isset( $preset['style'] ) ) {
 			return;
 		}
-		$responsive = [ 'fontSize', 'textAlign', 'fontWeight', 'padding', 'margin', 'border' ];
 		foreach ( $preset['style'] as $key => $value ) {
-			if ( in_array( $key, $responsive, true ) ) {
+			if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
 				$this->add_responsive_style( $key, $value );
 			} else {
 				$this->add_style( $key, $value );
@@ -352,14 +400,14 @@ class Heading_Migration {
 	/**
 	 * 疑似要素を持っているか.
 	 *
-	 * @param string $pos before/after.
+	 * @param string $type before/after.
 	 *
 	 * @return bool
 	 */
-	private function has_pseudo_elements( $pos ) {
-		$color = $this->get_old_option( "{$pos}Color", '' );
-		$size  = $this->get_old_option( "{$pos}Size", '' );
-		$icon  = $this->get_old_option( "{$pos}Icon", '' );
+	private function has_pseudo_elements( $type ) {
+		$color = $this->get_old_option( "{$type}Color", '' );
+		$size  = $this->get_old_option( "{$type}Size", '' );
+		$icon  = $this->get_pseudo_elements_icon( $type );
 
 		return ! empty( $color ) || ! empty( $size ) || ! empty( $icon );
 	}
@@ -374,7 +422,7 @@ class Heading_Migration {
 	 * @return void
 	 */
 	private function add_pseudo_elements_style( $pos, $name, $value ) {
-		if ( ! $this->has_pseudo_elements( $pos ) ) {
+		if ( empty( $name ) && empty( $value ) ) {
 			return;
 		}
 		$this->new_option[ $pos ][ $name ] = $value;
@@ -390,12 +438,20 @@ class Heading_Migration {
 	 * @return void
 	 */
 	private function add_pseudo_elements_responsive_style( $pos, $name, $value ) {
-		if ( ! $this->has_pseudo_elements( $pos ) ) {
+		if ( empty( $name ) && empty( $value ) ) {
 			return;
 		}
+
+		if ( is_array( $value ) && ! isset( $value['desktop'] ) ) {
+			$value = [
+				'desktop' => $value,
+			];
+		}
+
 		$value = Styles::get_responsive_value( $value );
+
 		// セット.
-		$this->new_option[ $pos ]['contentStyles'][ $name ] = $value;
+		$this->new_option[ $pos ][ $name ] = $value;
 	}
 
 	/**
@@ -419,6 +475,12 @@ class Heading_Migration {
 	 * @return void
 	 */
 	private function add_responsive_style( $name, $value ) {
+		if ( is_array( $value ) && ! isset( $value['desktop'] ) ) {
+			$value = [
+				'desktop' => $value,
+			];
+		}
+
 		$value = Styles::get_responsive_value( $value );
 		// セット.
 		$this->new_option['style'][ $name ] = $value;
