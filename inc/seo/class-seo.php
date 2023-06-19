@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Document;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -47,7 +49,7 @@ class SEO {
 		}
 		$seo_title = get_term_meta( $term_id, 'ystdtb-seo-title', true );
 		if ( ! empty( $seo_title ) ) {
-			$title = Utility::get_document_title( $seo_title );
+			$title = Document::get_document_title( $seo_title );
 		}
 
 		return $title;

@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Document;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -45,7 +46,7 @@ class Post_Meta_SEO {
 		if ( is_singular() ) {
 			$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
 			if ( ! empty( trim( $seo_title ) ) ) {
-				$title = Utility::get_document_title( $seo_title );
+				$title = Document::get_document_title( $seo_title );
 			}
 		}
 

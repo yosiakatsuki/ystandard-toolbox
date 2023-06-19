@@ -19,32 +19,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-	
-	/**
-	 * タイトルタグ用タイトルの作成
-	 *
-	 * @param string $title Title.
-	 */
-	public static function get_document_title( $title ) {
-
-		$title = apply_filters(
-			'document_title_parts',
-			[
-				'title'   => $title,
-				'page'    => '',
-				'tagline' => '',
-				'site'    => get_bloginfo( 'name', 'display' ),
-			]
-		);
-		$sep   = apply_filters( 'document_title_separator', '-' );
-		$title = implode( " $sep ", array_filter( $title ) );
-		$title = wptexturize( $title );
-		$title = convert_chars( $title );
-		$title = esc_html( $title );
-		$title = capital_P_dangit( $title );
-
-		return $title;
-	}
 
 	/**
 	 * 使える画像サイズ一覧取得
