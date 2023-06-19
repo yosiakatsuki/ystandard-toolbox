@@ -8,5 +8,9 @@ require_once __DIR__ . '/class-shortcode.php';
 require_once __DIR__ . '/class-version.php';
 require_once __DIR__ . '/class-types.php';
 require_once __DIR__ . '/class-text.php';
+require_once __DIR__ . '/class-manual.php';
+
+// 依存あり.
+require_once __DIR__ . '/class-styles.php';
 
 require_once __DIR__ . '/class-debug.php';

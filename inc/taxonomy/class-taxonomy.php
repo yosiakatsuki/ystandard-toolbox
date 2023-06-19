@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Manual;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -118,7 +120,7 @@ class Taxonomy {
 		<div class="ystdtb-option-box">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
 			<h2 class="ystdtb-option-box__label">yStandard Toolbox 設定</h2>
-			<div class="ystdtb-option-box__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
+			<div class="ystdtb-option-box__manual"><?php echo Manual::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
 			<?php do_action( 'ystdtb_term_edit_form', $tag, $taxonomy ); ?>
 		</div>
 		<?php
