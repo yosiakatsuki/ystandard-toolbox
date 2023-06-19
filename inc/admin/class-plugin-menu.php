@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -40,7 +42,7 @@ class Plugin_Menu {
 			'manage_options',
 			Config::ADMIN_MENU_PARENT_SLUG,
 			'',
-			Utility::get_menu_icon(),
+			Admin::get_menu_icon(),
 			59
 		);
 		add_submenu_page(

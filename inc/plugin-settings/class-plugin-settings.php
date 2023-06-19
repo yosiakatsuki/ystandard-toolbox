@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
 use ystandard_toolbox\Util\AMP;
 use ystandard_toolbox\Util\Version;
 
@@ -260,7 +261,7 @@ class Plugin_Settings {
 			'manage_options',
 			Config::ADMIN_MENU_SLUG_V2,
 			'',
-			Utility::get_menu_icon(),
+			Admin::get_menu_icon(),
 			59
 		);
 		foreach ( self::SUBMENU as $menu ) {

@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -97,7 +99,7 @@ class Block_Patterns {
 				'query_var'           => false,
 				'exclude_from_search' => true,
 				'publicly_queryable'  => false,
-				'menu_icon'           => Utility::get_menu_icon(),
+				'menu_icon'           => Admin::get_menu_icon(),
 				'supports'            => [
 					'title',
 					'editor',

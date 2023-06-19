@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
 use ystandard_toolbox\Util\Manual;
 
 defined( 'ABSPATH' ) || die();
@@ -133,7 +134,7 @@ class Taxonomy {
 	 */
 	public function update_term_meta( $term_id ) {
 
-		if ( ! Utility::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
+		if ( ! Admin::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
 			return;
 		}
 

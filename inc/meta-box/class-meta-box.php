@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -135,7 +137,7 @@ class Meta_Box {
 	public function save_post( $post_id ) {
 		$nonce  = self::NONCE_NAME_PREFIX . $this->id;
 		$action = self::NONCE_ACTION_PREFIX . $this->id;
-		if ( ! Utility::verify_nonce( $nonce, $action ) ) {
+		if ( ! Admin::verify_nonce( $nonce, $action ) ) {
 			return;
 		}
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {

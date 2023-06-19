@@ -14,8 +14,3 @@ defined( 'ABSPATH' ) || die();
  */
 require_once __DIR__ . '/class-drawer-menu.php';
 require_once __DIR__ . '/class-array-object.php';
-
-/**
- * 依存あり.
- */
-require_once __DIR__ . '/class-styles.php';

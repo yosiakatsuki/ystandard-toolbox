@@ -21,17 +21,6 @@ defined( 'ABSPATH' ) || die();
 class Utility {
 
 	/**
-	 * メニューアイコン取得
-	 *
-	 * @return string
-	 */
-	public static function get_menu_icon() {
-		$icon = Util\File::file_get_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
-
-		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
-	}
-
-	/**
 	 * 投稿タイプ取得
 	 *
 	 * @param array $args    args.
@@ -112,23 +101,6 @@ class Utility {
 		}
 
 		return $template;
-	}
-
-	/**
-	 * Nonceチェック
-	 *
-	 * @param string $name   Name.
-	 * @param string $action Action.
-	 *
-	 * @return bool|int
-	 */
-	public static function verify_nonce( $name, $action ) {
-		// nonceがセットされているかどうか確認.
-		if ( ! isset( $_POST[ $name ] ) ) {
-			return false;
-		}
-
-		return wp_verify_nonce( $_POST[ $name ], $action );
 	}
 
 	/**
