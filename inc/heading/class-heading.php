@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\helper\Styles;
 use ystandard_toolbox\helper\Text;
 
 defined( 'ABSPATH' ) || die();
@@ -85,7 +86,7 @@ class Heading {
 		if ( empty( $css ) ) {
 			return;
 		}
-		wp_register_style( self::CSS_HANDLE, false );
+		wp_register_style( self::CSS_HANDLE, false, [], wp_date( 'YmdHis' ) );
 		wp_add_inline_style(
 			self::CSS_HANDLE,
 			Text::minify( $css )
@@ -113,6 +114,7 @@ class Heading {
 		$settings['heading_design']        = self::get_heading_design_options();
 		$settings['heading_level']         = self::get_heading_level_options();
 		$settings['heading_is_compatible'] = $this->is_compatible_mode();
+		$settings['heading_breakpoints']   = Styles::get_breakpoints();
 
 		return $settings;
 	}
