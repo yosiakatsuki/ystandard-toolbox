@@ -14,7 +14,7 @@ use ystandard_toolbox\Util\Types;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Utility
+ * Class Option
  *
  * @package ystandard_toolbox
  */

@@ -1,25 +1,17 @@
 <?php
 /**
- * Utility
+ * ページ関連
  *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
  */
 
-namespace ystandard_toolbox;
-
-use ystandard_toolbox\Util;
+namespace ystandard_toolbox\Util;
 
 defined( 'ABSPATH' ) || die();
 
-/**
- * Class Utility
- *
- * @package ystandard_toolbox
- */
-class Utility {
-
+class Image {
 	/**
 	 * 使える画像サイズ一覧取得
 	 *
@@ -50,5 +42,4 @@ class Utility {
 
 		return $sizes;
 	}
-
 }
