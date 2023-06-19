@@ -1,16 +1,15 @@
 <?php
 /**
- * Helper Styles
+ * スタイル関連
  *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
  * @license GPL-2.0+
  */
 
-namespace ystandard_toolbox\helper;
+namespace ystandard_toolbox\Util;
 
 use ystandard_toolbox\Config;
-use ystandard_toolbox\Util\Text;
 
 defined( 'ABSPATH' ) || die();
 

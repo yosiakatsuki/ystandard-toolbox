@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Styles;
+use ystandard_toolbox\Util;
 
 defined( 'ABSPATH' ) || die();
 
@@ -19,20 +19,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-
-	/**
-	 * メディアクエリを追加
-	 *
-	 * @param string $css Styles.
-	 * @param string $min Breakpoint.
-	 * @param string $max Breakpoint.
-	 *
-	 * @return string
-	 * @deprecated
-	 */
-	public static function add_media_query( $css, $min = '', $max = '' ) {
-		return Styles::add_media_query( $css, $min, $max );
-	}
 
 	/**
 	 * マニュアルリンク作成
