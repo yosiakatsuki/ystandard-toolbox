@@ -472,7 +472,7 @@ class Utility {
 		var_dump( $var );
 		$dump = ob_get_contents();
 		ob_end_clean();
-		file_put_contents( ABSPATH . 'wp-content/uploads/debug.html', $dump, FILE_APPEND );
+		file_put_contents( ABSPATH . 'wp-content/uploads/debug.html', $dump . PHP_EOL, FILE_APPEND );
 	}
 
 }
