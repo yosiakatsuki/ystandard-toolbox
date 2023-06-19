@@ -8,6 +8,7 @@
    		<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
    		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
    		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+   		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
    		<exclude name="WordPress.DB.DirectDatabaseQuery"/>
    		<exclude name="WordPress.DB.PreparedSQL"/>
    		<exclude name="WordPress.DB.PreparedSQLPlaceholders"/>
@@ -15,7 +16,7 @@
    		<exclude name="WordPress.DB.RestrictedFunctions"/>
    		<exclude name="WordPress.DB.SlowDBQuery"/>
    		<exclude name="WordPress.Security.EscapeOutput"/>
-   		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+   		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
    	</rule>
     <file>.</file>
     <exclude-pattern>/vendor/</exclude-pattern>

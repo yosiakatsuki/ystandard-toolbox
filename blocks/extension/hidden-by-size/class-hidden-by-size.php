@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox\blocks\extension;
 
-use ystandard_toolbox\Filesystem;
+use ystandard_toolbox\Util\File;
 
 defined( 'ABSPATH' ) || die();
 
@@ -29,7 +29,7 @@ class Hidden_By_Size {
 
 		return Extension::merge_attributes(
 			$args,
-			Filesystem::get_json_file_contents( __DIR__ . '/attributes.json' )
+			File::get_json_file_contents( __DIR__ . '/attributes.json' )
 		);
 	}
 

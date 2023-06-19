@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Array_Object;
+use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Types;
 
@@ -265,6 +266,6 @@ class Heading_Helper {
 	 * @return array
 	 */
 	public static function get_presets_all() {
-		return Filesystem::get_json_file_contents( YSTDTB_PATH . '/library/ystandard-toolbox-heading/preset.json' );
+		return File::get_json_file_contents( YSTDTB_PATH . '/library/ystandard-toolbox-heading/preset.json' );
 	}
 }

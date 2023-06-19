@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Types;
@@ -175,10 +176,10 @@ class Heading_Compatible {
 	private function get_heading_css() {
 		$options = self::get_option();
 		// 初期値等取得.
-		$this->schema = Filesystem::get_json_file_contents(
+		$this->schema = File::get_json_file_contents(
 			YSTDTB_PATH . '/js/admin/heading/schema.json'
 		);
-		$this->preset = Filesystem::get_json_file_contents(
+		$this->preset = File::get_json_file_contents(
 			YSTDTB_PATH . '/js/admin/heading/preset.json'
 		);
 

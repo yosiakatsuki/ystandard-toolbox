@@ -26,7 +26,7 @@ class Utility {
 	 * @return string
 	 */
 	public static function get_menu_icon() {
-		$icon = Filesystem::file_get_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
+		$icon = Util\File::file_get_contents( YSTDTB_PATH . '/assets/menu/toolbox.svg' );
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
 	}
