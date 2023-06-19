@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Types;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -71,7 +73,7 @@ class Option {
 	 */
 	public static function get_option_by_bool( $section, $name, $default = false ) {
 
-		return Utility::to_bool( self::get_option( $section, $name, $default ) );
+		return Types::to_bool( self::get_option( $section, $name, $default ) );
 	}
 
 	/**

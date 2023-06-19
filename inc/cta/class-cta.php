@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Boolean;
+use ystandard_toolbox\Util\Types;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -150,48 +150,48 @@ class CTA {
 			$footer = $priority['footer'];
 			foreach ( $header as &$item ) {
 				$option_name = $item['id'];
-				$enable      = Boolean::to_bool( $item['enable'] );
+				$enable      = Types::to_bool( $item['enable'] );
 				switch ( $option_name ) {
 					case 'post-thumbnail':
 						$theme          = get_option(
 							"ys_show_${post_type}_header_thumbnail",
 							$enable
 						);
-						$item['enable'] = Boolean::to_bool( $theme );
+						$item['enable'] = Types::to_bool( $theme );
 						break;
 				}
 			}
 			foreach ( $footer as &$item ) {
 				$option_name = $item['id'];
-				$enable      = Boolean::to_bool( $item['enable'] );
+				$enable      = Types::to_bool( $item['enable'] );
 				switch ( $option_name ) {
 					case 'taxonomy':
 						$theme          = get_option(
 							"ys_show_${post_type}_category",
 							$enable
 						);
-						$item['enable'] = Boolean::to_bool( $theme );
+						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'author':
 						$theme          = get_option(
 							"ys_show_${post_type}_author",
 							$enable
 						);
-						$item['enable'] = Boolean::to_bool( $theme );
+						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'related':
 						$theme          = get_option(
 							"ys_show_${post_type}_related",
 							$enable
 						);
-						$item['enable'] = Boolean::to_bool( $theme );
+						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'paging':
 						$theme          = get_option(
 							"ys_show_${post_type}_paging",
 							$enable
 						);
-						$item['enable'] = Boolean::to_bool( $theme );
+						$item['enable'] = Types::to_bool( $theme );
 						break;
 
 				}
@@ -313,7 +313,7 @@ class CTA {
 
 		foreach ( $header as $item ) {
 			$option_name = $item['id'];
-			$enable      = Helper\Boolean::to_bool( $item['enable'] );
+			$enable      = Types::to_bool( $item['enable'] );
 			switch ( $option_name ) {
 				case 'post-thumbnail':
 					update_option( "ys_show_${post_type}_header_thumbnail", $enable );
@@ -332,7 +332,7 @@ class CTA {
 		}
 		foreach ( $footer as $item ) {
 			$option_name = $item['id'];
-			$enable      = Helper\Boolean::to_bool( $item['enable'] );
+			$enable      = Types::to_bool( $item['enable'] );
 			switch ( $option_name ) {
 				case 'taxonomy':
 					update_option( "ys_show_${post_type}_category", $enable );

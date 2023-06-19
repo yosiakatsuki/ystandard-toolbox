@@ -10,9 +10,8 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Array_Object;
-use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
-use ystandard_toolbox\helper\Text;
+use ystandard_toolbox\Util\Types;
 
 defined( 'ABSPATH' ) || die();
 
@@ -40,7 +39,7 @@ class Heading_Helper {
 			$styles = Array_Object::get_value( $item, 'style', [] );
 			$before = Array_Object::get_value( $item, 'before', [] );
 			$after  = Array_Object::get_value( $item, 'after', [] );
-			$enable = Boolean::to_bool( $enable );
+			$enable = Types::to_bool( $enable );
 			// カスタムCSS.
 			$custom_css    = apply_filters(
 				'ystdtb_custom_heading_custom_css',

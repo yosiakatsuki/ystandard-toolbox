@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\AMP;
+use ystandard_toolbox\Util\Types;
 
 defined( 'ABSPATH' ) || die();
 
@@ -97,7 +98,7 @@ class Accordion {
 			return $instance;
 		}
 		if ( isset( $new_instance[ self::FIELD_ID ] ) ) {
-			$instance[ self::FIELD_ID ] = Utility::to_bool( $new_instance[ self::FIELD_ID ] );
+			$instance[ self::FIELD_ID ] = Types::to_bool( $new_instance[ self::FIELD_ID ] );
 		} else {
 			if ( isset( $instance[ self::FIELD_ID ] ) ) {
 				unset( $instance[ self::FIELD_ID ] );
@@ -141,7 +142,7 @@ class Accordion {
 
 		$accordion = false;
 		if ( isset( $widget_option[ $widget_num ]['ystdtb-accordion'] ) ) {
-			$accordion = Utility::to_bool( $widget_option[ $widget_num ]['ystdtb-accordion'] );
+			$accordion = Types::to_bool( $widget_option[ $widget_num ]['ystdtb-accordion'] );
 		}
 
 		if ( $accordion ) {

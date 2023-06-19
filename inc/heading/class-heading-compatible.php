@@ -9,8 +9,8 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
+use ystandard_toolbox\Util\Types;
 
 defined( 'ABSPATH' ) || die();
 
@@ -185,7 +185,7 @@ class Heading_Compatible {
 		foreach ( $options as $level => $value ) {
 			$this->init_var();
 			$this->option = $value;
-			if ( ! Boolean::to_bool( $this->get_value( 'useCustomStyle' ) ) ) {
+			if ( ! Types::to_bool( $this->get_value( 'useCustomStyle' ) ) ) {
 				continue;
 			}
 			$this->get_font_css();
@@ -425,7 +425,7 @@ class Heading_Compatible {
 		// font-size.
 		$fz_unit = $this->get_unit( 'fontSizeUnit' );
 		$default = $this->get_value( 'fontSizePc', 1 );
-		if ( Boolean::to_bool( $this->get_value( 'fontSizeResponsive' ) ) ) {
+		if ( Types::to_bool( $this->get_value( 'fontSizeResponsive' ) ) ) {
 			$this->set_css(
 				'font-size',
 				$this->get_value( 'fontSizeMobile', $default ) . $fz_unit
@@ -465,7 +465,7 @@ class Heading_Compatible {
 			$this->get_value( 'fontStyle' )
 		);
 		// 高度な設定.
-		if ( Boolean::to_bool( $this->get_value( 'fontAdvanced' ) ) ) {
+		if ( Types::to_bool( $this->get_value( 'fontAdvanced' ) ) ) {
 			// family.
 			$this->set_css(
 				'font-family',
@@ -620,7 +620,7 @@ class Heading_Compatible {
 	private function get_pseudo_elements_css() {
 		$preset = $this->get_preset();
 		// クリア.
-		if ( isset( $preset['clearPseudoElements'] ) && Utility::to_bool( $preset['clearPseudoElements'] ) ) {
+		if ( isset( $preset['clearPseudoElements'] ) && Types::to_bool( $preset['clearPseudoElements'] ) ) {
 			$this->set_css( 'display', 'none', 'before' );
 			$this->set_css( 'display', 'none', 'after' );
 		}

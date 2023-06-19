@@ -9,7 +9,6 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
 use ystandard_toolbox\helper\Text;
 
@@ -21,18 +20,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-
-	/**
-	 * Bool値に変換
-	 *
-	 * @param mixed $value value.
-	 *
-	 * @return bool
-	 * @deprecated
-	 */
-	public static function to_bool( $value ) {
-		return Boolean::to_bool( $value );
-	}
 
 	/**
 	 * CSSの圧縮

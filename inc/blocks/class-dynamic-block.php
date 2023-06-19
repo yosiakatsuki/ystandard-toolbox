@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Types;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -153,7 +155,7 @@ abstract class Dynamic_Block {
 				$attributes[ $key ] = isset( $item['default'] ) ? $item['default'] : null;
 			}
 			if ( 'bool' === $item['type'] ) {
-				$attributes[ $key ] = Utility::to_bool( $attributes[ $key ] );
+				$attributes[ $key ] = Types::to_bool( $attributes[ $key ] );
 			}
 		}
 

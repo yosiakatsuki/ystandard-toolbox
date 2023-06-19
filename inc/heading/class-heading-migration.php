@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\helper\Styles;
+use ystandard_toolbox\Util\Types;
 
 defined( 'ABSPATH' ) || die();
 
@@ -320,7 +321,7 @@ class Heading_Migration {
 	private function set_typography() {
 		// フォントサイズ.
 		$unit         = $this->get_old_option( 'fontSizeUnit', 'em' );
-		$responsive   = Helper\Boolean::to_bool(
+		$responsive   = Types::to_bool(
 			$this->get_old_option( 'fontSizeResponsive', false )
 		);
 		$size_desktop = $this->get_old_option( 'fontSizePc', '' );
@@ -389,7 +390,7 @@ class Heading_Migration {
 		$this->new_option['label'] = $this->get_option_label( $level );
 		$this->new_option['style'] = [];
 		// 有効化.
-		$is_enable                  = Helper\Boolean::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
+		$is_enable                  = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
 		$this->new_option['enable'] = $is_enable;
 
 		if ( $is_enable ) {
@@ -568,7 +569,7 @@ class Heading_Migration {
 				wp_json_encode( $data )
 			);
 		}
-		if ( ! helper\Boolean::to_bool( $data['migration'] ) ) {
+		if ( ! Types::to_bool( $data['migration'] ) ) {
 			return Api::create_response(
 				false,
 				'パラメーターが正しくありません。',
