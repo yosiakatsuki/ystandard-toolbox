@@ -2,6 +2,17 @@
 
 class Heading_Design_Migration_Test extends WP_UnitTestCase {
 
+	public function set_up() {
+		parent::set_up();
+		update_option( 'ystdtb_heading', [ 'hoge' => 'fuga' ] );
+		update_option( 'ystdtb_heading_v2', false );
+		if ( ! class_exists( '\ystandard_toolbox\Heading_Compatible' ) ) {
+			require_once YSTDTB_PATH . '/inc/heading/class-heading-compatible.php';
+		}
+		if ( ! class_exists( '\ystandard_toolbox\Heading_Migration' ) ) {
+			require_once YSTDTB_PATH . '/inc/heading/class-heading-migration.php';
+		}
+	}
 
 	public function set_option( $value ) {
 		update_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME, $value );
@@ -42,7 +53,7 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'style'  => [
 					'border' => [
 						'desktop' => [
-							'top' => [
+							'top'    => [
 								'width' => '1px',
 								'style' => 'solid',
 								'color' => '#aaaaaa',
@@ -52,8 +63,8 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 								'style' => 'dashed',
 								'color' => '#222222',
 							],
-						]
-					]
+						],
+					],
 				],
 			],
 		];
@@ -95,12 +106,12 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'style'  => [
 					'border' => [
 						'desktop' => [
-							'top' => [
+							'top'    => [
 								'width' => '1px',
 								'style' => 'solid',
 								'color' => '#aaaaaa',
 							],
-							'right' => [
+							'right'  => [
 								'width' => '2em',
 								'style' => 'dotted',
 								'color' => '#111111',
@@ -110,13 +121,13 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 								'style' => 'dashed',
 								'color' => '#222222',
 							],
-							'left' => [
+							'left'   => [
 								'width' => '4vh',
 								'style' => 'double',
 								'color' => '#333333',
 							],
-						]
-					]
+						],
+					],
 				],
 			],
 		];
