@@ -9,7 +9,6 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\Array_Object;
 use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Types;
@@ -34,17 +33,17 @@ class Heading_Helper {
 
 		$selector_all = self::get_selector_all();
 		foreach ( $heading as $name => $item ) {
-			$slug   = Array_Object::get_value( $item, 'slug', '' );
-			$label  = Array_Object::get_value( $item, 'label', '' );
-			$enable = Array_Object::get_value( $item, 'enable', true );
-			$styles = Array_Object::get_value( $item, 'style', [] );
-			$before = Array_Object::get_value( $item, 'before', [] );
-			$after  = Array_Object::get_value( $item, 'after', [] );
+			$slug   = Types::get_array_value( $item, 'slug', '' );
+			$label  = Types::get_array_value( $item, 'label', '' );
+			$enable = Types::get_array_value( $item, 'enable', true );
+			$styles = Types::get_array_value( $item, 'style', [] );
+			$before = Types::get_array_value( $item, 'before', [] );
+			$after  = Types::get_array_value( $item, 'after', [] );
 			$enable = Types::to_bool( $enable );
 			// カスタムCSS.
 			$custom_css    = apply_filters(
 				'ystdtb_custom_heading_custom_css',
-				Array_Object::get_value( $item, 'customCss', '' ),
+				Types::get_array_value( $item, 'customCss', '' ),
 				$slug
 			);
 			$custom_style  = [];
@@ -71,7 +70,7 @@ class Heading_Helper {
 			$level = self::get_level( $level_list, $slug );
 
 			$block_selector = self::get_block_style_selector( $level );
-			$level_selector = Array_Object::get_value( $selector_all, $level, [] );
+			$level_selector = Types::get_array_value( $selector_all, $level, [] );
 
 			$css_selector = $block_selector;
 			if ( ! empty( $level_selector ) ) {

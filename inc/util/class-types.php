@@ -41,4 +41,24 @@ class Types {
 			return false;
 		}
 	}
+
+	/**
+	 * 配列の値を取得.
+	 *
+	 * @param array  $array   Array.
+	 * @param string $key     Key.
+	 * @param mixed  $default Default Value.
+	 *
+	 * @return array|mixed
+	 */
+	public static function get_array_value( $array, $key, $default = false ) {
+		if ( ! is_array( $array ) || empty( $array ) ) {
+			return $default;
+		}
+		if ( array_key_exists( $key, $array ) ) {
+			return $array[ $key ];
+		}
+
+		return $default;
+	}
 }
