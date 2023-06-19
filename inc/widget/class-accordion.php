@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\AMP;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -115,7 +117,7 @@ class Accordion {
 	public function sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
-		if ( Utility::is_amp() ) {
+		if ( AMP::is_amp() ) {
 			return $params;
 		}
 

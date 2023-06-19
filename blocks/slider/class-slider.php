@@ -9,7 +9,7 @@
 
 namespace ystandard_toolbox\blocks;
 
-use ystandard_toolbox\helper\AMP;
+use ystandard_toolbox\util\AMP;
 
 defined( 'ABSPATH' ) || die();
 

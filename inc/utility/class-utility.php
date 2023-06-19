@@ -9,11 +9,10 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\AMP;
 use ystandard_toolbox\helper\Boolean;
 use ystandard_toolbox\helper\Styles;
-use ystandard_toolbox\helper\Version_Compare;
 use ystandard_toolbox\helper\Text;
+use ystandard_toolbox\helper\Version_Compare;
 
 defined( 'ABSPATH' ) || die();
 
@@ -23,26 +22,6 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class Utility {
-
-	/**
-	 * AMPが有効か
-	 *
-	 * @return bool
-	 * @deprecated 1.24.0
-	 */
-	public static function is_amp() {
-
-		return AMP::is_amp();
-	}
-
-	/**
-	 * AMPが使えるか.
-	 *
-	 * @deprecated 1.24.0
-	 */
-	public static function is_amp_enable() {
-		return AMP::is_amp_enable();
-	}
 
 	/**
 	 * ショートコード用にパラメーターを展開

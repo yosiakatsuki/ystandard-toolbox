@@ -6,8 +6,7 @@
  * @author  yosiakatsuki
  * @license GPL-2.0+
  */
-
-namespace ystandard_toolbox\helper;
+namespace ystandard_toolbox\Util;
 
 defined( 'ABSPATH' ) || die();
 

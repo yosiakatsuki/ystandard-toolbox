@@ -9,8 +9,8 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\helper\AMP;
 use ystandard_toolbox\helper\Version_Compare;
+use ystandard_toolbox\Util\AMP;
 
 defined( 'ABSPATH' ) || die();
 

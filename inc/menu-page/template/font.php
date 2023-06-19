@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\AMP;
+
 defined( 'ABSPATH' ) || die();
 
 $sample_font = Font::get_sample_font_family();
@@ -23,7 +25,7 @@ $font_family = Font::get_font_family();
 		<div class="ystdtb-menu__subtext">
 			<a href="https://fonts.google.com/" target="_blank" rel="noreferrer nofollow noopener">Google Fonts</a>などで発行したフォント読み込み用のHTMLを貼り付けてください。
 		</div>
-		<?php if ( Utility::is_amp_enable() ) : ?>
+		<?php if ( AMP::is_amp_enable() ) : ?>
 			<div class="ystdtb-menu__subtext">
 				※入力したコードはAMPページでも出力されます。<br>
 				※AMPページと分けたい場合は「コード追加」設定を使用してください。
