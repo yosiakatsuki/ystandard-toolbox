@@ -109,6 +109,7 @@ class Heading_Migration {
 			$icon       = $this->get_pseudo_elements_icon( $type );
 			$size       = $this->get_old_option( "{$type}Size", '' );
 			$size_unit  = 'px';
+			$icon_size  = '';
 
 			// content.
 			if ( $this->has_pseudo_elements( $type ) ) {
@@ -125,6 +126,7 @@ class Heading_Migration {
 				$this->new_option['style']['alignItems'] = 'center';
 
 				$font_size = "{$size}em";
+				$icon_size = ! empty( $size ) ? "{$size}em" : '';
 				if ( empty( $size ) && isset( $preset[ $type ]['fontSize'] ) && ! empty( $preset[ $type ]['fontSize'] ) ) {
 					$font_size = $preset[ $type ]['fontSize'];
 				}
@@ -144,6 +146,11 @@ class Heading_Migration {
 				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
 					$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
 				}
+			}
+			// アイコンの場合.
+			if ( ! empty( $icon_size ) ) {
+				$this->add_pseudo_elements_style( $type, 'height', $icon_size );
+				$this->add_pseudo_elements_style( $type, 'width', $icon_size );
 			}
 		}
 	}
