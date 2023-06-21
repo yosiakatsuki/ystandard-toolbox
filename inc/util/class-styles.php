@@ -153,16 +153,21 @@ class Styles {
 		if ( isset( $styles['icon'] ) ) {
 			unset( $styles['icon'] );
 		}
-		if ( isset( $styles['content'] ) ) {
-			$content = stripslashes( $styles['content'] );
-			$content = str_replace( '\'', '"', $content );
-			if ( false !== strpos( $content, '<svg' ) ) {
-				$content                   = rawurlencode( $content );
-				$styles['content']         = '""';
-				$styles['backgroundImage'] = "url('data:image/svg+xml;charset=UTF-8,{$content}')";
-				$styles['backgroundSize']  = 'contain';
-			}
+		// contentの処理.
+		if ( ! isset( $styles['content'] ) ) {
+			$styles['content'] = '""';
 		}
+		$content = stripslashes( $styles['content'] );
+		$content = str_replace( '\'', '"', $content );
+		// SVGアイコンの処理.
+		if ( false !== strpos( $content, '<svg' ) ) {
+			$svg_icon                  = rawurlencode( $content );
+			$styles['backgroundImage'] = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
+			$styles['backgroundSize']  = 'contain';
+			$content                   = '';
+		}
+		$content           = trim( $content, '"' );
+		$styles['content'] = "\"{$content}\"";
 
 		return self::parse_styles( $styles, $pseudo_elements );
 	}

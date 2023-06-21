@@ -43,16 +43,28 @@ export interface HeadingStyle {
 	borderRadius?: ResponsiveValues;
 
 	// Size.
+	width?: ResponsiveValues;
 	minWidth?: ResponsiveValues;
 	maxWidth?: ResponsiveValues;
+	height?: ResponsiveValues;
 	minHeight?: ResponsiveValues;
 	maxHeight?: ResponsiveValues;
 
 	// advanced.
+	background?: string;
 	display?: string;
+	position?: string;
+	top?: string;
+	right?: string;
+	bottom?: string;
+	left?: string;
 	gap?: ResponsiveValues;
 	flexDirection?: string;
+	alignItems?: string;
+	justifyContent?: string;
 	fontFamily?: string;
+	textShadow?: string;
+	boxShadow?: string;
 	customCss?: string;
 }
 
@@ -79,12 +91,23 @@ export interface HeadingPseudoElementsStyle {
 	border?: ResponsiveBorder;
 	borderRadius?: ResponsiveValues;
 	// Size.
+	width?: ResponsiveValues;
 	minWidth?: ResponsiveValues;
 	maxWidth?: ResponsiveValues;
+	height?: ResponsiveValues;
 	minHeight?: ResponsiveValues;
 	maxHeight?: ResponsiveValues;
 	// advanced.
+	background?: string;
 	display?: string;
+	flexGrow?: string;
+	flexShrink?: string;
+	position?: string;
+	top?: string;
+	right?: string;
+	bottom?: string;
+	left?: string;
+	zIndex?: string;
 	fontFamily?: string;
 	customCss?: string;
 }
