@@ -61,6 +61,7 @@ class Styles {
 		if ( ! is_array( $styles ) || empty( $styles ) ) {
 			return [];
 		}
+
 		$result  = [];
 		$desktop = [];
 		$tablet  = [];
@@ -86,11 +87,16 @@ class Styles {
 				$desktop[ $property ] = $value['desktop'];
 			}
 
+			// 画像の処理.
+			if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+				$desktop[ $property ] = "url('{$value['desktop']}')";
+			}
+
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
 				if ( is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
 					$var_prefix = ! empty( $pseudo_elements ) ? "-{$pseudo_elements}" : '';
-					$var_prefix = "--ystdtb-custom-header{$var_prefix}";
+					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
 					$color_rgb  = self::hex_2_rgb( $value['desktop'] );
 					$color_rgb  = implode( ',', $color_rgb );
 					$type       = 'backgroundColor' === $key ? 'bg-color' : 'color';
@@ -187,9 +193,17 @@ class Styles {
 		$parse = function ( $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $border_value ) {
-				foreach ( $border_value as $key => $value ) {
-					$parse_result[ "border-{$position}-{$key}" ] = $value;
+				$border_width = isset( $border_value['width'] ) ? $border_value['width'] : '';
+				$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
+				$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
+				$value        = "{$border_width} {$border_style} {$border_color}";
+				// width=0の場合は0のみセット.
+				if ( '' !== $border_width && 0 === (int) $border_width ) {
+					$value = 0;
 				}
+
+				// セット.
+				$parse_result[ "border-{$position}" ] = $value;
 			}
 
 			return $parse_result;
@@ -234,6 +248,9 @@ class Styles {
 		$parse = function ( $name, $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $value ) {
+				if ( '' !== $value && 0 === (int) $value ) {
+					$value = 0;
+				}
 				$parse_result[ "{$name}-{$position}" ] = $value;
 			}
 

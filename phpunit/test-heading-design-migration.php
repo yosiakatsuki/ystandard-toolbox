@@ -419,7 +419,7 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					"backgroundColor"    => "#fafafa",
-					"backgroundImage"    => "url('https://example.com/image.jpg')",
+					"backgroundImage"    => "https://example.com/image.jpg",
 					"backgroundPosition" => "center center",
 					"backgroundRepeat"   => "no-repeat",
 					"backgroundSize"     => "cover",
@@ -577,7 +577,7 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 							"top"    => [
 								"width" => "0.9em",
 								"style" => "solid",
-								"color" => "var(--ystdtb-custom-header-after-bg-color,var(--ystdtb-custom-header-bg-color))",
+								"color" => "var(--ystdtb-custom-heading-after-bg-color,var(--ystdtb-custom-heading-bg-color))",
 							],
 							"right"  => [
 								"width" => "0.9em",

@@ -184,6 +184,9 @@ class Heading_Migration {
 		$preset_value = Heading_Helper::get_preset( $preset );
 		if ( is_array( $preset_value ) && ! empty( $preset_value ) && isset( $preset_value[ $type ] ) ) {
 			foreach ( $preset_value[ $type ] as $key => $value ) {
+				// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
+				$key   = $this->replace_custom_property( $key );
+				$value = $this->replace_custom_property( $value );
 				if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
 					$this->add_pseudo_elements_responsive_style( $type, $key, $value );
 				} else {
@@ -284,7 +287,7 @@ class Heading_Migration {
 		// 画像.
 		$bg_image = $this->get_old_option( 'backgroundImage', '' );
 		if ( $bg_image ) {
-			$this->add_style( 'backgroundImage', "url('{$bg_image}')" );
+			$this->add_style( 'backgroundImage', "{$bg_image}" );
 		}
 		// 背景 位置.
 		$bg_pos = $this->get_old_option( 'backgroundPosition', '' );
@@ -314,12 +317,36 @@ class Heading_Migration {
 			return;
 		}
 		foreach ( $preset['style'] as $key => $value ) {
+			// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
+			$key   = $this->replace_custom_property( $key );
+			$value = $this->replace_custom_property( $value );
+			// スタイルのセット.
 			if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
 				$this->add_responsive_style( $key, $value );
 			} else {
 				$this->add_style( $key, $value );
 			}
 		}
+	}
+
+	/**
+	 * カスタムプロパティ置換.
+	 *
+	 * @param string|array $value 名前.
+	 *
+	 * @return string|array
+	 */
+	private function replace_custom_property( $value ) {
+		if ( ! is_array( $value ) ) {
+			return str_replace( '--ystdtb-custom-header', '--ystdtb-custom-heading', $value );
+		}
+
+		$new_value = [];
+		foreach ( $value as $key => $val ) {
+			$new_value[ $key ] = $this->replace_custom_property( $val );
+		}
+
+		return $new_value;
 	}
 
 	/**
