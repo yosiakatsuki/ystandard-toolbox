@@ -102,8 +102,8 @@ class Taxonomy {
 			]
 		);
 		foreach ( $taxonomies as $key => $value ) {
-			add_action( "${key}_edit_form", [ $this, 'edit_form' ], 10, 2 );
-			add_action( "edit_${key}", [ $this, 'update_term_meta' ] );
+			add_action( "{$key}_edit_form", [ $this, 'edit_form' ], 10, 2 );
+			add_action( "edit_{$key}", [ $this, 'update_term_meta' ] );
 		}
 	}
 

@@ -99,8 +99,8 @@ class LP {
 		$template_dir = Config::CUSTOM_TEMPLATE_DIR;
 
 		return [
-			"${template_dir}/lp/lp-wide.php" => 'LP(ワイド) [Toolbox]',
-			"${template_dir}/lp/lp.php"      => 'LP [Toolbox]',
+			"{$template_dir}/lp/lp-wide.php" => 'LP(ワイド) [Toolbox]',
+			"{$template_dir}/lp/lp.php"      => 'LP [Toolbox]',
 		];
 	}
 

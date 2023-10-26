@@ -169,7 +169,7 @@ class Posts_Block extends Dynamic_Block {
 			$this->migration_attributes( $attributes )
 		);
 
-		return "<div class=\"${classes}\">" . do_shortcode( "[ys_recent_posts ${short_code_attributes}]" ) . '</div>';
+		return "<div class=\"{$classes}\">" . do_shortcode( "[ys_recent_posts {$short_code_attributes}]" ) . '</div>';
 	}
 
 	/**

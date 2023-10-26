@@ -127,11 +127,11 @@ class Heading {
 			return;
 		}
 		$wrap        = Config::EDITOR_STYLES_WRAPPER;
-		$block_style = "#editor ${wrap}.block-editor-block-preview__container .is-style-default";
+		$block_style = "#editor {$wrap}.block-editor-block-preview__container .is-style-default";
 		// スタイルパネル用.
-		$css .= "${block_style} {border:0;color:#222;background:none;}";
-		$css .= "${block_style}:before {display:none;}";
-		$css .= "${block_style}:after {display:none;}";
+		$css .= "{$block_style} {border:0;color:#222;background:none;}";
+		$css .= "{$block_style}:before {display:none;}";
+		$css .= "{$block_style}:after {display:none;}";
 
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
@@ -210,15 +210,15 @@ class Heading {
 
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
-			$block_style = "${wrap} .is-style-ystdtb-${level}";
+			$block_style = "{$wrap} .is-style-ystdtb-{$level}";
 			if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-				$selector = "${wrap} ${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 			}
 		}
 
-		$content = $this->get_section_selector( "${block_style},${selector}" );
-		$before  = $this->get_section_selector( "${block_style},${selector}", '::before' );
-		$after   = $this->get_section_selector( "${block_style},${selector}", '::after' );
+		$content = $this->get_section_selector( "{$block_style},{$selector}" );
+		$before  = $this->get_section_selector( "{$block_style},{$selector}", '::before' );
+		$after   = $this->get_section_selector( "{$block_style},{$selector}", '::after' );
 
 		// CSS.
 		$css      = '';
@@ -226,20 +226,20 @@ class Heading {
 		foreach ( $sections as $section ) {
 			$style = $this->get_styles( $this->css, $section );
 			if ( $style ) {
-				$css .= "${$section} { ${style} }";
+				$css .= "{$section} { {$style} }";
 			}
 			// サイズ別.
 			$style = $this->get_styles( $this->css_tablet );
 			if ( $style ) {
 				$css .= Utility::add_media_query(
-					"${$section} { ${style} }",
+					"{$section} { {$style} }",
 					'md'
 				);
 			}
 			$style = $this->get_styles( $this->css_pc );
 			if ( $style ) {
 				$css .= Utility::add_media_query(
-					"${$section} { ${style} }",
+					"{$section} { {$style} }",
 					'lg'
 				);
 			}
@@ -260,7 +260,7 @@ class Heading {
 		$result    = '';
 		$selectors = explode( ',', $selectors );
 		foreach ( $selectors as $selector ) {
-			$result .= "${selector}${pseudo},";
+			$result .= "{$selector}{$pseudo},";
 		}
 
 		return rtrim( $result, ',' );
@@ -279,17 +279,17 @@ class Heading {
 		// ブロックスタイル.
 		$block_style_class = '.' . self::BODY_CLASS_HEADING;
 		if ( $block ) {
-			return "${body_class}${block_style_class} .is-style-ystdtb-${level}";
+			return "{$body_class}{$block_style_class} .is-style-ystdtb-{$level}";
 		}
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-			$level_selector = "${level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+			$level_selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
 			);
 
-			return "${body_class} ${class} ${level_selector}";
+			return "{$body_class} {$class} {$level_selector}";
 		}
 		// サイドバー.
 		if ( 'sidebar' === $level ) {
@@ -298,7 +298,7 @@ class Heading {
 				'.sidebar'
 			);
 
-			return "${body_class} ${class} .widget-title,${body_class} ${class} .widgettitle";
+			return "{$body_class} {$class} .widget-title,{$body_class} {$class} .widgettitle";
 		}
 		// フッター.
 		if ( 'footer' === $level ) {
@@ -307,7 +307,7 @@ class Heading {
 				'.site-footer'
 			);
 
-			return "${body_class} ${class} .widget-title,${body_class} ${class} .widgettitle";
+			return "{$body_class} {$class} .widget-title,{$body_class} {$class} .widgettitle";
 		}
 		// 投稿タイトル.
 		if ( 'post-title' === $level ) {
@@ -316,7 +316,7 @@ class Heading {
 				'.entry-title'
 			);
 
-			return "${body_class}.single ${class}";
+			return "{$body_class}.single {$class}";
 		}
 		// 固定ページタイトル.
 		if ( 'page-title' === $level ) {
@@ -325,7 +325,7 @@ class Heading {
 				'.entry-title'
 			);
 
-			return "${body_class}.page ${class}";
+			return "{$body_class}.page {$class}";
 		}
 		// アーカイブページタイトル.
 		if ( 'archive-title' === $level ) {
@@ -334,7 +334,7 @@ class Heading {
 				'.archive__header .archive__page-title'
 			);
 
-			return "${body_class} ${class}";
+			return "{$body_class} {$class}";
 		}
 
 		return '';
@@ -381,7 +381,7 @@ class Heading {
 							);
 						}
 					}
-					$css .= "${key}:${value};";
+					$css .= "{$key}:{$value};";
 				}
 			}
 		}
@@ -465,7 +465,7 @@ class Heading {
 			$this->get_value( 'backgroundColor' )
 		);
 		$image = $this->get_value( 'backgroundImage' );
-		$image = empty( $image ) ? '' : "url(\"${image}\")";
+		$image = empty( $image ) ? '' : "url(\"{$image}\")";
 		$this->set_css(
 			'background-image',
 			$image
@@ -490,10 +490,10 @@ class Heading {
 	private function get_border_css() {
 		$pos = $this->get_position_list();
 		foreach ( $pos as $value ) {
-			$unit  = $this->get_unit( "border${value}WidthUnit" );
-			$width = $this->get_value( "border${value}Width" );
-			$style = $this->get_value( "border${value}Style" );
-			$color = $this->get_value( "border${value}Color" );
+			$unit  = $this->get_unit( "border{$value}WidthUnit" );
+			$width = $this->get_value( "border{$value}Width" );
+			$style = $this->get_value( "border{$value}Style" );
+			$color = $this->get_value( "border{$value}Color" );
 			if ( '0' === $width ) {
 				$unit  = '';
 				$style = '';
@@ -502,8 +502,8 @@ class Heading {
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(
-				"border-${property}",
-				trim( "${width}${unit} ${style} ${color}" )
+				"border-{$property}",
+				trim( "{$width}{$unit} {$style} {$color}" )
 			);
 		}
 		$radius = $this->get_value( 'borderRadius' );
@@ -521,19 +521,19 @@ class Heading {
 	private function get_padding_css() {
 		$pos = $this->get_position_list();
 		foreach ( $pos as $value ) {
-			$num = $this->get_value( "padding${value}" );
+			$num = $this->get_value( "padding{$value}" );
 			if ( ! is_numeric( $num ) && empty( $num ) ) {
 				continue;
 			}
-			$unit = $this->get_unit( "padding${value}Unit" );
+			$unit = $this->get_unit( "padding{$value}Unit" );
 			if ( 0 === $num || '0' === $num ) {
 				$unit = '';
 			}
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(
-				"padding-${property}",
-				"${num}${unit}"
+				"padding-{$property}",
+				"{$num}{$unit}"
 			);
 		}
 	}
@@ -544,19 +544,19 @@ class Heading {
 	private function get_margin_css() {
 		$pos = [ 'Top', 'Bottom' ];
 		foreach ( $pos as $value ) {
-			$num = $this->get_value( "margin${value}" );
+			$num = $this->get_value( "margin{$value}" );
 			if ( ! is_numeric( $num ) && empty( $num ) ) {
 				continue;
 			}
-			$unit = $this->get_unit( "margin${value}Unit" );
+			$unit = $this->get_unit( "margin{$value}Unit" );
 			if ( 0 === $num || '0' === $num ) {
 				$unit = '';
 			}
 			$property = strtolower( $value );
 			// CSS.
 			$this->set_css(
-				"margin-${property}",
-				"${num}${unit}"
+				"margin-{$property}",
+				"{$num}{$unit}"
 			);
 		}
 	}
@@ -602,13 +602,13 @@ class Heading {
 		}
 		$pseudo_elements = [ 'before', 'after' ];
 		foreach ( $pseudo_elements as $pos ) {
-			$size = $this->get_value( "${pos}Size" );
+			$size = $this->get_value( "{$pos}Size" );
 			if ( '0' !== $size && '' !== $size ) {
-				$content = stripslashes( $this->get_value( "${pos}Content" ) );
+				$content = stripslashes( $this->get_value( "{$pos}Content" ) );
 				if ( false !== strpos( $content, '<svg' ) ) {
 					$content = str_replace( '\'', '"', $content );
 					$content = str_replace( '#', '%23', $content );
-					$content = "url('data:image/svg+xml;charset=UTF-8,${content}')";
+					$content = "url('data:image/svg+xml;charset=UTF-8,{$content}')";
 				}
 				$this->set_css(
 					'content',
@@ -621,15 +621,15 @@ class Heading {
 				foreach ( $preset['usePseudoElementsSize'] as $item ) {
 					$this->set_css(
 						$item,
-						$this->get_value( "${pos}Size" ) . 'px',
+						$this->get_value( "{$pos}Size" ) . 'px',
 						$pos
 					);
 				}
 			}
 			// color.
 			$this->set_css(
-				$this->get_value( "${pos}ColorType" ),
-				$this->get_value( "${pos}Color" ),
+				$this->get_value( "{$pos}ColorType" ),
+				$this->get_value( "{$pos}Color" ),
 				$pos
 			);
 		}

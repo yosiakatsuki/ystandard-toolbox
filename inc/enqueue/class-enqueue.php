@@ -145,9 +145,9 @@ class Enqueue {
 			/**
 			 * 結合
 			 */
-			$css .= "${prefix} .${class_name},
-				${prefix} .has-border.${class_name}{
-				border-color:${value['color']};
+			$css .= "{$prefix} .{$class_name},
+				{$prefix} .has-border.{$class_name}{
+				border-color:{$value['color']};
 			}";
 		}
 

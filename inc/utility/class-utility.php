@@ -55,7 +55,7 @@ class Utility {
 			if ( is_array( $value ) ) {
 				$value = implode( ',', $value );
 			}
-			$result .= "${key}=\"${value}\" ";
+			$result .= "{$key}=\"{$value}\" ";
 		}
 
 		return $result;
@@ -188,11 +188,11 @@ class Utility {
 		}
 		if ( array_key_exists( $min, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $min ];
-			$min        = "(min-width: ${breakpoint}px)";
+			$min        = "(min-width: {$breakpoint}px)";
 		}
 		if ( array_key_exists( $max, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $max ] - 1;
-			$max        = "(max-width: ${breakpoint}px)";
+			$max        = "(max-width: {$breakpoint}px)";
 		}
 		$breakpoint = $min . $max;
 		if ( '' !== $min && '' !== $max ) {
@@ -225,7 +225,7 @@ class Utility {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link\">${link}</div>" );
+		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link\">{$link}</div>" );
 	}
 
 	/**
@@ -243,7 +243,7 @@ class Utility {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link-inline\">${link}</div>" );
+		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link-inline\">{$link}</div>" );
 	}
 
 	/**
@@ -272,12 +272,12 @@ class Utility {
 					'utm_medium'   => 'referral',
 					'utm_campaign' => $url,
 				],
-				"https://wp-ystandard.com/${url}/"
+				"https://wp-ystandard.com/{$url}/"
 			);
 		}
 		$class = '' === $class ? '' : "class=\"$class\"";
 
-		return "<a ${class} href=\"${url}\" target=\"_blank\">${icon}${text}</a>";
+		return "<a {$class} href=\"{$url}\" target=\"_blank\">{$icon}{$text}</a>";
 	}
 
 	/**
@@ -304,7 +304,7 @@ class Utility {
 		}
 		$class = '' === $class ? '' : "class=\"$class\"";
 
-		return "<a ${class} href=\"${url}\">${icon}${text}</a>";
+		return "<a {$class} href=\"{$url}\">{$icon}{$text}</a>";
 	}
 
 	/**

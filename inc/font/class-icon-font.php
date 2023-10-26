@@ -86,11 +86,11 @@ class Icon_Font {
 
 		return "
 		@font-face {
-		  font-family: '${font_family}';
+		  font-family: '{$font_family}';
 		  src:
-		    url('${font_url}/${font_family}.ttf?subg4m') format('truetype'),
-		    url('${font_url}/${font_family}.woff?subg4m') format('woff'),
-		    url('${font_url}/${font_family}.svg?subg4m#${font_family}') format('svg');
+		    url('{$font_url}/{$font_family}.ttf?subg4m') format('truetype'),
+		    url('{$font_url}/{$font_family}.woff?subg4m') format('woff'),
+		    url('{$font_url}/{$font_family}.svg?subg4m#{$font_family}') format('svg');
 		  font-weight: normal;
 		  font-style: normal;
 		  font-display: block;
@@ -118,9 +118,9 @@ class Icon_Font {
 			/**
 			 * 結合
 			 */
-			$css .= "${prefix} .${class_name},
-				${prefix} .has-icon-font-color.${class_name}{
-				--icon-font-color:${value['color']};
+			$css .= "{$prefix} .{$class_name},
+				{$prefix} .has-icon-font-color.{$class_name}{
+				--icon-font-color:{$value['color']};
 			}";
 		}
 
