@@ -122,16 +122,21 @@ class Blocks {
 	 * @return array
 	 */
 	public static function add_block_categories( $categories ) {
-		$categories[] = [
+		$toolbox_categories   = [];
+		$toolbox_categories[] = [
 			'slug'  => Config::BLOCK_CATEGORY,
 			'title' => Config::BLOCK_CATEGORY_NAME,
 		];
-		$categories[] = [
+		$toolbox_categories[] = [
 			'slug'  => Config::BLOCK_CATEGORY_BETA,
 			'title' => Config::BLOCK_CATEGORY_NAME_BETA,
 		];
 
-		return $categories;
+		if ( apply_filters( 'ystdtb_block_category_top', false ) ) {
+			return array_merge( $toolbox_categories, $categories );
+		}
+
+		return array_merge( $categories, $toolbox_categories );
 	}
 
 	/**
