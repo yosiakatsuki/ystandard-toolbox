@@ -11,7 +11,8 @@
 - [変更] `ystdtb_css_breakpoints` キー変更 `sm`-> `mobile`, `md` -> `tablet`, `lg` -> `desktop`、値に単位追加.
 
 ### v1.26.0 : 2023/10/31
-- [調整] PHP 8.2向け調整
+- [調整] PHP 8.2向け調整  
+- [追加] ブロックカテゴリーの順序を調整するフック追加（ystdtb_block_category_top）
 
 ### v1.25.0 : 2023/03/30
 - [調整] WordPress 6.2向け調整
