@@ -369,6 +369,7 @@ function TimelineItem( props ) {
 									onChange={ ( font ) => {
 										setLabelFontSize( font );
 									} }
+									__nextHasNoMarginBottom
 								/>
 							</BaseControl>
 							<BaseControl
