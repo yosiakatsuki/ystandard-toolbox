@@ -221,6 +221,7 @@ function Timeline( props ) {
 										} );
 										setLabelFontSize( font );
 									} }
+									__nextHasNoMarginBottom
 								/>
 							</BaseControl>
 							<BaseControl
