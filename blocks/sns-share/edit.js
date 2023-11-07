@@ -22,6 +22,7 @@ const snsShare = ( props ) => {
 		align,
 		labelBefore,
 		labelAfter,
+		useX,
 		useTwitter,
 		useFacebook,
 		useHatenaBookmark,
@@ -34,6 +35,7 @@ const snsShare = ( props ) => {
 
 	const snsSharePreview = () => {
 		if (
+			! useX &&
 			! useTwitter &&
 			! useFacebook &&
 			! useHatenaBookmark &&
@@ -119,6 +121,15 @@ const snsShare = ( props ) => {
 						initialOpen={ true }
 					>
 						<BaseControl>
+							<ToggleControl
+								label={ __( 'X', 'ystandard-toolbox' ) }
+								onChange={ () => {
+									setAttributes( {
+										useX: ! useX,
+									} );
+								} }
+								checked={ useX }
+							/>
 							<ToggleControl
 								label={ __( 'Twitter', 'ystandard-toolbox' ) }
 								onChange={ () => {
