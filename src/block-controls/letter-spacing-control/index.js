@@ -24,7 +24,6 @@ const LetterSpacingControl = ( { value, onChange } ) => {
 				value={ value }
 				onChange={ onChange }
 				units={ units }
-				unit={ currentUnit }
 				onUnitChange={ ( newSelectedUnit ) => {
 					setCurrentUnit( newSelectedUnit );
 				} }
