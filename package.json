@@ -74,7 +74,9 @@
     "i18n:blocks": "po2json languages/ystandard-toolbox-ja.po languages/ystandard-toolbox-ja-ystandard-toolbox-block-editor.json -f jed",
     "packages-update": "wp-scripts packages-update",
     "production": "npm run build && npm run build:deploy-files",
-    "production:manual": "npm run build && gulp manualProduction"
+    "production:manual": "npm run build && gulp manualProduction",
+    "zip:beta": "gulp deployFilesBeta",
+    "zip:production": "gulp deployFiles"
   },
   "author": "yosiakatsuki",
   "license": "GPL-2.0+",
