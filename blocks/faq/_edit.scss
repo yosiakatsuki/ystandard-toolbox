@@ -3,90 +3,84 @@
 [data-type="ystdtb/faq"],
 [data-type="ystdtb/faq-item"] {
 
-	&,
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-	&.is-selected {
-		padding: 1em;
-	}
+  &.is-selected {
+    padding: 0;
+  }
 
 }
 
 [data-type="ystdtb/faq-item"] {
 
-	&.is-faq--q,
-	&.is-faq--a {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
+  &.is-faq--q,
+  &.is-faq--a {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-	.ystdtb-faq-item__contents {
+  .ystdtb-faq-item__contents {
+    >.block-editor-inner-blocks>.block-editor-block-list__layout {
+      >* {
+        &:first-child {
+          margin-top: 0;
+        }
 
-		>.block-editor-inner-blocks > .block-editor-block-list__layout {
+        &:not(.block-list-appender):last-of-type {
+          margin-bottom: 0;
+        }
+      }
 
-			>* {
+      >.block-list-appender {
+        margin: 8px 0 0 !important;
 
-				&:first-child {
-					margin-top: 0;
-				}
+        .block-editor-button-block-appender {
+          display: flex;
+          flex-direction: row;
+          box-shadow: none;
+          height: 24px;
+          width: 24px;
 
-				&:not(.block-list-appender):last-of-type {
-					margin-bottom: 0;
-				}
-			}
-
-			>.block-list-appender {
-				margin: 8px 0 0 !important;
-
-				.block-editor-button-block-appender {
-					display: flex;
-					flex-direction: row;
-					box-shadow: none;
-					height: 24px;
-					width: 24px;
-
-					svg {
-						width: 24px;
-						background-color: #1e1e1e;
-						color: #fff;
-						border-radius: 2px;
-						flex: 1 0 auto;
-					}
-				}
-			}
-		}
-	}
+          svg {
+            width: 24px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border-radius: 2px;
+            flex: 1 0 auto;
+          }
+        }
+      }
+    }
+  }
 }
 
 .ystdtb-faq {
+  &.is-accordion {
+    .ystdtb-faq-item {
 
-	&.is-accordion {
+      &.is-faq--q {
+        &:after {
+          content: '';
+          display: none;
+        }
+      }
 
-		.ystdtb-faq-item {
-
-			&.is-faq--q {
-
-				&::after {
-					content: "";
-					display: none;
-				}
-			}
-
-			&.is-faq--a {
-				height: auto;
-				padding-top: 1.5em;
-				padding-bottom: 1.5em;
-				opacity: 1;
-				visibility: visible;
-			}
-		}
-	}
+      &.is-faq--a {
+        height: auto;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
 }
 
 .ystdtb-faq__design-sample-content {
-	display: flex;
+  display: flex;
 }
