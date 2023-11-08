@@ -181,6 +181,16 @@ function watchFiles() {
   watch(["./src/js/app/*.js"], buildJs);
 }
 
+
+function watchSass() {
+    sass();
+    sassBlocks();
+    watch(
+        ["./src/sass/**/*.scss", "./src/js/**/*.scss", "./blocks/**/*.scss"],
+        series(sass, sassBlocks)
+    );
+}
+
 exports.deployFiles = series(
   cleanFiles,
   copyJson,
@@ -207,8 +217,9 @@ exports.manualProduction = series(
   cleanTemp
 );
 
-exports.sass = series(sass);
+exports.sass = series(sass,sassBlocks);
 exports.watch = series(watchFiles);
+exports.watchSass = series(watchSass);
 exports.clean = series(cleanFiles);
 exports.buildApp = series(buildJs);
 exports.copyJson = series(copyJson);

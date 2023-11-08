@@ -61,6 +61,7 @@
     "watch:menu": "NODE_ENV=development wp-scripts start --config ./webpack.menu.config.js",
     "watch:blockApp": "NODE_ENV=development wp-scripts start --config webpack.block-app.config.js",
     "watch:block": "NODE_ENV=development wp-scripts start --config webpack.blocks.config.js",
+    "watch:sass": "gulp watchSass",
     "watch": "gulp watch & npm run watch:block & watch:blockApp & watch:menu",
     "build:menu": "NODE_ENV=production wp-scripts build --config ./webpack.menu.config.js",
     "build:blockApp": "NODE_ENV=production wp-scripts build --config webpack.block-app.config.js",
