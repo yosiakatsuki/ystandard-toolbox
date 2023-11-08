@@ -116,6 +116,8 @@ function copyProductionFiles() {
       "!webpack.blocks.config.dev.js",
       "!webpack.menu.config.js",
       "!webpack.menu.config.dev.js",
+      "!webpack.block-app.config.js",
+      "!webpack.block-app.config.dev.js",
       "!ystandard-toolbox-webpack-config.js",
       "!ystandard-toolbox.json",
       "!ystandard-toolbox-beta.json",
