@@ -9,7 +9,7 @@ const BoxTextColor = ( props ) => {
 	return (
 		<BaseControl
 			id={ 'box-text-color' }
-			label={ __( '文字色', 'ystandard-toolbox' ) }
+			label={ __( 'ボックス文字色', 'ystandard-toolbox' ) }
 		>
 			<ColorPalette
 				colors={ colors }
