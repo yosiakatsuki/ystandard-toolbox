@@ -52,6 +52,7 @@ const SlideFunction = ( { attributes, setAttributes } ) => {
 						value={ _slideFunction }
 						options={ SELECT_FUNCTION }
 						onChange={ handleOnChange }
+						__nextUnconstrainedWidth
 					/>
 				</BaseControl>
 			) }
