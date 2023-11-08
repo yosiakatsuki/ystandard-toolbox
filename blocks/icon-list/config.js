@@ -1,13 +1,6 @@
 import { __ } from '@wordpress/i18n';
 
 export const attributes = {
-	values: {
-		type: 'string',
-		source: 'html',
-		selector: 'ul',
-		multiline: 'li',
-		default: '',
-	},
 	iconType: {
 		type: 'string',
 		default: 'chevron-right',
