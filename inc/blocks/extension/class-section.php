@@ -60,7 +60,7 @@ class Section {
 		return [
 			[
 				'name'           => 'stripes-dark',
-				'image'          => "${image_dir}/stripes-dark.svg",
+				'image'          => "{$image_dir}/stripes-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -83,7 +83,7 @@ class Section {
 			],
 			[
 				'name'           => 'stripes-light',
-				'image'          => "${image_dir}/stripes-light.svg",
+				'image'          => "{$image_dir}/stripes-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -106,7 +106,7 @@ class Section {
 			],
 			[
 				'name'           => 'border-dark',
-				'image'          => "${image_dir}/border-dark.svg",
+				'image'          => "{$image_dir}/border-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -129,7 +129,7 @@ class Section {
 			],
 			[
 				'name'           => 'border-light',
-				'image'          => "${image_dir}/border-light.svg",
+				'image'          => "{$image_dir}/border-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -152,7 +152,7 @@ class Section {
 			],
 			[
 				'name'           => 'diagonal-stripes-dark',
-				'image'          => "${image_dir}/diagonal-stripes-dark.svg",
+				'image'          => "{$image_dir}/diagonal-stripes-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -175,7 +175,7 @@ class Section {
 			],
 			[
 				'name'           => 'diagonal-stripes-light',
-				'image'          => "${image_dir}/diagonal-stripes-light.svg",
+				'image'          => "{$image_dir}/diagonal-stripes-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -198,7 +198,7 @@ class Section {
 			],
 			[
 				'name'           => 'texture-dark',
-				'image'          => "${image_dir}/texture-dark.svg",
+				'image'          => "{$image_dir}/texture-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -221,7 +221,7 @@ class Section {
 			],
 			[
 				'name'           => 'texture-light',
-				'image'          => "${image_dir}/texture-light.svg",
+				'image'          => "{$image_dir}/texture-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -244,7 +244,7 @@ class Section {
 			],
 			[
 				'name'           => 'jigsaw-dark',
-				'image'          => "${image_dir}/jigsaw-dark.svg",
+				'image'          => "{$image_dir}/jigsaw-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -267,7 +267,7 @@ class Section {
 			],
 			[
 				'name'           => 'jigsaw-light',
-				'image'          => "${image_dir}/jigsaw-light.svg",
+				'image'          => "{$image_dir}/jigsaw-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -290,7 +290,7 @@ class Section {
 			],
 			[
 				'name'           => 'hexagons-dark',
-				'image'          => "${image_dir}/hexagons-dark.svg",
+				'image'          => "{$image_dir}/hexagons-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -313,7 +313,7 @@ class Section {
 			],
 			[
 				'name'           => 'hexagons-light',
-				'image'          => "${image_dir}/hexagons-light.svg",
+				'image'          => "{$image_dir}/hexagons-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -336,7 +336,7 @@ class Section {
 			],
 			[
 				'name'           => 'overlapping-circles-dark',
-				'image'          => "${image_dir}/overlapping-circles-dark.svg",
+				'image'          => "{$image_dir}/overlapping-circles-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -359,7 +359,7 @@ class Section {
 			],
 			[
 				'name'           => 'overlapping-circles-light',
-				'image'          => "${image_dir}/overlapping-circles-light.svg",
+				'image'          => "{$image_dir}/overlapping-circles-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -382,7 +382,7 @@ class Section {
 			],
 			[
 				'name'           => 'plus-dark',
-				'image'          => "${image_dir}/plus-dark.svg",
+				'image'          => "{$image_dir}/plus-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -405,7 +405,7 @@ class Section {
 			],
 			[
 				'name'           => 'plus-light',
-				'image'          => "${image_dir}/plus-light.svg",
+				'image'          => "{$image_dir}/plus-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -428,7 +428,7 @@ class Section {
 			],
 			[
 				'name'           => 'bubbles-dark',
-				'image'          => "${image_dir}/bubbles-dark.svg",
+				'image'          => "{$image_dir}/bubbles-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -451,7 +451,7 @@ class Section {
 			],
 			[
 				'name'           => 'bubbles-light',
-				'image'          => "${image_dir}/bubbles-light.svg",
+				'image'          => "{$image_dir}/bubbles-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -474,7 +474,7 @@ class Section {
 			],
 			[
 				'name'           => 'sprinkle-dark',
-				'image'          => "${image_dir}/sprinkle-dark.svg",
+				'image'          => "{$image_dir}/sprinkle-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -494,7 +494,7 @@ class Section {
 			],
 			[
 				'name'           => 'sprinkle-light',
-				'image'          => "${image_dir}/sprinkle-light.svg",
+				'image'          => "{$image_dir}/sprinkle-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -514,7 +514,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-up-down-dark',
-				'image'          => "${image_dir}/meteor-up-down-dark.svg",
+				'image'          => "{$image_dir}/meteor-up-down-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -534,7 +534,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-up-down-light',
-				'image'          => "${image_dir}/meteor-up-down-light.svg",
+				'image'          => "{$image_dir}/meteor-up-down-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -554,7 +554,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-left-right-dark',
-				'image'          => "${image_dir}/meteor-left-right-dark.svg",
+				'image'          => "{$image_dir}/meteor-left-right-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -574,7 +574,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-left-right-light',
-				'image'          => "${image_dir}/meteor-left-right-light.svg",
+				'image'          => "{$image_dir}/meteor-left-right-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -594,7 +594,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-topleft-bottomright-dark',
-				'image'          => "${image_dir}/meteor-topleft-bottomright-dark.svg",
+				'image'          => "{$image_dir}/meteor-topleft-bottomright-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -614,7 +614,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-topleft-bottomright-light',
-				'image'          => "${image_dir}/meteor-topleft-bottomright-light.svg",
+				'image'          => "{$image_dir}/meteor-topleft-bottomright-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -634,7 +634,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-topright-bottomleft-dark',
-				'image'          => "${image_dir}/meteor-topright-bottomleft-dark.svg",
+				'image'          => "{$image_dir}/meteor-topright-bottomleft-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -654,7 +654,7 @@ class Section {
 			],
 			[
 				'name'           => 'meteor-topright-bottomleft-light',
-				'image'          => "${image_dir}/meteor-topright-bottomleft-light.svg",
+				'image'          => "{$image_dir}/meteor-topright-bottomleft-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -674,7 +674,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-topleft-dark',
-				'image'          => "${image_dir}/curve-line-topleft-dark.svg",
+				'image'          => "{$image_dir}/curve-line-topleft-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -694,7 +694,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-topleft-light',
-				'image'          => "${image_dir}/curve-line-topleft-light.svg",
+				'image'          => "{$image_dir}/curve-line-topleft-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -714,7 +714,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-topright-dark',
-				'image'          => "${image_dir}/curve-line-topright-dark.svg",
+				'image'          => "{$image_dir}/curve-line-topright-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -734,7 +734,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-topright-light',
-				'image'          => "${image_dir}/curve-line-topright-light.svg",
+				'image'          => "{$image_dir}/curve-line-topright-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -754,7 +754,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-bottomleft-dark',
-				'image'          => "${image_dir}/curve-line-bottomleft-dark.svg",
+				'image'          => "{$image_dir}/curve-line-bottomleft-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -774,7 +774,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-bottomleft-light',
-				'image'          => "${image_dir}/curve-line-bottomleft-light.svg",
+				'image'          => "{$image_dir}/curve-line-bottomleft-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -794,7 +794,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-bottomright-dark',
-				'image'          => "${image_dir}/curve-line-bottomright-dark.svg",
+				'image'          => "{$image_dir}/curve-line-bottomright-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -814,7 +814,7 @@ class Section {
 			],
 			[
 				'name'           => 'curve-line-bottomright-light',
-				'image'          => "${image_dir}/curve-line-bottomright-light.svg",
+				'image'          => "{$image_dir}/curve-line-bottomright-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -834,7 +834,7 @@ class Section {
 			],
 			[
 				'name'           => 'circuit-board-dark',
-				'image'          => "${image_dir}/circuit-board-dark.svg",
+				'image'          => "{$image_dir}/circuit-board-dark.svg",
 				'useDarkPreview' => false,
 				'value'          => [
 					'backgroundType'                  => 'image',
@@ -854,7 +854,7 @@ class Section {
 			],
 			[
 				'name'           => 'circuit-board-light',
-				'image'          => "${image_dir}/circuit-board-light.svg",
+				'image'          => "{$image_dir}/circuit-board-light.svg",
 				'useDarkPreview' => true,
 				'value'          => [
 					'backgroundType'                  => 'image',

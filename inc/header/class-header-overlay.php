@@ -146,7 +146,7 @@ class Header_Overlay {
 		$close  = Navigation::get_drawer_menu_start();
 		$expand = $close + 1;
 		$style  = "
-		@media (min-width: ${expand}px) {
+		@media (min-width: {$expand}px) {
 			.global-nav {
 				background-color: transparent;
 			}

@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Debug;
 use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Types;
@@ -67,10 +68,9 @@ class Heading_Helper {
 			if ( empty( $label ) ) {
 				$label = $slug;
 			}
-			$level = self::get_level( $level_list, $slug );
 
-			$block_selector = self::get_block_style_selector( $level );
-			$level_selector = Types::get_array_value( $selector_all, $level, [] );
+			$block_selector = self::get_block_style_selector( $slug );
+			$level_selector = self::get_level_style_selector( $selector_all, $level_list, $slug );
 
 			$css_selector = $block_selector;
 			if ( ! empty( $level_selector ) ) {
@@ -90,6 +90,12 @@ class Heading_Helper {
 			if ( ! empty( $custom_before ) ) {
 				$before = $custom_css['before'];
 			} else {
+				Debug::debug_var_dump_file(
+					[
+						'$before'           => $before,
+					],
+					__DIR__ . '/get_heading_css.html'
+				);
 				$before = Styles::parse_styles_pseudo_elements( $before, 'before' );
 			}
 			$before_css = self::create_css( $before, $before_selector );
@@ -117,7 +123,7 @@ class Heading_Helper {
 	 *
 	 * @return string
 	 */
-	private static function create_css( $styles, $selector ) {
+	public static function create_css( $styles, $selector ) {
 		$result = '';
 		if ( array_key_exists( 'desktop', $styles ) ) {
 			$css = Styles::get_styles_css( $styles['desktop'] );
@@ -145,39 +151,25 @@ class Heading_Helper {
 	 * 疑似要素追加.
 	 *
 	 * @param string $block_selector Block Selector.
-	 * @param string $level_selector Level Selector.
+	 * @param array  $level_selector Level Selector.
 	 * @param string $type           Before / After.
 	 *
 	 * @return string
 	 */
-	private static function add_pseudo_elements( $block_selector, $level_selector, $type = 'before' ) {
+	public static function add_pseudo_elements( $block_selector, $level_selector, $type = 'before' ) {
 		$result          = '';
 		$pseudo_elements = "::{$type}";
 		// 結合.
 		if ( $block_selector ) {
-			$result .= "{$block_selector}{$pseudo_elements},";
+			$result .= "{$block_selector}{$pseudo_elements}";
 		}
 		if ( ! empty( $level_selector ) ) {
+			$result .= ',';
 			$result .= implode( "{$pseudo_elements},", $level_selector ) . "{$pseudo_elements}";
 		}
 
 		return $result;
 	}
-
-	/**
-	 * 見出しレベルの設定情報取得.
-	 *
-	 * @param array  $level 見出しレベルリスト.
-	 * @param string $slug  設定名.
-	 *
-	 * @return false|int|string
-	 */
-	public static function get_level( $level, $slug ) {
-		$result = array_search( $slug, $level, true );
-
-		return empty( $result ) ? '' : $result;
-	}
-
 
 	/**
 	 * ブロックスタイル用セレクター取得.
@@ -194,6 +186,29 @@ class Heading_Helper {
 	}
 
 	/**
+	 * レベル別のセレクター取得.
+	 *
+	 * @param array  $level_selector レベル別セレクター.
+	 * @param array  $level_list     レベルリスト.
+	 * @param string $slug           設定名.
+	 *
+	 * @return array
+	 */
+	public static function get_level_style_selector( $level_selector, $level_list, $slug ) {
+		$result = [];
+		foreach ( $level_list as $key => $value ) {
+			// レベル別スタイルに設定されている時.
+			if ( $value === $slug ) {
+				if ( isset( $level_selector[ $key ] ) ) {
+					$result = array_merge( $result, $level_selector[ $key ] );
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * レベル別のセレクター取得
 	 *
 	 * @return array
@@ -203,42 +218,42 @@ class Heading_Helper {
 		$result = [];
 
 		// レベル別.
-		$base = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
+		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
 			$selector         = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\".is-clear-style\"])";
-			$result[ $level ] = [ "{$body} {$base} {$selector}" ];
+			$result[ $level ] = [ "{$body} {$content} {$selector}" ];
 		}
 
 		// サイドバー クラシックウィジェット.
-		$base     = apply_filters( 'ystdtb_heading_selector_sidebar', '.sidebar' );
+		$area     = apply_filters( 'ystdtb_heading_selector_sidebar', '.sidebar' );
 		$target   = [];
-		$target[] = "{$body} {$base} .widget-title";
-		$target[] = "{$body} {$base} .widgettitle";
+		$target[] = "{$body} {$area} .widget-title";
+		$target[] = "{$body} {$area} .widgettitle";
 		// 結合.
 		$result['sidebar'] = $target;
 
 		// フッター クラシックウィジェット.
-		$base     = apply_filters( 'ystdtb_heading_selector_footer', '.site-footer' );
+		$area     = apply_filters( 'ystdtb_heading_selector_footer', '.site-footer' );
 		$target   = [];
-		$target[] = "{$body} {$base} .widget-title";
-		$target[] = "{$body} {$base} .widgettitle";
+		$target[] = "{$body} {$area} .widget-title";
+		$target[] = "{$body} {$area} .widgettitle";
 		// 結合.
 		$result['footer'] = $target;
 
 		// 投稿タイトル.
-		$base = apply_filters( 'ystdtb_heading_selector_post_title', '.entry-title' );
+		$title = apply_filters( 'ystdtb_heading_selector_post_title', '.entry-title' );
 		// 結合.
-		$result['post-title'] = [ "{$body}.single {$base}" ];
+		$result['post-title'] = [ "{$body}.single {$title}" ];
 
 		// 固定ページタイトル.
-		$base = apply_filters( 'ystdtb_heading_selector_page_title', '.entry-title' );
+		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.entry-title' );
 		// 結合.
-		$result['page-title'] = [ "{$body}.page {$base}" ];
+		$result['page-title'] = [ "{$body}.page {$title}" ];
 
 		// アーカイブページタイトル.
-		$base = apply_filters( 'ystdtb_heading_selector_page_title', '.archive__header .archive__page-title' );
+		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.archive__header .archive__page-title' );
 		// 結合.
-		$result['archive-title'] = [ "{$body} {$base}" ];
+		$result['archive-title'] = [ "{$body} {$title}" ];
 
 		return $result;
 	}

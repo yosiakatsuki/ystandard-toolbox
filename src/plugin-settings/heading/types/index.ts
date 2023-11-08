@@ -53,11 +53,6 @@ export interface HeadingStyle {
 	// advanced.
 	background?: string;
 	display?: string;
-	position?: string;
-	top?: string;
-	right?: string;
-	bottom?: string;
-	left?: string;
 	gap?: ResponsiveValues;
 	flexDirection?: string;
 	alignItems?: string;

@@ -326,7 +326,10 @@ class Styles {
 	 * @return array|null
 	 */
 	public static function get_breakpoints() {
-		return apply_filters( 'ystdtb_css_breakpoints', Config::BREAKPOINTS );
+		return apply_filters(
+			'ystdtb_css_breakpoints',
+			apply_filters( 'ys_get_break_points', Config::BREAKPOINTS )
+		);
 	}
 
 	/**
@@ -346,23 +349,26 @@ class Styles {
 		if ( array_key_exists( $min, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $min ];
 			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint .= 'px';
+				$breakpoint = ( (int) $breakpoint + 1 ) . 'px';
 			}
-			$min = "(min-width: {$breakpoint})";
+			// emでの+1px計算.
+			$float_value = (float) $breakpoint;
+			$unit        = str_replace( (string) $float_value, '', $breakpoint );
+			if ( ! empty( $unit ) && 'px' !== $unit ) {
+				$base       = apply_filters( 'ys_breakpoints_base_size', 16 );
+				$base       = empty( $base ) ? 16 : $base;
+				$breakpoint = ( $float_value + ( 1 / $base ) ) . $unit;
+			}
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoint, $min );
+			$min        = "(min-width: {$breakpoint})";
 		}
 		if ( array_key_exists( $max, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $max ];
 			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint = ( (int) $breakpoint - 1 ) . 'px';
+				$breakpoint .= 'px';
 			}
-			if ( (string) ( (int) $breakpoint ) !== (string) ( (float) $breakpoint ) ) {
-				$float_value = (float) $breakpoint;
-				$unit        = str_replace( (string) $float_value, '', $breakpoint );
-				$base        = apply_filters( 'ystdtb_css_breakpoints_base_size', 16 );
-				$breakpoint  = ( $float_value - ( 1 / $base ) ) . $unit;
-				$breakpoint  = apply_filters( 'ystdtb_css_breakpoints_max_width', $breakpoint, $max );
-			}
-			$max = "(max-width: {$breakpoint})";
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_max_width', $breakpoint, $max );
+			$max        = "(max-width: {$breakpoint})";
 		}
 		$breakpoint = $min . $max;
 		if ( '' !== $min && '' !== $max ) {

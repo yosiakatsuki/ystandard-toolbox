@@ -1,6 +1,6 @@
 <?php
 
-class Heading_Design_CSS_Pseudo_Elements_Test extends WP_UnitTestCase {
+class Heading_Design_Pseudo_Elements_Style_Test extends WP_UnitTestCase {
 
 	function test_parse_styles_pseudo_elements_icon() {
 		$input    = [

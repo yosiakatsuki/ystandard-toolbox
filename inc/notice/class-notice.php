@@ -39,7 +39,7 @@ class Notice {
 	 * @param string $type    type.
 	 */
 	public static function notice( $content, $type = 'error' ) {
-		echo "<div class=\"notice ystdtb-notice notice-${type} is-dismissible\">${content}</div>";
+		echo "<div class=\"notice ystdtb-notice notice-{$type} is-dismissible\">{$content}</div>";
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Notice {
 	 * @param string $content notice content.
 	 */
 	public static function manual( $content ) {
-		echo "<div class=\"notice ystdtb-notice notice-manual\">${content}</div>";
+		echo "<div class=\"notice ystdtb-notice notice-manual\">{$content}</div>";
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Notice {
 	 * @param string $content notice content.
 	 */
 	public static function plain( $content ) {
-		echo "<div class=\"notice ystdtb-notice\">${content}</div>";
+		echo "<div class=\"notice ystdtb-notice\">{$content}</div>";
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Notice {
 	 * @return string;
 	 */
 	public static function customizer_notice( $content, $type = 'warning' ) {
-		return "<div class=\"ystdtb-customizer-notice notice-${type}\">${content}</div>";
+		return "<div class=\"ystdtb-customizer-notice notice-{$type}\">{$content}</div>";
 	}
 
 }

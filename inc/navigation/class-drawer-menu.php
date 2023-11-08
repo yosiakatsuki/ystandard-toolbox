@@ -109,7 +109,7 @@ class Drawer_Menu {
 		  padding-right: 2.5em;
           padding-left: 2.5em;
 		}
-		@media (min-width: ${expand}px) {
+		@media (min-width: {$expand}px) {
 			.widget-mobile-nav {
 				display:none;
 			}
@@ -118,7 +118,7 @@ class Drawer_Menu {
 
 		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideGlobalMenu', false ) ) {
 			$style .= "
-			@media (max-width: ${close}px) {
+			@media (max-width: {$close}px) {
 				.global-nav__menu:not(#global-nav__menu-amp) {
 					display:none;
 				}
@@ -127,7 +127,7 @@ class Drawer_Menu {
 		}
 		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideSearch', false ) ) {
 			$style .= "
-			@media (max-width: ${close}px) {
+			@media (max-width: {$close}px) {
 				.global-nav__search {
 					display:none;
 				}

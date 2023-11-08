@@ -232,18 +232,18 @@ class Plugin_Settings {
 			if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PREFIX_V2 ) ) {
 				return;
 			}
-			$asset = include( YSTDTB_PATH . "/build/plugin-settings/${name}.asset.php" );
+			$asset = include( YSTDTB_PATH . "/build/plugin-settings/{$name}.asset.php" );
 			wp_enqueue_script(
-				"ystdtb-plugin-settings-${name}",
-				YSTDTB_URL . "/build/plugin-settings/${name}.js",
+				"ystdtb-plugin-settings-{$name}",
+				YSTDTB_URL . "/build/plugin-settings/{$name}.js",
 				$asset['dependencies'],
 				$asset['version'],
 				true
 			);
-			if ( file_exists( YSTDTB_PATH . "/build/plugin-settings/${name}.css" ) ) {
+			if ( file_exists( YSTDTB_PATH . "/build/plugin-settings/{$name}.css" ) ) {
 				wp_enqueue_style(
-					"ystdtb-plugin-settings-${name}",
-					YSTDTB_URL . "/build/plugin-settings/${name}.css",
+					"ystdtb-plugin-settings-{$name}",
+					YSTDTB_URL . "/build/plugin-settings/{$name}.css",
 					[],
 					$asset['version'],
 				);
