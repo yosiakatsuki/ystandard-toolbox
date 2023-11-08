@@ -15,6 +15,7 @@ const LabelSize = ( props ) => {
 				onChange={ ( font ) => {
 					setLabelFontSize( font );
 				} }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
