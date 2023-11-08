@@ -44,6 +44,7 @@ const BorderStyleControl = ( {
 			value={ currentSelection }
 			onChange={ handleOnChange }
 			{ ...props }
+			__nextUnconstrainedWidth
 		/>
 	);
 };
