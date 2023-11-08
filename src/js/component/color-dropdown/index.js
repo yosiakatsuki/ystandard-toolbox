@@ -19,7 +19,9 @@ const ColorDropdown = ( { key, value, label, renderContent } ) => {
 		>
 			<Dropdown
 				key={ key }
-				position={ 'bottom left' }
+				popoverProps={{
+					placement: 'bottom-start'
+				}}
 				className="block-editor-panel-color-gradient-settings__dropdown"
 				contentClassName="block-editor-panel-color-gradient-settings__dropdown-content"
 				style={ { display: 'block' } }
