@@ -210,7 +210,7 @@ class Heading {
 
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
-			$block_style = "{$wrap} .is-style-ystdtb-{$level}";
+			$block_style = "{$wrap} .is-style-ystdtb-{$level}";;
 			if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
 				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
 			}
@@ -222,24 +222,28 @@ class Heading {
 
 		// CSS.
 		$css      = '';
-		$sections = [ 'content', 'before', 'after' ];
-		foreach ( $sections as $section ) {
+		$sections = [
+			'content' => $content,
+			'before'  => $before,
+			'after'   => $after,
+		];
+		foreach ( $sections as $section => $selectors ) {
 			$style = $this->get_styles( $this->css, $section );
 			if ( $style ) {
-				$css .= "{$section} { {$style} }";
+				$css .= "{$selectors} { {$style} }";
 			}
 			// サイズ別.
 			$style = $this->get_styles( $this->css_tablet );
 			if ( $style ) {
 				$css .= Utility::add_media_query(
-					"{$section} { {$style} }",
+					"{$selectors} { {$style} }",
 					'md'
 				);
 			}
 			$style = $this->get_styles( $this->css_pc );
 			if ( $style ) {
 				$css .= Utility::add_media_query(
-					"{$section} { {$style} }",
+					"{$selectors} { {$style} }",
 					'lg'
 				);
 			}
@@ -252,7 +256,7 @@ class Heading {
 	 * セレクタの分解と結合・疑似要素追加
 	 *
 	 * @param string $selectors セレクタ.
-	 * @param string $pseudo    疑似要素.
+	 * @param string $pseudo 疑似要素.
 	 *
 	 * @return string
 	 */
@@ -270,7 +274,7 @@ class Heading {
 	 * セレクター取得
 	 *
 	 * @param string $level 見出しレベル.
-	 * @param bool   $block ブロック.
+	 * @param bool $block ブロック.
 	 *
 	 * @return string
 	 */
@@ -343,7 +347,7 @@ class Heading {
 	/**
 	 * スタイル作成
 	 *
-	 * @param array  $styles  styles.
+	 * @param array $styles styles.
 	 * @param string $section section.
 	 *
 	 * @return string
@@ -638,8 +642,8 @@ class Heading {
 	/**
 	 * 設定値取得.
 	 *
-	 * @param string $key     Key.
-	 * @param mixed  $default Default.
+	 * @param string $key Key.
+	 * @param mixed $default Default.
 	 *
 	 * @return mixed|string
 	 */
@@ -746,8 +750,8 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css( $property, $value, $section = 'content' ) {
 		$this->css[ $section ][ $this->get_css_property( $property ) ] = $value;
@@ -757,8 +761,8 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css_tablet( $property, $value, $section = 'content' ) {
 		$this->css_tablet[ $section ][ $this->get_css_property( $property ) ] = $value;
@@ -768,8 +772,8 @@ class Heading {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css_pc( $property, $value, $section = 'content' ) {
 		$this->css_pc[ $section ][ $this->get_css_property( $property ) ] = $value;
