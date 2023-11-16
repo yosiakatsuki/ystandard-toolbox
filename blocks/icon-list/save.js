@@ -7,13 +7,8 @@ import {
 import { blockClassName } from './config';
 
 export default function save( { attributes } ) {
-	const {
-		iconType,
-		customIconClass,
-		iconBold,
-		iconColor,
-		customIconColor,
-	} = attributes;
+	const { iconType, customIconClass, iconBold, iconColor, customIconColor } =
+		attributes;
 
 	const iconColorClass = getColorClassName( 'icon-font-color', iconColor );
 

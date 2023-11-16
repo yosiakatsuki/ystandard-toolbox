@@ -23,11 +23,7 @@ import { getColorSlug, getColorCode } from '@ystd/function/_getColorSlug';
 import { getFontSize, getFontSlug } from '@ystd/function/_getFontSlug';
 
 function Timeline( props ) {
-	const {
-		className,
-		updateChildAttributes,
-		updateLabelType,
-	} = props;
+	const { className, updateChildAttributes, updateLabelType } = props;
 
 	const [ contentMarginTop, setContentMarginTop ] = useState( 0 );
 	const [ labelType, setLabelType ] = useState( 'none' );
@@ -347,4 +343,4 @@ const timelineEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 	},
 } ) )( Timeline );
 
-export default timelineEdit
+export default timelineEdit;

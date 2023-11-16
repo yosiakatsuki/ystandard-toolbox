@@ -5,41 +5,42 @@ import { getIcons } from '@ystd/function/icons';
 import SVGIcon from '../svg-icon';
 import { __ } from '@wordpress/i18n';
 
-
 export default function IconSelect( props ) {
-	const { selectedIcon, onChange, previewIcon } =
-		props;
+	const { selectedIcon, onChange, previewIcon } = props;
 	const [ isOpen, setIsOpen ] = useState( false );
 	const isPreview = false === previewIcon ? previewIcon : true;
 
-	const iconOnSelect = useCallback( ( selectIcon ) => {
-		if ( selectedIcon === selectIcon ) {
-			onChange( '' );
-			setIsOpen( false );
-		} else {
-			onChange( selectIcon );
-		}
-	}, [ selectedIcon, onChange, setIsOpen ] );
+	const iconOnSelect = useCallback(
+		( selectIcon ) => {
+			if ( selectedIcon === selectIcon ) {
+				onChange( '' );
+				setIsOpen( false );
+			} else {
+				onChange( selectIcon );
+			}
+		},
+		[ selectedIcon, onChange, setIsOpen ]
+	);
 
 	const iconButtons = useMemo( () => {
 		return (
 			<>
 				{ isOpen && (
-					<IconList selectedIcon={ selectedIcon } onChange={ iconOnSelect }/>
+					<IconList
+						selectedIcon={ selectedIcon }
+						onChange={ iconOnSelect }
+					/>
 				) }
 			</>
 		);
 	}, [ selectedIcon, iconOnSelect, isOpen ] );
-
 
 	return (
 		<div className={ 'ys-icon-picker' }>
 			<div className={ 'ys-icon-picker__selected' }>
 				{ isPreview && (
 					<div className={ 'ys-icon-picker__preview' }>
-						{ !! selectedIcon && (
-							<SVGIcon name={ selectedIcon }/>
-						) }
+						{ !! selectedIcon && <SVGIcon name={ selectedIcon } /> }
 					</div>
 				) }
 				<Button
@@ -61,8 +62,8 @@ export default function IconSelect( props ) {
 					) }
 					{ ! isOpen && (
 						<span>
-								{ __( 'アイコン選択', 'ystandard-blocks' ) }
-							</span>
+							{ __( 'アイコン選択', 'ystandard-blocks' ) }
+						</span>
 					) }
 				</Button>
 				<Button
@@ -91,43 +92,30 @@ export default function IconSelect( props ) {
 	);
 }
 
-
 function IconList( props ) {
-	const { selectedIcon, onChange } =
-		props;
+	const { selectedIcon, onChange } = props;
 	const iconList = getIcons();
 
 	return (
 		<>
-			{
-				iconList.map( ( icon ) => {
-					const iconName = icon.name;
-					const isSelected = selectedIcon === iconName;
-					const svgIcon = useMemo( () => {
-						return (
-							<SVGIcon name={ iconName }/>
-						);
-					}, [ iconName ] );
+			{ iconList.map( ( icon ) => {
+				const iconName = icon.name;
+				const isSelected = selectedIcon === iconName;
 
-					return (
-						<Button
-							key={ iconName }
-							className={ classnames(
-								`ys-icon-picker__icon`,
-								{
-									'is-selected':
-									isSelected,
-								}
-							) }
-							onClick={ () => {
-								onChange( iconName );
-							} }
-						>
-							{ svgIcon }
-						</Button>
-					);
-				} )
-			}
+				return (
+					<Button
+						key={ iconName }
+						className={ classnames( `ys-icon-picker__icon`, {
+							'is-selected': isSelected,
+						} ) }
+						onClick={ () => {
+							onChange( iconName );
+						} }
+					>
+						<SVGIcon name={ iconName } />
+					</Button>
+				);
+			} ) }
 		</>
 	);
 }
