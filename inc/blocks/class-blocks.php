@@ -146,10 +146,11 @@ class Blocks {
 	 * @return array
 	 */
 	public static function add_block_categories( $categories ) {
-		return array_merge(
-			$categories,
-			array_values( Config::BLOCK_CATEGORIES ),
-		);
+		if ( apply_filters( 'ystdtb_block_category_top', false ) ) {
+			return array_merge( array_values( Config::BLOCK_CATEGORIES ), $categories );
+		}
+
+		return array_merge( $categories, array_values( Config::BLOCK_CATEGORIES ) );
 	}
 
 	/**
