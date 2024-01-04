@@ -69,6 +69,7 @@ const ResponsiveFontSize = ( props ) => {
 										) }
 										value={ valueDesktop }
 										onChange={ handleOnChangeDesktop }
+										__nextHasNoMarginBottom
 									/>
 								</div>
 							) }

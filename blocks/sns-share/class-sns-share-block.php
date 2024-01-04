@@ -43,6 +43,10 @@ class SNS_Share_Block extends Dynamic_Block {
 				'type'    => 'string',
 				'default' => '',
 			],
+			'useX'               => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
 			'useTwitter'         => [
 				'type'    => 'boolean',
 				'default' => true,
@@ -106,7 +110,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			$this->migration_attributes( $attributes )
 		);
 
-		return "<div class=\"${classes}\">" . do_shortcode( "[ys_share_button ${attributes}]" ) . '</div>';
+		return "<div class=\"{$classes}\">" . do_shortcode( "[ys_share_button {$attributes}]" ) . '</div>';
 	}
 
 	/**
@@ -119,6 +123,7 @@ class SNS_Share_Block extends Dynamic_Block {
 	private function migration_attributes( $attributes ) {
 
 		$attributes['type']                 = $attributes['buttonType'];
+		$attributes['x']                    = $attributes['useX'];
 		$attributes['twitter']              = $attributes['useTwitter'];
 		$attributes['facebook']             = $attributes['useFacebook'];
 		$attributes['hatenabookmark']       = $attributes['useHatenaBookmark'];

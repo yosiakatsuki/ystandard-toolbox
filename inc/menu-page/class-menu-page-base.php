@@ -115,6 +115,13 @@ abstract class Menu_Page_Base {
 	protected $ajax_result;
 
 	/**
+	 * オプション名
+	 *
+	 * @var string
+	 */
+	protected $option_name = '';
+
+	/**
 	 * Menu_Page_Base constructor.
 	 */
 	public function __construct() {
@@ -548,12 +555,12 @@ abstract class Menu_Page_Base {
 	 */
 	protected function enqueue_admin_script( $name, $deps = [], $in_footer = true ) {
 		$ver = gmdate( 'YmdHis' );
-		if ( file_exists( YSTDTB_PATH . "/js/admin/${name}.js" ) ) {
-			$ver = filemtime( YSTDTB_PATH . "/js/admin/${name}.js" );
+		if ( file_exists( YSTDTB_PATH . "/js/admin/{$name}.js" ) ) {
+			$ver = filemtime( YSTDTB_PATH . "/js/admin/{$name}.js" );
 		}
 		wp_enqueue_script(
-			"ystdtb-${name}",
-			YSTDTB_URL . "/js/admin/${name}.js",
+			"ystdtb-{$name}",
+			YSTDTB_URL . "/js/admin/{$name}.js",
 			$deps,
 			$ver,
 			$in_footer
@@ -570,7 +577,7 @@ abstract class Menu_Page_Base {
 	protected function enqueue_admin_localize_script( $name, $object_name, $args ) {
 		$args['site-url']   = esc_url_raw( home_url() );
 		$args['plugin-url'] = YSTDTB_URL;
-		wp_localize_script( "ystdtb-${name}", $object_name, $args );
+		wp_localize_script( "ystdtb-{$name}", $object_name, $args );
 	}
 
 	/**
@@ -591,7 +598,7 @@ abstract class Menu_Page_Base {
 			$config
 		);
 		wp_localize_script(
-			"ystdtb-${name}",
+			"ystdtb-{$name}",
 			$object_name,
 			[
 				'config'  => $config,

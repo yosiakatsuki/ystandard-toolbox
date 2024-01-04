@@ -1,23 +1,21 @@
 import { ystdtbConfig } from '@ystd/config';
 import edit from './edit';
 import save from './save';
-import transforms from './transforms';
 import { List } from 'react-feather';
 import { attributes, supports } from './config';
 import { registerBlockType } from '@wordpress/blocks';
-import deprecated from './deprecated';
 import { __ } from '@wordpress/i18n';
 
-registerBlockType( 'ystdtb/icon-list', {
+registerBlockType( 'ystdtb/icon-list-item', {
 	apiVersion: 2,
-	title: __( 'アイコンリスト', 'ystandard-toolbox' ),
+	title: __( 'アイコンリストアイテム', 'ystandard-toolbox' ),
 	description: __(
-		'アイコンを表示できるリストブロック',
+		'アイコンを表示できるリストブロックの行',
 		'ystandard-toolbox'
 	),
 	icon: (
 		<List
-			stroke={ ystdtbConfig.color.iconForeground }
+			stroke={ ystdtbConfig.color.iconForegroundChild }
 			style={ { fill: 'none' } }
 		/>
 	),
@@ -28,6 +26,5 @@ registerBlockType( 'ystdtb/icon-list', {
 	edit,
 	save,
 	example: {},
-	transforms,
-	deprecated,
+	parent: [ 'ystdtb/icon-list' ],
 } );

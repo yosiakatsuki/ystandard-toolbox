@@ -244,6 +244,7 @@ function FAQItem( props ) {
 							onChange={ ( font ) => {
 								setLabelSize( font );
 							} }
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl

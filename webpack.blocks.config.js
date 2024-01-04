@@ -14,6 +14,7 @@ module.exports = {
 		'faq-item': './blocks/faq/item/index.js',
 		'sns-share': './blocks/sns-share/index.js',
 		'icon-list': './blocks/icon-list/index.js',
+		'icon-list-item': './blocks/icon-list-item/index.js',
 		'box': './blocks/box/index.js',
 		'parts': './blocks/parts/index.js',
 		'banner-link': './blocks/banner-link/index.js',

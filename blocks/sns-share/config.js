@@ -17,6 +17,10 @@ export const attributes = {
 		type: 'string',
 		default: '',
 	},
+	useX: {
+		type: 'bool',
+		default: true,
+	},
 	useTwitter: {
 		type: 'bool',
 		default: true,

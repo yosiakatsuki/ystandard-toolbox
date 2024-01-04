@@ -81,7 +81,7 @@ class Menu_Heading extends Menu_Page_Base {
 		$font           = ! empty( $toolbox_family ) ? $toolbox_family : $theme_font;
 		wp_add_inline_style(
 			'ystdtb-admin',
-			".heading-editor-preview {font-family:${font};}"
+			".heading-editor-preview {font-family:{$font};}"
 		);
 	}
 

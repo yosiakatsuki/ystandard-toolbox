@@ -93,7 +93,7 @@ class Admin_Utility {
 	public static function get_menu_page_url( $name ) {
 		$menu_page = config::ADMIN_MENU_PAGE_PREFIX . '-' . $name;
 
-		return esc_url_raw( admin_url( "admin.php?page=${menu_page}" ) );
+		return esc_url_raw( admin_url( "admin.php?page={$menu_page}" ) );
 	}
 
 	/**

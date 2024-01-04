@@ -53,8 +53,8 @@ class Sub_Header {
 
 		$css = '';
 		// CSS.
-		$css .= ".sub-header.is-top{background-color:${bg};color:${color};}";
-		$css .= ".sub-header__nav{justify-content:${menu_align};font-size:${size}${unit};}";
+		$css .= ".sub-header.is-top{background-color:{$bg};color:{$color};}";
+		$css .= ".sub-header__nav{justify-content:{$menu_align};font-size:{$size}{$unit};}";
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import {
-	RichText,
+	useInnerBlocksProps,
 	InspectorControls,
 	withColors,
 	useBlockProps,
@@ -12,22 +12,14 @@ import {
 	ToggleControl,
 	ColorPalette,
 } from '@wordpress/components';
-import { createBlock } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { blockClassName } from './config';
 import * as BlockOption from './inspector-controls';
 
 function IconList( props ) {
-	const {
-		attributes,
-		setAttributes,
-		mergeBlocks,
-		onReplace,
-		iconColor,
-		setIconColor,
-	} = props;
-	const { values, iconType, customIconClass, iconBold } = attributes;
+	const { attributes, setAttributes, iconColor, setIconColor } = props;
+	const { iconType, customIconClass, iconBold } = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 	const blockProps = useBlockProps( {
@@ -78,28 +70,13 @@ function IconList( props ) {
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<RichText
-				identifier="values"
-				className={ blockClassName }
-				multiline="li"
-				tagName="ul"
-				onChange={ ( nextValues ) =>
-					setAttributes( { values: nextValues } )
-				}
-				value={ values }
-				aria-label={ __( 'Icon list text', 'ystandard-toolbox' ) }
-				placeholder={ __( 'リストを入力…', 'ystandard-toolbox' ) }
-				onMerge={ mergeBlocks }
-				onSplit={ ( value ) =>
-					createBlock( 'ystdtb/icon-list', {
-						...attributes,
-						values: value,
-					} )
-				}
-				onReplace={ onReplace }
-				onRemove={ () => onReplace( [] ) }
-				type="ul"
-				{ ...blockProps }
+			<ul
+				{ ...useInnerBlocksProps( blockProps, {
+					allowedBlocks: [ 'ystdtb/icon-list-item' ],
+					template: [ [ 'ystdtb/icon-list-item' ] ],
+					templateLock: false,
+					templateInsertUpdatesSelection: false,
+				} ) }
 			/>
 		</>
 	);

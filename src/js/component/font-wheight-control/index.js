@@ -78,6 +78,7 @@ const FontWeightControl = ( {
 			value={ currentSelection }
 			onChange={ handleOnChange }
 			{ ...props }
+			__nextUnconstrainedWidth
 		/>
 	);
 };

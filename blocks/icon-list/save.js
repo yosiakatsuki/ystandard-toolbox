@@ -1,20 +1,14 @@
 import classnames from 'classnames';
 import {
-	RichText,
+	InnerBlocks,
 	useBlockProps,
 	getColorClassName,
 } from '@wordpress/block-editor';
 import { blockClassName } from './config';
 
 export default function save( { attributes } ) {
-	const {
-		values,
-		iconType,
-		customIconClass,
-		iconBold,
-		iconColor,
-		customIconColor,
-	} = attributes;
+	const { iconType, customIconClass, iconBold, iconColor, customIconColor } =
+		attributes;
 
 	const iconColorClass = getColorClassName( 'icon-font-color', iconColor );
 
@@ -36,7 +30,7 @@ export default function save( { attributes } ) {
 				style: listStyle,
 			} ) }
 		>
-			<RichText.Content value={ values } multiline="li" />
+			<InnerBlocks.Content />
 		</ul>
 	);
 }

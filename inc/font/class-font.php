@@ -89,7 +89,7 @@ class Font {
 		$css = "
 		#editor .editor-styles-wrapper,
 		#editor .editor-styles-wrapper .editor-post-title__block .editor-post-title__input {
-			font-family:${family};
+			font-family:{$family};
 		}";
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,

@@ -14,7 +14,7 @@ import {
 	ToggleControl,
 	ColorPalette,
 } from '@wordpress/components';
-import { withState, compose } from '@wordpress/compose';
+import { useState } from '@wordpress/element';
 import { withDispatch, select } from '@wordpress/data';
 import { innerMargin } from './item/config';
 import { calcContentMarginTop } from './item/function';
@@ -23,18 +23,14 @@ import { getColorSlug, getColorCode } from '@ystd/function/_getColorSlug';
 import { getFontSize, getFontSlug } from '@ystd/function/_getFontSlug';
 
 function Timeline( props ) {
-	const {
-		className,
-		updateChildAttributes,
-		updateLabelType,
-		contentMarginTop,
-		labelType,
-		labelBold,
-		labelBorderRadius,
-		labelFontSize,
-		labelBorderSize,
-		setState,
-	} = props;
+	const { className, updateChildAttributes, updateLabelType } = props;
+
+	const [ contentMarginTop, setContentMarginTop ] = useState( 0 );
+	const [ labelType, setLabelType ] = useState( 'none' );
+	const [ labelBold, setLabelBold ] = useState( false );
+	const [ labelBorderRadius, setLabelBorderRadius ] = useState( 50 );
+	const [ labelFontSize, setLabelFontSize ] = useState( 14 );
+	const [ labelBorderSize, setLabelBorderSize ] = useState( 0 );
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 
@@ -110,7 +106,7 @@ function Timeline( props ) {
 								updateChildAttributes( {
 									contentMarginTop: value,
 								} );
-								setState( { contentMarginTop: value } );
+								setContentMarginTop( value );
 							} }
 							initialPosition={ selectedMarginTop }
 							min={ -100 }
@@ -133,7 +129,7 @@ function Timeline( props ) {
 								updateChildAttributes( {
 									labelBorderRadius: value,
 								} );
-								setState( { labelBorderRadius: value } );
+								setLabelBorderRadius( value );
 							} }
 							initialPosition={ 50 }
 							min={ 0 }
@@ -162,10 +158,8 @@ function Timeline( props ) {
 											updateChildAttributes( {
 												contentMarginTop: margin,
 											} );
-											setState( {
-												labelType: item.name,
-												contentMarginTop: margin,
-											} );
+											setLabelType( item.name );
+											setContentMarginTop( margin );
 											if ( '' === item.name ) {
 												updateChildAttributes( {
 													labelFontSize: 14,
@@ -194,9 +188,7 @@ function Timeline( props ) {
 									updateChildAttributes( {
 										labelBold: ! labelBold,
 									} );
-									setState( {
-										labelBold: ! labelBold,
-									} );
+									setLabelBold( ! labelBold );
 								} }
 								checked={ labelBold }
 							/>
@@ -223,8 +215,9 @@ function Timeline( props ) {
 											customLabelFontSize:
 												getFontSize( font ),
 										} );
-										setState( { labelFontSize: font } );
+										setLabelFontSize( font );
 									} }
+									__nextHasNoMarginBottom
 								/>
 							</BaseControl>
 							<BaseControl
@@ -274,7 +267,7 @@ function Timeline( props ) {
 								updateChildAttributes( {
 									labelBorderSize: value,
 								} );
-								setState( { labelBorderSize: value } );
+								setLabelBorderSize( value );
 							} }
 							initialPosition={ 0 }
 							min={ 0 }
@@ -350,13 +343,4 @@ const timelineEdit = withDispatch( ( dispatch, ownProps, registry ) => ( {
 	},
 } ) )( Timeline );
 
-export default compose( [
-	withState( {
-		contentMarginTop: 0,
-		labelType: 'none',
-		labelBold: false,
-		labelBorderRadius: 50,
-		labelFontSize: 14,
-		labelBorderSize: 0,
-	} ),
-] )( timelineEdit );
+export default timelineEdit;
