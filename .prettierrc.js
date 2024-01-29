@@ -1,1 +1,6 @@
-module.exports = require( '@wordpress/prettier-config' );
+module.exports = {
+	plugins: [
+		"@wordpress/prettier-config",
+		"prettier-plugin-tailwindcss",
+	],
+};
