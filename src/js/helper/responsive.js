@@ -54,6 +54,8 @@ export const getResponsiveValues = ( values ) => {
 	return 0 < Object.keys( result ).length ? result : undefined;
 };
 /**
+ * @param values
+ * @param arrowFalsy
  * @deprecated
  */
 export const parseResponsiveValues = ( values, arrowFalsy = false ) => {

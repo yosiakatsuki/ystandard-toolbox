@@ -11,7 +11,6 @@ import './_edit.scss';
 const HeadingCustomize = () => {
 	const options = getHeadingOptions();
 	const [ isLoading, setIsLoading ] = useState< boolean >( false );
-	options.isCompatible = true;
 	return (
 		<>
 			{ /* @ts-ignore */ }

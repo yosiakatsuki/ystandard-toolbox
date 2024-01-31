@@ -5,6 +5,13 @@
 詳細・購入はこちら▼
 [https://wp-ystandard.com/plugins/ystandard-toolbox/](https://wp-ystandard.com/plugins/ystandard-toolbox/)
 
+## 開発メモ
+- 見出し編集機能
+- プレビュー作成・スタイル調整2024/01/31
+- エディット機能作成する。プリセットの選択・コピーから
+- データのオブジェクトの形式確認から…
+
+
 ## 更新履歴
 
 ### v2.0.0

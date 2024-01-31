@@ -94,7 +94,7 @@ class Heading_Helper {
 					[
 						'$before'           => $before,
 					],
-					__DIR__ . '/get_heading_css.html'
+					__DIR__ . '/debug-get_heading_css.html'
 				);
 				$before = Styles::parse_styles_pseudo_elements( $before, 'before' );
 			}

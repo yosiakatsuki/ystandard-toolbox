@@ -14,23 +14,35 @@ export default function EditContainer() {
 	const { selectedStyle } = useContext( HeadingContext );
 	return (
 		<>
-			<div className={ 'border border-slate-400 p-3 mt-5' }>
-				<h2 className={ 'font-bold text-slate-500 mb-3' }>
+			<div
+				className={
+					'mt-5 border border-solid border-aktk-border-gray px-4 py-8'
+				}
+			>
+				<h2 className={ 'mb-3 mt-0 font-bold text-aktk-text-gray' }>
 					{ __( 'スタイル編集', 'ystandard-toolbox' ) }
 				</h2>
 				<>
 					{ selectedStyle ? (
 						<div
 							className={
-								'flex flex-col-reverse md:flex-row gap-5'
+								'grid grid-cols-1 gap-5 md:grid-cols-2'
 							}
 						>
-							<div className={ 'w-full relative' }>
+							<div className={ 'relative w-full' }>
 								えでぃっと
 							</div>
-							<div className={ 'w-full relative' }>
-								<div className={ 'pb-5 sticky top-5 w-full' }>
-									<div className={ 'font-bold mb-3' }>
+							<div
+								className={
+									'relative w-full md:border-0 md:border-l md:border-solid md:border-l-gray-200 md:pl-5'
+								}
+							>
+								<div className={ 'sticky top-5 w-full pb-5' }>
+									<div
+										className={
+											'mb-3 font-bold text-aktk-text-gray'
+										}
+									>
 										プレビュー
 									</div>
 									<Preview />
@@ -38,7 +50,7 @@ export default function EditContainer() {
 							</div>
 						</div>
 					) : (
-						<p className={ 'text-gray-400 text-xs' }>
+						<p className={ 'text-xs text-gray-400' }>
 							{ __(
 								'スタイルを選択してください。',
 								'ystandard-toolbox'

@@ -79,9 +79,11 @@ export default function LevelSelect() {
 
 	return (
 		<>
-			<div className={ 'border border-slate-400 p-5' }>
+			<div
+				className={ 'border border-solid border-aktk-border-gray p-5' }
+			>
 				<div className={ 'flex justify-between' }>
-					<div className={ 'flex justify-between items-end gap-3' }>
+					<div className={ 'flex items-end justify-between gap-3' }>
 						<CustomSelectControl
 							value={ selectedStyle || '' }
 							options={

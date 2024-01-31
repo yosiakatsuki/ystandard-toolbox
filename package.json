@@ -31,6 +31,7 @@
 		"css-declaration-sorter": "^7.1.1",
 		"cssnano": "^6.0.3",
 		"del": "^7.1.0",
+		"eslint-plugin-tailwindcss": "^3.14.1",
 		"fast-glob": "^3.3.2",
 		"feather-icons": "^4.29.1",
 		"hex-rgb": "^5.0.0",
