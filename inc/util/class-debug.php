@@ -13,7 +13,7 @@ class Debug {
 	/**
 	 * 変数の内容をファイルに出力（開発用）
 	 *
-	 * @param mixed  $var  value.
+	 * @param mixed $var value.
 	 * @param string $path Path.
 	 * @param string $file File Name.
 	 * @param string $line Line Number.
@@ -32,4 +32,21 @@ class Debug {
 		ob_end_clean();
 		file_put_contents( $path, $dump . PHP_EOL, FILE_APPEND );
 	}
+
+	/**
+	 * 変数の内容をjsonファイルに出力（開発用）
+	 *
+	 * @param array $var value.
+	 * @param string $path Path.
+	 * @param string $file File Name.
+	 * @param string $line Line Number.
+	 */
+	public static function debug_json_dump_file( $var, $path = '' ) {
+		if ( empty( $path ) ) {
+			$path = WP_CONTENT_DIR . '/uploads/debug.html';
+		}
+
+		file_put_contents( $path, json_encode( $var ) );
+	}
+
 }

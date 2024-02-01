@@ -9,6 +9,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Debug;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Text;
 
@@ -292,7 +293,10 @@ class Heading {
 	 */
 	public static function get_heading_design_options() {
 		$option = get_option( self::OPTION_MAIN, [] );
-
+		Debug::debug_json_dump_file(
+			$option,
+			__DIR__ . '/debug-heading-option.json'
+		);
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 

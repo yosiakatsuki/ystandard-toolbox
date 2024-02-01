@@ -18,6 +18,10 @@ module.exports = {
 			'@aktk/api': path.resolve( __dirname, 'src/block-api' ),
 			'@aktk/utils': path.resolve( __dirname, 'src/block-utils' ),
 			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
+			'@aktk/block-components': path.resolve(
+				__dirname,
+				'src/aktk-block-components'
+			),
 		},
 	},
 };

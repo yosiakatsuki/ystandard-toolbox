@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { HeadingContext } from '../index';
 import Preview from '@aktk/plugin-settings/heading/app/preview';
+import Editor from './editor';
 
 export default function EditContainer() {
 	// @ts-ignore
@@ -30,7 +31,7 @@ export default function EditContainer() {
 							}
 						>
 							<div className={ 'relative w-full' }>
-								えでぃっと
+								<Editor />
 							</div>
 							<div
 								className={
@@ -50,7 +51,7 @@ export default function EditContainer() {
 							</div>
 						</div>
 					) : (
-						<p className={ 'text-xs text-gray-400' }>
+						<p className={ 'text-xs text-aktk-text-gray' }>
 							{ __(
 								'スタイルを選択してください。',
 								'ystandard-toolbox'
