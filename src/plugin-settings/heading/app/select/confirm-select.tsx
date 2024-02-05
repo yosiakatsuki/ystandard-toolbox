@@ -2,7 +2,7 @@
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import { ConfirmModal } from '@aktk/components/modal';
+import { ConfirmModal } from '@aktk/block-components/modal';
 
 /**
  * Component.
@@ -32,7 +32,7 @@ export default function ConfirmSelect( props: ConfirmSelectProps ) {
 						'ystandard-toolbox'
 					) }
 				</p>
-				<p className={ 'text-xs text-gray-400 mt-1' }>
+				<p className={ 'mt-1 text-xs text-gray-400' }>
 					{ __(
 						'※編集中のデータは破棄されます。',
 						'ystandard-toolbox'

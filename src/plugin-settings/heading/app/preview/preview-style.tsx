@@ -12,6 +12,7 @@ interface PreviewStyleProps {
 	style?: HeadingStyle;
 	before?: HeadingPseudoElementsStyle;
 	after?: HeadingPseudoElementsStyle;
+	selector?: string;
 }
 
 export default function PreviewStyle( props: PreviewStyleProps ) {
@@ -23,16 +24,11 @@ function getStyles( props: PreviewStyleProps ) {
 	const style = parseStyles( props?.style as unknown as object );
 	const before = parseStylesPseudoElements( props?.before || {} );
 	const after = parseStylesPseudoElements( props?.after || {} );
+	const selector = props?.selector || 'ystdtb-setting-heading__preview-text';
 
-	const styleCss = createCSS( style );
-	const beforeCss = createCSS(
-		before,
-		'ystdtb-setting-heading__preview-text::before'
-	);
-	const afterCss = createCSS(
-		after,
-		'ystdtb-setting-heading__preview-text::after'
-	);
+	const styleCss = createCSS( style, selector );
+	const beforeCss = createCSS( before, `${ selector }::before` );
+	const afterCss = createCSS( after, `${ selector }::after` );
 
 	return `${ styleCss }\n${ beforeCss }\n${ afterCss }`;
 }
@@ -221,7 +217,6 @@ function addMediaQuery( style: string, min?: string, max?: string ) {
 		return `@media (min-width: ${ min }) { ${ style } }`;
 	} else if ( max ) {
 		return `@media (max-width: ${ max }) { ${ style } }`;
-	} else {
-		return style;
 	}
+	return style;
 }

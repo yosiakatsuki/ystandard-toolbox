@@ -77,6 +77,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		await initLevelList();
 		await initHeadingStyles();
 		setIsLoading( false );
+		console.log( 'initApp' );
 	};
 
 	const updateStyle = ( value: HeadingStyle ) => {

@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Plugin.
  */
-import { Modal } from '@aktk/components/modal';
+import { Modal } from '@aktk/block-components/modal';
 import InputControl from '@aktk/components/input-controls';
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 
@@ -17,6 +17,7 @@ import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 import { HeadingContext } from '../index';
 import { getNewOption } from '../../util/setting';
 import { notifyError, notifySuccess } from '@aktk/components/toast-message';
+
 interface AddStyleProps {
 	isOpen: boolean;
 	onSuccess: () => void;
@@ -54,10 +55,9 @@ export default function AddStyle( props: AddStyleProps ) {
 					__( '入力されていません。', 'ystandard-toolbox' )
 				);
 				return false;
-			} else {
-				setIsIdErrorMessage( '' );
-				return true;
 			}
+			setIsIdErrorMessage( '' );
+			return true;
 		}
 		const regexWord = /^[a-zA-Z0-9-]*$/;
 		if ( ! regexWord.test( value ) ) {
@@ -103,10 +103,9 @@ export default function AddStyle( props: AddStyleProps ) {
 					__( '入力されていません。', 'ystandard-toolbox' )
 				);
 				return false;
-			} else {
-				setIsLabelErrorMessage( '' );
-				return true;
 			}
+			setIsLabelErrorMessage( '' );
+			return true;
 		}
 		setIsLabelErrorMessage( '' );
 		return true;
@@ -166,7 +165,7 @@ export default function AddStyle( props: AddStyleProps ) {
 				onCancel={ handleOnCancel }
 				onOk={ handleOnOk }
 			>
-				<div className={ 'flex flex-col gap-5 w-full' }>
+				<div className={ 'flex w-full flex-col gap-5' }>
 					<div>
 						<InputControl
 							label={ __( 'スタイルID', 'ystandard-toolbox' ) }
@@ -174,7 +173,7 @@ export default function AddStyle( props: AddStyleProps ) {
 							onChange={ handleIDOnChange }
 						/>
 						{ isIdErrorMessage && (
-							<p className={ 'text-xs mt-1 text-notice-error' }>
+							<p className={ 'mt-1 text-xs text-notice-error' }>
 								{ isIdErrorMessage }
 							</p>
 						) }
@@ -186,7 +185,7 @@ export default function AddStyle( props: AddStyleProps ) {
 							onChange={ handleLabelOnChange }
 						/>
 						{ isLabelErrorMessage && (
-							<p className={ 'text-xs mt-1 text-notice-error' }>
+							<p className={ 'mt-1 text-xs text-notice-error' }>
 								{ isLabelErrorMessage }
 							</p>
 						) }

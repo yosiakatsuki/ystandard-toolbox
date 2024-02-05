@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import CustomSelectControl, {
 	CustomSelectControlOption,
 } from '@aktk/components/custom-select-control';
-import { AddButton } from '@aktk/components/buttons';
+import { AddButton } from '@aktk/block-components/buttons';
 /**
  * Component.
  */

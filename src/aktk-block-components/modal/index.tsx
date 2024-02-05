@@ -11,11 +11,12 @@ interface ModalProps {
 	title?: string;
 	children: React.ReactNode;
 	isOpen: boolean;
-	onOk: () => void;
-	onCancel: () => void;
+	onOk?: () => void;
+	onCancel?: () => void;
 	okText?: string;
 	cancelText?: string;
 }
+
 export function Modal( props: ModalProps ) {
 	const {
 		title,
@@ -23,16 +24,18 @@ export function Modal( props: ModalProps ) {
 		isOpen,
 		onOk,
 		onCancel,
-		okText = 'OK',
-		cancelText = __( 'キャンセル', 'ystandard-toolbox' ),
+		okText = __( 'OK', 'aktk-blocks' ),
+		cancelText = __( 'キャンセル', 'aktk-blocks' ),
 	} = props;
+
 	const handleOnClose = () => {
-		onCancel();
+		if ( !! onCancel ) {
+			onCancel();
+		}
 	};
 	return (
 		<>
 			{ isOpen && (
-				// @ts-expect-error
 				<WPModal
 					title={ title || '' }
 					onRequestClose={ handleOnClose }
@@ -40,14 +43,16 @@ export function Modal( props: ModalProps ) {
 				>
 					<div>{ children }</div>
 					<div className={ 'mt-4 flex justify-end gap-4' }>
-						{ /* @ts-expect-error */ }
-						<Button variant={ 'tertiary' } onClick={ onCancel }>
-							{ cancelText }
-						</Button>
-						{ /* @ts-expect-error */ }
-						<Button variant={ 'primary' } onClick={ onOk }>
-							{ okText }
-						</Button>
+						{ onCancel && (
+							<Button variant={ 'tertiary' } onClick={ onCancel }>
+								{ cancelText }
+							</Button>
+						) }
+						{ onOk && (
+							<Button variant={ 'primary' } onClick={ onOk }>
+								{ okText }
+							</Button>
+						) }
 					</div>
 				</WPModal>
 			) }
@@ -56,8 +61,9 @@ export function Modal( props: ModalProps ) {
 }
 
 export function ConfirmModal( props: ModalProps ) {
+	const { title } = props;
 	return (
-		<Modal { ...props } title={ __( '確認', 'ystandard-toolbox' ) }>
+		<Modal { ...props } title={ title ?? __( '確認', 'aktk-blocks' ) }>
 			{ props.children }
 		</Modal>
 	);

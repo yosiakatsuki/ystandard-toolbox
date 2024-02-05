@@ -1,0 +1,149 @@
+{
+	"border-bottom": {
+		"slug": "border-bottom",
+		"name": "下線",
+		"style": {
+			"border": {
+				"desktop": {
+					"bottom": {
+						"color": "#222222",
+						"style": "solid",
+						"width": "1px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"bottom": "0.5em"
+				}
+			}
+		}
+	},
+	"border-bottom-dotted": {
+		"slug": "border-bottom-dotted",
+		"name": "下線(点線)",
+		"style": {
+			"border": {
+				"desktop": {
+					"bottom": {
+						"color": "#222222",
+						"style": "dotted",
+						"width": "1px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"bottom": "0.5em"
+				}
+			}
+		}
+	},
+	"border-bottom-dashed": {
+		"slug": "border-bottom-dashed",
+		"name": "下線(破線)",
+		"style": {
+			"border": {
+				"desktop": {
+					"bottom": {
+						"color": "#222222",
+						"style": "dashed",
+						"width": "1px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"bottom": "0.5em"
+				}
+			}
+		}
+	},
+	"border-left": {
+		"slug": "border-left",
+		"name": "左線",
+		"style": {
+			"border": {
+				"desktop": {
+					"left": {
+						"color": "#222222",
+						"style": "solid",
+						"width": "4px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"top": "0.3em",
+					"left": "0.5em",
+					"bottom": "0.3em"
+				}
+			}
+		}
+	},
+	"border-horizontal": {
+		"slug": "border-horizontal",
+		"name": "上下の直線",
+		"style": {
+			"border": {
+				"desktop": {
+					"top": {
+						"color": "#222222",
+						"style": "solid",
+						"width": "1px"
+					},
+					"bottom": {
+						"color": "#222222",
+						"style": "solid",
+						"width": "1px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"bottom": "0.5em"
+				}
+			}
+		}
+	},
+	"background-color": {
+		"slug": "background-color",
+		"name": "背景色",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"right": "0.5em",
+					"bottom": "0.5em",
+					"left": "0.5em"
+				}
+			}
+		}
+	},
+	"border-left-plus-bg": {
+		"slug": "border-left-plus-bg",
+		"name": "左線 + 背景色",
+		"style": {
+			"backgroundColor": "#f7f7f7",
+			"border": {
+				"desktop": {
+					"left": {
+						"color": "#222222",
+						"style": "solid",
+						"width": "4px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"right": "0.5em",
+					"bottom": "0.5em",
+					"left": "0.5em"
+				}
+			}
+		}
+	}
+}

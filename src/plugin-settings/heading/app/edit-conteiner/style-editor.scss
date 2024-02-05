@@ -1,0 +1,12 @@
+#heading-v2 {
+	.components-panel__body {
+		font-size: 14px;
+
+		& > .components-panel__body-title {
+			&:hover {
+				background-color: #fff;
+			}
+		}
+	}
+}
+
