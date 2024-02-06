@@ -1,7 +1,7 @@
 {
 	"border-bottom": {
 		"slug": "border-bottom",
-		"name": "下線",
+		"label": "下線",
 		"style": {
 			"border": {
 				"desktop": {
@@ -21,7 +21,7 @@
 	},
 	"border-bottom-dotted": {
 		"slug": "border-bottom-dotted",
-		"name": "下線(点線)",
+		"label": "下線(点線)",
 		"style": {
 			"border": {
 				"desktop": {
@@ -41,7 +41,7 @@
 	},
 	"border-bottom-dashed": {
 		"slug": "border-bottom-dashed",
-		"name": "下線(破線)",
+		"label": "下線(破線)",
 		"style": {
 			"border": {
 				"desktop": {
@@ -61,7 +61,7 @@
 	},
 	"border-left": {
 		"slug": "border-left",
-		"name": "左線",
+		"label": "左線",
 		"style": {
 			"border": {
 				"desktop": {
@@ -83,7 +83,7 @@
 	},
 	"border-horizontal": {
 		"slug": "border-horizontal",
-		"name": "上下の直線",
+		"label": "上下の直線",
 		"style": {
 			"border": {
 				"desktop": {
@@ -109,7 +109,7 @@
 	},
 	"background-color": {
 		"slug": "background-color",
-		"name": "背景色",
+		"label": "背景色",
 		"style": {
 			"backgroundColor": "#eeeeee",
 			"padding": {
@@ -124,7 +124,7 @@
 	},
 	"border-left-plus-bg": {
 		"slug": "border-left-plus-bg",
-		"name": "左線 + 背景色",
+		"label": "左線 + 背景色",
 		"style": {
 			"backgroundColor": "#f7f7f7",
 			"border": {

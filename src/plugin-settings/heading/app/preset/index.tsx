@@ -1,8 +1,9 @@
+import classnames from 'classnames';
 /**
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useContext } from '@wordpress/element';
 
 /**
  * Akatsuki
@@ -13,6 +14,7 @@ import {
 	HasElementButton,
 } from '@aktk/block-components/buttons';
 import { Modal } from '@aktk/block-components/modal';
+import { NoticeWarning } from '@aktk/block-components/notice';
 
 /**
  * Types
@@ -21,17 +23,41 @@ import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
 // @ts-ignore
 import presetStyles from '../../preset/preset.json';
 import PreviewStyle from '@aktk/plugin-settings/heading/app/preview/preview-style';
-import { NoticeWarning } from '@aktk/block-components/notice';
+
+import { HeadingContext } from '../index';
+import { mergePreset } from './utils';
 
 export default function Preset() {
-	console.log( { presetStyles } );
-
 	const [ isModaOpen, setIsModalOpen ] = useState( false );
+	// @ts-ignore
+	const { headingOption, setHeadingOption } = useContext( HeadingContext );
+
+	// console.log( { headingOption } );
+
+	// プリセットが選択されたら値をセット.
+	const handleOnSelectPreset = ( value: HeadingOption ) => {
+		const newStyle = mergePreset( value?.style, headingOption?.style );
+		const newBefore = mergePreset( value?.before, headingOption?.before );
+		const newAfter = mergePreset( value?.after, headingOption?.after );
+
+		setHeadingOption( {
+			...headingOption,
+			// @ts-expect-error
+			style: newStyle,
+			before: newBefore,
+			after: newAfter,
+		} );
+
+		setIsModalOpen( false );
+	};
 
 	return (
 		<OpenPanel title={ __( 'プリセット', 'ystandard-toolbox' ) }>
 			<div>
-				<PrimaryButton onClick={ () => setIsModalOpen( ! isModaOpen ) }>
+				<PrimaryButton
+					icon={ 'admin-appearance' }
+					onClick={ () => setIsModalOpen( ! isModaOpen ) }
+				>
 					{ __( 'プリセットから選択', 'ystandard-toolbox' ) }
 				</PrimaryButton>
 			</div>
@@ -39,9 +65,7 @@ export default function Preset() {
 				isOpen={ isModaOpen }
 				onCancel={ () => setIsModalOpen( false ) }
 			>
-				<PresetList
-					onSelect={ ( value ) => console.log( { value } ) }
-				/>
+				<PresetList onSelect={ handleOnSelectPreset } />
 			</Modal>
 		</OpenPanel>
 	);
@@ -71,7 +95,7 @@ function PresetList( props: PresetListProps ) {
 		<>
 			<div
 				className={
-					'border-b-1 mb-2 border-0 border-b border-dotted border-b-aktk-border-gray pb-2'
+					'border-b-1 mb-4 border-0 border-b border-dotted border-b-aktk-border-gray pb-4'
 				}
 			>
 				<div>
@@ -96,17 +120,19 @@ function PresetList( props: PresetListProps ) {
 
 			<div
 				className={
-					'grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8 lg:grid-cols-4'
+					'grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-4 lg:grid-cols-4'
 				}
 			>
 				{ presetList &&
 					presetList.map( ( preset ) => {
-						const selector = `ystdtb-setting-heading__preset-preview-${ preset.slug }`;
+						const selector = classnames(
+							`ystdtb-setting-heading__preset-preview-${ preset.slug }`
+						);
 						return (
 							<div key={ preset.slug }>
 								<HasElementButton
 									className={
-										'block w-full p-4 text-left text-[16px]'
+										'block w-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
 									}
 									onClick={ () => handleOnClick( preset ) }
 								>
@@ -117,7 +143,7 @@ function PresetList( props: PresetListProps ) {
 										selector={ selector }
 									/>
 									<div className={ selector }>
-										プリセット : { preset.name }
+										プリセット : { preset.label }
 									</div>
 								</HasElementButton>
 							</div>

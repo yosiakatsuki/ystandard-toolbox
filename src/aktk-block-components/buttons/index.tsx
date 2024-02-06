@@ -133,6 +133,19 @@ export function AddButton( props: AktkButtonProps ) {
 	);
 }
 
+export function IconButton( props: AktkButtonProps ) {
+	const { text, children, iconSize = 18, ...buttonProps } = props;
+	const buttonContent = children ? children : text;
+	return (
+		<PrimaryButton { ...buttonProps }>
+			<span className={ 'flex items-center gap-1' }>
+				<WPIcon icon={ plusCircle } size={ iconSize } />
+				<>{ buttonContent }</>
+			</span>
+		</PrimaryButton>
+	);
+}
+
 export function HasElementButton( props: AktkButtonProps ) {
 	const { style } = props;
 

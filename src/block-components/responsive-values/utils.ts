@@ -1,5 +1,5 @@
 import type { MayBeResponsiveValue, ResponsiveValues } from './types';
-import { deleteUndefined, isObject } from '@aktk/utils/object';
+import { deleteUndefined, isObject } from '@aktk/block-components/utils/object';
 import { RESPONSIVE_KEYS } from './types';
 
 export function isResponsiveValue( value: unknown ): value is ResponsiveValues {

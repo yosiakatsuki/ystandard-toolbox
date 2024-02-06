@@ -1,6 +1,6 @@
 import { kebabCase, isArray } from 'lodash';
 
-import { deleteUndefined, isEmpty } from '@aktk/utils/object';
+import { deleteUndefined, isEmpty } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/components/responsive-values/utils';
 import { getHeadingOptions } from '@aktk/plugin-settings/heading/util/setting';
 import type {

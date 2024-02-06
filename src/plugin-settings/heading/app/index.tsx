@@ -15,7 +15,7 @@ import type {
 	HeadingStyle,
 } from '../types';
 import EditContainer from './edit-conteiner';
-import { deleteUndefined } from '@aktk/utils/object';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -65,10 +65,12 @@ export default function HeadingApp( props: HeadingAppProps ) {
 
 	const initLevelList = async () => {
 		const level = await getLevelList();
+		// @ts-expect-error
 		setLevelList( level );
 	};
 	const initHeadingStyles = async () => {
 		const styles = await getHeadingStyles();
+		// @ts-expect-error
 		setHeadingStyles( styles );
 	};
 
@@ -77,7 +79,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		await initLevelList();
 		await initHeadingStyles();
 		setIsLoading( false );
-		console.log( 'initApp' );
 	};
 
 	const updateStyle = ( value: HeadingStyle ) => {
@@ -132,6 +133,11 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
+
+	useEffect( () => {
+		console.log( { updateHeadingOption: headingOption } );
+	}, [ headingOption ] );
+
 	return (
 		<div>
 			{ /* @ts-ignore */ }
