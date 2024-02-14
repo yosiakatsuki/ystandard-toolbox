@@ -29,6 +29,7 @@ export default function LevelSelect() {
 		setAppMode,
 		appMode,
 		isEdit,
+		setIsEdit,
 		// @ts-ignore
 	} = useContext( HeadingContext );
 
@@ -113,6 +114,7 @@ export default function LevelSelect() {
 				onSuccess={ () => {
 					changeSelectedStyle( tempSelectedStyle, false );
 					setIsConfirmModalOpen( false );
+					setIsEdit( false );
 				} }
 			/>
 			<AddStyle

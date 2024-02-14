@@ -28,9 +28,10 @@ import { HeadingContext } from '../index';
 import { mergePreset } from './utils';
 
 export default function Preset() {
-	const [ isModaOpen, setIsModalOpen ] = useState( false );
+	const [ isModalOpen, setIsModalOpen ] = useState( false );
 	// @ts-ignore
-	const { headingOption, setHeadingOption } = useContext( HeadingContext );
+	const { headingOption, setHeadingOption, setIsEdit } =
+		useContext( HeadingContext );
 
 	// console.log( { headingOption } );
 
@@ -49,6 +50,7 @@ export default function Preset() {
 		} );
 
 		setIsModalOpen( false );
+		setIsEdit( true );
 	};
 
 	return (
@@ -56,13 +58,13 @@ export default function Preset() {
 			<div>
 				<PrimaryButton
 					icon={ 'admin-appearance' }
-					onClick={ () => setIsModalOpen( ! isModaOpen ) }
+					onClick={ () => setIsModalOpen( ! isModalOpen ) }
 				>
 					{ __( 'プリセットから選択', 'ystandard-toolbox' ) }
 				</PrimaryButton>
 			</div>
 			<Modal
-				isOpen={ isModaOpen }
+				isOpen={ isModalOpen }
 				onCancel={ () => setIsModalOpen( false ) }
 			>
 				<PresetList onSelect={ handleOnSelectPreset } />
