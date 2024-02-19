@@ -44,7 +44,13 @@ export function Modal( props: ModalProps ) {
 					<div>{ children }</div>
 					<div className={ 'mt-4 flex justify-end gap-4' }>
 						{ onCancel && (
-							<Button variant={ 'tertiary' } onClick={ onCancel }>
+							<Button
+								variant={ 'tertiary' }
+								onClick={ onCancel }
+								style={ {
+									color: 'var(--ys--global--text-color--gray,#989EA1)',
+								} }
+							>
 								{ cancelText }
 							</Button>
 						) }

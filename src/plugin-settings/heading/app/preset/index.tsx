@@ -33,8 +33,6 @@ export default function Preset() {
 	const { headingOption, setHeadingOption, setIsEdit } =
 		useContext( HeadingContext );
 
-	// console.log( { headingOption } );
-
 	// プリセットが選択されたら値をセット.
 	const handleOnSelectPreset = ( value: HeadingOption ) => {
 		const newStyle = mergePreset( value?.style, headingOption?.style );

@@ -10,13 +10,13 @@ import { __ } from '@wordpress/i18n';
 import { Modal } from '@aktk/block-components/modal';
 import InputControl from '@aktk/components/input-controls';
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
+import { notifyError, notifySuccess } from '@aktk/components/toast-message';
 
 /**
  * Components.
  */
 import { HeadingContext } from '../index';
 import { getNewOption } from '../../util/setting';
-import { notifyError, notifySuccess } from '@aktk/components/toast-message';
 
 interface AddStyleProps {
 	isOpen: boolean;

@@ -1,5 +1,7 @@
 import { getPluginSettings } from '@aktk/plugin-settings/function/setting';
 import type { HeadingOption, HeadingStyle } from '../types';
+import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
+import { notifyError, notifySuccess } from '@aktk/components/toast-message';
 
 export function getHeadingOptions() {
 	return {
@@ -18,4 +20,28 @@ export function getNewOption( slug: string, label: string ): HeadingOption {
 		enableParagraph: false,
 		style: {} as HeadingStyle,
 	};
+}
+
+export function updateStyleOption(
+	styles: HeadingOption,
+	onSuccess: () => void | undefined,
+	onError: () => void | undefined
+) {
+	apiPost( {
+		endpoint: getEndpoint( 'add_heading_style' ),
+		data: { style: styles },
+		callback: ( response ) => {
+			if ( SUCCESS === response.status ) {
+				if ( onSuccess ) {
+					onSuccess();
+				}
+			} else if ( onError ) {
+				onError();
+			}
+		},
+		// @ts-ignore
+		messageSuccess: notifySuccess,
+		// @ts-ignore
+		messageError: notifyError,
+	} );
 }
