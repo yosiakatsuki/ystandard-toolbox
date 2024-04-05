@@ -1,6 +1,7 @@
 @use "customProperty";
 
-.ystdtb-slider {
+.ystdtb-slider ,
+body.has-background .ystdtb-slider {
   &.alignfull,
   &.alignwide {
     padding-right: 0;
