@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ystdtb-app-container__title {
+	.ys-notice,
+	.notice {
+		display: none;
+	}
+}
