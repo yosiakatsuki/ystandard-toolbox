@@ -1,4 +1,4 @@
-import { render, useState } from '@wordpress/element';
+import { useState, createRoot } from '@wordpress/element';
 
 import Migration from './migration';
 import { ToastContainer } from '@aktk/components/toast-message';
@@ -26,4 +26,6 @@ const HeadingCustomize = () => {
 	);
 };
 
-render( <HeadingCustomize />, document.getElementById( 'heading-v2' ) );
+const container = document.getElementById( 'heading-v2' );
+const root = createRoot( container! );
+root.render( <HeadingCustomize /> );
