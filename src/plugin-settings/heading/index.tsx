@@ -1,10 +1,24 @@
+/**
+ * WordPress
+ */
 import { useState, createRoot } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
-import Migration from './migration';
+/**
+ * Aktk Components.
+ */
 import { ToastContainer } from '@aktk/components/toast-message';
+/**
+ * Plugin
+ */
+import AppContainer from '@aktk/plugin-settings/components/app-container';
+
+/**
+ * App
+ */
+import Migration from './migration';
 import { getHeadingOptions } from './util/setting';
 import HeadingApp from './app';
-import AppContainer from '@aktk/plugin-settings/components/app-container';
 
 import './_edit.scss';
 
@@ -14,9 +28,15 @@ const HeadingCustomize = () => {
 	return (
 		<>
 			{ /* @ts-ignore */ }
-			<AppContainer title={ '見出しデザイン編集' } loading={ isLoading }>
+			<AppContainer
+				title={ __( '見出しデザイン編集', 'ystandard-toolbox' ) }
+				loading={ isLoading }
+			>
 				{ options.isCompatible ? (
-					<Migration />
+					<>
+						{ /* 互換モードの場合、移行ツールを開く */ }
+						<Migration />
+					</>
 				) : (
 					<HeadingApp setIsLoading={ setIsLoading } />
 				) }

@@ -32,6 +32,7 @@ interface HeadingContextProps {
 	levelList: {};
 	initLevelList: () => void;
 	headingStyles: { [ key: string ]: HeadingOption };
+	setHeadingStyles: ( value: { [ key: string ]: HeadingOption } ) => void;
 	initHeadingStyles: () => void;
 	isEdit: boolean;
 	setIsEdit: ( value: boolean ) => void;
@@ -158,6 +159,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		}
 		const option =
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
+		console.log( { selectedStyle, option } );
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
 
@@ -174,6 +176,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					levelList,
 					initLevelList,
 					headingStyles,
+					setHeadingStyles,
 					initHeadingStyles,
 					isEdit,
 					setIsEdit,

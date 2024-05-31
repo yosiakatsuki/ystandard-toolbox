@@ -33,6 +33,7 @@ export default function LevelSelect() {
 		// @ts-ignore
 	} = useContext( HeadingContext );
 
+	// セレクトボックスの選択肢.
 	const selectOptions = useMemo( () => {
 		// @ts-ignore
 		return Object.keys( headingStyles ).map( ( key: string ) => {

@@ -17,6 +17,7 @@ import { notifyError, notifySuccess } from '@aktk/components/toast-message';
  */
 import { HeadingContext } from '../index';
 import { getNewOption } from '../../util/setting';
+import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
 
 interface AddStyleProps {
 	isOpen: boolean;
@@ -24,12 +25,19 @@ interface AddStyleProps {
 	onCancel: () => void;
 }
 
+/**
+ * スタイル追加.
+ *
+ * @param props
+ */
 export default function AddStyle( props: AddStyleProps ) {
 	const { isOpen, onSuccess, onCancel } = props;
 
-	const { headingStyles, initApp, setSelectedStyle } =
+	const { headingStyles, setHeadingStyles, setSelectedStyle } =
 		// @ts-ignore
 		useContext( HeadingContext );
+
+	// スタイルのIDリスト.
 	const headingStylesIds = useMemo(
 		// @ts-ignore
 		() => Object.values( headingStyles ).map( ( style ) => style.slug ),
@@ -41,6 +49,7 @@ export default function AddStyle( props: AddStyleProps ) {
 	const [ label, setLabel ] = useState( '' );
 	const [ isLabelErrorMessage, setIsLabelErrorMessage ] = useState( '' );
 
+	// 入力の初期化.
 	const initInput = () => {
 		setId( '' );
 		setLabel( '' );
@@ -48,8 +57,11 @@ export default function AddStyle( props: AddStyleProps ) {
 		setIsLabelErrorMessage( '' );
 	};
 
+	// IDの入力チェック.
 	const checkId = ( value: string, checkEmpty: boolean = false ): boolean => {
+		// 空白チェック.
 		if ( ! value.trim() ) {
+			// 空白チェックありならエラーを表示.
 			if ( checkEmpty ) {
 				setIsIdErrorMessage(
 					__( '入力されていません。', 'ystandard-toolbox' )
@@ -59,6 +71,7 @@ export default function AddStyle( props: AddStyleProps ) {
 			setIsIdErrorMessage( '' );
 			return true;
 		}
+		// 入力規則チェック.
 		const regexWord = /^[a-zA-Z0-9-]*$/;
 		if ( ! regexWord.test( value ) ) {
 			setIsIdErrorMessage(
@@ -66,6 +79,7 @@ export default function AddStyle( props: AddStyleProps ) {
 			);
 			return false;
 		}
+		// 「先頭に数字が入ってたらエラー」チェック.
 		const regexStart = /^[a-zA-Z][a-zA-Z0-9-]*$/;
 		if ( ! regexStart.test( value ) ) {
 			setIsIdErrorMessage(
@@ -73,6 +87,7 @@ export default function AddStyle( props: AddStyleProps ) {
 			);
 			return false;
 		}
+		// 「ハイフンは1回まで」チェック.
 		const regex = /^[a-zA-Z][a-zA-Z0-9]*-?[a-zA-Z0-9]*$/;
 		if ( ! regex.test( value ) ) {
 			setIsIdErrorMessage(
@@ -81,6 +96,7 @@ export default function AddStyle( props: AddStyleProps ) {
 			return false;
 		}
 
+		// 重複チェック.
 		const exists = headingStylesIds.find( ( style ) => style === value );
 		if ( exists ) {
 			setIsIdErrorMessage(
@@ -96,8 +112,11 @@ export default function AddStyle( props: AddStyleProps ) {
 		return true;
 	};
 
+	// ラベルの入力チェック.
 	const checkLabel = ( value: string, checkEmpty: boolean = false ) => {
+		// 空白チェック.
 		if ( ! value.trim() ) {
+			// 空白チェックありならエラーを表示.
 			if ( checkEmpty ) {
 				setIsLabelErrorMessage(
 					__( '入力されていません。', 'ystandard-toolbox' )
@@ -111,36 +130,47 @@ export default function AddStyle( props: AddStyleProps ) {
 		return true;
 	};
 
+	// IDの入力チェック.
 	const handleIDOnChange = ( value: string ) => {
 		checkId( value );
 		setId( value );
 	};
 
+	// ラベルの入力チェック.
 	const handleLabelOnChange = ( value: string ) => {
 		checkLabel( value );
 		setLabel( value );
 	};
 
+	// 追加したスタイルをスタイル一覧オブジェクトへ追加.
+	const addNewStyleData = ( styleId: string, style: HeadingOption ) => {
+		const newStyles = {
+			...headingStyles,
+			...{ [ styleId ]: style },
+		};
+		setHeadingStyles( newStyles );
+		setSelectedStyle( styleId );
+	};
+
+	// OKボタン押下時.
 	const handleOnOk = () => {
+		// 入力チェック実行.
 		const checkIdResult = checkId( id, true );
 		const checkLabelResult = checkLabel( label, true );
-
+		// エラーがあればストップ.
 		if ( ! checkLabelResult || ! checkIdResult ) {
 			return;
 		}
 
+		// 新しいスタイルの作成.
 		const newStyle = getNewOption( id, label );
+		// データ登録
 		apiPost( {
 			endpoint: getEndpoint( 'add_heading_style' ),
 			data: { style: newStyle },
-			callback: ( response ) => {
+			callback: async ( response ) => {
 				if ( SUCCESS === response.status ) {
-					if ( initApp ) {
-						initApp();
-					}
-					if ( setSelectedStyle ) {
-						setSelectedStyle( id );
-					}
+					addNewStyleData( id, newStyle );
 					initInput();
 					onSuccess();
 				}
@@ -152,8 +182,10 @@ export default function AddStyle( props: AddStyleProps ) {
 		} );
 	};
 
+	// キャンセルボタン押下時.
 	const handleOnCancel = () => {
 		setIsIdErrorMessage( '' );
+		setIsLabelErrorMessage( '' );
 		onCancel();
 	};
 
