@@ -58,6 +58,7 @@ export async function apiPost( props: ApiPostProps ) {
 	await apiFetch( options )
 		// @ts-ignore
 		.then( ( response ) => {
+			// @ts-ignore
 			if ( isSuccess( response.status ) ) {
 				if ( 'function' === typeof messageSuccess ) {
 					messageSuccess();

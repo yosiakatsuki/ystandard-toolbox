@@ -65,6 +65,10 @@ export default function LevelSelect() {
 		setTempSelectedStyle( '' );
 	};
 
+	/**
+	 * スタイル選択時の処理.
+	 * @param value
+	 */
 	const handleOnChange = ( value: string ) => {
 		if ( isEdit ) {
 			setTempSelectedStyle( value );

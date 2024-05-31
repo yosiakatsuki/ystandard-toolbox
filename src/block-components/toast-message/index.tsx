@@ -2,8 +2,11 @@ import {
 	ToastContainer as ReactToastifyContainer,
 	toast,
 } from 'react-toastify';
+import type { ToastOptions } from 'react-toastify/dist/types';
+// CSS
 import 'react-toastify/dist/ReactToastify.min.css';
 
+// @ts-expect-error
 export const ToastContainer = ( props ) => {
 	return (
 		<ReactToastifyContainer
@@ -29,7 +32,7 @@ const option = {
 	pauseOnHover: true,
 	draggable: true,
 	progress: undefined,
-};
+} as ToastOptions;
 
 export const notifySuccess = ( message = undefined ) => {
 	const showMessage = message ?? '更新しました。';

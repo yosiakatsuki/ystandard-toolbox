@@ -168,12 +168,34 @@ class Heading {
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_heading_style( $request ) {
-		$data       = $request->get_json_params();
-		$result     = false;
-		$new_option = [];
-		if ( is_array( $data ) && isset( $data['style'] ) ) {
-
+		$data   = $request->get_json_params();
+		$result = false;
+		// データチェック
+		if ( ! is_array( $data ) || ! isset( $data['style'] ) || ! isset( $data['type'] ) ) {
+			return Api::create_response(
+				false,
+				__( '更新データが不正です。', 'ystandard-toolbox' ),
+				wp_json_encode( $data )
+			);
 		}
+		// 更新に必要な情報を抽出.
+		$type = $data['type'];
+		$slug = $data['style']['slug'];
+		// 既存設定を取得.
+		$styles = $this->get_heading_styles();
+		// 更新データ作成.
+		if ( 'delete' === $type ) {
+			// 削除の場合、該当スタイルを削除.
+			if ( isset( $styles[ $slug ] ) ) {
+				unset( $styles[ $slug ] );
+			}
+		} else {
+			// 更新の場合、該当スタイルを更新.
+			$styles[ $slug ] = $data['style'];
+		}
+
+		// 更新実行.
+		$result = $this->update_heading_design_option( $styles );
 
 		return Api::create_response(
 			$result,
@@ -297,6 +319,7 @@ class Heading {
 			$option,
 			__DIR__ . '/debug-heading-option.json'
 		);
+
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}
 

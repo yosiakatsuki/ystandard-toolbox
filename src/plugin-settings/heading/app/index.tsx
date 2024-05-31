@@ -63,17 +63,26 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		__( 'プレビューテキスト', 'ystandard-toolbox' )
 	);
 
+	/**
+	 * 見出しレベルのリスト取得.
+	 */
 	const initLevelList = async () => {
 		const level = await getLevelList();
 		// @ts-expect-error
 		setLevelList( level );
 	};
+	/**
+	 * 登録されている見出しスタイルの取得とセット
+	 */
 	const initHeadingStyles = async () => {
 		const styles = await getHeadingStyles();
 		// @ts-expect-error
 		setHeadingStyles( styles );
 	};
 
+	/**
+	 * 見出しリストとスタイルの初期化.
+	 */
 	const initApp = async () => {
 		setIsLoading( true );
 		await initLevelList();
@@ -81,6 +90,10 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		setIsLoading( false );
 	};
 
+	/**
+	 * スタイル(メイン)の更新.
+	 * @param value
+	 */
 	const updateStyle = ( value: HeadingStyle ) => {
 		if ( ! headingOption ) {
 			return;
@@ -93,6 +106,10 @@ export default function HeadingApp( props: HeadingAppProps ) {
 
 		setHeadingOption( newOption );
 	};
+	/**
+	 * Beforeスタイルの更新.
+	 * @param value
+	 */
 	const updateBeforeStyle = ( value: HeadingPseudoElementsStyle ) => {
 		if ( ! headingOption ) {
 			return;
@@ -105,6 +122,10 @@ export default function HeadingApp( props: HeadingAppProps ) {
 
 		setHeadingOption( newOption );
 	};
+	/**
+	 * Afterスタイルの更新.
+	 * @param value
+	 */
 	const updateAfterStyle = ( value: HeadingPseudoElementsStyle ) => {
 		if ( ! headingOption ) {
 			return;
@@ -118,10 +139,16 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		setHeadingOption( newOption );
 	};
 
+	/**
+	 * 初期化
+	 */
 	useEffect( () => {
 		initApp();
 	}, [] );
 
+	/**
+	 * スタイルの選択が変わったとき、選択中オプションを更新.
+	 */
 	useEffect( () => {
 		if ( ! selectedStyle ) {
 			setHeadingOption( undefined );
@@ -133,10 +160,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
-
-	useEffect( () => {
-		console.log( { updateHeadingOption: headingOption } );
-	}, [ headingOption ] );
 
 	return (
 		<div>

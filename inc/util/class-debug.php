@@ -43,7 +43,7 @@ class Debug {
 	 */
 	public static function debug_json_dump_file( $var, $path = '' ) {
 		if ( empty( $path ) ) {
-			$path = WP_CONTENT_DIR . '/uploads/debug.html';
+			$path = WP_CONTENT_DIR . '/uploads/debug.json';
 		}
 
 		file_put_contents( $path, json_encode( $var ) );
