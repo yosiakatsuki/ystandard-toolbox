@@ -9,12 +9,12 @@ import { __ } from '@wordpress/i18n';
 import CustomSelectControl, {
 	CustomSelectControlOption,
 } from '@aktk/components/custom-select-control';
-import { AddButton } from '@aktk/block-components/buttons';
+import { AddButton } from '@aktk/block-components//components/buttons';
 /**
  * Component.
  */
 import { HeadingContext } from '../index';
-import ConfirmSelect from './confirm-select';
+import ConfirmSelectModal from './confirm-select-modal';
 import AddStyle from './add-style';
 
 export default function LevelSelect() {
@@ -110,7 +110,7 @@ export default function LevelSelect() {
 					</div>
 				</div>
 			</div>
-			<ConfirmSelect
+			<ConfirmSelectModal
 				isOpen={ isConfirmModalOpen }
 				onCancel={ () => {
 					setIsConfirmModalOpen( false );

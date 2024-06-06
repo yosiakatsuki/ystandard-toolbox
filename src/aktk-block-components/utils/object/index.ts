@@ -1,8 +1,8 @@
 /**
- * オブジェクトのプロパティを削除する
+ * オブジェクトの空プロパティを削除する
  *
  * @param {Object} obj - 削除対象のオブジェクト
- * @return {Object} - プロパティを削除したオブジェクト
+ * @return {Object} - 空プロパティを削除したオブジェクト
  */
 export function deleteUndefined( obj: object ) {
 	try {
@@ -20,7 +20,7 @@ export function deleteUndefined( obj: object ) {
  * @param {any} value - チェック対象の値
  */
 export function isObject( value: unknown ) {
-	return 'object' === typeof value;
+	return null !== value && 'object' === typeof value;
 }
 
 /**

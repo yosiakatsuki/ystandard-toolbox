@@ -5,7 +5,11 @@ import type { Context } from 'react';
 import { useState, useEffect, createContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk dependencies
+ */
+import { deleteUndefined } from '@aktk/block-components/utils/object';
+/**
+ * Plugin dependencies
  */
 import LevelSelect from './select';
 import { getHeadingStyles, getLevelList } from './api';
@@ -15,7 +19,6 @@ import type {
 	HeadingStyle,
 } from '../types';
 import EditContainer from './edit-conteiner';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -159,7 +162,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		}
 		const option =
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
-		console.log( { selectedStyle, option } );
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
 

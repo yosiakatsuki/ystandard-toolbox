@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Components.
  */
-import { ToastContainer } from '@aktk/components/toast-message';
+import { ToastContainer } from '@aktk/block-components/components/toast-message';
 /**
  * Plugin
  */

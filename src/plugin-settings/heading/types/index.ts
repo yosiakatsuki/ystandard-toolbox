@@ -1,11 +1,18 @@
-import type { ResponsiveSpacing } from '@aktk/components/responsive-spacing';
-import type { ResponsiveValues } from '@aktk/components/responsive-values';
-import type { ResponsiveBorder } from '@aktk/components/responsive-border';
+import type { ResponsiveValues } from '@aktk/block-components/types';
+import type { CustomSpacing } from 'src/aktk-block-components/components/custom-spacing-select';
+import type { CustomFontSize } from 'src/aktk-block-components/components/custom-font-size-picker';
+import type { CustomBorder } from '@aktk/block-components/components/custom-border-select/types';
 
+/**
+ * 見出しデザイン編集設定
+ */
 export type HeadingOptions = {
 	[ name: string ]: HeadingOption;
 };
 
+/**
+ * 見出し設定1つの設定内容
+ */
 export interface HeadingOption {
 	slug: string;
 	label: string;
@@ -16,9 +23,12 @@ export interface HeadingOption {
 	after?: HeadingPseudoElementsStyle;
 }
 
+/**
+ * [style]属性の設定内容
+ */
 export interface HeadingStyle {
 	// typography.
-	fontSize?: ResponsiveValues;
+	fontSize?: CustomFontSize;
 	color?: string;
 	textAlign?: ResponsiveValues;
 	fontWeight?: ResponsiveValues;
@@ -35,11 +45,11 @@ export interface HeadingStyle {
 	backgroundSize?: string;
 
 	// Spacing.
-	margin?: ResponsiveSpacing;
-	padding?: ResponsiveSpacing;
+	margin?: CustomSpacing;
+	padding?: CustomSpacing;
 
 	// Border.
-	border?: ResponsiveBorder;
+	border?: CustomBorder;
 	borderRadius?: ResponsiveValues;
 
 	// Size.
@@ -63,6 +73,9 @@ export interface HeadingStyle {
 	customCss?: string;
 }
 
+/**
+ * [before][after]属性の設定内容
+ */
 export interface HeadingPseudoElementsStyle {
 	content?: string;
 	icon?: string;
@@ -80,10 +93,10 @@ export interface HeadingPseudoElementsStyle {
 	backgroundRepeat?: string;
 	backgroundSize?: string;
 	// Spacing.
-	margin?: ResponsiveSpacing;
-	padding?: ResponsiveSpacing;
+	margin?: CustomSpacing;
+	padding?: CustomSpacing;
 	// Border.
-	border?: ResponsiveBorder;
+	border?: CustomBorder;
 	borderRadius?: ResponsiveValues;
 	// Size.
 	width?: ResponsiveValues;

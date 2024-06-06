@@ -7,10 +7,13 @@ import { __ } from '@wordpress/i18n';
 /**
  * Plugin.
  */
-import { Modal } from '@aktk/block-components/modal';
+import { Modal } from '@aktk/block-components/components/modal';
 import InputControl from '@aktk/components/input-controls';
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
-import { notifyError, notifySuccess } from '@aktk/components/toast-message';
+import {
+	notifyError,
+	notifySuccess,
+} from '@aktk/block-components/components/toast-message';
 
 /**
  * Components.

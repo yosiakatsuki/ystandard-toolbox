@@ -18,45 +18,45 @@ export interface SvgIconProps {
 	style?: React.CSSProperties;
 }
 
-export function SvgIcon(props: SvgIconProps) {
+export function SvgIcon( props: SvgIconProps ) {
 	const { name = '', fallback, className, style } = props;
 
-	const Content = useMemo(() => {
-		const svg = getIconSvg(name);
+	const Content = useMemo( () => {
+		const svg = getIconSvg( name );
 		return (
 			<IconHTML
-				svg={svg}
-				name={name}
-				fallback={fallback}
-				className={className}
-				style={style}
+				svg={ svg }
+				name={ name }
+				fallback={ fallback }
+				className={ className }
+				style={ style }
 			/>
 		);
-	}, [name, fallback]);
+	}, [ name, fallback ] );
 
-	return <>{Content}</>;
+	return <>{ Content }</>;
 }
 
-function IconHTML(props: SvgIconProps) {
+function IconHTML( props: SvgIconProps ) {
 	const { name = '', svg = '', fallback, className, style } = props;
-	const iconSvg = svg || getIconSvg(name);
+	const iconSvg = svg || getIconSvg( name );
 	const FallBack = () => {
-		if (iconSvg || !fallback) {
+		if ( iconSvg || ! fallback ) {
 			return <></>;
 		}
-		return <>{fallback}</>;
+		return <>{ fallback }</>;
 	};
 	return (
 		<>
-			{iconSvg && (
+			{ iconSvg && (
 				<span
-					className={classnames('ys-icon', className, {
-						'sns-icon': -1 !== name.indexOf('sns-'),
-					})}
-					style={style}
-					dangerouslySetInnerHTML={{ __html: iconSvg }}
+					className={ classnames( 'ys-icon', className, {
+						'sns-icon': -1 !== name.indexOf( 'sns-' ),
+					} ) }
+					style={ style }
+					dangerouslySetInnerHTML={ { __html: iconSvg } }
 				/>
-			)}
+			) }
 			<FallBack />
 		</>
 	);

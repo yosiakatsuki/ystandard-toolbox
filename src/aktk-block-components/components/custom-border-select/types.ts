@@ -1,4 +1,4 @@
-export interface ResponsiveBorder {
+export interface CustomBorder {
 	desktop?: Border;
 	tablet?: Border;
 	mobile?: Border;

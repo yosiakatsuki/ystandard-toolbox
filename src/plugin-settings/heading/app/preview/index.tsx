@@ -9,6 +9,7 @@ export default function Preview() {
 	// @ts-ignore
 	const { previewText, headingOption } = useContext( HeadingContext );
 
+	console.log( { headingOption } );
 	return (
 		<div className={ 'sticky top-[3em]' }>
 			<PreviewStyle

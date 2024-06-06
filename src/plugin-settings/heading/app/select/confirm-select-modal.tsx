@@ -2,7 +2,10 @@
  * WordPress dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import { ConfirmModal } from '@aktk/block-components/modal';
+/**
+ * Aktk dependencies.
+ */
+import { ConfirmModal } from '@aktk/block-components/components/modal';
 
 /**
  * Component.
@@ -13,7 +16,7 @@ interface ConfirmSelectProps {
 	onCancel: () => void;
 }
 
-export default function ConfirmSelect( props: ConfirmSelectProps ) {
+export default function ConfirmSelectModal( props: ConfirmSelectProps ) {
 	const { isOpen, onSuccess, onCancel } = props;
 	return (
 		<>

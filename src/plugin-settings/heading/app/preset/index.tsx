@@ -12,10 +12,9 @@ import { OpenPanel } from '@aktk/block-components/components/panel';
 import {
 	PrimaryButton,
 	HasElementButton,
-} from '@aktk/block-components/buttons';
-import { Modal } from '@aktk/block-components/modal';
-import { NoticeWarning } from '@aktk/block-components/notice';
-
+} from '@aktk/block-components/components/buttons';
+import { Modal } from '@aktk/block-components/components/modal';
+import { NoticeWarning } from '@aktk/block-components/components/notice';
 /**
  * Types
  */

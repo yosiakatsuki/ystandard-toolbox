@@ -1,7 +1,10 @@
 /**
  * Components.
  */
-import { notifyError, notifySuccess } from '@aktk/components/toast-message';
+import {
+	notifyError,
+	notifySuccess,
+} from '@aktk/block-components/components/toast-message';
 /**
  * Plugin Settings.
  */

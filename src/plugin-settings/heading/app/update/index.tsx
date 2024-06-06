@@ -10,7 +10,7 @@ import { useContext } from '@wordpress/element';
 import {
 	DestructiveButton,
 	PrimaryButton,
-} from '@aktk/block-components/buttons';
+} from '@aktk/block-components/components/buttons';
 
 /**
  * Plugin.

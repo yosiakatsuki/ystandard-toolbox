@@ -1,13 +1,23 @@
-import { kebabCase, isArray } from 'lodash';
+import { kebabCase, isArray, isNumber } from 'lodash';
 
+/**
+ * Aktk dependencies.
+ */
 import { deleteUndefined, isEmpty } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/components/responsive-values/utils';
+import type { CustomFontSize } from '@aktk/block-components/components/custom-font-size-picker';
+/**
+ * Plugin dependencies.
+ */
 import { getHeadingOptions } from '@aktk/plugin-settings/heading/util/setting';
 import type {
 	HeadingPseudoElementsStyle,
 	HeadingStyle,
 } from '@aktk/plugin-settings/heading/types';
 
+/**
+ * Component.
+ */
 interface PreviewStyleProps {
 	style?: HeadingStyle;
 	before?: HeadingPseudoElementsStyle;
@@ -33,6 +43,10 @@ function getStyles( props: PreviewStyleProps ) {
 	return `${ styleCss }\n${ beforeCss }\n${ afterCss }`;
 }
 
+/**
+ * スタイルの解析
+ * @param styles
+ */
 function parseStyles( styles: object ) {
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -44,12 +58,19 @@ function parseStyles( styles: object ) {
 		const property = kebabCase( key );
 		// @ts-ignore
 		let value = styles[ key ];
+		// フォントサイズの場合特殊処理.
+		if ( isFontSize( property ) ) {
+			value = parseFontSizeStyle( value );
+		}
+		// レスポンシブ値でない場合はデスクトップのみの値として扱う
 		if ( ! isResponsiveValue( value ) ) {
 			value = { desktop: value };
 		}
+		// borderの場合.
 		if ( isBorder( property ) ) {
 			value = parseLongHandStyle( value, property, parseBorderProperty );
 		}
+		// spacingの場合.
 		if ( isSpacing( property ) ) {
 			value = parseLongHandStyle( value, property, parseSpacingProperty );
 		}
@@ -104,10 +125,46 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 	return parseStyles( styles );
 }
 
+/**
+ * フォントサイズの設定か判定.
+ * @param property
+ */
+function isFontSize( property: string ) {
+	return 'font-size' === property;
+}
+
+/**
+ * フォントサイズの解析.
+ * @param value
+ */
+function parseFontSizeStyle( value: CustomFontSize ) {
+	// テーマ設定を使っている場合はプレビュー用にdesktopに値を設定する.
+	if ( value?.fontSize?.size ) {
+		let fontSize = value.fontSize.size;
+		// 数値型の場合、単位を追加する
+		if ( isNumber( fontSize ) ) {
+			fontSize = `${ fontSize }px`;
+		}
+
+		value.desktop = fontSize;
+	}
+	return value;
+}
+
+/**
+ * 枠線関連の設定か判定.
+ * @param property
+ */
 function isBorder( property: string ) {
 	return 'border' === property;
 }
 
+/**
+ * top,right,bottom,leftの設定を分解.
+ * @param value
+ * @param property
+ * @param parser
+ */
 function parseLongHandStyle(
 	value: object,
 	property: string,
@@ -133,6 +190,11 @@ function parseLongHandStyle(
 	return result;
 }
 
+/**
+ * Borderの分解.
+ * @param value
+ * @param name
+ */
 function parseBorderProperty( value: object, name: string = 'border' ) {
 	let result: string[] = [];
 	Object.keys( value ).forEach( ( position: string ) => {
@@ -149,10 +211,19 @@ function parseBorderProperty( value: object, name: string = 'border' ) {
 	return result;
 }
 
+/**
+ * 余白関連の設定か判定.
+ * @param property
+ */
 function isSpacing( property: string ) {
 	return 'padding' === property || 'margin' === property;
 }
 
+/**
+ * 余白設定の分解.
+ * @param value
+ * @param name
+ */
 function parseSpacingProperty( value: object, name: string ) {
 	let result: string[] = [];
 
@@ -163,6 +234,14 @@ function parseSpacingProperty( value: object, name: string ) {
 	return result;
 }
 
+/**
+ * CSSの生成
+ * @param styles
+ * @param styles.desktop
+ * @param selector
+ * @param styles.tablet
+ * @param styles.mobile
+ */
 function createCSS(
 	styles: { desktop: any[]; tablet: any[]; mobile: any[] },
 	selector = 'ystdtb-setting-heading__preview-text'

@@ -1,4 +1,1 @@
-/**
- * App
- */
 export * from './types';

@@ -27,22 +27,22 @@
         "baseUrl": "./",
         "paths": {
             "@aktk/function/*": [
-                "src/block-function/*"
+                "src/blocks/function/*"
             ],
             "@aktk/config/*": [
                 "src/js/config/*"
             ],
             "@aktk/components/*": [
-                "src/block-components/*"
+                "src/blocks/components/*"
             ],
             "@aktk/controls/*": [
-                "src/block-controls/*"
+                "src/blocks/controls/*"
             ],
             "@aktk/utils/*": [
-                "src/block-utils/*"
+                "src/blocks/utils/*"
             ],
             "@aktk/api": [
-                "src/block-api/index"
+                "src/blocks/api/index"
             ],
 			"@aktk/plugin-settings/*": [
 				"src/plugin-settings/*"
