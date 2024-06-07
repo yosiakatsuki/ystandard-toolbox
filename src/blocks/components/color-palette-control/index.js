@@ -3,6 +3,25 @@ import '@wordpress/block-editor';
 import { getColorSetting } from '@aktk/helper/color';
 import ColorDropdown from '@aktk/components/color-dropdown';
 
+/**
+ *
+ * @param  value.value
+ * @param  value
+ * @param  onChange
+ * @param  colors
+ * @param  label
+ * @param  key
+ * @param  position
+ * @param  props
+ * @param  value.onChange
+ * @param  value.colors
+ * @param  value.label
+ * @param  value.key
+ * @param  value.position
+ * @return {JSX.Element}
+ * @class
+ * @deprecated
+ */
 const ColorPaletteControl = ( {
 	value,
 	onChange,

@@ -8,6 +8,20 @@ import {
 	__experimentalItemGroup as ItemGroup,
 } from '@wordpress/components';
 
+/**
+ *
+ * @param  key.key
+ * @param  key
+ * @param  value
+ * @param  label
+ * @param  renderContent
+ * @param  key.value
+ * @param  key.label
+ * @param  key.renderContent
+ * @return {JSX.Element}
+ * @class
+ * @deprecated
+ */
 const ColorDropdown = ( { key, value, label, renderContent } ) => {
 	const _buttonLabel = label ?? '色';
 
@@ -19,9 +33,9 @@ const ColorDropdown = ( { key, value, label, renderContent } ) => {
 		>
 			<Dropdown
 				key={ key }
-				popoverProps={{
-					placement: 'bottom-start'
-				}}
+				popoverProps={ {
+					placement: 'bottom-start',
+				} }
 				className="block-editor-panel-color-gradient-settings__dropdown"
 				contentClassName="block-editor-panel-color-gradient-settings__dropdown-content"
 				style={ { display: 'block' } }

@@ -18,10 +18,6 @@ import CustomFontSizePicker, {
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
-/**
- * CSS
- */
-import './style-editor.scss';
 
 export default function FontSize() {
 	// @ts-ignore
