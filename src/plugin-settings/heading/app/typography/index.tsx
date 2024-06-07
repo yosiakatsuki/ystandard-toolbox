@@ -16,6 +16,7 @@ import './style-editor.scss';
  */
 import FontSize from './font-size';
 import TextColor from './text-color';
+import TextAlign from './text-align';
 
 /**
  * 文字設定
@@ -26,6 +27,7 @@ export default function Typography() {
 			<div className={ 'flex flex-col gap-4' }>
 				<FontSize />
 				<TextColor />
+				<TextAlign />
 			</div>
 		</OpenPanel>
 	);

@@ -9,7 +9,7 @@ import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
 
 jest.mock( '@aktk/block-components/hooks/useThemeFontSizes', () => jest.fn() );
 
-jest.mock( '@aktk/block-components/components/icon-unit-control', () => ( {
+jest.mock( 'src/aktk-block-components/components/icon-control', () => ( {
 	IconUnitControl: {
 		// @ts-ignore
 		Desktop: ( { value, onChange } ) => (

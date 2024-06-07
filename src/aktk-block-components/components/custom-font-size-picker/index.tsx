@@ -1,3 +1,4 @@
+import { isNumber } from 'lodash';
 /**
  * WordPress dependencies
  */
@@ -13,14 +14,15 @@ import type {
  * Aktk dependencies.
  */
 import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
-import { IconUnitControl } from '@aktk/block-components/components/icon-unit-control';
+import { IconUnitControl } from '@aktk/block-components/components/icon-control';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Internal dependencies
  */
 import type { CustomFontSize, CustomFontSizePickerProps } from './types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
-import { isNumber } from 'lodash';
+
+import './style-editor.scss';
 
 export { CustomFontSize };
 
