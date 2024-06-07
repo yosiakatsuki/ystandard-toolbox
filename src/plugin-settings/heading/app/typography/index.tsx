@@ -17,6 +17,7 @@ import './style-editor.scss';
 import FontSize from './font-size';
 import TextColor from './text-color';
 import TextAlign from './text-align';
+import FontWeight from './font-weight';
 
 /**
  * 文字設定
@@ -24,10 +25,11 @@ import TextAlign from './text-align';
 export default function Typography() {
 	return (
 		<OpenPanel title={ __( '文字設定', 'ystandard-toolbox' ) }>
-			<div className={ 'flex flex-col gap-4' }>
+			<div className={ 'flex flex-col gap-8' }>
 				<FontSize />
 				<TextColor />
 				<TextAlign />
+				<FontWeight />
 			</div>
 		</OpenPanel>
 	);

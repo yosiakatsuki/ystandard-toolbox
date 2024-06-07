@@ -68,7 +68,7 @@ export default function EditContainer() {
 									>
 										<div
 											className={
-												'sticky top-5 w-full pb-5'
+												'sticky top-14 w-full pb-5'
 											}
 										>
 											<div

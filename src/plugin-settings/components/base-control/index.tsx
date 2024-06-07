@@ -22,19 +22,24 @@ const BaseControl = ( {
 	isFullWidth = false,
 	...props
 }: BaseControlProps ) => {
-	const className = classnames( 'aktk-settings__base-control', {
-		'is-full-width': isFullWidth,
-	} );
+	const className = classnames(
+		'aktk-plugin-settings-base-control__base-control',
+		{
+			'is-full-width': isFullWidth,
+		}
+	);
 	return (
-		<WPBaseControl
-			{ ...{
-				label,
-				id,
-				...props,
-			} }
-		>
-			<div className={ className }>{ children }</div>
-		</WPBaseControl>
+		<div className={ 'aktk-plugin-settings-base-control' }>
+			<WPBaseControl
+				{ ...{
+					label,
+					id,
+					...props,
+				} }
+			>
+				<div className={ className }>{ children }</div>
+			</WPBaseControl>
+		</div>
 	);
 };
 export default BaseControl;

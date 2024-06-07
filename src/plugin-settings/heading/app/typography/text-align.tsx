@@ -13,17 +13,20 @@ import {
 	TabletTextAlignSelect,
 	TextAlignButtons,
 } from '@aktk/block-components/components/alignment-control';
-import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
+import {
+	ResponsiveSelectTab,
+	ResponsiveControlGrid,
+} from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
-/**
- * Context
- */
-import { HeadingContext } from '../index';
 /**
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+/**
+ * Context
+ */
+import { HeadingContext } from '../index';
 
 export default function TextAlign() {
 	// @ts-ignore
@@ -104,7 +107,7 @@ function ResponsiveTextAlignEdit( {
 		} );
 	};
 	return (
-		<div className={ 'grid grid-cols-1 gap-4 md:grid-cols-3' }>
+		<ResponsiveControlGrid>
 			<div>
 				<DesktopTextAlignSelect
 					value={ value.desktop || '' }
@@ -129,6 +132,6 @@ function ResponsiveTextAlignEdit( {
 					} }
 				/>
 			</div>
-		</div>
+		</ResponsiveControlGrid>
 	);
 }

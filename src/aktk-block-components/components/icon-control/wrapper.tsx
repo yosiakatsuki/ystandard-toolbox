@@ -7,7 +7,7 @@ function IconUnitControlWrap( { children } ) {
 	return (
 		<div
 			className={
-				'flex items-center gap-1 [&>svg]:shrink-0 [&>svg]:text-gray-500 [&_label:empty]:hidden'
+				'flex items-center gap-1 [&>*:not(svg)]:grow [&>svg]:shrink-0 [&>svg]:text-gray-500 [&_label:empty]:hidden'
 			}
 		>
 			{ children }

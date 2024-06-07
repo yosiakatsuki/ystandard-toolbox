@@ -9,9 +9,9 @@ export default function Preview() {
 	// @ts-ignore
 	const { previewText, headingOption } = useContext( HeadingContext );
 
-	console.log( { headingOption } );
+	console.log( { Preview: headingOption } );
 	return (
-		<div className={ 'sticky top-[3em]' }>
+		<div className={ '' }>
 			<PreviewStyle
 				style={ headingOption?.style }
 				before={ headingOption?.before }

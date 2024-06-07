@@ -1,6 +1,10 @@
-.aktk-settings__base-control {
+.aktk-plugin-settings-base-control {
+	> div > div > .components-base-control__label {
+		font-weight: 700;
+		font-size: 14px;
+	}
 
-	&:not(.is-full-width) > *:not([style*="max-width"]) {
+	.aktk-plugin-settings-base-control__base-control:not(.is-full-width) > *:not([style*="max-width"]) {
 		max-width: 300px;
 	}
 }
