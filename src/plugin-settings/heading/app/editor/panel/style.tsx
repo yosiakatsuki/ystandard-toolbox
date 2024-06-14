@@ -28,6 +28,7 @@ import {
 	TextColor,
 	TextAlign,
 	FontStyle,
+	LineHeight,
 } from '@aktk/plugin-settings/heading/app/options/typography';
 
 export function StylePanel() {
@@ -73,6 +74,10 @@ export function StylePanel() {
 					/>
 					<FontStyle
 						value={ headingOption?.style?.fontStyle }
+						onChange={ handleOnChange }
+					/>
+					<LineHeight
+						value={ headingOption?.style?.lineHeight }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

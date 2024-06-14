@@ -1,7 +1,6 @@
-import FontSize from './font-size';
-import TextColor from './text-color';
-import TextAlign from './text-align';
-import FontWeight from './font-weight';
-import FontStyle from './font-style';
-
-export { FontSize, TextColor, TextAlign, FontWeight, FontStyle };
+export { default as FontSize } from './font-size';
+export { default as TextColor } from './text-color';
+export { default as TextAlign } from './text-align';
+export { default as FontWeight } from './font-weight';
+export { default as FontStyle } from './font-style';
+export { default as LineHeight } from './line-height';
