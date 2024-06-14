@@ -2,7 +2,6 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
 
 /**
  * Aktk Dependencies
@@ -23,25 +22,18 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
-/**
- * Context
- */
-import { HeadingContext } from '../index';
+import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
-export default function TextAlign() {
-	// @ts-ignore
-	const { headingOption, setHeadingOption, setIsEdit } =
-		useContext( HeadingContext );
+interface TextAlignControlProps {
+	value: ResponsiveValues | undefined;
+	onChange: ( newValue: { textAlign: ResponsiveValues } ) => void;
+}
+export default function TextAlign( props: TextAlignControlProps ) {
+	const { value, onChange } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		// @ts-ignore
-		setHeadingOption( {
-			...headingOption,
-			style: {
-				...headingOption?.style,
-				textAlign: deleteUndefined( newValue ),
-			},
+		onChange( {
+			textAlign: deleteUndefined( newValue ),
 		} );
-		setIsEdit( true );
 	};
 	return (
 		<BaseControl
@@ -50,15 +42,16 @@ export default function TextAlign() {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
+				isResponsive={ isResponsiveHeadingOption( value ) }
 				defaultTabContent={
 					<DefaultTextAlignEdit
-						value={ headingOption?.style?.textAlign?.desktop }
+						value={ value?.desktop }
 						onChange={ handleOnChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveTextAlignEdit
-						value={ headingOption?.style?.textAlign || {} }
+						value={ value || {} }
 						onChange={ handleOnChange }
 					/>
 				}
@@ -112,7 +105,7 @@ function ResponsiveTextAlignEdit( {
 				<DesktopTextAlignSelect
 					value={ value.desktop || '' }
 					onChange={ ( newValue ) => {
-						handleOnChange( { desktop: newValue } );
+						handleOnChange( { desktop: newValue || undefined } );
 					} }
 				/>
 			</div>
@@ -120,7 +113,7 @@ function ResponsiveTextAlignEdit( {
 				<TabletTextAlignSelect
 					value={ value.tablet || '' }
 					onChange={ ( newValue ) => {
-						handleOnChange( { tablet: newValue } );
+						handleOnChange( { tablet: newValue || undefined } );
 					} }
 				/>
 			</div>
@@ -128,7 +121,7 @@ function ResponsiveTextAlignEdit( {
 				<MobileTextAlignSelect
 					value={ value.mobile || '' }
 					onChange={ ( newValue ) => {
-						handleOnChange( { mobile: newValue } );
+						handleOnChange( { mobile: newValue || undefined } );
 					} }
 				/>
 			</div>

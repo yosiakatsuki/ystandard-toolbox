@@ -8,7 +8,8 @@ import { TAB_CLASS } from './const';
 import './style-editor.scss';
 
 interface ResponsiveSelectTabProps {
-	initialTabName?: 'default' | 'responsive';
+	initialTabName?: 'default' | 'responsive' | undefined;
+	isResponsive?: boolean;
 	defaultTabContent: React.ReactNode;
 	responsiveTabContent: React.ReactNode;
 }
@@ -16,7 +17,7 @@ interface ResponsiveSelectTabProps {
 const TABS = [
 	{
 		name: 'default',
-		title: __( '共通', 'ystandard-toolbox' ),
+		title: __( '標準', 'ystandard-toolbox' ),
 		className: TAB_CLASS,
 	},
 	{
@@ -27,12 +28,20 @@ const TABS = [
 ];
 
 export function ResponsiveSelectTab( props: ResponsiveSelectTabProps ) {
-	const { initialTabName, defaultTabContent, responsiveTabContent } = props;
+	const {
+		initialTabName = undefined,
+		defaultTabContent,
+		responsiveTabContent,
+		isResponsive = false,
+	} = props;
+
+	const _initialTabName =
+		initialTabName ?? isResponsive ? 'responsive' : 'default';
 
 	return (
 		<TabPanel
 			tabs={ TABS }
-			initialTabName={ initialTabName }
+			initialTabName={ _initialTabName }
 			className={ 'aktk-responsive-select-tab' }
 		>
 			{ ( tab ) => {

@@ -11,14 +11,14 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin dependencies
  */
-import LevelSelect from './select';
+import LevelSelect from './style-select';
 import { getHeadingStyles, getLevelList } from './api';
 import type {
 	HeadingOption,
 	HeadingPseudoElementsStyle,
 	HeadingStyle,
 } from '../types';
-import EditContainer from './edit-conteiner';
+import { EditContainer } from './editor';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;

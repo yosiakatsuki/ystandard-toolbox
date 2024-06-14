@@ -2,7 +2,7 @@ import { isNumber } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { FontSizePicker, TabPanel } from '@wordpress/components';
+import { FontSizePicker } from '@wordpress/components';
 import { getFontSizeClass } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import type {
@@ -15,7 +15,7 @@ import type {
  */
 import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
 
 /**
  * Internal dependencies
@@ -25,21 +25,6 @@ import type { CustomFontSize, CustomFontSizePickerProps } from './types';
 import './style-editor.scss';
 
 export { CustomFontSize };
-
-const TAB_CLASS = 'h-auto py-2 text-fz-xs';
-
-const TABS = [
-	{
-		name: 'theme',
-		title: __( '標準', 'ystandard-toolbox' ),
-		className: TAB_CLASS,
-	},
-	{
-		name: 'custom',
-		title: __( 'カスタム', 'ystandard-toolbox' ),
-		className: TAB_CLASS,
-	},
-];
 
 /**
  * カスタムフォントサイズピッカー
@@ -56,7 +41,7 @@ export default function CustomFontSizePicker(
 	const wpPickerFontSize = fontSize?.fontSize?.size ?? fontSize?.desktop;
 	// 値の更新.
 	const handleOnChange = ( newValue: CustomFontSize ) => {
-		onChange( deleteUndefined( newValue ) );
+		onChange( newValue );
 	};
 	// カスタム入力の変更イベント.
 	const handleOnCustomInputChange = ( newValue: CustomFontSize ) => {
@@ -95,34 +80,29 @@ export default function CustomFontSizePicker(
 		} );
 	};
 
-	const getInitialTabName = () => {
-		if ( !! fontSize?.tablet || !! fontSize?.mobile ) {
-			return 'custom';
-		}
-		return 'theme';
+	const isResponsive = () => {
+		return !! fontSize?.tablet || !! fontSize?.mobile;
 	};
 
 	return (
 		<div className={ 'aktk-component__custom-font-size-picker' }>
 			{ useResponsive ? (
-				<TabPanel tabs={ TABS } initialTabName={ getInitialTabName() }>
-					{ ( tab ) => (
-						<div className={ 'pt-4' }>
-							{ 'theme' === tab.name ? (
-								<WPFontSizePicker
-									onChange={ handleOnWPPickerChange }
-									value={ wpPickerFontSize }
-									fontSizes={ themeFontSizes }
-								/>
-							) : (
-								<CustomSizeInputPanel
-									fontSize={ fontSize }
-									onChange={ handleOnCustomInputChange }
-								/>
-							) }
-						</div>
-					) }
-				</TabPanel>
+				<ResponsiveSelectTab
+					isResponsive={ isResponsive() }
+					defaultTabContent={
+						<WPFontSizePicker
+							onChange={ handleOnWPPickerChange }
+							value={ wpPickerFontSize }
+							fontSizes={ themeFontSizes }
+						/>
+					}
+					responsiveTabContent={
+						<CustomSizeInputPanel
+							fontSize={ fontSize }
+							onChange={ handleOnCustomInputChange }
+						/>
+					}
+				/>
 			) : (
 				<WPFontSizePicker
 					onChange={ handleOnWPPickerChange }

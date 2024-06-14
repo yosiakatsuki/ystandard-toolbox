@@ -20,10 +20,10 @@ import { NoticeWarning } from '@aktk/block-components/components/notice';
  */
 import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
 // @ts-ignore
-import presetStyles from '../../preset/preset.json';
+import presetStyles from '../../../preset/preset.json';
 import PreviewStyle from '@aktk/plugin-settings/heading/app/preview/preview-style';
 
-import { HeadingContext } from '../index';
+import { HeadingContext } from '../../index';
 import { mergePreset } from './utils';
 
 export default function Preset() {

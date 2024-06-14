@@ -2,7 +2,7 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
+
 /**
  * Aktk Dependencies
  */
@@ -13,36 +13,35 @@ import {
 import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
+
 /**
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
-/**
- * Context
- */
-import { HeadingContext } from '../index';
+import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
-interface FontWeightProps {
+interface FontWeightControlProps {
+	value: ResponsiveValues | undefined;
+	onChange: ( newValue: { fontWeight: ResponsiveValues } ) => void;
+}
+
+interface FontWeightEditProps {
 	value: ResponsiveValues | undefined;
 	onChange: ( newValue: ResponsiveValues ) => void;
 }
 
-export default function FontWeight() {
-	// @ts-ignore
-	const { headingOption, setHeadingOption, setIsEdit } =
-		useContext( HeadingContext );
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		// @ts-ignore
-		setHeadingOption( {
-			...headingOption,
-			style: {
-				...headingOption?.style,
-				fontWeight: newValue,
-			},
-		} );
-		setIsEdit( true );
-	};
+export default function FontWeight( props: FontWeightControlProps ) {
+	const { value, onChange } = props;
 
+	const handleOnChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			fontWeight: deleteUndefined( {
+				...value,
+				...newValue,
+			} ),
+		} );
+	};
 	return (
 		<BaseControl
 			id={ 'font-weight' }
@@ -51,15 +50,16 @@ export default function FontWeight() {
 			className={ '[&_.components-custom-select-control__label]:hidden' }
 		>
 			<ResponsiveSelectTab
+				isResponsive={ isResponsiveHeadingOption( value ) }
 				defaultTabContent={
 					<DefaultFontWeightEdit
-						value={ headingOption?.style?.fontWeight }
+						value={ value }
 						onChange={ handleOnChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveFontWeightEdit
-						value={ headingOption?.style?.fontWeight }
+						value={ value }
 						onChange={ handleOnChange }
 					/>
 				}
@@ -68,7 +68,7 @@ export default function FontWeight() {
 	);
 }
 
-export function DefaultFontWeightEdit( props: FontWeightProps ) {
+export function DefaultFontWeightEdit( props: FontWeightEditProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
 		onChange( {
@@ -85,7 +85,7 @@ export function DefaultFontWeightEdit( props: FontWeightProps ) {
 	);
 }
 
-export function ResponsiveFontWeightEdit( props: FontWeightProps ) {
+export function ResponsiveFontWeightEdit( props: FontWeightEditProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
@@ -99,7 +99,7 @@ export function ResponsiveFontWeightEdit( props: FontWeightProps ) {
 				<IconFontWeightControl.Desktop
 					value={ value?.desktop || '' }
 					onChange={ ( newValue: string ) =>
-						handleOnChange( { desktop: newValue } )
+						handleOnChange( { desktop: newValue || undefined } )
 					}
 				/>
 			</div>
@@ -107,7 +107,7 @@ export function ResponsiveFontWeightEdit( props: FontWeightProps ) {
 				<IconFontWeightControl.Tablet
 					value={ value?.tablet || '' }
 					onChange={ ( newValue: string ) =>
-						handleOnChange( { tablet: newValue } )
+						handleOnChange( { tablet: newValue || undefined } )
 					}
 				/>
 			</div>
@@ -115,7 +115,7 @@ export function ResponsiveFontWeightEdit( props: FontWeightProps ) {
 				<IconFontWeightControl.Mobile
 					value={ value?.mobile || '' }
 					onChange={ ( newValue: string ) =>
-						handleOnChange( { mobile: newValue } )
+						handleOnChange( { mobile: newValue || undefined } )
 					}
 				/>
 			</div>

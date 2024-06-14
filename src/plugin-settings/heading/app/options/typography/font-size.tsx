@@ -2,38 +2,35 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
-/**
- * Context
- */
-import { HeadingContext } from '../index';
 /**
  * Akatsuki
  */
 import CustomFontSizePicker, {
 	type CustomFontSize,
 } from '@aktk/block-components/components/custom-font-size-picker';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 
-export default function FontSize() {
-	// @ts-ignore
-	const { headingOption, setHeadingOption, setIsEdit } =
-		useContext( HeadingContext );
+interface FontSizeControlProps {
+	value: CustomFontSize | undefined;
+	onChange: ( newValue: { fontSize: CustomFontSize } ) => void;
+}
+
+export default function FontSize( props: FontSizeControlProps ) {
+	const { value, onChange } = props;
 
 	const handleOnChange = ( newValue: CustomFontSize ) => {
 		// @ts-ignore
-		setHeadingOption( {
-			...headingOption,
-			style: {
-				...headingOption?.style,
-				fontSize: newValue,
-			},
+		onChange( {
+			fontSize: deleteUndefined( {
+				...value,
+				...newValue,
+			} ),
 		} );
-		setIsEdit( true );
 	};
 
 	return (
@@ -43,7 +40,7 @@ export default function FontSize() {
 			isFullWidth={ true }
 		>
 			<CustomFontSizePicker
-				fontSize={ headingOption?.style?.fontSize }
+				fontSize={ value }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>

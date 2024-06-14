@@ -9,9 +9,10 @@ import { __ } from '@wordpress/i18n';
  */
 import { HeadingContext } from '../index';
 import Preview from '@aktk/plugin-settings/heading/app/preview';
-import Editor from './editor';
+import { StylePanel } from './panel';
+import UpdateHeadingOption from '../update';
 
-export default function EditContainer() {
+export function EditContainer() {
 	// @ts-ignore
 	const { selectedStyle } = useContext( HeadingContext );
 	const [ showEditor, setShowEditor ] = useState( !! selectedStyle );
@@ -59,7 +60,8 @@ export default function EditContainer() {
 									}
 								>
 									<div className={ 'relative w-full' }>
-										<Editor />
+										<StylePanel />
+										<UpdateHeadingOption />
 									</div>
 									<div
 										className={
