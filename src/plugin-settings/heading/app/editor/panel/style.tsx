@@ -27,6 +27,7 @@ import {
 	FontWeight,
 	TextColor,
 	TextAlign,
+	FontStyle,
 } from '@aktk/plugin-settings/heading/app/options/typography';
 
 export function StylePanel() {
@@ -68,6 +69,10 @@ export function StylePanel() {
 					/>
 					<FontWeight
 						value={ headingOption?.style?.fontWeight }
+						onChange={ handleOnChange }
+					/>
+					<FontStyle
+						value={ headingOption?.style?.fontStyle }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

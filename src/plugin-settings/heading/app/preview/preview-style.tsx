@@ -62,6 +62,10 @@ function parseStyles( styles: object ) {
 		if ( isFontSize( property ) ) {
 			value = parseFontSizeStyle( value );
 		}
+		// font-styleの場合、ページのCSSで font-style: normal !importantが効いているので上書きする.
+		if ( 'font-style' === property ) {
+			value = `${ value } !important`;
+		}
 		// レスポンシブ値でない場合はデスクトップのみの値として扱う
 		if ( ! isResponsiveValue( value ) ) {
 			value = { desktop: value };
@@ -248,13 +252,13 @@ function createCSS(
 ) {
 	let result = '';
 	if ( styles?.desktop ) {
-		result += `.${ selector } {\n${ styles.desktop.join( '\n' ) }\n}`;
+		result += `#${ selector } {\n${ styles.desktop.join( '\n' ) }\n}`;
 	}
 	if ( styles?.tablet ) {
 		const tabletCSS = styles.tablet.join( '\n' );
 		if ( tabletCSS ) {
 			result += `\n${ addTabletMediaQuery(
-				`.${ selector } {\n${ tabletCSS }\n}`
+				`#${ selector } {\n${ tabletCSS }\n}`
 			) }`;
 		}
 	}
@@ -262,7 +266,7 @@ function createCSS(
 		const mobileCSS = styles.mobile.join( '\n' );
 		if ( mobileCSS ) {
 			result += `\n${ addMobileMediaQuery(
-				`.${ selector } {\n${ mobileCSS }\n}`
+				`#${ selector } {\n${ mobileCSS }\n}`
 			) }`;
 		}
 	}

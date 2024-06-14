@@ -42,6 +42,7 @@ export function FontWeightControl( props: FontWeightStyleControlProps ) {
 			value={ { fontWeight: value } }
 			onChange={ handleOnChange }
 			hasFontStyles={ false }
+			hasFontWeights={ true }
 		/>
 	);
 }
@@ -60,7 +61,8 @@ export function FontStyleControl( props: FontWeightStyleControlProps ) {
 		<WPFontAppearanceControl
 			value={ { fontStyle: value } }
 			onChange={ handleOnChange }
-			hasFontStyles={ false }
+			hasFontStyles={ true }
+			hasFontWeights={ false }
 		/>
 	);
 }
