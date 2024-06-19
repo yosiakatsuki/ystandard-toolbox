@@ -4,7 +4,6 @@ import { isNumber } from 'lodash';
  */
 import { FontSizePicker } from '@wordpress/components';
 import { getFontSizeClass } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 import type {
 	FontSize,
 	FontSizePickerProps,

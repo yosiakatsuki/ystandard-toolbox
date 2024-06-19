@@ -29,6 +29,7 @@ import {
 	TextAlign,
 	FontStyle,
 	LineHeight,
+	LetterSpacing,
 } from '@aktk/plugin-settings/heading/app/options/typography';
 
 export function StylePanel() {
@@ -78,6 +79,10 @@ export function StylePanel() {
 					/>
 					<LineHeight
 						value={ headingOption?.style?.lineHeight }
+						onChange={ handleOnChange }
+					/>
+					<LetterSpacing
+						value={ headingOption?.style?.letterSpacing }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

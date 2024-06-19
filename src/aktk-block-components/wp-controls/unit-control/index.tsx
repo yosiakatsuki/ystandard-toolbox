@@ -1,4 +1,7 @@
-import { __experimentalUnitControl as WPUnitControl } from '@wordpress/components';
+import {
+	__experimentalUnitControl as WPUnitControl,
+	__experimentalUseCustomUnits as useCustomUnits,
+} from '@wordpress/components';
 
 export type UnitType = {
 	value: string;
@@ -20,3 +23,5 @@ export default function UnitControl( props: UnitControlProps ) {
 	// @ts-expect-error
 	return <WPUnitControl { ...props } />;
 }
+
+export { useCustomUnits };

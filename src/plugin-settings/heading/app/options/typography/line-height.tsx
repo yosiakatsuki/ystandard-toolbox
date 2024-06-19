@@ -23,7 +23,7 @@ export default function LineHeight( props: LineHeightControlProps ) {
 	};
 	return (
 		<BaseControl
-			id={ 'font-style' }
+			id={ 'line-height' }
 			label={ __( 'Line Height', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
 			className={ '[&_.components-custom-select-control__label]:hidden' }

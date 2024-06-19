@@ -1,5 +1,8 @@
 import { __experimentalUnitControl as WPUnitControl } from '@wordpress/components';
 
+/*
+ * @deprecated
+ */
 const UnitControl = ( { label, value, onChange, units, ...props } ) => {
 	return (
 		<WPUnitControl
@@ -12,4 +15,7 @@ const UnitControl = ( { label, value, onChange, units, ...props } ) => {
 	);
 };
 
+/*
+ * @deprecated
+ */
 export default UnitControl;
