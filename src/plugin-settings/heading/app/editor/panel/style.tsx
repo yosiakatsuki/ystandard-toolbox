@@ -31,6 +31,7 @@ import {
 	LineHeight,
 	LetterSpacing,
 } from '@aktk/plugin-settings/heading/app/options/typography';
+import { BackgroundImage } from '@aktk/plugin-settings/heading/app/options/background';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -52,40 +53,49 @@ export function StylePanel() {
 		} );
 		setIsEdit( true );
 	};
+
+	const option = headingOption?.style;
+
 	return (
 		<PanelGroup>
 			<Preset />
 			<OpenPanel title={ __( '文字設定', 'ystandard-toolbox' ) }>
 				<PanelInner>
 					<FontSize
-						value={ headingOption?.style?.fontSize }
+						value={ option?.fontSize }
 						onChange={ handleOnChange }
 					/>
 					<TextColor
-						value={ headingOption?.style?.color }
+						value={ option?.color }
 						onChange={ handleOnChange }
 					/>
 					<TextAlign
-						value={ headingOption?.style?.textAlign }
+						value={ option?.textAlign }
 						onChange={ handleOnChange }
 					/>
 					<FontWeight
-						value={ headingOption?.style?.fontWeight }
+						value={ option?.fontWeight }
 						onChange={ handleOnChange }
 					/>
 					<FontStyle
-						value={ headingOption?.style?.fontStyle }
+						value={ option?.fontStyle }
 						onChange={ handleOnChange }
 					/>
 					<LineHeight
-						value={ headingOption?.style?.lineHeight }
+						value={ option?.lineHeight }
 						onChange={ handleOnChange }
 					/>
 					<LetterSpacing
-						value={ headingOption?.style?.letterSpacing }
+						value={ option?.letterSpacing }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
+			</OpenPanel>
+			<OpenPanel title={ __( '背景設定', 'ystandard-toolbox' ) }>
+				<BackgroundImage
+					onChange={ handleOnChange }
+					value={ option?.backgroundImage }
+				/>
 			</OpenPanel>
 		</PanelGroup>
 	);

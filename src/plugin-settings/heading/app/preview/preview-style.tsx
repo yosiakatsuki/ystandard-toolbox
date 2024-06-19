@@ -66,6 +66,10 @@ function parseStyles( styles: object ) {
 		if ( 'font-style' === property ) {
 			value = `${ value } !important`;
 		}
+		// background-imageの場合、url()を追加.
+		if ( 'background-image' === property ) {
+			value = `url("${ value }")`;
+		}
 		// レスポンシブ値でない場合はデスクトップのみの値として扱う
 		if ( ! isResponsiveValue( value ) ) {
 			value = { desktop: value };

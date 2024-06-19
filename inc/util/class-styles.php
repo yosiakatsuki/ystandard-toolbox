@@ -99,7 +99,7 @@ class Styles {
 					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
 					$color_rgb  = self::hex_2_rgb( $value['desktop'] );
 					$color_rgb  = implode( ',', $color_rgb );
-					$type       = 'backgroundColor' === $key ? 'bg-color' : 'color';
+					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
 					// 色.
 					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
 					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
