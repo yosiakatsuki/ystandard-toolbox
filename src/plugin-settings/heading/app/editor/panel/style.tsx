@@ -31,7 +31,10 @@ import {
 	LineHeight,
 	LetterSpacing,
 } from '@aktk/plugin-settings/heading/app/options/typography';
-import { BackgroundImage } from '@aktk/plugin-settings/heading/app/options/background';
+import {
+	BackgroundImage,
+	BackgroundSize,
+} from '@aktk/plugin-settings/heading/app/options/background';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -95,6 +98,10 @@ export function StylePanel() {
 				<BackgroundImage
 					onChange={ handleOnChange }
 					value={ option?.backgroundImage }
+				/>
+				<BackgroundSize
+					onChange={ handleOnChange }
+					value={ option?.backgroundSize }
 				/>
 			</OpenPanel>
 		</PanelGroup>

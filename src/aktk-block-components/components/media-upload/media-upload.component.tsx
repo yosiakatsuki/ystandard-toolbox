@@ -60,7 +60,6 @@ function MediaUploadRender(
 	props: MediaUploadRenderProps & MediaUploadRenderComponentProps
 ) {
 	const { obj, media, onClear, selectLabel, clearLabel } = props;
-	console.log( { props } );
 	// Propsの展開.
 	const open = obj.open;
 	const type = media?.type || 'image';

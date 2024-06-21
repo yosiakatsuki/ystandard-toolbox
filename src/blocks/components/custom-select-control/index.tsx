@@ -10,12 +10,18 @@ import { CustomSelectControl as WPCustomSelectControl } from '@wordpress/compone
  */
 import './_index.scss';
 
+/**
+ * @deprecated
+ */
 export interface CustomSelectControlOption {
 	key: string;
 	name: string;
 	style: React.CSSProperties;
 }
 
+/**
+ * @deprecated
+ */
 export interface CustomSelectControlProps {
 	value: string;
 	options: CustomSelectControlOption[];
@@ -26,6 +32,16 @@ export interface CustomSelectControlProps {
 	className?: string;
 }
 
+/**
+ * @param root0
+ * @param root0.value
+ * @param root0.options
+ * @param root0.onChange
+ * @param root0.isHorizon
+ * @param root0.label
+ * @param root0.deleteEmpty
+ * @deprecated
+ */
 const CustomSelectControl = ( {
 	value,
 	options,

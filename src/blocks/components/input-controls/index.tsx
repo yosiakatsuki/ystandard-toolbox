@@ -6,6 +6,9 @@ import classnames from 'classnames';
 import { __experimentalInputControl as WPInputControl } from '@wordpress/components';
 import './editor.scss';
 
+/**
+ * @deprecated
+ */
 interface InputControlProps {
 	label: string;
 	onChange: ( value: string ) => void;
@@ -15,6 +18,10 @@ interface InputControlProps {
 	labelPosition?: 'top' | 'side';
 }
 
+/**
+ * @param props
+ * @deprecated
+ */
 export default function InputControl( props: InputControlProps ) {
 	const { label, onChange, value } = props;
 	const componentClassName = classnames(
