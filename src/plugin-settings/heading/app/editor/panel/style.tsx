@@ -99,10 +99,14 @@ export function StylePanel() {
 					onChange={ handleOnChange }
 					value={ option?.backgroundImage }
 				/>
-				<BackgroundSize
-					onChange={ handleOnChange }
-					value={ option?.backgroundSize }
-				/>
+				{ option?.backgroundImage && (
+					<>
+						<BackgroundSize
+							onChange={ handleOnChange }
+							value={ option?.backgroundSize }
+						/>
+					</>
+				) }
 			</OpenPanel>
 		</PanelGroup>
 	);

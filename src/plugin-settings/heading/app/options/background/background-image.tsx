@@ -18,7 +18,12 @@ import BaseControl from '@aktk/plugin-settings/components/base-control';
 
 interface BackgroundImageControlProps {
 	value: string | undefined;
-	onChange: ( newValue: { backgroundImage: string | undefined } ) => void;
+	onChange: ( newValue: {
+		backgroundImage: string | undefined;
+		backgroundPosition?: string | undefined;
+		backgroundRepeat?: string | undefined;
+		backgroundSize?: string | undefined;
+	} ) => void;
 }
 
 export default function BackgroundImage( props: BackgroundImageControlProps ) {
@@ -30,8 +35,12 @@ export default function BackgroundImage( props: BackgroundImageControlProps ) {
 		} );
 	};
 	const onClear = () => {
+		// 画像がクリアされたら関連する設定をまとめてクリア.
 		onChange( {
 			backgroundImage: undefined,
+			backgroundPosition: undefined,
+			backgroundRepeat: undefined,
+			backgroundSize: undefined,
 		} );
 	};
 
