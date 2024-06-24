@@ -34,6 +34,7 @@ import {
 import {
 	BackgroundImage,
 	BackgroundPosition,
+	BackgroundRepeat,
 	BackgroundSize,
 } from '@aktk/plugin-settings/heading/app/options/background';
 
@@ -103,6 +104,10 @@ export function StylePanel() {
 					/>
 					{ option?.backgroundImage && (
 						<PanelInner>
+							<BackgroundRepeat
+								onChange={ handleOnChange }
+								value={ option?.backgroundRepeat }
+							/>
 							<BackgroundPosition
 								onChange={ handleOnChange }
 								value={ option?.backgroundPosition }
