@@ -33,6 +33,7 @@ import {
 } from '@aktk/plugin-settings/heading/app/options/typography';
 import {
 	BackgroundImage,
+	BackgroundPosition,
 	BackgroundSize,
 } from '@aktk/plugin-settings/heading/app/options/background';
 
@@ -95,18 +96,24 @@ export function StylePanel() {
 				</PanelInner>
 			</OpenPanel>
 			<OpenPanel title={ __( '背景設定', 'ystandard-toolbox' ) }>
-				<BackgroundImage
-					onChange={ handleOnChange }
-					value={ option?.backgroundImage }
-				/>
-				{ option?.backgroundImage && (
-					<>
-						<BackgroundSize
-							onChange={ handleOnChange }
-							value={ option?.backgroundSize }
-						/>
-					</>
-				) }
+				<PanelInner>
+					<BackgroundImage
+						onChange={ handleOnChange }
+						value={ option?.backgroundImage }
+					/>
+					{ option?.backgroundImage && (
+						<PanelInner>
+							<BackgroundPosition
+								onChange={ handleOnChange }
+								value={ option?.backgroundPosition }
+							/>
+							<BackgroundSize
+								onChange={ handleOnChange }
+								value={ option?.backgroundSize }
+							/>
+						</PanelInner>
+					) }
+				</PanelInner>
 			</OpenPanel>
 		</PanelGroup>
 	);
