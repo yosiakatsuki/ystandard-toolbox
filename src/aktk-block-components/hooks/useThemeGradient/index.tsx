@@ -8,22 +8,20 @@ import { store as editorStore } from '@wordpress/editor';
 /**
  * テーマのカラー設定を取得する（設定画面用）
  */
-const useThemeColors = () => {
-	const [ colors, setColors ] = useState( [] );
-	const themeColors = useSelect( ( select ) => {
+const useThemeGradients = () => {
+	const [ gradients, setGradients ] = useState( [] );
+	const themeGradients = useSelect( ( select ) => {
 		// @ts-ignore
 		const settings = select( editorStore )?.getEditorSettings();
-		return settings?.colors || [];
+		return settings?.gradients || [];
 	}, [] );
 	useEffect( () => {
-		if ( themeColors ) {
-			setColors( themeColors );
+		if ( themeGradients ) {
+			setGradients( themeGradients );
 		}
-	}, [ themeColors ] );
+	}, [ themeGradients ] );
 
-	return colors;
+	return gradients;
 };
 
-export default useThemeColors;
-
-
+export default useThemeGradients;

@@ -32,6 +32,7 @@ import {
 	LetterSpacing,
 } from '@aktk/plugin-settings/heading/app/options/typography';
 import {
+	BackgroundColor,
 	BackgroundImage,
 	BackgroundPosition,
 	BackgroundRepeat,
@@ -98,6 +99,10 @@ export function StylePanel() {
 			</OpenPanel>
 			<OpenPanel title={ __( '背景設定', 'ystandard-toolbox' ) }>
 				<PanelInner>
+					<BackgroundColor
+						onChange={ handleOnChange }
+						value={ option?.backgroundColor }
+					/>
 					<BackgroundImage
 						onChange={ handleOnChange }
 						value={ option?.backgroundImage }

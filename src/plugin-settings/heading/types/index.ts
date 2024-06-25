@@ -39,6 +39,7 @@ export interface HeadingStyle {
 
 	// Background.
 	backgroundColor?: string;
+	backgroundGradient?: string;
 	backgroundImage?: string;
 	backgroundPosition?: string;
 	backgroundRepeat?: string;
@@ -88,6 +89,7 @@ export interface HeadingPseudoElementsStyle {
 	textDecoration?: string;
 	// Background.
 	backgroundColor?: string;
+	backgroundGradient?: string;
 	backgroundImage?: string;
 	backgroundPosition?: string;
 	backgroundRepeat?: string;
