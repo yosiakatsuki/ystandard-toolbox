@@ -38,7 +38,10 @@ import {
 	BackgroundRepeat,
 	BackgroundSize,
 } from '@aktk/plugin-settings/heading/app/options/background';
-import { Border } from '@aktk/plugin-settings/heading/app/options/border';
+import {
+	Border,
+	BorderRadius,
+} from '@aktk/plugin-settings/heading/app/options/border';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -131,6 +134,10 @@ export function StylePanel() {
 					<Border
 						onChange={ handleOnChange }
 						value={ option?.border }
+					/>
+					<BorderRadius
+						onChange={ handleOnChange }
+						value={ option?.borderRadius }
 					/>
 				</PanelInner>
 			</OpenPanel>
