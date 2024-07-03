@@ -269,7 +269,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $border ) ) {
-			$this->add_responsive_style( 'border', [ 'desktop' => $border ] );
+			$this->add_responsive_style( 'border', $border );
 		}
 	}
 

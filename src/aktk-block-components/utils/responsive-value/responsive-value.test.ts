@@ -1,4 +1,4 @@
-import { isResponsiveValue, parseResponsiveValue } from '../index';
+import { isResponsiveValue, parseResponsiveValue, getFlatValue } from './index';
 
 describe( 'isResponsiveValue', () => {
 	test( 'オブジェクト以外の値に対して false を返す', () => {
@@ -81,5 +81,29 @@ describe( 'parseResponsiveValue', () => {
 				mobile: undefined,
 			} )
 		).toBe( undefined );
+	} );
+} );
+
+describe( 'getFlatValue', () => {
+	test( 'レスポンシブ形式の値が与えられた場合、デスクトップの値を返す', () => {
+		const responsiveValue = { desktop: 'd', tablet: 't', mobile: 'm' };
+		const defaultValue = 'default';
+		expect( getFlatValue( responsiveValue, defaultValue ) ).toBe( 'd' );
+	} );
+
+	test( 'レスポンシブ形式の値が与えられ、デスクトップの値が存在しない場合、デフォルト値を返す', () => {
+		const responsiveValue = { tablet: 't', mobile: 'm' };
+		const defaultValue = 'default';
+		expect( getFlatValue( responsiveValue, defaultValue ) ).toBe(
+			defaultValue
+		);
+	} );
+
+	test( 'レスポンシブ形式ではない値が与えられた場合、その値をそのまま返す', () => {
+		const nonResponsiveValue = 'non-responsive';
+		const defaultValue = 'default';
+		expect( getFlatValue( nonResponsiveValue, defaultValue ) ).toBe(
+			nonResponsiveValue
+		);
 	} );
 } );

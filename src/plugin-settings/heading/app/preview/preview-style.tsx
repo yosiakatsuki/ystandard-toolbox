@@ -3,7 +3,11 @@ import { kebabCase, isArray, isNumber } from 'lodash';
 /**
  * Aktk dependencies.
  */
-import { deleteUndefined, isEmpty } from '@aktk/block-components/utils/object';
+import {
+	deleteUndefined,
+	isEmpty,
+	isObject,
+} from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/components/responsive-values/utils';
 import type { CustomFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 /**
@@ -14,6 +18,7 @@ import type {
 	HeadingPseudoElementsStyle,
 	HeadingStyle,
 } from '@aktk/plugin-settings/heading/types';
+import { isSplit } from '@aktk/block-components/components/custom-border-select/utils';
 
 /**
  * Component.
@@ -178,9 +183,11 @@ function parseLongHandStyle(
 	property: string,
 	parser: ( style: object, name: string ) => string[]
 ) {
+	// レスポンシブではない場合
 	if ( ! isResponsiveValue( value ) ) {
 		value = { desktop: value };
 	}
+	// レスポンシブは未実装。desktopで処理される.
 	const result = {};
 	if ( value.hasOwnProperty( 'desktop' ) ) {
 		// @ts-ignore
@@ -205,17 +212,32 @@ function parseLongHandStyle(
  */
 function parseBorderProperty( value: object, name: string = 'border' ) {
 	let result: string[] = [];
-	Object.keys( value ).forEach( ( position: string ) => {
-		// @ts-ignore
-		const borderValue = value[ position ];
-		Object.keys( borderValue ).forEach( ( key: string ) => {
-			const cssValue = borderValue[ key ];
-			result = [
-				...result,
-				`${ name }-${ position }-${ key }: ${ cssValue };`,
-			];
+
+	if ( ! isObject( value ) ) {
+		return [];
+	}
+
+	if ( isSplit( value ) ) {
+		// Splitの場合.
+		Object.keys( value ).forEach( ( position: string ) => {
+			// @ts-ignore
+			const borderValue = value[ position ];
+			Object.keys( borderValue ).forEach( ( key: string ) => {
+				const cssValue = borderValue[ key ];
+				result = [
+					...result,
+					`${ name }-${ position }-${ key }: ${ cssValue };`,
+				];
+			} );
 		} );
-	} );
+	} else {
+		Object.keys( value ).forEach( ( key: string ) => {
+			// @ts-ignore
+			const cssValue = value[ key ];
+			result = [ ...result, `${ name }-${ key }: ${ cssValue };` ];
+		} );
+	}
+
 	return result;
 }
 

@@ -38,6 +38,7 @@ import {
 	BackgroundRepeat,
 	BackgroundSize,
 } from '@aktk/plugin-settings/heading/app/options/background';
+import { Border } from '@aktk/plugin-settings/heading/app/options/border';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -123,6 +124,14 @@ export function StylePanel() {
 							/>
 						</PanelInner>
 					) }
+				</PanelInner>
+			</OpenPanel>
+			<OpenPanel title={ __( '枠線設定', 'ystandard-toolbox' ) }>
+				<PanelInner>
+					<Border
+						onChange={ handleOnChange }
+						value={ option?.border }
+					/>
 				</PanelInner>
 			</OpenPanel>
 		</PanelGroup>

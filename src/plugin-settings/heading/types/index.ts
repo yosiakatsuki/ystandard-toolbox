@@ -1,7 +1,10 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import type { CustomSpacing } from 'src/aktk-block-components/components/custom-spacing-select';
 import type { CustomFontSize } from 'src/aktk-block-components/components/custom-font-size-picker';
-import type { CustomBorder } from '@aktk/block-components/components/custom-border-select/types';
+import type {
+	SplitBorders,
+	FlatBorder,
+} from '@aktk/block-components/components/custom-border-select';
 
 /**
  * 見出しデザイン編集設定
@@ -50,7 +53,7 @@ export interface HeadingStyle {
 	padding?: CustomSpacing;
 
 	// Border.
-	border?: CustomBorder;
+	border?: SplitBorders | FlatBorder;
 	borderRadius?: ResponsiveValues;
 
 	// Size.
@@ -98,7 +101,7 @@ export interface HeadingPseudoElementsStyle {
 	margin?: CustomSpacing;
 	padding?: CustomSpacing;
 	// Border.
-	border?: CustomBorder;
+	border?: SplitBorders | FlatBorder;
 	borderRadius?: ResponsiveValues;
 	// Size.
 	width?: ResponsiveValues;

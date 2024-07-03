@@ -1,6 +1,7 @@
 import type {
 	ResponsiveValues,
 	MayBeResponsiveValue,
+	FlatValue,
 } from '@aktk/block-components/types';
 import { deleteUndefined, isObject } from '@aktk/block-components/utils/object';
 
@@ -53,4 +54,28 @@ export function parseResponsiveValue(
 	}
 
 	return result as unknown as ResponsiveValues;
+}
+
+/**
+ * レスポンシブ形式の値を非レスポンシブな形式に変更する.
+ *
+ * @param value
+ * @param defaultValue
+ */
+export function getFlatValue(
+	value: MayBeResponsiveValue,
+	defaultValue: FlatValue
+): FlatValue {
+	// レスポンシブ形式の場合.
+	if ( isResponsiveValue( value ) ) {
+		// desktopの値があれば返す.
+		if ( value.hasOwnProperty( 'desktop' ) ) {
+			return value.desktop;
+		}
+		// desktopがなければデフォルト値
+		return defaultValue;
+	}
+
+	// レスポンシブ形式ではない場合、そのまま返却.
+	return value;
 }

@@ -10,10 +10,10 @@ import {
 	ResponsiveSelectTab,
 	ResponsiveControlGrid,
 } from '@aktk/block-components/components/tab-panel';
-import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
+import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
 
 /**
  * Plugin Dependencies

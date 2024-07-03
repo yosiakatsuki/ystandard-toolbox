@@ -315,17 +315,15 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
 						],
 					],
 				],
@@ -368,27 +366,25 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'right'  => [
-								'width' => '2em',
-								'style' => 'dotted',
-								'color' => '#111111',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
-							'left'   => [
-								'width' => '4vh',
-								'style' => 'double',
-								'color' => '#333333',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'right'  => [
+							'width' => '2em',
+							'style' => 'dotted',
+							'color' => '#111111',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
+						],
+						'left'   => [
+							'width' => '4vh',
+							'style' => 'double',
+							'color' => '#333333',
 						],
 					],
 				],

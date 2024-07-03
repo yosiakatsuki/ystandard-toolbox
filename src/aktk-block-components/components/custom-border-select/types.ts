@@ -1,18 +1,20 @@
 export interface CustomBorder {
-	desktop?: Border;
-	tablet?: Border;
-	mobile?: Border;
+	desktop?: SplitBorders;
+	tablet?: SplitBorders;
+	mobile?: SplitBorders;
 }
 
-export interface Border {
-	top?: BorderProperty;
-	right?: BorderProperty;
-	bottom?: BorderProperty;
-	left?: BorderProperty;
+export interface SplitBorders {
+	top?: FlatBorder;
+	right?: FlatBorder;
+	bottom?: FlatBorder;
+	left?: FlatBorder;
 }
 
-export interface BorderProperty {
+export interface FlatBorder {
 	color?: string;
 	style?: string;
 	width?: string;
 }
+
+export interface BorderControlProps {}

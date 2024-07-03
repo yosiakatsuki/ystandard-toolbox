@@ -4,12 +4,12 @@ import '@testing-library/jest-dom';
 import CustomFontSizePicker, {
 	WPFontSizePicker,
 	CustomSizeInputPanel,
-} from '../index';
+} from './index';
 import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
 
 jest.mock( '@aktk/block-components/hooks/useThemeFontSizes', () => jest.fn() );
 
-jest.mock( 'src/aktk-block-components/components/icon-control', () => ( {
+jest.mock( '@aktk/block-components/components/icon-control', () => ( {
 	IconUnitControl: {
 		// @ts-ignore
 		Desktop: ( { value, onChange } ) => (
@@ -58,7 +58,7 @@ describe( 'CustomFontSizePicker', () => {
 		);
 
 		expect( screen.getByText( '標準' ) ).toBeInTheDocument();
-		expect( screen.getByText( 'カスタム' ) ).toBeInTheDocument();
+		expect( screen.getByText( 'デバイス別' ) ).toBeInTheDocument();
 	} );
 
 	test( 'FontSizePicker が正しくレンダリングされ、変更が処理される', () => {
@@ -84,7 +84,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ {} } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: 'desktop' } ), {
 			target: { value: '2em' },
 		} );
@@ -104,7 +104,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /tablet/i } ), {
 			target: { value: '6em' },
 		} );
@@ -124,7 +124,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /mobile/i } ), {
 			target: { value: '7em' },
 		} );
@@ -144,7 +144,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /desktop/i } ), {
 			target: { value: '8em' },
 		} );
@@ -164,7 +164,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /mobile/i } ), {
 			target: { value: '9em' },
 		} );
@@ -183,7 +183,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /desktop/i } ), {
 			target: { value: '10em' },
 		} );
@@ -203,7 +203,7 @@ describe( 'CustomFontSizePicker', () => {
 			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
 		);
 
-		fireEvent.click( screen.getByText( 'カスタム' ) );
+		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: /tablet/i } ), {
 			target: { value: '11em' },
 		} );
