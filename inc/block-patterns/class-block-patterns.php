@@ -213,7 +213,7 @@ class Block_Patterns {
 		// カテゴリーがついていないパターンの受け皿.
 		register_block_pattern_category(
 			self::BLOCK_PATTERNS,
-			[ 'label' => 'yStandard Toolbox' ]
+			[ 'label' => get_bloginfo( 'name' ) ]
 		);
 
 		do_action( 'ystdtb_register_block_pattern_category' );
