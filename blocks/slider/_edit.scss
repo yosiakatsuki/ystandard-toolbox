@@ -3,113 +3,115 @@
 @use "sass:math";
 
 [data-type="ystdtb/slider"] {
-  &,
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
-  &.preview--grid {
-    .ystdtb-slider__container {
-      > .block-editor-inner-blocks {
-        > .block-editor-block-list__layout {
-          display: flex;
-          flex-wrap: wrap;
-          align-self: flex-start;
-          justify-content: flex-start;
-          gap: 10px;
+	&.preview--grid {
+		.ystdtb-slider__container {
+			> .block-editor-inner-blocks {
+				> .block-editor-block-list__layout {
+					display: flex;
+					flex-wrap: wrap;
+					align-self: flex-start;
+					justify-content: flex-start;
+					gap: 10px;
 
-          > * {
-            flex: 0 0 calc(50% - 5px);
-            box-sizing: border-box;
-            margin: 0;
-          }
+					> * {
+						flex: 0 0 calc(50% - 5px);
+						box-sizing: border-box;
+						margin: 0;
+					}
 
-          > .block-list-appender {
-            position: relative;
-            margin: 0;
-            align-self: flex-start;
+					> .block-list-appender {
+						position: relative;
+						margin: 0;
 
-            &::before {
-              content: "";
-              display: block;
-              padding-top: #{(global.decimal-floor(math.div( 9 , 16 ), 2) * 100)}#{"%"};
-            }
-            > .block-editor-inserter {
-              position: absolute;
-              top: 0;
-              right: 0;
-              bottom: 0;
-              left: 0;
-              padding: 0 0 8px 0;
-              overflow: hidden;
-            }
+						&::before {
+							content: "";
+							display: block;
+							padding-top: #{(global.decimal-floor(math.div( 9 , 16 ), 2) * 100)}#{"%"};
+						}
 
-            .block-list-appender__toggle {
-              display: flex;
-              align-self: center;
-              justify-content: center;
-              width: 100%;
-              height: 100%;
-              margin: 0;
-              background-color: #fafafa;
-              border: 1px solid var(--wp-admin-theme-color);
+						> .block-editor-inserter {
+							position: absolute;
+							top: 0;
+							right: 0;
+							bottom: 0;
+							left: 0;
+							padding: 0 0 0 0;
+							overflow: hidden;
+						}
+
+						.block-list-appender__toggle {
+							display: flex;
+							align-self: center;
+							justify-content: center;
+							width: 100%;
+							height: 100%;
+							margin: 0;
+							background-color: #fafafa;
+							border: 1px solid var(--wp-admin-theme-color);
 
 
+							svg {
+								background-color: transparent;
+								color: var(--wp-admin-theme-color);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-              svg {
-                background-color: transparent;
-                color: var(--wp-admin-theme-color);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	&.preview--horizontal {
+		.ystdtb-slider__container {
+			overflow: auto;
+			box-sizing: border-box;
 
-  &.preview--horizontal {
-    .ystdtb-slider__container {
-      overflow: auto;
-      box-sizing: border-box;
+			> .block-editor-inner-blocks {
+				width: auto;
 
-      > .block-editor-inner-blocks {
-        width: auto;
+				> .block-editor-block-list__layout {
+					display: flex;
 
-        > .block-editor-block-list__layout {
-          display: flex;
+					> *:not(.block-list-appender) {
+						width: calc(100vw - 120px);
+						margin: 0 20px 0 0;
+						flex-shrink: 0;
+						flex-grow: 0;
+						min-width: 1px;
 
-          > *:not(.block-list-appender) {
-            width: calc(100vw - 120px);
-            margin: 0 20px 0 0;
-            flex-shrink: 0;
-            flex-grow: 0;
-            min-width: 1px;
+						@media (min-width: 783px) {
+							width: calc(100vw - 300px - 36px - 120px);
+						}
+						@media (min-width: 961px) {
+							width: calc(100vw - 300px - 160px - 120px);
+							max-width: calc(830px - 120px);
+						}
+					}
 
-            @media (min-width: 783px) {
-              width: calc(100vw - 300px - 36px - 120px);
-            }
-            @media (min-width: 961px) {
-              width: calc(100vw - 300px - 160px - 120px);
-              max-width: calc(830px - 120px);
-            }
-          }
-
-          .block-list-appender {
-            align-self: center;
-          }
-        }
-      }
-    }
-  }
+					.block-list-appender {
+						align-self: center;
+						position: relative;
+						margin: 0;
+						padding-right: 1em;
+					}
+				}
+			}
+		}
+	}
 }
 
 
 .ystdtb-slider__slide-option-reset {
-  button {
-    display: block;
-    width: 100%;
-  }
+	button {
+		display: block;
+		width: 100%;
+	}
 }
 
