@@ -25,7 +25,6 @@ export default function Border( props: BorderProps ) {
 	const { value, onChange } = props;
 
 	const handleOnChange = ( newValue: SplitBorders | FlatBorder ) => {
-		console.log( { newValue } );
 		onChange( {
 			border: newValue,
 		} );

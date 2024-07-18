@@ -48,13 +48,13 @@ export interface HeadingStyle {
 	backgroundRepeat?: string;
 	backgroundSize?: string;
 
-	// Spacing.
-	margin?: CustomSpacing;
-	padding?: CustomSpacing;
-
 	// Border.
 	border?: SplitBorders | FlatBorder;
 	borderRadius?: ResponsiveValues;
+
+	// Spacing.
+	padding?: CustomSpacing;
+	margin?: CustomSpacing;
 
 	// Size.
 	width?: ResponsiveValues;
@@ -97,12 +97,12 @@ export interface HeadingPseudoElementsStyle {
 	backgroundPosition?: string;
 	backgroundRepeat?: string;
 	backgroundSize?: string;
-	// Spacing.
-	margin?: CustomSpacing;
-	padding?: CustomSpacing;
 	// Border.
 	border?: SplitBorders | FlatBorder;
 	borderRadius?: ResponsiveValues;
+	// Spacing.
+	padding?: CustomSpacing;
+	margin?: CustomSpacing;
 	// Size.
 	width?: ResponsiveValues;
 	minWidth?: ResponsiveValues;

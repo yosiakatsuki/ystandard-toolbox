@@ -1,3 +1,4 @@
+import classnames from 'classnames/dedupe';
 /**
  * WordPress dependencies
  */
@@ -57,14 +58,15 @@ export function ResponsiveSelectTab( props: ResponsiveSelectTabProps ) {
 	);
 }
 
-export function ResponsiveControlGrid( {
-	children,
-}: {
+interface ResponsiveControlGridProps {
 	children: React.ReactNode;
-} ) {
-	return (
-		<div className={ 'grid grid-cols-1 gap-4 md:grid-cols-3' }>
-			{ children }
-		</div>
-	);
+	customClassName?: object;
+}
+
+export function ResponsiveControlGrid( props: ResponsiveControlGridProps ) {
+	const { children, customClassName = {} } = props;
+	const wrapClass = classnames( 'grid grid-cols-1 gap-4 md:grid-cols-3', {
+		...customClassName,
+	} );
+	return <div className={ wrapClass }>{ children }</div>;
 }

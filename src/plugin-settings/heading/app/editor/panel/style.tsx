@@ -42,6 +42,7 @@ import {
 	Border,
 	BorderRadius,
 } from '@aktk/plugin-settings/heading/app/options/border';
+import { Padding } from '@aktk/plugin-settings/heading/app/options/spacing';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -139,6 +140,15 @@ export function StylePanel() {
 						onChange={ handleOnChange }
 						value={ option?.borderRadius }
 					/>
+				</PanelInner>
+			</OpenPanel>
+			<OpenPanel title={ __( '余白設定', 'ystandard-toolbox' ) }>
+				<PanelInner>
+					<Padding
+						value={ option?.padding }
+						onChange={ handleOnChange }
+					/>
+					<div>margin</div>
 				</PanelInner>
 			</OpenPanel>
 		</PanelGroup>

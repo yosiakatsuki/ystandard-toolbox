@@ -25,5 +25,3 @@ const useThemeColors = () => {
 };
 
 export default useThemeColors;
-
-
