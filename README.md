@@ -17,6 +17,10 @@
 ### v2.0.0
 - [変更] `ystdtb_css_breakpoints` キー変更 `sm`-> `mobile`, `md` -> `tablet`, `lg` -> `desktop`、値に単位追加.
 
+### v1.28.0 :
+- [調整] WordPress 6.6 向け調整
+- [調整] ブロックパターン編集機能：パターンカテゴリーのデフォルトカテゴリー名を「yStandard Toolbox」からサイト名に変更
+
 ### v1.26.0 : 2023/11/08
 - [調整] WordPress 6.4 向け調整
 - [調整] PHP 8.2向け調整
