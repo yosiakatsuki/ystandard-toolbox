@@ -38,7 +38,7 @@ export default function Margin( props: MarginControlProps ) {
 	return (
 		<BaseControl
 			id={ 'margin' }
-			label={ __( '内側余白(Margin)', 'ystandard-toolbox' ) }
+			label={ __( '外側余白(Margin)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
 			className={ '[&_.components-range-control]:hidden' }
 		>

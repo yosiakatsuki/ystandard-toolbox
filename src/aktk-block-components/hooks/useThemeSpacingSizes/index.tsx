@@ -95,6 +95,11 @@ function getDefaultSpacingSizes() {
 			size: '80px',
 			slug: '80px',
 		},
+		{
+			name: 'auto',
+			size: 'auto',
+			slug: 'auto',
+		},
 	];
 }
 
