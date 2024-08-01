@@ -12,22 +12,18 @@ interface PanelProps {
 
 export function Panel( props: PanelProps ) {
 	const { title, initialOpen, children } = props;
-	const [ panelOpen, setPanelOpen ] = useState( false );
+	// 初期開閉状態が関数の時とそれ以外でちょっと動きが違う.
+	const isInitialOpenFunction = 'function' === typeof initialOpen;
+	const _initialOpen = isInitialOpenFunction ? false : initialOpen;
+	// パネルの初期状態セット.
+	const [ panelOpen, setPanelOpen ] = useState( _initialOpen );
 
-	const setInitialOpen = () => {
-		if ( 'function' === typeof initialOpen ) {
+	// 初期状態をセット.
+	useEffect( () => {
+		if ( isInitialOpenFunction ) {
 			setPanelOpen( initialOpen() );
 		}
-		setPanelOpen( initialOpen ?? false );
-	};
-
-	useEffect( () => {
-		setInitialOpen();
 	}, [] );
-
-	useEffect( () => {
-		setInitialOpen();
-	}, [ initialOpen ] );
 
 	const togglePanel = () => {
 		setPanelOpen( ! panelOpen );
