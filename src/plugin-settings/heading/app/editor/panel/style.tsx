@@ -22,6 +22,9 @@ import Preset from '../../options/preset';
  * Context
  */
 import { HeadingContext } from '../../index';
+/**
+ * Controls.
+ */
 import {
 	FontSize,
 	FontWeight,
@@ -42,7 +45,10 @@ import {
 	Border,
 	BorderRadius,
 } from '@aktk/plugin-settings/heading/app/options/border';
-import { Padding } from '@aktk/plugin-settings/heading/app/options/spacing';
+import {
+	Margin,
+	Padding,
+} from '@aktk/plugin-settings/heading/app/options/spacing';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -148,7 +154,10 @@ export function StylePanel() {
 						value={ option?.padding }
 						onChange={ handleOnChange }
 					/>
-					<div>margin</div>
+					<Margin
+						value={ option?.margin }
+						onChange={ handleOnChange }
+					/>
 				</PanelInner>
 			</OpenPanel>
 		</PanelGroup>

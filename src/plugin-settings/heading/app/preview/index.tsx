@@ -10,16 +10,16 @@ const PREVIEW_ELEMENT_ID = 'ystdtb-setting-heading__preview-text';
 export default function Preview() {
 	// @ts-ignore
 	const { previewText, headingOption } = useContext( HeadingContext );
-
-	console.log( { Preview: headingOption } );
+	// eslint-disable-next-line no-console
+	console.log( { PreviewStyles: headingOption } );
 	return (
-		<div className={ '' }>
+		<div>
 			<PreviewStyle
 				style={ headingOption?.style }
 				before={ headingOption?.before }
 				after={ headingOption?.after }
 			/>
-			<div>
+			<div className={ '-m-px p-px' }>
 				<div id={ PREVIEW_ELEMENT_ID } className={ PREVIEW_ELEMENT_ID }>
 					{ previewText }
 				</div>

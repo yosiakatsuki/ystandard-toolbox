@@ -2,7 +2,6 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk Dependencies
  */
@@ -21,26 +20,11 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
+import { filterSpacingSizes } from './function';
 
 interface PaddingControlProps {
 	value: CustomSpacing | undefined;
 	onChange: ( newValue: { padding: CustomSpacing } ) => void;
-}
-
-function filterSpacingSizes( sizes: object[] ) {
-	addFilter(
-		'blockEditor.useSetting.before',
-		'ystandard-toolbox/plugin-settings/heading/spacingSizes',
-		( settingValue, settingName ) => {
-			if (
-				'spacing.spacingSizes.theme' === settingName &&
-				! settingValue
-			) {
-				settingValue = sizes;
-			}
-			return settingValue;
-		}
-	);
 }
 
 export default function Padding( props: PaddingControlProps ) {
