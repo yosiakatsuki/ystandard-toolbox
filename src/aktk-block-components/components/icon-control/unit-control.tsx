@@ -12,7 +12,7 @@ import UnitControl, {
 import { DesktopControl, TabletControl, MobileControl } from './wrapper';
 
 type IconUnitControlProps = UnitControlProps & {
-	unitType?: 'fontSize' | 'spacing' | 'length';
+	unitType?: 'fontSize' | 'spacing' | 'length' | 'size';
 };
 
 const UNITS = {
@@ -22,6 +22,15 @@ const UNITS = {
 		{ value: 'rem', label: 'rem', default: 0 },
 	] as UnitType[],
 	spacing: [
+		{ value: 'px', label: 'px', default: 0 },
+		{ value: 'em', label: 'em', default: 0 },
+		{ value: 'rem', label: 'rem', default: 0 },
+		{ value: '%', label: '%', default: 0 },
+		{ value: 'vw', label: 'vw', default: 0 },
+		{ value: 'vh', label: 'vh', default: 0 },
+		{ value: 'ch', label: 'ch', default: 0 },
+	] as UnitType[],
+	size: [
 		{ value: 'px', label: 'px', default: 0 },
 		{ value: 'em', label: 'em', default: 0 },
 		{ value: 'rem', label: 'rem', default: 0 },

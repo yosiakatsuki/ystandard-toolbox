@@ -49,6 +49,7 @@ import {
 	Margin,
 	Padding,
 } from '@aktk/plugin-settings/heading/app/options/spacing';
+import { Width } from '@aktk/plugin-settings/heading/app/options/size';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -156,6 +157,14 @@ export function StylePanel() {
 					/>
 					<Margin
 						value={ option?.margin }
+						onChange={ handleOnChange }
+					/>
+				</PanelInner>
+			</OpenPanel>
+			<OpenPanel title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }>
+				<PanelInner>
+					<Width
+						value={ option?.width }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

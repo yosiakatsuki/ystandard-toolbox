@@ -1,8 +1,15 @@
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Aktk dependencies
+ */
 import CustomSpacingSelect, {
 	type CustomSpacing,
 } from '@aktk/block-components/components/custom-spacing-select';
 import { ResponsiveControlGrid } from '@aktk/block-components/components/tab-panel';
-import { __ } from '@wordpress/i18n';
 import type { SpacingSizeValues } from '@aktk/block-components/wp-controls/spacing-size-control';
 
 export function DefaultSpacingEdit( props: {
