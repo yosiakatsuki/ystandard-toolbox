@@ -49,7 +49,10 @@ import {
 	Margin,
 	Padding,
 } from '@aktk/plugin-settings/heading/app/options/spacing';
-import { Width } from '@aktk/plugin-settings/heading/app/options/size';
+import {
+	Width,
+	MaxWidth,
+} from '@aktk/plugin-settings/heading/app/options/size';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -165,6 +168,10 @@ export function StylePanel() {
 				<PanelInner>
 					<Width
 						value={ option?.width }
+						onChange={ handleOnChange }
+					/>
+					<MaxWidth
+						value={ option?.maxWidth }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

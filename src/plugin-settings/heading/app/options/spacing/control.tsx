@@ -22,6 +22,8 @@ export function DefaultSpacingEdit( props: {
 	const handleOnChange = ( newValue: SpacingSizeValues ) => {
 		onChange( {
 			desktop: newValue,
+			tablet: undefined,
+			mobile: undefined,
 		} );
 	};
 	return (
