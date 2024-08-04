@@ -52,6 +52,7 @@ import {
 import {
 	Width,
 	MaxWidth,
+	MinWidth,
 } from '@aktk/plugin-settings/heading/app/options/size';
 
 export function StylePanel() {
@@ -172,6 +173,10 @@ export function StylePanel() {
 					/>
 					<MaxWidth
 						value={ option?.maxWidth }
+						onChange={ handleOnChange }
+					/>
+					<MinWidth
+						value={ option?.minWidth }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>

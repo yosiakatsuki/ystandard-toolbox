@@ -20,21 +20,21 @@ import {
 	ResponsiveSizeEdit,
 } from '@aktk/plugin-settings/heading/app/options/size/control';
 
-interface MaxWidthControlProps {
+interface MinWidthControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { maxWidth: ResponsiveValues } ) => void;
+	onChange: ( newValue: { minWidth: ResponsiveValues } ) => void;
 }
 
-export default function MaxWidth( props: MaxWidthControlProps ) {
+export default function MinWidth( props: MinWidthControlProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { maxWidth: deleteUndefined( newValue ) } );
+		onChange( { minWidth: deleteUndefined( newValue ) } );
 	};
 
 	return (
 		<BaseControl
-			id={ 'max-width' }
-			label={ __( '最大幅(max-width)', 'ystandard-toolbox' ) }
+			id={ 'min-width' }
+			label={ __( '最小幅(min-width)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
