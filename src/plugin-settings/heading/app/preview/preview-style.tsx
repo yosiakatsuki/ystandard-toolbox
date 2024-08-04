@@ -90,20 +90,29 @@ function parseStyles( styles: object ) {
 
 		if ( isArray( value.desktop ) ) {
 			desktop = [ ...desktop, ...value.desktop ];
-		} else {
+		} else if (
+			! isObject( value.desktop ) ||
+			! isEmpty( value.desktop )
+		) {
 			desktop = [ ...desktop, `${ property }: ${ value.desktop };` ];
 		}
 		if ( value?.tablet ) {
 			if ( isArray( value.tablet ) ) {
 				tablet = [ ...tablet, ...value.tablet ];
-			} else {
+			} else if (
+				! isObject( value.desktop ) ||
+				! isEmpty( value.desktop )
+			) {
 				tablet = [ ...tablet, `${ property }: ${ value.tablet };` ];
 			}
 		}
 		if ( value?.mobile ) {
 			if ( isArray( value.mobile ) ) {
 				mobile = [ ...mobile, ...value.mobile ];
-			} else {
+			} else if (
+				! isObject( value.desktop ) ||
+				! isEmpty( value.desktop )
+			) {
 				mobile = [ ...mobile, `${ property }: ${ value.mobile };` ];
 			}
 		}

@@ -17,7 +17,7 @@ export function DefaultSizeEdit( props: {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
 		onChange( {
-			desktop: newValue,
+			desktop: '' === newValue ? undefined : newValue,
 			tablet: undefined,
 			mobile: undefined,
 		} );

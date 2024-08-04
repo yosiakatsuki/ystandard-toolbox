@@ -28,9 +28,7 @@ interface WidthControlProps {
 export default function Width( props: WidthControlProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( {
-			width: deleteUndefined( newValue ),
-		} );
+		onChange( { width: deleteUndefined( newValue ) } );
 	};
 
 	return (
