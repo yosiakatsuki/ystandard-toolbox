@@ -42,6 +42,7 @@ export const getSliderOptions = ( attributes ) => {
 				true === attributes?.autoplayDisableOnInteraction
 					? undefined
 					: attributes?.autoplayDisableOnInteraction,
+			reverseDirection: attributes?.autoplayReverseDirection || undefined,
 		};
 		addOptions( 'autoplay', autoplayOptions );
 	}

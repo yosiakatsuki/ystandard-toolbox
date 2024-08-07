@@ -53,6 +53,10 @@ export const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	autoplayReverseDirection: {
+		type: 'boolean',
+		default: false,
+	},
 	ratio: {
 		type: 'string',
 	},
