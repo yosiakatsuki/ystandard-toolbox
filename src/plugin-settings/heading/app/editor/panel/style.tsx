@@ -5,13 +5,10 @@ import { __ } from '@wordpress/i18n';
 import { useContext } from '@wordpress/element';
 
 /**
- * Akatsuki
- */
-import { OpenPanel } from '@aktk/block-components/components/panel';
-/**
  * Plugin Dependencies
  */
 import { PanelGroup, PanelInner } from './index';
+import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 
 /**
  * Options.
@@ -84,7 +81,10 @@ export function StylePanel() {
 	return (
 		<PanelGroup>
 			<Preset />
-			<OpenPanel title={ __( '文字設定', 'ystandard-toolbox' ) }>
+			<PluginSettingsPanel
+				title={ __( '文字設定', 'ystandard-toolbox' ) }
+				initialOpen={ false }
+			>
 				<PanelInner>
 					<FontSize
 						value={ option?.fontSize }
@@ -115,8 +115,11 @@ export function StylePanel() {
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
-			</OpenPanel>
-			<OpenPanel title={ __( '背景設定', 'ystandard-toolbox' ) }>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '背景設定', 'ystandard-toolbox' ) }
+				initialOpen={ false }
+			>
 				<PanelInner>
 					<BackgroundColor
 						onChange={ handleOnChange }
@@ -143,8 +146,11 @@ export function StylePanel() {
 						</PanelInner>
 					) }
 				</PanelInner>
-			</OpenPanel>
-			<OpenPanel title={ __( '枠線設定', 'ystandard-toolbox' ) }>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '枠線設定', 'ystandard-toolbox' ) }
+				initialOpen={ false }
+			>
 				<PanelInner>
 					<Border
 						onChange={ handleOnChange }
@@ -155,8 +161,11 @@ export function StylePanel() {
 						value={ option?.borderRadius }
 					/>
 				</PanelInner>
-			</OpenPanel>
-			<OpenPanel title={ __( '余白設定', 'ystandard-toolbox' ) }>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '余白設定', 'ystandard-toolbox' ) }
+				initialOpen={ false }
+			>
 				<PanelInner>
 					<Padding
 						value={ option?.padding }
@@ -167,8 +176,11 @@ export function StylePanel() {
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
-			</OpenPanel>
-			<OpenPanel title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+				initialOpen={ false }
+			>
 				<PanelInner>
 					<Width
 						value={ option?.width }
@@ -195,7 +207,7 @@ export function StylePanel() {
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
-			</OpenPanel>
+			</PluginSettingsPanel>
 		</PanelGroup>
 	);
 }

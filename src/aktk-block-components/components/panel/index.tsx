@@ -8,10 +8,11 @@ interface PanelProps {
 	title: string;
 	initialOpen?: ( () => boolean ) | boolean;
 	children: React.ReactNode;
+	className?: string;
 }
 
 export function Panel( props: PanelProps ) {
-	const { title, initialOpen, children } = props;
+	const { title, initialOpen, children, className } = props;
 	// 初期開閉状態が関数の時とそれ以外でちょっと動きが違う.
 	const isInitialOpenFunction = 'function' === typeof initialOpen;
 	const _initialOpen = isInitialOpenFunction ? false : initialOpen;
@@ -34,6 +35,7 @@ export function Panel( props: PanelProps ) {
 			title={ title }
 			initialOpen={ panelOpen }
 			onToggle={ togglePanel }
+			className={ className }
 		>
 			{ children }
 		</PanelBody>

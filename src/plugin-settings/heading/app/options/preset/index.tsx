@@ -8,13 +8,16 @@ import { useState, useEffect, useContext } from '@wordpress/element';
 /**
  * Akatsuki
  */
-import { OpenPanel } from '@aktk/block-components/components/panel';
 import {
 	PrimaryButton,
 	HasElementButton,
 } from '@aktk/block-components/components/buttons';
 import { Modal } from '@aktk/block-components/components/modal';
 import { NoticeWarning } from '@aktk/block-components/components/notice';
+/**
+ * Plugin Dependencies
+ */
+import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 /**
  * Types
  */
@@ -51,7 +54,10 @@ export default function Preset() {
 	};
 
 	return (
-		<OpenPanel title={ __( 'プリセット', 'ystandard-toolbox' ) }>
+		<PluginSettingsPanel
+			title={ __( 'プリセット', 'ystandard-toolbox' ) }
+			initialOpen={ true }
+		>
 			<div>
 				<PrimaryButton
 					icon={ 'admin-appearance' }
@@ -66,7 +72,7 @@ export default function Preset() {
 			>
 				<PresetList onSelect={ handleOnSelectPreset } />
 			</Modal>
-		</OpenPanel>
+		</PluginSettingsPanel>
 	);
 }
 
