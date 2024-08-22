@@ -67,10 +67,10 @@ export interface HeadingStyle {
 	// advanced.
 	background?: string;
 	display?: ResponsiveValues;
+	flexDirection?: ResponsiveValues;
+	alignItems?: ResponsiveValues;
+	justifyContent?: ResponsiveValues;
 	gap?: ResponsiveValues;
-	flexDirection?: string;
-	alignItems?: string;
-	justifyContent?: string;
 	fontFamily?: string;
 	textShadow?: string;
 	boxShadow?: string;

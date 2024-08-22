@@ -54,7 +54,10 @@ import {
 	MaxHeight,
 	MinHeight,
 } from '@aktk/plugin-settings/heading/app/options/size';
-import { ResponsiveDisplay } from '@aktk/plugin-settings/heading/app/options/advanced';
+import {
+	FlexDirection,
+	ResponsiveDisplay,
+} from '@aktk/plugin-settings/heading/app/options/advanced';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -217,6 +220,11 @@ export function StylePanel() {
 					<ResponsiveDisplay
 						value={ option?.display }
 						onChange={ handleOnChange }
+					/>
+					<FlexDirection
+						value={ option?.flexDirection }
+						onChange={ handleOnChange }
+						displayValue={ option?.display }
 					/>
 				</PanelInner>
 			</PluginSettingsPanel>
