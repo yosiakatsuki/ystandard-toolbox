@@ -15,10 +15,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
-import {
-	DefaultSizeEdit,
-	ResponsiveSizeEdit,
-} from '@aktk/plugin-settings/heading/app/options/size/control';
+import { DefaultSizeEdit, ResponsiveSizeEdit } from './control';
 
 interface WidthControlProps {
 	value: ResponsiveValues | undefined;

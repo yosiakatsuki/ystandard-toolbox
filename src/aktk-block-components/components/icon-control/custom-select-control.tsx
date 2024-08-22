@@ -1,29 +1,27 @@
 /**
- * WordPress dependencies
- */
-import { CustomSelectControl } from '@wordpress/components';
-/**
  * Components
  */
 import { DesktopControl, TabletControl, MobileControl } from './wrapper';
+import CustomSelectControl from '@aktk/block-components/wp-controls/custom-select-control';
 
 interface IconSelectControlProps {
 	onChange: ( value: string ) => void;
 	value: string;
 	label?: string;
 	options: { name: string; key: string }[];
+	emptyLabel?: string;
 }
 
 function CustomSelectBase( props: IconSelectControlProps ) {
-	const { onChange, value, label, options } = props;
+	const { onChange, value, label, options, emptyLabel = '----' } = props;
 	return (
 		<CustomSelectControl
 			label={ label }
-			value={ options.find( ( option ) => option.key === value ) }
+			value={ value }
 			options={ options }
-			// @ts-ignore
-			onChange={ ( { selectedItem } ) => {
-				onChange( selectedItem?.key );
+			emptyLabel={ emptyLabel }
+			onChange={ ( newValue ) => {
+				onChange( newValue );
 			} }
 		/>
 	);

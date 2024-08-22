@@ -54,6 +54,7 @@ import {
 	MaxHeight,
 	MinHeight,
 } from '@aktk/plugin-settings/heading/app/options/size';
+import { ResponsiveDisplay } from '@aktk/plugin-settings/heading/app/options/advanced';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -204,6 +205,17 @@ export function StylePanel() {
 					/>
 					<MinHeight
 						value={ option?.minHeight }
+						onChange={ handleOnChange }
+					/>
+				</PanelInner>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '上級者向け', 'ystandard-toolbox' ) }
+				initialOpen={ true }
+			>
+				<PanelInner>
+					<ResponsiveDisplay
+						value={ option?.display }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
