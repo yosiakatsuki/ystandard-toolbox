@@ -14,10 +14,10 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 import { AdvancedResponsiveSelectControl } from './controls';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
-interface AlignItemsProps {
+interface JustifyContentProps {
 	value: ResponsiveValues | undefined;
 	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { alignItems: ResponsiveValues } ) => void;
+	onChange: ( newValue: { justifyContent: ResponsiveValues } ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -34,15 +34,19 @@ const SELECT_OPTIONS = [
 		name: __( 'flex-end', 'ystandard-toolbox' ),
 	},
 	{
-		key: 'baseline',
-		name: __( 'baseline', 'ystandard-toolbox' ),
+		key: 'space-between',
+		name: __( 'space-between', 'ystandard-toolbox' ),
+	},
+	{
+		key: 'space-around',
+		name: __( 'space-around', 'ystandard-toolbox' ),
 	},
 ];
 
-export default function AlignItems( props: AlignItemsProps ) {
+export default function JustifyContent( props: JustifyContentProps ) {
 	const { value, onChange, displayValue } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { alignItems: deleteUndefined( newValue ) } );
+		onChange( { justifyContent: deleteUndefined( newValue ) } );
 	};
 	// flexが選択されていない場合は非表示.
 	if ( ! isUseFlex( displayValue ) ) {
@@ -50,8 +54,8 @@ export default function AlignItems( props: AlignItemsProps ) {
 	}
 	return (
 		<AdvancedResponsiveSelectControl
-			id={ 'align-items' }
-			label={ __( 'align-items', 'ystandard-toolbox' ) }
+			id={ 'justify-content' }
+			label={ __( 'justify-content', 'ystandard-toolbox' ) }
 			value={ value }
 			onChange={ handleOnChange }
 			options={ SELECT_OPTIONS }

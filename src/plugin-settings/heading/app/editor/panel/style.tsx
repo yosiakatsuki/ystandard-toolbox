@@ -57,6 +57,7 @@ import {
 import {
 	AlignItems,
 	FlexDirection,
+	JustifyContent,
 	ResponsiveDisplay,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 
@@ -229,6 +230,11 @@ export function StylePanel() {
 					/>
 					<AlignItems
 						value={ option?.alignItems }
+						onChange={ handleOnChange }
+						displayValue={ option?.display }
+					/>
+					<JustifyContent
+						value={ option?.justifyContent }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
 					/>
