@@ -56,6 +56,7 @@ import {
 } from '@aktk/plugin-settings/heading/app/options/size';
 import {
 	AlignItems,
+	Background,
 	FlexDirection,
 	FontFamily,
 	Gap,
@@ -247,6 +248,10 @@ export function StylePanel() {
 					/>
 					<FontFamily
 						value={ option?.fontFamily }
+						onChange={ handleOnChange }
+					/>
+					<Background
+						value={ option?.background }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
