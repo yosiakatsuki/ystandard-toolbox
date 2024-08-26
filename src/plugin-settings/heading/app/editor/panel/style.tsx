@@ -55,6 +55,7 @@ import {
 	MinHeight,
 } from '@aktk/plugin-settings/heading/app/options/size';
 import {
+	AlignItems,
 	FlexDirection,
 	ResponsiveDisplay,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
@@ -223,6 +224,11 @@ export function StylePanel() {
 					/>
 					<FlexDirection
 						value={ option?.flexDirection }
+						onChange={ handleOnChange }
+						displayValue={ option?.display }
+					/>
+					<AlignItems
+						value={ option?.alignItems }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
 					/>
