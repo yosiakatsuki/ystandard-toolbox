@@ -12,10 +12,17 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Internal Dependencies
  */
 import { AdvancedResponsiveSelectControl } from './controls';
+import { isUseFlex } from './utils';
 
 interface ResponsiveDisplayProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { display: ResponsiveValues } ) => void;
+	onChange: ( newValue: {
+		display?: ResponsiveValues;
+		flexDirection?: ResponsiveValues;
+		alignItems?: ResponsiveValues;
+		justifyContent?: ResponsiveValues;
+		gap?: ResponsiveValues;
+	} ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -44,7 +51,20 @@ const SELECT_OPTIONS = [
 export function ResponsiveDisplay( props: ResponsiveDisplayProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { display: deleteUndefined( newValue ) } );
+		let _newValue = { display: deleteUndefined( newValue ) };
+		// flexが選択されていない場合はflex関連の設定クリア.
+		if ( ! isUseFlex( newValue ) ) {
+			_newValue = {
+				..._newValue,
+				...{
+					flexDirection: undefined,
+					alignItems: undefined,
+					justifyContent: undefined,
+					gap: undefined,
+				},
+			};
+		}
+		onChange( _newValue );
 	};
 	return (
 		<AdvancedResponsiveSelectControl
