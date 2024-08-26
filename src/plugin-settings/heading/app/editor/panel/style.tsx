@@ -62,6 +62,7 @@ import {
 	Gap,
 	JustifyContent,
 	ResponsiveDisplay,
+	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 
 export function StylePanel() {
@@ -252,6 +253,10 @@ export function StylePanel() {
 					/>
 					<Background
 						value={ option?.background }
+						onChange={ handleOnChange }
+					/>
+					<TextShadow
+						value={ option?.textShadow }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
