@@ -57,6 +57,7 @@ import {
 import {
 	AlignItems,
 	FlexDirection,
+	FontFamily,
 	Gap,
 	JustifyContent,
 	ResponsiveDisplay,
@@ -243,6 +244,10 @@ export function StylePanel() {
 						value={ option?.gap }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+					/>
+					<FontFamily
+						value={ option?.fontFamily }
+						onChange={ handleOnChange }
 					/>
 				</PanelInner>
 			</PluginSettingsPanel>

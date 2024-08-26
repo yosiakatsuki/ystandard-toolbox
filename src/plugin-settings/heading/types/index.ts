@@ -65,13 +65,13 @@ export interface HeadingStyle {
 	maxHeight?: ResponsiveValues;
 
 	// advanced.
-	background?: string;
 	display?: ResponsiveValues;
 	flexDirection?: ResponsiveValues;
 	alignItems?: ResponsiveValues;
 	justifyContent?: ResponsiveValues;
 	gap?: ResponsiveValues;
 	fontFamily?: string;
+	background?: string;
 	textShadow?: string;
 	boxShadow?: string;
 	customCss?: string;
