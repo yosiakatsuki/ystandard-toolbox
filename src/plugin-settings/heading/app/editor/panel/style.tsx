@@ -57,6 +57,7 @@ import {
 import {
 	AlignItems,
 	FlexDirection,
+	Gap,
 	JustifyContent,
 	ResponsiveDisplay,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
@@ -235,6 +236,11 @@ export function StylePanel() {
 					/>
 					<JustifyContent
 						value={ option?.justifyContent }
+						onChange={ handleOnChange }
+						displayValue={ option?.display }
+					/>
+					<Gap
+						value={ option?.gap }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
 					/>
