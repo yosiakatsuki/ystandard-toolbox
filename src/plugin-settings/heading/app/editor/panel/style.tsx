@@ -57,6 +57,7 @@ import {
 import {
 	AlignItems,
 	Background,
+	BoxShadow,
 	FlexDirection,
 	FontFamily,
 	Gap,
@@ -257,6 +258,10 @@ export function StylePanel() {
 					/>
 					<TextShadow
 						value={ option?.textShadow }
+						onChange={ handleOnChange }
+					/>
+					<BoxShadow
+						value={ option?.boxShadow }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
