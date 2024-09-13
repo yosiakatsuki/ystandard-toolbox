@@ -12,7 +12,7 @@
 
 .ystdtb-plugin-settings-panel {
 	&.is-nested {
-		&:last-child {
+		.ystdtb-plugin-settings-panel:last-child {
 			margin-bottom: 0;
 		}
 	}

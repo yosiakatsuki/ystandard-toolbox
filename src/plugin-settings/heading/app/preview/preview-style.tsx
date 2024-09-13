@@ -136,11 +136,13 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 		let styleContent = styles.content.replace( /\\(.)/g, '$1' );
 		styleContent = styleContent.replace( /\'/g, '"' );
 		styles.content = styleContent;
-		if ( -1 < styleContent.indexOf( '<svg' ) ) {
+		if ( styleContent.includes( '<svg' ) ) {
 			styleContent = encodeURIComponent( styleContent );
 			styles.content = '""';
-			styles.backgroundImage = `url('data:image/svg+xml;charset=UTF-8,${ styleContent }')`;
+			styles.backgroundImage = `data:image/svg+xml;charset=UTF-8,${ styleContent }`;
 			styles.backgroundSize = 'contain';
+		} else if ( ! styleContent.includes( '"' ) ) {
+			styles.content = `"${ styleContent }"`;
 		}
 	}
 

@@ -83,6 +83,7 @@ export interface HeadingStyle {
 export interface HeadingPseudoElementsStyle {
 	content?: string;
 	icon?: string;
+	useIconMask?: boolean;
 	fontSize?: ResponsiveValues;
 	color?: string;
 	fontWeight?: string;

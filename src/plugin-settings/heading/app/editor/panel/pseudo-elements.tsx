@@ -19,7 +19,10 @@ import type { HeadingPseudoElementsStyle } from '@aktk/plugin-settings/heading/t
 /**
  * Controls.
  */
-import { EnablePseudoElements } from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
+import {
+	EnablePseudoElements,
+	PseudoElementsContent,
+} from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
 
 export function BeforePanel() {
 	// @ts-ignore
@@ -77,7 +80,11 @@ function PseudoElements( props: PseudoElementsProps ) {
 	);
 
 	return (
-		<PluginSettingsPanel title={ panelName } initialOpen={ true }>
+		<PluginSettingsPanel
+			title={ panelName }
+			initialOpen={ true }
+			isNested={ true }
+		>
 			<EnablePseudoElements
 				value={ option?.content }
 				onChange={ onChange }
@@ -86,11 +93,14 @@ function PseudoElements( props: PseudoElementsProps ) {
 			{ undefined !== option?.content && (
 				<PanelGroup>
 					<PluginSettingsPanel
-						title={ '内側' }
+						title={ 'content' }
 						initialOpen={ true }
-						isNested={ true }
 					>
-						<div>panel</div>
+						<PseudoElementsContent
+							value={ option?.content }
+							onChange={ onChange }
+							type={ type }
+						/>
 					</PluginSettingsPanel>
 				</PanelGroup>
 			) }
