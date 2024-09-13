@@ -87,10 +87,10 @@ export default function UpdateHeadingOption() {
 					icon={ 'cloud-upload' }
 					onClick={ handleOnClickSave }
 				>
-					{ __( '更新', 'ystandard-toolbox' ) }
+					{ __( 'スタイル設定を更新', 'ystandard-toolbox' ) }
 				</PrimaryButton>
 				<DestructiveButton onClick={ handleOnClickDelete }>
-					{ __( '削除', 'ystandard-toolbox' ) }
+					{ __( 'スタイルを削除', 'ystandard-toolbox' ) }
 				</DestructiveButton>
 			</div>
 		</>

@@ -2,7 +2,7 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
+import { useContext, useCallback } from '@wordpress/element';
 
 /**
  * Plugin Dependencies
@@ -65,6 +65,10 @@ import {
 	ResponsiveDisplay,
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
+import type {
+	HeadingOptions,
+	HeadingStyle,
+} from '@aktk/plugin-settings/heading/types';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -89,12 +93,29 @@ export function StylePanel() {
 
 	const option = headingOption?.style;
 
+	const isInitialOpen = useCallback(
+		( panelOptions: HeadingStyle | undefined, names: string[] ) => {
+			return names.some(
+				( name ) => panelOptions?.hasOwnProperty( name )
+			);
+		},
+		[]
+	);
+
 	return (
 		<PanelGroup>
 			<Preset />
 			<PluginSettingsPanel
 				title={ __( '文字設定', 'ystandard-toolbox' ) }
-				initialOpen={ false }
+				initialOpen={ isInitialOpen( option, [
+					'fontSize',
+					'color',
+					'textAlign',
+					'fontWeight',
+					'fontStyle',
+					'lineHeight',
+					'letterSpacing',
+				] ) }
 			>
 				<PanelInner>
 					<FontSize
@@ -129,7 +150,10 @@ export function StylePanel() {
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
 				title={ __( '背景設定', 'ystandard-toolbox' ) }
-				initialOpen={ false }
+				initialOpen={ isInitialOpen( option, [
+					'backgroundColor',
+					'backgroundImage',
+				] ) }
 			>
 				<PanelInner>
 					<BackgroundColor
@@ -160,7 +184,10 @@ export function StylePanel() {
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
 				title={ __( '枠線設定', 'ystandard-toolbox' ) }
-				initialOpen={ false }
+				initialOpen={ isInitialOpen( option, [
+					'border',
+					'borderRadius',
+				] ) }
 			>
 				<PanelInner>
 					<Border
@@ -175,7 +202,7 @@ export function StylePanel() {
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
 				title={ __( '余白設定', 'ystandard-toolbox' ) }
-				initialOpen={ false }
+				initialOpen={ isInitialOpen( option, [ 'padding', 'margin' ] ) }
 			>
 				<PanelInner>
 					<Padding
@@ -190,7 +217,14 @@ export function StylePanel() {
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
 				title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
-				initialOpen={ false }
+				initialOpen={ isInitialOpen( option, [
+					'width',
+					'maxWidth',
+					'minWidth',
+					'height',
+					'maxHeight',
+					'minHeight',
+				] ) }
 			>
 				<PanelInner>
 					<Width
@@ -221,7 +255,13 @@ export function StylePanel() {
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
 				title={ __( '上級者向け', 'ystandard-toolbox' ) }
-				initialOpen={ true }
+				initialOpen={ isInitialOpen( option, [
+					'display',
+					'fontFamily',
+					'background',
+					'textShadow',
+					'boxShadow',
+				] ) }
 			>
 				<PanelInner>
 					<ResponsiveDisplay
