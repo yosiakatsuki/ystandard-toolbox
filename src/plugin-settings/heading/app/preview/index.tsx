@@ -15,9 +15,9 @@ export default function Preview() {
 	return (
 		<div>
 			<PreviewStyle
-				style={ headingOption?.style }
-				before={ headingOption?.before }
-				after={ headingOption?.after }
+				style={ { ...headingOption?.style } }
+				before={ { ...headingOption?.before } }
+				after={ { ...headingOption?.after } }
 			/>
 			<div className={ '-m-px p-px' }>
 				<div id={ PREVIEW_ELEMENT_ID } className={ PREVIEW_ELEMENT_ID }>

@@ -38,6 +38,7 @@ export interface UpdateHeadingOptionProps {
 }
 
 export async function updateHeadingStyles( props: UpdateHeadingOptionProps ) {
+	console.log( { update: props.headingOption } );
 	await apiPost( {
 		endpoint: getEndpoint( 'update_heading_style' ),
 		data: {
