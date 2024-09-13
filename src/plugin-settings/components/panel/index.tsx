@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 /**
  * Akatsuki
  */
@@ -9,15 +10,19 @@ interface PluginSettingsPanelProps {
 	title: string;
 	initialOpen?: ( () => boolean ) | boolean;
 	children: React.ReactNode;
+	isNested?: boolean;
 }
 
 export function PluginSettingsPanel( props: PluginSettingsPanelProps ) {
-	const { title, initialOpen, children } = props;
+	const { title, initialOpen, children, isNested = false } = props;
+	const className = clsx( 'ystdtb-plugin-settings-panel', {
+		'is-nested': isNested,
+	} );
 	return (
 		<Panel
 			title={ title }
 			initialOpen={ initialOpen }
-			className={ 'ystdtb-plugin-settings-panel' }
+			className={ className }
 		>
 			{ children }
 		</Panel>

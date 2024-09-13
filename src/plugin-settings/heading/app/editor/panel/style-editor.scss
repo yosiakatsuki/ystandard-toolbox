@@ -10,3 +10,13 @@
 	}
 }
 
+.ystdtb-plugin-settings-panel {
+	&.is-nested {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.components-form-toggle {
+		display: inline-flex;
+	}
+}

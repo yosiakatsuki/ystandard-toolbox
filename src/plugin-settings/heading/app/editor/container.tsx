@@ -11,6 +11,7 @@ import { HeadingContext } from '../index';
 import Preview from '@aktk/plugin-settings/heading/app/preview';
 import { StylePanel } from './panel';
 import UpdateHeadingOption from '../update';
+import { BeforePanel } from '@aktk/plugin-settings/heading/app/editor/panel/pseudo-elements';
 
 export function EditContainer() {
 	// @ts-ignore
@@ -61,6 +62,7 @@ export function EditContainer() {
 								>
 									<div className={ 'relative w-full' }>
 										<StylePanel />
+										<BeforePanel />
 										<UpdateHeadingOption />
 									</div>
 									<div

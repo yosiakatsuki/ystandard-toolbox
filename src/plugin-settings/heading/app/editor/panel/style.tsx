@@ -65,10 +65,7 @@ import {
 	ResponsiveDisplay,
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
-import type {
-	HeadingOptions,
-	HeadingStyle,
-} from '@aktk/plugin-settings/heading/types';
+import type { HeadingStyle } from '@aktk/plugin-settings/heading/types';
 
 export function StylePanel() {
 	// @ts-ignore
