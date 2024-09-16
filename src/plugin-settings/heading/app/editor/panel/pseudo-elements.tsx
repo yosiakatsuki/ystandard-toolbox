@@ -22,6 +22,7 @@ import type { HeadingPseudoElementsStyle } from '@aktk/plugin-settings/heading/t
 import {
 	EnablePseudoElements,
 	PseudoElementsContent,
+	PseudoElementsIcon,
 } from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
 
 export function BeforePanel() {
@@ -98,6 +99,16 @@ function PseudoElements( props: PseudoElementsProps ) {
 					>
 						<PseudoElementsContent
 							value={ option?.content }
+							onChange={ onChange }
+							type={ type }
+						/>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( 'アイコン', 'ystandard-toolbox' ) }
+						initialOpen={ true }
+					>
+						<PseudoElementsIcon
+							value={ option?.icon }
 							onChange={ onChange }
 							type={ type }
 						/>

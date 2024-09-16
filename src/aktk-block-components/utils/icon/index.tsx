@@ -13,17 +13,17 @@ export type IconList = Icon[];
  */
 export function getIcons(): IconList {
 	// @ts-expect-error
-	return window?.ystdbIconList || [];
+	return window?.ystdtbIconList || [];
 }
 
-export function getFilteredIcons(name: string): IconList {
+export function getFilteredIcons( name: string ): IconList {
 	const icons = getIcons();
-	if (!icons) {
+	if ( ! icons ) {
 		return [];
 	}
-	return icons.filter((icon: Icon) => {
-		return icon.name.indexOf(name) > -1;
-	});
+	return icons.filter( ( icon: Icon ) => {
+		return icon.name.indexOf( name ) > -1;
+	} );
 }
 
 /**
@@ -32,14 +32,14 @@ export function getFilteredIcons(name: string): IconList {
  * @param {string} iconName アイコン名.
  * @return {undefined|string} アイコンSVG.
  */
-export function getIconSvg(iconName: string) {
-	if (!iconName) {
+export function getIconSvg( iconName: string ) {
+	if ( ! iconName ) {
 		return undefined;
 	}
-	const targetIcon = getIcons().find((icon: Icon) => {
+	const targetIcon = getIcons().find( ( icon: Icon ) => {
 		return icon.name === iconName;
-	});
-	if (!targetIcon || !targetIcon.hasOwnProperty('icon')) {
+	} );
+	if ( ! targetIcon || ! targetIcon.hasOwnProperty( 'icon' ) ) {
 		return undefined;
 	}
 	return targetIcon.icon;

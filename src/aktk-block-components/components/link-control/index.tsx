@@ -90,7 +90,7 @@ export function LinkControl( props: LinkControlProps ) {
 				settings={ [
 					{
 						id: 'opensInNewTab',
-						title: __( '新しいタブで開く', 'ystandard-blocks' ),
+						title: __( '新しいタブで開く', 'ystandard-toolbox' ),
 					},
 				] }
 			/>

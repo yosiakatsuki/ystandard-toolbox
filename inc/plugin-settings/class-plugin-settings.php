@@ -177,15 +177,16 @@ class Plugin_Settings {
 			[ 'jquery' ]
 		);
 
+		$script_handle = 'ystdtb-plugin-settings';
 		wp_enqueue_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			YSTDTB_URL . '/build/plugin-settings/plugin-settings.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 		wp_localize_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			'ystdtbAdminConfig',
 			apply_filters(
 				'ystdtb_admin_config',
@@ -199,7 +200,7 @@ class Plugin_Settings {
 			)
 		);
 		wp_localize_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			'ystdtbPluginSettings',
 			apply_filters(
 				'ystdtb_plugin_settings',
@@ -208,6 +209,7 @@ class Plugin_Settings {
 				]
 			)
 		);
+		do_action( 'ystdtb_enqueue_plugin_settings_base_scripts', $script_handle );
 	}
 
 	/**
@@ -248,6 +250,7 @@ class Plugin_Settings {
 					$asset['version'],
 				);
 			}
+			do_action( 'ystdtb_enqueue_plugin_settings_page_scripts', $name );
 		}
 	}
 

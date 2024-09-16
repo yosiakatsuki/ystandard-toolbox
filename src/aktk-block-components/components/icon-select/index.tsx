@@ -2,7 +2,8 @@
  * WordPress dependencies.
  */
 import { Button, TextControl, Popover } from '@wordpress/components';
-import { useMemo, useCallback, useState } from '@wordpress/element';
+import { useMemo, useCallback, useState, useRef } from '@wordpress/element';
+import { Icon, closeSmall } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -10,7 +11,6 @@ import { __ } from '@wordpress/i18n';
  */
 import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 import { getFilteredIcons } from '@aktk/block-components/utils/icon';
-import { ComponentLabel } from '@aktk/blocks/components/label';
 
 /**
  * Internal dependencies.
@@ -28,14 +28,12 @@ export function IconSelect( props: IconSelectProps ) {
 	const [ filter, setFilter ] = useState( '' );
 	const [ isOpen, setIsOpen ] = useState( false );
 	const [ popoverAnchor, setPopoverAnchor ] = useState();
-	const buttonText = isOpen
-		? __( '閉じる', 'ystandard-blocks' )
-		: __( 'アイコン選択', 'ystandard-blocks' );
+	const filterRef = useRef( null );
 
 	return (
 		<div className={ 'ystd-component__icon-select' }>
 			<>
-				{ label && <ComponentLabel>{ label }</ComponentLabel> }
+				{ label && <div>{ label }</div> }
 
 				<div
 					className={ 'flex items-center gap-4' }
@@ -49,19 +47,26 @@ export function IconSelect( props: IconSelectProps ) {
 						variant={ 'secondary' }
 						className="h-8"
 						onClick={ () => {
-							setIsOpen( ! isOpen );
+							if ( isOpen ) {
+								return;
+							}
+							setIsOpen( true );
+							setTimeout( () => {
+								// @ts-ignore
+								filterRef.current?.focus();
+							}, 100 );
 						} }
 					>
-						{ buttonText }
+						{ __( 'アイコン選択', 'ystandard-toolbox' ) }
 					</Button>
 					<Button
 						variant={ 'tertiary' }
 						onClick={ () => {
 							onChange( undefined );
 						} }
-						isSmall
+						size={ 'small' }
 					>
-						{ __( 'クリア', 'ystandard-blocks' ) }
+						{ __( 'クリア', 'ystandard-toolbox' ) }
 					</Button>
 				</div>
 				{ isOpen && (
@@ -71,20 +76,42 @@ export function IconSelect( props: IconSelectProps ) {
 						className={
 							'ystd-component__icon-select__popover min-w-[300px]'
 						}
-						onClose={ () => setIsOpen( false ) }
+						onClose={ () => {
+							setTimeout( () => {
+								setIsOpen( false );
+							}, 150 );
+						} }
 					>
-						<div className="p-2">
-							<div className="mb-2">
-								<TextControl
-									value={ filter }
-									onChange={ setFilter }
-									placeholder={ __(
-										'絞り込み…',
-										'ystandard-blocks'
+						<div className="px-2 pt-2">
+							<div className="mb-2 flex items-center justify-between">
+								<h3 className="m-0 text-fz-xs font-bold">
+									{ __(
+										'アイコン選択',
+										'ystandard-toolbox'
 									) }
-								/>
+								</h3>
+								<Button
+									className="!p-0 text-current hover:text-current focus:text-current"
+									onClick={ () => {
+										setIsOpen( false );
+									} }
+									size={ 'small' }
+								>
+									<Icon icon={ closeSmall } />
+								</Button>
 							</div>
-							<div className="max-h-[200px] overflow-y-scroll">
+							<TextControl
+								ref={ filterRef }
+								value={ filter }
+								onChange={ setFilter }
+								placeholder={ __(
+									'絞り込み…',
+									'ystandard-toolbox'
+								) }
+							/>
+						</div>
+						<div className="max-h-[200px] overflow-y-scroll p-1">
+							<div className="m-1">
 								<IconButtons
 									icon={ icon }
 									onChange={ onChange }

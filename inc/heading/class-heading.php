@@ -193,8 +193,6 @@ class Heading {
 			// 更新の場合、該当スタイルを更新.
 			$styles[ $slug ] = $data['style'];
 		}
-
-		Debug::debug_var_dump_file( $styles, __DIR__ . '/debug-heading-update.text' );
 		// 更新実行.
 		$result = $this->update_heading_design_option( $styles );
 

@@ -32,6 +32,7 @@ class Icon {
 	 */
 	public function __construct() {
 		add_action( 'enqueue_block_editor_assets', [ $this, 'add_icons' ], 100 );
+		add_action( 'ystdtb_enqueue_plugin_settings_base_scripts', [ $this, 'admin_add_icons' ], 50 );
 	}
 
 	/**
@@ -40,6 +41,19 @@ class Icon {
 	public function add_icons() {
 		wp_localize_script(
 			Blocks::BLOCK_EDITOR_SCRIPT_HANDLE,
+			'ystdtbIconList',
+			$this->get_icons()
+		);
+	}
+
+	/**
+	 * プラグイン設定画面用
+	 *
+	 * @param string $script_handle Script handle.
+	 */
+	public function admin_add_icons( $script_handle ) {
+		wp_localize_script(
+			$script_handle,
 			'ystdtbIconList',
 			$this->get_icons()
 		);
