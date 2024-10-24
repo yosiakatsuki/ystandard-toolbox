@@ -138,9 +138,16 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 		styles.content = styleContent;
 		if ( styleContent.includes( '<svg' ) ) {
 			styleContent = encodeURIComponent( styleContent );
+			// SVGの場合はbackground-imageに設定.
 			styles.content = '""';
 			styles.backgroundImage = `data:image/svg+xml;charset=UTF-8,${ styleContent }`;
 			styles.backgroundSize = 'contain';
+			// Display調整・サイズ調整
+			styles.display = styles?.display || 'inline-flex';
+			styles.width = styles?.width || { desktop: '1em' };
+			styles.height = styles?.height || { desktop: '1em' };
+			// 位置調整.
+			styles.verticalAlign = '-0.125em';
 		} else if ( ! styleContent.includes( '"' ) ) {
 			styles.content = `"${ styleContent }"`;
 		}

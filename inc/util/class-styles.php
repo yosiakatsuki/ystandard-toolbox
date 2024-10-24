@@ -52,7 +52,7 @@ class Styles {
 	/**
 	 * スタイル設定をCSSとして扱えるように変換.
 	 *
-	 * @param array  $styles          CSS設定.
+	 * @param array $styles CSS設定.
 	 * @param string $pseudo_elements 疑似要素処理用.
 	 *
 	 * @return array
@@ -101,9 +101,9 @@ class Styles {
 					$color_rgb  = implode( ',', $color_rgb );
 					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
 					// 色.
-					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
-					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
-					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
+					$color_var["{$var_prefix}-{$type}"]      = $value['desktop'];
+					$color_var["{$var_prefix}-{$type}-rgb"]  = "rgb({$color_rgb})";
+					$color_var["{$var_prefix}-{$type}-rgba"] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
 					// マージ.
 					$desktop = array_merge( $color_var, $desktop );
 				}
@@ -141,7 +141,7 @@ class Styles {
 	/**
 	 * 疑似要素用スタイルのパース.
 	 *
-	 * @param array  $styles          Styles.
+	 * @param array $styles Styles.
 	 * @param string $pseudo_elements Pseudo Elements.
 	 *
 	 * @return array
@@ -164,6 +164,10 @@ class Styles {
 			$svg_icon                  = rawurlencode( $content );
 			$styles['backgroundImage'] = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
 			$styles['backgroundSize']  = 'contain';
+			$styles['display']         = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
+			$default_size              = [ 'desktop' => '1em' ];
+			$styles['width']           = empty( $styles['width'] ) ? $default_size : $styles['width'];
+			$styles['height']          = empty( $styles['height'] ) ? $default_size : $styles['height'];
 			$content                   = '';
 		}
 		$content           = trim( $content, '"' );
@@ -208,7 +212,7 @@ class Styles {
 				}
 
 				// セット.
-				$parse_result[ "border-{$position}" ] = $value;
+				$parse_result["border-{$position}"] = $value;
 			}
 
 			return $parse_result;
@@ -240,8 +244,8 @@ class Styles {
 	/**
 	 * Spacing 展開
 	 *
-	 * @param string $name    property name.
-	 * @param array  $spacing value.
+	 * @param string $name property name.
+	 * @param array $spacing value.
 	 *
 	 * @return array
 	 */
@@ -256,7 +260,7 @@ class Styles {
 				if ( '' !== $value && 0 === (int) $value ) {
 					$value = 0;
 				}
-				$parse_result[ "{$name}-{$position}" ] = $value;
+				$parse_result["{$name}-{$position}"] = $value;
 			}
 
 			return $parse_result;

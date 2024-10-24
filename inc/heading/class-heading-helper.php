@@ -90,12 +90,6 @@ class Heading_Helper {
 			if ( ! empty( $custom_before ) ) {
 				$before = $custom_css['before'];
 			} else {
-				Debug::debug_var_dump_file(
-					[
-						'$before'           => $before,
-					],
-					__DIR__ . '/debug-get_heading_css.html'
-				);
 				$before = Styles::parse_styles_pseudo_elements( $before, 'before' );
 			}
 			$before_css = self::create_css( $before, $before_selector );

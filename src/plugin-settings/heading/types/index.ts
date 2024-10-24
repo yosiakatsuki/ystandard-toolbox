@@ -124,4 +124,6 @@ export interface HeadingPseudoElementsStyle {
 	zIndex?: string;
 	fontFamily?: string;
 	customCss?: string;
+	//system.
+	verticalAlign?: string;
 }
