@@ -21,10 +21,11 @@ export interface IconSelectProps {
 	icon: string;
 	label?: string;
 	onChange: ( value: string | undefined ) => void;
+	disable?: boolean;
 }
 
 export function IconSelect( props: IconSelectProps ) {
-	const { icon, label, onChange } = props;
+	const { icon, label, onChange, disable = false } = props;
 	const [ filter, setFilter ] = useState( '' );
 	const [ isOpen, setIsOpen ] = useState( false );
 	const [ popoverAnchor, setPopoverAnchor ] = useState();
@@ -56,6 +57,7 @@ export function IconSelect( props: IconSelectProps ) {
 								filterRef.current?.focus();
 							}, 100 );
 						} }
+						disabled={ disable }
 					>
 						{ __( 'アイコン選択', 'ystandard-toolbox' ) }
 					</Button>
@@ -65,6 +67,7 @@ export function IconSelect( props: IconSelectProps ) {
 							onChange( undefined );
 						} }
 						size={ 'small' }
+						disabled={ disable }
 					>
 						{ __( 'クリア', 'ystandard-toolbox' ) }
 					</Button>

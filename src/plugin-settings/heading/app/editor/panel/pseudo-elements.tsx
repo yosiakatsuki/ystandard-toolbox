@@ -101,6 +101,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							value={ option?.content }
 							onChange={ onChange }
 							type={ type }
+							hasIcon={ !! option?.icon }
 						/>
 					</PluginSettingsPanel>
 					<PluginSettingsPanel
@@ -111,6 +112,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							value={ option?.icon }
 							onChange={ onChange }
 							type={ type }
+							hasContent={ !! option?.content && ! option?.icon }
 						/>
 					</PluginSettingsPanel>
 				</PanelGroup>
