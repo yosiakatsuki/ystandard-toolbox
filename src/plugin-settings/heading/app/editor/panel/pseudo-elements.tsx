@@ -7,7 +7,7 @@ import { useContext, useCallback } from '@wordpress/element';
 /**
  * Plugin Dependencies
  */
-import { PanelGroup, PanelInner } from './index';
+import { PanelGroup } from './index';
 import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 
 /**
@@ -24,6 +24,7 @@ import {
 	PseudoElementsContent,
 	PseudoElementsIcon,
 } from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
+import { FontSize } from '@aktk/plugin-settings/heading/app/options/typography';
 
 export function BeforePanel() {
 	// @ts-ignore
@@ -73,6 +74,8 @@ function PseudoElements( props: PseudoElementsProps ) {
 			panelOptions: HeadingPseudoElementsStyle | undefined,
 			names: string[]
 		) => {
+			return true;
+			// @ts-ignore
 			return names.some(
 				( name ) => panelOptions?.hasOwnProperty( name )
 			);
@@ -95,7 +98,12 @@ function PseudoElements( props: PseudoElementsProps ) {
 				<PanelGroup>
 					<PluginSettingsPanel
 						title={ 'content' }
-						initialOpen={ true }
+						initialOpen={ isInitialOpen(
+							{
+								content: option?.content,
+							},
+							[ 'content' ]
+						) }
 					>
 						<PseudoElementsContent
 							value={ option?.content }
@@ -106,13 +114,32 @@ function PseudoElements( props: PseudoElementsProps ) {
 					</PluginSettingsPanel>
 					<PluginSettingsPanel
 						title={ __( 'アイコン', 'ystandard-toolbox' ) }
-						initialOpen={ true }
+						initialOpen={ isInitialOpen(
+							{
+								icon: option?.icon,
+							},
+							[ 'icon' ]
+						) }
 					>
 						<PseudoElementsIcon
 							value={ option?.icon }
 							onChange={ onChange }
 							type={ type }
 							hasContent={ !! option?.content && ! option?.icon }
+						/>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '文字設定', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen(
+							{
+								fontSize: option?.fontSize,
+							},
+							[ 'fontSize' ]
+						) }
+					>
+						<FontSize
+							value={ option?.fontSize }
+							onChange={ onChange }
 						/>
 					</PluginSettingsPanel>
 				</PanelGroup>
