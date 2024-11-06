@@ -86,7 +86,7 @@ export interface HeadingPseudoElementsStyle {
 	useIconMask?: boolean;
 	fontSize?: ResponsiveValues;
 	color?: string;
-	fontWeight?: string;
+	fontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;
@@ -123,7 +123,6 @@ export interface HeadingPseudoElementsStyle {
 	left?: string;
 	zIndex?: string;
 	fontFamily?: string;
-	customCss?: string;
 	//system.
 	verticalAlign?: string;
 }

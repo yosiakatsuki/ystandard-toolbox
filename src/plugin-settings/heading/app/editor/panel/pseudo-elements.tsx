@@ -7,7 +7,7 @@ import { useContext, useCallback } from '@wordpress/element';
 /**
  * Plugin Dependencies
  */
-import { PanelGroup } from './index';
+import { PanelGroup, PanelInner } from './index';
 import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 
 /**
@@ -24,8 +24,25 @@ import {
 	PseudoElementsContent,
 	PseudoElementsIcon,
 } from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
-import { FontSize } from '@aktk/plugin-settings/heading/app/options/typography';
+import {
+	FontSize,
+	FontStyle,
+	FontWeight,
+	LetterSpacing,
+	LineHeight,
+	TextColor,
+} from '@aktk/plugin-settings/heading/app/options/typography';
+import {
+	BackgroundColor,
+	BackgroundImage,
+	BackgroundPosition,
+	BackgroundRepeat,
+	BackgroundSize,
+} from '@aktk/plugin-settings/heading/app/options/background';
 
+/**
+ * BeforePanel
+ */
 export function BeforePanel() {
 	// @ts-ignore
 	const { headingOption, setHeadingOption, setIsEdit } =
@@ -66,6 +83,10 @@ interface PseudoElementsProps {
 	type: 'before' | 'after';
 }
 
+/**
+ * PseudoElements
+ * @param props {PseudoElementsProps} - props
+ */
 function PseudoElements( props: PseudoElementsProps ) {
 	const { panelName, option, onChange, type } = props;
 
@@ -82,6 +103,10 @@ function PseudoElements( props: PseudoElementsProps ) {
 		},
 		[]
 	);
+
+	const handleOnChange = ( newValue: { [ name: string ]: unknown } ) => {
+		onChange( newValue );
+	};
 
 	return (
 		<PluginSettingsPanel
@@ -107,7 +132,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 					>
 						<PseudoElementsContent
 							value={ option?.content }
-							onChange={ onChange }
+							onChange={ handleOnChange }
 							type={ type }
 							hasIcon={ !! option?.icon }
 						/>
@@ -123,24 +148,86 @@ function PseudoElements( props: PseudoElementsProps ) {
 					>
 						<PseudoElementsIcon
 							value={ option?.icon }
-							onChange={ onChange }
+							onChange={ handleOnChange }
 							type={ type }
 							hasContent={ !! option?.content && ! option?.icon }
 						/>
 					</PluginSettingsPanel>
 					<PluginSettingsPanel
 						title={ __( '文字設定', 'ystandard-toolbox' ) }
-						initialOpen={ isInitialOpen(
-							{
-								fontSize: option?.fontSize,
-							},
-							[ 'fontSize' ]
-						) }
+						initialOpen={ isInitialOpen( option || {}, [
+							'fontSize',
+							'color',
+							'fontWeight',
+							'fontStyle',
+							'lineHeight',
+							'letterSpacing',
+						] ) }
 					>
-						<FontSize
-							value={ option?.fontSize }
-							onChange={ onChange }
-						/>
+						<PanelInner>
+							<FontSize
+								value={ option?.fontSize }
+								onChange={ handleOnChange }
+							/>
+							<TextColor
+								value={ option?.color }
+								onChange={ handleOnChange }
+							/>
+							<FontWeight
+								value={ option?.fontWeight }
+								onChange={ handleOnChange }
+							/>
+							<FontStyle
+								value={ option?.fontStyle }
+								onChange={ handleOnChange }
+							/>
+							<LineHeight
+								value={ option?.lineHeight }
+								onChange={ handleOnChange }
+							/>
+							<LetterSpacing
+								value={ option?.letterSpacing }
+								onChange={ handleOnChange }
+							/>
+						</PanelInner>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '背景設定', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen( option || {}, [
+							'fontSize',
+							'color',
+							'fontWeight',
+							'fontStyle',
+							'lineHeight',
+							'letterSpacing',
+						] ) }
+					>
+						<PanelInner>
+							<BackgroundColor
+								onChange={ handleOnChange }
+								value={ option?.backgroundColor }
+							/>
+							<BackgroundImage
+								onChange={ handleOnChange }
+								value={ option?.backgroundImage }
+							/>
+							{ option?.backgroundImage && (
+								<PanelInner>
+									<BackgroundRepeat
+										onChange={ handleOnChange }
+										value={ option?.backgroundRepeat }
+									/>
+									<BackgroundPosition
+										onChange={ handleOnChange }
+										value={ option?.backgroundPosition }
+									/>
+									<BackgroundSize
+										onChange={ handleOnChange }
+										value={ option?.backgroundSize }
+									/>
+								</PanelInner>
+							) }
+						</PanelInner>
 					</PluginSettingsPanel>
 				</PanelGroup>
 			) }
