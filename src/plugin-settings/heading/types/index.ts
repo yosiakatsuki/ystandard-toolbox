@@ -113,7 +113,13 @@ export interface HeadingPseudoElementsStyle {
 	maxHeight?: ResponsiveValues;
 	// advanced.
 	background?: string;
-	display?: string;
+	display?: ResponsiveValues;
+	textShadow?: string;
+	boxShadow?: string;
+	fontFamily?: string;
+	//system.
+	verticalAlign?: string;
+	// 保留.
 	flexGrow?: string;
 	flexShrink?: string;
 	position?: string;
@@ -122,7 +128,4 @@ export interface HeadingPseudoElementsStyle {
 	bottom?: string;
 	left?: string;
 	zIndex?: string;
-	fontFamily?: string;
-	//system.
-	verticalAlign?: string;
 }

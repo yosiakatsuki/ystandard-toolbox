@@ -39,6 +39,29 @@ import {
 	BackgroundRepeat,
 	BackgroundSize,
 } from '@aktk/plugin-settings/heading/app/options/background';
+import {
+	Border,
+	BorderRadius,
+} from '@aktk/plugin-settings/heading/app/options/border';
+import {
+	Margin,
+	Padding,
+} from '@aktk/plugin-settings/heading/app/options/spacing';
+import {
+	Height,
+	MaxHeight,
+	MaxWidth,
+	MinHeight,
+	MinWidth,
+	Width,
+} from '@aktk/plugin-settings/heading/app/options/size';
+import {
+	Background,
+	BoxShadow,
+	FontFamily,
+	ResponsiveDisplay,
+	TextShadow,
+} from '@aktk/plugin-settings/heading/app/options/advanced';
 
 /**
  * BeforePanel
@@ -76,6 +99,42 @@ export function BeforePanel() {
 	);
 }
 
+/**
+ * AfterPanel
+ */
+export function AfterPanel() {
+	// @ts-ignore
+	const { headingOption, setHeadingOption, setIsEdit } =
+		useContext( HeadingContext );
+	/**
+	 * 設定反映
+	 * @param newValue
+	 * @param newValue.key
+	 */
+	const handleOnChange = ( newValue: { [ name: string ]: unknown } ) => {
+		// @ts-ignore
+		setHeadingOption( {
+			...headingOption,
+			after: {
+				...headingOption?.after,
+				...newValue,
+			},
+		} );
+		setIsEdit( true );
+	};
+
+	const option = headingOption?.after;
+
+	return (
+		<PseudoElements
+			panelName={ __( '::after設定', 'ystandard-toolbox' ) }
+			option={ option }
+			onChange={ handleOnChange }
+			type={ 'after' }
+		/>
+	);
+}
+
 interface PseudoElementsProps {
 	panelName: string;
 	option: HeadingPseudoElementsStyle | undefined;
@@ -95,8 +154,6 @@ function PseudoElements( props: PseudoElementsProps ) {
 			panelOptions: HeadingPseudoElementsStyle | undefined,
 			names: string[]
 		) => {
-			return true;
-			// @ts-ignore
 			return names.some(
 				( name ) => panelOptions?.hasOwnProperty( name )
 			);
@@ -111,7 +168,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 	return (
 		<PluginSettingsPanel
 			title={ panelName }
-			initialOpen={ true }
+			initialOpen={ isInitialOpen( option || {}, [ 'content' ] ) }
 			isNested={ true }
 		>
 			<EnablePseudoElements
@@ -227,6 +284,113 @@ function PseudoElements( props: PseudoElementsProps ) {
 									/>
 								</PanelInner>
 							) }
+						</PanelInner>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '枠線設定', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen( option || {}, [
+							'border',
+							'borderRadius',
+						] ) }
+					>
+						<PanelInner>
+							<Border
+								onChange={ handleOnChange }
+								value={ option?.border }
+							/>
+							<BorderRadius
+								onChange={ handleOnChange }
+								value={ option?.borderRadius }
+							/>
+						</PanelInner>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '余白設定', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen( option, [
+							'padding',
+							'margin',
+						] ) }
+					>
+						<PanelInner>
+							<Padding
+								value={ option?.padding }
+								onChange={ handleOnChange }
+							/>
+							<Margin
+								value={ option?.margin }
+								onChange={ handleOnChange }
+							/>
+						</PanelInner>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen( option, [
+							'width',
+							'maxWidth',
+							'minWidth',
+							'height',
+							'maxHeight',
+							'minHeight',
+						] ) }
+					>
+						<PanelInner>
+							<Width
+								value={ option?.width }
+								onChange={ handleOnChange }
+							/>
+							<MaxWidth
+								value={ option?.maxWidth }
+								onChange={ handleOnChange }
+							/>
+							<MinWidth
+								value={ option?.minWidth }
+								onChange={ handleOnChange }
+							/>
+							<Height
+								value={ option?.height }
+								onChange={ handleOnChange }
+							/>
+							<MaxHeight
+								value={ option?.maxHeight }
+								onChange={ handleOnChange }
+							/>
+							<MinHeight
+								value={ option?.minHeight }
+								onChange={ handleOnChange }
+							/>
+						</PanelInner>
+					</PluginSettingsPanel>
+					<PluginSettingsPanel
+						title={ __( '上級者向け', 'ystandard-toolbox' ) }
+						initialOpen={ isInitialOpen( option, [
+							'display',
+							'fontFamily',
+							'background',
+							'textShadow',
+							'boxShadow',
+						] ) }
+					>
+						<PanelInner>
+							<ResponsiveDisplay
+								value={ option?.display }
+								onChange={ handleOnChange }
+							/>
+							<FontFamily
+								value={ option?.fontFamily }
+								onChange={ handleOnChange }
+							/>
+							<Background
+								value={ option?.background }
+								onChange={ handleOnChange }
+							/>
+							<TextShadow
+								value={ option?.textShadow }
+								onChange={ handleOnChange }
+							/>
+							<BoxShadow
+								value={ option?.boxShadow }
+								onChange={ handleOnChange }
+							/>
 						</PanelInner>
 					</PluginSettingsPanel>
 				</PanelGroup>
