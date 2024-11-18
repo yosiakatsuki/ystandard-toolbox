@@ -36,6 +36,6 @@ defined( 'ABSPATH' ) || die();
 define( 'YSTDTB_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'YSTDTB_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'YSTDTB_NAME', plugin_basename( __FILE__ ) );
-define( 'YSTDTB_VERSION', '1.30.0' );
+define( 'YSTDTB_VERSION', '1.30.1' );
 
 require_once __DIR__ . '/inc/load.php';
