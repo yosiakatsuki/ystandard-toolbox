@@ -225,7 +225,7 @@ class Utility {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link\">{$link}</div>" );
+		return "<div class=\"ystdtb-menu__manual-link\">{$link}</div>";
 	}
 
 	/**
@@ -243,7 +243,7 @@ class Utility {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link-inline\">{$link}</div>" );
+		return "<div class=\"ystdtb-menu__manual-link-inline\">{$link}</div>";
 	}
 
 	/**
