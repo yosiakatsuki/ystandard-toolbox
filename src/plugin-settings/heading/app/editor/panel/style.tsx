@@ -66,6 +66,7 @@ import {
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 import type { HeadingStyle } from '@aktk/plugin-settings/heading/types';
+import BlockStyle from '@aktk/plugin-settings/heading/app/options/blockStyle';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -102,6 +103,7 @@ export function StylePanel() {
 	return (
 		<PanelGroup>
 			<Preset />
+			<BlockStyle />
 			<PluginSettingsPanel
 				title={ __( '文字設定', 'ystandard-toolbox' ) }
 				initialOpen={ isInitialOpen( option, [

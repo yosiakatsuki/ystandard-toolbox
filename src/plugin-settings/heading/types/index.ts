@@ -20,7 +20,8 @@ export interface HeadingOption {
 	slug: string;
 	label: string;
 	enable: boolean;
-	enableParagraph?: boolean;
+	useHeadingStyle?: boolean;
+	useParagraphStyle?: boolean;
 	style: HeadingStyle;
 	before?: HeadingPseudoElementsStyle;
 	after?: HeadingPseudoElementsStyle;

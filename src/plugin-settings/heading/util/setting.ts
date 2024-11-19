@@ -20,7 +20,8 @@ export function getNewOption( slug: string, label: string ): HeadingOption {
 		slug,
 		label,
 		enable: true,
-		enableParagraph: false,
+		useHeadingStyle: true,
+		useParagraphStyle: false,
 		style: {} as HeadingStyle,
 	};
 }

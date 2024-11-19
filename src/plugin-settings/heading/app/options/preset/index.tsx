@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 /**
  * WordPress
  */
@@ -130,7 +130,7 @@ function PresetList( props: PresetListProps ) {
 			>
 				{ presetList &&
 					presetList.map( ( preset ) => {
-						const selector = classnames(
+						const selector = clsx(
 							`ystdtb-setting-heading__preset-preview-${ preset.slug }`
 						);
 						return (
