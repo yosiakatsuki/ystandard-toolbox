@@ -60,6 +60,7 @@ class Heading {
 
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ], 11 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ], 11 );
+		add_action( 'init', [ $this, 'register_block_styles' ], 11 );
 
 	}
 
@@ -102,6 +103,70 @@ class Heading {
 	 */
 	public function enqueue_editor_assets() {
 		$this->enqueue_block_assets();
+	}
+
+	/**
+	 * ブロックスタイルとして有効化されているスタイルの追加
+	 *
+	 * @return void
+	 */
+	public function register_block_styles() {
+		$heading = self::get_heading_design_options();
+
+		if ( empty( $heading ) || ! is_array( $heading ) ) {
+			return;
+		}
+
+		$heading_items   = [];
+		$paragraph_items = [];
+
+		foreach ( $heading as $key => $value ) {
+
+			$slug  = $key;
+			$label = isset( $value['label'] ) ? $value['label'] : $slug;
+
+			// 見出しスタイルの判断.
+			if ( isset( $value['useHeadingStyle'] ) && true === (bool) $value['useHeadingStyle'] ) {
+				$heading_items[] = [
+					'name'  => Heading_Helper::get_block_style_selector_name( $slug ),
+					'label' => $label,
+				];
+			}
+			// 段落スタイルの判断.
+			if ( isset( $value['useParagraphStyle'] ) && true === (bool) $value['useParagraphStyle'] ) {
+				$paragraph_items[] = [
+					'name'  => Heading_Helper::get_block_style_selector_name( $slug ),
+					'label' => $label,
+				];
+			}
+		}
+
+		// 見出しスタイル追加.（'ystdb/heading'はいろいろ都合が悪い）
+		$this->register_block_style( $heading_items, [ 'core/heading' ] );
+		// 段落スタイル追加.
+		$this->register_block_style( $paragraph_items, [ 'core/paragraph' ] );
+	}
+
+	/**
+	 * ブロックスタイル追加
+	 *
+	 * @param array $blocks スタイル追加するブロックの情報
+	 * @param array $types 対象となるブロックのタイプ
+	 *
+	 * @return void
+	 */
+	private function register_block_style( $blocks, $types ) {
+		foreach ( $types as $type ) {
+			foreach ( $blocks as $block ) {
+				register_block_style(
+					$type,
+					[
+						'name'  => $block['name'],
+						'label' => $block['label'],
+					]
+				);
+			}
+		}
 	}
 
 	/**
@@ -313,7 +378,11 @@ class Heading {
 	 * @return array
 	 */
 	public static function get_heading_design_options() {
-		$option = get_option( self::OPTION_MAIN, [] );
+		$option = apply_filters(
+			'ystdtb_get_heading_design_options',
+			get_option( self::OPTION_MAIN, [] )
+		);
+
 		Debug::debug_json_dump_file(
 			$option,
 			__DIR__ . '/debug-heading-option.json'
@@ -328,7 +397,10 @@ class Heading {
 	 * @return array
 	 */
 	public static function get_heading_level_options() {
-		$option = get_option( self::OPTION_LEVEL, [] );
+		$option = apply_filters(
+			'ystdtb_get_heading_level_options',
+			get_option( self::OPTION_LEVEL, [] )
+		);
 
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
 	}

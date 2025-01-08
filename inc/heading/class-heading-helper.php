@@ -166,6 +166,17 @@ class Heading_Helper {
 	}
 
 	/**
+	 * ブロックスタイル用セレクター名取得.
+	 *
+	 * @param string $slug Slug.
+	 *
+	 * @return string
+	 */
+	public static function get_block_style_selector_name( $slug ) {
+		return "ystdtb-{$slug}";
+	}
+
+	/**
 	 * ブロックスタイル用セレクター取得.
 	 *
 	 * @param string $level Level.
@@ -175,8 +186,9 @@ class Heading_Helper {
 	public static function get_block_style_selector( $level ) {
 		$body             = '.' . Config::BODY_CLASS;
 		$heading_selector = '.' . Heading::BODY_CLASS_HEADING;
+		$selector_name = self::get_block_style_selector_name( $level );
 
-		return "{$body}{$heading_selector} .is-style-ystdtb-{$level}";
+		return "{$body}{$heading_selector} .is-style-{$selector_name}";
 	}
 
 	/**

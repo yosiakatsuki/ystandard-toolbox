@@ -84,7 +84,7 @@ class Heading_Compatible {
 	 * Heading constructor.
 	 */
 	public function __construct() {
-		add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'add_heading_styles' ] );
+		add_action( 'ystdtb_enqueue_css', [ $this, 'add_heading_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'add_heading_editor_styles' ], 11 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_option' ] );
 		add_filter( 'body_class', [ $this, 'body_class_heading' ], 20 );
