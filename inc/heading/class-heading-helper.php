@@ -24,15 +24,16 @@ class Heading_Helper {
 	/**
 	 * 見出しCSS作成.
 	 *
-	 * @param array $heading    見出しスタイル.
+	 * @param array $heading 見出しスタイル.
 	 * @param array $level_list レベル別 スタイル情報.
+	 * @param bool $is_editor エディター用CSSかどうか.
 	 *
 	 * @return string
 	 */
-	public static function get_heading_css( $heading, $level_list ) {
+	public static function get_heading_css( $heading, $level_list, $is_editor = false ) {
 		$result = '';
 
-		$selector_all = self::get_selector_all();
+		$selector_all = self::get_selector_all( $is_editor );
 		foreach ( $heading as $name => $item ) {
 			$slug   = Types::get_array_value( $item, 'slug', '' );
 			$label  = Types::get_array_value( $item, 'label', '' );
@@ -69,13 +70,16 @@ class Heading_Helper {
 				$label = $slug;
 			}
 
-			$block_selector = self::get_block_style_selector( $slug );
+			// セレクター（CSSクラス）の作成.
+			$block_selector = self::get_block_style_selector( $slug, $is_editor );
 			$level_selector = self::get_level_style_selector( $selector_all, $level_list, $slug );
 
 			$css_selector = $block_selector;
+			// レベル別のセレクター作成.
 			if ( ! empty( $level_selector ) ) {
 				$css_selector .= ',' . implode( ',', $level_selector );
 			}
+			// カスタムスタイル.
 			if ( ! empty( $custom_style ) ) {
 				$styles = $custom_style;
 			} else {
@@ -83,8 +87,9 @@ class Heading_Helper {
 				// desktop,tablet,mobileの形に整形。CSSとして使える形に変換.
 				$styles = Styles::parse_styles( $styles );
 			}
-
+			// CSS作成.
 			$style_css = self::create_css( $styles, $css_selector );
+
 			// before.
 			$before_selector = self::add_pseudo_elements( $block_selector, $level_selector, 'before' );
 			if ( ! empty( $custom_before ) ) {
@@ -93,6 +98,7 @@ class Heading_Helper {
 				$before = Styles::parse_styles_pseudo_elements( $before, 'before' );
 			}
 			$before_css = self::create_css( $before, $before_selector );
+
 			// after.
 			$after_selector = self::add_pseudo_elements( $block_selector, $level_selector, 'after' );
 			if ( ! empty( $custom_after ) ) {
@@ -100,9 +106,9 @@ class Heading_Helper {
 			} else {
 				$after = Styles::parse_styles_pseudo_elements( $after, 'after' );
 			}
-
 			$after_css = self::create_css( $after, $after_selector );
-			// 結合.
+
+			// 各スタイルを結合.
 			$result .= $style_css . $before_css . $after_css;
 		}
 
@@ -112,7 +118,7 @@ class Heading_Helper {
 	/**
 	 * CSS作成.
 	 *
-	 * @param array  $styles   Styles.
+	 * @param array $styles Styles.
 	 * @param string $selector CSS Selector.
 	 *
 	 * @return string
@@ -145,12 +151,12 @@ class Heading_Helper {
 	 * 疑似要素追加.
 	 *
 	 * @param string $block_selector Block Selector.
-	 * @param array  $level_selector Level Selector.
-	 * @param string $type           Before / After.
+	 * @param array $level_selector Level Selector.
+	 * @param string $type Before / After.
 	 *
 	 * @return string
 	 */
-	public static function add_pseudo_elements( $block_selector, $level_selector, $type = 'before' ) {
+	public static function add_pseudo_elements( $block_selector, $level_selector, $type ) {
 		$result          = '';
 		$pseudo_elements = "::{$type}";
 		// 結合.
@@ -163,6 +169,42 @@ class Heading_Helper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Bodyクラス取得.
+	 *
+	 * @param bool $is_editor エディター用か.
+	 *
+	 * @return string
+	 */
+	public static function get_body_class( $is_editor = false ) {
+		$class_name = '.' . Config::BODY_CLASS;
+
+		// 編集画面の時.
+		if ( $is_editor ) {
+			$class_name = '';
+		}
+
+		return $class_name;
+	}
+
+	/**
+	 * 見出し反映用クラス取得.
+	 *
+	 * @param bool $is_editor エディター用か.
+	 *
+	 * @return string
+	 */
+	public static function get_heading_selector( $is_editor = false ) {
+		$class_name = '.' . Heading::BODY_CLASS_HEADING;
+
+		// 編集画面の時.
+		if ( $is_editor ) {
+			$class_name = ':where(.editor-styles-wrapper)';
+		}
+
+		return $class_name;
 	}
 
 	/**
@@ -180,13 +222,15 @@ class Heading_Helper {
 	 * ブロックスタイル用セレクター取得.
 	 *
 	 * @param string $level Level.
+	 * @param bool $is_editor Is Editor.
 	 *
 	 * @return string
 	 */
-	public static function get_block_style_selector( $level ) {
-		$body             = '.' . Config::BODY_CLASS;
-		$heading_selector = '.' . Heading::BODY_CLASS_HEADING;
-		$selector_name = self::get_block_style_selector_name( $level );
+	public static function get_block_style_selector( $level, $is_editor = false ) {
+		// 各セレクター取得.
+		$body             = self::get_body_class( $is_editor );
+		$heading_selector = self::get_heading_selector( $is_editor );
+		$selector_name    = self::get_block_style_selector_name( $level );
 
 		return "{$body}{$heading_selector} .is-style-{$selector_name}";
 	}
@@ -194,9 +238,9 @@ class Heading_Helper {
 	/**
 	 * レベル別のセレクター取得.
 	 *
-	 * @param array  $level_selector レベル別セレクター.
-	 * @param array  $level_list     レベルリスト.
-	 * @param string $slug           設定名.
+	 * @param array $level_selector レベル別セレクター.
+	 * @param array $level_list レベルリスト.
+	 * @param string $slug 設定名.
 	 *
 	 * @return array
 	 */
@@ -217,48 +261,108 @@ class Heading_Helper {
 	/**
 	 * レベル別のセレクター取得
 	 *
+	 * @param bool $is_editor エディター用か.
+	 *
 	 * @return array
 	 */
-	public static function get_selector_all() {
-		$body   = '.' . Config::BODY_CLASS;
+	public static function get_selector_all( $is_editor = false ) {
+		$body   = self::get_body_class( $is_editor );
 		$result = [];
 
+		// *************************************************************
 		// レベル別.
+		// *************************************************************
 		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
+		$content = $is_editor ? '.editor-styles-wrapper' : $content;
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
-			$selector         = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\".is-clear-style\"])";
-			$result[ $level ] = [ "{$body} {$content} {$selector}" ];
+			$selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\".is-clear-style\"])";
+			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
+			$css_selector     = apply_filters(
+				'ystdtb_heading_css_selector_content',
+				[ "{$body} {$content} {$selector}" ],
+				$is_editor
+			);
+			$result[ $level ] = $css_selector;
 		}
 
+		// *************************************************************
 		// サイドバー クラシックウィジェット.
-		$area     = apply_filters( 'ystdtb_heading_selector_sidebar', '.sidebar' );
+		// *************************************************************
+		$area     = apply_filters( 'ystdtb_heading_selector_classic_widget', '.sidebar' );
+		$area     = $is_editor ? 'body.widgets-php :where(.wp-block-widget-area__panel-body-content)' : $area;
 		$target   = [];
 		$target[] = "{$body} {$area} .widget-title";
 		$target[] = "{$body} {$area} .widgettitle";
+		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
+		$css_selector = apply_filters(
+			'ystdtb_heading_css_selector_classic_widget',
+			$target,
+			$is_editor
+		);
 		// 結合.
-		$result['sidebar'] = $target;
+		$result['sidebar'] = $css_selector;
 
+		// *************************************************************
 		// フッター クラシックウィジェット.
-		$area     = apply_filters( 'ystdtb_heading_selector_footer', '.site-footer' );
-		$target   = [];
-		$target[] = "{$body} {$area} .widget-title";
-		$target[] = "{$body} {$area} .widgettitle";
+		// *************************************************************
+		$area = apply_filters( 'ystdtb_heading_selector_footer_classic_widget', '.site-footer' );
+		// エディター用のセレクター.
+		$editor_selector = implode(
+			',',
+			[
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"]',
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"]',
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"]',
+			]
+		);
+		$area            = $is_editor ? $editor_selector : $area;
+		$target          = [];
+		$target[]        = "{$body} {$area} .widget-title";
+		$target[]        = "{$body} {$area} .widgettitle";
+		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
+		$css_selector = apply_filters(
+			'ystdtb_heading_css_selector_footer_classic_widget',
+			$target,
+			$is_editor
+		);
 		// 結合.
-		$result['footer'] = $target;
+		$result['footer'] = $css_selector;
 
+		// *************************************************************
 		// 投稿タイトル.
+		// *************************************************************
 		$title = apply_filters( 'ystdtb_heading_selector_post_title', '.entry-title' );
+		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
+		$area  = $is_editor ? 'body.ystdtb-editor-type-post' : '.single';
+		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
+		$css_selector = apply_filters(
+			'ystdtb_heading_css_selector_post_title',
+			[ "{$body}{$area} {$title}" ],
+			$is_editor
+		);
 		// 結合.
-		$result['post-title'] = [ "{$body}.single {$title}" ];
+		$result['post-title'] = $css_selector;
 
+		// *************************************************************
 		// 固定ページタイトル.
+		// *************************************************************
 		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.entry-title' );
+		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
+		$area  = $is_editor ? 'body.ystdtb-editor-type-page' : '.page';
+		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
+		$css_selector = apply_filters(
+			'ystdtb_heading_css_selector_page_title',
+			[ "{$body}{$area} {$title}" ],
+			$is_editor
+		);
 		// 結合.
-		$result['page-title'] = [ "{$body}.page {$title}" ];
+		$result['page-title'] = $css_selector;
 
+		// *************************************************************
 		// アーカイブページタイトル.
+		// *************************************************************
 		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.archive__header .archive__page-title' );
-		// 結合.
+		// 結合。アーカイブに関してはエディター側の制御は不要なはず….
 		$result['archive-title'] = [ "{$body} {$title}" ];
 
 		return $result;

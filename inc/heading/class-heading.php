@@ -56,6 +56,7 @@ class Heading {
 			return;
 		}
 		add_filter( 'body_class', [ $this, 'body_class' ], 20 );
+		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ], 20 );
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ], 11 );
@@ -68,26 +69,20 @@ class Heading {
 	/**
 	 * CSS作成.
 	 *
-	 * @return string
-	 */
-	public function get_css() {
-		$heading = self::get_heading_design_options();
-		$level   = self::get_heading_level_options();
-		$css     = Heading_Helper::get_heading_css( $heading, $level );
-
-		return $css;
-	}
-
-	/**
-	 * CSS追加.
+	 * @param bool $is_editor エディター用か.
 	 *
 	 * @return void
 	 */
-	public function enqueue_block_assets() {
-		$css = $this->get_css();
+	public function enqueue_block_css( $is_editor = false ) {
+		// 設定取得.
+		$heading = self::get_heading_design_options();
+		$level   = self::get_heading_level_options();
+		// CSS作成.
+		$css = Heading_Helper::get_heading_css( $heading, $level, $is_editor );
 		if ( empty( $css ) ) {
 			return;
 		}
+		// エンキュー.
 		wp_register_style( self::CSS_HANDLE, false, [], wp_date( 'YmdHis' ) );
 		wp_add_inline_style(
 			self::CSS_HANDLE,
@@ -97,12 +92,21 @@ class Heading {
 	}
 
 	/**
+	 * CSS追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_block_assets() {
+		$this->enqueue_block_css();
+	}
+
+	/**
 	 * CSS（Editor）追加.
 	 *
 	 * @return void
 	 */
 	public function enqueue_editor_assets() {
-		$this->enqueue_block_assets();
+		$this->enqueue_block_css( true );
 	}
 
 	/**
@@ -141,7 +145,7 @@ class Heading {
 			}
 		}
 
-		// 見出しスタイル追加.（'ystdb/heading'はいろいろ都合が悪い）
+		// 見出しスタイル追加.（ 'ystdb/heading' はいろいろ都合が悪い）
 		$this->register_block_style( $heading_items, [ 'core/heading' ] );
 		// 段落スタイル追加.
 		$this->register_block_style( $paragraph_items, [ 'core/paragraph' ] );
@@ -203,7 +207,7 @@ class Heading {
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 * @return \WP_Error|WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function add_heading_style( $request ) {
 		$data   = $request->get_json_params();
@@ -230,7 +234,7 @@ class Heading {
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 * @return \WP_Error|WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_heading_style( $request ) {
 		$data   = $request->get_json_params();
@@ -273,7 +277,7 @@ class Heading {
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 *
-	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 * @return \WP_Error|WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_heading_level( $request ) {
 		$data       = $request->get_json_params();
@@ -283,7 +287,7 @@ class Heading {
 			foreach ( $data as $key => $value ) {
 				$new_option[ $key ] = trim( $value );
 			}
-			// $result = Option::update_option( self::OPTION_NAME, $new_option );
+//			 $result = Option::update_option( self::OPTION_NAME, $new_option );
 		}
 
 		return Api::create_response(
@@ -350,6 +354,26 @@ class Heading {
 	}
 
 	/**
+	 * Admin Body Class.
+	 *
+	 * @return void
+	 */
+	public function admin_body_class( $classes ) {
+		global $pagenow;
+
+		if ( in_array( $pagenow, [ 'post.php', 'post-new.php' ], true ) ) {
+			$query = get_post_type_object( get_post_type() );
+			if ( $query ) {
+				$type = $query->hierarchical ? 'page' : 'post';
+				// クラス追加.
+				$classes = "{$classes} ystdtb-editor-type-{$type}";
+			}
+		}
+
+		return $classes;
+	}
+
+	/**
 	 * 見出しデザイン設定の更新.
 	 *
 	 * @param array $value 設定.
@@ -381,11 +405,6 @@ class Heading {
 		$option = apply_filters(
 			'ystdtb_get_heading_design_options',
 			get_option( self::OPTION_MAIN, [] )
-		);
-
-		Debug::debug_json_dump_file(
-			$option,
-			__DIR__ . '/debug-heading-option.json'
 		);
 
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
