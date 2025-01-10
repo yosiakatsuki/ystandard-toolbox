@@ -8,8 +8,8 @@ import { __ } from '@wordpress/i18n';
  */
 import CustomSelectControl, {
 	CustomSelectControlOption,
-} from '@aktk/components/custom-select-control';
-import { AddButton } from '@aktk/block-components//components/buttons';
+} from '@aktk/block-components/wp-controls/custom-select-control';
+import { AddButton } from '@aktk/block-components/components/buttons';
 /**
  * Component.
  */
@@ -97,7 +97,7 @@ export default function LevelSelect() {
 							}
 							onChange={ handleOnChange }
 							label={ __( 'スタイル選択', 'ystandard-toolbox' ) }
-							className={ 'whitespace-nowrap' }
+							className={ 'min-w-[170px] whitespace-nowrap' }
 						/>
 						<AddButton
 							className={ 'ml-3' }

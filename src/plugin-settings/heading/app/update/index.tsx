@@ -82,7 +82,7 @@ export default function UpdateHeadingOption() {
 
 	return (
 		<>
-			<div className="sticky bottom-0 left-0 flex justify-between bg-white/90 pb-5 pt-2">
+			<div className="sticky bottom-0 left-0 flex justify-between bg-white/80 pb-5 pt-2">
 				<PrimaryButton
 					icon={ 'cloud-upload' }
 					onClick={ handleOnClickSave }

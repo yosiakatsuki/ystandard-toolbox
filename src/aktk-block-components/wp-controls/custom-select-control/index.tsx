@@ -17,6 +17,7 @@ export interface CustomSelectControlProps {
 	label?: string;
 	emptyLabel?: string;
 	useEmptyValue?: boolean;
+	className?: string;
 }
 
 export default function CustomSelectControl( props: CustomSelectControlProps ) {
@@ -27,6 +28,7 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 		label,
 		emptyLabel,
 		useEmptyValue = true,
+		className = '',
 	} = props;
 	// 選択肢に空の選択肢を追加.
 	const selectOptions = useMemo( () => {
@@ -68,6 +70,7 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 				value={ currentItem }
 				onChange={ handleOnChange }
 				__nextUnconstrainedWidth={ true }
+				className={ className }
 			/>
 		</div>
 	);

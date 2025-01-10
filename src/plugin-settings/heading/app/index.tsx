@@ -1,9 +1,11 @@
+import clsx from 'clsx';
 import type { Context } from 'react';
 /**
  * WordPress
  */
 import { useState, useEffect, createContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { brush, cog, Icon as WPIcon } from '@wordpress/icons';
 /**
  * Aktk dependencies
  */
@@ -19,6 +21,7 @@ import type {
 	HeadingStyle,
 } from '../types';
 import { EditContainer } from './editor';
+import { PrimaryButton } from '@aktk/block-components/components/buttons';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -26,10 +29,14 @@ interface HeadingAppProps {
 
 type AppMode = 'select' | 'add' | 'update';
 
+type AppTabType = 'style' | 'level';
+
 interface HeadingContextProps {
 	initApp: () => void;
 	appMode: AppMode;
 	setAppMode: ( value: AppMode ) => void;
+	appTab: AppTabType;
+	setAppTab: ( value: AppTabType ) => void;
 	selectedStyle: string;
 	setSelectedStyle: ( value: string ) => void;
 	levelList: {};
@@ -57,6 +64,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	const { setIsLoading } = props;
 	// ステート関連.
 	const [ appMode, setAppMode ] = useState< AppMode >( 'select' );
+	const [ appTab, setAppTab ] = useState< AppTabType >( 'style' );
 	const [ isEdit, setIsEdit ] = useState( false );
 	// データ関連.
 	const [ selectedStyle, setSelectedStyle ] = useState< string >( '' );
@@ -173,6 +181,8 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					initApp,
 					appMode,
 					setAppMode,
+					appTab,
+					setAppTab,
 					selectedStyle,
 					setSelectedStyle,
 					levelList,
@@ -192,10 +202,45 @@ export default function HeadingApp( props: HeadingAppProps ) {
 				} }
 			>
 				<div className={ 'pb-5' }>
+					<ModeSelect onChange={ setAppTab } isEdit={ isEdit } />
 					<LevelSelect />
 					<EditContainer />
 				</div>
 			</HeadingContext.Provider>
+		</div>
+	);
+}
+
+type ModeSelectProps = {
+	onChange: ( value: AppTabType ) => void;
+	isEdit: boolean;
+};
+
+function ModeSelect( props ) {
+	const { onChange, isEdit } = props;
+
+	const handleOnClick = ( value: AppTabType ) => {
+		onChange( value );
+	};
+
+	const buttonClass = clsx( 'justify-center gap-2 font-bold' );
+
+	return (
+		<div className="grid grid-cols-2 gap-4">
+			<PrimaryButton
+				onClick={ () => handleOnClick( 'style' ) }
+				className={ buttonClass }
+			>
+				<WPIcon icon={ brush } />
+				{ __( 'スタイル編集', 'ystandard-toolbox' ) }
+			</PrimaryButton>
+			<PrimaryButton
+				onClick={ () => handleOnClick( 'level' ) }
+				className={ buttonClass }
+			>
+				<WPIcon icon={ cog } />
+				{ __( '割り当て設定', 'ystandard-toolbox' ) }
+			</PrimaryButton>
 		</div>
 	);
 }
