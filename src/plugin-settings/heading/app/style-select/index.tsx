@@ -9,7 +9,10 @@ import { __ } from '@wordpress/i18n';
 import CustomSelectControl, {
 	CustomSelectControlOption,
 } from '@aktk/block-components/wp-controls/custom-select-control';
-import { AddButton } from '@aktk/block-components/components/buttons';
+import {
+	AddButton,
+	DestructiveButton,
+} from '@aktk/block-components/components/buttons';
 /**
  * Component.
  */
@@ -54,6 +57,7 @@ export default function LevelSelect() {
 		initLevel();
 	}, [ headingStyles ] );
 
+	// スタイル変更処理メイン.
 	const changeSelectedStyle = (
 		value: string,
 		checkEdit: boolean = true
@@ -66,10 +70,7 @@ export default function LevelSelect() {
 		setTempSelectedStyle( '' );
 	};
 
-	/**
-	 * スタイル選択時の処理.
-	 * @param value
-	 */
+	// スタイル変更 プルダウン変更.
 	const handleOnChange = ( value: string ) => {
 		if ( isEdit ) {
 			setTempSelectedStyle( value );
@@ -79,15 +80,19 @@ export default function LevelSelect() {
 		changeSelectedStyle( value );
 	};
 
+	// スタイル追加ボタンクリック.
 	const handleOnAddButtonClick = () => {
 		setAppMode( 'add' );
 	};
 
+	// キャンセルボタンクリック.
+	const handleOnCancel = () => {
+		handleOnChange( '' );
+	};
+
 	return (
 		<>
-			<div
-				className={ 'border border-solid border-aktk-border-gray p-5' }
-			>
+			<div className={ '' }>
 				<div className={ 'flex justify-between' }>
 					<div className={ 'flex items-end justify-between gap-3' }>
 						<CustomSelectControl
@@ -96,17 +101,30 @@ export default function LevelSelect() {
 								levelSelect as CustomSelectControlOption[]
 							}
 							onChange={ handleOnChange }
-							label={ __( 'スタイル選択', 'ystandard-toolbox' ) }
 							className={ 'min-w-[170px] whitespace-nowrap' }
 						/>
-						<AddButton
-							className={ 'ml-3' }
-							onClick={ handleOnAddButtonClick }
-							isSmall={ true }
-							disabled={ !! selectedStyle }
-						>
-							<>{ __( 'スタイル追加', 'ystandard-toolbox' ) }</>
-						</AddButton>
+						{ ! selectedStyle ? (
+							<AddButton
+								className={ 'mb-1' }
+								onClick={ handleOnAddButtonClick }
+								isSmall={ true }
+							>
+								<>
+									{ __(
+										'スタイル追加',
+										'ystandard-toolbox'
+									) }
+								</>
+							</AddButton>
+						) : (
+							<DestructiveButton
+								className={ 'mb-1' }
+								onClick={ handleOnCancel }
+								isSmall={ true }
+							>
+								{ __( 'キャンセル', 'ystandard-toolbox' ) }
+							</DestructiveButton>
+						) }
 					</div>
 				</div>
 			</div>

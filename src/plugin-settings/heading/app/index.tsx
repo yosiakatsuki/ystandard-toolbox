@@ -13,7 +13,6 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin dependencies
  */
-import LevelSelect from './style-select';
 import { getHeadingStyles, getLevelList } from './api';
 import type {
 	HeadingOption,
@@ -21,7 +20,10 @@ import type {
 	HeadingStyle,
 } from '../types';
 import { EditContainer } from './editor';
-import { PrimaryButton } from '@aktk/block-components/components/buttons';
+import {
+	PrimaryButton,
+	SecondaryButton,
+} from '@aktk/block-components/components/buttons';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -202,9 +204,20 @@ export default function HeadingApp( props: HeadingAppProps ) {
 				} }
 			>
 				<div className={ 'pb-5' }>
-					<ModeSelect onChange={ setAppTab } isEdit={ isEdit } />
-					<LevelSelect />
-					<EditContainer />
+					<ModeSelect
+						selectedType={ appTab }
+						onChange={ setAppTab }
+						isEdit={ isEdit }
+					/>
+					<div className="mt-4">
+						{ appTab === 'level' ? (
+							<div>レベル設定</div>
+						) : (
+							<>
+								<EditContainer />
+							</>
+						) }
+					</div>
 				</div>
 			</HeadingContext.Provider>
 		</div>
@@ -212,12 +225,13 @@ export default function HeadingApp( props: HeadingAppProps ) {
 }
 
 type ModeSelectProps = {
+	selectedType: AppTabType;
 	onChange: ( value: AppTabType ) => void;
 	isEdit: boolean;
 };
 
-function ModeSelect( props ) {
-	const { onChange, isEdit } = props;
+function ModeSelect( props: ModeSelectProps ) {
+	const { onChange, isEdit, selectedType } = props;
 
 	const handleOnClick = ( value: AppTabType ) => {
 		onChange( value );
@@ -225,22 +239,51 @@ function ModeSelect( props ) {
 
 	const buttonClass = clsx( 'justify-center gap-2 font-bold' );
 
+	type TabButtonProps = {
+		selected: boolean;
+		onClick: () => void;
+		children: React.ReactNode;
+	};
+
+	const TabButton = ( tabButtonProps: TabButtonProps ) => {
+		const { selected, onClick, children } = tabButtonProps;
+		return (
+			<>
+				{ selected ? (
+					<PrimaryButton
+						onClick={ () => onClick() }
+						className={ buttonClass }
+					>
+						{ children }
+					</PrimaryButton>
+				) : (
+					<SecondaryButton
+						onClick={ () => onClick() }
+						className={ buttonClass }
+					>
+						{ children }
+					</SecondaryButton>
+				) }
+			</>
+		);
+	};
+
 	return (
 		<div className="grid grid-cols-2 gap-4">
-			<PrimaryButton
+			<TabButton
+				selected={ 'style' === selectedType }
 				onClick={ () => handleOnClick( 'style' ) }
-				className={ buttonClass }
 			>
 				<WPIcon icon={ brush } />
 				{ __( 'スタイル編集', 'ystandard-toolbox' ) }
-			</PrimaryButton>
-			<PrimaryButton
+			</TabButton>
+			<TabButton
+				selected={ 'level' === selectedType }
 				onClick={ () => handleOnClick( 'level' ) }
-				className={ buttonClass }
 			>
 				<WPIcon icon={ cog } />
 				{ __( '割り当て設定', 'ystandard-toolbox' ) }
-			</PrimaryButton>
+			</TabButton>
 		</div>
 	);
 }

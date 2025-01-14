@@ -8,13 +8,14 @@ import { __ } from '@wordpress/i18n';
  * Component.
  */
 import { HeadingContext } from '../index';
-import Preview from '@aktk/plugin-settings/heading/app/preview';
 import { StylePanel } from './panel';
 import UpdateHeadingOption from '../update';
+import Preview from '@aktk/plugin-settings/heading/app/preview';
 import {
 	AfterPanel,
 	BeforePanel,
 } from '@aktk/plugin-settings/heading/app/editor/panel/pseudo-elements';
+import LevelSelect from '@aktk/plugin-settings/heading/app/style-select';
 
 export function EditContainer() {
 	// @ts-ignore
@@ -42,9 +43,10 @@ export function EditContainer() {
 				<h2 className={ 'mb-3 mt-0 font-bold text-aktk-text-gray' }>
 					{ __( 'スタイル編集', 'ystandard-toolbox' ) }
 				</h2>
+				<LevelSelect />
 				<>
 					{ selectedStyle ? (
-						<div className={ '' }>
+						<div className={ 'mt-4' }>
 							{ isLoading && (
 								<div
 									className={
