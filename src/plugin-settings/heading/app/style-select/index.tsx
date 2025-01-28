@@ -4,7 +4,7 @@
 import { useContext, useState, useEffect, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 /**
- * Plugin
+ * Aktk dependencies
  */
 import CustomSelectControl, {
 	CustomSelectControlOption,

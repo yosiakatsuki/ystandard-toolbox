@@ -8,7 +8,10 @@ import {
 /**
  * Plugin Settings.
  */
-import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
+import type {
+	HeadingOption,
+	LevelList,
+} from '@aktk/plugin-settings/heading/types';
 import {
 	apiGet,
 	getEndpoint,
@@ -21,6 +24,12 @@ import {
 export async function getLevelList() {
 	return await apiGet( {
 		endpoint: getEndpoint( 'get_heading_level' ),
+	} );
+}
+
+export async function getLevelKeys() {
+	return await apiGet( {
+		endpoint: getEndpoint( 'get_heading_level_keys' ),
 	} );
 }
 
@@ -38,12 +47,39 @@ export interface UpdateHeadingOptionProps {
 }
 
 export async function updateHeadingStyles( props: UpdateHeadingOptionProps ) {
-	console.log( { update: props.headingOption } );
 	await apiPost( {
 		endpoint: getEndpoint( 'update_heading_style' ),
 		data: {
 			type: props.type,
 			style: props.headingOption,
+		},
+		callback: ( response ) => {
+			if ( SUCCESS === response.status ) {
+				props?.onSuccess?.( response );
+			}
+			if ( ERROR === response.status ) {
+				props?.onError?.( response );
+			}
+		},
+		// @ts-ignore
+		messageSuccess: notifySuccess,
+		// @ts-ignore
+		messageError: notifyError,
+	} );
+}
+
+interface UpdateLevelListProps {
+	levelList: LevelList;
+	onSuccess?: ( response?: ApiPostCallbackProps ) => void;
+	onError?: ( response?: ApiPostCallbackProps ) => void;
+}
+
+export async function updateHeadingLevel( props: UpdateLevelListProps ) {
+	await apiPost( {
+		endpoint: getEndpoint( 'update_heading_level' ),
+		data: {
+			type: 'update',
+			level: props.levelList,
 		},
 		callback: ( response ) => {
 			if ( SUCCESS === response.status ) {

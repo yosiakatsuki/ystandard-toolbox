@@ -17,7 +17,7 @@ import {
 } from '@aktk/plugin-settings/heading/app/editor/panel/pseudo-elements';
 import LevelSelect from '@aktk/plugin-settings/heading/app/style-select';
 
-export function EditContainer() {
+export function StyleEditContainer() {
 	// @ts-ignore
 	const { selectedStyle } = useContext( HeadingContext );
 	const [ showEditor, setShowEditor ] = useState( !! selectedStyle );

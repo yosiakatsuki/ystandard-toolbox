@@ -130,3 +130,7 @@ export interface HeadingPseudoElementsStyle {
 	left?: string;
 	zIndex?: string;
 }
+
+export interface LevelList {
+	[ key: string ]: string;
+}

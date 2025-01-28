@@ -76,7 +76,9 @@ export async function apiPost( props: ApiPostProps ) {
 				console.log( response );
 				/* eslint-enable */
 				if ( 'function' === typeof messageError ) {
-					messageError();
+					// @ts-ignore
+					const message = response?.message || undefined;
+					messageError( message );
 				}
 				if ( 'function' === typeof callback ) {
 					callback( {
@@ -122,6 +124,7 @@ export async function apiGet( props: ApiGetProps ) {
 			if ( 'function' === typeof callback ) {
 				callback( {
 					status: SUCCESS,
+					// @ts-ignore
 					data: result,
 				} );
 			}

@@ -200,6 +200,7 @@ class Heading {
 		Api::register_rest_route( 'update_heading_level', [ $this, 'update_heading_level' ] );
 		Api::register_rest_route( 'get_heading_styles', [ $this, 'get_heading_styles' ], 'GET' );
 		Api::register_rest_route( 'get_heading_level', [ $this, 'get_heading_level' ], 'GET' );
+		Api::register_rest_route( 'get_heading_level_keys', [ $this, 'get_heading_level_keys' ], 'GET' );
 	}
 
 	/**
@@ -238,7 +239,6 @@ class Heading {
 	 */
 	public function update_heading_style( $request ) {
 		$data   = $request->get_json_params();
-		$result = false;
 		// データチェック
 		if ( ! is_array( $data ) || ! isset( $data['style'] ) || ! isset( $data['type'] ) ) {
 			return Api::create_response(
@@ -250,7 +250,7 @@ class Heading {
 		// 更新に必要な情報を抽出.
 		$type = $data['type'];
 		$slug = $data['style']['slug'];
-		// 既存設定を取得.
+		// 登録済み設定を取得.
 		$styles = $this->get_heading_styles();
 		// 更新データ作成.
 		if ( 'delete' === $type ) {
@@ -273,7 +273,7 @@ class Heading {
 	}
 
 	/**
-	 * 見出しレベル関連の設定追加
+	 * 見出しレベル割り当て設定の保存.
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 *
@@ -281,14 +281,17 @@ class Heading {
 	 */
 	public function update_heading_level( $request ) {
 		$data       = $request->get_json_params();
-		$result     = false;
 		$new_option = [];
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => $value ) {
-				$new_option[ $key ] = trim( $value );
-			}
-//			 $result = Option::update_option( self::OPTION_NAME, $new_option );
+		// データチェック
+		if ( ! is_array( $data ) || ! isset( $data['level'] ) || ! is_array( $data['level'] ) ) {
+			return Api::create_response(
+				false,
+				__( '更新データが不正です。', 'ystandard-toolbox' ),
+				wp_json_encode( $data )
+			);
 		}
+		// レベル設定の更新.
+		$result = Option::update_option( self::OPTION_LEVEL, $data['level'] );
 
 		return Api::create_response(
 			$result,
@@ -303,9 +306,7 @@ class Heading {
 	 * @return array
 	 */
 	public function get_heading_styles() {
-		$result = self::get_heading_design_options();
-
-		return $result;
+		return self::get_heading_design_options();
 	}
 
 	/**
@@ -314,9 +315,16 @@ class Heading {
 	 * @return array
 	 */
 	public function get_heading_level() {
-		$result = self::get_heading_level_options();
+		return self::get_heading_level_options();
+	}
 
-		return $result;
+	/**
+	 * レベル定義を取得.
+	 *
+	 * @return array
+	 */
+	public function get_heading_level_keys() {
+		return self::get_heading_level_schema();
 	}
 
 	/**
@@ -422,6 +430,40 @@ class Heading {
 		);
 
 		return is_array( $option ) ? stripslashes_deep( $option ) : [];
+	}
+
+	/**
+	 * 見出しカスタマイズ機能 レベル設定の定義取得
+	 *
+	 * @return array
+	 */
+	public static function get_heading_level_schema() {
+		$keys = [
+			'h1'            => _x( 'h1', 'plugin-settings', 'ystandard-toolbox' ),
+			'h2'            => _x( 'h2', 'plugin-settings', 'ystandard-toolbox' ),
+			'h3'            => _x( 'h3', 'plugin-settings', 'ystandard-toolbox' ),
+			'h4'            => _x( 'h4', 'plugin-settings', 'ystandard-toolbox' ),
+			'h5'            => _x( 'h5', 'plugin-settings', 'ystandard-toolbox' ),
+			'h6'            => _x( 'h6', 'plugin-settings', 'ystandard-toolbox' ),
+			'post-title'    => _x( '投稿タイトル', 'plugin-settings', 'ystandard-toolbox' ),
+			'page-title'    => _x( '固定ページタイトル', 'plugin-settings', 'ystandard-toolbox' ),
+			'archive-title' => _x( '一覧ページタイトル', 'plugin-settings', 'ystandard-toolbox' ),
+		];
+
+		// サイドバー・フッターは追加設定.
+		if ( apply_filters( 'ystdtb_heading_level_additional', false ) ) {
+			$keys = array_merge(
+				$keys,
+				[
+					'sidebar' => _x( 'サイドバーウィジェット', 'plugin-settings', 'ystandard-toolbox' ),
+					'footer'  => _x( 'フッターウィジェット', 'plugin-settings', 'ystandard-toolbox' ),
+				]
+			);
+		}
+
+		$option = apply_filters( 'get_heading_level_schema', $keys );
+
+		return is_array( $option ) ? $option : $keys;
 	}
 
 }

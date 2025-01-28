@@ -3,6 +3,7 @@
  */
 import { useMemo } from '@wordpress/element';
 import { CustomSelectControl as WPCustomSelectControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 export interface CustomSelectControlOption {
 	key: string;
@@ -37,7 +38,9 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 				...[
 					{
 						key: '',
-						name: emptyLabel || '--選択してください--',
+						name:
+							emptyLabel ||
+							__( '-- 選択してください --', 'ystandard-toolbox' ),
 					},
 				],
 				...options,

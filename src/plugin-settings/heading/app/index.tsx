@@ -13,13 +13,13 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin dependencies
  */
-import { getHeadingStyles, getLevelList } from './api';
+import { getHeadingStyles, getLevelList, getLevelKeys } from './api';
 import type {
 	HeadingOption,
 	HeadingPseudoElementsStyle,
 	HeadingStyle,
 } from '../types';
-import { EditContainer } from './editor';
+import { StyleEditContainer, LevelEditContainer } from './editor';
 import {
 	PrimaryButton,
 	SecondaryButton,
@@ -43,6 +43,8 @@ interface HeadingContextProps {
 	setSelectedStyle: ( value: string ) => void;
 	levelList: {};
 	initLevelList: () => void;
+	levelKeys: {};
+	initLevelKeys: () => void;
 	headingStyles: { [ key: string ]: HeadingOption };
 	setHeadingStyles: ( value: { [ key: string ]: HeadingOption } ) => void;
 	initHeadingStyles: () => void;
@@ -71,6 +73,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	// データ関連.
 	const [ selectedStyle, setSelectedStyle ] = useState< string >( '' );
 	const [ levelList, setLevelList ] = useState( {} );
+	const [ levelKeys, setLevelKeys ] = useState( [] );
 	const [ headingStyles, setHeadingStyles ] = useState( {} );
 	const [ headingOption, setHeadingOption ] = useState< HeadingOption >();
 	const [ previewText, setPreviewText ] = useState(
@@ -84,6 +87,11 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		const level = await getLevelList();
 		// @ts-expect-error
 		setLevelList( level );
+	};
+	const initLevelKeys = async () => {
+		const keys = await getLevelKeys();
+		// @ts-expect-error
+		setLevelKeys( keys );
 	};
 	/**
 	 * 登録されている見出しスタイルの取得とセット
@@ -100,6 +108,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	const initApp = async () => {
 		setIsLoading( true );
 		await initLevelList();
+		await initLevelKeys();
 		await initHeadingStyles();
 		setIsLoading( false );
 	};
@@ -189,6 +198,8 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					setSelectedStyle,
 					levelList,
 					initLevelList,
+					levelKeys,
+					initLevelKeys,
 					headingStyles,
 					setHeadingStyles,
 					initHeadingStyles,
@@ -211,11 +222,9 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					/>
 					<div className="mt-4">
 						{ appTab === 'level' ? (
-							<div>レベル設定</div>
+							<LevelEditContainer />
 						) : (
-							<>
-								<EditContainer />
-							</>
+							<StyleEditContainer />
 						) }
 					</div>
 				</div>
