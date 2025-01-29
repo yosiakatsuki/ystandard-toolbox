@@ -106,7 +106,7 @@ export function LevelEditContainer() {
 			</table>
 			<div className="mt-4">
 				<PrimaryButton icon={ 'cloud-upload' } onClick={ handleOnSave }>
-					{ __( '設定を保存', 'ystandard-toolbox' ) }
+					{ __( '割り当て設定を更新', 'ystandard-toolbox' ) }
 				</PrimaryButton>
 			</div>
 		</div>

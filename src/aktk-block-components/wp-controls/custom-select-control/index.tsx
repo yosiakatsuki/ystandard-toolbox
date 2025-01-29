@@ -19,6 +19,7 @@ export interface CustomSelectControlProps {
 	emptyLabel?: string;
 	useEmptyValue?: boolean;
 	className?: string;
+	disabled?: boolean;
 }
 
 export default function CustomSelectControl( props: CustomSelectControlProps ) {
@@ -30,6 +31,7 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 		emptyLabel,
 		useEmptyValue = true,
 		className = '',
+		disabled = false,
 	} = props;
 	// 選択肢に空の選択肢を追加.
 	const selectOptions = useMemo( () => {
@@ -64,7 +66,7 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 	return (
 		<div
 			className={
-				'[&_.components-custom-select-control__label:empty]:hidden'
+				'[&_*:disabled]:bg-gray-100 [&_*:disabled]:text-gray-500 [&_.components-custom-select-control__label:empty]:hidden'
 			}
 		>
 			<WPCustomSelectControl
@@ -74,6 +76,7 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 				onChange={ handleOnChange }
 				__nextUnconstrainedWidth={ true }
 				className={ className }
+				disabled={ disabled }
 			/>
 		</div>
 	);

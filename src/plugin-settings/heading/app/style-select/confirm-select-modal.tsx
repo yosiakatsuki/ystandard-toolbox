@@ -24,10 +24,8 @@ export default function ConfirmSelectModal( props: ConfirmSelectProps ) {
 				isOpen={ isOpen }
 				onOk={ onSuccess }
 				onCancel={ onCancel }
-				okText={ __(
-					'編集するスタイルを変更する',
-					'ystandard-toolbox'
-				) }
+				okText={ __( '別のスタイルを編集する', 'ystandard-toolbox' ) }
+				cancelText={ __( 'スタイル編集に戻る', 'ystandard-toolbox' ) }
 			>
 				<p>
 					{ __(

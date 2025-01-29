@@ -3,13 +3,19 @@ import type { Context } from 'react';
 /**
  * WordPress
  */
-import { useState, useEffect, createContext } from '@wordpress/element';
+import {
+	useState,
+	useEffect,
+	createContext,
+	useContext,
+} from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { brush, cog, Icon as WPIcon } from '@wordpress/icons';
 /**
  * Aktk dependencies
  */
 import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { ConfirmModal } from '@aktk/block-components/components/modal';
 /**
  * Plugin dependencies
  */
@@ -218,7 +224,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					<ModeSelect
 						selectedType={ appTab }
 						onChange={ setAppTab }
-						isEdit={ isEdit }
 					/>
 					<div className="mt-4">
 						{ appTab === 'level' ? (
@@ -236,13 +241,28 @@ export default function HeadingApp( props: HeadingAppProps ) {
 type ModeSelectProps = {
 	selectedType: AppTabType;
 	onChange: ( value: AppTabType ) => void;
-	isEdit: boolean;
 };
 
 function ModeSelect( props: ModeSelectProps ) {
-	const { onChange, isEdit, selectedType } = props;
+	const { onChange, selectedType } = props;
+	const {
+		setSelectedStyle,
+		setAppMode,
+		isEdit,
+		setIsEdit,
+		// @ts-ignore
+	} = useContext( HeadingContext );
+
+	// 確認画面.
+	const [ isConfirmModalOpen, setIsConfirmModalOpen ] = useState( false );
+	const [ tempSelectedType, setTempSelectedType ] = useState( selectedType );
 
 	const handleOnClick = ( value: AppTabType ) => {
+		if ( isEdit ) {
+			setTempSelectedType( value );
+			setIsConfirmModalOpen( true );
+			return;
+		}
 		onChange( value );
 	};
 
@@ -256,6 +276,7 @@ function ModeSelect( props: ModeSelectProps ) {
 
 	const TabButton = ( tabButtonProps: TabButtonProps ) => {
 		const { selected, onClick, children } = tabButtonProps;
+
 		return (
 			<>
 				{ selected ? (
@@ -277,22 +298,59 @@ function ModeSelect( props: ModeSelectProps ) {
 		);
 	};
 
+	// モード切り替え確認画面でOKしたとき.
+	const handleConfirmModalOk = () => {
+		onChange( tempSelectedType );
+		setIsConfirmModalOpen( false );
+		setSelectedStyle( '' );
+		setAppMode( 'select' );
+		setIsEdit( false );
+	};
+
 	return (
-		<div className="grid grid-cols-2 gap-4">
-			<TabButton
-				selected={ 'style' === selectedType }
-				onClick={ () => handleOnClick( 'style' ) }
+		<>
+			<div className="grid grid-cols-2 gap-4">
+				<TabButton
+					selected={ 'style' === selectedType }
+					onClick={ () => handleOnClick( 'style' ) }
+				>
+					<WPIcon icon={ brush } />
+					{ __( 'スタイル編集', 'ystandard-toolbox' ) }
+				</TabButton>
+				<TabButton
+					selected={ 'level' === selectedType }
+					onClick={ () => handleOnClick( 'level' ) }
+				>
+					<WPIcon icon={ cog } />
+					{ __( '割り当て設定', 'ystandard-toolbox' ) }
+				</TabButton>
+			</div>
+			<ConfirmModal
+				title={ __( '編集モード切り替え確認', 'ystandard-toolbox' ) }
+				isOpen={ isConfirmModalOpen }
+				okText={ __( '編集モードを切り替える', 'ystandard-toolbox' ) }
+				onCancel={ () => {
+					setIsConfirmModalOpen( false );
+					setTempSelectedType( selectedType );
+				} }
+				onOk={ handleConfirmModalOk }
 			>
-				<WPIcon icon={ brush } />
-				{ __( 'スタイル編集', 'ystandard-toolbox' ) }
-			</TabButton>
-			<TabButton
-				selected={ 'level' === selectedType }
-				onClick={ () => handleOnClick( 'level' ) }
-			>
-				<WPIcon icon={ cog } />
-				{ __( '割り当て設定', 'ystandard-toolbox' ) }
-			</TabButton>
-		</div>
+				<p className="mb-0">
+					{ __( '編集中のデータがあります。', 'ystandard-toolbox' ) }
+				</p>
+				<p className="mt-0">
+					{ __(
+						'編集モードを切り替えてもよろしいですか。',
+						'ystandard-toolbox'
+					) }
+				</p>
+				<p className={ 'mt-1 text-xs text-gray-400' }>
+					{ __(
+						'※編集中のデータは破棄されます。',
+						'ystandard-toolbox'
+					) }
+				</p>
+			</ConfirmModal>
+		</>
 	);
 }

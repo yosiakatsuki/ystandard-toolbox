@@ -102,6 +102,7 @@ export default function LevelSelect() {
 							}
 							onChange={ handleOnChange }
 							className={ 'min-w-[170px] whitespace-nowrap' }
+							disabled={ isEdit }
 						/>
 						{ ! selectedStyle ? (
 							<AddButton
@@ -122,7 +123,10 @@ export default function LevelSelect() {
 								onClick={ handleOnCancel }
 								isSmall={ true }
 							>
-								{ __( 'キャンセル', 'ystandard-toolbox' ) }
+								{ __(
+									'別のスタイルを編集',
+									'ystandard-toolbox'
+								) }
 							</DestructiveButton>
 						) }
 					</div>
