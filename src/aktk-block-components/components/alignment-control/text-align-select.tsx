@@ -11,20 +11,10 @@ import { IconSelectControl } from '@aktk/block-components/components/icon-contro
 import { TEXT_ALIGNMENT_OPTIONS } from './const';
 
 function getOptions() {
-	const options = TEXT_ALIGNMENT_OPTIONS.map( ( { title, align } ) => ( {
+	return TEXT_ALIGNMENT_OPTIONS.map( ( { title, align } ) => ( {
 		name: title,
 		key: align,
 	} ) );
-
-	// 未選択時のオプション.
-	const noSelectOption = [
-		{
-			name: __( '----', 'ystandard-toolbox' ),
-			key: '',
-		},
-	];
-
-	return [ ...noSelectOption, ...options ];
 }
 
 interface TextAlignSelectProps {
