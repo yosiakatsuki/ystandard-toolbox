@@ -51,6 +51,7 @@ class Heading_Helper {
 			$custom_style  = [];
 			$custom_before = [];
 			$custom_after  = [];
+			// カスタムCSSが設定されていて、配列の場合、style,before,afterに分割.
 			if ( ! empty( $custom_css ) && is_array( $custom_css ) ) {
 				if ( isset( $custom_css['style'] ) ) {
 					$custom_style = $custom_css['style'];
@@ -62,10 +63,11 @@ class Heading_Helper {
 					$custom_after = $custom_css['after'];
 				}
 			}
-
+			// スラッグ不明 or 無効の場合はスキップ.
 			if ( empty( $slug ) || false === $enable ) {
 				continue;
 			}
+			// ラベルが未設定の場合はスラッグを使用.
 			if ( empty( $label ) ) {
 				$label = $slug;
 			}

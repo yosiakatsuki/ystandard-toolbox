@@ -24,7 +24,7 @@ export default function LetterSpacing( props: LetterSpacingControlProps ) {
 
 	const handleOnChange = ( newValue: string ) => {
 		onChange( {
-			letterSpacing: newValue,
+			letterSpacing: newValue || undefined,
 		} );
 	};
 

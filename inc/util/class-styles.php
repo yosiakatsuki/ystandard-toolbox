@@ -18,6 +18,13 @@ defined( 'ABSPATH' ) || die();
  */
 class Styles {
 
+	const AXIS_POSITION = [
+		'top',
+		'right',
+		'bottom',
+		'left',
+	];
+
 	/**
 	 * CSS作成.
 	 *
@@ -34,6 +41,7 @@ class Styles {
 		}
 		$css = [];
 
+		// CSSプロパティの展開.
 		foreach ( $styles as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$parse_css = self::get_styles_css( $value );
@@ -41,7 +49,10 @@ class Styles {
 					$css = array_merge( $css, $parse_css );
 				}
 			} else {
-				$css[] = "{$key}:{$value}";
+				// 空の場合はスキップ.
+				if ( $value ) {
+					$css[] = "{$key}:{$value}";
+				}
 			}
 		}
 
@@ -70,13 +81,16 @@ class Styles {
 		foreach ( $styles as $key => $value ) {
 			$property = Text::camel_to_kebab( $key );
 
+			// レスポンシブではない設定をDesktopの設定として扱う.
 			if ( ! self::is_responsive_style( $value ) ) {
 				$value = [ 'desktop' => $value ];
 			}
 
+			// borderの処理.
 			if ( self::is_border( $property ) ) {
 				$value = self::parse_border_style( $value );
 			}
+			// 余白の処理
 			if ( self::is_spacing( $property ) ) {
 				$value = self::parse_spacing_style( $property, $value );
 			}
@@ -199,16 +213,24 @@ class Styles {
 		if ( ! self::is_responsive_style( $border ) ) {
 			$border = [ 'desktop' => $border ];
 		}
+
+		// 上下左右の設定分割.
 		$parse = function ( $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $border_value ) {
-				$border_width = isset( $border_value['width'] ) ? $border_value['width'] : '';
-				$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
-				$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
-				$value        = "{$border_width} {$border_style} {$border_color}";
-				// width=0の場合は0のみセット.
-				if ( '' !== $border_width && 0 === (int) $border_width ) {
-					$value = 0;
+
+				if ( in_array( $position, self::AXIS_POSITION, true ) ) {
+					// 上下左右に分かれての指定の場合.
+					$border_width = isset( $border_value['width'] ) ? $border_value['width'] : '';
+					$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
+					$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
+					$value        = "{$border_width} {$border_style} {$border_color}";
+					// width=0の場合は0のみセット.
+					if ( '' !== $border_width && 0 === (int) $border_width ) {
+						$value = 0;
+					}
+				} else {
+					$value = $border_value;
 				}
 
 				// セット.
@@ -217,6 +239,7 @@ class Styles {
 
 			return $parse_result;
 		};
+
 
 		$result['desktop'] = $parse( $border['desktop'] );
 

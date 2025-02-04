@@ -21,7 +21,7 @@ export default function FontStyle( props: FontStyleControlProps ) {
 
 	const handleOnChange = ( newValue: string | undefined ) => {
 		onChange( {
-			fontStyle: newValue,
+			fontStyle: newValue || undefined,
 		} );
 	};
 

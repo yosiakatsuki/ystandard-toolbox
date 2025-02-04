@@ -24,9 +24,10 @@ interface BorderProps {
 export default function Border( props: BorderProps ) {
 	const { value, onChange } = props;
 
+	// 枠線設定更新.
 	const handleOnChange = ( newValue: SplitBorders | FlatBorder ) => {
 		onChange( {
-			border: newValue,
+			border: getNewBorderOption( newValue ),
 		} );
 	};
 
@@ -46,4 +47,34 @@ export default function Border( props: BorderProps ) {
 			/>
 		</BaseControl>
 	);
+}
+
+function getNewBorderOption(
+	border: SplitBorders | FlatBorder
+): SplitBorders | FlatBorder {
+	if ( ! border ) {
+		return border;
+	}
+	// @ts-ignore
+	if ( border?.color || border?.style || border?.width ) {
+		return sanitizeBorder( border as FlatBorder );
+	}
+
+	// 上下左右の分割バージョン.
+	Object.keys( border as SplitBorders ).forEach( ( key ) => {
+		// @ts-ignore
+		border[ key ] = sanitizeBorder( border[ key ] );
+	} );
+
+	return border;
+}
+
+function sanitizeBorder( border: FlatBorder ): FlatBorder {
+	if ( border && border?.color && border?.width ) {
+		if ( ! border?.style ) {
+			// 色と幅のみの指定の場合はsolidを自動で設定する.
+			border.style = 'solid';
+		}
+	}
+	return border;
 }
