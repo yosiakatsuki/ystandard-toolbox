@@ -49,3 +49,24 @@ export function updateStyleOption(
 		messageError: notifyError,
 	} );
 }
+
+export function getStyleSelectOptions( options: {
+	[ key: string ]: HeadingOption;
+} ) {
+	const styles = Object.keys( options ).map( ( key: string ) => {
+		const style = options[ key ];
+		return {
+			key: style?.slug,
+			name: style?.label,
+		};
+	} );
+	return styles.sort( ( a, b ) => {
+		if ( a.name < b.name ) {
+			return -1;
+		}
+		if ( a.name > b.name ) {
+			return 1;
+		}
+		return 0;
+	} );
+}

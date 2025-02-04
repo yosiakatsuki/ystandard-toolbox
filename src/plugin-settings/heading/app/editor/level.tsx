@@ -17,6 +17,7 @@ import { PrimaryButton } from '@aktk/block-components/components/buttons';
  */
 import { HeadingContext } from '../index';
 import { updateHeadingLevel } from '@aktk/plugin-settings/heading/app/api';
+import { getStyleSelectOptions } from '@aktk/plugin-settings/heading/util/setting';
 
 export function LevelEditContainer() {
 	// @ts-ignore
@@ -32,15 +33,7 @@ export function LevelEditContainer() {
 
 	// セレクトボックスの選択肢.
 	const selectOptions = useMemo( () => {
-		// @ts-ignore
-		return Object.keys( headingStyles ).map( ( key: string ) => {
-			// @ts-ignore
-			const style = headingStyles[ key ];
-			return {
-				key: style?.slug,
-				name: style?.label,
-			};
-		} );
+		return getStyleSelectOptions( headingStyles );
 	}, [ headingStyles ] );
 
 	// レベルリストの変更処理.

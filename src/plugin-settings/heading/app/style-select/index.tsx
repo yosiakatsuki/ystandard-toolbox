@@ -17,6 +17,7 @@ import {
  * Component.
  */
 import { HeadingContext } from '../index';
+import { getStyleSelectOptions } from '@aktk/plugin-settings/heading/util/setting';
 import ConfirmSelectModal from './confirm-select-modal';
 import AddStyle from './add-style';
 
@@ -38,15 +39,7 @@ export default function LevelSelect() {
 
 	// セレクトボックスの選択肢.
 	const selectOptions = useMemo( () => {
-		// @ts-ignore
-		return Object.keys( headingStyles ).map( ( key: string ) => {
-			// @ts-ignore
-			const style = headingStyles[ key ];
-			return {
-				key: style?.slug,
-				name: style?.label,
-			};
-		} );
+		return getStyleSelectOptions( headingStyles );
 	}, [ headingStyles ] );
 
 	const initLevel = () => {

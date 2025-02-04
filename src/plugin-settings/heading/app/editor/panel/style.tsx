@@ -66,7 +66,9 @@ import {
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 import type { HeadingStyle } from '@aktk/plugin-settings/heading/types';
-import BlockStyle from '@aktk/plugin-settings/heading/app/options/blockStyle';
+
+import BlockStyle from '@aktk/plugin-settings/heading/app/options/block-style';
+import StyleLabel from '@aktk/plugin-settings/heading/app/options/style-label';
 
 export function StylePanel() {
 	// @ts-ignore
@@ -102,6 +104,7 @@ export function StylePanel() {
 
 	return (
 		<PanelGroup>
+			<StyleLabel />
 			<Preset />
 			<BlockStyle />
 			<PluginSettingsPanel

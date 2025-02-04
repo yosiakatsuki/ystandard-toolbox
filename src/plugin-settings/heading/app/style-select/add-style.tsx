@@ -5,15 +5,19 @@ import { useContext, useState, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
- * Plugin.
+ * Aktk Components.
  */
 import { Modal } from '@aktk/block-components/components/modal';
-import InputControl from '@aktk/components/input-controls';
-import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
+import InputControl from '@aktk/block-components/wp-controls/input-control';
 import {
 	notifyError,
 	notifySuccess,
 } from '@aktk/block-components/components/toast-message';
+
+/**
+ * Plugin.
+ */
+import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 
 /**
  * Components.
@@ -134,15 +138,15 @@ export default function AddStyle( props: AddStyleProps ) {
 	};
 
 	// IDの入力チェック.
-	const handleIDOnChange = ( value: string ) => {
-		checkId( value );
-		setId( value );
+	const handleIDOnChange = ( value?: string ) => {
+		checkId( value || '' );
+		setId( value || '' );
 	};
 
 	// ラベルの入力チェック.
-	const handleLabelOnChange = ( value: string ) => {
-		checkLabel( value );
-		setLabel( value );
+	const handleLabelOnChange = ( value?: string ) => {
+		checkLabel( value || '' );
+		setLabel( value || '' );
 	};
 
 	// 追加したスタイルをスタイル一覧オブジェクトへ追加.
