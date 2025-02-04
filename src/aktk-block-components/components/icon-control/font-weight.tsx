@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import {
 	type FontWeightStyleControlProps,
 	FontWeightControl,
@@ -7,13 +9,15 @@ import {
  */
 import { DesktopControl, TabletControl, MobileControl } from './wrapper';
 
+const WRAPPER_CLASS = clsx( '!items-end [&>svg]:mb-1.5' );
+
 function IconFontWeightControlBase( props: FontWeightStyleControlProps ) {
 	return <FontWeightControl { ...props } />;
 }
 
 function DesktopFontWeightControl( props: FontWeightStyleControlProps ) {
 	return (
-		<DesktopControl>
+		<DesktopControl className={ WRAPPER_CLASS }>
 			<IconFontWeightControlBase { ...props } />
 		</DesktopControl>
 	);
@@ -21,7 +25,7 @@ function DesktopFontWeightControl( props: FontWeightStyleControlProps ) {
 
 function TabletFontWeightControl( props: FontWeightStyleControlProps ) {
 	return (
-		<TabletControl>
+		<TabletControl className={ WRAPPER_CLASS }>
 			<IconFontWeightControlBase { ...props } />
 		</TabletControl>
 	);
@@ -29,7 +33,7 @@ function TabletFontWeightControl( props: FontWeightStyleControlProps ) {
 
 function MobileFontWeightControl( props: FontWeightStyleControlProps ) {
 	return (
-		<MobileControl>
+		<MobileControl className={ WRAPPER_CLASS }>
 			<IconFontWeightControlBase { ...props } />
 		</MobileControl>
 	);

@@ -25,6 +25,7 @@ export function FontAppearanceControl( props: FontAppearanceControlProps ) {
 export interface FontWeightStyleControlProps {
 	onChange: ( value: string ) => void;
 	value: string;
+	className?: string;
 }
 
 /**
