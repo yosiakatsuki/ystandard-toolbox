@@ -11,7 +11,11 @@ export default function Preview() {
 	// @ts-ignore
 	const { previewText, headingOption } = useContext( HeadingContext );
 	// eslint-disable-next-line no-console
-	console.log( { PreviewStyles: headingOption } );
+	console.log( {
+		PreviewStyle: headingOption?.style,
+		PreviewBefore: headingOption?.before,
+		PreviewAfter: headingOption?.after,
+	} );
 	return (
 		<div>
 			<PreviewStyle

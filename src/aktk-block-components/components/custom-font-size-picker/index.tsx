@@ -24,6 +24,7 @@ import type { CustomFontSize, CustomFontSizePickerProps } from './types';
 import './style-editor.scss';
 
 export { CustomFontSize };
+export * from './util';
 
 /**
  * カスタムフォントサイズピッカー

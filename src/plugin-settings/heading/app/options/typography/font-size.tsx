@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
  * Akatsuki
  */
 import CustomFontSizePicker, {
+	sanitizeFontSize,
 	type CustomFontSize,
 } from '@aktk/block-components/components/custom-font-size-picker';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
@@ -17,7 +18,7 @@ import BaseControl from '@aktk/plugin-settings/components/base-control';
 
 interface FontSizeControlProps {
 	value: CustomFontSize | undefined;
-	onChange: ( newValue: { fontSize: CustomFontSize } ) => void;
+	onChange: ( newValue: { fontSize: CustomFontSize | undefined } ) => void;
 }
 
 export default function FontSize( props: FontSizeControlProps ) {
@@ -26,10 +27,12 @@ export default function FontSize( props: FontSizeControlProps ) {
 	const handleOnChange = ( newValue: CustomFontSize ) => {
 		// @ts-ignore
 		onChange( {
-			fontSize: deleteUndefined( {
-				...value,
-				...newValue,
-			} ),
+			fontSize: sanitizeFontSize(
+				deleteUndefined( {
+					...value,
+					...newValue,
+				} )
+			),
 		} );
 	};
 
