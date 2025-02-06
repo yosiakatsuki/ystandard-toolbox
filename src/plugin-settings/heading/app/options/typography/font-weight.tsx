@@ -11,9 +11,9 @@ import {
 	ResponsiveControlGrid,
 } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
-import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
 import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
+import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Plugin Dependencies
@@ -72,7 +72,7 @@ export function DefaultFontWeightEdit( props: FontWeightEditProps ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
 		onChange( {
-			desktop: newValue,
+			desktop: newValue || undefined,
 			tablet: undefined,
 			mobile: undefined,
 		} );

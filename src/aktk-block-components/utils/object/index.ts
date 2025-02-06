@@ -6,7 +6,8 @@
  */
 export function deleteUndefined( obj: object ) {
 	try {
-		return JSON.parse( JSON.stringify( obj ) );
+		const parsed = JSON.parse( JSON.stringify( obj ) );
+		return isEmpty( parsed ) ? undefined : parsed;
 	} catch ( error ) {
 		// // eslint-disable-next-line no-console
 		// console.error( error );
