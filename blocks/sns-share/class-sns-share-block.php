@@ -49,7 +49,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			],
 			'useTwitter'         => [
 				'type'    => 'boolean',
-				'default' => false,
+				'default' => true,
 			],
 			'useFacebook'        => [
 				'type'    => 'boolean',
@@ -69,7 +69,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			],
 			'useBluesky'         => [
 				'type'    => 'boolean',
-				'default' => true,
+				'default' => false,
 			],
 			'twitterVia'         => [
 				'type'    => 'string',
