@@ -4,6 +4,7 @@ import Autoplay from './autoplay';
 import AutoplayDelay from './autoplay-delay';
 import PauseOnMouse from './pause-on-mouse';
 import DisableOnInteraction from './disable-on-interaction';
+import ReverseDirection from './reverse-direction';
 
 const PanelAutoplay = ( props ) => {
 	return (
@@ -14,6 +15,7 @@ const PanelAutoplay = ( props ) => {
 			<AutoplayDelay { ...props } />
 			<PauseOnMouse { ...props } />
 			<DisableOnInteraction { ...props } />
+			<ReverseDirection { ...props } />
 		</PanelBody>
 	);
 };

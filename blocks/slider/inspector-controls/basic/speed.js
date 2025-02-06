@@ -16,7 +16,7 @@ const Speed = ( { attributes, setAttributes } ) => {
 				onChange={ handleOnChange }
 				initialPosition={ 0.3 }
 				min={ 0.1 }
-				max={ 10 }
+				max={ 100 }
 				step={ 0.1 }
 				allowReset={ true }
 			/>
