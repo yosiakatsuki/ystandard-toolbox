@@ -23,7 +23,7 @@ export const attributes = {
 	},
 	useTwitter: {
 		type: 'bool',
-		default: false,
+		default: true,
 	},
 	useFacebook: {
 		type: 'bool',
