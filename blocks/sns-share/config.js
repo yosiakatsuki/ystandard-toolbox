@@ -43,7 +43,7 @@ export const attributes = {
 	},
 	useBluesky: {
 		type: 'bool',
-		default: true,
+		default: false,
 	},
 	twitterVia: {
 		type: 'string',
