@@ -23,7 +23,7 @@ export const attributes = {
 	},
 	useTwitter: {
 		type: 'bool',
-		default: true,
+		default: false,
 	},
 	useFacebook: {
 		type: 'bool',
@@ -38,6 +38,10 @@ export const attributes = {
 		default: true,
 	},
 	useLINE: {
+		type: 'bool',
+		default: true,
+	},
+	useBluesky: {
 		type: 'bool',
 		default: true,
 	},

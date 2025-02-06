@@ -49,7 +49,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			],
 			'useTwitter'         => [
 				'type'    => 'boolean',
-				'default' => true,
+				'default' => false,
 			],
 			'useFacebook'        => [
 				'type'    => 'boolean',
@@ -64,6 +64,10 @@ class SNS_Share_Block extends Dynamic_Block {
 				'default' => true,
 			],
 			'useLINE'            => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'useBluesky'         => [
 				'type'    => 'boolean',
 				'default' => true,
 			],
@@ -94,8 +98,8 @@ class SNS_Share_Block extends Dynamic_Block {
 	/**
 	 * Render
 	 *
-	 * @param array  $attributes block attributes.
-	 * @param string $content    innerBlocks.
+	 * @param array $attributes block attributes.
+	 * @param string $content innerBlocks.
 	 *
 	 * @return false|string
 	 */
@@ -129,6 +133,7 @@ class SNS_Share_Block extends Dynamic_Block {
 		$attributes['hatenabookmark']       = $attributes['useHatenaBookmark'];
 		$attributes['pocket']               = $attributes['usePocket'];
 		$attributes['line']                 = $attributes['useLINE'];
+		$attributes['bluesky']              = $attributes['useBluesky'];
 		$attributes['twitter_via_user']     = $attributes['twitterVia'];
 		$attributes['twitter_related_user'] = $attributes['twitterRelatedUser'];
 		$attributes['twitter_hash_tags']    = $attributes['twitterHashTags'];
