@@ -76,11 +76,11 @@ class Config {
 	 */
 	const BREAKPOINTS = [
 		'sm'      => 600,
-		'mobile'  => '37.5em',
+		'mobile'  => '37.5rem',
 		'md'      => 768,
-		'tablet'  => '48em',
+		'tablet'  => '48rem',
 		'lg'      => 1024,
-		'desktop' => '64em',
+		'desktop' => '64rem',
 	];
 
 	/**

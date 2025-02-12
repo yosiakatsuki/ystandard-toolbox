@@ -50,7 +50,7 @@ class Styles {
 				}
 			} else {
 				// 空の場合はスキップ.
-				if ( $value ) {
+				if ( '' !== $value ) {
 					$css[] = "{$key}:{$value}";
 				}
 			}
@@ -279,8 +279,10 @@ class Styles {
 		}
 		$parse = function ( $name, $list ) {
 			$parse_result = [];
+
 			foreach ( $list as $position => $value ) {
-				if ( '' !== $value && 0 === (int) $value ) {
+				// 0pxなど0の場合は単位なしの0をセット.
+				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
 					$value = 0;
 				}
 				$parse_result["{$name}-{$position}"] = $value;
