@@ -388,31 +388,29 @@ class Heading_Compatible {
 				$content = empty( $value ) ? '""' : $value;
 				// 結合.
 				$css .= 'content:' . $content . ';';
-			} else {
-				if ( ! empty( $key ) && '' !== $value ) {
-					if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
-						$replace  = $matches[0];
-						$property = str_replace( [ '#{', '}' ], '', $replace );
-						$convert  = '';
-						if ( 1 < count( explode( ',', $property ) ) ) {
-							$convert  = explode( ',', $property )[1];
-							$property = explode( ',', $property )[0];
-						}
-						if ( isset( $styles[ $section ][ $this->get_css_property( $property ) ] ) ) {
-							$style = $styles[ $section ][ $this->get_css_property( $property ) ];
-							if ( 'rgb' === $convert ) {
-								$rgb   = Styles::hex_2_rgb( $style );
-								$style = "{$rgb[0]},{$rgb[1]},{$rgb[2]}";
-							}
-							$value = str_replace(
-								$replace,
-								$style,
-								$value
-							);
-						}
+			} elseif ( ! empty( $key ) && '' !== $value ) {
+				if ( preg_match( '/#\{.+?\}/', $value, $matches ) ) {
+					$replace  = $matches[0];
+					$property = str_replace( [ '#{', '}' ], '', $replace );
+					$convert  = '';
+					if ( 1 < count( explode( ',', $property ) ) ) {
+						$convert  = explode( ',', $property )[1];
+						$property = explode( ',', $property )[0];
 					}
-					$css .= "{$key}:{$value};";
+					if ( isset( $styles[ $section ][ $this->get_css_property( $property ) ] ) ) {
+						$style = $styles[ $section ][ $this->get_css_property( $property ) ];
+						if ( 'rgb' === $convert ) {
+							$rgb   = Styles::hex_2_rgb( $style );
+							$style = "{$rgb[0]},{$rgb[1]},{$rgb[2]}";
+						}
+						$value = str_replace(
+							$replace,
+							$style,
+							$value
+						);
+					}
 				}
+					$css .= "{$key}:{$value};";
 			}
 		}
 
@@ -814,7 +812,6 @@ class Heading_Compatible {
 			'ystdtbBlockEditorHeading',
 			self::get_option()
 		);
-
 	}
 
 	/**
@@ -836,7 +833,6 @@ class Heading_Compatible {
 	public static function delete_option() {
 		delete_option( self::OPTION_NAME );
 	}
-
 }
 
 new Heading_Compatible();
