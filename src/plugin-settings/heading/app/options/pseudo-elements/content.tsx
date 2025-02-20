@@ -2,48 +2,13 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { Button, ToggleControl } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 /**
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
 import { NoticeWarningText } from '@aktk/block-components/components/notice';
-
-interface EnablePseudoElementsContentProps {
-	type: 'before' | 'after';
-	value: string | undefined;
-	onChange: ( newValue: { content?: string } ) => void;
-}
-
-export function EnablePseudoElements(
-	props: EnablePseudoElementsContentProps
-) {
-	const { value, onChange, type } = props;
-
-	const handleOnChange = ( check: boolean ) => {
-		const newValue = check ? '' : undefined;
-		onChange( {
-			content: newValue,
-		} );
-	};
-	return (
-		<BaseControl
-			id={ `${ type }-enable-content` }
-			label={ `::${ type }${ __( 'の有効化', 'ystandard-toolbox' ) }` }
-			isFullWidth={ true }
-		>
-			<ToggleControl
-				label={ `${ type }${ __(
-					'を有効化する',
-					'ystandard-toolbox'
-				) }` }
-				checked={ value !== undefined }
-				onChange={ handleOnChange }
-			/>
-		</BaseControl>
-	);
-}
 
 interface PseudoElementsContentProps {
 	type: 'before' | 'after';

@@ -113,6 +113,7 @@ class Heading_Migration {
 
 			// content.
 			if ( $this->has_pseudo_elements( $type ) ) {
+				$this->new_option[ $type ]['enable']  = ! empty( $content ) ? true : false;
 				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
 			}
 			// 色設定.

@@ -13,6 +13,7 @@ import UnitControl, {
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface LetterSpacingControlProps {
 	value: string | undefined;
@@ -55,6 +56,7 @@ export default function LetterSpacing( props: LetterSpacingControlProps ) {
 				units={ useLetterSpacingCustomUnits() }
 				onChange={ handleOnChange }
 			/>
+			<ClearButton onClick={ () => handleOnChange( '' ) } />
 		</BaseControl>
 	);
 }

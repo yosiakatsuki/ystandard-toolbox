@@ -172,7 +172,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 			isNested={ true }
 		>
 			<EnablePseudoElements
-				value={ option?.content }
+				value={ option?.enable }
 				onChange={ onChange }
 				type={ type }
 			/>

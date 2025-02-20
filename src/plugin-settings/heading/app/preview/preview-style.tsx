@@ -129,6 +129,9 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 	if ( isEmpty( styles ) ) {
 		return {};
 	}
+	if ( ! styles?.enable ) {
+		return {};
+	}
 	if ( styles?.icon ) {
 		delete styles.icon;
 	}
@@ -143,7 +146,7 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 			styles.backgroundImage = `data:image/svg+xml;charset=UTF-8,${ styleContent }`;
 			styles.backgroundSize = 'contain';
 			// Display調整・サイズ調整
-			styles.display = styles?.display || 'inline-flex';
+			styles.display = styles?.display || { desktop: 'inline-flex' };
 			styles.width = styles?.width || { desktop: '1em' };
 			styles.height = styles?.height || { desktop: '1em' };
 			// 位置調整.

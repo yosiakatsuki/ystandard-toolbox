@@ -82,6 +82,7 @@ export interface HeadingStyle {
  * [before][after]属性の設定内容
  */
 export interface HeadingPseudoElementsStyle {
+	enable?: boolean;
 	content?: string;
 	icon?: string;
 	useIconMask?: boolean;

@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import LineHeightControl from '@aktk/block-components/wp-controls/line-height-control';
 
 interface LineHeightControlProps {
@@ -32,6 +33,7 @@ export default function LineHeight( props: LineHeightControlProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
+			<ClearButton onClick={ () => handleOnChange( undefined ) } />
 		</BaseControl>
 	);
 }

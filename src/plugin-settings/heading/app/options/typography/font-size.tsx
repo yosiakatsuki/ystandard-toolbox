@@ -1,7 +1,7 @@
 /**
  * WordPress
  */
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 /**
  * Akatsuki
  */
@@ -15,6 +15,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface FontSizeControlProps {
 	value: CustomFontSize | undefined;
@@ -45,6 +46,9 @@ export default function FontSize( props: FontSizeControlProps ) {
 			<CustomFontSizePicker
 				fontSize={ value }
 				onChange={ handleOnChange }
+			/>
+			<ClearButton
+				onClick={ () => onChange( { fontSize: undefined } ) }
 			/>
 		</BaseControl>
 	);

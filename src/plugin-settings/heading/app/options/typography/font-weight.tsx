@@ -19,11 +19,12 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface FontWeightControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { fontWeight: ResponsiveValues } ) => void;
+	onChange: ( newValue: { fontWeight?: ResponsiveValues } ) => void;
 }
 
 interface FontWeightEditProps {
@@ -63,6 +64,9 @@ export default function FontWeight( props: FontWeightControlProps ) {
 						onChange={ handleOnChange }
 					/>
 				}
+			/>
+			<ClearButton
+				onClick={ () => onChange( { fontWeight: undefined } ) }
 			/>
 		</BaseControl>
 	);

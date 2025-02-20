@@ -22,11 +22,12 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface TextAlignControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { textAlign: ResponsiveValues } ) => void;
+	onChange: ( newValue: { textAlign?: ResponsiveValues } ) => void;
 }
 export default function TextAlign( props: TextAlignControlProps ) {
 	const { value, onChange } = props;
@@ -55,6 +56,11 @@ export default function TextAlign( props: TextAlignControlProps ) {
 						onChange={ handleOnChange }
 					/>
 				}
+			/>
+			<ClearButton
+				onClick={ () => {
+					onChange( { textAlign: undefined } );
+				} }
 			/>
 		</BaseControl>
 	);
