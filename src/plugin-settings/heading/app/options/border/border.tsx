@@ -14,18 +14,21 @@ import type {
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { getFlatValue } from '@aktk/block-components/utils/responsive-value';
 
 interface BorderProps {
 	value?: SplitBorders | FlatBorder;
-	onChange: ( newValue: { border: SplitBorders | FlatBorder } ) => void;
+	onChange: ( newValue: { border?: SplitBorders | FlatBorder } ) => void;
 }
 
 export default function Border( props: BorderProps ) {
 	const { value, onChange } = props;
 
 	// 枠線設定更新.
-	const handleOnChange = ( newValue: SplitBorders | FlatBorder ) => {
+	const handleOnChange = (
+		newValue: SplitBorders | FlatBorder | undefined
+	) => {
 		onChange( {
 			border: getNewBorderOption( newValue ),
 		} );
@@ -45,13 +48,14 @@ export default function Border( props: BorderProps ) {
 				}
 				onChange={ handleOnChange }
 			/>
+			<ClearButton onClick={ () => handleOnChange( undefined ) } />
 		</BaseControl>
 	);
 }
 
 function getNewBorderOption(
-	border: SplitBorders | FlatBorder
-): SplitBorders | FlatBorder {
+	border?: SplitBorders | FlatBorder
+): SplitBorders | FlatBorder | undefined {
 	if ( ! border ) {
 		return border;
 	}

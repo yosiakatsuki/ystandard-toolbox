@@ -17,11 +17,12 @@ import { IconUnitControl } from '@aktk/block-components/components/icon-control'
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface BorderRadiusControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { borderRadius: ResponsiveValues } ) => void;
+	onChange: ( newValue: { borderRadius?: ResponsiveValues } ) => void;
 }
 
 export default function BorderRadius( props: BorderRadiusControlProps ) {
@@ -51,6 +52,9 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 						onChange={ handleOnChange }
 					/>
 				}
+			/>
+			<ClearButton
+				onClick={ () => onChange( { borderRadius: undefined } ) }
 			/>
 		</BaseControl>
 	);
