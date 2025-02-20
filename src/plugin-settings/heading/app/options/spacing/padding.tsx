@@ -13,13 +13,14 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 import { filterSpacingSizes } from './function';
 
 interface PaddingControlProps {
 	value: CustomSpacing | undefined;
-	onChange: ( newValue: { padding: CustomSpacing } ) => void;
+	onChange: ( newValue: { padding?: CustomSpacing } ) => void;
 }
 
 export default function Padding( props: PaddingControlProps ) {
@@ -57,6 +58,7 @@ export default function Padding( props: PaddingControlProps ) {
 					/>
 				}
 			/>
+			<ClearButton onClick={ () => onChange( { padding: undefined } ) } />
 		</BaseControl>
 	);
 }

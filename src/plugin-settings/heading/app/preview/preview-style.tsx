@@ -278,6 +278,10 @@ function isSpacing( property: string ) {
 function parseSpacingProperty( value: object, name: string ) {
 	let result: string[] = [];
 
+	if ( ! isObject( value ) ) {
+		return [];
+	}
+
 	Object.keys( value ).forEach( ( key: string ) => {
 		// @ts-ignore
 		result = [ ...result, `${ name }-${ key }: ${ value[ key ] };` ];

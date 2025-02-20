@@ -13,6 +13,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 /**
  * Block.
@@ -22,7 +23,7 @@ import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 
 interface MarginControlProps {
 	value: CustomSpacing | undefined;
-	onChange: ( newValue: { margin: CustomSpacing } ) => void;
+	onChange: ( newValue: { margin?: CustomSpacing } ) => void;
 }
 
 export default function Margin( props: MarginControlProps ) {
@@ -60,6 +61,7 @@ export default function Margin( props: MarginControlProps ) {
 					/>
 				}
 			/>
+			<ClearButton onClick={ () => onChange( { margin: undefined } ) } />
 		</BaseControl>
 	);
 }
