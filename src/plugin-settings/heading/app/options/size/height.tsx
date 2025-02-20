@@ -14,6 +14,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
 	DefaultSizeEdit,
@@ -22,7 +23,7 @@ import {
 
 interface HeightControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { height: ResponsiveValues } ) => void;
+	onChange: ( newValue: { height?: ResponsiveValues } ) => void;
 }
 
 export default function Height( props: HeightControlProps ) {
@@ -52,6 +53,7 @@ export default function Height( props: HeightControlProps ) {
 					/>
 				}
 			/>
+			<ClearButton onClick={ () => onChange( { height: undefined } ) } />
 		</BaseControl>
 	);
 }

@@ -14,6 +14,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
 	DefaultSizeEdit,
@@ -22,7 +23,7 @@ import {
 
 interface MaxWidthControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { maxWidth: ResponsiveValues } ) => void;
+	onChange: ( newValue: { maxWidth?: ResponsiveValues } ) => void;
 }
 
 export default function MaxWidth( props: MaxWidthControlProps ) {
@@ -51,6 +52,9 @@ export default function MaxWidth( props: MaxWidthControlProps ) {
 						onChange={ handleOnChange }
 					/>
 				}
+			/>
+			<ClearButton
+				onClick={ () => onChange( { maxWidth: undefined } ) }
 			/>
 		</BaseControl>
 	);

@@ -14,12 +14,13 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { DefaultSizeEdit, ResponsiveSizeEdit } from './control';
 
 interface WidthControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { width: ResponsiveValues } ) => void;
+	onChange: ( newValue: { width?: ResponsiveValues } ) => void;
 }
 
 export default function Width( props: WidthControlProps ) {
@@ -49,6 +50,7 @@ export default function Width( props: WidthControlProps ) {
 					/>
 				}
 			/>
+			<ClearButton onClick={ () => onChange( { width: undefined } ) } />
 		</BaseControl>
 	);
 }
