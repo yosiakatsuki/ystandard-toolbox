@@ -14,6 +14,7 @@ import InputControl from '@aktk/block-components/wp-controls/input-control';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 const SELECT_OPTIONS = [
 	{
@@ -76,7 +77,7 @@ export default function BackgroundPosition( props: BackgroundPositionProps ) {
 		isCustom ? value : ''
 	);
 
-	const handleOnSelectChange = ( newValue: string ) => {
+	const handleOnSelectChange = ( newValue: string | undefined ) => {
 		onChange( {
 			backgroundPosition: newValue,
 		} );
@@ -111,6 +112,7 @@ export default function BackgroundPosition( props: BackgroundPositionProps ) {
 					/>
 				</div>
 			) }
+			<ClearButton onClick={ () => handleOnSelectChange( undefined ) } />
 		</BaseControl>
 	);
 }

@@ -13,6 +13,7 @@ import InputControl from '@aktk/block-components/wp-controls/input-control';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 const SELECT_OPTIONS = [
 	{
@@ -47,7 +48,7 @@ export default function BackgroundSize( props: BackgroundSizeProps ) {
 		isCustom ? value : ''
 	);
 
-	const handleOnSelectChange = ( newValue: string ) => {
+	const handleOnSelectChange = ( newValue: string | undefined ) => {
 		onChange( {
 			backgroundSize: newValue,
 		} );
@@ -82,6 +83,7 @@ export default function BackgroundSize( props: BackgroundSizeProps ) {
 					/>
 				</div>
 			) }
+			<ClearButton onClick={ () => handleOnSelectChange( undefined ) } />
 		</BaseControl>
 	);
 }

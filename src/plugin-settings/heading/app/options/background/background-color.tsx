@@ -11,6 +11,7 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface BackgroundColorProps {
 	value: string | undefined;
@@ -35,6 +36,7 @@ export default function BackgroundColor( props: BackgroundColorProps ) {
 				value={ value }
 				onChange={ handleOnColorChange }
 			/>
+			<ClearButton onClick={ () => handleOnColorChange( undefined ) } />
 		</BaseControl>
 	);
 }

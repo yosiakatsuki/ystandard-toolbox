@@ -12,6 +12,7 @@ import CustomSelectControl from '@aktk/block-components/wp-controls/custom-selec
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 const SELECT_OPTIONS = [
 	{
@@ -48,7 +49,7 @@ interface BackgroundRepeatProps {
 export default function BackgroundRepeat( props: BackgroundRepeatProps ) {
 	const { value, onChange } = props;
 
-	const handleOnSelectChange = ( newValue: string ) => {
+	const handleOnSelectChange = ( newValue: string | undefined ) => {
 		onChange( {
 			backgroundRepeat: newValue,
 		} );
@@ -64,6 +65,7 @@ export default function BackgroundRepeat( props: BackgroundRepeatProps ) {
 				onChange={ handleOnSelectChange }
 				emptyLabel={ __( '--指定なし--', 'ystandard-toolbox' ) }
 			/>
+			<ClearButton onClick={ () => handleOnSelectChange( undefined ) } />
 		</BaseControl>
 	);
 }
