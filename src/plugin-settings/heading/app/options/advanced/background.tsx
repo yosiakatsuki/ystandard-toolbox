@@ -7,6 +7,7 @@ import { TextareaControl } from '@wordpress/components';
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface BackgroundControlProps {
 	value: string | undefined;
@@ -33,6 +34,7 @@ export default function Background( props: BackgroundControlProps ) {
 				__nextHasNoMarginBottom
 				style={ { lineHeight: '1.3' } }
 			/>
+			<ClearButton onClick={ () => handleOnChange( undefined ) } />
 		</BaseControl>
 	);
 }

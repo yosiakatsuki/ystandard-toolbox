@@ -17,7 +17,7 @@ import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/ut
 interface AlignItemsProps {
 	value: ResponsiveValues | undefined;
 	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { alignItems: ResponsiveValues } ) => void;
+	onChange: ( newValue: { alignItems?: ResponsiveValues } ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -55,6 +55,7 @@ export default function AlignItems( props: AlignItemsProps ) {
 			value={ value }
 			onChange={ handleOnChange }
 			options={ SELECT_OPTIONS }
+			onClear={ () => onChange( { alignItems: undefined } ) }
 		/>
 	);
 }

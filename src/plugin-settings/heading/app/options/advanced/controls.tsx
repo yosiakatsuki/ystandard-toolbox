@@ -13,6 +13,7 @@ import {
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { IconSelectControl } from '@aktk/block-components/components/icon-control';
 
@@ -21,6 +22,7 @@ interface AdvancedResponsiveSelectControlProps {
 	label: string;
 	value: ResponsiveValues | undefined;
 	onChange: ( newValue: ResponsiveValues ) => void;
+	onClear: () => void;
 	options: CustomSelectControlOption[];
 }
 interface AdvancedResponsiveSelectEditProps {
@@ -32,7 +34,7 @@ interface AdvancedResponsiveSelectEditProps {
 export function AdvancedResponsiveSelectControl(
 	props: AdvancedResponsiveSelectControlProps
 ) {
-	const { id, label, value, onChange, options } = props;
+	const { id, label, value, onChange, onClear, options } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
 		onChange( newValue );
 	};
@@ -55,6 +57,7 @@ export function AdvancedResponsiveSelectControl(
 					/>
 				}
 			/>
+			<ClearButton onClick={ onClear } />
 		</BaseControl>
 	);
 }

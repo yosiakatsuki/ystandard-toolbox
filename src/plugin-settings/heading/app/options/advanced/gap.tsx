@@ -17,12 +17,13 @@ import { IconUnitControl } from '@aktk/block-components/components/icon-control'
  * Plugin Dependencies
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
 interface GapControlProps {
 	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { gap: ResponsiveValues } ) => void;
+	onChange: ( newValue: { gap?: ResponsiveValues } ) => void;
 	displayValue: ResponsiveValues | undefined;
 }
 
@@ -58,6 +59,7 @@ export default function Gap( props: GapControlProps ) {
 					/>
 				}
 			/>
+			<ClearButton onClick={ () => onChange( { gap: undefined } ) } />
 		</BaseControl>
 	);
 }

@@ -17,7 +17,7 @@ import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/ut
 interface FlexDirectionProps {
 	value: ResponsiveValues | undefined;
 	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { flexDirection: ResponsiveValues } ) => void;
+	onChange: ( newValue: { flexDirection?: ResponsiveValues } ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -54,6 +54,7 @@ export default function FlexDirection( props: FlexDirectionProps ) {
 			label={ __( 'flex-direction', 'ystandard-toolbox' ) }
 			value={ value }
 			onChange={ handleOnChange }
+			onClear={ () => onChange( { flexDirection: undefined } ) }
 			options={ SELECT_OPTIONS }
 		/>
 	);

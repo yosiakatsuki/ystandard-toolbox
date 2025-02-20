@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface FontFamilyControlProps {
 	value: string | undefined;
@@ -27,6 +28,7 @@ export default function FontFamily( props: FontFamilyControlProps ) {
 			isFullWidth={ true }
 		>
 			<InputControl value={ value || '' } onChange={ handleOnChange } />
+			<ClearButton onClick={ () => handleOnChange( undefined ) } />
 		</BaseControl>
 	);
 }

@@ -72,6 +72,7 @@ export function ResponsiveDisplay( props: ResponsiveDisplayProps ) {
 			label={ __( 'display', 'ystandard-toolbox' ) }
 			value={ value }
 			onChange={ handleOnChange }
+			onClear={ () => onChange( { display: undefined } ) }
 			options={ SELECT_OPTIONS }
 		/>
 	);

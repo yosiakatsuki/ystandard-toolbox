@@ -17,7 +17,7 @@ import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/ut
 interface JustifyContentProps {
 	value: ResponsiveValues | undefined;
 	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { justifyContent: ResponsiveValues } ) => void;
+	onChange: ( newValue: { justifyContent?: ResponsiveValues } ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -58,6 +58,7 @@ export default function JustifyContent( props: JustifyContentProps ) {
 			label={ __( 'justify-content', 'ystandard-toolbox' ) }
 			value={ value }
 			onChange={ handleOnChange }
+			onClear={ () => onChange( { justifyContent: undefined } ) }
 			options={ SELECT_OPTIONS }
 		/>
 	);
