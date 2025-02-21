@@ -105,6 +105,10 @@ class Styles {
 			if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
 				$desktop[ $property ] = "url('{$value['desktop']}')";
 			}
+			// 画像の処理.
+			if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+				$desktop[ $property ] = "url('{$value['desktop']}')";
+			}
 
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
@@ -183,23 +187,34 @@ class Styles {
 		$content = str_replace( '\'', '"', $content );
 		// SVGアイコンの処理.
 		if ( false !== strpos( $content, '<svg' ) ) {
-			$svg_icon                  = rawurlencode( $content );
-			$styles['backgroundImage'] = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
+			$svg_icon = rawurlencode( $content );
+			// 背景色を現在の文字色に設定.
+			$styles['backgroundColor'] = $styles['iconColor'] ? $styles['iconColor'] : 'currentColor';
+			// マスク関連.
+			$icon_content                 = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
+			$styles['-webkit-mask-image'] = $icon_content;
+			$styles['maskImage']          = $icon_content;
+			$styles['maskSize']           = 'contain';
+			$styles['maskRepeat']         = 'no-repeat';
+			$styles['maskPosition']       = 'center';
 			// アイコンを背景画像として表示するので諸々調整.
+			unset( $styles['backgroundImage'] );
 			$styles['backgroundSize']     = 'contain';
 			$styles['backgroundRepeat']   = 'no-repeat';
 			$styles['backgroundPosition'] = 'center';
-			$styles['verticalAlign']      = '-0.15em';
+			$styles['verticalAlign']      = '-0.125em';
 			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
 			// サイズの指定がなければ 1em で設定.
 			$default_size     = [ 'desktop' => '1em' ];
-			$styles['width']  = empty( $styles['width'] ) ? $default_size : $styles['width'];
-			$styles['height'] = empty( $styles['height'] ) ? $default_size : $styles['height'];
+			$styles['width']  = empty( $styles['fontSize'] ) ? $default_size : $styles['width'];
+			$styles['height'] = empty( $styles['fontSize'] ) ? $default_size : $styles['height'];
 			// contentは空に.
 			$content = '';
 		}
 		$content           = trim( $content, '"' );
 		$styles['content'] = "\"{$content}\"";
+
+		unset( $styles['iconColor'] );
 
 		return self::parse_styles( $styles, $pseudo_elements );
 	}

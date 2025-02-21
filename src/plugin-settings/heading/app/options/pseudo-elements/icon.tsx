@@ -17,7 +17,11 @@ interface PseudoElementsIconProps {
 	type: 'before' | 'after';
 	value: string | undefined;
 	hasContent?: boolean;
-	onChange: ( newValue: { icon?: string; content?: string } ) => void;
+	onChange: ( newValue: {
+		icon?: string;
+		content?: string;
+		[ name: string ]: unknown;
+	} ) => void;
 }
 
 export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
@@ -29,6 +33,40 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 			icon: newValue,
 			content: svg || '',
 		} );
+
+		// アイコン設定によって削除する設定.
+		if ( svg ) {
+			onChange( {
+				color: undefined,
+				fontWeight: undefined,
+				fontStyle: undefined,
+				lineHeight: undefined,
+				letterSpacing: undefined,
+				backgroundColor: undefined,
+				backgroundImage: undefined,
+				backgroundRepeat: undefined,
+				backgroundPosition: undefined,
+				backgroundSize: undefined,
+				border: undefined,
+				borderRadius: undefined,
+				width: undefined,
+				height: undefined,
+				maxWidth: undefined,
+				maxHeight: undefined,
+				minWidth: undefined,
+				minHeight: undefined,
+				display: undefined,
+				fontFamily: undefined,
+				background: undefined,
+				textShadow: undefined,
+				boxShadow: undefined,
+			} );
+		} else {
+			// アイコン設定がなくなったら削除する設定.
+			onChange( {
+				iconColor: undefined,
+			} );
+		}
 	};
 
 	return (
@@ -46,6 +84,19 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 				<NoticeWarningText>
 					{ __(
 						'※contentに入力がある場合、アイコン設定は使用できません。',
+						'ystandard-toolbox'
+					) }
+				</NoticeWarningText>
+			) }
+			{ value && (
+				<NoticeWarningText>
+					{ __(
+						'※アイコンの設定を使用中はいくつかの設定が無視されます。',
+						'ystandard-toolbox'
+					) }
+					<br />
+					{ __(
+						'※アイコンの大きさは「文字サイズ」で調整してください。',
 						'ystandard-toolbox'
 					) }
 				</NoticeWarningText>

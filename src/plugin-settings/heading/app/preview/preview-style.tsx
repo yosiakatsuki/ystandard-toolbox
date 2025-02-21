@@ -145,22 +145,38 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 		styles.content = styleContent;
 		if ( styleContent.includes( '<svg' ) ) {
 			styleContent = encodeURIComponent( styleContent );
-			// SVGの場合はbackground-imageに設定.
+			// アイコン使用時の調整.
 			styles.content = '""';
-			styles.backgroundImage = `data:image/svg+xml;charset=UTF-8,${ styleContent }`;
+			// 背景色を現在の文字色に設定.
+			styles.backgroundColor = styles?.iconColor || 'currentColor';
+			// マスク関連.
+			const iconContent = `url('data:image/svg+xml;charset=UTF-8,${ styleContent }')`;
+			styles[ '-webkit-mask-image' ] = iconContent;
+			styles.maskImage = iconContent;
+			styles.maskPosition = 'center';
+			styles.maskRepeat = 'no-repeat';
+			styles.maskSize = 'contain';
+
+			// background関連の設定調整.
+			delete styles.backgroundImage;
 			styles.backgroundSize = 'contain';
 			styles.backgroundRepeat = 'no-repeat';
 			styles.backgroundPosition = 'center';
+			// 位置調整.
 			styles.verticalAlign = '-0.15em';
 			// Display調整・サイズ調整
 			styles.display = styles?.display || { desktop: 'inline-flex' };
-			styles.width = styles?.width || { desktop: '1em' };
-			styles.height = styles?.height || { desktop: '1em' };
+			styles.width = styles?.fontSize || { desktop: '1em' };
+			styles.height = styles?.fontSize || { desktop: '1em' };
 			// 位置調整.
 			styles.verticalAlign = '-0.125em';
+			// 使わない値を削除.
+			delete styles.color;
 		} else if ( ! styleContent.includes( '"' ) ) {
 			styles.content = `"${ styleContent }"`;
 		}
+		// 絶対に不要になる値を削除.
+		delete styles.iconColor;
 	}
 
 	return parseStyles( styles );

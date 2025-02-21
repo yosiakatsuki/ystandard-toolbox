@@ -85,6 +85,7 @@ export interface HeadingPseudoElementsStyle {
 	enable?: boolean;
 	content?: string;
 	icon?: string;
+	iconColor?: string;
 	useIconMask?: boolean;
 	fontSize?: ResponsiveValues;
 	color?: string;
@@ -130,6 +131,12 @@ export interface HeadingPseudoElementsStyle {
 	bottom?: string;
 	left?: string;
 	zIndex?: string;
+	// アイコン関連の設定.
+	maskImage?: string;
+	'-webkit-mask-image'?: string;
+	maskPosition?: string;
+	maskSize?: string;
+	maskRepeat?: string;
 }
 
 export interface LevelList {

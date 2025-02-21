@@ -23,6 +23,7 @@ import {
 	EnablePseudoElements,
 	PseudoElementsContent,
 	PseudoElementsIcon,
+	IconColor,
 } from '@aktk/plugin-settings/heading/app/options/pseudo-elements';
 import {
 	FontSize,
@@ -165,6 +166,14 @@ function PseudoElements( props: PseudoElementsProps ) {
 		onChange( newValue );
 	};
 
+	// アイコン設定があったら無効化する.
+	const DisableHasIcon = ( { children }: { children: React.ReactNode } ) => {
+		if ( option?.icon ) {
+			return <></>;
+		}
+		return <>{ children }</>;
+	};
+
 	return (
 		<PluginSettingsPanel
 			title={ panelName }
@@ -212,6 +221,12 @@ function PseudoElements( props: PseudoElementsProps ) {
 							type={ type }
 							hasContent={ !! option?.content && ! option?.icon }
 						/>
+						{ option?.icon && (
+							<IconColor
+								value={ option?.iconColor }
+								onChange={ handleOnChange }
+							/>
+						) }
 					</PluginSettingsPanel>
 					<PluginSettingsPanel
 						title={ __( '文字設定', 'ystandard-toolbox' ) }
@@ -229,83 +244,88 @@ function PseudoElements( props: PseudoElementsProps ) {
 								value={ option?.fontSize }
 								onChange={ handleOnChange }
 							/>
-							<TextColor
-								value={ option?.color }
-								onChange={ handleOnChange }
-							/>
-							<FontWeight
-								value={ option?.fontWeight }
-								onChange={ handleOnChange }
-							/>
-							<FontStyle
-								value={ option?.fontStyle }
-								onChange={ handleOnChange }
-							/>
-							<LineHeight
-								value={ option?.lineHeight }
-								onChange={ handleOnChange }
-							/>
-							<LetterSpacing
-								value={ option?.letterSpacing }
-								onChange={ handleOnChange }
-							/>
+							<DisableHasIcon>
+								<TextColor
+									value={ option?.color }
+									onChange={ handleOnChange }
+								/>
+								<FontWeight
+									value={ option?.fontWeight }
+									onChange={ handleOnChange }
+								/>
+								<FontStyle
+									value={ option?.fontStyle }
+									onChange={ handleOnChange }
+								/>
+								<LineHeight
+									value={ option?.lineHeight }
+									onChange={ handleOnChange }
+								/>
+								<LetterSpacing
+									value={ option?.letterSpacing }
+									onChange={ handleOnChange }
+								/>
+							</DisableHasIcon>
 						</PanelInner>
 					</PluginSettingsPanel>
-					<PluginSettingsPanel
-						title={ __( '背景設定', 'ystandard-toolbox' ) }
-						initialOpen={ isInitialOpen( option || {}, [
-							'backgroundColor',
-							'backgroundImage',
-							'backgroundRepeat',
-							'backgroundPosition',
-							'backgroundSize',
-						] ) }
-					>
-						<PanelInner>
-							<BackgroundColor
-								onChange={ handleOnChange }
-								value={ option?.backgroundColor }
-							/>
-							<BackgroundImage
-								onChange={ handleOnChange }
-								value={ option?.backgroundImage }
-							/>
-							{ option?.backgroundImage && (
-								<PanelInner>
-									<BackgroundRepeat
-										onChange={ handleOnChange }
-										value={ option?.backgroundRepeat }
-									/>
-									<BackgroundPosition
-										onChange={ handleOnChange }
-										value={ option?.backgroundPosition }
-									/>
-									<BackgroundSize
-										onChange={ handleOnChange }
-										value={ option?.backgroundSize }
-									/>
-								</PanelInner>
-							) }
-						</PanelInner>
-					</PluginSettingsPanel>
-					<PluginSettingsPanel
-						title={ __( '枠線設定', 'ystandard-toolbox' ) }
-						initialOpen={ isInitialOpen( option || {}, [
-							'border',
-							'borderRadius',
-						] ) }
-					>
-						<PanelInner>
-							<Border
-								onChange={ handleOnChange }
-								value={ option?.border }
-							/>
-							<BorderRadius
-								onChange={ handleOnChange }
-								value={ option?.borderRadius }
-							/>
-						</PanelInner>
-					</PluginSettingsPanel>
+					<DisableHasIcon>
+						<PluginSettingsPanel
+							title={ __( '背景設定', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option || {}, [
+								'backgroundColor',
+								'backgroundImage',
+								'backgroundRepeat',
+								'backgroundPosition',
+								'backgroundSize',
+							] ) }
+						>
+							<PanelInner>
+								<BackgroundColor
+									onChange={ handleOnChange }
+									value={ option?.backgroundColor }
+								/>
+								<BackgroundImage
+									onChange={ handleOnChange }
+									value={ option?.backgroundImage }
+								/>
+								{ option?.backgroundImage && (
+									<PanelInner>
+										<BackgroundRepeat
+											onChange={ handleOnChange }
+											value={ option?.backgroundRepeat }
+										/>
+										<BackgroundPosition
+											onChange={ handleOnChange }
+											value={ option?.backgroundPosition }
+										/>
+										<BackgroundSize
+											onChange={ handleOnChange }
+											value={ option?.backgroundSize }
+										/>
+									</PanelInner>
+								) }
+							</PanelInner>
+						</PluginSettingsPanel>
+
+						<PluginSettingsPanel
+							title={ __( '枠線設定', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option || {}, [
+								'border',
+								'borderRadius',
+							] ) }
+						>
+							<PanelInner>
+								<Border
+									onChange={ handleOnChange }
+									value={ option?.border }
+								/>
+								<BorderRadius
+									onChange={ handleOnChange }
+									value={ option?.borderRadius }
+								/>
+							</PanelInner>
+						</PluginSettingsPanel>
+					</DisableHasIcon>
 					<PluginSettingsPanel
 						title={ __( '余白設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option, [
@@ -324,77 +344,79 @@ function PseudoElements( props: PseudoElementsProps ) {
 							/>
 						</PanelInner>
 					</PluginSettingsPanel>
-					<PluginSettingsPanel
-						title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
-						initialOpen={ isInitialOpen( option, [
-							'width',
-							'maxWidth',
-							'minWidth',
-							'height',
-							'maxHeight',
-							'minHeight',
-						] ) }
-					>
-						<PanelInner>
-							<Width
-								value={ option?.width }
-								onChange={ handleOnChange }
-							/>
-							<MaxWidth
-								value={ option?.maxWidth }
-								onChange={ handleOnChange }
-							/>
-							<MinWidth
-								value={ option?.minWidth }
-								onChange={ handleOnChange }
-							/>
-							<Height
-								value={ option?.height }
-								onChange={ handleOnChange }
-							/>
-							<MaxHeight
-								value={ option?.maxHeight }
-								onChange={ handleOnChange }
-							/>
-							<MinHeight
-								value={ option?.minHeight }
-								onChange={ handleOnChange }
-							/>
-						</PanelInner>
-					</PluginSettingsPanel>
-					<PluginSettingsPanel
-						title={ __( '上級者向け', 'ystandard-toolbox' ) }
-						initialOpen={ isInitialOpen( option, [
-							'display',
-							'fontFamily',
-							'background',
-							'textShadow',
-							'boxShadow',
-						] ) }
-					>
-						<PanelInner>
-							<ResponsiveDisplay
-								value={ option?.display }
-								onChange={ handleOnChange }
-							/>
-							<FontFamily
-								value={ option?.fontFamily }
-								onChange={ handleOnChange }
-							/>
-							<Background
-								value={ option?.background }
-								onChange={ handleOnChange }
-							/>
-							<TextShadow
-								value={ option?.textShadow }
-								onChange={ handleOnChange }
-							/>
-							<BoxShadow
-								value={ option?.boxShadow }
-								onChange={ handleOnChange }
-							/>
-						</PanelInner>
-					</PluginSettingsPanel>
+					<DisableHasIcon>
+						<PluginSettingsPanel
+							title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option, [
+								'width',
+								'height',
+								'maxWidth',
+								'maxHeight',
+								'minWidth',
+								'minHeight',
+							] ) }
+						>
+							<PanelInner>
+								<Width
+									value={ option?.width }
+									onChange={ handleOnChange }
+								/>
+								<Height
+									value={ option?.height }
+									onChange={ handleOnChange }
+								/>
+								<MaxWidth
+									value={ option?.maxWidth }
+									onChange={ handleOnChange }
+								/>
+								<MaxHeight
+									value={ option?.maxHeight }
+									onChange={ handleOnChange }
+								/>
+								<MinWidth
+									value={ option?.minWidth }
+									onChange={ handleOnChange }
+								/>
+								<MinHeight
+									value={ option?.minHeight }
+									onChange={ handleOnChange }
+								/>
+							</PanelInner>
+						</PluginSettingsPanel>
+						<PluginSettingsPanel
+							title={ __( '上級者向け', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option, [
+								'display',
+								'fontFamily',
+								'background',
+								'textShadow',
+								'boxShadow',
+							] ) }
+						>
+							<PanelInner>
+								<ResponsiveDisplay
+									value={ option?.display }
+									onChange={ handleOnChange }
+								/>
+								<FontFamily
+									value={ option?.fontFamily }
+									onChange={ handleOnChange }
+								/>
+								<Background
+									value={ option?.background }
+									onChange={ handleOnChange }
+								/>
+								<TextShadow
+									value={ option?.textShadow }
+									onChange={ handleOnChange }
+								/>
+								<BoxShadow
+									value={ option?.boxShadow }
+									onChange={ handleOnChange }
+								/>
+							</PanelInner>
+						</PluginSettingsPanel>
+					</DisableHasIcon>
 				</PanelGroup>
 			) }
 		</PluginSettingsPanel>

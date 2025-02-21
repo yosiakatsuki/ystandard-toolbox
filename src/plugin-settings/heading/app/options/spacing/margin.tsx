@@ -51,6 +51,7 @@ export default function Margin( props: MarginControlProps ) {
 						onChange={ handleOnChange }
 						spacingSizes={ spacingSizes }
 						label={ __( '外側余白', 'ystandard-toolbox' ) }
+						minimumCustomValue={ -9999 }
 					/>
 				}
 				responsiveTabContent={
@@ -58,6 +59,7 @@ export default function Margin( props: MarginControlProps ) {
 						value={ value || {} }
 						onChange={ handleOnChange }
 						spacingSizes={ spacingSizes }
+						minimumCustomValue={ -9999 }
 					/>
 				}
 			/>

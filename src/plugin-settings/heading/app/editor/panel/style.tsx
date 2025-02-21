@@ -233,20 +233,20 @@ export function StylePanel() {
 						value={ option?.width }
 						onChange={ handleOnChange }
 					/>
-					<MaxWidth
-						value={ option?.maxWidth }
-						onChange={ handleOnChange }
-					/>
-					<MinWidth
-						value={ option?.minWidth }
-						onChange={ handleOnChange }
-					/>
 					<Height
 						value={ option?.height }
 						onChange={ handleOnChange }
 					/>
+					<MaxWidth
+						value={ option?.maxWidth }
+						onChange={ handleOnChange }
+					/>
 					<MaxHeight
 						value={ option?.maxHeight }
+						onChange={ handleOnChange }
+					/>
+					<MinWidth
+						value={ option?.minWidth }
 						onChange={ handleOnChange }
 					/>
 					<MinHeight

@@ -17,8 +17,15 @@ export function DefaultSpacingEdit( props: {
 	onChange: ( newValue: CustomSpacing ) => void;
 	spacingSizes: object[];
 	label: string;
+	minimumCustomValue?: number;
 } ) {
-	const { value, onChange, spacingSizes, label } = props;
+	const {
+		value,
+		onChange,
+		spacingSizes,
+		label,
+		minimumCustomValue = 0,
+	} = props;
 	const handleOnChange = ( newValue: SpacingSizeValues ) => {
 		onChange( {
 			desktop: newValue,
@@ -32,6 +39,7 @@ export function DefaultSpacingEdit( props: {
 			values={ value }
 			onChange={ handleOnChange }
 			spacingSizes={ spacingSizes }
+			minimumCustomValue={ minimumCustomValue }
 		/>
 	);
 }
@@ -40,8 +48,9 @@ export function ResponsiveSpacingEdit( props: {
 	value: CustomSpacing;
 	onChange: ( newValue: CustomSpacing ) => void;
 	spacingSizes: object[];
+	minimumCustomValue?: number;
 } ) {
-	const { value, onChange, spacingSizes } = props;
+	const { value, onChange, spacingSizes, minimumCustomValue = 0 } = props;
 	const handleOnChange = ( newValue: CustomSpacing ) => {
 		onChange( {
 			...value,
@@ -58,6 +67,7 @@ export function ResponsiveSpacingEdit( props: {
 						handleOnChange( { desktop: newValue } );
 					} }
 					spacingSizes={ spacingSizes }
+					minimumCustomValue={ minimumCustomValue }
 				/>
 			</div>
 			<div>
@@ -68,6 +78,7 @@ export function ResponsiveSpacingEdit( props: {
 						handleOnChange( { tablet: newValue } );
 					} }
 					spacingSizes={ spacingSizes }
+					minimumCustomValue={ minimumCustomValue }
 				/>
 			</div>
 			<div>
@@ -78,6 +89,7 @@ export function ResponsiveSpacingEdit( props: {
 						handleOnChange( { mobile: newValue } );
 					} }
 					spacingSizes={ spacingSizes }
+					minimumCustomValue={ minimumCustomValue }
 				/>
 			</div>
 		</ResponsiveControlGrid>

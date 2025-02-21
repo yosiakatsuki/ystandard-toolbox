@@ -10,7 +10,7 @@ export * from './types';
 type CustomSpacingSelectProps = SpacingSizeControlProps;
 
 export default function CustomSpacingSelect( props: CustomSpacingSelectProps ) {
-	const { values, onChange, label, sides } = props;
+	const { values, onChange, label, sides, minimumCustomValue = 0 } = props;
 	return (
 		<>
 			<SpacingSizesControl
@@ -18,6 +18,7 @@ export default function CustomSpacingSelect( props: CustomSpacingSelectProps ) {
 				onChange={ onChange }
 				label={ label }
 				sides={ sides }
+				minimumCustomValue={ minimumCustomValue }
 			/>
 		</>
 	);
@@ -31,7 +32,14 @@ interface CustomSpacingSelectWithCustomValueProps
 export function CustomSpacingSelectWithCustomValue(
 	props: CustomSpacingSelectWithCustomValueProps
 ) {
-	const { values, onChange, label, sides, spacingSizes } = props;
+	const {
+		values,
+		onChange,
+		label,
+		sides,
+		spacingSizes,
+		minimumCustomValue = 0,
+	} = props;
 
 	const handleOnChange = ( newValue: SpacingSizeValues ) => {
 		// プリセットから値を取得して返す.
@@ -56,6 +64,7 @@ export function CustomSpacingSelectWithCustomValue(
 				onChange={ handleOnChange }
 				label={ label }
 				sides={ sides }
+				minimumCustomValue={ minimumCustomValue }
 			/>
 		</>
 	);
