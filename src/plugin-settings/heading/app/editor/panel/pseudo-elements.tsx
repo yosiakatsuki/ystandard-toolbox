@@ -168,7 +168,10 @@ function PseudoElements( props: PseudoElementsProps ) {
 	return (
 		<PluginSettingsPanel
 			title={ panelName }
-			initialOpen={ isInitialOpen( option || {}, [ 'content' ] ) }
+			initialOpen={ isInitialOpen( option || {}, [
+				'enable',
+				'content',
+			] ) }
 			isNested={ true }
 		>
 			<EnablePseudoElements
@@ -176,7 +179,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 				onChange={ onChange }
 				type={ type }
 			/>
-			{ undefined !== option?.content && (
+			{ option?.enable && (
 				<PanelGroup>
 					<PluginSettingsPanel
 						title={ 'content' }
@@ -251,12 +254,11 @@ function PseudoElements( props: PseudoElementsProps ) {
 					<PluginSettingsPanel
 						title={ __( '背景設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option || {}, [
-							'fontSize',
-							'color',
-							'fontWeight',
-							'fontStyle',
-							'lineHeight',
-							'letterSpacing',
+							'backgroundColor',
+							'backgroundImage',
+							'backgroundRepeat',
+							'backgroundPosition',
+							'backgroundSize',
 						] ) }
 					>
 						<PanelInner>

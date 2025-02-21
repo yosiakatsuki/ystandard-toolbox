@@ -129,9 +129,13 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 	if ( isEmpty( styles ) ) {
 		return {};
 	}
+	// 有効化の確認.
 	if ( ! styles?.enable ) {
 		return {};
 	}
+	delete styles.enable;
+
+	// アイコン設定の削除.
 	if ( styles?.icon ) {
 		delete styles.icon;
 	}
@@ -145,6 +149,9 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
 			styles.content = '""';
 			styles.backgroundImage = `data:image/svg+xml;charset=UTF-8,${ styleContent }`;
 			styles.backgroundSize = 'contain';
+			styles.backgroundRepeat = 'no-repeat';
+			styles.backgroundPosition = 'center';
+			styles.verticalAlign = '-0.15em';
 			// Display調整・サイズ調整
 			styles.display = styles?.display || { desktop: 'inline-flex' };
 			styles.width = styles?.width || { desktop: '1em' };

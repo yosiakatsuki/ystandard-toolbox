@@ -164,9 +164,14 @@ class Styles {
 		if ( ! is_array( $styles ) || empty( $styles ) ) {
 			return [];
 		}
+		// 有効化確認.
 		if ( ! isset( $styles['enable'] ) || ! $styles['enable'] ) {
 			return [];
 		}
+		// 有効化オプションは削除.
+		unset( $styles['enable'] );
+
+		// アイコン設定の確認・削除.
 		if ( isset( $styles['icon'] ) ) {
 			unset( $styles['icon'] );
 		}
@@ -180,12 +185,18 @@ class Styles {
 		if ( false !== strpos( $content, '<svg' ) ) {
 			$svg_icon                  = rawurlencode( $content );
 			$styles['backgroundImage'] = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
-			$styles['backgroundSize']  = 'contain';
-			$styles['display']         = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
-			$default_size              = [ 'desktop' => '1em' ];
-			$styles['width']           = empty( $styles['width'] ) ? $default_size : $styles['width'];
-			$styles['height']          = empty( $styles['height'] ) ? $default_size : $styles['height'];
-			$content                   = '';
+			// アイコンを背景画像として表示するので諸々調整.
+			$styles['backgroundSize']     = 'contain';
+			$styles['backgroundRepeat']   = 'no-repeat';
+			$styles['backgroundPosition'] = 'center';
+			$styles['verticalAlign']      = '-0.15em';
+			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
+			// サイズの指定がなければ 1em で設定.
+			$default_size     = [ 'desktop' => '1em' ];
+			$styles['width']  = empty( $styles['width'] ) ? $default_size : $styles['width'];
+			$styles['height'] = empty( $styles['height'] ) ? $default_size : $styles['height'];
+			// contentは空に.
+			$content = '';
 		}
 		$content           = trim( $content, '"' );
 		$styles['content'] = "\"{$content}\"";

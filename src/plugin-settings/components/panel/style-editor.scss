@@ -12,14 +12,16 @@
 		&.is-opened {
 			> .components-panel__body-title {
 				margin-bottom: 1em;
-				border-bottom: 1px solid var(--plugin-settings-panel--border-color);
+				border-bottom: 1px solid
+					var(--plugin-settings-panel--border-color);
 			}
 		}
 
 		> .components-base-control {
 			margin-top: 2em;
 
-			> .components-base-control__field > .components-base-control__label {
+			> .components-base-control__field
+				> .components-base-control__label {
 				font-weight: 700;
 			}
 		}
@@ -36,11 +38,16 @@
 
 	&.is-nested {
 		&.components-panel__body {
-			@apply bg-gray-50;
+			@apply bg-orange-50/30;
 		}
-		.components-panel__body-title,
-		.components-panel__body {
-			@apply bg-white;
+		> .components-panel__body-title {
+			@apply bg-orange-50/80;
+		}
+		.ystdtb-heading-v2__panel-group {
+			.components-panel__body-title,
+			.components-panel__body {
+				@apply bg-white;
+			}
 		}
 	}
 }
