@@ -8,6 +8,7 @@ import { Button } from '@wordpress/components';
  */
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { NoticeWarningText } from '@aktk/block-components/components/notice';
 
 interface PseudoElementsContentProps {
@@ -48,15 +49,7 @@ export function PseudoElementsContent( props: PseudoElementsContentProps ) {
 					) }
 				</NoticeWarningText>
 			) }
-			<div className="flex justify-end">
-				<Button
-					variant={ 'tertiary' }
-					onClick={ handleOnClear }
-					size={ 'small' }
-				>
-					{ __( 'クリア', 'ystandard-toolbox' ) }
-				</Button>
-			</div>
+			<ClearButton onClick={ handleOnClear } />
 		</BaseControl>
 	);
 }
