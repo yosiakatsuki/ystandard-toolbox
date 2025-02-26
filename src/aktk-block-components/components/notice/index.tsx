@@ -56,7 +56,7 @@ export function NoticeWarning( props: NoticeProps ) {
 		<Notice
 			{ ...props }
 			className={
-				'mt-1 bg-aktk-bg-yellow text-fz-xxs text-aktk-text-yellow'
+				'mt-1 bg-aktk-bg-yellow text-fz-xs text-aktk-text-yellow'
 			}
 		/>
 	);

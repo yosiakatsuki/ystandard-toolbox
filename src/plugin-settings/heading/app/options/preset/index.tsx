@@ -109,7 +109,7 @@ function PresetList( props: PresetListProps ) {
 						'ystandard-toolbox'
 					) }
 				</div>
-				<div className={ 'text-fz-xxs' }>
+				<div className={ 'text-fz-xs' }>
 					{ __(
 						'※プリセット選択後に各設定のカスタマイズも可能です。',
 						'ystandard-toolbox'
@@ -130,9 +130,7 @@ function PresetList( props: PresetListProps ) {
 			>
 				{ presetList &&
 					presetList.map( ( preset ) => {
-						const selector = clsx(
-							`ystdtb-setting-heading__preset-preview-${ preset.slug }`
-						);
+						const selector = `ystdtb-setting-heading__preset-preview-${ preset.slug }`;
 						return (
 							<div key={ preset.slug }>
 								<HasElementButton
@@ -147,7 +145,7 @@ function PresetList( props: PresetListProps ) {
 										after={ preset?.after }
 										selector={ selector }
 									/>
-									<div className={ selector }>
+									<div id={ selector } className="text-fz-xs">
 										プリセット : { preset.label }
 									</div>
 								</HasElementButton>

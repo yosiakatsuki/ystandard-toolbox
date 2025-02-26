@@ -1,8 +1,10 @@
 {
-	"slug":"",
-	"label":"",
-	"enable":true,
-	"style":{},
-	"before":{},
-	"after":{}
+	"slug": "",
+	"label": "",
+	"enable": true,
+	"useHeadingStyle": true,
+	"useParagraphStyle": false,
+	"style": {},
+	"before": {},
+	"after": {}
 }
