@@ -62,6 +62,11 @@ import {
 	FontFamily,
 	ResponsiveDisplay,
 	TextShadow,
+	Position,
+	PositionTop,
+	PositionRight,
+	PositionBottom,
+	PositionLeft,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 
 /**
@@ -156,10 +161,13 @@ function PseudoElements( props: PseudoElementsProps ) {
 			names: string[]
 		) => {
 			return names.some(
-				( name ) => panelOptions?.hasOwnProperty( name )
+				( name ) =>
+					panelOptions?.hasOwnProperty( name ) &&
+					// @ts-ignore
+					!! panelOptions[ name ]
 			);
 		},
-		[]
+		[ option?.icon ]
 	);
 
 	const handleOnChange = ( newValue: { [ name: string ]: unknown } ) => {
@@ -167,12 +175,15 @@ function PseudoElements( props: PseudoElementsProps ) {
 	};
 
 	// アイコン設定があったら無効化する.
-	const DisableHasIcon = ( { children }: { children: React.ReactNode } ) => {
-		if ( option?.icon ) {
-			return <></>;
-		}
-		return <>{ children }</>;
-	};
+	const DisableHasIcon = useCallback(
+		( { children }: { children: React.ReactNode } ) => {
+			if ( option?.icon ) {
+				return <></>;
+			}
+			return <>{ children }</>;
+		},
+		[ option?.icon ]
+	);
 
 	return (
 		<PluginSettingsPanel
@@ -391,12 +402,37 @@ function PseudoElements( props: PseudoElementsProps ) {
 								'background',
 								'textShadow',
 								'boxShadow',
+								'position',
 							] ) }
 						>
 							<PanelInner>
 								<ResponsiveDisplay
 									value={ option?.display }
 									onChange={ handleOnChange }
+								/>
+								<Position
+									value={ option?.position }
+									onChange={ handleOnChange }
+								/>
+								<PositionTop
+									value={ option?.top }
+									onChange={ handleOnChange }
+									position={ option?.position }
+								/>
+								<PositionRight
+									value={ option?.right }
+									onChange={ handleOnChange }
+									position={ option?.position }
+								/>
+								<PositionBottom
+									value={ option?.bottom }
+									onChange={ handleOnChange }
+									position={ option?.position }
+								/>
+								<PositionLeft
+									value={ option?.left }
+									onChange={ handleOnChange }
+									position={ option?.position }
 								/>
 								<FontFamily
 									value={ option?.fontFamily }

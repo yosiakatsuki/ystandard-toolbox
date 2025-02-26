@@ -63,6 +63,11 @@ import {
 	Gap,
 	JustifyContent,
 	ResponsiveDisplay,
+	Position,
+	PositionTop,
+	PositionRight,
+	PositionBottom,
+	PositionLeft,
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 import type { HeadingStyle } from '@aktk/plugin-settings/heading/types';
@@ -263,6 +268,7 @@ export function StylePanel() {
 					'background',
 					'textShadow',
 					'boxShadow',
+					'position',
 				] ) }
 			>
 				<PanelInner>
@@ -289,6 +295,30 @@ export function StylePanel() {
 						value={ option?.gap }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+					/>
+					<Position
+						value={ option?.position }
+						onChange={ handleOnChange }
+					/>
+					<PositionTop
+						value={ option?.top }
+						onChange={ handleOnChange }
+						position={ option?.position }
+					/>
+					<PositionRight
+						value={ option?.right }
+						onChange={ handleOnChange }
+						position={ option?.position }
+					/>
+					<PositionBottom
+						value={ option?.bottom }
+						onChange={ handleOnChange }
+						position={ option?.position }
+					/>
+					<PositionLeft
+						value={ option?.left }
+						onChange={ handleOnChange }
+						position={ option?.position }
 					/>
 					<FontFamily
 						value={ option?.fontFamily }

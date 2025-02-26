@@ -2,7 +2,6 @@
  * WordPress
  */
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
 /**
  * Plugin Dependencies
  */
@@ -14,7 +13,11 @@ import { NoticeWarningText } from '@aktk/block-components/components/notice';
 interface PseudoElementsContentProps {
 	type: 'before' | 'after';
 	value: string | undefined;
-	onChange: ( newValue: { content?: string; icon?: string } ) => void;
+	onChange: ( newValue: {
+		content?: string;
+		icon?: string;
+		iconColor?: string;
+	} ) => void;
 	hasIcon?: boolean;
 }
 
@@ -31,6 +34,7 @@ export function PseudoElementsContent( props: PseudoElementsContentProps ) {
 		onChange( {
 			content: '',
 			icon: undefined,
+			iconColor: undefined,
 		} );
 	};
 

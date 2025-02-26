@@ -1,7 +1,7 @@
 /**
  * WordPress
  */
-import { __ } from '@wordpress/i18n';
+import { __, _n } from '@wordpress/i18n';
 /**
  * aktk Components.
  */
@@ -13,15 +13,17 @@ import { getIconSvg } from '@aktk/block-components/utils/icon';
 import BaseControl from '@aktk/plugin-settings/components/base-control';
 import { NoticeWarningText } from '@aktk/block-components/components/notice';
 
+type PseudoElementsIconUpdateValue = {
+	icon?: string;
+	content?: string;
+	[ name: string ]: unknown;
+};
+
 interface PseudoElementsIconProps {
 	type: 'before' | 'after';
 	value: string | undefined;
 	hasContent?: boolean;
-	onChange: ( newValue: {
-		icon?: string;
-		content?: string;
-		[ name: string ]: unknown;
-	} ) => void;
+	onChange: ( newValue: PseudoElementsIconUpdateValue ) => void;
 }
 
 export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
@@ -29,14 +31,16 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 
 	const handleOnChange = ( newValue: string | undefined ) => {
 		const svg = getIconSvg( newValue || '' );
-		onChange( {
+
+		// 更新する値.
+		let _newValue = {
 			icon: newValue,
 			content: svg || '',
-		} );
-
-		// アイコン設定によって削除する設定.
+		} as PseudoElementsIconUpdateValue;
+		// アイコン設定がある場合は一部の設定をクリア.
 		if ( svg ) {
-			onChange( {
+			_newValue = {
+				..._newValue,
 				color: undefined,
 				fontWeight: undefined,
 				fontStyle: undefined,
@@ -60,13 +64,15 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 				background: undefined,
 				textShadow: undefined,
 				boxShadow: undefined,
-			} );
+			};
 		} else {
-			// アイコン設定がなくなったら削除する設定.
-			onChange( {
+			_newValue = {
+				..._newValue,
 				iconColor: undefined,
-			} );
+			};
 		}
+
+		onChange( _newValue );
 	};
 
 	return (

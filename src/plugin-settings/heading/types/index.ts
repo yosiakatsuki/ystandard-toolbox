@@ -71,6 +71,11 @@ export interface HeadingStyle {
 	alignItems?: ResponsiveValues;
 	justifyContent?: ResponsiveValues;
 	gap?: ResponsiveValues;
+	position?: string;
+	top?: string;
+	right?: string;
+	bottom?: string;
+	left?: string;
 	fontFamily?: string;
 	background?: string;
 	textShadow?: string;
