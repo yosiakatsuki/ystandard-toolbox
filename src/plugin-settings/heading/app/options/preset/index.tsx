@@ -37,6 +37,7 @@ export default function Preset() {
 
 	// プリセットが選択されたら値をセット.
 	const handleOnSelectPreset = ( value: HeadingOption ) => {
+		// プリセットの値をマージ.
 		const newStyle = mergePreset( value?.style, headingOption?.style );
 		const newBefore = mergePreset( value?.before, headingOption?.before );
 		const newAfter = mergePreset( value?.after, headingOption?.after );
@@ -84,14 +85,24 @@ function PresetList( props: PresetListProps ) {
 	const { onSelect } = props;
 	const [ presetList, setPresetList ] = useState< HeadingOption[] >();
 
+	// プリセットの初期化.
 	useEffect( () => {
 		const _presetStyles = Object.keys( presetStyles ).map( ( key ) => {
 			// @ts-expect-error
-			return presetStyles[ key ];
+			const preset = presetStyles[ key ];
+			// enable を true にする.
+			if ( preset?.before ) {
+				preset.before.enable = true;
+			}
+			if ( preset?.after ) {
+				preset.after.enable = true;
+			}
+			return preset;
 		} );
 		setPresetList( _presetStyles );
 	}, [] );
 
+	// プリセット選択時の処理.
 	const handleOnClick = ( value: HeadingOption ) => {
 		onSelect( value );
 	};
@@ -130,19 +141,20 @@ function PresetList( props: PresetListProps ) {
 			>
 				{ presetList &&
 					presetList.map( ( preset ) => {
+						const previewPreset = structuredClone( preset );
 						const selector = `ystdtb-setting-heading__preset-preview-${ preset.slug }`;
 						return (
 							<div key={ preset.slug }>
 								<HasElementButton
 									className={
-										'block w-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
+										'block w-full h-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
 									}
 									onClick={ () => handleOnClick( preset ) }
 								>
 									<PreviewStyle
-										style={ preset?.style }
-										before={ preset?.before }
-										after={ preset?.after }
+										style={ previewPreset?.style }
+										before={ previewPreset?.before }
+										after={ previewPreset?.after }
 										selector={ selector }
 									/>
 									<div id={ selector } className="text-fz-xs">

@@ -36,10 +36,12 @@ export default function PreviewStyle( props: PreviewStyleProps ) {
 }
 
 function getStyles( props: PreviewStyleProps ) {
-	const style = parseStyles( props?.style as unknown as object );
-	const before = parseStylesPseudoElements( props?.before || {} );
-	const after = parseStylesPseudoElements( props?.after || {} );
-	const selector = props?.selector || 'ystdtb-setting-heading__preview-text';
+	const styleProps = { ...props };
+	const style = parseStyles( styleProps?.style as unknown as object );
+	const before = parseStylesPseudoElements( styleProps?.before || {} );
+	const after = parseStylesPseudoElements( styleProps?.after || {} );
+	const selector =
+		styleProps?.selector || 'ystdtb-setting-heading__preview-text';
 
 	const styleCss = createCSS( style, selector );
 	const beforeCss = createCSS( before, `${ selector }::before` );

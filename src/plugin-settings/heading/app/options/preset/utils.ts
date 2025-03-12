@@ -10,6 +10,13 @@ import type {
 
 type MergePresetProp = HeadingStyle | HeadingPseudoElementsStyle | undefined;
 
+/**
+ * プリセットと編集中のスタイルをマージする.
+ *
+ * @param presetStyle
+ * @param userStyle
+ * @returns
+ */
 export function mergePreset(
 	presetStyle: MergePresetProp,
 	userStyle: MergePresetProp
@@ -19,8 +26,12 @@ export function mergePreset(
 	if ( isEmpty( newStyle ) ) {
 		return undefined;
 	}
-	console.log( { mergePresetNewStyle: newStyle } );
 
+	if ( isEmpty( userStyle as unknown as object ) ) {
+		return newStyle;
+	}
+
+	// 編集中のスタイル引き継ぐプロパティ.
 	const copyProps = [
 		'fontSize',
 		'fontStyle',
