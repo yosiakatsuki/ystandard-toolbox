@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import CustomSelectControl from '@aktk/block-components/wp-controls/custom-select-control';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
+import InputControl from '@aktk/block-components/wp-controls/input-control';
 /**
  * Plugin Dependencies
  */
@@ -21,6 +22,7 @@ interface PositionProps {
 		right?: string;
 		bottom?: string;
 		left?: string;
+		zIndex?: string;
 	} ) => void;
 	position?: string;
 }
@@ -58,6 +60,7 @@ export function Position( props: PositionProps ) {
 				right: undefined,
 				bottom: undefined,
 				left: undefined,
+				zIndex: undefined,
 			} );
 		}
 		onChange( { position: newValue } );
@@ -162,6 +165,25 @@ export function PositionLeft( props: PositionProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
+		</BaseControl>
+	);
+}
+
+export function ZIndex( props: PositionProps ) {
+	const { value, onChange, position = '' } = props;
+	if ( ! position || 'static' === position ) {
+		return <></>;
+	}
+	const handleOnChange = ( newValue: string | undefined ) => {
+		onChange( { zIndex: newValue } );
+	};
+	return (
+		<BaseControl
+			label={ __( 'z-index', 'ystandard-toolbox' ) }
+			id="z-index"
+			isFullWidth={ true }
+		>
+			<InputControl value={ value || '' } onChange={ handleOnChange } />
 		</BaseControl>
 	);
 }

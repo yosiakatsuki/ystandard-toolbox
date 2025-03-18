@@ -67,6 +67,7 @@ import {
 	PositionRight,
 	PositionBottom,
 	PositionLeft,
+	ZIndex,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 
 /**
@@ -431,6 +432,11 @@ function PseudoElements( props: PseudoElementsProps ) {
 								/>
 								<PositionLeft
 									value={ option?.left }
+									onChange={ handleOnChange }
+									position={ option?.position }
+								/>
+								<ZIndex
+									value={ option?.zIndex }
 									onChange={ handleOnChange }
 									position={ option?.position }
 								/>

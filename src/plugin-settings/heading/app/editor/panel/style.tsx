@@ -68,6 +68,7 @@ import {
 	PositionRight,
 	PositionBottom,
 	PositionLeft,
+	ZIndex,
 	TextShadow,
 } from '@aktk/plugin-settings/heading/app/options/advanced';
 import type { HeadingStyle } from '@aktk/plugin-settings/heading/types';
@@ -317,6 +318,11 @@ export function StylePanel() {
 					/>
 					<PositionLeft
 						value={ option?.left }
+						onChange={ handleOnChange }
+						position={ option?.position }
+					/>
+					<ZIndex
+						value={ option?.zIndex }
 						onChange={ handleOnChange }
 						position={ option?.position }
 					/>

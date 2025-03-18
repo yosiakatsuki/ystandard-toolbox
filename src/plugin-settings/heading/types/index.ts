@@ -76,6 +76,7 @@ export interface HeadingStyle {
 	right?: string;
 	bottom?: string;
 	left?: string;
+	zIndex?: string;
 	fontFamily?: string;
 	background?: string;
 	textShadow?: string;
