@@ -63,6 +63,8 @@ interface HeadingContextProps {
 	updateStyle: ( value: HeadingStyle ) => void;
 	updateBeforeStyle: ( value: HeadingPseudoElementsStyle ) => void;
 	updateAfterStyle: ( value: HeadingPseudoElementsStyle ) => void;
+	showEditor: boolean;
+	setShowEditor: ( value: boolean ) => void;
 }
 
 // @ts-ignore
@@ -76,6 +78,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	const [ appMode, setAppMode ] = useState< AppMode >( 'select' );
 	const [ appTab, setAppTab ] = useState< AppTabType >( 'style' );
 	const [ isEdit, setIsEdit ] = useState( false );
+	const [ showEditor, setShowEditor ] = useState( false );
 	// データ関連.
 	const [ selectedStyle, setSelectedStyle ] = useState< string >( '' );
 	const [ levelList, setLevelList ] = useState( {} );
@@ -218,6 +221,8 @@ export default function HeadingApp( props: HeadingAppProps ) {
 					updateStyle,
 					updateBeforeStyle,
 					updateAfterStyle,
+					showEditor,
+					setShowEditor,
 				} }
 			>
 				<div className={ 'pb-5' }>

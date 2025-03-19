@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 /**
  * WordPress
  */
@@ -32,11 +31,14 @@ import { mergePreset } from './utils';
 export default function Preset() {
 	const [ isModalOpen, setIsModalOpen ] = useState( false );
 	// @ts-ignore
-	const { headingOption, setHeadingOption, setIsEdit } =
+	const { headingOption, setHeadingOption, setIsEdit, setShowEditor } =
 		useContext( HeadingContext );
 
 	// プリセットが選択されたら値をセット.
 	const handleOnSelectPreset = ( value: HeadingOption ) => {
+		// initialOpen 対策.
+		setShowEditor( false );
+
 		// プリセットの値をマージ.
 		const newStyle = mergePreset( value?.style, headingOption?.style );
 		const newBefore = mergePreset( value?.before, headingOption?.before );
@@ -52,6 +54,10 @@ export default function Preset() {
 
 		setIsModalOpen( false );
 		setIsEdit( true );
+		// initialOpen 対策.
+		setTimeout( () => {
+			setShowEditor( true );
+		}, 10 );
 	};
 
 	return (
@@ -62,7 +68,9 @@ export default function Preset() {
 			<div>
 				<PrimaryButton
 					icon={ 'admin-appearance' }
-					onClick={ () => setIsModalOpen( ! isModalOpen ) }
+					onClick={ () => {
+						setIsModalOpen( ! isModalOpen );
+					} }
 				>
 					{ __( 'プリセットから選択', 'ystandard-toolbox' ) }
 				</PrimaryButton>
@@ -147,7 +155,7 @@ function PresetList( props: PresetListProps ) {
 							<div key={ preset.slug }>
 								<HasElementButton
 									className={
-										'block w-full h-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
+										'block w-full !h-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
 									}
 									onClick={ () => handleOnClick( preset ) }
 								>

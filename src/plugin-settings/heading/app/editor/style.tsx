@@ -19,8 +19,8 @@ import LevelSelect from '@aktk/plugin-settings/heading/app/style-select';
 
 export function StyleEditContainer() {
 	// @ts-ignore
-	const { selectedStyle } = useContext( HeadingContext );
-	const [ showEditor, setShowEditor ] = useState( !! selectedStyle );
+	const { selectedStyle, showEditor, setShowEditor } =
+		useContext( HeadingContext );
 	const [ isLoading, setIsLoading ] = useState( false );
 
 	// エディター表示の更新

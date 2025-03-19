@@ -145,5 +145,265 @@
 				}
 			}
 		}
+	},
+	"stitch": {
+		"slug": "stitch",
+		"label": "ステッチ",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"border": {
+				"desktop": {
+					"top": {
+						"color": "#ffffff",
+						"style": "dashed",
+						"width": "2px"
+					},
+					"right": {
+						"color": "#ffffff",
+						"style": "dashed",
+						"width": "2px"
+					},
+					"bottom": {
+						"color": "#ffffff",
+						"style": "dashed",
+						"width": "2px"
+					},
+					"left": {
+						"color": "#ffffff",
+						"style": "dashed",
+						"width": "2px"
+					}
+				}
+			},
+			"borderRadius": {
+				"desktop": "2px"
+			},
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"right": "0.5em",
+					"bottom": "0.5em",
+					"left": "0.5em"
+				}
+			},
+			"margin": {
+				"desktop": {
+					"top": "0.5em"
+				}
+			},
+			"boxShadow": "0 0 0 8px #eeeeee"
+		}
+	},
+	"double-border-bottom": {
+		"slug": "double-border-bottom",
+		"label": "下線2種類",
+		"style": {
+			"border": {
+				"desktop": {
+					"bottom": {
+						"color": "#eeeeee",
+						"style": "solid",
+						"width": "2px"
+					}
+				}
+			},
+			"padding": {
+				"desktop": {
+					"bottom": "0.5em"
+				}
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"height": {
+				"desktop": "2px"
+			},
+			"width": {
+				"desktop": "3em"
+			},
+			"backgroundColor": "#222222",
+			"position": "absolute",
+			"left": "0",
+			"top": "100%"
+		}
+	},
+	"text-center-border": {
+		"slug": "text-center-border",
+		"label": "左右に直線",
+		"style": {
+			"display": {
+				"desktop": "flex"
+			},
+			"alignItems": {
+				"desktop": "center"
+			},
+			"gap": {
+				"desktop": "0.5em"
+			}
+		},
+		"before": {
+			"enable": true,
+			"content": "\"\"",
+			"backgroundColor": "#222222",
+			"flexGrow": 1,
+			"height": {
+				"desktop": "2px"
+			},
+			"minWidth": {
+				"desktop": "10%"
+			}
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"backgroundColor": "#222222",
+			"flexGrow": 1,
+			"height": {
+				"desktop": "2px"
+			},
+			"minWidth": {
+				"desktop": "10%"
+			}
+		}
+	},
+	"balloon": {
+		"slug": "balloon",
+		"label": "吹き出し",
+		"style": {
+			"backgroundColor": "#d4e7f2",
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"right": "0.5em",
+					"bottom": "0.5em",
+					"left": "0.5em"
+				}
+			},
+			"margin": {
+				"desktop": {
+					"bottom": "1.5em"
+				}
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"height": {
+				"desktop": "0"
+			},
+			"width": {
+				"desktop": "0"
+			},
+			"position": "absolute",
+			"top": "100%",
+			"left": "1.5em",
+			"border": {
+				"desktop": {
+					"top": {
+						"color": "#d4e7f2",
+						"style": "solid",
+						"width": "1em"
+					},
+					"right": {
+						"color": "transparent",
+						"style": "solid",
+						"width": "1em"
+					},
+					"bottom": {
+						"color": "transparent",
+						"style": "solid",
+						"width": "1em"
+					},
+					"left": {
+						"color": "transparent",
+						"style": "solid",
+						"width": "1em"
+					}
+				}
+			}
+		}
+	},
+	"ribbon": {
+		"slug": "ribbon",
+		"label": "リボン",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"padding": {
+				"desktop": {
+					"top": "0.5em",
+					"right": "0.5em",
+					"bottom": "0.5em",
+					"left": "0.5em"
+				}
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"position": "absolute",
+			"top": "100%",
+			"left": 0,
+			"border": {
+				"desktop": {
+					"right": {
+						"color": "#aaaaaa",
+						"style": "solid",
+						"width": "20px"
+					},
+					"bottom": {
+						"color": "transparent",
+						"style": "solid",
+						"width": "10px"
+					}
+				}
+			}
+		}
+	},
+	"icon-award": {
+		"slug": "icons",
+		"label": "アイコン（バッジ）",
+		"style": {
+			"display": {
+				"desktop": "flex"
+			},
+			"alignItems": {
+				"desktop": "center"
+			},
+			"gap": {
+				"desktop": "0.2em"
+			}
+		},
+		"before": {
+			"enable": true,
+			"content": "\"\"",
+			"icon": "award"
+		}
+	},
+	"repeating-linear-gradient-gray": {
+		"slug": "repeating-linear-gradient-gray",
+		"label": "斜めしましま下線（グレー）",
+		"style": {
+			"position": "relative",
+			"zIndex": "1"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"position": "absolute",
+			"left": 0,
+			"bottom": "3px",
+			"height": {
+				"desktop": "5px"
+			},
+			"width": {
+				"desktop": "100%"
+			},
+			"zIndex": "-1",
+			"background": "repeating-linear-gradient(-45deg,rgba(204,204,204,.3),rgba(204,204,204,.3) 2px,#fff 0,#fff 4px)"
+		}
 	}
 }
