@@ -48,12 +48,14 @@ export default function BlockStyle() {
 		>
 			<div>
 				<ToggleControl
+					className="mb-2"
 					label={ __(
 						'見出しブロックのスタイルとして使う',
 						'ystandard-toolbox'
 					) }
 					checked={ isUseHeadingStyle }
 					onChange={ handleOnHeadingStyleChange }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __(
@@ -63,6 +65,7 @@ export default function BlockStyle() {
 					checked={ isUseParagraphStyle }
 					onChange={ handleOnParagraphStyleChange }
 					className={ '!mb-0' }
+					__nextHasNoMarginBottom
 				/>
 			</div>
 		</PluginSettingsPanel>

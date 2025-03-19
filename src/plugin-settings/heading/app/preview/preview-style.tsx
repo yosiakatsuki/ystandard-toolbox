@@ -267,7 +267,7 @@ function parseBorderProperty( value: object, name: string = 'border' ) {
 		// Splitの場合.
 		Object.keys( value ).forEach( ( position: string ) => {
 			// @ts-ignore
-			const borderValue = value[ position ];
+			const borderValue = value[ position ] || {};
 			Object.keys( borderValue ).forEach( ( key: string ) => {
 				const cssValue = borderValue[ key ];
 				result = [

@@ -74,9 +74,9 @@ function getNewBorderOption(
 }
 
 function sanitizeBorder( border: FlatBorder ): FlatBorder {
-	if ( border && border?.color && border?.width ) {
-		if ( ! border?.style ) {
-			// 色と幅のみの指定の場合はsolidを自動で設定する.
+	if ( border ) {
+		// 色と幅のみの指定の場合はsolidを自動で設定する.
+		if ( ! border?.style && border?.color && border?.width ) {
 			border.style = 'solid';
 		}
 	}

@@ -31,12 +31,14 @@ export function EnablePseudoElements(
 			isFullWidth={ true }
 		>
 			<ToggleControl
+				className="mb-2"
 				label={ `${ type }${ __(
 					'を有効化する',
 					'ystandard-toolbox'
 				) }` }
 				checked={ value }
 				onChange={ handleOnChange }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
