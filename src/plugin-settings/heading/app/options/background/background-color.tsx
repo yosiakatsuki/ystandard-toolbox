@@ -35,6 +35,7 @@ export default function BackgroundColor( props: BackgroundColorProps ) {
 				label={ __( '背景色', 'ystandard-toolbox' ) }
 				value={ value }
 				onChange={ handleOnColorChange }
+				enableCurrentColor={ true }
 			/>
 			<ClearButton onClick={ () => handleOnColorChange( undefined ) } />
 		</BaseControl>

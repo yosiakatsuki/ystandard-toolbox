@@ -12,6 +12,8 @@ export interface BorderBoxControlProps {
 	disableCustomColors?: boolean;
 	enableAlpha?: boolean;
 	enableStyle?: boolean;
+	enableCurrentColor?: boolean;
+	enableTransparent?: boolean;
 }
 
 export default function BorderBoxControl( props: BorderBoxControlProps ) {
@@ -23,9 +25,14 @@ export default function BorderBoxControl( props: BorderBoxControlProps ) {
 		disableCustomColors = false,
 		enableAlpha = false,
 		enableStyle = true,
+		enableCurrentColor = false,
+		enableTransparent = false,
 	} = props;
 
-	const themeColors = useThemeColors();
+	const themeColors = useThemeColors( {
+		enableCurrentColor,
+		enableTransparent,
+	} );
 	const paletteColors = colors || themeColors;
 
 	return (

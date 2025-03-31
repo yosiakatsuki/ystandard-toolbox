@@ -47,6 +47,8 @@ export default function Border( props: BorderProps ) {
 						| FlatBorder
 				}
 				onChange={ handleOnChange }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
 			/>
 			<ClearButton onClick={ () => handleOnChange( undefined ) } />
 		</BaseControl>

@@ -18,6 +18,8 @@ interface ColorPaletteProps {
 	value: string;
 	onChange: ( value: string ) => void;
 	colors?: string[];
+	enableCurrentColor?: boolean;
+	enableTransparent?: boolean;
 }
 
 /**
@@ -25,8 +27,19 @@ interface ColorPaletteProps {
  * @param props
  */
 export function ColorPalette( props: ColorPaletteProps ) {
-	const { label, value, onChange, colors } = props;
-	const themeColors = useThemeColors();
+	const {
+		label,
+		value,
+		onChange,
+		colors,
+		enableCurrentColor = false,
+		enableTransparent = false,
+	} = props;
+	// テーマのカラー設定を取得.
+	const themeColors = useThemeColors( {
+		enableCurrentColor,
+		enableTransparent,
+	} );
 
 	const paletteColors = colors || themeColors;
 
