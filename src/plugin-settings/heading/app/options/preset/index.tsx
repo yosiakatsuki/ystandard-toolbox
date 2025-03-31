@@ -13,6 +13,7 @@ import {
 } from '@aktk/block-components/components/buttons';
 import { Modal } from '@aktk/block-components/components/modal';
 import { NoticeWarning } from '@aktk/block-components/components/notice';
+import { getIconSvg } from '@aktk/block-components/utils/icon';
 /**
  * Plugin Dependencies
  */
@@ -20,7 +21,11 @@ import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 /**
  * Types
  */
-import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
+import type {
+	HeadingOption,
+	HeadingStyle,
+	HeadingPseudoElementsStyle,
+} from '@aktk/plugin-settings/heading/types';
 // @ts-ignore
 import presetStyles from '../../../preset/preset.json';
 import PreviewStyle from '@aktk/plugin-settings/heading/app/preview/preview-style';
@@ -28,6 +33,9 @@ import PreviewStyle from '@aktk/plugin-settings/heading/app/preview/preview-styl
 import { HeadingContext } from '../../index';
 import { mergePreset } from './utils';
 
+/**
+ * プリセット.
+ */
 export default function Preset() {
 	const [ isModalOpen, setIsModalOpen ] = useState( false );
 	// @ts-ignore
@@ -112,6 +120,7 @@ function PresetList( props: PresetListProps ) {
 
 	// プリセット選択時の処理.
 	const handleOnClick = ( value: HeadingOption ) => {
+		console.log( value );
 		onSelect( value );
 	};
 
@@ -149,7 +158,8 @@ function PresetList( props: PresetListProps ) {
 			>
 				{ presetList &&
 					presetList.map( ( preset ) => {
-						const previewPreset = structuredClone( preset );
+						const selectPreset = createSelectPreset( preset );
+						const previewPreset = structuredClone( selectPreset );
 						const selector = `ystdtb-setting-heading__preset-preview-${ preset.slug }`;
 						return (
 							<div key={ preset.slug }>
@@ -157,7 +167,9 @@ function PresetList( props: PresetListProps ) {
 									className={
 										'block w-full !h-full rounded-2xl border border-solid border-aktk-border-light-gray p-4 text-left text-fz-s'
 									}
-									onClick={ () => handleOnClick( preset ) }
+									onClick={ () =>
+										handleOnClick( selectPreset )
+									}
 								>
 									<PreviewStyle
 										style={ previewPreset?.style }
@@ -166,7 +178,7 @@ function PresetList( props: PresetListProps ) {
 										selector={ selector }
 									/>
 									<div id={ selector } className="text-fz-xs">
-										プリセット : { preset.label }
+										{ preset.label }
 									</div>
 								</HasElementButton>
 							</div>
@@ -175,4 +187,17 @@ function PresetList( props: PresetListProps ) {
 			</div>
 		</>
 	);
+}
+
+function createSelectPreset( preset: HeadingOption ) {
+	const _preset = structuredClone( preset );
+
+	// アイコンの SVG をセット.
+	if ( _preset?.before && _preset?.before?.icon ) {
+		_preset.before.content = getIconSvg( _preset.before.icon );
+	}
+	if ( _preset?.after && _preset?.after?.icon ) {
+		_preset.after.content = getIconSvg( _preset.after.icon );
+	}
+	return _preset;
 }

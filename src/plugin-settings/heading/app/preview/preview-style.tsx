@@ -55,13 +55,17 @@ function getStyles( props: PreviewStyleProps ) {
  * @param styles
  */
 function parseStyles( styles: object ) {
+	// 空の場合は空のオブジェクトを返す.
 	if ( isEmpty( styles ) ) {
 		return {};
 	}
+
 	let desktop: any[] = [];
 	let tablet: any[] = [];
 	let mobile: any[] = [];
+
 	Object.keys( styles ).forEach( ( key: string ) => {
+		// キーをケバブケースに変換.
 		const property = kebabCase( key );
 		// @ts-ignore
 		let value = styles[ key ];
@@ -90,6 +94,7 @@ function parseStyles( styles: object ) {
 			value = parseLongHandStyle( value, property, parseSpacingProperty );
 		}
 
+		// デスクトップの場合.
 		if ( isArray( value.desktop ) ) {
 			desktop = [ ...desktop, ...value.desktop ];
 		} else if (
@@ -98,6 +103,7 @@ function parseStyles( styles: object ) {
 		) {
 			desktop = [ ...desktop, `${ property }: ${ value.desktop };` ];
 		}
+		// タブレットの場合.
 		if ( value?.tablet ) {
 			if ( isArray( value.tablet ) ) {
 				tablet = [ ...tablet, ...value.tablet ];
@@ -108,6 +114,7 @@ function parseStyles( styles: object ) {
 				tablet = [ ...tablet, `${ property }: ${ value.tablet };` ];
 			}
 		}
+		// モバイルの場合.
 		if ( value?.mobile ) {
 			if ( isArray( value.mobile ) ) {
 				mobile = [ ...mobile, ...value.mobile ];
