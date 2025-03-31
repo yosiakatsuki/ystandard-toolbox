@@ -6,6 +6,7 @@ const path = require( 'path' );
 module.exports = {
 	...defaultConfig,
 	entry: {
+		...defaultConfig.entry,
 		'plugin-settings': './src/plugin-settings/',
 		'ystdtb-settings-v2': './src/plugin-settings/start-page/',
 		'add-code': './src/plugin-settings/add-code/',

@@ -81,7 +81,7 @@
 		"watch:block:app": "wp-scripts start --config webpack.block-app.config.js",
 		"watch:block:v1": "wp-scripts start --config webpack.blocks.config.js",
 		"watch:block": "run-p watch:block:*",
-		"watch:plugin-settings": "wp-scripts start --config webpack.plugin-settings.config.js",
+		"watch:plugin-settings": "wp-scripts start --webpack-src-dir=src/plugin-settings --config webpack.plugin-settings.config.js",
 		"watch:js:app": "babel src/js/app --out-dir js/app -w -s",
 		"watch:js": "run-p watch:js:*",
 		"watch:css:postcss": "postcss temp/css/**/*.css --base temp/css --dir css --verbose -w",
