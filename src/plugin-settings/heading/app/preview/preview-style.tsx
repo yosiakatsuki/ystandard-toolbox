@@ -8,7 +8,7 @@ import {
 	isEmpty,
 	isObject,
 } from '@aktk/block-components/utils/object';
-import { isResponsiveValue } from '@aktk/components/responsive-values/utils';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 import type { CustomFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 /**
  * Plugin dependencies.
@@ -54,7 +54,7 @@ function getStyles( props: PreviewStyleProps ) {
  * スタイルの解析
  * @param styles
  */
-function parseStyles( styles: object ) {
+export function parseStyles( styles: object ) {
 	// 空の場合は空のオブジェクトを返す.
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -134,7 +134,9 @@ function parseStyles( styles: object ) {
 	} );
 }
 
-function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
+export function parseStylesPseudoElements(
+	styles: HeadingPseudoElementsStyle
+) {
 	if ( isEmpty( styles ) ) {
 		return {};
 	}
@@ -195,7 +197,7 @@ function parseStylesPseudoElements( styles: HeadingPseudoElementsStyle ) {
  * フォントサイズの設定か判定.
  * @param property
  */
-function isFontSize( property: string ) {
+export function isFontSize( property: string ) {
 	return 'font-size' === property;
 }
 
@@ -203,7 +205,7 @@ function isFontSize( property: string ) {
  * フォントサイズの解析.
  * @param value
  */
-function parseFontSizeStyle( value: CustomFontSize ) {
+export function parseFontSizeStyle( value: CustomFontSize ) {
 	// テーマ設定を使っている場合はプレビュー用にdesktopに値を設定する.
 	if ( value?.fontSize?.size ) {
 		let fontSize = value.fontSize.size;
@@ -221,7 +223,7 @@ function parseFontSizeStyle( value: CustomFontSize ) {
  * 枠線関連の設定か判定.
  * @param property
  */
-function isBorder( property: string ) {
+export function isBorder( property: string ) {
 	return 'border' === property;
 }
 
@@ -231,7 +233,7 @@ function isBorder( property: string ) {
  * @param property
  * @param parser
  */
-function parseLongHandStyle(
+export function parseLongHandStyle(
 	value: object,
 	property: string,
 	parser: ( style: object, name: string ) => string[]
@@ -263,7 +265,7 @@ function parseLongHandStyle(
  * @param value
  * @param name
  */
-function parseBorderProperty( value: object, name: string = 'border' ) {
+export function parseBorderProperty( value: object, name: string = 'border' ) {
 	let result: string[] = [];
 
 	if ( ! isObject( value ) ) {
@@ -298,7 +300,7 @@ function parseBorderProperty( value: object, name: string = 'border' ) {
  * 余白関連の設定か判定.
  * @param property
  */
-function isSpacing( property: string ) {
+export function isSpacing( property: string ) {
 	return 'padding' === property || 'margin' === property;
 }
 
@@ -307,7 +309,7 @@ function isSpacing( property: string ) {
  * @param value
  * @param name
  */
-function parseSpacingProperty( value: object, name: string ) {
+export function parseSpacingProperty( value: object, name: string ) {
 	let result: string[] = [];
 
 	if ( ! isObject( value ) ) {
@@ -329,7 +331,7 @@ function parseSpacingProperty( value: object, name: string ) {
  * @param styles.tablet
  * @param styles.mobile
  */
-function createCSS(
+export function createCSS(
 	styles: { desktop: any[]; tablet: any[]; mobile: any[] },
 	selector = 'ystdtb-setting-heading__preview-text'
 ) {
@@ -357,25 +359,25 @@ function createCSS(
 	return result;
 }
 
-function getBreakpoints( type: 'mobile' | 'tablet' | 'desktop' ) {
+export function getBreakpoints( type: 'mobile' | 'tablet' | 'desktop' ) {
 	const settings = getHeadingOptions();
 	const breakpoints = settings?.breakpoints || {};
 
 	return breakpoints[ type ];
 }
 
-function addMobileMediaQuery( style: string ) {
+export function addMobileMediaQuery( style: string ) {
 	const mobile = getBreakpoints( 'mobile' );
 	return addMediaQuery( style, '', mobile );
 }
 
-function addTabletMediaQuery( style: string ) {
+export function addTabletMediaQuery( style: string ) {
 	const mobile = getBreakpoints( 'mobile' );
 	const tablet = getBreakpoints( 'tablet' );
 	return addMediaQuery( style, mobile, tablet );
 }
 
-function addMediaQuery( style: string, min?: string, max?: string ) {
+export function addMediaQuery( style: string, min?: string, max?: string ) {
 	// max側の計算が簡易的。実際にPHPで出力されるものと少し違うが、管理画面側だけの話なのでそういう仕様とする。
 	if ( min && max ) {
 		return `@media (min-width: ${ min }) and (max-width: ${ max }) { ${ style } }`;

@@ -22,6 +22,10 @@ module.exports = {
 				__dirname,
 				'src/aktk-block-components'
 			),
+			'@aktk/plugin-settings': path.resolve(
+				__dirname,
+				'src/plugin-settings'
+			),
 		},
 	},
 };

@@ -5,6 +5,7 @@ module.exports = {
 	moduleNameMapper: {
 		'^@aktk/block-components/(.+)':
 			'<rootDir>/src/aktk-block-components/$1',
+		'^@aktk/plugin-settings/(.+)': '<rootDir>/src/plugin-settings/$1',
 		'\\.css$': 'identity-obj-proxy',
 	},
 	preset: '@wordpress/jest-preset-default',

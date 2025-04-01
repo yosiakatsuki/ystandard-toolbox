@@ -49,7 +49,7 @@ export function parseResponsiveValue(
 	} );
 
 	result = deleteUndefined( result );
-	if ( 0 === Object.keys( result ).length ) {
+	if ( ! isObject( result ) || 0 === Object.keys( result ).length ) {
 		return undefined;
 	}
 

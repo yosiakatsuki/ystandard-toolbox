@@ -25,10 +25,6 @@ module.exports = {
 		...pluginConfig.resolve,
 		alias: {
 			...pluginConfig.resolve.alias,
-			'@aktk/plugin-settings': path.resolve(
-				__dirname,
-				'src/plugin-settings'
-			),
 		},
 	},
 	performance: {
