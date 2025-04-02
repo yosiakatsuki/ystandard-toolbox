@@ -30,11 +30,21 @@ interface PreviewStyleProps {
 	selector?: string;
 }
 
+/**
+ * スタイルのプレビュー用のstyle要素を生成.
+ * @param props
+ * @returns
+ */
 export default function PreviewStyle( props: PreviewStyleProps ) {
 	const css = getStyles( props );
 	return <style dangerouslySetInnerHTML={ { __html: css } } />;
 }
 
+/**
+ * スタイルの生成
+ * @param props
+ * @returns
+ */
 function getStyles( props: PreviewStyleProps ) {
 	const styleProps = { ...props };
 	const style = parseStyles( styleProps?.style as unknown as object );
@@ -206,7 +216,7 @@ export function isFontSize( property: string ) {
  * @param value
  */
 export function parseFontSizeStyle( value: CustomFontSize ) {
-	// テーマ設定を使っている場合はプレビュー用にdesktopに値を設定する.
+	// テーマ設定を使っている場合はプレビュー用としてdesktopに値を設定する.
 	if ( value?.fontSize?.size ) {
 		let fontSize = value.fontSize.size;
 		// 数値型の場合、単位を追加する
