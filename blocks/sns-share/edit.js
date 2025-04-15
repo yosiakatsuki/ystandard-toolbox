@@ -92,7 +92,7 @@ const snsShare = ( props ) => {
 						title={__( 'デザイン', 'ystandard-toolbox' )}
 						initialOpen={true}
 					>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<div className="ystdtb__horizon-buttons">
 								{shareButtonsDesign.map( ( item ) => {
 									return (
@@ -134,7 +134,7 @@ const snsShare = ( props ) => {
 						)}
 						initialOpen={true}
 					>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<ToggleControl
 								label={__( 'X', 'ystandard-toolbox' )}
 								onChange={() => {
@@ -143,6 +143,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useX}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__( 'Twitter', 'ystandard-toolbox' )}
@@ -152,6 +153,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useTwitter}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__( 'Bluesky', 'ystandard-toolbox' )}
@@ -161,6 +163,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useBluesky}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__( 'Facebook', 'ystandard-toolbox' )}
@@ -170,6 +173,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useFacebook}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__(
@@ -182,6 +186,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useHatenaBookmark}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__( 'Pocket', 'ystandard-toolbox' )}
@@ -191,6 +196,7 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={usePocket}
+								__nextHasNoMarginBottom
 							/>
 							<ToggleControl
 								label={__( 'LINE', 'ystandard-toolbox' )}
@@ -200,11 +206,12 @@ const snsShare = ( props ) => {
 									} );
 								}}
 								checked={useLINE}
+								__nextHasNoMarginBottom
 							/>
 						</BaseControl>
 					</PanelBody>
 					<PanelBody title={__( 'テキスト', 'ystandard-toolbox' )}>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={__(
 									'上側テキスト',
@@ -216,9 +223,11 @@ const snsShare = ( props ) => {
 										labelBefore: value,
 									} );
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 						</BaseControl>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={__(
 									'下側テキスト',
@@ -230,6 +239,8 @@ const snsShare = ( props ) => {
 										labelAfter: value,
 									} );
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 						</BaseControl>
 					</PanelBody>
@@ -239,7 +250,7 @@ const snsShare = ( props ) => {
 							'ystandard-toolbox'
 						)}
 					>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={__(
 									'viaアカウント',
@@ -251,6 +262,8 @@ const snsShare = ( props ) => {
 										twitterVia: value,
 									} );
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 							<div className="ystdtb-block-dscr">
 								{__(
@@ -259,7 +272,7 @@ const snsShare = ( props ) => {
 								)}
 							</div>
 						</BaseControl>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={__(
 									'ツイート後に表示するおすすめアカウント',
@@ -271,6 +284,8 @@ const snsShare = ( props ) => {
 										twitterRelatedUser: value,
 									} );
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 							<div className="ystdtb-block-dscr">
 								{__(
@@ -279,7 +294,7 @@ const snsShare = ( props ) => {
 								)}
 							</div>
 						</BaseControl>
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={__(
 									'ハッシュタグ',
@@ -291,6 +306,8 @@ const snsShare = ( props ) => {
 										twitterHashTags: value,
 									} );
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 							<div className="ystdtb-block-dscr">
 								{__(
