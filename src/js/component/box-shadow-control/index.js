@@ -107,18 +107,21 @@ const BoxShadowControl = ( { label = undefined, value, onChange } ) => {
 						value={ value?.offsetX }
 						onChange={ handleOffsetXOnChange }
 						units={ units }
+						__next40pxDefaultSize
 					/>
 					<UnitControl
 						label={ __( 'Y方向', 'ystandard-toolbox' ) }
 						value={ value?.offsetY }
 						onChange={ handleOffsetYOnChange }
 						units={ units }
+						__next40pxDefaultSize
 					/>
 					<UnitControl
 						label={ __( 'ぼかし', 'ystandard-toolbox' ) }
 						value={ value?.blurRadius }
 						onChange={ handleBlurRadiusOnChange }
 						units={ units }
+						__next40pxDefaultSize
 					/>
 				</div>
 			</div>

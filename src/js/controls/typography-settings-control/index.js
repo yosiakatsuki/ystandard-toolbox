@@ -47,7 +47,7 @@ const TypographySettingsControl = ( { values, onChange } ) => {
 	};
 
 	return (
-		<BaseControl className={ 'ystdtb-typography-control' }>
+		<BaseControl className={ 'ystdtb-typography-control' } __nextHasNoMarginBottom>
 			<div className={ 'ystdtb-typography-control__row' }>
 				<div>
 					<FontWeightControl
@@ -67,12 +67,14 @@ const TypographySettingsControl = ( { values, onChange } ) => {
 					<BaseControl
 						id={ 'line-height' }
 						label={ __( 'line height', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<NumberControl
 							value={ _values.lineHeight }
 							onChange={ handleLineHeightOnChange }
 							step={ 0.1 }
 							shiftStep={ 0.5 }
+							__next40pxDefaultSize
 						/>
 					</BaseControl>
 				</div>

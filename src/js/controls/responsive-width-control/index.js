@@ -10,7 +10,7 @@ const ResponsiveWidthControl = ( { label, values, onChange, ...props } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ResponsiveValues
 				label={ label ? label : __( '幅', 'ystandard-toolbox' ) }
 				values={ values }

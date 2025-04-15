@@ -12,7 +12,7 @@ const TextColorControl = ( { id, value, onChange, label, ...props } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ColorPaletteControl
 				value={ _color }
 				onChange={ handleOnChange }

@@ -70,6 +70,7 @@ const ResponsiveFontSize = ( props ) => {
 										value={ valueDesktop }
 										onChange={ handleOnChangeDesktop }
 										__nextHasNoMarginBottom
+										__next40pxDefaultSize
 									/>
 								</div>
 							) }
@@ -87,6 +88,7 @@ const ResponsiveFontSize = ( props ) => {
 										value={ valueTablet }
 										onChange={ handleOnChangeTablet }
 										units={ _units }
+										__next40pxDefaultSize
 									/>
 									<ButtonReset
 										isDisable={ ! valueTablet }
@@ -110,6 +112,7 @@ const ResponsiveFontSize = ( props ) => {
 										value={ valueMobile }
 										onChange={ handleOnChangeMobile }
 										units={ _units }
+										__next40pxDefaultSize
 									/>
 									<ButtonReset
 										isDisable={ ! valueMobile }

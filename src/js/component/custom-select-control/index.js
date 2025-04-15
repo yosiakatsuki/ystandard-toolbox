@@ -23,6 +23,7 @@ const CustomSelectControl = ( {
 			value={ currentSelection }
 			onChange={ handleOnChange }
 			{ ...props }
+			__next40pxDefaultSize
 		/>
 	);
 };

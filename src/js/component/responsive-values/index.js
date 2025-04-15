@@ -68,6 +68,7 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 										value={ valueDesktop }
 										onChange={ handleOnChangeDesktop }
 										units={ _units }
+										__next40pxDefaultSize
 									/>
 									<ButtonReset
 										isDisable={ ! valueDesktop }
@@ -91,6 +92,7 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 										value={ valueTablet }
 										onChange={ handleOnChangeTablet }
 										units={ _units }
+										__next40pxDefaultSize
 									/>
 									<ButtonReset
 										isDisable={ ! valueTablet }
@@ -114,6 +116,7 @@ const ResponsiveValues = ( { label, values, onChange, units = undefined } ) => {
 										value={ valueMobile }
 										onChange={ handleOnChangeMobile }
 										units={ _units }
+										__next40pxDefaultSize
 									/>
 									<ButtonReset
 										isDisable={ ! valueMobile }

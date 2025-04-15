@@ -69,6 +69,7 @@ const ResponsiveSpacing = ( props ) => {
 										onChange={ handleOnChangeDesktop }
 										units={ _units }
 										inputProps={ inputProps }
+										__next40pxDefaultSize
 									/>
 								</div>
 							) }
@@ -88,6 +89,7 @@ const ResponsiveSpacing = ( props ) => {
 										onChange={ handleOnChangeTablet }
 										units={ _units }
 										inputProps={ inputProps }
+										__next40pxDefaultSize
 									/>
 								</div>
 							) }
@@ -107,6 +109,7 @@ const ResponsiveSpacing = ( props ) => {
 										onChange={ handleOnChangeMobile }
 										units={ _units }
 										inputProps={ inputProps }
+										__next40pxDefaultSize
 									/>
 								</div>
 							) }

@@ -8,6 +8,7 @@ const NumberControl = ( { value, onChange, step, shiftStep, ...props } ) => {
 			step={ step }
 			shiftStep={ shiftStep }
 			{ ...props }
+			__next40pxDefaultSize
 		/>
 	);
 };

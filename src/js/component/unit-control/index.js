@@ -8,6 +8,7 @@ const UnitControl = ( { label, value, onChange, units, ...props } ) => {
 			onChange={ onChange }
 			units={ units }
 			{ ...props }
+			__next40pxDefaultSize
 		/>
 	);
 };
