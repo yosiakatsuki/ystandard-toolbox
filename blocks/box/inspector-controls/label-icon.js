@@ -11,6 +11,7 @@ const LabelIcon = ( props ) => {
 		<BaseControl
 			id={ 'label-icon' }
 			label={ __( 'アイコン', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<SVGIconSelect
 				iconControlTitle={ '' }

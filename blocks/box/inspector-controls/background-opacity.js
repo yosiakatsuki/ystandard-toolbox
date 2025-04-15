@@ -11,7 +11,7 @@ const BackgroundOpacity = ( props ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<RangeControl
 				label={ __( '背景色の不透明度', 'ystandard-toolbox' ) }
 				value={ backgroundImageCoverOpacity }
@@ -19,6 +19,8 @@ const BackgroundOpacity = ( props ) => {
 				min={ 0 }
 				max={ 1 }
 				step={ 0.1 }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

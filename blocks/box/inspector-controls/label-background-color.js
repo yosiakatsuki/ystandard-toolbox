@@ -10,6 +10,7 @@ const LabelBackgroundColor = ( props ) => {
 		<BaseControl
 			id={ 'label-background-color' }
 			label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ColorPalette
 				colors={ colors }

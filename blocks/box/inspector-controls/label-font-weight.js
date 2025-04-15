@@ -11,6 +11,7 @@ const LabelFontWeight = ( props ) => {
 		<BaseControl
 			id={ 'label-font-weight' }
 			label={ __( '文字の太さ', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<div className="ystdtb__horizon-buttons">
 				{ fontWeightList.map( ( item ) => {

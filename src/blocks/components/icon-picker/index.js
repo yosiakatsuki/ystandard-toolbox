@@ -36,7 +36,7 @@ class SVGIconSelect extends Component {
 					<div style={ customInfoStyle }>{ customInfo }</div>
 				) }
 				{ !! onChangePosition && (
-					<BaseControl>
+					<BaseControl __nextHasNoMarginBottom>
 						<div className="ystdb-inspector-controls__label">
 							{ __( 'アイコン表示位置', 'ystandard-blocks' ) }
 						</div>
@@ -58,7 +58,7 @@ class SVGIconSelect extends Component {
 						</div>
 					</BaseControl>
 				) }
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<div className="ystdb-inspector-controls__label">
 						{ iconBaseControlTitle }
 					</div>

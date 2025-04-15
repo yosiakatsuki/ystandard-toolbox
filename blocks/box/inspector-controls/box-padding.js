@@ -21,8 +21,9 @@ const BoxPadding = ( props ) => {
 		<BaseControl
 			id={ 'box-padding' }
 			label={ __( '余白設定', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
-			<BaseControl>
+			<BaseControl __nextHasNoMarginBottom>
 				<BoxControl
 					label={ __( 'ボックス内側余白', 'ystandard-toolbox' ) }
 					values={ getResponsiveProperty( boxPadding, 'desktop' ) }
@@ -35,6 +36,7 @@ const BoxPadding = ( props ) => {
 						} );
 					} }
 					units={ units }
+					__next40pxDefaultSize
 				/>
 				<ToggleControl
 					label={ __(
@@ -55,10 +57,11 @@ const BoxPadding = ( props ) => {
 						} );
 					} }
 					checked={ isResponsiveBoxPadding }
+					__nextHasNoMarginBottom
 				/>
 			</BaseControl>
 			{ isResponsiveBoxPadding && (
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<BoxControl
 						label={ __( 'タブレット', 'ystandard-toolbox' ) }
 						values={ getResponsiveProperty( boxPadding, 'tablet' ) }
@@ -71,6 +74,7 @@ const BoxPadding = ( props ) => {
 							} );
 						} }
 						units={ units }
+						__next40pxDefaultSize
 					/>
 					<BoxControl
 						label={ __( 'モバイル', 'ystandard-toolbox' ) }
@@ -84,6 +88,7 @@ const BoxPadding = ( props ) => {
 							} );
 						} }
 						units={ units }
+						__next40pxDefaultSize
 					/>
 				</BaseControl>
 			) }

@@ -14,7 +14,7 @@ const BackgroundImage = ( props ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<MediaUploadControl
 				media={ backgroundImage }
 				onSelect={ handleOnSelect }

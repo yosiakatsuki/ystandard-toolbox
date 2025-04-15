@@ -15,6 +15,7 @@ const LabelBorderRadius = ( props ) => {
 		<BaseControl
 			id={ 'label-border-radius' }
 			label={ __( '角丸', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<UnitControl
 				value={ labelBorderRadius }
@@ -24,6 +25,7 @@ const LabelBorderRadius = ( props ) => {
 					} );
 				} }
 				units={ units }
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

@@ -11,6 +11,7 @@ const LabelText = ( props ) => {
 		<BaseControl
 			id={ 'label' }
 			label={ __( 'ラベルテキスト', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<PlainText
 				value={ label }
