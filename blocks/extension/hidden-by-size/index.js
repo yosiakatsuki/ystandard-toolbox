@@ -135,6 +135,7 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 							) }
 							checked={ ystdtbIsHiddenMobile }
 							onChange={ handleOnChangeIsHiddenMobile }
+							__nextHasNoMarginBottom
 						/>
 
 						<ToggleControl
@@ -144,12 +145,14 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 							) }
 							checked={ ystdtbIsHiddenTablet }
 							onChange={ handleOnChangeIsHiddenTablet }
+							__nextHasNoMarginBottom
 						/>
 
 						<ToggleControl
 							label={ __( 'PCで非表示', 'ystandard-toolbox' ) }
 							checked={ ystdtbIsHiddenDesktop }
 							onChange={ handleOnChangeIsHiddenDesktop }
+							__nextHasNoMarginBottom
 						/>
 					</PanelBody>
 				</InspectorControls>
