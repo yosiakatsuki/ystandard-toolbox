@@ -126,7 +126,7 @@ function FAQItem( props ) {
 					title={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
 					initialOpen={ false }
 				>
-					<BaseControl id={ 'sample-design' }>
+					<BaseControl id={ 'sample-design' } __nextHasNoMarginBottom>
 						<div>
 							{ designPreset.map( ( item ) => {
 								return (
@@ -211,6 +211,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'label-position' }
 						label={ __( 'ラベル表示位置', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<div className="ystdtb__horizon-buttons">
 							{ labelPositions.map( ( item ) => {
@@ -238,6 +239,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'label-size' }
 						label={ __( 'ラベルサイズ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<FontSizePicker
 							value={ labelSize.size }
@@ -245,11 +247,13 @@ function FAQItem( props ) {
 								setLabelSize( font );
 							} }
 							__nextHasNoMarginBottom
+							__next40pxDefaultSize
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-contents-weight' }
 						label={ __( '文字の太さ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ToggleControl
 							label={ __( '太字にする', 'ystandard-toolbox' ) }
@@ -259,11 +263,13 @@ function FAQItem( props ) {
 								} );
 							} }
 							checked={ labelBold }
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-color' }
 						label={ __( '文字色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -277,6 +283,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'label-color' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -290,6 +297,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'label-border-radius' }
 						label={ __( '角丸', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<RangeControl
 							value={
@@ -304,11 +312,14 @@ function FAQItem( props ) {
 							max={ 100 }
 							step={ 1 }
 							allowReset={ true }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-border-size' }
 						label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<RangeControl
 							value={
@@ -323,11 +334,14 @@ function FAQItem( props ) {
 							max={ 10 }
 							step={ 1 }
 							allowReset={ true }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-border-color' }
 						label={ __( '枠線の色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -343,6 +357,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'basic-background-color' }
 						label={ __( '文字色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -356,6 +371,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'basic-background-color' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -369,6 +385,7 @@ function FAQItem( props ) {
 					<BaseControl
 						id={ 'basic-border-type' }
 						label={ __( '枠線タイプ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<div className="ystdtb__horizon-buttons">
 							{ faqBorderTypes.map( ( item ) => {
@@ -412,6 +429,7 @@ function FAQItem( props ) {
 									'枠線サイズ',
 									'ystandard-toolbox'
 								) }
+								__nextHasNoMarginBottom
 							>
 								<RangeControl
 									value={
@@ -428,11 +446,14 @@ function FAQItem( props ) {
 									max={ 10 }
 									step={ 1 }
 									allowReset={ true }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							</BaseControl>
 							<BaseControl
 								id={ 'basic-border-color' }
 								label={ __( '枠線の色', 'ystandard-toolbox' ) }
+								__nextHasNoMarginBottom
 							>
 								<ColorPalette
 									colors={ colors }
