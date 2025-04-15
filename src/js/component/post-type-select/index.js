@@ -27,6 +27,8 @@ const PostTypeSelect = ( { label, value, onChange } ) => {
 			value={ value }
 			options={ postTypesOptions }
 			onChange={ handleOnChange }
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
 		/>
 	);
 };

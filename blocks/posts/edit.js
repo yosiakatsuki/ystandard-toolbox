@@ -48,6 +48,8 @@ const Posts = ( props ) => {
 							} }
 							min={ 1 }
 							max={ 6 }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 						<RangeControl
 							label={ __( 'タブレット', 'ystandard-toolbox' ) }
@@ -60,6 +62,8 @@ const Posts = ( props ) => {
 							} }
 							min={ 1 }
 							max={ 6 }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 						<RangeControl
 							label={ __( 'モバイル', 'ystandard-toolbox' ) }
@@ -72,6 +76,8 @@ const Posts = ( props ) => {
 							} }
 							min={ 1 }
 							max={ 6 }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</PanelBody>
 					<PanelThumbnail { ...props } />
@@ -93,6 +99,7 @@ const Posts = ( props ) => {
 								} );
 							} }
 							checked={ showDate }
+							__nextHasNoMarginBottom
 						/>
 						<ToggleControl
 							label={ __(
@@ -105,6 +112,7 @@ const Posts = ( props ) => {
 								} );
 							} }
 							checked={ showCategory }
+							__nextHasNoMarginBottom
 						/>
 						{ 'simple' !== listType && (
 							<>
@@ -119,6 +127,7 @@ const Posts = ( props ) => {
 										} );
 									} }
 									checked={ showExcerpt }
+									__nextHasNoMarginBottom
 								/>
 								<BlockOption.ExcerptLength { ...props } />
 							</>

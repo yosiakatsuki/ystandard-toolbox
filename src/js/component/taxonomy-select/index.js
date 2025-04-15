@@ -35,6 +35,8 @@ const TaxonomySelect = ( { label, value, postType, onChange } ) => {
 			value={ value }
 			options={ options }
 			onChange={ handleOnChange }
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
 		/>
 	);
 };

@@ -13,11 +13,13 @@ const PostId = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<TextControl
 				label={ __( '投稿ID指定', 'ystandard-toolbox' ) }
 				value={ postIn }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

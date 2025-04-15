@@ -24,7 +24,7 @@ const ListDesign = ( { attributes, setAttributes } ) => {
 	}
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ResponsiveTab
 				label={ __( 'デザイン', 'ystandard-toolbox' ) }
 				hasTablet={ false }
@@ -39,6 +39,8 @@ const ListDesign = ( { attributes, setAttributes } ) => {
 									onChange={ ( value ) => {
 										setAttributes( { listType: value } );
 									} }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							) }
 							{ tabType.mobile === tab.name && (
@@ -50,6 +52,8 @@ const ListDesign = ( { attributes, setAttributes } ) => {
 											listTypeMobile: value,
 										} );
 									} }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							) }
 						</>

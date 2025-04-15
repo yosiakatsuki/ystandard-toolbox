@@ -27,7 +27,7 @@ const Orderby = ( { attributes, setAttributes } ) => {
 	const { orderby, order } = attributes;
 	const orderSelected = `${ orderby }/${ order }`;
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<SelectControl
 				label={ __( '並び順', 'ystandard-toolbox' ) }
 				value={ orderSelected }
@@ -39,6 +39,8 @@ const Orderby = ( { attributes, setAttributes } ) => {
 						order: _order[ 1 ],
 					} );
 				} }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

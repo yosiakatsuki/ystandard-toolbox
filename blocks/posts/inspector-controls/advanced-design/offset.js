@@ -15,7 +15,7 @@ const Offset = ( { attributes, setAttributes } ) => {
 		return 0 < _value ? _value : undefined;
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ResponsiveTab
 				label={ __( '表示開始位置', 'ystandard-toolbox' ) }
 				hasTablet={ false }
@@ -31,6 +31,7 @@ const Offset = ( { attributes, setAttributes } ) => {
 											offset: sanitize( value ),
 										} );
 									} }
+									__next40pxDefaultSize
 								/>
 							) }
 							{ tabType.mobile === tab.name && (
@@ -41,6 +42,7 @@ const Offset = ( { attributes, setAttributes } ) => {
 											offsetMobile: sanitize( value ),
 										} );
 									} }
+									__next40pxDefaultSize
 								/>
 							) }
 						</>

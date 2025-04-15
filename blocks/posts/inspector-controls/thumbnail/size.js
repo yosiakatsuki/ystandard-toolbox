@@ -22,12 +22,14 @@ const Size = ( { attributes, setAttributes } ) => {
 		setAttributes( { thumbnailSize: newValue } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<SelectControl
 				label={ __( '画像サイズ', 'ystandard-toolbox' ) }
 				value={ thumbnailSize }
 				options={ imageSizesOptions }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
