@@ -64,6 +64,7 @@ function FAQ( props ) {
 					<BaseControl
 						id={ 'accordion' }
 						label={ __( '開閉設定', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ToggleControl
 							label={ __( '開閉式にする', 'ystandard-toolbox' ) }
@@ -73,6 +74,7 @@ function FAQ( props ) {
 								} );
 							} }
 							checked={ isAccordion }
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					{ isAccordion && (
@@ -82,6 +84,7 @@ function FAQ( props ) {
 								'開閉ボタンの色',
 								'ystandard-toolbox'
 							) }
+							__nextHasNoMarginBottom
 						>
 							<ColorPalette
 								colors={ colors }
@@ -102,6 +105,7 @@ function FAQ( props ) {
 					<BaseControl
 						id={ 'background-color' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -115,6 +119,7 @@ function FAQ( props ) {
 					<BaseControl
 						id={ 'border-type' }
 						label={ __( '枠線タイプ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<div className="ystdtb__horizon-buttons">
 							{ faqBorderTypes.map( ( item ) => {
@@ -149,6 +154,7 @@ function FAQ( props ) {
 									'枠線サイズ',
 									'ystandard-toolbox'
 								) }
+								__nextHasNoMarginBottom
 							>
 								<RangeControl
 									value={
@@ -163,11 +169,14 @@ function FAQ( props ) {
 									max={ 10 }
 									step={ 1 }
 									allowReset={ true }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							</BaseControl>
 							<BaseControl
 								id={ 'border-color' }
 								label={ __( '枠線の色', 'ystandard-toolbox' ) }
+								__nextHasNoMarginBottom
 							>
 								<ColorPalette
 									colors={ colors }
