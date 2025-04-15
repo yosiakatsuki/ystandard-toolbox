@@ -12,7 +12,7 @@ const BoxBorderRadius = ( props ) => {
 	const { boxBorderRadius } = attributes;
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<UnitControl
 				label={ __( '枠線角丸', 'ystandard-toolbox' ) }
 				value={ boxBorderRadius }
@@ -22,6 +22,7 @@ const BoxBorderRadius = ( props ) => {
 					} );
 				} }
 				units={ units }
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

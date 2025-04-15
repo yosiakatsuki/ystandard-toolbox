@@ -10,6 +10,7 @@ const BoxBorderColor = ( props ) => {
 		<BaseControl
 			id={ 'box-border-color' }
 			label={ __( 'ボックス枠線色', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ColorPalette
 				colors={ colors }

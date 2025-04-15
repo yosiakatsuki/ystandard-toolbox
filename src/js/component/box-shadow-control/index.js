@@ -57,7 +57,7 @@ const BoxShadowControl = ( { label = undefined, value, onChange } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<div className="ystdtb-box-shadow-control">
 				<div className="ystdtb-box-shadow-control__header">
 					<div className="ystdtb-box-shadow-control__label">

@@ -9,7 +9,7 @@ const BoxBorderStyle = ( props ) => {
 	const { boxBorderStyle } = attributes;
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<SelectControl
 				label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
 				value={ boxBorderStyle }
@@ -19,6 +19,8 @@ const BoxBorderStyle = ( props ) => {
 						boxBorderStyle: value,
 					} );
 				} }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
