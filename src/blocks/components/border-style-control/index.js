@@ -45,6 +45,7 @@ const BorderStyleControl = ( {
 			onChange={ handleOnChange }
 			{ ...props }
 			__nextUnconstrainedWidth
+			__next40pxDefaultSize
 		/>
 	);
 };

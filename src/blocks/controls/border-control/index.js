@@ -105,21 +105,22 @@ const BorderControl = ( { value, onChange, id, label } ) => {
 		} );
 	};
 	return (
-		<BaseControl id={ _id } label={ label }>
+		<BaseControl id={ _id } label={ label } __nextHasNoMarginBottom>
 			<div className="ystdtb-component-border-control">
 				<div className="ystdtb-component-border-control__columns">
 					<div className="ystdtb-component-border-control__column">
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<UnitControl
 								label={ __( '太さ', 'ystandard-toolbox' ) }
 								value={ value?.width }
 								onChange={ handleWidthOnChange }
 								units={ [ { value: 'px', label: 'px' } ] }
+								__next40pxDefaultSize
 							/>
 						</BaseControl>
 					</div>
 					<div className="ystdtb-component-border-control__column">
-						<BaseControl>
+						<BaseControl __nextHasNoMarginBottom>
 							<BorderStyleControl
 								label={ __( 'スタイル', 'ystandard-toolbox' ) }
 								value={ value?.style ?? 'solid' }
@@ -128,7 +129,7 @@ const BorderControl = ( { value, onChange, id, label } ) => {
 						</BaseControl>
 					</div>
 				</div>
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<ColorPaletteControl
 						value={ value?.color?.hex }
 						onChange={ handleColorOnChange }

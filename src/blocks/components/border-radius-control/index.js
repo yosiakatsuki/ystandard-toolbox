@@ -9,6 +9,7 @@ const BorderRadiusControl = ( { label, value, onChange, units } ) => {
 			value={ value }
 			onChange={ onChange }
 			units={ _units }
+			__next40pxDefaultSize
 		/>
 	);
 };

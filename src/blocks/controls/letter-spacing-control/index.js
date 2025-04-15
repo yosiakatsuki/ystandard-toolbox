@@ -19,6 +19,7 @@ const LetterSpacingControl = ( { value, onChange } ) => {
 		<BaseControl
 			id={ 'letter-Spacing' }
 			label={ __( 'letter Spacing', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<UnitControl
 				value={ value }
@@ -28,6 +29,7 @@ const LetterSpacingControl = ( { value, onChange } ) => {
 					setCurrentUnit( newSelectedUnit );
 				} }
 				step={ selectedUnit?.step || 1 }
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

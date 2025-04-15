@@ -10,7 +10,7 @@ const ResponsiveFontSizeControl = ( { label, values, onChange, ...props } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ResponsiveFontSize
 				label={
 					label ? label : __( 'フォントサイズ', 'ystandard-toolbox' )

@@ -6,7 +6,7 @@ import { hasObjectKey } from '@aktk/helper/object';
 const BackgroundColorControl = ( { value, onChange, label, ...props } ) => {
 	const _color = hasObjectKey( value, 'color' ) ? value.color : value;
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ColorGradientControl
 				label={ label ? label : __( '背景色', 'ystandard-toolbox' ) }
 				colorValue={ _color }

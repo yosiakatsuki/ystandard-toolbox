@@ -44,6 +44,7 @@ const FontStyleControl = ( {
 			onChange={ handleOnChange }
 			{ ...props }
 			__nextUnconstrainedWidth
+			__next40pxDefaultSize
 		/>
 	);
 };
