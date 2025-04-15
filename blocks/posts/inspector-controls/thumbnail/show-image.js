@@ -12,11 +12,12 @@ const ShowImage = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ToggleControl
 				label={ __( '画像を表示する', 'ystandard-toolbox' ) }
 				onChange={ handleOnChange }
 				checked={ showImg }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

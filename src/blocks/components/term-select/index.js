@@ -41,6 +41,8 @@ const TermSelect = ( { label, value, taxonomy, onChange } ) => {
 			value={ value }
 			options={ options }
 			onChange={ handleOnChange }
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
 		/>
 	);
 };

@@ -24,7 +24,7 @@ const PostParent = ( { attributes, setAttributes } ) => {
 	return (
 		<>
 			{ isHierarchical && (
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<PostParentSelect
 						label={ __( '親ページ指定', 'ystandard-toolbox' ) }
 						postType={ postType }

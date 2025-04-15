@@ -16,7 +16,7 @@ const PostType = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<PostTypeSelect
 				label={ __( '投稿タイプ', 'ystandard-toolbox' ) }
 				value={ postType }
