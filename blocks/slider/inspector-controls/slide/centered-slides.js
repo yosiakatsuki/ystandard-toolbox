@@ -23,6 +23,7 @@ const CenteredSlides = ( { type, attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'BaseControl' }
 			label={ __( 'スライドの中央表示', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ToggleControl
 				label={ __(
@@ -31,6 +32,7 @@ const CenteredSlides = ( { type, attributes, setAttributes } ) => {
 				) }
 				onChange={ handleOnChange }
 				checked={ centeredSlides ?? false }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

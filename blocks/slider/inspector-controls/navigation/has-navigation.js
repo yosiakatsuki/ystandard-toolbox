@@ -7,7 +7,7 @@ const HasNavigation = ( { attributes, setAttributes } ) => {
 		setAttributes( { hasNavigation: value } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ToggleControl
 				label={ __(
 					'矢印(ナビゲーション)を表示する',
@@ -15,6 +15,7 @@ const HasNavigation = ( { attributes, setAttributes } ) => {
 				) }
 				onChange={ handleOnChange }
 				checked={ hasNavigation ?? false }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

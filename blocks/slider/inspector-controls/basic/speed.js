@@ -10,6 +10,7 @@ const Speed = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'speed' }
 			label={ __( 'スライドの速さ(秒)', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<RangeControl
 				value={ speed }
@@ -19,6 +20,8 @@ const Speed = ( { attributes, setAttributes } ) => {
 				max={ 100 }
 				step={ 0.1 }
 				allowReset={ true }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

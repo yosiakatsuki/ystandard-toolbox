@@ -7,6 +7,7 @@ const Color = ( { navigationColor, setNavigationColor } ) => {
 		<BaseControl
 			id={ 'navigationColor' }
 			label={ __( '色', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ColorPaletteControl
 				value={ navigationColor.color }

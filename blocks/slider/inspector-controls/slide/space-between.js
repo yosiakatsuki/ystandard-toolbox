@@ -24,6 +24,7 @@ const SpaceBetween = ( { type, attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'BaseControl' }
 			label={ __( 'スライド間の余白', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<UnitControl
 				value={ spaceBetween }

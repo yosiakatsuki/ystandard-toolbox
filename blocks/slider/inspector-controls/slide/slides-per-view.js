@@ -21,6 +21,7 @@ const SlidesPerView = ( { type, attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'BaseControl' }
 			label={ __( '1画面に表示するスライド数', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<RangeControl
 				value={ slidesPerView }
@@ -29,6 +30,8 @@ const SlidesPerView = ( { type, attributes, setAttributes } ) => {
 				min={ 1 }
 				max={ 6 }
 				allowReset={ true }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

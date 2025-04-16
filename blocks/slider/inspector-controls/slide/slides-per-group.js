@@ -21,6 +21,7 @@ const SlidesPerGroup = ( { type, attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'BaseControl' }
 			label={ __( 'グループ化するスライド数', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<RangeControl
 				value={ slidesPerGroup }
@@ -29,6 +30,8 @@ const SlidesPerGroup = ( { type, attributes, setAttributes } ) => {
 				min={ 1 }
 				max={ 6 }
 				allowReset={ true }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
