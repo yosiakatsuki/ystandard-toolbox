@@ -13,6 +13,7 @@ export const supports = {
 	lightBlockWrapper: true,
 	fontSize: false,
 	color: false,
+	splitting:true,
 };
 
 export const blockClassName = 'ystdtb-icon-list-item';

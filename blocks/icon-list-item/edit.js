@@ -23,7 +23,7 @@ function IconListItem( props ) {
 					title={ __( 'リスト', 'ystandard-toolbox' ) }
 					initialOpen={ true }
 				>
-					<BaseControl>
+					<BaseControl __nextHasNoMarginBottom>
 						<p>
 							リストアイテムに設定はありません。アイコンリストブロック（親ブロック）から設定を変更してください。
 						</p>
@@ -39,12 +39,6 @@ function IconListItem( props ) {
 				value={ content }
 				placeholder={ __( 'テキストを入力…', 'ystandard-toolbox' ) }
 				onMerge={ mergeBlocks }
-				onSplit={ ( value ) =>
-					createBlock( 'ystdtb/icon-list-item', {
-						...attributes,
-						content: value,
-					} )
-				}
 				onReplace={ onReplace }
 				onRemove={ () => onReplace( [] ) }
 				type="li"

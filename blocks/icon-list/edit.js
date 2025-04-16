@@ -41,6 +41,7 @@ function IconList( props ) {
 					<BaseControl
 						id={ 'icon-color' }
 						label={ __( 'アイコン色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -54,6 +55,7 @@ function IconList( props ) {
 					<BaseControl
 						id={ 'icon-bold' }
 						label={ __( 'アイコン太さ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ToggleControl
 							label={ __(
@@ -66,6 +68,7 @@ function IconList( props ) {
 								} );
 							} }
 							checked={ iconBold }
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 				</PanelBody>
