@@ -13,7 +13,7 @@ const Height = ( { attributes, setAttributes } ) => {
 	return (
 		<>
 			{ ! ratio && (
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<ResponsiveValues
 						label={ __( '高さ', 'ystandard-toolbox' ) }
 						values={ height }

@@ -7,7 +7,7 @@ const DisableOnInteraction = ( { attributes, setAttributes } ) => {
 		setAttributes( { autoplayDisableOnInteraction: value } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ToggleControl
 				label={ __(
 					'手動スライドで再生を止める',
@@ -15,6 +15,7 @@ const DisableOnInteraction = ( { attributes, setAttributes } ) => {
 				) }
 				onChange={ handleOnChange }
 				checked={ autoplayDisableOnInteraction ?? true }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

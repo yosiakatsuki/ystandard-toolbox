@@ -36,6 +36,8 @@ const RatioSizeControl = ( {
 				value={ value }
 				onChange={ handleOnChange }
 				options={ _options }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</div>
 	);

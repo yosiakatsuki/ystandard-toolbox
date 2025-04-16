@@ -47,6 +47,7 @@ const SlideFunction = ( { attributes, setAttributes } ) => {
 				<BaseControl
 					id={ 'slide-function' }
 					label={ __( 'スライド効果', 'ystandard-toolbox' ) }
+					__nextHasNoMarginBottom
 				>
 					<CustomSelectControl
 						value={ _slideFunction }

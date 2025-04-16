@@ -7,7 +7,7 @@ const ReverseDirection = ( { attributes, setAttributes } ) => {
 		setAttributes( { autoplayReverseDirection: value } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ToggleControl
 				label={ __(
 					'再生順を逆方向にする',
@@ -15,6 +15,7 @@ const ReverseDirection = ( { attributes, setAttributes } ) => {
 				) }
 				onChange={ handleOnChange }
 				checked={ autoplayReverseDirection ?? true }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

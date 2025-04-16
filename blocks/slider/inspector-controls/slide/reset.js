@@ -16,7 +16,7 @@ const Reset = ( { type, attributes, setAttributes } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<div className="ystdtb-slider__slide-option-reset">
 				<Button
 					isDestructive

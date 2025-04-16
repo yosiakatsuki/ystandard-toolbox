@@ -10,11 +10,13 @@ const Loop = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'loop' }
 			label={ __( 'ループ再生', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ToggleControl
 				label={ __( 'スライドをループする', 'ystandard-toolbox' ) }
 				onChange={ handleOnChange }
 				checked={ loop ?? true }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

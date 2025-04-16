@@ -12,6 +12,7 @@ const Color = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'paginationColor' }
 			label={ __( '色', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ColorPaletteControl
 				value={ paginationColor }
