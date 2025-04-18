@@ -317,6 +317,282 @@ describe( 'parseStyles', () => {
 			expect( result.mobile ).not.toContain( 'text-decoration:' );
 		} );
 	} );
+
+	describe( 'backgroundColor', () => {
+		it( 'backgroundColorが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'background-color:' );
+			expect( result.tablet ).not.toContain( 'background-color:' );
+			expect( result.mobile ).not.toContain( 'background-color:' );
+		} );
+		it( 'backgroundColorがある場合', () => {
+			const styles = {
+				backgroundColor: '#ffffff',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'background-color: #ffffff;' );
+			expect( result.tablet ).not.toContain( 'background-color:' );
+			expect( result.mobile ).not.toContain( 'background-color:' );
+		} );
+	} );
+
+	describe( 'backgroundImage', () => {
+		it( 'backgroundImageが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'background-image:' );
+			expect( result.tablet ).not.toContain( 'background-image:' );
+			expect( result.mobile ).not.toContain( 'background-image:' );
+		} );
+		it( 'backgroundImageがある場合', () => {
+			const styles = {
+				backgroundImage: 'https://example.com/test.jpg',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain(
+				'background-image: url("https://example.com/test.jpg");'
+			);
+			expect( result.tablet ).not.toContain( 'background-image:' );
+			expect( result.mobile ).not.toContain( 'background-image:' );
+		} );
+	} );
+
+	describe( 'backgroundPosition', () => {
+		it( 'backgroundPositionが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'background-position:' );
+			expect( result.tablet ).not.toContain( 'background-position:' );
+			expect( result.mobile ).not.toContain( 'background-position:' );
+		} );
+		it( 'backgroundPositionがある場合', () => {
+			const styles = {
+				backgroundPosition: 'center center',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain(
+				'background-position: center center;'
+			);
+			expect( result.tablet ).not.toContain( 'background-position:' );
+			expect( result.mobile ).not.toContain( 'background-position:' );
+		} );
+
+		it( 'backgroundPositionのカスタム指定', () => {
+			const styles = {
+				backgroundPosition: '100%',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'background-position: 100%;' );
+			expect( result.tablet ).not.toContain( 'background-position:' );
+			expect( result.mobile ).not.toContain( 'background-position:' );
+		} );
+	} );
+
+	describe( 'backgroundRepeat', () => {
+		it( 'backgroundRepeatが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'background-repeat:' );
+			expect( result.tablet ).not.toContain( 'background-repeat:' );
+			expect( result.mobile ).not.toContain( 'background-repeat:' );
+		} );
+		it( 'backgroundRepeatがある場合', () => {
+			const styles = {
+				backgroundRepeat: 'no-repeat',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain(
+				'background-repeat: no-repeat;'
+			);
+			expect( result.tablet ).not.toContain( 'background-repeat:' );
+			expect( result.mobile ).not.toContain( 'background-repeat:' );
+		} );
+	} );
+
+	describe( 'backgroundSize', () => {
+		it( 'backgroundSizeが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'background-size:' );
+			expect( result.tablet ).not.toContain( 'background-size:' );
+			expect( result.mobile ).not.toContain( 'background-size:' );
+		} );
+		it( 'backgroundSizeがある場合', () => {
+			const styles = {
+				backgroundSize: 'cover',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'background-size: cover;' );
+			expect( result.tablet ).not.toContain( 'background-size:' );
+			expect( result.mobile ).not.toContain( 'background-size:' );
+		} );
+		it( 'backgroundSizeのカスタム指定', () => {
+			const styles = {
+				backgroundSize: '10px 20px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'background-size: 10px 20px;' );
+			expect( result.tablet ).not.toContain( 'background-size:' );
+			expect( result.mobile ).not.toContain( 'background-size:' );
+		} );
+	} );
+
+	describe( 'border', () => {
+		it( 'borderが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'border:' );
+			expect( result.tablet ).not.toContain( 'border:' );
+			expect( result.mobile ).not.toContain( 'border:' );
+		} );
+		it( 'SplitBordersタイプの場合', () => {
+			const styles = {
+				border: {
+					top: {
+						color: '#000000',
+						style: 'solid',
+						width: '1px',
+					},
+					right: {
+						color: '#111111',
+						style: 'dotted',
+						width: '2px',
+					},
+					bottom: {
+						color: '#222222',
+						style: 'dashed',
+						width: '3px',
+					},
+					left: {
+						color: '#333333',
+						style: 'double',
+						width: '4px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-top-color: #000000;' );
+			expect( result.desktop ).toContain( 'border-top-style: solid;' );
+			expect( result.desktop ).toContain( 'border-top-width: 1px;' );
+			expect( result.desktop ).toContain(
+				'border-right-color: #111111;'
+			);
+			expect( result.desktop ).toContain( 'border-right-style: dotted;' );
+			expect( result.desktop ).toContain( 'border-right-width: 2px;' );
+			expect( result.desktop ).toContain(
+				'border-bottom-color: #222222;'
+			);
+			expect( result.desktop ).toContain(
+				'border-bottom-style: dashed;'
+			);
+			expect( result.desktop ).toContain( 'border-bottom-width: 3px;' );
+			expect( result.desktop ).toContain( 'border-left-color: #333333;' );
+			expect( result.desktop ).toContain( 'border-left-style: double;' );
+			expect( result.desktop ).toContain( 'border-left-width: 4px;' );
+			expect( result.tablet ).not.toContain( 'border-' );
+			expect( result.mobile ).not.toContain( 'border-' );
+		} );
+		it( 'FlatBorderタイプの場合', () => {
+			const styles = {
+				border: {
+					color: '#000000',
+					style: 'solid',
+					width: '1px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-color: #000000;' );
+			expect( result.desktop ).toContain( 'border-style: solid;' );
+			expect( result.desktop ).toContain( 'border-width: 1px;' );
+			expect( result.tablet ).not.toContain( 'border:' );
+			expect( result.mobile ).not.toContain( 'border:' );
+		} );
+	} );
+
+	describe( 'borderRadius', () => {
+		it( 'borderRadiusが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'border-radius:' );
+			expect( result.tablet ).not.toContain( 'border-radius:' );
+			expect( result.mobile ).not.toContain( 'border-radius:' );
+		} );
+		it( 'borderRadiusがある場合(desktop)', () => {
+			const styles = {
+				borderRadius: {
+					desktop: '10px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-radius: 10px;' );
+			expect( result.tablet ).not.toContain( 'border-radius:' );
+			expect( result.mobile ).not.toContain( 'border-radius:' );
+		} );
+		it( 'borderRadiusがある場合(tablet)', () => {
+			const styles = {
+				borderRadius: {
+					tablet: '20px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'border-radius:' );
+			expect( result.tablet ).toContain( 'border-radius: 20px;' );
+			expect( result.mobile ).not.toContain( 'border-radius:' );
+		} );
+		it( 'borderRadiusがある場合(mobile)', () => {
+			const styles = {
+				borderRadius: {
+					mobile: '30px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'border-radius:' );
+			expect( result.tablet ).not.toContain( 'border-radius:' );
+			expect( result.mobile ).toContain( 'border-radius: 30px;' );
+		} );
+		it( 'borderRadiusがある場合(all)', () => {
+			const styles = {
+				borderRadius: {
+					desktop: '10px',
+					tablet: '20px',
+					mobile: '30px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-radius: 10px;' );
+			expect( result.tablet ).toContain( 'border-radius: 20px;' );
+			expect( result.mobile ).toContain( 'border-radius: 30px;' );
+		} );
+	} );
 } );
 
 /**

@@ -43,7 +43,7 @@ export interface HeadingStyle {
 
 	// Background.
 	backgroundColor?: string;
-	backgroundGradient?: string;
+	backgroundGradient?: string; //未対応.
 	backgroundImage?: string;
 	backgroundPosition?: string;
 	backgroundRepeat?: string;
