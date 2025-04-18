@@ -14,9 +14,11 @@
 
 ## 更新履歴
 
-
 ### v2.0.0
 - [変更] `ystdtb_css_breakpoints` キー変更 `sm`-> `mobile`, `md` -> `tablet`, `lg` -> `desktop`、値に単位追加.
+
+### v1.32.0 : 2025/04/18
+- [調整] WordPress 6.8 向け調整
 
 ### v1.31.0 : 2025/02/06
 - [追加] シェアボタンブロック：Bluesky表示設定追加
