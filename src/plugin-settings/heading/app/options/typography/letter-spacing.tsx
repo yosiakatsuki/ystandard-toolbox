@@ -12,7 +12,7 @@ import UnitControl, {
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface LetterSpacingControlProps {
@@ -45,7 +45,7 @@ export default function LetterSpacing( props: LetterSpacingControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'letter-spacing' }
 			label={ __( '文字間隔', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -57,6 +57,6 @@ export default function LetterSpacing( props: LetterSpacingControlProps ) {
 				onChange={ handleOnChange }
 			/>
 			<ClearButton onClick={ () => handleOnChange( '' ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

@@ -10,7 +10,7 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface IconColorControlProps {
@@ -25,7 +25,7 @@ export function IconColor( props: IconColorControlProps ) {
 
 	return (
 		<>
-			<BaseControl
+			<PluginSettingsBaseControl
 				id={ 'icon-color' }
 				label={ __( 'アイコン色', 'ystandard-toolbox' ) }
 				isFullWidth={ true }
@@ -38,7 +38,7 @@ export function IconColor( props: IconColorControlProps ) {
 				<ClearButton
 					onClick={ () => onChange( { iconColor: undefined } ) }
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</>
 	);
 }

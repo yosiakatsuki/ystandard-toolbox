@@ -13,7 +13,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
@@ -33,7 +33,7 @@ export default function MinWidth( props: MinWidthControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'min-width' }
 			label={ __( '最小幅(min-width)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -56,6 +56,6 @@ export default function MinWidth( props: MinWidthControlProps ) {
 			<ClearButton
 				onClick={ () => onChange( { minWidth: undefined } ) }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

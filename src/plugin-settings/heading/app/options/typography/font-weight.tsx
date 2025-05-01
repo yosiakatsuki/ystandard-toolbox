@@ -18,7 +18,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
@@ -44,7 +44,7 @@ export default function FontWeight( props: FontWeightControlProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'font-weight' }
 			label={ __( '文字太さ', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -68,7 +68,7 @@ export default function FontWeight( props: FontWeightControlProps ) {
 			<ClearButton
 				onClick={ () => onChange( { fontWeight: undefined } ) }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 

@@ -13,7 +13,7 @@ import type {
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { getFlatValue } from '@aktk/block-components/utils/responsive-value';
 
@@ -35,7 +35,7 @@ export default function Border( props: BorderProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'border' }
 			label={ __( '枠線', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -51,7 +51,7 @@ export default function Border( props: BorderProps ) {
 				enableTransparent={ true }
 			/>
 			<ClearButton onClick={ () => handleOnChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 

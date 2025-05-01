@@ -10,7 +10,7 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface BackgroundColorProps {
@@ -26,7 +26,7 @@ export default function BackgroundColor( props: BackgroundColorProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'background-color' }
 			label={ __( '背景色', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -38,6 +38,6 @@ export default function BackgroundColor( props: BackgroundColorProps ) {
 				enableCurrentColor={ true }
 			/>
 			<ClearButton onClick={ () => handleOnColorChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

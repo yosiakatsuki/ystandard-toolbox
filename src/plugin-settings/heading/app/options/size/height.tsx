@@ -13,7 +13,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
@@ -33,7 +33,7 @@ export default function Height( props: HeightControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'height' }
 			label={ __( '高さ(height)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -54,6 +54,6 @@ export default function Height( props: HeightControlProps ) {
 				}
 			/>
 			<ClearButton onClick={ () => onChange( { height: undefined } ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

@@ -6,7 +6,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 interface EnablePseudoElementsContentProps {
 	type: 'before' | 'after';
@@ -25,7 +25,7 @@ export function EnablePseudoElements(
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ `${ type }-enable-content` }
 			label={ `::${ type }${ __( 'の有効化', 'ystandard-toolbox' ) }` }
 			isFullWidth={ true }
@@ -40,6 +40,6 @@ export function EnablePseudoElements(
 				onChange={ handleOnChange }
 				__nextHasNoMarginBottom
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

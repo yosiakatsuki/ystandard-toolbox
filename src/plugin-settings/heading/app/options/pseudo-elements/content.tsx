@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { NoticeWarningText } from '@aktk/block-components/components/notice';
@@ -39,7 +39,10 @@ export function PseudoElementsContent( props: PseudoElementsContentProps ) {
 	};
 
 	return (
-		<BaseControl id={ `${ type }-content` } isFullWidth={ true }>
+		<PluginSettingsBaseControl
+			id={ `${ type }-content` }
+			isFullWidth={ true }
+		>
 			<InputControl
 				value={ value || '' }
 				onChange={ handleOnChange }
@@ -54,6 +57,6 @@ export function PseudoElementsContent( props: PseudoElementsContentProps ) {
 				</NoticeWarningText>
 			) }
 			<ClearButton onClick={ handleOnClear } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

@@ -1,58 +1,63 @@
-import { isNumber } from 'lodash';
+import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { FontSizePicker } from '@wordpress/components';
-import { getFontSizeClass } from '@wordpress/block-editor';
-import type {
-	FontSize,
-	FontSizePickerProps,
-} from '@wordpress/components/src/font-size-picker/types';
-
+import type { FontSize } from '@wordpress/components/src/font-size-picker/types';
 /**
  * Aktk dependencies.
  */
 import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
+import FontSizePicker from '@aktk/block-components/wp-controls/font-size-picker';
+import Button from '@aktk/block-components/wp-controls/button';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
 import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
 
 /**
  * Internal dependencies
  */
-import type { CustomFontSize, CustomFontSizePickerProps } from './types';
+import type {
+	ResponsiveFontSize,
+	CustomFontSizePickerProps,
+	CustomFontSizePickerOnChangeProps,
+} from './types';
 
 import './style-editor.scss';
+import { isNumber } from 'lodash';
 
-export { CustomFontSize };
+/**
+ * Export.
+ */
+export { ResponsiveFontSize, CustomFontSizePickerOnChangeProps };
 export * from './util';
 
 /**
  * カスタムフォントサイズピッカー
  * @param props
  */
-export default function CustomFontSizePicker(
-	props: CustomFontSizePickerProps
-) {
+export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
 	// フォントサイズ設定の取得.
 	const themeFontSizes = useThemeFontSizes();
 
-	const { fontSize, useResponsive = true, onChange } = props;
+	const {
+		fontSize,
+		customFontSize,
+		responsiveFontSize,
+		useResponsive = true,
+		wpPickerDisableCustomFontSizes = false,
+		responsiveControlStyle = 'vertical',
+		showResetButton = true,
+		onChange,
+	} = props;
 	// WPフォントサイズピッカー用にサイズ抽出.
-	const wpPickerFontSize = fontSize?.fontSize?.size ?? fontSize?.desktop;
-	// 値の更新.
-	const handleOnChange = ( newValue: CustomFontSize ) => {
-		onChange( newValue );
-	};
+	const wpPickerFontSize =
+		fontSize?.size ?? customFontSize ?? responsiveFontSize?.desktop;
 	// カスタム入力の変更イベント.
-	const handleOnCustomInputChange = ( newValue: CustomFontSize ) => {
+	const handleOnCustomInputChange = ( newValue: ResponsiveFontSize ) => {
 		// カスタム入力が使われた場合、WPフォントサイズピッカーにdesktopの値を入れつつ更新.
-		const newFontSize = newValue?.desktop
-			? { size: newValue.desktop }
-			: undefined;
-		handleOnChange( {
-			...fontSize,
-			...newValue,
-			fontSize: newFontSize,
+		onChange( {
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: newValue,
 		} );
 	};
 	// WPフォントサイズピッカーの変更イベント.
@@ -60,28 +65,16 @@ export default function CustomFontSizePicker(
 		newValue: number | string | undefined,
 		selectedItem?: FontSize
 	) => {
-		// カスタム値の入力の場合`selectedItem`はundefined.
-		const newFontSize = {
-			size: newValue,
-			slug: '',
-			className: '',
-		};
-		if ( !! selectedItem ) {
-			newFontSize.slug = selectedItem.slug;
-			newFontSize.className = getFontSizeClass( selectedItem.slug );
-		}
 		// WPフォントサイズピッカーを使った場合カスタム側の値を削除しつつ更新.
-		handleOnChange( {
-			...fontSize,
-			desktop: isNumber( newValue ) ? `${ newValue }px` : newValue,
-			tablet: undefined,
-			mobile: undefined,
-			fontSize: newFontSize,
+		onChange( {
+			fontSize: selectedItem,
+			customFontSize: isNumber( newValue ) ? `${ newValue }px` : newValue,
+			responsiveFontSize: undefined,
 		} );
 	};
 
 	const isResponsive = () => {
-		return !! fontSize?.tablet || !! fontSize?.mobile;
+		return !! responsiveFontSize?.tablet || !! responsiveFontSize?.mobile;
 	};
 
 	return (
@@ -90,21 +83,26 @@ export default function CustomFontSizePicker(
 				<ResponsiveSelectTab
 					isResponsive={ isResponsive() }
 					defaultTabContent={
-						<WPFontSizePicker
+						<FontSizePicker
 							onChange={ handleOnWPPickerChange }
 							value={ wpPickerFontSize }
 							fontSizes={ themeFontSizes }
+							disableCustomFontSizes={
+								wpPickerDisableCustomFontSizes
+							}
 						/>
 					}
 					responsiveTabContent={
 						<CustomSizeInputPanel
-							fontSize={ fontSize }
+							responsiveFontSize={ responsiveFontSize }
 							onChange={ handleOnCustomInputChange }
+							responsiveControlStyle={ responsiveControlStyle }
+							showResetButton={ showResetButton }
 						/>
 					}
 				/>
 			) : (
-				<WPFontSizePicker
+				<FontSizePicker
 					onChange={ handleOnWPPickerChange }
 					value={ wpPickerFontSize }
 					fontSizes={ themeFontSizes }
@@ -114,59 +112,94 @@ export default function CustomFontSizePicker(
 	);
 }
 
-export function WPFontSizePicker( props: FontSizePickerProps ) {
-	return <FontSizePicker { ...props } __nextHasNoMarginBottom />;
-}
-
 /**
  * カスタムフォントサイズ入力パネル
  * @param props
+ * @param props.responsiveFontSize
+ * @param props.onChange
+ * @param props.responsiveControlStyle
+ * @param props.showResetButton
  */
-export function CustomSizeInputPanel( props: CustomFontSizePickerProps ) {
-	const { fontSize, onChange } = props;
+export function CustomSizeInputPanel( props: {
+	responsiveFontSize?: ResponsiveFontSize;
+	onChange: ( value: ResponsiveFontSize ) => void;
+	responsiveControlStyle?: 'vertical' | 'horizontal';
+	showResetButton?: boolean;
+} ) {
+	const {
+		responsiveFontSize,
+		onChange,
+		responsiveControlStyle = 'vertical',
+		showResetButton = true,
+	} = props;
 
-	const handleOnChange = ( newValue: CustomFontSize ) => {
+	const handleOnChange = ( newValue: ResponsiveFontSize ) => {
 		onChange( newValue );
 	};
 
+	const handleOnReset = () => {
+		handleOnChange( {
+			desktop: undefined,
+			tablet: undefined,
+			mobile: undefined,
+		} );
+	};
+
+	const gridClassName = classnames( 'grid grid-cols-1 gap-2', {
+		'gap-4 md:grid-cols-3': 'horizontal' === responsiveControlStyle,
+	} );
+
 	return (
-		<div className={ 'grid grid-cols-1 gap-4 md:grid-cols-3' }>
-			<div>
-				<IconUnitControl.Desktop
-					value={ fontSize?.desktop }
-					onChange={ ( newValue ) => {
-						handleOnChange( {
-							...fontSize,
-							desktop: newValue,
-						} );
-					} }
-					unitType={ 'fontSize' }
-				/>
+		<div>
+			<div className={ gridClassName }>
+				<div>
+					<IconUnitControl.Desktop
+						value={ responsiveFontSize?.desktop }
+						onChange={ ( newValue ) => {
+							handleOnChange( {
+								...responsiveFontSize,
+								desktop: newValue,
+							} );
+						} }
+						unitType={ 'fontSize' }
+					/>
+				</div>
+				<div>
+					<IconUnitControl.Tablet
+						value={ responsiveFontSize?.tablet }
+						onChange={ ( newValue ) => {
+							handleOnChange( {
+								...responsiveFontSize,
+								tablet: newValue,
+							} );
+						} }
+						unitType={ 'fontSize' }
+					/>
+				</div>
+				<div>
+					<IconUnitControl.Mobile
+						value={ responsiveFontSize?.mobile }
+						onChange={ ( newValue ) => {
+							handleOnChange( {
+								...responsiveFontSize,
+								mobile: newValue,
+							} );
+						} }
+						unitType={ 'fontSize' }
+					/>
+				</div>
 			</div>
-			<div>
-				<IconUnitControl.Tablet
-					value={ fontSize?.tablet }
-					onChange={ ( newValue ) => {
-						handleOnChange( {
-							...fontSize,
-							tablet: newValue,
-						} );
-					} }
-					unitType={ 'fontSize' }
-				/>
-			</div>
-			<div>
-				<IconUnitControl.Mobile
-					value={ fontSize?.mobile }
-					onChange={ ( newValue ) => {
-						handleOnChange( {
-							...fontSize,
-							mobile: newValue,
-						} );
-					} }
-					unitType={ 'fontSize' }
-				/>
-			</div>
+			{ showResetButton && (
+				<Button
+					onClick={ handleOnReset }
+					size={ 'small' }
+					variant={ 'secondary' }
+					isDestructive
+					className={ 'mt-2 w-full justify-center text-center' }
+				>
+					リセット
+				</Button>
+			) }
 		</div>
 	);
 }

@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
@@ -22,13 +22,13 @@ export default function BoxShadow( props: BoxShadowControlProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'box-shadow' }
 			label={ __( 'box-shadow', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
 		>
 			<InputControl value={ value || '' } onChange={ handleOnChange } />
 			<ClearButton onClick={ () => handleOnChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

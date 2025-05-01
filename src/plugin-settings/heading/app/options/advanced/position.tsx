@@ -12,7 +12,7 @@ import InputControl from '@aktk/block-components/wp-controls/input-control';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 interface PositionProps {
 	value: string | undefined;
@@ -66,7 +66,7 @@ export function Position( props: PositionProps ) {
 		onChange( { position: newValue } );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'position', 'ystandard-toolbox' ) }
 			id="position"
 			isFullWidth={ true }
@@ -76,7 +76,7 @@ export function Position( props: PositionProps ) {
 				onChange={ handleOnChange }
 				options={ SELECT_OPTIONS }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 
@@ -90,7 +90,7 @@ export function PositionTop( props: PositionProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'top', 'ystandard-toolbox' ) }
 			id="position-top"
 			isFullWidth={ true }
@@ -99,7 +99,7 @@ export function PositionTop( props: PositionProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 
@@ -112,7 +112,7 @@ export function PositionRight( props: PositionProps ) {
 		onChange( { right: newValue } );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'right', 'ystandard-toolbox' ) }
 			id="position-right"
 			isFullWidth={ true }
@@ -121,7 +121,7 @@ export function PositionRight( props: PositionProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 
@@ -134,7 +134,7 @@ export function PositionBottom( props: PositionProps ) {
 		onChange( { bottom: newValue } );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'bottom', 'ystandard-toolbox' ) }
 			id="position-bottom"
 			isFullWidth={ true }
@@ -143,7 +143,7 @@ export function PositionBottom( props: PositionProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 
@@ -156,7 +156,7 @@ export function PositionLeft( props: PositionProps ) {
 		onChange( { left: newValue } );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'left', 'ystandard-toolbox' ) }
 			id="position-left"
 			isFullWidth={ true }
@@ -165,7 +165,7 @@ export function PositionLeft( props: PositionProps ) {
 				value={ value || '' }
 				onChange={ handleOnChange }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 
@@ -178,12 +178,12 @@ export function ZIndex( props: PositionProps ) {
 		onChange( { zIndex: newValue } );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			label={ __( 'z-index', 'ystandard-toolbox' ) }
 			id="z-index"
 			isFullWidth={ true }
 		>
 			<InputControl value={ value || '' } onChange={ handleOnChange } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

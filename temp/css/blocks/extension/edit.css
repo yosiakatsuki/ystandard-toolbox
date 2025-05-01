@@ -1,0 +1,31 @@
+.ystdtb-hidden-mobile::before,
+.ystdtb-hidden-tablet::before,
+.ystdtb-hidden-desktop::before {
+  content: "";
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.ystdtb-hook-panel .components-panel__body-toggle.components-button {
+  padding-left: 40px;
+}
+.ystdtb-hook-panel .components-panel__icon[data-icon-name=ystdtb-panel-icon] {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  margin: 0;
+  color: currentcolor;
+  fill: currentcolor;
+  transform: translateY(-50%);
+}
+.ystdtb-hook-panel.is-enabled .components-button.components-panel__body-toggle {
+  color: var(--wp-admin-theme-color);
+}

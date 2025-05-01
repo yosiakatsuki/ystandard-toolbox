@@ -1,6 +1,5 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import type { CustomSpacing } from '@aktk/block-components/components/custom-spacing-select';
-import type { CustomFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 import type {
 	SplitBorders,
 	FlatBorder,
@@ -147,4 +146,15 @@ export interface HeadingPseudoElementsStyle {
 
 export interface LevelList {
 	[ key: string ]: string;
+}
+
+export interface CustomFontSize {
+	desktop?: string;
+	tablet?: string;
+	mobile?: string;
+	fontSize?: {
+		size?: number | string;
+		slug?: string;
+		name?: string;
+	};
 }

@@ -1,34 +1,19 @@
-import { CustomFontSize } from './types';
-import { isEmpty } from '@aktk/block-components/utils/object';
+/**
+ * WordPress dependencies
+ */
+import type { FontSize } from '@wordpress/components/src/font-size-picker/types';
+import { getFontSizeClass } from '@wordpress/block-editor';
 
-export function sanitizeFontSize(
-	fontSize: CustomFontSize
-): CustomFontSize | undefined {
-	// fontSize.fontSize が存在しない場合、fontSize を削除
-	if ( fontSize?.fontSize ) {
-		const size = fontSize.fontSize?.size;
-		const slug = fontSize.fontSize?.slug;
-		const className = fontSize.fontSize?.className;
+export function getCustomFontSizeClass( fontSize: FontSize | undefined ) {
+	return getFontSizeClass( fontSize?.slug || '' );
+}
 
-		if ( ! size || ! slug || ! className ) {
-			// fontSize.fontSize を削除
-			delete fontSize.fontSize;
-		}
-	} else {
-		delete fontSize.fontSize;
+export function getCustomFontSizeStyle(
+	fontSize?: FontSize,
+	customFontSize?: string
+) {
+	if ( fontSize?.slug ) {
+		return undefined;
 	}
-	// desktop が存在しない場合、desktop を削除
-	if ( ! fontSize?.desktop ) {
-		delete fontSize.desktop;
-	}
-	// tablet が存在しない場合、tablet を削除
-	if ( ! fontSize?.tablet ) {
-		delete fontSize.tablet;
-	}
-	// mobile が存在しない場合、mobile を削除
-	if ( ! fontSize?.mobile ) {
-		delete fontSize.mobile;
-	}
-
-	return isEmpty( fontSize ) ? undefined : fontSize;
+	return customFontSize;
 }

@@ -15,7 +15,7 @@ type BaseControlProps = WPBaseControlProps & {
 	isFullWidth?: boolean;
 };
 
-const BaseControl = ( {
+const PluginSettingsBaseControl = ( {
 	label,
 	id,
 	children,
@@ -47,4 +47,4 @@ const BaseControl = ( {
 		</div>
 	);
 };
-export default BaseControl;
+export default PluginSettingsBaseControl;

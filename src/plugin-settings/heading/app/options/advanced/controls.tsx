@@ -12,7 +12,7 @@ import {
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { IconSelectControl } from '@aktk/block-components/components/icon-control';
@@ -39,7 +39,11 @@ export function AdvancedResponsiveSelectControl(
 		onChange( newValue );
 	};
 	return (
-		<BaseControl id={ id } label={ label } isFullWidth={ true }>
+		<PluginSettingsBaseControl
+			id={ id }
+			label={ label }
+			isFullWidth={ true }
+		>
 			<ResponsiveSelectTab
 				isResponsive={ isResponsiveHeadingOption( value ) }
 				defaultTabContent={
@@ -58,7 +62,7 @@ export function AdvancedResponsiveSelectControl(
 				}
 			/>
 			<ClearButton onClick={ onClear } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 

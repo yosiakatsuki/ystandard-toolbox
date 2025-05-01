@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import LineHeightControl from '@aktk/block-components/wp-controls/line-height-control';
 
@@ -23,7 +23,7 @@ export default function LineHeight( props: LineHeightControlProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'line-height' }
 			label={ __( 'Line Height', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -34,6 +34,6 @@ export default function LineHeight( props: LineHeightControlProps ) {
 				onChange={ handleOnChange }
 			/>
 			<ClearButton onClick={ () => handleOnChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
 import MediaUploadControl from '@aktk/components/media-upload-control';
 import Notice from '@aktk/components/notice';
 import CustomSelectControl from '@aktk/components/custom-select-control';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 const RATIO = [
 	{
@@ -73,7 +73,7 @@ const Image = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ '画像' }>
-			<BaseControl
+			<PluginSettingsBaseControl
 				label={ '投稿一覧デフォルト画像' }
 				id={ 'default-image' }
 			>
@@ -93,8 +93,12 @@ const Image = ( { updateSection, sectionSettings } ) => {
 					onSelect={ handleOnSelectImage }
 					onClear={ handleOnClearImage }
 				/>
-			</BaseControl>
-			<BaseControl label={ '画像縦横比' } id={ 'ratio' } isFullWidth>
+			</PluginSettingsBaseControl>
+			<PluginSettingsBaseControl
+				label={ '画像縦横比' }
+				id={ 'ratio' }
+				isFullWidth
+			>
 				<Notice
 					isHelp
 					style={ {
@@ -125,7 +129,7 @@ const Image = ( { updateSection, sectionSettings } ) => {
 						/>
 					) }
 				</div>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</PanelBody>
 	);
 };

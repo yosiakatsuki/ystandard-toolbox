@@ -9,7 +9,7 @@ import { FontStyleControl } from '@aktk/block-components/wp-controls/font-appear
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface FontStyleControlProps {
@@ -27,7 +27,7 @@ export default function FontStyle( props: FontStyleControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'font-style' }
 			label={ __( '文字スタイル', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -38,6 +38,6 @@ export default function FontStyle( props: FontStyleControlProps ) {
 				onChange={ handleOnChange }
 			/>
 			<ClearButton onClick={ () => handleOnChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

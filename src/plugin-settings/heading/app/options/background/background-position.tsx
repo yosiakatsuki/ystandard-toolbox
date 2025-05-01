@@ -13,7 +13,7 @@ import InputControl from '@aktk/block-components/wp-controls/input-control';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 const SELECT_OPTIONS = [
@@ -94,7 +94,7 @@ export default function BackgroundPosition( props: BackgroundPositionProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'background-position' }
 			label={ __( '背景位置', 'ystandard-toolbox' ) }
 		>
@@ -113,6 +113,6 @@ export default function BackgroundPosition( props: BackgroundPositionProps ) {
 				</div>
 			) }
 			<ClearButton onClick={ () => handleOnSelectChange( undefined ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

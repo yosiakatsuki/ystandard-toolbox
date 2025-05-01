@@ -16,7 +16,7 @@ import { IconUnitControl } from '@aktk/block-components/components/icon-control'
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
@@ -33,7 +33,7 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'border-radius' }
 			label={ __( '角丸', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -56,7 +56,7 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 			<ClearButton
 				onClick={ () => onChange( { borderRadius: undefined } ) }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 

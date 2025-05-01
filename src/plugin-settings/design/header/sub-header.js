@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
 import ColorPaletteControl from '@aktk/components/color-palette-control';
 import UnitControl from '@aktk/components/unit-control';
 import HorizonButtons from '@aktk/components/horizon-buttons';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { migrateSubHeaderFontSize } from './function/sub-header';
 import { getEditorColors } from '@aktk/plugin-settings/function/config';
 
@@ -44,7 +44,10 @@ const SubHeader = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ 'サブヘッダー' }>
-			<BaseControl label={ '背景色' } id={ 'background-color' }>
+			<PluginSettingsBaseControl
+				label={ '背景色' }
+				id={ 'background-color' }
+			>
 				<ColorPaletteControl
 					label={ '背景色' }
 					value={
@@ -55,8 +58,8 @@ const SubHeader = ( { updateSection, sectionSettings } ) => {
 					position={ 'right bottom' }
 					colors={ getEditorColors() }
 				/>
-			</BaseControl>
-			<BaseControl label={ '文字色' } id={ 'text-color' }>
+			</PluginSettingsBaseControl>
+			<PluginSettingsBaseControl label={ '文字色' } id={ 'text-color' }>
 				<ColorPaletteControl
 					label={ '文字色' }
 					value={
@@ -66,8 +69,8 @@ const SubHeader = ( { updateSection, sectionSettings } ) => {
 					position={ 'right bottom' }
 					colors={ getEditorColors() }
 				/>
-			</BaseControl>
-			<BaseControl label={ '表示位置' } id={ 'position' }>
+			</PluginSettingsBaseControl>
+			<PluginSettingsBaseControl label={ '表示位置' } id={ 'position' }>
 				<HorizonButtons
 					primary={
 						sectionSettings?.subHeaderAlignDesktop ?? 'right'
@@ -88,13 +91,16 @@ const SubHeader = ( { updateSection, sectionSettings } ) => {
 					] }
 					onChange={ handleOnChangeAlign }
 				/>
-			</BaseControl>
-			<BaseControl label={ '文字サイズ' } id={ 'font-size' }>
+			</PluginSettingsBaseControl>
+			<PluginSettingsBaseControl
+				label={ '文字サイズ' }
+				id={ 'font-size' }
+			>
 				<UnitControl
 					value={ subHeaderFontSize }
 					onChange={ handleOnChangeFontSize }
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</PanelBody>
 	);
 };

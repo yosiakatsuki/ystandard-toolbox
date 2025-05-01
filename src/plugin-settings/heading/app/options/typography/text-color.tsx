@@ -10,7 +10,7 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 
 interface TextColorControlProps {
@@ -24,7 +24,7 @@ export default function TextColor( props: TextColorControlProps ) {
 	};
 	return (
 		<>
-			<BaseControl
+			<PluginSettingsBaseControl
 				id={ 'text-color' }
 				label={ __( '文字色', 'ystandard-toolbox' ) }
 				isFullWidth={ true }
@@ -37,7 +37,7 @@ export default function TextColor( props: TextColorControlProps ) {
 				<ClearButton
 					onClick={ () => onChange( { color: undefined } ) }
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</>
 	);
 }

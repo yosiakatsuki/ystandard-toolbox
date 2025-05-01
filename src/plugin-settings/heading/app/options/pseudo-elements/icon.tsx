@@ -10,7 +10,7 @@ import { getIconSvg } from '@aktk/block-components/utils/icon';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { NoticeWarningText } from '@aktk/block-components/components/notice';
 
 type PseudoElementsIconUpdateValue = {
@@ -76,7 +76,7 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ `${ type }-icon` }
 			label={ __( 'アイコン', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -107,6 +107,6 @@ export function PseudoElementsIcon( props: PseudoElementsIconProps ) {
 					) }
 				</NoticeWarningText>
 			) }
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

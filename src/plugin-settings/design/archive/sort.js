@@ -6,7 +6,7 @@ import { PanelBody } from '@wordpress/components';
  * yStandard
  */
 import CustomSelectControl from '@aktk/components/custom-select-control';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 const ORDER = [
 	{ key: '', name: '公開日/降順(デフォルト)' },
@@ -26,7 +26,7 @@ const Sort = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ '並び順' }>
-			<BaseControl isFullWidth>
+			<PluginSettingsBaseControl isFullWidth>
 				<CustomSelectControl
 					label={ '並び順' }
 					options={ ORDER }
@@ -34,7 +34,7 @@ const Sort = ( { updateSection, sectionSettings } ) => {
 					onChange={ handleOnChangeOrder }
 					isHorizon
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</PanelBody>
 	);
 };

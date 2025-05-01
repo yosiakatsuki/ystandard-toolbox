@@ -13,7 +13,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { DefaultSizeEdit, ResponsiveSizeEdit } from './control';
@@ -30,7 +30,7 @@ export default function Width( props: WidthControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'width' }
 			label={ __( '横幅(width)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -51,6 +51,6 @@ export default function Width( props: WidthControlProps ) {
 				}
 			/>
 			<ClearButton onClick={ () => onChange( { width: undefined } ) } />
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }

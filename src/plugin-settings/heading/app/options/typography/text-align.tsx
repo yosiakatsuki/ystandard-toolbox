@@ -21,7 +21,7 @@ import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
@@ -37,7 +37,7 @@ export default function TextAlign( props: TextAlignControlProps ) {
 		} );
 	};
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'text-align' }
 			label={ __( '揃え位置', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
@@ -62,7 +62,7 @@ export default function TextAlign( props: TextAlignControlProps ) {
 					onChange( { textAlign: undefined } );
 				} }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
 

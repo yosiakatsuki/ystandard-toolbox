@@ -14,7 +14,7 @@ import {
 /**
  * Plugin Dependencies
  */
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 interface BackgroundImageControlProps {
 	value: string | undefined;
@@ -45,7 +45,7 @@ export default function BackgroundImage( props: BackgroundImageControlProps ) {
 	};
 
 	return (
-		<BaseControl
+		<PluginSettingsBaseControl
 			id={ 'background-image' }
 			label={ __( '背景画像', 'ystandard-toolbox' ) }
 		>
@@ -55,6 +55,6 @@ export default function BackgroundImage( props: BackgroundImageControlProps ) {
 				onClear={ onClear }
 				useMediaUtils={ true }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
 }
