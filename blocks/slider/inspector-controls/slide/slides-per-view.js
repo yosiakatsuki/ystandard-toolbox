@@ -1,4 +1,4 @@
-import { BaseControl, RangeControl } from '@wordpress/components';
+import { BaseControl, __experimentalNumberControl as NumberControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { getSlidesOption } from '../../function/slider-option';
 import { setSlidesOption } from '../../function/edit';
@@ -9,31 +9,55 @@ const SlidesPerView = ( { type, attributes, setAttributes } ) => {
 	const slidesPerView = getSlidesOption( slides, type, optionName );
 
 	const handleOnChange = ( newValue ) => {
+		const _newValue = parseFloat( newValue );
 		setSlidesOption( {
 			setAttributes,
 			type,
 			slides,
-			newValue: { slidesPerView: 1 === newValue ? undefined : newValue },
+			newValue: { slidesPerView: !_newValue || '' === newValue ? undefined : _newValue},
+		} );
+	};
+
+	const handleOnChangeToggle = ( newValue ) => {
+		setSlidesOption( {
+			setAttributes,
+			type,
+			slides,
+			newValue: { slidesPerView: !newValue ? undefined : 'auto' },
 		} );
 	};
 
 	return (
-		<BaseControl
-			id={ 'BaseControl' }
-			label={ __( '1画面に表示するスライド数', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
-		>
-			<RangeControl
-				value={ slidesPerView }
-				onChange={ handleOnChange }
-				initialPosition={ 1 }
-				min={ 1 }
-				max={ 6 }
-				allowReset={ true }
-				__next40pxDefaultSize
+		<div style={{ marginBottom: '40px' }}>
+			<BaseControl
+				id={'BaseControl'}
+				label={__( '1画面に表示するスライド数', 'ystandard-toolbox' )}
 				__nextHasNoMarginBottom
-			/>
-		</BaseControl>
+			>
+				<NumberControl
+					value={'auto' === slidesPerView ? undefined : slidesPerView}
+					onChange={handleOnChange}
+					min={0.0}
+					max={10.0}
+					step={"any"}
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
+				/>
+			</BaseControl>
+			<BaseControl
+				__nextHasNoMarginBottom
+			>
+				<ToggleControl
+					label={__(
+						'"auto"を指定する（上級者向け）',
+						'ystandard-toolbox'
+					)}
+					onChange={handleOnChangeToggle}
+					checked={'auto' === slidesPerView}
+					__nextHasNoMarginBottom
+				/>
+			</BaseControl>
+		</div>
 	);
 };
 
