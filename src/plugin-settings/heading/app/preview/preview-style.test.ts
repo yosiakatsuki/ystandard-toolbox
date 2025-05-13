@@ -5,7 +5,6 @@ import PreviewStyle, {
 	isFontSize,
 	parseFontSizeStyle,
 	isBorder,
-	parseLongHandStyle,
 } from './preview-style';
 import type {
 	HeadingPseudoElementsStyle,
@@ -591,6 +590,545 @@ describe( 'parseStyles', () => {
 			expect( result.desktop ).toContain( 'border-radius: 10px;' );
 			expect( result.tablet ).toContain( 'border-radius: 20px;' );
 			expect( result.mobile ).toContain( 'border-radius: 30px;' );
+		} );
+	} );
+
+	describe( 'padding', () => {
+		it( 'paddingが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'padding:' );
+			expect( result.tablet ).not.toContain( 'padding:' );
+			expect( result.mobile ).not.toContain( 'padding:' );
+		} );
+		it( 'paddingがある場合(desktop)', () => {
+			const styles = {
+				padding: {
+					desktop: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'padding-top: 10px;' );
+			expect( result.desktop ).toContain( 'padding-right: 20px;' );
+			expect( result.desktop ).toContain( 'padding-bottom: 30px;' );
+			expect( result.desktop ).toContain( 'padding-left: 40px;' );
+		} );
+		it( 'paddingがある場合(tablet)', () => {
+			const styles = {
+				padding: {
+					tablet: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.tablet ).toContain( 'padding-top: 10px;' );
+			expect( result.tablet ).toContain( 'padding-right: 20px;' );
+			expect( result.tablet ).toContain( 'padding-bottom: 30px;' );
+			expect( result.tablet ).toContain( 'padding-left: 40px;' );
+		} );
+		it( 'paddingがある場合(mobile)', () => {
+			const styles = {
+				padding: {
+					mobile: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.mobile ).toContain( 'padding-top: 10px;' );
+			expect( result.mobile ).toContain( 'padding-right: 20px;' );
+			expect( result.mobile ).toContain( 'padding-bottom: 30px;' );
+			expect( result.mobile ).toContain( 'padding-left: 40px;' );
+		} );
+		it( 'paddingがある場合(all)', () => {
+			const styles = {
+				padding: {
+					desktop: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+					tablet: {
+						top: '15px',
+						right: '25px',
+						bottom: '35px',
+						left: '45px',
+					},
+					mobile: {
+						top: '20px',
+						right: '30px',
+						bottom: '40px',
+						left: '50px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'padding-top: 10px;' );
+			expect( result.desktop ).toContain( 'padding-right: 20px;' );
+			expect( result.desktop ).toContain( 'padding-bottom: 30px;' );
+			expect( result.desktop ).toContain( 'padding-left: 40px;' );
+
+			expect( result.tablet ).toContain( 'padding-top: 15px;' );
+			expect( result.tablet ).toContain( 'padding-right: 25px;' );
+			expect( result.tablet ).toContain( 'padding-bottom: 35px;' );
+			expect( result.tablet ).toContain( 'padding-left: 45px;' );
+
+			expect( result.mobile ).toContain( 'padding-top: 20px;' );
+			expect( result.mobile ).toContain( 'padding-right: 30px;' );
+			expect( result.mobile ).toContain( 'padding-bottom: 40px;' );
+			expect( result.mobile ).toContain( 'padding-left: 50px;' );
+		} );
+	} );
+
+	describe( 'margin', () => {
+		it( 'marginが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'margin:' );
+			expect( result.tablet ).not.toContain( 'margin:' );
+			expect( result.mobile ).not.toContain( 'margin:' );
+		} );
+		it( 'marginがある場合(desktop)', () => {
+			const styles = {
+				margin: {
+					desktop: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 10px;' );
+			expect( result.desktop ).toContain( 'margin-right: 20px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 30px;' );
+			expect( result.desktop ).toContain( 'margin-left: 40px;' );
+		} );
+		it( 'marginがある場合(tablet)', () => {
+			const styles = {
+				margin: {
+					tablet: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.tablet ).toContain( 'margin-top: 10px;' );
+			expect( result.tablet ).toContain( 'margin-right: 20px;' );
+			expect( result.tablet ).toContain( 'margin-bottom: 30px;' );
+			expect( result.tablet ).toContain( 'margin-left: 40px;' );
+		} );
+		it( 'marginがある場合(mobile)', () => {
+			const styles = {
+				margin: {
+					mobile: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.mobile ).toContain( 'margin-top: 10px;' );
+			expect( result.mobile ).toContain( 'margin-right: 20px;' );
+			expect( result.mobile ).toContain( 'margin-bottom: 30px;' );
+			expect( result.mobile ).toContain( 'margin-left: 40px;' );
+		} );
+		it( 'marginがある場合(all)', () => {
+			const styles = {
+				margin: {
+					desktop: {
+						top: '10px',
+						right: '20px',
+						bottom: '30px',
+						left: '40px',
+					},
+					tablet: {
+						top: '15px',
+						right: '25px',
+						bottom: '35px',
+						left: '45px',
+					},
+					mobile: {
+						top: '20px',
+						right: '30px',
+						bottom: '40px',
+						left: '50px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 10px;' );
+			expect( result.desktop ).toContain( 'margin-right: 20px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 30px;' );
+			expect( result.desktop ).toContain( 'margin-left: 40px;' );
+
+			expect( result.tablet ).toContain( 'margin-top: 15px;' );
+			expect( result.tablet ).toContain( 'margin-right: 25px;' );
+			expect( result.tablet ).toContain( 'margin-bottom: 35px;' );
+			expect( result.tablet ).toContain( 'margin-left: 45px;' );
+
+			expect( result.mobile ).toContain( 'margin-top: 20px;' );
+			expect( result.mobile ).toContain( 'margin-right: 30px;' );
+			expect( result.mobile ).toContain( 'margin-bottom: 40px;' );
+			expect( result.mobile ).toContain( 'margin-left: 50px;' );
+		} );
+	} );
+
+	describe( 'width', () => {
+		it( 'widthが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'width:' );
+			expect( result.tablet ).not.toContain( 'width:' );
+			expect( result.mobile ).not.toContain( 'width:' );
+		} );
+		it( 'widthがある場合', () => {
+			const styles = {
+				width: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'width: 100px;' );
+			expect( result.tablet ).not.toContain( 'width:' );
+			expect( result.mobile ).not.toContain( 'width:' );
+		} );
+		it( 'widthがある場合（desktop）', () => {
+			const styles = {
+				width: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'width: 100px;' );
+			expect( result.tablet ).not.toContain( 'width:' );
+			expect( result.mobile ).not.toContain( 'width:' );
+		} );
+		it( 'widthがある場合（tablet）', () => {
+			const styles = {
+				width: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'width:' );
+			expect( result.tablet ).toContain( 'width: 200px;' );
+			expect( result.mobile ).not.toContain( 'width:' );
+		} );
+		it( 'widthがある場合（mobile）', () => {
+			const styles = {
+				width: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'width:' );
+			expect( result.tablet ).not.toContain( 'width:' );
+			expect( result.mobile ).toContain( 'width: 300px;' );
+		} );
+	} );
+	describe( 'minWidth', () => {
+		it( 'minWidthが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-width:' );
+			expect( result.tablet ).not.toContain( 'min-width:' );
+			expect( result.mobile ).not.toContain( 'min-width:' );
+		} );
+		it( 'minWidthがある場合', () => {
+			const styles = {
+				minWidth: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'min-width: 100px;' );
+			expect( result.tablet ).not.toContain( 'min-width:' );
+			expect( result.mobile ).not.toContain( 'min-width:' );
+		} );
+		it( 'minWidthがある場合（desktop）', () => {
+			const styles = {
+				minWidth: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'min-width: 100px;' );
+			expect( result.tablet ).not.toContain( 'min-width:' );
+			expect( result.mobile ).not.toContain( 'min-width:' );
+		} );
+		it( 'minWidthがある場合（tablet）', () => {
+			const styles = {
+				minWidth: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-width:' );
+			expect( result.tablet ).toContain( 'min-width: 200px;' );
+			expect( result.mobile ).not.toContain( 'min-width:' );
+		} );
+		it( 'minWidthがある場合（mobile）', () => {
+			const styles = {
+				minWidth: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-width:' );
+			expect( result.tablet ).not.toContain( 'min-width:' );
+			expect( result.mobile ).toContain( 'min-width: 300px;' );
+		} );
+	} );
+	describe( 'maxWidth', () => {
+		it( 'maxWidthが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-width:' );
+			expect( result.tablet ).not.toContain( 'max-width:' );
+			expect( result.mobile ).not.toContain( 'max-width:' );
+		} );
+		it( 'maxWidthがある場合', () => {
+			const styles = {
+				maxWidth: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'max-width: 100px;' );
+			expect( result.tablet ).not.toContain( 'max-width:' );
+			expect( result.mobile ).not.toContain( 'max-width:' );
+		} );
+		it( 'maxWidthがある場合（desktop）', () => {
+			const styles = {
+				maxWidth: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'max-width: 100px;' );
+			expect( result.tablet ).not.toContain( 'max-width:' );
+			expect( result.mobile ).not.toContain( 'max-width:' );
+		} );
+		it( 'maxWidthがある場合（tablet）', () => {
+			const styles = {
+				maxWidth: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-width:' );
+			expect( result.tablet ).toContain( 'max-width: 200px;' );
+			expect( result.mobile ).not.toContain( 'max-width:' );
+		} );
+		it( 'maxWidthがある場合（mobile）', () => {
+			const styles = {
+				maxWidth: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-width:' );
+			expect( result.tablet ).not.toContain( 'max-width:' );
+			expect( result.mobile ).toContain( 'max-width: 300px;' );
+		} );
+	} );
+	describe( 'height', () => {
+		it( 'heightが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'height:' );
+			expect( result.tablet ).not.toContain( 'height:' );
+			expect( result.mobile ).not.toContain( 'height:' );
+		} );
+		it( 'heightがある場合', () => {
+			const styles = {
+				height: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'height: 100px;' );
+			expect( result.tablet ).not.toContain( 'height:' );
+			expect( result.mobile ).not.toContain( 'height:' );
+		} );
+		it( 'heightがある場合（desktop）', () => {
+			const styles = {
+				height: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'height: 100px;' );
+			expect( result.tablet ).not.toContain( 'height:' );
+			expect( result.mobile ).not.toContain( 'height:' );
+		} );
+		it( 'heightがある場合（tablet）', () => {
+			const styles = {
+				height: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'height:' );
+			expect( result.tablet ).toContain( 'height: 200px;' );
+			expect( result.mobile ).not.toContain( 'height:' );
+		} );
+		it( 'heightがある場合（mobile）', () => {
+			const styles = {
+				height: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'height:' );
+			expect( result.tablet ).not.toContain( 'height:' );
+			expect( result.mobile ).toContain( 'height: 300px;' );
+		} );
+	} );
+	describe( 'minHeight', () => {
+		it( 'minHeightが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-height:' );
+			expect( result.tablet ).not.toContain( 'min-height:' );
+			expect( result.mobile ).not.toContain( 'min-height:' );
+		} );
+		it( 'minHeightがある場合', () => {
+			const styles = {
+				minHeight: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'min-height: 100px;' );
+			expect( result.tablet ).not.toContain( 'min-height:' );
+			expect( result.mobile ).not.toContain( 'min-height:' );
+		} );
+		it( 'minHeightがある場合（desktop）', () => {
+			const styles = {
+				minHeight: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'min-height: 100px;' );
+			expect( result.tablet ).not.toContain( 'min-height:' );
+			expect( result.mobile ).not.toContain( 'min-height:' );
+		} );
+		it( 'minHeightがある場合（tablet）', () => {
+			const styles = {
+				minHeight: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-height:' );
+			expect( result.tablet ).toContain( 'min-height: 200px;' );
+			expect( result.mobile ).not.toContain( 'min-height:' );
+		} );
+		it( 'minHeightがある場合（mobile）', () => {
+			const styles = {
+				minHeight: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'min-height:' );
+			expect( result.tablet ).not.toContain( 'min-height:' );
+			expect( result.mobile ).toContain( 'min-height: 300px;' );
+		} );
+	} );
+	describe( 'maxHeight', () => {
+		it( 'maxHeightが無い場合', () => {
+			const styles = {
+				fontSize: {
+					desktop: '24px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-height:' );
+			expect( result.tablet ).not.toContain( 'max-height:' );
+			expect( result.mobile ).not.toContain( 'max-height:' );
+		} );
+		it( 'maxHeightがある場合', () => {
+			const styles = {
+				maxHeight: '100px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'max-height: 100px;' );
+			expect( result.tablet ).not.toContain( 'max-height:' );
+			expect( result.mobile ).not.toContain( 'max-height:' );
+		} );
+		it( 'maxHeightがある場合（desktop）', () => {
+			const styles = {
+				maxHeight: {
+					desktop: '100px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'max-height: 100px;' );
+			expect( result.tablet ).not.toContain( 'max-height:' );
+			expect( result.mobile ).not.toContain( 'max-height:' );
+		} );
+		it( 'maxHeightがある場合（tablet）', () => {
+			const styles = {
+				maxHeight: {
+					tablet: '200px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-height:' );
+			expect( result.tablet ).toContain( 'max-height: 200px;' );
+			expect( result.mobile ).not.toContain( 'max-height:' );
+		} );
+		it( 'maxHeightがある場合（mobile）', () => {
+			const styles = {
+				maxHeight: {
+					mobile: '300px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'max-height:' );
+			expect( result.tablet ).not.toContain( 'max-height:' );
+			expect( result.mobile ).toContain( 'max-height: 300px;' );
 		} );
 	} );
 } );

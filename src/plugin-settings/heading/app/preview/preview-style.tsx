@@ -9,12 +9,12 @@ import {
 	isObject,
 } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
-import type { CustomFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 /**
  * Plugin dependencies.
  */
 import { getHeadingOptions } from '@aktk/plugin-settings/heading/util/setting';
 import type {
+	CustomFontSize,
 	HeadingPseudoElementsStyle,
 	HeadingStyle,
 } from '@aktk/plugin-settings/heading/types';
@@ -33,7 +33,7 @@ interface PreviewStyleProps {
 /**
  * スタイルのプレビュー用のstyle要素を生成.
  * @param props
- * @returns
+ * @return
  */
 export default function PreviewStyle( props: PreviewStyleProps ) {
 	const css = getStyles( props );
@@ -43,7 +43,6 @@ export default function PreviewStyle( props: PreviewStyleProps ) {
 /**
  * スタイルの生成
  * @param props
- * @returns
  */
 function getStyles( props: PreviewStyleProps ) {
 	const styleProps = { ...props };
