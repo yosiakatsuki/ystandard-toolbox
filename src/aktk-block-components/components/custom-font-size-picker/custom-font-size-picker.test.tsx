@@ -1,10 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CustomFontSizePicker, {
-	WPFontSizePicker,
-	CustomSizeInputPanel,
-} from './index';
+import { CustomFontSizePicker, CustomSizeInputPanel } from './index';
 import useThemeFontSizes from '@aktk/block-components/hooks/useThemeFontSizes';
 
 jest.mock( '@aktk/block-components/hooks/useThemeFontSizes', () => jest.fn() );
@@ -53,9 +50,7 @@ useThemeFontSizes.mockReturnValue( mockFontSizes );
 describe( 'CustomFontSizePicker', () => {
 	test( 'デフォルトのプロパティでレンダリングされる', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomFontSizePicker fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomFontSizePicker onChange={ onChange } /> );
 
 		expect( screen.getByText( '標準' ) ).toBeInTheDocument();
 		expect( screen.getByText( 'デバイス別' ) ).toBeInTheDocument();
@@ -63,9 +58,7 @@ describe( 'CustomFontSizePicker', () => {
 
 	test( 'FontSizePicker が正しくレンダリングされ、変更が処理される', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomFontSizePicker fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomFontSizePicker onChange={ onChange } /> );
 
 		fireEvent.click( screen.getByText( '標準' ) );
 		fireEvent.change( screen.getByRole( 'combobox' ), {
@@ -73,16 +66,15 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( onChange ).toHaveBeenCalledWith( {
-			fontSize: { size: 16, slug: 'medium', className: 'medium' },
-			desktop: '16px',
+			fontSize: { size: 16, slug: 'medium', name: 'Medium' },
+			customFontSize: '16px',
+			responsiveFontSize: undefined,
 		} );
 	} );
 
 	test( 'CustomSizeInputPanel が正しくレンダリングされ、変更が処理される', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomFontSizePicker fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomFontSizePicker onChange={ onChange } /> );
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
 		fireEvent.change( screen.getByRole( 'textbox', { name: 'desktop' } ), {
@@ -90,18 +82,24 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( onChange ).toHaveBeenCalledWith( {
-			desktop: '2em',
-			fontSize: { size: '2em' },
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				desktop: '2em',
+			},
 		} );
 	} );
 
 	test( 'デスクトップ入力済み、タブレットの入力がある場合', async () => {
-		let fontSize = { desktop: '5px', fontSize: { size: '5px' } };
+		let fontSize = { desktop: '5px' };
 		const onChange = jest.fn( ( newValue ) => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -110,18 +108,24 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			desktop: '5px',
-			fontSize: { size: '5px' },
-			tablet: '6em',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				desktop: '5px',
+				tablet: '6em',
+			},
 		} );
 	} );
 	test( 'デスクトップ入力済み、モバイルの入力がある場合', async () => {
-		let fontSize = { desktop: '5px', fontSize: { size: '5px' } };
+		let fontSize = { desktop: '5px' };
 		const onChange = jest.fn( ( newValue ) => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -130,9 +134,12 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			desktop: '5px',
-			fontSize: { size: '5px' },
-			mobile: '7em',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				desktop: '5px',
+				mobile: '7em',
+			},
 		} );
 	} );
 	test( 'タブレット入力済み、デスクトップの入力がある場合', async () => {
@@ -141,7 +148,10 @@ describe( 'CustomFontSizePicker', () => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -150,9 +160,12 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			desktop: '8em',
-			fontSize: { size: '8em' },
-			tablet: '5px',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				desktop: '8em',
+				tablet: '5px',
+			},
 		} );
 	} );
 	test( 'タブレット入力済み、モバイルの入力がある場合', async () => {
@@ -161,7 +174,10 @@ describe( 'CustomFontSizePicker', () => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -170,8 +186,12 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			tablet: '5px',
-			mobile: '9em',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				tablet: '5px',
+				mobile: '9em',
+			},
 		} );
 	} );
 	test( 'モバイル入力済み、デスクトップの入力がある場合', async () => {
@@ -180,7 +200,10 @@ describe( 'CustomFontSizePicker', () => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -189,9 +212,12 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			desktop: '10em',
-			fontSize: { size: '10em' },
-			mobile: '5px',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				desktop: '10em',
+				mobile: '5px',
+			},
 		} );
 	} );
 	test( 'モバイル入力済み、タブレットの入力がある場合', async () => {
@@ -200,7 +226,10 @@ describe( 'CustomFontSizePicker', () => {
 			fontSize = newValue;
 		} );
 		render(
-			<CustomFontSizePicker fontSize={ fontSize } onChange={ onChange } />
+			<CustomFontSizePicker
+				responsiveFontSize={ fontSize }
+				onChange={ onChange }
+			/>
 		);
 
 		fireEvent.click( screen.getByText( 'デバイス別' ) );
@@ -209,31 +238,20 @@ describe( 'CustomFontSizePicker', () => {
 		} );
 
 		expect( fontSize ).toEqual( {
-			tablet: '11em',
-			mobile: '5px',
+			fontSize: undefined,
+			customFontSize: undefined,
+			responsiveFontSize: {
+				tablet: '11em',
+				mobile: '5px',
+			},
 		} );
-	} );
-} );
-
-describe( 'WPFontSizePicker', () => {
-	test( 'クラッシュせずにレンダリングされる', () => {
-		const { container } = render(
-			<WPFontSizePicker
-				onChange={ () => {} }
-				value={ 16 }
-				fontSizes={ mockFontSizes }
-			/>
-		);
-		expect( container ).toBeInTheDocument();
 	} );
 } );
 
 describe( 'CustomSizeInputPanel', () => {
 	test( 'デスクトップサイズの変更が正しく処理される', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomSizeInputPanel fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomSizeInputPanel onChange={ onChange } /> );
 
 		fireEvent.change( screen.getByRole( 'textbox', { name: /desktop/i } ), {
 			target: { value: '2em' },
@@ -244,9 +262,7 @@ describe( 'CustomSizeInputPanel', () => {
 	} );
 	test( 'タブレットの入力がある場合', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomSizeInputPanel fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomSizeInputPanel onChange={ onChange } /> );
 
 		fireEvent.change( screen.getByRole( 'textbox', { name: /tablet/i } ), {
 			target: { value: '3rem' },
@@ -258,9 +274,7 @@ describe( 'CustomSizeInputPanel', () => {
 	} );
 	test( 'モバイルの入力がある場合', () => {
 		const onChange = jest.fn();
-		render(
-			<CustomSizeInputPanel fontSize={ {} } onChange={ onChange } />
-		);
+		render( <CustomSizeInputPanel onChange={ onChange } /> );
 
 		fireEvent.change( screen.getByRole( 'textbox', { name: /mobile/i } ), {
 			target: { value: '16px' },

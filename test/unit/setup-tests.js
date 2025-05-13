@@ -58,6 +58,10 @@ jest.mock( '@wordpress/components', () => ( {
 			</div>
 		);
 	},
+	// @ts-ignore
+	Button: ( { onClick, children } ) => (
+		<button onClick={ onClick }>{ children }</button>
+	),
 } ) );
 
 jest.mock( '@wordpress/block-editor', () => ( {
