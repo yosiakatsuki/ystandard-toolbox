@@ -82,5 +82,6 @@
   "license": "GPL-2.0+",
   "browserslist": [
     "extends @wordpress/browserslist-config"
-  ]
+  ],
+  "dependencies": {}
 }
