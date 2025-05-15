@@ -127,9 +127,9 @@ class Parts_Block extends Dynamic_Block {
 			$this->migration_attributes( $attributes )
 		);
 
-		$content = do_shortcode( "[ys_parts ${attributes}]" );
+		$content = do_shortcode( "[ys_parts {$attributes}]" );
 
-		return apply_filters( "ystdtb_parts_block_content_${parts_id}", $content );
+		return apply_filters( "ystdtb_parts_block_content_{$parts_id}", $content );
 	}
 
 	/**

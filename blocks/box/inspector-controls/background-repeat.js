@@ -14,12 +14,14 @@ const BackgroundRepeat = ( props ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<SelectControl
 				label={ __( '背景画像繰り返し', 'ystandard-toolbox' ) }
 				value={ backgroundImageRepeat }
 				options={ repeatOptions }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

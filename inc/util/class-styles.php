@@ -18,6 +18,13 @@ defined( 'ABSPATH' ) || die();
  */
 class Styles {
 
+	const AXIS_POSITION = [
+		'top',
+		'right',
+		'bottom',
+		'left',
+	];
+
 	/**
 	 * CSS作成.
 	 *
@@ -34,6 +41,7 @@ class Styles {
 		}
 		$css = [];
 
+		// CSSプロパティの展開.
 		foreach ( $styles as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$parse_css = self::get_styles_css( $value );
@@ -41,7 +49,10 @@ class Styles {
 					$css = array_merge( $css, $parse_css );
 				}
 			} else {
-				$css[] = "{$key}:{$value}";
+				// 空の場合はスキップ.
+				if ( '' !== $value ) {
+					$css[] = "{$key}:{$value}";
+				}
 			}
 		}
 
@@ -52,7 +63,7 @@ class Styles {
 	/**
 	 * スタイル設定をCSSとして扱えるように変換.
 	 *
-	 * @param array  $styles          CSS設定.
+	 * @param array $styles CSS設定.
 	 * @param string $pseudo_elements 疑似要素処理用.
 	 *
 	 * @return array
@@ -61,6 +72,7 @@ class Styles {
 		if ( ! is_array( $styles ) || empty( $styles ) ) {
 			return [];
 		}
+
 		$result  = [];
 		$desktop = [];
 		$tablet  = [];
@@ -69,13 +81,16 @@ class Styles {
 		foreach ( $styles as $key => $value ) {
 			$property = Text::camel_to_kebab( $key );
 
+			// レスポンシブではない設定をDesktopの設定として扱う.
 			if ( ! self::is_responsive_style( $value ) ) {
 				$value = [ 'desktop' => $value ];
 			}
 
+			// borderの処理.
 			if ( self::is_border( $property ) ) {
 				$value = self::parse_border_style( $value );
 			}
+			// 余白の処理
 			if ( self::is_spacing( $property ) ) {
 				$value = self::parse_spacing_style( $property, $value );
 			}
@@ -86,14 +101,23 @@ class Styles {
 				$desktop[ $property ] = $value['desktop'];
 			}
 
+			// 画像の処理.
+			if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+				$desktop[ $property ] = "url('{$value['desktop']}')";
+			}
+			// 画像の処理.
+			if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+				$desktop[ $property ] = "url('{$value['desktop']}')";
+			}
+
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
 				if ( is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
 					$var_prefix = ! empty( $pseudo_elements ) ? "-{$pseudo_elements}" : '';
-					$var_prefix = "--ystdtb-custom-header{$var_prefix}";
+					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
 					$color_rgb  = self::hex_2_rgb( $value['desktop'] );
 					$color_rgb  = implode( ',', $color_rgb );
-					$type       = 'backgroundColor' === $key ? 'bg-color' : 'color';
+					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
 					// 色.
 					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
 					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
@@ -135,7 +159,7 @@ class Styles {
 	/**
 	 * 疑似要素用スタイルのパース.
 	 *
-	 * @param array  $styles          Styles.
+	 * @param array $styles Styles.
 	 * @param string $pseudo_elements Pseudo Elements.
 	 *
 	 * @return array
@@ -144,19 +168,53 @@ class Styles {
 		if ( ! is_array( $styles ) || empty( $styles ) ) {
 			return [];
 		}
+		// 有効化確認.
+		if ( ! isset( $styles['enable'] ) || ! $styles['enable'] ) {
+			return [];
+		}
+		// 有効化オプションは削除.
+		unset( $styles['enable'] );
+
+		// アイコン設定の確認・削除.
 		if ( isset( $styles['icon'] ) ) {
 			unset( $styles['icon'] );
 		}
-		if ( isset( $styles['content'] ) ) {
-			$content = stripslashes( $styles['content'] );
-			$content = str_replace( '\'', '"', $content );
-			if ( false !== strpos( $content, '<svg' ) ) {
-				$content                   = rawurlencode( $content );
-				$styles['content']         = '""';
-				$styles['backgroundImage'] = "url('data:image/svg+xml;charset=UTF-8,{$content}')";
-				$styles['backgroundSize']  = 'contain';
-			}
+		// contentの処理.
+		if ( ! isset( $styles['content'] ) ) {
+			$styles['content'] = '""';
 		}
+		$content = stripslashes( $styles['content'] );
+		$content = str_replace( '\'', '"', $content );
+		// SVGアイコンの処理.
+		if ( false !== strpos( $content, '<svg' ) ) {
+			$svg_icon = rawurlencode( $content );
+			// 背景色を現在の文字色に設定.
+			$styles['backgroundColor'] = $styles['iconColor'] ? $styles['iconColor'] : 'currentColor';
+			// マスク関連.
+			$icon_content                 = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
+			$styles['-webkit-mask-image'] = $icon_content;
+			$styles['maskImage']          = $icon_content;
+			$styles['maskSize']           = 'contain';
+			$styles['maskRepeat']         = 'no-repeat';
+			$styles['maskPosition']       = 'center';
+			// アイコンを背景画像として表示するので諸々調整.
+			unset( $styles['backgroundImage'] );
+			$styles['backgroundSize']     = 'contain';
+			$styles['backgroundRepeat']   = 'no-repeat';
+			$styles['backgroundPosition'] = 'center';
+			$styles['verticalAlign']      = '-0.125em';
+			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
+			// サイズの指定がなければ 1em で設定.
+			$default_size     = [ 'desktop' => '1em' ];
+			$styles['width']  = empty( $styles['fontSize'] ) ? $default_size : $styles['width'];
+			$styles['height'] = empty( $styles['fontSize'] ) ? $default_size : $styles['height'];
+			// contentは空に.
+			$content = '';
+		}
+		$content           = trim( $content, '"' );
+		$styles['content'] = "\"{$content}\"";
+
+		unset( $styles['iconColor'] );
 
 		return self::parse_styles( $styles, $pseudo_elements );
 	}
@@ -184,12 +242,28 @@ class Styles {
 		if ( ! self::is_responsive_style( $border ) ) {
 			$border = [ 'desktop' => $border ];
 		}
+
+		// 上下左右の設定分割.
 		$parse = function ( $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $border_value ) {
-				foreach ( $border_value as $key => $value ) {
-					$parse_result[ "border-{$position}-{$key}" ] = $value;
+
+				if ( in_array( $position, self::AXIS_POSITION, true ) ) {
+					// 上下左右に分かれての指定の場合.
+					$border_width = isset( $border_value['width'] ) ? $border_value['width'] : '';
+					$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
+					$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
+					$value        = "{$border_width} {$border_style} {$border_color}";
+					// width=0の場合は0のみセット.
+					if ( '' !== $border_width && 0 === (int) $border_width ) {
+						$value = 0;
+					}
+				} else {
+					$value = $border_value;
 				}
+
+				// セット.
+				$parse_result[ "border-{$position}" ] = $value;
 			}
 
 			return $parse_result;
@@ -221,8 +295,8 @@ class Styles {
 	/**
 	 * Spacing 展開
 	 *
-	 * @param string $name    property name.
-	 * @param array  $spacing value.
+	 * @param string $name property name.
+	 * @param array $spacing value.
 	 *
 	 * @return array
 	 */
@@ -233,7 +307,12 @@ class Styles {
 		}
 		$parse = function ( $name, $list ) {
 			$parse_result = [];
+
 			foreach ( $list as $position => $value ) {
+				// 0pxなど0の場合は単位なしの0をセット.
+				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
+					$value = 0;
+				}
 				$parse_result[ "{$name}-{$position}" ] = $value;
 			}
 
@@ -304,7 +383,10 @@ class Styles {
 	 * @return array|null
 	 */
 	public static function get_breakpoints() {
-		return apply_filters( 'ystdtb_css_breakpoints', Config::BREAKPOINTS );
+		return apply_filters(
+			'ystdtb_css_breakpoints',
+			apply_filters( 'ys_get_break_points', Config::BREAKPOINTS )
+		);
 	}
 
 	/**
@@ -324,23 +406,26 @@ class Styles {
 		if ( array_key_exists( $min, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $min ];
 			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint .= 'px';
+				$breakpoint = ( (int) $breakpoint + 1 ) . 'px';
 			}
-			$min = "(min-width: {$breakpoint})";
+			// emでの+1px計算.
+			$float_value = (float) $breakpoint;
+			$unit        = str_replace( (string) $float_value, '', $breakpoint );
+			if ( ! empty( $unit ) && 'px' !== $unit ) {
+				$base       = apply_filters( 'ys_breakpoints_base_size', 16 );
+				$base       = empty( $base ) ? 16 : $base;
+				$breakpoint = ( $float_value + ( 1 / $base ) ) . $unit;
+			}
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoint, $min );
+			$min        = "(min-width: {$breakpoint})";
 		}
 		if ( array_key_exists( $max, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $max ];
 			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint = ( (int) $breakpoint - 1 ) . 'px';
+				$breakpoint .= 'px';
 			}
-			if ( (string) ( (int) $breakpoint ) !== (string) ( (float) $breakpoint ) ) {
-				$float_value = (float) $breakpoint;
-				$unit        = str_replace( (string) $float_value, '', $breakpoint );
-				$base        = apply_filters( 'ystdtb_css_breakpoints_base_size', 16 );
-				$breakpoint  = ( $float_value - ( 1 / $base ) ) . $unit;
-				$breakpoint  = apply_filters( 'ystdtb_css_breakpoints_max_width', $breakpoint, $max );
-			}
-			$max = "(max-width: {$breakpoint})";
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_max_width', $breakpoint, $max );
+			$max        = "(max-width: {$breakpoint})";
 		}
 		$breakpoint = $min . $max;
 		if ( '' !== $min && '' !== $max ) {

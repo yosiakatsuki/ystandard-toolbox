@@ -118,7 +118,7 @@ class Archive {
 			return $ratio;
 		}
 
-		return "is-${new_ratio}";
+		return "is-{$new_ratio}";
 	}
 
 

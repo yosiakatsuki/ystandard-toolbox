@@ -14,6 +14,7 @@ const ExcerptLength = ( { attributes, setAttributes } ) => {
 				label={ __( '概要文長さ', 'ystandard-toolbox' ) }
 				value={ excerptLength }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
 			/>
 		</>
 	);

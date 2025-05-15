@@ -43,6 +43,10 @@ class SNS_Share_Block extends Dynamic_Block {
 				'type'    => 'string',
 				'default' => '',
 			],
+			'useX'               => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
 			'useTwitter'         => [
 				'type'    => 'boolean',
 				'default' => true,
@@ -62,6 +66,10 @@ class SNS_Share_Block extends Dynamic_Block {
 			'useLINE'            => [
 				'type'    => 'boolean',
 				'default' => true,
+			],
+			'useBluesky'         => [
+				'type'    => 'boolean',
+				'default' => false,
 			],
 			'twitterVia'         => [
 				'type'    => 'string',
@@ -90,8 +98,8 @@ class SNS_Share_Block extends Dynamic_Block {
 	/**
 	 * Render
 	 *
-	 * @param array  $attributes block attributes.
-	 * @param string $content    innerBlocks.
+	 * @param array $attributes block attributes.
+	 * @param string $content innerBlocks.
 	 *
 	 * @return false|string
 	 */
@@ -106,7 +114,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			$this->migration_attributes( $attributes )
 		);
 
-		return "<div class=\"${classes}\">" . do_shortcode( "[ys_share_button ${attributes}]" ) . '</div>';
+		return "<div class=\"{$classes}\">" . do_shortcode( "[ys_share_button {$attributes}]" ) . '</div>';
 	}
 
 	/**
@@ -119,11 +127,13 @@ class SNS_Share_Block extends Dynamic_Block {
 	private function migration_attributes( $attributes ) {
 
 		$attributes['type']                 = $attributes['buttonType'];
+		$attributes['x']                    = $attributes['useX'];
 		$attributes['twitter']              = $attributes['useTwitter'];
 		$attributes['facebook']             = $attributes['useFacebook'];
 		$attributes['hatenabookmark']       = $attributes['useHatenaBookmark'];
 		$attributes['pocket']               = $attributes['usePocket'];
 		$attributes['line']                 = $attributes['useLINE'];
+		$attributes['bluesky']              = $attributes['useBluesky'];
 		$attributes['twitter_via_user']     = $attributes['twitterVia'];
 		$attributes['twitter_related_user'] = $attributes['twitterRelatedUser'];
 		$attributes['twitter_hash_tags']    = $attributes['twitterHashTags'];

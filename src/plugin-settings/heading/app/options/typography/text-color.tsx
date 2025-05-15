@@ -1,0 +1,43 @@
+/**
+ * WordPress
+ */
+import { __ } from '@wordpress/i18n';
+/**
+ * Aktk Dependencies
+ */
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
+
+/**
+ * Plugin Dependencies
+ */
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import ClearButton from '@aktk/plugin-settings/components/clear-button';
+
+interface TextColorControlProps {
+	value: string | undefined;
+	onChange: ( newValue: { color: string | undefined } ) => void;
+}
+export default function TextColor( props: TextColorControlProps ) {
+	const { value, onChange } = props;
+	const handleOnChange = ( newValue: string ) => {
+		onChange( { color: newValue || undefined } );
+	};
+	return (
+		<>
+			<PluginSettingsBaseControl
+				id={ 'text-color' }
+				label={ __( '文字色', 'ystandard-toolbox' ) }
+				isFullWidth={ true }
+			>
+				<ColorPalette
+					label={ __( '文字色', 'ystandard-toolbox' ) }
+					value={ value || '' }
+					onChange={ handleOnChange }
+				/>
+				<ClearButton
+					onClick={ () => onChange( { color: undefined } ) }
+				/>
+			</PluginSettingsBaseControl>
+		</>
+	);
+}

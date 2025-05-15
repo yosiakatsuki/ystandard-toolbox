@@ -1,0 +1,22 @@
+.ystdtb-heading-v2__panel-group {
+	.components-panel__body {
+		font-size: 14px;
+
+		& > .components-panel__body-title {
+			&:hover {
+				background-color: #fff;
+			}
+		}
+	}
+}
+
+.ystdtb-plugin-settings-panel {
+	&.is-nested {
+		.ystdtb-plugin-settings-panel:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.components-form-toggle {
+		display: inline-flex;
+	}
+}

@@ -19,12 +19,14 @@ const Ratio = ( { attributes, setAttributes } ) => {
 		setAttributes( { thumbnailRatio: newValue } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<SelectControl
 				label={ __( '画像縦横比', 'ystandard-toolbox' ) }
 				value={ thumbnailRatio }
 				options={ thumbnailRatioSelect }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

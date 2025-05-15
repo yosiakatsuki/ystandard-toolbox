@@ -151,6 +151,7 @@ function TimelineItem( props ) {
 							'コンテンツ内の余白',
 							'ystandard-toolbox'
 						) }
+						__nextHasNoMarginBottom
 					>
 						<div className="ystdtb__horizon-buttons">
 							{ innerMargin.map( ( item ) => {
@@ -180,6 +181,7 @@ function TimelineItem( props ) {
 					<BaseControl
 						id={ 'contents-border-color' }
 						label={ __( '線の色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -196,6 +198,7 @@ function TimelineItem( props ) {
 							'コンテンツ上部余白',
 							'ystandard-toolbox'
 						) }
+						__nextHasNoMarginBottom
 					>
 						<RangeControl
 							value={ () => {
@@ -219,6 +222,8 @@ function TimelineItem( props ) {
 								'ystandard-toolbox'
 							) }
 							allowReset={ true }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 				</PanelBody>
@@ -229,6 +234,7 @@ function TimelineItem( props ) {
 					<BaseControl
 						id={ 'label-contents' }
 						label={ __( '角丸', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<RangeControl
 							value={ () => {
@@ -248,11 +254,14 @@ function TimelineItem( props ) {
 							max={ 100 }
 							step={ 1 }
 							allowReset={ true }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-contents' }
 						label={ __( 'タイプ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<div className="ystdtb__horizon-buttons">
 							{ labelTypes.map( ( item ) => {
@@ -287,6 +296,7 @@ function TimelineItem( props ) {
 						<BaseControl
 							id={ 'label-contents-icon' }
 							label={ __( 'アイコン', 'ystandard-toolbox' ) }
+							__nextHasNoMarginBottom
 						>
 							<SVGIconSelect
 								panelTitle={ __(
@@ -306,6 +316,7 @@ function TimelineItem( props ) {
 							<BaseControl
 								id={ 'label-contents-text' }
 								label={ __( 'テキスト', 'ystandard-toolbox' ) }
+								__nextHasNoMarginBottom
 							>
 								<PlainText
 									value={ labelContents }
@@ -334,6 +345,7 @@ function TimelineItem( props ) {
 									'文字の太さ',
 									'ystandard-toolbox'
 								) }
+								__nextHasNoMarginBottom
 							>
 								<ToggleControl
 									label={ __(
@@ -359,6 +371,7 @@ function TimelineItem( props ) {
 									'文字・アイコン サイズ',
 									'ystandard-toolbox'
 								) }
+								__nextHasNoMarginBottom
 							>
 								<FontSizePicker
 									label={ __(
@@ -369,6 +382,8 @@ function TimelineItem( props ) {
 									onChange={ ( font ) => {
 										setLabelFontSize( font );
 									} }
+									__nextHasNoMarginBottom
+									__next40pxDefaultSize
 								/>
 							</BaseControl>
 							<BaseControl
@@ -377,6 +392,7 @@ function TimelineItem( props ) {
 									'文字・アイコン 色',
 									'ystandard-toolbox'
 								) }
+								__nextHasNoMarginBottom
 							>
 								<ColorPalette
 									colors={ colors }
@@ -392,6 +408,7 @@ function TimelineItem( props ) {
 					<BaseControl
 						id={ 'label-bg' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }
@@ -405,6 +422,7 @@ function TimelineItem( props ) {
 					<BaseControl
 						id={ 'label-border' }
 						label={ __( '枠線の太さ', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<RangeControl
 							value={ labelBorderSize }
@@ -420,11 +438,14 @@ function TimelineItem( props ) {
 							max={ 100 }
 							step={ 1 }
 							allowReset={ true }
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 					<BaseControl
 						id={ 'label-border-color' }
 						label={ __( '枠線の色', 'ystandard-toolbox' ) }
+						__nextHasNoMarginBottom
 					>
 						<ColorPalette
 							colors={ colors }

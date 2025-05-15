@@ -1,0 +1,194 @@
+.notice.ystdtb-notice {
+  padding: 9px 12px;
+}
+.notice.ystdtb-notice ul {
+  list-style: disc;
+  margin-left: 1.5em;
+}
+
+.ystdtb-customizer-notice {
+  padding: 8px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+}
+.ystdtb-customizer-notice.notice-warning {
+  border-color: #e29e21;
+  background-color: #ffedcc;
+  color: #e29e21;
+}
+.ystdtb-customizer-notice.notice-error {
+  border-color: #ae3b43;
+  background-color: #f2d9db;
+  color: #ae3b43;
+}
+.ystdtb-customizer-notice.notice-info {
+  border-color: #007660;
+  background-color: #c8eae4;
+  color: #007660;
+}
+
+.wp-admin .ystdtb-menu__manual-link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  min-height: unset;
+}
+@media (min-width: 769px) {
+  .wp-admin .ystdtb-menu__manual-link a {
+    padding: 0.25em 0;
+  }
+}
+.wp-admin .ystdtb-menu__manual-link a svg {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.25em;
+}
+@media (min-width: 769px) {
+  .wp-admin .ystdtb-menu__manual-link.is-horizon {
+    display: flex;
+  }
+}
+.wp-admin .ystdtb-menu__manual-link.is-horizon > * {
+  width: 100%;
+  margin-bottom: 0.25em;
+}
+@media (min-width: 769px) {
+  .wp-admin .ystdtb-menu__manual-link.is-horizon > * {
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    margin-bottom: 0;
+  }
+  .wp-admin .ystdtb-menu__manual-link.is-horizon > *:first-child {
+    margin-left: 0;
+  }
+  .wp-admin .ystdtb-menu__manual-link.is-horizon > *:last-child {
+    margin-right: 0;
+  }
+}
+.wp-admin .ystdtb-menu__manual-link-inline {
+  display: inline-block;
+  font-size: 0.8em;
+}
+.wp-admin .ystdtb-menu__manual-link-inline svg {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.25em;
+}
+
+.wp-admin > .xdebug-var-dump {
+  padding-left: 200px;
+}
+
+.ystdtb-meta-box {
+  margin: 1.5em 0;
+}
+.ystdtb-meta-box .ystdtb-meta-box__title {
+  margin: 1em 0 0.5em;
+}
+.ystdtb-meta-box .ystdtb-meta-box__title:first-child {
+  margin-top: 0;
+}
+.ystdtb-meta-box .ystdtb-meta-box__notes {
+  color: #757575;
+  font-size: 0.8em;
+}
+
+.ystdtb-radio-horizon {
+  display: flex;
+  margin: 0.5em 0;
+}
+.ystdtb-radio-horizon.is-small {
+  max-width: 200px;
+}
+.ystdtb-radio-horizon label {
+  width: 100%;
+  text-align: center;
+  padding: 0.25em;
+  border-top: 1px solid #07689f;
+  border-bottom: 1px solid #07689f;
+  border-left: 1px solid #07689f;
+}
+.ystdtb-radio-horizon label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+.ystdtb-radio-horizon label:last-of-type {
+  border-radius: 0 4px 4px 0;
+  border-right: 1px solid #07689f;
+}
+.ystdtb-radio-horizon input[type=radio] {
+  display: none;
+}
+.ystdtb-radio-horizon input[type=radio]:checked + label {
+  background-color: #07689f;
+  color: #fff;
+}
+
+.ystdtb-option-box {
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 2em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5em;
+  border: 1px solid #eee;
+}
+
+.ystdtb-option-box__label {
+  margin-top: 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+  color: #07689f;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.ystdtb-option-box__section {
+  margin: 1.5em 0;
+}
+
+.ystdtb-option-box__title {
+  margin: 1.5em 0 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #eee;
+  font-size: 1.2em;
+}
+
+.ystdtb-option-box__notes {
+  margin-top: 0.5em;
+  color: #757575;
+  font-size: 0.8em;
+}
+
+.ystdtb-menu__form .button.ystdtb-button-cancel {
+  border-color: #eee;
+  color: #757575;
+}
+.ystdtb-menu__form .button.ystdtb-button-delete {
+  border-color: transparent;
+  color: #d53939;
+}
+.ystdtb-menu__form .button.ystdtb-button-delete:hover {
+  background-color: transparent;
+}
+.ystdtb-menu__form .button.ystdtb-button-delete:focus {
+  border-color: transparent;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+.ystdtb-menu__form .button.ystdtb-button-delete:disabled {
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+
+.ystdtb-widget-option {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+.ystdtb-widget-option .ystdtb-option-box__label {
+  font-size: 1.1em;
+}

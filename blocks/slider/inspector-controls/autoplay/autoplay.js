@@ -10,11 +10,13 @@ const Autoplay = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'autoplay' }
 			label={ __( '自動再生', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ToggleControl
 				label={ __( 'スライドを自動再生する', 'ystandard-toolbox' ) }
 				onChange={ handleOnChange }
 				checked={ autoplay ?? true }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

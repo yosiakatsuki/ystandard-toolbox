@@ -13,13 +13,16 @@ const SliderId = ( props ) => {
 		<BaseControl
 			id={ 'sliderId' }
 			label={ __( 'スライダーID', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<TextControl
 				value={ sliderId }
 				onChange={ handleOnChange }
 				disabled={ disableIdInput }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
-			<div style={ { marginTop: '-20px' } }>
+			<div style={ { marginTop: '-12px' } }>
 				<Button
 					isSmall
 					isSecondary

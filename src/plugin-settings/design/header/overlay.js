@@ -12,7 +12,7 @@ import HorizonButtons from '@aktk/components/horizon-buttons';
 import ColorPaletteControl from '@aktk/components/color-palette-control';
 import { toBool } from '@aktk/helper/boolean.js';
 import MediaUploadControl from '@aktk/components/media-upload-control';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { getEditorColors } from '@aktk/plugin-settings/function/config';
 
 const Overlay = ( { updateSection, sectionSettings } ) => {
@@ -89,7 +89,10 @@ const Overlay = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ 'ヘッダーオーバーレイ' }>
-			<BaseControl label={ '有効 / 無効' } id={ 'enable-overlay' }>
+			<PluginSettingsBaseControl
+				label={ '有効 / 無効' }
+				id={ 'enable-overlay' }
+			>
 				<HorizonButtons
 					items={ [
 						{
@@ -106,10 +109,13 @@ const Overlay = ( { updateSection, sectionSettings } ) => {
 					primary={ toBool( overlayEnable ) }
 					onChange={ handleOnChangeEnable }
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 			{ toBool( overlayEnable ) && (
 				<>
-					<BaseControl label={ 'ページタイプ' } id={ 'page-type' }>
+					<PluginSettingsBaseControl
+						label={ 'ページタイプ' }
+						id={ 'page-type' }
+					>
 						{ getOverlayTypes().map( ( type ) => {
 							return (
 								<CheckboxControl
@@ -125,16 +131,22 @@ const Overlay = ( { updateSection, sectionSettings } ) => {
 								/>
 							);
 						} ) }
-					</BaseControl>
-					<BaseControl label={ 'ロゴ画像' } id={ 'site-logo' }>
+					</PluginSettingsBaseControl>
+					<PluginSettingsBaseControl
+						label={ 'ロゴ画像' }
+						id={ 'site-logo' }
+					>
 						<MediaUploadControl.Utils
 							value={ overlayImage }
 							media={ overlayImage }
 							onSelect={ handleOnSelectLogo }
 							onClear={ handleOnClearLogo }
 						/>
-					</BaseControl>
-					<BaseControl label={ '文字色' } id={ 'text-color' }>
+					</PluginSettingsBaseControl>
+					<PluginSettingsBaseControl
+						label={ '文字色' }
+						id={ 'text-color' }
+					>
 						<ColorPaletteControl
 							label={ '文字色' }
 							value={ sectionSettings?.overlayTextColor }
@@ -142,7 +154,7 @@ const Overlay = ( { updateSection, sectionSettings } ) => {
 							position={ 'right bottom' }
 							colors={ getEditorColors() }
 						/>
-					</BaseControl>
+					</PluginSettingsBaseControl>
 				</>
 			) }
 		</PanelBody>

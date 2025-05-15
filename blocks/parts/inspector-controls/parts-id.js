@@ -18,7 +18,7 @@ const PartsId = ( props ) => {
 	];
 	return (
 		<>
-			<BaseControl>
+			<BaseControl __nextHasNoMarginBottom>
 				<SelectControl
 					label={ __( 'パーツ', 'ystandard-toolbox' ) }
 					value={ partsId }
@@ -26,6 +26,8 @@ const PartsId = ( props ) => {
 					onChange={ ( value ) => {
 						setAttributes( { partsId: value } );
 					} }
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 			</BaseControl>
 		</>

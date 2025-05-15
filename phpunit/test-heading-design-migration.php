@@ -18,11 +18,125 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 		update_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME, $value );
 	}
 
+	public function test_icon_type() {
+		$option = json_decode( '{
+		"preset": "icons",
+		"useCustomStyle": "true",
+		"fontSizePc": "1.2",
+		"fontSizeTablet": "1.2",
+		"fontSizeMobile": "1.2",
+		"fontSizeUnit": "em",
+		"fontColor": "",
+		"fontAlign": "",
+		"fontWeight": "bold",
+		"fontStyle": "normal",
+		"fontAdvanced": "false",
+		"fontSizeResponsive": "false",
+		"fontFamily": "",
+		"lineHeight": "1.3",
+		"letterSpacing": "0.05",
+		"backgroundColor": "",
+		"backgroundImage": "",
+		"backgroundPosition": "",
+		"backgroundRepeat": "",
+		"backgroundSize": "",
+		"borderTopWidth": "0",
+		"borderTopWidthUnit": "px",
+		"borderTopStyle": "solid",
+		"borderTopColor": "",
+		"borderRightWidth": "0",
+		"borderRightWidthUnit": "px",
+		"borderRightStyle": "solid",
+		"borderRightColor": "",
+		"borderBottomWidth": "0",
+		"borderBottomWidthUnit": "px",
+		"borderBottomStyle": "solid",
+		"borderBottomColor": "",
+		"borderLeftWidth": "0",
+		"borderLeftWidthUnit": "px",
+		"borderLeftStyle": "solid",
+		"borderLeftColor": "",
+		"borderRadius": "",
+		"paddingTop": "",
+		"paddingTopUnit": "em",
+		"paddingRight": "",
+		"paddingRightUnit": "em",
+		"paddingBottom": "",
+		"paddingBottomUnit": "em",
+		"paddingLeft": "",
+		"paddingLeftUnit": "em",
+		"marginTop": "",
+		"marginTopUnit": "em",
+		"marginBottom": "",
+		"marginBottomUnit": "em",
+		"beforeColorType": "color",
+		"beforeIcon": "award",
+		"beforeContent": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#CF4747\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-award\" style=\"width:1.3em;height:1.3em;\"><circle cx=\"12\" cy=\"8\" r=\"7\"><\/circle><polyline points=\"8.21 13.89 7 23 12 20 17 23 15.79 13.88\"><\/polyline><\/svg>",
+		"beforeSize": "1.3",
+		"beforeColor": "#CF4747",
+		"afterColorType": "color",
+		"afterIcon": "book-open",
+		"afterContent": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#64389D\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-book-open\" style=\"width:0.8em;height:0.8em;\"><path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"><\/path><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"><\/path><\/svg>",
+		"afterSize": "0.8",
+		"afterColor": "#64389D"
+	}', true );
+
+		$input = [
+			'h1' => $option,
+		];
+
+		$this->set_option( $input );
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$v2       = $heading->migration( $data );
+		$expected = [
+			'v1-h1' => [
+				'slug'   => 'v1-h1',
+				'label'  => 'v1:h1',
+				'enable' => true,
+				'style'  => [
+					'fontSize'      => [
+						'desktop' => '1.2em',
+					],
+					'fontWeight'    => [
+						'desktop' => 'bold',
+					],
+					'fontStyle'     => 'normal',
+					'lineHeight'    => 1.3,
+					'letterSpacing' => '0.05em',
+					'display'       => 'flex',
+					'gap'           => '0.5em',
+					'alignItems'    => 'center',
+				],
+				'before' => [
+					'icon' => 'award',
+					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CF4747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award" style="width:1.3em;height:1.3em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
+					'fontSize' => [
+						'desktop' => '1.3em',
+					],
+					'color' => '#CF4747',
+					'width' => '1.3em',
+					'height' => '1.3em',
+				],
+				'after' => [
+					'icon' => 'book-open',
+					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64389D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open" style="width:0.8em;height:0.8em;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+					'fontSize' => [
+						'desktop' => '0.8em',
+					],
+					'color' => '#64389D',
+					'width' => '0.8em',
+					'height' => '0.8em',
+				],
+			],
+		];
+		$this->assertEquals( $expected, $v2 );
+	}
+
 	public function test_margin_right_left() {
 		$input = [
 			'h1' => [
-				'preset'            => 'custom',
-				'useCustomStyle'    => true,
+				'preset'           => 'custom',
+				'useCustomStyle'   => true,
 				'marginTop'        => '',
 				'marginTopUnit'    => 'px',
 				'marginRight'      => '0',
@@ -44,8 +158,8 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'style'  => [
 					'margin' => [
 						'desktop' => [
-							'right'  => 0,
-							'left'   => '3vw',
+							'right' => 0,
+							'left'  => '3vw',
 						],
 					],
 				],
@@ -57,8 +171,8 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 	public function test_margin_all() {
 		$input = [
 			'h1' => [
-				'preset'            => 'custom',
-				'useCustomStyle'    => true,
+				'preset'           => 'custom',
+				'useCustomStyle'   => true,
 				'marginTop'        => '0',
 				'marginTopUnit'    => 'px',
 				'marginRight'      => '1',
@@ -201,17 +315,15 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
 						],
 					],
 				],
@@ -254,27 +366,25 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'right'  => [
-								'width' => '2em',
-								'style' => 'dotted',
-								'color' => '#111111',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
-							'left'   => [
-								'width' => '4vh',
-								'style' => 'double',
-								'color' => '#333333',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'right'  => [
+							'width' => '2em',
+							'style' => 'dotted',
+							'color' => '#111111',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
+						],
+						'left'   => [
+							'width' => '4vh',
+							'style' => 'double',
+							'color' => '#333333',
 						],
 					],
 				],
@@ -305,7 +415,7 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'enable' => true,
 				'style'  => [
 					"backgroundColor"    => "#fafafa",
-					"backgroundImage"    => "url('https://example.com/image.jpg')",
+					"backgroundImage"    => "https://example.com/image.jpg",
 					"backgroundPosition" => "center center",
 					"backgroundRepeat"   => "no-repeat",
 					"backgroundSize"     => "cover",
@@ -463,7 +573,7 @@ class Heading_Design_Migration_Test extends WP_UnitTestCase {
 							"top"    => [
 								"width" => "0.9em",
 								"style" => "solid",
-								"color" => "var(--ystdtb-custom-header-after-bg-color,var(--ystdtb-custom-header-bg-color))",
+								"color" => "var(--ystdtb-custom-heading-after-bg-color,var(--ystdtb-custom-heading-bg-color))",
 							],
 							"right"  => [
 								"width" => "0.9em",

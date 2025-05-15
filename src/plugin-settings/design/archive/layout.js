@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
 import { Flex, FlexItem } from '@aktk/components/flex';
 import ButtonImage from '@aktk/components/button-image';
 import ButtonReset from '@aktk/components/button-reset';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import Notice from '@aktk/components/notice';
 import { getPluginAssetsUrl } from '@aktk/plugin-settings/function/config';
 
@@ -49,7 +49,7 @@ const Layout = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ '一覧ページレイアウト' }>
-			<BaseControl
+			<PluginSettingsBaseControl
 				label={ 'デスクトップ・タブレット' }
 				id={ 'desktop-tablet' }
 			>
@@ -72,8 +72,8 @@ const Layout = ( { updateSection, sectionSettings } ) => {
 				<Notice isHelp style={ { fontSize: '12px', maxWidth: '100%' } }>
 					※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。
 				</Notice>
-			</BaseControl>
-			<BaseControl label={ 'モバイル' } id={ 'mobile' }>
+			</PluginSettingsBaseControl>
+			<PluginSettingsBaseControl label={ 'モバイル' } id={ 'mobile' }>
 				<Flex isGapSmall>
 					{ LAYOUT_TYPES.map( ( item ) => {
 						return (
@@ -104,7 +104,7 @@ const Layout = ( { updateSection, sectionSettings } ) => {
 				<Notice isHelp style={ { fontSize: '12px', maxWidth: '100%' } }>
 					※未選択の場合、デスクトップ・タブレットと同じレイアウトが適用されます。
 				</Notice>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</PanelBody>
 	);
 };

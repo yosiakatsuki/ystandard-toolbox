@@ -16,7 +16,7 @@ const Taxonomy = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<TaxonomySelect
 				label={ __( '分類', 'ystandard-toolbox' ) }
 				value={ taxonomy }

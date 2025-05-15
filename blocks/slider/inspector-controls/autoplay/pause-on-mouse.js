@@ -7,7 +7,7 @@ const PauseOnMouse = ( { attributes, setAttributes } ) => {
 		setAttributes( { autoplayPauseOnMouse: value } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ToggleControl
 				label={ __(
 					'マウスホバーで再生を止める',
@@ -15,6 +15,7 @@ const PauseOnMouse = ( { attributes, setAttributes } ) => {
 				) }
 				onChange={ handleOnChange }
 				checked={ autoplayPauseOnMouse ?? false }
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

@@ -7,7 +7,7 @@ import { PanelBody } from '@wordpress/components';
  */
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import Notice from '@aktk/components/notice';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { toBool } from '@aktk/helper/boolean.js';
 
 const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
@@ -32,7 +32,7 @@ const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ 'リッチドロワーメニュー' }>
-			<BaseControl label={ '有効 / 無効' } id={ 'enable' }>
+			<PluginSettingsBaseControl label={ '有効 / 無効' } id={ 'enable' }>
 				<HorizonButtons
 					primary={ enableRichDrawerMenu }
 					items={ [
@@ -49,10 +49,10 @@ const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 					] }
 					onChange={ handleOnChangeEnable }
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 			{ toBool( enableRichDrawerMenu ) && (
 				<>
-					<BaseControl
+					<PluginSettingsBaseControl
 						label={ 'グローバルメニューの表示' }
 						id={ 'global-menu' }
 					>
@@ -81,8 +81,11 @@ const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 							] }
 							onChange={ handleOnChangeHideGlobalMenu }
 						/>
-					</BaseControl>
-					<BaseControl label={ '検索フォームの表示' } id={ 'search' }>
+					</PluginSettingsBaseControl>
+					<PluginSettingsBaseControl
+						label={ '検索フォームの表示' }
+						id={ 'search' }
+					>
 						<Notice
 							isHelp
 							style={ { fontSize: '12px', paddingTop: 0 } }
@@ -107,7 +110,7 @@ const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 							] }
 							onChange={ handleOnChangeHideSearch }
 						/>
-					</BaseControl>
+					</PluginSettingsBaseControl>
 				</>
 			) }
 		</PanelBody>

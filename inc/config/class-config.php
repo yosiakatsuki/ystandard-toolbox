@@ -70,16 +70,17 @@ class Config {
 
 	/**
 	 * ブレークポイント
+	 * (1/16 = 0.0625)
 	 *
 	 * @var array
 	 */
 	const BREAKPOINTS = [
 		'sm'      => 600,
-		'mobile'  => '37.5em',
-		'md'      => 769,
-		'tablet'  => '48.0625em',
-		'lg'      => 1025,
-		'desktop' => '64.0625em',
+		'mobile'  => '37.5rem',
+		'md'      => 768,
+		'tablet'  => '48rem',
+		'lg'      => 1024,
+		'desktop' => '64rem',
 	];
 
 	/**

@@ -18,7 +18,7 @@ const Term = ( { attributes, setAttributes } ) => {
 	return (
 		<>
 			{ !! taxonomy && (
-				<BaseControl>
+				<BaseControl __nextHasNoMarginBottom>
 					<TermSelect
 						label={ __( 'カテゴリー・タグ', 'ystandard-toolbox' ) }
 						value={ termSlug }

@@ -1,4 +1,4 @@
-import { BaseControl, RangeControl, __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { getSlidesOption } from '../../function/slider-option';
 import { setSlidesOption } from '../../function/edit';
@@ -9,27 +9,27 @@ const SlidesPerGroup = ( { type, attributes, setAttributes } ) => {
 	const slidesPerGroup = getSlidesOption( slides, type, optionName );
 
 	const handleOnChange = ( newValue ) => {
-		const _newValue = parseFloat( newValue );
 		setSlidesOption( {
 			setAttributes,
 			type,
 			slides,
-			newValue: { slidesPerGroup: !_newValue || '' === newValue ? undefined : _newValue },
+			newValue: { slidesPerGroup: 1 === newValue ? undefined : newValue },
 		} );
 	};
 
 	return (
 		<BaseControl
-			id={'BaseControl'}
-			label={__( 'グループ化するスライド数', 'ystandard-toolbox' )}
+			id={ 'BaseControl' }
+			label={ __( 'グループ化するスライド数', 'ystandard-toolbox' ) }
 			__nextHasNoMarginBottom
 		>
-			<NumberControl
-				value={slidesPerGroup}
-				onChange={handleOnChange}
-				min={0}
-				max={10.0}
-				step={"any"}
+			<RangeControl
+				value={ slidesPerGroup }
+				onChange={ handleOnChange }
+				initialPosition={ 1 }
+				min={ 1 }
+				max={ 6 }
+				allowReset={ true }
 				__next40pxDefaultSize
 				__nextHasNoMarginBottom
 			/>

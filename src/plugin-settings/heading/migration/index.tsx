@@ -9,7 +9,10 @@ import { useState } from '@wordpress/element';
  */
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 import Buttons from '@aktk/plugin-settings/components/buttons';
-import { notifyError, notifySuccess } from '@aktk/components/toast-message';
+import {
+	notifyError,
+	notifySuccess,
+} from '@aktk/block-components/components/toast-message';
 
 export default function Migration() {
 	const [ isButtonDisable, setIsButtonDisable ] = useState( false );

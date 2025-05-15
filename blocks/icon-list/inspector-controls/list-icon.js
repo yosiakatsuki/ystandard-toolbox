@@ -19,6 +19,7 @@ const ListIcon = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'list-icon' }
 			label={ __( 'リストアイコン', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<div className="ystdtb__icon-list-buttons">
 				{ options.map( ( item ) => {

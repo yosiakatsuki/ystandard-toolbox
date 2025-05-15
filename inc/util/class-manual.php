@@ -31,7 +31,7 @@ class Manual {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link\">${link}</div>" );
+		return "<div class=\"ystdtb-menu__manual-link\">{$link}</div>";
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Manual {
 			return '';
 		}
 
-		return wp_targeted_link_rel( "<div class=\"ystdtb-menu__manual-link-inline\">${link}</div>" );
+		return "<div class=\"ystdtb-menu__manual-link-inline\">{$link}</div>";
 	}
 
 	/**
@@ -78,11 +78,11 @@ class Manual {
 					'utm_medium'   => 'referral',
 					'utm_campaign' => $url,
 				],
-				"https://wp-ystandard.com/${url}/"
+				"https://wp-ystandard.com/{$url}/"
 			);
 		}
 		$class = '' === $class ? '' : "class=\"$class\"";
 
-		return "<a ${class} href=\"${url}\" target=\"_blank\">${icon}${text}</a>";
+		return "<a {$class} href=\"{$url}\" target=\"_blank\">{$icon}{$text}</a>";
 	}
 }

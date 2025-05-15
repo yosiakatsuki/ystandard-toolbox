@@ -11,6 +11,7 @@ const Pagination = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'paginationType' }
 			label={ __( 'ページネーションタイプ', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<RadioControl
 				selected={ paginationType ?? '' }

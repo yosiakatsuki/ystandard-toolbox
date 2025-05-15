@@ -16,7 +16,7 @@ const PanelSlide = ( props ) => {
 				<PanelBody
 					title={ __( 'スライド表示数設定', 'ystandard-toolbox' ) }
 				>
-					<BaseControl>
+					<BaseControl __nextHasNoMarginBottom>
 						<ResponsiveTab>
 							{ ( tab ) => {
 								return (

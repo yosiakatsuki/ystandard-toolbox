@@ -28,7 +28,7 @@ class Shortcode {
 			if ( is_array( $value ) ) {
 				$value = implode( ',', $value );
 			}
-			$result .= "${key}=\"${value}\" ";
+			$result .= "{$key}=\"{$value}\" ";
 		}
 
 		return $result;

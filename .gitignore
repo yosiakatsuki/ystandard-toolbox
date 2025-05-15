@@ -9,3 +9,4 @@ ystandard-toolbox/
 /debug
 temp/
 phpunit/data/actual
+debug-*

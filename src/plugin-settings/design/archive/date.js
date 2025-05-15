@@ -6,7 +6,7 @@ import { PanelBody } from '@wordpress/components';
  * yStandard
  */
 import CustomSelectControl from '@aktk/components/custom-select-control';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 
 const DISPLAY_DATE = [
 	{
@@ -27,7 +27,7 @@ const Date = ( { updateSection, sectionSettings } ) => {
 	};
 	return (
 		<PanelBody title={ '日付情報' }>
-			<BaseControl>
+			<PluginSettingsBaseControl>
 				<CustomSelectControl
 					label={ '日付表示' }
 					options={ DISPLAY_DATE }
@@ -35,7 +35,7 @@ const Date = ( { updateSection, sectionSettings } ) => {
 					onChange={ handleOnChangeDisplayDate }
 					isHorizon
 				/>
-			</BaseControl>
+			</PluginSettingsBaseControl>
 		</PanelBody>
 	);
 };

@@ -56,8 +56,8 @@ class Sub_Header {
 
 		$css = '';
 		// CSS.
-		$css .= ".sub-header.is-top{background-color:${bg};color:${color};}";
-		$css .= ".sub-header__nav{justify-content:${menu_align};font-size:${font_size};}";
+		$css .= ".sub-header.is-top{background-color:{$bg};color:{$color};}";
+		$css .= ".sub-header__nav{justify-content:{$menu_align};font-size:{$font_size};}";
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
@@ -79,7 +79,7 @@ class Sub_Header {
 		$unit = Header_Design::get_option( 'subHeaderFontSizeUnitDesktop', 'em' );
 
 		if ( is_null( $font_size ) ) {
-			return "${size}${unit}";
+			return "{$size}{$unit}";
 		}
 
 		return $font_size;

@@ -15,7 +15,7 @@ const RatioSize = ( { attributes, setAttributes } ) => {
 		}
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<RatioSizeControl
 				label={ __( '縦横比', 'ystandard-toolbox' ) }
 				value={ ratio }

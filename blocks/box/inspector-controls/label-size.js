@@ -9,12 +9,15 @@ const LabelSize = ( props ) => {
 		<BaseControl
 			id={ 'label-size' }
 			label={ __( '文字サイズ', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<FontSizePicker
 				value={ labelFontSize.size }
 				onChange={ ( font ) => {
 					setLabelFontSize( font );
 				} }
+				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

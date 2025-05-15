@@ -177,15 +177,16 @@ class Plugin_Settings {
 			[ 'jquery' ]
 		);
 
+		$script_handle = 'ystdtb-plugin-settings';
 		wp_enqueue_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			YSTDTB_URL . '/build/plugin-settings/plugin-settings.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 		wp_localize_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			'ystdtbAdminConfig',
 			apply_filters(
 				'ystdtb_admin_config',
@@ -199,7 +200,7 @@ class Plugin_Settings {
 			)
 		);
 		wp_localize_script(
-			'ystdtb-plugin-settings',
+			$script_handle,
 			'ystdtbPluginSettings',
 			apply_filters(
 				'ystdtb_plugin_settings',
@@ -208,6 +209,7 @@ class Plugin_Settings {
 				]
 			)
 		);
+		do_action( 'ystdtb_enqueue_plugin_settings_base_scripts', $script_handle );
 	}
 
 	/**
@@ -232,22 +234,23 @@ class Plugin_Settings {
 			if ( false === strpos( $hook_suffix, Config::ADMIN_MENU_PREFIX_V2 ) ) {
 				return;
 			}
-			$asset = include( YSTDTB_PATH . "/build/plugin-settings/${name}.asset.php" );
+			$asset = include( YSTDTB_PATH . "/build/plugin-settings/{$name}.asset.php" );
 			wp_enqueue_script(
-				"ystdtb-plugin-settings-${name}",
-				YSTDTB_URL . "/build/plugin-settings/${name}.js",
+				"ystdtb-plugin-settings-{$name}",
+				YSTDTB_URL . "/build/plugin-settings/{$name}.js",
 				$asset['dependencies'],
 				$asset['version'],
 				true
 			);
-			if ( file_exists( YSTDTB_PATH . "/build/plugin-settings/${name}.css" ) ) {
+			if ( file_exists( YSTDTB_PATH . "/build/plugin-settings/{$name}.css" ) ) {
 				wp_enqueue_style(
-					"ystdtb-plugin-settings-${name}",
-					YSTDTB_URL . "/build/plugin-settings/${name}.css",
+					"ystdtb-plugin-settings-{$name}",
+					YSTDTB_URL . "/build/plugin-settings/{$name}.css",
 					[],
 					$asset['version'],
 				);
 			}
+			do_action( 'ystdtb_enqueue_plugin_settings_page_scripts', $name );
 		}
 	}
 

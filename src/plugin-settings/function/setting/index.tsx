@@ -1,5 +1,4 @@
-import { hasObjectKey } from '@aktk/helper/object';
-
+import { isObject } from '@aktk/block-components/utils/object';
 /**
  * 設定取得.
  *
@@ -11,14 +10,20 @@ export function getPluginSetting(
 	section: string | undefined = undefined,
 	defaultValue: any = undefined
 ) {
-	const settings = getPluginSettings( 'settings' );
+	const settings = getPluginSettings( 'settings' ) as
+		| Record< string, any >
+		| undefined;
+
 	if ( ! settings ) {
 		return defaultValue;
 	}
 	if ( ! section ) {
 		return settings;
 	}
-	if ( ! hasObjectKey( settings, section ) ) {
+	if (
+		! isObject( settings ) ||
+		! Object.prototype.hasOwnProperty.call( settings, section )
+	) {
 		return defaultValue;
 	}
 	return settings[ section ];

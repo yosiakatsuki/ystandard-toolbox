@@ -13,11 +13,13 @@ const PostName = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<TextControl
 				label={ __( '投稿名指定', 'ystandard-toolbox' ) }
 				value={ postNameIn }
 				onChange={ handleOnChange }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

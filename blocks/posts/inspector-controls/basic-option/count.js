@@ -9,7 +9,7 @@ import { getNumber } from '@aktk/helper/number';
 const Count = ( { attributes, setAttributes } ) => {
 	const { count, countMobile } = attributes;
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<ResponsiveTab
 				label={ __( '表示件数', 'ystandard-toolbox' ) }
 				hasTablet={ false }
@@ -27,6 +27,8 @@ const Count = ( { attributes, setAttributes } ) => {
 									} }
 									min={ 1 }
 									max={ 20 }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							) }
 							{ tabType.mobile === tab.name && (
@@ -44,6 +46,8 @@ const Count = ( { attributes, setAttributes } ) => {
 									min={ 1 }
 									max={ 20 }
 									allowReset={ true }
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							) }
 						</>

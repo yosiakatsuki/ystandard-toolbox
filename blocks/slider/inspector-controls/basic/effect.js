@@ -11,6 +11,7 @@ const Effect = ( { attributes, setAttributes } ) => {
 		<BaseControl
 			id={ 'effect' }
 			label={ __( 'エフェクト', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<RadioControl
 				selected={ effect ?? 'slide' }

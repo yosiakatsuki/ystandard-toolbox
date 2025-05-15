@@ -3,7 +3,6 @@
 @use "sass:math";
 
 [data-type="ystdtb/slider"] {
-
 	&,
 	*,
 	*::before,
@@ -12,11 +11,8 @@
 	}
 
 	&.preview--grid {
-
 		.ystdtb-slider__container {
-
 			> .block-editor-inner-blocks {
-
 				> .block-editor-block-list__layout {
 					display: flex;
 					flex-wrap: wrap;
@@ -33,12 +29,11 @@
 					> .block-list-appender {
 						position: relative;
 						margin: 0;
-						align-self: flex-start;
 
 						&::before {
 							content: "";
 							display: block;
-							padding-top: #{(global.decimal-floor(math.div(9, 16), 2) * 100)}#{"%"};
+							padding-top: #{(global.decimal-floor(math.div( 9 , 16 ), 2) * 100)}#{"%"};
 						}
 
 						> .block-editor-inserter {
@@ -47,7 +42,7 @@
 							right: 0;
 							bottom: 0;
 							left: 0;
-							padding: 0 0 8px 0;
+							padding: 0 0 0 0;
 							overflow: hidden;
 						}
 
@@ -74,7 +69,6 @@
 	}
 
 	&.preview--horizontal {
-
 		.ystdtb-slider__container {
 			overflow: auto;
 			box-sizing: border-box;
@@ -95,7 +89,6 @@
 						@media (min-width: 783px) {
 							width: calc(100vw - 300px - 36px - 120px);
 						}
-
 						@media (min-width: 961px) {
 							width: calc(100vw - 300px - 160px - 120px);
 							max-width: calc(830px - 120px);
@@ -104,6 +97,9 @@
 
 					.block-list-appender {
 						align-self: center;
+						position: relative;
+						margin: 0;
+						padding-right: 1em;
 					}
 				}
 			}
@@ -113,7 +109,6 @@
 
 
 .ystdtb-slider__slide-option-reset {
-
 	button {
 		display: block;
 		width: 100%;

@@ -19,74 +19,82 @@ const BoxPadding = ( props ) => {
 
 	return (
 		<BaseControl
-			id={ 'box-padding' }
-			label={ __( '余白設定', 'ystandard-toolbox' ) }
+			id={'box-padding'}
+			label={__( '余白設定', 'ystandard-toolbox' )}
+			__nextHasNoMarginBottom
 		>
-			<BaseControl>
+			<BaseControl __nextHasNoMarginBottom>
 				<BoxControl
-					label={ __( 'ボックス内側余白', 'ystandard-toolbox' ) }
-					values={ getResponsiveProperty( boxPadding, 'desktop' ) }
-					onChange={ ( nextValues ) => {
+					label={__( 'ボックス内側余白', 'ystandard-toolbox' )}
+					values={getResponsiveProperty( boxPadding, 'desktop' )}
+					onChange={( nextValues ) => {
 						setAttributes( {
 							boxPadding: {
 								...boxPadding,
 								desktop: nextValues,
 							},
 						} );
-					} }
-					units={ units }
+					}}
+					units={units}
+					__next40pxDefaultSize
 				/>
-				<ToggleControl
-					label={ __(
-						'タブレット・モバイル設定',
-						'ystandard-toolbox'
-					) }
-					onChange={ ( value ) => {
-						let newBoxPadding;
-						if ( value ) {
-							newBoxPadding = addResponsiveProperty( boxPadding );
-						} else {
-							newBoxPadding =
-								deleteResponsiveProperty( boxPadding );
-						}
-						setAttributes( {
-							isResponsiveBoxPadding: value,
-							boxPadding: newBoxPadding,
-						} );
-					} }
-					checked={ isResponsiveBoxPadding }
-				/>
+				<div style={{ marginTop: '10px' }}>
+					<ToggleControl
+						label={__(
+							'タブレット・モバイル設定',
+							'ystandard-toolbox'
+						)}
+						onChange={( value ) => {
+							let newBoxPadding;
+							if ( value ) {
+								newBoxPadding = addResponsiveProperty( boxPadding );
+							} else {
+								newBoxPadding =
+									deleteResponsiveProperty( boxPadding );
+							}
+							setAttributes( {
+								isResponsiveBoxPadding: value,
+								boxPadding: newBoxPadding,
+							} );
+						}}
+						checked={isResponsiveBoxPadding}
+						__nextHasNoMarginBottom
+
+					/>
+				</div>
 			</BaseControl>
-			{ isResponsiveBoxPadding && (
-				<BaseControl>
+			{isResponsiveBoxPadding && (
+				<BaseControl __nextHasNoMarginBottom>
 					<BoxControl
-						label={ __( 'タブレット', 'ystandard-toolbox' ) }
-						values={ getResponsiveProperty( boxPadding, 'tablet' ) }
-						onChange={ ( nextValues ) => {
+						label={__( 'タブレット', 'ystandard-toolbox' )}
+						values={getResponsiveProperty( boxPadding, 'tablet' )}
+						onChange={( nextValues ) => {
 							setAttributes( {
 								boxPadding: {
 									...boxPadding,
 									tablet: nextValues,
 								},
 							} );
-						} }
-						units={ units }
+						}}
+						units={units}
+						__next40pxDefaultSize
 					/>
 					<BoxControl
-						label={ __( 'モバイル', 'ystandard-toolbox' ) }
-						values={ getResponsiveProperty( boxPadding, 'mobile' ) }
-						onChange={ ( nextValues ) => {
+						label={__( 'モバイル', 'ystandard-toolbox' )}
+						values={getResponsiveProperty( boxPadding, 'mobile' )}
+						onChange={( nextValues ) => {
 							setAttributes( {
 								boxPadding: {
 									...boxPadding,
 									mobile: nextValues,
 								},
 							} );
-						} }
-						units={ units }
+						}}
+						units={units}
+						__next40pxDefaultSize
 					/>
 				</BaseControl>
-			) }
+			)}
 		</BaseControl>
 	);
 };

@@ -24,9 +24,9 @@ export default function AppContainer( props: AppContainerProps ) {
 		height: 'calc(100vh - var(--wp-admin--admin-bar--height, 32px))',
 	};
 	return (
-		<div className="text-base relative">
+		<div className="relative text-base">
 			<div className="bg-aktk-blue p-5">
-				<div className="flex justify-between text-white items-end">
+				<div className="ystdtb-app-container__title flex items-end justify-between text-white">
 					<h1 className="text-2xl text-white">
 						<span className="font-bold">{ title }</span>
 					</h1>
@@ -42,13 +42,13 @@ export default function AppContainer( props: AppContainerProps ) {
 			{ loading && (
 				<div
 					className={
-						'flex items-center justify-center absolute w-full z-10 top-0 left-0'
+						'absolute left-0 top-0 z-10 flex w-full items-center justify-center'
 					}
 					style={ loadingPanelStyle }
 				>
 					<div
 						className={
-							'opacity-80 bg-white z-10 absolute w-full h-full'
+							'absolute z-10 size-full bg-white opacity-80'
 						}
 					/>
 					<div className={ 'relative z-20' }>

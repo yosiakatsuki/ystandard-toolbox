@@ -155,7 +155,7 @@ class CTA {
 				switch ( $option_name ) {
 					case 'post-thumbnail':
 						$theme          = get_option(
-							"ys_show_${post_type}_header_thumbnail",
+							"ys_show_{$post_type}_header_thumbnail",
 							$enable
 						);
 						$item['enable'] = Types::to_bool( $theme );
@@ -168,28 +168,28 @@ class CTA {
 				switch ( $option_name ) {
 					case 'taxonomy':
 						$theme          = get_option(
-							"ys_show_${post_type}_category",
+							"ys_show_{$post_type}_category",
 							$enable
 						);
 						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'author':
 						$theme          = get_option(
-							"ys_show_${post_type}_author",
+							"ys_show_{$post_type}_author",
 							$enable
 						);
 						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'related':
 						$theme          = get_option(
-							"ys_show_${post_type}_related",
+							"ys_show_{$post_type}_related",
 							$enable
 						);
 						$item['enable'] = Types::to_bool( $theme );
 						break;
 					case 'paging':
 						$theme          = get_option(
-							"ys_show_${post_type}_paging",
+							"ys_show_{$post_type}_paging",
 							$enable
 						);
 						$item['enable'] = Types::to_bool( $theme );
@@ -278,7 +278,7 @@ class CTA {
 	public function set_sync_cta_option() {
 		$post_types = apply_filters( 'ystdtb_sync_cta_option_post_types', [ 'post', 'page' ] );
 		foreach ( $post_types as $type ) {
-			add_action( "ystdtb_sync_cta_option__${type}", [ __CLASS__, 'update_cta_theme_option' ], 10, 2 );
+			add_action( "ystdtb_sync_cta_option__{$type}", [ __CLASS__, 'update_cta_theme_option' ], 10, 2 );
 		}
 	}
 
@@ -293,7 +293,7 @@ class CTA {
 			return;
 		}
 		foreach ( $data as $post_type => $cta ) {
-			do_action( "ystdtb_sync_cta_option__${post_type}", $cta, $post_type );
+			do_action( "ystdtb_sync_cta_option__{$post_type}", $cta, $post_type );
 		}
 	}
 
@@ -317,17 +317,17 @@ class CTA {
 			$enable      = Types::to_bool( $item['enable'] );
 			switch ( $option_name ) {
 				case 'post-thumbnail':
-					update_option( "ys_show_${post_type}_header_thumbnail", $enable );
+					update_option( "ys_show_{$post_type}_header_thumbnail", $enable );
 					break;
 				case 'meta':
-					$show_date = get_option( "ys_show_${post_type}_publish_date", 'both' );
+					$show_date = get_option( "ys_show_{$post_type}_publish_date", 'both' );
 					if ( 'none' === $show_date && $enable ) {
-						update_option( "ys_show_${post_type}_publish_date", 'both' );
+						update_option( "ys_show_{$post_type}_publish_date", 'both' );
 					}
 					if ( 'none' !== $show_date && ! $enable ) {
-						update_option( "ys_show_${post_type}_publish_date", 'none' );
+						update_option( "ys_show_{$post_type}_publish_date", 'none' );
 					}
-					update_option( "ys_show_${post_type}_header_category", $enable );
+					update_option( "ys_show_{$post_type}_header_category", $enable );
 					break;
 			}
 		}
@@ -336,16 +336,16 @@ class CTA {
 			$enable      = Types::to_bool( $item['enable'] );
 			switch ( $option_name ) {
 				case 'taxonomy':
-					update_option( "ys_show_${post_type}_category", $enable );
+					update_option( "ys_show_{$post_type}_category", $enable );
 					break;
 				case 'author':
-					update_option( "ys_show_${post_type}_author", $enable );
+					update_option( "ys_show_{$post_type}_author", $enable );
 					break;
 				case 'related':
-					update_option( "ys_show_${post_type}_related", $enable );
+					update_option( "ys_show_{$post_type}_related", $enable );
 					break;
 				case 'paging':
-					update_option( "ys_show_${post_type}_paging", $enable );
+					update_option( "ys_show_{$post_type}_paging", $enable );
 					break;
 			}
 		}

@@ -17,6 +17,10 @@ export const attributes = {
 		type: 'string',
 		default: '',
 	},
+	useX: {
+		type: 'bool',
+		default: true,
+	},
 	useTwitter: {
 		type: 'bool',
 		default: true,
@@ -36,6 +40,10 @@ export const attributes = {
 	useLINE: {
 		type: 'bool',
 		default: true,
+	},
+	useBluesky: {
+		type: 'bool',
+		default: false,
 	},
 	twitterVia: {
 		type: 'string',

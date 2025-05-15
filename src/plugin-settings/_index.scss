@@ -29,40 +29,4 @@
 	.wrap {
 		margin: 0;
 	}
-
-	.components-panel__body {
-		border: 1px solid #e0e0e0;
-		margin: 2em 0;
-
-		&:first-child {
-			margin-top: 0;
-		}
-
-		&.is-opened {
-
-			> .components-panel__body-title {
-				margin-bottom: 1em;
-			}
-		}
-
-		> .components-base-control {
-			margin-top: 2em;
-
-			> .components-base-control__field > .components-base-control__label {
-				font-weight: 700;
-			}
-		}
-	}
-
-	.components-panel__body-title {
-		border-bottom: 1px solid #e0e0e0 !important;
-
-		.components-panel__body-toggle {
-			font-weight: 700;
-		}
-
-		+ .components-base-control {
-			margin-top: 0;
-		}
-	}
 }

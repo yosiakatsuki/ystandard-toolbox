@@ -12,7 +12,7 @@ const BoxBorderSize = ( props ) => {
 	const { boxBorderSize } = attributes;
 
 	return (
-		<BaseControl>
+		<BaseControl __nextHasNoMarginBottom>
 			<UnitControl
 				label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
 				value={ boxBorderSize }
@@ -22,6 +22,7 @@ const BoxBorderSize = ( props ) => {
 					} );
 				} }
 				units={ units }
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

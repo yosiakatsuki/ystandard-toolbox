@@ -9,7 +9,8 @@ const BoxBackgroundColor = ( props ) => {
 	return (
 		<BaseControl
 			id={ 'box-background-color' }
-			label={ __( '背景色', 'ystandard-toolbox' ) }
+			label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
+			__nextHasNoMarginBottom
 		>
 			<ColorPalette
 				colors={ colors }

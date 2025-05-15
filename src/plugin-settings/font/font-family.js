@@ -10,7 +10,7 @@ import { PanelBody, Button } from '@wordpress/components';
  */
 import InputControls from '@aktk/components/input-controls';
 import Notice from '@aktk/components/notice';
-import BaseControl from '@aktk/plugin-settings/components/base-control';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import Stack from '@aktk/plugin-settings/components/stack';
 import { FontContext } from './index';
 
@@ -43,7 +43,7 @@ const FontFamily = () => {
 				</Notice>
 			</div>
 			{ ! settings?.family && (
-				<BaseControl
+				<PluginSettingsBaseControl
 					label={ 'フォント設定のコピー' }
 					id={ 'copy-font-family' }
 					isFullWidth
@@ -68,7 +68,7 @@ const FontFamily = () => {
 							</Button>
 						</div>
 					</Stack>
-				</BaseControl>
+				</PluginSettingsBaseControl>
 			) }
 		</PanelBody>
 	);
