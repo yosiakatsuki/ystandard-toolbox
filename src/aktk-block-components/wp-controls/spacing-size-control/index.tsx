@@ -23,12 +23,25 @@ export interface SpacingSizeControlProps {
 	values: SpacingSizeValues | undefined;
 	onChange: ( newValue: SpacingSizeValues ) => void;
 	label?: string;
-	sides?: 'top' | 'right' | 'bottom' | 'left';
+	sides?: (
+		| 'top'
+		| 'right'
+		| 'bottom'
+		| 'left'
+		| 'horizontal'
+		| 'vertical'
+	)[];
 	minimumCustomValue?: number;
 }
 
 export default function SpacingSizesControl( props: SpacingSizeControlProps ) {
-	const { values, onChange, label, sides, minimumCustomValue = 0 } = props;
+	const {
+		values,
+		onChange,
+		label,
+		sides = [ 'top', 'right', 'bottom', 'left' ],
+		minimumCustomValue = 0,
+	} = props;
 	const controlLabel = label || '';
 	return (
 		<WPSpacingSizesControl
