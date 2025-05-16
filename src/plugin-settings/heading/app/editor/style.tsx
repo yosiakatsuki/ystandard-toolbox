@@ -37,7 +37,7 @@ export function StyleEditContainer() {
 		<>
 			<div
 				className={
-					'relative mt-5 min-h-[300px] border border-solid border-aktk-border-gray px-4 py-8'
+					'aktk-responsive-select-tab-for-setting-page relative mt-5 min-h-[300px] border border-solid border-aktk-border-gray px-4 py-8'
 				}
 			>
 				<h2 className={ 'mb-3 mt-0 font-bold text-aktk-text-gray' }>
