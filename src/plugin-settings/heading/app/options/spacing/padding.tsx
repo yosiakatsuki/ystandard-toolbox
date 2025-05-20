@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
-import type { CustomSpacing } from '@aktk/block-components/components/custom-spacing-select';
+import type { ResponsiveSpacing } from '@aktk/block-components/components/custom-spacing-select';
 import { useThemeSpacingSizes } from '@aktk/block-components/hooks';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
 /**
@@ -19,13 +19,13 @@ import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 import { filterSpacingSizes } from './function';
 
 interface PaddingControlProps {
-	value: CustomSpacing | undefined;
-	onChange: ( newValue: { padding?: CustomSpacing } ) => void;
+	value: ResponsiveSpacing | undefined;
+	onChange: ( newValue: { padding?: ResponsiveSpacing } ) => void;
 }
 
 export default function Padding( props: PaddingControlProps ) {
 	const { value, onChange } = props;
-	const handleOnChange = ( newValue: CustomSpacing ) => {
+	const handleOnChange = ( newValue: ResponsiveSpacing ) => {
 		onChange( {
 			padding: deleteUndefined( newValue ),
 		} );
