@@ -82,7 +82,6 @@ export default function LevelSelect() {
 	const handleOnCancel = () => {
 		handleOnChange( '' );
 	};
-
 	return (
 		<>
 			<div className={ '' }>

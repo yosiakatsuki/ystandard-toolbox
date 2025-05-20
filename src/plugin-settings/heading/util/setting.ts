@@ -60,7 +60,12 @@ export function getStyleSelectOptions( options: {
 			name: style?.label,
 		};
 	} );
-	return styles.sort( ( a, b ) => {
+	// 空要素の削除.
+	const filteredStyles = styles.filter( ( style ) => {
+		return style.key && style.key.trim() !== '';
+	} );
+
+	return filteredStyles.sort( ( a, b ) => {
 		if ( a.name < b.name ) {
 			return -1;
 		}
