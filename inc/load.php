@@ -61,8 +61,6 @@ require_once __DIR__ . '/polyfill/class-polyfill.php';
 
 // Admin.
 require_once __DIR__ . '/admin/class-admin-utility.php';
-require_once __DIR__ . '/menu-page/class-menu-page.php';
-require_once __DIR__ . '/admin/class-plugin-menu.php';
 if ( file_exists( __DIR__ . '/update/class-update.php' ) ) {
 	require_once __DIR__ . '/update/class-update.php';
 }
