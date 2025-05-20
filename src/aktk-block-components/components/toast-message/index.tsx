@@ -1,13 +1,11 @@
 import {
 	ToastContainer as ReactToastifyContainer,
 	toast,
+	type ToastContainerProps,
+	type ToastOptions,
 } from 'react-toastify';
-import type {
-	ToastContainerProps,
-	ToastOptions,
-} from 'react-toastify/dist/types';
 // CSS
-import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 /**
  * トーストメッセージコンテナ
