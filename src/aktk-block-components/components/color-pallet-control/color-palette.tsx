@@ -1,26 +1,23 @@
+import { ColorPalette as WPColorPalette } from '@wordpress/components';
 import {
-	// @ts-ignore
-	ColorPaletteControl,
-	// @ts-ignore
-	__experimentalColorGradientControl as WPColorGradientControl,
-	// @ts-expect-error
-	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
-} from '@wordpress/block-editor';
-
+	ColorObject,
+	PaletteObject,
+} from '@wordpress/components/src/color-palette/types';
 /**
  * Aktk Dependencies
  */
 import ColorDropdownWrapper from '@aktk/block-components/components/color-pallet-control/color-dropdown-wrapper';
 import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
-import useThemeGradients from '@aktk/block-components/hooks/useThemeGradient';
 
 import './editor-color-palette.scss';
 
 interface ColorPaletteProps {
 	label: string;
 	value: string;
-	onChange: ( value: string ) => void;
-	colors?: string[];
+	onChange: ( newColor?: string, index?: number ) => void;
+	colors?: PaletteObject[] | ColorObject[];
+	enableCurrentColor?: boolean;
+	enableTransparent?: boolean;
 }
 
 /**
@@ -28,80 +25,31 @@ interface ColorPaletteProps {
  * @param props
  */
 export function ColorPalette( props: ColorPaletteProps ) {
-	const { label, value, onChange, colors } = props;
-	const themeColors = useThemeColors();
-
-	const paletteColors = colors || themeColors;
-
+	const {
+		label,
+		value,
+		onChange,
+		colors,
+		enableCurrentColor,
+		enableTransparent,
+	} = props;
+	const handleOnChange = ( newColor?: string, index?: number ) => {
+		onChange( newColor, index );
+	};
+	const themeColors = useThemeColors( {
+		enableCurrentColor,
+		enableTransparent,
+	} );
 	return (
 		<>
 			<ColorDropdownWrapper colorValue={ value } label={ label }>
-				<ColorPaletteControl
+				<WPColorPalette
 					className="aktk-components__color-palette-control"
-					label={ label }
 					value={ value }
-					onChange={ onChange }
+					onChange={ handleOnChange }
 					disableCustomColors={ false }
-					colors={ paletteColors }
+					colors={ colors || themeColors }
 				/>
-			</ColorDropdownWrapper>
-		</>
-	);
-}
-
-interface ColorGradientPaletteProps {
-	label: string;
-	colorValue: string;
-	onColorChange: ( value: string ) => void;
-	colors?: string[];
-	gradientValue?: string;
-	setGradient?: ( newGradientValue: string ) => void;
-	gradients?: string[];
-}
-
-/**
- *
- * @param      props
- */
-export function ColorGradientPalette( props: ColorGradientPaletteProps ) {
-	const {
-		label,
-		colorValue,
-		onColorChange,
-		colors,
-		gradientValue,
-		setGradient,
-		gradients,
-	} = props;
-	const colorGradientSettings = useMultipleOriginColorsAndGradients();
-	// 色設定を取得
-	const themeColors = useThemeColors();
-	const themeGradients = useThemeGradients();
-	// カラーパレットの設定
-	const paletteColors = colors || themeColors;
-	const paletteGradients = gradients || themeGradients;
-
-	const controlProps = {
-		clearable: false,
-		colors: paletteColors,
-		colorValue,
-		gradientValue,
-		label,
-		onColorChange,
-		gradients: paletteGradients,
-		onGradientChange: setGradient,
-		showTitle: false,
-		disableCustomGradients: false,
-		disableCustomColors: false,
-		...colorGradientSettings,
-	};
-	return (
-		<>
-			<ColorDropdownWrapper
-				colorValue={ gradientValue ?? colorValue }
-				label={ label }
-			>
-				<WPColorGradientControl { ...controlProps } />
 			</ColorDropdownWrapper>
 		</>
 	);

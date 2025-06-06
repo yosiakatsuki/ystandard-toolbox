@@ -1,7 +1,9 @@
 /**
  * WordPress dependencies
  */
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useMemo } from '@wordpress/element';
+// @ts-ignore
+import { useSettings } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 
@@ -10,16 +12,44 @@ import { store as editorStore } from '@wordpress/editor';
  */
 const useThemeGradients = () => {
 	const [ gradients, setGradients ] = useState( [] );
-	const themeGradients = useSelect( ( select ) => {
+	// 設定から取得.
+	const [
+		userGradientPalette,
+		themeGradientPalette,
+		defaultGradientPalette,
+	] = useSettings(
+		'color.gradients.custom',
+		'color.gradients.theme',
+		'color.gradients.default'
+	);
+
+	// useSelectから色情報を取得(主に設定画面用).
+	const dataGradients = useSelect( ( select ) => {
 		// @ts-ignore
 		const settings = select( editorStore )?.getEditorSettings();
+		// @ts-ignore
 		return settings?.gradients || [];
 	}, [] );
+
+	const allGradients = useMemo(
+		() => [
+			...( userGradientPalette || [] ),
+			...( themeGradientPalette || dataGradients || [] ),
+			...( defaultGradientPalette || [] ),
+		],
+		[
+			userGradientPalette,
+			themeGradientPalette,
+			defaultGradientPalette,
+			dataGradients,
+		]
+	);
 	useEffect( () => {
-		if ( themeGradients ) {
-			setGradients( themeGradients );
+		if ( allGradients ) {
+			// @ts-ignore
+			setGradients( allGradients );
 		}
-	}, [ themeGradients ] );
+	}, [ allGradients ] );
 
 	return gradients;
 };
