@@ -1,14 +1,16 @@
 /**
  * WordPress dependencies.
  */
-import { Button, TextControl, Popover } from '@wordpress/components';
+import { Popover } from '@wordpress/components';
 import { useMemo, useCallback, useState, useRef } from '@wordpress/element';
 import { Icon, closeSmall } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
 
 /**
- * Plugin.
+ * Aktk dependencies.
  */
+import TextControl from '@aktk/block-components/wp-controls/text-control';
+import Button from '@aktk/block-components/wp-controls/button';
 import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 import { getFilteredIcons } from '@aktk/block-components/utils/icon';
 
@@ -17,6 +19,7 @@ import { getFilteredIcons } from '@aktk/block-components/utils/icon';
  */
 import './style-editor.scss';
 
+// @ts-ignore
 export interface IconSelectProps {
 	icon: string;
 	label?: string;
@@ -41,7 +44,7 @@ export function IconSelect( props: IconSelectProps ) {
 					// @ts-expect-error
 					ref={ setPopoverAnchor }
 				>
-					<div className="flex size-8 items-center justify-center bg-gray-300">
+					<div className="ystd-component__icon-preview flex aspect-square size-8 items-center justify-center bg-gray-300">
 						<PreviewIcon icon={ icon } />
 					</div>
 					<Button
@@ -62,12 +65,13 @@ export function IconSelect( props: IconSelectProps ) {
 						{ __( 'アイコン選択', 'ystandard-toolbox' ) }
 					</Button>
 					<Button
-						variant={ 'tertiary' }
+						variant={ 'secondary' }
 						onClick={ () => {
 							onChange( undefined );
 						} }
 						size={ 'small' }
 						disabled={ disable }
+						isDestructive
 					>
 						{ __( 'クリア', 'ystandard-toolbox' ) }
 					</Button>
