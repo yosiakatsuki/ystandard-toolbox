@@ -30,6 +30,7 @@ const TRANSPARENT = {
 
 /**
  * テーマのカラー設定を取得する（設定画面用）
+ * @param options
  */
 const useThemeColors = ( options?: themeColorsOptions ) => {
 	const { enableCurrentColor = false, enableTransparent = false } =
