@@ -22,20 +22,22 @@ export function deleteUndefined( obj: object ) {
  * @param {Object} obj - 削除対象のオブジェクト
  * @return {Object} - 空プロパティを削除したオブジェクト
  */
-export function stripUndefined( obj: object ): object {
+export function stripUndefined( obj: object ): object | undefined {
 	if ( ! isObject( obj ) ) {
 		return obj;
 	}
-	return Object.entries( obj ).reduce( ( acc, [ key, value ] ) => {
-		if ( value === undefined ) {
+	if ( isEmpty( obj ) ) {
+		return obj;
+	}
+	const result = Object.entries( obj ).reduce( ( acc, [ key, value ] ) => {
+		if ( undefined === value ) {
 			return acc;
 		}
 
 		if ( value && typeof value === 'object' && ! Array.isArray( value ) ) {
 			// 子オブジェクトも走査
 			const cleaned = stripUndefined( value );
-			// @ts-ignore
-			if ( Object.keys( cleaned ).length ) {
+			if ( isObject( cleaned ) && Object.keys( cleaned ).length ) {
 				// @ts-ignore
 				acc[ key ] = cleaned;
 			}
@@ -45,6 +47,8 @@ export function stripUndefined( obj: object ): object {
 		}
 		return acc;
 	}, {} );
+
+	return isEmpty( result ) ? undefined : result;
 }
 
 /**
