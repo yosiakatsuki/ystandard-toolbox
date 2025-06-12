@@ -1,0 +1,169 @@
+import queryString from 'query-string';
+import type { Context } from 'react';
+/**
+ * WordPress
+ */
+import {
+	useState,
+	useEffect,
+	createContext,
+	createRoot,
+} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+/**
+ * Aktk dependencies
+ */
+import {
+	ToastContainer,
+	notifySuccess,
+	notifyError,
+} from '@aktk/block-components/components/toast-message';
+import { hasKey } from '@aktk/block-components/utils/object';
+import { PrimaryButton } from '@aktk/block-components/components/buttons';
+/**
+ * Plugin dependencies
+ */
+import { apiPost, getEndpoint } from '@aktk/api';
+import AppContainer from '@aktk/plugin-settings/components/app-container';
+import { getPluginSetting } from '@aktk/plugin-settings/function/setting';
+import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
+
+/**
+ * App
+ */
+import { DesignSettings } from './types';
+import Copyright from './copyright';
+import Header from './header';
+import Menu from './menu';
+import Archive from './archive';
+
+interface DesignContextProps {
+	settings: { [ key: string ]: any };
+	isLoading: boolean;
+	setIsLoading: ( value: boolean ) => void;
+	isUpdate: boolean;
+	setIsUpdate: ( value: boolean ) => void;
+	getSettings: ( section?: string ) => { [ key: string ]: any };
+	updateSettings: ( section: string, value: DesignSettings ) => void;
+}
+
+// @ts-ignore
+export const DesignContext: Context< DesignContextProps > =
+	// @ts-ignore
+	createContext< DesignContextProps >();
+
+const TABS = [
+	{
+		name: 'header',
+		title: 'ヘッダー',
+	},
+	{
+		name: 'menu',
+		title: 'メニュー',
+	},
+	{
+		name: 'archive',
+		title: 'アーカイブ',
+	},
+	{
+		name: 'copyright',
+		title: 'Copyright',
+	},
+];
+
+const Design = () => {
+	const [ isLoading, setIsLoading ] = useState( true );
+	const [ isUpdate, setIsUpdate ] = useState( false );
+	const [ settings, setSettings ] = useState< DesignSettings | {} >( {} );
+
+	useEffect( () => {
+		setSettings( getPluginSetting() );
+		setIsLoading( false );
+	}, [] );
+
+	// eslint-disable-next-line no-undef
+	const parsed = queryString.parse( location.search );
+	const initialTabName = parsed?.tab as string | undefined;
+
+	const getSettings = ( section: string | undefined = undefined ) => {
+		if ( ! section || ! hasKey( settings, section ) ) {
+			return {};
+		}
+		// @ts-ignore
+		return settings[ section ];
+	};
+
+	const updateSettings = ( section: string, value: DesignSettings ) => {
+		setSettings( {
+			...settings,
+			...{
+				[ section ]: value,
+			},
+		} );
+	};
+
+	// 設定更新.
+	const handleOnClickUpdate = async () => {
+		setIsUpdate( true );
+		setIsLoading( true );
+		await apiPost( {
+			endpoint: getEndpoint( 'update_plugin_settings_all' ),
+			data: settings,
+			callback: ( response ) => {
+				if ( response?.data ) {
+					setSettings( response?.data );
+				}
+				setTimeout( () => {
+					setIsUpdate( false );
+					setIsLoading( false );
+				}, 1000 );
+			},
+			messageSuccess: notifySuccess,
+			messageError: notifyError,
+		} );
+	};
+
+	return (
+		<AppContainer title={ 'サイトデザイン拡張' } loading={ isLoading }>
+			<DesignContext.Provider
+				value={ {
+					settings,
+					isLoading,
+					setIsLoading,
+					isUpdate,
+					setIsUpdate,
+					getSettings,
+					updateSettings,
+				} }
+			>
+				<SettingsTab
+					tabs={ TABS }
+					initialTabName={ initialTabName || '' }
+				>
+					{ ( tab: unknown ) => {
+						return (
+							<>
+								<Header tab={ tab } />
+								<Menu tab={ tab } />
+								<Archive tab={ tab } />
+								{ /* <Copyright tab={ tab } /> */ }
+							</>
+						);
+					} }
+				</SettingsTab>
+			</DesignContext.Provider>
+			<PrimaryButton
+				onClick={ handleOnClickUpdate }
+				disabled={ isUpdate }
+				icon={ 'cloud-upload' }
+			>
+				{ __( '変更を保存', 'ystandard-toolbox' ) }
+			</PrimaryButton>
+			<ToastContainer />
+		</AppContainer>
+	);
+};
+
+const container = document.getElementById( 'design' );
+const root = createRoot( container! );
+root.render( <Design /> );

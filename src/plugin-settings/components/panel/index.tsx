@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import classnames from 'classnames';
 /**
  * Akatsuki
  */
@@ -15,7 +15,7 @@ interface PluginSettingsPanelProps {
 
 export function PluginSettingsPanel( props: PluginSettingsPanelProps ) {
 	const { title, initialOpen, children, isNested = false } = props;
-	const className = clsx( 'ystdtb-plugin-settings-panel', {
+	const className = classnames( 'ystdtb-plugin-settings-panel', {
 		'is-nested': isNested,
 	} );
 	return (

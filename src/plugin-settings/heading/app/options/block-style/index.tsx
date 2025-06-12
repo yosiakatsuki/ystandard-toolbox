@@ -19,6 +19,7 @@ import { HeadingContext } from '../../index';
 export default function BlockStyle() {
 	// @ts-ignore
 	const { headingOption, setHeadingOption, setIsEdit } =
+		// @ts-ignore
 		useContext( HeadingContext );
 
 	const isUseHeadingStyle = headingOption?.useHeadingStyle;

@@ -23,6 +23,10 @@ export const parseObject = ( value ) => {
 	return 0 < Object.keys( result ).length ? result : undefined;
 };
 
+/**
+ *
+ * @deprecated use `@aktk/block-components/utils/object/hasKey`
+ */
 export const hasObjectKey = ( value, key ) => {
 	if ( ! isObject( value ) ) {
 		return false;

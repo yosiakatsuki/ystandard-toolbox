@@ -7,6 +7,10 @@ import { useMemo } from '@wordpress/element';
 import ManualLink from '@aktk/components/manual-link';
 import './_editor.scss';
 
+/**
+ *
+ * @deprecated
+ */
 const PageBase = ( { title, manual, loading = false, children } ) => {
 	const isLoading = useMemo( () => {
 		return loading;

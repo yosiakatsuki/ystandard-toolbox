@@ -1,5 +1,5 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import type { CustomSpacing } from '@aktk/block-components/components/custom-spacing-select';
+import type { ResponsiveSpacing } from '@aktk/block-components/components/custom-spacing-select';
 import type {
 	SplitBorders,
 	FlatBorder,
@@ -53,8 +53,8 @@ export interface HeadingStyle {
 	borderRadius?: ResponsiveValues;
 
 	// Spacing.
-	padding?: CustomSpacing;
-	margin?: CustomSpacing;
+	padding?: ResponsiveSpacing;
+	margin?: ResponsiveSpacing;
 
 	// Size.
 	width?: ResponsiveValues;
@@ -110,8 +110,8 @@ export interface HeadingPseudoElementsStyle {
 	border?: SplitBorders | FlatBorder;
 	borderRadius?: ResponsiveValues;
 	// Spacing.
-	padding?: CustomSpacing;
-	margin?: CustomSpacing;
+	padding?: ResponsiveSpacing;
+	margin?: ResponsiveSpacing;
 	// Size.
 	width?: ResponsiveValues;
 	minWidth?: ResponsiveValues;
