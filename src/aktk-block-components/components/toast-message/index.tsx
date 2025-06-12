@@ -43,7 +43,7 @@ const option = {
  * @param props
  * @param message
  */
-export const notifySuccess = ( message = undefined ) => {
+export const notifySuccess = ( message: string | undefined = undefined ) => {
 	const showMessage = message ?? '更新しました。';
 	toast.success( showMessage, option );
 };
@@ -52,7 +52,7 @@ export const notifySuccess = ( message = undefined ) => {
  * @param props
  * @param message
  */
-export const notifyWarning = ( message = undefined ) => {
+export const notifyWarning = ( message: string | undefined = undefined ) => {
 	const showMessage = message ?? '問題が発生しました。';
 	toast.warn( showMessage, option );
 };
@@ -61,7 +61,7 @@ export const notifyWarning = ( message = undefined ) => {
  * @param props
  * @param message
  */
-export const notifyError = ( message = undefined ) => {
+export const notifyError = ( message: string | undefined = undefined ) => {
 	const showMessage = message ?? '問題が発生しました。';
 	toast.error( showMessage, option );
 };
