@@ -2,6 +2,9 @@ import { Button } from '@wordpress/components';
 import classnames from 'classnames';
 import './_edit.scss';
 
+/**
+ * @deprecated use aktk-block-components/components/buttons/horizon-buttons instead
+ */
 const HorizonButtons = ( {
 	items,
 	onChange,

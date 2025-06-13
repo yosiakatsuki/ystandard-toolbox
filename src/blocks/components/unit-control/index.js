@@ -1,7 +1,7 @@
 import { __experimentalUnitControl as WPUnitControl } from '@wordpress/components';
 
 /*
- * @deprecated
+ * @deprecated use aktk-block-components/wp-controls/unit-control instead
  */
 const UnitControl = ( { label, value, onChange, units, ...props } ) => {
 	return (
