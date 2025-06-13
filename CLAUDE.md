@@ -13,7 +13,7 @@
 -   TypeScriptの型定義やインターフェース名は英語のまま
 -   **importセクションコメント（例: `// WordPress`）は英語で記述する**
     -   WordPress依存関係 → WordPress Dependencies
-    -   aktk-block-components依存関係 → Aktk Dependencies
+    -   aktk-block-components(`src/aktk-block-components/**`,`@aktk/block-components/**`)依存関係 → Aktk Dependencies
     -   プラグイン固有の依存関係 → Plugin Dependencies
 
 ## プロジェクト概要
