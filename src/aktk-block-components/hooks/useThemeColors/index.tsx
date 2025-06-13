@@ -7,6 +7,7 @@ import { useMemo } from '@wordpress/element';
 import { useSettings } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
+import { applyFilters } from '@wordpress/hooks';
 
 type themeColorsOptions = {
 	enableCurrentColor?: boolean;
@@ -42,6 +43,16 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 			'color.defaultPalette'
 		);
 
+	// フィルターを適用してテーマカラーを取得.
+	const hookThemeColors = applyFilters(
+		'aktk.hooks.getThemeColors.themeColors',
+		[]
+	) as Array< {
+		name: string;
+		slug: string;
+		color: string;
+	} >;
+
 	// useSelectから色情報を取得(主に設定画面用).
 	const dataColors = useSelect( ( select ) => {
 		// @ts-ignore
@@ -52,20 +63,22 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 
 	return useMemo( () => {
 		const result = [];
+		let _themeColors = [];
+		// テーマカラーの取得.
 		if ( themeColors && themeColors.length ) {
-			result.push( {
-				name: _x( 'テーマ', 'useThemeColors', 'ystandard-blocks' ),
-				colors: [
-					...themeColors,
-					...( enableCurrentColor ? [ CURRENT_COLOR ] : [] ),
-					...( enableTransparent ? [ TRANSPARENT ] : [] ),
-				],
-			} );
+			_themeColors = themeColors;
+		} else if ( hookThemeColors && hookThemeColors.length ) {
+			_themeColors = hookThemeColors;
 		} else if ( dataColors && dataColors.length ) {
+			_themeColors = dataColors;
+		}
+		// テーマカラーのチェック&追加.
+		if ( _themeColors && _themeColors.length ) {
+			console.log( { _themeColors } );
 			result.push( {
 				name: _x( 'テーマ', 'useThemeColors', 'ystandard-blocks' ),
 				colors: [
-					...dataColors,
+					..._themeColors,
 					...( enableCurrentColor ? [ CURRENT_COLOR ] : [] ),
 					...( enableTransparent ? [ TRANSPARENT ] : [] ),
 				],
