@@ -10,7 +10,7 @@ import { store as coreStore } from '@wordpress/core-data';
  */
 import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
-import { toBool } from '@aktk/helper/boolean.js';
+import { toBool } from '@aktk/block-components/utils/boolean';
 import MediaUploadControl from '@aktk/components/media-upload-control';
 /**
  * Plugin Dependencies

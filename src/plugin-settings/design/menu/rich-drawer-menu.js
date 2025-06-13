@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import Notice from '@aktk/components/notice';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { toBool } from '@aktk/helper/boolean.js';
+import { toBool } from '@aktk/block-components/utils/boolean';
 
 const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 	const enableRichDrawerMenu = toBool(

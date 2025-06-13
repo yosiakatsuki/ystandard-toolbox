@@ -5,7 +5,7 @@ import { useContext } from '@wordpress/element';
  */
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import { BlockPatternsContext } from '../index';
-import { toBool } from '@aktk/helper/boolean';
+import { toBool } from '@aktk/block-components/utils/boolean';
 
 const DisableCorePattern = () => {
 	const { settings, setSettings, getSetting } =
