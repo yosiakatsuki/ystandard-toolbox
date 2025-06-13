@@ -74,7 +74,6 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 		}
 		// テーマカラーのチェック&追加.
 		if ( _themeColors && _themeColors.length ) {
-			console.log( { _themeColors } );
 			result.push( {
 				name: _x( 'テーマ', 'useThemeColors', 'ystandard-blocks' ),
 				colors: [
