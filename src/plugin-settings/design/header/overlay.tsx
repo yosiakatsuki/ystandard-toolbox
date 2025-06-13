@@ -51,6 +51,7 @@ export default function Overlay( {
 	const overlayEnable = sectionSettings?.enableOverlay ?? false;
 	const overlayPageType = sectionSettings?.overlayPageType || [];
 
+	// @ts-ignore
 	const { postTypes } = useSelect( ( select ) => {
 		const { getPostTypes } = select( coreStore );
 		const _postTypes = getPostTypes( { per_page: -1 } ) ?? [];
@@ -86,6 +87,7 @@ export default function Overlay( {
 		];
 	};
 
+	// @ts-ignore
 	const overlayImage: MediaItem | undefined = !! sectionSettings?.overlayImage
 		? {
 				id: sectionSettings?.overlayImageId,
@@ -119,7 +121,7 @@ export default function Overlay( {
 		} );
 	};
 
-	const handleOnChangeTextColor = ( newValue: string ) => {
+	const handleOnChangeTextColor = ( newValue?: string ) => {
 		updateSection( {
 			overlayTextColor: newValue,
 		} );
@@ -187,7 +189,9 @@ export default function Overlay( {
 						>
 							<ColorPalette
 								label={ '文字色' }
-								value={ sectionSettings?.overlayTextColor }
+								value={
+									sectionSettings?.overlayTextColor || ''
+								}
 								onChange={ handleOnChangeTextColor }
 							/>
 						</PluginSettingsBaseControl>
