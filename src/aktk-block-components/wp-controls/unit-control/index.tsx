@@ -19,7 +19,9 @@ export interface UnitControlProps {
 	isResetValueOnUnitChange?: boolean | undefined;
 }
 
-export default function UnitControl( props: UnitControlProps ) {
+export default function UnitControl(
+	props: UnitControlProps
+): React.ReactElement {
 	// @ts-expect-error
 	return <WPUnitControl { ...props } />;
 }

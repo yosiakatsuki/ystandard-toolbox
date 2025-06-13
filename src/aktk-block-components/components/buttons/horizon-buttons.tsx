@@ -10,7 +10,7 @@ export function HorizonButtons( {
 }: {
 	children: React.ReactNode;
 	className?: string;
-} ) {
+} ): React.ReactElement {
 	const buttonClass = classnames(
 		'aktk-components__horizon-buttons',
 		className
@@ -26,7 +26,9 @@ interface HorizonButtonSelectProps {
 	buttonSize?: 'small' | 'default' | 'compact';
 }
 
-export function HorizonButtonSelect( props: HorizonButtonSelectProps ) {
+export function HorizonButtonSelect(
+	props: HorizonButtonSelectProps
+): React.ReactElement {
 	const { className, onChange, value, options, buttonSize } = props;
 
 	return (
