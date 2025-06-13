@@ -24,7 +24,7 @@ interface ColorPaletteProps {
  * カラーパレット（設定画面用。エディター側はWP提供のコントロールを使おう）
  * @param props
  */
-export function ColorPalette( props: ColorPaletteProps ) {
+export function ColorPalette( props: ColorPaletteProps ): React.ReactElement {
 	const {
 		label,
 		value,
@@ -43,6 +43,7 @@ export function ColorPalette( props: ColorPaletteProps ) {
 	return (
 		<>
 			<ColorDropdownWrapper colorValue={ value } label={ label }>
+				{ /* @ts-ignore */ }
 				<WPColorPalette
 					className="aktk-components__color-palette-control"
 					value={ value }
