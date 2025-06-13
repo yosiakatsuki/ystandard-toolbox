@@ -26,7 +26,11 @@ export interface PanelProps {
 	sectionSettings: HeaderSettings;
 }
 
-export default function Header( { tab }: { tab: DesignSettingsTab } ) {
+export default function Header( {
+	tab,
+}: {
+	tab: DesignSettingsTab;
+} ): JSX.Element | null {
 	// @ts-ignore
 	const { settings, getSettings, updateSettings } =
 		// @ts-ignore
