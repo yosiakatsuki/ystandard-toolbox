@@ -28,3 +28,7 @@ export function PluginSettingsPanel( props: PluginSettingsPanelProps ) {
 		</Panel>
 	);
 }
+
+export function PanelInner( { children }: { children: React.ReactNode } ) {
+	return <div className={ 'flex flex-col gap-8' }>{ children }</div>;
+}
