@@ -20,9 +20,9 @@ export function HorizonButtons( {
 
 interface HorizonButtonSelectProps {
 	className?: string;
-	onChange?: ( value: string ) => void;
-	value?: string;
-	options: { label: string; value: string }[];
+	onChange?: ( value: string | number | boolean ) => void;
+	value?: string | number | boolean;
+	options: { label: string; value: string | number | boolean }[];
 	buttonSize?: 'small' | 'default' | 'compact';
 }
 
@@ -34,9 +34,9 @@ export function HorizonButtonSelect(
 	return (
 		<HorizonButtons className={ className }>
 			<>
-				{ options?.map( ( option ) => (
+				{ options?.map( ( option, index ) => (
 					<Button
-						key={ option.value }
+						key={ option.value ? `${ option.value }` : index }
 						variant={
 							option.value === value ? 'primary' : 'secondary'
 						}
