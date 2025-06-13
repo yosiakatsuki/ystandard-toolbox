@@ -66,19 +66,19 @@ export const DesignContext: Context< DesignContextProps > =
 const TABS: DesignSettingsTab[] = [
 	{
 		name: 'header',
-		title: 'ヘッダー',
+		title: __( 'ヘッダー', 'ystandard-toolbox' ),
 	},
 	{
 		name: 'menu',
-		title: 'メニュー',
+		title: __( 'メニュー', 'ystandard-toolbox' ),
 	},
 	{
 		name: 'archive',
-		title: 'アーカイブ',
+		title: __( 'アーカイブ', 'ystandard-toolbox' ),
 	},
 	{
 		name: 'copyright',
-		title: 'Copyright',
+		title: __( 'Copyright', 'ystandard-toolbox' ),
 	},
 ];
 
@@ -146,7 +146,7 @@ const Design = () => {
 	);
 
 	return (
-		<AppContainer title={ 'サイトデザイン拡張' } loading={ isLoading }>
+		<AppContainer title={ __( 'サイトデザイン拡張', 'ystandard-toolbox' ) } loading={ isLoading }>
 			{ /* @ts-ignore */ }
 			<DesignContext.Provider
 				value={ {
