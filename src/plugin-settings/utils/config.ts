@@ -1,5 +1,9 @@
 /**
- * @deprecated use utils/config
+ * 設定を取得するユーティリティ関数
+ *
+ * @param name
+ * @param defaultValue
+ * @returns
  */
 export function getAdminConfig(
 	name: string | undefined = undefined,
@@ -15,13 +19,10 @@ export function getAdminConfig(
 }
 
 /**
- * @deprecated use utils/config
+ * 設定からエディターのカラー設定を取得
+ *
+ * @returns
  */
 export function getEditorColors() {
 	return getAdminConfig( 'editorColors' );
-}
-
-export function getPluginAssetsUrl() {
-	const pluginUrl = getAdminConfig( 'pluginUrl' );
-	return `${ pluginUrl }/assets/settings`;
 }
