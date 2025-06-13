@@ -147,6 +147,7 @@ const Design = () => {
 
 	return (
 		<AppContainer title={ 'サイトデザイン拡張' } loading={ isLoading }>
+			{ /* @ts-ignore */ }
 			<DesignContext.Provider
 				value={ {
 					settings,
