@@ -7,8 +7,11 @@ import { useContext, useCallback } from '@wordpress/element';
 /**
  * Plugin Dependencies
  */
-import { PanelGroup, PanelInner } from './index';
-import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
+import { PanelGroup } from './index';
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
 
 /**
  * Context
