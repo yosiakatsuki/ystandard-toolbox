@@ -10,6 +10,7 @@ import {
 	createRoot,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
@@ -27,6 +28,7 @@ import { apiPost, getEndpoint } from '@aktk/api';
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSetting } from '@aktk/plugin-settings/function/setting';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
+import { getEditorColors } from '@aktk/plugin-settings/utils';
 
 /**
  * App
@@ -105,7 +107,7 @@ const Design = () => {
 
 	const updateSettings = (
 		section: DesignSettingsSection,
-		value: DesignSettings
+		value: DesignSettings[ DesignSettingsSection ]
 	) => {
 		setSettings( {
 			...settings,
@@ -135,6 +137,13 @@ const Design = () => {
 			messageError: notifyError,
 		} );
 	};
+
+	// addFilter で テーマカラーを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeColors.themeColors',
+		'ystandard-toolbox/settings/design/getThemeColors',
+		() => getEditorColors()
+	);
 
 	return (
 		<AppContainer title={ 'サイトデザイン拡張' } loading={ isLoading }>
