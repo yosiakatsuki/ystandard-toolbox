@@ -31,7 +31,11 @@ import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
 /**
  * App
  */
-import { DesignSettings } from './types';
+import {
+	DesignSettings,
+	DesignSettingsTab,
+	DesignSettingsSection,
+} from './types';
 import Copyright from './copyright';
 import Header from './header';
 import Menu from './menu';
@@ -43,8 +47,13 @@ interface DesignContextProps {
 	setIsLoading: ( value: boolean ) => void;
 	isUpdate: boolean;
 	setIsUpdate: ( value: boolean ) => void;
-	getSettings: ( section?: string ) => { [ key: string ]: any };
-	updateSettings: ( section: string, value: DesignSettings ) => void;
+	getSettings: (
+		section?: DesignSettingsSection
+	) => DesignSettings | {} | undefined;
+	updateSettings: (
+		section: DesignSettingsSection,
+		value: DesignSettings[ DesignSettingsSection ]
+	) => void;
 }
 
 // @ts-ignore
@@ -52,7 +61,7 @@ export const DesignContext: Context< DesignContextProps > =
 	// @ts-ignore
 	createContext< DesignContextProps >();
 
-const TABS = [
+const TABS: DesignSettingsTab[] = [
 	{
 		name: 'header',
 		title: 'ヘッダー',
@@ -85,15 +94,19 @@ const Design = () => {
 	const parsed = queryString.parse( location.search );
 	const initialTabName = parsed?.tab as string | undefined;
 
-	const getSettings = ( section: string | undefined = undefined ) => {
+	const getSettings = (
+		section: DesignSettingsSection | undefined = undefined
+	) => {
 		if ( ! section || ! hasKey( settings, section ) ) {
 			return {};
 		}
-		// @ts-ignore
-		return settings[ section ];
+		return ( settings as DesignSettings )[ section ];
 	};
 
-	const updateSettings = ( section: string, value: DesignSettings ) => {
+	const updateSettings = (
+		section: DesignSettingsSection,
+		value: DesignSettings
+	) => {
 		setSettings( {
 			...settings,
 			...{
@@ -140,7 +153,7 @@ const Design = () => {
 					tabs={ TABS }
 					initialTabName={ initialTabName || '' }
 				>
-					{ ( tab: unknown ) => {
+					{ ( tab: DesignSettingsTab ) => {
 						return (
 							<>
 								<Header tab={ tab } />

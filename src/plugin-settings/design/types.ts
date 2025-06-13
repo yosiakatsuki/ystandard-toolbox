@@ -36,7 +36,16 @@ export interface CopyrightSettings {
 	disable_theme_info?: boolean;
 }
 
-export type DesignSettings = HeaderSettings &
-	MenuSettings &
-	ArchiveSettings &
-	CopyrightSettings;
+export type DesignSettings = {
+	header_design?: HeaderSettings;
+	menu?: MenuSettings;
+	archive?: ArchiveSettings;
+	copyright?: CopyrightSettings;
+};
+
+export type DesignSettingsSection = keyof DesignSettings;
+
+export type DesignSettingsTab = {
+	name: 'header' | 'menu' | 'archive' | 'copyright' | string;
+	title: string;
+};
