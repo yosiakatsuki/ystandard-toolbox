@@ -7,7 +7,7 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 /**
  * yStandard
  */
-import { migrateSubHeaderFontSize } from './function/sub-header';
+import { migrateSubHeaderFontSize } from './utils/sub-header';
 
 /**
  * Plugin Dependencies
