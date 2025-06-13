@@ -1,4 +1,4 @@
-import { toBool } from './index';
+import { toBool } from '../index';
 
 describe('toBool', () => {
 	it('should return true for boolean true', () => {
