@@ -11,7 +11,10 @@ import { store as coreStore } from '@wordpress/core-data';
 import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 import { toBool } from '@aktk/block-components/utils/boolean';
-import MediaUploadControl from '@aktk/components/media-upload-control';
+import {
+	MediaUpload,
+	MediaObject,
+} from '@aktk/block-components/components/media-upload';
 /**
  * Plugin Dependencies
  */
@@ -39,10 +42,6 @@ interface OverlayType {
 	slug: string;
 }
 
-interface MediaItem {
-	id: number;
-	url: string;
-}
 
 export default function Overlay( {
 	updateSection,
@@ -87,8 +86,7 @@ export default function Overlay( {
 		];
 	};
 
-	// @ts-ignore
-	const overlayImage: MediaItem | undefined = !! sectionSettings?.overlayImage
+	const overlayImage: MediaObject | undefined = !!sectionSettings?.overlayImage
 		? {
 				id: sectionSettings?.overlayImageId,
 				url: sectionSettings?.overlayImage,
@@ -107,10 +105,10 @@ export default function Overlay( {
 		updateSection( { overlayPageType: newTypes } );
 	};
 
-	const handleOnSelectLogo = ( newValue: MediaItem ) => {
+	const handleOnSelectLogo = ( newValue: MediaObject | undefined ) => {
 		updateSection( {
-			overlayImage: newValue.url,
-			overlayImageId: newValue.id,
+			overlayImage: newValue?.url,
+			overlayImageId: newValue?.id,
 		} );
 	};
 
@@ -176,11 +174,11 @@ export default function Overlay( {
 							label={ 'ロゴ画像' }
 							id={ 'site-logo' }
 						>
-							<MediaUploadControl.Utils
-								value={ overlayImage }
+							<MediaUpload
 								media={ overlayImage }
 								onSelect={ handleOnSelectLogo }
 								onClear={ handleOnClearLogo }
+								useMediaUtils={ true }
 							/>
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl
