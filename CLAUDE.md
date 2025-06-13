@@ -1,62 +1,64 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、Claude Code (claude.ai/code) がこのリポジトリで作業する際のガイダンスを提供します。
 
-## Project Overview
+**重要**: このプロジェクトの今後のドキュメント作成は、日本語を使用してください。
 
-**yStandard Toolbox** is a commercial WordPress plugin that extends the free yStandard theme with custom Gutenberg blocks, design settings, and utility features. Current version: 2.0.0-alpha.
+## プロジェクト概要
 
-## Common Development Commands
+**yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグインです。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供します。現在のバージョン: 2.0.0-alpha
 
-### Environment Management
+## よく使う開発コマンド
+
+### 環境管理
 ```bash
-npm run start                # Start wp-env + import data + open browser (http://localhost:10020)
-npm run watch                # Development mode with file watching for all assets
-npm run build                # Production build of all assets
-npm run stop                 # Export data and stop environment
+npm run start                # wp-env開始 + データインポート + ブラウザオープン (http://localhost:10020)
+npm run watch                # 全アセットのファイル監視付き開発モード
+npm run build                # 全アセットのプロダクションビルド
+npm run stop                 # データエクスポート後、環境停止
 ```
 
-### Code Quality
+### コード品質
 ```bash
-npm run lint                 # Lint all code (JS, CSS, PHP)
-npm run test                 # Run all tests (PHPUnit + Jest)
-npm run format               # Format code with Prettier
+npm run lint                 # 全コードの検証 (JS, CSS, PHP)
+npm run test                 # 全テストの実行 (PHPUnit + Jest)
+npm run format               # Prettierでコードフォーマット
 ```
 
-### Build Distribution
+### 配布用ビルド
 ```bash
-npm run zip                  # Create plugin distribution zip
+npm run zip                  # プラグイン配布用zipファイル作成
 ```
 
-## Architecture Overview
+## アーキテクチャ概要
 
-### Dual Build System
-- **Legacy blocks** (`/blocks/`) - Traditional WordPress blocks with classic JS/SCSS
-- **Modern components** (`/src/`) - TypeScript/React components using aktk framework
-- **Plugin settings** (`/src/plugin-settings/`) - React-based admin interface
-- **Core PHP** (`/inc/`) - Backend functionality with `ystandard_toolbox` namespace
+### デュアルビルドシステム
+- **レガシーブロック** (`/blocks/`) - 従来のWordPressブロック（クラシックJS/SCSS）
+- **モダンコンポーネント** (`/src/`) - aktkフレームワークを使用したTypeScript/React
+- **プラグイン設定** (`/src/plugin-settings/`) - React製管理画面
+- **コアPHP** (`/inc/`) - `ystandard_toolbox`名前空間のバックエンド機能
 
-### Key Directories
+### 主要ディレクトリ
 ```
 src/
-├── block-library/          # Modern TypeScript blocks  
-├── plugin-settings/        # React admin interface
-├── blocks/                 # Shared block utilities
-└── js/                    # Legacy JavaScript
+├── block-library/          # モダンTypeScriptブロック
+├── plugin-settings/        # React管理画面
+├── blocks/                 # 共有ブロックユーティリティ
+└── js/                    # レガシーJavaScript
 
-blocks/                     # Legacy block implementations
-inc/                       # PHP backend classes
-build/ & dist/             # Compiled assets
-css/ & js/                 # Final compiled output
+blocks/                     # レガシーブロック実装
+inc/                       # PHPバックエンドクラス
+build/ & dist/             # コンパイル済みアセット
+css/ & js/                 # 最終コンパイル出力
 ```
 
-### Build Pipeline
-- **4 separate webpack configs** for different asset types
-- **SASS → PostCSS** pipeline with Tailwind CSS integration
-- **TypeScript** with strict configuration and path aliases (`@aktk/*`, `@ystdtb/*`)
-- **Babel** transpilation for legacy JavaScript
+### ビルドパイプライン
+- **4つの独立したwebpack設定** アセットタイプ別
+- **SASS → PostCSS** パイプライン（Tailwind CSS統合）
+- **TypeScript** 厳密設定とパスエイリアス（`@aktk/*`, `@ystdtb/*`）
+- **Babel** レガシーJavaScript用トランスパイル
 
-### TypeScript Path Aliases
+### TypeScriptパスエイリアス
 ```typescript
 @aktk/function/*         → src/blocks/function/*
 @aktk/components/*       → src/blocks/components/*  
@@ -64,68 +66,68 @@ css/ & js/                 # Final compiled output
 @ystdtb/*               → src/js/*
 ```
 
-## Development Patterns
+## 開発パターン
 
-### WordPress Integration
-- Uses WordPress Scripts as primary build tool
-- Follows WordPress coding standards (ESLint, PHPCS, Stylelint)
-- Block development with `@wordpress/scripts` and Gutenberg API
-- REST API endpoints in PHP with namespace `ystandard_toolbox`
+### WordPress統合
+- WordPress Scriptsをメインビルドツールとして使用
+- WordPress コーディング規約に準拠（ESLint, PHPCS, Stylelint）
+- `@wordpress/scripts` とGutenberg APIを使用したブロック開発
+- PHP REST APIエンドポイント（`ystandard_toolbox`名前空間）
 
-### Component Architecture  
-- **aktk-block-components** library for reusable React components
-- Hook-based state management in modern blocks
-- Config-based attribute management in legacy blocks
-- Responsive design utilities integrated with theme system
+### コンポーネントアーキテクチャ
+- **aktk-block-components** 再利用可能Reactコンポーネントライブラリ
+- モダンブロックではフックベースの状態管理
+- レガシーブロックでは設定ベースの属性管理
+- テーマシステムと統合されたレスポンシブデザインユーティリティ
 
-### Testing Setup
-- **PHPUnit** 8.5+ with WordPress test framework at `/phpunit/`
-- **Jest** for JavaScript component testing at `/test/`
-- Integration tests for block validation and full content
+### テスト設定
+- **PHPUnit** 8.5+ WordPressテストフレームワーク (`/phpunit/`)
+- **Jest** JavaScriptコンポーネントテスト (`/test/`)
+- ブロック検証とフルコンテンツの統合テスト
 
-### CSS Architecture
-- **Tailwind CSS** with custom design tokens (preflight disabled)
-- **SMACSS** property ordering via CSS Declaration Sorter
-- Theme-specific responsive breakpoints: `mobile`, `tablet`, `desktop`
-- PostCSS with Autoprefixer and CSSnano optimization
+### CSSアーキテクチャ
+- **Tailwind CSS** カスタムデザイントークン（preflight無効）
+- **SMACSS** プロパティ順序（CSS Declaration Sorter）
+- テーマ固有のレスポンシブブレークポイント: `mobile`, `tablet`, `desktop`
+- PostCSS（Autoprefixer + CSSnano最適化）
 
-## Development Environment
+## 開発環境
 
-### WordPress Environment
-- Runs on ports 10020 (dev) and 10021 (tests)  
-- Japanese WordPress version with yStandard theme required
-- Data persistence via `.wp-content/` directory
-- Auto-imports yStandard Blocks plugin
+### WordPress環境
+- ポート10020（開発）、10021（テスト）で動作
+- 日本語版WordPressとyStandardテーマが必要
+- `.wp-content/`ディレクトリによるデータ永続化
+- yStandard Blocksプラグインの自動インポート
 
-### Code Quality Tools
-- **ESLint** with WordPress + Tailwind CSS rules
-- **Prettier** with WordPress configuration  
-- **PHP CodeSniffer** with WordPress standards
-- **Husky** git hooks for automated quality checks
+### コード品質ツール
+- **ESLint** WordPress + Tailwind CSSルール
+- **Prettier** WordPress設定
+- **PHP CodeSniffer** WordPress規約
+- **Husky** 自動品質チェック用Gitフック
 
-## Plugin Requirements
+## プラグイン要件
 
-- **WordPress**: 6.1+ (Japanese version preferred)
+- **WordPress**: 6.1+（日本語版推奨）
 - **PHP**: 7.4+
-- **yStandard Theme**: 4.36.0+
-- **Node.js**: Compatible with @wordpress/scripts
+- **yStandardテーマ**: 4.36.0+
+- **Node.js**: @wordpress/scripts対応バージョン
 
-## Key Features
+## 主要機能
 
-### Block System
-- 15+ custom Gutenberg blocks (Box, Slider, FAQ, Timeline, Posts, etc.)
-- Block extensions for responsive visibility controls
-- Block patterns and category management
-- Live preview system for design changes
+### ブロックシステム
+- 15+のカスタムGutenbergブロック（ボックス、スライダー、FAQ、タイムライン、投稿など）
+- レスポンシブ表示制御のブロック拡張
+- ブロックパターンとカテゴリー管理
+- デザイン変更のライブプレビューシステム
 
-### Design System
-- Header/subheader design customization with live preview
-- Heading style editor with preset management
-- Custom CSS editor with CodeMirror integration
-- Font family management and web font loading
+### デザインシステム
+- ヘッダー/サブヘッダーデザインのライブプレビュー付きカスタマイズ
+- プリセット管理付き見出しスタイルエディター
+- CodeMirror統合カスタムCSSエディター
+- フォントファミリー管理とWebフォント読み込み
 
-### Content Management
-- Page-specific SEO settings (title, meta description)
-- Archive layout controls with responsive options  
-- Navigation enhancements and CTA management
-- Copyright text customization with template variables
+### コンテンツ管理
+- ページ別SEO設定（タイトル、メタディスクリプション）
+- レスポンシブオプション付きアーカイブレイアウト制御
+- ナビゲーション拡張とCTA管理
+- テンプレート変数付きコピーライトテキストカスタマイズ
