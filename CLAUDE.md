@@ -4,6 +4,18 @@
 
 **重要**: このプロジェクトの今後のドキュメント作成は、日本語を使用してください。
 
+## コーディング規約
+
+### ドキュメント・コメント
+
+-   **基本的にドキュメント・コメントは日本語で記述する**
+-   ラインコメント、Docコメント（JSDoc）、インラインコメントが対象
+-   TypeScriptの型定義やインターフェース名は英語のまま
+-   **importセクションコメント（例: `// WordPress`）は英語で記述する**
+    -   WordPress依存関係 → WordPress Dependencies
+    -   aktk-block-components依存関係 → Aktk Dependencies
+    -   プラグイン固有の依存関係 → Plugin Dependencies
+
 ## プロジェクト概要
 
 **yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグインです。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供します。現在のバージョン: 2.0.0-alpha

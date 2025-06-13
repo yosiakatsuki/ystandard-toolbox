@@ -1,59 +1,59 @@
 import { toBool } from '../index';
 
 describe('toBool', () => {
-	it('should return true for boolean true', () => {
+	it('boolean型のtrueに対してtrueを返す', () => {
 		expect(toBool(true)).toBe(true);
 	});
 
-	it('should return true for string "true"', () => {
+	it('文字列"true"に対してtrueを返す', () => {
 		expect(toBool('true')).toBe(true);
 	});
 
-	it('should return true for number 1', () => {
+	it('数値1に対してtrueを返す', () => {
 		expect(toBool(1)).toBe(true);
 	});
 
-	it('should return true for string "1"', () => {
+	it('文字列"1"に対してtrueを返す', () => {
 		expect(toBool('1')).toBe(true);
 	});
 
-	it('should return false for boolean false', () => {
+	it('boolean型のfalseに対してfalseを返す', () => {
 		expect(toBool(false)).toBe(false);
 	});
 
-	it('should return false for string "false"', () => {
+	it('文字列"false"に対してfalseを返す', () => {
 		expect(toBool('false')).toBe(false);
 	});
 
-	it('should return false for number 0', () => {
+	it('数値0に対してfalseを返す', () => {
 		expect(toBool(0)).toBe(false);
 	});
 
-	it('should return false for string "0"', () => {
+	it('文字列"0"に対してfalseを返す', () => {
 		expect(toBool('0')).toBe(false);
 	});
 
-	it('should return false for null', () => {
+	it('nullに対してfalseを返す', () => {
 		expect(toBool(null)).toBe(false);
 	});
 
-	it('should return false for undefined', () => {
+	it('undefinedに対してfalseを返す', () => {
 		expect(toBool(undefined)).toBe(false);
 	});
 
-	it('should return false for empty string', () => {
+	it('空文字に対してfalseを返す', () => {
 		expect(toBool('')).toBe(false);
 	});
 
-	it('should return false for random string', () => {
+	it('任意の文字列に対してfalseを返す', () => {
 		expect(toBool('random')).toBe(false);
 	});
 
-	it('should return false for object', () => {
+	it('オブジェクトに対してfalseを返す', () => {
 		expect(toBool({})).toBe(false);
 	});
 
-	it('should return false for array', () => {
+	it('配列に対してfalseを返す', () => {
 		expect(toBool([])).toBe(false);
 	});
 });

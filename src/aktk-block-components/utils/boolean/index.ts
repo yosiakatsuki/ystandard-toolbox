@@ -1,7 +1,7 @@
 /**
- * Convert value to boolean
- * @param value - The value to convert
- * @returns boolean value
+ * 値をboolean型に変換する
+ * @param value - 変換する値
+ * @returns boolean値
  */
 export const toBool = (value: unknown): boolean => {
 	return (

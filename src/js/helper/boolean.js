@@ -1,5 +1,5 @@
 /**
- * @deprecated Use toBool from '@aktk/block-components/utils/boolean' instead
+ * @deprecated '@aktk/block-components/utils/boolean'のtoBoolを使用してください
  */
 export const toBool = ( value ) => {
 	return true === value || 'true' === value || 1 === value || '1' === value;
