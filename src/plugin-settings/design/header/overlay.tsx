@@ -2,6 +2,7 @@ import { unescape as unescapeString, without } from 'lodash';
 /**
  * WordPress
  */
+import { __ } from '@wordpress/i18n';
 import { CheckboxControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
@@ -79,7 +80,7 @@ export default function Overlay( {
 		}
 		return [
 			{
-				name: 'フロントページ(TOPページ)',
+				name: __( 'フロントページ(TOPページ)', 'ystandard-toolbox' ),
 				slug: 'front-page',
 			},
 			...types,
@@ -126,10 +127,10 @@ export default function Overlay( {
 	};
 
 	return (
-		<PluginSettingsPanel title={ 'ヘッダーオーバーレイ' }>
+		<PluginSettingsPanel title={ __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ) }>
 			<PanelInner>
 				<PluginSettingsBaseControl
-					label={ '有効 / 無効' }
+					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
 					id={ 'enable-overlay' }
 				>
 					<HorizonButtonSelect
@@ -138,11 +139,11 @@ export default function Overlay( {
 						options={ [
 							{
 								value: true,
-								label: 'ON',
+								label: __( 'ON', 'ystandard-toolbox' ),
 							},
 							{
 								value: false,
-								label: 'OFF',
+								label: __( 'OFF', 'ystandard-toolbox' ),
 							},
 						] }
 					/>
@@ -150,7 +151,7 @@ export default function Overlay( {
 				{ toBool( overlayEnable ) && (
 					<>
 						<PluginSettingsBaseControl
-							label={ 'ページタイプ' }
+							label={ __( 'ページタイプ', 'ystandard-toolbox' ) }
 							id={ 'page-type' }
 						>
 							{ getOverlayTypes().map( ( type ) => {
@@ -171,7 +172,7 @@ export default function Overlay( {
 							} ) }
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl
-							label={ 'ロゴ画像' }
+							label={ __( 'ロゴ画像', 'ystandard-toolbox' ) }
 							id={ 'site-logo' }
 						>
 							<MediaUpload
@@ -182,11 +183,11 @@ export default function Overlay( {
 							/>
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl
-							label={ '文字色' }
+							label={ __( '文字色', 'ystandard-toolbox' ) }
 							id={ 'text-color' }
 						>
 							<ColorPalette
-								label={ '文字色' }
+								label={ __( '文字色', 'ystandard-toolbox' ) }
 								value={
 									sectionSettings?.overlayTextColor || ''
 								}
