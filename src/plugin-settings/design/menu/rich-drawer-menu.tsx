@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
-import Notice from '@aktk/components/notice';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 import { toBool } from '@aktk/block-components/utils/boolean';
 /**
  * Plugin Dependencies
@@ -26,23 +26,31 @@ export default function RichDrawerMenu( {
 		sectionSettings?.mobileMenuEnable ?? false
 	);
 
-	const handleOnChangeEnable = ( newValue: string | number | boolean ): void => {
+	const handleOnChangeEnable = (
+		newValue: string | number | boolean
+	): void => {
 		updateSection( {
 			mobileMenuEnable: toBool( newValue ),
 		} );
 	};
-	const handleOnChangeHideGlobalMenu = ( newValue: string | number | boolean ): void => {
+	const handleOnChangeHideGlobalMenu = (
+		newValue: string | number | boolean
+	): void => {
 		updateSection( {
 			mobileMenuHideGlobalMenu: toBool( newValue ),
 		} );
 	};
-	const handleOnChangeHideSearch = ( newValue: string | number | boolean ): void => {
+	const handleOnChangeHideSearch = (
+		newValue: string | number | boolean
+	): void => {
 		updateSection( {
 			mobileMenuHideSearch: toBool( newValue ),
 		} );
 	};
 	return (
-		<PluginSettingsPanel title={ __( 'リッチドロワーメニュー', 'ystandard-toolbox' ) }>
+		<PluginSettingsPanel
+			title={ __( 'リッチドロワーメニュー', 'ystandard-toolbox' ) }
+		>
 			<PanelInner>
 				<PluginSettingsBaseControl
 					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
@@ -66,15 +74,18 @@ export default function RichDrawerMenu( {
 				{ toBool( enableRichDrawerMenu ) && (
 					<>
 						<PluginSettingsBaseControl
-							label={ __( 'グローバルメニューの表示', 'ystandard-toolbox' ) }
+							label={ __(
+								'グローバルメニューの表示',
+								'ystandard-toolbox'
+							) }
 							id={ 'global-menu' }
 						>
-							<Notice
-								isHelp
-								style={ { fontSize: '12px', paddingTop: 0 } }
-							>
-								{ __( 'ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。', 'ystandard-toolbox' ) }
-							</Notice>
+							<NoticeSecondaryText className="mb-1">
+								{ __(
+									'ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。',
+									'ystandard-toolbox'
+								) }
+							</NoticeSecondaryText>
 							<HorizonButtonSelect
 								value={ toBool(
 									sectionSettings?.mobileMenuHideGlobalMenu ??
@@ -84,38 +95,54 @@ export default function RichDrawerMenu( {
 								options={ [
 									{
 										value: false,
-										label: __( '表示', 'ystandard-toolbox' ),
+										label: __(
+											'表示',
+											'ystandard-toolbox'
+										),
 									},
 									{
 										value: true,
-										label: __( '非表示', 'ystandard-toolbox' ),
+										label: __(
+											'非表示',
+											'ystandard-toolbox'
+										),
 									},
 								] }
 							/>
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl
-							label={ __( '検索フォームの表示', 'ystandard-toolbox' ) }
+							label={ __(
+								'検索フォームの表示',
+								'ystandard-toolbox'
+							) }
 							id={ 'search' }
 						>
-							<Notice
-								isHelp
-								style={ { fontSize: '12px', paddingTop: 0 } }
-							>
-								{ __( 'ドロワーメニュー内の検索フォームの表示/非表示を設定します。', 'ystandard-toolbox' ) }
-							</Notice>
+							<NoticeSecondaryText className="mb-1">
+								{ __(
+									'ドロワーメニュー内の検索フォームの表示/非表示を設定します。',
+									'ystandard-toolbox'
+								) }
+							</NoticeSecondaryText>
 							<HorizonButtonSelect
 								value={ toBool(
-									sectionSettings?.mobileMenuHideSearch ?? false
+									sectionSettings?.mobileMenuHideSearch ??
+										false
 								) }
 								onChange={ handleOnChangeHideSearch }
 								options={ [
 									{
 										value: false,
-										label: __( '表示', 'ystandard-toolbox' ),
+										label: __(
+											'表示',
+											'ystandard-toolbox'
+										),
 									},
 									{
 										value: true,
-										label: __( '非表示', 'ystandard-toolbox' ),
+										label: __(
+											'非表示',
+											'ystandard-toolbox'
+										),
 									},
 								] }
 							/>
