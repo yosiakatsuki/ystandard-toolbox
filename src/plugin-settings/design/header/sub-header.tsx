@@ -37,24 +37,28 @@ export default function SubHeader( {
 			},
 			'0.7em'
 		);
-	const handleOnChangeBackgroundColor = ( newValue ) => {
+	const handleOnChangeBackgroundColor = ( newValue?: string ) => {
 		updateSection( {
 			subHeaderBackgroundColorDesktop: newValue,
 		} );
 	};
-	const handleOnChangeTextColor = ( newValue ) => {
+	const handleOnChangeTextColor = ( newValue?: string ) => {
 		updateSection( {
 			subHeaderColorDesktop: newValue,
 		} );
 	};
-	const handleOnChangeFontSize = ( newValue ) => {
+	const handleOnChangeFontSize = ( newValue: string ) => {
 		updateSection( {
 			subHeaderFontSize: newValue,
 		} );
 	};
-	const handleOnChangeAlign = ( newValue ) => {
+	const handleOnChangeAlign = ( newValue: string | number | boolean ) => {
 		updateSection( {
-			subHeaderAlignDesktop: newValue,
+			subHeaderAlignDesktop: ( newValue || undefined ) as
+				| 'left'
+				| 'center'
+				| 'right'
+				| undefined,
 		} );
 	};
 	return (
