@@ -3,29 +3,38 @@
  */
 import { PanelBody } from '@wordpress/components';
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import Notice from '@aktk/components/notice';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { toBool } from '@aktk/block-components/utils/boolean';
+/**
+ * Plugin Dependencies
+ */
+import { PanelProps } from './index';
 
-const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
+export default function RichDrawerMenu( {
+	updateSection,
+	sectionSettings,
+}: PanelProps ): JSX.Element {
 	const enableRichDrawerMenu = toBool(
 		sectionSettings?.mobileMenuEnable ?? false
 	);
 
-	const handleOnChangeEnable = ( newValue ) => {
+	const handleOnChangeEnable = ( newValue: { value: boolean } ): void => {
 		updateSection( {
 			mobileMenuEnable: newValue.value,
 		} );
 	};
-	const handleOnChangeHideGlobalMenu = ( newValue ) => {
+	const handleOnChangeHideGlobalMenu = ( newValue: {
+		value: boolean;
+	} ): void => {
 		updateSection( {
 			mobileMenuHideGlobalMenu: newValue.value,
 		} );
 	};
-	const handleOnChangeHideSearch = ( newValue ) => {
+	const handleOnChangeHideSearch = ( newValue: { value: boolean } ): void => {
 		updateSection( {
 			mobileMenuHideSearch: newValue.value,
 		} );
@@ -115,6 +124,4 @@ const RichDrawerMenu = ( { updateSection, sectionSettings } ) => {
 			) }
 		</PanelBody>
 	);
-};
-
-export default RichDrawerMenu;
+}
