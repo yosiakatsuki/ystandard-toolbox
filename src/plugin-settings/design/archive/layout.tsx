@@ -5,8 +5,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import { ImageButton } from '@aktk/block-components/components/buttons';
-import ButtonReset from '@aktk/components/button-reset';
+import {
+	ImageButton,
+	DestructiveButton,
+} from '@aktk/block-components/components/buttons';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
  * Plugin Dependencies
@@ -95,7 +97,7 @@ export default function Layout( {
 							);
 						} ) }
 					</div>
-					<NoticeSecondaryText className="mb-1">
+					<NoticeSecondaryText>
 						{ __(
 							'※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。',
 							'ystandard-toolbox'
@@ -126,16 +128,18 @@ export default function Layout( {
 						} ) }
 					</div>
 					<div className="mt-2">
-						<ButtonReset
-							label={ __( 'クリア', 'ystandard-toolbox' ) }
+						<DestructiveButton
 							onClick={ () => {
 								handleOnChangeMobileLayout( {
 									name: undefined,
 								} );
 							} }
-						/>
+							isSmall={ true }
+						>
+							{ __( 'クリア', 'ystandard-toolbox' ) }
+						</DestructiveButton>
 					</div>
-					<NoticeSecondaryText className="mb-1">
+					<NoticeSecondaryText>
 						{ __(
 							'※未選択の場合、デスクトップ・タブレットと同じレイアウトが適用されます。',
 							'ystandard-toolbox'
