@@ -38,7 +38,7 @@ export interface CopyrightSettings {
 
 export type DesignSettings = {
 	header_design?: HeaderSettings;
-	menu?: MenuSettings;
+	navigation?: MenuSettings;
 	archive?: ArchiveSettings;
 	copyright?: CopyrightSettings;
 };

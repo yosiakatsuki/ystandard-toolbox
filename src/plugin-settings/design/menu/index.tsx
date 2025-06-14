@@ -3,25 +3,47 @@
  */
 import { useContext, useEffect, useState } from '@wordpress/element';
 /**
- * yStandard
+ * Settings Dependencies
  */
 import { DesignContext } from '../index';
+import {
+	DesignSettingsTab,
+	DesignSettingsSection,
+	MenuSettings,
+} from '../types';
+/**
+ * Section
+ */
 import RichDrawerMenu from './rich-drawer-menu';
 
 const TAB_NAME = 'menu';
-const SECTION_NAME = 'navigation';
+const SECTION_NAME = 'navigation' as DesignSettingsSection;
 
-const Menu = ( { tab } ) => {
+export interface PanelProps {
+	updateSection: ( value: MenuSettings ) => void;
+	sectionSettings: MenuSettings;
+}
+
+export default function Menu( {
+	tab,
+}: {
+	tab: DesignSettingsTab;
+} ): JSX.Element | null {
+	// @ts-ignore
 	const { settings, getSettings, updateSettings } =
+		// @ts-ignore
 		useContext( DesignContext );
-	const [ sectionSettings, setSectionSettings ] = useState( {} );
-	const getSectionSettings = () => {
-		setSectionSettings( getSettings( SECTION_NAME ) );
+	const [ sectionSettings, setSectionSettings ] = useState< MenuSettings >(
+		{}
+	);
+	const getSectionSettings = (): void => {
+		setSectionSettings( getSettings( SECTION_NAME ) as MenuSettings );
 	};
+	// @ts-ignore
 	useEffect( getSectionSettings, [ settings ] );
 
 	// 設定更新.
-	const updateSection = ( value ) => {
+	const updateSection = ( value: MenuSettings ): void => {
 		updateSettings( SECTION_NAME, {
 			...sectionSettings,
 			...value,
@@ -30,9 +52,10 @@ const Menu = ( { tab } ) => {
 
 	// タブチェック.
 	if ( TAB_NAME !== tab?.name ) {
-		return <></>;
+		return null;
 	}
-	const panelProps = {
+
+	const panelProps: PanelProps = {
 		updateSection,
 		sectionSettings,
 	};
@@ -41,5 +64,4 @@ const Menu = ( { tab } ) => {
 			<RichDrawerMenu { ...panelProps } />
 		</>
 	);
-};
-export default Menu;
+}

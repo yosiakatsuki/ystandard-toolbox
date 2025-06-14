@@ -1,7 +1,6 @@
 /**
  * WordPress
  */
-// @ts-ignore
 import { useContext, useEffect, useState } from '@wordpress/element';
 /**
  * Settings Dependencies
