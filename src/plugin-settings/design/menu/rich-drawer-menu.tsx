@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import HorizonButtons from '@aktk/components/horizon-buttons';
+import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 import Notice from '@aktk/components/notice';
 import { toBool } from '@aktk/block-components/utils/boolean';
 /**
@@ -26,21 +26,19 @@ export default function RichDrawerMenu( {
 		sectionSettings?.mobileMenuEnable ?? false
 	);
 
-	const handleOnChangeEnable = ( newValue: { value: boolean } ): void => {
+	const handleOnChangeEnable = ( newValue: string | number | boolean ): void => {
 		updateSection( {
-			mobileMenuEnable: newValue.value,
+			mobileMenuEnable: toBool( newValue ),
 		} );
 	};
-	const handleOnChangeHideGlobalMenu = ( newValue: {
-		value: boolean;
-	} ): void => {
+	const handleOnChangeHideGlobalMenu = ( newValue: string | number | boolean ): void => {
 		updateSection( {
-			mobileMenuHideGlobalMenu: newValue.value,
+			mobileMenuHideGlobalMenu: toBool( newValue ),
 		} );
 	};
-	const handleOnChangeHideSearch = ( newValue: { value: boolean } ): void => {
+	const handleOnChangeHideSearch = ( newValue: string | number | boolean ): void => {
 		updateSection( {
-			mobileMenuHideSearch: newValue.value,
+			mobileMenuHideSearch: toBool( newValue ),
 		} );
 	};
 	return (
@@ -50,21 +48,19 @@ export default function RichDrawerMenu( {
 					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
 					id={ 'enable' }
 				>
-					<HorizonButtons
-						primary={ enableRichDrawerMenu }
-						items={ [
+					<HorizonButtonSelect
+						value={ toBool( enableRichDrawerMenu ) }
+						onChange={ handleOnChangeEnable }
+						options={ [
 							{
-								name: 'true',
-								label: __( 'ON', 'ystandard-toolbox' ),
 								value: true,
+								label: __( 'ON', 'ystandard-toolbox' ),
 							},
 							{
-								name: 'false',
-								label: __( 'OFF', 'ystandard-toolbox' ),
 								value: false,
+								label: __( 'OFF', 'ystandard-toolbox' ),
 							},
 						] }
-						onChange={ handleOnChangeEnable }
 					/>
 				</PluginSettingsBaseControl>
 				{ toBool( enableRichDrawerMenu ) && (
@@ -79,24 +75,22 @@ export default function RichDrawerMenu( {
 							>
 								{ __( 'ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。', 'ystandard-toolbox' ) }
 							</Notice>
-							<HorizonButtons
-								primary={ toBool(
+							<HorizonButtonSelect
+								value={ toBool(
 									sectionSettings?.mobileMenuHideGlobalMenu ??
 										false
 								) }
-								items={ [
+								onChange={ handleOnChangeHideGlobalMenu }
+								options={ [
 									{
-										name: 'false',
-										label: __( '表示', 'ystandard-toolbox' ),
 										value: false,
+										label: __( '表示', 'ystandard-toolbox' ),
 									},
 									{
-										name: 'true',
-										label: __( '非表示', 'ystandard-toolbox' ),
 										value: true,
+										label: __( '非表示', 'ystandard-toolbox' ),
 									},
 								] }
-								onChange={ handleOnChangeHideGlobalMenu }
 							/>
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl
@@ -109,23 +103,21 @@ export default function RichDrawerMenu( {
 							>
 								{ __( 'ドロワーメニュー内の検索フォームの表示/非表示を設定します。', 'ystandard-toolbox' ) }
 							</Notice>
-							<HorizonButtons
-								primary={ toBool(
+							<HorizonButtonSelect
+								value={ toBool(
 									sectionSettings?.mobileMenuHideSearch ?? false
 								) }
-								items={ [
+								onChange={ handleOnChangeHideSearch }
+								options={ [
 									{
-										name: 'false',
-										label: __( '表示', 'ystandard-toolbox' ),
 										value: false,
+										label: __( '表示', 'ystandard-toolbox' ),
 									},
 									{
-										name: 'true',
-										label: __( '非表示', 'ystandard-toolbox' ),
 										value: true,
+										label: __( '非表示', 'ystandard-toolbox' ),
 									},
 								] }
-								onChange={ handleOnChangeHideSearch }
 							/>
 						</PluginSettingsBaseControl>
 					</>
