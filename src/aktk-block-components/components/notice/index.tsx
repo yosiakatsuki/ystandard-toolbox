@@ -44,48 +44,63 @@ export function NoticeText( props: NoticeProps ) {
 }
 
 export function NoticeInfo( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
 	return (
 		<Notice
-			{ ...props }
-			className={ 'bg-aktk-bg-blue text-aktk-text-blue' }
+			{ ...otherProps }
+			className={ classNames( 'bg-aktk-bg-blue text-aktk-text-blue', className ) }
 		/>
 	);
 }
 
 export function NoticeWarning( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
 	return (
 		<Notice
-			{ ...props }
-			className={
-				'mt-1 bg-aktk-bg-yellow text-fz-xxs text-aktk-text-yellow'
-			}
+			{ ...otherProps }
+			className={ classNames(
+				'mt-1 bg-aktk-bg-yellow text-fz-xxs text-aktk-text-yellow',
+				className
+			) }
 		/>
 	);
 }
 
 export function NoticeSecondary( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
 	return (
 		<Notice
-			{ ...props }
-			className={ 'mt-1 bg-aktk-bg-gray text-fz-xxs text-aktk-text-gray' }
+			{ ...otherProps }
+			className={ classNames(
+				'mt-1 bg-aktk-bg-gray text-fz-xxs text-aktk-text-gray',
+				className
+			) }
 		/>
 	);
 }
 
 export function NoticeWarningText( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
 	return (
 		<NoticeText
-			{ ...props }
-			className={ 'mt-1 text-fz-xxs text-aktk-text-yellow' }
+			{ ...otherProps }
+			className={ classNames(
+				'mt-1 text-fz-xxs text-aktk-text-yellow',
+				className
+			) }
 		/>
 	);
 }
 
 export function NoticeSecondaryText( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
 	return (
 		<NoticeText
-			{ ...props }
-			className={ 'mt-1 text-fz-xxs text-aktk-text-gray' }
+			{ ...otherProps }
+			className={ classNames(
+				'mt-1 text-fz-xxs text-aktk-text-gray',
+				className
+			) }
 		/>
 	);
 }
