@@ -1,17 +1,21 @@
 /**
  * WordPress
  */
-import { PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
 import HorizonButtons from '@aktk/components/horizon-buttons';
 import Notice from '@aktk/components/notice';
-import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { toBool } from '@aktk/block-components/utils/boolean';
 /**
  * Plugin Dependencies
  */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import { PanelProps } from './index';
 
 export default function RichDrawerMenu( {
@@ -40,88 +44,93 @@ export default function RichDrawerMenu( {
 		} );
 	};
 	return (
-		<PanelBody title={ 'リッチドロワーメニュー' }>
-			<PluginSettingsBaseControl label={ '有効 / 無効' } id={ 'enable' }>
-				<HorizonButtons
-					primary={ enableRichDrawerMenu }
-					items={ [
-						{
-							name: 'true',
-							label: 'ON',
-							value: true,
-						},
-						{
-							name: 'false',
-							label: 'OFF',
-							value: false,
-						},
-					] }
-					onChange={ handleOnChangeEnable }
-				/>
-			</PluginSettingsBaseControl>
-			{ toBool( enableRichDrawerMenu ) && (
-				<>
-					<PluginSettingsBaseControl
-						label={ 'グローバルメニューの表示' }
-						id={ 'global-menu' }
-					>
-						<Notice
-							isHelp
-							style={ { fontSize: '12px', paddingTop: 0 } }
+		<PluginSettingsPanel title={ __( 'リッチドロワーメニュー', 'ystandard-toolbox' ) }>
+			<PanelInner>
+				<PluginSettingsBaseControl
+					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
+					id={ 'enable' }
+				>
+					<HorizonButtons
+						primary={ enableRichDrawerMenu }
+						items={ [
+							{
+								name: 'true',
+								label: __( 'ON', 'ystandard-toolbox' ),
+								value: true,
+							},
+							{
+								name: 'false',
+								label: __( 'OFF', 'ystandard-toolbox' ),
+								value: false,
+							},
+						] }
+						onChange={ handleOnChangeEnable }
+					/>
+				</PluginSettingsBaseControl>
+				{ toBool( enableRichDrawerMenu ) && (
+					<>
+						<PluginSettingsBaseControl
+							label={ __( 'グローバルメニューの表示', 'ystandard-toolbox' ) }
+							id={ 'global-menu' }
 						>
-							ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。
-						</Notice>
-						<HorizonButtons
-							primary={ toBool(
-								sectionSettings?.mobileMenuHideGlobalMenu ??
-									false
-							) }
-							items={ [
-								{
-									name: 'false',
-									label: '表示',
-									value: false,
-								},
-								{
-									name: 'true',
-									label: '非表示',
-									value: true,
-								},
-							] }
-							onChange={ handleOnChangeHideGlobalMenu }
-						/>
-					</PluginSettingsBaseControl>
-					<PluginSettingsBaseControl
-						label={ '検索フォームの表示' }
-						id={ 'search' }
-					>
-						<Notice
-							isHelp
-							style={ { fontSize: '12px', paddingTop: 0 } }
+							<Notice
+								isHelp
+								style={ { fontSize: '12px', paddingTop: 0 } }
+							>
+								{ __( 'ドロワーメニュー内のグローバルメニューの表示/非表示を設定します。', 'ystandard-toolbox' ) }
+							</Notice>
+							<HorizonButtons
+								primary={ toBool(
+									sectionSettings?.mobileMenuHideGlobalMenu ??
+										false
+								) }
+								items={ [
+									{
+										name: 'false',
+										label: __( '表示', 'ystandard-toolbox' ),
+										value: false,
+									},
+									{
+										name: 'true',
+										label: __( '非表示', 'ystandard-toolbox' ),
+										value: true,
+									},
+								] }
+								onChange={ handleOnChangeHideGlobalMenu }
+							/>
+						</PluginSettingsBaseControl>
+						<PluginSettingsBaseControl
+							label={ __( '検索フォームの表示', 'ystandard-toolbox' ) }
+							id={ 'search' }
 						>
-							ドロワーメニュー内の検索フォームの表示/非表示を設定します。
-						</Notice>
-						<HorizonButtons
-							primary={ toBool(
-								sectionSettings?.mobileMenuHideSearch ?? false
-							) }
-							items={ [
-								{
-									name: 'false',
-									label: '表示',
-									value: false,
-								},
-								{
-									name: 'true',
-									label: '非表示',
-									value: true,
-								},
-							] }
-							onChange={ handleOnChangeHideSearch }
-						/>
-					</PluginSettingsBaseControl>
-				</>
-			) }
-		</PanelBody>
+							<Notice
+								isHelp
+								style={ { fontSize: '12px', paddingTop: 0 } }
+							>
+								{ __( 'ドロワーメニュー内の検索フォームの表示/非表示を設定します。', 'ystandard-toolbox' ) }
+							</Notice>
+							<HorizonButtons
+								primary={ toBool(
+									sectionSettings?.mobileMenuHideSearch ?? false
+								) }
+								items={ [
+									{
+										name: 'false',
+										label: __( '表示', 'ystandard-toolbox' ),
+										value: false,
+									},
+									{
+										name: 'true',
+										label: __( '非表示', 'ystandard-toolbox' ),
+										value: true,
+									},
+								] }
+								onChange={ handleOnChangeHideSearch }
+							/>
+						</PluginSettingsBaseControl>
+					</>
+				) }
+			</PanelInner>
+		</PluginSettingsPanel>
 	);
 }
