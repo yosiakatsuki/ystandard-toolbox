@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import { Flex, FlexItem } from '@aktk/components/flex';
 import ButtonImage from '@aktk/components/button-image';
 import ButtonReset from '@aktk/components/button-reset';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
@@ -73,10 +72,10 @@ export default function Layout( {
 					label={ __( 'デスクトップ・タブレット', 'ystandard-toolbox' ) }
 					id={ 'desktop-tablet' }
 				>
-					<Flex isGapSmall>
+					<div className="flex gap-2">
 						{ LAYOUT_TYPES.map( ( item ) => {
 							return (
-								<FlexItem key={ item.name }>
+								<div key={ item.name }>
 									<ButtonImage
 										isPrimary={ layoutDesktop === item.name }
 										onClick={ () =>
@@ -85,10 +84,10 @@ export default function Layout( {
 										imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
 										alt={ item.label }
 									/>
-								</FlexItem>
+								</div>
 							);
 						} ) }
-					</Flex>
+					</div>
 					<NoticeSecondaryText className="mb-1">
 						{ __(
 							'※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。',
@@ -100,10 +99,10 @@ export default function Layout( {
 					label={ __( 'モバイル', 'ystandard-toolbox' ) }
 					id={ 'mobile' }
 				>
-					<Flex isGapSmall>
+					<div className="flex gap-2">
 						{ LAYOUT_TYPES.map( ( item ) => {
 							return (
-								<FlexItem key={ item.name }>
+								<div key={ item.name }>
 									<ButtonImage
 										isPrimary={
 											sectionSettings?.archiveMobileLayout ===
@@ -115,11 +114,11 @@ export default function Layout( {
 										imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
 										alt={ item.label }
 									/>
-								</FlexItem>
+								</div>
 							);
 						} ) }
-					</Flex>
-					<div style={ { marginTop: '0.5em' } }>
+					</div>
+					<div className="mt-2">
 						<ButtonReset
 							label={ __( 'クリア', 'ystandard-toolbox' ) }
 							onClick={ () => {
