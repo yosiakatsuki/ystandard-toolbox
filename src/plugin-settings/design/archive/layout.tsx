@@ -1,45 +1,62 @@
 /**
  * WordPress
  */
-import { PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import { Flex, FlexItem } from '@aktk/components/flex';
 import ButtonImage from '@aktk/components/button-image';
 import ButtonReset from '@aktk/components/button-reset';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
+/**
+ * Plugin Dependencies
+ */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import Notice from '@aktk/components/notice';
 import { getPluginAssetsUrl } from '@aktk/plugin-settings/function/config';
+import { PanelProps } from './index';
 
-const LAYOUT_TYPES = [
+interface LayoutType {
+	name: string;
+	label: string;
+	image: string;
+}
+
+const LAYOUT_TYPES: LayoutType[] = [
 	{
 		name: 'card',
-		label: 'カード',
+		label: __( 'カード', 'ystandard-toolbox' ),
 		image: 'card.png',
 	},
 	{
 		name: 'list',
-		label: 'リスト',
+		label: __( 'リスト', 'ystandard-toolbox' ),
 		image: 'list.png',
 	},
 	{
 		name: 'simple',
-		label: 'シンプル',
+		label: __( 'シンプル', 'ystandard-toolbox' ),
 		image: 'simple.png',
 	},
 ];
 
-const Layout = ( { updateSection, sectionSettings } ) => {
+export default function Layout( {
+	updateSection,
+	sectionSettings,
+}: PanelProps ): JSX.Element {
 	const assetsUrl = getPluginAssetsUrl();
 	const layoutDesktop = sectionSettings?.theme_ys_archive_type ?? 'card';
 
-	const handleOnChangeDesktopLayout = ( newValue ) => {
+	const handleOnChangeDesktopLayout = ( newValue: LayoutType ): void => {
 		updateSection( {
 			theme_ys_archive_type: newValue.name,
 		} );
 	};
-	const handleOnChangeMobileLayout = ( newValue ) => {
+	const handleOnChangeMobileLayout = ( newValue: { name?: string } ): void => {
 		updateSection( {
 			archiveMobileLayout: newValue.name,
 			archiveImageRatioMobile: !! newValue.name
@@ -48,64 +65,76 @@ const Layout = ( { updateSection, sectionSettings } ) => {
 		} );
 	};
 	return (
-		<PanelBody title={ '一覧ページレイアウト' }>
-			<PluginSettingsBaseControl
-				label={ 'デスクトップ・タブレット' }
-				id={ 'desktop-tablet' }
-			>
-				<Flex isGapSmall>
-					{ LAYOUT_TYPES.map( ( item ) => {
-						return (
-							<FlexItem key={ item.name }>
-								<ButtonImage
-									isPrimary={ layoutDesktop === item.name }
-									onClick={ () =>
-										handleOnChangeDesktopLayout( item )
-									}
-									imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
-									alt={ item.label }
-								/>
-							</FlexItem>
-						);
-					} ) }
-				</Flex>
-				<Notice isHelp style={ { fontSize: '12px', maxWidth: '100%' } }>
-					※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。
-				</Notice>
-			</PluginSettingsBaseControl>
-			<PluginSettingsBaseControl label={ 'モバイル' } id={ 'mobile' }>
-				<Flex isGapSmall>
-					{ LAYOUT_TYPES.map( ( item ) => {
-						return (
-							<FlexItem key={ item.name }>
-								<ButtonImage
-									isPrimary={
-										sectionSettings?.archiveMobileLayout ===
-										item.name
-									}
-									onClick={ () =>
-										handleOnChangeMobileLayout( item )
-									}
-									imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
-									alt={ item.label }
-								/>
-							</FlexItem>
-						);
-					} ) }
-				</Flex>
-				<div style={ { marginTop: '0.5em' } }>
-					<ButtonReset
-						label={ 'クリア' }
-						onClick={ () => {
-							handleOnChangeMobileLayout( { name: undefined } );
-						} }
-					/>
-				</div>
-				<Notice isHelp style={ { fontSize: '12px', maxWidth: '100%' } }>
-					※未選択の場合、デスクトップ・タブレットと同じレイアウトが適用されます。
-				</Notice>
-			</PluginSettingsBaseControl>
-		</PanelBody>
+		<PluginSettingsPanel
+			title={ __( '一覧ページレイアウト', 'ystandard-toolbox' ) }
+		>
+			<PanelInner>
+				<PluginSettingsBaseControl
+					label={ __( 'デスクトップ・タブレット', 'ystandard-toolbox' ) }
+					id={ 'desktop-tablet' }
+				>
+					<Flex isGapSmall>
+						{ LAYOUT_TYPES.map( ( item ) => {
+							return (
+								<FlexItem key={ item.name }>
+									<ButtonImage
+										isPrimary={ layoutDesktop === item.name }
+										onClick={ () =>
+											handleOnChangeDesktopLayout( item )
+										}
+										imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
+										alt={ item.label }
+									/>
+								</FlexItem>
+							);
+						} ) }
+					</Flex>
+					<NoticeSecondaryText className="mb-1">
+						{ __(
+							'※カスタマイザーの「デザイン」→「アーカイブページ」→「一覧レイアウト」と同じ設定です。',
+							'ystandard-toolbox'
+						) }
+					</NoticeSecondaryText>
+				</PluginSettingsBaseControl>
+				<PluginSettingsBaseControl
+					label={ __( 'モバイル', 'ystandard-toolbox' ) }
+					id={ 'mobile' }
+				>
+					<Flex isGapSmall>
+						{ LAYOUT_TYPES.map( ( item ) => {
+							return (
+								<FlexItem key={ item.name }>
+									<ButtonImage
+										isPrimary={
+											sectionSettings?.archiveMobileLayout ===
+											item.name
+										}
+										onClick={ () =>
+											handleOnChangeMobileLayout( item )
+										}
+										imageUrl={ `${ assetsUrl }/archive/${ item.image }` }
+										alt={ item.label }
+									/>
+								</FlexItem>
+							);
+						} ) }
+					</Flex>
+					<div style={ { marginTop: '0.5em' } }>
+						<ButtonReset
+							label={ __( 'クリア', 'ystandard-toolbox' ) }
+							onClick={ () => {
+								handleOnChangeMobileLayout( { name: undefined } );
+							} }
+						/>
+					</div>
+					<NoticeSecondaryText className="mb-1">
+						{ __(
+							'※未選択の場合、デスクトップ・タブレットと同じレイアウトが適用されます。',
+							'ystandard-toolbox'
+						) }
+					</NoticeSecondaryText>
+				</PluginSettingsBaseControl>
+			</PanelInner>
+		</PluginSettingsPanel>
 	);
-};
-export default Layout;
+}
