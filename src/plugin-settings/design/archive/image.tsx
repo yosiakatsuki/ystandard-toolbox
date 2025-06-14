@@ -1,16 +1,34 @@
 /**
  * WordPress
  */
-import { PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import MediaUploadControl from '@aktk/components/media-upload-control';
-import Notice from '@aktk/components/notice';
 import CustomSelectControl from '@aktk/components/custom-select-control';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
+/**
+ * Plugin Dependencies
+ */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { PanelProps } from './index';
 
-const RATIO = [
+interface RatioOption {
+	key: string;
+	name: string;
+}
+
+interface MediaObject {
+	id: number;
+	url: string;
+}
+
+const RATIO: RatioOption[] = [
 	{
 		key: '16-9',
 		name: '16:9',
@@ -37,100 +55,86 @@ const RATIO = [
 	},
 ];
 
-const Image = ( { updateSection, sectionSettings } ) => {
-	const defaultImage = !! sectionSettings?.archiveDefaultImage
+export default function Image( {
+	updateSection,
+	sectionSettings,
+}: PanelProps ): JSX.Element {
+	const defaultImage: MediaObject | undefined = !! sectionSettings?.archiveDefaultImage
 		? {
 				id: sectionSettings?.archiveDefaultImageId ?? 0,
 				url: sectionSettings?.archiveDefaultImage,
 		  }
 		: undefined;
 
-	const handleOnSelectImage = ( newValue ) => {
+	const handleOnSelectImage = ( newValue: MediaObject ): void => {
 		updateSection( {
 			archiveDefaultImage: newValue.url,
 			archiveDefaultImageId: newValue.id,
 		} );
 	};
-	const handleOnClearImage = () => {
+	const handleOnClearImage = (): void => {
 		updateSection( {
 			archiveDefaultImage: undefined,
 			archiveDefaultImageId: undefined,
 		} );
 	};
-	const handleOnChangeRatioDesktop = ( newValue ) => {
+	const handleOnChangeRatioDesktop = ( newValue: string ): void => {
 		updateSection( {
 			archiveImageRatio: newValue,
 		} );
 	};
-	const handleOnChangeRatioMobile = ( newValue ) => {
+	const handleOnChangeRatioMobile = ( newValue: string ): void => {
 		updateSection( {
 			archiveImageRatioMobile: newValue,
 		} );
 	};
-	const customSelectStyle = {
-		'--aktk-custom-select-control-label-width': '160px',
-		marginTop: '8px',
-	};
 	return (
-		<PanelBody title={ '画像' }>
-			<PluginSettingsBaseControl
-				label={ '投稿一覧デフォルト画像' }
-				id={ 'default-image' }
-			>
-				<Notice
-					isHelp
-					style={ {
-						fontSize: '12px',
-						maxWidth: '100%',
-						paddingTop: 0,
-					} }
+		<PluginSettingsPanel title={ __( '画像', 'ystandard-toolbox' ) }>
+			<PanelInner>
+				<PluginSettingsBaseControl
+					label={ __( '投稿一覧デフォルト画像', 'ystandard-toolbox' ) }
+					id={ 'default-image' }
 				>
-					投稿一覧でアイキャッチ画像がなかった場合に表示される画像の設定
-				</Notice>
-				<MediaUploadControl.Utils
-					media={ defaultImage }
-					value={ defaultImage }
-					onSelect={ handleOnSelectImage }
-					onClear={ handleOnClearImage }
-				/>
-			</PluginSettingsBaseControl>
-			<PluginSettingsBaseControl
-				label={ '画像縦横比' }
-				id={ 'ratio' }
-				isFullWidth
-			>
-				<Notice
-					isHelp
-					style={ {
-						fontSize: '12px',
-						maxWidth: '100%',
-						paddingTop: 0,
-					} }
-				>
-					投稿一覧ページ画像の縦横比の設定
-					<br />
-					※モバイル用レイアウトが設定されている場合、「デスクトップ・タブレット」と「モバイル」で別々の縦横比を設定できます。
-				</Notice>
-				<div style={ customSelectStyle }>
-					<CustomSelectControl
-						label={ 'デスクトップ・タブレット' }
-						options={ RATIO }
-						value={ sectionSettings?.archiveImageRatio ?? '16-9' }
-						onChange={ handleOnChangeRatioDesktop }
-						isHorizon
+					<NoticeSecondaryText className="mb-1">
+						{ __( '投稿一覧でアイキャッチ画像がなかった場合に表示される画像の設定', 'ystandard-toolbox' ) }
+					</NoticeSecondaryText>
+					<MediaUploadControl.Utils
+						media={ defaultImage }
+						value={ defaultImage }
+						onSelect={ handleOnSelectImage }
+						onClear={ handleOnClearImage }
 					/>
-					{ !! sectionSettings?.archiveMobileLayout && (
+				</PluginSettingsBaseControl>
+				<PluginSettingsBaseControl
+					label={ __( '画像縦横比', 'ystandard-toolbox' ) }
+					id={ 'ratio' }
+					isFullWidth
+				>
+					<NoticeSecondaryText className="mb-1">
+						{ __( '投稿一覧ページ画像の縦横比の設定', 'ystandard-toolbox' ) }
+						<br />
+						{ __( '※モバイル用レイアウトが設定されている場合、「デスクトップ・タブレット」と「モバイル」で別々の縦横比を設定できます。', 'ystandard-toolbox' ) }
+					</NoticeSecondaryText>
+					<div className="mt-2" style={ { '--aktk-custom-select-control-label-width': '160px' } as React.CSSProperties }>
 						<CustomSelectControl
-							label={ 'モバイル' }
+							label={ __( 'デスクトップ・タブレット', 'ystandard-toolbox' ) }
 							options={ RATIO }
-							value={ sectionSettings?.archiveImageRatioMobile }
-							onChange={ handleOnChangeRatioMobile }
+							value={ sectionSettings?.archiveImageRatio ?? '16-9' }
+							onChange={ handleOnChangeRatioDesktop }
 							isHorizon
 						/>
-					) }
-				</div>
-			</PluginSettingsBaseControl>
-		</PanelBody>
+						{ !! sectionSettings?.archiveMobileLayout && (
+							<CustomSelectControl
+								label={ __( 'モバイル', 'ystandard-toolbox' ) }
+								options={ RATIO }
+								value={ sectionSettings?.archiveImageRatioMobile }
+								onChange={ handleOnChangeRatioMobile }
+								isHorizon
+							/>
+						) }
+					</div>
+				</PluginSettingsBaseControl>
+			</PanelInner>
+		</PluginSettingsPanel>
 	);
-};
-export default Image;
+}
