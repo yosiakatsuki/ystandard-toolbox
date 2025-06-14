@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import ButtonImage from '@aktk/components/button-image';
+import { ImageButton } from '@aktk/block-components/components/buttons';
 import ButtonReset from '@aktk/components/button-reset';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
@@ -55,7 +55,9 @@ export default function Layout( {
 			theme_ys_archive_type: newValue.name,
 		} );
 	};
-	const handleOnChangeMobileLayout = ( newValue: { name?: string } ): void => {
+	const handleOnChangeMobileLayout = ( newValue: {
+		name?: string;
+	} ): void => {
 		updateSection( {
 			archiveMobileLayout: newValue.name,
 			archiveImageRatioMobile: !! newValue.name
@@ -69,15 +71,20 @@ export default function Layout( {
 		>
 			<PanelInner>
 				<PluginSettingsBaseControl
-					label={ __( 'デスクトップ・タブレット', 'ystandard-toolbox' ) }
+					label={ __(
+						'デスクトップ・タブレット',
+						'ystandard-toolbox'
+					) }
 					id={ 'desktop-tablet' }
 				>
 					<div className="flex gap-2">
 						{ LAYOUT_TYPES.map( ( item ) => {
 							return (
 								<div key={ item.name }>
-									<ButtonImage
-										isPrimary={ layoutDesktop === item.name }
+									<ImageButton
+										isPrimary={
+											layoutDesktop === item.name
+										}
 										onClick={ () =>
 											handleOnChangeDesktopLayout( item )
 										}
@@ -103,7 +110,7 @@ export default function Layout( {
 						{ LAYOUT_TYPES.map( ( item ) => {
 							return (
 								<div key={ item.name }>
-									<ButtonImage
+									<ImageButton
 										isPrimary={
 											sectionSettings?.archiveMobileLayout ===
 											item.name
@@ -122,7 +129,9 @@ export default function Layout( {
 						<ButtonReset
 							label={ __( 'クリア', 'ystandard-toolbox' ) }
 							onClick={ () => {
-								handleOnChangeMobileLayout( { name: undefined } );
+								handleOnChangeMobileLayout( {
+									name: undefined,
+								} );
 							} }
 						/>
 					</div>
