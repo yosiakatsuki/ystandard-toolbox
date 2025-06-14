@@ -21,7 +21,3 @@ export function getEditorColors() {
 	return getAdminConfig( 'editorColors' );
 }
 
-export function getPluginAssetsUrl() {
-	const pluginUrl = getAdminConfig( 'pluginUrl' );
-	return `${ pluginUrl }/assets/settings`;
-}

@@ -18,7 +18,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { getPluginAssetsUrl } from '@aktk/plugin-settings/function/config';
+import { getPluginAssetsUrl } from '@aktk/plugin-settings/utils/config';
 import { PanelProps } from './index';
 
 interface LayoutType {

@@ -26,3 +26,13 @@ export function getAdminConfig(
 export function getEditorColors() {
 	return getAdminConfig( 'editorColors' );
 }
+
+/**
+ * プラグインのアセットURLを取得
+ *
+ * @returns
+ */
+export function getPluginAssetsUrl(): string {
+	const pluginUrl = getAdminConfig( 'pluginUrl' );
+	return `${ pluginUrl }/assets/settings`;
+}
