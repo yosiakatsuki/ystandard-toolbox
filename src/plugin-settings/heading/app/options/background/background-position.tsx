@@ -7,7 +7,7 @@ import { useState } from '@wordpress/element';
 /**
  * Aktk Dependencies
  */
-import CustomSelectControl from '@aktk/block-components/wp-controls/custom-select-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
 
 /**

@@ -6,9 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk dependencies
  */
-import CustomSelectControl, {
+import {
+	CustomSelectControl,
 	CustomSelectControlOption,
-} from '@aktk/block-components/wp-controls/custom-select-control';
+} from '@aktk/block-components/components/custom-select-control';
 import {
 	AddButton,
 	DestructiveButton,

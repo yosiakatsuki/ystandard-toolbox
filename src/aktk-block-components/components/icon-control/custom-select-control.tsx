@@ -2,7 +2,7 @@
  * Components
  */
 import { DesktopControl, TabletControl, MobileControl } from './wrapper';
-import CustomSelectControl from '@aktk/block-components/wp-controls/custom-select-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 
 interface IconSelectControlProps {
 	onChange: ( value: string ) => void;

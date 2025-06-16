@@ -22,7 +22,7 @@ export interface CustomSelectControlProps {
 	disabled?: boolean;
 }
 
-export default function CustomSelectControl( props: CustomSelectControlProps ) {
+export function CustomSelectControl( props: CustomSelectControlProps ) {
 	const {
 		value,
 		options,

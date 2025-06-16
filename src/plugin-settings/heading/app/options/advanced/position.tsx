@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import CustomSelectControl from '@aktk/block-components/wp-controls/custom-select-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
 /**

@@ -1,9 +1,10 @@
 /**
  * Aktk Dependencies
  */
-import CustomSelectControl, {
+import {
+	CustomSelectControl,
 	type CustomSelectControlOption,
-} from '@aktk/block-components/wp-controls/custom-select-control';
+} from '@aktk/block-components/components/custom-select-control';
 import {
 	ResponsiveControlGrid,
 	ResponsiveSelectTab,
