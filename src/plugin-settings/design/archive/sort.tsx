@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import CustomSelectControl from '@aktk/components/custom-select-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 /**
  * Plugin Dependencies
  */
@@ -31,25 +31,26 @@ const ORDER: OrderOption[] = [
 	{ key: 'rand/ASC', name: 'ランダム' },
 ];
 
-export default function Sort({
+export default function Sort( {
 	updateSection,
 	sectionSettings,
-}: PanelProps): JSX.Element {
-	const handleOnChangeOrder = (newValue: string): void => {
-		updateSection({
+}: PanelProps ): JSX.Element {
+	const handleOnChangeOrder = ( newValue: string ): void => {
+		updateSection( {
 			archiveOrder: newValue,
-		});
+		} );
 	};
 	return (
-		<PluginSettingsPanel title={__('並び順', 'ystandard-toolbox')}>
+		<PluginSettingsPanel title={ __( '並び順', 'ystandard-toolbox' ) }>
 			<PanelInner>
-				<PluginSettingsBaseControl isFullWidth>
+				<PluginSettingsBaseControl
+					label={ __( '投稿の並び順', 'ystandard-toolbox' ) }
+					isFullWidth
+				>
 					<CustomSelectControl
-						label={__('並び順', 'ystandard-toolbox')}
-						options={ORDER}
-						value={sectionSettings?.archiveOrder}
-						onChange={handleOnChangeOrder}
-						isHorizon
+						options={ ORDER }
+						value={ sectionSettings?.archiveOrder || '' }
+						onChange={ handleOnChangeOrder }
 					/>
 				</PluginSettingsBaseControl>
 			</PanelInner>
