@@ -1,14 +1,32 @@
 /**
- * WordPress
+ * WordPress Dependencies
  */
-import { PanelBody } from '@wordpress/components';
-/**
- * yStandard
- */
-import CustomSelectControl from '@aktk/components/custom-select-control';
-import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { __ } from '@wordpress/i18n';
 
-const DISPLAY_DATE = [
+/**
+ * Aktk Dependencies
+ */
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
+
+/**
+ * Plugin Dependencies
+ */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { PanelProps } from './index';
+
+/**
+ * 日付表示オプション
+ */
+interface DateOption {
+	key: string;
+	name: string;
+}
+
+const DISPLAY_DATE: DateOption[] = [
 	{
 		key: '',
 		name: '公開日(デフォルト)',
@@ -19,24 +37,32 @@ const DISPLAY_DATE = [
 	},
 ];
 
-const Date = ( { updateSection, sectionSettings } ) => {
-	const handleOnChangeDisplayDate = ( newValue ) => {
-		updateSection( {
+/**
+ * 日付設定コンポーネント
+ */
+export default function Date({
+	updateSection,
+	sectionSettings,
+}: PanelProps): JSX.Element {
+	const handleOnChangeDisplayDate = (newValue: string): void => {
+		updateSection({
 			archiveDisplayDate: newValue,
-		} );
+		});
 	};
 	return (
-		<PanelBody title={ '日付情報' }>
-			<PluginSettingsBaseControl>
-				<CustomSelectControl
-					label={ '日付表示' }
-					options={ DISPLAY_DATE }
-					value={ sectionSettings?.archiveDisplayDate }
-					onChange={ handleOnChangeDisplayDate }
-					isHorizon
-				/>
-			</PluginSettingsBaseControl>
-		</PanelBody>
+		<PluginSettingsPanel title={__('日付情報', 'ystandard-toolbox')}>
+			<PanelInner>
+				<PluginSettingsBaseControl
+					label={__('日付表示', 'ystandard-toolbox')}
+					isFullWidth
+				>
+					<CustomSelectControl
+						options={DISPLAY_DATE}
+						value={sectionSettings?.archiveDisplayDate || ''}
+						onChange={handleOnChangeDisplayDate}
+					/>
+				</PluginSettingsBaseControl>
+			</PanelInner>
+		</PluginSettingsPanel>
 	);
-};
-export default Date;
+}
