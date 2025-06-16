@@ -1,14 +1,27 @@
 /**
  * WordPress
  */
-import { PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import CustomSelectControl from '@aktk/components/custom-select-control';
+/**
+ * Plugin Dependencies
+ */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { PanelProps } from './index';
 
-const ORDER = [
+interface OrderOption {
+	key: string;
+	name: string;
+}
+
+const ORDER: OrderOption[] = [
 	{ key: '', name: '公開日/降順(デフォルト)' },
 	{ key: 'date/ASC', name: '公開日/昇順' },
 	{ key: 'modified/DESC', name: '更新日/降順' },
@@ -18,24 +31,28 @@ const ORDER = [
 	{ key: 'rand/ASC', name: 'ランダム' },
 ];
 
-const Sort = ( { updateSection, sectionSettings } ) => {
-	const handleOnChangeOrder = ( newValue ) => {
-		updateSection( {
+export default function Sort({
+	updateSection,
+	sectionSettings,
+}: PanelProps): JSX.Element {
+	const handleOnChangeOrder = (newValue: string): void => {
+		updateSection({
 			archiveOrder: newValue,
-		} );
+		});
 	};
 	return (
-		<PanelBody title={ '並び順' }>
-			<PluginSettingsBaseControl isFullWidth>
-				<CustomSelectControl
-					label={ '並び順' }
-					options={ ORDER }
-					value={ sectionSettings?.archiveOrder }
-					onChange={ handleOnChangeOrder }
-					isHorizon
-				/>
-			</PluginSettingsBaseControl>
-		</PanelBody>
+		<PluginSettingsPanel title={__('並び順', 'ystandard-toolbox')}>
+			<PanelInner>
+				<PluginSettingsBaseControl isFullWidth>
+					<CustomSelectControl
+						label={__('並び順', 'ystandard-toolbox')}
+						options={ORDER}
+						value={sectionSettings?.archiveOrder}
+						onChange={handleOnChangeOrder}
+						isHorizon
+					/>
+				</PluginSettingsBaseControl>
+			</PanelInner>
+		</PluginSettingsPanel>
 	);
-};
-export default Sort;
+}
