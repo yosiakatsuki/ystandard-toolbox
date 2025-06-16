@@ -4,7 +4,12 @@
 		font-size: 14px;
 	}
 
-	.aktk-plugin-settings-base-control__base-control:not(.is-full-width) > *:not([style*="max-width"]) {
+	.aktk-plugin-settings-base-control__base-control:not(.is-full-width)
+		> *:not([style*="max-width"]) {
 		max-width: 300px;
+	}
+
+	label {
+		text-transform: none !important;
 	}
 }

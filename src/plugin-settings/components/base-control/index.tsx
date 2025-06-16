@@ -29,11 +29,7 @@ const PluginSettingsBaseControl = ( {
 		}
 	);
 	return (
-		<div
-			className={
-				'aktk-plugin-settings-base-control [&_label]:!normal-case'
-			}
-		>
+		<div className={ 'aktk-plugin-settings-base-control' }>
 			<WPBaseControl
 				{ ...{
 					label,

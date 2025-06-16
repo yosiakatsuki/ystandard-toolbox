@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import MediaUploadControl from '@aktk/components/media-upload-control';
-import CustomSelectControl from '@aktk/components/custom-select-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
  * Plugin Dependencies
@@ -59,12 +59,13 @@ export default function Image( {
 	updateSection,
 	sectionSettings,
 }: PanelProps ): JSX.Element {
-	const defaultImage: MediaObject | undefined = !! sectionSettings?.archiveDefaultImage
-		? {
-				id: sectionSettings?.archiveDefaultImageId ?? 0,
-				url: sectionSettings?.archiveDefaultImage,
-		  }
-		: undefined;
+	const defaultImage: MediaObject | undefined =
+		!! sectionSettings?.archiveDefaultImage
+			? {
+					id: sectionSettings?.archiveDefaultImageId ?? 0,
+					url: sectionSettings?.archiveDefaultImage,
+			  }
+			: undefined;
 
 	const handleOnSelectImage = ( newValue: MediaObject ): void => {
 		updateSection( {
@@ -92,11 +93,17 @@ export default function Image( {
 		<PluginSettingsPanel title={ __( '画像', 'ystandard-toolbox' ) }>
 			<PanelInner>
 				<PluginSettingsBaseControl
-					label={ __( '投稿一覧デフォルト画像', 'ystandard-toolbox' ) }
+					label={ __(
+						'投稿一覧デフォルト画像',
+						'ystandard-toolbox'
+					) }
 					id={ 'default-image' }
 				>
 					<NoticeSecondaryText className="mb-1">
-						{ __( '投稿一覧でアイキャッチ画像がなかった場合に表示される画像の設定', 'ystandard-toolbox' ) }
+						{ __(
+							'投稿一覧でアイキャッチ画像がなかった場合に表示される画像の設定',
+							'ystandard-toolbox'
+						) }
 					</NoticeSecondaryText>
 					<MediaUploadControl.Utils
 						media={ defaultImage }
@@ -111,26 +118,45 @@ export default function Image( {
 					isFullWidth
 				>
 					<NoticeSecondaryText className="mb-1">
-						{ __( '投稿一覧ページ画像の縦横比の設定', 'ystandard-toolbox' ) }
+						{ __(
+							'投稿一覧ページ画像の縦横比の設定',
+							'ystandard-toolbox'
+						) }
 						<br />
-						{ __( '※モバイル用レイアウトが設定されている場合、「デスクトップ・タブレット」と「モバイル」で別々の縦横比を設定できます。', 'ystandard-toolbox' ) }
+						{ __(
+							'※モバイル用レイアウトが設定されている場合、「デスクトップ・タブレット」と「モバイル」で別々の縦横比を設定できます。',
+							'ystandard-toolbox'
+						) }
 					</NoticeSecondaryText>
-					<div className="mt-2" style={ { '--aktk-custom-select-control-label-width': '160px' } as React.CSSProperties }>
-						<CustomSelectControl
-							label={ __( 'デスクトップ・タブレット', 'ystandard-toolbox' ) }
-							options={ RATIO }
-							value={ sectionSettings?.archiveImageRatio ?? '16-9' }
-							onChange={ handleOnChangeRatioDesktop }
-							isHorizon
-						/>
-						{ !! sectionSettings?.archiveMobileLayout && (
+					<div className="mt-4 grid grid-cols-1 gap-4">
+						<PluginSettingsBaseControl>
 							<CustomSelectControl
-								label={ __( 'モバイル', 'ystandard-toolbox' ) }
+								label={ __(
+									'デスクトップ・タブレット',
+									'ystandard-toolbox'
+								) }
 								options={ RATIO }
-								value={ sectionSettings?.archiveImageRatioMobile }
-								onChange={ handleOnChangeRatioMobile }
-								isHorizon
+								value={
+									sectionSettings?.archiveImageRatio ?? '16-9'
+								}
+								onChange={ handleOnChangeRatioDesktop }
 							/>
+						</PluginSettingsBaseControl>
+						{ !! sectionSettings?.archiveMobileLayout && (
+							<PluginSettingsBaseControl>
+								<CustomSelectControl
+									label={ __(
+										'モバイル',
+										'ystandard-toolbox'
+									) }
+									options={ RATIO }
+									value={
+										sectionSettings?.archiveImageRatioMobile ||
+										''
+									}
+									onChange={ handleOnChangeRatioMobile }
+								/>
+							</PluginSettingsBaseControl>
 						) }
 					</div>
 				</PluginSettingsBaseControl>
