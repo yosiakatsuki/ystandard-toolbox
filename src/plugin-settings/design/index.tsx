@@ -146,7 +146,10 @@ const Design = () => {
 	);
 
 	return (
-		<AppContainer title={ __( 'サイトデザイン拡張', 'ystandard-toolbox' ) } loading={ isLoading }>
+		<AppContainer
+			title={ __( 'サイトデザイン拡張', 'ystandard-toolbox' ) }
+			loading={ isLoading }
+		>
 			{ /* @ts-ignore */ }
 			<DesignContext.Provider
 				value={ {
@@ -169,7 +172,7 @@ const Design = () => {
 								<Header tab={ tab } />
 								<Menu tab={ tab } />
 								<Archive tab={ tab } />
-								{ /* <Copyright tab={ tab } /> */ }
+								<Copyright tab={ tab } />
 							</>
 						);
 					} }
