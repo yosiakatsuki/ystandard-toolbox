@@ -1,9 +1,15 @@
 /**
- * WordPress
+ * WordPress Dependencies
  */
 import { useMemo } from '@wordpress/element';
-import { CustomSelectControl as WPCustomSelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Aktk Dependencies
+ */
+import WPCustomSelectControl, {
+	CustomSelectControlOption as WPCustomSelectControlOption,
+} from '@aktk/block-components/wp-controls/custom-select-control';
 
 export interface CustomSelectControlOption {
 	key: string;
@@ -46,15 +52,16 @@ export function CustomSelectControl( props: CustomSelectControlProps ) {
 					},
 				],
 				...options,
-			] as CustomSelectControlOption[];
+			] as WPCustomSelectControlOption[];
 		}
-		return [ ...options ] as CustomSelectControlOption[];
+		return [ ...options ] as WPCustomSelectControlOption[];
 	}, [ options ] );
-	// 選択時にキーをリターン.
+
+	// 選択時にキーをリターン
 	const handleOnChange = ( {
 		selectedItem,
 	}: {
-		selectedItem: CustomSelectControlOption;
+		selectedItem: WPCustomSelectControlOption;
 	} ) => {
 		onChange( selectedItem.key );
 	};
@@ -74,7 +81,6 @@ export function CustomSelectControl( props: CustomSelectControlProps ) {
 				options={ selectOptions }
 				value={ currentItem }
 				onChange={ handleOnChange }
-				__nextUnconstrainedWidth={ true }
 				className={ className }
 				disabled={ disabled }
 			/>

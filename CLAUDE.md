@@ -16,6 +16,16 @@
     -   aktk-block-components(`src/aktk-block-components/**`,`@aktk/block-components/**`)依存関係 → Aktk Dependencies
     -   プラグイン固有の依存関係 → Plugin Dependencies
 
+### aktk-block-componentsでのルール
+
+#### @wordpress/componentsの直接利用不可
+
+1. @wordpress/componentsのコンポーネントは基本的に直接使用しない。
+2. wp-controls内にラップしたコンポーネントを作成し、それを利用する。
+3. このルールは後から追加したルールのため、プロジェクト内で守られていない部分が多数あることを理解・許容すること
+4. 新規で作成するコンポーネントには上記1.,2.のルールを適用する
+5. このルールはWordPress(Gutenberg)のコンポーネントにはアップデートによって過渡期対応となるプロパティが追加されることがあるが、その対応を1つのコンポーネントを更新するだけで完了できるようにするための対応である。
+
 ## プロジェクト概要
 
 **yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグインです。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供します。現在のバージョン: 2.0.0-alpha
@@ -58,10 +68,22 @@ npm run zip                  # プラグイン配布用zipファイル作成
 
 ```
 src/
-├── block-library/          # モダンTypeScriptブロック
+├── aktk-block-components/  # モダンTypeScriptコンポーネント（他プロジェクトでも使用）
+│　　　├── components/       # ブロック・設定画面で使用する各種値設定のUIコンポーネント
+│　　　├── config/           # プロダクト共通の設定
+│　　　├── hooks/            # react hooks
+│　　　├── types/            #
+│　　　├── utils/            # ユーティリティー関数
+│　　　└── wp-controls/      # WordPress（Gutenberg）のコンポーネントを単純にラップしたコンポーネント
 ├── plugin-settings/        # React管理画面
 ├── blocks/                 # 共有ブロックユーティリティ
-└── js/                    # レガシーJavaScript
+│　　　├── api/    		  # REST APIを使用した処理など
+│　　　├── block-library/    # モダンTypeScriptブロック
+│　　　├── components/       # プラグイン固有のコンポーネント（将来的に可能なものはaktk-block-componentsへ切り替え予定・JavaScriptのものはTypeScriptへ切り替え予定）
+│　　　├── controls/         # レガシーJavaScript コンポーネント（将来的にaktk-block-componentsへ切り替え予定）
+│　　　├── function/         # レガシーJavaScript ユーティリティー関数（将来的にaktk-block-componentsへ切り替え予定・./utilsへ移行予定）
+│　　　└── utils/            # プラグイン固有のユーティリティー関数（将来的に可能なものはaktk-block-componentsへ切り替え予定・JavaScriptのものはTypeScriptへ切り替え予定）
+└── js/                    # レガシーJavaScript（将来的にaktk-block-components、もしくは、src/blocks/内のものに切り替え予定）
 
 blocks/                     # レガシーブロック実装
 inc/                       # PHPバックエンドクラス
