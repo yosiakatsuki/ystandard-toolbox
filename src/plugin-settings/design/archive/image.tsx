@@ -5,8 +5,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import MediaUploadControl from '@aktk/components/media-upload-control';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
+import {
+	MediaUpload,
+	MediaObject,
+} from '@aktk/block-components/components/media-upload';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
  * Plugin Dependencies
@@ -21,11 +24,6 @@ import { PanelProps } from './index';
 interface RatioOption {
 	key: string;
 	name: string;
-}
-
-interface MediaObject {
-	id: number;
-	url: string;
 }
 
 const RATIO: RatioOption[] = [
@@ -67,10 +65,10 @@ export default function Image( {
 			  }
 			: undefined;
 
-	const handleOnSelectImage = ( newValue: MediaObject ): void => {
+	const handleOnSelectImage = ( newValue: MediaObject | undefined ): void => {
 		updateSection( {
-			archiveDefaultImage: newValue.url,
-			archiveDefaultImageId: newValue.id,
+			archiveDefaultImage: newValue?.url,
+			archiveDefaultImageId: newValue?.id,
 		} );
 	};
 	const handleOnClearImage = (): void => {
@@ -105,11 +103,11 @@ export default function Image( {
 							'ystandard-toolbox'
 						) }
 					</NoticeSecondaryText>
-					<MediaUploadControl.Utils
+					<MediaUpload
 						media={ defaultImage }
-						value={ defaultImage }
 						onSelect={ handleOnSelectImage }
 						onClear={ handleOnClearImage }
+						useMediaUtils={ true }
 					/>
 				</PluginSettingsBaseControl>
 				<PluginSettingsBaseControl
