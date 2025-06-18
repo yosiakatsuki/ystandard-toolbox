@@ -20,18 +20,22 @@ import {
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import CodeInput from '@aktk/components/code-input';
-import { getAdminConfig } from '@aktk/plugin-settings/function/config';
+import { getAdminConfig } from '@aktk/plugin-settings/utils/config';
 /**
  * Components
  */
 import { DesignContext } from '../index';
-import { DesignSettingsTab } from '../types';
+import {
+	CopyrightSettings,
+	DesignSettingsSection,
+	DesignSettingsTab,
+} from '../types';
 
 /**
  * タブ名とセクション名
  */
 const TAB_NAME = 'copyright';
-const SECTION_NAME = 'copyright';
+const SECTION_NAME = 'copyright' as DesignSettingsSection;
 
 /**
  * Powered by ボタンオプション
@@ -53,14 +57,6 @@ const POWERED_BY_BUTTONS: PoweredByOption[] = [
 ];
 
 /**
- * コピーライト設定
- */
-interface CopyrightSettings {
-	copyright?: string;
-	poweredBy?: boolean;
-}
-
-/**
  * Props型定義
  */
 interface CopyrightProps {
@@ -74,16 +70,17 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 	const [ sectionSettings, setSectionSettings ] =
 		useState< CopyrightSettings >( {} );
 	const { getSettings, updateSettings, settings } =
+		// @ts-ignore
 		useContext( DesignContext );
 	/**
 	 * 設定取得
 	 */
 	const getCopyrightSettings = (): void => {
 		const defaultCopyright = getAdminConfig( 'copyrightDefault' ) as string;
-		const _settings = getSettings( SECTION_NAME );
+		const _settings = getSettings( SECTION_NAME ) as CopyrightSettings;
 		setSectionSettings( {
 			copyright: _settings?.copyright ?? defaultCopyright,
-			poweredBy: _settings?.disable_theme_info ?? false,
+			disable_theme_info: _settings?.disable_theme_info ?? false,
 		} );
 	};
 	useEffect( getCopyrightSettings, [ settings ] );
@@ -96,9 +93,9 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 	/**
 	 * 設定更新
 	 */
-	const updateSection = ( value: Record< string, any > ): void => {
+	const updateSection = ( value: CopyrightSettings ): void => {
 		updateSettings( SECTION_NAME, {
-			...getSettings( SECTION_NAME ),
+			...sectionSettings,
 			...value,
 		} );
 	};
@@ -134,6 +131,7 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 						maxHeight={ '100px' }
 						value={ sectionSettings.copyright || '' }
 						onChange={ handleCopyrightOnChange }
+						extensions={ [] }
 					/>
 					<NoticeSecondaryText className="mt-2 text-sm">
 						※次のHTMLタグが使用できます。<code>a</code>,
@@ -152,7 +150,7 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 					id={ 'powered-by' }
 				>
 					<HorizonButtonSelect
-						value={ toBool( sectionSettings.poweredBy ) }
+						value={ toBool( sectionSettings.disable_theme_info ) }
 						onChange={ handlePoweredByOnChange }
 						options={ POWERED_BY_BUTTONS }
 					/>
