@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
+import { DestructiveButton } from '@aktk/block-components/components/buttons';
 import { toBool } from '@aktk/block-components/utils/boolean';
 
 /**
@@ -116,6 +117,16 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 		updateSection( { disable_theme_info: toBool( value ) } );
 	};
 
+	/**
+	 * 設定をクリアしてデフォルト値にリセット
+	 */
+	const handleClearSettings = (): void => {
+		const defaultCopyright = getAdminConfig( 'copyrightDefault' ) as string;
+		updateSection( {
+			copyright: defaultCopyright,
+		} );
+	};
+
 	return (
 		<PluginSettingsPanel
 			title={ __( 'Copyright編集', 'ystandard-toolbox' ) }
@@ -131,7 +142,6 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 						maxHeight={ '100px' }
 						value={ sectionSettings.copyright || '' }
 						onChange={ handleCopyrightOnChange }
-						extensions={ [] }
 					/>
 					<NoticeSecondaryText className="mt-2 text-sm">
 						※次のHTMLタグが使用できます。<code>a</code>,
@@ -144,6 +154,15 @@ export default function Copyright( { tab }: CopyrightProps ): JSX.Element {
 							<li>{ '{url}' } : サイトURL</li>
 						</ul>
 					</NoticeSecondaryText>
+					<DestructiveButton
+						className="text-fz-xxs"
+						isSmall
+						onClick={ handleClearSettings }
+						text={ __(
+							'設定をデフォルトに戻す',
+							'ystandard-toolbox'
+						) }
+					/>
 				</PluginSettingsBaseControl>
 				<PluginSettingsBaseControl
 					label={ __( 'Powered by の削除', 'ystandard-toolbox' ) }
