@@ -19,7 +19,14 @@ interface CustomSelectControlProps {
 }
 
 export default function CustomSelectControl( props: CustomSelectControlProps ) {
-	const { value, options, onChange, label, className = '', disabled = false } = props;
+	const {
+		value,
+		options,
+		onChange,
+		label,
+		className = '',
+		disabled = false,
+	} = props;
 
 	return (
 		<WPCustomSelectControl
@@ -27,9 +34,9 @@ export default function CustomSelectControl( props: CustomSelectControlProps ) {
 			options={ options }
 			value={ value }
 			onChange={ onChange }
-			__nextUnconstrainedWidth={ true }
 			className={ className }
 			disabled={ disabled }
+			__next40pxDefaultSize
 		/>
 	);
 }

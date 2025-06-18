@@ -4,7 +4,11 @@ import { Draggable } from 'react-beautiful-dnd';
  * WordPress Dependencies
  */
 import { Icon, menu } from '@wordpress/icons';
-import { ToggleControl } from '@wordpress/components';
+
+/**
+ * Aktk Dependencies
+ */
+import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 
 /**
  * Styles
