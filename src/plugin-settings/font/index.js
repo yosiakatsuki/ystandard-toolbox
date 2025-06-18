@@ -13,7 +13,7 @@ import {
 } from '@aktk/components/toast-message';
 import PageBase from '@aktk/plugin-settings/components/page-base';
 import Buttons from '@aktk/plugin-settings/components/buttons';
-import { getPluginSettings } from '../function/setting';
+import { getPluginSettings } from '@aktk/plugin-settings/utils/setting';
 import Html from './html';
 import FontFamily from './font-family';
 

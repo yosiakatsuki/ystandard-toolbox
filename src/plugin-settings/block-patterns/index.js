@@ -6,7 +6,7 @@ import { render, useState, useEffect, createContext } from '@wordpress/element';
  * yStandard
  */
 import PageBase from '@aktk/plugin-settings/components/page-base';
-import { getPluginSetting } from '../function/setting';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import {
 	ToastContainer,
 	notifySuccess,

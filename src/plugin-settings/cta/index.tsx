@@ -28,7 +28,7 @@ import AppContainer from '@aktk/plugin-settings/components/app-container';
 /**
  * App
  */
-import { getPluginSetting } from '../function/setting';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import ModalReset from './modal-reset';
 import Tab from './tab';
 import { update } from './update';

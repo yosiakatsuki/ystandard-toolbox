@@ -1,4 +1,4 @@
-import { getPluginSettings } from '@aktk/plugin-settings/function/setting';
+import { getPluginSettings } from '@aktk/plugin-settings/utils/setting';
 import type { HeadingOption, HeadingStyle } from '../types';
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 import {

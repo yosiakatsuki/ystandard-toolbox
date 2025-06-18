@@ -15,7 +15,7 @@ import Buttons from '@aktk/plugin-settings/components/buttons';
  * Settings.
  */
 import { CtaContext } from './index';
-import { getPluginSetting } from '../function/setting';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 
 /**
  * Plugin

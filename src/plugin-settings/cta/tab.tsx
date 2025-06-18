@@ -7,7 +7,7 @@ import { useContext } from '@wordpress/element';
  */
 import SettingsTab from '@aktk/plugin-settings/components/settings-tab';
 
-import { getPluginSetting } from '../function/setting';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import { CtaContext } from './index';
 import ListContainer from './list-container';
 import PostTypeSelector from './post-type-selector';

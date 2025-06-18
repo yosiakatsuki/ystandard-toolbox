@@ -1,7 +1,7 @@
 import CustomSelectControl from '@aktk/components/custom-select-control';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { CtaContext } from './index';
-import { getPluginSetting } from '../function/setting';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 
 const DEFAULT_POST_TYPE_OPTIONS = [ { name: '----', key: '' } ];
 
