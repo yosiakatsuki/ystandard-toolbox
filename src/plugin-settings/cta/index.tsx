@@ -2,21 +2,31 @@ import React from 'react';
 /**
  * WordPress
  */
-import { render, useState, useEffect, createContext } from '@wordpress/element';
+import {
+	useState,
+	useEffect,
+	createContext,
+	createRoot,
+} from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk dependencies
  */
 import {
 	ToastContainer,
 	notifySuccess,
 	notifyError,
-} from '@aktk/components/toast-message';
-import PageBase from '@aktk/plugin-settings/components/page-base';
-import Buttons from '@aktk/plugin-settings/components/buttons';
-import { Flex, FlexItem } from '@aktk/components/flex';
+} from '@aktk/block-components/components/toast-message';
+import {
+	DestructiveButton,
+	PrimaryButton,
+} from '@aktk/block-components/components/buttons';
 /**
- * Block.
+ * Plugin dependencies
+ */
+import AppContainer from '@aktk/plugin-settings/components/app-container';
+/**
+ * App
  */
 import { getPluginSetting } from '../function/setting';
 import ModalReset from './modal-reset';
@@ -88,35 +98,39 @@ const Cta = () => {
 		setIsResetModalOpen,
 	};
 	return (
-		<PageBase
+		<AppContainer
 			title={ __( '投稿詳細ページ上下拡張', 'ystandard-toolbox' ) }
 			loading={ isLoading }
 		>
+			{ /* @ts-ignore */ }
 			<CtaContext.Provider value={ ctaContextValue }>
 				<Tab />
 				{ isResetModalOpen && (
 					<ModalReset onClickUpdate={ handleOnClickUpdate } />
 				) }
 			</CtaContext.Provider>
-			<Flex justifyBetween>
-				<FlexItem>
-					<Buttons
-						onClickUpdate={ () => handleOnClickUpdate( ctaItems ) }
-						isDisabled={ isUpdate }
-					/>
-				</FlexItem>
-				<FlexItem>
-					<Buttons.Delete
-						text={ __( '初期値に戻す', 'ystandard-toolbox' ) }
-						onClick={ handleOnClickReset }
-						isDisabled={ isUpdate }
-						style={ { fontSize: '0.7em' } }
-					/>
-				</FlexItem>
-			</Flex>
+			<div className="flex justify-between">
+				<PrimaryButton
+					onClick={ () => handleOnClickUpdate( ctaItems ) }
+					disabled={ isUpdate }
+					icon={ 'cloud-upload' }
+				>
+					{ ' ' }
+					{ __( '変更を保存', 'ystandard-toolbox' ) }{ ' ' }
+				</PrimaryButton>
+				<DestructiveButton
+					onClick={ handleOnClickReset }
+					disabled={ isUpdate }
+					style={ { fontSize: '0.7em' } }
+				>
+					{ __( '初期値に戻す', 'ystandard-toolbox' ) }
+				</DestructiveButton>
+			</div>
 			<ToastContainer />
-		</PageBase>
+		</AppContainer>
 	);
 };
 
-render( <Cta />, document.getElementById( 'cta' ) );
+const container = document.getElementById( 'cta' );
+const root = createRoot( container! );
+root.render( <Cta /> );
