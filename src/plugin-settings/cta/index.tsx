@@ -30,8 +30,8 @@ import { apiPost, getEndpoint } from '@aktk/api';
 /**
  * App
  */
-import ModalReset from './modal-reset';
 import Tab from './tab';
+import ModalReset from './modal-reset';
 
 export const CtaContext: object = createContext( {} );
 
@@ -136,7 +136,7 @@ const Cta = () => {
 					<ModalReset onClickUpdate={ handleOnClickUpdate } />
 				) } */ }
 			</CtaContext.Provider>
-			<div className="flex justify-between">
+			<div className="flex justify-between mt-4">
 				<PrimaryButton
 					onClick={ () => handleOnClickUpdate( ctaItems ) }
 					disabled={ isUpdate }

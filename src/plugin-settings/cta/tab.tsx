@@ -14,6 +14,10 @@ import { CtaContext } from './index';
 import ListContainer from './list-container';
 import PostTypeSelector from './post-type-selector';
 
+/**
+ * 利用可能なタブの定義
+ * ヘッダーとフッターの2つの位置でCTAを設定可能
+ */
 const TABS = [
 	{
 		name: 'footer',
@@ -25,7 +29,12 @@ const TABS = [
 	},
 ];
 
-export const getTabName = ( name ) => {
+/**
+ * タブ名からタブのタイトルを取得する関数
+ * @param {string} name - タブ名
+ * @return {string} タブのタイトル
+ */
+export function getTabName( name: string ): string {
 	const currentTab = name || 'footer';
 	const selected = TABS.filter( ( item ) => {
 		return item.name === currentTab;
@@ -35,20 +44,33 @@ export const getTabName = ( name ) => {
 		return '';
 	}
 	return selected[ 0 ].title;
-};
+}
 
-export const getCtaDefault = ( postType ) => {
+/**
+ * 指定された投稿タイプのデフォルトCTA設定を取得する関数
+ * @param {string} postType - 投稿タイプ
+ * @return {object} デフォルトCTA設定
+ */
+export function getCtaDefault( postType: string ) {
 	const ctaDefault = getPluginSetting( 'ctaDefault', {} );
 	return Object.hasOwnProperty.call( ctaDefault, postType )
 		? ctaDefault[ postType ]
 		: ctaDefault._default;
-};
+}
 
-const Tab = () => {
+/**
+ * CTAタブコンポーネント
+ * 投稿タイプ選択とヘッダー/フッター位置でのCTA設定を管理
+ */
+export default function Tab(): JSX.Element {
 	const { ctaItems, setCtaItems, selectPostType, isShowTab, setSelectedTab } =
 		useContext( CtaContext );
 
-	const handleOnChangeCta = ( newValue, position ) => {
+	/**
+	 * CTA設定変更時の処理
+	 * 指定された位置のCTA設定を更新する
+	 */
+	const handleOnChangeCta = ( newValue: any, position: string ) => {
 		const newPostTypeCtaItem = {
 			...getPostTypeCta( selectPostType ),
 			...{
@@ -64,42 +86,49 @@ const Tab = () => {
 		setCtaItems( newCtaItems );
 	};
 
-	const getPostTypeCta = ( postType ) => {
+	/**
+	 * 指定された投稿タイプのCTA設定を取得
+	 * 設定が存在しない場合はデフォルト値を使用
+	 */
+	const getPostTypeCta = ( postType: string ) => {
 		return Object.hasOwnProperty.call( ctaItems, postType )
 			? ctaItems[ postType ]
 			: getCtaDefault( postType );
 	};
 
-	const getItems = ( position ) => {
+	/**
+	 * 指定された位置のCTAアイテムを取得
+	 */
+	const getItems = ( position: string ) => {
 		const items = getPostTypeCta( selectPostType );
 		return items[ position ];
 	};
 
-	const handleOnSelectTab = ( tab ) => {
+	/**
+	 * タブ選択時の処理
+	 */
+	const handleOnSelectTab = ( tab: string ) => {
 		setSelectedTab( tab );
 	};
 
 	return (
-		<div className="ystdtb-settings-cta__tab">
+		<div>
 			<PostTypeSelector />
 			{ isShowTab && (
 				<SettingsTab tabs={ TABS } onSelect={ handleOnSelectTab }>
 					{ ( tab ) => {
 						return (
-							<>
-								<ListContainer
-									items={ getItems( tab.name ) }
-									setItems={ ( newValue ) => {
-										handleOnChangeCta( newValue, tab.name );
-									} }
-									position={ tab.name }
-								/>
-							</>
+							<ListContainer
+								items={ getItems( tab.name ) }
+								setItems={ ( newValue ) => {
+									handleOnChangeCta( newValue, tab.name );
+								} }
+								position={ tab.name }
+							/>
 						);
 					} }
 				</SettingsTab>
 			) }
 		</div>
 	);
-};
-export default Tab;
+}
