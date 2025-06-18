@@ -25,14 +25,13 @@ import {
  * Plugin dependencies
  */
 import AppContainer from '@aktk/plugin-settings/components/app-container';
+import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 /**
  * App
  */
-import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import ModalReset from './modal-reset';
 import Tab from './tab';
 import { update } from './update';
-import './index.scss';
 
 export const CtaContext: object = createContext( {} );
 
@@ -105,9 +104,9 @@ const Cta = () => {
 			{ /* @ts-ignore */ }
 			<CtaContext.Provider value={ ctaContextValue }>
 				<Tab />
-				{ isResetModalOpen && (
+				{ /* { isResetModalOpen && (
 					<ModalReset onClickUpdate={ handleOnClickUpdate } />
-				) }
+				) } */ }
 			</CtaContext.Provider>
 			<div className="flex justify-between">
 				<PrimaryButton
