@@ -20,7 +20,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import CodeInput from '@aktk/components/code-input';
+import { CodeInput } from '@aktk/components/code-input';
 import { getAdminConfig } from '@aktk/plugin-settings/utils/config';
 /**
  * Components
