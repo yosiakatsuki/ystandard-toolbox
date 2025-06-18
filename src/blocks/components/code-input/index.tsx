@@ -1,6 +1,6 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
-import './_edit.scss';
+import './style-editor.scss';
 
 const CodeInput = ( {
 	value,
