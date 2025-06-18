@@ -26,12 +26,12 @@ import {
  */
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
+import { apiPost, getEndpoint } from '@aktk/api';
 /**
  * App
  */
 import ModalReset from './modal-reset';
 import Tab from './tab';
-import { update } from './update';
 
 export const CtaContext: object = createContext( {} );
 
@@ -84,7 +84,8 @@ const Cta = () => {
 	) => {
 		setIsUpdate( true );
 		setIsLoading( true );
-		update( {
+		apiPost( {
+			endpoint: getEndpoint( 'update_cta' ),
 			data: newValue,
 			callback: ( response ) => {
 				if ( response?.data ) {
@@ -93,8 +94,8 @@ const Cta = () => {
 				setIsUpdate( false );
 				setIsLoading( false );
 			},
-			success: notifySuccess,
-			error: notifyError,
+			messageSuccess: notifySuccess,
+			messageError: notifyError,
 		} );
 	};
 
