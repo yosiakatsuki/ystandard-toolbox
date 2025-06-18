@@ -3,11 +3,13 @@
  */
 import { useContext } from '@wordpress/element';
 /**
- * yStandard
+ * Plugin dependencies
  */
-import SettingsTab from '@aktk/plugin-settings/components/settings-tab';
-
+import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
+/**
+ * App
+ */
 import { CtaContext } from './index';
 import ListContainer from './list-container';
 import PostTypeSelector from './post-type-selector';
