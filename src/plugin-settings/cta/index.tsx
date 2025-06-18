@@ -36,17 +36,28 @@ import { update } from './update';
 export const CtaContext: object = createContext( {} );
 
 const Cta = () => {
+	// ローディング状態管理
 	const [ isLoading, setIsLoading ] = useState( true );
+	// 更新処理中の状態管理
 	const [ isUpdate, setIsUpdate ] = useState( false );
+	// 設定タブの表示/非表示状態
 	const [ isShowTab, setIsShowTab ] = useState( undefined );
+	// CTA項目のデータ管理
 	const [ ctaItems, setCtaItems ] = useState( {} );
+	// 選択されている投稿タイプ
 	const [ selectPostType, setSelectPostType ] = useState( '' );
+	// 選択されているタブ
 	const [ selectedTab, setSelectedTab ] = useState( '' );
+	// リセットモーダルの表示状態
 	const [ isResetModalOpen, setIsResetModalOpen ] = useState( false );
 
+	/**
+	 * CTA項目の初期化処理
+	 * プラグイン設定からCTAデータを取得し、旧バージョンとの互換性を保つ
+	 */
 	const initCtaItems = () => {
 		let _items = getPluginSetting( 'cta', {} );
-		// 旧バージョンの設定を引き継ぐ.
+		// 旧バージョンの設定を引き継ぐ
 		if ( _items?.ctaSort ) {
 			_items = _items.ctaSort;
 			delete _items.ctaSort;
@@ -56,11 +67,18 @@ const Cta = () => {
 	};
 	useEffect( initCtaItems, [] );
 
+	/**
+	 * 選択された投稿タイプに基づいて設定タブの表示を制御
+	 */
 	useEffect( () => {
 		const _isShowSettingTab = !! selectPostType;
 		setIsShowTab( _isShowSettingTab );
 	}, [ selectPostType ] );
 
+	/**
+	 * 設定の更新処理
+	 * REST APIを通じてサーバーに設定を保存する
+	 */
 	const handleOnClickUpdate = (
 		newValue: object | undefined = undefined
 	) => {
@@ -79,9 +97,18 @@ const Cta = () => {
 			error: notifyError,
 		} );
 	};
+
+	/**
+	 * リセットボタンクリック時の処理
+	 * リセット確認モーダルを表示する
+	 */
 	const handleOnClickReset = () => {
 		setIsResetModalOpen( true );
 	};
+
+	/**
+	 * 子コンポーネントに渡すContext値
+	 */
 	const ctaContextValue = {
 		ctaItems,
 		setCtaItems,
