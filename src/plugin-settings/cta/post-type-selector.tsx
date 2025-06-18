@@ -4,9 +4,13 @@
 import { useContext, useEffect, useState } from '@wordpress/element';
 
 /**
+ * Aktk Dependencies
+ */
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
+
+/**
  * Plugin Dependencies
  */
-import CustomSelectControl from '@aktk/components/custom-select-control';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 
 /**
@@ -57,14 +61,13 @@ export default function PostTypeSelector(): JSX.Element {
 	};
 
 	return (
-		<div className="ystdtb-settings-cta__post-type-selector">
+		<div className="mb-4">
 			<CustomSelectControl
 				label={ '投稿タイプ' }
 				options={ postTypes }
 				value={ selectPostType }
 				onChange={ handleOnChangePostType }
-				isHorizon
-				__nextUnconstrainedWidth
+				useEmptyValue={ true }
 			/>
 		</div>
 	);
