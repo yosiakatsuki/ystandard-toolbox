@@ -7,7 +7,6 @@ import { __, sprintf } from '@wordpress/i18n';
 /**
  * Aktk Dependencies
  */
-import { Flex, FlexItem } from '@aktk/components/flex';
 import Modal from '@aktk/block-components/wp-controls/modal';
 import Buttons from '@aktk/plugin-settings/components/buttons';
 
@@ -94,8 +93,8 @@ export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
 			shouldCloseOnClickOutside={ true }
 			isDismissible={ false }
 		>
-			<Flex gap="2em" style={ { flexDirection: 'column' } }>
-				<FlexItem>
+			<div className="flex flex-col gap-8">
+				<p>
 					{ sprintf(
 						/* translators: %1$s post type, %2$s section. */
 						__(
@@ -105,13 +104,9 @@ export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
 						getPostTypeName(),
 						getTabName( selectedTab )
 					) }
-				</FlexItem>
-				<FlexItem>
-					<Flex
-						className="ystdtb-settings-cta__reset-buttons"
-						justifyBetween
-						gap="1em"
-					>
+				</p>
+				<div>
+					<div className="ystdtb-settings-cta__reset-buttons flex justify-between gap-4">
 						<Buttons.Delete
 							text={ __( 'リセット', 'ystandard-toolbox' ) }
 							onClick={ handleResetOnClick }
@@ -120,9 +115,9 @@ export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
 							text={ __( 'キャンセル', 'ystandard-toolbox' ) }
 							onClick={ handleCloseModal }
 						/>
-					</Flex>
-				</FlexItem>
-			</Flex>
+					</div>
+				</div>
+			</div>
 		</Modal>
 	);
 }
