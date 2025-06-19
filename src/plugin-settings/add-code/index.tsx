@@ -1,32 +1,73 @@
+import React from 'react';
 /**
- * WordPress
+ * WordPress Dependencies
  */
-import { render, useState, useEffect, createContext } from '@wordpress/element';
+import {
+	useState,
+	useEffect,
+	createContext,
+	createRoot,
+} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk Dependencies
  */
-import PageBase from '@aktk/plugin-settings/components/page-base';
 import {
 	ToastContainer,
 	notifySuccess,
 	notifyError,
-} from '@aktk/components/toast-message';
+} from '@aktk/block-components/components/toast-message';
+import { PrimaryButton } from '@aktk/block-components/components/buttons/buttons';
+/**
+ * Plugin Dependencies
+ */
+import AppContainer from '@aktk/plugin-settings/components/app-container';
 import EditorTab from './editor-tab';
-import { getCodeSetting } from '../function/setting';
-import Buttons from '@aktk/plugin-settings/components/buttons';
+import { getCodeSetting } from '../utils/setting';
 import { update } from './update';
 
-export const AddCodeContext = createContext();
+/**
+ * コード追加設定のコンテキスト型定義
+ */
+interface AddCodeContextType {
+	settings: Record< string, any >;
+	setSettings: React.Dispatch<
+		React.SetStateAction< Record< string, any > >
+	>;
+	isLoading: boolean;
+	setIsLoading: React.Dispatch< React.SetStateAction< boolean > >;
+}
 
-const AddCode = () => {
-	const [ isLoading, setIsLoading ] = useState( true );
-	const [ isUpdate, setIsUpdate ] = useState( false );
-	const [ settings, setSettings ] = useState( {} );
+export const AddCodeContext = createContext< AddCodeContextType >( {
+	settings: {},
+	setSettings: () => {},
+	isLoading: true,
+	setIsLoading: () => {},
+} );
+
+/**
+ * コード追加設定画面のメインコンポーネント
+ * ヘッダー、フッター、その他のコード追加機能を提供
+ */
+export default function AddCode(): JSX.Element {
+	// ローディング状態管理
+	const [ isLoading, setIsLoading ] = useState< boolean >( true );
+	// 更新処理中の状態管理
+	const [ isUpdate, setIsUpdate ] = useState< boolean >( false );
+	// コード追加設定データ管理
+	const [ settings, setSettings ] = useState< Record< string, any > >( {} );
+	/**
+	 * 初期設定を読み込む
+	 */
 	const getSettings = () => {
 		setSettings( getCodeSetting() );
 		setIsLoading( false );
 	};
 	useEffect( getSettings, [] );
+	/**
+	 * 更新ボタンクリック時の処理
+	 * コード追加設定をサーバーに保存する
+	 */
 	const handleOnClickUpdate = () => {
 		setIsUpdate( true );
 		setIsLoading( true );
@@ -40,24 +81,41 @@ const AddCode = () => {
 			error: notifyError,
 		} );
 	};
+	// コンテキスト値の準備
+	const addCodeContextValue: AddCodeContextType = {
+		settings,
+		setSettings,
+		isLoading,
+		setIsLoading,
+	};
+
 	return (
-		<PageBase title={ 'コード追加' } loading={ isLoading }>
-			<AddCodeContext.Provider
-				value={ {
-					settings,
-					setSettings,
-					isLoading,
-					setIsLoading,
-				} }
-			>
+		<AppContainer
+			title={ __( 'コード追加', 'ystandard-toolbox' ) }
+			loading={ isLoading }
+		>
+			{ /* @ts-ignore */ }
+			<AddCodeContext.Provider value={ addCodeContextValue }>
 				<EditorTab />
 			</AddCodeContext.Provider>
-			<Buttons
-				onClickUpdate={ handleOnClickUpdate }
-				isDisabled={ isUpdate }
-			/>
+			<div className="flex justify-between mt-4">
+				<PrimaryButton
+					onClick={ handleOnClickUpdate }
+					disabled={ isUpdate }
+					isBusy={ isUpdate }
+					icon={ 'cloud-upload' }
+				>
+					{ __( '変更を保存', 'ystandard-toolbox' ) }
+				</PrimaryButton>
+			</div>
 			<ToastContainer />
-		</PageBase>
+		</AppContainer>
 	);
-};
-render( <AddCode />, document.getElementById( 'add-code' ) );
+}
+
+// レンダリング処理
+const container = document.getElementById( 'add-code' );
+if ( container ) {
+	const root = createRoot( container );
+	root.render( <AddCode /> );
+}
