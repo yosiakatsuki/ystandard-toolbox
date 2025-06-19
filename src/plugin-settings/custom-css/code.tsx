@@ -13,13 +13,9 @@ import { CodeInput } from '@aktk/components/code-input';
 /**
  * Plugin Dependencies
  */
-import {
-	PluginSettingsPanel,
-	PanelInner,
-} from '@aktk/plugin-settings/components/panel';
+import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
 import { CustomCssContext } from './index';
-import { getObjectValue } from '@aktk/helper/object.js';
 
 /**
  * CSS編集タブの定義
@@ -64,7 +60,7 @@ export default function Code(): JSX.Element {
 	 * @return CSSコード
 	 */
 	const getCode = ( name: string ): string => {
-		return getObjectValue( settings, name, '' ) as string;
+		return settings?.[ name ] ?? '';
 	};
 	/**
 	 * 指定されたタブのヘルプテキストを取得する
