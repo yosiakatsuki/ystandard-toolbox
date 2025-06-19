@@ -132,9 +132,9 @@ const Cta = () => {
 			{ /* @ts-ignore */ }
 			<CtaContext.Provider value={ ctaContextValue }>
 				<Tab />
-				{ /* { isResetModalOpen && (
+				{ isResetModalOpen && (
 					<ModalReset onClickUpdate={ handleOnClickUpdate } />
-				) } */ }
+				) }
 			</CtaContext.Provider>
 			<div className="flex justify-between mt-4">
 				<PrimaryButton
@@ -142,7 +142,6 @@ const Cta = () => {
 					disabled={ isUpdate }
 					icon={ 'cloud-upload' }
 				>
-					{ ' ' }
 					{ __( '変更を保存', 'ystandard-toolbox' ) }{ ' ' }
 				</PrimaryButton>
 				<DestructiveButton

@@ -29,7 +29,8 @@ interface ModalResetProps {
 	onClickUpdate: ( value: object ) => void;
 }
 
-const ModalReset = ( { onClickUpdate }: ModalResetProps ) => {
+export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
+	// CTA設定のコンテキストから必要な値と関数を取得
 	const {
 		ctaItems,
 		setCtaItems,
@@ -38,11 +39,17 @@ const ModalReset = ( { onClickUpdate }: ModalResetProps ) => {
 		setIsResetModalOpen,
 	} = useContext( CtaContext );
 
+	/**
+	 * 選択されている投稿タイプの表示名を取得する
+	 * @return {string} 投稿タイプの表示名
+	 */
 	const getPostTypeName = () => {
+		// CTA選択可能な投稿タイプの設定を取得
 		const settings = getPluginSetting( 'ctaSelectPostType' );
 		if ( ! Array.isArray( settings ) ) {
 			return '';
 		}
+		// 現在選択されている投稿タイプの情報を検索
 		const selected = settings.filter( ( item ) => {
 			return item?.key === selectPostType;
 		} );
@@ -52,19 +59,31 @@ const ModalReset = ( { onClickUpdate }: ModalResetProps ) => {
 		return selected[ 0 ]?.name || '';
 	};
 
+	/**
+	 * リセットボタンクリック時の処理
+	 * 選択された投稿タイプのCTA設定をデフォルト値にリセットする
+	 */
 	const handleResetOnClick = () => {
+		// 選択された投稿タイプのデフォルトCTA設定を取得
 		const defaultCta = getCtaDefault( selectPostType );
+		// 既存のCTA設定にデフォルト値をマージ
 		const newCtaItems = {
 			...ctaItems,
 			...{
 				[ selectPostType ]: defaultCta,
 			},
 		};
+		// ローカル状態を更新
 		setCtaItems( newCtaItems );
+		// 親コンポーネントに変更を通知
 		onClickUpdate( newCtaItems );
+		// モーダルを閉じる
 		handleCloseModal();
 	};
 
+	/**
+	 * モーダルを閉じる処理
+	 */
 	const handleCloseModal = () => {
 		setIsResetModalOpen( false );
 	};
@@ -107,4 +126,3 @@ const ModalReset = ( { onClickUpdate }: ModalResetProps ) => {
 		</Modal>
 	);
 };
-export default ModalReset;
