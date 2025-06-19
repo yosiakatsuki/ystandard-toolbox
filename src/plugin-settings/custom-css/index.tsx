@@ -113,7 +113,7 @@ export default function CustomCss(): JSX.Element {
 			{ /* @ts-ignore */ }
 			<CustomCssContext.Provider value={ customCssContextValue }>
 				<WPCustomCss />
-				{ /* <Code /> */ }
+				<Code />
 			</CustomCssContext.Provider>
 			<div className="flex justify-between mt-4">
 				<PrimaryButton

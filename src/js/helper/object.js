@@ -34,6 +34,9 @@ export const hasObjectKey = ( value, key ) => {
 	return value.hasOwnProperty( key );
 };
 
+/**
+ * @deprecated
+ */
 export const getObjectValue = ( value, key, defaultValue = undefined ) => {
 	if ( ! hasObjectKey( value, key ) ) {
 		return defaultValue;
