@@ -1,40 +1,87 @@
+import React from 'react';
 /**
- * WordPress
+ * WordPress Dependencies
  */
-import { render, useState, useEffect, createContext } from '@wordpress/element';
+import {
+	useState,
+	useEffect,
+	createContext,
+	createRoot,
+} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import { apiPost, getEndpoint } from '@aktk/api';
 import {
 	ToastContainer,
 	notifySuccess,
 	notifyError,
-} from '@aktk/components/toast-message';
-import PageBase from '@aktk/plugin-settings/components/page-base';
-import Buttons from '@aktk/plugin-settings/components/buttons';
+} from '@aktk/block-components/components/toast-message';
+import { PrimaryButton } from '@aktk/block-components/components/buttons/buttons';
+/**
+ * Plugin Dependencies
+ */
+import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSettings } from '@aktk/plugin-settings/utils/setting';
 import WPCustomCss from './wp-custom-css';
 import './_index.scss';
 import Code from './code';
 
-export const CustomCssContext = createContext();
+/**
+ * カスタムCSS設定のコンテキスト型定義
+ */
+interface CustomCssContextType {
+	settings: Record< string, any >;
+	setSettings: React.Dispatch<
+		React.SetStateAction< Record< string, any > >
+	>;
+	isLoading: boolean;
+	setIsLoading: React.Dispatch< React.SetStateAction< boolean > >;
+	updateSettings: ( value: Record< string, any > ) => void;
+}
 
-const CustomCss = () => {
-	const [ isLoading, setIsLoading ] = useState( true );
-	const [ isUpdate, setIsUpdate ] = useState( false );
-	const [ settings, setSettings ] = useState( {} );
+export const CustomCssContext = createContext< CustomCssContextType >( {
+	settings: {},
+	setSettings: () => {},
+	isLoading: true,
+	setIsLoading: () => {},
+	updateSettings: () => {},
+} );
+
+/**
+ * カスタムCSS設定画面のメインコンポーネント
+ * WordPress標準のカスタムCSSとプラグイン独自のCSS編集機能を提供
+ */
+export default function CustomCss(): JSX.Element {
+	// ローディング状態管理
+	const [ isLoading, setIsLoading ] = useState< boolean >( true );
+	// 更新処理中の状態管理
+	const [ isUpdate, setIsUpdate ] = useState< boolean >( false );
+	// カスタムCSS設定データ管理
+	const [ settings, setSettings ] = useState< Record< string, any > >( {} );
+	/**
+	 * 初期設定を読み込む
+	 */
 	const initSettings = () => {
 		setSettings( getPluginSettings( 'customCss' ) );
 		setIsLoading( false );
 	};
 	useEffect( initSettings, [] );
-	const updateSettings = ( value ) => {
+	/**
+	 * 設定値を更新する
+	 * @param value - 更新する設定値
+	 */
+	const updateSettings = ( value: Record< string, any > ) => {
 		setSettings( {
 			...settings,
 			...value,
 		} );
 	};
+	/**
+	 * 更新ボタンクリック時の処理
+	 * APIを通じてカスタムCSS設定をサーバーに保存する
+	 */
 	const handleOnClickUpdate = () => {
 		setIsUpdate( true );
 		setIsLoading( true );
@@ -49,26 +96,43 @@ const CustomCss = () => {
 			messageError: notifyError,
 		} );
 	};
+	// コンテキスト値の準備
+	const customCssContextValue: CustomCssContextType = {
+		settings,
+		setSettings,
+		isLoading,
+		setIsLoading,
+		updateSettings,
+	};
+
 	return (
-		<PageBase title={ 'カスタムCSS' } loading={ isLoading }>
-			<CustomCssContext.Provider
-				value={ {
-					settings,
-					setSettings,
-					isLoading,
-					setIsLoading,
-					updateSettings,
-				} }
-			>
+		<AppContainer
+			title={ __( 'カスタムCSS', 'ystandard-toolbox' ) }
+			loading={ isLoading }
+		>
+			{ /* @ts-ignore */ }
+			<CustomCssContext.Provider value={ customCssContextValue }>
 				<WPCustomCss />
 				<Code />
 			</CustomCssContext.Provider>
-			<Buttons
-				onClickUpdate={ handleOnClickUpdate }
-				isDisabled={ isUpdate }
-			/>
+			<div className="flex justify-between mt-4">
+				<PrimaryButton
+					onClick={ handleOnClickUpdate }
+					disabled={ isUpdate }
+					isBusy={ isUpdate }
+					icon={ 'cloud-upload' }
+				>
+					{ __( '変更を保存', 'ystandard-toolbox' ) }
+				</PrimaryButton>
+			</div>
 			<ToastContainer />
-		</PageBase>
+		</AppContainer>
 	);
-};
-render( <CustomCss />, document.getElementById( 'custom-css' ) );
+}
+
+// レンダリング処理
+const container = document.getElementById( 'custom-css' );
+if ( container ) {
+	const root = createRoot( container );
+	root.render( <CustomCss /> );
+}
