@@ -1,14 +1,14 @@
 /**
- * WordPress
+ * WordPress Dependencies
  */
-import { Modal } from '@wordpress/components';
 import { useContext } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 /**
- * yStandard
+ * Aktk Dependencies
  */
 import { Flex, FlexItem } from '@aktk/components/flex';
+import Modal from '@aktk/block-components/wp-controls/modal';
 import Buttons from '@aktk/plugin-settings/components/buttons';
 
 /**
@@ -125,4 +125,4 @@ export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
 			</Flex>
 		</Modal>
 	);
-};
+}
