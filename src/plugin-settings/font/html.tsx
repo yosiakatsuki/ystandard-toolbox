@@ -1,42 +1,64 @@
 /**
- * WordPress
+ * WordPress Dependencies
  */
 import { useContext } from '@wordpress/element';
-import { PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 /**
- * yStandard
+ * Aktk Dependencies
  */
-import Notice from '@aktk/components/notice';
-import CodeEditor from '@aktk/controls/code-editor';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
+
+/**
+ * Plugin Dependencies
+ */
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
+import { CodeInput } from '@aktk/components/code-input';
 import { FontContext } from './index';
 
-const Html = () => {
+/**
+ * フォント追加用HTMLコンポーネント
+ * Google Fontsなどから取得したフォント読み込み用HTMLを設定する
+ */
+export default function Html(): JSX.Element {
+	// フォント設定のコンテキストから必要な値と関数を取得
 	const { settings, updateSettings } = useContext( FontContext );
 
-	const handleOnChange = ( newValue ) => {
+	/**
+	 * HTMLコード変更時の処理
+	 * @param newValue - 新しいHTMLコード
+	 */
+	const handleOnChange = ( newValue: string ) => {
 		updateSettings( {
 			html: newValue,
 		} );
 	};
 	return (
-		<PanelBody title={ 'フォント追加用HTML' }>
-			<CodeEditor
-				value={ settings?.html }
+		<PluginSettingsPanel
+			title={ __( 'フォント追加用HTML', 'ystandard-toolbox' ) }
+		>
+			<CodeInput
+				minHeight={ '100px' }
+				maxHeight={ '100px' }
+				value={ settings?.html || '' }
 				onChange={ handleOnChange }
-				height={ '100px' }
 			/>
-			<Notice isHelp isTextSmall>
+			<NoticeSecondaryText>
 				<a
-					href={ 'https://fonts.google.com/' }
-					target={ '_blank' }
-					rel={ 'noreferrer nofollow noopener' }
+					href="https://fonts.google.com/"
+					target="_blank"
+					rel="noreferrer nofollow noopener"
 				>
-					Google Fonts
+					{ __( 'Google Fonts', 'ystandard-toolbox' ) }
 				</a>
-				などで発行したフォント読み込み用のHTMLを貼り付けてください。
-			</Notice>
-		</PanelBody>
+				{ __(
+					'などで発行したフォント読み込み用のHTMLを貼り付けてください。',
+					'ystandard-toolbox'
+				) }
+			</NoticeSecondaryText>
+		</PluginSettingsPanel>
 	);
-};
-export default Html;
+}
