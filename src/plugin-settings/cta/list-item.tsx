@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
  * WordPress Dependencies
  */
 import { Icon, menu } from '@wordpress/icons';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Aktk Dependencies
@@ -91,7 +92,21 @@ export default function ListItem( {
 									'ystdtb-settings-cta__list-item-show-toggle-label'
 								}
 							>
-								表示 / 非表示
+								<span
+									className={
+										enable ? 'font-bold' : 'opacity-60'
+									}
+								>
+									{ __( '表示', 'ystandard-toolbox' ) }
+								</span>
+								{ ' / ' }
+								<span
+									className={
+										! enable ? 'font-bold' : 'opacity-60'
+									}
+								>
+									{ __( '非表示', 'ystandard-toolbox' ) }
+								</span>
 							</div>
 							<ToggleControl
 								className={
