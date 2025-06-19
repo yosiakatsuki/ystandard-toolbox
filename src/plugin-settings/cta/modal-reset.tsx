@@ -8,7 +8,10 @@ import { __, sprintf } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import Modal from '@aktk/block-components/wp-controls/modal';
-import Buttons from '@aktk/plugin-settings/components/buttons';
+import {
+	DestructiveButton,
+	CancelLinkButton,
+} from '@aktk/block-components/components/buttons/buttons';
 
 /**
  * Settings.
@@ -28,7 +31,9 @@ interface ModalResetProps {
 	onClickUpdate: ( value: object ) => void;
 }
 
-export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
+export default function ModalReset( {
+	onClickUpdate,
+}: ModalResetProps ): JSX.Element {
 	// CTA設定のコンテキストから必要な値と関数を取得
 	const {
 		ctaItems,
@@ -107,11 +112,11 @@ export default function ModalReset( { onClickUpdate }: ModalResetProps ) {
 				</p>
 				<div>
 					<div className="ystdtb-settings-cta__reset-buttons flex justify-between gap-4">
-						<Buttons.Delete
+						<DestructiveButton
 							text={ __( 'リセット', 'ystandard-toolbox' ) }
 							onClick={ handleResetOnClick }
 						/>
-						<Buttons.Cancel
+						<CancelLinkButton
 							text={ __( 'キャンセル', 'ystandard-toolbox' ) }
 							onClick={ handleCloseModal }
 						/>
