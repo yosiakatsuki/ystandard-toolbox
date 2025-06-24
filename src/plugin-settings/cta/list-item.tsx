@@ -49,6 +49,10 @@ interface ListItemProps {
 /**
  * CTAリストアイテムコンポーネント
  * ドラッグ可能なCTAアイテムを表示し、有効/無効の切り替えが可能
+ * @param root0
+ * @param root0.item
+ * @param root0.index
+ * @param root0.onChange
  */
 export default function ListItem( {
 	item,
@@ -60,6 +64,7 @@ export default function ListItem( {
 	/**
 	 * 有効/無効切り替え時の処理
 	 * ToggleControlの値変更を親コンポーネントに通知
+	 * @param newValue
 	 */
 	const handleOnChangeEnable = ( newValue: boolean ) => {
 		onChange( { enable: newValue }, index );

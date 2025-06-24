@@ -78,6 +78,7 @@ const Cta = () => {
 	/**
 	 * 設定の更新処理
 	 * REST APIを通じてサーバーに設定を保存する
+	 * @param newValue
 	 */
 	const handleOnClickUpdate = (
 		newValue: object | undefined = undefined
@@ -136,7 +137,7 @@ const Cta = () => {
 					<ModalReset onClickUpdate={ handleOnClickUpdate } />
 				) }
 			</CtaContext.Provider>
-			<div className="flex justify-between mt-4">
+			<div className="mt-4 flex justify-between">
 				<PrimaryButton
 					onClick={ () => handleOnClickUpdate( ctaItems ) }
 					disabled={ isUpdate }

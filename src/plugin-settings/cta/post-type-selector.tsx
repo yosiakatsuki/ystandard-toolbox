@@ -52,6 +52,7 @@ export default function PostTypeSelector(): JSX.Element {
 	/**
 	 * 投稿タイプ変更時の処理
 	 * 選択された投稿タイプを設定し、タブ表示を制御
+	 * @param newValue
 	 */
 	const handleOnChangePostType = ( newValue: string ) => {
 		setSelectPostType( newValue );

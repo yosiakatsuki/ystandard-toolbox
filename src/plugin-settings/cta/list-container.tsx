@@ -15,6 +15,10 @@ interface ListContainerProps {
 /**
  * CTAアイテムリストコンテナコンポーネント
  * ドラッグ＆ドロップで順序変更可能なCTAアイテムの一覧を表示
+ * @param root0
+ * @param root0.items
+ * @param root0.setItems
+ * @param root0.position
  */
 export default function ListContainer( {
 	items,
@@ -24,6 +28,7 @@ export default function ListContainer( {
 	/**
 	 * アイテムの優先度を設定する関数
 	 * インデックスに基づいてpriority値を更新（10間隔で設定）
+	 * @param newItems
 	 */
 	const setPriority = ( newItems: any[] ) => {
 		newItems.forEach( ( element, index ) => {
@@ -35,6 +40,7 @@ export default function ListContainer( {
 	/**
 	 * ドラッグ＆ドロップ終了時の処理
 	 * アイテムの順序を変更し、優先度を再設定する
+	 * @param result
 	 */
 	const handleOnDragEnd = ( result: any ) => {
 		const newItems = Array.from( items );
@@ -48,6 +54,8 @@ export default function ListContainer( {
 	/**
 	 * リストアイテム変更時の処理
 	 * 指定されたインデックスのアイテムを更新する
+	 * @param newValue
+	 * @param index
 	 */
 	const handleOnChangeListItem = ( newValue: any, index: number ) => {
 		const newItems = Array.from( items );

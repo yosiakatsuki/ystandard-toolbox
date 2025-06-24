@@ -34,6 +34,8 @@ interface EditorPanelProps {
 /**
  * コード追加エディターパネルコンポーネント
  * ヘッダー、フッター、その他のコード編集エリアとAMP対応コードを提供
+ * @param root0
+ * @param root0.tab
  */
 export default function EditorPanel( { tab }: EditorPanelProps ): JSX.Element {
 	// コード追加設定のコンテキストから必要な値と関数を取得
@@ -96,7 +98,7 @@ export default function EditorPanel( { tab }: EditorPanelProps ): JSX.Element {
 			</div>
 			{ useAmp && (
 				<div className="mt-4 space-y-4">
-					<label className="text-aktk-text-blue font-bold text-lg">
+					<label className="text-lg font-bold text-aktk-text-blue">
 						{ __( 'AMP用コード追加', 'ystandard-toolbox' ) }
 					</label>
 					<CodeInput

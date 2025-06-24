@@ -31,31 +31,33 @@ import FontFamily from './font-family';
  * フォント設定のコンテキスト型定義
  */
 interface FontContextType {
-	settings: Record<string, any>;
-	setSettings: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+	settings: Record< string, any >;
+	setSettings: React.Dispatch<
+		React.SetStateAction< Record< string, any > >
+	>;
 	isLoading: boolean;
-	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-	updateSettings: (value: Record<string, any>) => void;
+	setIsLoading: React.Dispatch< React.SetStateAction< boolean > >;
+	updateSettings: ( value: Record< string, any > ) => void;
 }
 
-export const FontContext = createContext<FontContextType>({
+export const FontContext = createContext< FontContextType >( {
 	settings: {},
 	setSettings: () => {},
 	isLoading: true,
 	setIsLoading: () => {},
 	updateSettings: () => {},
-});
+} );
 
 /**
  * フォント設定画面のメインコンポーネント
  */
 export default function Font(): JSX.Element {
 	// ローディング状態管理
-	const [ isLoading, setIsLoading ] = useState<boolean>( true );
+	const [ isLoading, setIsLoading ] = useState< boolean >( true );
 	// 更新処理中の状態管理
-	const [ isUpdate, setIsUpdate ] = useState<boolean>( false );
+	const [ isUpdate, setIsUpdate ] = useState< boolean >( false );
 	// フォント設定データ管理
-	const [ settings, setSettings ] = useState<Record<string, any>>( {} );
+	const [ settings, setSettings ] = useState< Record< string, any > >( {} );
 	/**
 	 * 初期設定を読み込む
 	 */
@@ -68,7 +70,7 @@ export default function Font(): JSX.Element {
 	 * 設定値を更新する
 	 * @param value - 更新する設定値
 	 */
-	const updateSettings = ( value: Record<string, any> ) => {
+	const updateSettings = ( value: Record< string, any > ) => {
 		setSettings( {
 			...settings,
 			...value,
@@ -112,7 +114,7 @@ export default function Font(): JSX.Element {
 				<Html />
 				<FontFamily />
 			</FontContext.Provider>
-			<div className="flex justify-between mt-4">
+			<div className="mt-4 flex justify-between">
 				<PrimaryButton
 					onClick={ handleOnClickUpdate }
 					disabled={ isUpdate }

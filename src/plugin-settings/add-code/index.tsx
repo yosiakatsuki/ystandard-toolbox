@@ -99,7 +99,7 @@ export default function AddCode(): JSX.Element {
 			<AddCodeContext.Provider value={ addCodeContextValue }>
 				<EditorTab />
 			</AddCodeContext.Provider>
-			<div className="flex justify-between mt-4">
+			<div className="mt-4 flex justify-between">
 				<PrimaryButton
 					onClick={ handleOnClickUpdate }
 					disabled={ isUpdate }

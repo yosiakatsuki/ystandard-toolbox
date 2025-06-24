@@ -9,6 +9,11 @@ import './_editor.scss';
 
 /**
  *
+ * @param root0
+ * @param root0.title
+ * @param root0.manual
+ * @param root0.loading
+ * @param root0.children
  * @deprecated
  */
 const PageBase = ( { title, manual, loading = false, children } ) => {

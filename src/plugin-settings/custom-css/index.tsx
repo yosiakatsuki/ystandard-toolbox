@@ -115,7 +115,7 @@ export default function CustomCss(): JSX.Element {
 				<WPCustomCss />
 				<Code />
 			</CustomCssContext.Provider>
-			<div className="flex justify-between mt-4">
+			<div className="mt-4 flex justify-between">
 				<PrimaryButton
 					onClick={ handleOnClickUpdate }
 					disabled={ isUpdate }

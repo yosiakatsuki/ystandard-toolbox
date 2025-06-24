@@ -49,7 +49,7 @@ export function getTabName( name: string ): string {
 /**
  * 指定された投稿タイプのデフォルトCTA設定を取得する関数
  * @param {string} postType - 投稿タイプ
- * @return {object} デフォルトCTA設定
+ * @return {Object} デフォルトCTA設定
  */
 export function getCtaDefault( postType: string ) {
 	const ctaDefault = getPluginSetting( 'ctaDefault', {} );
@@ -69,6 +69,8 @@ export default function Tab(): JSX.Element {
 	/**
 	 * CTA設定変更時の処理
 	 * 指定された位置のCTA設定を更新する
+	 * @param newValue
+	 * @param position
 	 */
 	const handleOnChangeCta = ( newValue: any, position: string ) => {
 		const newPostTypeCtaItem = {
@@ -89,6 +91,7 @@ export default function Tab(): JSX.Element {
 	/**
 	 * 指定された投稿タイプのCTA設定を取得
 	 * 設定が存在しない場合はデフォルト値を使用
+	 * @param postType
 	 */
 	const getPostTypeCta = ( postType: string ) => {
 		return Object.hasOwnProperty.call( ctaItems, postType )
@@ -98,6 +101,7 @@ export default function Tab(): JSX.Element {
 
 	/**
 	 * 指定された位置のCTAアイテムを取得
+	 * @param position
 	 */
 	const getItems = ( position: string ) => {
 		const items = getPostTypeCta( selectPostType );
@@ -106,6 +110,7 @@ export default function Tab(): JSX.Element {
 
 	/**
 	 * タブ選択時の処理
+	 * @param tab
 	 */
 	const handleOnSelectTab = ( tab: string ) => {
 		setSelectedTab( tab );

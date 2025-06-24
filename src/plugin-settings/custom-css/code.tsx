@@ -75,7 +75,7 @@ export default function Code(): JSX.Element {
 	};
 	/**
 	 * CSSコード変更時の処理
-	 * @param name - タブ名（all, front, editor）
+	 * @param name  - タブ名（all, front, editor）
 	 * @param value - 新しいCSSコード
 	 */
 	const handleOnChange = ( name: string, value: string ) => {
