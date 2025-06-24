@@ -144,27 +144,41 @@ const options = [
 ## 実装TODO
 
 ### 1. レガシーコンポーネントの問題点分析
-- [ ] aktk-block-componentsで利用可能なコンポーネント調査
-- [ ] HorizonButtonsの代替コンポーネント検討
-- [ ] 移行パスの確定
+- [x] aktk-block-componentsで利用可能なコンポーネント調査
+- [x] HorizonButtonsの代替コンポーネント検討
+- [x] 移行パスの確定
 
 ### 2. モダンコンポーネント移行計画策定
-- [ ] index.tsx: PanelBody → wp-controls版に移行
-- [ ] disable-core-pattern.tsx: BaseControl → wp-controls版に移行
-- [ ] HorizonButtons → 適切なモダンコンポーネントに移行
+- [x] index.tsx: PanelBody → PluginSettingsPanel に移行
+- [x] disable-core-pattern.tsx: BaseControl → PluginSettingsBaseControl に移行
+- [x] HorizonButtons → HorizonButtonSelect に移行
 
 ### 3. TypeScript型定義の改善
-- [ ] 関数コンポーネントの戻り値型追加
-- [ ] handleOnChange関数のパラメータ型定義
-- [ ] Context使用部分の型安全性確保
+- [x] 関数コンポーネントの戻り値型追加
+- [x] handleOnChange関数のパラメータ型定義
+- [x] Context使用部分の型安全性確保
 
 ### 4. 国際化対応の完全実装
-- [ ] すべてのハードコード文字列を__()で国際化
-- [ ] 適切なtextdomainの設定確認
+- [x] すべてのハードコード文字列を__()で国際化
+- [x] 適切なtextdomainの設定確認
 
 ### 5. importセクションの統一
-- [ ] WordPress Dependencies / Aktk Dependencies / Plugin Dependencies形式への統一
-- [ ] 適切なコメントセクション追加
+- [x] WordPress Dependencies / Aktk Dependencies / Plugin Dependencies形式への統一
+- [x] 適切なコメントセクション追加
+
+## 実装完了
+
+すべての実装が完了しました。主要な変更内容：
+
+1. **index.tsx**: 
+   - PanelBody → PluginSettingsPanel
+   - 完全なTypeScript化と国際化
+
+2. **disable-core-pattern.tsx**:
+   - BaseControl → PluginSettingsBaseControl
+   - HorizonButtons → HorizonButtonSelect (APIの変更対応)
+   - 完全な型定義と国際化
+   - 適切なJSDocコメント追加
 
 ## 影響範囲
 

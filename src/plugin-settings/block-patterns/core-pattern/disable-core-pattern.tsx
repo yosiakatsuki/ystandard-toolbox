@@ -1,45 +1,73 @@
-import { BaseControl } from '@wordpress/components';
-import { useContext } from '@wordpress/element';
+import React from 'react';
 /**
- * yStandard
+ * WordPress Dependencies
  */
-import HorizonButtons from '@aktk/components/horizon-buttons';
-import { BlockPatternsContext } from '../index';
+import { useContext } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+/**
+ * Aktk Dependencies
+ */
+import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 import { toBool } from '@aktk/block-components/utils/boolean';
+/**
+ * Plugin Dependencies
+ */
+import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { BlockPatternsContext } from '../index';
 
-const DisableCorePattern = () => {
-	const { settings, setSettings, getSetting } =
-		useContext( BlockPatternsContext );
-	const handleOnChange = ( newValue ) => {
+/**
+ * ボタンオプションの型定義
+ */
+interface ButtonOption {
+	value: boolean;
+	label: string;
+}
+
+/**
+ * WordPressコアブロックパターンの無効化設定コンポーネント
+ * WordPress本体のブロックパターンの表示・非表示を制御する
+ */
+export default function DisableCorePattern(): JSX.Element {
+	const { settings, setSettings, getSetting } = useContext( BlockPatternsContext );
+
+	/**
+	 * 設定変更時のハンドラー
+	 * @param newValue 新しい設定値（boolean）
+	 */
+	const handleOnChange = ( newValue: string | number | boolean ) => {
 		setSettings( {
 			...settings,
-			...{
-				disable_core_pattern: newValue.name,
-			},
+			disable_core_pattern: newValue,
 		} );
 	};
-	const items = [
+
+	/**
+	 * ボタンオプションの配列
+	 */
+	const options: ButtonOption[] = [
 		{
-			name: false,
-			label: '有効',
+			value: false,
+			label: __( '有効', 'ystandard-toolbox' ),
 		},
 		{
-			name: true,
-			label: '無効',
+			value: true,
+			label: __( '無効', 'ystandard-toolbox' ),
 		},
 	];
-	const primary = toBool( getSetting( 'disable_core_pattern' ) );
+
+	// 現在の設定値を取得
+	const currentValue = toBool( getSetting( 'disable_core_pattern' ) );
+
 	return (
-		<BaseControl
-			id={ 'disable_core_pattern' }
-			label={ 'WordPress本体のブロックパターンの有効・無効' }
+		<PluginSettingsBaseControl
+			id="disable_core_pattern"
+			label={ __( 'WordPress本体のブロックパターンの有効・無効', 'ystandard-toolbox' ) }
 		>
-			<HorizonButtons
+			<HorizonButtonSelect
+				value={ currentValue }
 				onChange={ handleOnChange }
-				items={ items }
-				primary={ primary }
+				options={ options }
 			/>
-		</BaseControl>
+		</PluginSettingsBaseControl>
 	);
-};
-export default DisableCorePattern;
+}

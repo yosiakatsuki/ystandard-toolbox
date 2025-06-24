@@ -1,14 +1,22 @@
-import { PanelBody } from '@wordpress/components';
+import React from 'react';
 /**
- * yStandard
+ * WordPress Dependencies
  */
+import { __ } from '@wordpress/i18n';
+/**
+ * Plugin Dependencies
+ */
+import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 import DisableCorePattern from './disable-core-pattern';
 
-const CorePattern = () => {
+/**
+ * WordPressコアブロックパターン設定のメインコンポーネント
+ * WordPressの標準ブロックパターンの有効・無効を制御する
+ */
+export default function CorePattern(): JSX.Element {
 	return (
-		<PanelBody title={ 'WordPress標準パターン' }>
+		<PluginSettingsPanel title={ __( 'WordPress標準パターン', 'ystandard-toolbox' ) }>
 			<DisableCorePattern />
-		</PanelBody>
+		</PluginSettingsPanel>
 	);
-};
-export default CorePattern;
+}

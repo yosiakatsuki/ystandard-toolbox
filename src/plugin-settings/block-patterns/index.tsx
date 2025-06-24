@@ -71,6 +71,7 @@ export default function BlockPatterns(): JSX.Element {
 
 	/**
 	 * 設定値を取得するヘルパー関数
+	 * @param name
 	 */
 	const getSetting = ( name: string ) => {
 		return getObjectValue( settings, name );
@@ -113,7 +114,7 @@ export default function BlockPatterns(): JSX.Element {
 			<BlockPatternsContext.Provider value={ blockPatternsContextValue }>
 				<CorePattern />
 			</BlockPatternsContext.Provider>
-			<div className="flex justify-between mt-4">
+			<div className="mt-4 flex justify-between">
 				<PrimaryButton
 					onClick={ handleOnClickUpdate }
 					disabled={ isUpdate }
