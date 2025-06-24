@@ -18,13 +18,13 @@ import {
 	notifyError,
 } from '@aktk/block-components/components/toast-message';
 import { PrimaryButton } from '@aktk/block-components/components/buttons/buttons';
+import { apiPost, getEndpoint } from '@aktk/api';
 /**
  * Plugin Dependencies
  */
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import EditorTab from './editor-tab';
 import { getCodeSetting } from '../utils/setting';
-import { update } from './update';
 
 /**
  * コード追加設定のコンテキスト型定義
@@ -71,14 +71,15 @@ export default function AddCode(): JSX.Element {
 	const handleOnClickUpdate = () => {
 		setIsUpdate( true );
 		setIsLoading( true );
-		update( {
+		apiPost( {
+			endpoint: getEndpoint( 'update_code' ),
 			data: settings,
 			callback: () => {
 				setIsUpdate( false );
 				setIsLoading( false );
 			},
-			success: notifySuccess,
-			error: notifyError,
+			messageSuccess: notifySuccess,
+			messageError: notifyError,
 		} );
 	};
 	// コンテキスト値の準備
