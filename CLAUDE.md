@@ -238,6 +238,12 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   TypeScript型定義の追加
 -   現代的なReactパターンの適用（フックベース）
 
+#### 6. スタイルシート対応
+-   **style-editor.scss** - 編集画面専用スタイルを記述
+-   **style.scss** - フロントエンド表示用スタイルを記述
+-   旧スタイルシート名からのリネーム後、参照先の修正を適宜実施
+-   既存の `_block.scss`, `_edit.scss` などは上記命名規則に統一
+
 ### 移行対象ブロック分類
 
 #### 単体ブロック（7個）
