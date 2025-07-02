@@ -11,7 +11,7 @@ interface PanelProps {
 	className?: string;
 }
 
-export function Panel( props: PanelProps ) {
+export function Panel( props: PanelProps ): React.ReactElement {
 	const { title, initialOpen, children, className } = props;
 	// 初期開閉状態が関数の時とそれ以外でちょっと動きが違う.
 	const isInitialOpenFunction = 'function' === typeof initialOpen;
@@ -42,7 +42,7 @@ export function Panel( props: PanelProps ) {
 	);
 }
 
-export function OpenPanel( props: PanelProps ) {
+export function OpenPanel( props: PanelProps ): React.ReactElement {
 	const { title, initialOpen, children } = props;
 	return (
 		<Panel title={ title } initialOpen={ initialOpen ?? true }>
