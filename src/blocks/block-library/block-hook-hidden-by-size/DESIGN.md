@@ -17,50 +17,26 @@
 - 名前空間が`core`、`ystdb`、`ystdtb`で始まるブロック
 
 ### 属性定義
-```typescript
-interface HiddenBySizeAttributes {
-  ystdtbIsHiddenMobile: boolean;   // モバイルで非表示
-  ystdtbIsHiddenTablet: boolean;   // タブレットで非表示
-  ystdtbIsHiddenDesktop: boolean;  // デスクトップで非表示
-}
-```
+- `ystdtbIsHiddenMobile: boolean` - モバイルで非表示
+- `ystdtbIsHiddenTablet: boolean` - タブレットで非表示
+- `ystdtbIsHiddenDesktop: boolean` - デスクトップで非表示
 
 ## 既存実装の分析
 
-### ファイル構成（レガシー）
-```
-blocks/extension/hidden-by-size/
-├── index.js              # メインロジック（フィルター・Higher Order Component）
-├── attributes.json       # ブロック属性定義
-├── class-hidden-by-size.php  # PHP側の属性マージ処理
-├── _block.scss          # フロントエンド用CSS
-└── _edit.scss           # エディター用CSS
-```
-
-### 技術的特徴
-- **フィルターベースの実装**: `blocks.registerBlockType`と`editor.BlockEdit`フィルターを使用
-- **Higher Order Component**: `createHigherOrderComponent`でブロックエディターを拡張
-- **動的属性追加**: レジスト時に対象ブロックにのみ属性を追加
-- **クラス名管理**: `classnames/dedupe`を使用してCSSクラスを動的制御
-
-### 依存関係
-- `@aktk/components/ystandard-icon` - パネルアイコン
-- `@aktk/components/manual-link` - マニュアルリンクコンポーネント
-- `../helper` - ヘルパー関数（`isEnableHook`, `getPanelClassName`）
+### レガシー実装の特徴
+- フィルターベースの実装（`blocks.registerBlockType`と`editor.BlockEdit`）
+- Higher Order Componentでブロックエディターを拡張
+- 動的属性追加とクラス名管理
 
 ## 移行設計
 
 ### 新しいファイル構成
-```
-src/blocks/block-library/extension-hidden-by-size/
-├── DESIGN.md            # 本設計書
-├── index.tsx            # TypeScript化されたメインロジック
-├── types.ts             # TypeScript型定義
-├── hooks.ts             # カスタムフック定義
-├── style.scss           # フロントエンド用CSS（旧_block.scss）
-├── style-editor.scss    # エディター用CSS（旧_edit.scss）
-└── index.php            # PHP属性処理統合ファイル
-```
+- `index.tsx` - TypeScript化されたメインロジック
+- `types.ts` - TypeScript型定義
+- `hooks.ts` - カスタムフック定義
+- `style.scss` - フロントエンド用CSS
+- `style-editor.scss` - エディター用CSS
+- `index.php` - PHP属性処理統合ファイル
 
 **注意**: この機能はブロック拡張のため`block.json`は使用不可。ブロック拡張機能は既存ブロックに機能を追加するものであり、新しいブロックタイプを登録するものではないため、`register_block_type(__DIR__)`による自動エンキューも利用できない。そのため、手動でのアセットエンキューが必要となる。
 
@@ -130,77 +106,26 @@ src/blocks/block-library/extension-hidden-by-size/
 
 ブロック拡張機能では`block.json`による自動ビルド・エンキューが使用できないため、以下の方法で対応：
 
-#### webpack設定（`webpack.blocks.v2.config.js`）
-```javascript
-entry: {
-  'extension-hidden-by-size': './src/blocks/block-library/extension-hidden-by-size/index.tsx',
-}
-```
+#### webpack設定（`webpack.blocks.hook.config.js`）
+ブロック拡張機能（フック）専用の設定ファイルを使用し、`build/block-hook/`ディレクトリに出力
+
+#### ビルドコマンド
+`npm run build:block:hook`
 
 #### ビルド出力
-- **JavaScript**: `build/blocks/extension-hidden-by-size/index.js`
-- **Asset情報**: `build/blocks/extension-hidden-by-size/index.asset.php`
-- **CSS（エディター用）**: `build/blocks/extension-hidden-by-size/style-editor.css`
-- **CSS（フロントエンド用）**: `build/blocks/extension-hidden-by-size/style.css`
+- **JavaScript**: `build/block-hook/hidden-by-size.js`
+- **Asset情報**: `build/block-hook/hidden-by-size.asset.php`
+- **CSS（エディター用）**: `build/block-hook/hidden-by-size.css`
+- **CSS（フロントエンド用）**: `build/block-hook/style-hidden-by-size.css`
+- **PHPファイル**: `build/block-hook/block-hook-hidden-by-size/index.php`
 
 ### アセットエンキュー設計
 
 #### PHPでの手動エンキュー（`index.php`）
-```php
-class HiddenBySize {
-    public function __construct() {
-        // ブロック属性追加
-        add_filter( 'register_block_type_args', [ $this, 'add_attributes' ], 999, 2 );
-        // エディター用アセット
-        add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
-        // フロントエンド用アセット
-        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
-    }
-
-    public function enqueue_editor_assets() {
-        // asset.phpファイルから依存関係とバージョンを取得
-        $asset_file = YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/index.asset.php';
-        $asset = file_exists( $asset_file ) ? include $asset_file : [
-            'dependencies' => [],
-            'version'      => YSTDTB_VERSION,
-        ];
-
-        // JavaScript
-        wp_enqueue_script(
-            'ystdtb-extension-hidden-by-size-editor',
-            YSTDTB_URL . '/build/blocks/extension-hidden-by-size/index.js',
-            $asset['dependencies'],
-            $asset['version'],
-            true
-        );
-
-        // CSS（エディター用）
-        if ( file_exists( YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/style-editor.css' ) ) {
-            wp_enqueue_style(
-                'ystdtb-extension-hidden-by-size-editor',
-                YSTDTB_URL . '/build/blocks/extension-hidden-by-size/style-editor.css',
-                [],
-                $asset['version']
-            );
-        }
-    }
-
-    public function enqueue_frontend_assets() {
-        // フロントエンド用CSS
-        if ( file_exists( YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/style.css' ) ) {
-            wp_enqueue_style(
-                'ystdtb-extension-hidden-by-size',
-                YSTDTB_URL . '/build/blocks/extension-hidden-by-size/style.css',
-                [],
-                YSTDTB_VERSION
-            );
-        }
-    }
-}
-
-// インスタンス化
-new HiddenBySize();
-```
+- `enqueue_block_editor_assets`でエディター用アセット
+- `wp_enqueue_scripts`でフロントエンド用アセット
+- `asset.php`ファイルによる依存関係とバージョン管理
+- 条件付きファイル存在確認でエラー防止
 
 ### 最適化ポイント
 
@@ -227,7 +152,7 @@ new HiddenBySize();
 - ✅ PHP属性処理をindex.phpに統合
 - ✅ blocks/extension完全削除対応完了
 - ✅ ビルド・エンキュー設計確定
-- ✅ webpack.blocks.v2.config.jsにエントリーポイント追加
+- ✅ webpack.blocks.hook.config.jsにブロックフック専用設定作成
 - ✅ 手動アセットエンキューシステム実装
 - ✅ ビルド・エンキュー動作確認
 
@@ -250,7 +175,8 @@ new HiddenBySize();
 - **手動アセットエンキューシステムを実装**
 
 #### ビルドシステム
-- **webpack.blocks.v2.config.jsにエントリーポイント追加**
+- **webpack.blocks.hook.config.jsによるブロックフック専用ビルド設定**
+- **build/block-hook/ディレクトリへの出力分離**
 - **asset.phpファイルによる依存関係管理**
 - **条件付きCSSエンキューシステム**
 - **CSS/JSファイルの自動生成確認済み**
@@ -259,17 +185,11 @@ new HiddenBySize();
 
 ブロック拡張機能「画面サイズによる非表示機能」の最新Gutenberg仕様への移行が完了しました。
 
-#### 生成されるアセット
-- `build/blocks/extension-hidden-by-size.js` - メインJavaScript
-- `build/blocks/extension-hidden-by-size.asset.php` - 依存関係情報
-- `build/blocks/extension-hidden-by-size.css` - エディター用CSS
-- `build/blocks/style-extension-hidden-by-size.css` - フロントエンド用CSS
-- `build/blocks/extension-hidden-by-size/index.php` - PHPファイル（コピー）
-
-#### 注意事項
-- ManualLinkコンポーネントは`aktk-block-components`に存在しないため削除
-- CSS命名は`@wordpress/scripts`の自動生成に従う
-- エディター用CSS・フロントエンド用CSSは適切に分離
+#### 技術的特徴
+- ブロックフック専用のwebpack設定により通常のブロックと出力先を分離
+- エディター用CSS・フロントエンド用CSSの適切な分離
+- asset.phpファイルによる依存関係とバージョン管理の自動化
+- 条件付きファイル存在確認によるエラー防止
 
 ### 今後の検証項目
 
