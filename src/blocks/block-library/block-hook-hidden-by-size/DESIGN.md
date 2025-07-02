@@ -113,10 +113,10 @@
 `npm run build:block:hook`
 
 #### ビルド出力
-- **JavaScript**: `build/block-hook/hidden-by-size.js`
-- **Asset情報**: `build/block-hook/hidden-by-size.asset.php`
-- **CSS（エディター用）**: `build/block-hook/hidden-by-size.css`
-- **CSS（フロントエンド用）**: `build/block-hook/style-hidden-by-size.css`
+- **JavaScript**: `build/block-hook/block-hook-hidden-by-size/index.js`
+- **Asset情報**: `build/block-hook/block-hook-hidden-by-size/index.asset.php`
+- **CSS（エディター用）**: `build/block-hook/block-hook-hidden-by-size/index.css`
+- **CSS（フロントエンド用）**: `build/block-hook/block-hook-hidden-by-size/style-index.css`
 - **PHPファイル**: `build/block-hook/block-hook-hidden-by-size/index.php`
 
 ### アセットエンキュー設計
@@ -187,9 +187,17 @@
 
 #### 技術的特徴
 - ブロックフック専用のwebpack設定により通常のブロックと出力先を分離
+- 機能ごとに独立したディレクトリ構成（`build/block-hook/block-hook-**/`）
+- 標準的なファイル名（`index.js`、`index.css`、`style-index.css`）
 - エディター用CSS・フロントエンド用CSSの適切な分離
 - asset.phpファイルによる依存関係とバージョン管理の自動化
 - 条件付きファイル存在確認によるエラー防止
+
+#### 拡張性
+新しいブロックフック機能（例：`block-hook-ex2`）を追加する場合：
+- `src/blocks/block-library/block-hook-ex2/`にソースを配置
+- `webpack.blocks.hook.config.js`にエントリー追加
+- 自動的に`build/block-hook/block-hook-ex2/`に出力される
 
 ### 今後の検証項目
 

@@ -6,8 +6,7 @@ const path = require( 'path' );
 module.exports = {
 	...defaultConfig,
 	entry: {
-		...defaultConfig.entry,
-		'hidden-by-size':
+		'block-hook-hidden-by-size/index':
 			'./src/blocks/block-library/block-hook-hidden-by-size/',
 	},
 	output: {

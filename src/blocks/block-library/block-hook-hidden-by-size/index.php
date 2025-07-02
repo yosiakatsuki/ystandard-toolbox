@@ -99,7 +99,7 @@ class HiddenBySize {
 	 * エディター用アセットをエンキュー
 	 */
 	public function enqueue_editor_assets() {
-		$asset_file = YSTDTB_PATH . '/build/block-hook/hidden-by-size/index.asset.php';
+		$asset_file = YSTDTB_PATH . '/build/block-hook/block-hook-hidden-by-size/index.asset.php';
 		$asset      = file_exists( $asset_file ) ? include $asset_file : [
 			'dependencies' => [],
 			'version'      => YSTDTB_VERSION,
@@ -108,18 +108,18 @@ class HiddenBySize {
 		// JavaScript
 		wp_enqueue_script(
 			'ystdtb-block-hook-hidden-by-size-editor',
-			YSTDTB_URL . '/build/block-hook/hidden-by-size/index.js',
+			YSTDTB_URL . '/build/block-hook/block-hook-hidden-by-size/index.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 
 		// CSS（エディター用）
-		$editor_css = YSTDTB_PATH . '/build/block-hook/hidden-by-size.css';
+		$editor_css = YSTDTB_PATH . '/build/block-hook/block-hook-hidden-by-size/index.css';
 		if ( file_exists( $editor_css ) ) {
 			wp_enqueue_style(
 				'ystdtb-block-hook-hidden-by-size-editor',
-				YSTDTB_URL . '/build/block-hook/hidden-by-size.css',
+				YSTDTB_URL . '/build/block-hook/block-hook-hidden-by-size/index.css',
 				[],
 				$asset['version']
 			);
@@ -131,11 +131,11 @@ class HiddenBySize {
 	 */
 	public function enqueue_frontend_assets() {
 		// フロントエンド用CSS
-		$frontend_css = YSTDTB_PATH . '/build/block-hook/style-hidden-by-size.css';
+		$frontend_css = YSTDTB_PATH . '/build/block-hook/block-hook-hidden-by-size/style-index.css';
 		if ( file_exists( $frontend_css ) ) {
 			wp_enqueue_style(
 				'ystdtb-block-hook-hidden-by-size',
-				YSTDTB_URL . '/build/block-hook/style-hidden-by-size.css',
+				YSTDTB_URL . '/build/block-hook/block-hook-hidden-by-size/style-index.css',
 				[],
 				filemtime( $frontend_css )
 			);
