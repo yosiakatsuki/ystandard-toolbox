@@ -59,10 +59,16 @@ src/blocks/block-library/extension-hidden-by-size/
 ├── hooks.ts             # カスタムフック定義
 ├── style.scss           # フロントエンド用CSS（旧_block.scss）
 ├── style-editor.scss    # エディター用CSS（旧_edit.scss）
-└── index.php            # エントリーポイント用PHP
+└── index.php            # PHP属性処理統合ファイル
 ```
 
 **注意**: この機能はブロック拡張のため`block.json`は不要。独立したブロックタイプを登録せず、既存ブロックの機能拡張のみを行う。
+
+### blocks/extension 完全削除対応
+- `blocks/extension/class-extension.php` の `register_block_type_args` フィルター処理を移植
+- `blocks/extension/hidden-by-size/class-hidden-by-size.php` の属性マージ処理を移植
+- `ystandard_toolbox\Util\File::get_json_file_contents` 依存を除去
+- 完全に独立した属性処理システムを構築
 
 ### モダン化の要点
 
@@ -126,14 +132,25 @@ src/blocks/block-library/extension-hidden-by-size/
 - ✅ カスタムフック実装 (`hooks.ts`)
 - ✅ CSSファイル移行・リネーム (`style.scss`, `style-editor.scss`)
 - ✅ PHPエントリーポイント作成 (`index.php`)
+- ✅ PHP属性処理をindex.phpに統合
+- ✅ blocks/extension完全削除対応完了
 
 ### 実装上の変更点
+
+#### フロントエンド（TypeScript/React）
 - aktk-block-componentsのSvgIconとManualLinkコンポーネントを使用
 - Higher Order Componentパターンを維持（互換性重視）
 - フィルター実行優先度を維持（`Number.MAX_SAFE_INTEGER`）
 - 属性名・CSSクラス名は既存のものを維持
 - **importセクションコメントをブロックコメント形式に変更**
 - **重複処理を統合：hooks.tsの関数をindex.tsxで使用するように最適化**
+
+#### バックエンド（PHP）
+- **blocks/extension依存を完全に除去**
+- **index.phpに全属性処理を統合（クラス不使用）**
+- **ystandard_toolbox\Util\File依存を除去し、属性定義を直接記述**
+- **register_block_type_argsフィルターを独自実装**
+- **フィルター名とロジックは既存と完全互換**
 
 ### 今後の検証項目
 

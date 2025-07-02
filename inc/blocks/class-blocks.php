@@ -264,6 +264,24 @@ class Blocks {
 	private function replace_path_to_url( $path ) {
 		return str_replace( YSTDTB_PATH, YSTDTB_URL, $path );
 	}
+
+	/**
+	 * 属性をマージする (ブロック拡張機能用)
+	 *
+	 * @param array $args       ブロック引数
+	 * @param array $attributes 追加する属性
+	 *
+	 * @return array
+	 */
+	public static function merge_attributes( $args, $attributes ) {
+		if ( array_key_exists( 'attributes', $args ) && is_array( $args['attributes'] ) ) {
+			$args['attributes'] = array_merge( $args['attributes'], $attributes );
+		} else {
+			$args['attributes'] = $attributes;
+		}
+
+		return $args;
+	}
 }
 
 new Blocks();
