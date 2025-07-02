@@ -10,3 +10,4 @@ ystandard-toolbox/
 temp/
 phpunit/data/actual
 debug-*
+block-example/
