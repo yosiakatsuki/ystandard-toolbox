@@ -81,7 +81,7 @@ class HiddenBySize {
 	 */
 	private function is_enable( $block_name ) {
 		$allowed_namespaces = apply_filters(
-			'ystdtb_block_extension_hidden_by_size',
+			'ystdtb_block_block_hook_hidden_by_size',
 			[ 'core', 'ystdb', 'ystdtb' ]
 		);
 
@@ -99,7 +99,7 @@ class HiddenBySize {
 	 * エディター用アセットをエンキュー
 	 */
 	public function enqueue_editor_assets() {
-		$asset_file = YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/index.asset.php';
+		$asset_file = YSTDTB_PATH . '/build/block-hook/hidden-by-size/index.asset.php';
 		$asset      = file_exists( $asset_file ) ? include $asset_file : [
 			'dependencies' => [],
 			'version'      => YSTDTB_VERSION,
@@ -107,19 +107,19 @@ class HiddenBySize {
 
 		// JavaScript
 		wp_enqueue_script(
-			'ystdtb-extension-hidden-by-size-editor',
-			YSTDTB_URL . '/build/blocks/extension-hidden-by-size/index.js',
+			'ystdtb-block-hook-hidden-by-size-editor',
+			YSTDTB_URL . '/build/block-hook/hidden-by-size/index.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 
 		// CSS（エディター用）
-		$editor_css = YSTDTB_PATH . '/build/blocks/extension-hidden-by-size.css';
+		$editor_css = YSTDTB_PATH . '/build/block-hook/hidden-by-size.css';
 		if ( file_exists( $editor_css ) ) {
 			wp_enqueue_style(
-				'ystdtb-extension-hidden-by-size-editor',
-				YSTDTB_URL . '/build/blocks/extension-hidden-by-size.css',
+				'ystdtb-block-hook-hidden-by-size-editor',
+				YSTDTB_URL . '/build/block-hook/hidden-by-size.css',
 				[],
 				$asset['version']
 			);
@@ -131,11 +131,11 @@ class HiddenBySize {
 	 */
 	public function enqueue_frontend_assets() {
 		// フロントエンド用CSS
-		$frontend_css = YSTDTB_PATH . '/build/blocks/style-extension-hidden-by-size.css';
+		$frontend_css = YSTDTB_PATH . '/build/block-hook/style-hidden-by-size.css';
 		if ( file_exists( $frontend_css ) ) {
 			wp_enqueue_style(
-				'ystdtb-extension-hidden-by-size',
-				YSTDTB_URL . '/build/blocks/style-extension-hidden-by-size.css',
+				'ystdtb-block-hook-hidden-by-size',
+				YSTDTB_URL . '/build/block-hook/style-hidden-by-size.css',
 				[],
 				filemtime( $frontend_css )
 			);

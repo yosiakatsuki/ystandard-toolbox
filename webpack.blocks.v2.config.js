@@ -4,9 +4,6 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
-	entry: {
-		'extension-hidden-by-size': './src/blocks/block-library/extension-hidden-by-size/index.tsx',
-	},
 	resolve: {
 		...defaultConfig.resolve,
 		alias: {
