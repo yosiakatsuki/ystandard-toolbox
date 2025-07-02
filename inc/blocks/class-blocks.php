@@ -35,17 +35,15 @@ class Blocks {
 	 * Blocks constructor.
 	 */
 	public function __construct() {
+
+		$this->init_blocks();
+		add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
+		// 移行する.
 		$this->load_files();
 		$this->init();
 		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
 		add_action( 'init', [ $this, 'register_block' ] );
-		add_action( 'init', [ $this, 'block_init' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
-		if ( Version::wordpress_version_compare( '5.8-alpha-1' ) ) {
-			add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
-		} else {
-			add_filter( 'block_categories', [ __CLASS__, 'add_block_categories' ] );
-		}
 	}
 
 	/**
@@ -61,19 +59,10 @@ class Blocks {
 	 *
 	 * @return void
 	 */
-	public function block_init() {
-		$this->register_blocks( 'custom' );
-	}
-
-	/**
-	 * Register Blocks.
-	 *
-	 * @param string $name Block Type Name.
-	 * @return void
-	 */
-	private function register_blocks( $name ) {
-		foreach ( glob( YSTDTB_PATH . "/build/blocks/{$name}/*", GLOB_ONLYDIR ) as $dir_path ) {
-			register_block_type( $dir_path );
+	public function init_blocks() {
+		$blocks = glob( YSTDTB_PATH . '/build/blocks/**/index.php' );
+		foreach ( $blocks as $file ) {
+			require_once $file;
 		}
 	}
 
