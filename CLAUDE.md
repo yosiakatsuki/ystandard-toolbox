@@ -16,6 +16,7 @@
 -   ラインコメント、Docコメント（JSDoc）、インラインコメントが対象
 -   TypeScriptの型定義やインターフェース名は英語のまま
 -   **importセクションコメントは英語で記述する。またラインコメントではなく、ブロックコメントとする**
+    -   外部ライブラリのimport(classnames等) → コメント無しで先頭に記載
     -   WordPress依存関係 → WordPress Dependencies
     -   aktk-block-components(`src/aktk-block-components/**`,`@aktk/block-components/**`)依存関係 → Aktk Dependencies
     -   プラグイン固有の依存関係 → Plugin Dependencies
