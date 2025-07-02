@@ -62,7 +62,7 @@ src/blocks/block-library/extension-hidden-by-size/
 └── index.php            # PHP属性処理統合ファイル
 ```
 
-**注意**: この機能はブロック拡張のため`block.json`は不要。独立したブロックタイプを登録せず、既存ブロックの機能拡張のみを行う。
+**注意**: この機能はブロック拡張のため`block.json`は使用不可。ブロック拡張機能は既存ブロックに機能を追加するものであり、新しいブロックタイプを登録するものではないため、`register_block_type(__DIR__)`による自動エンキューも利用できない。そのため、手動でのアセットエンキューが必要となる。
 
 ### blocks/extension 完全削除対応
 - `blocks/extension/class-extension.php` の `register_block_type_args` フィルター処理を移植
@@ -124,6 +124,98 @@ src/blocks/block-library/extension-hidden-by-size/
 - CSS・PHPファイル名変更（機能に影響なし）
 - 型定義追加（ランタイムに影響なし）
 
+## ビルドとアセットエンキューの設計
+
+### ビルド設定
+
+ブロック拡張機能では`block.json`による自動ビルド・エンキューが使用できないため、以下の方法で対応：
+
+#### webpack設定（`webpack.blocks.v2.config.js`）
+```javascript
+entry: {
+  'extension-hidden-by-size': './src/blocks/block-library/extension-hidden-by-size/index.tsx',
+}
+```
+
+#### ビルド出力
+- **JavaScript**: `build/blocks/extension-hidden-by-size/index.js`
+- **Asset情報**: `build/blocks/extension-hidden-by-size/index.asset.php`
+- **CSS（エディター用）**: `build/blocks/extension-hidden-by-size/style-editor.css`
+- **CSS（フロントエンド用）**: `build/blocks/extension-hidden-by-size/style.css`
+
+### アセットエンキュー設計
+
+#### PHPでの手動エンキュー（`index.php`）
+```php
+class HiddenBySize {
+    public function __construct() {
+        // ブロック属性追加
+        add_filter( 'register_block_type_args', [ $this, 'add_attributes' ], 999, 2 );
+        // エディター用アセット
+        add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
+        // フロントエンド用アセット
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
+    }
+
+    public function enqueue_editor_assets() {
+        // asset.phpファイルから依存関係とバージョンを取得
+        $asset_file = YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/index.asset.php';
+        $asset = file_exists( $asset_file ) ? include $asset_file : [
+            'dependencies' => [],
+            'version'      => YSTDTB_VERSION,
+        ];
+
+        // JavaScript
+        wp_enqueue_script(
+            'ystdtb-extension-hidden-by-size-editor',
+            YSTDTB_URL . '/build/blocks/extension-hidden-by-size/index.js',
+            $asset['dependencies'],
+            $asset['version'],
+            true
+        );
+
+        // CSS（エディター用）
+        if ( file_exists( YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/style-editor.css' ) ) {
+            wp_enqueue_style(
+                'ystdtb-extension-hidden-by-size-editor',
+                YSTDTB_URL . '/build/blocks/extension-hidden-by-size/style-editor.css',
+                [],
+                $asset['version']
+            );
+        }
+    }
+
+    public function enqueue_frontend_assets() {
+        // フロントエンド用CSS
+        if ( file_exists( YSTDTB_PATH . '/build/blocks/extension-hidden-by-size/style.css' ) ) {
+            wp_enqueue_style(
+                'ystdtb-extension-hidden-by-size',
+                YSTDTB_URL . '/build/blocks/extension-hidden-by-size/style.css',
+                [],
+                YSTDTB_VERSION
+            );
+        }
+    }
+}
+
+// インスタンス化
+new HiddenBySize();
+```
+
+### 最適化ポイント
+
+1. **asset.phpファイルの活用**
+   - `@wordpress/scripts`が生成する依存関係情報を利用
+   - 適切な依存関係とバージョン管理を自動化
+
+2. **条件付きエンキュー**
+   - ファイル存在確認でエラーを防止
+   - 開発・本番環境での柔軟性を確保
+
+3. **パフォーマンス**
+   - フロントエンド用CSSは必要な場合のみエンキュー
+   - エディター用アセットはエディターでのみ読み込み
+
 ## 移行状況
 
 ### 完了済み
@@ -134,6 +226,7 @@ src/blocks/block-library/extension-hidden-by-size/
 - ✅ PHPエントリーポイント作成 (`index.php`)
 - ✅ PHP属性処理をindex.phpに統合
 - ✅ blocks/extension完全削除対応完了
+- ✅ ビルド・エンキュー設計確定
 
 ### 実装上の変更点
 
@@ -147,10 +240,16 @@ src/blocks/block-library/extension-hidden-by-size/
 
 #### バックエンド（PHP）
 - **blocks/extension依存を完全に除去**
-- **index.phpに全属性処理を統合（クラス不使用）**
+- **index.phpに全属性処理を統合（クラス使用）**
 - **ystandard_toolbox\Util\File依存を除去し、属性定義を直接記述**
 - **register_block_type_argsフィルターを独自実装**
 - **フィルター名とロジックは既存と完全互換**
+- **手動アセットエンキューシステムを実装**
+
+#### ビルドシステム
+- **webpack.blocks.v2.config.jsにエントリーポイント追加**
+- **asset.phpファイルによる依存関係管理**
+- **条件付きCSSエンキューシステム**
 
 ### 今後の検証項目
 
