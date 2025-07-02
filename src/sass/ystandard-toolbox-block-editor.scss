@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
 @use "../../blocks/posts/edit" as posts-edit;
@@ -17,7 +21,6 @@
 }
 
 .wp-block {
-
 	&[class*="ystdtb-"] {
 		box-sizing: border-box;
 	}

@@ -60,7 +60,10 @@ class Blocks {
 	 * @return void
 	 */
 	public function init_blocks() {
-		$blocks = glob( YSTDTB_PATH . '/build/blocks/**/index.php' );
+		$blocks = array_merge(
+			glob( YSTDTB_PATH . '/build/blocks/**/index.php' ),
+			glob( YSTDTB_PATH . '/build/block-hook/**/index.php' )
+		);
 		foreach ( $blocks as $file ) {
 			require_once $file;
 		}
