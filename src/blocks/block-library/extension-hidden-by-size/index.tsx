@@ -1,4 +1,11 @@
 import classnames from 'classnames/dedupe';
+
+/**
+ * CSS Imports
+ */
+import './style.scss';
+import './style-editor.scss';
+
 /**
  * ブロック拡張：画面サイズによる非表示機能
  */

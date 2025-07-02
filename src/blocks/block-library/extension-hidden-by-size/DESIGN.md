@@ -227,6 +227,9 @@ new HiddenBySize();
 - ✅ PHP属性処理をindex.phpに統合
 - ✅ blocks/extension完全削除対応完了
 - ✅ ビルド・エンキュー設計確定
+- ✅ webpack.blocks.v2.config.jsにエントリーポイント追加
+- ✅ 手動アセットエンキューシステム実装
+- ✅ ビルド・エンキュー動作確認
 
 ### 実装上の変更点
 
@@ -250,6 +253,23 @@ new HiddenBySize();
 - **webpack.blocks.v2.config.jsにエントリーポイント追加**
 - **asset.phpファイルによる依存関係管理**
 - **条件付きCSSエンキューシステム**
+- **CSS/JSファイルの自動生成確認済み**
+
+### 実装完了
+
+ブロック拡張機能「画面サイズによる非表示機能」の最新Gutenberg仕様への移行が完了しました。
+
+#### 生成されるアセット
+- `build/blocks/extension-hidden-by-size.js` - メインJavaScript
+- `build/blocks/extension-hidden-by-size.asset.php` - 依存関係情報
+- `build/blocks/extension-hidden-by-size.css` - エディター用CSS
+- `build/blocks/style-extension-hidden-by-size.css` - フロントエンド用CSS
+- `build/blocks/extension-hidden-by-size/index.php` - PHPファイル（コピー）
+
+#### 注意事項
+- ManualLinkコンポーネントは`aktk-block-components`に存在しないため削除
+- CSS命名は`@wordpress/scripts`の自動生成に従う
+- エディター用CSS・フロントエンド用CSSは適切に分離
 
 ### 今後の検証項目
 
