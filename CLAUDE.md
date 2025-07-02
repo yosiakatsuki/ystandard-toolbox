@@ -15,7 +15,7 @@
 -   **基本的にドキュメント・コメントは日本語で記述する**
 -   ラインコメント、Docコメント（JSDoc）、インラインコメントが対象
 -   TypeScriptの型定義やインターフェース名は英語のまま
--   **importセクションコメント（例: `// WordPress`）は英語で記述する**
+-   **importセクションコメントは英語で記述する。またラインコメントではなく、ブロックコメントとする**
     -   WordPress依存関係 → WordPress Dependencies
     -   aktk-block-components(`src/aktk-block-components/**`,`@aktk/block-components/**`)依存関係 → Aktk Dependencies
     -   プラグイン固有の依存関係 → Plugin Dependencies
@@ -214,11 +214,13 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 ### 移行手順
 
 #### 1. 事前準備（ユーザー担当）
+
 -   移行対象ディレクトリ・ファイルを `src/blocks/block-library/` へ移動
 -   `.js` ファイルを `.tsx` に変更
 -   入れ子構造ブロックは平坦化（parent-child関係を廃止し、block-library直下に配置）
 
 #### 2. 設計書作成（開発サポート）
+
 -   移行対象ブロックディレクトリに `DESIGN.md` を作成
 -   現在の実装の分析と移行後の設計方針を文書化
 -   コンポーネント依存関係とaktk-block-components移行計画を記載
@@ -226,30 +228,35 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   移行に伴うリスクと対策を記録
 
 #### 3. ブロック登録処理の作成（開発サポート）
+
 -   各ブロックディレクトリに `index.php` を作成
 -   `init` アクションで `register_block_type( __DIR__ )` する処理を実装
 -   WordPressのコーディング規約に準拠したPHPコードを作成
 -   **設計書に実装内容を反映**
 
 #### 4. コンポーネント移行対応
+
 -   `src/blocks/components/` 内コンポーネント利用箇所を特定
 -   該当コンポーネントを **deprecated** マーク（後にaktk-block-componentsに移行予定）
 -   `aktk-block-components` に同等機能がある場合は参照を変更
 -   **設計書にコンポーネント移行の進捗と変更点を記録**
 
 #### 5. 入れ子構造ブロックの対応
+
 -   親子関係を廃止し、独立したブロックとして再構築
 -   ブロック間の参照関係を修正
 -   `InnerBlocks` を使用していた箇所の代替実装
 -   **設計書に構造変更の詳細と影響範囲を更新**
 
 #### 6. 最新Gutenberg仕様への対応
+
 -   `block.json` を使用したブロック定義への移行
 -   TypeScript型定義の追加
 -   現代的なReactパターンの適用（フックベース）
 -   **設計書に新仕様対応の内容と既存からの変更点を記録**
 
 #### 7. スタイルシート対応
+
 -   **style-editor.scss** - 編集画面専用スタイルを記述
 -   **style.scss** - フロントエンド表示用スタイルを記述
 -   旧スタイルシート名からのリネーム後、参照先の修正を適宜実施
@@ -259,6 +266,7 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 ### 移行対象ブロック分類
 
 #### 単体ブロック（7個）
+
 -   `banner-link/` - バナーリンクブロック
 -   `box/` - ボックスブロック
 -   `extension/` - ブロック拡張機能
@@ -268,6 +276,7 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   `styles/` - スタイル拡張
 
 #### 入れ子構造ブロック（5組）
+
 -   `description-list/` → 親ブロック + 4子ブロック(`dd-box/`, `dd-simple/`, `dl-column/`, `dt/`)
 -   `faq/` → 親ブロック + 1子ブロック(`item/`)
 -   `icon-list/` + `icon-list-item/` → 関連ブロック
@@ -279,6 +288,7 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 #### `src/blocks/components/` → `aktk-block-components` 変換対応
 
 **1. 完全一致で移行可能**
+
 -   `color-palette-control/` → `components/color-pallet-control/`
 -   `custom-select-control/` → `components/custom-select-control/`
 -   `border-radius-control/` → `components/border-radius-control/`
@@ -288,17 +298,20 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   `notice/` → `components/notice/`
 
 **2. wp-controls経由で利用すべき**
+
 -   `unit-control/` → `wp-controls/unit-control/`
 -   `number-control/` → `wp-controls/number-control/`
 -   `font-size-picker/` → `wp-controls/font-size-picker/`
 
 **3. プラグイン固有（移行不可）**
+
 -   `responsive-*` 系コンポーネント（レスポンシブ機能）
 -   `post-*-select/` 系コンポーネント（WordPress投稿関連）
 -   `taxonomy-select/`, `term-select/`
 -   `ystandard-icon/`（テーマ固有）
 
 **4. 機能統合・名称変更あり**
+
 -   `align-items-control/` → `components/alignment-control/`
 -   `box-control/` → `components/custom-spacing-select/`
 -   `color-gradient-control/` → `components/color-pallet-control/`
@@ -306,16 +319,19 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 ### 移行優先順位
 
 #### フェーズ1（単体ブロック）
+
 1. `extension/` - 他ブロックへの影響が大きいため最優先
 2. `box/` - 使用頻度が高く、比較的シンプル
 3. `banner-link/` - 中程度の複雑さ
 
 #### フェーズ2（独立性の高いブロック）
+
 4. `sns-share/` - 外部依存が少ない
 5. `parts/` - シンプルな構造
 6. `posts/` - 複雑だが独立性が高い
 
 #### フェーズ3（入れ子構造ブロック）
+
 7. `icon-list/` + `icon-list-item/` - 関連ブロック（比較的シンプル）
 8. `faq/` + `item/` - 中程度の複雑さ
 9. `timeline/` + `item/` - 中程度の複雑さ
@@ -323,6 +339,7 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 11. `description-list/` + 子ブロック群 - 最も複雑（5ブロック構成）
 
 #### フェーズ4（スタイル系）
+
 12. `styles/` - スタイル拡張機能（特殊対応）
 
 ## 設計書運用
