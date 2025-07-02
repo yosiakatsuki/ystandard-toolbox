@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@use "./tailwind";
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
 @use "../../blocks/posts/edit" as posts-edit;

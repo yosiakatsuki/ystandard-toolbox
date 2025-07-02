@@ -1,8 +1,10 @@
 @use "../../src/sass/global";
 @use "block";
 
-
 .ystdtb-box__type-select {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
 
 	&,
 	*,
@@ -10,10 +12,6 @@
 	*::after {
 		box-sizing: border-box;
 	}
-
-	display: flex;
-	flex-wrap: wrap;
-	box-sizing: border-box;
 
 	.ystdtb-box__type-button {
 		&.components-button {
