@@ -118,7 +118,24 @@ src/blocks/block-library/extension-hidden-by-size/
 - CSS・PHPファイル名変更（機能に影響なし）
 - 型定義追加（ランタイムに影響なし）
 
-## 移行後の検証項目
+## 移行状況
+
+### 完了済み
+- ✅ TypeScript型定義ファイル作成 (`types.ts`)
+- ✅ メインロジックのTypeScript化 (`index.tsx`)
+- ✅ カスタムフック実装 (`hooks.ts`)
+- ✅ CSSファイル移行・リネーム (`style.scss`, `style-editor.scss`)
+- ✅ PHPエントリーポイント作成 (`index.php`)
+
+### 実装上の変更点
+- aktk-block-componentsのSvgIconとManualLinkコンポーネントを使用
+- Higher Order Componentパターンを維持（互換性重視）
+- フィルター実行優先度を維持（`Number.MAX_SAFE_INTEGER`）
+- 属性名・CSSクラス名は既存のものを維持
+- **importセクションコメントをブロックコメント形式に変更**
+- **重複処理を統合：hooks.tsの関数をindex.tsxで使用するように最適化**
+
+### 今後の検証項目
 
 1. **機能検証**
    - 各画面サイズでの非表示機能動作確認
