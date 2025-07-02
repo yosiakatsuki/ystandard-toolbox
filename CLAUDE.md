@@ -83,7 +83,9 @@ src/
 ├── plugin-settings/        # React管理画面
 ├── blocks/                 # 共有ブロックユーティリティ
 │　　　├── api/    		  # REST APIを使用した処理など
-│　　　├── block-library/    # モダンTypeScriptブロック
+│　　　├── block-library/    # モダンTypeScriptブロック・ブロックフック
+│　　　│   ├── block-hook-*/ # ブロック拡張機能（フック）✅
+│　　　│   └── */           # 通常のブロック
 │　　　├── components/       # プラグイン固有のコンポーネント（将来的に可能なものはaktk-block-componentsへ切り替え予定・JavaScriptのものはTypeScriptへ切り替え予定）
 │　　　├── controls/         # レガシーJavaScript コンポーネント（将来的にaktk-block-componentsへ切り替え予定）
 │　　　├── function/         # レガシーJavaScript ユーティリティー関数（将来的にaktk-block-componentsへ切り替え予定・./utilsへ移行予定）
@@ -92,13 +94,22 @@ src/
 
 blocks/                     # レガシーブロック実装
 inc/                       # PHPバックエンドクラス
-build/ & dist/             # コンパイル済みアセット
+build/                     # コンパイル済みアセット
+├── block-hook/            # ブロックフック（拡張機能）ビルド出力 ✅
+│   └── block-hook-*/      # 機能ごとの独立ディレクトリ
+├── blocks/                # モダンブロックビルド出力
+└── dist/                  # その他ビルド出力
 css/ & js/                 # 最終コンパイル出力
 ```
 
 ### ビルドパイプライン
 
--   **4つの独立したwebpack設定** アセットタイプ別
+-   **5つの独立したwebpack設定** アセットタイプ別
+   - `webpack.blocks.v2.config.js` - モダンブロック用
+   - `webpack.blocks.hook.config.js` - ブロックフック（拡張機能）用 ✅
+   - `webpack.blocks.config.js` - レガシーブロック用
+   - `webpack.block-app.config.js` - ブロックアプリ用
+   - `webpack.plugin-settings.config.js` - プラグイン設定用
 -   **SASS → PostCSS** パイプライン（Tailwind CSS統合）
 -   **TypeScript** 厳密設定とパスエイリアス（`@aktk/*`, `@ystdtb/*`）
 -   **Babel** レガシーJavaScript用トランスパイル
@@ -212,6 +223,18 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   移行は単純なファイル移動ではなく、最新のGutenbergブロックの仕様に合わせて刷新する
 -   プラグイン設定の刷新が完了した後に着手予定
 
+### ✅ ブロック拡張機能移行完了実績
+
+**`extension/hidden-by-size`機能の移行完了により、以下の技術基盤が確立されました：**
+
+-   **ブロックフック専用ビルドシステム** - `webpack.blocks.hook.config.js`
+-   **機能別独立ディレクトリ構成** - `build/block-hook/block-hook-**/`
+-   **TypeScript/React現代化** - レガシーJSからの完全移行
+-   **手動アセットエンキューシステム** - `block.json`に依存しない拡張機能用
+-   **標準ファイル命名規則** - `index.js`、`index.css`、`style-index.css`
+
+この実績により、今後のブロック拡張機能追加時の効率が大幅に向上し、保守性の高いアーキテクチャが実現されました。
+
 ### 移行手順
 
 #### 1. 事前準備（ユーザー担当）
@@ -321,7 +344,10 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 
 #### フェーズ1（単体ブロック）
 
-1. `extension/` - 他ブロックへの影響が大きいため最優先
+1. ✅ **`extension/`** - 他ブロックへの影響が大きいため最優先 **【移行完了】**
+   - `blocks/extension/hidden-by-size/` → `src/blocks/block-library/block-hook-hidden-by-size/`
+   - TypeScript化、ブロックフック専用ビルドシステム構築
+   - 機能ごとの独立ディレクトリ構成（`build/block-hook/block-hook-**/`）実現
 2. `box/` - 使用頻度が高く、比較的シンプル
 3. `banner-link/` - 中程度の複雑さ
 
