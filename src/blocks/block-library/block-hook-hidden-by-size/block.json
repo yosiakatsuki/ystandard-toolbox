@@ -1,0 +1,28 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/block-hook-hidden-by-size",
+	"version": "2.0.0",
+	"title": "画面表示サイズ切り替え",
+	"description": "画面表示サイズによるブロックの表示切り替えを行う拡張設定。",
+	"category": "ystdtb-hook",
+	"keywords": [],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"ystdtbIsHiddenMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"ystdtbIsHiddenTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"ystdtbIsHiddenDesktop": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
