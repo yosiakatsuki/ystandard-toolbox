@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import { COLORS } from '@aktk/block-components/config';
-import { mergeDefaultAttributes } from '@aktk/helper/attribute';
+import { mergeDefaultAttributes } from '@aktk/block-components/utils/attributes';
 
 /*
  * Plugin Dependencies

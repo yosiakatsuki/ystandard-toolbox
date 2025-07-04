@@ -105,11 +105,11 @@ css/ & js/                 # 最終コンパイル出力
 ### ビルドパイプライン
 
 -   **5つの独立したwebpack設定** アセットタイプ別
-   - `webpack.blocks.v2.config.js` - モダンブロック用
-   - `webpack.blocks.hook.config.js` - ブロックフック（拡張機能）用 ✅
-   - `webpack.blocks.config.js` - レガシーブロック用
-   - `webpack.block-app.config.js` - ブロックアプリ用
-   - `webpack.plugin-settings.config.js` - プラグイン設定用
+-   `webpack.blocks.v2.config.js` - モダンブロック用
+-   `webpack.blocks.hook.config.js` - ブロックフック（拡張機能）用 ✅
+-   `webpack.blocks.config.js` - レガシーブロック用
+-   `webpack.block-app.config.js` - ブロックアプリ用
+-   `webpack.plugin-settings.config.js` - プラグイン設定用
 -   **SASS → PostCSS** パイプライン（Tailwind CSS統合）
 -   **TypeScript** 厳密設定とパスエイリアス（`@aktk/*`, `@ystdtb/*`）
 -   **Babel** レガシーJavaScript用トランスパイル
@@ -226,36 +226,40 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 ### 🚀 最新Gutenberg仕様移行ガイドライン
 
 **1. メタデータ駆動アーキテクチャ**
-- `block.json`に完全なブロック定義を記述
-- `index.tsx`は`metadata`からインポートしてregisterBlockTypeに渡す
-- `config.tsx`を廃止し、必要な定数は`utils.ts`に移行
+
+-   `block.json`に完全なブロック定義を記述
+-   `index.tsx`は`metadata`からインポートしてregisterBlockTypeに渡す
+-   `config.tsx`を廃止し、必要な定数は`utils.ts`に移行
 
 **2. 最新ファイル構成**
+
 ```
 src/blocks/block-library/[ブロック名]/
 ├── block.json          # 完全なブロック定義（example含む）
 ├── index.tsx           # メタデータ駆動の登録
-├── icon.tsx            # 分離されたアイコンコンポーネント
 ├── edit.tsx            # CSS直接インポート付きエディター
 ├── save.tsx            # 保存コンポーネント
 ├── style.scss          # フロントエンド用CSS
-├── style-editor.scss   # エディター専用CSS  
+├── style-editor.scss   # エディター専用CSS
 ├── utils.ts            # ブロック固有の定数・ユーティリティ
 ├── types.ts            # TypeScript型定義
 └── deprecated/         # 下位互換対応
 ```
 
 **3. CSS分離パターン**
-- **中央集約廃止**: `src/sass/ystandard-toolbox-*.scss`からの参照削除
-- **ブロック個別**: `index.tsx`で`./style.scss`直接インポート
-- **エディター専用**: `edit.tsx`で`./style-editor.scss`直接インポート
+
+-   **中央集約廃止**: `src/sass/ystandard-toolbox-*.scss`からの参照削除
+-   **ブロック個別**: `index.tsx`で`./style.scss`直接インポート
+-   **エディター専用**: `edit.tsx`で`./style-editor.scss`直接インポート
 
 **4. 必須実装パターン**
+
 ```tsx
 // index.tsx テンプレート
 import { registerBlockType } from '@wordpress/blocks';
-import { ystdtbConfig } from '@aktk/config';
-import { mergeDefaultAttributes } from '@aktk/helper/attribute';
+import { COLORS } from '@aktk/block-components/config';
+import { mergeDefaultAttributes } from '@aktk/block-components/utils/attributes';
+import { CATEGORY } from '@aktk/blocks/config';
 // @ts-ignore
 import metadata from './block.json';
 import edit from './edit';
@@ -268,12 +272,17 @@ export function register[ブロック名]Block() {
         metadata.name,
         metadata.attributes
     );
-    
+
     registerBlockType( metadata.name, {
         ...metadata,
         ...{
-            icon,
-            category: ystdtbConfig.category.common,
+            icon(
+				<IconName
+					stroke={ COLORS.iconForeground }
+					style={ { fill: 'none' } }
+				/>
+			),
+            category: CATEGORY.common,
             attributes,
             edit,
             save,
@@ -410,9 +419,9 @@ register[ブロック名]Block();
 #### フェーズ1（単体ブロック）
 
 1. ✅ **`extension/`** - 他ブロックへの影響が大きいため最優先 **【移行完了】**
-   - `blocks/extension/hidden-by-size/` → `src/blocks/block-library/block-hook-hidden-by-size/`
-   - TypeScript化、ブロックフック専用ビルドシステム構築
-   - 機能ごとの独立ディレクトリ構成（`build/block-hook/block-hook-**/`）実現
+    - `blocks/extension/hidden-by-size/` → `src/blocks/block-library/block-hook-hidden-by-size/`
+    - TypeScript化、ブロックフック専用ビルドシステム構築
+    - 機能ごとの独立ディレクトリ構成（`build/block-hook/block-hook-**/`）実現
 2. `box/` - 使用頻度が高く、比較的シンプル
 3. `banner-link/` - 中程度の複雑さ
 
@@ -510,16 +519,16 @@ class [ブロック名]_Block {
 
 #### 命名規則
 
-- **namespace**: `ystandard_toolbox` （サブnamespaceは使用しない）
-- **クラス名**: `[ブロック名]_Block` 形式（例: `Box_Block`, `Timeline_Block`）
-- **定数**: `const BLOCK_NAME = 'ystdtb/[ブロック名]'`
-- **ファイル名**: `index.php`
+-   **namespace**: `ystandard_toolbox` （サブnamespaceは使用しない）
+-   **クラス名**: `[ブロック名]_Block` 形式（例: `Box_Block`, `Timeline_Block`）
+-   **定数**: `const BLOCK_NAME = 'ystdtb/[ブロック名]'`
+-   **ファイル名**: `index.php`
 
 #### 実装パターン
 
-- **シングルトンパターン**: `get_instance()` メソッドによるインスタンス管理
-- **WordPress標準**: `register_block_type( __DIR__ )` によるblock.json自動読み込み
-- **優先度**: `add_action( 'init', [ $this, 'register_block' ], 100 )`
+-   **シングルトンパターン**: `get_instance()` メソッドによるインスタンス管理
+-   **WordPress標準**: `register_block_type( __DIR__ )` によるblock.json自動読み込み
+-   **優先度**: `add_action( 'init', [ $this, 'register_block' ], 100 )`
 
 この規約により、全ブロックの登録処理が統一され、保守性が向上する。
 
