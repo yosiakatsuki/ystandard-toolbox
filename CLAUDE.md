@@ -254,6 +254,10 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 #### 3. ブロック登録処理の作成（開発サポート）
 
 -   各ブロックディレクトリに `index.php` を作成
+-   **namespace**: `ystandard_toolbox` （サブnamespaceは使用しない）
+-   **クラス化**: `[ブロック名]_Block` 形式のクラス名（例: `Box_Block`）
+-   **シングルトンパターン**: `get_instance()` メソッドによるインスタンス管理
+-   **ブロック定数**: `const BLOCK_NAME = 'ystdtb/[ブロック名]'`
 -   `init` アクションで `register_block_type( __DIR__ )` する処理を実装
 -   WordPressのコーディング規約に準拠したPHPコードを作成
 -   **設計書に実装内容を反映**
@@ -377,6 +381,86 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   機能ごとに該当ディレクトリ内に`DESIGN.md`として作成
 -   既存の設計書がある場合は更新しながら進める
 -   変更の影響範囲と設計意図を明文化する
+
+### PHPブロック登録の統一規約
+
+#### 基本構造
+
+全てのブロックの`index.php`は以下の構造に統一する：
+
+```php
+<?php
+/**
+ * [ブロック名]ブロック
+ *
+ * @package ystandard-toolbox
+ */
+
+namespace ystandard_toolbox;
+
+defined( 'ABSPATH' ) || die();
+
+/**
+ * Class [ブロック名]_Block.
+ */
+class [ブロック名]_Block {
+
+    const BLOCK_NAME = 'ystdtb/[ブロック名]';
+
+    /**
+     * Instance.
+     *
+     * @var [ブロック名]_Block
+     */
+    private static $instance;
+
+    /**
+     * Constructor.
+     */
+    private function __construct() {
+        add_action( 'init', [ $this, 'register_block' ], 100 );
+    }
+
+    /**
+     * Instance.
+     *
+     * @return [ブロック名]_Block
+     */
+    public static function get_instance() {
+        if ( ! isset( self::$instance ) ) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * ブロック登録
+     *
+     * @return void
+     */
+    public function register_block() {
+        register_block_type( __DIR__ );
+    }
+}
+
+[ブロック名]_Block::get_instance();
+```
+
+#### 命名規則
+
+- **namespace**: `ystandard_toolbox` （サブnamespaceは使用しない）
+- **クラス名**: `[ブロック名]_Block` 形式（例: `Box_Block`, `Timeline_Block`）
+- **定数**: `const BLOCK_NAME = 'ystdtb/[ブロック名]'`
+- **ファイル名**: `index.php`
+
+#### 実装パターン
+
+- **シングルトンパターン**: `get_instance()` メソッドによるインスタンス管理
+- **WordPress標準**: `register_block_type( __DIR__ )` によるblock.json自動読み込み
+- **優先度**: `add_action( 'init', [ $this, 'register_block' ], 100 )`
+
+この規約により、全ブロックの登録処理が統一され、保守性が向上する。
 
 ### 設計書の目的
 
