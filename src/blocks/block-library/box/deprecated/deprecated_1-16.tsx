@@ -11,7 +11,7 @@ import {
 	getLabelBorderRadius,
 } from '../function';
 import classnames from 'classnames';
-import { blockClassName } from '../config';
+import { blockClassName } from '../utils';
 import getDataFallbackProperty from '@aktk/helper/fallback';
 import { getSpacing } from '@aktk/helper/spacing';
 

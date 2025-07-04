@@ -8,6 +8,16 @@ module.exports = {
 		...defaultConfig.resolve,
 		alias: {
 			...defaultConfig.resolve.alias,
+			'@aktk/blocks': path.resolve( __dirname, 'src/blocks' ),
+			'@aktk/block-components': path.resolve(
+				__dirname,
+				'src/aktk-block-components'
+			),
+			'@aktk/plugin-settings': path.resolve(
+				__dirname,
+				'src/plugin-settings'
+			),
+			// 旧設定。徐々に削除予定.
 			'@aktk/function': path.resolve( __dirname, 'src/blocks/function' ),
 			'@aktk/config': path.resolve( __dirname, 'src/js/config' ),
 			'@aktk/components': path.resolve(
@@ -18,14 +28,6 @@ module.exports = {
 			'@aktk/api': path.resolve( __dirname, 'src/blocks/api' ),
 			'@aktk/utils': path.resolve( __dirname, 'src/blocks/utils' ),
 			'@aktk/helper': path.resolve( __dirname, 'src/js/helper' ),
-			'@aktk/block-components': path.resolve(
-				__dirname,
-				'src/aktk-block-components'
-			),
-			'@aktk/plugin-settings': path.resolve(
-				__dirname,
-				'src/plugin-settings'
-			),
 		},
 	},
 };

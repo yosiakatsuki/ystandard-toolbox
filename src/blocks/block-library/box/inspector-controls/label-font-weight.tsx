@@ -1,6 +1,6 @@
 import { BaseControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { fontWeightList } from '../config';
+import { fontWeightList } from '../utils';
 
 const LabelFontWeight = ( props ) => {
 	const { attributes, setAttributes } = props;

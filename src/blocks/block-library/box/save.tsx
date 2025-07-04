@@ -1,21 +1,37 @@
+import classnames from 'classnames';
+
+/*
+ * WordPress Dependencies
+ */
 import {
 	InnerBlocks,
 	getColorClassName,
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
+
+/*
+ * Aktk Dependencies
+ */
 import SVGIcon from '@aktk/components/svg-icon';
+import { getSpacing } from '@aktk/helper/spacing';
+import getDataFallbackProperty from '@aktk/helper/fallback';
+
+/*
+ * Plugin Dependencies
+ */
+import { blockClassName } from './utils';
 import {
 	getBoxBorderRadius,
 	isLabelOutside,
 	getLabelBorderRadius,
 } from './function';
-import classnames from 'classnames';
-import { blockClassName } from './config';
-import getDataFallbackProperty from '@aktk/helper/fallback';
-import { getSpacing } from '@aktk/helper/spacing';
+import { BoxSaveProps } from './types';
 
-export default function save( { attributes } ) {
+/**
+ * ボックスブロック保存コンポーネント
+ */
+export default function save( { attributes }: BoxSaveProps ) {
 	const {
 		boxStyle,
 		boxBackgroundColor,

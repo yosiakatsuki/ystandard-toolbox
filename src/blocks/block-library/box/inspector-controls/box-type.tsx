@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { Button } from '@wordpress/components';
 
-import { boxStyleList } from '../config';
+import { boxStyleList } from '../utils';
 
 const BoxType = ( props ) => {
 	const { attributes, setAttributes } = props;

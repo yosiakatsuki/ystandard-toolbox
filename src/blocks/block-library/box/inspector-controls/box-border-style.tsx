@@ -1,7 +1,7 @@
 import { BaseControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { borderStyles } from '../config';
+import { borderStyles } from '../utils';
 
 const BoxBorderStyle = ( props ) => {
 	const { attributes, setAttributes } = props;

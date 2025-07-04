@@ -1,0 +1,126 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/box",
+	"version": "2.0.0",
+	"title": "ボックス",
+	"description": "囲み枠ブロック",
+	"category": "ystdtb-common",
+	"keywords": ["box", "ボックス", "囲み", "label", "ラベル"],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"boxStyle": {
+			"type": "string",
+			"default": "label-none"
+		},
+		"boxBackgroundColor": {
+			"type": "string"
+		},
+		"customBoxBackgroundColor": {
+			"type": "string"
+		},
+		"boxTextColor": {
+			"type": "string"
+		},
+		"customBoxTextColor": {
+			"type": "string"
+		},
+		"boxBorderColor": {
+			"type": "string"
+		},
+		"customBoxBorderColor": {
+			"type": "string"
+		},
+		"boxBorderSize": {
+			"type": "string",
+			"default": "1px"
+		},
+		"boxBorderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"boxBorderRadius": {
+			"type": "string"
+		},
+		"boxPadding": {
+			"type": "object"
+		},
+		"isResponsiveBoxPadding": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string"
+		},
+		"labelIcon": {
+			"type": "string"
+		},
+		"labelFontSize": {
+			"type": "string"
+		},
+		"customLabelFontSize": {
+			"type": "string",
+			"default": "0.9em"
+		},
+		"labelWeight": {
+			"type": "string",
+			"default": "normal"
+		},
+		"labelBackgroundColor": {
+			"type": "string"
+		},
+		"customLabelBackgroundColor": {
+			"type": "string"
+		},
+		"labelTextColor": {
+			"type": "string"
+		},
+		"customLabelTextColor": {
+			"type": "string"
+		},
+		"labelBorderRadius": {
+			"type": "string"
+		},
+		"backgroundImage": {
+			"type": "object"
+		},
+		"backgroundImageCoverOpacity": {
+			"type": "number",
+			"default": 0.8
+		},
+		"backgroundImageRepeat": {
+			"type": "string",
+			"default": "no-repeat"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false,
+		"lightBlockWrapper": true
+	},
+	"example": {
+		"attributes": {
+			"label": "ボックスラベル",
+			"boxBorderColor": "#07689f",
+			"boxBorderSize": "2px"
+		},
+		"innerBlocks": [
+			{
+				"name": "core/paragraph",
+				"attributes": {
+					"content": "ボックスコンテンツの例です。"
+				}
+			},
+			{
+				"name": "core/paragraph",
+				"attributes": {
+					"content": "InnerBlocksで自由にコンテンツを追加できます。"
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

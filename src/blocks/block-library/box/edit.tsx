@@ -1,4 +1,13 @@
 import classnames from 'classnames';
+
+/*
+ * Style Dependencies
+ */
+import './style-editor.scss';
+
+/*
+ * WordPress Dependencies
+ */
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -9,18 +18,30 @@ import {
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { blockClassName } from './config';
+
+/*
+ * Aktk Dependencies
+ */
 import SVGIcon from '@aktk/components/svg-icon';
+import { getSpacing } from '@aktk/helper/spacing';
+import StretchTextControl from '@aktk/components/stretch-text-control';
+
+/*
+ * Plugin Dependencies
+ */
+import { blockClassName } from './utils';
 import {
 	getBoxBorderRadius,
 	isLabelOutside,
 	getLabelBorderRadius,
 } from './function';
-import { getSpacing } from '@aktk/helper/spacing';
 import * as BlockOption from './inspector-controls';
-import StretchTextControl from '@aktk/components/stretch-text-control';
+import { BoxEditProps } from './types';
 
-function Box( props ) {
+/**
+ * ボックスブロック編集コンポーネント
+ */
+function Box( props: BoxEditProps ) {
 	const {
 		attributes,
 		setAttributes,

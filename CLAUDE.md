@@ -223,6 +223,67 @@ yStandard Toolboxの他にyStandard BlocksというyStandardシリーズのブ�
 -   移行は単純なファイル移動ではなく、最新のGutenbergブロックの仕様に合わせて刷新する
 -   プラグイン設定の刷新が完了した後に着手予定
 
+### 🚀 最新Gutenberg仕様移行ガイドライン
+
+**1. メタデータ駆動アーキテクチャ**
+- `block.json`に完全なブロック定義を記述
+- `index.tsx`は`metadata`からインポートしてregisterBlockTypeに渡す
+- `config.tsx`を廃止し、必要な定数は`utils.ts`に移行
+
+**2. 最新ファイル構成**
+```
+src/blocks/block-library/[ブロック名]/
+├── block.json          # 完全なブロック定義（example含む）
+├── index.tsx           # メタデータ駆動の登録
+├── icon.tsx            # 分離されたアイコンコンポーネント
+├── edit.tsx            # CSS直接インポート付きエディター
+├── save.tsx            # 保存コンポーネント
+├── style.scss          # フロントエンド用CSS
+├── style-editor.scss   # エディター専用CSS  
+├── utils.ts            # ブロック固有の定数・ユーティリティ
+├── types.ts            # TypeScript型定義
+└── deprecated/         # 下位互換対応
+```
+
+**3. CSS分離パターン**
+- **中央集約廃止**: `src/sass/ystandard-toolbox-*.scss`からの参照削除
+- **ブロック個別**: `index.tsx`で`./style.scss`直接インポート
+- **エディター専用**: `edit.tsx`で`./style-editor.scss`直接インポート
+
+**4. 必須実装パターン**
+```tsx
+// index.tsx テンプレート
+import { registerBlockType } from '@wordpress/blocks';
+import { ystdtbConfig } from '@aktk/config';
+import { mergeDefaultAttributes } from '@aktk/helper/attribute';
+// @ts-ignore
+import metadata from './block.json';
+import edit from './edit';
+import save from './save';
+import icon from './icon';
+import './style.scss';
+
+export function register[ブロック名]Block() {
+    const attributes = mergeDefaultAttributes(
+        metadata.name,
+        metadata.attributes
+    );
+    
+    registerBlockType( metadata.name, {
+        ...metadata,
+        ...{
+            icon,
+            category: ystdtbConfig.category.common,
+            attributes,
+            edit,
+            save,
+        },
+    } );
+}
+
+register[ブロック名]Block();
+```
+
 ### ✅ ブロック拡張機能移行完了実績
 
 **`extension/hidden-by-size`機能の移行完了により、以下の技術基盤が確立されました：**

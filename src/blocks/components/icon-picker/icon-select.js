@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 import classnames from 'classnames';
-import { getIcons } from '@ystd/function/icons';
+import { getIcons } from '@aktk/function/icons';
 import SVGIcon from '../svg-icon';
 import { __ } from '@wordpress/i18n';
 

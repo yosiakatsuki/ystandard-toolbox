@@ -1,52 +1,53 @@
 import { Box } from 'react-feather';
+/*
+ * WordPress Dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { ystdtbConfig } from '@aktk/config';
-import { __, _x } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
+
+/*
+ * Aktk Dependencies
+ */
+import { COLORS } from '@aktk/block-components/config';
 import { mergeDefaultAttributes } from '@aktk/helper/attribute';
+
+/*
+ * Plugin Dependencies
+ */
+import { CATEGORY } from '@aktk/blocks/config';
+// @ts-ignore
+import metadata from './block.json';
 import edit from './edit';
 import save from './save';
-import { attributes, supports } from './config';
 import { deprecated } from './deprecated';
+import './style.scss';
 
-const blockName = 'ystdtb/box';
-const blockAttributes = mergeDefaultAttributes( blockName, attributes );
+/**
+ * ボックスブロック登録関数
+ */
+export function registerBoxBlock() {
+	const attributes = mergeDefaultAttributes(
+		metadata.name,
+		metadata.attributes
+	);
 
-registerBlockType( blockName, {
-	apiVersion: 2,
-	title: __( 'ボックス', 'ystandard-toolbox' ),
-	description: __( '囲み枠ブロック', 'ystandard-toolbox' ),
-	icon: (
-		<Box
-			stroke={ ystdtbConfig.color.iconForeground }
-			style={ { fill: 'none' } }
-		/>
-	),
-	keywords: [ _x( 'box', 'block-keywords', 'ystandard-toolbox' ), 'box' ],
-	category: ystdtbConfig.category.common,
-	attributes: blockAttributes,
-	supports,
-	edit,
-	save,
-	deprecated,
-	example: {
-		attributes: {
-			label: __( 'ボックスラベル', 'ystandard-toolbox' ),
-			boxBorderColor: '#07689f',
-			boxBorderSize: '2px',
+	// @ts-ignore
+	registerBlockType( metadata.name, {
+		...metadata,
+		...{
+			icon: (
+				<Box
+					stroke={ COLORS.iconForeground }
+					style={ { fill: 'none' } }
+				/>
+			),
+			category: CATEGORY.common,
+			attributes,
+			edit,
+			save,
+			deprecated,
 		},
-		innerBlocks: [
-			{
-				name: 'core/paragraph',
-				attributes: {
-					content: __( 'ボックスコンテンツ', 'ystandard-toolbox' ),
-				},
-			},
-			{
-				name: 'core/paragraph',
-				attributes: {
-					content: __( 'ボックスコンテンツ', 'ystandard-toolbox' ),
-				},
-			},
-		],
-	},
-} );
+	} );
+}
+
+registerBoxBlock();

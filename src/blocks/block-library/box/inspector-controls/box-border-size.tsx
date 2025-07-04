@@ -4,7 +4,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { units } from '../config';
+import { units } from '../utils';
 
 const BoxBorderSize = ( props ) => {
 	const { attributes, setAttributes } = props;
