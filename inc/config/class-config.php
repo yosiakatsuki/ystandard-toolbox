@@ -101,15 +101,11 @@ class Config {
 	 * ブロックカテゴリー スラッグ
 	 */
 	const BLOCK_CATEGORIES = [
-		'layout' => [
-			'slug'  => 'ystdtb-layout',
-			'title' => '[Toolbox]レイアウト',
-		],
-		'main'   => [
+		'main' => [
 			'slug'  => 'ystdtb',
 			'title' => '[Toolbox]yStandard Toolbox',
 		],
-		'beta'   => [
+		'beta' => [
 			'slug'  => 'ystdtb_beta',
 			'title' => '[Toolbox]ベータ版 ブロック',
 		],

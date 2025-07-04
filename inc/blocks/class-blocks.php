@@ -40,10 +40,10 @@ class Blocks {
 		add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
 		// 移行する.
-		$this->load_files();
-		$this->init();
-		add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
-		add_action( 'init', [ $this, 'register_block' ] );
+		// $this->load_files();
+		// $this->init();
+		// add_action( 'init', [ $this, 'require_dynamic_block_file' ] );
+		// add_action( 'init', [ $this, 'register_block' ] );
 	}
 
 	/**
@@ -138,7 +138,6 @@ class Blocks {
 		if ( apply_filters( 'ystdtb_block_category_top', false ) ) {
 			return array_merge( array_values( Config::BLOCK_CATEGORIES ), $categories );
 		}
-
 		return array_merge( $categories, array_values( Config::BLOCK_CATEGORIES ) );
 	}
 
