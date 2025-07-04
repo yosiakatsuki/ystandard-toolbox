@@ -75,7 +75,7 @@
 		"lint:css": "run-s lint:css:*",
 		"lint:php": "composer phpcs",
 		"lint": "run-s lint:*",
-		"watch:blocks:custom": "wp-scripts start --webpack-copy-php --webpack-src-dir=src/block-library --output-path=build/blocks --config webpack.blocks.v2.config.js",
+		"watch:blocks:v2": "wp-scripts start --webpack-copy-php --webpack-src-dir=src/blocks/block-library --output-path=build/blocks --config webpack.blocks.v2.config.js",
 		"watch:blocks:app": "wp-scripts start --config webpack.block-app.config.js",
 		"watch:blocks:v1": "wp-scripts start --config webpack.blocks.config.js",
 		"watch:blocks": "run-p watch:blocks:*",
