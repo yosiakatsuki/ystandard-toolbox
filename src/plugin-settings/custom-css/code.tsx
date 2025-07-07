@@ -1,3 +1,4 @@
+import { css } from '@codemirror/lang-css';
 /**
  * WordPress Dependencies
  */
@@ -103,6 +104,7 @@ export default function Code(): JSX.Element {
 								} }
 								language="css"
 								minHeight="300px"
+								extensions={ [ css() ] }
 							/>
 						</div>
 					);
