@@ -4,7 +4,7 @@ export const attributes = {
 		source: 'html',
 		selector: 'li',
 		default: '',
-	}
+	},
 };
 
 export const supports = {

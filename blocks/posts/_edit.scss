@@ -1,26 +1,23 @@
 @use "../../src/sass/global";
 
 [data-type="ystdtb/posts"] {
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-	&,
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
-
-	.ystdtb-posts {
-
-		&:empty {
-
-			&::after {
-				content: "記事一覧ブロック：投稿が見つかりませんでした。";
-				display: block;
-				padding: 2em;
-				background: global.$color__bg-gray-light;
-				color: global.$color__text-light;
-				font-size: 0.8em;
-			}
-		}
-	}
+  .ystdtb-posts {
+    &:empty {
+      &:after {
+        content: "記事一覧ブロック：投稿が見つかりませんでした。";
+        display: block;
+        padding: 2em;
+        background: global.$color__bg-gray-light;
+        color: global.$color__text-light;
+        font-size: 0.8em;
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import NumberControl from '@aktk/components/number-control';
+import NumberControl from '@ystd/components/number-control';
 
 const ExcerptLength = ( { attributes, setAttributes } ) => {
 	const { excerptLength } = attributes;

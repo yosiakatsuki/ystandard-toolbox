@@ -1,6 +1,6 @@
 import { BaseControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { isObject, parseObject } from '@aktk/helper/object';
+import { isObject, parseObject } from '@ystd/helper/object';
 
 const Reset = ( { type, attributes, setAttributes } ) => {
 	const { slides } = attributes;

@@ -2,12 +2,11 @@
 
 .ystdtb-dt {
 
-	&.has-padding {
+  &.has-padding {
+    @include global.responsive-custom-property("dt", "padding");
+  }
 
-		@include global.responsive-custom-property("dt", "padding");
-	}
-
-	&.has-background:not(.has-padding) {
-		padding: 1em 1.5em;
-	}
+  &.has-background:not(.has-padding) {
+    padding: 1em 1.5em
+  }
 }

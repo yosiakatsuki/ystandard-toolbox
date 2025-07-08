@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import BorderControl from '@aktk/controls/border-control';
+import BorderControl from '@ystd/controls/border-control';
 
 const PanelBorder = ( props ) => {
 	const { attributes, setAttributes } = props;

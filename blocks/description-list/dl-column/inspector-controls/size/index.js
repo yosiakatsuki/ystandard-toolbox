@@ -1,6 +1,6 @@
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ResponsiveWidthControl from '@aktk/controls/responsive-width-control';
+import ResponsiveWidthControl from '@ystd/controls/responsive-width-control';
 
 const PanelSize = ( props ) => {
 	const { attributes, setAttributes } = props;

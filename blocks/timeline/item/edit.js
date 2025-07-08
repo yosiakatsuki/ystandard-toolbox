@@ -20,8 +20,8 @@ import {
 import { withSelect, select } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import SVGIconSelect from '@aktk/components/icon-picker';
-import SVGIcon from '@aktk/components/svg-icon';
+import SVGIconSelect from '@ystd/components/icon-picker';
+import SVGIcon from '@ystd/components/svg-icon';
 import { calcContentMarginTop } from './function';
 
 function TimelineItem( props ) {

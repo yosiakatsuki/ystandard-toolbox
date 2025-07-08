@@ -1,24 +1,19 @@
 import classnames from 'classnames';
-import {
-    RichText,
-    useBlockProps,
-} from '@wordpress/block-editor';
-import {blockClassName} from './config';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { blockClassName } from './config';
 
-export default function save({attributes}) {
-    const {
-        content,
-    } = attributes;
+export default function save( { attributes } ) {
+	const { content } = attributes;
 
-    const listClassName = classnames(blockClassName);
+	const listClassName = classnames( blockClassName );
 
-    return (
-        <RichText.Content
-            {...useBlockProps.save({
-                className: listClassName,
-            })}
-            tagName="li"
-            value={content}
-        />
-    );
+	return (
+		<RichText.Content
+			{ ...useBlockProps.save( {
+				className: listClassName,
+			} ) }
+			tagName="li"
+			value={ content }
+		/>
+	);
 }

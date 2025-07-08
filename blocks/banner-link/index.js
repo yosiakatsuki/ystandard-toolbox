@@ -1,8 +1,8 @@
 import { Image } from 'react-feather';
 import { registerBlockType } from '@wordpress/blocks';
 import { __, _x } from '@wordpress/i18n';
-import { ystdtbConfig } from '@aktk/config';
-import { mergeDefaultAttributes } from '@aktk/helper/attribute';
+import { ystdtbConfig } from '@ystd/config';
+import { mergeDefaultAttributes } from '@ystd/helper/attribute';
 import { attributes, supports } from './config';
 import edit from './edit';
 import save from './save';

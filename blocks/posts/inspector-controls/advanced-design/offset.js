@@ -3,10 +3,10 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
-import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
-import Notice, { noticeType } from '@aktk/components/notice';
-import NumberControl from '@aktk/components/number-control';
-import { toInt } from '@aktk/helper/number';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import Notice, { noticeType } from '@ystd/components/notice';
+import NumberControl from '@ystd/components/number-control';
+import { toInt } from '@ystd/helper/number';
 
 const Offset = ( { attributes, setAttributes } ) => {
 	const { offset, offsetMobile } = attributes;

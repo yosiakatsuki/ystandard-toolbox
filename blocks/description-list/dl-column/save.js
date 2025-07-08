@@ -10,11 +10,11 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
  * Block
  */
 import { config } from './config';
-import { getResponsiveWidthStyle } from '@aktk/components/responsive-values';
-import { getBorderCustomProperty } from '@aktk/controls/border-control';
-import { isResponsive } from '@aktk/helper/responsive';
-import { ystdtbConfig } from '@aktk/config';
-import { getResponsiveMarginStyle } from '@aktk/components/responsive-spacing';
+import { getResponsiveWidthStyle } from '@ystd/components/responsive-values';
+import { getBorderCustomProperty } from '@ystd/controls/border-control';
+import { isResponsive } from '@ystd/helper/responsive';
+import { ystdtbConfig } from '@ystd/config';
+import { getResponsiveMarginStyle } from '@ystd/components/responsive-spacing';
 
 export default function save( { attributes } ) {
 	const { isStackedOnMobile, isStackedOnTablet, dtWidth, border, margin } =

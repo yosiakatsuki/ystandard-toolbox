@@ -15,9 +15,9 @@ import { compose } from '@wordpress/compose';
 import {
 	getResponsiveMarginStyle,
 	getResponsivePaddingStyle,
-} from '@aktk/components/responsive-spacing';
-import { getBackGroundStyle } from '@aktk/helper/color';
-import { ystdtbConfig } from '@aktk/config';
+} from '@ystd/components/responsive-spacing';
+import { getBackGroundStyle } from '@ystd/helper/color';
+import { ystdtbConfig } from '@ystd/config';
 /**
  * Block
  */

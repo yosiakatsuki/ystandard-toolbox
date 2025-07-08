@@ -8,7 +8,7 @@ import {
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
-import _toNumber from '@aktk/function/_toNumber';
+import _toNumber from '../../src/js/blocks/function/_toNumber';
 import * as BlockOption from './inspector-controls';
 import PanelThumbnail from './inspector-controls/thumbnail';
 import PanelSearchOption from './inspector-controls/search-option';

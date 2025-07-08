@@ -3,8 +3,8 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BaseControl, RangeControl } from '@wordpress/components';
-import ResponsiveTab, { tabType } from '@aktk/components/responsive-tab';
-import { getNumber } from '@aktk/helper/number';
+import ResponsiveTab, { tabType } from '@ystd/components/responsive-tab';
+import { getNumber } from '@ystd/helper/number';
 
 const Count = ( { attributes, setAttributes } ) => {
 	const { count, countMobile } = attributes;

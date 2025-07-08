@@ -1,93 +1,91 @@
 @use "../../src/sass/global";
 
 .ystdtb-timeline {
-	padding-top: 1em;
-	padding-left: 1em;
+  padding-top: 1em;
+  padding-left: 1em;
 }
 
 .ystdtb-timeline-item {
-	position: relative;
-	border-left: 2px solid #eee;
-	padding: 1em 0 3em 1.75em;
+  position: relative;
+  border-left: 2px solid #eee;
+  padding: 1em 0 3em 1.75em;
 
-	@include global.media-breakpoint(sm) {
-		padding-left: 2.5em;
-	}
+  @include global.media-breakpoint(sm) {
+    padding-left: 2.5em;
+  }
 
-	&.is-margin-small {
-		padding-bottom: 2em;
-	}
+  &.is-margin-small {
+    padding-bottom: 2em;
+  }
 
-	&.is-margin-large {
-		padding-bottom: 5em;
-	}
+  &.is-margin-large {
+    padding-bottom: 5em;
+  }
 }
 
 .ystdtb-timeline__label {
-	display: inline-block;
-	background-color: #eee;
-	padding: 0.5em;
-	position: absolute;
-	top: 0;
-	left: 0;
-	border-radius: 50px;
-	transform: translateX(calc(-50% - 1px));
+  display: inline-block;
+  background-color: #eee;
+  padding: .5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+  transform: translateX(calc(-50% - 1px));
 
-	&.has-icon,
-	&.has-text {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 2em;
-		height: 2em;
-		line-height: 1;
-	}
+  &.has-icon,
+  &.has-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    line-height: 1;
+  }
 
-	&.has-long-text {
-		left: -1.5em;
-		width: auto;
-		height: auto;
-		padding-right: 0.5em;
-		padding-left: 0.5em;
-		transform: none;
-	}
+  &.has-long-text {
+    left: -1.5em;
+    width: auto;
+    height: auto;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    transform: none;
+  }
 
-	.ys-icon {
-		vertical-align: -0.3em;
-	}
+  .ys-icon {
+    vertical-align: -.3em;
+  }
 }
 
 .ystdtb-timeline__contents {
-	margin-top: -1.3em;
+  margin-top: -1.3em;
 
-	> * {
-		margin-top: 1.5em;
-		margin-bottom: 0;
+  > * {
+    margin-top: 1.5em;
+    margin-bottom: 0;
 
-		&:first-child {
-			margin-top: 0;
-		}
-	}
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 
-	&.is-margin-small {
+  &.is-margin-small {
+    > * {
+      margin-top: 1em;
 
-		> * {
-			margin-top: 1em;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
 
-			&:first-child {
-				margin-top: 0;
-			}
-		}
-	}
+  &.is-margin-large {
+    > * {
+      margin-top: 2em;
 
-	&.is-margin-large {
-
-		> * {
-			margin-top: 2em;
-
-			&:first-child {
-				margin-top: 0;
-			}
-		}
-	}
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
 }

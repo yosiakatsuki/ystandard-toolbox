@@ -16,7 +16,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle } from '@aktk/components/responsive-spacing';
+import { getResponsiveMarginStyle } from '@ystd/components/responsive-spacing';
 /**
  * Block
  */

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
-import PostParentSelect from '@aktk/components/post-parent-select';
+import PostParentSelect from '@ystd/components/post-parent-select';
 import { useSelect } from '@wordpress/data';
 
 const PostParent = ( { attributes, setAttributes } ) => {

@@ -1,40 +1,36 @@
 @mixin block-style() {
 
-	.ystdtb-sns-share {
+  .ystdtb-sns-share {
+    &.has-align-left {
+      .sns-share {
+        text-align: left;
 
-		&.has-align-left {
+        .sns-share__container {
+          justify-content: flex-start;
+        }
+      }
+    }
 
-			.sns-share {
-				text-align: left;
+    &.has-align-center {
+      .sns-share {
+        text-align: center;
 
-				.sns-share__container {
-					justify-content: flex-start;
-				}
-			}
-		}
+        .sns-share__container {
+          justify-content: center;
+        }
+      }
+    }
 
-		&.has-align-center {
+    &.has-align-right {
+      .sns-share {
+        text-align: right;
 
-			.sns-share {
-				text-align: center;
-
-				.sns-share__container {
-					justify-content: center;
-				}
-			}
-		}
-
-		&.has-align-right {
-
-			.sns-share {
-				text-align: right;
-
-				.sns-share__container {
-					justify-content: flex-end;
-				}
-			}
-		}
-	}
+        .sns-share__container {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
 }
 
 @include block-style;

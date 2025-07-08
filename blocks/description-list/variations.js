@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { Columns, Square } from 'react-feather';
-import { ystdtbConfig } from '@aktk/config';
+import { ystdtbConfig } from '@ystd/config';
 const variations = [
 	{
 		name: 'dt-and-simple',

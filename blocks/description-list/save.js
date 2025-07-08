@@ -6,7 +6,7 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 /**
  * yStandard
  */
-import { getResponsiveMarginStyle } from '@aktk/components/responsive-spacing';
+import { getResponsiveMarginStyle } from '@ystd/components/responsive-spacing';
 /**
  * Block
  */

@@ -1,69 +1,63 @@
 @use "../../../src/sass/global";
 
 .wp-block-table {
+  &.is-style-ystdtb-table-2col,
+  &.is-style-ystdtb-table-2col-m {
+    td {
+      &:first-child {
+        background-color: #f1f1f3;
+        white-space: nowrap;
+      }
+    }
+  }
 
-	&.is-style-ystdtb-table-2col,
-	&.is-style-ystdtb-table-2col-m {
+  &.is-style-ystdtb-table-2col-m {
+    @include global.media-breakpoint-down(sm) {
+      &,
+      tbody,
+      thead,
+      tfoot,
+      tr,
+      th,
+      td {
+        display: block;
+      }
 
-		td {
+      td {
+        padding-top: .5em;
+        padding-bottom: .5em;
+      }
+    }
+  }
 
-			&:first-child {
-				background-color: #f1f1f3;
-				white-space: nowrap;
-			}
-		}
-	}
+  &.is-style-ystdtb-table-scroll {
+    @include global.media-breakpoint-down(sm) {
+      display: block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 0.5rem;
+      overflow: auto;
 
-	&.is-style-ystdtb-table-2col-m {
-
-		@include global.media-breakpoint-down(sm) {
-
-			&,
-			tbody,
-			thead,
-			tfoot,
-			tr,
-			th,
-			td {
-				display: block;
-			}
-
-			td {
-				padding-top: 0.5em;
-				padding-bottom: 0.5em;
-			}
-		}
-	}
-
-	&.is-style-ystdtb-table-scroll {
-
-		@include global.media-breakpoint-down(sm) {
-			display: block;
-			position: relative;
-			width: 100%;
-			padding-bottom: 0.5rem;
-			overflow: auto;
-
-			-webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch;
 
 
-			& > * {
-				width: auto;
-				min-width: 100%;
-				white-space: nowrap;
-			}
+      & > * {
+        width: auto;
+        min-width: 100%;
+        white-space: nowrap;
+      }
 
-			&::-webkit-scrollbar {
-				height: 0.2em;
-			}
+      &::-webkit-scrollbar {
+        height: 0.2em;
+      }
 
-			&::-webkit-scrollbar-track {
-				background: #ccc;
-			}
+      &::-webkit-scrollbar-track {
+        background: #ccc;
+      }
 
-			&::-webkit-scrollbar-thumb {
-				background: #ccc;
-			}
-		}
-	}
+      &::-webkit-scrollbar-thumb {
+        background: #ccc;
+      }
+    }
+  }
 }

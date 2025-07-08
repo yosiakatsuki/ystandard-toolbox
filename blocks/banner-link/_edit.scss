@@ -4,11 +4,10 @@
 @use "inspector-controls/banner";
 
 .ystdtb-banner-link {
-
-	&,
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
+    &,
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 }

@@ -2,69 +2,71 @@
 @use "customProperty";
 
 .ystdtb-banner-link {
-	display: flex;
-	position: relative;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	overflow: hidden;
-	text-decoration: none;
-	color: currentcolor;
+  display: flex;
+  position: relative;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  text-decoration: none;
+  color: currentColor;
 
-	&:hover {
-		color: currentcolor;
-	}
+  &:hover {
+    color: currentColor;
+  }
 
-	@include customProperty.banner-link();
-
-	.ystdtb-banner-link__main-text {
-		margin-top: 0;
-		margin-bottom: 0;
-
-		&:not(.has-font-size) {
-			font-size: 1.6em;
-		}
-
-		@include customProperty.main-text();
-	}
-
-	.ystdtb-banner-link__sub-text {
-		margin-bottom: 0;
-
-		&:not(.has-margin-top) {
-			margin-top: 1.5em;
-		}
-
-		@include customProperty.sub-text();
-	}
+  @include customProperty.banner-link();
 }
 
 .ystdtb-banner-link__container {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	text-align: center;
-	z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
 
-	&:not(.has-padding) {
-		padding: 2em;
-	}
+  &:not(.has-padding) {
+    padding: 2em;
+  }
 
-	@include customProperty.container();
+  @include customProperty.container();
 }
 
 .ystdtb-banner-link__overlay-background,
 .ystdtb-banner-link__overlay-border {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .ystdtb-banner-link__overlay-background {
-	opacity: 0.5;
+  opacity: 0.5;
+}
+
+.ystdtb-banner-link {
+  .ystdtb-banner-link__main-text {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &:not(.has-font-size) {
+      font-size: 1.6em;
+    }
+
+    @include customProperty.main-text();
+  }
+
+  .ystdtb-banner-link__sub-text {
+    margin-bottom: 0;
+
+    &:not(.has-margin-top) {
+      margin-top: 1.5em;
+    }
+
+    @include customProperty.sub-text();
+  }
 }

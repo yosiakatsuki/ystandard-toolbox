@@ -5,7 +5,7 @@ import {
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import SVGIcon from '@aktk/components/svg-icon';
+import SVGIcon from '../../../src/js/component/svg-icon';
 
 export default function ( { attributes } ) {
 	const {
