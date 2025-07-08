@@ -98,7 +98,7 @@ class SNS_Share_Block extends Dynamic_Block {
 	/**
 	 * Render
 	 *
-	 * @param array $attributes block attributes.
+	 * @param array  $attributes block attributes.
 	 * @param string $content innerBlocks.
 	 *
 	 * @return false|string
@@ -131,7 +131,7 @@ class SNS_Share_Block extends Dynamic_Block {
 		$attributes['twitter']              = $attributes['useTwitter'];
 		$attributes['facebook']             = $attributes['useFacebook'];
 		$attributes['hatenabookmark']       = $attributes['useHatenaBookmark'];
-		$attributes['pocket']               = $attributes['usePocket'];
+		$attributes['pocket']               = false; // $attributes['usePocket']; 2025.07.08 サービス終了.
 		$attributes['line']                 = $attributes['useLINE'];
 		$attributes['bluesky']              = $attributes['useBluesky'];
 		$attributes['twitter_via_user']     = $attributes['twitterVia'];

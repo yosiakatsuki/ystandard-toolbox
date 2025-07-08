@@ -1,22 +1,52 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Coding Standards for Plugins">
-    <description>Generally-applicable sniffs for WordPress plugins</description>
+	<description>Generally-applicable sniffs for WordPress plugins</description>
 
-    <rule ref="WordPress-Core">
-        <exclude name="Generic.Files.EndFileNewline.NotFound"/>
-        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	<exclude name="Squiz.Scope.MethodScope.Missing"/>
+	<exclude name="Squiz.Commenting.FileComment.Missing"/>
+	<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+	<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+	<exclude name="Squiz.Commenting.VariableComment.Missing"/>
+	<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing"/>
+	<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.OneParamPerLine"/>
+
+	<rule ref="WordPress">
+		<exclude name="Generic.Files.EndFileNewline.NotFound"/>
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+		<exclude name="Generic.WhiteSpace.IncrementDecrementSpacing.SpaceAfterIncrement"/>
+		<exclude name="Generic.WhiteSpace.IncrementDecrementSpacing.SpaceAfterDecrement"/>
+
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.defaultFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.echoFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.parentFound"/>
+		<exclude name="Universal.Operators.DisallowStandalonePostIncrementDecrement.PostIncrementFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.classFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.returnFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.listFound"/>
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.functionFound"/>
+
+		<exclude name="PSR2.Methods.FunctionClosingBrace.SpacingBeforeClose"/>
+		<exclude name="PSR2.Methods.FunctionClosingBrace.SpacingBeforeClose"/>
+		<exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+
+		<exclude name="PSR12.Classes.ClassInstantiation.MissingParentheses"/>
+		<exclude name="PSR12.Functions.ReturnTypeDeclaration"/>
+
+		<exclude name="PEAR.Files.IncludingFile.BracketsNotRequired"/>
+	</rule>
+	<rule ref="WordPress-Docs">
+        <exclude name="WordPress.Files.FileComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
     </rule>
-    <rule ref="WordPress-Docs"/>
-    <file>.</file>
-    <exclude-pattern>/vendor/</exclude-pattern>
-    <exclude-pattern>/build/</exclude-pattern>
-    <exclude-pattern>/dist/</exclude-pattern>
-    <exclude-pattern>/node_modules/</exclude-pattern>
-    <exclude-pattern>/wordpress/</exclude-pattern>
-    <exclude-pattern>/library/</exclude-pattern>
-    <exclude-pattern>/tests/bootstrap.php</exclude-pattern>
-    <exclude-pattern>/tests/*</exclude-pattern>
-    <exclude-pattern>*/js/*</exclude-pattern>
-    <arg name="basepath" value="."/>
-    <arg name="extensions" value="php"/>
+	<file>.</file>
+	<arg name="basepath" value="."/>
+	<arg name="extensions" value="php"/>
+	<exclude-pattern>/vendor/</exclude-pattern>
+	<exclude-pattern>/build/</exclude-pattern>
+	<exclude-pattern>/node_modules/</exclude-pattern>
+	<exclude-pattern>/wordpress/</exclude-pattern>
+	<exclude-pattern>/library/</exclude-pattern>
+	<exclude-pattern>/tests/bootstrap.php</exclude-pattern>
+	<exclude-pattern>/tests/</exclude-pattern>
 </ruleset>
