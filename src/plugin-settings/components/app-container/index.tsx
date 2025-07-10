@@ -48,7 +48,7 @@ export default function AppContainer( props: AppContainerProps ) {
 				>
 					<div
 						className={
-							'absolute z-10 size-full bg-white opacity-80'
+							'absolute z-10 h-full w-full bg-white opacity-80'
 						}
 					/>
 					<div className={ 'relative z-20' }>

@@ -21,6 +21,7 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'off',
 		'jsdoc/check-param-names': 'off',
 		'tailwindcss/no-custom-classname': 'off',
+		'tailwindcss/enforces-shorthand': 'off',
 	},
 	parserOptions: {
 		requireConfigFile: false,
