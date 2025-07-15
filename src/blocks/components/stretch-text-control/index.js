@@ -1,6 +1,10 @@
 import { TextControl } from '@wordpress/components';
 import classnames from 'classnames';
 
+/**
+ * @param props
+ * @deprecated
+ */
 const StretchTextControl = ( props ) => {
 	const { className, style, value, onChange, placeholder } = props;
 	const inputClassName = classnames(
