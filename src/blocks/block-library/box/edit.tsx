@@ -19,16 +19,21 @@ import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 
-/*
+/**
  * Aktk Dependencies
  */
-import SVGIcon from '@aktk/components/svg-icon';
-import { getSpacing } from '@aktk/helper/spacing';
-import StretchTextControl from '@aktk/components/stretch-text-control';
+import { StretchTextControl } from '@aktk/block-components/components/text-control';
 
 /*
  * Plugin Dependencies
  */
+import SVGIcon from '@aktk/components/svg-icon';
+import { getSpacing } from '@aktk/helper/spacing';
+
+/*
+ * Block Dependencies
+ */
+import type { BoxEditProps } from './types';
 import { blockClassName } from './utils';
 import {
 	getBoxBorderRadius,
@@ -36,10 +41,10 @@ import {
 	getLabelBorderRadius,
 } from './function';
 import * as BlockOption from './inspector-controls';
-import { BoxEditProps } from './types';
 
 /**
  * ボックスブロック編集コンポーネント
+ * @param props
  */
 function Box( props: BoxEditProps ) {
 	const {
@@ -230,7 +235,7 @@ function Box( props: BoxEditProps ) {
 					{ ( label || isSelected ) && (
 						<StretchTextControl
 							className="ystdtb-box__label-text"
-							value={ label }
+							value={ label || '' }
 							onChange={ ( value ) => {
 								setAttributes( { label: value } );
 							} }
