@@ -1,26 +1,39 @@
-import { BaseControl, ColorPalette } from '@wordpress/components';
-import { select } from '@wordpress/data';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-const BoxTextColor = ( props ) => {
-	const { colors } = select( 'core/block-editor' ).getSettings();
+/*
+ * Aktk Dependencies
+ */
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
+
+/*
+ * Plugin Dependencies
+ */
+import { BoxEditProps } from '../types';
+
+interface BoxTextColorProps {
+	boxTextColor: BoxEditProps['boxTextColor'];
+	setBoxTextColor: BoxEditProps['setBoxTextColor'];
+}
+
+/**
+ * ボックス文字色コントロール
+ */
+const BoxTextColor = ( props: BoxTextColorProps ) => {
 	const { boxTextColor, setBoxTextColor } = props;
 
 	return (
-		<BaseControl
-			id={ 'box-text-color' }
+		<ColorPalette
 			label={ __( 'ボックス文字色', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
-		>
-			<ColorPalette
-				colors={ colors }
-				disableCustomColors={ false }
-				onChange={ ( color ) => {
-					setBoxTextColor( color );
-				} }
-				value={ boxTextColor.color }
-			/>
-		</BaseControl>
+			value={ boxTextColor.color || '' }
+			onChange={ ( color ) => {
+				setBoxTextColor( color );
+			} }
+			enableCurrentColor={ true }
+			enableTransparent={ true }
+		/>
 	);
 };
 

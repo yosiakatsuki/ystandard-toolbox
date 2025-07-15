@@ -1,28 +1,54 @@
-import { BaseControl, SelectControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
+/*
+ * Aktk Dependencies
+ */
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
+
+/*
+ * Plugin Dependencies
+ */
+/*
+ * Plugin Dependencies
+ */
+import type { BoxAttributes } from '../types';
 import { borderStyles } from '../utils';
 
-const BoxBorderStyle = ( props ) => {
+interface BoxBorderStyleProps {
+	attributes: BoxAttributes;
+	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
+}
+
+/**
+ * ボックス枠線スタイルコントロール
+ * @param props
+ */
+const BoxBorderStyle = ( props: BoxBorderStyleProps ) => {
 	const { attributes, setAttributes } = props;
 
 	const { boxBorderStyle } = attributes;
 
+	// CustomSelectControl用にオプションを変換
+	const selectOptions = borderStyles.map( ( style ) => ( {
+		key: style.value,
+		name: style.label,
+	} ) );
+
 	return (
-		<BaseControl __nextHasNoMarginBottom>
-			<SelectControl
-				label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
-				value={ boxBorderStyle }
-				options={ borderStyles }
-				onChange={ ( value ) => {
-					setAttributes( {
-						boxBorderStyle: value,
-					} );
-				} }
-				__next40pxDefaultSize
-				__nextHasNoMarginBottom
-			/>
-		</BaseControl>
+		<CustomSelectControl
+			label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
+			value={ boxBorderStyle }
+			options={ selectOptions }
+			onChange={ ( value ) => {
+				setAttributes( {
+					boxBorderStyle: value as BoxAttributes[ 'boxBorderStyle' ],
+				} );
+			} }
+			useEmptyValue={ false }
+		/>
 	);
 };
 

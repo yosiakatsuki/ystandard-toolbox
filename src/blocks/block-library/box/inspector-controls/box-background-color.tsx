@@ -1,26 +1,39 @@
-import { BaseControl, ColorPalette } from '@wordpress/components';
-import { select } from '@wordpress/data';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-const BoxBackgroundColor = ( props ) => {
+/*
+ * Aktk Dependencies
+ */
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
+
+/*
+ * Plugin Dependencies
+ */
+import { BoxEditProps } from '../types';
+
+interface BoxBackgroundColorProps {
+	boxBackgroundColor: BoxEditProps['boxBackgroundColor'];
+	setBoxBackgroundColor: BoxEditProps['setBoxBackgroundColor'];
+}
+
+/**
+ * ボックス背景色コントロール
+ */
+const BoxBackgroundColor = ( props: BoxBackgroundColorProps ) => {
 	const { boxBackgroundColor, setBoxBackgroundColor } = props;
-	const { colors } = select( 'core/block-editor' ).getSettings();
 
 	return (
-		<BaseControl
-			id={ 'box-background-color' }
+		<ColorPalette
 			label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
-		>
-			<ColorPalette
-				colors={ colors }
-				disableCustomColors={ false }
-				onChange={ ( color ) => {
-					setBoxBackgroundColor( color );
-				} }
-				value={ boxBackgroundColor.color }
-			/>
-		</BaseControl>
+			value={ boxBackgroundColor.color || '' }
+			onChange={ ( color ) => {
+				setBoxBackgroundColor( color );
+			} }
+			enableCurrentColor={ true }
+			enableTransparent={ true }
+		/>
 	);
 };
 

@@ -262,6 +262,8 @@ import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 import RangeControl from '@aktk/block-components/wp-controls/range-control';
 ```
 
+**注意**: `@aktk/block-components/wp-controls/select-control`は存在しない。代わりに`@aktk/block-components/components/custom-select-control`を使用する。
+
 ### CSSファイル移行
 
 #### 1. ファイル名変更 ✅ 完了
