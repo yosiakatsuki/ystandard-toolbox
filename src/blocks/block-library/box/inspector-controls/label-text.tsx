@@ -1,17 +1,37 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { PlainText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-const LabelText = ( props ) => {
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+
+/*
+ * Plugin Dependencies
+ */
+import type { BoxAttributes } from '../types';
+
+interface LabelTextProps {
+	attributes: BoxAttributes;
+	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
+}
+
+/**
+ * ラベルテキストコントロール
+ * @param props
+ */
+const LabelText = ( props: LabelTextProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
 
 	const { label } = attributes;
 
 	return (
 		<BaseControl
-			id={ 'label' }
+			id="label"
 			label={ __( 'ラベルテキスト', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
 		>
 			<PlainText
 				value={ label }

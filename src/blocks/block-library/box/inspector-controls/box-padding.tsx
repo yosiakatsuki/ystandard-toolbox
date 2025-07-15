@@ -1,100 +1,49 @@
-import {
-	BaseControl,
-	ToggleControl,
-	__experimentalBoxControl as BoxControl,
-} from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-import { units } from '../utils';
-import {
-	addResponsiveProperty,
-	deleteResponsiveProperty,
-	getResponsiveProperty,
-} from '@aktk/helper/responsive';
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
 
-const BoxPadding = ( props ) => {
+/*
+ * Plugin Dependencies
+ */
+import type { BoxAttributes } from '../types';
+
+interface BoxPaddingProps {
+	attributes: BoxAttributes;
+	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
+}
+
+/**
+ * ボックス内側余白コントロール
+ * @param props
+ */
+const BoxPadding = ( props: BoxPaddingProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
 
-	const { boxPadding, isResponsiveBoxPadding } = attributes;
+	const { boxPadding } = attributes;
 
 	return (
 		<BaseControl
-			id={'box-padding'}
-			label={__( '余白設定', 'ystandard-toolbox' )}
-			__nextHasNoMarginBottom
+			id="box-padding"
+			label={ __( '余白設定', 'ystandard-toolbox' ) }
 		>
-			<BaseControl __nextHasNoMarginBottom>
-				<BoxControl
-					label={__( 'ボックス内側余白', 'ystandard-toolbox' )}
-					values={getResponsiveProperty( boxPadding, 'desktop' )}
-					onChange={( nextValues ) => {
-						setAttributes( {
-							boxPadding: {
-								...boxPadding,
-								desktop: nextValues,
-							},
-						} );
-					}}
-					units={units}
-					__next40pxDefaultSize
-				/>
-				<div style={{ marginTop: '10px' }}>
-					<ToggleControl
-						label={__(
-							'タブレット・モバイル設定',
-							'ystandard-toolbox'
-						)}
-						onChange={( value ) => {
-							let newBoxPadding;
-							if ( value ) {
-								newBoxPadding = addResponsiveProperty( boxPadding );
-							} else {
-								newBoxPadding =
-									deleteResponsiveProperty( boxPadding );
-							}
-							setAttributes( {
-								isResponsiveBoxPadding: value,
-								boxPadding: newBoxPadding,
-							} );
-						}}
-						checked={isResponsiveBoxPadding}
-						__nextHasNoMarginBottom
-
-					/>
-				</div>
-			</BaseControl>
-			{isResponsiveBoxPadding && (
-				<BaseControl __nextHasNoMarginBottom>
-					<BoxControl
-						label={__( 'タブレット', 'ystandard-toolbox' )}
-						values={getResponsiveProperty( boxPadding, 'tablet' )}
-						onChange={( nextValues ) => {
-							setAttributes( {
-								boxPadding: {
-									...boxPadding,
-									tablet: nextValues,
-								},
-							} );
-						}}
-						units={units}
-						__next40pxDefaultSize
-					/>
-					<BoxControl
-						label={__( 'モバイル', 'ystandard-toolbox' )}
-						values={getResponsiveProperty( boxPadding, 'mobile' )}
-						onChange={( nextValues ) => {
-							setAttributes( {
-								boxPadding: {
-									...boxPadding,
-									mobile: nextValues,
-								},
-							} );
-						}}
-						units={units}
-						__next40pxDefaultSize
-					/>
-				</BaseControl>
-			)}
+			<ResponsiveSpacingSelect
+				value={ boxPadding }
+				onChange={ ( newValue ) => {
+					setAttributes( { boxPadding: newValue } );
+				} }
+				responsiveControlStyle="vertical"
+				useResponsive={ true }
+				showResetButton={ true }
+				sides={ [ 'top', 'right', 'bottom', 'left' ] }
+				minimumCustomValue={ 0 }
+			/>
 		</BaseControl>
 	);
 };

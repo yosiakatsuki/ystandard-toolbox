@@ -1,33 +1,44 @@
-import {
-	BaseControl,
-	__experimentalUnitControl as UnitControl,
-} from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
+/*
+ * Aktk Dependencies
+ */
+import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+
+/*
+ * Plugin Dependencies
+ */
+import type { BoxAttributes } from '../types';
 import { units } from '../utils';
 
-const LabelBorderRadius = ( props ) => {
+interface LabelBorderRadiusProps {
+	attributes: BoxAttributes;
+	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
+}
+
+/**
+ * ラベル角丸コントロール
+ * @param props
+ */
+const LabelBorderRadius = ( props: LabelBorderRadiusProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
 
 	const { labelBorderRadius } = attributes;
 
 	return (
-		<BaseControl
-			id={ 'label-border-radius' }
+		<UnitControl
 			label={ __( '角丸', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
-		>
-			<UnitControl
-				value={ labelBorderRadius }
-				onChange={ ( value ) => {
-					setAttributes( {
-						labelBorderRadius: value,
-					} );
-				} }
-				units={ units }
-				__next40pxDefaultSize
-			/>
-		</BaseControl>
+			value={ labelBorderRadius }
+			onChange={ ( value ) => {
+				setAttributes( {
+					labelBorderRadius: value,
+				} );
+			} }
+			units={ units }
+		/>
 	);
 };
 

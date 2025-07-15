@@ -1,26 +1,40 @@
-import { BaseControl, ColorPalette } from '@wordpress/components';
-import { select } from '@wordpress/data';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-const LabelBackgroundColor = ( props ) => {
+/*
+ * Aktk Dependencies
+ */
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
+
+/*
+ * Plugin Dependencies
+ */
+import type { BoxEditProps } from '../types';
+
+interface LabelBackgroundColorProps {
+	labelBackgroundColor: BoxEditProps['labelBackgroundColor'];
+	setLabelBackgroundColor: BoxEditProps['setLabelBackgroundColor'];
+}
+
+/**
+ * ラベル背景色コントロール
+ * @param props
+ */
+const LabelBackgroundColor = ( props: LabelBackgroundColorProps ): React.ReactElement => {
 	const { labelBackgroundColor, setLabelBackgroundColor } = props;
-	const { colors } = select( 'core/block-editor' ).getSettings();
 
 	return (
-		<BaseControl
-			id={ 'label-background-color' }
+		<ColorPalette
 			label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
-			__nextHasNoMarginBottom
-		>
-			<ColorPalette
-				colors={ colors }
-				disableCustomColors={ false }
-				onChange={ ( color ) => {
-					setLabelBackgroundColor( color );
-				} }
-				value={ labelBackgroundColor.color }
-			/>
-		</BaseControl>
+			value={ labelBackgroundColor.color || '' }
+			onChange={ ( color ) => {
+				setLabelBackgroundColor( color );
+			} }
+			enableCurrentColor={ true }
+			enableTransparent={ true }
+		/>
 	);
 };
 

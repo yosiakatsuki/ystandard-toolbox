@@ -31,6 +31,23 @@
 4. 新規で作成するコンポーネントには上記1.,2.のルールを適用する
 5. このルールはWordPress(Gutenberg)のコンポーネントにはアップデートによって過渡期対応となるプロパティが追加されることがあるが、その対応を1つのコンポーネントを更新するだけで完了できるようにするための対応である。
 
+#### wp-controlsの正しい利用方法
+
+**基本的なコントロール**:
+```typescript
+// 正しい使用方法
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
+import RangeControl from '@aktk/block-components/wp-controls/range-control';
+import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+```
+
+**注意事項**:
+- `@aktk/block-components/wp-controls/select-control`は存在しない
+- 代わりに`@aktk/block-components/components/custom-select-control`を使用
+- `__nextHasNoMarginBottom`、`__next40pxDefaultSize`プロパティは削除する
+- オプション形式を`{ value, label }`から`{ key, name }`に変換する
+
 ## プロジェクト概要
 
 **yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグインです。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供します。現在のバージョン: 2.0.0-alpha

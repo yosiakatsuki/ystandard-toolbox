@@ -255,14 +255,20 @@ Box_Block::get_instance();
 #### 2. wp-controls活用
 ```typescript
 // 既存
-import { ToggleControl, RangeControl } from '@wordpress/components';
+import { BaseControl, ToggleControl, RangeControl } from '@wordpress/components';
 
 // 移行後  
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 import RangeControl from '@aktk/block-components/wp-controls/range-control';
+import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 ```
 
-**注意**: `@aktk/block-components/wp-controls/select-control`は存在しない。代わりに`@aktk/block-components/components/custom-select-control`を使用する。
+**重要な変更点**:
+- `BaseControl` → `@aktk/block-components/wp-controls/base-control`
+- `@aktk/block-components/wp-controls/select-control`は存在しない
+- 代わりに`@aktk/block-components/components/custom-select-control`を使用
+- `__nextHasNoMarginBottom`、`__next40pxDefaultSize`プロパティは削除
 
 ### CSSファイル移行
 
