@@ -6,11 +6,9 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 
-/*
- * Plugin Dependencies
- */
 /*
  * Plugin Dependencies
  */
@@ -26,7 +24,7 @@ interface BoxBorderStyleProps {
  * ボックス枠線スタイルコントロール
  * @param props
  */
-const BoxBorderStyle = ( props: BoxBorderStyleProps ) => {
+const BoxBorderStyle = ( props: BoxBorderStyleProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
 
 	const { boxBorderStyle } = attributes;
@@ -38,17 +36,19 @@ const BoxBorderStyle = ( props: BoxBorderStyleProps ) => {
 	} ) );
 
 	return (
-		<CustomSelectControl
-			label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
-			value={ boxBorderStyle }
-			options={ selectOptions }
-			onChange={ ( value ) => {
-				setAttributes( {
-					boxBorderStyle: value as BoxAttributes[ 'boxBorderStyle' ],
-				} );
-			} }
-			useEmptyValue={ false }
-		/>
+		<BaseControl>
+			<CustomSelectControl
+				label={ __( '枠線スタイル', 'ystandard-toolbox' ) }
+				value={ boxBorderStyle }
+				options={ selectOptions }
+				onChange={ ( value ) => {
+					setAttributes( {
+						boxBorderStyle: value as BoxAttributes[ 'boxBorderStyle' ],
+					} );
+				} }
+				useEmptyValue={ false }
+			/>
+		</BaseControl>
 	);
 };
 

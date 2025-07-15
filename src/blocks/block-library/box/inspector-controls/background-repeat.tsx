@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import { getComponentConfig } from '@aktk/helper/config';
 
@@ -41,13 +42,15 @@ const BackgroundRepeat = ( props: BackgroundRepeatProps ): React.ReactElement =>
 	};
 
 	return (
-		<CustomSelectControl
-			label={ __( '背景画像繰り返し', 'ystandard-toolbox' ) }
-			value={ backgroundImageRepeat }
-			options={ selectOptions }
-			onChange={ handleOnChange }
-			useEmptyValue={ false }
-		/>
+		<BaseControl>
+			<CustomSelectControl
+				label={ __( '背景画像繰り返し', 'ystandard-toolbox' ) }
+				value={ backgroundImageRepeat }
+				options={ selectOptions }
+				onChange={ handleOnChange }
+				useEmptyValue={ false }
+			/>
+		</BaseControl>
 	);
 };
 

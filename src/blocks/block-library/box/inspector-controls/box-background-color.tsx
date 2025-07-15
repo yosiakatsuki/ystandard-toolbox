@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 
 /*
@@ -20,20 +21,23 @@ interface BoxBackgroundColorProps {
 
 /**
  * ボックス背景色コントロール
+ * @param props
  */
-const BoxBackgroundColor = ( props: BoxBackgroundColorProps ) => {
+const BoxBackgroundColor = ( props: BoxBackgroundColorProps ): React.ReactElement => {
 	const { boxBackgroundColor, setBoxBackgroundColor } = props;
 
 	return (
-		<ColorPalette
-			label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
-			value={ boxBackgroundColor.color || '' }
-			onChange={ ( color ) => {
-				setBoxBackgroundColor( color );
-			} }
-			enableCurrentColor={ true }
-			enableTransparent={ true }
-		/>
+		<BaseControl>
+			<ColorPalette
+				label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
+				value={ boxBackgroundColor.color || '' }
+				onChange={ ( color ) => {
+					setBoxBackgroundColor( color );
+				} }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
+			/>
+		</BaseControl>
 	);
 };
 

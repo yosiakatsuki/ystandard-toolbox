@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 
 /*
@@ -26,15 +27,17 @@ const LabelBackgroundColor = ( props: LabelBackgroundColorProps ): React.ReactEl
 	const { labelBackgroundColor, setLabelBackgroundColor } = props;
 
 	return (
-		<ColorPalette
-			label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
-			value={ labelBackgroundColor.color || '' }
-			onChange={ ( color ) => {
-				setLabelBackgroundColor( color );
-			} }
-			enableCurrentColor={ true }
-			enableTransparent={ true }
-		/>
+		<BaseControl>
+			<ColorPalette
+				label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
+				value={ labelBackgroundColor.color || '' }
+				onChange={ ( color ) => {
+					setLabelBackgroundColor( color );
+				} }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
+			/>
+		</BaseControl>
 	);
 };
 
