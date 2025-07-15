@@ -325,28 +325,30 @@ interface BoxEditProps {
 
 ## 移行手順
 
-### Phase 1: 基盤整備
-1. **block.json作成**
+### Phase 1: 基盤整備 ✅ 完了
+1. **block.json作成** ✅ 完了
    - 28属性の正確な移行
    - supports設定の移行
    - アセットファイルパス設定
 
-2. **index.php作成**
+2. **index.php作成** ✅ 完了
    - `register_block_type(__DIR__)`実装
-   - 必要に応じてrender_callback検討
+   - Box_Blockクラスによるシングルトン実装
 
-3. **CSSファイルリネーム** ✅ 完了済み
+3. **CSSファイルリネーム** ✅ 完了
    - `_block.scss` → `style.scss`
    - `_edit.scss` → `style-editor.scss`
 
-### Phase 2: TypeScript移行
-1. **型定義ファイル作成**
-   - `types.ts`で属性・プロパティ型定義
+### Phase 2: TypeScript移行 ✅ 完了
+1. **型定義ファイル作成** ✅ 完了
+   - `types.ts`で属性・プロパティ型定義（168行）
    - HOC由来プロパティの型定義
+   - BoxAttributes, BoxEditProps, BoxSaveProps定義
 
-2. **メインファイル改修**
-   - `index.tsx`でregisterBlockType削除
-   - `edit.tsx`, `save.tsx`のTypeScript化
+2. **メインファイル改修** ✅ 完了
+   - `index.tsx`でメタデータ駆動型registerBlockType実装
+   - 適切なコメント構造とimport整理
+   - `edit.tsx`, `save.tsx`のTypeScript化対応
 
 ### Phase 3: コンポーネント移行
 1. **HOC維持**
