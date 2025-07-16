@@ -27,7 +27,7 @@ const LabelBackgroundColor = ( props: LabelBackgroundColorProps ): React.ReactEl
 	const { labelBackgroundColor, setLabelBackgroundColor } = props;
 
 	return (
-		<BaseControl>
+		<BaseControl label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }>
 			<ColorPalette
 				label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
 				value={ labelBackgroundColor.color || '' }

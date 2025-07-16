@@ -48,6 +48,31 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 - `__nextHasNoMarginBottom`、`__next40pxDefaultSize`プロパティは削除する
 - オプション形式を`{ value, label }`から`{ key, name }`に変換する
 
+#### BaseControlによるコントロールラップ規則
+
+**すべてのコントロールを`BaseControl`でラップする**:
+```typescript
+// 基本パターン
+<BaseControl>
+	<UnitControl label={ __( 'サイズ', 'textdomain' ) } />
+</BaseControl>
+
+// ColorPaletteは特別対応（UIの明確性のため）
+<BaseControl label={ __( '背景色', 'textdomain' ) }>
+	<ColorPalette label={ __( '背景色', 'textdomain' ) } />
+</BaseControl>
+```
+
+**理由**:
+- **統一された余白**: 隣接するコントロール間の適切な余白を確保
+- **視覚的な統一性**: すべてのコントロールが同じスタイルで表示
+- **ColorPaletteの特別対応**: BaseControlとColorPalette両方にラベルを設定することで、設定内容がより分かりやすくなる
+
+**コントロール別対応パターン**:
+1. **UnitControl, CustomSelectControl等**: BaseControlでラップ、内部コントロールにラベル設定
+2. **ColorPalette**: BaseControlとColorPalette両方に同じラベルを設定
+3. **複合コントロール**: BaseControlでラップ、適切なラベルを設定
+
 ## プロジェクト概要
 
 **yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグインです。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供します。現在のバージョン: 2.0.0-alpha

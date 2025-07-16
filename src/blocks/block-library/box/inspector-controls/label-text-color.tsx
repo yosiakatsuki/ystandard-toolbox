@@ -27,7 +27,7 @@ const LabelTextColor = ( props: LabelTextColorProps ): React.ReactElement => {
 	const { labelTextColor, setLabelTextColor } = props;
 
 	return (
-		<BaseControl>
+		<BaseControl label={ __( 'ラベル文字色', 'ystandard-toolbox' ) }>
 			<ColorPalette
 				label={ __( 'ラベル文字色', 'ystandard-toolbox' ) }
 				value={ labelTextColor.color || '' }
