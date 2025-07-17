@@ -1,39 +1,49 @@
+/*
+ * External Dependencies
+ */
 import { Image } from 'react-feather';
+
+/*
+ * WordPress Dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { __, _x } from '@wordpress/i18n';
-import { ystdtbConfig } from '@ystd/config';
-import { mergeDefaultAttributes } from '@ystd/helper/attribute';
-import { attributes, supports } from './config';
+
+/*
+ * Aktk Dependencies
+ */
+import { COLORS, CATEGORY } from '@aktk/block-components/config';
+import { mergeDefaultAttributes } from '@aktk/block-components/utils/attributes';
+
+/*
+ * Plugin Dependencies
+ */
+// @ts-ignore
+import metadata from './block.json';
 import edit from './edit';
 import save from './save';
+import './style.scss';
 
-const blockName = 'ystdtb/banner-link';
-const blockAttributes = mergeDefaultAttributes( blockName, attributes );
+export function registerBannerLinkBlock() {
+	const attributes = mergeDefaultAttributes(
+		metadata.name,
+		metadata.attributes
+	);
 
-registerBlockType( blockName, {
-	apiVersion: 2,
-	title: __( 'バナーリンク', 'ystandard-toolbox' ),
-	description: __(
-		'画像の上にテキストを配置したバナー型のリンクを作れるブロック',
-		'ystandard-toolbox'
-	),
-	icon: (
-		<Image
-			stroke={ ystdtbConfig.color.iconBeta }
-			style={ { fill: 'none' } }
-		/>
-	),
-	keywords: [
-		_x( 'banner-link', 'block-keywords', 'ystandard-toolbox' ),
-		_x( 'banner', 'block-keywords', 'ystandard-toolbox' ),
-		'banner-link',
-		'banner',
-		'link',
-	],
-	category: ystdtbConfig.category.beta,
-	attributes: blockAttributes,
-	supports,
-	edit,
-	save,
-	example: {},
-} );
+	registerBlockType( metadata.name, {
+		...metadata,
+		...{
+			icon: (
+				<Image
+					stroke={ COLORS.iconForeground }
+					style={ { fill: 'none' } }
+				/>
+			),
+			category: CATEGORY.common,
+			attributes,
+			edit,
+			save,
+		},
+	} );
+}
+
+registerBannerLinkBlock();

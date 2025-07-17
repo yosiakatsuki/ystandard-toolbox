@@ -1,8 +1,18 @@
-import { BaseControl } from '@wordpress/components';
-import ResponsiveSpacing from '@ystd/components/responsive-spacing';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
+/*
+ * Plugin Dependencies
+ */
+import ResponsiveSpacing from '@ystd/components/responsive-spacing';
 import { getResponsiveValues } from '@ystd/helper/responsive';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const Padding = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -16,7 +26,7 @@ const Padding = ( props ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl id="banner-padding">
 			<ResponsiveSpacing
 				label={ __( '内側余白', 'ystandard-toolbox' ) }
 				values={ padding }

@@ -1,5 +1,13 @@
-import { BaseControl, RangeControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import RangeControl from '@aktk/block-components/wp-controls/range-control';
 
 const Opacity = ( { attributes, setAttributes } ) => {
 	const { backgroundOpacity } = attributes;
@@ -7,7 +15,7 @@ const Opacity = ( { attributes, setAttributes } ) => {
 		setAttributes( { backgroundOpacity: value } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl id="banner-opacity">
 			<RangeControl
 				label={ __( '不透明度', 'ystandard-toolbox' ) }
 				value={ backgroundOpacity }

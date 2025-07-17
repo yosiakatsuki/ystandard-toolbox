@@ -1,6 +1,13 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import BorderRadiusControl from '@ystd/components/border-radius-control';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { BorderRadiusControl } from '@aktk/block-components/components/border-radius-control';
 
 const BorderRadius = ( { attributes, setAttributes } ) => {
 	const { borderRadius } = attributes;
@@ -10,7 +17,7 @@ const BorderRadius = ( { attributes, setAttributes } ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl id="banner-border-radius">
 			<BorderRadiusControl
 				label={ __( '角丸', 'ystandard-toolbox' ) }
 				value={ borderRadius }

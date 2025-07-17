@@ -1,15 +1,27 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import ColorGradientControl from '@ystd/components/color-gradient-control';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 
 const BackgroundColor = ( props ) => {
 	const { backgroundColor, setBackgroundColor } = props;
 	return (
-		<BaseControl>
-			<ColorGradientControl
+		<BaseControl
+			id="banner-background-color"
+			label={ __( '背景色', 'ystandard-toolbox' ) }
+		>
+			<ColorPalette
 				label={ __( '背景色', 'ystandard-toolbox' ) }
-				colorValue={ backgroundColor.color }
-				onColorChange={ setBackgroundColor }
+				value={ backgroundColor.color }
+				onChange={ setBackgroundColor }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
 			/>
 		</BaseControl>
 	);

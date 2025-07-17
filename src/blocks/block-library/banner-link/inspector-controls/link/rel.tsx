@@ -1,6 +1,17 @@
-import { BaseControl } from '@wordpress/components';
-import InputControl from '@ystd/components/input-controls';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
+
+/*
+ * Plugin Dependencies
+ */
+import InputControl from '@ystd/components/input-controls';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const Rel = ( { attributes, setAttributes } ) => {
 	const { link } = attributes;
@@ -14,7 +25,7 @@ const Rel = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl id="link-rel">
 			<InputControl
 				label={ __( 'rel', 'ystandard-toolbox' ) }
 				value={ link?.rel ?? '' }

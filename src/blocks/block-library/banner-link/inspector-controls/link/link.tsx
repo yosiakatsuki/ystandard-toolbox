@@ -1,5 +1,12 @@
+/*
+ * WordPress Dependencies
+ */
 import { URLInput } from '@wordpress/block-editor';
-import { BaseControl } from '@wordpress/components';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const Link = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -15,7 +22,7 @@ const Link = ( props ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl id="link-url">
 			<URLInput value={ link?.url ?? '' } onChange={ handleOnChange } />
 		</BaseControl>
 	);

@@ -1,9 +1,14 @@
-import {
-	BaseControl,
-	SelectControl,
-	ToggleControl,
-} from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
+import { SelectControl } from '@wordpress/components';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 import { headingTag, textHtmlTag } from '../../config';
 
 const HtmlTag = ( { attributes, setAttributes } ) => {
@@ -34,7 +39,7 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 				/>
 			</BaseControl>
 			{ headingTag.includes( subTextHtml ) && (
-				<BaseControl>
+				<BaseControl id="sub-text-style-clear">
 					<ToggleControl
 						label={ __(
 							'見出しスタイル削除',

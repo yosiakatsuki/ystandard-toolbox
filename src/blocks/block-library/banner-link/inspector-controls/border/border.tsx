@@ -1,6 +1,12 @@
-import { BaseControl } from '@wordpress/components';
-
+/*
+ * Plugin Dependencies
+ */
 import BorderControl from '@ystd/controls/border-control';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const Border = ( { attributes, setAttributes } ) => {
 	const { border } = attributes;
@@ -10,7 +16,7 @@ const Border = ( { attributes, setAttributes } ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl id="banner-border">
 			<BorderControl value={ border } onChange={ handleOnChange } />
 		</BaseControl>
 	);

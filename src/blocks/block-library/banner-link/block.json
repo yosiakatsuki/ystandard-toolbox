@@ -1,0 +1,138 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/banner-link",
+	"version": "1.0.0",
+	"title": "バナーリンク",
+	"category": "text",
+	"description": "画像の上にテキストを配置したバナー型のリンクを作れるブロック",
+	"keywords": [
+		"banner-link",
+		"banner", 
+		"link"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"link": {
+			"type": "object"
+		},
+		"backgroundImage": {
+			"type": "object"
+		},
+		"backgroundImageFocalPoint": {
+			"type": "object"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"customGradient": {
+			"type": "string"
+		},
+		"backgroundOpacity": {
+			"type": "number"
+		},
+		"ratio": {
+			"type": "string"
+		},
+		"size": {
+			"type": "object"
+		},
+		"borderRadius": {
+			"type": "string"
+		},
+		"border": {
+			"type": "object"
+		},
+		"mainText": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ystdtb-banner-link__main-text"
+		},
+		"mainTextFontSize": {
+			"type": "object"
+		},
+		"mainTextColor": {
+			"type": "string"
+		},
+		"customMainTextColor": {
+			"type": "string"
+		},
+		"mainTextLineHeight": {
+			"type": "number"
+		},
+		"mainTextLetterSpacing": {
+			"type": "string"
+		},
+		"mainTextHtml": {
+			"type": "string"
+		},
+		"mainTextStyleClear": {
+			"type": "boolean",
+			"default": true
+		},
+		"subText": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ystdtb-banner-link__sub-text"
+		},
+		"subTextFontSize": {
+			"type": "object"
+		},
+		"subTextColor": {
+			"type": "string"
+		},
+		"customSubTextColor": {
+			"type": "string"
+		},
+		"subTextLineHeight": {
+			"type": "number"
+		},
+		"subTextLetterSpacing": {
+			"type": "string"
+		},
+		"subTextHtml": {
+			"type": "string"
+		},
+		"subTextStyleClear": {
+			"type": "boolean",
+			"default": true
+		},
+		"subTextMargin": {
+			"type": "object"
+		},
+		"padding": {
+			"type": "object"
+		},
+		"boxShadow": {
+			"type": "object"
+		},
+		"contentPosition": {
+			"type": "object"
+		},
+		"blockPosition": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false,
+		"lightBlockWrapper": true
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"example": {
+		"attributes": {
+			"mainText": "メインテキスト",
+			"subText": "サブテキスト",
+			"backgroundColor": "#f0f0f0"
+		}
+	}
+}

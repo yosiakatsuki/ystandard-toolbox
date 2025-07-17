@@ -1,6 +1,17 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
+
+/*
+ * Plugin Dependencies
+ */
 import ResponsiveValues from '@ystd/components/responsive-values';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { parseSize } from '../../function/edit';
 
 const MaxWidth = ( { attributes, setAttributes } ) => {
@@ -22,7 +33,7 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 	};
 	return (
 		<>
-			<BaseControl>
+			<BaseControl id="banner-max-width">
 				<ResponsiveValues
 					label={ __( '最大幅', 'ystandard-toolbox' ) }
 					values={ size?.maxWidth }

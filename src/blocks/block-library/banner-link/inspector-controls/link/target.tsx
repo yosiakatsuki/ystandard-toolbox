@@ -1,11 +1,22 @@
-import { BaseControl, ToggleControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
+/*
+ * Plugin Dependencies
+ */
 import {
 	isOpenInNewTab,
 	toggleOpenInNewTab,
 	getLinkRel,
 } from '@ystd/helper/link';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 
 const Target = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -30,7 +41,7 @@ const Target = ( props ) => {
 		} );
 	};
 	return (
-		<BaseControl>
+		<BaseControl id="link-target">
 			<ToggleControl
 				label={ __( '新しいタブで開く', 'ystandard-toolbox' ) }
 				onChange={ handleOnChange }

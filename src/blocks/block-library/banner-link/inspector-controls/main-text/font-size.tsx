@@ -1,8 +1,18 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
+/*
+ * Plugin Dependencies
+ */
 import ResponsiveFontSize from '@ystd/components/responsive-font-size';
 import { getResponsiveValues } from '@ystd/helper/responsive';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const FontSize = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -16,7 +26,7 @@ const FontSize = ( props ) => {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl id="main-text-font-size">
 			<ResponsiveFontSize
 				label={ __( 'フォントサイズ', 'ystandard-toolbox' ) }
 				values={ mainTextFontSize }

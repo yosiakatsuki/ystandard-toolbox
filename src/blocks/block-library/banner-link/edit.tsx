@@ -1,4 +1,11 @@
+/*
+ * External Dependencies
+ */
 import classnames from 'classnames';
+
+/*
+ * WordPress Dependencies
+ */
 import {
 	RichText,
 	withColors,
@@ -7,7 +14,12 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { blockClassName, blockClasses } from './config';
+
+/*
+ * Plugin Dependencies
+ */
+import { blockClassName, blockClasses } from './utils';
+import './style-editor.scss';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
 import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';

@@ -1,7 +1,18 @@
-import { BaseControl, TabPanel, FocalPointPicker } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
+import { TabPanel, FocalPointPicker } from '@wordpress/components';
 
+/*
+ * Plugin Dependencies
+ */
 import MediaUploadControl from '@ystd/components/media-upload-control';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const Image = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -52,7 +63,7 @@ const Image = ( props ) => {
 					return (
 						<>
 							{ 'image' === tab.name && (
-								<BaseControl>
+								<BaseControl id="banner-image-upload">
 									<MediaUploadControl
 										media={ backgroundImage }
 										onSelect={ handleImageOnSelect }
@@ -62,7 +73,7 @@ const Image = ( props ) => {
 								</BaseControl>
 							) }
 							{ 'focalPoint' === tab.name && (
-								<BaseControl>
+								<BaseControl id="banner-image-focal-point">
 									<FocalPointPicker
 										value={ backgroundImageFocalPoint }
 										onChange={ handleFocalPointOnChange }

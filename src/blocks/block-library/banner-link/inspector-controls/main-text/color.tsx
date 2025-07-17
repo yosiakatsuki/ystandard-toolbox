@@ -1,17 +1,26 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-import ColorPaletteControl from '@ystd/components/color-palette-control';
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 
 const Color = ( { mainTextColor, setMainTextColor } ) => {
 	return (
 		<BaseControl
-			id={ mainTextColor }
+			id="main-text-color"
 			label={ __( '色', 'ystandard-toolbox' ) }
 		>
-			<ColorPaletteControl
+			<ColorPalette
+				label={ __( '色', 'ystandard-toolbox' ) }
 				value={ mainTextColor.color }
 				onChange={ setMainTextColor }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
 			/>
 		</BaseControl>
 	);

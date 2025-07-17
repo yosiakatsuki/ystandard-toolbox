@@ -1,7 +1,13 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
-import ColorPaletteControl from '@ystd/components/color-palette-control';
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 
 const Color = ( { subTextColor, setSubTextColor } ) => {
 	return (
@@ -9,9 +15,12 @@ const Color = ( { subTextColor, setSubTextColor } ) => {
 			id={ subTextColor }
 			label={ __( '色', 'ystandard-toolbox' ) }
 		>
-			<ColorPaletteControl
+			<ColorPalette
+				label={ __( '色', 'ystandard-toolbox' ) }
 				value={ subTextColor.color }
 				onChange={ setSubTextColor }
+				enableCurrentColor={ true }
+				enableTransparent={ true }
 			/>
 		</BaseControl>
 	);

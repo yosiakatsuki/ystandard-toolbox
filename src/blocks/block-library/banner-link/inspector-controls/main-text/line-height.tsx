@@ -1,7 +1,18 @@
-import { BaseControl } from '@wordpress/components';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import NumberControl from '@ystd/components/number-control';
+
+/*
+ * Plugin Dependencies
+ */
 import { toNumber } from '@ystd/helper/number';
+
+/*
+ * Aktk Dependencies
+ */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import NumberControl from '@aktk/block-components/wp-controls/number-control';
 
 const LineHeight = ( { attributes, setAttributes } ) => {
 	const { mainTextLineHeight } = attributes;
