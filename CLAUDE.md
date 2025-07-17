@@ -412,6 +412,44 @@ import { CATEGORY } from '@aktk/blocks/config';
 - **解決策**: CATEGORYは`@aktk/blocks/config`から個別にインポートする
 - **適用対象**: 全ブロックの`index.tsx`ファイル
 
+**@ystd → @aktk 依存関係変換表**:
+
+##### ✅ 単純変換可能（webpack設定で同じディレクトリを参照）
+| @ystd | @aktk | 実際のパス |
+|-------|-------|-----------|
+| `@ystd/function` | `@aktk/function` | `src/blocks/function` |
+| `@ystd/components` | `@aktk/components` | `src/blocks/components` |
+| `@ystd/controls` | `@aktk/controls` | `src/blocks/controls` |
+| `@ystd/config` | `@aktk/config` | `src/js/config` |
+| `@ystd/helper` | `@aktk/helper` | `src/js/helper` |
+
+### @ystd/ → @aktk/ 変換ガイドライン
+
+**3段階の変換方針**:
+1. **aktk-block-components優先**: 存在する場合は `@aktk/block-components/` に移行
+2. **webpackエイリアス活用**: `@ystd/` → `@aktk/` の単純変換で参照解決を試す
+3. **真の変換不可能のみリストアップ**: 上記2つで解決しない場合のみ手動対応
+
+**変換判定の正しい基準**:
+- ❌ **誤**: 複雑そうだから変換不可能
+- ✅ **正**: webpackエイリアス確認後、実際に参照エラーが出るもののみ変換不可能
+
+**banner-link実績**: 42箇所中40箇所が変換可能、真の変換不可能は2箇所のみ
+
+##### ⚠️ aktk-block-componentsに移行すべき項目
+- `@ystd/components/responsive-values` → `@aktk/block-components/components/responsive-values`
+- `@ystd/components/box-shadow-control` → `@aktk/block-components/components/box-shadow-control`
+- `@ystd/controls/number-control` → `@aktk/block-components/wp-controls/number-control`
+
+##### 🚫 真の変換不可能項目（例）
+- `@ystd/components/ratio-size-control` → プラグイン固有（aktk未対応）
+- `@ystd/helper/fallback` → プラグイン固有（aktk未対応）
+
+##### 📋 移行方針
+1. **aktk-block-components移行**: 共通コンポーネント活用
+2. **単純変換**: `@ystd/` → `@aktk/`でwebpackエイリアス解決
+3. **最小限維持**: 真に変換不可能な2%のみ`@ystd/`維持
+
 #### 5. 入れ子構造ブロックの対応
 
 -   親子関係を廃止し、独立したブロックとして再構築

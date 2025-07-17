@@ -74,9 +74,75 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 ### ⏸️ 一時中断フェーズ
 
 #### フェーズ2: 依存関係移行（一時中断）
-- **理由**: 60ファイル以上の複雑な`@ystd/`依存関係
+- **理由**: 42箇所の複雑な`@ystd/`依存関係
 - **新方針**: レガシーコンポーネント維持、最低限の仕様対応のみ実施
 - **今後の対応**: 他の簡単なブロック移行完了後に再検討
+
+## 🔄 @ystd/ → @aktk/ 依存関係変換分析
+
+### ✅ 単純な名前空間変換で解決可能（28箇所）
+
+webpackエイリアス設定により、`@ystd/` → `@aktk/` への変更だけで参照解決される：
+
+#### config関連（8箇所）
+- `edit.tsx:43` → `@aktk/config`
+- `save.tsx:27` → `@aktk/config`
+- `inspector-controls/link/target.tsx:13` → `@aktk/config`
+- 他5箇所
+
+#### helper関連（11箇所）
+- `edit.tsx:37,42` → `@aktk/helper/ratio`, `@aktk/helper/fontSize`
+- `save.tsx:8,10` → `@aktk/helper/fontSize`, `@aktk/helper/ratio`
+- `function/style.ts:4` → `@aktk/helper/responsive`
+- 他6箇所
+
+#### function関連（4箇所）
+- `function/style.ts:6,7` → `@aktk/function/spacing`, `@aktk/function/object`
+- `function/edit.ts:1` → `@aktk/function/object`
+- `block-controls/content-position/index.tsx:5` → `@aktk/function/object`
+
+#### controls関連（5箇所）
+- `edit.tsx:41` → `@aktk/controls/border-control`
+- `save.tsx:26` → `@aktk/controls/border-control`
+- `inspector-controls/border/border.tsx:4` → `@aktk/controls/border-control`
+- `inspector-controls/link/rel.tsx:9` → `@aktk/controls/input-controls`
+- `controls/link.tsx:1` → `@aktk/controls/link-control`
+
+### ⚠️ aktk-block-componentsに移行すべき（12箇所）
+
+以下は aktk-block-components で同等機能が提供されているため、適切なパスに変更：
+
+#### レスポンシブコンポーネント（5箇所）
+- `inspector-controls/banner/min-height.tsx:9` → `@aktk/block-components/components/responsive-values`
+- `inspector-controls/banner/max-width.tsx:9` → `@aktk/block-components/components/responsive-values`
+- `inspector-controls/sub-text/margin.tsx:9` → `@aktk/block-components/components/responsive-values`
+- `inspector-controls/sub-text/font-size.tsx:9` → `@aktk/block-components/components/responsive-font-size`
+- `inspector-controls/main-text/font-size.tsx:9` → `@aktk/block-components/components/responsive-font-size`
+
+#### 共通コンポーネント（4箇所）
+- `inspector-controls/banner/image.tsx:10` → `@aktk/block-components/components/media-upload-control`
+- `edit.tsx:25` → `@aktk/block-components/components/box-shadow-control`
+- `save.tsx:22` → `@aktk/block-components/components/box-shadow-control`
+- `inspector-controls/box-shadow/box-shadow.tsx:4` → `@aktk/block-components/components/box-shadow-control`
+
+#### wp-controls利用（3箇所）
+- `inspector-controls/sub-text/line-height.tsx:9` → `@aktk/block-components/wp-controls/number-control`
+- `inspector-controls/main-text/line-height.tsx:9` → `@aktk/block-components/wp-controls/number-control`
+- `inspector-controls/padding/padding.tsx:9` → `@aktk/block-components/components/responsive-spacing`
+
+### 🚫 真の変換不可能項目（2箇所のみ）
+
+以下は aktk-block-components にも @aktk/ エイリアスにも対応するものが存在せず、プラグイン固有実装のため維持が必要：
+
+#### プラグイン固有コンポーネント（2箇所）
+- `inspector-controls/banner/ratio-size.tsx:9` → `@ystd/components/ratio-size-control`
+- `save.tsx:28` → `@ystd/helper/fallback`
+
+### 📊 統計
+- **単純変換**: 28箇所（webpackエイリアスで解決）
+- **aktk移行**: 12箇所（共通コンポーネント活用）
+- **維持必要**: 2箇所（プラグイン固有機能）
+- **合計**: 42箇所
 
 #### フェーズ3: 最適化（一時中断）
 - CSS分離、型定義強化、テスト追加は後回し
