@@ -34,13 +34,13 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystd/controls/border-control';
-import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
-import { getComponentConfig } from '@ystd/helper/config';
+} from '@aktk/controls/border-control';
+import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
+import { ystdtbConfig } from '@aktk/config';
 
 const BannerLink = ( props ) => {
 	const {
@@ -80,7 +80,7 @@ const BannerLink = ( props ) => {
 	} = attributes;
 
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
-	const clearStyle = getComponentConfig( 'headingClearStyle' );
+	const clearStyle = ystdtbConfig( 'headingClearStyle' );
 
 	const fontSizeClasses = {
 		mainText: getFontSizeClassByObject( mainTextFontSize?.desktop ),

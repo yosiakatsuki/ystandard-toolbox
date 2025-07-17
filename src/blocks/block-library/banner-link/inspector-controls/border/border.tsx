@@ -1,7 +1,7 @@
 /*
  * Plugin Dependencies
  */
-import BorderControl from '@ystd/controls/border-control';
+import BorderControl from '@aktk/controls/border-control';
 
 /*
  * Aktk Dependencies

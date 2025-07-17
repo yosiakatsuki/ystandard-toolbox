@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import { toNumber } from '@ystd/helper/number';
+import { toNumber } from '@aktk/helper/number';
 
 /*
  * Aktk Dependencies

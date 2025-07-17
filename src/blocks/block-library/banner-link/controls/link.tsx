@@ -3,7 +3,7 @@ import {
 	isOpenInNewTab,
 	toggleOpenInNewTab,
 	getLinkRel,
-} from '@ystd/helper/link';
+} from '@aktk/helper/link';
 
 const BannerLinkLinkControl = ( props ) => {
 	const { attributes, setAttributes } = props;

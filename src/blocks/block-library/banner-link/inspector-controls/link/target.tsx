@@ -10,7 +10,7 @@ import {
 	isOpenInNewTab,
 	toggleOpenInNewTab,
 	getLinkRel,
-} from '@ystd/helper/link';
+} from '@aktk/helper/link';
 
 /*
  * Aktk Dependencies

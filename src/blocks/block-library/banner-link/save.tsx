@@ -5,9 +5,9 @@ import {
 	__experimentalGetGradientClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { getFontSizeClassByObject } from '@ystd/helper/fontSize';
+import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
 import { blockClassName, blockClasses } from './config';
-import { getRatioClassName, getRatioInnerClassName } from '@ystd/helper/ratio';
+import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import {
 	getBackgroundImage,
 	getBackgroundPosition,
@@ -23,8 +23,8 @@ import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@ystd/controls/border-control';
-import { getComponentConfig } from '@ystd/helper/config';
+} from '@aktk/controls/border-control';
+import { ystdtbConfig } from '@aktk/config';
 import getDataFallbackProperty from '@ystd/helper/fallback';
 import { getSpacingCSS } from '@ystd/helper/spacing';
 
@@ -65,7 +65,7 @@ const save = ( { attributes } ) => {
 		blockPosition,
 	} = attributes;
 
-	const clearStyle = getComponentConfig( 'headingClearStyle' );
+	const clearStyle = ystdtbConfig( 'headingClearStyle' );
 
 	const colorClasses = {
 		backgroundColor:
