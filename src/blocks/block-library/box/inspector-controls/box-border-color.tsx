@@ -27,7 +27,10 @@ const BoxBorderColor = ( props: BoxBorderColorProps ): React.ReactElement => {
 	const { boxBorderColor, setBoxBorderColor } = props;
 
 	return (
-		<BaseControl label={ __( 'ボックス枠線色', 'ystandard-toolbox' ) }>
+		<BaseControl
+			id="box-border-color"
+			label={ __( 'ボックス枠線色', 'ystandard-toolbox' ) }
+		>
 			<ColorPalette
 				label={ __( 'ボックス枠線色', 'ystandard-toolbox' ) }
 				value={ boxBorderColor.color || '' }

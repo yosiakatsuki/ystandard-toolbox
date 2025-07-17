@@ -27,7 +27,10 @@ const BoxBackgroundColor = ( props: BoxBackgroundColorProps ): React.ReactElemen
 	const { boxBackgroundColor, setBoxBackgroundColor } = props;
 
 	return (
-		<BaseControl label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }>
+		<BaseControl
+			id="box-background-color"
+			label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
+		>
 			<ColorPalette
 				label={ __( 'ボックス背景色', 'ystandard-toolbox' ) }
 				value={ boxBackgroundColor.color || '' }

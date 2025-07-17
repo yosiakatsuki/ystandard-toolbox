@@ -27,7 +27,10 @@ const BoxTextColor = ( props: BoxTextColorProps ): React.ReactElement => {
 	const { boxTextColor, setBoxTextColor } = props;
 
 	return (
-		<BaseControl label={ __( 'ボックス文字色', 'ystandard-toolbox' ) }>
+		<BaseControl
+			id="box-text-color"
+			label={ __( 'ボックス文字色', 'ystandard-toolbox' ) }
+		>
 			<ColorPalette
 				label={ __( 'ボックス文字色', 'ystandard-toolbox' ) }
 				value={ boxTextColor.color || '' }
