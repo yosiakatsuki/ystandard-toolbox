@@ -464,26 +464,29 @@ register[ブロック名]Block();
     - `blocks/extension/hidden-by-size/` → `src/blocks/block-library/block-hook-hidden-by-size/`
     - TypeScript化、ブロックフック専用ビルドシステム構築
     - 機能ごとの独立ディレクトリ構成（`build/block-hook/block-hook-**/`）実現
-2. `box/` - 使用頻度が高く、比較的シンプル
+2. ✅ **`box/`** - 使用頻度が高く、比較的シンプル **【移行完了】**
+    - `blocks/box/` → `src/blocks/block-library/box/`
+    - aktk-block-componentsコンポーネント活用
+    - BaseControlへのid属性追加完了
 3. `banner-link/` - 中程度の複雑さ
 
 #### フェーズ2（独立性の高いブロック）
 
-4. `sns-share/` - 外部依存が少ない
-5. `parts/` - シンプルな構造
-6. `posts/` - 複雑だが独立性が高い
+1. `sns-share/` - 外部依存が少ない
+2. `parts/` - シンプルな構造
+3. `posts/` - 複雑だが独立性が高い
 
 #### フェーズ3（入れ子構造ブロック）
 
-7. `icon-list/` + `icon-list-item/` - 関連ブロック（比較的シンプル）
-8. `faq/` + `item/` - 中程度の複雑さ
-9. `timeline/` + `item/` - 中程度の複雑さ
-10. `slider/` + `item/` - 高い複雑さ（JavaScript依存）
-11. `description-list/` + 子ブロック群 - 最も複雑（5ブロック構成）
+1. `icon-list/` + `icon-list-item/` - 関連ブロック（比較的シンプル）
+2. `faq/` + `item/` - 中程度の複雑さ
+3. `timeline/` + `item/` - 中程度の複雑さ
+4. `slider/` + `item/` - 高い複雑さ（JavaScript依存）
+5. `description-list/` + 子ブロック群 - 最も複雑（5ブロック構成）
 
 #### フェーズ4（スタイル系）
 
-12. `styles/` - スタイル拡張機能（特殊対応）
+1. `styles/` - スタイル拡張機能（特殊対応）
 
 ## 設計書運用
 
