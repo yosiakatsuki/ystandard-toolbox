@@ -11,8 +11,9 @@ import { registerBlockType } from '@wordpress/blocks';
 /*
  * Aktk Dependencies
  */
-import { COLORS, CATEGORY } from '@aktk/block-components/config';
+import { COLORS } from '@aktk/block-components/config';
 import { mergeDefaultAttributes } from '@aktk/block-components/utils/attributes';
+import { CATEGORY } from '@aktk/blocks/config';
 
 /*
  * Plugin Dependencies
