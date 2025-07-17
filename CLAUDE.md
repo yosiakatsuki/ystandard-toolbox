@@ -397,6 +397,21 @@ register[ブロック名]Block();
 - ブロック内固有のロジック（そのブロックでしか使わない処理）であれば作成可能
 - 共通利用が想定される機能は勝手に作成せず、相談する
 
+##### 📋 共通エラー対応パターン
+
+**CATEGORYエクスポートエラー**:
+```typescript
+// ❌ エラーとなるパターン
+import { COLORS, CATEGORY } from '@aktk/block-components/config';
+
+// ✅ 正しい修正パターン
+import { COLORS } from '@aktk/block-components/config';
+import { CATEGORY } from '@aktk/blocks/config';
+```
+- **原因**: `@aktk/block-components/config`にはCATEGORYがエクスポートされていない
+- **解決策**: CATEGORYは`@aktk/blocks/config`から個別にインポートする
+- **適用対象**: 全ブロックの`index.tsx`ファイル
+
 #### 5. 入れ子構造ブロックの対応
 
 -   親子関係を廃止し、独立したブロックとして再構築

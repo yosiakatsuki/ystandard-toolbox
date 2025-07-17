@@ -50,20 +50,36 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 
 ## 移行計画
 
-### フェーズ1: 基盤整備
-1. **block.json作成**: メタデータ駆動アーキテクチャ
-2. **index.php作成**: Banner_Link_Blockクラス実装
-3. **utils.ts作成**: config.tsから定数移行
+### ✅ 完了済みフェーズ
 
-### フェーズ2: 依存関係移行
-1. **@ystd/ → @aktk/移行**: 27ファイルの段階的更新
-2. **@wordpress/components → wp-controls移行**: 33ファイルの対応
-3. **BaseControl id属性追加**: アクセシビリティ向上
+#### フェーズ1: 基盤整備（部分完了）
+1. ✅ **block.json作成**: メタデータ駆動アーキテクチャ
+2. ✅ **index.php作成**: Banner_Link_Blockクラス実装
+3. ✅ **utils.ts作成**: config.tsから定数移行
+4. ✅ **types.ts作成**: TypeScript型定義追加
 
-### フェーズ3: 最適化
-1. **CSS分離**: style.scss、style-editor.scss作成
-2. **型定義強化**: types.ts作成・拡張
-3. **テスト追加**: Jest単体テスト実装
+#### 実際の対応事項
+1. ✅ **CATEGORYエクスポートエラー修正**: 
+   - **問題**: `@aktk/block-components/config`からCATEGORYがエクスポートされていない
+   - **解決策**: `@aktk/blocks/config`から正しくインポート
+   ```typescript
+   // 修正前（エラー）
+   import { COLORS, CATEGORY } from '@aktk/block-components/config';
+   
+   // 修正後（正常）
+   import { COLORS } from '@aktk/block-components/config';
+   import { CATEGORY } from '@aktk/blocks/config';
+   ```
+
+### ⏸️ 一時中断フェーズ
+
+#### フェーズ2: 依存関係移行（一時中断）
+- **理由**: 60ファイル以上の複雑な`@ystd/`依存関係
+- **新方針**: レガシーコンポーネント維持、最低限の仕様対応のみ実施
+- **今後の対応**: 他の簡単なブロック移行完了後に再検討
+
+#### フェーズ3: 最適化（一時中断）
+- CSS分離、型定義強化、テスト追加は後回し
 
 ## コンポーネント移行マップ
 
