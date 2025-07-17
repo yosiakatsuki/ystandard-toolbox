@@ -484,7 +484,10 @@ register[ブロック名]Block();
     - `blocks/box/` → `src/blocks/block-library/box/`
     - aktk-block-componentsコンポーネント活用
     - BaseControlへのid属性追加完了
-3. `banner-link/` - 中程度の複雑さ
+3. ⏸️ **`banner-link/`** - 中程度の複雑さ **【一時中断】**
+    - 複雑な依存関係のため、より簡単なブロックの移行完了後に対応
+    - 60ファイル以上の`@ystd/`依存関係が存在
+    - レガシーコンポーネント精査フェーズで対応予定
 
 #### フェーズ2（独立性の高いブロック）
 
