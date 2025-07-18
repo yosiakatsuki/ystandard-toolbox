@@ -17,6 +17,8 @@ export const getDefaultAttributes = () => {
 
 /**
  *
+ * @param      name
+ * @param      attributes
  * @deprecated use src/aktk-block-components/utils/attributes/
  */
 export const mergeDefaultAttributes = ( name, attributes ) => {

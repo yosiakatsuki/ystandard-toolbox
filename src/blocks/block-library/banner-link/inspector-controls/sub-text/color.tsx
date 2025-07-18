@@ -12,7 +12,7 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 const Color = ( { subTextColor, setSubTextColor } ) => {
 	return (
 		<BaseControl
-			id={ subTextColor }
+			id="sub-text-color"
 			label={ __( '色', 'ystandard-toolbox' ) }
 		>
 			<ColorPalette

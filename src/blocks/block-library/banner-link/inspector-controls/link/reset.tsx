@@ -2,12 +2,12 @@
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
 
 /*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import Button from '@aktk/block-components/wp-controls/button';
 
 const Reset = ( { setAttributes } ) => {
 	const handleOnClick = () => {

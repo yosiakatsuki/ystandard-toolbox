@@ -2,13 +2,13 @@
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { SelectControl } from '@wordpress/components';
 
 /*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import { headingTag, textHtmlTag } from '../../config';
 
 const HtmlTag = ( { attributes, setAttributes } ) => {
@@ -30,9 +30,9 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 		<>
 			<BaseControl
 				id={ 'mainTextHtml' }
-				label={ __( 'HTMLタグ', 'ystandard-toolbox' ) }
 			>
-				<SelectControl
+				<CustomSelectControl
+					label={ __( 'HTMLタグ', 'ystandard-toolbox' ) }
 					value={ mainTextHtml }
 					options={ textHtmlTag }
 					onChange={ handleHtmlTagOnChange }
