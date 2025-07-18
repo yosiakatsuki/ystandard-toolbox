@@ -19,14 +19,14 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';
+import { getBoxShadowStyle } from '@aktk/components/box-shadow-control';
 import {
 	getBorderColorClass,
 	getBorderStyle,
 } from '@aktk/controls/border-control';
-import { ystdtbConfig } from '@aktk/config';
-import getDataFallbackProperty from '@ystd/helper/fallback';
-import { getSpacingCSS } from '@ystd/helper/spacing';
+import { HEADING_CLEAR_STYLE } from '@aktk/blocks/config';
+import getDataFallbackProperty from '@aktk/helper/fallback';
+import { getSpacingCSS } from '@aktk/helper/spacing';
 
 const save = ( { attributes } ) => {
 	const {
@@ -65,7 +65,7 @@ const save = ( { attributes } ) => {
 		blockPosition,
 	} = attributes;
 
-	const clearStyle = ystdtbConfig( 'headingClearStyle' );
+	const clearStyle = HEADING_CLEAR_STYLE;
 
 	const colorClasses = {
 		backgroundColor:

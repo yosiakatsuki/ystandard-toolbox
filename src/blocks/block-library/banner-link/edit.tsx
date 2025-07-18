@@ -18,11 +18,21 @@ import { compose } from '@wordpress/compose';
 /*
  * Plugin Dependencies
  */
+import { HEADING_CLEAR_STYLE } from '@aktk/blocks/config';
+import { getBoxShadowStyle } from '@aktk/components/box-shadow-control';
+import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
+import {
+	getBorderColorClass,
+	getBorderStyle,
+} from '@aktk/controls/border-control';
+import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
+/**
+ * Internal Dependencies.
+ */
 import { blockClassName, blockClasses } from './utils';
 import './style-editor.scss';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
-import { getBoxShadowStyle } from '@ystd/components/box-shadow-control';
 import {
 	getBackgroundImage,
 	getBackgroundPosition,
@@ -34,13 +44,6 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
-import {
-	getBorderColorClass,
-	getBorderStyle,
-} from '@aktk/controls/border-control';
-import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
-import { ystdtbConfig } from '@aktk/config';
 
 const BannerLink = ( props ) => {
 	const {
@@ -80,7 +83,7 @@ const BannerLink = ( props ) => {
 	} = attributes;
 
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
-	const clearStyle = ystdtbConfig( 'headingClearStyle' );
+	const clearStyle = HEADING_CLEAR_STYLE;
 
 	const fontSizeClasses = {
 		mainText: getFontSizeClassByObject( mainTextFontSize?.desktop ),

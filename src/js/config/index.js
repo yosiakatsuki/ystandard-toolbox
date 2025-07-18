@@ -32,7 +32,6 @@ export const ystdtbConfig = {
 	hasClasses,
 	customPropertyPrefix,
 	component: {
-		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [
 			{
 				value: 'no-repeat',

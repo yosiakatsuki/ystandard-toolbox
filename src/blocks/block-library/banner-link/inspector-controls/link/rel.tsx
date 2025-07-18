@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import InputControl from '@ystd/components/input-controls';
+import InputControl from '@aktk/components/input-controls';
 
 /*
  * Aktk Dependencies

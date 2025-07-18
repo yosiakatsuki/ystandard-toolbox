@@ -1,7 +1,7 @@
 /*
  * Plugin Dependencies
  */
-import BoxShadowControl from '@ystd/components/box-shadow-control';
+import BoxShadowControl from '@aktk/components/box-shadow-control';
 
 /*
  * Aktk Dependencies

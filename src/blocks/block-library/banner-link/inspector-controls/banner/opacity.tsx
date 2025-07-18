@@ -2,12 +2,12 @@
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { RangeControl } from '@wordpress/components';
 
 /*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import RangeControl from '@aktk/block-components/wp-controls/range-control';
 
 const Opacity = ( { attributes, setAttributes } ) => {
 	const { backgroundOpacity } = attributes;

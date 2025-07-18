@@ -1,4 +1,4 @@
-import { parseObject } from '@ystd/helper/object';
+import { parseObject } from '@aktk/helper/object';
 
 export const parseSize = ( size ) => {
 	if ( ! size ) {

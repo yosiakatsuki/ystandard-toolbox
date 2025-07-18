@@ -1,9 +1,4 @@
-import LinkControl from '@ystd/components/link-control';
-import {
-	isOpenInNewTab,
-	toggleOpenInNewTab,
-	getLinkRel,
-} from '@aktk/helper/link';
+import { LinkControl } from '@aktk/block-components/components/link-control';
 
 const BannerLinkLinkControl = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -11,30 +6,27 @@ const BannerLinkLinkControl = ( props ) => {
 	const { link } = attributes;
 
 	const handleOnChange = ( value ) => {
-		const { url: newURL = '', opensInNewTab: newOpensInNewTab } = value;
-		if ( ! newURL ) {
+		const { url, linkTarget, rel } = value;
+		if ( ! url ) {
 			setAttributes( { link: undefined } );
 			return;
 		}
-		let target = link?.linkTarget;
-		if ( isOpenInNewTab( target ) !== isOpenInNewTab( newOpensInNewTab ) ) {
-			target = toggleOpenInNewTab( target );
-		}
-		const newLink = {
-			url: newURL,
-			linkTarget: target,
-			rel: getLinkRel( target, link?.rel ),
-		};
 
 		setAttributes( {
-			link: newLink,
+			link: {
+				url,
+				linkTarget,
+				rel,
+			},
 		} );
 	};
+
 	return (
 		<LinkControl
 			value={ {
-				url: link?.url,
-				opensInNewTab: isOpenInNewTab( link?.linkTarget ),
+				url: link?.url || '',
+				linkTarget: link?.linkTarget,
+				rel: link?.rel,
 			} }
 			onChange={ handleOnChange }
 		/>

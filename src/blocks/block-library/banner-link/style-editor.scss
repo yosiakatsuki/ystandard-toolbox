@@ -1,7 +1,7 @@
-@use "../../src/sass/global";
-@use "block";
-@use "inspector-controls/link";
-@use "inspector-controls/banner";
+@use "../../../sass/global";
+@use "./style";
+@use "./inspector-controls/link";
+@use "./inspector-controls/banner";
 
 .ystdtb-banner-link {
     &,

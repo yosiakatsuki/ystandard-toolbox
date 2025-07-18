@@ -6,8 +6,8 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import ResponsiveFontSize from '@ystd/components/responsive-font-size';
-import { getResponsiveValues } from '@ystd/helper/responsive';
+import ResponsiveFontSize from '@aktk/components/responsive-font-size';
+import { getResponsiveValues } from '@aktk/helper/responsive';
 
 /*
  * Aktk Dependencies

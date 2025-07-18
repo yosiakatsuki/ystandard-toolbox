@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import ResponsiveValues from '@ystd/components/responsive-values';
+import ResponsiveValues from '@aktk/components/responsive-values';
 
 /*
  * Aktk Dependencies

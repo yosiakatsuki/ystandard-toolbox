@@ -7,7 +7,7 @@ import { TabPanel, FocalPointPicker } from '@wordpress/components';
 /*
  * Plugin Dependencies
  */
-import MediaUploadControl from '@ystd/components/media-upload-control';
+import MediaUploadControl from '@aktk/components/media-upload-control';
 
 /*
  * Aktk Dependencies

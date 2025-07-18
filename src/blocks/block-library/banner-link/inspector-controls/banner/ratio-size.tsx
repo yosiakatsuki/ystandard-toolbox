@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import RatioSizeControl from '@ystd/components/ratio-size-control';
+import RatioSizeControl from '@aktk/components/ratio-size-control';
 
 /*
  * Aktk Dependencies

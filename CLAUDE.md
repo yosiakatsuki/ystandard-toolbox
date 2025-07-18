@@ -96,6 +96,12 @@ npm run test                 # 全テストの実行 (PHPUnit + Jest)
 npm run format               # Prettierでコードフォーマット
 ```
 
+### ブロック開発
+
+```bash
+npm run build:blocks:v2      # 移行中ブロックのビルド（src/blocks/block-library内のモダンブロック）
+```
+
 ### 配布用ビルド
 
 ```bash
@@ -427,14 +433,16 @@ import { CATEGORY } from '@aktk/blocks/config';
 
 **3段階の変換方針**:
 1. **aktk-block-components優先**: 存在する場合は `@aktk/block-components/` に移行
-2. **webpackエイリアス活用**: `@ystd/` → `@aktk/` の単純変換で参照解決を試す
-3. **真の変換不可能のみリストアップ**: 上記2つで解決しない場合のみ手動対応
+2. **一括書き換え実行**: すべての `@ystd/` → `@aktk/` へ機械的に変換
+3. **ビルド確認**: `npm run build:blocks:v2` でエラーが出るもののみ手動対応
 
-**変換判定の正しい基準**:
-- ❌ **誤**: 複雑そうだから変換不可能
-- ✅ **正**: webpackエイリアス確認後、実際に参照エラーが出るもののみ変換不可能
+**具体的な手順**:
+1. aktk-block-componentsに同等コンポーネントがあるかチェック
+2. ある場合は `@aktk/block-components/` に変更
+3. ない場合は `@ystd/` を `@aktk/` に一括置換
+4. ビルドを実行してエラーが出た箇所のみ個別対応
 
-**banner-link実績**: 42箇所中40箇所が変換可能、真の変換不可能は2箇所のみ
+**重要**: 事前の判断で「変換不可能」と決めつけず、まず実際に変換してビルドで確認する
 
 ##### ⚠️ aktk-block-componentsに移行すべき項目
 - `@ystd/components/responsive-values` → `@aktk/block-components/components/responsive-values`
