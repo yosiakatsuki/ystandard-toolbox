@@ -23,7 +23,11 @@ const Link = ( props ) => {
 	};
 	return (
 		<BaseControl id="link-url">
-			<URLInput value={ link?.url ?? '' } onChange={ handleOnChange } />
+			<URLInput
+				className="min-w-[100px]"
+				value={ link?.url ?? '' }
+				onChange={ handleOnChange }
+			/>
 		</BaseControl>
 	);
 };
