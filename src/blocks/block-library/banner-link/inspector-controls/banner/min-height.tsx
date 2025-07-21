@@ -4,14 +4,10 @@
 import { __ } from '@wordpress/i18n';
 
 /*
- * Plugin Dependencies
- */
-import ResponsiveValues from '@aktk/components/responsive-values';
-
-/*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { CustomSizeControl } from '@aktk/block-components/components/custom-size-control';
 import { parseSize } from '../../function/edit';
 
 const MinHeight = ( { attributes, setAttributes } ) => {
@@ -28,10 +24,12 @@ const MinHeight = ( { attributes, setAttributes } ) => {
 	return (
 		<>
 			{ ! ratio && (
-				<BaseControl id="banner-min-height">
-					<ResponsiveValues
-						label={ __( '最小高さ', 'ystandard-toolbox' ) }
-						values={ size?.minHeight }
+				<BaseControl
+					id="banner-min-height"
+					label={ __( '最小高さ', 'ystandard-toolbox' ) }
+				>
+					<CustomSizeControl
+						value={ size?.minHeight }
 						onChange={ handleOnChange }
 					/>
 				</BaseControl>

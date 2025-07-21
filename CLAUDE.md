@@ -533,6 +533,60 @@ import { CATEGORY } from '@aktk/blocks/config';
 -   `box-control/` → `components/custom-spacing-select/`
 -   `color-gradient-control/` → `components/color-pallet-control/`
 
+**5. レスポンシブサイズ制御のモダン化**
+
+-   `responsive-values/` → `@aktk/block-components/components/custom-size-control/`
+
+### レガシーコンポーネントからaktk-block-componentsへの変換パターン
+
+#### ResponsiveValues → CustomSizeControl
+
+**変換対象**: レスポンシブな数値（幅、高さ、フォントサイズ、余白など）の入力UI
+
+**変更前**:
+```tsx
+import ResponsiveValues from '@aktk/components/responsive-values';
+
+<BaseControl id="control-id">
+  <ResponsiveValues
+    label="ラベル名"
+    values={attributeValue}
+    onChange={handleChange}
+  />
+</BaseControl>
+```
+
+**変更後**:
+```tsx
+import { CustomSizeControl } from '@aktk/block-components/components/custom-size-control';
+
+<BaseControl id="control-id" label="ラベル名">
+  <CustomSizeControl
+    value={attributeValue}  // values → value
+    onChange={handleChange}
+  />
+</BaseControl>
+```
+
+**主な変更点**:
+- インポート元: `@aktk/components/responsive-values` → `@aktk/block-components/components/custom-size-control`
+- プロパティ名: `values` → `value`
+- ラベル位置: コンポーネント内 → `BaseControl`の`label`プロパティ
+- UI変更: 3タブ形式 → デフォルト/レスポンシブ切り替え形式
+
+**設定値の互換性**: ✅ 完全互換（`{desktop, tablet, mobile}`形式を維持）
+
+**適用実績**:
+- ✅ `banner-link/inspector-controls/banner/max-width.tsx`
+- ✅ `banner-link/inspector-controls/banner/min-height.tsx`  
+- ✅ `banner-link/inspector-controls/sub-text/margin.tsx`
+
+**変換対象ファイル検索コマンド**:
+```bash
+# ResponsiveValuesコンポーネントを使用しているファイルを検索
+grep -r "import.*ResponsiveValues.*from" src/blocks/
+```
+
 ### 移行優先順位
 
 #### フェーズ1（単体ブロック）

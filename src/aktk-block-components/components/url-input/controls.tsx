@@ -29,6 +29,7 @@ interface CustomURLInputProps {
 	disableSuggestions?: boolean;
 }
 
+// @ts-ignore
 export function CustomURLInput( props: CustomURLInputProps ) {
 	const {
 		URLInputLabel,
@@ -107,6 +108,7 @@ interface URLInputProps {
 	isUseInspectorControl?: boolean;
 }
 
+// @ts-ignore
 export function URLInput( props: URLInputProps ) {
 	const { value, onChange, disableSuggestions = true } = props;
 

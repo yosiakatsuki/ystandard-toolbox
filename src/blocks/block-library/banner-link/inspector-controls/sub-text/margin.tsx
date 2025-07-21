@@ -4,14 +4,10 @@
 import { __ } from '@wordpress/i18n';
 
 /*
- * Plugin Dependencies
- */
-import ResponsiveValues from '@aktk/components/responsive-values';
-
-/*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { CustomSizeControl } from '@aktk/block-components/components/custom-size-control';
 
 const Margin = ( { attributes, setAttributes } ) => {
 	const { subTextMargin } = attributes;
@@ -25,8 +21,8 @@ const Margin = ( { attributes, setAttributes } ) => {
 			id="sub-text-margin"
 			label={ __( 'メインテキストとの間隔', 'ystandard-toolbox' ) }
 		>
-			<ResponsiveValues
-				values={ subTextMargin }
+			<CustomSizeControl
+				value={ subTextMargin }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>
