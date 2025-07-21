@@ -107,7 +107,7 @@ const BorderControl = ( { value, onChange, id, label } ) => {
 	return (
 		<BaseControl id={ _id } label={ label } __nextHasNoMarginBottom>
 			<div className="ystdtb-component-border-control">
-				<div className="ystdtb-component-border-control__columns">
+				<div className="ystdtb-component-border-control__columns mb-4">
 					<div className="ystdtb-component-border-control__column">
 						<BaseControl __nextHasNoMarginBottom>
 							<UnitControl
