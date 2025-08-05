@@ -4,32 +4,105 @@
 import { __ } from '@wordpress/i18n';
 
 /*
- * Plugin Dependencies
- */
-import ResponsiveFontSize from '@aktk/components/responsive-font-size';
-import { getResponsiveValues } from '@aktk/helper/responsive';
-
-/*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { CustomFontSizePicker } from '@aktk/block-components/components/custom-font-size-picker';
+import type { CustomFontSizePickerOnChangeProps } from '@aktk/block-components/components/custom-font-size-picker';
+import { getResponsiveValues } from '@aktk/helper/responsive';
 
 const FontSize = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	const { subTextFontSize } = attributes;
 
-	const handleOnChange = ( values ) => {
-		setAttributes( {
-			subTextFontSize: getResponsiveValues( values ),
-		} );
+	const handleOnChange = ( values: CustomFontSizePickerOnChangeProps ) => {
+		// CustomFontSizePickerの出力をResponsiveFontSizeの形式に変換
+		if ( values.responsiveFontSize ) {
+			// レスポンシブモードの場合
+			const responsiveData = {
+				desktop: values.responsiveFontSize.desktop
+					? { size: values.responsiveFontSize.desktop }
+					: undefined,
+				tablet: values.responsiveFontSize.tablet,
+				mobile: values.responsiveFontSize.mobile,
+			};
+			setAttributes( {
+				subTextFontSize: getResponsiveValues( responsiveData ),
+			} );
+		} else if ( values.fontSize || values.customFontSize ) {
+			// 通常モードの場合
+			let desktopValue;
+			if ( values.fontSize ) {
+				// テーマフォントサイズの場合
+				desktopValue = values.fontSize;
+			} else if ( values.customFontSize ) {
+				// カスタムフォントサイズの場合（文字列として保存）
+				desktopValue = values.customFontSize;
+			}
+
+			setAttributes( {
+				subTextFontSize: getResponsiveValues( {
+					desktop: desktopValue,
+					tablet: undefined,
+					mobile: undefined,
+				} ),
+			} );
+		}
 	};
 
+	// 現在のfontSizeデータをCustomFontSizePickerの形式に変換
+	const convertToPickerFormat = ( fontSizeData: any ) => {
+		if ( ! fontSizeData ) {
+			return {
+				fontSize: undefined,
+				customFontSize: undefined,
+				responsiveFontSize: undefined,
+			};
+		}
+
+		// レスポンシブデータがある場合
+		if ( fontSizeData.tablet || fontSizeData.mobile ) {
+			return {
+				fontSize: undefined,
+				customFontSize: undefined,
+				responsiveFontSize: {
+					desktop: fontSizeData.desktop?.size || fontSizeData.desktop,
+					tablet: fontSizeData.tablet,
+					mobile: fontSizeData.mobile,
+				},
+			};
+		}
+
+		// デスクトップのみの場合
+		const desktopValue = fontSizeData.desktop;
+		if ( desktopValue?.slug ) {
+			// テーマのフォントサイズの場合
+			return {
+				fontSize: desktopValue,
+				customFontSize: undefined,
+				responsiveFontSize: undefined,
+			};
+		}
+		// カスタムサイズの場合
+		return {
+			fontSize: undefined,
+			customFontSize: desktopValue?.size || desktopValue,
+			responsiveFontSize: undefined,
+		};
+	};
+
+	const pickerProps = convertToPickerFormat( subTextFontSize );
+
 	return (
-		<BaseControl id="sub-text-font-size">
-			<ResponsiveFontSize
-				label={ __( 'フォントサイズ', 'ystandard-toolbox' ) }
-				values={ subTextFontSize }
+		<BaseControl
+			id="sub-text-font-size"
+			label={ __( 'フォントサイズ', 'ystandard-toolbox' ) }
+		>
+			<CustomFontSizePicker
+				fontSize={ pickerProps.fontSize }
+				customFontSize={ pickerProps.customFontSize }
+				responsiveFontSize={ pickerProps.responsiveFontSize }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>
