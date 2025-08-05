@@ -20,10 +20,15 @@ const FontSize = ( props ) => {
 		// CustomFontSizePickerの出力をResponsiveFontSizeの形式に変換
 		if ( values.responsiveFontSize ) {
 			// レスポンシブモードの場合
+			const responsiveData = {
+				desktop: values.responsiveFontSize.desktop
+					? { size: values.responsiveFontSize.desktop }
+					: undefined,
+				tablet: values.responsiveFontSize.tablet,
+				mobile: values.responsiveFontSize.mobile,
+			};
 			setAttributes( {
-				mainTextFontSize: getResponsiveValues(
-					values.responsiveFontSize
-				),
+				mainTextFontSize: getResponsiveValues( responsiveData ),
 			} );
 		} else if ( values.fontSize || values.customFontSize ) {
 			// 通常モードの場合
@@ -78,14 +83,13 @@ const FontSize = ( props ) => {
 				customFontSize: undefined,
 				responsiveFontSize: undefined,
 			};
-		} else {
-			// カスタムサイズの場合
-			return {
-				fontSize: undefined,
-				customFontSize: desktopValue?.size || desktopValue,
-				responsiveFontSize: undefined,
-			};
 		}
+		// カスタムサイズの場合
+		return {
+			fontSize: undefined,
+			customFontSize: desktopValue?.size || desktopValue,
+			responsiveFontSize: undefined,
+		};
 	};
 
 	const pickerProps = convertToPickerFormat( mainTextFontSize );
