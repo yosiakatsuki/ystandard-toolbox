@@ -65,7 +65,7 @@
 		"start:update": "wp-env start --xdebug -- --update && npm run activate:theme && npm run import",
 		"start:env": "wp-env start --xdebug -- --update && npm run open",
 		"start": "wp-env start --xdebug && npm run import && npm run open",
-		"stop": "npm run export && wp-env stop",
+		"stop": "wp-env stop",
 		"lint:js:src": "wp-scripts lint-js src/js/**/*.js ./src/js --fix",
 		"lint:js:settings": "wp-scripts lint-js src/plugin-settings/**/*.{js,tsx} ./src/js --fix",
 		"lint:js:blocks": "wp-scripts lint-js blocks ./src/js --fix",
