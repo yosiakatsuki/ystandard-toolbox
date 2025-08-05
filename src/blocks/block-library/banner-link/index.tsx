@@ -30,16 +30,17 @@ export function registerBannerLinkBlock() {
 		metadata.attributes
 	);
 
+	// @ts-ignore
 	registerBlockType( metadata.name, {
 		...metadata,
 		...{
 			icon: (
 				<Image
-					stroke={ COLORS.iconForeground }
+					stroke={ COLORS.iconBetaForeground }
 					style={ { fill: 'none' } }
 				/>
 			),
-			category: CATEGORY.common,
+			category: CATEGORY.beta,
 			attributes,
 			edit,
 			save,
