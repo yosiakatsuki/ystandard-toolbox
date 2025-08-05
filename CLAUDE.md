@@ -587,6 +587,72 @@ import { CustomSizeControl } from '@aktk/block-components/components/custom-size
 grep -r "import.*ResponsiveValues.*from" src/blocks/
 ```
 
+#### ResponsiveFontSize → CustomFontSizePicker
+
+**変換対象**: レスポンシブなフォントサイズ入力UI（WordPressテーマフォントサイズとカスタムサイズ対応）
+
+**変更前**:
+```tsx
+import ResponsiveFontSize from '@aktk/components/responsive-font-size';
+
+<BaseControl id="control-id">
+  <ResponsiveFontSize
+    label="フォントサイズ"
+    values={attributeValue}
+    onChange={handleChange}
+  />
+</BaseControl>
+```
+
+**変更後**:
+```tsx
+import { CustomFontSizePicker } from '@aktk/block-components/components/custom-font-size-picker';
+import type { CustomFontSizePickerOnChangeProps } from '@aktk/block-components/components/custom-font-size-picker';
+
+<BaseControl id="control-id" label="フォントサイズ">
+  <CustomFontSizePicker
+    fontSize={pickerProps.fontSize}
+    customFontSize={pickerProps.customFontSize}
+    responsiveFontSize={pickerProps.responsiveFontSize}
+    onChange={handleChange}
+  />
+</BaseControl>
+```
+
+**主な変更点**:
+- インポート元: `@aktk/components/responsive-font-size` → `@aktk/block-components/components/custom-font-size-picker`
+- プロパティ構造: 単一`values` → 分離された`fontSize`, `customFontSize`, `responsiveFontSize`
+- onChange関数: 複雑なデータ変換ロジックが必要
+- UI改善: WordPressテーマフォントサイズピッカー統合
+
+**データ変換が必要**:
+```tsx
+// 旧形式 → 新形式の変換関数が必要
+const convertToPickerFormat = (fontSizeData) => {
+  // デスクトップがテーマフォントサイズの場合
+  if (fontSizeData.desktop?.slug) {
+    return { fontSize: fontSizeData.desktop, ... };
+  }
+  // レスポンシブデータがある場合
+  if (fontSizeData.tablet || fontSizeData.mobile) {
+    return { responsiveFontSize: { ... }, ... };
+  }
+  // ...その他のケース
+};
+```
+
+**設定値の互換性**: ⚠️ 部分的互換（変換ロジック必要）
+
+**適用実績**:
+- ✅ `banner-link/inspector-controls/main-text/font-size.tsx`
+- ✅ `banner-link/inspector-controls/sub-text/font-size.tsx`
+
+**変換対象ファイル検索コマンド**:
+```bash
+# ResponsiveFontSizeコンポーネントを使用しているファイルを検索
+grep -r "import.*ResponsiveFontSize.*from" src/blocks/
+```
+
 ### 移行優先順位
 
 #### フェーズ1（単体ブロック）
