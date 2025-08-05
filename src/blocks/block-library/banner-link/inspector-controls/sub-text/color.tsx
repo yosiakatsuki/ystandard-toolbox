@@ -16,7 +16,7 @@ const Color = ( { subTextColor, setSubTextColor } ) => {
 			label={ __( '色', 'ystandard-toolbox' ) }
 		>
 			<ColorPalette
-				label={ __( '色', 'ystandard-toolbox' ) }
+				label={ __( 'サブテキスト色', 'ystandard-toolbox' ) }
 				value={ subTextColor.color }
 				onChange={ setSubTextColor }
 				enableCurrentColor={ true }

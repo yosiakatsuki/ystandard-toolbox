@@ -16,7 +16,7 @@ const Color = ( { mainTextColor, setMainTextColor } ) => {
 			label={ __( '色', 'ystandard-toolbox' ) }
 		>
 			<ColorPalette
-				label={ __( '色', 'ystandard-toolbox' ) }
+				label={ __( 'メインテキスト色', 'ystandard-toolbox' ) }
 				value={ mainTextColor.color }
 				onChange={ setMainTextColor }
 				enableCurrentColor={ true }
