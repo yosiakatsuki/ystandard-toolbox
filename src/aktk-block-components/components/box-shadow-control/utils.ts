@@ -1,29 +1,5 @@
 import type { BoxShadowValue } from './types';
-
-/**
- * HEXカラーをRGBに変換
- */
-function hex2rgb( hex: string ): number[] {
-	let hexValue = hex;
-	if ( hexValue.slice( 0, 1 ) === '#' ) {
-		hexValue = hexValue.slice( 1 );
-	}
-	if ( hexValue.length === 3 ) {
-		hexValue =
-			hexValue.slice( 0, 1 ) +
-			hexValue.slice( 0, 1 ) +
-			hexValue.slice( 1, 2 ) +
-			hexValue.slice( 1, 2 ) +
-			hexValue.slice( 2, 3 ) +
-			hexValue.slice( 2, 3 );
-	}
-
-	return [ hexValue.slice( 0, 2 ), hexValue.slice( 2, 4 ), hexValue.slice( 4, 6 ) ].map(
-		( str ) => {
-			return parseInt( str, 16 );
-		}
-	);
-}
+import { hex2rgb } from '@aktk/block-components/utils/color';
 
 /**
  * BoxShadowValueからCSSスタイルを生成
