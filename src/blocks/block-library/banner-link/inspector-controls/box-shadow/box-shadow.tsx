@@ -1,12 +1,8 @@
 /*
- * Plugin Dependencies
- */
-import BoxShadowControl from '@aktk/components/box-shadow-control';
-
-/*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { BoxShadowControl } from '@aktk/block-components/components/box-shadow-control';
 
 const BoxShadow = ( props ) => {
 	const { attributes, setAttributes } = props;

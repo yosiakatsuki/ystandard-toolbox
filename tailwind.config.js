@@ -30,6 +30,7 @@ module.exports = {
 				'fz-base': '16px',
 				'fz-label': '18px',
 				'fz-label-l': '20px',
+				'fz-label-component': '11px',
 			},
 			fontFamily: {
 				orbitron: [ 'Orbitron', 'sans-serif' ],

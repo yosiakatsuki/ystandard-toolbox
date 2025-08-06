@@ -19,7 +19,7 @@ import {
 	getPaddingStyle,
 	isClearStyle,
 } from './function/style';
-import { getBoxShadowStyle } from '@aktk/components/box-shadow-control';
+import { getBoxShadowStyle } from '@aktk/block-components/components/box-shadow-control';
 import {
 	getBorderColorClass,
 	getBorderStyle,

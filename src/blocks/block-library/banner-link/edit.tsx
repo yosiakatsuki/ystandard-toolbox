@@ -19,7 +19,7 @@ import { compose } from '@wordpress/compose';
  * Plugin Dependencies
  */
 import { HEADING_CLEAR_STYLE } from '@aktk/blocks/config';
-import { getBoxShadowStyle } from '@aktk/components/box-shadow-control';
+import { getBoxShadowStyle } from '@aktk/block-components/components/box-shadow-control';
 import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import {
 	getBorderColorClass,
