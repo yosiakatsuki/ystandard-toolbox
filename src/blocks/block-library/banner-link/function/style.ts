@@ -5,6 +5,7 @@ import {
 import { headingTag } from '../config';
 import { getSpacingCSS } from '@aktk/helper/spacing';
 import { isObject, parseObject } from '@aktk/helper/object';
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 
 export const getCustomProperty = ( property, value, ignoreDesktop = false ) => {
 	return getResponsiveCustomProperties(
@@ -63,11 +64,24 @@ export const isClearStyle = ( tagName, isClear ) => {
 	return undefined === isClear ? true : isClear;
 };
 
+const convertSpacingValues = ( spacing ) => {
+	if ( ! spacing || 'object' !== typeof spacing ) {
+		return undefined;
+	}
+	
+	return {
+		top: presetTokenToCssVar( spacing.top ),
+		right: presetTokenToCssVar( spacing.right ),
+		bottom: presetTokenToCssVar( spacing.bottom ),
+		left: presetTokenToCssVar( spacing.left ),
+	};
+};
+
 export const getPaddingStyle = ( padding ) => {
 	const value = parseResponsiveValues( {
-		desktop: getSpacingCSS( padding?.desktop ),
-		tablet: getSpacingCSS( padding?.tablet ),
-		mobile: getSpacingCSS( padding?.mobile ),
+		desktop: getSpacingCSS( convertSpacingValues( padding?.desktop ) ),
+		tablet: getSpacingCSS( convertSpacingValues( padding?.tablet ) ),
+		mobile: getSpacingCSS( convertSpacingValues( padding?.mobile ) ),
 	} );
 	return getCustomProperty( 'padding', value );
 };
