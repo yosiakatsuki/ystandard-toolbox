@@ -6,8 +6,7 @@ import { __ } from '@wordpress/i18n';
 /*
  * Plugin Dependencies
  */
-import ResponsiveSpacing from '@aktk/components/responsive-spacing';
-import { getResponsiveValues } from '@aktk/helper/responsive';
+import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
 
 /*
  * Aktk Dependencies
@@ -21,15 +20,17 @@ const Padding = ( props ) => {
 
 	const handleOnChange = ( values ) => {
 		setAttributes( {
-			padding: getResponsiveValues( values ),
+			padding: values,
 		} );
 	};
 
 	return (
-		<BaseControl id="banner-padding">
-			<ResponsiveSpacing
-				label={ __( '内側余白', 'ystandard-toolbox' ) }
-				values={ padding }
+		<BaseControl
+			id="banner-padding"
+			label={ __( '内側余白', 'ystandard-toolbox' ) }
+		>
+			<ResponsiveSpacingSelect
+				value={ padding }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>
