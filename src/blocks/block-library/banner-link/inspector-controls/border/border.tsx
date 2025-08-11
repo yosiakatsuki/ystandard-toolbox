@@ -150,36 +150,33 @@ const BorderControl = ( { value, onChange }: BorderControlProps ) => {
 	};
 
 	return (
-		<div className="ystdtb-component-border-control">
-			<div className="ystdtb-component-border-control__columns mb-4">
-				<div className="ystdtb-component-border-control__column">
-					<BaseControl>
-						<UnitControl
-							label={ __( '太さ', 'ystandard-toolbox' ) }
-							value={ value?.width }
-							onChange={ handleWidthOnChange }
-							units={ [ { value: 'px', label: 'px' } ] }
-						/>
-					</BaseControl>
-				</div>
-				<div className="ystdtb-component-border-control__column">
-					<BaseControl>
-						<BorderStyleControl
-							label={ __( 'スタイル', 'ystandard-toolbox' ) }
-							value={ value?.style ?? 'solid' }
-							onChange={ handleStyleOnChange }
-						/>
-					</BaseControl>
-				</div>
-			</div>
+		<BaseControl>
 			<BaseControl>
+				<UnitControl
+					label={ __( '太さ', 'ystandard-toolbox' ) }
+					value={ value?.width }
+					onChange={ handleWidthOnChange }
+					units={ [ { value: 'px', label: 'px' } ] }
+				/>
+			</BaseControl>
+			<BaseControl>
+				<BorderStyleControl
+					label={ __( 'スタイル', 'ystandard-toolbox' ) }
+					value={ value?.style ?? 'solid' }
+					onChange={ handleStyleOnChange }
+				/>
+			</BaseControl>
+			<BaseControl
+				id="border-color"
+				label={ __( '枠線色', 'ystandard-toolbox' ) }
+			>
 				<ColorPalette
 					label={ __( '枠線色', 'ystandard-toolbox' ) }
 					value={ value?.color?.hex || '' }
 					onChange={ handleColorOnChange }
 				/>
 			</BaseControl>
-		</div>
+		</BaseControl>
 	);
 };
 
