@@ -11,7 +11,8 @@ import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control/color-palette';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
-import { getColorSlug } from '@aktk/helper/color';
+import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
+import { getColorSetting } from '@aktk/helper/color';
 
 // ボーダースタイル定数
 const BORDER_STYLES = [
@@ -150,6 +151,16 @@ interface BorderControlProps {
 }
 
 const BorderControl = ( { value, onChange }: BorderControlProps ) => {
+	const _colors = useThemeColors();
+
+	const getColorSlug = ( color: string ) => {
+		const selected = _colors.filter( ( data ) => data?.color === color );
+		if ( 0 < selected.length ) {
+			return selected[ 0 ]?.slug;
+		}
+		return undefined;
+	};
+
 	const setBorder = ( border: any ) => {
 		if ( ! border || ! isObject( border ) ) {
 			onChange( undefined );
@@ -183,6 +194,7 @@ const BorderControl = ( { value, onChange }: BorderControlProps ) => {
 	};
 
 	const handleColorOnChange = ( color?: string ) => {
+		console.log( { color } );
 		const newColor = ! color
 			? undefined
 			: {
