@@ -44,6 +44,7 @@ export default function InputControl( props: InputControlProps ) {
 			readOnly={ readOnly }
 			className={ classes }
 			placeholder={ placeholder }
+			__next40pxDefaultSize
 		/>
 	);
 }

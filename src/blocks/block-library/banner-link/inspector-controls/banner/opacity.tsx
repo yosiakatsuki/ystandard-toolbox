@@ -24,6 +24,8 @@ const Opacity = ( { attributes, setAttributes } ) => {
 				max={ 1 }
 				step={ 0.1 }
 				allowReset
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);

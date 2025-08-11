@@ -23,7 +23,7 @@ export default function UnitControl(
 	props: UnitControlProps
 ): React.ReactElement {
 	// @ts-expect-error
-	return <WPUnitControl { ...props } />;
+	return <WPUnitControl { ...props } __next40pxDefaultSize />;
 }
 
 export { useCustomUnits };
