@@ -9,7 +9,7 @@ import { getColorClassName } from '@wordpress/block-editor';
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
-import ColorPaletteControl from '@aktk/components/color-palette-control';
+import { ColorPalette } from '@aktk/block-components/components/color-pallet-control/color-palette';
 import BorderStyleControl from '@aktk/components/border-style-control';
 import { getColorSlug } from '@aktk/helper/color';
 
@@ -33,7 +33,9 @@ const isObject = ( value: any ): value is object => {
 };
 
 const parseObject = ( obj: any ) => {
-	if ( ! obj || typeof obj !== 'object' ) return undefined;
+	if ( ! obj || typeof obj !== 'object' ) {
+		return undefined;
+	}
 	const keys = Object.keys( obj );
 	return keys.length > 0 ? obj : undefined;
 };
@@ -134,7 +136,7 @@ const BorderControl = ( { value, onChange }: BorderControlProps ) => {
 		} );
 	};
 
-	const handleColorOnChange = ( color: string ) => {
+	const handleColorOnChange = ( color?: string ) => {
 		const newColor = ! color
 			? undefined
 			: {
@@ -171,8 +173,9 @@ const BorderControl = ( { value, onChange }: BorderControlProps ) => {
 				</div>
 			</div>
 			<BaseControl>
-				<ColorPaletteControl
-					value={ value?.color?.hex }
+				<ColorPalette
+					label={ __( '枠線色', 'ystandard-toolbox' ) }
+					value={ value?.color?.hex || '' }
 					onChange={ handleColorOnChange }
 				/>
 			</BaseControl>
@@ -187,7 +190,7 @@ interface BorderProps {
 	setAttributes: ( attrs: { border?: Border } ) => void;
 }
 
-const Border = ( { attributes, setAttributes }: BorderProps ) => {
+const Border: React.FC< BorderProps > = ( { attributes, setAttributes } ) => {
 	const { border } = attributes;
 	const handleOnChange = ( value?: Border ) => {
 		setAttributes( {
