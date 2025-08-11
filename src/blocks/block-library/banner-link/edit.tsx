@@ -24,7 +24,7 @@ import { getRatioClassName, getRatioInnerClassName } from '@aktk/helper/ratio';
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@aktk/controls/border-control';
+} from './inspector-controls/border/border';
 import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
 /**
  * Internal Dependencies.

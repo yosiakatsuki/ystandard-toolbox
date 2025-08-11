@@ -23,7 +23,7 @@ import { getBoxShadowStyle } from '@aktk/block-components/components/box-shadow-
 import {
 	getBorderColorClass,
 	getBorderStyle,
-} from '@aktk/controls/border-control';
+} from './inspector-controls/border/border';
 import { HEADING_CLEAR_STYLE } from '@aktk/blocks/config';
 import getDataFallbackProperty from '@aktk/helper/fallback';
 import { getSpacingCSS } from '@aktk/helper/spacing';

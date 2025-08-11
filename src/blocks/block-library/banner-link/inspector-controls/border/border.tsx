@@ -194,7 +194,6 @@ const BorderControl = ( { value, onChange }: BorderControlProps ) => {
 	};
 
 	const handleColorOnChange = ( color?: string ) => {
-		console.log( { color } );
 		const newColor = ! color
 			? undefined
 			: {
