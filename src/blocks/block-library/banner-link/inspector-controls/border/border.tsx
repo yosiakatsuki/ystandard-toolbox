@@ -1,7 +1,7 @@
 /*
  * WordPress Dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 import { getColorClassName } from '@wordpress/block-editor';
 
 /*
@@ -10,8 +10,28 @@ import { getColorClassName } from '@wordpress/block-editor';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control/color-palette';
-import BorderStyleControl from '@aktk/components/border-style-control';
+import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import { getColorSlug } from '@aktk/helper/color';
+
+// ボーダースタイル定数
+const BORDER_STYLES = [
+	{
+		name: _x( '直線', 'border style', 'ystandard-toolbox' ),
+		key: 'solid',
+	},
+	{
+		name: _x( '点線', 'border style', 'ystandard-toolbox' ),
+		key: 'dotted',
+	},
+	{
+		name: _x( '破線', 'border style', 'ystandard-toolbox' ),
+		key: 'dashed',
+	},
+	{
+		name: _x( '二重線', 'border style', 'ystandard-toolbox' ),
+		key: 'double',
+	},
+];
 
 // 型定義
 interface BorderColor {
@@ -95,6 +115,32 @@ export const getBorderCustomProperty = (
 	return {
 		[ `${ customProperty }` ]: `${ border.width } ${ borderStyle } ${ border.color.hex }`,
 	};
+};
+
+// BorderStyleControlコンポーネント
+interface BorderStyleControlProps {
+	value?: string;
+	onChange: ( value: string ) => void;
+	label?: string;
+}
+
+const BorderStyleControl = ( {
+	value,
+	onChange,
+	label,
+}: BorderStyleControlProps ) => {
+	const _label = label ?? __( 'スタイル', 'ystandard-toolbox' );
+	const _value = value || 'solid';
+
+	return (
+		<CustomSelectControl
+			label={ _label }
+			value={ _value }
+			options={ BORDER_STYLES }
+			onChange={ onChange }
+			useEmptyValue={ false }
+		/>
+	);
 };
 
 // ボーダーコントロールコンポーネント
