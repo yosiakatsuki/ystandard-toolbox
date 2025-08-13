@@ -9,28 +9,29 @@ import metadata from './block.json';
 import edit from './edit';
 import './style.scss';
 
-registerBlockType( 'ystdtb/sns-share', {
-	title: __( 'シェアボタン', 'ystandard-toolbox' ),
-	description: __( 'シェアボタンを表示するブロック', 'ystandard-toolbox' ),
-	icon: (
-		<Share2
-			stroke={ ystdtbConfig.color.iconForeground }
-			style={ { fill: 'none' } }
-		/>
-	),
-	keywords: [
-		__( 'sns' ),
-		__( 'share' ),
-		__( 'シェアボタン' ),
-		'sns',
-		'share',
-	],
-	category: ystdtbConfig.category.common,
-	attributes,
-	supports,
-	edit,
-	save() {
-		return null;
-	},
-	example: {},
-} );
+export function registerSnsShareBlock() {
+	const attributes = mergeDefaultAttributes(
+		metadata.name,
+		metadata.attributes
+	);
+
+	// @ts-ignore
+	registerBlockType( metadata.name, {
+		...metadata,
+		icon: () => (
+			// @ts-ignore
+			<Share2
+				stroke={ COLORS.iconForeground }
+				style={ { fill: 'none' } }
+			/>
+		),
+		category: CATEGORY.common,
+		attributes,
+		edit,
+		save() {
+			return null;
+		},
+	} );
+}
+
+registerSnsShareBlock();
