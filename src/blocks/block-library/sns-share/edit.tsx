@@ -14,10 +14,17 @@ import {
 } from "@wordpress/components";
 import ServerSideRender from "@wordpress/server-side-render";
 
-import Notice, { noticeType } from "@ystd/components/notice";
-import { shareButtonsDesign } from "./config";
+import { NoticeWarning } from "@aktk/block-components/components/notice";
+import type { SnsShareProps, ShareButtonDesign } from "./types";
 
-const snsShare = (props) => {
+const shareButtonsDesign: ShareButtonDesign[] = [
+  { label: __("円", "ystandard-toolbox"), value: "circle" },
+  { label: __("四角", "ystandard-toolbox"), value: "square" },
+  { label: __("アイコン", "ystandard-toolbox"), value: "icon" },
+  { label: __("公式", "ystandard-toolbox"), value: "official" },
+];
+
+const snsShare: React.FC<SnsShareProps> = (props) => {
   const { attributes, setAttributes } = props;
   const {
     buttonType,
@@ -107,12 +114,12 @@ const snsShare = (props) => {
               </div>
               {"official" === buttonType && !!useBluesky && (
                 <div style={{ marginTop: "10px", fontSize: "10px" }}>
-                  <Notice type={noticeType.warning}>
+                  <NoticeWarning>
                     {__(
                       "Blueskyの公式ボタンはありません。Blueskyボタンを表示する場合は「公式」以外の設定をご利用ください。",
                       "ystandard-toolbox"
                     )}
-                  </Notice>
+                  </NoticeWarning>
                 </div>
               )}
             </BaseControl>

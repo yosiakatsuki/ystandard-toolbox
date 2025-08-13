@@ -1,0 +1,86 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ystdtb/sns-share",
+  "title": "シェアボタン",
+  "description": "シェアボタンを表示するブロック",
+  "category": "ystdtb-common",
+  "keywords": ["sns", "share", "シェアボタン"],
+  "version": "1.0.0",
+  "textdomain": "ystandard-toolbox",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonType": {
+      "type": "string",
+      "default": "circle"
+    },
+    "labelBefore": {
+      "type": "string",
+      "default": ""
+    },
+    "labelAfter": {
+      "type": "string",
+      "default": ""
+    },
+    "useX": {
+      "type": "boolean",
+      "default": true
+    },
+    "useTwitter": {
+      "type": "boolean",
+      "default": false
+    },
+    "useFacebook": {
+      "type": "boolean",
+      "default": true
+    },
+    "useHatenaBookmark": {
+      "type": "boolean",
+      "default": true
+    },
+    "usePocket": {
+      "type": "boolean",
+      "default": true
+    },
+    "useLINE": {
+      "type": "boolean",
+      "default": true
+    },
+    "useBluesky": {
+      "type": "boolean",
+      "default": false
+    },
+    "twitterVia": {
+      "type": "string",
+      "default": ""
+    },
+    "twitterRelatedUser": {
+      "type": "string",
+      "default": ""
+    },
+    "twitterHashTags": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "className": false,
+    "html": false,
+    "align": false
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "example": {
+    "attributes": {
+      "buttonType": "circle",
+      "useX": true,
+      "useFacebook": true,
+      "useHatenaBookmark": true,
+      "useLINE": true
+    }
+  }
+}

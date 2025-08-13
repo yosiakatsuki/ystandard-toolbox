@@ -1,9 +1,13 @@
-import { ystdtbConfig } from '@ystd/config';
 import { registerBlockType } from '@wordpress/blocks';
-import { attributes, supports } from './config';
-import edit from './edit';
+import { COLORS } from '@aktk/block-components/config';
+import { mergeDefaultAttributes } from '@aktk/block-components/utils/attributes';
+import { CATEGORY } from '@aktk/blocks/config';
 import { Share2 } from 'react-feather';
-import { __ } from '@wordpress/i18n';
+
+// @ts-ignore
+import metadata from './block.json';
+import edit from './edit';
+import './style.scss';
 
 registerBlockType( 'ystdtb/sns-share', {
 	title: __( 'シェアボタン', 'ystandard-toolbox' ),

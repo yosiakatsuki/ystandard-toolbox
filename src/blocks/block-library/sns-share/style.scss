@@ -1,29 +1,7 @@
-@use "../../src/sass/global";
-
-@use "block";
-
-.editor-styles-wrapper {
-  &,
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  @include block.block-style;
-
-  .ystdtb-sns-share-edit__no-preview {
-    padding: 2em;
-    background-color: global.$color__bg-gray-light;
-    border: 1px solid global.$color__border-gray-light;
-    font-size: 0.8em;
-  }
-
-  [data-type="ystdtb/sns-share"] {
-    .sns-share__button {
-      .sns-share__link {
-        padding: 0;
-      }
-    }
-  }
+// sns-share ブロックのフロントエンド用CSS
+.ystdtb-sns-share-edit__no-preview {
+  padding: 2em;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  font-size: 0.8em;
 }

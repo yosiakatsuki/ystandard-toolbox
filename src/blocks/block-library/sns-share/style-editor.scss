@@ -1,10 +1,24 @@
-@mixin block-style() {
+// sns-share ブロックのエディター用CSS
+.editor-styles-wrapper {
+  .ystdtb-sns-share-edit__no-preview {
+    padding: 2em;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    font-size: 0.8em;
+  }
+
+  [data-type="ystdtb/sns-share"] {
+    .sns-share__button {
+      .sns-share__link {
+        padding: 0;
+      }
+    }
+  }
 
   .ystdtb-sns-share {
     &.has-align-left {
       .sns-share {
         text-align: left;
-
         .sns-share__container {
           justify-content: flex-start;
         }
@@ -14,7 +28,6 @@
     &.has-align-center {
       .sns-share {
         text-align: center;
-
         .sns-share__container {
           justify-content: center;
         }
@@ -24,7 +37,6 @@
     &.has-align-right {
       .sns-share {
         text-align: right;
-
         .sns-share__container {
           justify-content: flex-end;
         }
@@ -32,5 +44,3 @@
     }
   }
 }
-
-@include block-style;
