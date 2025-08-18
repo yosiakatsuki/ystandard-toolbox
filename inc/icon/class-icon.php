@@ -42,7 +42,7 @@ class Icon {
 		wp_localize_script(
 			Blocks::BLOCK_EDITOR_SCRIPT_HANDLE,
 			'ystdtbIconList',
-			$this->get_icons()
+			self::get_icons()
 		);
 	}
 
@@ -55,8 +55,23 @@ class Icon {
 		wp_localize_script(
 			$script_handle,
 			'ystdtbIconList',
-			$this->get_icons()
+			self::get_icons()
 		);
+	}
+
+	/**
+	 * アイコン取得
+	 *
+	 * @param $name
+	 *
+	 * @return mixed|string
+	 */
+	public static function get_icon( $name ) {
+		$icons = self::get_icons();
+		if ( ! isset( $icons[ $name ] ) ) {
+			return '';
+		}
+		return $icons[ $name ];
 	}
 
 	/**
@@ -64,7 +79,7 @@ class Icon {
 	 *
 	 * @return array
 	 */
-	private function get_icons() {
+	public static function get_icons() {
 
 		$icons = include( YSTDTB_PATH . '/library/svg-icons/svg-icons.php' );
 		// カスタムアイコン.
@@ -74,7 +89,7 @@ class Icon {
 
 		// 結合.
 		$icons = array_merge(
-			$this->sanitize_custom_icon( $custom_icons ),
+			self::sanitize_custom_icon( $custom_icons ),
 			$icons
 		);
 
@@ -88,7 +103,7 @@ class Icon {
 	 *
 	 * @return array
 	 */
-	private function sanitize_custom_icon( $icons ) {
+	public static function sanitize_custom_icon( $icons ) {
 		if ( ! is_array( $icons ) || empty( $icons ) ) {
 			return $icons;
 		}

@@ -6,44 +6,42 @@ const feather = require( 'feather-icons' );
 const outputPath = './library/svg-icons/svg-icons.php';
 const icons = [];
 const {
-	siTwitter,
 	siFacebook,
 	siHatenabookmark,
-	siPocket,
 	siLine,
 	siFeedly,
 	siRss,
 	siWordpress,
 	siPinterest,
 	siInstagram,
-	siLinkedin,
 	siYoutube,
 	siTwitch,
 	siDribbble,
 	siGithub,
 	siTumblr,
-	siAmazon,
 	siDiscord,
-} = require( 'simple-icons/icons' );
+	siTiktok,
+	siX,
+	siBluesky,
+} = require( 'simple-icons' );
 const snsIcons = [
-	siTwitter,
 	siFacebook,
 	siHatenabookmark,
-	siPocket,
 	siLine,
 	siFeedly,
 	siRss,
 	siWordpress,
 	siPinterest,
 	siInstagram,
-	siLinkedin,
 	siYoutube,
 	siTwitch,
 	siDribbble,
 	siGithub,
 	siTumblr,
-	siAmazon,
 	siDiscord,
+	siTiktok,
+	siX,
+	siBluesky,
 ];
 for ( const icon in feather.icons ) {
 	icons.push( {
@@ -51,6 +49,13 @@ for ( const icon in feather.icons ) {
 		icon: feather.icons[ icon ].toSvg(),
 		category: 'feather',
 	} );
+	if ( 'twitter' === icon ) {
+		icons.push( {
+			name: 'sns-' + icon,
+			icon: feather.icons[ icon ].toSvg(),
+			category: 'sns',
+		} );
+	}
 }
 for ( const icon of snsIcons ) {
 	icons.push( {

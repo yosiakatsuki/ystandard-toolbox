@@ -55,7 +55,7 @@
 		"react-toastify": "^11.0.5",
 		"rimraf": "^6.0.1",
 		"sass": "^1.89.0",
-		"simple-icons": "^14.14.0",
+		"simple-icons": "^15.11.0",
 		"swiper": "^11.2.7",
 		"tailwindcss": "^3.4.17"
 	},
@@ -96,7 +96,7 @@
 		"build:blocks": "run-s build:blocks:*",
 		"build:plugin-settings": "wp-scripts build --config webpack.plugin-settings.config.js",
 		"build:app": "babel src/js/app --out-dir js/app",
-		"build:icons": "node src/js/script/create-svg-icon-list.js",
+		"build:icons": "node src/scripts/icons/index.js",
 		"build": "NODE_ENV=production run-s build:*",
 		"test:unit:php": "wp-env start && wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/ystandard-toolbox/phpunit.xml.dist --verbose'",
 		"test:unit:component": "wp-scripts test-unit-js --config test/unit/component.config.js",
