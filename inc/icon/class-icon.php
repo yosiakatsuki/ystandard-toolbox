@@ -62,33 +62,39 @@ class Icon {
 	/**
 	 * アイコン取得
 	 *
-	 * @param $name
+	 * @param string $name アイコン名
 	 *
-	 * @return mixed|string
+	 * @return array アイコンデータの配列（見つからない場合は空配列）
 	 */
 	public static function get_icon( $name ) {
-		$icons = self::get_icons();
+		$icons  = self::get_icons();
+		$result = [];
 
 		// 直接名前でマッチするアイコンを検索
-		if ( isset( $icons[ $name ] ) ) {
+		if ( is_array( $icons ) && isset( $icons[ $name ] ) ) {
 			return $icons[ $name ];
 		}
 
-		// nameフィールドでの高速検索
-		$names = array_column( $icons, 'name' );
-		$key = array_search( $name, $names, true );
+		// nameフィールドでの検索
+		foreach ( $icons as $icon_key => $icon_data ) {
+			if ( is_array( $icon_data ) && isset( $icon_data['name'] ) ) {
+				if ( $icon_data['name'] === $name ) {
+					$result[ $icon_key ] = $icon_data;
 
-		if ( $key !== false ) {
-			return $icons[ $key ];
+					return $result;
+				}
+			}
 		}
 
 		// カスタムアイコンのプレフィックス付きで検索
 		$custom_name = self::CUSTOM_ICON_PREFIX . $name;
 		if ( isset( $icons[ $custom_name ] ) ) {
-			return $icons[ $custom_name ];
+			$result[ $custom_name ] = $icons[ $custom_name ];
+
+			return $result;
 		}
 
-		return '';
+		return [];
 	}
 
 	/**
