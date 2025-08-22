@@ -68,10 +68,27 @@ class Icon {
 	 */
 	public static function get_icon( $name ) {
 		$icons = self::get_icons();
-		if ( ! isset( $icons[ $name ] ) ) {
-			return '';
+
+		// 直接名前でマッチするアイコンを検索
+		if ( isset( $icons[ $name ] ) ) {
+			return $icons[ $name ];
 		}
-		return $icons[ $name ];
+
+		// nameフィールドでの高速検索
+		$names = array_column( $icons, 'name' );
+		$key = array_search( $name, $names, true );
+
+		if ( $key !== false ) {
+			return $icons[ $key ];
+		}
+
+		// カスタムアイコンのプレフィックス付きで検索
+		$custom_name = self::CUSTOM_ICON_PREFIX . $name;
+		if ( isset( $icons[ $custom_name ] ) ) {
+			return $icons[ $custom_name ];
+		}
+
+		return '';
 	}
 
 	/**

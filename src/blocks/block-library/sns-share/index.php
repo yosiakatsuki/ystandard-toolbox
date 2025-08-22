@@ -24,6 +24,13 @@ class Sns_Share_Block {
 	private static $instance;
 
 	/**
+	 * ブロック属性
+	 *
+	 * @var array
+	 */
+	private static $attributes;
+
+	/**
 	 * Constructor.
 	 */
 	private function __construct() {
@@ -54,7 +61,7 @@ class Sns_Share_Block {
 			return;
 		}
 
-		register_block_type( 
+		register_block_type(
 			__DIR__,
 			[
 				'render_callback' => [ $this, 'render_callback' ],
@@ -65,12 +72,32 @@ class Sns_Share_Block {
 	/**
 	 * レンダーコールバック
 	 *
-	 * @param array  $attributes ブロック属性.
-	 * @param string $content    インナーブロック.
+	 * @param array $attributes ブロック属性.
+	 * @param string $content インナーブロック.
 	 *
 	 * @return string
 	 */
 	public function render_callback( $attributes, $content = '' ) {
+		self::$attributes = $attributes;
+		// クラス名作成.
+		$classes = $this->get_class_names();
+
+		// テスト.
+		$this->get_sns_icon( 'twitter' );
+
+		return sprintf(
+			'<div class="%s">%s</div>',
+			esc_attr( $classes ),
+			''
+		);
+	}
+
+	/**
+	 * クラス名を取得
+	 *
+	 * @return string
+	 */
+	private function get_class_names() {
 		$class_names = [ 'ystdtb-sns-share' ];
 
 		// 配置クラスの追加
@@ -83,18 +110,57 @@ class Sns_Share_Block {
 			$class_names[] = $attributes['className'];
 		}
 
-		$classes = implode( ' ', $class_names );
-
-		// ブロック属性をショートコード属性に変換
-		$shortcode_attributes = $this->migrate_attributes( $attributes );
-		$shortcode_params = $this->build_shortcode_params( $shortcode_attributes );
-
-		return sprintf(
-			'<div class="%s">%s</div>',
-			esc_attr( $classes ),
-			do_shortcode( "[ys_share_button {$shortcode_params}]" )
-		);
+		return implode( ' ', $class_names );
 	}
+
+	/**
+	 *
+	 *
+	 * @return string
+	 */
+	private function get_sns_share_buttons_html( $type, $share_button ) {
+		if ( empty( $share_button ) ) {
+			return '';
+		}
+		// シェアボタンのタイプに応じたクラス名を設定.
+		$type_class        = "is-{$type}";
+		$button_color_type = 'icon' === $type ? 'text' : 'bg';
+
+		ob_start();
+		?>
+		<div class="sns-share is-square">
+			<?php if ( isset( $share_button['text']['before'] ) && $share_button['text']['before'] ) : ?>
+				<p class="sns-share__before"><?php echo esc_html( $share_button['text']['before'] ); ?></p>
+			<?php endif; ?>
+			<ul class="sns-share__container">
+				<?php foreach ( $share_button['sns'] as $sns => $url ) : ?>
+					<li class="sns-share__button sns-bg--<?php echo esc_attr( $sns ); ?> is-<?php echo esc_attr( $sns ); ?>">
+						<a class="sns-share__link" href="<?php echo esc_url_raw( $url ); ?>" target="_blank">
+							<?php echo $this->get_sns_icon( $sns ); ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<?php if ( isset( $share_button['text']['after'] ) && $share_button['text']['after'] ) : ?>
+				<p class="sns-share__after"><?php echo esc_html( $share_button['text']['after'] ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+
+	private function get_sns_icon( $sns ) {
+
+		$sns_icons = Icon::get_icon( "sns-{$sns}" );
+
+		if ( empty( $sns_icons ) || ! isset( $sns_icons['icon'] ) ) {
+			return '';
+		}
+
+		return $sns_icons['icon'];
+	}
+
 
 	/**
 	 * ブロック属性をショートコード属性に変換
@@ -121,26 +187,7 @@ class Sns_Share_Block {
 		];
 	}
 
-	/**
-	 * ショートコードパラメータ文字列を構築
-	 *
-	 * @param array $attributes 属性配列.
-	 *
-	 * @return string
-	 */
-	private function build_shortcode_params( $attributes ) {
-		$params = [];
 
-		foreach ( $attributes as $key => $value ) {
-			if ( is_bool( $value ) ) {
-				$params[] = $key . '="' . ( $value ? 'true' : 'false' ) . '"';
-			} elseif ( ! empty( $value ) ) {
-				$params[] = $key . '="' . esc_attr( $value ) . '"';
-			}
-		}
-
-		return implode( ' ', $params );
-	}
 }
 
 Sns_Share_Block::get_instance();
