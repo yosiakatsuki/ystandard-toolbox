@@ -5,3 +5,21 @@
   border: 1px solid #ddd;
   font-size: 0.8em;
 }
+
+.ystdtb-sns-share {
+
+	&:not(.is-official) {
+		text-align: center;
+
+		:where(.sns-share__container) {
+			justify-content: center;
+		}
+	}
+}
+
+.ystdtb-sns-share__before-text {
+	font-weight: bold;
+}
+.ystdtb-sns-share__after-text {
+	font-size: 0.8em;
+}
