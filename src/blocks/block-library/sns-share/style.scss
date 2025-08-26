@@ -1,25 +1,187 @@
 // sns-share ブロックのフロントエンド用CSS
 .ystdtb-sns-share-edit__no-preview {
-  padding: 2em;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  font-size: 0.8em;
+	padding: 2em;
+	background-color: #f1f1f1;
+	border: 1px solid #ddd;
+	font-size: 0.8em;
 }
 
 .ystdtb-sns-share {
+	--ystdtb--sns-share--button-color--x: #000000;
+	--ystdtb--sns-share--button-color--twitter: #21a1f3;
+	--ystdtb--sns-share--button-color--facebook: #1977f2;
+	--ystdtb--sns-share--button-color--bluesky: #0285ff;
+	--ystdtb--sns-share--button-color--hatenabookmark: #00a4de;
+	--ystdtb--sns-share--button-color--line: #00c300;
+	--ystdtb--sns-share--button-size: 40px;
 
-	&:not(.is-official) {
+
+	&:where(.has-align-center) {
 		text-align: center;
 
-		:where(.sns-share__container) {
+		:where(.ystdtb-sns-share__container) {
 			justify-content: center;
 		}
 	}
+
+	&:where(.has-align-left) {
+		text-align: left;
+
+		:where(.ystdtb-sns-share__container) {
+			justify-content: flex-start;
+		}
+	}
+
+	&:where(.has-align-right) {
+		text-align: right;
+
+		:where(.ystdtb-sns-share__container) {
+			justify-content: flex-end;
+		}
+	}
+
+	&:where(.is-circle) {
+		:where(.ystdtb-sns-share__button) {
+			border-radius: 50%;
+		}
+	}
+
+	&:where(.is-icon) {
+		:where(.ystdtb-sns-share__link) {
+			padding: 20%;
+			color: currentColor;
+
+			:where(svg) {
+				fill: currentColor;
+				width: 1.5em;
+				height: 1.5em;
+			}
+		}
+	}
+
+	&:where(.is-official) {
+		text-align: left;
+
+		:where(.ystdtb-sns-share__container) {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+
+		:where(.ystdtb-sns-share__after-text) {
+			margin-top: 0;
+		}
+
+		:where(.ystdtb-sns-share__button) {
+			@media (hover: hover) {
+				&:hover {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+
+	.fb_iframe_widget,
+	.fb_iframe_widget span {
+		display: block;
+	}
+}
+
+.ystdtb-sns-share__container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	padding: 0;
+	list-style: none;
+}
+
+.ystdtb-sns-share__button {
+	transition: transform 0.3s;
+
+	@media (hover: hover) {
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+
+	:where(svg) {
+		display: block;
+		fill: #fff;
+		stroke-width: 0;
+	}
+}
+
+.ystdtb-sns-share__link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ystdtb--sns-share--button-size);
+	height: var(--ystdtb--sns-share--button-size);
+	padding: 25%;
+}
+
+.ystdtb-sns-share__before-text,
+.ystdtb-sns-share__after-text {
+	display: block;
+	margin-bottom: 0;
 }
 
 .ystdtb-sns-share__before-text {
+	margin-top: 0;
 	font-weight: bold;
 }
+
 .ystdtb-sns-share__after-text {
+	margin-top: 1em;
 	font-size: 0.8em;
+}
+
+/**
+ * SNSごとのボタンカラー
+ */
+.ystdtb-sns-share-text--x {
+	color: var(--ystdtb--sns-share--button-color--x);
+}
+
+.ystdtb-sns-share-text--twitter {
+	color: var(--ystdtb--sns-share--button-color--twitter);
+}
+
+.ystdtb-sns-share-text--facebook {
+	color: var(--ystdtb--sns-share--button-color--facebook);
+}
+
+.ystdtb-sns-share-text--bluesky {
+	color: var(--ystdtb--sns-share--button-color--bluesky);
+}
+
+.ystdtb-sns-share-text--hatenabookmark {
+	color: var(--ystdtb--sns-share--button-color--hatenabookmark);
+}
+
+.ystdtb-sns-share-text--line {
+	color: var(--ystdtb--sns-share--button-color--line);
+}
+
+.ystdtb-sns-share-bg--x {
+	background-color: var(--ystdtb--sns-share--button-color--x);
+}
+
+.ystdtb-sns-share-bg--twitter {
+	background-color: var(--ystdtb--sns-share--button-color--twitter);
+}
+
+.ystdtb-sns-share-bg--facebook {
+	background-color: var(--ystdtb--sns-share--button-color--facebook);
+}
+
+.ystdtb-sns-share-bg--bluesky {
+	background-color: var(--ystdtb--sns-share--button-color--bluesky);
+}
+
+.ystdtb-sns-share-bg--hatenabookmark {
+	background-color: var(--ystdtb--sns-share--button-color--hatenabookmark);
+}
+
+.ystdtb-sns-share-bg--line {
+	background-color: var(--ystdtb--sns-share--button-color--line);
 }

@@ -95,8 +95,6 @@ class Sns_Share_Block {
 			],
 			$attributes,
 		);
-		// クラス名作成.
-		$classes = self::get_wrap_class_names();
 
 		// シェアボタンHTML取得.
 		$share_button = '';
@@ -108,12 +106,8 @@ class Sns_Share_Block {
 				self::get_share_button_param( self::$attributes )
 			);
 		}
-		
-		return sprintf(
-			'<div class="%s">%s</div>',
-			esc_attr( $classes ),
-			$share_button
-		);
+
+		return $share_button;
 	}
 
 	/**
@@ -125,14 +119,17 @@ class Sns_Share_Block {
 		$class_names = [ 'ystdtb-sns-share' ];
 
 		// 配置クラスの追加
-		if ( ! empty( $attributes['align'] ) ) {
-			$class_names[] = 'has-align-' . $attributes['align'];
+		if ( ! empty( self::$attributes['align'] ) ) {
+			$class_names[] = 'has-align-' . self::$attributes['align'];
 		}
 
 		// カスタムクラスの追加
-		if ( ! empty( $attributes['className'] ) ) {
-			$class_names[] = $attributes['className'];
+		if ( ! empty( self::$attributes['className'] ) ) {
+			$class_names[] = self::$attributes['className'];
 		}
+
+		$type          = self::$attributes['buttonType'] ?? 'circle';
+		$class_names[] = "is-{$type}";
 
 		return implode( ' ', $class_names );
 	}
@@ -146,27 +143,28 @@ class Sns_Share_Block {
 		if ( empty( $share_button ) ) {
 			return '';
 		}
+		// クラス名作成.
+		$classes = self::get_wrap_class_names();
 		// シェアボタンのタイプに応じたクラス名を設定.
-		$type_class        = "is-{$type}";
-		$button_color_type = 'icon' === $type ? 'sns-text--' : 'sns-bg--';
+		$button_color_type = 'icon' === $type ? 'ystdtb-sns-share-text--' : 'ystdtb-sns-share-bg--';
 
 		ob_start();
 		?>
-		<div class="sns-share <?php echo esc_attr( $type_class ); ?>">
+		<div class="<?php echo esc_attr( $classes ); ?>">
 			<?php if ( isset( $share_button['text']['before'] ) && $share_button['text']['before'] ) : ?>
-				<p class="sns-share__before"><?php echo esc_html( $share_button['text']['before'] ); ?></p>
+				<p class="ystdtb-sns-share__before-text"><?php echo esc_html( $share_button['text']['before'] ); ?></p>
 			<?php endif; ?>
-			<ul class="sns-share__container">
+			<ul class="ystdtb-sns-share__container">
 				<?php foreach ( $share_button['sns'] as $sns => $url ) : ?>
-					<li class="sns-share__button <?php echo esc_attr( $button_color_type ) . esc_attr( $sns ); ?> is-<?php echo esc_attr( $sns ); ?>">
-						<a class="sns-share__link" href="<?php echo esc_url_raw( $url ); ?>" target="_blank">
+					<li class="ystdtb-sns-share__button <?php echo esc_attr( $button_color_type ) . esc_attr( $sns ); ?> is-<?php echo esc_attr( $sns ); ?>">
+						<a class="ystdtb-sns-share__link" href="<?php echo esc_url_raw( $url ); ?>" target="_blank">
 							<?php echo self::get_sns_icon( $sns ); ?>
 						</a>
 					</li>
 				<?php endforeach; ?>
 			</ul>
 			<?php if ( isset( $share_button['text']['after'] ) && $share_button['text']['after'] ) : ?>
-				<p class="sns-share__after"><?php echo esc_html( $share_button['text']['after'] ); ?></p>
+				<p class="ystdtb-sns-share__after-text"><?php echo esc_html( $share_button['text']['after'] ); ?></p>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -174,6 +172,13 @@ class Sns_Share_Block {
 	}
 
 
+	/**
+	 * シェアボタンのパラメータを取得
+	 *
+	 * @param array $attribute ブロック属性.
+	 *
+	 * @return array
+	 */
 	public static function get_share_button_param( $attribute ) {
 		$result = [];
 		// URL情報.
@@ -265,34 +270,6 @@ class Sns_Share_Block {
 
 		return $sns_icons['icon'];
 	}
-
-
-	/**
-	 * ブロック属性をショートコード属性に変換
-	 *
-	 * @param array $attributes ブロック属性.
-	 *
-	 * @return array
-	 */
-	private function migrate_attributes( $attributes ) {
-		return [
-			'type'                 => $attributes['buttonType'] ?? 'circle',
-			'x'                    => $attributes['useX'] ?? true,
-			'twitter'              => $attributes['useTwitter'] ?? false,
-			'facebook'             => $attributes['useFacebook'] ?? true,
-			'hatenabookmark'       => $attributes['useHatenaBookmark'] ?? true,
-			'pocket'               => false, // サービス終了のため強制的にfalse
-			'line'                 => $attributes['useLINE'] ?? true,
-			'bluesky'              => $attributes['useBluesky'] ?? false,
-			'twitter_via_user'     => $attributes['twitterVia'] ?? '',
-			'twitter_related_user' => $attributes['twitterRelatedUser'] ?? '',
-			'twitter_hash_tags'    => $attributes['twitterHashTags'] ?? '',
-			'before'               => $attributes['labelBefore'] ?? '',
-			'after'                => $attributes['labelAfter'] ?? '',
-		];
-	}
-
-
 }
 
 Sns_Share_Block::get_instance();

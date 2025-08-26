@@ -90,12 +90,14 @@ const snsShare: React.FC< SnsShareProps > = ( props ) => {
 		<>
 			<>
 				<BlockControls>
-					<AlignmentToolbar
-						value={ align }
-						onChange={ ( nextAlign ) => {
-							setAttributes( { align: nextAlign } );
-						} }
-					/>
+					{ 'official' !== buttonType && (
+						<AlignmentToolbar
+							value={ align }
+							onChange={ ( nextAlign ) => {
+								setAttributes( { align: nextAlign } );
+							} }
+						/>
+					) }
 				</BlockControls>
 				<InspectorControls>
 					<PanelBody

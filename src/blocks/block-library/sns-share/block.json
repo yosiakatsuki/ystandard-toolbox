@@ -11,7 +11,7 @@
   "attributes": {
     "align": {
       "type": "string",
-      "default": ""
+      "default": "center"
     },
     "buttonType": {
       "type": "string",
