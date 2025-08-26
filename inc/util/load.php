@@ -17,6 +17,7 @@ require_once __DIR__ . '/class-template.php';
 require_once __DIR__ . '/class-document.php';
 require_once __DIR__ . '/class-image.php';
 require_once __DIR__ . '/class-url.php';
+require_once __DIR__ . '/class-scripts.php';
 
 // 依存あり.
 require_once __DIR__ . '/class-styles.php';
