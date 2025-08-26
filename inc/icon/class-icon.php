@@ -70,28 +70,27 @@ class Icon {
 		$icons  = self::get_icons();
 		$result = [];
 
+
 		// 直接名前でマッチするアイコンを検索
 		if ( is_array( $icons ) && isset( $icons[ $name ] ) ) {
 			return $icons[ $name ];
 		}
 
 		// nameフィールドでの検索
-		foreach ( $icons as $icon_key => $icon_data ) {
-			if ( is_array( $icon_data ) && isset( $icon_data['name'] ) ) {
-				if ( $icon_data['name'] === $name ) {
-					$result[ $icon_key ] = $icon_data;
+		foreach ( $icons as $icon_data ) {
 
-					return $result;
+			if ( is_array( $icon_data ) && isset( $icon_data['name'] ) ) {
+
+				if ( $icon_data['name'] === $name ) {
+					return $icon_data;
+				}
+
+				// カスタムアイコンのプレフィックス付きで検索
+				$custom_name = self::CUSTOM_ICON_PREFIX . $name;
+				if ( $icon_data['name'] === $custom_name ) {
+					return $icon_data;
 				}
 			}
-		}
-
-		// カスタムアイコンのプレフィックス付きで検索
-		$custom_name = self::CUSTOM_ICON_PREFIX . $name;
-		if ( isset( $icons[ $custom_name ] ) ) {
-			$result[ $custom_name ] = $icons[ $custom_name ];
-
-			return $result;
 		}
 
 		return [];
