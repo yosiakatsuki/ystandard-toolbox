@@ -2,6 +2,7 @@
  * SVGアイコンのリストを作成するスクリプト
  */
 const fs = require( 'fs' );
+// @ts-ignore
 const feather = require( 'feather-icons' );
 const outputPath = './library/svg-icons/svg-icons.php';
 const icons = [];
@@ -68,7 +69,8 @@ for ( const icon of snsIcons ) {
 /**
  * JSONファイルの作成
  */
-const content = "<?php return json_decode('" + JSON.stringify( icons ) + "');";
+const content =
+	"<?php return json_decode('" + JSON.stringify( icons ) + "',true);";
 fs.writeFile( outputPath, content, ( err ) => {
 	/* eslint-disable no-console */
 	if ( err ) {
