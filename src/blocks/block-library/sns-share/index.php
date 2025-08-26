@@ -101,7 +101,7 @@ class Sns_Share_Block {
 			],
 			$attributes,
 		);
-		
+
 		$share_button_param = self::get_share_button_param( self::$attributes );
 		// シェアボタンHTML取得.
 		if ( 'official' === self::$attributes['buttonType'] ) {
