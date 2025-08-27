@@ -17,6 +17,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 import { NoticeWarning } from '@aktk/block-components/components/notice';
 import type { SnsShareProps, ShareButtonDesign } from './types';
+import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 
 const shareButtonsDesign: ShareButtonDesign[] = [
 	{ label: __( '円', 'ystandard-toolbox' ), value: 'circle' },
@@ -105,29 +106,18 @@ const snsShare: React.FC< SnsShareProps > = ( props ) => {
 						initialOpen={ true }
 					>
 						<BaseControl __nextHasNoMarginBottom>
-							<div className="ystdtb__horizon-buttons">
-								{ shareButtonsDesign.map( ( item ) => {
-									return (
-										<Button
-											key={ item.value }
-											isSecondary={
-												item.value !== buttonType
-											}
-											isPrimary={
-												item.value === buttonType
-											}
-											onClick={ () => {
-												setAttributes( {
-													buttonType: item.value,
-												} );
-											} }
-										>
-											<span>{ item.label }</span>
-										</Button>
-									);
-								} ) }
-							</div>
-							{ 'official' === buttonType && !! useBluesky && (
+							<HorizonButtonSelect
+								value={ buttonType ?? 'circle' }
+								onChange={ ( value ) => {
+									setAttributes( {
+										buttonType:
+											value as ShareButtonDesign[ 'value' ],
+									} );
+								} }
+								options={ shareButtonsDesign }
+							/>
+
+							{ 'official' === buttonType && useBluesky && (
 								<div
 									style={ {
 										marginTop: '10px',

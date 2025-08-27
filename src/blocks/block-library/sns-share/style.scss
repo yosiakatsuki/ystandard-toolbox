@@ -49,10 +49,8 @@
 	&:where(.is-icon) {
 		:where(.ystdtb-sns-share__link) {
 			padding: 20%;
-			color: currentColor;
 
 			:where(svg) {
-				fill: currentColor;
 				width: 1.5em;
 				height: 1.5em;
 			}
@@ -103,9 +101,13 @@
 		}
 	}
 
+	&:where(:not([class*="ystdtb-sns-share-text--"])) {
+		color: #fff;
+	}
+
 	:where(svg) {
 		display: block;
-		fill: #fff;
+		fill: currentColor;
 		stroke-width: 0;
 	}
 }
@@ -117,6 +119,7 @@
 	width: var(--ystdtb--sns-share--button-size);
 	height: var(--ystdtb--sns-share--button-size);
 	padding: 25%;
+	color: currentColor;
 }
 
 .ystdtb-sns-share__before-text,
