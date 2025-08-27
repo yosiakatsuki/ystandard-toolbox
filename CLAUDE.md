@@ -673,7 +673,7 @@ grep -r "import.*ResponsiveFontSize.*from" src/blocks/
 
 #### フェーズ2（独立性の高いブロック）
 
-1. `sns-share/` - 外部依存が少ない
+1. ✅ **`sns-share/`** - 外部依存が少ない **【移行完了】**
 2. `parts/` - シンプルな構造
 3. `posts/` - 複雑だが独立性が高い
 
