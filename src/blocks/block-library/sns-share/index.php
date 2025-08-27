@@ -11,6 +11,7 @@ use ystandard_toolbox\Util\Post;
 use ystandard_toolbox\Util\Scripts;
 use ystandard_toolbox\Util\Types;
 use ystandard_toolbox\Util\URL;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -154,6 +155,7 @@ class Sns_Share_Block {
 		if ( empty( $share_button ) ) {
 			return '';
 		}
+
 		// クラス名作成.
 		$classes = self::get_wrap_class_names( self::$attributes );
 		// シェアボタンのタイプに応じたクラス名を設定.
@@ -179,7 +181,12 @@ class Sns_Share_Block {
 			<?php endif; ?>
 		</div>
 		<?php
-		return ob_get_clean();
+
+		return apply_filters(
+			'ystdtb/blocks/sns_share/get_sns_share_buttons_html',
+			ob_get_clean(),
+			$share_button
+		);
 	}
 
 
@@ -194,6 +201,7 @@ class Sns_Share_Block {
 		if ( empty( $share_button ) ) {
 			return '';
 		}
+
 		// X,Twitter関連の属性作成.
 		$url          = $share_button['official']['url'];
 		$title        = $share_button['official']['title'];
@@ -241,7 +249,11 @@ class Sns_Share_Block {
 		</div>
 		<?php
 
-		return ob_get_clean();
+		return apply_filters(
+			'ystdtb/blocks/sns_share/get_sns_share_buttons_official_html',
+			ob_get_clean(),
+			$share_button
+		);
 	}
 
 	/**
@@ -320,6 +332,9 @@ class Sns_Share_Block {
 
 		$result['text']['before'] = $attributes['labelBefore'];
 		$result['text']['after']  = $attributes['labelAfter'];
+
+		$result['className']  = $attributes['className'] ?? '';
+		$result['buttonType'] = $attributes['buttonType'] ?? '';
 
 		return $result;
 	}
