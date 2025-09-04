@@ -120,6 +120,11 @@
 	height: var(--ystdtb--sns-share--button-size);
 	padding: 25%;
 	color: currentColor;
+	box-sizing: border-box;
+
+	&:hover {
+		color: currentColor;
+	}
 }
 
 .ystdtb-sns-share__before-text,
