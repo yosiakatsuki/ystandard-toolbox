@@ -41,7 +41,7 @@ class Init {
 	 * プラグインの初期化処理
 	 */
 	public function plugin_init() {
-		$result = load_plugin_textdomain(
+		load_plugin_textdomain(
 			Config::TEXT_DOMAIN,
 			false,
 			dirname( YSTDTB_NAME ) . '/languages'
