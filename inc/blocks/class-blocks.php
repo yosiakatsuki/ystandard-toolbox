@@ -170,13 +170,13 @@ class Blocks {
 			$this->create_block_option()
 		);
 
-		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations(
-				self::BLOCK_EDITOR_SCRIPT_HANDLE,
-				'ystandard-toolbox',
-				YSTDTB_PATH . '/languages'
-			);
-		}
+//		if ( function_exists( 'wp_set_script_translations' ) ) {
+//			wp_set_script_translations(
+//				self::BLOCK_EDITOR_SCRIPT_HANDLE,
+//				'ystandard-toolbox',
+//				YSTDTB_PATH . '/languages'
+//			);
+//		}
 		wp_enqueue_script( self::BLOCK_EDITOR_SCRIPT_HANDLE );
 	}
 
