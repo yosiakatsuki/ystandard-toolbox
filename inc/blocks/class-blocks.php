@@ -138,6 +138,7 @@ class Blocks {
 		if ( apply_filters( 'ystdtb_block_category_top', false ) ) {
 			return array_merge( array_values( Config::BLOCK_CATEGORIES ), $categories );
 		}
+
 		return array_merge( $categories, array_values( Config::BLOCK_CATEGORIES ) );
 	}
 
@@ -146,6 +147,7 @@ class Blocks {
 	 */
 	public function enqueue_block_assets() {
 
+		// CSS.
 		wp_enqueue_style(
 			Config::BLOCK_CSS_HANDLE,
 			YSTDTB_URL . '/css/ystandard-toolbox-block-editor.css',
@@ -159,6 +161,23 @@ class Blocks {
 			);
 		}
 		do_action( Config::AFTER_ENQUEUE_BLOCK_ASSETS_CSS_HOOK );
+
+		// 設定関連.
+		wp_register_script( self::BLOCK_EDITOR_SCRIPT_HANDLE, false );
+		wp_localize_script(
+			self::BLOCK_EDITOR_SCRIPT_HANDLE,
+			'ystdtbBlockEditor',
+			$this->create_block_option()
+		);
+
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations(
+				self::BLOCK_EDITOR_SCRIPT_HANDLE,
+				'ystandard-toolbox',
+				YSTDTB_PATH . '/languages'
+			);
+		}
+		wp_enqueue_script( self::BLOCK_EDITOR_SCRIPT_HANDLE );
 	}
 
 	/**
@@ -174,19 +193,7 @@ class Blocks {
 				$asset_file['dependencies'],
 				$asset_file['version']
 			);
-			wp_localize_script(
-				self::BLOCK_EDITOR_SCRIPT_HANDLE,
-				'ystdtbBlockEditor',
-				$this->create_block_option()
-			);
 
-			if ( function_exists( 'wp_set_script_translations' ) ) {
-				wp_set_script_translations(
-					self::BLOCK_EDITOR_SCRIPT_HANDLE,
-					'ystandard-toolbox',
-					YSTDTB_PATH . '/languages'
-				);
-			}
 		}
 
 		foreach ( $this->register_blocks['normal'] as $block ) {
@@ -267,7 +274,7 @@ class Blocks {
 	/**
 	 * 属性をマージする (ブロック拡張機能用)
 	 *
-	 * @param array $args       ブロック引数
+	 * @param array $args ブロック引数
 	 * @param array $attributes 追加する属性
 	 *
 	 * @return array

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { BaseControl, SelectControl } from '@wordpress/components';
-import { getBlockConfig } from '@ystd/helper/blockConfig';
+import { getBlockConfig } from '@aktk/helper/blockConfig';
 
 const PartsId = ( props ) => {
 	const { attributes, setAttributes } = props;
