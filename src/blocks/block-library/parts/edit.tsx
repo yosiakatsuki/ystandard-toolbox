@@ -1,13 +1,26 @@
 import classnames from 'classnames';
+/*
+ * WordPress Dependencies
+ */
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
+/*
+ * Plugin Dependencies
+ */
+import type { PartsEditProps } from './types';
 import * as BlockOption from './inspector-controls';
-import EditorStyles from './editor-styles/index';
+import EditorStyles from './editor-styles';
+import './style-editor.scss';
 
-const Parts = ( props ) => {
+/**
+ * パーツブロックエディターコンポーネント
+ *
+ * @param {PartsEditProps} props - コンポーネントプロパティ
+ */
+const PartsEdit = ( props: PartsEditProps ) => {
 	const { attributes } = props;
 	const { partsId } = attributes;
 
@@ -44,4 +57,5 @@ const Parts = ( props ) => {
 		</>
 	);
 };
-export default Parts;
+
+export default PartsEdit;
