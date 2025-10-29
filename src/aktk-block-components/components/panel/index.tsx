@@ -6,25 +6,34 @@ import { useEffect, useState } from '@wordpress/element';
 
 interface PanelProps {
 	title: string;
-	initialOpen?: ( () => boolean ) | boolean;
+	initialOpen?: boolean;
+	initialOpenControlled?: ( () => boolean ) | boolean;
 	children: React.ReactNode;
-	className?: string;
 }
 
-export function Panel( props: PanelProps ): React.ReactElement {
-	const { title, initialOpen, children, className } = props;
-	// 初期開閉状態が関数の時とそれ以外でちょっと動きが違う.
-	const isInitialOpenFunction = 'function' === typeof initialOpen;
-	const _initialOpen = isInitialOpenFunction ? false : initialOpen;
-	// パネルの初期状態セット.
-	const [ panelOpen, setPanelOpen ] = useState( _initialOpen );
+export function Panel( props: PanelProps ) {
+	const {
+		title,
+		initialOpen = true,
+		initialOpenControlled = false,
+		children,
+	} = props;
+	const [ panelOpen, setPanelOpen ] = useState( initialOpen );
 
-	// 初期状態をセット.
-	useEffect( () => {
-		if ( isInitialOpenFunction ) {
-			setPanelOpen( initialOpen() );
+	// 動的に開閉状態を制御する場合の初期値設定.
+	const setInitialOpen = () => {
+		if ( 'function' === typeof initialOpenControlled ) {
+			setPanelOpen( initialOpenControlled() );
 		}
+	};
+
+	useEffect( () => {
+		setInitialOpen();
 	}, [] );
+
+	useEffect( () => {
+		setInitialOpen();
+	}, [ initialOpenControlled ] );
 
 	const togglePanel = () => {
 		setPanelOpen( ! panelOpen );
@@ -35,14 +44,13 @@ export function Panel( props: PanelProps ): React.ReactElement {
 			title={ title }
 			initialOpen={ panelOpen }
 			onToggle={ togglePanel }
-			className={ className }
 		>
 			{ children }
 		</PanelBody>
 	);
 }
 
-export function OpenPanel( props: PanelProps ): React.ReactElement {
+export function OpenPanel( props: PanelProps ) {
 	const { title, initialOpen, children } = props;
 	return (
 		<Panel title={ title } initialOpen={ initialOpen ?? true }>
