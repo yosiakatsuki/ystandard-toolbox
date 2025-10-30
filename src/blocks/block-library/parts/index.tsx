@@ -33,10 +33,13 @@ export function registerPartsBlock() {
 		...metadata,
 		...{
 			icon: (
-				<HardDrive
-					stroke={ COLORS.iconForeground }
-					style={ { fill: 'none' } }
-				/>
+				<>
+					{ /* @ts-ignore */ }
+					<HardDrive
+						stroke={ COLORS.iconForeground }
+						style={ { fill: 'none' } }
+					/>
+				</>
 			),
 			category: CATEGORY.common,
 			attributes,
