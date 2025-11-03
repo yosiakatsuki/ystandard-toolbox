@@ -14,10 +14,12 @@ interface LineHeightControlProps {
 	onChange: ( newValue: { lineHeight: string | undefined } ) => void;
 }
 
-export default function LineHeight( props: LineHeightControlProps ) {
+export default function LineHeight(
+	props: LineHeightControlProps
+): JSX.Element {
 	const { value, onChange } = props;
 
-	const handleOnChange = ( newValue: number | undefined ) => {
+	const handleOnChange = ( newValue: string | undefined ) => {
 		onChange( {
 			lineHeight: newValue ? `${ newValue }` : undefined,
 		} );
