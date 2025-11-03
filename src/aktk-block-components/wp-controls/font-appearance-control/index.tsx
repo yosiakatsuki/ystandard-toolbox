@@ -19,7 +19,7 @@ export interface FontAppearanceControlProps {
  * @class
  */
 export function FontAppearanceControl( props: FontAppearanceControlProps ) {
-	return <WPFontAppearanceControl { ...props } />;
+	return <WPFontAppearanceControl { ...props } __next40pxDefaultSize />;
 }
 
 export interface FontWeightStyleControlProps {
@@ -44,6 +44,7 @@ export function FontWeightControl( props: FontWeightStyleControlProps ) {
 			onChange={ handleOnChange }
 			hasFontStyles={ false }
 			hasFontWeights={ true }
+			__next40pxDefaultSize
 		/>
 	);
 }
@@ -64,6 +65,7 @@ export function FontStyleControl( props: FontWeightStyleControlProps ) {
 			onChange={ handleOnChange }
 			hasFontStyles={ true }
 			hasFontWeights={ false }
+			__next40pxDefaultSize
 		/>
 	);
 }
