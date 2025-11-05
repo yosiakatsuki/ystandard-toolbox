@@ -34,6 +34,7 @@ class Heading_Helper {
 		$result = '';
 
 		$selector_all = self::get_selector_all( $is_editor );
+		// 見出しスタイルごとに処理.
 		foreach ( $heading as $name => $item ) {
 			$slug   = Types::get_array_value( $item, 'slug', '' );
 			$label  = Types::get_array_value( $item, 'label', '' );
@@ -113,6 +114,7 @@ class Heading_Helper {
 			// 各スタイルを結合.
 			$result .= $style_css . $before_css . $after_css;
 		}
+
 
 		return $result;
 	}
@@ -277,7 +279,7 @@ class Heading_Helper {
 		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
 		$content = $is_editor ? '.editor-styles-wrapper' : $content;
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
-			$selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\".is-clear-style\"])";
+			$selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
 			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 			$css_selector     = apply_filters(
 				'ystdtb_heading_css_selector_content',
