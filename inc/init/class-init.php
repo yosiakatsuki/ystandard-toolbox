@@ -33,8 +33,11 @@ class Init {
 	public function __construct() {
 		add_action( 'after_setup_theme', [ $this, 'plugin_init' ] );
 		add_filter( 'body_class', [ $this, 'body_class' ], 20 );
-		$this->check_versions();
 		add_filter( 'ys_system_info', [ __CLASS__, 'system_info' ], 11 );
+		// 使用版チェックとバージョンチェック.
+		if ( ! $this->is_trial() ) {
+			$this->check_versions();
+		}
 	}
 
 	/**
@@ -59,6 +62,28 @@ class Init {
 		$classes[] = Config::BODY_CLASS;
 
 		return $classes;
+	}
+
+	/**
+	 * 試用版チェック
+	 *
+	 * @return bool
+	 */
+	private function is_trial() {
+		$update_checker_path = YSTDTB_PATH . '/library/plugin-update-checker/plugin-update-checker.php';
+		// アップデートチェッカーの存在確認.
+		if ( file_exists( $update_checker_path ) ) {
+			return false;
+		}
+		// 試用版の場合の注意文表示.
+		Notice::set_notice(
+			function () {
+				Notice::warning(
+					__( 'このyStandard Toolboxは試用・検証のために作成されたバージョンです。機能が不足していたり、不具合が多く含まれる可能性があります。', 'ystandard-toolbox' )
+				);
+			}
+		);
+		return true;
 	}
 
 	/**

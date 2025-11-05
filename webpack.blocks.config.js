@@ -13,7 +13,6 @@ module.exports = {
 		//'faq-item': './blocks/faq/item/index.js',
 		'icon-list': './blocks/icon-list/index.js',
 		'icon-list-item': './blocks/icon-list-item/index.js',
-		parts: './blocks/parts/index.js',
 		//slider: './blocks/slider/index.js',
 		//'slider-item': './blocks/slider/item/index.js',
 		//'description-list': './blocks/description-list/index.js',
