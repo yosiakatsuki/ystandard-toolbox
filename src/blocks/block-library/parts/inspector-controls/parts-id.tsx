@@ -36,13 +36,17 @@ const PartsId = ( props: PartsEditProps ) => {
 	];
 
 	return (
-		<BaseControl label={ __( 'パーツ', 'ystandard-toolbox' ) }>
+		<BaseControl
+			id={ 'parts' }
+			label={ __( 'パーツ', 'ystandard-toolbox' ) }
+		>
 			<CustomSelectControl
 				value={ partsId }
 				options={ options }
 				onChange={ ( value ) => {
 					setAttributes( { partsId: value } );
 				} }
+				useEmptyValue={ false }
 			/>
 		</BaseControl>
 	);
