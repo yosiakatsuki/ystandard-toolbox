@@ -11,10 +11,11 @@ import {
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { brush, cog, Icon as WPIcon } from '@wordpress/icons';
+import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { ConfirmModal } from '@aktk/block-components/components/modal';
 /**
  * Plugin dependencies
@@ -30,6 +31,11 @@ import {
 	PrimaryButton,
 	SecondaryButton,
 } from '@aktk/block-components/components/buttons';
+
+/**
+ * Plugin-Setting dependencies.
+ */
+import { getEditorColors } from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -130,7 +136,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		if ( ! headingOption ) {
 			return;
 		}
-		const newStyles = deleteUndefined( {
+		const newStyles = stripUndefined( {
 			...headingOption.style,
 			...value,
 		} );
@@ -146,7 +152,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		if ( ! headingOption ) {
 			return;
 		}
-		const newStyles = deleteUndefined( {
+		const newStyles = stripUndefined( {
 			...headingOption.before,
 			...value,
 		} );
@@ -162,7 +168,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		if ( ! headingOption ) {
 			return;
 		}
-		const newStyles = deleteUndefined( {
+		const newStyles = stripUndefined( {
 			...headingOption.after,
 			...value,
 		} );
@@ -192,6 +198,13 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
+
+	// addFilter で テーマカラーを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeColors.themeColors',
+		'ystandard-toolbox/settings/design/getThemeColors',
+		() => getEditorColors()
+	);
 
 	return (
 		<div>
