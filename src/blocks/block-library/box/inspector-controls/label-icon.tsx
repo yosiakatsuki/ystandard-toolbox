@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import SVGIconSelect from '@aktk/components/icon-picker';
+import { IconSelect } from '@aktk/block-components/components/icon-select';
 
 /*
  * Plugin Dependencies
@@ -33,10 +33,10 @@ const LabelIcon = ( props: LabelIconProps ): React.ReactElement => {
 			id="label-icon"
 			label={ __( 'アイコン', 'ystandard-toolbox' ) }
 		>
-			<SVGIconSelect
-				iconControlTitle=""
-				selectedIcon={ labelIcon }
-				onClickIcon={ ( value ) => {
+			<IconSelect
+				icon={ labelIcon || '' }
+				label=""
+				onChange={ ( value ) => {
 					setAttributes( { labelIcon: value } );
 				} }
 			/>

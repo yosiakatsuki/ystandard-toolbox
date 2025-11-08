@@ -31,7 +31,7 @@ class Icon {
 	 * Icon constructor.
 	 */
 	public function __construct() {
-		add_action( 'enqueue_block_editor_assets', [ $this, 'add_icons' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'add_icons' ], 100 );
 		add_action( 'ystdtb_enqueue_plugin_settings_base_scripts', [ $this, 'admin_add_icons' ], 50 );
 	}
 
@@ -39,6 +39,9 @@ class Icon {
 	 * アイコンリストの追加
 	 */
 	public function add_icons() {
+		if( ! is_admin() ) {
+			return;
+		}
 		wp_localize_script(
 			Blocks::BLOCK_EDITOR_SCRIPT_HANDLE,
 			'ystdtbIconList',

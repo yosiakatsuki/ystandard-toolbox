@@ -13,7 +13,11 @@ import {
 /*
  * Aktk Dependencies
  */
-import SVGIcon from '@aktk/components/svg-icon';
+import { SvgIcon } from '@aktk/block-components/components/svg-icon';
+
+/**
+ * Legacy Dependencies
+ */
 import { getSpacing } from '@aktk/helper/spacing';
 import getDataFallbackProperty from '@aktk/helper/fallback';
 
@@ -30,6 +34,8 @@ import { BoxSaveProps } from './types';
 
 /**
  * ボックスブロック保存コンポーネント
+ * @param root0
+ * @param root0.attributes
  */
 export default function save( { attributes }: BoxSaveProps ) {
 	const {
@@ -267,7 +273,7 @@ export default function save( { attributes }: BoxSaveProps ) {
 				<div className="ystdtb-box__label-contents">
 					{ labelIcon && (
 						<span className="ystdtb-box__label-icon">
-							<SVGIcon name={ labelIcon } />
+							<SvgIcon.Content name={ labelIcon } />
 						</span>
 					) }
 					{ label && (
