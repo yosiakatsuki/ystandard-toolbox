@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -19,6 +21,13 @@ defined( 'ABSPATH' ) || die();
  * @package ystandard_toolbox
  */
 class HiddenBySize {
+
+	/**
+	 * Instance.
+	 *
+	 * @var HiddenBySize
+	 */
+	private static $instance;
 
 	/**
 	 * 画面サイズ非表示用属性.
@@ -39,22 +48,35 @@ class HiddenBySize {
 			'default' => false,
 		],
 	];
+
 	/**
-	 * コンストラクタ.
+	 * Constructor.
 	 */
-	public function __construct() {
+	private function __construct() {
+		add_action( 'init', [ $this, 'register_block' ], 100 );
 		// 画面サイズ非表示用属性を追加するフィルターを登録.
 		add_filter( 'register_block_type_args', [ $this, 'add_attributes' ], 999, 2 );
-		// エディター用アセットをエンキュー
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
-		// フロントエンド用アセットをエンキュー
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'add_style' ] );
+	}
+
+	/**
+	 * Instance.
+	 *
+	 * @return Banner_Link_Block
+	 */
+	public static function get_instance() {
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
 	}
 
 	/**
 	 * ブロック登録時に画面サイズ非表示用属性を追加
 	 *
-	 * @param array  $args ブロック引数
+	 * @param array $args ブロック引数
 	 * @param string $name ブロック名
 	 *
 	 * @return array
@@ -96,52 +118,39 @@ class HiddenBySize {
 	}
 
 	/**
-	 * エディター用アセットをエンキュー
+	 * 画面サイズ非表示用スタイル追加
+	 *
+	 * @return void
 	 */
-	public function enqueue_editor_assets() {
-		$asset_file = YSTDTB_PATH . '/build/blocks/block-hook-hidden-by-size/index.asset.php';
-		$asset      = file_exists( $asset_file ) ? include $asset_file : [
-			'dependencies' => [],
-			'version'      => YSTDTB_VERSION,
-		];
+	public function add_style() {
 
-		// JavaScript
-		wp_enqueue_script(
-			'ystdtb-block-hook-hidden-by-size-editor',
-			YSTDTB_URL . '/build/blocks/block-hook-hidden-by-size/index.js',
-			$asset['dependencies'],
-			$asset['version'],
-			true
+		$handle = 'ystdtb-hidden-by-size-style';
+		$css    = '';
+		// モバイル非表示スタイル.
+		$css .= Styles::add_media_query_only_mobile(
+			'.ystdtb-hidden-mobile {display: none !important;}'
 		);
-
-		// CSS（エディター用）
-		$editor_css = YSTDTB_PATH . '/build/blocks/block-hook-hidden-by-size/index.css';
-		if ( file_exists( $editor_css ) ) {
-			wp_enqueue_style(
-				'ystdtb-block-hook-hidden-by-size-editor',
-				YSTDTB_URL . '/build/blocks/block-hook-hidden-by-size/index.css',
-				[],
-				$asset['version']
-			);
-		}
+		// タブレット非表示スタイル.
+		$css .= Styles::add_media_query_only_tablet(
+			'.ystdtb-hidden-tablet {display: none !important;}'
+		);
+		// デスクトップ非表示スタイル.
+		$css .= Styles::add_media_query_over_desktop(
+			'.ystdtb-hidden-desktop {display: none !important;}'
+		);
+		wp_register_style( $handle, false );
+		wp_enqueue_style( $handle );
+		wp_add_inline_style( $handle, $css );
 	}
 
 	/**
-	 * フロントエンド用アセットをエンキュー
+	 * ブロック登録
+	 *
+	 * @return void
 	 */
-	public function enqueue_frontend_assets() {
-		// フロントエンド用CSS
-		$frontend_css = YSTDTB_PATH . '/build/blocks/block-hook-hidden-by-size/style-index.css';
-		if ( file_exists( $frontend_css ) ) {
-			wp_enqueue_style(
-				'ystdtb-block-hook-hidden-by-size',
-				YSTDTB_URL . '/build/blocks/block-hook-hidden-by-size/style-index.css',
-				[],
-				filemtime( $frontend_css )
-			);
-		}
+	public function register_block() {
+		register_block_type( __DIR__ );
 	}
 }
 
-// HiddenBySizeクラスをインスタンス化
-new HiddenBySize();
+HiddenBySize::get_instance();

@@ -18,6 +18,30 @@ defined( 'ABSPATH' ) || die();
  */
 class Styles {
 
+	/**
+	 * ブレークポイント
+	 *
+	 * @var array
+	 */
+	const BREAKPOINTS = [
+		'mobile'  => 640,
+		'tablet'  => 768,
+		'desktop' => 1024,
+		'wide'    => 1200,
+	];
+
+	/**
+	 * ブレークポイントの単位
+	 *
+	 * @var string
+	 */
+	const BREAKPOINT_UNIT = 'px';
+
+	/**
+	 * Axis Position.
+	 *
+	 * @var array
+	 */
 	const AXIS_POSITION = [
 		'top',
 		'right',
@@ -119,9 +143,9 @@ class Styles {
 					$color_rgb  = implode( ',', $color_rgb );
 					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
 					// 色.
-					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
-					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
-					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
+					$color_var["{$var_prefix}-{$type}"]      = $value['desktop'];
+					$color_var["{$var_prefix}-{$type}-rgb"]  = "rgb({$color_rgb})";
+					$color_var["{$var_prefix}-{$type}-rgba"] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
 					// マージ.
 					$desktop = array_merge( $color_var, $desktop );
 				}
@@ -263,7 +287,7 @@ class Styles {
 				}
 
 				// セット.
-				$parse_result[ "border-{$position}" ] = $value;
+				$parse_result["border-{$position}"] = $value;
 			}
 
 			return $parse_result;
@@ -313,7 +337,7 @@ class Styles {
 				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
 					$value = 0;
 				}
-				$parse_result[ "{$name}-{$position}" ] = $value;
+				$parse_result["{$name}-{$position}"] = $value;
 			}
 
 			return $parse_result;
@@ -385,8 +409,46 @@ class Styles {
 	public static function get_breakpoints() {
 		return apply_filters(
 			'ystdtb_css_breakpoints',
-			apply_filters( 'ys_get_break_points', Config::BREAKPOINTS )
+			apply_filters( 'ys_get_break_points', self::BREAKPOINTS )
 		);
+	}
+
+	/**
+	 * ブレークポイントの単位を取得
+	 *
+	 * @return string
+	 */
+	public static function get_breakpoint_unit() {
+
+		return apply_filters(
+			'ystdtb_css_breakpoint_unit',
+			apply_filters( 'ys_get_breakpoint_unit', self::BREAKPOINT_UNIT )
+		);
+	}
+
+	/**
+	 * ブレークポイントのem計算のベースサイズ.
+	 *
+	 * @param string $type mobile/tablet/desktop.
+	 *
+	 * @return int|float
+	 */
+	public static function get_breakpoints_max_width_size( $type ) {
+		$breakpoints = self::get_breakpoints();
+
+		// チェック.
+		if ( ! is_array( $breakpoints ) || ! array_key_exists( $type, $breakpoints ) ) {
+			return 0;
+		}
+
+		// 定義にはmin側のサイズが入るので、maxの計算は-0.02する.
+		$result = (int) $breakpoints[ $type ] - 0.02;
+
+		return apply_filters(
+			'ystdtb_css_breakpoints_max_width_size',
+			apply_filters( 'ys_get_breakpoints_max_width_size', $result, $breakpoints, $type )
+		);
+
 	}
 
 	/**
@@ -400,32 +462,22 @@ class Styles {
 	 */
 	public static function add_media_query( $css, $min = '', $max = '' ) {
 		$breakpoints = self::get_breakpoints();
+		$unit        = self::get_breakpoint_unit();
 		if ( ! array_key_exists( $min, $breakpoints ) && ! array_key_exists( $max, $breakpoints ) ) {
 			return $css;
 		}
+		// min側
 		if ( array_key_exists( $min, $breakpoints ) ) {
 			$breakpoint = $breakpoints[ $min ];
-			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint = ( (int) $breakpoint + 1 ) . 'px';
-			}
-			// emでの+1px計算.
-			$float_value = (float) $breakpoint;
-			$unit        = str_replace( (string) $float_value, '', $breakpoint );
-			if ( ! empty( $unit ) && 'px' !== $unit ) {
-				$base       = apply_filters( 'ys_breakpoints_base_size', 16 );
-				$base       = empty( $base ) ? 16 : $base;
-				$breakpoint = ( $float_value + ( 1 / $base ) ) . $unit;
-			}
-			$breakpoint = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoint, $min );
-			$min        = "(min-width: {$breakpoint})";
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoint, $min, $breakpoints );
+			$min        = "(min-width: {$breakpoint}{$unit})";
 		}
+		// max側
 		if ( array_key_exists( $max, $breakpoints ) ) {
-			$breakpoint = $breakpoints[ $max ];
-			if ( $breakpoint === (int) $breakpoint ) {
-				$breakpoint .= 'px';
-			}
-			$breakpoint = apply_filters( 'ystdtb_breakpoints_max_width', $breakpoint, $max );
-			$max        = "(max-width: {$breakpoint})";
+			// @media max-width:... 側を取得.
+			$breakpoint = self::get_breakpoints_max_width_size( $max );
+			$breakpoint = apply_filters( 'ystdtb_breakpoints_max_width', $breakpoint, $max, $breakpoints );
+			$max        = "(max-width: {$breakpoint}{$unit})";
 		}
 		$breakpoint = $min . $max;
 		if ( '' !== $min && '' !== $max ) {

@@ -16,11 +16,12 @@ import { BoxAttributes } from '../types';
 
 interface BackgroundOpacityProps {
 	attributes: BoxAttributes;
-	setAttributes: ( attributes: Partial<BoxAttributes> ) => void;
+	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
 }
 
 /**
  * 背景色不透明度コントロール
+ * @param props
  */
 const BackgroundOpacity = ( props: BackgroundOpacityProps ) => {
 	const { attributes, setAttributes } = props;
@@ -42,6 +43,7 @@ const BackgroundOpacity = ( props: BackgroundOpacityProps ) => {
 				min={ 0 }
 				max={ 1 }
 				step={ 0.1 }
+				__next40pxDefaultSize
 			/>
 		</BaseControl>
 	);

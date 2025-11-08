@@ -38,7 +38,7 @@ class Blocks {
 
 		$this->init_blocks();
 		add_filter( 'block_categories_all', [ __CLASS__, 'add_block_categories' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_assets' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 		// 移行する.
 		// $this->load_files();
 		// $this->init();
@@ -146,6 +146,10 @@ class Blocks {
 	 * Block Assets.
 	 */
 	public function enqueue_block_assets() {
+
+		if ( ! is_admin() ) {
+			return;
+		}
 
 		// CSS.
 		wp_enqueue_style(
