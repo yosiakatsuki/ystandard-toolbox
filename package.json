@@ -80,7 +80,7 @@
 		"watch:blocks:v1": "wp-scripts start --config webpack.blocks.config.js",
 		"watch:blocks": "run-p watch:blocks:*",
 		"watch:plugin-settings": "wp-scripts start --webpack-src-dir=src/plugin-settings --config webpack.plugin-settings.config.js",
-		"watch:js:app": "babel src/js/app --out-dir js/app -w -s",
+		"watch:js:app": "wp-scripts start --webpack-copy-php --webpack-src-dir=src/js/app --output-path=js/app --config webpack.app.config.js",
 		"watch:js": "run-p watch:js:*",
 		"watch:css:postcss": "postcss temp/css/**/*.css --base temp/css --dir css --verbose -w",
 		"watch:css:sass": "sass src/sass:temp/css ./blocks:temp/css/blocks src/js:temp/css --no-source-map --no-stop-on-error -w",
