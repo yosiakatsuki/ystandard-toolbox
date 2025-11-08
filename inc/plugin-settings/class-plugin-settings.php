@@ -196,6 +196,7 @@ class Plugin_Settings {
 					'adminUrl'     => esc_url_raw( admin_url() ),
 					'isAmpEnable'  => AMP::is_amp_enable(),
 					'editorColors' => self::get_editor_colors(),
+					'fontSizes'    => self::get_editor_font_sizes(),
 				]
 			)
 		);
@@ -357,6 +358,17 @@ class Plugin_Settings {
 
 		return $palette[0];
 	}
+
+	private static function get_editor_font_sizes() {
+		$font_sizes = get_theme_support( 'editor-font-sizes' );
+		if ( ! is_array( $font_sizes ) || empty( $font_sizes ) ) {
+			return [];
+		}
+
+		return $font_sizes[0];
+
+	}
+
 }
 
 new Plugin_Settings();
