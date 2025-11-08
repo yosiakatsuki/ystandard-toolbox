@@ -36,10 +36,11 @@ export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
 		wpPickerDisableCustomFontSizes = false,
 		responsiveControlStyle = 'vertical',
 		showResetButton = true,
+		fontSizes = themeFontSizes,
 		onChange,
 	} = props;
 
-	const presetFontSize = themeFontSizes.filter( ( size: FontSize ) => {
+	const presetFontSize = fontSizes?.filter( ( size: FontSize ) => {
 		if ( ! isString( fontSize ) ) {
 			return false;
 		}
@@ -88,7 +89,7 @@ export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
 						<FontSizePicker
 							onChange={ handleOnWPPickerChange }
 							value={ wpPickerFontSize }
-							fontSizes={ themeFontSizes }
+							fontSizes={ fontSizes }
 							disableCustomFontSizes={
 								wpPickerDisableCustomFontSizes
 							}

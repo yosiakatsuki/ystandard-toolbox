@@ -21,4 +21,5 @@ export interface CustomFontSizePickerProps {
 	useResponsive?: boolean;
 	showResetButton?: boolean;
 	wpPickerDisableCustomFontSizes?: boolean;
+	fontSizes?: Array< { name: string; slug: string; size: number } >;
 }
