@@ -7,7 +7,7 @@ ystandard-toolbox/
 /vendor/
 .wp-content/
 /debug
-temp/
+/temp
 phpunit/data/actual
 debug-*
 block-example/
