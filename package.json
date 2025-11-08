@@ -95,7 +95,7 @@
 		"build:blocks:v1": "wp-scripts build --config webpack.blocks.config.js",
 		"build:blocks": "run-s build:blocks:*",
 		"build:plugin-settings": "wp-scripts build --config webpack.plugin-settings.config.js",
-		"build:app": "babel src/js/app --out-dir js/app",
+		"build:app": "wp-scripts build --webpack-copy-php --webpack-src-dir=src/js/app --output-path=js/app --config webpack.app.config.js",
 		"build:icons": "node src/scripts/icons/index.js",
 		"build": "NODE_ENV=production run-s build:*",
 		"test:unit:php": "wp-env start && wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/ystandard-toolbox/phpunit.xml.dist --verbose'",
