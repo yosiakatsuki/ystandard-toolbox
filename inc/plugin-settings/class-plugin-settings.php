@@ -359,14 +359,47 @@ class Plugin_Settings {
 		return $palette[0];
 	}
 
+	/**
+	 * エディターで使用可能なフォントサイズを取得
+	 *
+	 * theme.jsonとadd_theme_support()の両方からフォントサイズを取得してマージする
+	 *
+	 * @return array フォントサイズの配列
+	 */
 	private static function get_editor_font_sizes() {
-		$font_sizes = get_theme_support( 'editor-font-sizes' );
-		if ( ! is_array( $font_sizes ) || empty( $font_sizes ) ) {
-			return [];
+		$font_sizes = [];
+
+		// theme.jsonからフォントサイズを取得
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			if ( isset( $settings['typography']['fontSizes']['theme'] ) ) {
+				$theme_font_sizes = $settings['typography']['fontSizes']['theme'];
+				if ( is_array( $theme_font_sizes ) ) {
+					$font_sizes = array_merge( $font_sizes, $theme_font_sizes );
+				}
+			}
 		}
 
-		return $font_sizes[0];
+		// add_theme_support('editor-font-sizes')からフォントサイズを取得
+		$theme_support_sizes = get_theme_support( 'editor-font-sizes' );
+		if ( is_array( $theme_support_sizes ) && ! empty( $theme_support_sizes ) ) {
+			$theme_support_sizes = $theme_support_sizes[0];
+			if ( is_array( $theme_support_sizes ) ) {
+				$font_sizes = array_merge( $font_sizes, $theme_support_sizes );
+			}
+		}
 
+		// 重複を除去（slugをキーとして使用）
+		$unique_font_sizes = [];
+		foreach ( $font_sizes as $font_size ) {
+			if ( isset( $font_size['slug'] ) ) {
+				$unique_font_sizes[ $font_size['slug'] ] = $font_size;
+			}
+		}
+
+		return array_values( $unique_font_sizes );
 	}
 
 }
