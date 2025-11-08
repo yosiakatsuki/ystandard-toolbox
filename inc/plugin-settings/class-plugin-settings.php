@@ -348,15 +348,44 @@ class Plugin_Settings {
 	/**
 	 * カラーパレットの取得
 	 *
-	 * @return array
+	 * theme.jsonとadd_theme_support()の両方からカラーパレットを取得してマージする
+	 *
+	 * @return array カラーパレットの配列
 	 */
 	private static function get_editor_colors() {
-		$palette = get_theme_support( 'editor-color-palette' );
-		if ( ! is_array( $palette ) || empty( $palette ) ) {
-			return [];
+		$colors = [];
+
+		// theme.jsonからカラーパレットを取得
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			if ( isset( $settings['color']['palette']['theme'] ) ) {
+				$theme_colors = $settings['color']['palette']['theme'];
+				if ( is_array( $theme_colors ) ) {
+					$colors = array_merge( $colors, $theme_colors );
+				}
+			}
 		}
 
-		return $palette[0];
+		// add_theme_support('editor-color-palette')からカラーパレットを取得
+		$theme_support_colors = get_theme_support( 'editor-color-palette' );
+		if ( is_array( $theme_support_colors ) && ! empty( $theme_support_colors ) ) {
+			$theme_support_colors = $theme_support_colors[0];
+			if ( is_array( $theme_support_colors ) ) {
+				$colors = array_merge( $colors, $theme_support_colors );
+			}
+		}
+
+		// 重複を除去（slugをキーとして使用）
+		$unique_colors = [];
+		foreach ( $colors as $color ) {
+			if ( isset( $color['slug'] ) ) {
+				$unique_colors[ $color['slug'] ] = $color;
+			}
+		}
+
+		return array_values( $unique_colors );
 	}
 
 	/**
