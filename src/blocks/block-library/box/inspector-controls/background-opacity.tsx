@@ -44,6 +44,7 @@ const BackgroundOpacity = ( props: BackgroundOpacityProps ) => {
 				max={ 1 }
 				step={ 0.1 }
 				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</BaseControl>
 	);
