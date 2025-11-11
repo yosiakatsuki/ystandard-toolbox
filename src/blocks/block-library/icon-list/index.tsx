@@ -1,4 +1,4 @@
-import { Box } from 'react-feather';
+import { List } from 'react-feather';
 /*
  * WordPress Dependencies
  */
@@ -18,13 +18,12 @@ import { CATEGORY } from '@aktk/blocks/config';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
-import { deprecated } from './deprecated';
 import './style.scss';
 
 /**
- * ボックスブロック登録関数
+ * アイコンリストブロック登録
  */
-export function registerBoxBlock() {
+export function registerIconListBlock() {
 	const attributes = mergeDefaultAttributes(
 		metadata.name,
 		metadata.attributes
@@ -35,7 +34,8 @@ export function registerBoxBlock() {
 		...metadata,
 		...{
 			icon: (
-				<Box
+				// @ts-ignore
+				<List
 					stroke={ COLORS.iconForeground }
 					style={ { fill: 'none' } }
 				/>
@@ -44,9 +44,8 @@ export function registerBoxBlock() {
 			attributes,
 			edit,
 			save,
-			deprecated,
 		},
 	} );
 }
 
-registerBoxBlock();
+registerIconListBlock();

@@ -64,7 +64,7 @@
 			"margin": true,
 			"padding": true,
 			"__experimentalDefaultControls": {
-				"margin": false
+				"padding": false
 			}
 		},
 		"__experimentalBorder": {

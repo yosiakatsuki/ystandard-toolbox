@@ -1,10 +1,4 @@
 import classnames from 'classnames';
-
-/*
- * Style Dependencies
- */
-import './style-editor.scss';
-
 /*
  * WordPress Dependencies
  */
@@ -41,6 +35,7 @@ import {
 	getLabelBorderRadius,
 } from './function';
 import * as BlockOption from './inspector-controls';
+import './style-editor.scss';
 
 /**
  * ボックスブロック編集コンポーネント
