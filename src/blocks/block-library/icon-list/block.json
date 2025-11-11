@@ -1,0 +1,87 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/icon-list",
+	"version": "1.0.0",
+	"title": "アイコンリスト",
+	"category": "ystdtb-blocks",
+	"description": "アイコンを表示できるリストブロック",
+	"keywords": [
+		"list",
+		"icon",
+		"アイコン",
+		"リスト"
+	],
+	"allowedBlocks": [
+		"ystdtb/icon-list-item"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"iconType": {
+			"type": "string",
+			"default": "chevron-right"
+		},
+		"customIconClass": {
+			"type": "string"
+		},
+		"iconBold": {
+			"type": "boolean",
+			"default": false
+		},
+		"iconColor": {
+			"type": "string"
+		},
+		"customIconColor": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": false,
+		"className": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"margin": false
+			}
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
+	},
+	"providesContext": {
+		"ystdtb/iconType": "iconType",
+		"ystdtb/customIconClass": "customIconClass",
+		"ystdtb/iconBold": "iconBold",
+		"ystdtb/iconColor": "iconColor",
+		"ystdtb/customIconColor": "customIconColor"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
