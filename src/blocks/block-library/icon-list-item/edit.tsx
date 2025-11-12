@@ -29,18 +29,31 @@ function Edit( props ): JSX.Element {
 
 	const { removeBlock, selectPreviousBlock } =
 		useDispatch( 'core/block-editor' );
-	const { getPreviousBlockClientId } = useSelect( ( select ) => {
-		return {
-			getPreviousBlockClientId:
-				select( 'core/block-editor' ).getPreviousBlockClientId,
-		};
-	}, [] );
+	const { getPreviousBlockClientId, getBlockCount, getBlockRootClientId } =
+		useSelect( ( select ) => {
+			const blockEditor = select( 'core/block-editor' );
+			return {
+				getPreviousBlockClientId: blockEditor.getPreviousBlockClientId,
+				getBlockCount: blockEditor.getBlockCount,
+				getBlockRootClientId: blockEditor.getBlockRootClientId,
+			};
+		}, [] );
 
 	/**
 	 * テキストが空の状態でバックスペースを押した際の処理
 	 * 現在のブロックを削除し、前のブロックにフォーカスを移動
+	 * ただし、親ブロック内に1つしかアイテムがない場合は削除しない
 	 */
 	const handleRemove = () => {
+		// 親ブロック内のアイテム数を取得
+		const parentBlockClientId = getBlockRootClientId( clientId );
+		const siblingCount = getBlockCount( parentBlockClientId );
+
+		// 1つしかない場合は削除しない
+		if ( siblingCount <= 1 ) {
+			return;
+		}
+
 		const previousBlockClientId = getPreviousBlockClientId( clientId );
 		removeBlock( clientId );
 		if ( previousBlockClientId ) {
