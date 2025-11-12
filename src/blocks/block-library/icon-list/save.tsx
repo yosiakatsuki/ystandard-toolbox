@@ -1,18 +1,19 @@
 /*
  * WordPress Dependencies
  */
-import {
-	InnerBlocks,
-	InspectorControls,
-	withColors,
-	useBlockProps,
-} from '@wordpress/block-editor';
-import {
-	getBlockClasses,
-	getBlockStyles,
-} from '@aktk/blocks/block-library/icon-list/utils';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-function Save( { attributes } ) {
+/**
+ * Block Dependencies.
+ */
+import { getBlockClasses, getBlockStyles } from './utils';
+import type { IconListAttributes } from './types';
+
+function Save( {
+	attributes,
+}: {
+	attributes: IconListAttributes;
+} ): JSX.Element {
 	const blockProps = useBlockProps.save( {
 		className: getBlockClasses( {
 			...attributes,
@@ -24,7 +25,7 @@ function Save( { attributes } ) {
 	return (
 		<>
 			<ul { ...blockProps }>
-				<li>アイコンブロック移行中</li>
+				<InnerBlocks.Content />
 			</ul>
 		</>
 	);

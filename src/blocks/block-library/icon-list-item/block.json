@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/icon-list-item",
+	"version": "1.0.0",
+	"title": "アイコンリストアイテム",
+	"category": "ystdtb-blocks",
+	"description": "アイコンを表示できるリストブロックの行ブロック",
+	"keywords": [
+		"list",
+		"icon",
+		"アイコン",
+		"リスト"
+	],
+	"parent": [ "ystdtb/icon-list" ],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": "li",
+			"default": ""
+		}
+	},
+	"supports": {
+		"align": false,
+		"className": true,
+		"splitting": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"interactivity": {
+			"clientNavigation": true
+		}
+	},
+	"providesContext": {
+		"ystdtb/iconType": "iconType",
+		"ystdtb/customIconClass": "customIconClass",
+		"ystdtb/iconBold": "iconBold",
+		"ystdtb/iconColor": "iconColor",
+		"ystdtb/customIconColor": "customIconColor"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

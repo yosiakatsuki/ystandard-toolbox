@@ -15,6 +15,7 @@ export const UNITS_SIZE = [
  */
 export const COLORS = {
 	iconForeground: '#4190be',
+	iconForegroundChild: '#A64276',
 	iconBetaForeground: '#ba41be',
 	iconDeprecatedForeground: '#dcd1d1',
 };

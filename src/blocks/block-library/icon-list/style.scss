@@ -7,6 +7,7 @@
 	li {
 		position: relative;
 		padding-left: 1.5em;
+		min-height: 1em;
 
 		&::marker {
 			display: none;

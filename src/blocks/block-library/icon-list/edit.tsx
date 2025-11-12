@@ -2,7 +2,7 @@
  * WordPress Dependencies
  */
 import {
-	InnerBlocks,
+	useInnerBlocksProps,
 	withColors,
 	useBlockProps,
 } from '@wordpress/block-editor';
@@ -16,6 +16,11 @@ import type { IconListEditProps } from './types';
 import { getBlockClasses, getBlockStyles } from './utils';
 import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
+
+const DEFAULT_BLOCK = {
+	name: 'ystdtb/icon-list-item',
+};
+const TEMPLATE = [ [ 'ystdtb/icon-list-item' ] ];
 
 // @ts-ignore.
 function Edit( props: IconListEditProps ): JSX.Element {
@@ -31,12 +36,19 @@ function Edit( props: IconListEditProps ): JSX.Element {
 			customIconColor: iconColor?.color,
 		} ),
 	} );
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		defaultBlock: DEFAULT_BLOCK,
+		directInsert: true,
+		allowedBlocks: [ 'ystdtb/icon-list-item' ],
+		template: TEMPLATE,
+		templateLock: false,
+		templateInsertUpdatesSelection: true,
+		__experimentalCaptureToolbars: true,
+	} );
 	return (
 		<>
 			<InspectorControls { ...props } />
-			<ul { ...blockProps }>
-				<li>アイコンブロック移行中</li>
-			</ul>
+			<ul { ...innerBlocksProps } />
 		</>
 	);
 }

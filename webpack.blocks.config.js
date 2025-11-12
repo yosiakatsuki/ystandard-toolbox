@@ -11,8 +11,6 @@ module.exports = {
 		//'timeline-item': './blocks/timeline/item/index.js',
 		//faq: './blocks/faq/index.js',
 		//'faq-item': './blocks/faq/item/index.js',
-		'icon-list': './blocks/icon-list/index.js',
-		'icon-list-item': './blocks/icon-list-item/index.js',
 		//slider: './blocks/slider/index.js',
 		//'slider-item': './blocks/slider/item/index.js',
 		//'description-list': './blocks/description-list/index.js',
