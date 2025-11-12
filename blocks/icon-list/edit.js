@@ -23,10 +23,9 @@ function IconList( props ) {
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
 	const blockProps = useBlockProps( {
-		className: classnames( blockClassName, `icon--${ iconType }`, {
+		className: classnames( blockClassName, {
 			'is-bold': iconBold,
 			'has-icon-font-color': iconColor.color,
-			[ customIconClass ]: customIconClass,
 		} ),
 		style: {
 			'--icon-font-color': iconColor.color,

@@ -12,6 +12,7 @@ interface ButtonProps {
 	isBusy?: boolean;
 }
 
-export default function Button( props: ButtonProps ) {
+export default function Button( props: ButtonProps ): JSX.Element {
+	// @ts-ignore.
 	return <WPButton { ...props } __next40pxDefaultSize />;
 }

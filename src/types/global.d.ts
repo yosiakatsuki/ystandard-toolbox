@@ -8,5 +8,8 @@ declare global {
 		ystdtbAdminConfig: {
 			[ key: string ]: any;
 		};
+		ystdtbBlockEditor : {
+			[ key: string ]: any;
+		}
 	}
 }

@@ -9,6 +9,6 @@ import type { BaseControlProps as WPBaseControlProps } from '@wordpress/componen
  * BaseControl
  * @param props
  */
-export default function BaseControl( props: WPBaseControlProps ) {
+export default function BaseControl( props: WPBaseControlProps ): JSX.Element {
 	return <WPBaseControl { ...props } __nextHasNoMarginBottom />;
 }

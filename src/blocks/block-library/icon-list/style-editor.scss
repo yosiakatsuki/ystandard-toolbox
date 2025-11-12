@@ -1,1 +1,30 @@
 @use "./style";
+
+[data-type="ystdtb/icon-list"] {
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+}
+
+.ystdtb-icon-list-edit {
+	&.ystdtb-icon-list {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+
+		li {
+			margin: 0;
+			padding: 0;
+			font-size: 1.25rem; // 20px
+
+			&::before {
+				position: relative !important;
+			}
+		}
+	}
+}

@@ -35,7 +35,7 @@ class Icon_Font {
 		}
 		add_filter( 'ys_get_inline_css', [ $this, 'add_ys_icon_font' ], 1 );
 		add_filter( 'ys_get_inline_css', [ $this, 'add_icon_font_color' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'add_ys_icon_font_editor' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'add_ys_icon_font_editor' ] );
 	}
 
 	/**
@@ -72,6 +72,9 @@ class Icon_Font {
 	 * ブロックエディターにアイコンフォントCSSを追加
 	 */
 	public function add_ys_icon_font_editor() {
+		if( ! is_admin() ) {
+			return;
+		}
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
 			$this->get_font_face()
