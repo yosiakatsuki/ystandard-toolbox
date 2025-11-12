@@ -4,16 +4,10 @@ import classnames from 'classnames';
  */
 import {
 	RichText,
-	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-
-/**
- * Aktk Component Dependencies.
- */
-import { Panel } from '@aktk/block-components/components/panel';
 
 /**
  * Block Dependencies.

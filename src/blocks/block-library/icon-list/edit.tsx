@@ -6,7 +6,6 @@ import {
 	withColors,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 
 /*
