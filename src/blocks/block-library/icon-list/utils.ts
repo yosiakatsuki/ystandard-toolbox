@@ -16,8 +16,9 @@ import type { IconListAttributes } from './types';
 export const blockClassName = 'ystdtb-icon-list';
 
 export function getBlockClasses( attributes: IconListAttributes ) {
-	const { iconType, customIconClass } = attributes;
+	const { iconType, customIconClass, iconBold } = attributes;
 	return classnames( blockClassName, `icon--${ iconType }`, {
+		'is-bold': iconBold,
 		// @ts-ignore
 		[ customIconClass ]: !! customIconClass,
 	} );

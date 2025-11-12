@@ -9,11 +9,14 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import type { IconListEditProps } from '../../types';
 import { ListIcon } from './list-icon';
+import { IconBold } from './icon-bold';
 
 export function Icon( props: IconListEditProps ): JSX.Element {
 	return (
 		<Panel title={ __( 'アイコン', 'ystandard-toolbox' ) }>
 			<ListIcon { ...props } />
+
+			<IconBold { ...props } />
 		</Panel>
 	);
 }

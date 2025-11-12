@@ -24,7 +24,6 @@ function IconList( props ) {
 	const { colors } = select( 'core/block-editor' ).getSettings();
 	const blockProps = useBlockProps( {
 		className: classnames( blockClassName, {
-			'is-bold': iconBold,
 			'has-icon-font-color': iconColor.color,
 		} ),
 		style: {
@@ -49,25 +48,6 @@ function IconList( props ) {
 								setIconColor( color );
 							} }
 							value={ iconColor.color }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'icon-bold' }
-						label={ __( 'アイコン太さ', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<ToggleControl
-							label={ __(
-								'アイコンを太くする',
-								'ystandard-toolbox'
-							) }
-							onChange={ () => {
-								setAttributes( {
-									iconBold: ! iconBold,
-								} );
-							} }
-							checked={ iconBold }
-							__nextHasNoMarginBottom
 						/>
 					</BaseControl>
 				</PanelBody>
