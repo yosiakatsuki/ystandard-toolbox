@@ -252,7 +252,7 @@ class Blocks {
 			'defaultAttributes' => $this->get_block_default_attributes(),
 		];
 
-		return apply_filters( Config::BLOCK_EDITOR_OPTION_HOOK, $options );
+		return apply_filters( 'ystdtb_block_editor_option', $options );
 	}
 
 	/**

@@ -25,6 +25,7 @@ class Icon_List_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_filter( 'ystdtb_block_editor_option', [ $this, 'add_block_config' ] );
 	}
 
 	/**
@@ -38,6 +39,13 @@ class Icon_List_Block {
 		}
 
 		return self::$instance;
+	}
+
+	public function add_block_config( $options ) {
+
+		$options['listIcons'] = [];
+
+		return $options;
 	}
 
 	/**
