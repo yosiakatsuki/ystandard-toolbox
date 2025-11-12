@@ -22,34 +22,13 @@ function IconList( props ) {
 	const { iconType, customIconClass, iconBold } = attributes;
 
 	const { colors } = select( 'core/block-editor' ).getSettings();
-	const blockProps = useBlockProps( {
-		className: classnames( blockClassName, {
-			'has-icon-font-color': iconColor.color,
-		} ),
-		style: {
-			'--icon-font-color': iconColor.color,
-		},
-	} );
+	const blockProps = useBlockProps( {} );
 
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'アイコン', 'ystandard-toolbox' ) }>
 					<BlockOption.ListIcon { ...props } />
-					<BaseControl
-						id={ 'icon-color' }
-						label={ __( 'アイコン色', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								setIconColor( color );
-							} }
-							value={ iconColor.color }
-						/>
-					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
 			<ul
