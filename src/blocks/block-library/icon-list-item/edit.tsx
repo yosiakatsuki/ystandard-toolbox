@@ -6,8 +6,12 @@ import {
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
+import { createBlock } from '@wordpress/blocks';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { useRefEffect } from '@wordpress/compose';
+import { ENTER } from '@wordpress/keycodes';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -27,17 +31,24 @@ function Edit( props ): JSX.Element {
 		__unstableDisableDropZone: true,
 	} );
 
-	const { removeBlock, selectPreviousBlock } =
-		useDispatch( 'core/block-editor' );
-	const { getPreviousBlockClientId, getBlockCount, getBlockRootClientId } =
-		useSelect( ( select ) => {
-			const blockEditor = select( 'core/block-editor' );
-			return {
-				getPreviousBlockClientId: blockEditor.getPreviousBlockClientId,
-				getBlockCount: blockEditor.getBlockCount,
-				getBlockRootClientId: blockEditor.getBlockRootClientId,
-			};
-		}, [] );
+	const { removeBlock, selectPreviousBlock, insertBlocks } =
+		useDispatch( blockEditorStore );
+	const {
+		getPreviousBlockClientId,
+		getBlockCount,
+		getBlockRootClientId,
+		getNextBlockClientId,
+		getBlockIndex,
+	} = useSelect( ( select ) => {
+		const blockEditor = select( blockEditorStore );
+		return {
+			getPreviousBlockClientId: blockEditor.getPreviousBlockClientId,
+			getBlockCount: blockEditor.getBlockCount,
+			getBlockRootClientId: blockEditor.getBlockRootClientId,
+			getNextBlockClientId: blockEditor.getNextBlockClientId,
+			getBlockIndex: blockEditor.getBlockIndex,
+		};
+	}, [] );
 
 	/**
 	 * テキストが空の状態でバックスペースを押した際の処理
@@ -61,6 +72,53 @@ function Edit( props ): JSX.Element {
 		}
 	};
 
+	/**
+	 * エンターキーの処理をカスタマイズ
+	 * 最後のアイテムでテキストが空の場合、リストの後に段落ブロックを挿入
+	 */
+	const onEnterRef = useRefEffect(
+		( element ) => {
+			const handleKeyDown = ( event: KeyboardEvent ) => {
+				if ( event.keyCode !== ENTER ) {
+					return;
+				}
+
+				// テキストが空で、次のアイテムがない（最後のアイテム）場合
+				if ( ! content && ! getNextBlockClientId( clientId ) ) {
+					event.preventDefault();
+					const parentBlockClientId =
+						getBlockRootClientId( clientId );
+					const parentIndex = getBlockIndex( parentBlockClientId );
+					const grandParentClientId =
+						getBlockRootClientId( parentBlockClientId );
+
+					// 現在のブロックを削除
+					removeBlock( clientId );
+					// 親ブロック（リスト）の後に段落ブロックを挿入
+					insertBlocks(
+						createBlock( 'core/paragraph' ),
+						parentIndex + 1,
+						grandParentClientId
+					);
+				}
+			};
+
+			element.addEventListener( 'keydown', handleKeyDown );
+			return () => {
+				element.removeEventListener( 'keydown', handleKeyDown );
+			};
+		},
+		[
+			content,
+			clientId,
+			getNextBlockClientId,
+			getBlockRootClientId,
+			getBlockIndex,
+			removeBlock,
+			insertBlocks,
+		]
+	);
+
 	return (
 		<>
 			<li { ...innerBlocksProps }>
@@ -74,6 +132,7 @@ function Edit( props ): JSX.Element {
 					placeholder={ __( 'テキストを入力…', 'ystandard-toolbox' ) }
 					aria-label={ __( 'List text' ) }
 					onRemove={ handleRemove }
+					ref={ onEnterRef }
 				/>
 				{ innerBlocksProps.children }
 			</li>
