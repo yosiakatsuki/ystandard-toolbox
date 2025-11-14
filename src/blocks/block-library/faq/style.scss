@@ -1,0 +1,146 @@
+/**
+ * FAQブロック フロントエンド用スタイル
+ */
+
+.ystdtb-faq {
+	--ystdtb-faq-padding: 0.75em;
+	--ystdtb-faq-padding-wide: 1.5em;
+	--ystdtb-faq-item-padding-vertical: var(--ystdtb-faq-padding);
+	--ystdtb-faq-item-padding-horizon: 0;
+	--ystdtb-faq-padding-q-top: 1.5em;
+	--ystdtb-faq-padding-a-bottom: 1.5em;
+
+	border: 0;
+
+	& + .ystdtb-faq {
+		margin-top: 0;
+	}
+
+	&.has-padding {
+		.ystdtb-faq-item {
+			--ystdtb-faq-item-padding-horizon: 1.5em;
+		}
+	}
+
+	&.border-type--all {
+		border-style: solid;
+
+		& + .ystdtb-faq {
+			border-top: 0;
+		}
+	}
+
+	&.border-type--bottom {
+		border-bottom-style: solid;
+	}
+
+	// アコーディオン形式
+	&.is-accordion {
+		.ystdtb-faq-item__arrow {
+			display: block;
+			margin-left: 0.5em;
+			font-size: 1.1em;
+		}
+
+		.ystdtb-faq-item {
+			&.is-faq--q {
+				&:not(.is-open) {
+					border-bottom: 0;
+				}
+
+				padding-bottom: var(--ystdtb-faq-padding-q-top);
+			}
+
+			&.is-faq--a {
+				height: 0;
+				padding-top: 0;
+				padding-bottom: 0;
+				opacity: 0;
+				visibility: hidden;
+				transition: height 0.3s, padding 0.3s, opacity 0.2s;
+			}
+
+			&.is-open {
+				+ .is-faq--a {
+					height: auto;
+					padding-top: var(--ystdtb-faq-item-padding-vertical);
+					padding-bottom: var(--ystdtb-faq-padding-q-top);
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+}
+
+.ystdtb-faq-item {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	padding: var(--ystdtb-faq-item-padding-vertical)
+		var(--ystdtb-faq-item-padding-horizon);
+	border: 0;
+
+	&.is-faq--q {
+		padding-top: var(--ystdtb-faq-padding-q-top);
+	}
+
+	&.is-faq--a {
+		padding-bottom: var(--ystdtb-faq-padding-a-bottom);
+	}
+
+	&.has-border-bottom {
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+
+		&:not(.has-border) {
+			border-color: #e5e7eb;
+		}
+	}
+
+	&.has-background {
+		--ystdtb-faq-item-padding-vertical: 1.5em;
+		--ystdtb-faq-item-padding-horizon: 1.5em;
+	}
+}
+
+.ystdtb-faq-item__label {
+	margin: 0;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1;
+	text-transform: uppercase;
+	border-width: 0;
+	border-style: solid;
+
+	&.has-padding {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2em;
+		min-width: 2em;
+		height: 2em;
+		min-height: 2em;
+	}
+}
+
+.ystdtb-faq-item__contents {
+	margin: 0 0 0 1.5em;
+	flex-grow: 1;
+
+	> * {
+		margin-top: 1em;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.ystdtb-faq-item__arrow {
+	display: none;
+}

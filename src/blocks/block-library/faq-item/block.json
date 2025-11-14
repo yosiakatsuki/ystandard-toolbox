@@ -1,0 +1,113 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/faq-item",
+	"version": "1.0.0",
+	"title": "FAQアイテム",
+	"category": "ystdtb-blocks",
+	"description": "FAQブロックのQ&Aアイテム",
+	"keywords": [
+		"faq",
+		"item",
+		"Q&A"
+	],
+	"parent": [ "ystdtb/faq" ],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"faqType": {
+			"type": "string",
+			"default": "q"
+		},
+		"faqTextColor": {
+			"type": "string"
+		},
+		"customFaqTextColor": {
+			"type": "string"
+		},
+		"faqBackgroundColor": {
+			"type": "string"
+		},
+		"customFaqBackgroundColor": {
+			"type": "string"
+		},
+		"faqBorderType": {
+			"type": "string",
+			"default": ""
+		},
+		"faqBorderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"faqBorderColor": {
+			"type": "string"
+		},
+		"customFaqBorderColor": {
+			"type": "string"
+		},
+		"labelPosition": {
+			"type": "string",
+			"default": "center"
+		},
+		"labelSize": {
+			"type": "string"
+		},
+		"customLabelSize": {
+			"type": "string"
+		},
+		"labelColor": {
+			"type": "string"
+		},
+		"customLabelColor": {
+			"type": "string"
+		},
+		"labelBold": {
+			"type": "boolean",
+			"default": true
+		},
+		"labelBackgroundColor": {
+			"type": "string"
+		},
+		"customLabelBackgroundColor": {
+			"type": "string"
+		},
+		"labelBorderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"labelBorderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"labelBorderColor": {
+			"type": "string"
+		},
+		"customLabelBorderColor": {
+			"type": "string"
+		},
+		"accordionArrowColor": {
+			"type": "string"
+		},
+		"customAccordionArrowColor": {
+			"type": "string"
+		}
+	},
+	"usesContext": [
+		"ystdtb/isAccordion",
+		"ystdtb/backgroundColor",
+		"ystdtb/customBackgroundColor",
+		"ystdtb/borderType",
+		"ystdtb/borderSize",
+		"ystdtb/borderColor",
+		"ystdtb/customBorderColor",
+		"ystdtb/accordionArrowColor",
+		"ystdtb/customAccordionArrowColor"
+	],
+	"supports": {
+		"align": false,
+		"className": false,
+		"lightBlockWrapper": true,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

@@ -1,0 +1,92 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/faq",
+	"version": "1.0.0",
+	"title": "FAQ",
+	"category": "ystdtb-blocks",
+	"description": "Q&A(FAQ)表示ブロック",
+	"keywords": [
+		"faq",
+		"question",
+		"answer",
+		"Q&A"
+	],
+	"allowedBlocks": [
+		"ystdtb/faq-item"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"isAccordion": {
+			"type": "boolean",
+			"default": false
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"borderType": {
+			"type": "string",
+			"default": ""
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"borderColor": {
+			"type": "string"
+		},
+		"customBorderColor": {
+			"type": "string"
+		},
+		"accordionArrowColor": {
+			"type": "string"
+		},
+		"customAccordionArrowColor": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": false,
+		"className": false,
+		"lightBlockWrapper": true
+	},
+	"providesContext": {
+		"ystdtb/isAccordion": "isAccordion",
+		"ystdtb/backgroundColor": "backgroundColor",
+		"ystdtb/customBackgroundColor": "customBackgroundColor",
+		"ystdtb/borderType": "borderType",
+		"ystdtb/borderSize": "borderSize",
+		"ystdtb/borderColor": "borderColor",
+		"ystdtb/customBorderColor": "customBorderColor",
+		"ystdtb/accordionArrowColor": "accordionArrowColor",
+		"ystdtb/customAccordionArrowColor": "customAccordionArrowColor"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"example": {
+		"attributes": {
+			"isAccordion": true
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"attributes": {
+					"faqType": "q"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"attributes": {
+					"faqType": "a"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+}
