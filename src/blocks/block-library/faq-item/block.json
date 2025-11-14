@@ -105,7 +105,6 @@
 	"supports": {
 		"align": false,
 		"className": false,
-		"lightBlockWrapper": true,
 		"reusable": false
 	},
 	"editorScript": "file:./index.js",

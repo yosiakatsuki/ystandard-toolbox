@@ -3,7 +3,7 @@ import type {
 	BorderTypeOption,
 	LabelPositionOption,
 	DesignPreset,
-} from '../faq/types';
+} from './types';
 
 /**
  * FAQアイテムのボーダータイプ選択肢

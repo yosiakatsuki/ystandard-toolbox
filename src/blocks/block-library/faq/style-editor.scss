@@ -17,48 +17,6 @@
 	}
 }
 
-[data-type="ystdtb/faq-item"] {
-	&.is-faq--q,
-	&.is-faq--a {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-
-	.ystdtb-faq-item__contents {
-		> .block-editor-inner-blocks > .block-editor-block-list__layout {
-			> * {
-				&:first-child {
-					margin-top: 0;
-				}
-
-				&:not(.block-list-appender):last-of-type {
-					margin-bottom: 0;
-				}
-			}
-
-			> .block-list-appender {
-				margin: 8px 0 0 !important;
-
-				.block-editor-button-block-appender {
-					display: flex;
-					flex-direction: row;
-					box-shadow: none;
-					height: 24px;
-					width: 24px;
-
-					svg {
-						width: 24px;
-						background-color: #1e1e1e;
-						color: #fff;
-						border-radius: 2px;
-						flex: 1 0 auto;
-					}
-				}
-			}
-		}
-	}
-}
-
 // エディター内のアコーディオン表示調整
 .ystdtb-faq {
 	&.is-accordion {
@@ -80,9 +38,4 @@
 			}
 		}
 	}
-}
-
-// デザインサンプルコンテンツ
-.ystdtb-faq__design-sample-content {
-	display: flex;
 }

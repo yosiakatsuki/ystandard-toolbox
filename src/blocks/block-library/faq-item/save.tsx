@@ -27,6 +27,8 @@ type FaqItemSaveProps = {
 
 /**
  * FAQアイテムブロック保存コンポーネント
+ * @param root0
+ * @param root0.attributes
  */
 export default function FaqItemSave( { attributes }: FaqItemSaveProps ) {
 	const {
@@ -99,8 +101,7 @@ export default function FaqItemSave( { attributes }: FaqItemSaveProps ) {
 			: customFaqBackgroundColor,
 		borderColor: faqBorderColorClass ? undefined : customFaqBorderColor,
 		borderWidth: 0 === faqBorderSize ? undefined : `${ faqBorderSize }px`,
-		alignItems:
-			'center' === labelPosition ? undefined : labelPosition,
+		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 
 	// クラス名 - ラベル
@@ -179,7 +180,7 @@ export default function FaqItemSave( { attributes }: FaqItemSaveProps ) {
 					className={ accordionArrowClass }
 					style={ accordionArrowStyle }
 				>
-					<SvgIcon name="chevron-down" />
+					<SvgIcon.Content name="chevron-down" />
 				</div>
 			) }
 		</div>

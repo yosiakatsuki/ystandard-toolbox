@@ -5,7 +5,7 @@ import { ChevronDown } from 'react-feather';
  */
 import {
 	InnerBlocks,
-	InspectorControls,
+	InspectorControls as WPInspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 	FontSizePicker,
@@ -26,37 +26,18 @@ import { CustomSelectControl } from '@aktk/block-components/components/custom-se
 /*
  * Plugin Dependencies
  */
-import type { FaqItemBlockAttributes } from '../faq/types';
 import { useFaqItemColors } from './hooks/use-faq-item-colors';
 import { useFaqItemFontSize } from './hooks/use-faq-item-font-size';
-import {
-	template,
-	faqBorderTypes,
-	designPreset,
-	labelPositions,
-} from './utils';
-
-type FaqItemEditProps = {
-	attributes: FaqItemBlockAttributes;
-	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
-	isSelected: boolean;
-	context: Record< string, any >;
-};
+import { template, faqBorderTypes, labelPositions } from './utils';
+import { InspectorControls } from './inspector-controls';
+import type { FaqItemEditProps, FaqItemBlockAttributes } from './types';
 
 /**
  * FAQアイテムブロック編集コンポーネント
- * @param root0
- * @param root0.attributes
- * @param root0.setAttributes
- * @param root0.isSelected
- * @param root0.context
+ * @param props
  */
-export default function FaqItemEdit( {
-	attributes,
-	setAttributes,
-	isSelected,
-	context,
-}: FaqItemEditProps ) {
+export default function FaqItemEdit( props: FaqItemEditProps ) {
+	const { attributes, setAttributes, isSelected, context } = props;
 	const {
 		faqType,
 		faqBorderType,
@@ -162,66 +143,10 @@ export default function FaqItemEdit( {
 		}
 	);
 
-	/**
-	 * デザインプリセット適用
-	 * @param preset
-	 */
-	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
-		setAttributes( {
-			...preset.attributes,
-			accordionArrowColor: preset.attributes.labelColor,
-		} );
-	};
-
 	return (
 		<>
-			<InspectorControls>
-				{ /* デザインサンプル */ }
-				<PanelBody
-					title={ __( 'デザインサンプル', 'ystandard-toolbox' ) }
-					initialOpen={ false }
-				>
-					<BaseControl id="faq-item-design-sample">
-						<div>
-							{ designPreset.map( ( item ) => (
-								<Button
-									key={ item.name }
-									className="ystdtb__shadow-button"
-									onClick={ () => applyPreset( item ) }
-								>
-									<span
-										className="ystdtb-faq__design-sample-content"
-										style={ {
-											width: '100%',
-											alignItems: 'center',
-											...item.itemStyles,
-										} }
-									>
-										<span
-											style={ {
-												textTransform: 'uppercase',
-												marginRight: '1em',
-												...item.labelStyles,
-											} }
-										>
-											{ faqType }
-										</span>
-										<span
-											style={ {
-												flexGrow: 1,
-												textAlign: 'left',
-												color: '#222222',
-											} }
-										>
-											FAQ FAQ FAQ...
-										</span>
-									</span>
-								</Button>
-							) ) }
-						</div>
-					</BaseControl>
-				</PanelBody>
-
+			<InspectorControls { ...props } />
+			<WPInspectorControls>
 				{ /* FAQラベル */ }
 				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
 					{ /* ラベル表示位置 */ }
@@ -423,7 +348,7 @@ export default function FaqItemEdit( {
 						</>
 					) }
 				</PanelBody>
-			</InspectorControls>
+			</WPInspectorControls>
 
 			<div { ...blockProps }>
 				<div className={ itemClasses } style={ itemStyles }>

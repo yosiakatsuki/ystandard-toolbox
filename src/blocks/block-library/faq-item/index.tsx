@@ -35,7 +35,7 @@ export function registerFaqItemBlock() {
 			icon: (
 				// @ts-ignore
 				<MessageSquare
-					stroke={ COLORS.iconForeground }
+					stroke={ COLORS.iconForegroundChild }
 					style={ { fill: 'none' } }
 				/>
 			),
