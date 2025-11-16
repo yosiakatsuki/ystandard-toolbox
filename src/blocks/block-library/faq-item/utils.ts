@@ -1,8 +1,17 @@
+import classnames from 'classnames';
+/**
+ * WordPress dependencies.
+ */
 import { __ } from '@wordpress/i18n';
+import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
+
+/**
+ * Block dependencies.
+ */
 import type {
 	BorderTypeOption,
+	FaqItemBlockAttributes,
 	LabelPositionOption,
-	DesignPreset,
 } from './types';
 
 /**
@@ -11,16 +20,6 @@ import type {
 export const faqBorderTypes: BorderTypeOption[] = [
 	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
 	{ label: __( '下区切り線', 'ystandard-toolbox' ), name: 'bottom' },
-];
-
-/**
- * FAQアイテムの初期テンプレート
- */
-export const template: [ string, Record< string, any > ][] = [
-	[
-		'core/paragraph',
-		{ placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) },
-	],
 ];
 
 /**
@@ -33,180 +32,186 @@ export const labelPositions: LabelPositionOption[] = [
 ];
 
 /**
- * デザインプリセット
+ * FAQアイテムのクラス名を取得
+ * @param attributes
  */
-export const designPreset: DesignPreset[] = [
-	{
-		name: 'default',
-		label: __( 'デフォルト', 'ystandard-toolbox' ),
-		itemStyles: {},
-		labelStyles: {
-			color: '#222222',
-			fontWeight: 'bold',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: 0,
-			faqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			labelBorderSize: 0,
-			labelBorderRadius: 0,
-			labelBorderColor: undefined,
-		},
-	},
-	{
-		name: 'background-square',
-		label: __( '背景あり四角', 'ystandard-toolbox' ),
-		itemStyles: {},
-		labelStyles: {
-			fontWeight: 'bold',
-			backgroundColor: '#f1f1f3',
-			color: '#222222',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: 0,
-			faqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: '#222222',
-			labelBold: true,
-			labelBackgroundColor: '#f1f1f3',
-			labelBorderSize: 0,
-			labelBorderRadius: 0,
-			labelBorderColor: undefined,
-		},
-	},
-	{
-		name: 'background-circle',
-		label: __( '背景あり丸', 'ystandard-toolbox' ),
-		itemStyles: {},
-		labelStyles: {
-			fontWeight: 'bold',
-			backgroundColor: '#f1f1f3',
-			color: '#222222',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			borderRadius: '50px',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: 0,
-			faqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: '#222222',
-			labelBold: true,
-			labelBackgroundColor: '#f1f1f3',
-			labelBorderSize: 0,
-			labelBorderRadius: 50,
-			labelBorderColor: undefined,
-		},
-	},
-	{
-		name: 'outline-square',
-		label: __( '四角アウトライン', 'ystandard-toolbox' ),
-		itemStyles: {},
-		labelStyles: {
-			fontWeight: 'bold',
-			backgroundColor: '#ffffff',
-			color: '#666666',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			border: '2px solid #666666',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: 0,
-			faqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: '#666666',
-			labelBold: true,
-			labelBackgroundColor: '#ffffff',
-			labelBorderSize: 2,
-			labelBorderRadius: 0,
-			labelBorderColor: '#666666',
-		},
-	},
-	{
-		name: 'outline-circle',
-		label: __( '丸アウトライン', 'ystandard-toolbox' ),
-		itemStyles: {},
-		labelStyles: {
-			fontWeight: 'bold',
-			backgroundColor: '#ffffff',
-			color: '#666666',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			border: '2px solid #666666',
-			borderRadius: '50px',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: 0,
-			faqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: '#666666',
-			labelBold: true,
-			labelBackgroundColor: '#ffffff',
-			labelBorderSize: 2,
-			labelBorderRadius: 50,
-			labelBorderColor: '#666666',
-		},
-	},
-	{
-		name: 'bottom-divider',
-		label: __( '区切り線あり', 'ystandard-toolbox' ),
-		itemStyles: {
-			paddingBottom: '.25em',
-			borderBottom: '1px solid #aaaaaa',
-		},
-		labelStyles: {
-			color: '#222222',
-			fontWeight: 'bold',
-			width: '2em',
-			height: '2em',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		attributes: {
-			faqBackgroundColor: undefined,
-			faqBorderType: 'bottom',
-			faqBorderSize: 1,
-			faqBorderColor: '#aaaaaa',
-			labelSize: undefined,
-			labelColor: undefined,
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			labelBorderSize: 0,
-			labelBorderRadius: 0,
-			labelBorderColor: undefined,
-		},
-	},
-];
+export function getBlockPropsClasses(
+	attributes: FaqItemBlockAttributes
+): string {
+	const { faqType } = attributes;
+	return classnames( 'ystdtb-faq-item-wrap', {
+		[ `is-faq--${ faqType }` ]: faqType,
+	} );
+}
+
+/**
+ * FAQアイテムのクラス名を取得
+ * @param attributes
+ */
+export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
+	const {
+		faqType,
+		faqBorderType,
+		faqBackgroundColor,
+		customFaqBackgroundColor,
+		faqBorderColor,
+		customFaqBorderColor,
+	} = attributes;
+
+	const faqBackgroundColorClass =
+		getColorClassName( 'background-color', faqBackgroundColor ) || '';
+	const faqBorderColorClass =
+		getColorClassName( 'border-color', faqBorderColor ) || '';
+
+	return classnames( 'ystdtb-faq-item', {
+		[ `is-faq--${ faqType }` ]: faqType,
+		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
+		'has-background': faqBackgroundColor || customFaqBackgroundColor,
+		'has-border': faqBorderColor || customFaqBorderColor,
+		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
+		[ faqBorderColorClass ]: faqBorderColorClass,
+	} );
+}
+
+/**
+ * FAQアイテムのスタイルを取得
+ * @param attributes
+ */
+export function getItemStyles( attributes: FaqItemBlockAttributes ) {
+	const {
+		faqBackgroundColor,
+		customFaqBackgroundColor,
+		faqBorderColor,
+		customFaqBorderColor,
+		faqBorderSize,
+		labelPosition,
+	} = attributes;
+	return {
+		backgroundColor: faqBackgroundColor
+			? undefined
+			: customFaqBackgroundColor,
+		borderColor: faqBorderColor ? undefined : customFaqBorderColor,
+		borderWidth: 0 === faqBorderSize ? undefined : `${ faqBorderSize }px`,
+		alignItems: 'center' === labelPosition ? undefined : labelPosition,
+	};
+}
+
+/**
+ * FAQラベルのクラス名を取得
+ * @param attributes
+ */
+export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
+	const {
+		labelSize = '',
+		labelColor,
+		customLabelColor,
+		labelBackgroundColor,
+		customLabelBackgroundColor,
+		labelBorderColor,
+		customLabelBorderColor,
+		labelBorderSize,
+	} = attributes;
+
+	const labelSizeClass = getFontSizeClass( labelSize ) || '';
+	const labelColorClass = getColorClassName( 'color', labelColor ) || '';
+	const labelBackgroundColorClass =
+		getColorClassName( 'background-color', labelBackgroundColor ) || '';
+	const labelBorderColorClass =
+		getColorClassName( 'border-color', labelBorderColor ) || '';
+
+	const hasPadding =
+		labelBackgroundColor ||
+		customLabelBackgroundColor ||
+		labelBorderColor ||
+		customLabelBorderColor ||
+		labelBorderSize;
+
+	return classnames( 'ystdtb-faq-item__label', {
+		[ labelSizeClass ]: labelSizeClass,
+		'has-text-color': labelColor || customLabelColor,
+		[ labelColorClass ]: labelColorClass,
+		'has-background': labelBackgroundColor || customLabelBackgroundColor,
+		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
+		'has-border': labelBorderColor || customLabelBorderColor,
+		[ labelBorderColorClass ]: labelBorderColorClass,
+		'has-padding': hasPadding,
+	} );
+}
+
+/**
+ * FAQラベルのスタイルを取得
+ * @param attributes
+ */
+export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
+	const {
+		customLabelSize,
+		labelBold,
+		customLabelColor,
+		customLabelBackgroundColor,
+		customLabelBorderColor,
+		labelBorderSize,
+		labelBorderRadius,
+	} = attributes;
+	return {
+		fontSize: customLabelSize,
+		fontWeight: labelBold ? undefined : 400,
+		color: customLabelColor,
+		backgroundColor: customLabelBackgroundColor,
+		borderColor: customLabelBorderColor,
+		borderWidth:
+			0 === labelBorderSize || ! labelBorderSize
+				? undefined
+				: `${ labelBorderSize }px`,
+		borderRadius:
+			0 === labelBorderRadius || ! labelBorderRadius
+				? undefined
+				: `${ labelBorderRadius }px`,
+	};
+}
+
+/**
+ * FAQコンテンツのクラス名を取得
+ * @param attributes
+ */
+export function getContentsClasses(
+	attributes: FaqItemBlockAttributes
+): string {
+	const { faqTextColor, customFaqTextColor } = attributes;
+
+	const faqTextColorClass = getColorClassName( 'color', faqTextColor ) || '';
+
+	return classnames( 'ystdtb-faq-item__contents', {
+		'has-text-color': faqTextColor || customFaqTextColor,
+		[ faqTextColorClass ]: faqTextColorClass,
+	} );
+}
+
+/**
+ * FAQコンテンツのスタイルを取得
+ * @param attributes
+ */
+export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
+	const { customFaqTextColor } = attributes;
+	return {
+		color: customFaqTextColor,
+	};
+}
+
+export function getAccordionArrowClasses( attributes: FaqItemBlockAttributes ) {
+	const { accordionArrowColor, customAccordionArrowColor } = attributes;
+
+	const accordionArrowColorClass =
+		getColorClassName( 'color', accordionArrowColor ) || '';
+
+	return classnames( 'ystdtb-faq-item__arrow', {
+		'has-text-color': accordionArrowColor || customAccordionArrowColor,
+		[ accordionArrowColorClass ]: accordionArrowColorClass,
+	} );
+}
+
+export function getAccordionArrowStyles( attributes: FaqItemBlockAttributes ) {
+	const { customAccordionArrowColor } = attributes;
+	return {
+		color: customAccordionArrowColor,
+	};
+}

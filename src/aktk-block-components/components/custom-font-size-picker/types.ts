@@ -13,7 +13,7 @@ export type CustomFontSizePickerOnChangeProps = {
 };
 
 export interface CustomFontSizePickerProps {
-	fontSize?: FontSize;
+	fontSize?: FontSize | string;
 	customFontSize?: string;
 	responsiveFontSize?: ResponsiveFontSize;
 	onChange: ( value: CustomFontSizePickerOnChangeProps ) => void;

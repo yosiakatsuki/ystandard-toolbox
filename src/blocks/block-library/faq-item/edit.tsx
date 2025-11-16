@@ -1,17 +1,14 @@
-import classnames from 'classnames';
 import { ChevronDown } from 'react-feather';
 /*
  * WordPress Dependencies
  */
 import {
-	InnerBlocks,
 	InspectorControls as WPInspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
-	FontSizePicker,
-	useSetting,
+	withColors,
 } from '@wordpress/block-editor';
-import { PanelBody, Button } from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /*
@@ -26,122 +23,130 @@ import { CustomSelectControl } from '@aktk/block-components/components/custom-se
 /*
  * Plugin Dependencies
  */
-import { useFaqItemColors } from './hooks/use-faq-item-colors';
-import { useFaqItemFontSize } from './hooks/use-faq-item-font-size';
-import { template, faqBorderTypes, labelPositions } from './utils';
+import {
+	faqBorderTypes,
+	getLabelClasses,
+	getLabelStyles,
+	getItemClasses,
+	getItemStyles,
+	getContentsClasses,
+	getContentsStyles,
+	getAccordionArrowClasses,
+	getAccordionArrowStyles,
+} from './utils';
 import { InspectorControls } from './inspector-controls';
-import type { FaqItemEditProps, FaqItemBlockAttributes } from './types';
+import type { FaqItemEditProps } from './types';
+import { compose } from '@wordpress/compose';
+
+/**
+ * FAQアイテムの初期テンプレート
+ */
+const template: [ string, Record< string, any > ][] = [
+	[
+		'core/paragraph',
+		{ placeholder: __( 'Q&A項目…', 'ystandard-toolbox' ) },
+	],
+];
 
 /**
  * FAQアイテムブロック編集コンポーネント
  * @param props
  */
-export default function FaqItemEdit( props: FaqItemEditProps ) {
-	const { attributes, setAttributes, isSelected, context } = props;
+function FaqItemEdit( props: FaqItemEditProps ) {
 	const {
-		faqType,
-		faqBorderType,
-		faqBorderSize,
-		labelPosition,
-		labelBold,
-		labelBorderSize,
-		labelBorderRadius,
-	} = attributes;
-
-	// コンテキストから親ブロックの設定を取得
-	const accordionArrowColorFromContext =
-		context[ 'ystdtb/accordionArrowColor' ];
-	const customAccordionArrowColorFromContext =
-		context[ 'ystdtb/customAccordionArrowColor' ];
-
-	// 色設定
-	const {
+		attributes,
+		setAttributes,
 		faqTextColor,
 		faqBackgroundColor,
 		faqBorderColor,
 		labelColor,
 		labelBackgroundColor,
 		labelBorderColor,
-	} = useFaqItemColors( attributes, setAttributes );
+		accordionArrowColor,
+	} = props;
+	const {
+		faqType,
+		faqBorderType,
+		faqBorderSize,
+		labelBold,
+		labelBorderSize,
+		labelBorderRadius,
+	} = attributes;
 
-	// フォントサイズ設定
-	const { labelSize } = useFaqItemFontSize( attributes, setAttributes );
-
-	// テーマのフォントサイズ設定を取得
-	const fontSizes = useSetting( 'typography.fontSizes' ) || [];
-
-	// クラス名とスタイル - アイテム全体
-	const itemClasses = classnames( 'ystdtb-faq-item', {
-		[ `is-faq--${ faqType }` ]: faqType,
-		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-		'has-background': faqBackgroundColor.color,
-	} );
-
-	const itemStyles = {
-		backgroundColor: faqBackgroundColor.color,
-		borderColor: faqBorderColor.color,
-		borderWidth: faqBorderSize,
-		alignItems: labelPosition,
-	};
-
-	// クラス名とスタイル - ラベル
-	const labelClasses = classnames( 'ystdtb-faq-item__label', {
-		'has-padding':
-			labelBackgroundColor.color ||
-			labelBorderColor.color ||
-			labelBorderSize,
-	} );
-
-	const labelStyles = {
-		fontSize: labelSize.size,
-		fontWeight: labelBold ? undefined : 400,
-		color: labelColor.color,
-		backgroundColor: labelBackgroundColor.color,
-		borderColor: labelBorderColor.color,
-		borderWidth: labelBorderSize,
-		borderRadius: labelBorderRadius,
-	};
-
-	// クラス名とスタイル - コンテンツ
-	const contentsClasses = classnames( 'ystdtb-faq-item__contents', {
-		'has-text-color': faqTextColor.color,
-	} );
-
-	const contentsStyles = {
-		color: faqTextColor.color,
-	};
-
-	// クラス名とスタイル - アコーディオンアロー
-	const accordionArrowClass = classnames( 'ystdtb-faq-item__arrow', {
-		'has-text-color':
-			accordionArrowColorFromContext ||
-			customAccordionArrowColorFromContext,
-	} );
-
-	const accordionArrowStyle = {
-		color: customAccordionArrowColorFromContext,
-	};
-
-	// BlockProps
+	// FAQアイテムブロックProps
 	const blockProps = useBlockProps( {
-		className: classnames( 'ystdtb-faq-item-wrap', {
-			[ `is-faq--${ faqType }` ]: faqType,
+		className: getItemClasses( {
+			...attributes,
+			customFaqBackgroundColor: faqBackgroundColor?.color,
+			customFaqBorderColor: faqBorderColor?.color,
+		} ),
+		style: getItemStyles( {
+			...attributes,
+			customFaqBackgroundColor: faqBackgroundColor?.color,
+			customFaqBorderColor: faqBorderColor?.color,
 		} ),
 	} );
 
+	// FAQアイテムのクラス名とスタイル
+	const itemProps = {
+		className: getItemClasses( {
+			...attributes,
+			customFaqBackgroundColor: faqBackgroundColor?.color,
+			customFaqBorderColor: faqBorderColor?.color,
+		} ),
+		style: getItemStyles( {
+			...attributes,
+			customFaqBackgroundColor: faqBackgroundColor?.color,
+			customFaqBorderColor: faqBorderColor?.color,
+		} ),
+	};
+
+	// FAQラベルのクラス名とスタイル
+	const labelProps = {
+		className: getLabelClasses( {
+			...attributes,
+			customLabelColor: labelColor.color,
+			customLabelBackgroundColor: labelBackgroundColor?.color,
+			customLabelBorderColor: labelBorderColor?.color,
+			labelBorderSize,
+		} ),
+		style: getLabelStyles( {
+			...attributes,
+			customLabelColor: labelColor.color,
+			customLabelBackgroundColor: labelBackgroundColor?.color,
+			customLabelBorderColor: labelBorderColor?.color,
+		} ),
+	};
+
+	// FAQコンテンツのInnerBlocksProps
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: contentsClasses,
-			style: contentsStyles,
+			className: getContentsClasses( {
+				...attributes,
+				customFaqTextColor: faqTextColor?.color,
+			} ),
+			style: getContentsStyles( {
+				...attributes,
+				customFaqTextColor: faqTextColor?.color,
+			} ),
 		},
 		{
 			templateLock: false,
 			template,
-			renderAppender: isSelected
-				? InnerBlocks.ButtonBlockAppender
-				: false,
 		}
 	);
+
+	// アコーディオン矢印のクラス名とスタイル
+	const accordionArrowProps = {
+		className: getAccordionArrowClasses( {
+			...attributes,
+			customAccordionArrowColor: accordionArrowColor?.color,
+		} ),
+		style: getAccordionArrowStyles( {
+			...attributes,
+			customAccordionArrowColor: accordionArrowColor?.color,
+		} ),
+	};
 
 	return (
 		<>
@@ -149,35 +154,6 @@ export default function FaqItemEdit( props: FaqItemEditProps ) {
 			<WPInspectorControls>
 				{ /* FAQラベル */ }
 				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
-					{ /* ラベル表示位置 */ }
-					<BaseControl
-						id="faq-item-label-position"
-						label={ __( 'ラベル表示位置', 'ystandard-toolbox' ) }
-					>
-						<CustomSelectControl
-							value={ labelPosition }
-							options={ labelPositions.map( ( item ) => ( {
-								key: item.name,
-								name: item.label,
-							} ) ) }
-							onChange={ ( value ) =>
-								setAttributes( { labelPosition: value } )
-							}
-						/>
-					</BaseControl>
-
-					{ /* ラベルサイズ */ }
-					<BaseControl
-						id="faq-item-label-size"
-						label={ __( 'ラベルサイズ', 'ystandard-toolbox' ) }
-					>
-						<FontSizePicker
-							value={ labelSize.size }
-							onChange={ labelSize.setSize }
-							fontSizes={ fontSizes }
-						/>
-					</BaseControl>
-
 					{ /* 文字の太さ */ }
 					<BaseControl
 						id="faq-item-label-bold"
@@ -351,23 +327,31 @@ export default function FaqItemEdit( props: FaqItemEditProps ) {
 			</WPInspectorControls>
 
 			<div { ...blockProps }>
-				<div className={ itemClasses } style={ itemStyles }>
-					<div className={ labelClasses } style={ labelStyles }>
-						<span className="ystdtb-faq-item__label-text">
-							{ faqType }
-						</span>
-					</div>
-					<div { ...innerBlocksProps } />
-					{ 'q' === faqType && (
-						<div
-							className={ accordionArrowClass }
-							style={ accordionArrowStyle }
-						>
-							<ChevronDown />
-						</div>
-					) }
+				<div { ...labelProps }>
+					<span className="ystdtb-faq-item__label-text">
+						{ faqType }
+					</span>
 				</div>
+				<div { ...innerBlocksProps } />
+				{ 'q' === faqType && (
+					<div { ...accordionArrowProps }>
+						{ /* @ts-ignore */ }
+						<ChevronDown />
+					</div>
+				) }
 			</div>
 		</>
 	);
 }
+
+export default compose( [
+	withColors( {
+		faqTextColor: 'color',
+		faqBackgroundColor: 'backgroundColor',
+		faqBorderColor: 'borderColor',
+		labelColor: 'color',
+		labelBackgroundColor: 'backgroundColor',
+		labelBorderColor: 'borderColor',
+		accordionArrowColor: 'color',
+	} ),
+] )( FaqItemEdit );

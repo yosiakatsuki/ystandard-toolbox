@@ -24,7 +24,9 @@ import './style-editor.scss';
  * カスタムフォントサイズピッカー
  * @param props
  */
-export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
+export function CustomFontSizePicker(
+	props: CustomFontSizePickerProps
+): JSX.Element {
 	// フォントサイズ設定の取得.
 	const themeFontSizes = useThemeFontSizes();
 
@@ -40,6 +42,7 @@ export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
 		onChange,
 	} = props;
 
+	// スラッグからプリセットフォントサイズを取得.
 	const presetFontSize = fontSizes?.filter( ( size: FontSize ) => {
 		if ( ! isString( fontSize ) ) {
 			return false;
@@ -50,6 +53,7 @@ export function CustomFontSizePicker( props: CustomFontSizePickerProps ) {
 	// WPフォントサイズピッカー用にサイズ抽出.
 	const wpPickerFontSize =
 		presetFontSize?.size ??
+		// @ts-ignore
 		fontSize?.size ??
 		customFontSize ??
 		responsiveFontSize?.desktop;

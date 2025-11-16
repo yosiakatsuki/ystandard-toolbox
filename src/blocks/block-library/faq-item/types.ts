@@ -1,8 +1,14 @@
 export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
-	isSelected: boolean;
-	context: Record< string, any >;
+	isSelected?: boolean;
+	faqTextColor: { color?: string; slug?: string };
+	faqBackgroundColor: { color?: string; slug?: string };
+	faqBorderColor: { color?: string; slug?: string };
+	labelColor: { color?: string; slug?: string };
+	labelBackgroundColor: { color?: string; slug?: string };
+	labelBorderColor: { color?: string; slug?: string };
+	accordionArrowColor: { color?: string; slug?: string };
 };
 
 /**
