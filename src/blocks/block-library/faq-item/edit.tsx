@@ -87,20 +87,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 		} ),
 	} );
 
-	// FAQアイテムのクラス名とスタイル
-	const itemProps = {
-		className: getItemClasses( {
-			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
-		style: getItemStyles( {
-			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
-	};
-
 	// FAQラベルのクラス名とスタイル
 	const labelProps = {
 		className: getLabelClasses( {
