@@ -140,17 +140,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 			<WPInspectorControls>
 				{ /* FAQラベル */ }
 				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
-					{ /* 背景色 */ }
-					<BaseControl
-						id="faq-item-label-background-color"
-						label={ __( '背景色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							value={ labelBackgroundColor.color }
-							onChange={ labelBackgroundColor.setColor }
-						/>
-					</BaseControl>
-
 					{ /* 角丸 */ }
 					<BaseControl
 						id="faq-item-label-border-radius"

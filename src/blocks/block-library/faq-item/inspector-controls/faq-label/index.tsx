@@ -14,6 +14,7 @@ import { LabelPosition } from './label-position';
 import { LabelSize } from './label-size';
 import { LabelWeight } from './label-weight';
 import { LabelColor } from './label-color';
+import { LabelBackgroundColor } from './label-background-color';
 
 // @ts-ignore.
 export function FAQLabel( props ): JSX.Element {
@@ -23,6 +24,7 @@ export function FAQLabel( props ): JSX.Element {
 			<LabelSize { ...props } />
 			<LabelWeight { ...props } />
 			<LabelColor { ...props } />
+			<LabelBackgroundColor { ...props } />
 		</Panel>
 	);
 }
