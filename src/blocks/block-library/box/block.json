@@ -96,8 +96,7 @@
 	"supports": {
 		"anchor": false,
 		"align": false,
-		"className": false,
-		"lightBlockWrapper": true
+		"className": false
 	},
 	"example": {
 		"attributes": {

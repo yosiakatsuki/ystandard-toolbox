@@ -18,6 +18,7 @@ import { CATEGORY } from '@aktk/blocks/config';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
+import deprecated from './deprecated';
 
 /**
  * FAQアイテムブロック登録
@@ -43,6 +44,7 @@ export function registerFaqItemBlock() {
 			attributes,
 			edit,
 			save,
+			deprecated,
 		},
 	} );
 }
