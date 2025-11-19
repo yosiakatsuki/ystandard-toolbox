@@ -140,20 +140,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 			<WPInspectorControls>
 				{ /* FAQラベル */ }
 				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
-					{ /* 文字の太さ */ }
-					<BaseControl
-						id="faq-item-label-bold"
-						label={ __( '文字の太さ', 'ystandard-toolbox' ) }
-					>
-						<ToggleControl
-							label={ __( '太字にする', 'ystandard-toolbox' ) }
-							checked={ labelBold }
-							onChange={ () =>
-								setAttributes( { labelBold: ! labelBold } )
-							}
-						/>
-					</BaseControl>
-
 					{ /* 文字色 */ }
 					<BaseControl
 						id="faq-item-label-color"

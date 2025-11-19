@@ -12,6 +12,7 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import { LabelPosition } from './label-position';
 import { LabelSize } from './label-size';
+import { LabelWeight } from './label-weight';
 
 // @ts-ignore.
 export function FAQLabel( props ): JSX.Element {
@@ -19,6 +20,7 @@ export function FAQLabel( props ): JSX.Element {
 		<Panel title={ __( 'FAQラベル設定', 'ystandard-toolbox' ) }>
 			<LabelPosition { ...props } />
 			<LabelSize { ...props } />
+			<LabelWeight { ...props } />
 		</Panel>
 	);
 }
