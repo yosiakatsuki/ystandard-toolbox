@@ -2,8 +2,8 @@
  * Aktk
  */
 import UnitControl, {
-	UnitControlProps,
-	UnitType,
+	type UnitControlProps,
+	type UnitType,
 } from '@aktk/block-components/wp-controls/unit-control';
 
 /**

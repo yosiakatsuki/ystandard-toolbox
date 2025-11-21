@@ -140,25 +140,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 			<WPInspectorControls>
 				{ /* FAQラベル */ }
 				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
-					{ /* 角丸 */ }
-					<BaseControl
-						id="faq-item-label-border-radius"
-						label={ __( '角丸', 'ystandard-toolbox' ) }
-					>
-						<RangeControl
-							value={ labelBorderRadius ?? 0 }
-							onChange={ ( value ) =>
-								setAttributes( {
-									labelBorderRadius: value ?? 0,
-								} )
-							}
-							min={ 0 }
-							max={ 100 }
-							step={ 1 }
-							allowReset
-						/>
-					</BaseControl>
-
 					{ /* 枠線サイズ */ }
 					<BaseControl
 						id="faq-item-label-border-size"

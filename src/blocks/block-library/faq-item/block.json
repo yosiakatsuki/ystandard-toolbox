@@ -75,8 +75,7 @@
 			"default": 0
 		},
 		"labelBorderRadius": {
-			"type": "number",
-			"default": 0
+			"type": "string"
 		},
 		"labelBorderColor": {
 			"type": "string"

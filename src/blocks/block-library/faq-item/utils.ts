@@ -162,10 +162,7 @@ export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 			0 === labelBorderSize || ! labelBorderSize
 				? undefined
 				: `${ labelBorderSize }px`,
-		borderRadius:
-			0 === labelBorderRadius || ! labelBorderRadius
-				? undefined
-				: `${ labelBorderRadius }px`,
+		borderRadius: labelBorderRadius || undefined,
 	};
 }
 
