@@ -16,6 +16,7 @@ import { LabelWeight } from './label-weight';
 import { LabelColor } from './label-color';
 import { LabelBackgroundColor } from './label-background-color';
 import { LabelBorderRadius } from './label-border-radius';
+import { LabelBorder } from './label-border';
 
 // @ts-ignore.
 export function FAQLabel( props ): JSX.Element {
@@ -27,6 +28,7 @@ export function FAQLabel( props ): JSX.Element {
 			<LabelColor { ...props } />
 			<LabelBackgroundColor { ...props } />
 			<LabelBorderRadius { ...props } />
+			<LabelBorder { ...props } />
 		</Panel>
 	);
 }

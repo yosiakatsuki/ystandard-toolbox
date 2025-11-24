@@ -21,7 +21,7 @@ export function LabelWeight( props ): JSX.Element {
 
 	return (
 		<BaseControl
-			id="faq-item-label-position"
+			id="faq-item-label-weight"
 			label={ __( 'FAQラベル表示位置', 'ystandard-toolbox' ) }
 		>
 			<ToggleControl

@@ -18,7 +18,7 @@ export function LabelBorderRadius( props ): JSX.Element {
 	};
 	return (
 		<BaseControl
-			id="faq-item-label-color"
+			id="faq-item-label-border-radius"
 			label={ __( 'ラベル角丸', 'ystandard-toolbox' ) }
 		>
 			<UnitControl

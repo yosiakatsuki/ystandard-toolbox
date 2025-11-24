@@ -14,7 +14,7 @@ export function LabelBackgroundColor( props ): JSX.Element {
 
 	return (
 		<BaseControl
-			id="faq-item-label-color"
+			id="faq-item-label-background-color"
 			label={ __( 'ラベル背景色', 'ystandard-toolbox' ) }
 		>
 			<ColorPalette

@@ -138,39 +138,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 		<>
 			<InspectorControls { ...props } />
 			<WPInspectorControls>
-				{ /* FAQラベル */ }
-				<PanelBody title={ __( 'FAQラベル', 'ystandard-toolbox' ) }>
-					{ /* 枠線サイズ */ }
-					<BaseControl
-						id="faq-item-label-border-size"
-						label={ __( '枠線サイズ', 'ystandard-toolbox' ) }
-					>
-						<RangeControl
-							value={ labelBorderSize ?? 0 }
-							onChange={ ( value ) =>
-								setAttributes( {
-									labelBorderSize: value ?? 0,
-								} )
-							}
-							min={ 0 }
-							max={ 10 }
-							step={ 1 }
-							allowReset
-						/>
-					</BaseControl>
-
-					{ /* 枠線の色 */ }
-					<BaseControl
-						id="faq-item-label-border-color"
-						label={ __( '枠線の色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							value={ labelBorderColor.color }
-							onChange={ labelBorderColor.setColor }
-						/>
-					</BaseControl>
-				</PanelBody>
-
 				{ /* FAQコンテンツ */ }
 				<PanelBody title={ __( 'FAQコンテンツ', 'ystandard-toolbox' ) }>
 					{ /* 文字色 */ }

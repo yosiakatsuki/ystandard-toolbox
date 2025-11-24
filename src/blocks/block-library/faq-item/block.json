@@ -11,7 +11,9 @@
 		"item",
 		"Q&A"
 	],
-	"parent": [ "ystdtb/faq" ],
+	"parent": [
+		"ystdtb/faq"
+	],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
 		"faqType": {
@@ -71,8 +73,7 @@
 			"type": "string"
 		},
 		"labelBorderSize": {
-			"type": "number",
-			"default": 0
+			"type": "string"
 		},
 		"labelBorderRadius": {
 			"type": "string"

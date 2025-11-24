@@ -158,10 +158,7 @@ export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 		color: customLabelColor,
 		backgroundColor: customLabelBackgroundColor,
 		borderColor: customLabelBorderColor,
-		borderWidth:
-			0 === labelBorderSize || ! labelBorderSize
-				? undefined
-				: `${ labelBorderSize }px`,
+		borderWidth: labelBorderSize || undefined,
 		borderRadius: labelBorderRadius || undefined,
 	};
 }

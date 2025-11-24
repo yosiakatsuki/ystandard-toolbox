@@ -26,7 +26,7 @@ export function LabelSize( props ): JSX.Element {
 	};
 	return (
 		<BaseControl
-			id="faq-item-label-position"
+			id="faq-item-label-size"
 			label={ __( 'FAQラベル表示位置', 'ystandard-toolbox' ) }
 		>
 			<CustomFontSizePicker
