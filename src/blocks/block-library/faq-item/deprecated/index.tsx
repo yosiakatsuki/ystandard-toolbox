@@ -1,4 +1,4 @@
-import { deprecated1341 } from '@aktk/blocks/block-library/faq-item/deprecated/1.34.1';
+import { deprecated1341 } from './1.34.1';
 
 const deprecated = [ ...deprecated1341 ];
 

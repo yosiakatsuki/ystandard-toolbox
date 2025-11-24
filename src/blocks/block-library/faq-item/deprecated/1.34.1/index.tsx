@@ -12,62 +12,55 @@ import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 export const deprecated1341 = [
 	{
 		attributes: {
-			boxStyle: {
+			faqType: {
 				type: 'string',
-				default: 'label-none',
+				default: 'q',
 			},
-			boxBackgroundColor: {
-				type: 'string',
-			},
-			customBoxBackgroundColor: {
+			faqTextColor: {
 				type: 'string',
 			},
-			boxTextColor: {
+			customFaqTextColor: {
 				type: 'string',
 			},
-			customBoxTextColor: {
+			faqBackgroundColor: {
 				type: 'string',
 			},
-			boxBorderColor: {
+			customFaqBackgroundColor: {
 				type: 'string',
 			},
-			customBoxBorderColor: {
+			faqBorderType: {
+				type: 'string',
+				default: '',
+			},
+			faqBorderSize: {
+				type: 'number',
+				default: 0,
+			},
+			faqBorderColor: {
 				type: 'string',
 			},
-			boxBorderSize: {
-				type: 'string',
-				default: '1px',
-			},
-			boxBorderStyle: {
-				type: 'string',
-				default: 'solid',
-			},
-			boxBorderRadius: {
+			customFaqBorderColor: {
 				type: 'string',
 			},
-			boxPadding: {
-				type: 'object',
+			labelPosition: {
+				type: 'string',
+				default: 'center',
 			},
-			isResponsiveBoxPadding: {
-				type: 'boolean',
-				default: false,
-			},
-			label: {
+			labelSize: {
 				type: 'string',
 			},
-			labelIcon: {
+			customLabelSize: {
 				type: 'string',
 			},
-			labelFontSize: {
+			labelColor: {
 				type: 'string',
 			},
-			customLabelFontSize: {
+			customLabelColor: {
 				type: 'string',
-				default: '0.9em',
 			},
-			labelWeight: {
-				type: 'string',
-				default: 'normal',
+			labelBold: {
+				type: 'bool',
+				default: true,
 			},
 			labelBackgroundColor: {
 				type: 'string',
@@ -75,25 +68,25 @@ export const deprecated1341 = [
 			customLabelBackgroundColor: {
 				type: 'string',
 			},
-			labelTextColor: {
-				type: 'string',
-			},
-			customLabelTextColor: {
-				type: 'string',
+			labelBorderSize: {
+				type: 'number',
+				default: 0,
 			},
 			labelBorderRadius: {
-				type: 'string',
-			},
-			backgroundImage: {
-				type: 'object',
-			},
-			backgroundImageCoverOpacity: {
 				type: 'number',
-				default: 0.8,
+				default: 0,
 			},
-			backgroundImageRepeat: {
+			labelBorderColor: {
 				type: 'string',
-				default: 'no-repeat',
+			},
+			customLabelBorderColor: {
+				type: 'string',
+			},
+			accordionArrowColor: {
+				type: 'string',
+			},
+			customAccordionArrowColor: {
+				type: 'string',
 			},
 		},
 		supports: {
@@ -110,7 +103,7 @@ export const deprecated1341 = [
 					? `${ labelBorderRadius }px`
 					: undefined,
 				labelBorderSize: labelBorderSize
-					? `${ labelBorderSize }`
+					? `${ labelBorderSize }px`
 					: undefined,
 			};
 		},
