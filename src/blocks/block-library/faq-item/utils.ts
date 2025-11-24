@@ -8,19 +8,7 @@ import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
 /**
  * Block dependencies.
  */
-import type {
-	BorderTypeOption,
-	FaqItemBlockAttributes,
-	LabelPositionOption,
-} from './types';
-
-/**
- * FAQアイテムのボーダータイプ選択肢
- */
-export const faqBorderTypes: BorderTypeOption[] = [
-	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
-	{ label: __( '下区切り線', 'ystandard-toolbox' ), name: 'bottom' },
-];
+import type { FaqItemBlockAttributes, LabelPositionOption } from './types';
 
 /**
  * ラベル位置選択肢
@@ -56,6 +44,7 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
 		customFaqBackgroundColor,
 		faqBorderColor,
 		customFaqBorderColor,
+		faqBorderSize,
 	} = attributes;
 
 	const faqBackgroundColorClass =
@@ -67,9 +56,10 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
 		[ `is-faq--${ faqType }` ]: faqType,
 		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
 		'has-background': faqBackgroundColor || customFaqBackgroundColor,
-		'has-border': faqBorderColor || customFaqBorderColor,
+		'has-border':
+			!! faqBorderSize && ( faqBorderColor || customFaqBorderColor ),
 		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
-		[ faqBorderColorClass ]: faqBorderColorClass,
+		[ faqBorderColorClass ]: faqBorderSize && faqBorderColorClass,
 	} );
 }
 
@@ -86,12 +76,16 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 		faqBorderSize,
 		labelPosition,
 	} = attributes;
+
 	return {
 		backgroundColor: faqBackgroundColor
 			? undefined
 			: customFaqBackgroundColor,
-		borderColor: faqBorderColor ? undefined : customFaqBorderColor,
-		borderWidth: 0 === faqBorderSize ? undefined : `${ faqBorderSize }px`,
+		borderColor:
+			! faqBorderSize || faqBorderColor
+				? undefined
+				: customFaqBorderColor,
+		borderWidth: ! faqBorderSize ? undefined : faqBorderSize,
 		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 }

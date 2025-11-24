@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import WPCustomSelectControl, {
-	CustomSelectControlOption as WPCustomSelectControlOption,
+	type CustomSelectControlOption as WPCustomSelectControlOption,
 } from '@aktk/block-components/wp-controls/custom-select-control';
 
 export interface CustomSelectControlOption {

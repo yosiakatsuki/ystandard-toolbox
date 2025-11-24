@@ -9,6 +9,7 @@ import {
  * Aktk Dependencies
  */
 import { SvgIcon } from '@aktk/block-components/components/svg-icon';
+// @ts-ignore.
 export const deprecated1341 = [
 	{
 		attributes: {
@@ -96,7 +97,8 @@ export const deprecated1341 = [
 			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
-			const { labelBorderRadius, labelBorderSize } = attributes;
+			const { labelBorderRadius, labelBorderSize, faqBorderSize } =
+				attributes;
 			return {
 				...attributes,
 				labelBorderRadius: labelBorderRadius
@@ -105,8 +107,12 @@ export const deprecated1341 = [
 				labelBorderSize: labelBorderSize
 					? `${ labelBorderSize }px`
 					: undefined,
+				faqBorderSize: faqBorderSize
+					? `${ faqBorderSize }px`
+					: undefined,
 			};
 		},
+		// @ts-ignore.
 		save( { attributes } ) {
 			const {
 				className,

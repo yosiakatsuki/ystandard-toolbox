@@ -1,5 +1,6 @@
 import { deprecated1341 } from './1.34.1';
 
+// @ts-ignore
 const deprecated = [ ...deprecated1341 ];
 
 export default deprecated;

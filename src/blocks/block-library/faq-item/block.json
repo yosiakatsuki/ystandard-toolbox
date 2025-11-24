@@ -37,8 +37,7 @@
 			"default": ""
 		},
 		"faqBorderSize": {
-			"type": "number",
-			"default": 0
+			"type": "string"
 		},
 		"faqBorderColor": {
 			"type": "string"

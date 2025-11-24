@@ -44,7 +44,7 @@ export type FaqItemBlockAttributes = {
  * ボーダータイプ選択肢の型定義
  */
 export type BorderTypeOption = {
-	label: string;
+	key: string;
 	name: string;
 };
 

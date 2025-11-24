@@ -1,0 +1,59 @@
+
+.ystdtb-faq-item {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	padding: var(--ystdtb-faq-item-padding-vertical) var(--ystdtb-faq-item-padding-horizon);
+	border: 0;
+
+	&:where(.is-faq--q) {
+		padding-top: var(--ystdtb-faq-padding-q-top);
+	}
+
+	&:where(.is-faq--a) {
+		padding-bottom: var(--ystdtb-faq-padding-a-bottom);
+	}
+
+	&:where(.has-background) {
+		--ystdtb-faq-item-padding-vertical: 1.5em;
+		--ystdtb-faq-item-padding-horizon: 1.5em;
+	}
+}
+
+.ystdtb-faq-item__label {
+	margin: 0;
+	font-size: 1.5em;
+	font-weight: 700;
+	line-height: 1;
+	text-transform: uppercase;
+	border-width: 0;
+	border-style: solid;
+
+	&:where(.has-padding) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 1/1;
+	}
+}
+
+.ystdtb-faq-item__contents {
+	margin: 0 0 0 1.5em;
+	flex-grow: 1;
+
+	> :where(*) {
+		margin-top: 1em;
+
+		&:where(:first-child) {
+			margin-top: 0;
+		}
+
+		&:where(:last-child) {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.ystdtb-faq-item__arrow {
+	display: none;
+}
