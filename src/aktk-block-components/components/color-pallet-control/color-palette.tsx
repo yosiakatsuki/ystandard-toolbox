@@ -1,5 +1,6 @@
 import { ColorPalette as WPColorPalette } from '@wordpress/components';
-import {
+import { useMemo } from '@wordpress/element';
+import type {
 	ColorObject,
 	PaletteObject,
 } from '@wordpress/components/src/color-palette/types';
@@ -14,6 +15,7 @@ import './editor-color-palette.scss';
 interface ColorPaletteProps {
 	label: string;
 	value: string;
+	slug?: string;
 	onChange: ( newColor?: string, slug?: string ) => void;
 	colors?: PaletteObject[] | ColorObject[];
 	enableCurrentColor?: boolean;
@@ -28,44 +30,55 @@ export function ColorPalette( props: ColorPaletteProps ): React.ReactElement {
 	const {
 		label,
 		value,
+		slug,
 		onChange,
 		colors,
 		enableCurrentColor,
 		enableTransparent,
 	} = props;
 
+	// テーマカラーを取得.
 	const themeColors = useThemeColors( {
 		enableCurrentColor,
 		enableTransparent,
 	} );
 
+	// 全てのカラーをフラット化して取得.
+	const allColors = useMemo( () => {
+		return themeColors.flatMap( ( palette ) => palette.colors );
+	}, [ themeColors ] );
+
+	// スラッグから色コードを取得.
+	const getColorBySlug = ( colorSlug?: string ) => {
+		if ( ! colorSlug ) {
+			return undefined;
+		}
+		const foundColor = allColors.find(
+			( color ) => color.slug === colorSlug
+		);
+		return foundColor?.color;
+	};
+
+	// 色変更時のハンドラー.
 	const handleOnChange = ( newColor?: string ) => {
 		// 色コードからスラッグを取得
-		let colorSlug: string | undefined;
-
-		if ( newColor ) {
-			// 全ての色パレットから該当する色を検索
-			for ( const palette of themeColors ) {
-				const foundColor = palette.colors.find(
-					( color: ColorObject ) => color.color === newColor
-				);
-				if ( foundColor ) {
-					colorSlug = foundColor.slug;
-					break;
-				}
-			}
-		}
+		const foundColor = allColors.find(
+			( color ) => color.color === newColor
+		);
+		const colorSlug = foundColor?.slug;
 
 		onChange( newColor, colorSlug );
 	};
 
+	const _value = getColorBySlug( slug ) || value;
+
 	return (
 		<>
-			<ColorDropdownWrapper colorValue={ value } label={ label }>
+			<ColorDropdownWrapper colorValue={ _value } label={ label }>
 				{ /* @ts-ignore */ }
 				<WPColorPalette
 					className="aktk-components__color-palette-control"
-					value={ value }
+					value={ _value }
 					onChange={ handleOnChange }
 					disableCustomColors={ false }
 					colors={ colors || themeColors }
