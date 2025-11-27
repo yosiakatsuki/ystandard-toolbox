@@ -14,7 +14,7 @@ import './editor-color-palette.scss';
 interface ColorPaletteProps {
 	label: string;
 	value: string;
-	onChange: ( newColor?: string, index?: number ) => void;
+	onChange: ( newColor?: string, slug?: string ) => void;
 	colors?: PaletteObject[] | ColorObject[];
 	enableCurrentColor?: boolean;
 	enableTransparent?: boolean;
@@ -33,13 +33,32 @@ export function ColorPalette( props: ColorPaletteProps ): React.ReactElement {
 		enableCurrentColor,
 		enableTransparent,
 	} = props;
-	const handleOnChange = ( newColor?: string, index?: number ) => {
-		onChange( newColor, index );
-	};
+
 	const themeColors = useThemeColors( {
 		enableCurrentColor,
 		enableTransparent,
 	} );
+
+	const handleOnChange = ( newColor?: string ) => {
+		// 色コードからスラッグを取得
+		let colorSlug: string | undefined;
+
+		if ( newColor ) {
+			// 全ての色パレットから該当する色を検索
+			for ( const palette of themeColors ) {
+				const foundColor = palette.colors.find(
+					( color: ColorObject ) => color.color === newColor
+				);
+				if ( foundColor ) {
+					colorSlug = foundColor.slug;
+					break;
+				}
+			}
+		}
+
+		onChange( newColor, colorSlug );
+	};
+
 	return (
 		<>
 			<ColorDropdownWrapper colorValue={ value } label={ label }>
