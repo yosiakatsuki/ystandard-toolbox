@@ -1,6 +1,14 @@
 @use "./style";
 
 [data-type="ystdtb/faq-item"] {
+
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
 	&.is-faq--q,
 	&.is-faq--a {
 		margin-top: 0;
