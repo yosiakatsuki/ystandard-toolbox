@@ -1,3 +1,10 @@
+export type FaqEditProps = {
+	attributes: FaqBlockAttributes;
+	setAttributes: ( attributes: Partial< FaqBlockAttributes > ) => void;
+	clientId: string;
+	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
+};
+
 /**
  * FAQブロックの属性型定義
  */

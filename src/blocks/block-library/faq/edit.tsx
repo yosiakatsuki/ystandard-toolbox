@@ -2,7 +2,7 @@
  * WordPress Dependencies
  */
 import {
-	InspectorControls,
+	InspectorControls as WPInspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
@@ -23,14 +23,9 @@ import { CustomSelectControl } from '@aktk/block-components/components/custom-se
  */
 import { useFaqColors } from './hooks/use-faq-colors';
 import { faqBorderTypes, getFaqClassNames, getFaqStyle } from './utils';
-import type { FaqBlockAttributes } from './types';
+import type { FaqEditProps } from './types';
 import './style-editor.scss';
-
-type FaqEditProps = {
-	attributes: FaqBlockAttributes;
-	setAttributes: ( attributes: Partial< FaqBlockAttributes > ) => void;
-	clientId: string;
-};
+import { InspectorControls } from './inspector-controls';
 
 /**
  * FAQブロックの初期テンプレート
@@ -52,16 +47,10 @@ const template: [ string, Record< string, any > ][] = [
 
 /**
  * FAQブロック編集コンポーネント
- * @param root0
- * @param root0.attributes
- * @param root0.setAttributes
- * @param root0.clientId
+ * @param props
  */
-export default function FaqEdit( {
-	attributes,
-	setAttributes,
-	clientId,
-}: FaqEditProps ): JSX.Element {
+export default function FaqEdit( props: FaqEditProps ): JSX.Element {
+	const { attributes, setAttributes, clientId } = props;
 	const { isAccordion, borderType, borderSize } = attributes;
 
 	// 色設定
@@ -122,24 +111,16 @@ export default function FaqEdit( {
 		}
 	);
 
+	const inspectorControlsProps = {
+		...props,
+		updateChildAttributes,
+	};
+
 	return (
 		<>
-			<InspectorControls>
+			<InspectorControls { ...inspectorControlsProps } />
+			<WPInspectorControls>
 				<PanelBody title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-					{ /* アコーディオン設定 */ }
-					<BaseControl
-						id="faq-accordion"
-						label={ __( '開閉設定', 'ystandard-toolbox' ) }
-					>
-						<ToggleControl
-							label={ __( '開閉式にする', 'ystandard-toolbox' ) }
-							checked={ isAccordion }
-							onChange={ () =>
-								setAttributes( { isAccordion: ! isAccordion } )
-							}
-						/>
-					</BaseControl>
-
 					{ /* 開閉ボタンの色 */ }
 					{ isAccordion && (
 						<BaseControl
@@ -237,7 +218,7 @@ export default function FaqEdit( {
 						</>
 					) }
 				</PanelBody>
-			</InspectorControls>
+			</WPInspectorControls>
 
 			<div { ...blockProps }>
 				<div { ...innerBlocksProps } />
