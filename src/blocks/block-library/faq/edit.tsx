@@ -1,9 +1,7 @@
-import classnames from 'classnames';
 /*
  * WordPress Dependencies
  */
 import {
-	InnerBlocks,
 	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
@@ -24,7 +22,7 @@ import { CustomSelectControl } from '@aktk/block-components/components/custom-se
  * Plugin Dependencies
  */
 import { useFaqColors } from './hooks/use-faq-colors';
-import { template, faqBorderTypes } from './utils';
+import { faqBorderTypes, getFaqClassNames, getFaqStyle } from './utils';
 import type { FaqBlockAttributes } from './types';
 import './style-editor.scss';
 
@@ -33,6 +31,24 @@ type FaqEditProps = {
 	setAttributes: ( attributes: Partial< FaqBlockAttributes > ) => void;
 	clientId: string;
 };
+
+/**
+ * FAQブロックの初期テンプレート
+ */
+const template: [ string, Record< string, any > ][] = [
+	[
+		'ystdtb/faq-item',
+		{
+			faqType: 'q',
+		},
+	],
+	[
+		'ystdtb/faq-item',
+		{
+			faqType: 'a',
+		},
+	],
+];
 
 /**
  * FAQブロック編集コンポーネント
@@ -45,7 +61,7 @@ export default function FaqEdit( {
 	attributes,
 	setAttributes,
 	clientId,
-}: FaqEditProps ) {
+}: FaqEditProps ): JSX.Element {
 	const { isAccordion, borderType, borderSize } = attributes;
 
 	// 色設定
@@ -60,6 +76,7 @@ export default function FaqEdit( {
 		( select ) => {
 			// @ts-ignore
 			const { getBlockOrder } = select( 'core/block-editor' );
+			// @ts-ignore
 			return getBlockOrder( clientId );
 		},
 		[ clientId ]
@@ -72,26 +89,10 @@ export default function FaqEdit( {
 	const updateChildAttributes = (
 		childAttributes: Record< string, any >
 	) => {
+		// @ts-ignore.
 		innerBlockClientIds.forEach( ( innerBlockClientId ) => {
 			updateBlockAttributes( innerBlockClientId, childAttributes );
 		} );
-	};
-
-	// クラス名とスタイル
-	const faqClasses = classnames( 'ystdtb-faq', {
-		'has-padding': 'all' === borderType || backgroundColor.color,
-		[ `border-type--${ borderType }` ]: '' !== borderType,
-		'is-accordion': isAccordion,
-	} );
-
-	const faqStyles = {
-		backgroundColor: backgroundColor.color,
-		borderColor: borderColor.color,
-		borderWidth: 'all' === borderType ? borderSize : undefined,
-		borderBottomWidth:
-			'bottom' === borderType || 'all' === borderType
-				? borderSize
-				: undefined,
 	};
 
 	// BlockProps
@@ -101,8 +102,18 @@ export default function FaqEdit( {
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: faqClasses,
-			style: faqStyles,
+			className: getFaqClassNames( {
+				...attributes,
+				customBackgroundColor: backgroundColor.color,
+				customBorderColor: borderColor.color,
+				customAccordionArrowColor: accordionArrowColor.color,
+			} ),
+			style: getFaqStyle( {
+				...attributes,
+				customBackgroundColor: backgroundColor.color,
+				customBorderColor: borderColor.color,
+				customAccordionArrowColor: accordionArrowColor.color,
+			} ),
 		},
 		{
 			allowedBlocks: [ 'ystdtb/faq-item' ],

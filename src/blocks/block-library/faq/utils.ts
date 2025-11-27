@@ -19,24 +19,6 @@ export const faqBorderTypes: { label: string; name: string }[] = [
 	{ label: __( '下のみ', 'ystandard-toolbox' ), name: 'bottom' },
 ];
 
-/**
- * FAQブロックの初期テンプレート
- */
-export const template: [ string, Record< string, any > ][] = [
-	[
-		'ystdtb/faq-item',
-		{
-			faqType: 'q',
-		},
-	],
-	[
-		'ystdtb/faq-item',
-		{
-			faqType: 'a',
-		},
-	],
-];
-
 export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 	const {
 		isAccordion,
@@ -55,7 +37,8 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
-		'has-padding': 'all' === borderType || backgroundColor,
+		'has-padding':
+			'all' === borderType || backgroundColor || customBackgroundColor,
 		'has-background': backgroundColor || customBackgroundColor,
 		[ backgroundColorClass ]: backgroundColorClass,
 		'has-border': borderSize || borderColor || customBorderColor,
