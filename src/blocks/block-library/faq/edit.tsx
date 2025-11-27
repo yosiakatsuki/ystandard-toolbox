@@ -14,7 +14,6 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import ToggleControl from '@aktk/block-components/wp-controls/toggle-control';
 import RangeControl from '@aktk/block-components/wp-controls/range-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
@@ -93,15 +92,9 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 		{
 			className: getFaqClassNames( {
 				...attributes,
-				customBackgroundColor: backgroundColor.color,
-				customBorderColor: borderColor.color,
-				customAccordionArrowColor: accordionArrowColor.color,
 			} ),
 			style: getFaqStyle( {
 				...attributes,
-				customBackgroundColor: backgroundColor.color,
-				customBorderColor: borderColor.color,
-				customAccordionArrowColor: accordionArrowColor.color,
 			} ),
 		},
 		{
@@ -121,35 +114,6 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 			<InspectorControls { ...inspectorControlsProps } />
 			<WPInspectorControls>
 				<PanelBody title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-					{ /* 開閉ボタンの色 */ }
-					{ isAccordion && (
-						<BaseControl
-							id="faq-accordion-arrow-color"
-							label={ __(
-								'開閉ボタンの色',
-								'ystandard-toolbox'
-							) }
-						>
-							<ColorPalette
-								value={ accordionArrowColor.color }
-								onChange={ ( color ) => {
-									accordionArrowColor.setColor( color );
-									// 子ブロックにも反映
-									updateChildAttributes( {
-										accordionArrowColor:
-											accordionArrowColor.getColorSlug(
-												color
-											),
-										customAccordionArrowColor:
-											accordionArrowColor.getColorCode(
-												color
-											),
-									} );
-								} }
-							/>
-						</BaseControl>
-					) }
-
 					{ /* 背景色 */ }
 					<BaseControl
 						id="faq-background-color"
