@@ -114,17 +114,6 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 			<InspectorControls { ...inspectorControlsProps } />
 			<WPInspectorControls>
 				<PanelBody title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-					{ /* 背景色 */ }
-					<BaseControl
-						id="faq-background-color"
-						label={ __( '背景色', 'ystandard-toolbox' ) }
-					>
-						<ColorPalette
-							value={ backgroundColor.color }
-							onChange={ backgroundColor.setColor }
-						/>
-					</BaseControl>
-
 					{ /* 枠線タイプ */ }
 					<BaseControl
 						id="faq-border-type"
