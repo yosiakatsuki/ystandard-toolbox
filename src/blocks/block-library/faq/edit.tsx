@@ -1,29 +1,15 @@
 /*
  * WordPress Dependencies
  */
-import {
-	InspectorControls as WPInspectorControls,
-	useBlockProps,
-	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-
-/*
- * Aktk Dependencies
- */
-import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import RangeControl from '@aktk/block-components/wp-controls/range-control';
-import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 /*
  * Plugin Dependencies
  */
-import { useFaqColors } from './hooks/use-faq-colors';
-import { getFaqClassNames, getFaqStyle } from './utils';
 import type { FaqEditProps } from './types';
-import './style-editor.scss';
+import { getFaqClassNames, getFaqStyle } from './utils';
 import { InspectorControls } from './inspector-controls';
+import './style-editor.scss';
 
 /**
  * FAQブロックの初期テンプレート
@@ -48,14 +34,7 @@ const template: [ string, Record< string, any > ][] = [
  * @param props
  */
 export default function FaqEdit( props: FaqEditProps ): JSX.Element {
-	const { attributes, setAttributes, clientId } = props;
-	const { isAccordion, borderType, borderSize } = attributes;
-
-	// 色設定
-	const { backgroundColor, borderColor, accordionArrowColor } = useFaqColors(
-		attributes,
-		setAttributes
-	);
+	const { attributes, clientId } = props;
 
 	// 子ブロックの属性を更新
 	const { updateBlockAttributes } = useDispatch( 'core/block-editor' );
@@ -111,24 +90,6 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 	return (
 		<>
 			<InspectorControls { ...inspectorControlsProps } />
-			<WPInspectorControls>
-				<PanelBody title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-					{ /* 枠線サイズ */ }
-					{ '' !== borderType && (
-						<>
-							<BaseControl
-								id="faq-border-color"
-								label={ __( '枠線の色', 'ystandard-toolbox' ) }
-							>
-								<ColorPalette
-									value={ borderColor.color }
-									onChange={ borderColor.setColor }
-								/>
-							</BaseControl>
-						</>
-					) }
-				</PanelBody>
-			</WPInspectorControls>
 
 			<div { ...blockProps }>
 				<div { ...innerBlocksProps } />

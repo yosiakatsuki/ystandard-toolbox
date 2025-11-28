@@ -4,7 +4,6 @@ const ystdtbConfig = require( './webpack.blocks.config' );
 module.exports = {
 	...defaultConfig,
 	entry: {
-		'block-app': './src/js/blocks/app.js',
 		'app-slider': './blocks/slider/app.js',
 	},
 	output: {

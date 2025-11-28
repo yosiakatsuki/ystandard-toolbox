@@ -4,13 +4,10 @@ const path = require( 'path' );
 module.exports = {
 	...defaultConfig,
 	entry: {
-		block: './src/js/blocks/block.js',
 		//styles: './blocks/styles/index.js',
 		//posts: './blocks/posts/index.js',
 		//timeline: './blocks/timeline/index.js',
 		//'timeline-item': './blocks/timeline/item/index.js',
-		//faq: './blocks/faq/index.js',
-		//'faq-item': './blocks/faq/item/index.js',
 		//slider: './blocks/slider/index.js',
 		//'slider-item': './blocks/slider/item/index.js',
 		//'description-list': './blocks/description-list/index.js',

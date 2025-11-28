@@ -9,8 +9,9 @@ import { Panel } from '@aktk/block-components/components/panel';
 import { Accordion } from './accordion';
 import { AccordionArrowColor } from './accordion-arrow-color';
 import { BackgroundColor } from './background-color';
-import { BorderType } from '@aktk/blocks/block-library/faq/inspector-controls/faq-option/border-type';
-import { BorderSize } from '@aktk/blocks/block-library/faq/inspector-controls/faq-option/border-size';
+import { BorderType } from './border-type';
+import { BorderSize } from './border-size';
+import { BorderColor } from './border-color';
 
 // @ts-ignore.
 export function FaqOption( props ): JSX.Element {
@@ -21,6 +22,7 @@ export function FaqOption( props ): JSX.Element {
 			<BackgroundColor { ...props } />
 			<BorderType { ...props } />
 			<BorderSize { ...props } />
+			<BorderColor { ...props } />
 		</Panel>
 	);
 }

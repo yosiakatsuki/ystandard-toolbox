@@ -64,14 +64,6 @@ class Enqueue {
 		if ( AMP::is_amp() ) {
 			return;
 		}
-		wp_enqueue_script(
-			Config::JS_BLOCK_APP_HANDLE,
-			YSTDTB_URL . '/js/block-app/block-app.js',
-			[],
-			filemtime( YSTDTB_PATH . '/js/block-app/block-app.js' ),
-			true
-		);
-		wp_script_add_data( Config::JS_BLOCK_APP_HANDLE, 'defer', true );
 
 		wp_enqueue_script(
 			Config::JS_FRONT_APP_HANDLE,
