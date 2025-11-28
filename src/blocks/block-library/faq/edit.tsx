@@ -21,7 +21,7 @@ import { CustomSelectControl } from '@aktk/block-components/components/custom-se
  * Plugin Dependencies
  */
 import { useFaqColors } from './hooks/use-faq-colors';
-import { faqBorderTypes, getFaqClassNames, getFaqStyle } from './utils';
+import { getFaqClassNames, getFaqStyle } from './utils';
 import type { FaqEditProps } from './types';
 import './style-editor.scss';
 import { InspectorControls } from './inspector-controls';
@@ -114,27 +114,6 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 			<InspectorControls { ...inspectorControlsProps } />
 			<WPInspectorControls>
 				<PanelBody title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-					{ /* 枠線タイプ */ }
-					<BaseControl
-						id="faq-border-type"
-						label={ __( '枠線タイプ', 'ystandard-toolbox' ) }
-					>
-						<CustomSelectControl
-							value={ borderType }
-							options={ faqBorderTypes.map( ( item ) => ( {
-								key: item.name,
-								name: item.label,
-							} ) ) }
-							onChange={ ( value ) => {
-								setAttributes( { borderType: value } );
-								if ( '' === value ) {
-									setAttributes( { borderSize: 0 } );
-									borderColor.setColor( undefined );
-								}
-							} }
-						/>
-					</BaseControl>
-
 					{ /* 枠線サイズ */ }
 					{ '' !== borderType && (
 						<>

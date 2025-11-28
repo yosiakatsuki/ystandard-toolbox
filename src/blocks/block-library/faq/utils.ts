@@ -10,15 +10,6 @@ import { __ } from '@wordpress/i18n';
  */
 import type { FaqBlockAttributes } from '@aktk/blocks/block-library/faq/types';
 
-/**
- * FAQブロックのボーダータイプ選択肢
- */
-export const faqBorderTypes: { label: string; name: string }[] = [
-	{ label: __( 'なし', 'ystandard-toolbox' ), name: '' },
-	{ label: __( '上下左右', 'ystandard-toolbox' ), name: 'all' },
-	{ label: __( '下のみ', 'ystandard-toolbox' ), name: 'bottom' },
-];
-
 export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 	const {
 		isAccordion,
