@@ -33,7 +33,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		aspect-ratio: 1/1;
+		width: 2em;
+		height: 2em;
+		min-width: 2em;
+		min-height: 2em;
 	}
 }
 
