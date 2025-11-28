@@ -6,16 +6,17 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
-import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
+import {
+	CustomSelectControl,
+	type CustomSelectControlOption,
+} from '@aktk/block-components/components/custom-select-control';
 
 /**
  * Block dependencies.
  */
-import type { BorderTypeOption } from '../../types';
-import UnitControl from '@aktk/block-components/wp-controls/unit-control';
-
-const BORDER_TYPES: BorderTypeOption[] = [
+const BORDER_TYPES: CustomSelectControlOption[] = [
 	{ name: __( 'なし', 'ystandard-toolbox' ), key: '' },
 	{ name: __( '下区切り線', 'ystandard-toolbox' ), key: 'bottom' },
 ];
