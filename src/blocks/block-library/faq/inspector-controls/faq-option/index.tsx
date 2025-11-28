@@ -10,6 +10,7 @@ import { Accordion } from './accordion';
 import { AccordionArrowColor } from './accordion-arrow-color';
 import { BackgroundColor } from './background-color';
 import { BorderType } from '@aktk/blocks/block-library/faq/inspector-controls/faq-option/border-type';
+import { BorderSize } from '@aktk/blocks/block-library/faq/inspector-controls/faq-option/border-size';
 
 // @ts-ignore.
 export function FaqOption( props ): JSX.Element {
@@ -19,6 +20,7 @@ export function FaqOption( props ): JSX.Element {
 			<AccordionArrowColor { ...props } />
 			<BackgroundColor { ...props } />
 			<BorderType { ...props } />
+			<BorderSize { ...props } />
 		</Panel>
 	);
 }

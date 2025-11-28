@@ -32,8 +32,7 @@
 			"default": ""
 		},
 		"borderSize": {
-			"type": "number",
-			"default": 0
+			"type": "string"
 		},
 		"borderColor": {
 			"type": "string"

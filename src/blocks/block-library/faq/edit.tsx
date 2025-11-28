@@ -16,7 +16,6 @@ import { __ } from '@wordpress/i18n';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import RangeControl from '@aktk/block-components/wp-controls/range-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
-import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 /*
  * Plugin Dependencies
  */
@@ -117,27 +116,6 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 					{ /* 枠線サイズ */ }
 					{ '' !== borderType && (
 						<>
-							<BaseControl
-								id="faq-border-size"
-								label={ __(
-									'枠線サイズ',
-									'ystandard-toolbox'
-								) }
-							>
-								<RangeControl
-									value={ borderSize ?? 0 }
-									onChange={ ( value ) =>
-										setAttributes( {
-											borderSize: value ?? 0,
-										} )
-									}
-									min={ 0 }
-									max={ 10 }
-									step={ 1 }
-									allowReset
-								/>
-							</BaseControl>
-
 							<BaseControl
 								id="faq-border-color"
 								label={ __( '枠線の色', 'ystandard-toolbox' ) }
