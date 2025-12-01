@@ -27,6 +27,8 @@ const StretchTextControl = ( props ) => {
 				value={ value }
 				onChange={ onChange }
 				placeholder={ placeholder }
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 			/>
 		</div>
 	);
