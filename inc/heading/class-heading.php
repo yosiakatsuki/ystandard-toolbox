@@ -212,7 +212,7 @@ class Heading {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
 			$block_style = "{$wrap} .is-style-ystdtb-{$level}";;
 			if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading))";
 			}
 		}
 
@@ -287,7 +287,7 @@ class Heading {
 		}
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-			$level_selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style)";
+			$level_selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading))";
 			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
