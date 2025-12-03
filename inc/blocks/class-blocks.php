@@ -204,6 +204,15 @@ class Blocks {
 					$block['style']['var']
 				);
 				$register_block_args['style'] = $block['style']['handle'];
+
+				if ( 'ystdtb/extension' === $block_type ) {
+					wp_enqueue_style(
+						$block['style']['handle'],
+						$block['style']['src'],
+						[],
+						$block['style']['var']
+					);
+				}
 			}
 			if ( ! is_null( $block['editor_style'] ) ) {
 				wp_register_style(
