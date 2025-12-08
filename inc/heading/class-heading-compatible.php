@@ -84,6 +84,7 @@ class Heading_Compatible {
 	 * Heading constructor.
 	 */
 	public function __construct() {
+		add_action( 'init', [ $this, 'register_block_styles' ] );
 		add_action( 'ystdtb_enqueue_css', [ $this, 'add_heading_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'add_heading_editor_styles' ], 11 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'block_editor_option' ] );
@@ -282,7 +283,7 @@ class Heading_Compatible {
 	 * セレクタの分解と結合・疑似要素追加
 	 *
 	 * @param string $selectors セレクタ.
-	 * @param string $pseudo    疑似要素.
+	 * @param string $pseudo 疑似要素.
 	 *
 	 * @return string
 	 */
@@ -300,7 +301,7 @@ class Heading_Compatible {
 	 * セレクター取得
 	 *
 	 * @param string $level 見出しレベル.
-	 * @param bool   $block ブロック.
+	 * @param bool $block ブロック.
 	 *
 	 * @return string
 	 */
@@ -373,7 +374,7 @@ class Heading_Compatible {
 	/**
 	 * スタイル作成
 	 *
-	 * @param array  $styles  styles.
+	 * @param array $styles styles.
 	 * @param string $section section.
 	 *
 	 * @return string
@@ -410,7 +411,7 @@ class Heading_Compatible {
 						);
 					}
 				}
-					$css .= "{$key}:{$value};";
+				$css .= "{$key}:{$value};";
 			}
 		}
 
@@ -666,8 +667,8 @@ class Heading_Compatible {
 	/**
 	 * 設定値取得.
 	 *
-	 * @param string $key     Key.
-	 * @param mixed  $default Default.
+	 * @param string $key Key.
+	 * @param mixed $default Default.
 	 *
 	 * @return mixed|string
 	 */
@@ -774,8 +775,8 @@ class Heading_Compatible {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css( $property, $value, $section = 'content' ) {
 		$this->css[ $section ][ $this->get_css_property( $property ) ] = $value;
@@ -785,8 +786,8 @@ class Heading_Compatible {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css_tablet( $property, $value, $section = 'content' ) {
 		$this->css_tablet[ $section ][ $this->get_css_property( $property ) ] = $value;
@@ -796,8 +797,8 @@ class Heading_Compatible {
 	 * CSSセット
 	 *
 	 * @param string $property property name.
-	 * @param mixed  $value    value.
-	 * @param string $section  section name.
+	 * @param mixed $value value.
+	 * @param string $section section name.
 	 */
 	private function set_css_pc( $property, $value, $section = 'content' ) {
 		$this->css_pc[ $section ][ $this->get_css_property( $property ) ] = $value;
@@ -812,6 +813,27 @@ class Heading_Compatible {
 			'ystdtbBlockEditorHeading',
 			self::get_option()
 		);
+	}
+
+	/**
+	 * ブロックスタイル登録
+	 *
+	 * @return void
+	 */
+	public function register_block_styles() {
+		$options = self::get_option();
+		foreach ( $options as $level => $value ) {
+			if ( ! Types::to_bool( $value['useCustomStyle'] ) ) {
+				continue;
+			}
+			$args = [
+				'name'  => "ystdtb-{$level}",
+				'label' => ! empty( $value['label'] ) ? $value['label'] : ucfirst( $level ),
+			];
+			register_block_style( 'core/heading', $args );
+			register_block_style( 'ystdb/heading', $args );
+			register_block_style( 'ystdb/custom-heading', $args );
+		}
 	}
 
 	/**

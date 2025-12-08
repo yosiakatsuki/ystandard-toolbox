@@ -147,6 +147,8 @@ class Heading {
 
 		// 見出しスタイル追加.（ 'ystdb/heading' はいろいろ都合が悪い）
 		$this->register_block_style( $heading_items, [ 'core/heading' ] );
+		$this->register_block_style( $heading_items, [ 'ystdb/heading' ] );
+		$this->register_block_style( $heading_items, [ 'ystdb/custom-heading' ] );
 		// 段落スタイル追加.
 		$this->register_block_style( $paragraph_items, [ 'core/paragraph' ] );
 	}
