@@ -205,7 +205,7 @@ class Heading_Helper {
 
 		// 編集画面の時.
 		if ( $is_editor ) {
-			$class_name = ':where(.editor-styles-wrapper)';
+			$class_name = '.editor-styles-wrapper';
 		}
 
 		return $class_name;
@@ -279,7 +279,7 @@ class Heading_Helper {
 		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
 		$content = $is_editor ? '.editor-styles-wrapper' : $content;
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
-			$selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
+			$selector = "{$level}:where(.wp-block-heading):not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
 			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 			$css_selector     = apply_filters(
 				'ystdtb_heading_css_selector_content',
@@ -337,7 +337,7 @@ class Heading_Helper {
 		// *************************************************************
 		$title = apply_filters( 'ystdtb_heading_selector_post_title', '.entry-title' );
 		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
-		$area  = $is_editor ? 'body.ystdtb-editor-type-post' : '.single';
+		$area  = $is_editor ? 'body.post-type-post' : '.single';
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_post_title',
@@ -352,7 +352,7 @@ class Heading_Helper {
 		// *************************************************************
 		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.entry-title' );
 		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
-		$area  = $is_editor ? 'body.ystdtb-editor-type-page' : '.page';
+		$area  = $is_editor ? 'body.post-type-page' : '.page';
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_page_title',
