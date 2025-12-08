@@ -23,14 +23,28 @@
 				display: block;
 			}
 
+			tr:where(:not(:first-child)) {
+				td {
+					border-top: 0;
+				}
+			}
+
 			td {
 				padding-top: .5em;
 				padding-bottom: .5em;
+
+				+ td {
+					border-top: 0;
+				}
 			}
 		}
 	}
 
 	&:where(.is-style-ystdtb-table-scroll) {
+		.has-fixed-layout {
+			table-layout: auto;
+		}
+
 		@include global.media-breakpoint-down(mobile) {
 			display: block;
 			position: relative;

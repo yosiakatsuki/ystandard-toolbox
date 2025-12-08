@@ -54,7 +54,7 @@ class Block_Styles {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block_styles' ] );
-		add_action( 'enqueue_block_assets', [ $this, 'enqueue_custom_block_styles' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_custom_block_editor_styles' ] );
 	}
 
 	/**
@@ -82,31 +82,23 @@ class Block_Styles {
 	private static function get_toolbox_block_styles() {
 		return [
 			[
-				'block_name'       => 'core/table',
-				'name'             => 'ystdtb-table-2col',
-				'label'            => __( '2列用', 'ystandard-toolbox' ),
-				'url'              => YSTDTB_URL . '/css/block-styles/core__table/table.css',
-				'var'              => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table.css' ),
-				'editor_style'     => YSTDTB_URL . '/css/block-styles/core__table/table-editor.css',
-				'editor_style_var' => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table-editor.css' ),
+				'block_name'   => 'core/table',
+				'name'         => 'ystdtb-table-2col',
+				'label'        => __( '2列用', 'ystandard-toolbox' ),
+				'url'          => YSTDTB_URL . '/css/block-styles/core__table/table.css',
+				'path'         => YSTDTB_PATH . '/css/block-styles/core__table/table.css',
+				'editor_style' => YSTDTB_URL . '/css/block-styles/core__table/table-editor.css',
+				'editor_path'  => YSTDTB_PATH . '/css/block-styles/core__table/table-editor.css',
 			],
 			[
-				'block_name'       => 'core/table',
-				'name'             => 'ystdtb-table-2col-m',
-				'label'            => __( '2列用(モバイルで1列)', 'ystandard-toolbox' ),
-				'url'              => YSTDTB_URL . '/css/block-styles/core__table/table.css',
-				'var'              => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table.css' ),
-				'editor_style'     => YSTDTB_URL . '/css/block-styles/core__table/table-editor.css',
-				'editor_style_var' => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table-editor.css' ),
+				'block_name' => 'core/table',
+				'name'       => 'ystdtb-table-2col-m',
+				'label'      => __( '2列用(モバイルで1列)', 'ystandard-toolbox' ),
 			],
 			[
-				'block_name'       => 'core/table',
-				'name'             => 'ystdtb-table-scroll',
-				'label'            => __( 'モバイルでスクロール', 'ystandard-toolbox' ),
-				'url'              => YSTDTB_URL . '/css/block-styles/core__table/table.css',
-				'var'              => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table.css' ),
-				'editor_style'     => YSTDTB_URL . '/css/block-styles/core__table/table-editor.css',
-				'editor_style_var' => filemtime( YSTDTB_PATH . '/css/block-styles/core__table/table-editor.css' ),
+				'block_name' => 'core/table',
+				'name'       => 'ystdtb-table-scroll',
+				'label'      => __( 'モバイルでスクロール', 'ystandard-toolbox' ),
 			],
 		];
 	}
@@ -119,16 +111,57 @@ class Block_Styles {
 	public function register_block_styles() {
 		$blocks = self::get_custom_block_styles();
 		foreach ( $blocks as $item ) {
-			$args = [
+			$block_name = $item['block_name'];
+			$args       = [
 				'name'  => $item['name'],
 				'label' => $item['label'],
 			];
-			register_block_style( $item['block_name'], $args );
+			// ブロックスタイルを追加.
+			register_block_style( $block_name, $args );
+
+			// CSSの読み込み登録.
+			$url  = isset( $item['url'] ) ? $item['url'] : '';
+			$path = isset( $item['path'] ) ? $item['path'] : null;
+			if ( $url ) {
+				wp_enqueue_block_style(
+					$block_name,
+					[
+						'handle' => 'ystdtb-block-style-' . str_replace( '/', '-', $block_name ) . '-' . $item['name'],
+						'src'    => $url,
+						'path'   => $path,
+					]
+				);
+			}
 		}
 	}
 
-	public function enqueue_custom_block_styles() {
-
+	/**
+	 * エディター用カスタムブロックスタイルCSSの読み込み
+	 *
+	 * @return void
+	 */
+	public function enqueue_custom_block_editor_styles() {
+		if ( ! is_admin() ) {
+			return;
+		}
+		$blocks = self::get_custom_block_styles();
+		foreach ( $blocks as $item ) {
+			$style = $item['editor_style'] ?? '';
+			$path  = $item['editor_path'] ?? null;
+			$var   = false;
+			if ( empty( $style ) ) {
+				continue;
+			}
+			if ( ! empty( $path ) && file_exists( $path ) ) {
+				$var = filemtime( $path );
+			}
+			wp_enqueue_style(
+				'ystdtb-block-style-editor-' . str_replace( '/', '-', $item['block_name'] ) . '-' . $item['name'],
+				$style,
+				[],
+				$var
+			);
+		}
 	}
 }
 
