@@ -17,9 +17,13 @@ $color__border-gray-light: #eee !default;
 
 // ブレークポイント
 $breakpoints: (
-	sm : 600px,
-	md : 769px,
-	lg : 1025px,
+	sm : 640px,
+	md : 768px,
+	lg : 1024px,
+	mobile : 640px,
+	tablet : 768px,
+	desktop : 1024px,
+	wide : 1200px,
 ) !default;
 
 $breakpoints_editor: (
