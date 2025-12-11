@@ -1,0 +1,18 @@
+.ystdtb-dl-editor {
+	.block-editor-block-variation-picker {
+		svg {
+			fill: none !important;
+		}
+
+		.components-button:hover {
+			svg {
+				fill: none !important;
+			}
+			svg,
+			+ .block-editor-block-variation-picker__variation-label {
+				opacity: 0.8;
+				transition: opacity .3s;
+			}
+		}
+	}
+}

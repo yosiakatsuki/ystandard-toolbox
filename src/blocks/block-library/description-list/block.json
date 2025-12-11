@@ -3,8 +3,8 @@
 	"apiVersion": 3,
 	"name": "ystdtb/description-list",
 	"version": "2.0.0",
-	"title": "dl",
-	"description": "定義リスト ブロック",
+	"title": "定義リスト(dl)",
+	"description": "定義リスト(dl) ブロック",
 	"category": "ystdtb-common",
 	"keywords": [
 		"定義リスト",
