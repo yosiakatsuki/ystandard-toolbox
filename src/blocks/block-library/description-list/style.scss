@@ -1,0 +1,29 @@
+.ystdtb-dl {
+	> :where(dt),
+	> :where(dd) {
+		margin-block-end: 0;
+
+		&:where(:first-child) {
+			margin-block-start: 0;
+		}
+
+		&.has-background {
+			margin-block-start: 0;
+		}
+	}
+
+	> :where(.ystdtb-dl-column:first-child) {
+		margin-block-start: 0;
+
+	}
+
+	> :where(dt),
+	> :where(.ystdtb-dl-column) {
+		margin-block-start: var(--ystd-layout-gap, 1.5em);
+	}
+
+	> :where(dd),
+	> :where(.ystdtb-dl-column) + :where(.ystdtb-dl-column) {
+		margin-block-start: 0.5em;
+	}
+}
