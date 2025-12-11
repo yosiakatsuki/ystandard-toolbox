@@ -17,6 +17,7 @@ import metadata from './block.json';
 import edit from './edit';
 import save from './save';
 import variations from './variations';
+import deprecated from './deprecated';
 import './style.scss';
 
 export function registerDescriptionListBlock() {
@@ -40,6 +41,7 @@ export function registerDescriptionListBlock() {
 			edit,
 			save,
 			variations,
+			deprecated,
 		},
 	} );
 }
