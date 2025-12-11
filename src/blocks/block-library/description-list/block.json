@@ -17,6 +17,9 @@
 	"attributes": {
 		"margin": {
 			"type": "object"
+		},
+		"responsiveMargin": {
+			"type": "object"
 		}
 	},
 	"supports": {

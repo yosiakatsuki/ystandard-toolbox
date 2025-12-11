@@ -2,7 +2,6 @@
  * WordPress
  */
 import {
-	InnerBlocks,
 	useInnerBlocksProps,
 	useBlockProps,
 	// @ts-expect-error
@@ -12,15 +11,22 @@ import {
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import {
-	createBlock,
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
 } from '@wordpress/blocks';
 /**
  * Block Dependencies.
  */
-import type { DtBlockProps } from './types';
+import type { DlBlockProps } from './types';
+import { getDlClassNames, getDlStyles } from './utils';
 import './style-editor.scss';
+
+const ALLOWED_BLOCKS = [
+	'ystdtb/description-list-dt',
+	'ystdtb/description-list-dd-simple',
+	'ystdtb/description-list-dd-box',
+	'ystdtb/description-list-column',
+];
 
 /**
  * 編集コンテナコンポーネント
@@ -28,13 +34,18 @@ import './style-editor.scss';
  * @param props
  * @class
  */
-function DtEditContainer( props: DtBlockProps ) {
-	const blockProps = useBlockProps();
-	return (
-		<div { ...blockProps }>
-			<div>Description List Edit (to be implemented)</div>
-		</div>
-	);
+function DtEditContainer( props: DlBlockProps ) {
+	const { attributes } = props;
+	// Block Props.
+	const blockProps = useBlockProps( {
+		className: getDlClassNames( attributes ),
+		style: getDlStyles( attributes ),
+	} );
+	// InnerBlocks Props.
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: ALLOWED_BLOCKS,
+	} );
+	return <dl { ...innerBlocksProps } />;
 }
 
 /**
@@ -43,7 +54,7 @@ function DtEditContainer( props: DtBlockProps ) {
  * @param props
  * @class
  */
-function Placeholder( props: DtBlockProps ) {
+function Placeholder( props: DlBlockProps ) {
 	const { clientId, name, setAttributes } = props;
 	const { blockType, defaultVariation, variations } = useSelect(
 		( select ) => {
@@ -100,7 +111,7 @@ function Placeholder( props: DtBlockProps ) {
  * @param props
  * @class
  */
-function DtBlockEdit( props: DtBlockProps ): JSX.Element {
+function DtBlockEdit( props: DlBlockProps ): JSX.Element {
 	const { clientId } = props;
 	const hasInnerBlocks = useSelect(
 		( select ) =>

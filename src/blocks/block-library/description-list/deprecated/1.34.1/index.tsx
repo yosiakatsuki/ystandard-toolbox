@@ -17,11 +17,18 @@ export const deprecated1341 = [
 			className: false,
 		},
 		migrate: ( attributes: any ) => {
+			const { margin } = attributes;
+			const isResponsiveMargin =
+				margin &&
+				typeof margin === 'object' &&
+				( margin.tablet || margin.mobile );
 			return {
 				...attributes,
+				margin: ! isResponsiveMargin ? margin?.desktop : undefined,
+				responsiveMargin: isResponsiveMargin ? margin : undefined,
 			};
 		},
-		save( { attributes: any } ) {
+		save( { attributes }: { attributes: any } ) {
 			// @ts-ignore.
 			const { margin } = attributes;
 			const blockProps = useBlockProps.save( {
