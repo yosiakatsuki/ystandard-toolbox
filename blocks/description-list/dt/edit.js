@@ -47,18 +47,7 @@ const Edit = ( props ) => {
 	const fontSizeClass = getFontSizeClassByObject( textSize?.desktop );
 
 	const blockProps = useBlockProps( {
-		className: classnames( config.blockClasses, 'ystdtb-dt-editor', {
-			[ hasClasses.fontSize ]: fontSizeClass || textSize?.desktop,
-			[ fontSizeClass ]: fontSizeClass,
-			[ hasClasses.background ]: backgroundColor.color || gradientValue,
-			[ backgroundColor.class ]: backgroundColor.class,
-			[ hasClasses.textColor ]: textColor.color,
-			[ textColor.class ]: textColor.class,
-			[ hasClasses.backgroundGradient ]: gradientValue,
-			[ gradientClass ]: gradientClass,
-			[ hasClasses.padding ]: getResponsivePaddingStyle( padding ),
-			[ hasClasses.margin ]: getResponsiveMarginStyle( margin ),
-		} ),
+		className: classnames( config.blockClasses, 'ystdtb-dt-editor', {} ),
 		style: {
 			background: getBackGroundStyle( backgroundColor, gradientValue ),
 			...getResponsivePaddingStyle( padding ),

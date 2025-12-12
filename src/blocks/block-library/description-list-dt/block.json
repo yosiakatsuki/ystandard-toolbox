@@ -40,7 +40,10 @@
 			"type": "string"
 		},
 		"textSize": {
-			"type": "object"
+			"type": "string"
+		},
+		"customTextSize": {
+			"type": "string"
 		},
 		"responsiveTextSize": {
 			"type": "object"
@@ -52,7 +55,7 @@
 			"type": "string"
 		},
 		"lineHeight": {
-			"type": "number"
+			"type": "string"
 		},
 		"letterSpacing": {
 			"type": "string"
