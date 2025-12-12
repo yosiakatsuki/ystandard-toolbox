@@ -540,6 +540,41 @@ class Styles {
 	}
 
 	/**
+	 * レスポンシブ指定のカスタムプロパティ名を取得.
+	 *
+	 * @param string $name カスタムプロパティ名.
+	 * @param string $type タイプ(mobile,tablet,desktop).
+	 *
+	 * @return string
+	 */
+	public static function get_responsive_custom_prop_name( $name, $type ) {
+		return "--ystdtb--{$type}--{$name}";
+	}
+
+	/**
+	 * レスポンシブ指定のCSSを作成.
+	 *
+	 * @param array $args {
+	 *                    selector : string,
+	 *                    prop_name : string,
+	 *                    property : string,
+	 *                    type : string
+	 *                    } オプション.
+	 *
+	 * @return string
+	 */
+	public static function get_responsive_custom_prop_css( $args ) {
+		$selector  = $args['selector'];
+		$prop_name = $args['prop_name'];
+		$property  = $args['property'];
+		$type      = $args['type'];
+		// カスタムプロパティ作成.
+		$custom_prop = self::get_responsive_custom_prop_name( $prop_name, $type );
+
+		return "{$selector}:where([style*=\"{$custom_prop}\"]){{$property}:var({$custom_prop}) !important;}";
+	}
+
+	/**
 	 * カラーコードをrgbに変換
 	 *
 	 * @param string $color カラーコード.

@@ -19,6 +19,7 @@ import {
  */
 import type { DlBlockProps } from './types';
 import { getDlClassNames, getDlStyles } from './utils';
+import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
 const ALLOWED_BLOCKS = [
@@ -45,7 +46,12 @@ function DtEditContainer( props: DlBlockProps ) {
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: ALLOWED_BLOCKS,
 	} );
-	return <dl { ...innerBlocksProps } />;
+	return (
+		<>
+			<InspectorControls { ...props } />
+			<dl { ...innerBlocksProps } />
+		</>
+	);
 }
 
 /**

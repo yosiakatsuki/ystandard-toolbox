@@ -7,6 +7,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -31,6 +33,7 @@ class Description_List_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -44,6 +47,38 @@ class Description_List_Block {
 		}
 
 		return self::$instance;
+	}
+
+	public function enqueue_responsive_style() {
+		$types      = [ 'desktop', 'tablet', 'mobile' ];
+		$responsive = [
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		];
+		$selector   = '.ystdtb-dl';
+		$css        = '';
+		foreach ( $types as $type ) {
+			foreach ( [ 'top', 'bottom', ] as $pos ) {
+				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $selector,
+						'prop_name' => "dl--margin-{$pos}",
+						'property'  => "margin-{$pos}",
+						'type'      => $type,
+					]
+				);
+			}
+		}
+		// 結合.
+		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-dl-block-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, $css );
+		wp_enqueue_style( $handle );
 	}
 
 	/**
