@@ -12,6 +12,7 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import { FontSize } from './font-size';
 import { Color } from './color';
+import { FontWeight } from './font-weight';
 
 // @ts-ignore.
 export function Typography( props ): JSX.Element {
@@ -19,6 +20,7 @@ export function Typography( props ): JSX.Element {
 		<Panel title={ __( 'テキスト', 'ystandard-toolbox' ) }>
 			<FontSize { ...props } />
 			<Color { ...props } />
+			<FontWeight { ...props } />
 		</Panel>
 	);
 }
