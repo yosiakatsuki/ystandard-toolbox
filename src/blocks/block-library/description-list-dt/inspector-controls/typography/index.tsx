@@ -15,6 +15,7 @@ import { Color } from './color';
 import { FontWeight } from './font-weight';
 import { FontStyle } from './font-style';
 import { LineHeight } from './line-height';
+import { LetterSpacing } from './letter-spacing';
 
 // @ts-ignore.
 export function Typography( props ): JSX.Element {
@@ -25,6 +26,7 @@ export function Typography( props ): JSX.Element {
 			<FontWeight { ...props } />
 			<FontStyle { ...props } />
 			<LineHeight { ...props } />
+			<LetterSpacing { ...props } />
 		</Panel>
 	);
 }
