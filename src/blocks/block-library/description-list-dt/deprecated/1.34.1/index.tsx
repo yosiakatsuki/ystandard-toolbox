@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import {
 	RichText,
 	getColorClassName,
+	// @ts-ignore.
 	__experimentalGetGradientClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
@@ -20,6 +21,13 @@ const config = {
 	blockClasses: 'ystdtb-dt',
 	responsiveStyleClassPrefix: 'dt',
 };
+
+function isResponsiveObject( value: any ): boolean {
+	return (
+		typeof value === 'object' && ( 'tablet' in value || 'mobile' in value )
+	);
+}
+
 // @ts-ignore.
 export const deprecated1341 = [
 	{
@@ -76,8 +84,44 @@ export const deprecated1341 = [
 			reusable: false,
 		},
 		migrate: ( attributes: any ) => {
+			const { textSize, margin, padding, ...rest } = attributes;
+
+			// フォントサイズ変換.
+			let newTextSize;
+			if ( isResponsiveObject( textSize ) ) {
+				newTextSize = undefined;
+			} else {
+				newTextSize = textSize?.desktop || textSize;
+			}
+			// Margin変換.
+			let newMargin;
+			if ( isResponsiveObject( margin ) ) {
+				newMargin = undefined;
+			} else {
+				newMargin = margin?.desktop || margin;
+			}
+			// Padding変換.
+			let newPadding;
+			if ( isResponsiveObject( padding ) ) {
+				newPadding = undefined;
+			} else {
+				newPadding = padding?.desktop || padding;
+			}
+
 			return {
-				...attributes,
+				...rest,
+				textSize: newTextSize,
+				responsiveTextSize: isResponsiveObject( textSize )
+					? textSize
+					: undefined,
+				margin: newMargin,
+				responsiveMargin: isResponsiveObject( margin )
+					? margin
+					: undefined,
+				padding: newPadding,
+				responsivePadding: isResponsiveObject( padding )
+					? padding
+					: undefined,
 			};
 		},
 		save( { attributes }: { attributes: any } ) {
@@ -145,7 +189,7 @@ export const deprecated1341 = [
 					color: customTextColor,
 					...getResponsivePaddingStyle( padding ),
 					...getResponsiveMarginStyle( margin ),
-					...getResponsiveFontSizeStyle( textSize, fontSizeClass ),
+					...getResponsiveFontSizeStyle( textSize, !! fontSizeClass ),
 					fontWeight: fontWeight || undefined,
 					fontStyle: fontStyle || undefined,
 					lineHeight: lineHeight || undefined,
