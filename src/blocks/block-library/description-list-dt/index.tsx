@@ -19,6 +19,7 @@ import save from './save';
 import deprecated from './deprecated';
 import './style.scss';
 
+console.log( 'registerDescriptionTermBlock' );
 export function registerDescriptionTermBlock() {
 	const attributes = mergeDefaultAttributes(
 		metadata.name,
