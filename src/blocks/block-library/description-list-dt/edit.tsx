@@ -14,12 +14,13 @@ import { __ } from '@wordpress/i18n';
  */
 import type { DtBlockProps } from './types';
 import { getDtBlockClasses, getDtBlockStyles } from './utils';
+import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
 export default function Edit( props: DtBlockProps ): JSX.Element {
 	const { attributes, setAttributes, clientId } = props;
 	const { text } = attributes;
-	const { gradientClass, gradientValue } = useGradient();
+	const { gradientClass, gradientValue, setGradient } = useGradient();
 	const { selectBlock } = useDispatch( 'core/block-editor' );
 
 	// 次のブロックのclientIdを取得
@@ -61,8 +62,16 @@ export default function Edit( props: DtBlockProps ): JSX.Element {
 			customGradient: gradientValue,
 		} ),
 	} );
+
+	const inspectorControlsProps = {
+		...props,
+		gradientValue,
+		setGradient,
+	};
+
 	return (
 		<>
+			<InspectorControls { ...inspectorControlsProps } />
 			<RichText
 				tagName="dt"
 				value={ text || '' }
