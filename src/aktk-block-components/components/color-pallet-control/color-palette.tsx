@@ -26,7 +26,7 @@ interface ColorPaletteProps {
  * カラーパレット（設定画面用。エディター側はWP提供のコントロールを使おう）
  * @param props
  */
-export function ColorPalette( props: ColorPaletteProps ): React.ReactElement {
+export function ColorPalette( props: ColorPaletteProps ): JSX.Element {
 	const {
 		label,
 		value,

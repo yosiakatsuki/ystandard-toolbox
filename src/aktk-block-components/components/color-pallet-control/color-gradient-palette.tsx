@@ -1,7 +1,11 @@
+/**
+ * WordPress Dependencies.
+ */
 import {
 	// @ts-ignore
 	__experimentalColorGradientControl as WPColorGradientControl,
 } from '@wordpress/block-editor';
+import { useMemo } from '@wordpress/element';
 
 /**
  * Aktk Dependencies
@@ -13,6 +17,7 @@ import useThemeGradients from '@aktk/block-components/hooks/useThemeGradient';
 interface ColorGradientPaletteProps {
 	label: string;
 	colorValue: string;
+	colorSlug?: string;
 	onColorChange: ( value: string ) => void;
 	colors?: string[];
 	gradientValue: string;
@@ -27,10 +32,13 @@ interface ColorGradientPaletteProps {
  *
  * @param props
  */
-export function ColorGradientPalette( props: ColorGradientPaletteProps ) {
+export function ColorGradientPalette(
+	props: ColorGradientPaletteProps
+): JSX.Element {
 	const {
 		label,
 		colorValue,
+		colorSlug,
 		onColorChange,
 		colors,
 		gradientValue,
@@ -45,6 +53,25 @@ export function ColorGradientPalette( props: ColorGradientPaletteProps ) {
 		enableTransparent,
 	} );
 	const themeGradients = useThemeGradients();
+	console.log( { themeGradients } );
+
+	// 全てのカラーをフラット化して取得.
+	const allColors = useMemo( () => {
+		return themeColors.flatMap( ( palette ) => palette.colors );
+	}, [ themeColors ] );
+
+	// スラッグから色コードを取得.
+	const getColorBySlug = ( _colorSlug?: string ) => {
+		if ( ! _colorSlug ) {
+			return undefined;
+		}
+		const foundColor = allColors.find(
+			( color ) => color.slug === _colorSlug
+		);
+		return foundColor?.color;
+	};
+
+	const _colorValue = getColorBySlug( colorSlug ) || colorValue;
 
 	// カラーパレットの設定
 	const paletteColors = colors || themeColors;
@@ -57,7 +84,7 @@ export function ColorGradientPalette( props: ColorGradientPaletteProps ) {
 			>
 				<WPColorGradientControl
 					colors={ paletteColors }
-					colorValue={ colorValue }
+					colorValue={ _colorValue }
 					onColorChange={ onColorChange }
 					gradients={ paletteGradients }
 					gradientValue={ gradientValue }
