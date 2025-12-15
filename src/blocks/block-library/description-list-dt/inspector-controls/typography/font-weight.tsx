@@ -1,7 +1,3 @@
-/**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */

@@ -14,6 +14,7 @@ import { FontSize } from './font-size';
 import { Color } from './color';
 import { FontWeight } from './font-weight';
 import { FontStyle } from './font-style';
+import { LineHeight } from './line-height';
 
 // @ts-ignore.
 export function Typography( props ): JSX.Element {
@@ -23,6 +24,7 @@ export function Typography( props ): JSX.Element {
 			<Color { ...props } />
 			<FontWeight { ...props } />
 			<FontStyle { ...props } />
+			<LineHeight { ...props } />
 		</Panel>
 	);
 }

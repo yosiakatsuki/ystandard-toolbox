@@ -1,7 +1,3 @@
-/**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
@@ -16,8 +12,8 @@ import type { DtBlockProps } from '../../types';
 export function FontStyle( props: DtBlockProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { fontStyle } = attributes;
-	const handleOnChange = ( newFontWeight: string ) => {
-		setAttributes( { fontStyle: newFontWeight } );
+	const handleOnChange = ( newFontStyle: string ) => {
+		setAttributes( { fontStyle: newFontStyle } );
 	};
 	return (
 		<BaseControl>
