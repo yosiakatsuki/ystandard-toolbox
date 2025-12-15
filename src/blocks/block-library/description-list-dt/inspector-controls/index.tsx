@@ -7,6 +7,7 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  */
 import { Background } from './background';
 import { Typography } from './typography';
+import { Spacing } from './spacing';
 
 // @ts-ignore.
 export function InspectorControls( props ): JSX.Element {
@@ -14,6 +15,7 @@ export function InspectorControls( props ): JSX.Element {
 		<WPInspectorControls>
 			<Background { ...props } />
 			<Typography { ...props } />
+			<Spacing { ...props } />
 		</WPInspectorControls>
 	);
 }
