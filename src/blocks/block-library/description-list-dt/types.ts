@@ -35,4 +35,7 @@ export interface DtBlockProps {
 	clientId: string;
 	isSelected: boolean;
 	name?: string;
+	gradientClass?: string;
+	gradientValue?: string;
+	setGradient?: ( gradientValue: string ) => void;
 }
