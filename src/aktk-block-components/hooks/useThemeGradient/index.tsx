@@ -9,10 +9,16 @@ import { useSelect } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { applyFilters } from '@wordpress/hooks';
 
+type UseThemeGradientsOptions = {
+	enableDefaultGradients?: boolean;
+};
+
 /**
  * テーマのカラー設定を取得する（設定画面用）
+ * @param options
  */
-const useThemeGradients = () => {
+const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
+	const { enableDefaultGradients = false } = options || {};
 	const [
 		customGradients,
 		themeGradients,
@@ -24,7 +30,6 @@ const useThemeGradients = () => {
 		'color.gradients.default',
 		'color.defaultGradients'
 	);
-
 	// フィルターを適用してテーマカラーを取得.
 	const hookThemeGradients = applyFilters(
 		'aktk.hooks.getThemeGradients.themeGradients',
@@ -68,6 +73,7 @@ const useThemeGradients = () => {
 			} );
 		}
 		if (
+			enableDefaultGradients &&
 			shouldDisplayDefaultGradients &&
 			defaultGradients &&
 			defaultGradients.length

@@ -39,10 +39,8 @@ export function BackgroundColor( props: DtBlockProps ): JSX.Element {
 				colorValue={ customBackgroundColor || '' }
 				colorSlug={ backgroundColor }
 				onColorChange={ handleOnChange }
-				gradientValue={ gradientValue || '' }
+				gradientValue={ gradientValue }
 				onGradientChange={ handleGradientChange }
-				enableCurrentColor={ true }
-				enableTransparent={ true }
 			/>
 		</BaseControl>
 	);

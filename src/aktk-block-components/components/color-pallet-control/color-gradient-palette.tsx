@@ -16,11 +16,11 @@ import useThemeGradients from '@aktk/block-components/hooks/useThemeGradient';
 
 interface ColorGradientPaletteProps {
 	label: string;
-	colorValue: string;
+	colorValue?: string;
 	colorSlug?: string;
 	onColorChange: ( value: string ) => void;
 	colors?: string[];
-	gradientValue: string;
+	gradientValue?: string;
 	onGradientChange: ( value: string ) => void;
 	gradients?: string[];
 	enableCurrentColor?: boolean;
@@ -53,17 +53,11 @@ export function ColorGradientPalette(
 		enableTransparent,
 	} );
 	const themeGradients = useThemeGradients();
-	console.log( { themeGradients } );
 
 	// 全てのカラーをフラット化して取得.
 	const allColors = useMemo( () => {
 		return themeColors.flatMap( ( palette ) => palette.colors );
 	}, [ themeColors ] );
-
-	// 全てのグラデーションをフラット化して取得.
-	// const allGradients = useMemo( () => {
-	// 	return themeGradients.flatMap( ( palette ) => palette.gradients );
-	// }, [ themeGradients ] );
 
 	// スラッグから色コードを取得.
 	const getColorBySlug = ( _colorSlug?: string ) => {
@@ -84,7 +78,7 @@ export function ColorGradientPalette(
 	return (
 		<>
 			<ColorDropdownWrapper
-				colorValue={ colorValue || gradientValue }
+				colorValue={ _colorValue || gradientValue }
 				label={ label }
 			>
 				<WPColorGradientControl
@@ -94,7 +88,7 @@ export function ColorGradientPalette(
 					gradients={ paletteGradients }
 					gradientValue={ gradientValue }
 					onGradientChange={ onGradientChange }
-					disableCustomGradients={ true }
+					disableCustomGradients={ false }
 					disableCustomColors={ false }
 				/>
 			</ColorDropdownWrapper>

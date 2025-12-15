@@ -46,7 +46,11 @@ export function getDtBlockClasses( attributes: DtBlockAttributes ) {
 	return classnames( 'ystdtb-dt', {
 		'has-font-size': fontSizeClass || customTextSize || responsiveTextSize,
 		[ fontSizeClass ]: fontSizeClass,
-		'has-background': backgroundColorClass || customBackgroundColor,
+		'has-background':
+			backgroundColorClass ||
+			customBackgroundColor ||
+			gradient ||
+			customGradient,
 		[ backgroundColorClass ]: backgroundColorClass,
 		'has-text-color': textColorClass || customTextColor,
 		[ textColorClass ]: textColorClass,
