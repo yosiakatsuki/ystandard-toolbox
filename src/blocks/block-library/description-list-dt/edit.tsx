@@ -39,17 +39,13 @@ export default function Edit( props: DtBlockProps ): JSX.Element {
 	 * @param {Object} event - キーボードイベント
 	 */
 	const handleKeyDown = ( event: any ) => {
-		console.log( { nextBlockClientId } );
-		// Shift+Enterの場合は改行（デフォルト動作）
-		if ( event.key === 'Enter' && event.shiftKey ) {
-			return;
-		}
-
 		// Enterのみの場合は次のブロックへフォーカス移動
-		if ( event.key === 'Enter' && nextBlockClientId ) {
+		if ( event.key === 'Enter' && ! event.shiftKey ) {
 			event.preventDefault();
-			// 次のブロックを選択
-			selectBlock( nextBlockClientId );
+			// 次のブロックがあれば次を選択
+			if ( nextBlockClientId ) {
+				selectBlock( nextBlockClientId );
+			}
 		}
 	};
 
