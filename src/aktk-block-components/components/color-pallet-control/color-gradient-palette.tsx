@@ -60,6 +60,11 @@ export function ColorGradientPalette(
 		return themeColors.flatMap( ( palette ) => palette.colors );
 	}, [ themeColors ] );
 
+	// 全てのグラデーションをフラット化して取得.
+	// const allGradients = useMemo( () => {
+	// 	return themeGradients.flatMap( ( palette ) => palette.gradients );
+	// }, [ themeGradients ] );
+
 	// スラッグから色コードを取得.
 	const getColorBySlug = ( _colorSlug?: string ) => {
 		if ( ! _colorSlug ) {
@@ -89,7 +94,7 @@ export function ColorGradientPalette(
 					gradients={ paletteGradients }
 					gradientValue={ gradientValue }
 					onGradientChange={ onGradientChange }
-					disableCustomGradients={ false }
+					disableCustomGradients={ true }
 					disableCustomColors={ false }
 				/>
 			</ColorDropdownWrapper>
