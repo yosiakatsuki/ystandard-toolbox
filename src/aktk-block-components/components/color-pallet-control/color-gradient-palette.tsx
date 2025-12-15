@@ -18,7 +18,7 @@ interface ColorGradientPaletteProps {
 	label: string;
 	colorValue?: string;
 	colorSlug?: string;
-	onColorChange: ( value: string ) => void;
+	onColorChange: ( newColor?: string, slug?: string ) => void;
 	colors?: string[];
 	gradientValue?: string;
 	onGradientChange: ( value: string ) => void;
@@ -70,6 +70,18 @@ export function ColorGradientPalette(
 		return foundColor?.color;
 	};
 
+	// 色変更時のハンドラー.
+	const handleOnColorChange = ( newColor?: string ) => {
+		// 色コードからスラッグを取得
+		const foundColor = allColors.find(
+			( color ) => color.color === newColor
+		);
+		const _colorSlug = foundColor?.slug;
+
+		onColorChange( newColor, _colorSlug );
+	};
+
+	// ラベル用色を取得.
 	const _colorValue = getColorBySlug( colorSlug ) || colorValue;
 
 	// カラーパレットの設定
@@ -84,7 +96,7 @@ export function ColorGradientPalette(
 				<WPColorGradientControl
 					colors={ paletteColors }
 					colorValue={ _colorValue }
-					onColorChange={ onColorChange }
+					onColorChange={ handleOnColorChange }
 					gradients={ paletteGradients }
 					gradientValue={ gradientValue }
 					onGradientChange={ onGradientChange }
