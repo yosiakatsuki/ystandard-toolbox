@@ -1,0 +1,87 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/description-list-dd-simple",
+	"version": "2.0.0",
+	"title": "定義リスト 説明(dd)シンプル",
+	"description": "定義リスト 説明(dd)ブロック シンプル",
+	"keywords": [
+		"dd"
+	],
+	"parent": [
+		"ystdtb/description-list"
+	],
+	"attributes": {
+		"text": {
+			"type": "rich-text",
+			"source": "rich-text",
+			"selector": "dd",
+			"role": "content"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"customGradient": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
+		"textSize": {
+			"type": "string"
+		},
+		"customTextSize": {
+			"type": "string"
+		},
+		"responsiveTextSize": {
+			"type": "object"
+		},
+		"fontWeight": {
+			"type": "string"
+		},
+		"fontStyle": {
+			"type": "string"
+		},
+		"lineHeight": {
+			"type": "number"
+		},
+		"letterSpacing": {
+			"type": "string"
+		},
+		"padding": {
+			"type": "object"
+		},
+		"responsivePadding": {
+			"type": "object"
+		},
+		"margin": {
+			"type": "object"
+		},
+		"responsiveMargin": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false,
+		"reusable": false
+	},
+	"example": {
+		"attributes": {
+			"text": "タイトル..."
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
