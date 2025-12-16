@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import type { DdSimpleBlockProps } from './types';
 import { getDdSimpleBlockClasses, getDdSimpleBlockStyles } from './utils';
 import './style-editor.scss';
+import { InspectorControls } from '@aktk/blocks/block-library/description-list-dd-simple/inspector-controls';
 
 export default function Edit( props: DdSimpleBlockProps ): JSX.Element {
 	const { attributes, setAttributes, clientId } = props;
@@ -71,6 +72,7 @@ export default function Edit( props: DdSimpleBlockProps ): JSX.Element {
 
 	return (
 		<>
+			<InspectorControls { ...inspectorControlsProps } />
 			<RichText
 				tagName="dd"
 				value={ text || '' }
