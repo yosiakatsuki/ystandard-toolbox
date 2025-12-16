@@ -51,7 +51,7 @@ class Description_Details_Simple_Block {
 			'tablet'  => '',
 			'mobile'  => '',
 		];
-		$selector   = '.ystdtb-dt';
+		$selector   = '.ystdtb-dd-simple';
 		$css        = '';
 		foreach ( $types as $type ) {
 

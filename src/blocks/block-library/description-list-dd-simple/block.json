@@ -52,7 +52,7 @@
 			"type": "string"
 		},
 		"lineHeight": {
-			"type": "number"
+			"type": "string"
 		},
 		"letterSpacing": {
 			"type": "string"
