@@ -17,8 +17,8 @@ import {
 } from './utils';
 
 const config = {
-	blockClasses: 'ystdtb-dd-simple',
-	responsiveStyleClassPrefix: 'dd-simple',
+	blockClasses: 'ystdtb-dd-box',
+	responsiveStyleClassPrefix: 'dd-box',
 };
 
 function isResponsiveObject( value: any ): boolean {
