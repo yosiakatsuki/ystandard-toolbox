@@ -588,4 +588,22 @@ class Styles {
 			hexdec( substr( $color, 5, 2 ) ),
 		];
 	}
+
+	/**
+	 * 物理方向を論理方向に変換
+	 *
+	 * @param string $direction 物理方向（top/right/bottom/left）.
+	 *
+	 * @return string 論理方向（block-start/inline-end/block-end/inline-start）.
+	 */
+	public static function get_logical_direction( $direction ) {
+		$map = [
+			'top'    => 'block-start',
+			'right'  => 'inline-end',
+			'bottom' => 'block-end',
+			'left'   => 'inline-start',
+		];
+
+		return isset( $map[ $direction ] ) ? $map[ $direction ] : $direction;
+	}
 }
