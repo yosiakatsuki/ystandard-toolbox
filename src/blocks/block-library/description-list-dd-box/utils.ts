@@ -78,7 +78,7 @@ export function getDdBoxBlockStyles( attributes: DdBoxBlockAttributes ) {
 				if ( marginValue ) {
 					const customPropName = getResponsiveCustomPropName(
 						'ystdtb',
-						`dd-simple--margin-${ pos }`,
+						`dd-box--margin-${ pos }`,
 						type
 					);
 					acc[ customPropName ] =
@@ -92,7 +92,7 @@ export function getDdBoxBlockStyles( attributes: DdBoxBlockAttributes ) {
 				if ( paddingValue ) {
 					const customPropName = getResponsiveCustomPropName(
 						'ystdtb',
-						`dd-simple--padding-${ pos }`,
+						`dd-box--padding-${ pos }`,
 						type
 					);
 					acc[ customPropName ] =

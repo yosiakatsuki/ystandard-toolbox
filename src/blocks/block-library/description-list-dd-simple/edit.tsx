@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
 import type { DdSimpleBlockProps } from './types';
 import { getDdSimpleBlockClasses, getDdSimpleBlockStyles } from './utils';
 import './style-editor.scss';
-import { InspectorControls } from '@aktk/blocks/block-library/description-list-dd-simple/inspector-controls';
+import { InspectorControls } from './inspector-controls';
 
 export default function Edit( props: DdSimpleBlockProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
