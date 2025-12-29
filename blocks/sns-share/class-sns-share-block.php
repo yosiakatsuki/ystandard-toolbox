@@ -49,7 +49,7 @@ class SNS_Share_Block extends Dynamic_Block {
 			],
 			'useTwitter'         => [
 				'type'    => 'boolean',
-				'default' => true,
+				'default' => false,
 			],
 			'useFacebook'        => [
 				'type'    => 'boolean',
