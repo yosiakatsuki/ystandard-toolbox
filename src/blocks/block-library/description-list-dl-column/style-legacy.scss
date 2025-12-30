@@ -1,0 +1,58 @@
+/**
+ * v2未満のスタイル互換性のためのスタイル
+ */
+.ystdtb-dl-column {
+	&[style*="dl-column-desktop"] > dt {
+		@media (min-width: 1024px) {
+			width: var(--ystdtb-dl-column-desktop);
+		}
+	}
+
+	&[style*="dl-column-tablet"] > dt {
+		@media (min-width: 640px) and (max-width: 1023.98px) {
+			width: var(--ystdtb-dl-column-tablet);
+		}
+	}
+
+	&[style*="dl-column-mobile"] > dt {
+		@media (max-width: 639.98px) {
+			width: var(--ystdtb-dl-column--mobile);
+		}
+	}
+
+	&[style*="dl-column-width"] > dt {
+		flex-shrink: 0;
+	}
+
+	&:not(.is-not-stacked-on-mobile) {
+		@media (max-width: 639.98px) {
+			display: block;
+
+			+ .ystdtb-dl-column {
+				margin-block-start: var(--ystd-layout-gap, 1.5rem);
+			}
+
+			&.has-border {
+				> dd {
+					border-top: 0;
+				}
+			}
+		}
+	}
+
+	&:not(.is-not-stacked-on-tablet) {
+		@media (min-width: 640px) and (max-width: 1023.98px) {
+			display: block;
+
+			+ .ystdtb-dl-column {
+				margin-block-start: var(--ystd-layout-gap, 1.5rem);
+			}
+
+			&.has-border {
+				> dd {
+					border-top: 0;
+				}
+			}
+		}
+	}
+}

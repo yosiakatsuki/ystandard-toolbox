@@ -3,7 +3,8 @@ import classnames from 'classnames';
 /**
  * Aktk Dependencies.
  */
-import { getFlatBorderStyle } from '@aktk/block-components/components/custom-border-select/utils';
+import { isObject } from '@aktk/block-components/utils/object';
+import type { FlatBorder } from '@aktk/block-components/components/custom-border-select';
 import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 /*
@@ -20,11 +21,11 @@ export function getDlColumnClasses( attributes: DlColumnBlockAttributes ) {
 		responsiveMargin,
 	} = attributes;
 
-	const borderStyle = getFlatBorderStyle( '', border );
+	const borderStyle = getDtColumnBorderProp( border );
 
 	return classnames( 'ystdtb-dl-column', {
-		'is-not-stacked-on-mobile': ! isStackedOnMobile,
-		'is-not-stacked-on-tablet': ! isStackedOnTablet,
+		'is-stacked-on-mobile': isStackedOnMobile,
+		'is-stacked-on-tablet': isStackedOnTablet,
 		'has-border': !! borderStyle,
 		'has-margin': margin || responsiveMargin,
 	} );
@@ -34,7 +35,7 @@ export function getDtColumnStyles( attributes: DlColumnBlockAttributes ) {
 	const { dtWidth, responsiveDtWidth, border, margin, responsiveMargin } =
 		attributes;
 
-	const borderStyle = getFlatBorderStyle( '', border );
+	const borderStyle = getDtColumnBorderProp( border );
 
 	const types = [ 'desktop', 'tablet', 'mobile' ] as const;
 	const position = [ 'top', 'right', 'bottom', 'left' ] as const;
@@ -69,7 +70,26 @@ export function getDtColumnStyles( attributes: DlColumnBlockAttributes ) {
 	return {
 		margin,
 		'--ystdtb--dl-column--width': dtWidth,
-		...borderStyle,
+		'--ystdtb--dl-column--border': borderStyle,
 		...responsiveStyles,
 	};
+}
+
+/**
+ * Borderオブジェクトからborderプロパティの文字列を生成.
+ *
+ * @param border
+ */
+function getDtColumnBorderProp( border: FlatBorder | undefined ) {
+	if ( ! isObject( border ) ) {
+		return undefined;
+	}
+	const _color = border?.color;
+	const _style = border?.style;
+	const _width = border?.width;
+	if ( ! _color || ! _style || ! _width ) {
+		return undefined;
+	}
+
+	return `${ _width } ${ _style } ${ _color }`;
 }
