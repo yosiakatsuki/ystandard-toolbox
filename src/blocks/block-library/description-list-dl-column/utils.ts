@@ -4,7 +4,6 @@ import classnames from 'classnames';
  * Aktk Dependencies.
  */
 import { getFlatBorderStyle } from '@aktk/block-components/components/custom-border-select/utils';
-import { getCustomSpacingValues } from '@aktk/block-components/components/custom-spacing-select';
 import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 /*
@@ -12,7 +11,7 @@ import { getResponsiveCustomPropName } from '@aktk/block-components/utils/respon
  */
 import type { DlColumnBlockAttributes } from './types';
 
-export function getDlColumnClassNames( attributes: DlColumnBlockAttributes ) {
+export function getDlColumnClasses( attributes: DlColumnBlockAttributes ) {
 	const {
 		isStackedOnMobile,
 		isStackedOnTablet,
