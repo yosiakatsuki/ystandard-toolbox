@@ -11,7 +11,8 @@ import type { FlatBorder } from '@aktk/block-components/components/custom-border
 export interface DlColumnBlockAttributes {
 	isStackedOnMobile?: boolean;
 	isStackedOnTablet?: boolean;
-	dtWidth?: ResponsiveValues;
+	dtWidth?: string;
+	responsiveDtWidth?: ResponsiveValues;
 	border?: FlatBorder;
 	margin?: Spacing;
 	responsiveMargin?: ResponsiveSpacing;

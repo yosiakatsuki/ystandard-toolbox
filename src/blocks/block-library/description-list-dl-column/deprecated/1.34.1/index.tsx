@@ -58,7 +58,7 @@ export const deprecated1341 = [
 			className: false,
 		},
 		migrate: ( attributes: any ) => {
-			const { margin, padding, ...rest } = attributes;
+			const { margin, padding, dtWidth, ...rest } = attributes;
 
 			// Margin変換.
 			let newMargin;
@@ -67,14 +67,22 @@ export const deprecated1341 = [
 			} else {
 				newMargin = margin?.desktop || margin;
 			}
+			let newWidth;
+			if ( isResponsiveObject( dtWidth ) ) {
+				newWidth = undefined;
+			} else {
+				newWidth = dtWidth?.desktop;
+			}
+
 			return {
 				...rest,
 				margin: newMargin,
 				responsiveMargin: isResponsiveObject( margin )
 					? margin
 					: undefined,
-				responsivePadding: isResponsiveObject( padding )
-					? padding
+				dtWidth: newWidth,
+				responsiveDtWidth: isResponsiveObject( dtWidth )
+					? dtWidth
 					: undefined,
 			};
 		},

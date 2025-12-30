@@ -28,6 +28,9 @@
 		"dtWidth": {
 			"type": "object"
 		},
+		"responsiveDtWidth": {
+			"type": "object"
+		},
 		"border": {
 			"type": "object"
 		},
