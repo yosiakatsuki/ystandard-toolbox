@@ -15,8 +15,8 @@ export default function Save( props: DlColumnBlockProps ) {
 		style: getDtColumnStyles( attributes ),
 	} );
 	return (
-		<dd { ...blockProps }>
+		<div { ...blockProps }>
 			<InnerBlocks.Content />
-		</dd>
+		</div>
 	);
 }
