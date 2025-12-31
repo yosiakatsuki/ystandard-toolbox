@@ -70,23 +70,21 @@ class Description_List_Column_Block {
 			}
 		}
 		// border.
-		$responsive['desktop'] .= ".ystdtb-dl-column:where(.has-border) > :where(dd) {border-left:0}";
-		$responsive['tablet']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-tablet) > :where(dd) {border-top:0}";
-		$responsive['mobile']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-mobile) > :where(dd) {border-top:0}";
+		$responsive['desktop'] .= ".ystdtb-dl-column:where(.has-border) > :where(dd) {border-left:0;}";
+		$responsive['tablet']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-tablet) > :where(dd) {border-top:0;}";
+		$responsive['mobile']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-mobile) > :where(dd) {border-top:0;}";
 		// stack.
-		$responsive['tablet']  .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) {display:block}";
-		$responsive['tablet']  .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem)}";
-		$responsive['mobile']  .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) {display:block}";
-		$responsive['mobile']  .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem)}";
-
+		$responsive['tablet'] .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) {display:block;}";
+		$responsive['tablet'] .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}";
+		$responsive['mobile'] .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) {display:block;}";
+		$responsive['mobile'] .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}";
 
 		// 結合.
 		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
 		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
 		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
 
-		$handle = generate_block_asset_handle( 'ystdtb/description-list-column', 'style' );
-//		var_dump($handle);
+		// $handle = generate_block_asset_handle( 'ystdtb/description-list-column', 'style' );
 		$handle = 'ystdtb-dl-column-block-responsive';
 		wp_register_style( $handle, false );
 		wp_add_inline_style( $handle, $css );
