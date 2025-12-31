@@ -20,7 +20,10 @@ export function LetterSpacing( props: DtBlockProps ): JSX.Element {
 		setAttributes( { letterSpacing: newLetterSpacing } );
 	};
 	return (
-		<BaseControl>
+		<BaseControl
+			id="dt-letter-spacing"
+			label={ __( '文字間隔', 'ystandard-toolbox' ) }
+		>
 			<LetterSpacingControl
 				value={ letterSpacing || '' }
 				onChange={ handleOnChange }
