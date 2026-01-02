@@ -10,9 +10,9 @@ import { ColorGradientPalette } from '@aktk/block-components/components/color-pa
 /**
  * Block Dependencies.
  */
-import type { DtBlockProps } from '../../types';
+import type { DdSimpleBlockProps } from '../../types';
 
-export function BackgroundColor( props: DtBlockProps ): JSX.Element {
+export function BackgroundColor( props: DdSimpleBlockProps ): JSX.Element {
 	const { attributes, setAttributes, gradientValue, setGradient } = props;
 	const { backgroundColor, customBackgroundColor } = attributes;
 
