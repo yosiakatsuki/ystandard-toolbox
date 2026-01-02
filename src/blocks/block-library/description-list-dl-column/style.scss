@@ -5,9 +5,10 @@
 	display: flex;
 	gap: 1rem;
 
-	&[style*="dl-column--width"] {
+	&:where([style*="dl-column--width"]) {
 		> :where(dt) {
 			flex-shrink: 0;
+			width: min(100%, var(--ystdtb--dl-column--width,auto));
 		}
 	}
 

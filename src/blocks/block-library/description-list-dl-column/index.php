@@ -70,14 +70,18 @@ class Description_List_Column_Block {
 			}
 		}
 		// border.
-		$responsive['desktop'] .= ".ystdtb-dl-column:where(.has-border) > :where(dd) {border-left:0;}";
-		$responsive['tablet']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-tablet) > :where(dd) {border-top:0;}";
-		$responsive['mobile']  .= ".ystdtb-dl-column:where(.has-border.is-stacked-on-mobile) > :where(dd) {border-top:0;}";
+		$responsive['desktop'] .= '.ystdtb-dl-column:where(.has-border) > :where(dd) {border-left:0;}';
+		$responsive['tablet']  .= '.ystdtb-dl-column:where(.has-border.is-stacked-on-tablet) > :where(dd) {border-top:0;}';
+		$responsive['mobile']  .= '.ystdtb-dl-column:where(.has-border.is-stacked-on-mobile) > :where(dd) {border-top:0;}';
 		// stack.
-		$responsive['tablet'] .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) {display:block;}";
-		$responsive['tablet'] .= ".ystdtb-dl-column:where(.is-stacked-on-tablet) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}";
-		$responsive['mobile'] .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) {display:block;}";
-		$responsive['mobile'] .= ".ystdtb-dl-column:where(.is-stacked-on-mobile) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}";
+		$responsive['tablet'] .= '.ystdtb-dl-column:where(.is-stacked-on-tablet) {display:block;}';
+		$responsive['tablet'] .= '.ystdtb-dl-column:where(.is-stacked-on-tablet) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}';
+		$responsive['mobile'] .= '.ystdtb-dl-column:where(.is-stacked-on-mobile) {display:block;}';
+		$responsive['mobile'] .= '.ystdtb-dl-column:where(.is-stacked-on-mobile) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}';
+		// column-width.
+		$responsive['desktop'] .= '.ystdtb-dl-column[style*="dl-column--width--desktop"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--desktop);}';
+		$responsive['tablet'] .= '.ystdtb-dl-column[style*="dl-column--width--tablet"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--tablet);}';
+		$responsive['mobile'] .= '.ystdtb-dl-column[style*="dl-column--width--mobile"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--mobile);}';
 
 		// 結合.
 		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );

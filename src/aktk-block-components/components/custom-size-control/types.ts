@@ -1,9 +1,15 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import type { UnitType } from '@aktk/block-components/wp-controls/unit-control';
 
+export type CustomSizeResponsiveValues = ResponsiveValues;
+
 export interface CustomSizeControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	value: string | undefined;
+	responsiveValue?: CustomSizeResponsiveValues;
+	onChange: ( newValue: string | undefined ) => void;
+	onChangeResponsive?: (
+		newValue: CustomSizeResponsiveValues | undefined
+	) => void;
 	responsiveControlStyle?: 'vertical' | 'horizontal';
 	units?: UnitType[];
 	useResponsive?: boolean;

@@ -15,7 +15,7 @@ import { StackOnToggle } from './stack-on-toggle';
 // @ts-ignore.
 export function StackOn( props ) {
 	return (
-		<Panel title={ __( '横並び設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( '横並び', 'ystandard-toolbox' ) }>
 			<StackOnToggle { ...props } />
 		</Panel>
 	);
