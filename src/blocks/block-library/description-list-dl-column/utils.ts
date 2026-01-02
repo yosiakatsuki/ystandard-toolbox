@@ -7,6 +7,7 @@ import { isObject } from '@aktk/block-components/utils/object';
 import type { FlatBorder } from '@aktk/block-components/components/custom-border-select';
 import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
+import { getCustomSpacingValues } from '@aktk/block-components/components/custom-spacing-select';
 /*
  * Block Dependencies
  */
@@ -68,9 +69,9 @@ export function getDtColumnStyles( attributes: DlColumnBlockAttributes ) {
 	);
 
 	return {
-		margin,
 		'--ystdtb--dl-column--width': dtWidth,
 		'--ystdtb--dl-column--border': borderStyle,
+		...getCustomSpacingValues( margin, 'margin' ),
 		...responsiveStyles,
 	};
 }
