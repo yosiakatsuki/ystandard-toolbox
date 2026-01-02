@@ -8,12 +8,14 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
 import type { DlColumnBlockProps } from '../types';
 import { StackOn } from './stack-on';
 import { Size } from '@aktk/blocks/block-library/description-list-dl-column/inspector-controls/size';
+import { Border } from '@aktk/blocks/block-library/description-list-dl-column/inspector-controls/border';
 
 export function InspectorControls( props: DlColumnBlockProps ) {
 	return (
 		<WPInspectorControls>
 			<StackOn { ...props } />
 			<Size { ...props } />
+			<Border { ...props } />
 		</WPInspectorControls>
 	);
 }

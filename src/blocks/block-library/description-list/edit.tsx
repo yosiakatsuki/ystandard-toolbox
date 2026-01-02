@@ -82,7 +82,9 @@ function Placeholder( props: DlBlockProps ) {
 		[ name ]
 	);
 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
-	const blockProps = useBlockProps( { className: 'ystdtb-dl-editor' } );
+	const blockProps = useBlockProps( {
+		className: 'ystdtb-dl-variation-picker',
+	} );
 
 	return (
 		<div { ...blockProps }>

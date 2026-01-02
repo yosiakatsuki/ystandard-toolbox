@@ -70,9 +70,9 @@ class Description_List_Column_Block {
 			}
 		}
 		// border.
-		$responsive['desktop'] .= '.ystdtb-dl-column:where(.has-border) > :where(dd) {border-left:0;}';
-		$responsive['tablet']  .= '.ystdtb-dl-column:where(.has-border.is-stacked-on-tablet) > :where(dd) {border-top:0;}';
-		$responsive['mobile']  .= '.ystdtb-dl-column:where(.has-border.is-stacked-on-mobile) > :where(dd) {border-top:0;}';
+		$responsive['desktop'] .= '.ystdtb-dl-column:where(.has-border) > :where(dd) {border-inline-start:0;}';
+		$responsive['tablet']  .= '.ystdtb-dl-column:where(.has-border:not(.is-stacked-on-tablet)) > :where(dd) {border-inline-start:0;}';
+		$responsive['mobile']  .= '.ystdtb-dl-column:where(.has-border:not(.is-stacked-on-mobile)) > :where(dd) {border-inline-start:0;}';
 		// stack.
 		$responsive['tablet'] .= '.ystdtb-dl-column:where(.is-stacked-on-tablet) {display:block;}';
 		$responsive['tablet'] .= '.ystdtb-dl-column:where(.is-stacked-on-tablet) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}';

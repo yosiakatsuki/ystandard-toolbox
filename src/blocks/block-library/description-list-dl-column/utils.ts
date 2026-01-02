@@ -87,9 +87,9 @@ function getDtColumnBorderProp( border: FlatBorder | undefined ) {
 	const _color = border?.color;
 	const _style = border?.style;
 	const _width = border?.width;
-	if ( ! _color || ! _style || ! _width ) {
+	if ( ! _color || ! _width ) {
 		return undefined;
 	}
 
-	return `${ _width } ${ _style } ${ _color }`;
+	return `${ _width } ${ _style || 'solid' } ${ _color }`;
 }

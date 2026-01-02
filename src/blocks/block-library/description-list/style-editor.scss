@@ -1,4 +1,4 @@
-.ystdtb-dl-editor {
+.ystdtb-dl-variation-picker {
 	.block-editor-block-variation-picker {
 		svg {
 			fill: none !important;
@@ -8,6 +8,7 @@
 			svg {
 				fill: none !important;
 			}
+
 			svg,
 			+ .block-editor-block-variation-picker__variation-label {
 				opacity: 0.8;
@@ -16,3 +17,13 @@
 		}
 	}
 }
+
+.ystdtb-dl {
+	> * + * {
+		margin-block-start: var(--ystd-layout-gap, 1.5rem);
+		margin-block-end: 0;
+	}
+}
+
+
+
