@@ -1,10 +1,10 @@
 // @ts-ignore
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const pluginConfig = require( './webpack.blocks.v2.config.js' );
-const path = require( 'path' );
 
 // CopyWebpackPluginを除外したプラグイン配列を作成
 const plugins = defaultConfig.plugins.filter(
+	// @ts-ignore.
 	( plugin ) => plugin.constructor.name !== 'CopyPlugin'
 );
 
