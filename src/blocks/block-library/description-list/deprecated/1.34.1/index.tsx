@@ -17,15 +17,40 @@ export const deprecated1341 = [
 			className: false,
 		},
 		migrate: ( attributes: any ) => {
-			const { margin } = attributes;
+			const { margin, ...rest } = attributes;
 			const isResponsiveMargin =
 				margin &&
 				typeof margin === 'object' &&
 				( margin.tablet || margin.mobile );
+
+			let newMargin = {};
+
+			if ( isResponsiveMargin ) {
+				newMargin = {
+					desktop: {
+						top: margin.desktop?.top,
+						bottom: margin.desktop?.bottom,
+					},
+					tablet: {
+						top: margin.tablet?.top,
+						bottom: margin.tablet?.bottom,
+					},
+					mobile: {
+						top: margin.mobile?.top,
+						bottom: margin.mobile?.bottom,
+					},
+				};
+			} else {
+				newMargin = {
+					top: margin?.desktop?.top,
+					bottom: margin?.desktop?.bottom,
+				};
+			}
+
 			return {
-				...attributes,
-				margin: ! isResponsiveMargin ? margin?.desktop : undefined,
-				responsiveMargin: isResponsiveMargin ? margin : undefined,
+				...rest,
+				margin: ! isResponsiveMargin ? newMargin : undefined,
+				responsiveMargin: isResponsiveMargin ? newMargin : undefined,
 			};
 		},
 		save( { attributes }: { attributes: any } ) {
