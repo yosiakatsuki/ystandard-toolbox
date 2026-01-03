@@ -540,6 +540,41 @@ class Styles {
 	}
 
 	/**
+	 * レスポンシブ指定のカスタムプロパティ名を取得.
+	 *
+	 * @param string $name カスタムプロパティ名.
+	 * @param string $type タイプ(mobile,tablet,desktop).
+	 *
+	 * @return string
+	 */
+	public static function get_responsive_custom_prop_name( $name, $type ) {
+		return "--ystdtb--{$type}--{$name}";
+	}
+
+	/**
+	 * レスポンシブ指定のCSSを作成.
+	 *
+	 * @param array $args {
+	 *                    selector : string,
+	 *                    prop_name : string,
+	 *                    property : string,
+	 *                    type : string
+	 *                    } オプション.
+	 *
+	 * @return string
+	 */
+	public static function get_responsive_custom_prop_css( $args ) {
+		$selector  = $args['selector'];
+		$prop_name = $args['prop_name'];
+		$property  = $args['property'];
+		$type      = $args['type'];
+		// カスタムプロパティ作成.
+		$custom_prop = self::get_responsive_custom_prop_name( $prop_name, $type );
+
+		return "{$selector}:where([style*=\"{$custom_prop}\"]){{$property}:var({$custom_prop}) !important;}";
+	}
+
+	/**
 	 * カラーコードをrgbに変換
 	 *
 	 * @param string $color カラーコード.
@@ -552,5 +587,23 @@ class Styles {
 			hexdec( substr( $color, 3, 2 ) ),
 			hexdec( substr( $color, 5, 2 ) ),
 		];
+	}
+
+	/**
+	 * 物理方向を論理方向に変換
+	 *
+	 * @param string $direction 物理方向（top/right/bottom/left）.
+	 *
+	 * @return string 論理方向（block-start/inline-end/block-end/inline-start）.
+	 */
+	public static function get_logical_direction( $direction ) {
+		$map = [
+			'top'    => 'block-start',
+			'right'  => 'inline-end',
+			'bottom' => 'block-end',
+			'left'   => 'inline-start',
+		];
+
+		return isset( $map[ $direction ] ) ? $map[ $direction ] : $direction;
 	}
 }

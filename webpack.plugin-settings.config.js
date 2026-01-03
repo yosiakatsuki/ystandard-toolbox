@@ -1,12 +1,16 @@
 // @ts-ignore
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const pluginConfig = require( './webpack.blocks.v2.config.js' );
-const path = require( 'path' );
+
+// CopyWebpackPluginを除外したプラグイン配列を作成
+const plugins = defaultConfig.plugins.filter(
+	// @ts-ignore.
+	( plugin ) => plugin.constructor.name !== 'CopyPlugin'
+);
 
 module.exports = {
 	...defaultConfig,
 	entry: {
-		...defaultConfig.entry,
 		'plugin-settings': './src/plugin-settings/',
 		'ystdtb-settings-v2': './src/plugin-settings/start-page/',
 		'add-code': './src/plugin-settings/add-code/',
@@ -21,6 +25,7 @@ module.exports = {
 		filename: '[name].js',
 		path: `${ __dirname }/build/plugin-settings`,
 	},
+	plugins,
 	resolve: {
 		...pluginConfig.resolve,
 		alias: {

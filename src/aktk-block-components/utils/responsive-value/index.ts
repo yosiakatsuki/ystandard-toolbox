@@ -3,7 +3,7 @@ import type {
 	MayBeResponsiveValue,
 	FlatValue,
 } from '@aktk/block-components/types';
-import { deleteUndefined, isObject } from '@aktk/block-components/utils/object';
+import { isObject, stripUndefined } from '@aktk/block-components/utils/object';
 
 export const RESPONSIVE_KEYS = [ 'desktop', 'tablet', 'mobile' ] as const;
 
@@ -37,7 +37,7 @@ export function parseResponsiveValue(
 		return value;
 	}
 
-	let result = {} as ResponsiveValues;
+	let result = {} as ResponsiveValues | undefined;
 	RESPONSIVE_KEYS.forEach( ( key: keyof ResponsiveValues ) => {
 		if ( !! value && value.hasOwnProperty( key ) ) {
 			// @ts-ignore
@@ -48,7 +48,7 @@ export function parseResponsiveValue(
 		}
 	} );
 
-	result = deleteUndefined( result );
+	result = stripUndefined( result as object ) as ResponsiveValues | undefined;
 	if ( ! isObject( result ) || 0 === Object.keys( result ).length ) {
 		return undefined;
 	}
@@ -78,4 +78,19 @@ export function getFlatValue(
 
 	// レスポンシブ形式ではない場合、そのまま返却.
 	return value;
+}
+
+/**
+ * レスポンシブ用のカスタムプロパティ名を取得する.
+ *
+ * @param product
+ * @param propName
+ * @param deviceType
+ */
+export function getResponsiveCustomPropName(
+	product: string,
+	propName: string,
+	deviceType: 'mobile' | 'tablet' | 'desktop'
+) {
+	return `--${ product }--${ deviceType }--${ propName }`;
 }

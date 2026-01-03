@@ -17,13 +17,21 @@ export interface UnitControlProps {
 	unit?: string | undefined;
 	disableUnits?: boolean | undefined;
 	isResetValueOnUnitChange?: boolean | undefined;
+	inputWidth?: string;
 }
 
 export default function UnitControl(
 	props: UnitControlProps
 ): React.ReactElement {
-	// @ts-expect-error
-	return <WPUnitControl { ...props } __next40pxDefaultSize />;
+	const { inputWidth = 'auto', ...restProps } = props;
+	return (
+		// @ts-expect-error
+		<WPUnitControl
+			{ ...restProps }
+			__unstableInputWidth={ inputWidth }
+			__next40pxDefaultSize
+		/>
+	);
 }
 
 export { useCustomUnits };

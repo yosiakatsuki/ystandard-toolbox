@@ -16,6 +16,12 @@
 
 ### v2.0.0
 - [変更] `ystdtb_css_breakpoints` キー変更 `sm`-> `mobile`, `md` -> `tablet`, `lg` -> `desktop`、値に単位追加.
+- [変更]　定義リストブロック（dl）：余白設定の変更をレスポンシブ設定に変更。上下のみに制限
+- [変更]　定義リストブロック（dt）：フォントサイズ、外側余白、内側余白の設定に破壊的変更あり。
+- [変更]　定義リストブロック（dd）シンプル：フォントサイズ、外側余白、内側余白の設定に破壊的変更あり。
+- [変更]　定義リストブロック（dt-column）横並び：縦に並べる動作、dtのサイズ、枠線、外側余白の設定に破壊的変更あり。
+  - .is-not-stacked-on-tablet,.is-not-stacked-on-mobile の変更。対象クラスが使用されている投稿の編集画面を開く画面を用意.
+  - dl-column-width-desktop,dl-column-width-tablet,dl-column-width-mobile スタイルの変更。対象スタイルが使用されている投稿の編集画面を開く画面を用意.
 
 ### v1.32.0 : 2025/04/18
 - [調整] WordPress 6.8 向け調整

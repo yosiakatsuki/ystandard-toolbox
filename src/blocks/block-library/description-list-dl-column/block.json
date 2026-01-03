@@ -1,0 +1,75 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/description-list-column",
+	"version": "2.0.0",
+	"title": "定義リスト(横並び)",
+	"description": "定義リスト 用語(dt)と説明(dd)を横並びに表示するブロック",
+	"keywords": [
+		"定義リスト",
+		"dl",
+		"dt",
+		"dd",
+		"description list",
+		"definition list"
+	],
+	"parent": [
+		"ystdtb/description-list"
+	],
+	"attributes": {
+		"isStackedOnMobile": {
+			"type": "boolean",
+			"default": true
+		},
+		"isStackedOnTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"dtWidth": {
+			"type": "string"
+		},
+		"responsiveDtWidth": {
+			"type": "object"
+		},
+		"border": {
+			"type": "object"
+		},
+		"margin": {
+			"type": "object"
+		},
+		"responsiveMargin": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false
+	},
+	"example": {
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"attributes": {
+					"text": "タイトル..."
+				}
+			},
+			{
+				"name": "ystdtb/description-list-dd-box",
+				"attributes": {},
+				"innerBlocks" :[
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"text": "Text..."
+						}
+					}
+				]
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

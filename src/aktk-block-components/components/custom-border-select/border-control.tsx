@@ -1,5 +1,5 @@
 import BorderBoxControl, {
-	BorderBoxControlProps,
+	type BorderBoxControlProps,
 } from '@aktk/block-components/wp-controls/border-box-control';
 
 /**

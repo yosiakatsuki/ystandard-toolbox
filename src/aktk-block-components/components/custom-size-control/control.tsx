@@ -6,29 +6,125 @@ import { __ } from '@wordpress/i18n';
 /**
  * Aktk dependencies
  */
-import type { ResponsiveValues } from '@aktk/block-components/types';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
 import { DestructiveButton } from '@aktk/block-components/components/buttons';
 import type { UnitType } from '@aktk/block-components/wp-controls/unit-control';
+import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
+import {
+	stripUndefined,
+	isResponsive,
+} from '@aktk/block-components/utils/object';
+/**
+ * Component Dependencies.
+ */
+import type {
+	CustomSizeControlProps,
+	CustomSizeResponsiveValues,
+} from './types';
+
+export function CustomSizeControl( props: CustomSizeControlProps ) {
+	const {
+		value,
+		responsiveValue,
+		onChange,
+		onChangeResponsive,
+		responsiveControlStyle = 'vertical',
+		useResponsive = true,
+		showResetButton = true,
+		units = undefined,
+		additionalContent,
+	} = props;
+
+	const handleOnChange = ( newValue: string | undefined ) => {
+		onChange( newValue );
+		if ( onChangeResponsive ) {
+			onChangeResponsive( undefined );
+		}
+	};
+
+	const handleOnChangeResponsive = (
+		newValue: CustomSizeResponsiveValues
+	) => {
+		if ( onChangeResponsive ) {
+			// @ts-ignore.
+			onChangeResponsive( stripUndefined( newValue ) );
+			onChange( undefined );
+		}
+	};
+
+	const handleOnReset = () => {
+		onChange( undefined );
+		if ( onChangeResponsive ) {
+			onChangeResponsive( undefined );
+		}
+	};
+
+	return (
+		<>
+			{ useResponsive ? (
+				<ResponsiveSelectTab
+					isResponsive={ isResponsive( responsiveValue ) }
+					defaultTabContent={
+						<>
+							<NormalSizeEdit
+								value={ value }
+								onChange={ handleOnChange }
+								onReset={
+									showResetButton ? handleOnReset : undefined
+								}
+								units={ units }
+							/>
+							{ !! additionalContent &&
+								additionalContent( false ) }
+						</>
+					}
+					responsiveTabContent={
+						<>
+							<ResponsiveSizeEdit
+								value={ responsiveValue || {} }
+								onChange={ handleOnChangeResponsive }
+								responsiveControlStyle={
+									responsiveControlStyle
+								}
+								onReset={
+									showResetButton ? handleOnReset : undefined
+								}
+								units={ units }
+							/>
+							{ !! additionalContent &&
+								additionalContent( true ) }
+						</>
+					}
+				/>
+			) : (
+				<>
+					<NormalSizeEdit
+						value={ value }
+						onChange={ handleOnChange }
+						onReset={ showResetButton ? handleOnReset : undefined }
+						units={ units }
+					/>
+					{ !! additionalContent && additionalContent( false ) }
+				</>
+			) }
+		</>
+	);
+}
 
 export function NormalSizeEdit( props: {
 	value: string | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	onChange: ( newValue: string | undefined ) => void;
 	onReset?: () => void;
 	units?: UnitType[] | undefined;
 } ) {
 	const { value, onChange, onReset, units } = props;
 	const handleOnChange = ( newValue: string ) => {
-		// Desktopのみにセット.
-		onChange( {
-			desktop: '' === newValue ? undefined : newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( newValue );
 	};
 	return (
 		<div className={ 'flex items-center gap-2' }>
 			<IconUnitControl
+				// @ts-ignore.
 				className={ '!mb-0 w-full' }
 				unitType={ 'size' }
 				value={ value }
@@ -43,8 +139,8 @@ export function NormalSizeEdit( props: {
 }
 
 export function ResponsiveSizeEdit( props: {
-	value: ResponsiveValues;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	value: CustomSizeResponsiveValues;
+	onChange: ( newValue: CustomSizeResponsiveValues ) => void;
 	responsiveControlStyle?: 'vertical' | 'horizontal';
 	onReset?: () => void;
 	units?: UnitType[] | undefined;
@@ -56,7 +152,7 @@ export function ResponsiveSizeEdit( props: {
 		onReset,
 		units,
 	} = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
+	const handleOnChange = ( newValue: CustomSizeResponsiveValues ) => {
 		onChange( {
 			...value,
 			...newValue,

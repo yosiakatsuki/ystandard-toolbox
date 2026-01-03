@@ -1,0 +1,17 @@
+.ystdtb-dd-box {
+	margin: 0;
+
+	> * {
+		margin-block: 0;
+
+		+ * {
+			margin-block-start: var(--ystd-layout-gap, 1.5em);
+		}
+	}
+
+	&:where(.has-background) {
+		&:where(:not(.has-padding)) {
+			padding: 1em 1.5em;
+		}
+	}
+}

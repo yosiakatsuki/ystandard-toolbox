@@ -1,0 +1,67 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/description-list-dd-box",
+	"version": "2.0.0",
+	"title": "定義リスト 説明(dd)入れ子",
+	"description": "定義リスト 説明(dd)ブロック 入れ子版",
+	"keywords": [
+		"dd"
+	],
+	"parent": [
+		"ystdtb/description-list",
+		"ystdtb/description-list-column"
+	],
+	"attributes": {
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"customGradient": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
+		"padding": {
+			"type": "object"
+		},
+		"responsivePadding": {
+			"type": "object"
+		},
+		"margin": {
+			"type": "object"
+		},
+		"responsiveMargin": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false,
+		"reusable": false
+	},
+	"example": {
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "core/paragraph",
+				"attributes": {
+					"text": "Text..."
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

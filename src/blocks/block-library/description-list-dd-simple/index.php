@@ -1,0 +1,112 @@
+<?php
+/**
+ * 定義リスト 詳細ブロック シンプル版（dd)
+ *
+ * @package ystandard-toolbox
+ */
+
+namespace ystandard_toolbox;
+
+use ystandard_toolbox\Util\Styles;
+
+defined( 'ABSPATH' ) || die();
+
+/**
+ * Class Description_Details_Simple_Block
+ */
+class Description_Details_Simple_Block {
+
+	/**
+	 * Instance.
+	 *
+	 * @var Description_Details_Simple_Block
+	 */
+	private static $instance;
+
+	/**
+	 * Instance.
+	 *
+	 * @return Description_Details_Simple_Block
+	 */
+	public static function get_instance() {
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Constructor.
+	 */
+	private function __construct() {
+		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
+	}
+
+	public function enqueue_responsive_style() {
+		$types      = [ 'desktop', 'tablet', 'mobile' ];
+		$responsive = [
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		];
+		$selector   = '.ystdtb-dd-simple';
+		$css        = '';
+		foreach ( $types as $type ) {
+
+			// Font size.
+			$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $selector,
+					'prop_name' => 'dd-simple--font-size',
+					'property'  => 'font-size',
+					'type'      => $type,
+				]
+			);
+
+			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $pos ) {
+				$logical = Styles::get_logical_direction( $pos );
+				// Margin.
+				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $selector,
+						'prop_name' => "dd-simple--margin-{$pos}",
+						'property'  => "margin-{$logical}",
+						'type'      => $type,
+					]
+				);
+				// Padding.
+				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $selector,
+						'prop_name' => "dd-simple--padding-{$pos}",
+						'property'  => "padding-{$logical}",
+						'type'      => $type,
+					]
+				);
+			}
+		}
+		// 結合.
+		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-dd-simple-block-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, $css );
+		wp_enqueue_style( $handle );
+	}
+
+	/**
+	 * ブロック登録
+	 *
+	 * @return void
+	 */
+	public function register_block() {
+		register_block_type( __DIR__ );
+	}
+
+}
+
+Description_Details_Simple_Block::get_instance();
