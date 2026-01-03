@@ -76,9 +76,8 @@ export const deprecated1341 = [
 
 			return {
 				...rest,
-				margin: newMargin,
+				margin: ! isResponsiveObject( margin ) ? newMargin : undefined,
 				responsiveMargin: isResponsiveObject( margin )
-					? margin
 					: undefined,
 				dtWidth: newWidth,
 				responsiveDtWidth: isResponsiveObject( dtWidth )
@@ -97,6 +96,7 @@ export const deprecated1341 = [
 				border: 'has-border',
 				borderColor: 'has-border-color',
 			};
+			console.log( { attributes } );
 			const {
 				isStackedOnMobile,
 				isStackedOnTablet,
