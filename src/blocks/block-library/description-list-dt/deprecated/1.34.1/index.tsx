@@ -91,7 +91,7 @@ export const deprecated1341 = [
 			if ( isResponsiveObject( textSize ) ) {
 				newTextSize = undefined;
 			} else {
-				newTextSize = textSize?.desktop || textSize;
+				newTextSize = textSize?.desktop?.size || textSize;
 			}
 			// Margin変換.
 			let newMargin;
@@ -112,7 +112,11 @@ export const deprecated1341 = [
 				...rest,
 				textSize: newTextSize,
 				responsiveTextSize: isResponsiveObject( textSize )
-					? textSize
+					? {
+							desktop: textSize.desktop?.size,
+							tablet: textSize.tablet,
+							mobile: textSize.mobile,
+					  }
 					: undefined,
 				margin: newMargin,
 				responsiveMargin: isResponsiveObject( margin )
