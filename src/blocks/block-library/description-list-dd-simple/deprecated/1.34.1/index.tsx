@@ -89,10 +89,13 @@ export const deprecated1341 = [
 
 			// フォントサイズ変換.
 			let newTextSize;
-			if ( isResponsiveObject( textSize ) ) {
-				newTextSize = undefined;
-			} else {
-				newTextSize = textSize?.desktop || textSize;
+			let newCustomTextSize;
+			if ( ! isResponsiveObject( textSize ) ) {
+				if ( textSize?.desktop?.slug ) {
+					newTextSize = textSize.desktop.slug;
+				} else {
+					newCustomTextSize = textSize?.desktop?.size;
+				}
 			}
 			// Margin変換.
 			let newMargin;
@@ -112,8 +115,13 @@ export const deprecated1341 = [
 			return {
 				...rest,
 				textSize: newTextSize,
+				customTextSize: newCustomTextSize,
 				responsiveTextSize: isResponsiveObject( textSize )
-					? textSize
+					? {
+							desktop: textSize.desktop?.size,
+							tablet: textSize.tablet,
+							mobile: textSize.mobile,
+					  }
 					: undefined,
 				margin: newMargin,
 				responsiveMargin: isResponsiveObject( margin )

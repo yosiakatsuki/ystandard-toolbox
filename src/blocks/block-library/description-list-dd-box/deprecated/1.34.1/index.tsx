@@ -66,29 +66,63 @@ export const deprecated1341 = [
 			const { margin, padding, ...rest } = attributes;
 
 			// Margin変換.
-			let newMargin;
+			let newMargin = {};
 			if ( isResponsiveObject( margin ) ) {
-				newMargin = undefined;
+				newMargin = {
+					desktop: {
+						top: margin.desktop?.top,
+						bottom: margin.desktop?.bottom,
+					},
+					tablet: {
+						top: margin.tablet?.top,
+						bottom: margin.tablet?.bottom,
+					},
+					mobile: {
+						top: margin.mobile?.top,
+						bottom: margin.mobile?.bottom,
+					},
+				};
 			} else {
-				newMargin = margin?.desktop || margin;
+				newMargin = {
+					top: margin?.desktop?.top,
+					bottom: margin?.desktop?.bottom,
+				};
 			}
 			// Padding変換.
-			let newPadding;
+			let newPadding = {};
 			if ( isResponsiveObject( padding ) ) {
-				newPadding = undefined;
+				newPadding = {
+					desktop: {
+						top: padding.desktop?.top,
+						bottom: padding.desktop?.bottom,
+					},
+					tablet: {
+						top: padding.tablet?.top,
+						bottom: padding.tablet?.bottom,
+					},
+					mobile: {
+						top: padding.mobile?.top,
+						bottom: padding.mobile?.bottom,
+					},
+				};
 			} else {
-				newPadding = padding?.desktop || padding;
+				newPadding = {
+					top: padding?.desktop?.top,
+					bottom: padding?.desktop?.bottom,
+				};
 			}
 
 			return {
 				...rest,
-				margin: newMargin,
+				margin: ! isResponsiveObject( margin ) ? newMargin : undefined,
 				responsiveMargin: isResponsiveObject( margin )
-					? margin
+					? newMargin
 					: undefined,
-				padding: newPadding,
+				padding: ! isResponsiveObject( padding )
+					? newPadding
+					: undefined,
 				responsivePadding: isResponsiveObject( padding )
-					? padding
+					? newPadding
 					: undefined,
 			};
 		},
