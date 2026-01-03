@@ -78,6 +78,7 @@ export const deprecated1341 = [
 				...rest,
 				margin: ! isResponsiveObject( margin ) ? newMargin : undefined,
 				responsiveMargin: isResponsiveObject( margin )
+					? newMargin
 					: undefined,
 				dtWidth: newWidth,
 				responsiveDtWidth: isResponsiveObject( dtWidth )
