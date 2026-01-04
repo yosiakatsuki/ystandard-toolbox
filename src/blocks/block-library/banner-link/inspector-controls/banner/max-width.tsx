@@ -15,9 +15,11 @@ import { CustomSizeControl } from '@aktk/block-components/components/custom-size
 import { parseSize } from '../../function/edit';
 import { isResponsive } from '@aktk/block-components/utils/object';
 
+// @ts-ignore
 const MaxWidth = ( { attributes, setAttributes } ) => {
 	const { size, blockPosition } = attributes;
 
+	// @ts-ignore
 	const handleOnChange = ( newValue ) => {
 		if ( undefined === newValue ) {
 			return;
@@ -34,6 +36,7 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 		} );
 	};
 
+	// @ts-ignore
 	const handleOnChangeResponsive = ( newValue ) => {
 		if ( undefined === newValue ) {
 			return;
