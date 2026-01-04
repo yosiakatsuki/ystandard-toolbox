@@ -13,11 +13,31 @@ import { CustomSizeControl } from '@aktk/block-components/components/custom-size
  * Block Dependencies.
  */
 import { parseSize } from '../../function/edit';
+import { isResponsive } from '@aktk/block-components/utils/object';
 
 const MaxWidth = ( { attributes, setAttributes } ) => {
-	const { size } = attributes;
+	const { size, blockPosition } = attributes;
 
 	const handleOnChange = ( newValue ) => {
+		if ( undefined === newValue ) {
+			return;
+		}
+		const newSize = parseSize( {
+			...size,
+			maxWidth: {
+				desktop: newValue,
+			},
+		} );
+		setAttributes( {
+			size: newSize,
+			blockPosition: ! newSize ? undefined : blockPosition,
+		} );
+	};
+
+	const handleOnChangeResponsive = ( newValue ) => {
+		if ( undefined === newValue ) {
+			return;
+		}
 		const newSize = parseSize( {
 			...size,
 			maxWidth: newValue,
@@ -25,18 +45,25 @@ const MaxWidth = ( { attributes, setAttributes } ) => {
 		setAttributes( {
 			size: newSize,
 		} );
-		if ( ! newSize ) {
-			setAttributes( {
-				blockPosition: undefined,
-			} );
-		}
 	};
+
+	let _value;
+	if ( ! isResponsive( size?.maxWidth ) ) {
+		_value = size?.maxWidth?.desktop;
+	}
+
 	return (
 		<>
-			<BaseControl id="banner-max-width" label={ __( '最大幅', 'ystandard-toolbox' ) }>
+			<BaseControl
+				id="banner-max-width"
+				label={ __( '最大幅', 'ystandard-toolbox' ) }
+			>
 				<CustomSizeControl
-					value={ size?.maxWidth }
+					value={ _value }
+					responsiveValue={ size?.maxWidth }
 					onChange={ handleOnChange }
+					onChangeResponsive={ handleOnChangeResponsive }
+					showResetButton={ false }
 				/>
 			</BaseControl>
 		</>
