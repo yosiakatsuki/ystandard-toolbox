@@ -8,3 +8,7 @@ export interface TimeLineProps {
 	isSelected: boolean;
 	name?: string;
 }
+
+export interface TimeLineInspectorProps extends TimeLineProps {
+	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
+}
