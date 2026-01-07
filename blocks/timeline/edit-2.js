@@ -52,56 +52,6 @@ function Timeline( props ) {
 				<PanelBody
 					title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }
 				>
-					{ undefined !== labelType && '' !== labelType && (
-						<>
-							<BaseControl
-								id={ 'label-contents-size' }
-								label={ __(
-									'文字・アイコン サイズ',
-									'ystandard-toolbox'
-								) }
-								__nextHasNoMarginBottom
-							>
-								<FontSizePicker
-									label={ __(
-										'サイズ',
-										'ystandard-toolbox'
-									) }
-									value={ labelFontSize }
-									onChange={ ( font ) => {
-										updateChildAttributes( {
-											labelFontSize: getFontSlug( font ),
-											customLabelFontSize:
-												getFontSize( font ),
-										} );
-										setLabelFontSize( font );
-									} }
-									__nextHasNoMarginBottom
-									__next40pxDefaultSize
-								/>
-							</BaseControl>
-							<BaseControl
-								id={ 'label-contents-color' }
-								label={ __(
-									'文字・アイコン 色',
-									'ystandard-toolbox'
-								) }
-								__nextHasNoMarginBottom
-							>
-								<ColorPalette
-									colors={ colors }
-									disableCustomColors={ false }
-									onChange={ ( color ) => {
-										updateChildAttributes( {
-											labelColor: getColorSlug( color ),
-											customLabelColor:
-												getColorCode( color ),
-										} );
-									} }
-								/>
-							</BaseControl>
-						</>
-					) }
 					<BaseControl
 						id={ 'label-bg' }
 						label={ __( '背景色', 'ystandard-toolbox' ) }

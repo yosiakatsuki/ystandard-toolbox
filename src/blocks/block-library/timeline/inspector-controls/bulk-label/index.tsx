@@ -15,6 +15,7 @@ import { LabelType } from '@aktk/blocks/block-library/timeline/inspector-control
 import { LabelWeight } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-weight';
 import { FontSize } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/font-size';
 import { LabelColor } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-color';
+import { BackgroundColor } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/background-color';
 
 export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 	return (
@@ -24,6 +25,7 @@ export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 			<LabelWeight { ...props } />
 			<FontSize { ...props } />
 			<LabelColor { ...props } />
+			<BackgroundColor { ...props } />
 		</Panel>
 	);
 }

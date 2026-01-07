@@ -36,6 +36,10 @@ export function LabelColor( props: TimeLineInspectorProps ): JSX.Element {
 		setCustomLabelColor( _customLabelColor );
 	};
 
+	if ( ! firstChildAttributes?.labelType ) {
+		return <></>;
+	}
+
 	return (
 		<BaseControl
 			id="label-color"
