@@ -50,52 +50,6 @@ function Timeline( props ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'タイムライン一括設定', 'ystandard-toolbox' ) }
-				>
-					<BaseControl
-						id={ 'contents-border-color' }
-						label={ __( '線の色', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								updateChildAttributes( {
-									contentsBorderColor: getColorSlug( color ),
-									customContentsBorderColor:
-										getColorCode( color ),
-								} );
-							} }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'contents-border-color' }
-						label={ __(
-							'コンテンツ上部余白',
-							'ystandard-toolbox'
-						) }
-						__nextHasNoMarginBottom
-					>
-						<RangeControl
-							value={ selectedMarginTop }
-							onChange={ ( value ) => {
-								updateChildAttributes( {
-									contentMarginTop: value,
-								} );
-								setContentMarginTop( value );
-							} }
-							initialPosition={ selectedMarginTop }
-							min={ -100 }
-							max={ 100 }
-							step={ 1 }
-							allowReset={ true }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-					</BaseControl>
-				</PanelBody>
-				<PanelBody
 					title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }
 				>
 					<BaseControl
