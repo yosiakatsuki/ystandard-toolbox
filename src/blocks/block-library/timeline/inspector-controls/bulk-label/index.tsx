@@ -10,12 +10,14 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { TimeLineInspectorProps } from '../../types';
-import { BorderRadius } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/border-radius';
-import { LabelType } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-type';
-import { LabelWeight } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-weight';
-import { FontSize } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/font-size';
-import { LabelColor } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-color';
-import { BackgroundColor } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/background-color';
+import { BorderRadius } from './border-radius';
+import { LabelType } from './label-type';
+import { LabelWeight } from './label-weight';
+import { FontSize } from './font-size';
+import { LabelColor } from './label-color';
+import { BackgroundColor } from './background-color';
+import { LabelBorderWidth } from './label-border-width';
+import { LabelBorderColor } from './label-border-color';
 
 export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 	return (
@@ -26,6 +28,8 @@ export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 			<FontSize { ...props } />
 			<LabelColor { ...props } />
 			<BackgroundColor { ...props } />
+			<LabelBorderWidth { ...props } />
+			<LabelBorderColor { ...props } />
 		</Panel>
 	);
 }

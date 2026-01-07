@@ -53,45 +53,6 @@ function Timeline( props ) {
 					title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }
 				>
 					<BaseControl
-						id={ 'label-bg' }
-						label={ __( '背景色', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<ColorPalette
-							colors={ colors }
-							disableCustomColors={ false }
-							onChange={ ( color ) => {
-								updateChildAttributes( {
-									labelBackgroundColor: getColorSlug( color ),
-									customLabelBackgroundColor:
-										getColorCode( color ),
-								} );
-							} }
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-border' }
-						label={ __( '枠線の太さ', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<RangeControl
-							value={ labelBorderSize }
-							onChange={ ( value ) => {
-								updateChildAttributes( {
-									labelBorderSize: value,
-								} );
-								setLabelBorderSize( value );
-							} }
-							initialPosition={ 0 }
-							min={ 0 }
-							max={ 100 }
-							step={ 1 }
-							allowReset={ true }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-					</BaseControl>
-					<BaseControl
 						id={ 'label-border-color' }
 						label={ __( '枠線の色', 'ystandard-toolbox' ) }
 						__nextHasNoMarginBottom

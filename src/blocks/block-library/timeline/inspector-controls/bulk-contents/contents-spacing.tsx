@@ -2,17 +2,17 @@
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useState } from '@wordpress/element';
 /*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 
 /**
  * Block dependencies.
  */
 import type { TimeLineInspectorProps } from '../../types';
-import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
-import { useState } from '@wordpress/element';
 
 const OPTIONS = [
 	{ label: __( '小', 'ystandard-toolbox' ), value: 'small' },
