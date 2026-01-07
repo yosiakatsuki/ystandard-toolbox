@@ -15,10 +15,14 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 import type { TimeLineInspectorProps } from '../../types';
 
 export function Margin( props: TimeLineInspectorProps ): JSX.Element {
+	const { updateChildAttributes, firstChildAttributes } = props;
+
+	// 初期値として最初の子ブロックのcontentMarginTop値を設定
+	const initialValue = firstChildAttributes?.contentMarginTop;
+
 	const [ marginTop, setMarginTop ] = useState< string | undefined >(
-		undefined
+		initialValue
 	);
-	const { updateChildAttributes } = props;
 	const handleOnChange = ( value: string ) => {
 		updateChildAttributes( {
 			contentMarginTop: value || undefined,
