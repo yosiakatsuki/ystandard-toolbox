@@ -52,27 +52,6 @@ function Timeline( props ) {
 				<PanelBody
 					title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }
 				>
-					{ 'text' === labelType && (
-						<BaseControl
-							id={ 'label-contents-weight' }
-							label={ __( '文字の太さ', 'ystandard-toolbox' ) }
-							__nextHasNoMarginBottom
-						>
-							<ToggleControl
-								label={ __(
-									'太字にする',
-									'ystandard-toolbox'
-								) }
-								onChange={ () => {
-									updateChildAttributes( {
-										labelBold: ! labelBold,
-									} );
-									setLabelBold( ! labelBold );
-								} }
-								checked={ labelBold }
-							/>
-						</BaseControl>
-					) }
 					{ undefined !== labelType && '' !== labelType && (
 						<>
 							<BaseControl

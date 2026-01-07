@@ -13,6 +13,7 @@ import type { TimeLineInspectorProps } from '../../types';
 import { BorderRadius } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/border-radius';
 import { LabelType } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-type';
 import { LabelWeight } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-weight';
+import { FontSize } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/font-size';
 
 export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 	return (
@@ -20,6 +21,7 @@ export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 			<BorderRadius { ...props } />
 			<LabelType { ...props } />
 			<LabelWeight { ...props } />
+			<FontSize { ...props } />
 		</Panel>
 	);
 }
