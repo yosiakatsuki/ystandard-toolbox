@@ -11,11 +11,13 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import type { TimeLineInspectorProps } from '../../types';
 import { BorderRadius } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/border-radius';
+import { LabelType } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-label/label-type';
 
 export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 	return (
 		<Panel title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }>
 			<BorderRadius { ...props } />
+			<LabelType { ...props } />
 		</Panel>
 	);
 }

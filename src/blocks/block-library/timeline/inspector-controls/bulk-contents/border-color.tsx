@@ -2,6 +2,7 @@
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useState } from '@wordpress/element';
 /*
  * Aktk Dependencies
  */
@@ -14,12 +15,25 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 import type { TimeLineInspectorProps } from '../../types';
 
 export function BorderColor( props: TimeLineInspectorProps ): JSX.Element {
-	const { updateChildAttributes } = props;
+	const { updateChildAttributes, firstChildAttributes } = props;
+	// 初期値設定.
+	const [ borderColor, setBorderColor ] = useState< string | undefined >(
+		firstChildAttributes?.contentsBorderColor
+	);
+	const [ customBorderColor, setCustomBorderColor ] = useState<
+		string | undefined
+	>( firstChildAttributes?.contentsBorderColor );
+	// 値の更新.
 	const handleOnChange = ( newColor?: string, slug?: string ) => {
+		const contentsBorderColor = slug;
+		const customContentsBorderColor = slug ? undefined : newColor;
+
 		updateChildAttributes( {
-			contentsBorderColor: slug,
-			customContentsBorderColor: slug ? undefined : newColor,
+			contentsBorderColor,
+			customContentsBorderColor,
 		} );
+		setBorderColor( contentsBorderColor );
+		setCustomBorderColor( customContentsBorderColor );
 	};
 
 	return (
@@ -29,8 +43,8 @@ export function BorderColor( props: TimeLineInspectorProps ): JSX.Element {
 		>
 			<ColorPalette
 				label={ __( '線の色', 'ystandard-toolbox' ) }
-				value={ '' }
-				slug={ '' }
+				value={ customBorderColor || '' }
+				slug={ borderColor }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>

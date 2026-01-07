@@ -12,6 +12,7 @@ import BaseControl from '@aktk/block-components/wp-controls/base-control';
  */
 import type { TimeLineInspectorProps } from '../../types';
 import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
+import { useState } from '@wordpress/element';
 
 const OPTIONS = [
 	{ label: __( '小', 'ystandard-toolbox' ), value: 'small' },
@@ -20,11 +21,15 @@ const OPTIONS = [
 ];
 
 export function ContentsSpacing( props: TimeLineInspectorProps ): JSX.Element {
-	const { updateChildAttributes } = props;
+	const { updateChildAttributes, firstChildAttributes } = props;
+	const [ innerMargin, setInnerMargin ] = useState< string | undefined >(
+		firstChildAttributes?.contentsInnerMargin
+	);
 	const handleOnChange = ( value: string | number | boolean ) => {
 		updateChildAttributes( {
 			contentsInnerMargin: value,
 		} );
+		setInnerMargin( value as string );
 	};
 	return (
 		<BaseControl
@@ -32,7 +37,7 @@ export function ContentsSpacing( props: TimeLineInspectorProps ): JSX.Element {
 			label={ __( 'コンテンツ間の余白', 'ystandard-toolbox' ) }
 		>
 			<HorizonButtonSelect
-				value={ '' }
+				value={ innerMargin }
 				options={ OPTIONS }
 				onChange={ handleOnChange }
 			/>

@@ -52,65 +52,6 @@ function Timeline( props ) {
 				<PanelBody
 					title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }
 				>
-					<BaseControl
-						id={ 'label-contents' }
-						label={ __( '角丸', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<RangeControl
-							value={ labelBorderRadius }
-							onChange={ ( value ) => {
-								updateChildAttributes( {
-									labelBorderRadius: value,
-								} );
-								setLabelBorderRadius( value );
-							} }
-							initialPosition={ 50 }
-							min={ 0 }
-							max={ 100 }
-							step={ 1 }
-							allowReset={ true }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-					</BaseControl>
-					<BaseControl
-						id={ 'label-contents' }
-						label={ __( 'タイプ', 'ystandard-toolbox' ) }
-						__nextHasNoMarginBottom
-					>
-						<div className="ystdtb__horizon-buttons">
-							{ presetLabelTypes.map( ( item ) => {
-								return (
-									<Button
-										key={ item.name }
-										isSecondary={ true }
-										onClick={ () => {
-											const margin = calcContentMarginTop(
-												item.name,
-												undefined,
-												'1'
-											);
-											updateLabelType( item.name );
-											updateChildAttributes( {
-												contentMarginTop: margin,
-											} );
-											setLabelType( item.name );
-											setContentMarginTop( margin );
-											if ( '' === item.name ) {
-												updateChildAttributes( {
-													labelFontSize: 14,
-													customLabelFontSize: 14,
-												} );
-											}
-										} }
-									>
-										<span>{ item.label }</span>
-									</Button>
-								);
-							} ) }
-						</div>
-					</BaseControl>
 					{ 'text' === labelType && (
 						<BaseControl
 							id={ 'label-contents-weight' }
