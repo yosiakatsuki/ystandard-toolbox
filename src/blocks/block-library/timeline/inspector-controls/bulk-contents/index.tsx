@@ -10,11 +10,11 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { TimeLineInspectorProps } from '../../types';
-import { ContentsSpacing } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-settings/contents-spacing';
+import { ContentsSpacing } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-contents/contents-spacing';
 
-export function BulkSettings( props: TimeLineInspectorProps ): JSX.Element {
+export function BulkContents( props: TimeLineInspectorProps ): JSX.Element {
 	return (
-		<Panel title={ __( 'タイムライン一括設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( 'コンテンツ一括設定', 'ystandard-toolbox' ) }>
 			<ContentsSpacing { ...props } />
 		</Panel>
 	);

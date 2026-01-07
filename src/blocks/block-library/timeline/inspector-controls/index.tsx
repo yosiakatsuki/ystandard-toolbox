@@ -7,7 +7,7 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  * Block Dependencies.
  */
 import type { TimeLineInspectorProps } from '../types';
-import { BulkSettings } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-settings';
+import { BulkContents } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-contents';
 
 // @ts-ignore.
 export function InspectorControls(
@@ -15,7 +15,7 @@ export function InspectorControls(
 ): JSX.Element {
 	return (
 		<WPInspectorControls>
-			<BulkSettings { ...props } />
+			<BulkContents { ...props } />
 		</WPInspectorControls>
 	);
 }
