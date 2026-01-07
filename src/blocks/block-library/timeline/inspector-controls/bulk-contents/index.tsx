@@ -11,11 +11,13 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import type { TimeLineInspectorProps } from '../../types';
 import { ContentsSpacing } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-contents/contents-spacing';
+import { BorderColor } from '@aktk/blocks/block-library/timeline/inspector-controls/bulk-contents/border-color';
 
 export function BulkContents( props: TimeLineInspectorProps ): JSX.Element {
 	return (
 		<Panel title={ __( 'コンテンツ一括設定', 'ystandard-toolbox' ) }>
 			<ContentsSpacing { ...props } />
+			<BorderColor { ...props } />
 		</Panel>
 	);
 }
