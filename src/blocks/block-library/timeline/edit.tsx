@@ -9,7 +9,8 @@ import { useDispatch, useSelect } from '@wordpress/data';
  */
 import type { TimeLineProps } from './types';
 import { getTimelineClasses } from './utils';
-import { InspectorControls } from '@aktk/blocks/block-library/timeline/inspector-controls';
+import { InspectorControls } from './inspector-controls';
+import './style-editor.scss';
 
 const ALLOWED_BLOCKS = [ 'ystdtb/timeline-item' ];
 

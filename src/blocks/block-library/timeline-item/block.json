@@ -1,0 +1,90 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/timeline-item",
+	"version": "2.0.0",
+	"title": "タイムライン(詳細)",
+	"description": "タイムライン表示 詳細ブロック",
+	"category": "ystdtb-common",
+	"keywords": [
+		"タイムライン",
+		"timeline"
+	],
+	"parent":  [ "ystdtb/timeline" ],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"labelType": {
+			"type": "string",
+			"default": ""
+		},
+		"labelContents": {
+			"type": "string",
+			"default": ""
+		},
+		"labelWeight": {
+			"type": "string"
+		},
+		"labelColor": {
+			"type": "string"
+		},
+		"customLabelColor": {
+			"type": "string"
+		},
+		"labelBackgroundColor": {
+			"type": "string"
+		},
+		"customLabelBackgroundColor": {
+			"type": "string"
+		},
+		"labelFontSize": {
+			"type": "string"
+		},
+		"customLabelFontSize": {
+			"type": "string"
+		},
+		"labelBorderRadius": {
+			"type": "string",
+			"default": "50px"
+		},
+		"labelBorderSize": {
+			"type": "string"
+		},
+		"labelBorderColor": {
+			"type": "string"
+		},
+		"customLabelBorderColor": {
+			"type": "string"
+		},
+		"contentsInnerMargin": {
+			"type": "string",
+			"default": "normal"
+		},
+		"contentMarginTop": {
+			"type": "string"
+		},
+		"contentsBorderColor": {
+			"type": "string"
+		},
+		"customContentsBorderColor": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": false,
+		"className": false
+	},
+	"example": {
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "core/paragraph",
+				"attributes": {
+					"content": "タイムライン..."
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
