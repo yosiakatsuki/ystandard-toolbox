@@ -29,11 +29,6 @@ export default function ( { attributes } ) {
 		}
 	};
 
-	const blockProps = useBlockProps.save( {
-		className: classes,
-		style: timelineStyle,
-	} );
-
 	return (
 		<div { ...blockProps }>
 			<div className={ labelClasses } style={ labelStyles }>
