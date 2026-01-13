@@ -11,7 +11,7 @@ export function Notice( props: NoticeProps ) {
 	const baseClassName = 'aktk-notice';
 
 	const { children, className, style } = props;
-	const noticeClass = classNames( baseClassName, className );
+	const noticeClass = classNames( baseClassName, 'text-justify', className );
 	const noticeStyle = {
 		...style,
 	};
@@ -29,7 +29,7 @@ export function NoticeText( props: NoticeProps ) {
 	const baseClassName = 'aktk-notice--text';
 
 	const { children, className, style } = props;
-	const noticeClass = classNames( baseClassName, className );
+	const noticeClass = classNames( baseClassName, 'text-justify', className );
 	const noticeStyle = {
 		...style,
 	};
@@ -48,7 +48,10 @@ export function NoticeInfo( props: NoticeProps ) {
 	return (
 		<Notice
 			{ ...otherProps }
-			className={ classNames( 'bg-aktk-bg-blue text-aktk-text-blue', className ) }
+			className={ classNames(
+				'bg-aktk-bg-blue text-aktk-text-blue',
+				className
+			) }
 		/>
 	);
 }
