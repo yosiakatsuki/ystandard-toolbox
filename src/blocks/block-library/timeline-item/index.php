@@ -33,6 +33,27 @@ class TimelineItem_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
+	}
+
+	public function enqueue_responsive_style() {
+		$responsive = [
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		];
+		$css        = '';
+		// スタイル.
+		$responsive['desktop'] .= '.ystdtb-timeline-item {--ystdtb--timeline-item--padding-left:2rem;}';
+		// 結合.
+		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-timeline-item-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, $css );
+		wp_enqueue_style( $handle );
 	}
 
 	/**
