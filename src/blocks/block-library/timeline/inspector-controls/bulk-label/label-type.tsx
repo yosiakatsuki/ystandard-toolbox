@@ -26,8 +26,10 @@ export function LabelType( props: TimeLineInspectorProps ): JSX.Element {
 		firstChildAttributes?.labelType
 	);
 	const handleOnChange = ( value: string | number | boolean ) => {
+		const defaultContents = 'icon' === value ? 'bookmark' : '';
 		updateChildAttributes( {
 			labelType: value || undefined,
+			labelContents: defaultContents,
 		} );
 		setLabelType( value as string );
 	};

@@ -18,12 +18,14 @@ import { LabelColor } from './label-color';
 import { BackgroundColor } from './background-color';
 import { LabelBorderWidth } from './label-border-width';
 import { LabelBorderColor } from './label-border-color';
+import { LabelIcon } from './label-icon';
 
 export function BulkLabel( props: TimeLineInspectorProps ): JSX.Element {
 	return (
 		<Panel title={ __( 'ラベル一括設定', 'ystandard-toolbox' ) }>
 			<BorderRadius { ...props } />
 			<LabelType { ...props } />
+			<LabelIcon { ...props } />
 			<LabelWeight { ...props } />
 			<FontSize { ...props } />
 			<LabelColor { ...props } />
