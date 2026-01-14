@@ -14,6 +14,7 @@ export interface TimeLineItemAttributes {
 	labelBorderColor?: string;
 	customLabelBorderColor?: string;
 	contentsInnerMargin?: string;
+	contentsBorderSize?: string;
 	contentMarginTop?: string;
 	contentsBorderColor?: string;
 	customContentsBorderColor?: string;

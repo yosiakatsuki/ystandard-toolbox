@@ -59,6 +59,9 @@
 			"type": "string",
 			"default": "normal"
 		},
+		"contentsBorderSize": {
+			"type": "string"
+		},
 		"contentMarginTop": {
 			"type": "string"
 		},

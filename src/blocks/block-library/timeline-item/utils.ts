@@ -33,16 +33,22 @@ export function getTimelineItemClasses( attributes: TimeLineItemAttributes ) {
 }
 
 export function getTimelineItemStyles( attributes: TimeLineItemAttributes ) {
-	const { contentsBorderColor, customContentsBorderColor } = attributes;
+	const {
+		contentsBorderColor,
+		customContentsBorderColor,
+		contentsBorderSize,
+	} = attributes;
 	// 色関連
 	const contentsBorderColorClass = getColorClassName(
 		'border-color',
 		contentsBorderColor || ''
 	);
 	return {
-		borderColor: contentsBorderColorClass
+		borderLeftColor: contentsBorderColorClass
 			? undefined
 			: customContentsBorderColor,
+		'--ystdtb--timeline-item--border-width':
+			contentsBorderSize ?? undefined,
 	};
 }
 

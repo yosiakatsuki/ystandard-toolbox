@@ -12,24 +12,25 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
  */
 import type { TimeLineItemProps } from '../../types';
 
-export function LabelBorderWidth( props: TimeLineItemProps ): JSX.Element {
+export function BorderWidth( props: TimeLineItemProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { labelBorderSize } = attributes;
+	const { contentsBorderSize } = attributes;
 
 	const handleOnChange = ( value: string | number | boolean ) => {
 		setAttributes( {
-			labelBorderSize: value as string,
+			contentsBorderSize: value as string,
 		} );
 	};
 	return (
 		<BaseControl
-			id="label-border-width"
-			label={ __( 'ラベル枠線の太さ', 'ystandard-toolbox' ) }
+			id="border-width"
+			label={ __( '枠線の太さ', 'ystandard-toolbox' ) }
 		>
 			<UnitControl
-				value={ labelBorderSize }
+				value={ contentsBorderSize }
 				onChange={ handleOnChange }
 				min={ 0 }
+				placeholder="2px"
 			/>
 		</BaseControl>
 	);
