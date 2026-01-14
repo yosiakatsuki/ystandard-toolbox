@@ -1,0 +1,33 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/timeline",
+	"version": "2.0.0",
+	"title": "タイムライン",
+	"description": "タイムライン表示ブロック",
+	"category": "ystdtb-common",
+	"keywords": [
+		"タイムライン",
+		"timeline"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {},
+	"supports": {
+		"align": false,
+		"className": false
+	},
+	"example": {
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"attributes": {
+					"text": "Title..."
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
