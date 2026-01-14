@@ -56,9 +56,22 @@
 		transform: none;
 	}
 
-	:where(.ys-icon) {
-		vertical-align: -.3em;
+	span:where(.ys-icon) {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		flex-shrink: 0;
+		line-height: 1;
+
+		svg {
+			width: 1em;
+			height: 1em;
+		}
 	}
+}
+
+.ystdtb-timeline__label-text {
+	line-height: 1.2;
 }
 
 .ystdtb-timeline__contents {
