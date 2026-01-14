@@ -3,7 +3,7 @@
 	--ystdtb--timeline-item--border-style: solid;
 	--ystdtb--timeline-item--border-color: #eee;
 	--ystdtb--timeline-item--padding-top: 1rem;
-	--ystdtb--timeline-item--padding-bottom: 3rem;
+	--ystdtb--timeline-item--padding-bottom: 3.5rem;
 	--ystdtb--timeline-item--padding-left: 1.25rem;
 	--ystdtb--timeline-item--margin-left: calc(var(--ystdtb--timeline-item--border-width) / -2);
 
@@ -20,7 +20,7 @@
 	}
 
 	&:where(.is-margin-large) {
-		--ystdtb--timeline-item--padding-bottom: 5rem;
+		--ystdtb--timeline-item--padding-bottom: 6rem;
 	}
 }
 
@@ -65,7 +65,8 @@
 		justify-content: center;
 		align-items: center;
 		flex-shrink: 0;
-		line-height: 1;
+		line-height: 1.2;
+		vertical-align: -.15em;
 
 		svg {
 			width: 1em;

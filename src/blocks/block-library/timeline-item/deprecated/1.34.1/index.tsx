@@ -78,9 +78,27 @@ export const deprecated1341 = [
 			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
-			const { margin, ...rest } = attributes;
+			const {
+				labelBorderSize,
+				labelBorderRadius,
+				contentMarginTop,
+				...rest
+			} = attributes;
+
+			const newLabelBorderSize = labelBorderSize
+				? `${ labelBorderSize }px`
+				: undefined;
+			const newLabelBorderRadius = labelBorderRadius
+				? `${ labelBorderRadius }px`
+				: undefined;
+			const newContentMarginTop = contentMarginTop
+				? `${ -28 + contentMarginTop }px`
+				: undefined;
 
 			return {
+				labelBorderSize: newLabelBorderSize,
+				labelBorderRadius: newLabelBorderRadius,
+				contentMarginTop: newContentMarginTop,
 				...rest,
 			};
 		},

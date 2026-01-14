@@ -39,7 +39,7 @@ export function Margin( props: TimeLineInspectorProps ): JSX.Element {
 			<UnitControl
 				value={ marginTop }
 				onChange={ handleOnChange }
-				placeholder="-1.3rem"
+				placeholder="-1.8rem"
 			/>
 		</BaseControl>
 	);
