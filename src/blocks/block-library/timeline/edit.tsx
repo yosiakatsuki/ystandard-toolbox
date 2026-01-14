@@ -71,6 +71,7 @@ export default function Edit( props: TimeLineProps ) {
 	const inspectorControlsProps = {
 		...props,
 		updateChildAttributes,
+		innerBlockClientIds,
 		firstChildAttributes,
 	};
 

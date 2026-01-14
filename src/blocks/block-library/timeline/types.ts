@@ -11,5 +11,6 @@ export interface TimeLineProps {
 
 export interface TimeLineInspectorProps extends TimeLineProps {
 	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
+	innerBlockClientIds: string[];
 	firstChildAttributes?: Record< string, any >;
 }

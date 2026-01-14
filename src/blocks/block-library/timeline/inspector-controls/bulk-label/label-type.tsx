@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
+import { useDispatch, useSelect } from '@wordpress/data';
 /*
  * Aktk Dependencies
  */
@@ -21,16 +22,28 @@ const LABEL_TYPES = [
 ];
 
 export function LabelType( props: TimeLineInspectorProps ): JSX.Element {
-	const { updateChildAttributes, firstChildAttributes } = props;
+	const { updateBlockAttributes } = useDispatch( 'core/block-editor' );
+	const { updateChildAttributes, firstChildAttributes, innerBlockClientIds } =
+		props;
 	const [ labelType, setLabelType ] = useState< string | undefined >(
 		firstChildAttributes?.labelType
 	);
+	// ラベルタイプ変更時の処理.
 	const handleOnChange = ( value: string | number | boolean ) => {
 		const defaultContents = 'icon' === value ? 'bookmark' : '';
-		updateChildAttributes( {
-			labelType: value || undefined,
-			labelContents: defaultContents,
-		} );
+		if ( 'text' === value ) {
+			innerBlockClientIds.forEach( ( innerBlockClientId, index ) => {
+				updateBlockAttributes( innerBlockClientId, {
+					labelType: value || undefined,
+					labelContents: ( index + 1 ).toString(),
+				} );
+			} );
+		} else {
+			updateChildAttributes( {
+				labelType: value || undefined,
+				labelContents: defaultContents,
+			} );
+		}
 		setLabelType( value as string );
 	};
 
