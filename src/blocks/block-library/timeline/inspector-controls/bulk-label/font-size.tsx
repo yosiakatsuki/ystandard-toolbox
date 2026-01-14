@@ -32,7 +32,9 @@ export function FontSize( props: TimeLineInspectorProps ): JSX.Element {
 
 		updateChildAttributes( {
 			labelFontSize: _fontSize?.slug,
-			customLabelFontSize: ! _customFontSize ? customFontSize : undefined,
+			customLabelFontSize: ! _fontSize?.slug
+				? _customFontSize
+				: undefined,
 		} );
 		setFontSize( _fontSize?.slug );
 		setCustomFontSize( _customFontSize );

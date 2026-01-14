@@ -10,9 +10,9 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { TimeLineItemProps } from '../../types';
-import { ContentsSpacing } from '@aktk/blocks/block-library/timeline-item/inspector-controls/timeline/contents-spacing';
-import { BorderColor } from '@aktk/blocks/block-library/timeline-item/inspector-controls/timeline/border-color';
-import { Margin } from '@aktk/blocks/block-library/timeline-item/inspector-controls/timeline/margin';
+import { ContentsSpacing } from './contents-spacing';
+import { BorderColor } from './border-color';
+import { Margin } from './margin';
 
 export function Timeline( props: TimeLineItemProps ): JSX.Element {
 	return (
