@@ -42,12 +42,14 @@ export default function Save( props: TimeLineItemProps ) {
 	return (
 		<div { ...blockProps }>
 			<div className={ labelClasses } style={ labelStyles }>
-				<span className={ labelContentsClasses }>
-					{ 'text' === _labelType && <>{ labelContents }</> }
-					{ 'icon' === _labelType && (
-						<SvgIcon.Content name={ labelContents } />
-					) }
-				</span>
+				{ _labelType && (
+					<span className={ labelContentsClasses }>
+						{ 'text' === _labelType && <>{ labelContents }</> }
+						{ 'icon' === _labelType && (
+							<SvgIcon.Content name={ labelContents } />
+						) }
+					</span>
+				) }
 			</div>
 			<div className={ contentsClass } style={ contentsStyle }>
 				<InnerBlocks.Content />

@@ -10,6 +10,7 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { TimeLineItemProps } from '../../types';
+import { LabelSize } from './label-size';
 import { BorderRadius } from './border-radius';
 import { LabelType } from './label-type';
 import { LabelIcon } from './label-icon';
@@ -24,6 +25,7 @@ import { LabelBorderWidth } from './label-border-width';
 export function Label( props: TimeLineItemProps ): JSX.Element {
 	return (
 		<Panel title={ __( 'ラベル', 'ystandard-toolbox' ) }>
+			<LabelSize { ...props } />
 			<BorderRadius { ...props } />
 			<LabelType { ...props } />
 			<LabelIcon { ...props } />

@@ -20,7 +20,7 @@ export function Margin( props: TimeLineItemProps ): JSX.Element {
 
 	const handleOnChange = ( value: string ) => {
 		setAttributes( {
-			contentMarginTop: value || undefined,
+			contentMarginTop: '' === value ? undefined : ( value as string ),
 		} );
 	};
 

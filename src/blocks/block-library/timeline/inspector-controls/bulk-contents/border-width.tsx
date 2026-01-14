@@ -21,10 +21,11 @@ export function BorderWidth( props: TimeLineInspectorProps ): JSX.Element {
 	);
 
 	const handleOnChange = ( value: string | number | boolean ) => {
+		const _value = '' === value ? undefined : ( value as string );
 		updateChildAttributes( {
-			contentsBorderSize: value as string,
+			contentsBorderSize: _value,
 		} );
-		setBorderSize( value as string );
+		setBorderSize( _value );
 	};
 	return (
 		<BaseControl

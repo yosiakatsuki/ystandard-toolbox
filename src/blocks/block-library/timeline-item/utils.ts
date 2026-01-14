@@ -48,7 +48,7 @@ export function getTimelineItemStyles( attributes: TimeLineItemAttributes ) {
 			? undefined
 			: customContentsBorderColor,
 		'--ystdtb--timeline-item--border-width':
-			contentsBorderSize ?? undefined,
+			contentsBorderSize || undefined,
 	};
 }
 
@@ -93,6 +93,7 @@ export function getLabelClasses( attributes: TimeLineItemAttributes ) {
 
 export function getLabelStyles( attributes: TimeLineItemAttributes ) {
 	const {
+		labelSize,
 		labelFontSize,
 		customLabelFontSize,
 		labelWeight,
@@ -116,6 +117,8 @@ export function getLabelStyles( attributes: TimeLineItemAttributes ) {
 	// 文字関連
 	const labelFontSizeClass = getFontSizeClass( labelFontSize || '' );
 	return {
+		width: labelSize || undefined,
+		height: labelSize || undefined,
 		fontSize: labelFontSizeClass ? undefined : customLabelFontSize,
 		fontWeight: !! labelWeight ? labelWeight : undefined,
 		color: labelColorClass ? undefined : customLabelColor,

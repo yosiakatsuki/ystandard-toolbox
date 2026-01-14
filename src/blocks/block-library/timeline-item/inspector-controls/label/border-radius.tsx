@@ -19,7 +19,7 @@ export function BorderRadius( props: TimeLineItemProps ): JSX.Element {
 
 	const handleOnChange = ( value: string ) => {
 		setAttributes( {
-			labelBorderRadius: value || undefined,
+			labelBorderRadius: '' === value ? undefined : ( value as string ),
 		} );
 	};
 

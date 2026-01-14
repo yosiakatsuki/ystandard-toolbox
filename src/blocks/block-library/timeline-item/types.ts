@@ -1,6 +1,7 @@
 export interface TimeLineItemAttributes {
 	labelType?: string;
 	labelContents?: string;
+	labelSize?: string;
 	labelBold?: boolean;
 	labelWeight?: string;
 	labelColor?: string;

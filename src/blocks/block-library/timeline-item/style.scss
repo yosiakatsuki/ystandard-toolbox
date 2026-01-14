@@ -28,7 +28,8 @@
 	--ystdtb--timeline-item-label--background-color: #eee;
 	--ystdtb--timeline-item-label--padding: 0.5rem;
 	--ystdtb--timeline-item-label--border-radius: 50px;
-	--ystdtb--timeline-item-label--transform: translate(calc(-50% - 1px), 0);
+	--ystdtb--timeline-item-label--transform-x: calc(-50% - calc(var(--ystdtb--timeline-item--border-width) / 2));
+	--ystdtb--timeline-item-label--transform: translate(var(--ystdtb--timeline-item-label--transform-x), -50%);
 	--ystdtb--timeline-item-label--size: 2rem;
 
 	display: inline-flex;
@@ -78,7 +79,7 @@
 }
 
 .ystdtb-timeline__contents {
-	--ystdtb--timeline-item-contents--margin-top: -1.3rem;
+	--ystdtb--timeline-item-contents--margin-top: -1.8rem;
 	--ystdtb--timeline-item-contents--item-margin--small: 1em;
 	--ystdtb--timeline-item-contents--item-margin--large: 2em;
 

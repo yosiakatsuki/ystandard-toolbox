@@ -18,7 +18,7 @@ export function BorderWidth( props: TimeLineItemProps ): JSX.Element {
 
 	const handleOnChange = ( value: string | number | boolean ) => {
 		setAttributes( {
-			contentsBorderSize: value as string,
+			contentsBorderSize: '' === value ? undefined : ( value as string ),
 		} );
 	};
 	return (

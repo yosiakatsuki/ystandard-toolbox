@@ -22,11 +22,13 @@ export function BorderRadius( props: TimeLineInspectorProps ): JSX.Element {
 	const [ labelBorderRadius, setLabelBorderRadius ] = useState<
 		string | undefined
 	>( initialValue );
+	// 変更時処理.
 	const handleOnChange = ( value: string ) => {
+		const _value = '' === value ? undefined : ( value as string );
 		updateChildAttributes( {
-			labelBorderRadius: value || undefined,
+			labelBorderRadius: _value,
 		} );
-		setLabelBorderRadius( value || undefined );
+		setLabelBorderRadius( _value );
 	};
 
 	return (

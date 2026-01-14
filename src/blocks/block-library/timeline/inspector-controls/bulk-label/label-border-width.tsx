@@ -18,11 +18,13 @@ export function LabelBorderWidth( props: TimeLineInspectorProps ): JSX.Element {
 	const [ borderSize, setBorderSize ] = useState< string | undefined >(
 		firstChildAttributes?.labelBorderSize
 	);
+	// 値変更時処理.
 	const handleOnChange = ( value: string | number | boolean ) => {
+		const _value = '' === value ? undefined : ( value as string );
 		updateChildAttributes( {
-			labelBorderSize: value,
+			labelBorderSize: _value,
 		} );
-		setBorderSize( value as string );
+		setBorderSize( _value );
 	};
 	return (
 		<BaseControl

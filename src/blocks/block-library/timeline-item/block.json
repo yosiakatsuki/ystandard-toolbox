@@ -21,6 +21,9 @@
 			"type": "string",
 			"default": ""
 		},
+		"labelSize": {
+			"type": "string"
+		},
 		"labelWeight": {
 			"type": "string"
 		},

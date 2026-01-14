@@ -8,38 +8,33 @@ import { useState } from '@wordpress/element';
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
-
 /**
  * Block dependencies.
  */
 import type { TimeLineInspectorProps } from '../../types';
 
-export function Margin( props: TimeLineInspectorProps ): JSX.Element {
+export function LabelSize( props: TimeLineInspectorProps ): JSX.Element {
 	const { updateChildAttributes, firstChildAttributes } = props;
-
-	// 初期値として最初の子ブロックのcontentMarginTop値を設定
-	const initialValue = firstChildAttributes?.contentMarginTop;
-
-	const [ marginTop, setMarginTop ] = useState< string | undefined >(
-		initialValue
+	const [ labelSize, setLabelSize ] = useState< string | undefined >(
+		firstChildAttributes?.labelSize
 	);
-	const handleOnChange = ( value: string ) => {
+
+	const handleOnChange = ( value: string | number | boolean ) => {
 		const _value = '' === value ? undefined : ( value as string );
 		updateChildAttributes( {
-			contentMarginTop: _value,
+			labelSize: _value,
 		} );
-		setMarginTop( _value );
+		setLabelSize( _value );
 	};
-
 	return (
 		<BaseControl
-			id="content-margin"
-			label={ __( 'コンテンツ上部余白', 'ystandard-toolbox' ) }
+			id="label-size"
+			label={ __( 'ラベルサイズ（縦・横）', 'ystandard-toolbox' ) }
 		>
 			<UnitControl
-				value={ marginTop }
+				value={ labelSize }
 				onChange={ handleOnChange }
-				placeholder="-1.3rem"
+				min={ 0 }
 			/>
 		</BaseControl>
 	);
