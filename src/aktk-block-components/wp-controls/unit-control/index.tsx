@@ -21,6 +21,7 @@ export interface UnitControlProps {
 	min?: number | string | undefined;
 	max?: number | string | undefined;
 	step?: number | string | undefined;
+	placeholder?: string | undefined;
 }
 
 export default function UnitControl(

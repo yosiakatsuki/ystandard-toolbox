@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch } from '@wordpress/data';
 /*
  * Aktk Dependencies
  */

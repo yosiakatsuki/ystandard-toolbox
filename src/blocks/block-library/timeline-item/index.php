@@ -44,7 +44,7 @@ class TimelineItem_Block {
 		];
 		$css        = '';
 		// スタイル.
-		$responsive['desktop'] .= '.ystdtb-timeline-item {--ystdtb--timeline-item--padding-left:2rem;}';
+		$responsive['desktop'] .= '.ystdtb-timeline-item {--ystdtb--timeline-item--padding-left:1.5rem;}';
 		// 結合.
 		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
 		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );

@@ -35,7 +35,11 @@ export function Margin( props: TimeLineInspectorProps ): JSX.Element {
 			id="content-margin"
 			label={ __( 'コンテンツ上部余白', 'ystandard-toolbox' ) }
 		>
-			<UnitControl value={ marginTop } onChange={ handleOnChange } />
+			<UnitControl
+				value={ marginTop }
+				onChange={ handleOnChange }
+				placeholder="-1.3rem"
+			/>
 		</BaseControl>
 	);
 }

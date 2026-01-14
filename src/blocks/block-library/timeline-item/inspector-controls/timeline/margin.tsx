@@ -32,6 +32,7 @@ export function Margin( props: TimeLineItemProps ): JSX.Element {
 			<UnitControl
 				value={ contentMarginTop }
 				onChange={ handleOnChange }
+				placeholder="-1.3rem"
 			/>
 			<NoticeSecondaryText>
 				{ __(
