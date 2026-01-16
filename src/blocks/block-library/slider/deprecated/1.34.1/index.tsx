@@ -2,13 +2,17 @@ import classnames from 'classnames';
 import {
 	InnerBlocks,
 	getColorClassName,
-	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
 /**
  * Aktk Dependencies.
  */
-import { SvgIcon } from '@aktk/block-components/components/svg-icon';
+import {
+	getCustomProperty,
+	getSliderOptions,
+	getRatioClassName,
+	getRatioInnerClassName,
+} from './utils';
 
 export const blockClasses = {
 	blockClass: 'ystdtb-slider',
@@ -122,7 +126,94 @@ export const deprecated1341 = [
 			};
 		},
 		save( { attributes }: { attributes: any } ) {
-			return <></>;
+			const {
+				sliderId,
+				slideFunction,
+				ratio,
+				height,
+				hasNavigation,
+				navigationColor,
+				customNavigationColor,
+				paginationType,
+				paginationColor,
+			} = attributes;
+
+			const isFixedHeight = !! ratio || !! height;
+			const blockProps = useBlockProps.save( {
+				className: classnames( blockClasses.blockClass, {
+					// @ts-ignore
+					[ getRatioClassName( ratio ) ]: getRatioClassName( ratio ),
+				} ),
+			} );
+
+			const sliderProps = {
+				id: `ystdtb-slider-${ sliderId }`,
+				className: classnames(
+					sliderClasses.wrap,
+					blockClasses.slider,
+					{
+						'is-fixed-height': isFixedHeight,
+						// @ts-ignore
+						[ getRatioInnerClassName( ratio ) ]:
+							getRatioInnerClassName( ratio ),
+					}
+				),
+				style: {
+					...getCustomProperty( 'height', height ),
+				},
+				'data-slider-options': getSliderOptions( attributes ),
+			};
+
+			const slideContainerProps = {
+				className: classnames(
+					sliderClasses.container,
+					blockClasses.sliderContainer,
+					{}
+				),
+				style: {
+					transitionTimingFunction: slideFunction || undefined,
+				},
+			};
+
+			const getNavigationProps = ( type ) => {
+				const colorClass = getColorClassName(
+					'color',
+					navigationColor
+				);
+				return {
+					className: classnames( `swiper-button-${ type }`, {
+						'has-text-color': colorClass || customNavigationColor,
+						[ colorClass ]: colorClass,
+					} ),
+					style: {
+						color: customNavigationColor || undefined,
+					},
+				};
+			};
+			const paginationProps = {
+				className: classnames( 'swiper-pagination' ),
+				style: {
+					color: paginationColor,
+					'--swiper-pagination-color': paginationColor,
+				},
+			};
+
+			return (
+				<div { ...blockProps }>
+					<div { ...sliderProps }>
+						<div { ...slideContainerProps }>
+							<InnerBlocks.Content />
+						</div>
+						{ hasNavigation && (
+							<>
+								<div { ...getNavigationProps( 'prev' ) } />
+								<div { ...getNavigationProps( 'next' ) } />
+							</>
+						) }
+						{ paginationType && <div { ...paginationProps } /> }
+					</div>
+				</div>
+			);
 		},
 	},
 ];

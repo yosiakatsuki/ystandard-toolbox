@@ -20,8 +20,6 @@ export const sliderClasses = {
 	scrollbar: 'swiper-scrollbar',
 };
 
-export const supports = {};
-
 export const ALLOWED_BLOCKS = [
 	'core/image',
 	'core/cover',
