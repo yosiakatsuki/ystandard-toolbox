@@ -52,6 +52,9 @@
 			"type": "string"
 		},
 		"height": {
+			"type": "string"
+		},
+		"responsiveHeight": {
 			"type": "object"
 		},
 		"slides": {

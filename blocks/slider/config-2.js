@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 export const blockClasses = {
-	blockClass: 'ystdtb-slider',
+	// blockClass: 'ystdtb-slider',
 	slider: 'ystdtb-slider__slider',
 	sliderContainer: 'ystdtb-slider__container',
 	sliderPagination: 'ystdtb-slider__pagination',
@@ -11,7 +11,7 @@ export const blockClasses = {
 };
 
 export const sliderClasses = {
-	wrap: 'swiper',
+	// wrap: 'swiper',
 	container: 'swiper-wrapper',
 	item: 'swiper-slide',
 	pagination: 'swiper-pagination',
@@ -19,13 +19,6 @@ export const sliderClasses = {
 	buttonNext: 'swiper-button-next',
 	scrollbar: 'swiper-scrollbar',
 };
-
-export const ALLOWED_BLOCKS = [
-	'core/image',
-	'core/cover',
-	'core/video',
-	'ystdtb/slider-item',
-];
 
 export const effectOptions = [
 	{

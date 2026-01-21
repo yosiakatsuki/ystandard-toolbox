@@ -46,13 +46,15 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 		),
 	} );
 
+	// スライダーブロック
 	const sliderBlockProps = {
 		className: getSliderBlockClasses( attributes ),
 	};
+	// スライダーラップ
 	const sliderWrapProps = {
 		className: getSliderWrapClasses( attributes ),
 	};
-
+	// インナーブロックス
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: getSliderContainerClasses( attributes ),
@@ -68,7 +70,10 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 		<>
 			<BlockControls { ...props } />
 			<InspectorControls { ...props } />
+
+			{ /* ブロック */ }
 			<div { ...blockProps }>
+				{ /* スライダー本体 */ }
 				<div { ...sliderBlockProps }>
 					<div { ...sliderWrapProps }>
 						<div { ...innerBlocksProps } />

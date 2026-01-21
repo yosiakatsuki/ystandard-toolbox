@@ -1,8 +1,9 @@
+import type { ResponsiveValues } from '@aktk/block-components/types';
+
 export interface SliderEditProps {
 	attributes: SliderBlockAttributes;
 	setAttributes: ( attributes: Partial< SliderBlockAttributes > ) => void;
 	clientId: string;
-	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
 }
 
 /**
@@ -20,9 +21,10 @@ export interface SliderBlockAttributes {
 	autoplayDisableOnInteraction?: boolean;
 	autoplayReverseDirection?: boolean;
 	ratio?: string;
-	height?: Record< string, any >;
-	slides?: Record< string, any >;
-	breakpoints?: Record< string, any >;
+	height?: string;
+	responsiveHeight?: ResponsiveValues;
+	slides?: Slides;
+	breakpoints?: breakpoints;
 	hasNavigation?: boolean;
 	navigationColor?: string;
 	customNavigationColor?: string;
@@ -30,3 +32,24 @@ export interface SliderBlockAttributes {
 	paginationColor?: string;
 	previewType?: string;
 }
+
+export interface Slides {
+	desktop: SlideOptions;
+	tablet: SlideOptions;
+	mobile: SlideOptions;
+}
+
+export interface SlideOptions {
+	slidesPerView?: number;
+	spaceBetween?: string;
+	slidesPerGroup?: number;
+	centeredSlides?: boolean;
+}
+
+export type breakpoints = {
+	desktop: number;
+	tablet: number;
+	mobile: number;
+};
+
+export type navigationType = 'next' | 'prev';

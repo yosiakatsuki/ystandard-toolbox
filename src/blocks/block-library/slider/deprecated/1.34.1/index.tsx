@@ -39,6 +39,12 @@ export const breakpoints = {
 	tablet: 600,
 };
 
+function isResponsiveObject( value: any ): boolean {
+	return (
+		typeof value === 'object' && ( 'tablet' in value || 'mobile' in value )
+	);
+}
+
 // @ts-ignore.
 export const deprecated1341 = [
 	{
@@ -119,9 +125,20 @@ export const deprecated1341 = [
 			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
-			const { ...rest } = attributes;
+			const { height, ...rest } = attributes;
+
+			let newHeight;
+			if ( isResponsiveObject( height ) ) {
+				newHeight = undefined;
+			} else {
+				newHeight = height?.desktop;
+			}
 
 			return {
+				height: newHeight,
+				responsiveHeight: isResponsiveObject( height )
+					? height
+					: undefined,
 				...rest,
 			};
 		},
