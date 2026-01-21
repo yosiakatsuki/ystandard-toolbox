@@ -47,7 +47,12 @@ export function getDtColumnStyles( attributes: DlColumnBlockAttributes ) {
 			// dt width.
 			const _dtWidth = responsiveDtWidth?.[ type ];
 			if ( _dtWidth ) {
-				acc[ `--ystdtb--dl-column--width--${ type }` ] = _dtWidth;
+				const customPropName = getResponsiveCustomPropName(
+					'ystdtb',
+					'dl-column--width',
+					type
+				);
+				acc[ customPropName ] = _dtWidth;
 			}
 			// margin.
 			const _margin = responsiveMargin?.[ type ];
