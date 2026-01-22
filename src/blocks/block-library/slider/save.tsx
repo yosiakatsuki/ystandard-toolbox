@@ -36,21 +36,22 @@ export default function Save( props: SliderEditProps ): JSX.Element {
 		style: getSliderWrapStyles( attributes ),
 		'data-slider-options': getSliderOptions( attributes ),
 	};
-
+	// スライドコンテナ.
 	const slideContainerProps = {
 		className: getSliderContainerClasses(),
 		style: getSliderContainerStyles( attributes ),
 	};
-
+	// ナビゲーション Prev.
 	const prevNavigationProps = {
 		className: getNavigationClasses( 'prev', attributes ),
 		style: getNavigationStyles( attributes ),
 	};
+	// ナビゲーション Next.
 	const nextNavigationProps = {
 		className: getNavigationClasses( 'next', attributes ),
 		style: getNavigationStyles( attributes ),
 	};
-
+	// ページネーション.
 	const paginationProps = {
 		className: getPaginationClasses(),
 		style: getPaginationStyles( attributes ),

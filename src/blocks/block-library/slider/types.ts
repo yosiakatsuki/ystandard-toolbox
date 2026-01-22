@@ -30,7 +30,7 @@ export interface SliderBlockAttributes {
 	customNavigationColor?: string;
 	paginationType?: string;
 	paginationColor?: string;
-	previewType?: string;
+	previewType?: previewType;
 }
 
 export interface Slides {
@@ -51,5 +51,7 @@ export type breakpoints = {
 	tablet: number;
 	mobile: number;
 };
+
+export type previewType = 'grid' | 'horizontal';
 
 export type navigationType = 'next' | 'prev';
