@@ -98,31 +98,6 @@ export const supports = {
 	lightBlockWrapper: true,
 };
 
-export const ALLOWED_BLOCKS = [
-	'core/image',
-	'core/cover',
-	'core/video',
-	'ystdtb/slider-item',
-];
-
-export const effectOptions = [
-	{
-		label: __( 'スライド', 'ystandard-blocks' ),
-		value: 'slide',
-	},
-	{
-		label: __( 'フェード', 'ystandard-blocks' ),
-		value: 'fade',
-	},
-	{
-		label: __( 'カバー', 'ystandard-blocks' ),
-		value: 'coverflow',
-	},
-	{
-		label: __( 'キューブ', 'ystandard-blocks' ),
-		value: 'cube',
-	},
-];
 export const paginationOptions = [
 	{
 		label: __( 'なし', 'ystandard-blocks' ),

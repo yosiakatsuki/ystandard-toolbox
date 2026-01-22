@@ -3,3 +3,10 @@
 		fill: none;
 	}
 }
+
+.ystdtb-slider-edit__effect-control {
+	.components-radio-control__group-wrapper {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

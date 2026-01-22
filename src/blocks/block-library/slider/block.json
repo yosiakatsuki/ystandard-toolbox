@@ -16,10 +16,12 @@
 			"type": "string"
 		},
 		"effect": {
-			"type": "string"
+			"type": "string",
+			"default": "slide"
 		},
 		"speed": {
-			"type": "number"
+			"type": "number",
+			"default": 0.3
 		},
 		"loop": {
 			"type": "boolean",

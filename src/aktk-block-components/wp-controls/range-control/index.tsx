@@ -6,8 +6,8 @@ import { RangeControl as WPRangeControl } from '@wordpress/components';
 interface RangeControlProps {
 	label?: string;
 	value: number;
-	min: number;
-	max: number;
+	min?: number;
+	max?: number;
 	step?: number;
 	initialPosition?: number;
 	allowReset?: boolean;

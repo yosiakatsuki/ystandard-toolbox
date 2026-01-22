@@ -6,6 +6,9 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import { Panel } from '@aktk/block-components/components/panel';
+/**
+ * Block dependencies
+ */
 import { Accordion } from './accordion';
 import { AccordionArrowColor } from './accordion-arrow-color';
 import { BackgroundColor } from './background-color';
