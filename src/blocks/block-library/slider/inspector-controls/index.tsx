@@ -11,6 +11,7 @@ import type { SliderEditProps } from '../types';
 import { Basic } from '@aktk/blocks/block-library/slider/inspector-controls/basic';
 import { Autoplay } from '@aktk/blocks/block-library/slider/inspector-controls/autoplay';
 import { Size } from '@aktk/blocks/block-library/slider/inspector-controls/size';
+import { Slide } from '@aktk/blocks/block-library/slider/inspector-controls/slide';
 
 // @ts-ignore.
 export function InspectorControls( props: SliderEditProps ): JSX.Element {
@@ -19,6 +20,7 @@ export function InspectorControls( props: SliderEditProps ): JSX.Element {
 			<Basic { ...props } />
 			<Autoplay { ...props } />
 			<Size { ...props } />
+			<Slide { ...props } />
 		</WPInspectorControls>
 	);
 }

@@ -19,7 +19,7 @@ import { Height } from '@aktk/blocks/block-library/slider/inspector-controls/siz
 
 export function Size( props: SliderEditProps ): JSX.Element {
 	return (
-		<Panel title={ __( 'サイズ設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( 'サイズ', 'ystandard-toolbox' ) }>
 			<BaseControl>
 				<NoticeSecondary>
 					{ __(

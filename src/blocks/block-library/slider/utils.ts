@@ -179,10 +179,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 
 	// スライド形式のオプション.
 	let slideEffectOptions = {};
-	if (
-		[ 'slide', 'coverflow' ].includes( effect ?? 'slide' ) &&
-		! isEmpty( slides as object )
-	) {
+	if ( hasSlidesOption( effect ) && ! isEmpty( slides as object ) ) {
 		const {
 			desktop: slidesDesktop,
 			tablet: slidesTablet,
@@ -292,9 +289,17 @@ function getAspectRatioStyle( ratio: string ) {
 	} as CSSStyleDeclaration;
 }
 
+/**
+ * 秒をミリ秒に変換
+ * @param seconds
+ */
 function getMilliseconds( seconds: number | undefined ) {
 	if ( undefined === seconds ) {
 		return undefined;
 	}
 	return seconds * 1000;
+}
+
+export function hasSlidesOption( effect: string | undefined ) {
+	return [ 'slide', 'coverflow' ].includes( effect ?? 'slide' );
 }

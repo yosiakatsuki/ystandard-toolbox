@@ -34,9 +34,9 @@ export interface SliderBlockAttributes {
 }
 
 export interface Slides {
-	desktop: SlideOptions;
-	tablet: SlideOptions;
-	mobile: SlideOptions;
+	desktop?: SlideOptions;
+	tablet?: SlideOptions;
+	mobile?: SlideOptions;
 }
 
 export interface SlideOptions {
@@ -55,3 +55,9 @@ export type breakpoints = {
 export type previewType = 'grid' | 'horizontal';
 
 export type navigationType = 'next' | 'prev';
+
+export interface SlideOptionEditProps {
+	onChange: ( newValue?: SlideOptions ) => void;
+	value?: SlideOptions;
+	type: 'desktop' | 'tablet' | 'mobile';
+}
