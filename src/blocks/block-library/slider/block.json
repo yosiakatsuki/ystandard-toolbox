@@ -62,6 +62,9 @@
 		"slides": {
 			"type": "object"
 		},
+		"responsiveSlides": {
+			"type": "object"
+		},
 		"breakpoints": {
 			"type": "object"
 		},

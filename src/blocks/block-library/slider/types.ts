@@ -24,6 +24,7 @@ export interface SliderBlockAttributes {
 	height?: string;
 	responsiveHeight?: ResponsiveValues;
 	slides?: Slides;
+	responsiveSlides?: ResponsiveSlides;
 	breakpoints?: breakpoints;
 	hasNavigation?: boolean;
 	navigationColor?: string;
@@ -33,13 +34,13 @@ export interface SliderBlockAttributes {
 	previewType?: previewType;
 }
 
-export interface Slides {
-	desktop?: SlideOptions;
-	tablet?: SlideOptions;
-	mobile?: SlideOptions;
+export interface ResponsiveSlides {
+	desktop?: Slides;
+	tablet?: Slides;
+	mobile?: Slides;
 }
 
-export interface SlideOptions {
+export interface Slides {
 	slidesPerView?: number;
 	spaceBetween?: string;
 	slidesPerGroup?: number;
@@ -57,7 +58,13 @@ export type previewType = 'grid' | 'horizontal';
 export type navigationType = 'next' | 'prev';
 
 export interface SlideOptionEditProps {
-	onChange: ( newValue?: SlideOptions ) => void;
-	value?: SlideOptions;
+	onChange: ( newValue?: Slides ) => void;
+	value?: Slides;
+	type: 'normal' | 'desktop' | 'tablet' | 'mobile';
+}
+
+export interface ResponsiveSlideOptionEditProps {
+	onChange: ( newValue?: ResponsiveSlides ) => void;
+	value?: ResponsiveSlides;
 	type: 'desktop' | 'tablet' | 'mobile';
 }

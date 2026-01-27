@@ -16,7 +16,7 @@ import {
 /**
  * Block dependencies.
  */
-import type { SliderEditProps, SlideOptions } from '../../types';
+import type { SliderEditProps, Slides } from '../../types';
 import { hasSlidesOption } from '../../utils';
 import { SlidesPerView } from './slides-per-view';
 import { SlidesPerGroup } from './slides-per-group';
@@ -47,40 +47,38 @@ export function Slide( props: SliderEditProps ): JSX.Element {
 
 function DefaultTab( props: SliderEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { desktop: slidesDesktop } = attributes?.slides || {};
+	const { slides = {} } = attributes;
 
-	const handleOnChange = ( value?: SlideOptions ) => {
-		const newValue = stripUndefined( {
-			...slidesDesktop,
+	const handleOnChange = ( value?: Slides ) => {
+		const newValue = {
+			...slides,
 			...value,
-		} );
+		};
 		setAttributes( {
-			slides: stripUndefined( {
-				desktop: newValue,
-			} ),
+			slides: stripUndefined( newValue as object ),
 		} );
 	};
 
 	return (
 		<>
 			<SlidesPerView
-				type={ 'desktop' }
-				value={ slidesDesktop }
+				type={ 'normal' }
+				value={ slides }
 				onChange={ handleOnChange }
 			/>
 			<SlidesPerGroup
-				type={ 'desktop' }
-				value={ slidesDesktop }
+				type={ 'normal' }
+				value={ slides }
 				onChange={ handleOnChange }
 			/>
 			<SpaceBetween
-				type={ 'desktop' }
-				value={ slidesDesktop }
+				type={ 'normal' }
+				value={ slides }
 				onChange={ handleOnChange }
 			/>
 			<CenteredSlides
-				type={ 'desktop' }
-				value={ slidesDesktop }
+				type={ 'normal' }
+				value={ slides }
 				onChange={ handleOnChange }
 			/>
 			<DestructiveButton
