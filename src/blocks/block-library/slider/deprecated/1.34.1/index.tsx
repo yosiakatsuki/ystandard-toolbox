@@ -141,6 +141,8 @@ export const deprecated1341 = [
 					: undefined,
 				...rest,
 			};
+			// TODO: slidesの移行
+			// slidesとresponsiveSlidesに分割
 		},
 		save( { attributes }: { attributes: any } ) {
 			const {
