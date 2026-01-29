@@ -1,4 +1,4 @@
-import { Monitor, Tablet, Smartphone } from 'react-feather';
+import { Monitor, Tablet } from 'react-feather';
 /**
  * WordPress dependencies
  */

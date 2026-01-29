@@ -14,8 +14,8 @@ import BaseControl from '@aktk/block-components/wp-controls/base-control';
  */
 import type { SliderEditProps } from '../../types';
 // 設定.
-import { AspectRatio } from '@aktk/blocks/block-library/slider/inspector-controls/size/aspect-ratio';
-import { Height } from '@aktk/blocks/block-library/slider/inspector-controls/size/height';
+import { AspectRatio } from './aspect-ratio';
+import { Height } from './height';
 
 export function Size( props: SliderEditProps ): JSX.Element {
 	return (
