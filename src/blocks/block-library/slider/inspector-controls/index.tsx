@@ -13,6 +13,7 @@ import { Autoplay } from '@aktk/blocks/block-library/slider/inspector-controls/a
 import { Size } from '@aktk/blocks/block-library/slider/inspector-controls/size';
 import { Slide } from '@aktk/blocks/block-library/slider/inspector-controls/slide';
 import { Navigation } from '@aktk/blocks/block-library/slider/inspector-controls/navigation';
+import { Pagination } from '@aktk/blocks/block-library/slider/inspector-controls/pagination';
 
 // @ts-ignore.
 export function InspectorControls( props: SliderEditProps ): JSX.Element {
@@ -23,6 +24,7 @@ export function InspectorControls( props: SliderEditProps ): JSX.Element {
 			<Size { ...props } />
 			<Slide { ...props } />
 			<Navigation { ...props } />
+			<Pagination { ...props } />
 		</WPInspectorControls>
 	);
 }
