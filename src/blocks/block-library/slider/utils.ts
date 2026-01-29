@@ -152,6 +152,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 		autoplayDisableOnInteraction = true,
 		autoplayReverseDirection,
 		slides,
+		responsiveSlides,
 		breakpoints,
 		hasNavigation,
 		paginationType,
@@ -179,52 +180,46 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 
 	// スライド形式のオプション.
 	let slideEffectOptions = {};
-	if ( hasSlidesOption( effect ) && ! isEmpty( slides as object ) ) {
-		const {
-			desktop: slidesDesktop,
-			tablet: slidesTablet,
-			mobile: slidesMobile,
-		} = slides || {};
-		// @ts-ignore
-		const hasTabletSlides = ! isEmpty( stripUndefined( slidesTablet ) );
-		// @ts-ignore
-		const hasMobileSlides = ! isEmpty( stripUndefined( slidesMobile ) );
+	if ( hasSlidesOption( effect ) ) {
+		// スライド設定（全デバイス共通）
+		if ( ! isEmpty( slides as object ) ) {
+			slideEffectOptions = {
+				slidesPerView: slides?.slidesPerView || 1,
+				spaceBetween: slides?.spaceBetween,
+				slidesPerGroup: slides?.slidesPerGroup || 1,
+				centeredSlides: slides?.centeredSlides,
+			};
+		}
+		// スライド設定（デバイス別）
+		if ( ! isEmpty( responsiveSlides as object ) ) {
+			const {
+				desktop: slidesDesktop,
+				tablet: slidesTablet,
+				mobile: slidesMobile,
+			} = responsiveSlides || {};
 
-		const {
-			slidesPerView = 1,
-			spaceBetween,
-			slidesPerGroup = 1,
-			centeredSlides,
-		} = slidesDesktop || {};
-
-		slideEffectOptions = {
-			slidesPerView,
-			spaceBetween,
-			slidesPerGroup,
-			centeredSlides,
-		};
-		// レスポンシブ設定がある場合はbreakpointsを生成.
-		if ( hasTabletSlides || hasMobileSlides ) {
+			// モバイル設定が標準設定として
 			const {
 				slidesPerView: mobileSlidesPerView = 1,
 				spaceBetween: mobileSpaceBetween,
 				slidesPerGroup: mobileSlidesPerGroup = 1,
 				centeredSlides: mobileCenteredSlides,
 			} = slidesMobile || {};
+
 			slideEffectOptions = {
 				slidesPerView: mobileSlidesPerView,
 				spaceBetween: mobileSpaceBetween,
 				slidesPerGroup: mobileSlidesPerGroup,
 				centeredSlides: mobileCenteredSlides,
 			};
-
-			if ( hasTabletSlides ) {
+			// タブレット設定.
+			if ( ! isEmpty( stripUndefined( slidesTablet as object ) || {} ) ) {
 				const {
 					slidesPerView: tabletSlidesPerView = 1,
 					spaceBetween: tabletSpaceBetween,
 					slidesPerGroup: tabletSlidesPerGroup = 1,
 					centeredSlides: tabletCenteredSlides,
-				} = slidesTablet || {};
+				} = slidesMobile || {};
 				breakpointsOptions[ breakpointsTablet ] = {
 					slidesPerView: tabletSlidesPerView,
 					spaceBetween: tabletSpaceBetween,
@@ -232,13 +227,21 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 					centeredSlides: tabletCenteredSlides,
 				};
 			}
-			// @ts-ignore
-			if ( ! isEmpty( stripUndefined( slidesDesktop ) ) ) {
+			// デスクトップ設定.
+			if (
+				! isEmpty( stripUndefined( slidesDesktop as object ) || {} )
+			) {
+				const {
+					slidesPerView: desktopSlidesPerView = 1,
+					spaceBetween: desktopSpaceBetween,
+					slidesPerGroup: desktopSlidesPerGroup = 1,
+					centeredSlides: desktopCenteredSlides,
+				} = slidesDesktop || {};
 				breakpointsOptions[ breakpointsDesktop ] = {
-					slidesPerView,
-					spaceBetween,
-					slidesPerGroup,
-					centeredSlides,
+					desktopSlidesPerView,
+					desktopSpaceBetween,
+					desktopSlidesPerGroup,
+					desktopCenteredSlides,
 				};
 			}
 		}
