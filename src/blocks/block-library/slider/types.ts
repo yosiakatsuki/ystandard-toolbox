@@ -41,7 +41,7 @@ export interface ResponsiveSlides {
 }
 
 export interface Slides {
-	slidesPerView?: number;
+	slidesPerView?: number | 'auto';
 	spaceBetween?: string;
 	slidesPerGroup?: number;
 	centeredSlides?: boolean;

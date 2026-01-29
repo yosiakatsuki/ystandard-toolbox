@@ -68,7 +68,7 @@ function BaseButton( props: BaseButtonProps & AktkButtonProps ) {
 	);
 }
 
-export function PlainButton( props: AktkButtonProps ) {
+export function PlainButton( props: BaseButtonProps & AktkButtonProps ) {
 	return (
 		<>
 			<BaseButton { ...props } />

@@ -34,6 +34,7 @@ export function IconSelect( props: IconSelectProps ) {
 	const [ popoverAnchor, setPopoverAnchor ] = useState();
 	const filterRef = useRef( null );
 
+	// @ts-ignore
 	return (
 		<div className={ 'ystd-component__icon-select' }>
 			<>
@@ -108,6 +109,7 @@ export function IconSelect( props: IconSelectProps ) {
 								</Button>
 							</div>
 							<TextControl
+								// @ts-ignore
 								ref={ filterRef }
 								value={ filter }
 								onChange={ setFilter }

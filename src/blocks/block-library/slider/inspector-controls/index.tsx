@@ -8,12 +8,13 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  */
 import type { SliderEditProps } from '../types';
 // 設定.
-import { Basic } from '@aktk/blocks/block-library/slider/inspector-controls/basic';
-import { Autoplay } from '@aktk/blocks/block-library/slider/inspector-controls/autoplay';
-import { Size } from '@aktk/blocks/block-library/slider/inspector-controls/size';
-import { Slide } from '@aktk/blocks/block-library/slider/inspector-controls/slide';
-import { Navigation } from '@aktk/blocks/block-library/slider/inspector-controls/navigation';
-import { Pagination } from '@aktk/blocks/block-library/slider/inspector-controls/pagination';
+import { Basic } from './basic';
+import { Autoplay } from './autoplay';
+import { Size } from './size';
+import { Slide } from './slide';
+import { Navigation } from './navigation';
+import { Pagination } from './pagination';
+import { Advanced } from './advanced';
 
 // @ts-ignore.
 export function InspectorControls( props: SliderEditProps ): JSX.Element {
@@ -25,6 +26,7 @@ export function InspectorControls( props: SliderEditProps ): JSX.Element {
 			<Slide { ...props } />
 			<Navigation { ...props } />
 			<Pagination { ...props } />
+			<Advanced { ...props } />
 		</WPInspectorControls>
 	);
 }
