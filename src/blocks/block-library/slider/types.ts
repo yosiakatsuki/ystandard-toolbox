@@ -4,6 +4,7 @@ export interface SliderEditProps {
 	attributes: SliderBlockAttributes;
 	setAttributes: ( attributes: Partial< SliderBlockAttributes > ) => void;
 	clientId: string;
+	isSelected: boolean;
 }
 
 /**

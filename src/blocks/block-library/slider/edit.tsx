@@ -2,7 +2,11 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies.
  */
-import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
+import {
+	useInnerBlocksProps,
+	useBlockProps,
+	InnerBlocks,
+} from '@wordpress/block-editor';
 import { useEffect } from '@wordpress/element';
 /**
  * Block dependencies.
@@ -63,6 +67,7 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 			allowedBlocks: ALLOWED_BLOCKS,
 			template: [ [ 'core/image' ] ],
 			orientation: 'horizontal',
+			renderAppender: InnerBlocks.ButtonBlockAppender,
 		}
 	);
 

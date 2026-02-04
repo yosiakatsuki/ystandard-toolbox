@@ -1,8 +1,6 @@
 @use "./tailwind";
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
-@use "../../blocks/posts/edit" as posts-edit;
-@use "../../blocks/slider/edit" as slider;
 
 :root {
 	--ystdtb-editor-block-outline: 1px solid #ddd;
@@ -17,3 +15,4 @@
 .component-box-control__unit-control {
 	margin-bottom: 0 !important;
 }
+
