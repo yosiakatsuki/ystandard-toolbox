@@ -12,3 +12,4 @@ phpunit/data/actual
 debug-*
 block-example/
 .serena
+.claude
