@@ -50,11 +50,6 @@ class Config {
 	const JS_FRONT_APP_HANDLE = 'ystdtb-app';
 
 	/**
-	 * Script Block App Handle
-	 */
-	const JS_BLOCK_APP_HANDLE = 'ystdtb-block-app';
-
-	/**
 	 * CSS Hook
 	 */
 	const AFTER_ENQUEUE_CSS_HOOK = 'ystdtb_enqueue_css';
