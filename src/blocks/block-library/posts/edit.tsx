@@ -1,13 +1,29 @@
 /**
+ * WordPress Dependencies.
+ */
+import { useBlockProps } from '@wordpress/block-editor';
+import { Disabled } from '@wordpress/components';
+// @ts-ignore
+import ServerSideRender from '@wordpress/server-side-render';
+
+/**
  * Block dependencies.
  */
 import type { PostsEditProps } from './types';
 import './style-editor.scss';
 
 export default function Edit( props: PostsEditProps ) {
+	const { attributes } = props;
+	const blockProps = useBlockProps( { className: 'ystdtb-posts' } );
+
 	return (
-		<>
-			<div>Edit</div>
-		</>
+		<div { ...blockProps }>
+			<Disabled>
+				<ServerSideRender
+					block="ystdtb/posts"
+					attributes={ attributes }
+				/>
+			</Disabled>
+		</div>
 	);
 }
