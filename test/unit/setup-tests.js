@@ -62,6 +62,56 @@ jest.mock( '@wordpress/components', () => ( {
 	Button: ( { onClick, children } ) => (
 		<button onClick={ onClick }>{ children }</button>
 	),
+	// @ts-ignore
+	// eslint-disable-next-line no-unused-vars
+	__experimentalNumberControl: ( { label, value, onChange, __next40pxDefaultSize, ...rest } ) => (
+		<div>
+			{ label && <label>{ label }</label> }
+			<input
+				type="number"
+				aria-label={ label }
+				value={ value ?? '' }
+				onChange={ ( e ) => onChange( e.target.value ) }
+				{ ...rest }
+			/>
+		</div>
+	),
+	// @ts-ignore
+	CustomSelectControl: ( { label, options, value, onChange } ) => (
+		<div>
+			{ label && <label>{ label }</label> }
+			<select
+				aria-label={ label || '選択' }
+				value={ value?.key ?? '' }
+				onChange={ ( e ) => {
+					// @ts-ignore
+					const selectedItem = options.find(
+						// @ts-ignore
+						( opt ) => opt.key === e.target.value
+					);
+					if ( selectedItem ) {
+						onChange( { selectedItem } );
+					}
+				} }
+			>
+				{
+					// @ts-ignore
+					options.map( ( opt ) => (
+						<option key={ opt.key } value={ opt.key }>
+							{ opt.name }
+						</option>
+					) )
+				}
+			</select>
+		</div>
+	),
+	// @ts-ignore
+	BaseControl: ( { id, label, children } ) => (
+		<div>
+			{ label && <label htmlFor={ id }>{ label }</label> }
+			{ children }
+		</div>
+	),
 } ) );
 
 jest.mock( '@wordpress/block-editor', () => ( {

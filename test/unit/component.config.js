@@ -6,8 +6,10 @@ module.exports = {
 		'^@aktk/block-components/(.+)':
 			'<rootDir>/src/aktk-block-components/$1',
 		'^@aktk/plugin-settings/(.+)': '<rootDir>/src/plugin-settings/$1',
+		'^@aktk/blocks/(.+)': '<rootDir>/src/blocks/$1',
 		'^@aktk/api': '<rootDir>/src/blocks/api',
 		'\\.css$': 'identity-obj-proxy',
+		'\\.scss$': 'identity-obj-proxy',
 	},
 	preset: '@wordpress/jest-preset-default',
 	transform: {
@@ -16,6 +18,7 @@ module.exports = {
 	testMatch: [
 		'<rootDir>/src/aktk-block-components/**/*.test.[jt]s?(x)',
 		'<rootDir>/src/plugin-settings/**/*.test.[jt]s?(x)',
+		'<rootDir>/src/blocks/block-library/**/*.test.[jt]s?(x)',
 	],
 	testPathIgnorePatterns: [
 		'/.git/',
