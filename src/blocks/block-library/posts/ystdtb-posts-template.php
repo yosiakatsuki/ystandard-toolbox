@@ -4,5 +4,8 @@
  *
  * @package ystandard-toolbox
  */
+
+
+var_dump( $args );
 ?>
 <p>postsブロック</p>

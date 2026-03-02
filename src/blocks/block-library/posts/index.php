@@ -73,6 +73,8 @@ class Posts_Block {
 
 		$args = [];
 
+		$args = $attributes;
+
 		$template_path = apply_filters(
 			'ystdtb/blocks/posts/template_path',
 			__DIR__ . '/ystdtb-posts-template.php'
