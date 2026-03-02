@@ -10,6 +10,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  * Block dependencies.
  */
 import type { PostsEditProps } from './types';
+import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
 export default function Edit( props: PostsEditProps ) {
@@ -17,13 +18,16 @@ export default function Edit( props: PostsEditProps ) {
 	const blockProps = useBlockProps( { className: 'ystdtb-posts' } );
 
 	return (
-		<div { ...blockProps }>
-			<Disabled>
-				<ServerSideRender
-					block="ystdtb/posts"
-					attributes={ attributes }
-				/>
-			</Disabled>
-		</div>
+		<>
+			<InspectorControls { ...props } />
+			<div { ...blockProps }>
+				<Disabled>
+					<ServerSideRender
+						block="ystdtb/posts"
+						attributes={ attributes }
+					/>
+				</Disabled>
+			</div>
+		</>
 	);
 }
