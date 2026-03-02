@@ -71,9 +71,16 @@ class Posts_Block {
 	 */
 	public function render_callback( $attributes ) {
 
-		$html = 'postsブロック';
+		$args = [];
 
-		return $html;
+		$template_path = apply_filters(
+			'ystdtb/blocks/posts/template_path',
+			__DIR__ . '/ystdtb-posts-template.php'
+		);
+		ob_start();
+		load_template( $template_path, false, $args );
+
+		return ob_get_clean();
 	}
 }
 
