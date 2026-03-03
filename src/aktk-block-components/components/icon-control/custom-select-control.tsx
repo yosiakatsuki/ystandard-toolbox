@@ -10,10 +10,18 @@ interface IconSelectControlProps {
 	label?: string;
 	options: { name: string; key: string }[];
 	emptyLabel?: string;
+	useEmptyValue?: boolean;
 }
 
 function CustomSelectBase( props: IconSelectControlProps ) {
-	const { onChange, value, label, options, emptyLabel = '----' } = props;
+	const {
+		onChange,
+		value,
+		label,
+		options,
+		emptyLabel = '----',
+		useEmptyValue,
+	} = props;
 	return (
 		<CustomSelectControl
 			label={ label }
@@ -23,6 +31,7 @@ function CustomSelectBase( props: IconSelectControlProps ) {
 			onChange={ ( newValue ) => {
 				onChange( newValue );
 			} }
+			useEmptyValue={ useEmptyValue }
 		/>
 	);
 }

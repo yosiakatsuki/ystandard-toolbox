@@ -10,6 +10,7 @@ import NumberControl from '@aktk/block-components/wp-controls/number-control';
 import { toInt } from '@aktk/block-components/utils/number';
 import {
 	DesktopControl,
+	TabletControl,
 	MobileControl,
 } from '@aktk/block-components/components/icon-control';
 
@@ -18,42 +19,54 @@ import {
  */
 import type { PostsEditProps } from '../../types';
 
-export function Count( props: PostsEditProps ) {
+export function Columns( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
-	const { count, countMobile } = attributes;
-
-	const handleOnChangePcCount = ( value?: number | string ) => {
-		setAttributes( {
-			count: toInt( value ),
-		} );
-	};
-	const handleOnChangeMobileCount = ( value?: number | string ) => {
-		setAttributes( {
-			countMobile: toInt( value ),
-		} );
-	};
+	const { colPc, colTablet, colMobile } = attributes;
 
 	return (
 		<BaseControl
-			id={ 'count' }
-			label={ __( '表示件数', 'ystandard-toolbox' ) }
+			id={ 'columns' }
+			label={ __( '表示列数', 'ystandard-toolbox' ) }
 		>
 			<BaseControl>
 				<DesktopControl alignToInput>
 					<NumberControl
 						label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
-						value={ count }
-						onChange={ handleOnChangePcCount }
+						value={ colPc }
+						onChange={ ( value?: number | string ) => {
+							setAttributes( {
+								colPc: toInt( value ),
+							} );
+						} }
 						min={ 1 }
 					/>
 				</DesktopControl>
 			</BaseControl>
 			<BaseControl>
+				<TabletControl alignToInput>
+					<NumberControl
+						label={ __( 'タブレット', 'ystandard-toolbox' ) }
+						value={ colTablet }
+						onChange={ ( value?: number | string ) => {
+							setAttributes( {
+								colTablet: toInt( value ),
+							} );
+						} }
+						min={ 1 }
+					/>
+				</TabletControl>
+			</BaseControl>
+			<BaseControl>
 				<MobileControl alignToInput>
 					<NumberControl
 						label={ __( 'モバイル', 'ystandard-toolbox' ) }
-						value={ countMobile }
-						onChange={ handleOnChangeMobileCount }
+						value={ colMobile }
+						onChange={ ( value?: number | string ) => {
+							setAttributes( {
+								colMobile: toInt( value ),
+							} );
+						} }
+						min={ 1 }
 					/>
 				</MobileControl>
 			</BaseControl>
