@@ -13,6 +13,10 @@ import { toInt } from '@aktk/block-components/utils/number';
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
+import {
+	DesktopControl,
+	MobileControl,
+} from '@aktk/block-components/components/icon-control';
 
 export function Count( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
@@ -28,22 +32,31 @@ export function Count( props: PostsEditProps ) {
 			countMobile: toInt( value ),
 		} );
 	};
+
 	return (
 		<BaseControl
 			id={ 'count' }
 			label={ __( '表示件数', 'ystandard-toolbox' ) }
 		>
-			<NumberControl
-				label={ __( 'PC 表示件数', 'ystandard-toolbox' ) }
-				value={ count }
-				onChange={ handleOnChangePcCount }
-				min={ 1 }
-			/>
-			<NumberControl
-				label={ __( 'モバイル 表示件数', 'ystandard-toolbox' ) }
-				value={ countMobile }
-				onChange={ handleOnChangeMobileCount }
-			/>
+			<BaseControl>
+				<DesktopControl alignToInput>
+					<NumberControl
+						label={ __( 'PC 表示件数', 'ystandard-toolbox' ) }
+						value={ count }
+						onChange={ handleOnChangePcCount }
+						min={ 1 }
+					/>
+				</DesktopControl>
+			</BaseControl>
+			<BaseControl>
+				<MobileControl alignToInput>
+					<NumberControl
+						label={ __( 'モバイル 表示件数', 'ystandard-toolbox' ) }
+						value={ countMobile }
+						onChange={ handleOnChangeMobileCount }
+					/>
+				</MobileControl>
+			</BaseControl>
 		</BaseControl>
 	);
 }
