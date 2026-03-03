@@ -33,7 +33,10 @@ interface WithIconControlProps {
 export function DesktopControl( props: WithIconControlProps ) {
 	const { children, size, className = '', alignToInput } = props;
 	return (
-		<IconUnitControlWrap className={ className } alignToInput={ alignToInput }>
+		<IconUnitControlWrap
+			className={ className }
+			alignToInput={ alignToInput }
+		>
 			<Monitor size={ size || ICON_SIZE } />
 			{ children }
 		</IconUnitControlWrap>
@@ -43,7 +46,10 @@ export function DesktopControl( props: WithIconControlProps ) {
 export function TabletControl( props: WithIconControlProps ) {
 	const { children, size, className = '', alignToInput } = props;
 	return (
-		<IconUnitControlWrap className={ className } alignToInput={ alignToInput }>
+		<IconUnitControlWrap
+			className={ className }
+			alignToInput={ alignToInput }
+		>
 			<Tablet size={ size || ICON_SIZE } />
 			{ children }
 		</IconUnitControlWrap>
@@ -53,7 +59,10 @@ export function TabletControl( props: WithIconControlProps ) {
 export function MobileControl( props: WithIconControlProps ) {
 	const { children, size, className = '', alignToInput } = props;
 	return (
-		<IconUnitControlWrap className={ className } alignToInput={ alignToInput }>
+		<IconUnitControlWrap
+			className={ className }
+			alignToInput={ alignToInput }
+		>
 			<Smartphone size={ size || ICON_SIZE } />
 			{ children }
 		</IconUnitControlWrap>
