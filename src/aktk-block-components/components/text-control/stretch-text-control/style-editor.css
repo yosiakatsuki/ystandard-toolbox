@@ -4,7 +4,7 @@
 	left: 0;
 	translate: 0 -50%;
 
-	input {
+	& input {
 		width: 100% !important;
 		height: auto !important;
 		min-height: 0 !important;

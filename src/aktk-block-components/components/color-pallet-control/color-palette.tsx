@@ -10,7 +10,7 @@ import type {
 import ColorDropdownWrapper from '@aktk/block-components/components/color-pallet-control/color-dropdown-wrapper';
 import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
 
-import './editor-color-palette.scss';
+
 
 interface ColorPaletteProps {
 	label: string;

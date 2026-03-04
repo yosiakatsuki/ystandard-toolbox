@@ -20,7 +20,6 @@ interface ToggleGroupProps {
 	className?: string;
 }
 
-import './style-editor.scss';
 
 export function ToggleGroup( props: ToggleGroupProps ) {
 	const {

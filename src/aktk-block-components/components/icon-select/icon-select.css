@@ -1,0 +1,19 @@
+.aktk-component__icon-select {
+	& * {
+		box-sizing: border-box;
+	}
+}
+
+.aktk-component__icon-select,
+.aktk-component__icon-select__icon-list {
+	& .ys-icon:not(.sns-icon) svg {
+		fill: none;
+		stroke: currentcolor;
+	}
+}
+
+.aktk-component__icon-select__popover {
+	& .components-popover__content {
+		width: 100%;
+	}
+}

@@ -7,7 +7,7 @@
 	box-shadow: none;
 	border: 1px solid #ccc;
 
-	img {
+	& img {
 		width: 100%;
 		height: auto;
 	}

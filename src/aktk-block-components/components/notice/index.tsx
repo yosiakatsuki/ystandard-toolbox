@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import './style-editor.scss';
+
 
 interface NoticeProps {
 	children?: React.ReactNode;

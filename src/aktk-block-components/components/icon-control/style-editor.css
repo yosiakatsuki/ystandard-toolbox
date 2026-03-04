@@ -1,31 +1,32 @@
-.ystdtb-icon-unit-control-wrap {
+.aktk-component__icon-unit-control-wrap {
 	display: flex;
 	align-items: center;
 	gap: 4px;
 
-	> *:not(svg) {
+	& > *:not(svg) {
 		flex-grow: 1;
 	}
 
-	> svg {
+	& > svg {
 		flex-shrink: 0;
-		color: var(--ystdtb--editor--text-color--gray);
+		color: var(--aktk-component--text-color--gray);
 	}
 
-	label:empty {
+	& label:empty {
 		display: none;
 	}
 
 	&.is-align-to-input {
-		> svg {
+		& > svg {
 			translate: 0 50%;
 		}
-		label {
+
+		& label {
 			margin-left: -24px;
 		}
 	}
 
-	+ :where(.ystdtb-icon-unit-control-wrap) {
+	& + :where(.aktk-component__icon-unit-control-wrap) {
 		margin-top: 8px;
 	}
 }

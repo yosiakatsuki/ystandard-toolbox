@@ -6,7 +6,7 @@ import { TabPanel } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import { TAB_CLASS } from './const';
-import './style-editor.scss';
+
 
 interface ResponsiveSelectTabProps {
 	initialTabName?: 'default' | 'responsive' | undefined;

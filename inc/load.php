@@ -22,6 +22,7 @@ require_once __DIR__ . '/api/class-api.php';
 require_once __DIR__ . '/meta-box/class-meta-box.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
 // Blocks.
+require_once __DIR__ . '/blocks/class-shared-styles.php';
 require_once __DIR__ . '/blocks/class-blocks.php';
 require_once __DIR__ . '/blocks/class-block-styles.php';
 // Code.

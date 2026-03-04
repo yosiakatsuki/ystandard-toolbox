@@ -167,6 +167,7 @@ class Plugin_Settings {
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-plugin-settings.css' )
 		);
 
+		wp_enqueue_style( Shared_Styles::AKTK_COMPONENTS_EDITOR_HANDLE );
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'wp-block-editor' );
 		wp_enqueue_media();

@@ -60,5 +60,5 @@
 		"ystdtb/customIconColor": "customIconColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": ["aktk-components-editor", "file:./index.css"]
 }

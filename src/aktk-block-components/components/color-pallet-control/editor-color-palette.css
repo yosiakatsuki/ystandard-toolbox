@@ -1,14 +1,15 @@
-// [&_legend_*]:!m-0 [&_legend_*]:!font-bold
 .aktk-components__color-palette-control {
-	legend {
-		@apply px-4 pt-4;
+	& legend {
+		padding-left: 1rem;
+		padding-right: 1rem;
+		padding-top: 1rem;
 
-		* {
+		& * {
 			font-weight: 700 !important;
 			margin: 0 !important;
 		}
 
-		+ div {
+		& + div {
 			padding-top: 4px !important;
 		}
 	}
@@ -21,8 +22,8 @@
 		background-color: #fff !important;
 		background: repeating-linear-gradient(
 			-45deg,
-			rgba(#999, 0.8),
-			rgba(#999, 0.8) 3px,
+			rgb(153 153 153 / 0.8),
+			rgb(153 153 153 / 0.8) 3px,
 			#fff 0,
 			#fff 6px
 		) !important;
@@ -30,6 +31,6 @@
 
 	&[style*="transparent"] {
 		color: transparent !important;
-		background-color: rgba(#fff, 0.6) !important;
+		background-color: rgb(255 255 255 / 0.6) !important;
 	}
 }

@@ -4,7 +4,7 @@ import classnames from 'classnames';
  */
 import TextControl from '@aktk/block-components/wp-controls/text-control';
 
-import './style-editor.scss';
+
 
 interface StretchTextControlProps {
 	value: string;

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import { Monitor, Tablet, Smartphone } from 'react-feather';
 
-import './style-editor.css';
+
 
 const ICON_SIZE = 20;
 
@@ -16,7 +16,7 @@ interface IconUnitControlWrapProps {
 function IconUnitControlWrap( props: IconUnitControlWrapProps ) {
 	const { children, className = '', alignToInput = false } = props;
 
-	const classes = clsx( 'ystdtb-icon-unit-control-wrap', className, {
+	const classes = clsx( 'aktk-component__icon-unit-control-wrap', className, {
 		'is-align-to-input': alignToInput,
 	} );
 

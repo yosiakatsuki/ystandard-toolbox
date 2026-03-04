@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Button } from '@wordpress/components';
-import './image-button.scss';
+
 
 interface ImageButtonProps {
 	onClick: () => void;

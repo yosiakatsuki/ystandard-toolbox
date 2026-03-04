@@ -1,0 +1,18 @@
+/* コンポーネントCSS */
+@import './components/buttons/editor.css';
+@import './components/buttons/image-button.css';
+@import './components/color-pallet-control/editor-color-palette.css';
+@import './components/custom-font-size-picker/style-editor.css';
+@import './components/custom-select-control/style-editor.css';
+@import './components/icon-control/style-editor.css';
+@import './components/icon-select/icon-select.css';
+@import './components/icon-select/style-editor.css';
+@import './components/link-control/style-editor.css';
+@import './components/notice/style-editor.css';
+@import './components/tab-panel/style-editor.css';
+@import './components/text-control/stretch-text-control/style-editor.css';
+@import './components/toggle-group/style-editor.css';
+/* コンポーネント共通CSS変数 */
+:root {
+	--aktk-component--text-color--gray: #6b7280;
+}
