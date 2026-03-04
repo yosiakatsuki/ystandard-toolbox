@@ -38,25 +38,19 @@ export function Count( props: PostsEditProps ) {
 			id={ 'count' }
 			label={ __( '表示件数', 'ystandard-toolbox' ) }
 		>
-			<BaseControl>
-				<DesktopControl alignToInput>
-					<NumberControl
-						label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
-						value={ count }
-						onChange={ handleOnChangePcCount }
-						min={ 1 }
-					/>
-				</DesktopControl>
-			</BaseControl>
-			<BaseControl>
-				<MobileControl alignToInput>
-					<NumberControl
-						label={ __( 'モバイル', 'ystandard-toolbox' ) }
-						value={ countMobile }
-						onChange={ handleOnChangeMobileCount }
-					/>
-				</MobileControl>
-			</BaseControl>
+			<DesktopControl>
+				<NumberControl
+					value={ count }
+					onChange={ handleOnChangePcCount }
+					min={ 1 }
+				/>
+			</DesktopControl>
+			<MobileControl>
+				<NumberControl
+					value={ countMobile }
+					onChange={ handleOnChangeMobileCount }
+				/>
+			</MobileControl>
 		</BaseControl>
 	);
 }

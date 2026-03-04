@@ -11,6 +11,11 @@ import WPCustomSelectControl, {
 	type CustomSelectControlOption as WPCustomSelectControlOption,
 } from '@aktk/block-components/wp-controls/custom-select-control';
 
+/**
+ * Block dependencies.
+ */
+import './style-editor.css';
+
 export interface CustomSelectControlOption {
 	key: string;
 	name: string;
@@ -73,7 +78,7 @@ export function CustomSelectControl( props: CustomSelectControlProps ) {
 	return (
 		<div
 			className={
-				'[&_*:disabled]:bg-gray-100 [&_*:disabled]:text-gray-500 [&_.components-custom-select-control__label:empty]:hidden'
+				'ystdtb-custom-select-control [&_*:disabled]:bg-gray-100 [&_*:disabled]:text-gray-500'
 			}
 		>
 			<WPCustomSelectControl

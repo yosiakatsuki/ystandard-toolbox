@@ -2,6 +2,8 @@ import clsx from 'clsx';
 
 import { Monitor, Tablet, Smartphone } from 'react-feather';
 
+import './style-editor.css';
+
 const ICON_SIZE = 20;
 
 interface IconUnitControlWrapProps {
@@ -14,11 +16,9 @@ interface IconUnitControlWrapProps {
 function IconUnitControlWrap( props: IconUnitControlWrapProps ) {
 	const { children, className = '', alignToInput = false } = props;
 
-	const classes = clsx(
-		'flex items-center gap-1 [&>*:not(svg)]:grow [&>svg]:shrink-0 [&>svg]:text-gray-500 [&_label:empty]:hidden',
-		alignToInput && '[&>svg]:translate-y-1/2 [&_label]:-ml-6',
-		className
-	);
+	const classes = clsx( 'ystdtb-icon-unit-control-wrap', className, {
+		'is-align-to-input': alignToInput,
+	} );
 
 	return <div className={ classes }>{ children }</div>;
 }

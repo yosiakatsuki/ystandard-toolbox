@@ -28,48 +28,39 @@ export function Columns( props: PostsEditProps ) {
 			id={ 'columns' }
 			label={ __( '表示列数', 'ystandard-toolbox' ) }
 		>
-			<BaseControl>
-				<DesktopControl alignToInput>
-					<NumberControl
-						label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
-						value={ colPc }
-						onChange={ ( value?: number | string ) => {
-							setAttributes( {
-								colPc: toInt( value ),
-							} );
-						} }
-						min={ 1 }
-					/>
-				</DesktopControl>
-			</BaseControl>
-			<BaseControl>
-				<TabletControl alignToInput>
-					<NumberControl
-						label={ __( 'タブレット', 'ystandard-toolbox' ) }
-						value={ colTablet }
-						onChange={ ( value?: number | string ) => {
-							setAttributes( {
-								colTablet: toInt( value ),
-							} );
-						} }
-						min={ 1 }
-					/>
-				</TabletControl>
-			</BaseControl>
-			<BaseControl>
-				<MobileControl alignToInput>
-					<NumberControl
-						label={ __( 'モバイル', 'ystandard-toolbox' ) }
-						value={ colMobile }
-						onChange={ ( value?: number | string ) => {
-							setAttributes( {
-								colMobile: toInt( value ),
-							} );
-						} }
-						min={ 1 }
-					/>
-				</MobileControl>
-			</BaseControl>
+			<DesktopControl>
+				<NumberControl
+					value={ colPc }
+					onChange={ ( value?: number | string ) => {
+						setAttributes( {
+							colPc: toInt( value ),
+						} );
+					} }
+					min={ 1 }
+				/>
+			</DesktopControl>
+			<TabletControl>
+				<NumberControl
+					value={ colTablet }
+					onChange={ ( value?: number | string ) => {
+						setAttributes( {
+							colTablet: toInt( value ),
+						} );
+					} }
+					min={ 1 }
+				/>
+			</TabletControl>
+			<MobileControl>
+				<NumberControl
+					value={ colMobile }
+					onChange={ ( value?: number | string ) => {
+						setAttributes( {
+							colMobile: toInt( value ),
+						} );
+					} }
+					min={ 1 }
+				/>
+			</MobileControl>
 		</BaseControl>
 	);
 }

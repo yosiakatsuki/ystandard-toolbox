@@ -38,7 +38,7 @@ function CustomSelectBase( props: IconSelectControlProps ) {
 
 function DesktopIconSelectControl( props: IconSelectControlProps ) {
 	return (
-		<DesktopControl>
+		<DesktopControl alignToInput={ !! props?.label }>
 			<CustomSelectBase { ...props } />
 		</DesktopControl>
 	);
@@ -46,7 +46,7 @@ function DesktopIconSelectControl( props: IconSelectControlProps ) {
 
 function TabletIconSelectControl( props: IconSelectControlProps ) {
 	return (
-		<TabletControl>
+		<TabletControl alignToInput={ !! props?.label }>
 			<CustomSelectBase { ...props } />
 		</TabletControl>
 	);
@@ -54,7 +54,7 @@ function TabletIconSelectControl( props: IconSelectControlProps ) {
 
 function MobileIconSelectControl( props: IconSelectControlProps ) {
 	return (
-		<MobileControl>
+		<MobileControl alignToInput={ !! props?.label }>
 			<CustomSelectBase { ...props } />
 		</MobileControl>
 	);
