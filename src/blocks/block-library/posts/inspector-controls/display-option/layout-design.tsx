@@ -40,7 +40,9 @@ export function LayoutDesign( props: PostsEditProps ) {
 				options={ listTypes }
 				value={ listTypeMobile || '' }
 				onChange={ ( value?: string ) =>
-					setAttributes( { listTypeMobile: value as ListType } )
+					setAttributes( {
+						listTypeMobile: ( value as ListType ) || undefined,
+					} )
 				}
 			/>
 		</BaseControl>

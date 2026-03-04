@@ -40,9 +40,15 @@ describe( 'LayoutDesign', () => {
 		const props = createProps();
 		render( <LayoutDesign { ...props } /> );
 		// デスクトップ・モバイル両方のセレクトに選択肢があるため複数存在する.
-		expect( screen.getAllByText( 'カード' ).length ).toBeGreaterThanOrEqual( 1 );
-		expect( screen.getAllByText( 'リスト' ).length ).toBeGreaterThanOrEqual( 1 );
-		expect( screen.getAllByText( 'シンプル' ).length ).toBeGreaterThanOrEqual( 1 );
+		expect( screen.getAllByText( 'カード' ).length ).toBeGreaterThanOrEqual(
+			1
+		);
+		expect( screen.getAllByText( 'リスト' ).length ).toBeGreaterThanOrEqual(
+			1
+		);
+		expect(
+			screen.getAllByText( 'シンプル' ).length
+		).toBeGreaterThanOrEqual( 1 );
 	} );
 
 	it( 'デスクトップとモバイルで2つのセレクトが存在する', () => {
@@ -92,4 +98,21 @@ describe( 'LayoutDesign', () => {
 			listTypeMobile: 'simple',
 		} );
 	} );
+
+	it( 'モバイルで「----」を選択すると listTypeMobile が undefined になる', () => {
+		const props = createProps( {
+			attributes: {
+				...createProps().attributes,
+				listTypeMobile: 'list',
+			},
+		} );
+		render( <LayoutDesign { ...props } /> );
+		const selects = screen.getAllByRole( 'combobox' );
+		// 空の値（「----」）を選択.
+		fireEvent.change( selects[ 1 ], { target: { value: '' } } );
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			listTypeMobile: undefined,
+		} );
+	} );
+
 } );
