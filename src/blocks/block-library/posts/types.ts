@@ -20,7 +20,16 @@ export type Order = 'ASC' | 'DESC';
 /**
  * サムネイルアスペクト比
  */
-export type ThumbnailRatio = '16-9' | '4-3' | '3-2' | '3-1' | '2-1' | '1-1';
+export type ThumbnailRatio =
+	| '16-9'
+	| '4-3'
+	| '3-2'
+	| '1-1'
+	| '2-1'
+	| '3-1'
+	| '9-16'
+	| '4-5'
+	| '2-3';
 
 /**
  * 記事一覧ブロック属性
@@ -47,6 +56,7 @@ export interface PostsBlockAttributes {
 	showImg: boolean;
 	thumbnailSize: string;
 	thumbnailRatio: ThumbnailRatio;
+	thumbnailRatioMobile: ThumbnailRatio;
 
 	// メタ情報.
 	showDate: boolean;

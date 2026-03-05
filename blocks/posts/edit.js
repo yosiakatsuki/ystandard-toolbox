@@ -32,54 +32,6 @@ const Posts = ( props ) => {
 			<>
 				<InspectorControls>
 					<PanelBasicOption { ...props } />
-					<PanelBody title={ __( '表示設定', 'ystandard-toolbox' ) }>
-						<BlockOption.ListDesign { ...props } />
-						<div className="ystdtb-block-label">
-							{ __( '表示列数', 'ystandard-toolbox' ) }
-						</div>
-						<RangeControl
-							label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
-							beforeIcon={ 'desktop' }
-							value={ colPc }
-							onChange={ ( value ) => {
-								setAttributes( {
-									colPc: _toNumber( value, 1, 6, 3 ),
-								} );
-							} }
-							min={ 1 }
-							max={ 6 }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={ __( 'タブレット', 'ystandard-toolbox' ) }
-							beforeIcon={ 'tablet' }
-							value={ colTablet }
-							onChange={ ( value ) => {
-								setAttributes( {
-									colTablet: _toNumber( value, 1, 6, 3 ),
-								} );
-							} }
-							min={ 1 }
-							max={ 6 }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={ __( 'モバイル', 'ystandard-toolbox' ) }
-							beforeIcon={ 'smartphone' }
-							value={ colMobile }
-							onChange={ ( value ) => {
-								setAttributes( {
-									colMobile: _toNumber( value, 1, 6, 1 ),
-								} );
-							} }
-							min={ 1 }
-							max={ 6 }
-							__next40pxDefaultSize
-							__nextHasNoMarginBottom
-						/>
-					</PanelBody>
 					<PanelThumbnail { ...props } />
 					<PanelBody
 						initialOpen={ false }
