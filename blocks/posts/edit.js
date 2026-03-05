@@ -32,7 +32,6 @@ const Posts = ( props ) => {
 			<>
 				<InspectorControls>
 					<PanelBasicOption { ...props } />
-					<PanelThumbnail { ...props } />
 					<PanelBody
 						initialOpen={ false }
 						title={ __(

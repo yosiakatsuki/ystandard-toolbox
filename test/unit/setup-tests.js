@@ -13,6 +13,32 @@ jest.mock( '@wordpress/i18n', () => ( {
 	__: ( str ) => str,
 } ) );
 
+jest.mock( '@wordpress/element', () => ( {
+	...jest.requireActual( 'react' ),
+} ) );
+
+jest.mock( '@wordpress/data', () => ( {
+	useSelect: jest.fn( ( callback ) =>
+		callback( () => ( {
+			getSettings: () => ( {
+				imageSizes: [
+					{ slug: 'thumbnail', name: 'サムネイル' },
+					{ slug: 'medium', name: '中' },
+					{ slug: 'large', name: '大' },
+					{ slug: 'full', name: 'フルサイズ' },
+				],
+			} ),
+		} ) )
+	),
+	useDispatch: jest.fn( () => ( {} ) ),
+} ) );
+
+jest.mock( '@wordpress/block-editor', () => ( {
+	// @ts-ignore
+	getFontSizeClass: ( fontSize ) => fontSize,
+	store: 'core/block-editor',
+} ) );
+
 jest.mock( '@wordpress/components', () => ( {
 	// @ts-ignore
 	FontSizePicker: ( { value, onChange, fontSizes } ) => (
@@ -112,9 +138,26 @@ jest.mock( '@wordpress/components', () => ( {
 			{ children }
 		</div>
 	),
+	// @ts-ignore
+	ToggleControl: ( { label, checked, onChange, __nextHasNoMarginBottom, ...rest } ) => (
+		<div>
+			<label>
+				<input
+					type="checkbox"
+					checked={ checked }
+					onChange={ ( e ) => onChange( e.target.checked ) }
+					{ ...rest }
+				/>
+				{ label }
+			</label>
+		</div>
+	),
+	// @ts-ignore
+	PanelBody: ( { title, children } ) => (
+		<div>
+			<h2>{ title }</h2>
+			{ children }
+		</div>
+	),
 } ) );
 
-jest.mock( '@wordpress/block-editor', () => ( {
-	// @ts-ignore
-	getFontSizeClass: ( fontSize ) => fontSize,
-} ) );
