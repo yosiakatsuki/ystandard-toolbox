@@ -56,13 +56,12 @@ export interface PostsBlockAttributes {
 	showImg: boolean;
 	thumbnailSize: string;
 	thumbnailRatio: ThumbnailRatio;
-	thumbnailRatioMobile: ThumbnailRatio;
 
 	// メタ情報.
 	showDate: boolean;
 	showCategory: boolean;
 	showExcerpt: boolean;
-	excerptLength?: number;
+	excerptLines?: number;
 
 	// 投稿タイプ・高度な絞り込み.
 	postType: string;

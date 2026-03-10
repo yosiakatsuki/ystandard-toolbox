@@ -11,9 +11,9 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
-import { ShowThumbnail } from '@aktk/blocks/block-library/posts/inspector-controls/thumbnail/show-thumbnail';
-import { ThumbnailSize } from '@aktk/blocks/block-library/posts/inspector-controls/thumbnail/thumbnail-size';
-import { ThumbnailRatio } from '@aktk/blocks/block-library/posts/inspector-controls/thumbnail/thumbnail-ratio';
+import { ShowThumbnail } from './show-thumbnail';
+import { ThumbnailSize } from './thumbnail-size';
+import { ThumbnailRatio } from './thumbnail-ratio';
 
 export function Thumbnail( props: PostsEditProps ) {
 	const { attributes } = props;

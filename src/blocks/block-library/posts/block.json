@@ -65,12 +65,9 @@
 			"type": "boolean",
 			"default": false
 		},
-		"showExcerptMobile": {
-			"type": "boolean",
-			"default": false
-		},
-		"excerptLength": {
-			"type": "number"
+		"excerptLines": {
+			"type": "number",
+			"default": 2
 		},
 		"thumbnailSize": {
 			"type": "string",
