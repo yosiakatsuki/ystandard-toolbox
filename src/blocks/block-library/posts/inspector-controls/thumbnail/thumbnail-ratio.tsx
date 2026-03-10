@@ -81,7 +81,7 @@ export function ThumbnailRatio( props: PostsEditProps ) {
 								thumbnailRatioMobile: value as ThumbnailRatio,
 							} );
 						} }
-						useEmptyValue={ false }
+						emptyLabel={ '----' }
 					/>
 				) }
 			</MobileControl>
