@@ -11,9 +11,9 @@ import { Panel } from '@aktk/block-components/components/panel';
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
-import { PostType } from '@aktk/blocks/block-library/posts/inspector-controls/search-option/post-type';
-import { Taxonomy } from '@aktk/blocks/block-library/posts/inspector-controls/search-option/taxonomy';
-import { Term } from '@aktk/blocks/block-library/posts/inspector-controls/search-option/term';
+import { PostType } from './post-type';
+import { Taxonomy } from './taxonomy';
+import { Term } from './term';
 
 export function SearchOption( props: PostsEditProps ) {
 	return (
