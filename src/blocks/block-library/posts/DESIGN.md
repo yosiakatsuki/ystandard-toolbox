@@ -260,16 +260,12 @@ class Posts_Block {
 index.php                        # Posts_Block クラス（ブロック登録 + render_callback）
 ├── render_callback()            # WP_Query実行 + テンプレート呼び出し
 ├── build_query_args()           # ブロック属性 → WP_Queryパラメータ変換
+├── get_template_args()          # テンプレートに渡す変数の構築
 └── テンプレート読み込み           # load_template() でテンプレートファイルを読み込む
 
 templates/
 ├── posts.php                    # メインテンプレート（list/card共通）
-├── posts-simple.php             # シンプルテンプレート
-└── parts/
-    ├── thumbnail.php            # サムネイルパーツ
-    ├── meta.php                 # メタ情報（日付・カテゴリー）パーツ
-    ├── title.php                # タイトルパーツ
-    └── excerpt.php              # 概要パーツ
+└── posts-simple.php             # シンプルテンプレート
 ```
 
 ### テンプレートの上書き
@@ -287,10 +283,6 @@ if ( ! $template ) {
     $template = __DIR__ . "/templates/{$template_name}";
 }
 ```
-
-パーツテンプレートも同様の優先順:
-- 子テーマ/親テーマ: `ystdtb-templates/posts/parts/thumbnail.php`
-- プラグイン: `src/blocks/block-library/posts/templates/parts/thumbnail.php`
 
 ### テンプレートに渡す変数
 
@@ -360,6 +352,11 @@ private function build_query_args( $attributes ) {
         ];
     }
 
+    // 表示中の投稿を除外（シングルページ閲覧時）
+    if ( is_singular() ) {
+        $args['post__not_in'] = [ get_the_ID() ];
+    }
+
     return $args;
 }
 ```
@@ -393,48 +390,79 @@ private function get_offset( $attributes ) {
 
 新ブロックのプレフィックス: `ystdtb-posts`
 
+#### リスト・カード（posts.php）
+
+`<li>`直下の`<a>`でアイテム全体をリンクにする。
+サムネイルのアスペクト比はCSS `aspect-ratio`で制御（旧`.ratio`ハックを廃止）。
+
 ```html
-<!-- メイン -->
 <div class="ystdtb-posts is-{list_type}">
   <ul class="ystdtb-posts__list col-sp--{n} col-tablet--{n} col-pc--{n}">
     <li class="ystdtb-posts__item">
-      <div class="ystdtb-posts__content">
+      <a class="ystdtb-posts__link" href="{permalink}">
 
         <!-- サムネイル -->
-        <div class="ystdtb-posts__thumbnail">
-          <a class="ystdtb-posts__thumbnail-link ratio is-{ratio}" href="...">
-            <div class="ratio__item">
-              <figure class="ratio__image">
-                <img class="ystdtb-posts__image" />
-              </figure>
-            </div>
-          </a>
-        </div>
+        <figure class="ystdtb-posts__thumbnail is-{ratio}">
+          <img class="ystdtb-posts__image" />
+        </figure>
 
         <!-- テキストエリア -->
         <div class="ystdtb-posts__text">
-
-          <!-- メタ情報 -->
           <div class="ystdtb-posts__meta">
             <span class="ystdtb-posts__date">
               <time datetime="Y-m-d">...</time>
             </span>
             <span class="ystdtb-posts__cat {taxonomy}--{slug}">...</span>
           </div>
-
-          <!-- タイトル -->
-          <p class="ystdtb-posts__title">
-            <a class="ystdtb-posts__link" href="...">...</a>
-          </p>
-
-          <!-- 概要 -->
+          <p class="ystdtb-posts__title">...</p>
           <p class="ystdtb-posts__excerpt">...</p>
-
         </div>
-      </div>
+
+      </a>
     </li>
   </ul>
 </div>
+```
+
+#### シンプル（posts-simple.php）
+
+行全体を`<a>`で囲む。サムネイルなし。
+
+```html
+<div class="ystdtb-posts is-simple">
+  <ul class="ystdtb-posts__list">
+    <li class="ystdtb-posts__item">
+      <a class="ystdtb-posts__link" href="{permalink}">
+        <span class="ystdtb-posts__title">...</span>
+      </a>
+    </li>
+  </ul>
+</div>
+```
+
+#### CSS aspect-ratio
+
+旧`.ratio`ハック（padding-topによるアスペクト比制御）を廃止し、CSS `aspect-ratio`を使用。
+
+```css
+.ystdtb-posts__thumbnail {
+  overflow: hidden;
+}
+.ystdtb-posts__thumbnail.is-16-9 { aspect-ratio: 16 / 9; }
+.ystdtb-posts__thumbnail.is-4-3  { aspect-ratio: 4 / 3; }
+.ystdtb-posts__thumbnail.is-3-2  { aspect-ratio: 3 / 2; }
+.ystdtb-posts__thumbnail.is-1-1  { aspect-ratio: 1 / 1; }
+.ystdtb-posts__thumbnail.is-2-1  { aspect-ratio: 2 / 1; }
+.ystdtb-posts__thumbnail.is-3-1  { aspect-ratio: 3 / 1; }
+.ystdtb-posts__thumbnail.is-9-16 { aspect-ratio: 9 / 16; }
+.ystdtb-posts__thumbnail.is-4-5  { aspect-ratio: 4 / 5; }
+.ystdtb-posts__thumbnail.is-2-3  { aspect-ratio: 2 / 3; }
+
+.ystdtb-posts__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 ```
 
 #### 旧ブロックとのクラス変換表
@@ -445,33 +473,93 @@ private function get_offset( $attributes ) {
 | `.ys-posts.is-{type}` | `.ystdtb-posts.is-{type}` | 表示タイプ修飾子（同じ） |
 | `.ys-posts__list` | `.ystdtb-posts__list` | リスト |
 | `.ys-posts__item` | `.ystdtb-posts__item` | 各アイテム |
-| `.ys-posts__content` | `.ystdtb-posts__content` | コンテンツラッパー |
-| `.ys-posts__thumbnail` | `.ystdtb-posts__thumbnail` | サムネイルラッパー |
-| （なし） | `.ystdtb-posts__thumbnail-link` | サムネイルリンク（新規） |
+| `.ys-posts__content` | `.ystdtb-posts__link` | コンテンツラッパー → 全体リンクに変更 |
+| `.ys-posts__thumbnail` | `.ystdtb-posts__thumbnail` | サムネイル（`<figure>`に変更） |
 | `.ys-posts__image` | `.ystdtb-posts__image` | 画像 |
 | `.ys-posts__text` | `.ystdtb-posts__text` | テキストエリア |
 | `.ys-posts__meta` | `.ystdtb-posts__meta` | メタ情報ラッパー |
 | `.ys-posts__date` | `.ystdtb-posts__date` | 日付 |
 | `.ys-posts__cat` | `.ystdtb-posts__cat` | カテゴリー |
-| `.ys-posts__title` | `.ystdtb-posts__title` | タイトル |
-| `.ys-posts__link` | `.ystdtb-posts__link` | タイトルリンク |
+| `.ys-posts__title` | `.ystdtb-posts__title` | タイトル（`<a>`を含まない） |
+| `.ys-posts__link` | `.ystdtb-posts__link` | 旧: タイトルリンク → 新: アイテム全体リンク |
 | `.ys-posts__dscr` | `.ystdtb-posts__excerpt` | 概要（クラス名変更） |
-| `.ratio` | `.ratio` | アスペクト比（共通、変更なし） |
-| `.ratio.is-{ratio}` | `.ratio.is-{ratio}` | アスペクト比修飾子（共通、変更なし） |
-| `.ratio__item` | `.ratio__item` | アスペクト比内部（共通、変更なし） |
-| `.ratio__image` | `.ratio__image` | アスペクト比画像（共通、変更なし） |
+| `.ratio` / `.ratio.is-{ratio}` | （廃止） | CSS `aspect-ratio`に移行。`.ystdtb-posts__thumbnail.is-{ratio}`で代替 |
+| `.ratio__item` | （廃止） | `aspect-ratio`採用によりネスト不要 |
+| `.ratio__image` | （廃止） | `aspect-ratio`採用によりネスト不要 |
 | `.col-sp--{n}` | `.col-sp--{n}` | カラム（共通、変更なし） |
 | `.col-tablet--{n}` | `.col-tablet--{n}` | カラム（共通、変更なし） |
 | `.col-pc--{n}` | `.col-pc--{n}` | カラム（共通、変更なし） |
+
+#### 廃止されたクラス
+
+| 旧クラス | 理由 |
+|---|---|
+| `.ratio` / `.ratio.is-{ratio}` | CSS `aspect-ratio`に移行。`.ystdtb-posts__thumbnail.is-{ratio}`で代替 |
+| `.ratio__item` | `aspect-ratio`採用によりネスト不要 |
+| `.ratio__image` | `aspect-ratio`採用によりネスト不要 |
+
+#### アイコン
+
+プラグインの`Icon::get_icon()`（`inc/icon/class-icon.php`）を使用してSVGアイコンを出力する。
+
+| 用途 | アイコン名 | 旧実装 |
+|---|---|---|
+| 日付 | `calendar` | `ys_get_icon( 'calendar' )` |
+| 階層型タクソノミー | `folder` | `ys_get_taxonomy_icon()` |
+| 非階層型タクソノミー | `tag` | `ys_get_taxonomy_icon()` |
+
+```php
+// タクソノミーアイコンの取得
+$taxonomy_obj = get_taxonomy( $taxonomy );
+$icon_name    = $taxonomy_obj->hierarchical ? 'folder' : 'tag';
+$icon_data    = Icon::get_icon( $icon_name );
+$icon_svg     = $icon_data['icon'] ?? '';
+```
+
+#### デフォルト画像（サムネイルなし時のフォールバック）
+
+以下の優先順で画像を取得:
+
+1. **プラグイン設定の投稿一覧デフォルト画像**: `Option::get_option( 'archive', 'archiveDefaultImageId' )`
+2. **WordPressコア機能のサイトロゴ**: `get_theme_mod( 'custom_logo' )`
+3. **画像プレースホルダー**: SVGアイコン（`image`アイコン）を表示
+
+```php
+private function get_default_image( $thumbnail_size, $class ) {
+    // 1. プラグイン設定のデフォルト画像
+    $image_id = Option::get_option( 'archive', 'archiveDefaultImageId' );
+    if ( $image_id ) {
+        return wp_get_attachment_image( $image_id, $thumbnail_size, false, [ 'class' => $class ] );
+    }
+    // 2. サイトロゴ
+    $logo_id = get_theme_mod( 'custom_logo' );
+    if ( $logo_id ) {
+        return wp_get_attachment_image( $logo_id, $thumbnail_size, false, [ 'class' => $class ] );
+    }
+    // 3. プレースホルダーアイコン
+    $icon_data = Icon::get_icon( 'image' );
+    return '<span class="ystdtb-posts__no-image">' . ( $icon_data['icon'] ?? '' ) . '</span>';
+}
+```
+
+#### 概要テキスト
+
+旧実装の`ys_get_custom_excerpt()`はテーマ固有関数。新ブロックでは以下で代替:
+
+```php
+// 概要テキストの取得
+$excerpt = get_the_excerpt();
+// excerptLinesはCSS（-webkit-line-clamp）で制御
+```
 
 #### 廃止されたクラス・機能
 
 | 旧クラス・機能 | 理由 |
 |---|---|
-| `ys_get_icon( 'calendar' )` | テーマ固有のSVGアイコン関数。新ブロックでは使用しない |
-| `ys_get_taxonomy_icon()` | テーマ固有のタクソノミーアイコン関数。新ブロックでは使用しない |
-| `ys_get_custom_excerpt()` | テーマ固有の概要取得関数。`wp_trim_words()` + `get_the_excerpt()` で代替 |
-| `ys_the_archive_default_image()` | テーマ固有のデフォルト画像関数。新ブロックでは空の`<figure>`を表示 |
+| `ys_get_icon()` | テーマ固有関数。プラグインの`Icon::get_icon()`で代替 |
+| `ys_get_taxonomy_icon()` | テーマ固有関数。プラグインの`Icon::get_icon()`で代替 |
+| `ys_get_custom_excerpt()` | テーマ固有関数。`get_the_excerpt()` + CSS line-clampで代替 |
+| `ys_the_archive_default_image()` | テーマ固有関数。プラグイン設定 → サイトロゴ → アイコンのフォールバックで代替 |
 | SGA連携（ranking） | 機能廃止 |
 
 ### 廃止された旧実装
@@ -481,7 +569,8 @@ private function get_offset( $attributes ) {
 | `Dynamic_Block` 継承 | 廃止。標準的な`register_block_type`に移行 |
 | `ys_recent_posts` ショートコード委譲 | 廃止。独自`WP_Query`で直接レンダリング |
 | `migration_attributes()` | 不要。ショートコード変換が不要になったため |
-| `filter` パラメータ（`sga`, `category`, `remove-same-post`） | 廃止。SGA連携廃止、フィルタ機能はタクソノミー指定で代替 |
+| `filter` パラメータ（`sga`, `category`） | 廃止。SGA連携廃止、カテゴリーフィルタはタクソノミー指定で代替 |
+| `filter: remove-same-post` | 廃止。表示中ページの除外は標準動作として`build_query_args()`に組み込み |
 | `cache` パラメータ | 不要。ショートコードのキャッシュ機構だったため |
 | `run_type` パラメータ | 不要。ショートコード固有のパラメータだったため |
 
