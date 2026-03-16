@@ -250,10 +250,245 @@ class Posts_Block {
 
 ---
 
+---
+
+## PHPレンダリング設計
+
+### アーキテクチャ
+
+```
+index.php                        # Posts_Block クラス（ブロック登録 + render_callback）
+├── render_callback()            # WP_Query実行 + テンプレート呼び出し
+├── build_query_args()           # ブロック属性 → WP_Queryパラメータ変換
+└── テンプレート読み込み           # load_template() でテンプレートファイルを読み込む
+
+templates/
+├── posts.php                    # メインテンプレート（list/card共通）
+├── posts-simple.php             # シンプルテンプレート
+└── parts/
+    ├── thumbnail.php            # サムネイルパーツ
+    ├── meta.php                 # メタ情報（日付・カテゴリー）パーツ
+    ├── title.php                # タイトルパーツ
+    └── excerpt.php              # 概要パーツ
+```
+
+### テンプレートの上書き
+
+テンプレートは以下の優先順で読み込む:
+
+1. 子テーマ: `ystdtb-templates/posts/posts.php`
+2. 親テーマ: `ystdtb-templates/posts/posts.php`
+3. プラグイン: `src/blocks/block-library/posts/templates/posts.php`
+
+```php
+// テンプレート検索ロジック
+$template = locate_template( "ystdtb-templates/posts/{$template_name}" );
+if ( ! $template ) {
+    $template = __DIR__ . "/templates/{$template_name}";
+}
+```
+
+パーツテンプレートも同様の優先順:
+- 子テーマ/親テーマ: `ystdtb-templates/posts/parts/thumbnail.php`
+- プラグイン: `src/blocks/block-library/posts/templates/parts/thumbnail.php`
+
+### テンプレートに渡す変数
+
+テンプレートには `$args` 配列が渡される。テンプレートファイルの先頭にコメントで変数の参考を記載する。
+
+```php
+<?php
+/**
+ * 記事一覧ブロック メインテンプレート
+ *
+ * テンプレートの上書き:
+ *   テーマの ystdtb-templates/posts/posts.php にコピーして編集
+ *
+ * 利用可能な変数（$args）:
+ * @var WP_Query $query          投稿クエリ
+ * @var string   $list_type      表示タイプ（'card' | 'list' | 'simple'）
+ * @var bool     $show_img       画像表示
+ * @var string   $thumbnail_size 画像サイズ（'thumbnail' | 'medium' | 'large' | 'full'）
+ * @var string   $thumbnail_ratio アスペクト比（'16-9' | '4-3' | '1-1' 等）
+ * @var bool     $show_date      日付表示
+ * @var bool     $show_category  カテゴリー表示
+ * @var string   $taxonomy       表示するタクソノミースラッグ（空の場合はデフォルト）
+ * @var bool     $show_excerpt   概要表示
+ * @var int      $excerpt_lines  概要の行数
+ * @var string   $col_class      カラム用CSSクラス
+ */
+```
+
+### WP_Queryパラメータ構築
+
+```php
+private function build_query_args( $attributes ) {
+    $args = [
+        'post_type'           => $attributes['postType'] ?? 'post',
+        'posts_per_page'      => $this->get_count( $attributes ),
+        'offset'              => $this->get_offset( $attributes ),
+        'order'               => $attributes['order'] ?? 'DESC',
+        'orderby'             => $attributes['orderby'] ?? 'date',
+        'post_status'         => 'publish',
+        'ignore_sticky_posts' => true,
+        'no_found_rows'       => true,
+    ];
+
+    // 投稿ID指定
+    if ( ! empty( $attributes['postIn'] ) ) {
+        $args['post__in'] = array_map( 'intval', explode( ',', $attributes['postIn'] ) );
+    }
+
+    // 投稿名指定
+    if ( ! empty( $attributes['postNameIn'] ) ) {
+        $args['post_name__in'] = array_map( 'trim', explode( ',', $attributes['postNameIn'] ) );
+    }
+
+    // 親投稿指定
+    if ( ! empty( $attributes['postParent'] ) ) {
+        $args['post_parent'] = intval( $attributes['postParent'] );
+    }
+
+    // タクソノミー・ターム絞り込み
+    if ( ! empty( $attributes['taxonomy'] ) && ! empty( $attributes['termSlug'] ) ) {
+        $args['tax_query'] = [
+            [
+                'taxonomy' => $attributes['taxonomy'],
+                'field'    => 'slug',
+                'terms'    => $attributes['termSlug'],
+            ],
+        ];
+    }
+
+    return $args;
+}
+```
+
+### モバイル判定
+
+表示件数・オフセットのモバイル対応はPHP側（`wp_is_mobile()`）で判定する。
+旧実装と同じ仕様（`ys_is_mobile()` → `wp_is_mobile()`にフォールバック）。
+
+```php
+private function get_count( $attributes ) {
+    $count = $attributes['count'] ?? 3;
+    if ( ! empty( $attributes['countMobile'] ) && wp_is_mobile() ) {
+        $count = $attributes['countMobile'];
+    }
+    return $count;
+}
+
+private function get_offset( $attributes ) {
+    $offset = $attributes['offset'] ?? 0;
+    if ( ! empty( $attributes['offsetMobile'] ) && wp_is_mobile() ) {
+        $offset = $attributes['offsetMobile'];
+    }
+    return $offset;
+}
+```
+
+### HTML構造
+
+#### CSSクラス設計
+
+新ブロックのプレフィックス: `ystdtb-posts`
+
+```html
+<!-- メイン -->
+<div class="ystdtb-posts is-{list_type}">
+  <ul class="ystdtb-posts__list col-sp--{n} col-tablet--{n} col-pc--{n}">
+    <li class="ystdtb-posts__item">
+      <div class="ystdtb-posts__content">
+
+        <!-- サムネイル -->
+        <div class="ystdtb-posts__thumbnail">
+          <a class="ystdtb-posts__thumbnail-link ratio is-{ratio}" href="...">
+            <div class="ratio__item">
+              <figure class="ratio__image">
+                <img class="ystdtb-posts__image" />
+              </figure>
+            </div>
+          </a>
+        </div>
+
+        <!-- テキストエリア -->
+        <div class="ystdtb-posts__text">
+
+          <!-- メタ情報 -->
+          <div class="ystdtb-posts__meta">
+            <span class="ystdtb-posts__date">
+              <time datetime="Y-m-d">...</time>
+            </span>
+            <span class="ystdtb-posts__cat {taxonomy}--{slug}">...</span>
+          </div>
+
+          <!-- タイトル -->
+          <p class="ystdtb-posts__title">
+            <a class="ystdtb-posts__link" href="...">...</a>
+          </p>
+
+          <!-- 概要 -->
+          <p class="ystdtb-posts__excerpt">...</p>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+```
+
+#### 旧ブロックとのクラス変換表
+
+| 旧クラス（ys-posts） | 新クラス（ystdtb-posts） | 備考 |
+|---|---|---|
+| `.ys-posts` | `.ystdtb-posts` | ルート要素 |
+| `.ys-posts.is-{type}` | `.ystdtb-posts.is-{type}` | 表示タイプ修飾子（同じ） |
+| `.ys-posts__list` | `.ystdtb-posts__list` | リスト |
+| `.ys-posts__item` | `.ystdtb-posts__item` | 各アイテム |
+| `.ys-posts__content` | `.ystdtb-posts__content` | コンテンツラッパー |
+| `.ys-posts__thumbnail` | `.ystdtb-posts__thumbnail` | サムネイルラッパー |
+| （なし） | `.ystdtb-posts__thumbnail-link` | サムネイルリンク（新規） |
+| `.ys-posts__image` | `.ystdtb-posts__image` | 画像 |
+| `.ys-posts__text` | `.ystdtb-posts__text` | テキストエリア |
+| `.ys-posts__meta` | `.ystdtb-posts__meta` | メタ情報ラッパー |
+| `.ys-posts__date` | `.ystdtb-posts__date` | 日付 |
+| `.ys-posts__cat` | `.ystdtb-posts__cat` | カテゴリー |
+| `.ys-posts__title` | `.ystdtb-posts__title` | タイトル |
+| `.ys-posts__link` | `.ystdtb-posts__link` | タイトルリンク |
+| `.ys-posts__dscr` | `.ystdtb-posts__excerpt` | 概要（クラス名変更） |
+| `.ratio` | `.ratio` | アスペクト比（共通、変更なし） |
+| `.ratio.is-{ratio}` | `.ratio.is-{ratio}` | アスペクト比修飾子（共通、変更なし） |
+| `.ratio__item` | `.ratio__item` | アスペクト比内部（共通、変更なし） |
+| `.ratio__image` | `.ratio__image` | アスペクト比画像（共通、変更なし） |
+| `.col-sp--{n}` | `.col-sp--{n}` | カラム（共通、変更なし） |
+| `.col-tablet--{n}` | `.col-tablet--{n}` | カラム（共通、変更なし） |
+| `.col-pc--{n}` | `.col-pc--{n}` | カラム（共通、変更なし） |
+
+#### 廃止されたクラス・機能
+
+| 旧クラス・機能 | 理由 |
+|---|---|
+| `ys_get_icon( 'calendar' )` | テーマ固有のSVGアイコン関数。新ブロックでは使用しない |
+| `ys_get_taxonomy_icon()` | テーマ固有のタクソノミーアイコン関数。新ブロックでは使用しない |
+| `ys_get_custom_excerpt()` | テーマ固有の概要取得関数。`wp_trim_words()` + `get_the_excerpt()` で代替 |
+| `ys_the_archive_default_image()` | テーマ固有のデフォルト画像関数。新ブロックでは空の`<figure>`を表示 |
+| SGA連携（ranking） | 機能廃止 |
+
+### 廃止された旧実装
+
+| 旧実装の要素 | 理由 |
+|---|---|
+| `Dynamic_Block` 継承 | 廃止。標準的な`register_block_type`に移行 |
+| `ys_recent_posts` ショートコード委譲 | 廃止。独自`WP_Query`で直接レンダリング |
+| `migration_attributes()` | 不要。ショートコード変換が不要になったため |
+| `filter` パラメータ（`sga`, `category`, `remove-same-post`） | 廃止。SGA連携廃止、フィルタ機能はタクソノミー指定で代替 |
+| `cache` パラメータ | 不要。ショートコードのキャッシュ機構だったため |
+| `run_type` パラメータ | 不要。ショートコード固有のパラメータだったため |
+
 ## 進捗管理
 
-- [ ] ステップ1: 基盤整備
-- [ ] ステップ2: エディターUI移行
+- [x] ステップ1: 基盤整備
+- [x] ステップ2: エディターUI移行
 - [ ] ステップ3: PHPレンダリング移行
 - [ ] ステップ4: 旧ブロックとの互換対応
 - [ ] 動作確認・テスト
