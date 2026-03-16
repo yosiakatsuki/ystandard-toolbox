@@ -48,7 +48,7 @@ export function Modal( props: ModalProps ) {
 								variant={ 'tertiary' }
 								onClick={ onCancel }
 								style={ {
-									color: 'var(--ys--global--text-color--gray,#989EA1)',
+									color: 'var(--ys--global--text-color--gray, #656565)',
 								} }
 							>
 								{ cancelText }
