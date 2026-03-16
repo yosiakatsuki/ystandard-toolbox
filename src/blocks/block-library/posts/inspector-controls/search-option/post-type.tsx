@@ -18,7 +18,11 @@ export function PostType( props: PostsEditProps ) {
 	const { postType } = attributes;
 
 	const onChangePostType = ( value: string ) => {
-		setAttributes( { postType: value } );
+		setAttributes( {
+			postType: value,
+			taxonomy: undefined,
+			termSlug: undefined,
+		} );
 	};
 	return (
 		<BaseControl
