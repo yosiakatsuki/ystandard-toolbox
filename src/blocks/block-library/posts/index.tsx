@@ -22,7 +22,7 @@ import { CATEGORY } from '@aktk/blocks/config';
 // @ts-ignore
 import metadata from './block.json';
 import edit from './edit';
-import './style.scss';
+import './style.css';
 
 export function registerPostsBlock() {
 	const attributes = mergeDefaultAttributes(

@@ -11,7 +11,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  */
 import type { PostsEditProps } from './types';
 import { InspectorControls } from './inspector-controls';
-import './style-editor.scss';
+import './style-editor.css';
 
 export default function Edit( props: PostsEditProps ) {
 	const { attributes } = props;
