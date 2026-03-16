@@ -1,0 +1,184 @@
+/* 記事一覧ブロック フロントエンドCSS */
+
+.ystdtb-posts__list {
+	display: grid;
+	gap: 1.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* カラム */
+.ystdtb-posts__list.col-pc--1 { grid-template-columns: repeat(1, 1fr); }
+.ystdtb-posts__list.col-pc--2 { grid-template-columns: repeat(2, 1fr); }
+.ystdtb-posts__list.col-pc--3 { grid-template-columns: repeat(3, 1fr); }
+.ystdtb-posts__list.col-pc--4 { grid-template-columns: repeat(4, 1fr); }
+.ystdtb-posts__list.col-pc--5 { grid-template-columns: repeat(5, 1fr); }
+.ystdtb-posts__list.col-pc--6 { grid-template-columns: repeat(6, 1fr); }
+
+/* リンク */
+.ystdtb-posts__link {
+	display: flex;
+	color: inherit;
+	text-decoration: none;
+}
+
+.ystdtb-posts__link:hover {
+	opacity: 0.8;
+}
+
+/* サムネイル aspect-ratio */
+.ystdtb-posts__thumbnail {
+	overflow: hidden;
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.ystdtb-posts__thumbnail.is-16-9 { aspect-ratio: 16 / 9; }
+.ystdtb-posts__thumbnail.is-4-3 { aspect-ratio: 4 / 3; }
+.ystdtb-posts__thumbnail.is-3-2 { aspect-ratio: 3 / 2; }
+.ystdtb-posts__thumbnail.is-1-1 { aspect-ratio: 1 / 1; }
+.ystdtb-posts__thumbnail.is-2-1 { aspect-ratio: 2 / 1; }
+.ystdtb-posts__thumbnail.is-3-1 { aspect-ratio: 3 / 1; }
+.ystdtb-posts__thumbnail.is-9-16 { aspect-ratio: 9 / 16; }
+.ystdtb-posts__thumbnail.is-4-5 { aspect-ratio: 4 / 5; }
+.ystdtb-posts__thumbnail.is-2-3 { aspect-ratio: 2 / 3; }
+
+.ystdtb-posts__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* デフォルト画像プレースホルダー */
+.ystdtb-posts__no-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background-color: #f0f0f0;
+	color: #999;
+}
+
+.ystdtb-posts__no-image svg {
+	width: 48px;
+	height: 48px;
+}
+
+/* テキストエリア */
+.ystdtb-posts__text {
+	flex: 1;
+	min-width: 0;
+}
+
+/* メタ情報 */
+.ystdtb-posts__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	font-size: 0.8em;
+	color: #666;
+	margin-bottom: 0.4em;
+}
+
+.ystdtb-posts__date,
+.ystdtb-posts__cat {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25em;
+}
+
+.ystdtb-posts__date svg,
+.ystdtb-posts__cat svg {
+	width: 1em;
+	height: 1em;
+}
+
+/* タイトル */
+.ystdtb-posts__title {
+	margin: 0;
+	font-size: 1em;
+	line-height: 1.5;
+}
+
+/* 概要 */
+.ystdtb-posts__excerpt {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	margin: 0.4em 0 0;
+	font-size: 0.85em;
+	color: #666;
+	line-height: 1.6;
+}
+
+/* ================================
+   カード表示（is-card）
+   ================================ */
+.ystdtb-posts.is-card .ystdtb-posts__link {
+	flex-direction: column;
+}
+
+.ystdtb-posts.is-card .ystdtb-posts__text {
+	padding: 0.75rem 0 0;
+}
+
+/* ================================
+   リスト表示（is-list）
+   ================================ */
+.ystdtb-posts.is-list .ystdtb-posts__list {
+	grid-template-columns: 1fr;
+}
+
+.ystdtb-posts.is-list .ystdtb-posts__link {
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.ystdtb-posts.is-list .ystdtb-posts__thumbnail {
+	width: 120px;
+}
+
+/* ================================
+   シンプル表示（is-simple）
+   ================================ */
+.ystdtb-posts.is-simple .ystdtb-posts__list {
+	grid-template-columns: 1fr;
+	gap: 0;
+}
+
+.ystdtb-posts.is-simple .ystdtb-posts__item {
+	border-bottom: 1px solid #eee;
+}
+
+.ystdtb-posts.is-simple .ystdtb-posts__link {
+	padding: 0.75rem 0;
+}
+
+/* ================================
+   レスポンシブ
+   ================================ */
+@media (max-width: 1023px) {
+	.ystdtb-posts__list.col-tablet--1 { grid-template-columns: repeat(1, 1fr); }
+	.ystdtb-posts__list.col-tablet--2 { grid-template-columns: repeat(2, 1fr); }
+	.ystdtb-posts__list.col-tablet--3 { grid-template-columns: repeat(3, 1fr); }
+	.ystdtb-posts__list.col-tablet--4 { grid-template-columns: repeat(4, 1fr); }
+	.ystdtb-posts__list.col-tablet--5 { grid-template-columns: repeat(5, 1fr); }
+	.ystdtb-posts__list.col-tablet--6 { grid-template-columns: repeat(6, 1fr); }
+}
+
+@media (max-width: 599px) {
+	.ystdtb-posts__list.col-sp--1 { grid-template-columns: repeat(1, 1fr); }
+	.ystdtb-posts__list.col-sp--2 { grid-template-columns: repeat(2, 1fr); }
+	.ystdtb-posts__list.col-sp--3 { grid-template-columns: repeat(3, 1fr); }
+	.ystdtb-posts__list.col-sp--4 { grid-template-columns: repeat(4, 1fr); }
+	.ystdtb-posts__list.col-sp--5 { grid-template-columns: repeat(5, 1fr); }
+	.ystdtb-posts__list.col-sp--6 { grid-template-columns: repeat(6, 1fr); }
+
+	.ystdtb-posts.is-list .ystdtb-posts__thumbnail {
+		width: 80px;
+	}
+}
