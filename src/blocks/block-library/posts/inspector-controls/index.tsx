@@ -13,6 +13,7 @@ import { Thumbnail } from '@aktk/blocks/block-library/posts/inspector-controls/t
 import { Meta } from '@aktk/blocks/block-library/posts/inspector-controls/meta';
 import { SearchOption } from '@aktk/blocks/block-library/posts/inspector-controls/search-option';
 import { AdvancedSearch } from '@aktk/blocks/block-library/posts/inspector-controls/advanced-search';
+import { AdvancedDisplay } from '@aktk/blocks/block-library/posts/inspector-controls/advanced-display';
 
 // @ts-ignore.
 export function InspectorControls( props: PostsEditProps ): JSX.Element {
@@ -24,6 +25,7 @@ export function InspectorControls( props: PostsEditProps ): JSX.Element {
 			<Meta { ...props } />
 			<SearchOption { ...props } />
 			<AdvancedSearch { ...props } />
+			<AdvancedDisplay { ...props } />
 		</WPInspectorControls>
 	);
 }
