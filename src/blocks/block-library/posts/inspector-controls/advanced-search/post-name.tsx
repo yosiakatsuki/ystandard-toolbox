@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import TextControl from '@aktk/block-components/wp-controls/text-control';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 
 /**
  * Block dependencies.
@@ -35,6 +36,12 @@ export function PostName( props: PostsEditProps ) {
 				value={ postNameIn ?? '' }
 				onChange={ handleOnChange }
 			/>
+			<NoticeSecondaryText className="-mt-3">
+				{ __(
+					'複数指定する場合はカンマ区切りで入力してください（例: slug-1,slug-2）',
+					'ystandard-toolbox'
+				) }
+			</NoticeSecondaryText>
 		</BaseControl>
 	);
 }
