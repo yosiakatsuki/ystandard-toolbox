@@ -11,6 +11,7 @@ import { BasicOption } from '@aktk/blocks/block-library/posts/inspector-controls
 import { DisplayOption } from '@aktk/blocks/block-library/posts/inspector-controls/display-option';
 import { Thumbnail } from '@aktk/blocks/block-library/posts/inspector-controls/thumbnail';
 import { Meta } from '@aktk/blocks/block-library/posts/inspector-controls/meta';
+import { SearchOption } from '@aktk/blocks/block-library/posts/inspector-controls/search-option';
 
 // @ts-ignore.
 export function InspectorControls( props: PostsEditProps ): JSX.Element {
@@ -20,6 +21,7 @@ export function InspectorControls( props: PostsEditProps ): JSX.Element {
 			<DisplayOption { ...props } />
 			<Thumbnail { ...props } />
 			<Meta { ...props } />
+			<SearchOption { ...props } />
 		</WPInspectorControls>
 	);
 }
