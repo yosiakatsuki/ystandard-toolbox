@@ -26,6 +26,7 @@ export function PostTypeSelect( props: PostTypeSelectProps ) {
 		filter,
 		useEmptyValue = true,
 		emptyLabel,
+		noOptionsLabel,
 		disabled = false,
 	} = props;
 
@@ -60,14 +61,19 @@ export function PostTypeSelect( props: PostTypeSelectProps ) {
 		} ) );
 	}, [ postTypes, excludeSlugs, filter ] );
 
+	// 選択肢がない場合: noOptionsLabelを空選択肢として強制表示
+	const hasNoOptions = options.length === 0 && !! noOptionsLabel;
+	const resolvedEmptyLabel = hasNoOptions ? noOptionsLabel : emptyLabel;
+	const resolvedUseEmptyValue = hasNoOptions ? true : useEmptyValue;
+
 	return (
 		<CustomSelectControl
 			label={ label }
 			options={ options }
 			value={ value }
 			onChange={ onChange }
-			useEmptyValue={ useEmptyValue }
-			emptyLabel={ emptyLabel }
+			useEmptyValue={ resolvedUseEmptyValue }
+			emptyLabel={ resolvedEmptyLabel }
 			disabled={ disabled }
 		/>
 	);

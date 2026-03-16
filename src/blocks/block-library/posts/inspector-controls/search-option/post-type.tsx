@@ -29,6 +29,11 @@ export function PostType( props: PostsEditProps ) {
 				value={ postType }
 				onChange={ onChangePostType }
 				excludeSlugs={ [ 'attachment', 'ys-parts' ] }
+				useEmptyValue={ false }
+				noOptionsLabel={ __(
+					'選択できる投稿タイプがありません',
+					'ystandard-toolbox'
+				) }
 			/>
 		</BaseControl>
 	);

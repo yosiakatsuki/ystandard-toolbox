@@ -66,9 +66,10 @@ export function TaxonomySelect( props: TaxonomySelectProps ) {
 		} ) );
 	}, [ taxonomies, excludeSlugs, filter ] );
 
-	// 選択肢がない場合はnoOptionsLabelを空選択肢ラベルとして使用
-	const resolvedEmptyLabel =
-		options.length === 0 && noOptionsLabel ? noOptionsLabel : emptyLabel;
+	// 選択肢がない場合: noOptionsLabelを空選択肢として強制表示
+	const hasNoOptions = options.length === 0 && !! noOptionsLabel;
+	const resolvedEmptyLabel = hasNoOptions ? noOptionsLabel : emptyLabel;
+	const resolvedUseEmptyValue = hasNoOptions ? true : useEmptyValue;
 
 	return (
 		<CustomSelectControl
@@ -76,7 +77,7 @@ export function TaxonomySelect( props: TaxonomySelectProps ) {
 			options={ options }
 			value={ value }
 			onChange={ onChange }
-			useEmptyValue={ useEmptyValue }
+			useEmptyValue={ resolvedUseEmptyValue }
 			emptyLabel={ resolvedEmptyLabel }
 			disabled={ disabled }
 		/>

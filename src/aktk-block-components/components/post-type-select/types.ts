@@ -20,6 +20,8 @@ export interface PostTypeSelectProps {
 	useEmptyValue?: boolean;
 	/** 空選択肢のラベル */
 	emptyLabel?: string;
+	/** 選択肢がない場合に表示するラベル */
+	noOptionsLabel?: string;
 	/** 無効状態 */
 	disabled?: boolean;
 }
