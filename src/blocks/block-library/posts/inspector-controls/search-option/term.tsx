@@ -1,7 +1,8 @@
 /*
  * WordPress Dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
 
 /*
  * Aktk Dependencies
@@ -18,6 +19,23 @@ export function Term( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { taxonomy, termSlug } = attributes;
 
+	// タクソノミー名を取得
+	const taxonomyName = useSelect(
+		( select ) => {
+			if ( ! taxonomy ) {
+				return '';
+			}
+			// @ts-ignore -- getTaxonomy の型定義が不完全なため
+			const taxonomyInfo = select( coreStore ).getTaxonomy( taxonomy );
+			return taxonomyInfo?.name ?? '';
+		},
+		[ taxonomy ]
+	);
+
+	if ( ! taxonomy ) {
+		return null;
+	}
+
 	const handleOnChange = ( value: string ) => {
 		setAttributes( {
 			termSlug: value,
@@ -28,18 +46,11 @@ export function Term( props: PostsEditProps ) {
 	};
 
 	return (
-		<BaseControl
-			id={ 'term' }
-			label={ __( 'カテゴリー・タグ', 'ystandard-toolbox' ) }
-		>
+		<BaseControl id={ 'term' } label={ taxonomyName }>
 			<TermSelect
 				value={ termSlug ?? '' }
 				taxonomy={ taxonomy }
 				onChange={ handleOnChange }
-				noOptionsLabel={ __(
-					'分類を先に選択してください',
-					'ystandard-toolbox'
-				) }
 			/>
 		</BaseControl>
 	);
