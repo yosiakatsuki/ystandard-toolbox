@@ -12,6 +12,7 @@ import { DisplayOption } from '@aktk/blocks/block-library/posts/inspector-contro
 import { Thumbnail } from '@aktk/blocks/block-library/posts/inspector-controls/thumbnail';
 import { Meta } from '@aktk/blocks/block-library/posts/inspector-controls/meta';
 import { SearchOption } from '@aktk/blocks/block-library/posts/inspector-controls/search-option';
+import { AdvancedSearch } from '@aktk/blocks/block-library/posts/inspector-controls/advanced-search';
 
 // @ts-ignore.
 export function InspectorControls( props: PostsEditProps ): JSX.Element {
@@ -22,6 +23,7 @@ export function InspectorControls( props: PostsEditProps ): JSX.Element {
 			<Thumbnail { ...props } />
 			<Meta { ...props } />
 			<SearchOption { ...props } />
+			<AdvancedSearch { ...props } />
 		</WPInspectorControls>
 	);
 }
