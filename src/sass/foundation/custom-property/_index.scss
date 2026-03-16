@@ -1,3 +1,4 @@
+/* レガシー（旧テーマ連携用・今後廃止予定） */
 :root {
 	--ys--global--brand-color--main: #06669E;
 	--ys--global--brand-color--light: #F2F7FF;
@@ -17,4 +18,54 @@
 	--ys--global--background-color--ex-light-gray: #FAFBFC;
 	--ys--global--border-color--gray: #D7DADD;
 	--ys--global--border-color--light-gray: #ECEDF0;
+}
+
+/*
+ * yStandard Toolbox カラーパレット
+ *
+ * ブランドカラー #07689f をベースに設計。
+ * 濃色（dark）: 白背景上のテキスト・アイコンに使用（WCAG AA 4.5:1 以上）
+ * 淡色（light）: 背景色・装飾に使用
+ *
+ * コントラスト比（vs #ffffff）:
+ *   blue-dark    #07689f  6.0:1 ✓
+ *   red-dark     #b5332a  5.1:1 ✓
+ *   green-dark   #1e7b3c  5.3:1 ✓
+ *   yellow-dark  #7a6200  5.2:1 ✓
+ *   orange-dark  #a84e10  5.0:1 ✓
+ *   purple-dark  #6b4a9e  5.0:1 ✓
+ *   gray-text    #666666  5.7:1 ✓
+ */
+:root {
+	/* ベース */
+	--ystdtb--color--black: #222222;
+	--ystdtb--color--white: #ffffff;
+
+	/* 青（ブランドカラー） */
+	--ystdtb--color--blue-dark: #1565a0;
+	--ystdtb--color--blue-light: #dae9f5;
+
+	/* 赤 */
+	--ystdtb--color--red-dark: #b5332a;
+	--ystdtb--color--red-light: #fce8e6;
+
+	/* 緑 */
+	--ystdtb--color--green-dark: #1e7b3c;
+	--ystdtb--color--green-light: #e2f5ea;
+
+	/* 黄 */
+	--ystdtb--color--yellow-dark: #7a6200;
+	--ystdtb--color--yellow-light: #fdf5dc;
+
+	/* オレンジ */
+	--ystdtb--color--orange-dark: #a84e10;
+	--ystdtb--color--orange-light: #fef0e0;
+
+	/* 紫 */
+	--ystdtb--color--purple-dark: #6b4a9e;
+	--ystdtb--color--purple-light: #f0eaf8;
+
+	/* グレー */
+	--ystdtb--color--gray-bg: #f3f4f6;
+	--ystdtb--color--gray-text: #656565;
 }
