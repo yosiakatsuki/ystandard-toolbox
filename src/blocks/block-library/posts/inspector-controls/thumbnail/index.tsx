@@ -25,7 +25,7 @@ export function Thumbnail( props: PostsEditProps ) {
 		( 'simple' === listType && 'simple' === listTypeMobile );
 
 	return (
-		<Panel title={ __( '画像設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( 'サムネイル', 'ystandard-toolbox' ) }>
 			{ isSimpleDesign ? (
 				<p>
 					{ __(

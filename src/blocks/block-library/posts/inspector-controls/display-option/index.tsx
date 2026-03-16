@@ -16,7 +16,7 @@ import { LayoutDesign } from './layout-design';
 
 export function DisplayOption( props: PostsEditProps ) {
 	return (
-		<Panel title={ __( '表示設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( 'レイアウト', 'ystandard-toolbox' ) }>
 			<LayoutDesign { ...props } />
 			<Columns { ...props } />
 		</Panel>

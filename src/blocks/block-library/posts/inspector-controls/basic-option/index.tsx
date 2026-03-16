@@ -16,7 +16,7 @@ import { OrderBy } from './orderby';
 
 export function BasicOption( props: PostsEditProps ) {
 	return (
-		<Panel title={ __( '基本設定', 'ystandard-toolbox' ) }>
+		<Panel title={ __( '表示件数・並び順', 'ystandard-toolbox' ) }>
 			<Count { ...props } />
 			<OrderBy { ...props } />
 		</Panel>

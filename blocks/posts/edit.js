@@ -32,58 +32,6 @@ const Posts = ( props ) => {
 			<>
 				<InspectorControls>
 					<PanelBasicOption { ...props } />
-					<PanelBody
-						initialOpen={ false }
-						title={ __(
-							'日付・カテゴリー・概要の表示',
-							'ystandard-toolbox'
-						) }
-					>
-						<ToggleControl
-							label={ __(
-								'日付を表示する',
-								'ystandard-toolbox'
-							) }
-							onChange={ () => {
-								setAttributes( {
-									showDate: ! showDate,
-								} );
-							} }
-							checked={ showDate }
-							__nextHasNoMarginBottom
-						/>
-						<ToggleControl
-							label={ __(
-								'カテゴリーを表示する',
-								'ystandard-toolbox'
-							) }
-							onChange={ () => {
-								setAttributes( {
-									showCategory: ! showCategory,
-								} );
-							} }
-							checked={ showCategory }
-							__nextHasNoMarginBottom
-						/>
-						{ 'simple' !== listType && (
-							<>
-								<ToggleControl
-									label={ __(
-										'概要を表示する',
-										'ystandard-toolbox'
-									) }
-									onChange={ () => {
-										setAttributes( {
-											showExcerpt: ! showExcerpt,
-										} );
-									} }
-									checked={ showExcerpt }
-									__nextHasNoMarginBottom
-								/>
-								<BlockOption.ExcerptLength { ...props } />
-							</>
-						) }
-					</PanelBody>
 					<PanelSearchOption { ...props } />
 					<PanelAdvancedSearch { ...props } />
 					<PanelAdvancedDesign { ...props } />
