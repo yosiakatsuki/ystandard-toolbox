@@ -4,7 +4,10 @@ module.exports = {
 			stage: 2,
 			features: {
 				'nesting-rules': true,
+				'custom-media-queries': true,
 				'media-query-ranges': true,
+				'custom-properties': false,
+				'cascade-layers': false,
 			},
 		},
 		tailwindcss: {},
