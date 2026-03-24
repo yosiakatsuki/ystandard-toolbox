@@ -5,14 +5,14 @@
  * 濃色（dark）: 白背景上のテキスト・アイコンに使用（WCAG AA 4.5:1 以上）
  * 淡色（light）: 背景色・装飾に使用
  *
- * コントラスト比（vs #ffffff）:
- *   blue-dark    #07689f  6.0:1 ✓
- *   red-dark     #b5332a  5.1:1 ✓
- *   green-dark   #1e7b3c  5.3:1 ✓
- *   yellow-dark  #7a6200  5.2:1 ✓
- *   orange-dark  #a84e10  5.0:1 ✓
- *   purple-dark  #6b4a9e  5.0:1 ✓
- *   gray-text    #666666  5.7:1 ✓
+ * コントラスト比（vs #ffffff / vs light）:
+ *   blue-dark    #1565a0  6.2:1 / 5.0:1 ✓
+ *   red-dark     #b5332a  6.0:1 / 5.1:1 ✓
+ *   green-dark   #1e7b3c  5.3:1 / 4.7:1 ✓
+ *   yellow-dark  #7a6200  5.9:1 / 5.4:1 ✓
+ *   orange-dark  #a84e10  5.6:1 / 5.0:1 ✓
+ *   purple-dark  #6b4a9e  6.8:1 / 5.8:1 ✓
+ *   gray-text    #656565  5.8:1 / 5.3:1 ✓
  */
 :root {
 	/* ベース */
