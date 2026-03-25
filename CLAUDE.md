@@ -4,6 +4,12 @@
 
 **重要**: ドキュメント・コメント・チャットはすべて日本語で記述すること。
 
+## 関連ドキュメント
+
+- [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
+- [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
+- [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
+
 ## プロジェクト概要
 
 **yStandard Toolbox** は、無料WordPressテーマ「yStandard」を拡張する商用プラグイン。カスタムGutenbergブロック、デザイン設定、ユーティリティ機能を提供する。
