@@ -13,7 +13,8 @@
  * @var bool     $show_category   カテゴリー表示
  * @var string   $taxonomy        表示するタクソノミースラッグ（空の場合はデフォルト）
  * @var bool     $show_excerpt    概要表示
- * @var int      $excerpt_lines   概要の行数
+ * @var int      $excerpt_lines  概要の行数
+ * @var string   $wrapper_class  ラッパー要素のCSSクラス
  *
  * @package ystandard-toolbox
  */
@@ -29,8 +30,9 @@ $show_category = $args['show_category'];
 $taxonomy      = $args['taxonomy'];
 $show_excerpt  = $args['show_excerpt'];
 $excerpt_lines = $args['excerpt_lines'];
+$wrapper_class = $args['wrapper_class'];
 ?>
-<div class="ystdtb-posts is-simple">
+<div class="<?php echo esc_attr( $wrapper_class ); ?>">
 	<ul class="ystdtb-posts__list">
 		<?php while ( $query->have_posts() ) : ?>
 			<?php $query->the_post(); ?>

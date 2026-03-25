@@ -80,6 +80,10 @@ class Posts_Block {
 
 		$args = $this->get_template_args( $attributes, $query );
 
+		// 追加CSSクラスの反映.
+		$custom_class              = ! empty( $attributes['className'] ) ? $attributes['className'] : '';
+		$args['wrapper_class']     = trim( 'ystdtb-posts is-' . $args['list_type'] . ' ' . $custom_class );
+
 		// テンプレート名の決定.
 		$template_name = 'simple' === $args['list_type'] ? 'posts-simple.php' : 'posts.php';
 

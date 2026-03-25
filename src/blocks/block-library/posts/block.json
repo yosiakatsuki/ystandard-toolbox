@@ -9,6 +9,10 @@
 	"keywords": [ "posts", "post", "記事一覧" ],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
+		"className": {
+			"type": "string",
+			"default": ""
+		},
 		"count": {
 			"type": "number",
 			"default": 3
