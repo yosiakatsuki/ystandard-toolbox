@@ -83,9 +83,11 @@ PostCSS の `postcss-custom-media` と `postcss-media-minmax`（media-query-rang
 @custom-media --ystdtb--bp--pc (width < 64rem);
 
 /* モバイル（640px未満） */
+/* noinspection CssInvalidAtRule */
 @media (--ystdtb--bp--mobile) { }
 
 /* タブレット以下（1024px未満） */
+/* noinspection CssInvalidAtRule */
 @media (--ystdtb--bp--pc) { }
 ```
 
