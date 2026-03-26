@@ -13,6 +13,7 @@
  *   orange-dark  #a84e10  5.6:1 / 5.0:1 ✓
  *   purple-dark  #6b4a9e  6.8:1 / 5.8:1 ✓
  *   gray-text    #656565  5.8:1 / 5.3:1 ✓
+ *   gray-sub     #767676  4.5:1 / 4.2:1 ✓
  */
 :root {
 	/* ベース */
@@ -44,6 +45,14 @@
 	--ystdtb--color--purple-light: #f0eaf8;
 
 	/* グレー */
-	--ystdtb--color--gray-bg: #f3f4f6;
-	--ystdtb--color--gray-text: #656565;
+	--ystdtb--color--gray-background: var(
+		--ystd--site--background--light-gray,
+		#f3f4f6
+	);
+	--ystdtb--color--gray-border: var(
+		--ystd--site--border-color--gray,
+		#e5e7eb
+	);
+	--ystdtb--color--gray-sub: var(--ystd--text-color--light-gray, #767676);
+	--ystdtb--color--gray-text: var(--ystd--text-color--gray, #656565);
 }
