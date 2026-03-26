@@ -17,8 +17,6 @@
  * @package ystandard-toolbox
  */
 
-namespace ystandard_toolbox;
-
 defined( 'ABSPATH' ) || die();
 
 // テンプレート変数の展開.
