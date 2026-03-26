@@ -33,6 +33,11 @@
 
 		<exclude name="PEAR.Files.IncludingFile.BracketsNotRequired"/>
 	</rule>
+
+	<!-- src/blocks/ 内はブロックの規約（index.php）に従うためファイル名ルールを除外 -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>/src/blocks/</exclude-pattern>
+	</rule>
     <file>.</file>
     <exclude-pattern>/vendor/</exclude-pattern>
     <exclude-pattern>/build/</exclude-pattern>
