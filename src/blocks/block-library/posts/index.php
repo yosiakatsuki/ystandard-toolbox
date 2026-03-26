@@ -75,20 +75,17 @@ class Posts_Block {
 
 		if ( ! $query->have_posts() ) {
 			wp_reset_postdata();
+
 			return '';
 		}
 
+		// テンプレートに渡す引数の構築.
 		$args = $this->get_template_args( $attributes, $query );
-
-		// 追加CSSクラスの反映.
-		$custom_class              = ! empty( $attributes['className'] ) ? $attributes['className'] : '';
-		$args['wrapper_class']     = trim( 'ystdtb-posts is-' . $args['list_type'] . ' ' . $custom_class );
 
 		// テンプレート名の決定.
 		$template_name = 'simple' === $args['list_type'] ? 'posts-simple.php' : 'posts.php';
-
 		$template_path = $this->locate_template( $template_name );
-		$template_path = apply_filters( 'ystdtb/blocks/posts/template_path', $template_path, $template_name, $args );
+		$template_path = apply_filters( 'ystdtb_blocks_posts_template_path', $template_path, $template_name, $args );
 
 		ob_start();
 		load_template( $template_path, false, $args );
@@ -122,41 +119,80 @@ class Posts_Block {
 	/**
 	 * テンプレートに渡す変数を構築
 	 *
-	 * @param array     $attributes ブロック属性.
-	 * @param \WP_Query $query      投稿クエリ.
+	 * @param array $attributes ブロック属性.
+	 * @param \WP_Query $query 投稿クエリ.
 	 *
 	 * @return array
 	 */
 	private function get_template_args( $attributes, $query ) {
+
+		// 表示タイプ.
 		$list_type = $attributes['listType'] ?? 'card';
-		if ( wp_is_mobile() && ! empty( $attributes['listTypeMobile'] ) ) {
+		if ( self::is_mobile() && ! empty( $attributes['listTypeMobile'] ) ) {
 			$list_type = $attributes['listTypeMobile'];
 		}
 
+		// カラム数（モバイル・タブレット・PC）.
 		$col_mobile = $attributes['colMobile'] ?? 1;
 		$col_tablet = $attributes['colTablet'] ?? 3;
 		$col_pc     = $attributes['colPc'] ?? 3;
 
+		// サムネイルのアスペクト比.
 		$thumbnail_ratio = $attributes['thumbnailRatio'] ?? '16-9';
-		if ( wp_is_mobile() && ! empty( $attributes['thumbnailRatioMobile'] ) ) {
+		if ( self::is_mobile() && ! empty( $attributes['thumbnailRatioMobile'] ) ) {
 			$thumbnail_ratio = $attributes['thumbnailRatioMobile'];
 		}
 
-		$taxonomy = ! empty( $attributes['taxonomy'] ) ? $attributes['taxonomy'] : '';
+		// タクソノミースラッグ.
+		$taxonomy         = ! empty( $attributes['taxonomy'] ) ? $attributes['taxonomy'] : '';
+		$display_taxonomy = ! empty( $taxonomy ) ? $taxonomy : 'category';
 
-		return [
-			'query'           => $query,
-			'list_type'       => $list_type,
-			'show_img'        => $attributes['showImg'] ?? true,
-			'thumbnail_size'  => $attributes['thumbnailSize'] ?? 'full',
-			'thumbnail_ratio' => $thumbnail_ratio,
-			'show_date'       => $attributes['showDate'] ?? true,
-			'show_category'   => $attributes['showCategory'] ?? true,
-			'taxonomy'        => $taxonomy,
-			'show_excerpt'    => $attributes['showExcerpt'] ?? false,
-			'excerpt_lines'   => $attributes['excerptLines'] ?? 2,
-			'col_class'       => "col-sp--{$col_mobile} col-tablet--{$col_tablet} col-pc--{$col_pc}",
-		];
+		// 概要の行数.
+		$excerpt_lines = '';
+		if ( isset( $attributes['excerptLines'] ) && is_numeric( $attributes['excerptLines'] ) ) {
+			$excerpt_lines = 2 === (int) $attributes['excerptLines'] ? '' : (int) $attributes['excerptLines'];
+		}
+
+		// 追加CSSクラスの反映.
+		$custom_class  = ! empty( $attributes['className'] ) ? $attributes['className'] : '';
+		$wrapper_class = implode( ' ', array_filter( [ 'ystdtb-posts', 'is-' . $list_type, $custom_class ] ) );
+
+		// excerpt の style.
+		$excerpt_styles = array_filter(
+			[
+				'-webkit-line-clamp' => $excerpt_lines,
+			]
+		);
+
+		// 画像関連.
+		$thumbnail_size = $attributes['thumbnailSize'] ?? 'full';
+		$default_image  = Posts_Block::get_default_image( $thumbnail_size, 'ystdtb-posts__image' );
+
+		// アイコン関連
+		$calendar_icon = self::get_calendar_icon();
+		$taxonomy_icon = self::get_taxonomy_icon( $display_taxonomy );
+
+		return apply_filters(
+			'ystdtb_blocks_posts_template_args',
+			[
+				'query'           => $query,
+				'wrapper_class'   => $wrapper_class,
+				'list_type'       => $list_type,
+				'show_img'        => $attributes['showImg'] ?? true,
+				'thumbnail_size'  => $thumbnail_size,
+				'thumbnail_ratio' => $thumbnail_ratio,
+				'default_image'   => $default_image,
+				'show_date'       => $attributes['showDate'] ?? true,
+				'show_category'   => $attributes['showCategory'] ?? true,
+				'taxonomy'        => $taxonomy,
+				'show_excerpt'    => $attributes['showExcerpt'] ?? false,
+				'excerpt_lines'   => $excerpt_lines,
+				'excerpt_styles'  => implode( ' ', $excerpt_styles ),
+				'col_class'       => "col-sp--{$col_mobile} col-tablet--{$col_tablet} col-pc--{$col_pc}",
+				'calendar_icon'   => $calendar_icon,
+				'taxonomy_icon'   => $taxonomy_icon,
+			]
+		);
 	}
 
 	/**
@@ -221,7 +257,7 @@ class Posts_Block {
 	 */
 	private function get_count( $attributes ) {
 		$count = $attributes['count'] ?? 3;
-		if ( ! empty( $attributes['countMobile'] ) && wp_is_mobile() ) {
+		if ( ! empty( $attributes['countMobile'] ) && self::is_mobile() ) {
 			$count = $attributes['countMobile'];
 		}
 
@@ -237,7 +273,7 @@ class Posts_Block {
 	 */
 	private function get_offset( $attributes ) {
 		$offset = $attributes['offset'] ?? 0;
-		if ( ! empty( $attributes['offsetMobile'] ) && wp_is_mobile() ) {
+		if ( ! empty( $attributes['offsetMobile'] ) && self::is_mobile() ) {
 			$offset = $attributes['offsetMobile'];
 		}
 
@@ -253,7 +289,7 @@ class Posts_Block {
 	 *   3. プレースホルダーアイコン
 	 *
 	 * @param string $thumbnail_size 画像サイズ.
-	 * @param string $class          CSSクラス.
+	 * @param string $class CSSクラス.
 	 *
 	 * @return string 画像HTML.
 	 */
@@ -306,6 +342,17 @@ class Posts_Block {
 		$icon_data = Icon::get_icon( 'calendar' );
 
 		return $icon_data['icon'] ?? '';
+	}
+
+	/**
+	 * モバイル判定
+	 *
+	 * @return mixed|null
+	 */
+	public static function is_mobile() {
+		$is_mobile = wp_is_mobile();
+
+		return apply_filters( 'ystdtb_blocks_posts_is_mobile', $is_mobile );
 	}
 }
 

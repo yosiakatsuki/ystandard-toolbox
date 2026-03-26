@@ -7,18 +7,18 @@
  *
  * 利用可能な変数（$args）:
  *
- * @var WP_Query $query           投稿クエリ
- * @var string   $list_type       表示タイプ（'card' | 'list'）
- * @var bool     $show_img        画像表示
- * @var string   $thumbnail_size  画像サイズ（'thumbnail' | 'medium' | 'large' | 'full'）
- * @var string   $thumbnail_ratio アスペクト比（'16-9' | '4-3' | '1-1' 等）
- * @var bool     $show_date       日付表示
- * @var bool     $show_category   カテゴリー表示
- * @var string   $taxonomy        表示するタクソノミースラッグ（空の場合はデフォルト）
- * @var bool     $show_excerpt    概要表示
- * @var int      $excerpt_lines   概要の行数
- * @var string   $col_class      カラム用CSSクラス（例: 'col-sp--1 col-tablet--3 col-pc--3'）
- * @var string   $wrapper_class  ラッパー要素のCSSクラス
+ * @var WP_Query $query 投稿クエリ
+ * @var string $list_type 表示タイプ（'card' | 'list'）
+ * @var bool $show_img 画像表示
+ * @var string $thumbnail_size 画像サイズ（'thumbnail' | 'medium' | 'large' | 'full'）
+ * @var string $thumbnail_ratio アスペクト比（'16-9' | '4-3' | '1-1' 等）
+ * @var bool $show_date 日付表示
+ * @var bool $show_category カテゴリー表示
+ * @var string $taxonomy 表示するタクソノミースラッグ（空の場合はデフォルト）
+ * @var bool $show_excerpt 概要表示
+ * @var string $excerpt_styles 概要のstyle属性
+ * @var string $col_class カラム用CSSクラス（例: 'col-sp--1 col-tablet--3 col-pc--3'）
+ * @var string $wrapper_class ラッパー要素のCSSクラス
  *
  * @package ystandard-toolbox
  */
@@ -33,13 +33,16 @@ $list_type       = $args['list_type'];
 $show_img        = $args['show_img'];
 $thumbnail_size  = $args['thumbnail_size'];
 $thumbnail_ratio = $args['thumbnail_ratio'];
+$default_image   = $args['default_image'];
 $show_date       = $args['show_date'];
 $show_category   = $args['show_category'];
 $taxonomy        = $args['taxonomy'];
 $show_excerpt    = $args['show_excerpt'];
-$excerpt_lines   = $args['excerpt_lines'];
-$col_class     = $args['col_class'];
-$wrapper_class = $args['wrapper_class'];
+$excerpt_styles  = $args['excerpt_styles'];
+$col_class       = $args['col_class'];
+$wrapper_class   = $args['wrapper_class'];
+$calendar_icon   = $args['calendar_icon'];
+$taxonomy_icon   = $args['taxonomy_icon'];
 ?>
 <div class="<?php echo esc_attr( $wrapper_class ); ?>">
 	<ul class="ystdtb-posts__list <?php echo esc_attr( $col_class ); ?>">
@@ -53,10 +56,7 @@ $wrapper_class = $args['wrapper_class'];
 							<?php if ( has_post_thumbnail() ) : ?>
 								<?php the_post_thumbnail( $thumbnail_size, [ 'class' => 'ystdtb-posts__image' ] ); ?>
 							<?php else : ?>
-								<?php
-								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG出力のため
-								echo Posts_Block::get_default_image( $thumbnail_size, 'ystdtb-posts__image' );
-								?>
+								<?php echo wp_kses_post( $default_image ); ?>
 							<?php endif; ?>
 						</figure>
 					<?php endif; ?>
@@ -77,10 +77,7 @@ $wrapper_class = $args['wrapper_class'];
 							<div class="ystdtb-posts__meta">
 								<?php if ( $show_date ) : ?>
 									<span class="ystdtb-posts__date">
-										<?php
-										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG出力のため
-										echo Posts_Block::get_calendar_icon();
-										?>
+										<?php echo wp_kses_post( $calendar_icon ); ?>
 										<time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>">
 											<?php echo esc_html( get_the_date() ); ?>
 										</time>
@@ -91,10 +88,7 @@ $wrapper_class = $args['wrapper_class'];
 									$cat_class = esc_attr( $display_taxonomy . '--' . $term_data->slug );
 									?>
 									<span class="ystdtb-posts__cat <?php echo $cat_class; ?>">
-										<?php
-										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG出力のため
-										echo Posts_Block::get_taxonomy_icon( $display_taxonomy );
-										?>
+										<?php echo wp_kses_post( $taxonomy_icon ); ?>
 										<?php echo esc_html( $term_data->name ); ?>
 									</span>
 								<?php endif; ?>
@@ -104,12 +98,11 @@ $wrapper_class = $args['wrapper_class'];
 						<p class="ystdtb-posts__title"><?php the_title(); ?></p>
 
 						<?php if ( $show_excerpt ) : ?>
-							<p class="ystdtb-posts__excerpt" style="<?php echo esc_attr( "-webkit-line-clamp: {$excerpt_lines};" ); ?>">
+							<p class="ystdtb-posts__excerpt" style="<?php echo esc_attr( $excerpt_styles ); ?>">
 								<?php echo esc_html( get_the_excerpt() ); ?>
 							</p>
 						<?php endif; ?>
 					</div>
-
 				</a>
 			</li>
 		<?php endwhile; ?>
