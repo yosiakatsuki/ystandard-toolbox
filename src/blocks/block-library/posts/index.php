@@ -87,13 +87,103 @@ class Posts_Block {
 		$template_path = $this->locate_template( $template_name );
 		$template_path = apply_filters( 'ystdtb_blocks_posts_template_path', $template_path, $template_name, $args );
 
+		// テンプレート内で wp_kses_post() を使用してもSVGが消えないよう、レンダリング中のみ許可タグを拡張.
+		add_filter( 'wp_kses_allowed_html', [ $this, 'allow_svg_in_kses' ], 10, 2 );
+
 		ob_start();
 		load_template( $template_path, false, $args );
 		$html = ob_get_clean();
 
+		remove_filter( 'wp_kses_allowed_html', [ $this, 'allow_svg_in_kses' ], 10 );
+
 		wp_reset_postdata();
 
 		return $html;
+	}
+
+	/**
+	 * wp_kses_allowed_html にSVGタグを追加
+	 *
+	 * @param array  $allowed_tags 許可タグ.
+	 * @param string $context      コンテキスト.
+	 *
+	 * @return array
+	 */
+	public function allow_svg_in_kses( $allowed_tags, $context ) {
+		if ( 'post' !== $context ) {
+			return $allowed_tags;
+		}
+
+		$svg_tags = [
+			'svg'      => [
+				'xmlns'        => [],
+				'viewbox'      => [],
+				'width'        => [],
+				'height'       => [],
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+				'class'        => [],
+				'style'        => [],
+				'aria-hidden'  => [],
+				'role'         => [],
+				'focusable'    => [],
+			],
+			'path'     => [
+				'd'              => [],
+				'fill'           => [],
+				'stroke'         => [],
+				'stroke-width'   => [],
+				'stroke-linecap' => [],
+			],
+			'circle'   => [
+				'cx'           => [],
+				'cy'           => [],
+				'r'            => [],
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+			],
+			'rect'     => [
+				'x'            => [],
+				'y'            => [],
+				'width'        => [],
+				'height'       => [],
+				'rx'           => [],
+				'ry'           => [],
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+			],
+			'line'     => [
+				'x1'           => [],
+				'y1'           => [],
+				'x2'           => [],
+				'y2'           => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+			],
+			'polyline' => [
+				'points'       => [],
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+			],
+			'polygon'  => [
+				'points'       => [],
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+			],
+			'g'        => [
+				'fill'         => [],
+				'stroke'       => [],
+				'stroke-width' => [],
+				'transform'    => [],
+			],
+		];
+
+		return array_merge( $allowed_tags, $svg_tags );
 	}
 
 	/**
