@@ -13,12 +13,14 @@ import { toInt } from '@aktk/block-components/utils/number';
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
+import { isAllSimpleDesign } from '../../utils';
 
 export function ExcerptLines( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { excerptLines, showExcerpt } = attributes;
+	const allSimple = isAllSimpleDesign( attributes );
 
-	if ( ! showExcerpt ) {
+	if ( ! showExcerpt || allSimple ) {
 		return null;
 	}
 
