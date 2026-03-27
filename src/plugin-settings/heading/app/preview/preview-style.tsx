@@ -375,6 +375,11 @@ export function getBreakpoints( type: 'mobile' | 'tablet' | 'desktop' ) {
 	return breakpoints[ type ];
 }
 
+export function getBreakpointUnit(): string {
+	const settings = getHeadingOptions();
+	return settings?.breakpointUnit || 'rem';
+}
+
 export function addMobileMediaQuery( style: string ) {
 	const mobile = getBreakpoints( 'mobile' );
 	return addMediaQuery( style, '', mobile );
@@ -386,14 +391,19 @@ export function addTabletMediaQuery( style: string ) {
 	return addMediaQuery( style, mobile, tablet );
 }
 
-export function addMediaQuery( style: string, min?: string, max?: string ) {
+export function addMediaQuery(
+	style: string,
+	min?: number | string,
+	max?: number | string
+) {
 	// max側の計算が簡易的。実際にPHPで出力されるものと少し違うが、管理画面側だけの話なのでそういう仕様とする。
+	const unit = getBreakpointUnit();
 	if ( min && max ) {
-		return `@media (min-width: ${ min }) and (max-width: ${ max }) { ${ style } }`;
+		return `@media (min-width: ${ min }${ unit }) and (max-width: ${ max }${ unit }) { ${ style } }`;
 	} else if ( min ) {
-		return `@media (min-width: ${ min }) { ${ style } }`;
+		return `@media (min-width: ${ min }${ unit }) { ${ style } }`;
 	} else if ( max ) {
-		return `@media (max-width: ${ max }) { ${ style } }`;
+		return `@media (max-width: ${ max }${ unit }) { ${ style } }`;
 	}
 	return style;
 }

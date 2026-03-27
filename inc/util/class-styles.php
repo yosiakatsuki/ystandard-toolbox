@@ -24,10 +24,10 @@ class Styles {
 	 * @var array
 	 */
 	const BREAKPOINTS = [
-		'mobile'  => 640,
-		'tablet'  => 768,
-		'desktop' => 1024,
-		'large'   => 1200,
+		'mobile'  => 40,  // 640px / 16.
+		'tablet'  => 48,  // 768px / 16.
+		'desktop' => 64,  // 1024px / 16.
+		'large'   => 75,  // 1200px / 16.
 	];
 
 	/**
@@ -35,7 +35,7 @@ class Styles {
 	 *
 	 * @var string
 	 */
-	const BREAKPOINT_UNIT = 'px';
+	const BREAKPOINT_UNIT = 'rem';
 
 	/**
 	 * Axis Position.
@@ -427,7 +427,21 @@ class Styles {
 	}
 
 	/**
-	 * ブレークポイントのem計算のベースサイズ.
+	 * max-width計算用の調整値を取得.
+	 *
+	 * postcss-media-minmax に倣い、pxは0.02、それ以外は0.001を使用.
+	 *
+	 * @return float
+	 */
+	public static function get_max_width_step() {
+		$unit = self::get_breakpoint_unit();
+		$step = 'px' === $unit ? 0.02 : 0.001;
+
+		return apply_filters( 'ystdtb_css_max_width_step', $step, $unit );
+	}
+
+	/**
+	 * ブレークポイントのmax-width値を取得.
 	 *
 	 * @param string $type mobile/tablet/desktop.
 	 *
@@ -441,14 +455,14 @@ class Styles {
 			return 0;
 		}
 
-		// 定義にはmin側のサイズが入るので、maxの計算は-0.02する.
-		$result = (int) $breakpoints[ $type ] - 0.02;
+		// 定義にはmin側のサイズが入るので、maxの計算は調整値を引く.
+		$step   = self::get_max_width_step();
+		$result = $breakpoints[ $type ] - $step;
 
 		return apply_filters(
 			'ystdtb_css_breakpoints_max_width_size',
 			apply_filters( 'ys_get_breakpoints_max_width_size', $result, $breakpoints, $type )
 		);
-
 	}
 
 	/**
@@ -463,36 +477,33 @@ class Styles {
 	public static function add_media_query( $css, $min = '', $max = '' ) {
 		$breakpoints = self::get_breakpoints();
 		$unit        = self::get_breakpoint_unit();
+
 		if ( ! array_key_exists( $min, $breakpoints ) && ! array_key_exists( $max, $breakpoints ) ) {
 			return $css;
 		}
-		// min側
+
+		$conditions = [];
+
+		// min側.
 		if ( array_key_exists( $min, $breakpoints ) ) {
-			$breakpoint = $breakpoints[ $min ];
-			$breakpoint = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoint, $min, $breakpoints );
-			$min        = "(min-width: {$breakpoint}{$unit})";
-		}
-		// max側
-		if ( array_key_exists( $max, $breakpoints ) ) {
-			// @media max-width:... 側を取得.
-			$breakpoint = self::get_breakpoints_max_width_size( $max );
-			$breakpoint = apply_filters( 'ystdtb_breakpoints_max_width', $breakpoint, $max, $breakpoints );
-			$max        = "(max-width: {$breakpoint}{$unit})";
-		}
-		$breakpoint = $min . $max;
-		if ( '' !== $min && '' !== $max ) {
-			$breakpoint = $min . ' AND ' . $max;
+			$value        = apply_filters( 'ystdtb_breakpoints_min_width', $breakpoints[ $min ], $min, $breakpoints );
+			$conditions[] = "(min-width: {$value}{$unit})";
 		}
 
-		if ( empty( $breakpoint ) ) {
+		// max側.
+		if ( array_key_exists( $max, $breakpoints ) ) {
+			$value        = self::get_breakpoints_max_width_size( $max );
+			$value        = apply_filters( 'ystdtb_breakpoints_max_width', $value, $max, $breakpoints );
+			$conditions[] = "(max-width: {$value}{$unit})";
+		}
+
+		$query = implode( ' AND ', $conditions );
+
+		if ( empty( $query ) ) {
 			return $css;
 		}
 
-		return sprintf(
-			'@media %s {%s}',
-			$breakpoint,
-			$css
-		);
+		return sprintf( '@media %s {%s}', $query, $css );
 	}
 
 	/**

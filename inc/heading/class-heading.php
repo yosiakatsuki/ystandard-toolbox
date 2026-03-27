@@ -186,7 +186,8 @@ class Heading {
 		$settings['heading_design']        = self::get_heading_design_options();
 		$settings['heading_level']         = self::get_heading_level_options();
 		$settings['heading_is_compatible'] = $this->is_compatible_mode();
-		$settings['heading_breakpoints']   = Styles::get_breakpoints();
+		$settings['heading_breakpoints']      = Styles::get_breakpoints();
+		$settings['heading_breakpoint_unit']  = Styles::get_breakpoint_unit();
 
 		return $settings;
 	}
