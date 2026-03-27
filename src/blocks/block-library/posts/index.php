@@ -114,16 +114,19 @@ class Posts_Block {
 		$responsive = [
 			'desktop' => '',
 			'tablet'  => '',
+			'mobile'  => '',
 		];
 
 		for ( $i = 1; $i <= 6; $i++ ) {
 			$responsive['desktop'] .= ".ystdtb-posts__list:where(.col-desktop--{$i}) {--ystdtb--posts--columns:" . $i . ';}';
 			$responsive['tablet']  .= ".ystdtb-posts__list:where(.col-tablet--{$i}) {--ystdtb--posts--columns:" . $i . ';}';
+			$responsive['mobile']  .= ".ystdtb-posts__list:where(.col-mobile--{$i}) {--ystdtb--posts--columns:" . $i . ';}';
 		}
 
 		// 結合.
 		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
 		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
 
 		wp_register_style( $handle, false );
 		wp_add_inline_style( $handle, $css );
