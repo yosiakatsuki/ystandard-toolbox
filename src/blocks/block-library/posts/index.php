@@ -7,6 +7,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -33,6 +35,7 @@ class Posts_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -99,6 +102,32 @@ class Posts_Block {
 		wp_reset_postdata();
 
 		return $html;
+	}
+
+	/**
+	 * レスポンシブスタイルのエンキュー
+	 */
+	public function enqueue_responsive_style() {
+		$handle = 'ystdtb-blocks-posts-responsive';
+		$css    = '';
+
+		$responsive = [
+			'desktop' => '',
+			'tablet'  => '',
+		];
+
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$responsive['desktop'] .= ".ystdtb-posts__list:where(.col-desktop--{$i}) {--ystdtb--posts--columns:" . $i . ';}';
+			$responsive['tablet']  .= ".ystdtb-posts__list:where(.col-tablet--{$i}) {--ystdtb--posts--columns:" . $i . ';}';
+		}
+
+		// 結合.
+		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, $css );
+		wp_enqueue_style( $handle );
 	}
 
 	/**
@@ -278,7 +307,7 @@ class Posts_Block {
 				'show_excerpt'    => $attributes['showExcerpt'] ?? false,
 				'excerpt_lines'   => $excerpt_lines,
 				'excerpt_styles'  => implode( ' ', $excerpt_styles ),
-				'col_class'       => "col-sp--{$col_mobile} col-tablet--{$col_tablet} col-pc--{$col_pc}",
+				'col_class'       => "col-mobile--{$col_mobile} col-tablet--{$col_tablet} col-desktop--{$col_pc}",
 				'calendar_icon'   => $calendar_icon,
 				'taxonomy_icon'   => $taxonomy_icon,
 			]

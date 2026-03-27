@@ -50,27 +50,27 @@
 	padding: 0;
 	grid-template-columns: repeat(var(--ystdtb--posts--columns), 1fr);
 
-	&:where(.col-sp--1) {
+	&:where(.col-mobile--1) {
 		--ystdtb--posts--columns: 1;
 	}
 
-	&:where(.col-sp--2) {
+	&:where(.col-mobile--2) {
 		--ystdtb--posts--columns: 2;
 	}
 
-	&:where(.col-sp--3) {
+	&:where(.col-mobile--3) {
 		--ystdtb--posts--columns: 3;
 	}
 
-	&:where(.col-sp--4) {
+	&:where(.col-mobile--4) {
 		--ystdtb--posts--columns: 4;
 	}
 
-	&:where(.col-sp--5) {
+	&:where(.col-mobile--5) {
 		--ystdtb--posts--columns: 5;
 	}
 
-	&:where(.col-sp--6) {
+	&:where(.col-mobile--6) {
 		--ystdtb--posts--columns: 6;
 	}
 }
