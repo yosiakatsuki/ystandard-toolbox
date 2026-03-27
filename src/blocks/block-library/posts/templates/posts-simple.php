@@ -59,7 +59,7 @@ $wrapper_class = $args['wrapper_class'];
 									$cat_class = esc_attr( $display_taxonomy . '--' . $term_data->slug );
 									?>
 									<span class="ystdtb-posts__cat <?php echo $cat_class; ?>">
-										<?php echo esc_html( $term_data->name ); ?>
+										<span class="ystdtb-posts__cat-name"><?php echo esc_html( $term_data->name ); ?></span>
 									</span>
 								<?php endif; ?>
 							</div>

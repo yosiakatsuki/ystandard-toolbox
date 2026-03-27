@@ -87,7 +87,7 @@ $taxonomy_icon   = $args['taxonomy_icon'];
 									?>
 									<span class="ystdtb-posts__cat <?php echo $cat_class; ?>">
 										<?php echo wp_kses_post( $taxonomy_icon ); ?>
-										<?php echo esc_html( $term_data->name ); ?>
+										<span class="ystdtb-posts__cat-name"><?php echo esc_html( $term_data->name ); ?></span>
 									</span>
 								<?php endif; ?>
 							</div>

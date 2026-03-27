@@ -48,12 +48,13 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	grid-template-columns: repeat(var(--ystdtb--posts--columns), 1fr);
+	grid-template-columns: repeat(var(--ystdtb--posts--columns), minmax(0, 1fr));
 }
 
 /* リンク */
 .ystdtb-posts__link {
 	display: flex;
+	min-width: 0;
 	color: currentColor;
 	text-decoration: none;
 }
@@ -164,14 +165,27 @@
 	:where(svg) {
 		width: var(--ystdtb--posts--meta-icon-size);
 		height: var(--ystdtb--posts--meta-icon-size);
+		flex-shrink: 0;
 	}
 }
 
+/* 日付：折り返さず全文表示 */
 .ystdtb-posts__date {
 	font-size: var(--ystdtb--posts--meta-date-font-size);
+	white-space: nowrap;
+	flex-shrink: 0;
 }
+
+/* カテゴリー：入りきらない場合は省略表示 */
 .ystdtb-posts__cat {
 	font-size: var(--ystdtb--posts--meta-term-font-size);
+	min-width: 0;
+}
+
+.ystdtb-posts__cat-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 /* タイトル */
