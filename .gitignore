@@ -14,3 +14,4 @@ block-example/
 .serena
 .claude
 tsconfig.tsbuildinfo
+.phpunit.result.cache
