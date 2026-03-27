@@ -277,7 +277,7 @@ EOD;
 	font-size:16px;
 	margin-top:10px;
 }
-@media (max-width: 37.5em) {
+@media (max-width: 39.999rem) {
 .block-selector{
 	font-size:12px;
 	margin-left:10px;
@@ -313,13 +313,13 @@ EOD;
 	font-size:16px;
 	margin-top:10px;
 }
-@media (min-width: 37.5625em) AND (max-width: 64em) {
+@media (min-width: 40rem) AND (max-width: 63.999rem) {
 .block-selector{
 	font-size:14px;
 	margin-bottom:10px;
 }
 }
-@media (max-width: 37.5em) {
+@media (max-width: 39.999rem) {
 .block-selector{
 	font-size:12px;
 	margin-left:10px;
