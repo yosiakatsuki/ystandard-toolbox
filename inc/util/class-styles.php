@@ -27,7 +27,7 @@ class Styles {
 		'mobile'  => 640,
 		'tablet'  => 768,
 		'desktop' => 1024,
-		'wide'    => 1200,
+		'large'   => 1200,
 	];
 
 	/**
@@ -143,9 +143,9 @@ class Styles {
 					$color_rgb  = implode( ',', $color_rgb );
 					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
 					// 色.
-					$color_var["{$var_prefix}-{$type}"]      = $value['desktop'];
-					$color_var["{$var_prefix}-{$type}-rgb"]  = "rgb({$color_rgb})";
-					$color_var["{$var_prefix}-{$type}-rgba"] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
+					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
+					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
+					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
 					// マージ.
 					$desktop = array_merge( $color_var, $desktop );
 				}
@@ -287,7 +287,7 @@ class Styles {
 				}
 
 				// セット.
-				$parse_result["border-{$position}"] = $value;
+				$parse_result[ "border-{$position}" ] = $value;
 			}
 
 			return $parse_result;
@@ -337,7 +337,7 @@ class Styles {
 				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
 					$value = 0;
 				}
-				$parse_result["{$name}-{$position}"] = $value;
+				$parse_result[ "{$name}-{$position}" ] = $value;
 			}
 
 			return $parse_result;
