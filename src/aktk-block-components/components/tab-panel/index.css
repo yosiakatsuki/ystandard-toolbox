@@ -1,0 +1,21 @@
+.aktk-responsive-select-tab {
+	& .components-tab-panel__tabs {
+		border: none;
+		border-bottom: 1px solid rgb(243 244 246);
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	& .components-tab-panel__tabs-item {
+		text-align: center;
+		justify-content: center;
+	}
+}
+
+.aktk-responsive-select-tab-for-setting-page {
+	& .aktk-responsive-select-tab {
+		& .components-tab-panel__tabs {
+			display: block;
+		}
+	}
+}

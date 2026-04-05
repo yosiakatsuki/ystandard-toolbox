@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import './style-editor.scss';
+
 
 /**
  * 新しいタブで開くときに追加するrel属性

@@ -1,0 +1,36 @@
+.aktk-components__color-palette-control {
+	& legend {
+		padding-left: 1rem;
+		padding-right: 1rem;
+		padding-top: 1rem;
+
+		& * {
+			font-weight: 700 !important;
+			margin: 0 !important;
+		}
+
+		& + div {
+			padding-top: 4px !important;
+		}
+	}
+}
+
+.components-circular-option-picker__option {
+	&[style*="currentColor"],
+	&[style*="currentcolor"] {
+		color: transparent !important;
+		background-color: #fff !important;
+		background: repeating-linear-gradient(
+			-45deg,
+			rgb(153 153 153 / 0.8),
+			rgb(153 153 153 / 0.8) 3px,
+			#fff 0,
+			#fff 6px
+		) !important;
+	}
+
+	&[style*="transparent"] {
+		color: transparent !important;
+		background-color: rgb(255 255 255 / 0.6) !important;
+	}
+}

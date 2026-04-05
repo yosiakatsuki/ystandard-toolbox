@@ -12,6 +12,7 @@ export function getHeadingOptions() {
 		level: getPluginSettings( 'heading_level' ),
 		isCompatible: getPluginSettings( 'heading_is_compatible' ),
 		breakpoints: getPluginSettings( 'heading_breakpoints' ),
+		breakpointUnit: getPluginSettings( 'heading_breakpoint_unit' ),
 	};
 }
 

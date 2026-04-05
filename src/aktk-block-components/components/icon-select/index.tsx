@@ -14,10 +14,7 @@ import Button from '@aktk/block-components/wp-controls/button';
 import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 import { getFilteredIcons } from '@aktk/block-components/utils/icon';
 
-/**
- * Internal dependencies.
- */
-import './style-editor.scss';
+
 
 // @ts-ignore
 export interface IconSelectProps {
@@ -34,8 +31,9 @@ export function IconSelect( props: IconSelectProps ) {
 	const [ popoverAnchor, setPopoverAnchor ] = useState();
 	const filterRef = useRef( null );
 
+	// @ts-ignore
 	return (
-		<div className={ 'ystd-component__icon-select' }>
+		<div className={ 'aktk-component__icon-select' }>
 			<>
 				{ label && <div>{ label }</div> }
 
@@ -44,7 +42,7 @@ export function IconSelect( props: IconSelectProps ) {
 					// @ts-expect-error
 					ref={ setPopoverAnchor }
 				>
-					<div className="ystd-component__icon-preview flex aspect-square size-8 items-center justify-center bg-gray-300">
+					<div className="aktk-component__icon-preview flex aspect-square size-8 items-center justify-center bg-gray-300">
 						<PreviewIcon icon={ icon } />
 					</div>
 					<Button
@@ -81,7 +79,7 @@ export function IconSelect( props: IconSelectProps ) {
 						anchor={ popoverAnchor }
 						position={ 'top right' }
 						className={
-							'ystd-component__icon-select__popover min-w-[300px]'
+							'aktk-component__icon-select__popover min-w-[300px]'
 						}
 						onClose={ () => {
 							setTimeout( () => {
@@ -108,6 +106,7 @@ export function IconSelect( props: IconSelectProps ) {
 								</Button>
 							</div>
 							<TextControl
+								// @ts-ignore
 								ref={ filterRef }
 								value={ filter }
 								onChange={ setFilter }
@@ -171,7 +170,7 @@ function IconButtons( props: IconButtonsProps ) {
 
 	const Content = useMemo( () => {
 		return (
-			<div className="ystd-component__icon-select__icon-list grid grid-cols-5 gap-2">
+			<div className="aktk-component__icon-select__icon-list grid grid-cols-5 gap-2">
 				{ icons.map( ( item ) => {
 					const variant =
 						icon === item.name ? 'primary' : 'secondary';

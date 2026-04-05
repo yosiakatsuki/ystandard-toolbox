@@ -1,0 +1,17 @@
+/* コンポーネント共通CSS変数 */
+:root {
+	--aktk-component--text-color--gray: #6b7280;
+}
+
+/* コンポーネントCSS */
+@import './components/buttons/index.css';
+@import './components/color-pallet-control/index.css';
+@import './components/custom-font-size-picker/index.css';
+@import './components/custom-select-control/index.css';
+@import './components/icon-control/index.css';
+@import './components/icon-select/index.css';
+@import './components/link-control/index.css';
+@import './components/notice/index.css';
+@import './components/tab-panel/index.css';
+@import './components/text-control/stretch-text-control/index.css';
+@import './components/toggle-group/index.css';

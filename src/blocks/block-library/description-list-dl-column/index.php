@@ -79,9 +79,9 @@ class Description_List_Column_Block {
 		$responsive['mobile'] .= '.ystdtb-dl-column:where(.is-stacked-on-mobile) {display:block;}';
 		$responsive['mobile'] .= '.ystdtb-dl-column:where(.is-stacked-on-mobile) + :where(.ystdtb-dl-column) {margin-block-start:var(--ystd-layout-gap, 1.5rem);}';
 		// column-width.
-		$responsive['desktop'] .= '.ystdtb-dl-column[style*="dl-column--width--desktop"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--desktop);}';
-		$responsive['tablet'] .= '.ystdtb-dl-column[style*="dl-column--width--tablet"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--tablet);}';
-		$responsive['mobile'] .= '.ystdtb-dl-column[style*="dl-column--width--mobile"] {--ystdtb--dl-column--width:var(--ystdtb--dl-column--width--mobile);}';
+		$responsive['desktop'] .= '.ystdtb-dl-column[style*="desktop--dl-column--width"] {--ystdtb--dl-column--width:var(--ystdtb--desktop--dl-column--width);}';
+		$responsive['tablet']  .= '.ystdtb-dl-column[style*="tablet--dl-column--width"] {--ystdtb--dl-column--width:var(--ystdtb--tablet--dl-column--width);}';
+		$responsive['mobile']  .= '.ystdtb-dl-column[style*="mobile--dl-column--width"] {--ystdtb--dl-column--width:var(--ystdtb--mobile--dl-column--width);}';
 
 		// 結合.
 		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );

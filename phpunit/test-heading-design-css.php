@@ -277,7 +277,7 @@ EOD;
 	font-size:16px;
 	margin-top:10px;
 }
-@media (max-width: 37.5em) {
+@media (max-width: 39.999rem) {
 .block-selector{
 	font-size:12px;
 	margin-left:10px;
@@ -313,13 +313,13 @@ EOD;
 	font-size:16px;
 	margin-top:10px;
 }
-@media (min-width: 37.5625em) AND (max-width: 64em) {
+@media (min-width: 40rem) AND (max-width: 63.999rem) {
 .block-selector{
 	font-size:14px;
 	margin-bottom:10px;
 }
 }
-@media (max-width: 37.5em) {
+@media (max-width: 39.999rem) {
 .block-selector{
 	font-size:12px;
 	margin-left:10px;
@@ -343,51 +343,69 @@ EOD;
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
 
-		$expected = '@media (min-width: 48.0625em) {.css{color:#222;}}';
+		// デフォルト: rem単位.
+		$expected = '@media (min-width: 48rem) {.css{color:#222;}}';
 		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, 'tablet' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
 
-		$expected = '@media (max-width: 37.5em) {.css{color:#222;}}';
+		// max-width: rem単位では-0.001の調整.
+		$expected = '@media (max-width: 39.999rem) {.css{color:#222;}}';
 		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, '', 'mobile' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
 
-		$expected = '@media (min-width: 48.0625em) AND (max-width: 64em) {.css{color:#222;}}';
+		// min-width AND max-width.
+		$expected = '@media (min-width: 48rem) AND (max-width: 63.999rem) {.css{color:#222;}}';
 		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, 'tablet', 'desktop' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
 
-		add_filter( 'ystdtb_css_breakpoints_base_size', [ $this, 'breakpoints_base_size' ] );
-		$expected = '@media (min-width: 48.1em) {.css{color:#222;}}';
+		// フックでpx単位に切り替え.
+		$to_px_breakpoints = function () {
+			return [
+				'mobile'  => 640,
+				'tablet'  => 768,
+				'desktop' => 1024,
+				'large'   => 1200,
+			];
+		};
+		$to_px_unit        = function () {
+			return 'px';
+		};
+		add_filter( 'ystdtb_css_breakpoints', $to_px_breakpoints );
+		add_filter( 'ystdtb_css_breakpoint_unit', $to_px_unit );
+
+		// px単位では-0.02の調整.
+		$expected = '@media (min-width: 768px) {.css{color:#222;}}';
 		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, 'tablet' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
-		remove_filter( 'ystdtb_css_breakpoints_base_size', [ $this, 'breakpoints_base_size' ] );
 
-
-		add_filter( 'ys_theme_breakpoints', [ $this, 'custom_breakpoints' ] );
-		$expected = '@media (min-width: 769px) {.css{color:#222;}}';
-		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, 'tablet' );
+		$expected = '@media (max-width: 639.98px) {.css{color:#222;}}';
+		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, '', 'mobile' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
-		$expected = '@media (min-width: 601px) AND (max-width: 1024px) {.css{color:#222;}}';
+
+		$expected = '@media (min-width: 640px) AND (max-width: 1023.98px) {.css{color:#222;}}';
 		$actual   = \ystandard_toolbox\Util\Styles::add_media_query( $css, 'mobile', 'desktop' );
 		$this->assertEquals(
 			\ystandard_toolbox\Util\Text::minify( $expected ),
 			\ystandard_toolbox\Util\Text::minify( $actual )
 		);
-		remove_filter( 'ys_theme_breakpoints', [ $this, 'custom_breakpoints' ] );
+
+		remove_filter( 'ystdtb_css_breakpoints', $to_px_breakpoints );
+		remove_filter( 'ystdtb_css_breakpoint_unit', $to_px_unit );
 	}
 
 	function test_add_pseudo_elements() {

@@ -27,7 +27,7 @@ export function stripUndefined( obj: object ): object | undefined {
 		return obj;
 	}
 	if ( isEmpty( obj ) ) {
-		return obj;
+		return undefined;
 	}
 	const result = Object.entries( obj ).reduce( ( acc, [ key, value ] ) => {
 		if ( undefined === value ) {
@@ -77,7 +77,7 @@ export function isEmpty( value: object ) {
  *
  * @param value
  * @param key
- * @returns
+ * @return
  */
 export function hasKey( value: object, key: string ) {
 	if ( ! isObject( value ) ) {

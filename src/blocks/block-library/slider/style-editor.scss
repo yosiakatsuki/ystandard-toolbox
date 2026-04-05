@@ -1,0 +1,55 @@
+.ystdtb-slider-edit__block-control-preview-type {
+	svg {
+		fill: none;
+	}
+}
+
+.ystdtb-slider-edit__effect-control {
+	.components-radio-control__group-wrapper {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.ystdtb-slider-edit {
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	&.is-preview--grid {
+		.ystdtb-slider__container {
+			@media (min-width: 640px) {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+			}
+
+			> * {
+				width: 100%;
+
+				> .components-placeholder {
+					height: 100%;
+					justify-content: center;
+				}
+			}
+
+		}
+	}
+
+	.ystdtb-slider__container {
+		> .block-list-appender {
+			position: static;
+		}
+	}
+
+	&:not(:where(.has-child-selected,.is-selected)) {
+		.ystdtb-slider__container {
+			> .block-list-appender {
+				display: none;
+			}
+		}
+	}
+}

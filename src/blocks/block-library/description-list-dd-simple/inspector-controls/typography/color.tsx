@@ -10,9 +10,9 @@ import { ColorPalette } from '@aktk/block-components/components/color-pallet-con
 /**
  * Block Dependencies.
  */
-import type { DtBlockProps } from '../../types';
+import type { DdSimpleBlockProps } from '../../types';
 
-export function Color( props: DtBlockProps ): JSX.Element {
+export function Color( props: DdSimpleBlockProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { textColor, customTextColor } = attributes;
 	const handleOnChange = ( newColor?: string, slug?: string ) => {

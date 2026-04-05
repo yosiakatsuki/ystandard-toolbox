@@ -8,7 +8,7 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite>
+		<testsuite name="ystandard-toolbox">
 			<directory prefix="test-" suffix=".php">./phpunit/</directory>
 			<exclude>./phpunit/test-sample.php</exclude>
 		</testsuite>

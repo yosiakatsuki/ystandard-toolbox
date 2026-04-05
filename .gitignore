@@ -11,3 +11,7 @@ ystandard-toolbox/
 phpunit/data/actual
 debug-*
 block-example/
+.serena
+.claude
+tsconfig.tsbuildinfo
+.phpunit.result.cache

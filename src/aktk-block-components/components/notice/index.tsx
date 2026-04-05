@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import './style-editor.scss';
 
 interface NoticeProps {
 	children?: React.ReactNode;
@@ -69,19 +68,6 @@ export function NoticeWarning( props: NoticeProps ) {
 	);
 }
 
-export function NoticeSecondary( props: NoticeProps ) {
-	const { className, ...otherProps } = props;
-	return (
-		<Notice
-			{ ...otherProps }
-			className={ classNames(
-				'mt-1 bg-aktk-bg-gray text-fz-xxs text-aktk-text-gray',
-				className
-			) }
-		/>
-	);
-}
-
 export function NoticeWarningText( props: NoticeProps ) {
 	const { className, ...otherProps } = props;
 	return (
@@ -89,6 +75,19 @@ export function NoticeWarningText( props: NoticeProps ) {
 			{ ...otherProps }
 			className={ classNames(
 				'mt-1 text-fz-xxs text-aktk-text-yellow',
+				className
+			) }
+		/>
+	);
+}
+
+export function NoticeSecondary( props: NoticeProps ) {
+	const { className, ...otherProps } = props;
+	return (
+		<Notice
+			{ ...otherProps }
+			className={ classNames(
+				'mt-1 bg-aktk-bg-gray text-fz-xxs text-aktk-text-gray',
 				className
 			) }
 		/>

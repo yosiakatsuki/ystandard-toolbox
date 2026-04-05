@@ -68,7 +68,7 @@ function BaseButton( props: BaseButtonProps & AktkButtonProps ) {
 	);
 }
 
-export function PlainButton( props: AktkButtonProps ) {
+export function PlainButton( props: BaseButtonProps & AktkButtonProps ) {
 	return (
 		<>
 			<BaseButton { ...props } />
@@ -124,7 +124,7 @@ export function CancelLinkButton( props: AktkButtonProps ) {
 	const { style = {} } = props;
 	const _style = {
 		...style,
-		color: 'var(--ys--global--text-color--gray,#989EA1)',
+		color: 'var(--ys--global--text-color--gray, #656565)',
 	};
 	return (
 		<>

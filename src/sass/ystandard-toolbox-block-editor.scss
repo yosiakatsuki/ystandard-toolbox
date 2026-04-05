@@ -1,11 +1,10 @@
 @use "./tailwind";
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
-@use "../../blocks/posts/edit" as posts-edit;
-@use "../../blocks/slider/edit" as slider;
 
 :root {
-	--ystdtb-editor-block-outline: 1px solid #ddd;
+	--ystdtb--editor--text-color--gray: #6b7280;
+	--ystdtb--editor--block-outline: 1px solid #ddd;
 }
 
 .wp-block {
@@ -17,3 +16,4 @@
 .component-box-control__unit-control {
 	margin-bottom: 0 !important;
 }
+

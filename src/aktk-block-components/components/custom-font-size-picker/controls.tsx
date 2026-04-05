@@ -18,7 +18,7 @@ import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel
  * Internal dependencies
  */
 import type { ResponsiveFontSize, CustomFontSizePickerProps } from './types';
-import './style-editor.scss';
+
 
 /**
  * カスタムフォントサイズピッカー

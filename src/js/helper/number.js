@@ -1,6 +1,11 @@
 export const isNumber = ( value ) => {
 	return ! Number.isNaN( Number( value ) );
 };
+
+/**
+ * @deprecated aktk-block-components の toNumber を使用してください。
+ * @see {@link src/aktk-block-components/utils/number/index.ts toNumber}
+ */
 export const toNumber = ( value, defaultValue = undefined ) => {
 	const newValue = parseFloat( value );
 	if ( Number.isNaN( newValue ) ) {
@@ -8,6 +13,11 @@ export const toNumber = ( value, defaultValue = undefined ) => {
 	}
 	return newValue;
 };
+
+/**
+ * @deprecated aktk-block-components の toInt を使用してください。
+ * @see {@link src/aktk-block-components/utils/number/index.ts toInt}
+ */
 export const toInt = ( value, defaultValue = undefined ) => {
 	const newValue = parseInt( value );
 	if ( Number.isNaN( newValue ) ) {
