@@ -12,10 +12,16 @@ import { ImageSizeSelect } from '@aktk/block-components/components/image-size-se
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
+import { isAllSimpleDesign } from '../../utils';
 
 export function ThumbnailSize( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { thumbnailSize } = attributes;
+	const allSimple = isAllSimpleDesign( attributes );
+
+	if ( allSimple ) {
+		return null;
+	}
 
 	const handleOnChangeThumbnailSize = ( value?: string ) => {
 		setAttributes( {

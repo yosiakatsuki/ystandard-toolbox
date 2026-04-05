@@ -12,25 +12,28 @@ import { NoticeSecondary } from '@aktk/block-components/components/notice';
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
-import { isAllSimpleDesign } from '../../utils';
+import { isAllSimpleDesign, isAnySimpleDesign } from '../../utils';
 
 export function Excerpt( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { showExcerpt } = attributes;
 	const allSimple = isAllSimpleDesign( attributes );
+	const anySimple = isAnySimpleDesign( attributes );
+
+	const ExcerptNotice = () => {
+		return (
+			<NoticeSecondary>
+				{ __(
+					'シンプルデザインでは概要文は表示されません。',
+					'ystandard-toolbox'
+				) }
+			</NoticeSecondary>
+		);
+	};
 
 	return (
 		<>
-			{ allSimple ? (
-				<BaseControl id="show-excerpt" label={ __( '概要文', 'ystandard-toolbox' ) }>
-					<NoticeSecondary>
-						{ __(
-							'シンプルデザインでは概要文は表示されません。',
-							'ystandard-toolbox'
-						) }
-					</NoticeSecondary>
-				</BaseControl>
-			) : (
+			{ ! allSimple && (
 				<BaseControl>
 					<ToggleControl
 						label={ __( '概要文を表示する', 'ystandard-toolbox' ) }
@@ -39,6 +42,16 @@ export function Excerpt( props: PostsEditProps ) {
 							setAttributes( { showExcerpt: value } )
 						}
 					/>
+					{ anySimple && <ExcerptNotice /> }
+				</BaseControl>
+			) }
+			{ /* 全てシンプルデザイン */ }
+			{ allSimple && (
+				<BaseControl
+					id="show-excerpt"
+					label={ __( '概要文', 'ystandard-toolbox' ) }
+				>
+					<ExcerptNotice />
 				</BaseControl>
 			) }
 		</>

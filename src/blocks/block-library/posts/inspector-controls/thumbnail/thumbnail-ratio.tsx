@@ -17,6 +17,7 @@ import {
  * Block dependencies.
  */
 import type { PostsEditProps, ThumbnailRatio } from '../../types';
+import { isAllSimpleDesign } from '../../utils';
 
 /**
  * 画像縦横比の選択肢
@@ -37,6 +38,11 @@ export function ThumbnailRatio( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { thumbnailRatio, thumbnailRatioMobile, listType, listTypeMobile } =
 		attributes;
+	const allSimple = isAllSimpleDesign( attributes );
+
+	if ( allSimple ) {
+		return null;
+	}
 
 	return (
 		<BaseControl

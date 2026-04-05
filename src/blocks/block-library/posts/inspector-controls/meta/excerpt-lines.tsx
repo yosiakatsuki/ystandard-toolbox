@@ -7,18 +7,20 @@ import { __ } from '@wordpress/i18n';
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import NumberControl from '@aktk/block-components/wp-controls/number-control';
+import { NoticeSecondary } from '@aktk/block-components/components/notice';
 import { toInt } from '@aktk/block-components/utils/number';
 
 /**
  * Block dependencies.
  */
 import type { PostsEditProps } from '../../types';
-import { isAllSimpleDesign } from '../../utils';
+import { isAllSimpleDesign, isAnySimpleDesign } from '../../utils';
 
 export function ExcerptLines( props: PostsEditProps ) {
 	const { attributes, setAttributes } = props;
 	const { excerptLines, showExcerpt } = attributes;
 	const allSimple = isAllSimpleDesign( attributes );
+	const anySimple = isAnySimpleDesign( attributes );
 
 	if ( ! showExcerpt || allSimple ) {
 		return null;
@@ -34,6 +36,14 @@ export function ExcerptLines( props: PostsEditProps ) {
 				}
 				min={ 0 }
 			/>
+			{ anySimple && (
+				<NoticeSecondary>
+					{ __(
+						'シンプルデザインでは概要文は表示されません。',
+						'ystandard-toolbox'
+					) }
+				</NoticeSecondary>
+			) }
 		</BaseControl>
 	);
 }
