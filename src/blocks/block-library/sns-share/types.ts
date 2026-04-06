@@ -7,8 +7,7 @@ export interface SnsShareAttributes {
 	useTwitter: boolean;
 	useFacebook: boolean;
 	useHatenaBookmark: boolean;
-	usePocket: boolean;
-	useLINE: boolean;
+useLINE: boolean;
 	useBluesky: boolean;
 	twitterVia: string;
 	twitterRelatedUser: string;

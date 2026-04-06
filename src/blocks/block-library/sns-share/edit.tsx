@@ -37,8 +37,7 @@ const snsShare: React.FC< SnsShareProps > = ( props ) => {
 		useTwitter,
 		useFacebook,
 		useHatenaBookmark,
-		usePocket,
-		useLINE,
+useLINE,
 		useBluesky,
 		twitterVia,
 		twitterRelatedUser,
@@ -53,8 +52,7 @@ const snsShare: React.FC< SnsShareProps > = ( props ) => {
 			! useTwitter &&
 			! useFacebook &&
 			! useHatenaBookmark &&
-			! usePocket &&
-			! useLINE &&
+! useLINE &&
 			! useBluesky
 		) {
 			return (
