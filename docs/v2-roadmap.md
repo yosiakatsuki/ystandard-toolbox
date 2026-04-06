@@ -13,7 +13,7 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
   - `post-type.tsx` の `onChangePostType` で `taxonomy` / `termSlug` のみクリアしており、上記3属性が漏れている
 - [x] 見出しデザイン: compatible モードのバグ修正（`6937476`）
   - `class-heading-compatible.php` 255行目付近で `$section`（文字列 "content" 等）を CSS セレクタとして使用しているバグ
-- [ ] 見出しデザイン: compatible モードのアコーディオンブロック除外（`ae49fdb` の一部）
+- [x] 見出しデザイン: compatible モードのアコーディオンブロック除外（`ae49fdb` の一部）
   - `class-heading-compatible.php` のセレクタに `:not(:where(.wp-block-accordion-heading))` の追加が必要
 - [ ] SNS シェアボタン: Pocket 属性の残存クリーンアップ（`2446e7a`）
   - PHP 側では Pocket 出力は既に除外済みだが、`block.json` の `usePocket` 属性（default: true）と `edit.tsx` の参照が残存
