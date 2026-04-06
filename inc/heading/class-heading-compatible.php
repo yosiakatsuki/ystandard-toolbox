@@ -252,27 +252,30 @@ class Heading_Compatible {
 
 		// CSS.
 		$css      = '';
-		$sections = [ 'content', 'before', 'after' ];
-		foreach ( $sections as $section ) {
+		$sections = [
+			'content' => $content,
+			'before'  => $before,
+			'after'   => $after,
+		];
+		foreach ( $sections as $section => $selectors ) {
 			$style = $this->get_styles( $this->css, $section );
 			if ( $style ) {
-				$css .= "{$section} { {$style} }";
+				$css .= "{$selectors} { {$style} }";
 			}
 			// サイズ別.
 			$style = $this->get_styles( $this->css_tablet );
 			if ( $style ) {
 				$css .= Styles::add_media_query(
-					"{$section} { {$style} }",
+					"{$selectors} { {$style} }",
 					'tablet'
 				);
 			}
 			$style = $this->get_styles( $this->css_pc );
 			if ( $style ) {
 				$css .= Styles::add_media_query(
-					"{$section} { {$style} }",
+					"{$selectors} { {$style} }",
 					'desktop'
 				);
-
 			}
 		}
 

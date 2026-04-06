@@ -11,7 +11,7 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
 
 - [x] Posts ブロック: 投稿タイプ変更時に `postIn` / `postNameIn` / `postParent` をクリア（`606d56d`）
   - `post-type.tsx` の `onChangePostType` で `taxonomy` / `termSlug` のみクリアしており、上記3属性が漏れている
-- [ ] 見出しデザイン: compatible モードのバグ修正（`6937476`）
+- [x] 見出しデザイン: compatible モードのバグ修正（`6937476`）
   - `class-heading-compatible.php` 255行目付近で `$section`（文字列 "content" 等）を CSS セレクタとして使用しているバグ
 - [ ] 見出しデザイン: compatible モードのアコーディオンブロック除外（`ae49fdb` の一部）
   - `class-heading-compatible.php` のセレクタに `:not(:where(.wp-block-accordion-heading))` の追加が必要
