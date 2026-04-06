@@ -22,8 +22,8 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
 
 ### 要実機確認
 
-- [ ] スライダー: 全幅不具合修正（`d8d013c`）
-  - `body.has-background` での alignfull/alignwide の padding 問題。v2 の `style.scss` には該当 CSS がないため、v2 でも再現するか実機確認が必要
+- [x] スライダー: 全幅不具合修正（`d8d013c`）
+  - yStandard v4 系のみ alignfull/alignwide の padding リセット CSS をインライン出力する形で対応済み
 
 ### 対応済み（作業不要）
 
