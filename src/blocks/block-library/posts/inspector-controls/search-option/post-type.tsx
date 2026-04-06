@@ -22,6 +22,9 @@ export function PostType( props: PostsEditProps ) {
 			postType: value,
 			taxonomy: undefined,
 			termSlug: undefined,
+			postIn: undefined,
+			postNameIn: undefined,
+			postParent: undefined,
 		} );
 	};
 	return (

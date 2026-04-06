@@ -9,7 +9,7 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
 
 ### 取り込みが必要
 
-- [ ] Posts ブロック: 投稿タイプ変更時に `postIn` / `postNameIn` / `postParent` をクリア（`606d56d`）
+- [x] Posts ブロック: 投稿タイプ変更時に `postIn` / `postNameIn` / `postParent` をクリア（`606d56d`）
   - `post-type.tsx` の `onChangePostType` で `taxonomy` / `termSlug` のみクリアしており、上記3属性が漏れている
 - [ ] 見出しデザイン: compatible モードのバグ修正（`6937476`）
   - `class-heading-compatible.php` 255行目付近で `$section`（文字列 "content" 等）を CSS セレクタとして使用しているバグ
