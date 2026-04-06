@@ -218,7 +218,7 @@ class Sns_Share_Block {
 		?>
 		<div class="<?php echo esc_attr( $classes ); ?>">
 			<?php if ( isset( $share_button['text']['before'] ) && $share_button['text']['before'] ) : ?>
-				<p class="ystdtb-sns-share__before"><?php echo esc_html( $share_button['text']['before'] ); ?></p>
+				<p class="ystdtb-sns-share__before-text"><?php echo esc_html( $share_button['text']['before'] ); ?></p>
 			<?php endif; ?>
 			<ul class="ystdtb-sns-share__container">
 				<?php if ( isset( $share_button['sns']['twitter'] ) || isset( $share_button['sns']['x'] ) ) : ?>
@@ -243,7 +243,7 @@ class Sns_Share_Block {
 				<?php endif; ?>
 			</ul>
 			<?php if ( isset( $share_button['text']['after'] ) && $share_button['text']['after'] ) : ?>
-				<p class="ystdtb-sns-share__after"><?php echo esc_html( $share_button['text']['after'] ); ?></p>
+				<p class="ystdtb-sns-share__after-text"><?php echo esc_html( $share_button['text']['after'] ); ?></p>
 			<?php endif; ?>
 		</div>
 		<?php

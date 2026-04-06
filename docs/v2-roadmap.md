@@ -17,6 +17,8 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
   - `class-heading-compatible.php` のセレクタに `:not(:where(.wp-block-accordion-heading))` の追加が必要
 - [ ] SNS シェアボタン: Pocket 属性の残存クリーンアップ（`2446e7a`）
   - PHP 側では Pocket 出力は既に除外済みだが、`block.json` の `usePocket` 属性（default: true）と `edit.tsx` の参照が残存
+- [x] SNS シェアボタン: 公式デザインのテキスト CSS クラス名不一致修正
+  - `index.php` の公式ボタンで `__before` / `__after` が使われており、`__before-text` / `__after-text` に統一
 
 ### 要実機確認
 
