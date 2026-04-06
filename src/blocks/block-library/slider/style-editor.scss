@@ -35,17 +35,22 @@
 					justify-content: center;
 				}
 			}
-
 		}
 	}
 
 	.ystdtb-slider__container {
+		// スライダー編集画面では、画像と動画の高さを自動にする
+		> :where(.wp-block-image) :where(img),
+		> :where(.wp-block-video) :where(video) {
+			height: auto;
+		}
+
 		> .block-list-appender {
 			position: static;
 		}
 	}
 
-	&:not(:where(.has-child-selected,.is-selected)) {
+	&:not(:where(.has-child-selected, .is-selected)) {
 		.ystdtb-slider__container {
 			> .block-list-appender {
 				display: none;

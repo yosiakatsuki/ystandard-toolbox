@@ -1,0 +1,40 @@
+.ystdtb-slider__slider {
+	/* Swiper 初期化前に最初のスライド以外を非表示 */
+	&:not(:where(.swiper-initialized, .is-edit)) {
+		:where(.ystdtb-slider__container) > *:not(:first-child) {
+			display: none;
+		}
+	}
+
+	&:where(.is-fixed-height) {
+		:where(.ystdtb-slider__container) {
+			&,
+			> *,
+			img,
+			video {
+				height: 100%;
+			}
+		}
+	}
+}
+
+/* コンテナ内の子要素 */
+.ystdtb-slider__container {
+	> * {
+		width: 100%;
+	}
+
+	> :where(.wp-block-image) :where(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	> :where(.wp-block-video) :where(video) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+}

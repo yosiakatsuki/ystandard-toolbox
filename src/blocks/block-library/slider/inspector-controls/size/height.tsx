@@ -17,7 +17,11 @@ import type { SliderEditProps } from '../../types';
 
 export function Height( props: SliderEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { height, responsiveHeight } = attributes;
+	const { height, responsiveHeight, ratio = '' } = attributes;
+
+	if ( ratio ) {
+		return <></>;
+	}
 
 	const handleOnChange = ( value: string | undefined ) => {
 		setAttributes( { height: value } );

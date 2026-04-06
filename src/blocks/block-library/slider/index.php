@@ -8,6 +8,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
 use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
@@ -39,25 +40,40 @@ class Slider_Block {
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_compat_style' ] );
 	}
 
+	/**
+	 * レスポンシブ高さ用スタイルの出力
+	 *
+	 * @return void
+	 */
 	public function enqueue_responsive_style() {
-		$responsive = [
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '',
-		];
-		// スタイル.
-		$responsive['desktop'] .= '';
-		$responsive['tablet']  .= '';
-		$responsive['mobile']  .= '';
-		// 結合.
+		$selector = '.ystdtb-slider__slider.is-fixed-height';
+
+		$desktop = <<<CSS
+		{$selector}[style*="--ystdtb--desktop--slider--height"] {
+			height: var(--ystdtb--desktop--slider--height);
+		}
+		CSS;
+
+		$tablet = <<<CSS
+		{$selector}[style*="--ystdtb--tablet--slider--height"] {
+			height: var(--ystdtb--tablet--slider--height);
+		}
+		CSS;
+
+		$mobile = <<<CSS
+		{$selector}[style*="--ystdtb--mobile--slider--height"] {
+			height: var(--ystdtb--mobile--slider--height);
+		}
+		CSS;
+
 		$css  = '';
-		$css .= Styles::add_media_query_over_desktop( $responsive['desktop'] );
-		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
-		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+		$css .= Styles::add_media_query_over_desktop( $desktop );
+		$css .= Styles::add_media_query_only_tablet( $tablet );
+		$css .= Styles::add_media_query_only_mobile( $mobile );
 
 		$handle = 'ystdtb-slider-responsive';
 		wp_register_style( $handle, false );
-		wp_add_inline_style( $handle, $css );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
 		wp_enqueue_style( $handle );
 	}
 
@@ -83,7 +99,7 @@ class Slider_Block {
 
 		$handle = 'ystdtb-slider-compat';
 		wp_register_style( $handle, false );
-		wp_add_inline_style( $handle, $css );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
 		wp_enqueue_style( $handle );
 	}
 

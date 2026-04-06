@@ -19,6 +19,9 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
   - PHP 側では Pocket 出力は既に除外済みだが、`block.json` の `usePocket` 属性（default: true）と `edit.tsx` の参照が残存
 - [x] SNS シェアボタン: 公式デザインのテキスト CSS クラス名不一致修正
   - `index.php` の公式ボタンで `__before` / `__after` が使われており、`__before-text` / `__after-text` に統一
+- [x] スライダー: フロントエンド CSS の移行漏れ修正
+  - `style.scss` に初期化前非表示・コンテナ幅・画像動画フィットを追加
+  - `enqueue_responsive_style` でレスポンシブ高さ用 CSS を出力
 
 ### 要実機確認
 

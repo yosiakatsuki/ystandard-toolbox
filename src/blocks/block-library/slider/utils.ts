@@ -18,17 +18,6 @@ export function getSliderBlockClasses() {
 }
 
 /**
- * スライダーブロックのスタイルを取得
- * @param attributes
- */
-export function getSliderBlockStyles( attributes: SliderBlockAttributes ) {
-	const { ratio } = attributes;
-	return {
-		...getAspectRatioStyle( ratio || '' ),
-	};
-}
-
-/**
  * スライダーブロックのラップクラス名を取得
  * @param attributes
  */
@@ -44,7 +33,7 @@ export function getSliderWrapClasses( attributes: SliderBlockAttributes ) {
  * @param attributes
  */
 export function getSliderWrapStyles( attributes: SliderBlockAttributes ) {
-	const { height, responsiveHeight } = attributes;
+	const { height, responsiveHeight,ratio } = attributes;
 	const types = [ 'desktop', 'tablet', 'mobile' ] as const;
 
 	// レスポンシブ指定のあるスタイルを生成.
@@ -68,6 +57,7 @@ export function getSliderWrapStyles( attributes: SliderBlockAttributes ) {
 	return {
 		height,
 		...responsiveStyles,
+		...getAspectRatioStyle( ratio || '' ),
 	};
 }
 

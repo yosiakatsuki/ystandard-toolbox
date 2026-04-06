@@ -56,7 +56,10 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 	};
 	// スライダーラップ
 	const sliderWrapProps = {
-		className: getSliderWrapClasses( attributes ),
+		className: classnames(
+			getSliderWrapClasses( attributes ),
+			'is-edit'
+		)
 	};
 	// インナーブロックス
 	const innerBlocksProps = useInnerBlocksProps(

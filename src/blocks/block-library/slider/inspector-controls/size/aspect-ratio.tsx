@@ -56,7 +56,11 @@ export function AspectRatio( props: SliderEditProps ): JSX.Element {
 	const { ratio = '' } = attributes;
 
 	const handleOnChange = ( value: string ) => {
-		setAttributes( { ratio: value || undefined } );
+		setAttributes( {
+			ratio: value || undefined ,
+			height: undefined,
+			responsiveHeight: undefined,
+		} );
 	};
 
 	return (
