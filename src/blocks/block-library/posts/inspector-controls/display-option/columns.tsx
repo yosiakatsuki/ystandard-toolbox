@@ -36,6 +36,10 @@ export function Columns( props: PostsEditProps ) {
 				<>
 					<DesktopControl>
 						<NumberControl
+							aria-label={ __(
+								'デスクトップ',
+								'ystandard-toolbox'
+							) }
 							value={ colPc }
 							onChange={ ( value?: number | string ) => {
 								setAttributes( {
@@ -47,6 +51,10 @@ export function Columns( props: PostsEditProps ) {
 					</DesktopControl>
 					<TabletControl>
 						<NumberControl
+							aria-label={ __(
+								'タブレット',
+								'ystandard-toolbox'
+							) }
 							value={ colTablet }
 							onChange={ ( value?: number | string ) => {
 								setAttributes( {
@@ -58,6 +66,10 @@ export function Columns( props: PostsEditProps ) {
 					</TabletControl>
 					<MobileControl>
 						<NumberControl
+							aria-label={ __(
+								'モバイル',
+								'ystandard-toolbox'
+							) }
 							value={ colMobile }
 							onChange={ ( value?: number | string ) => {
 								setAttributes( {

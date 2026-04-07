@@ -40,6 +40,7 @@ export function Count( props: PostsEditProps ) {
 		>
 			<DesktopControl>
 				<NumberControl
+					aria-label={ __( 'PC 表示件数', 'ystandard-toolbox' ) }
 					value={ count }
 					onChange={ handleOnChangePcCount }
 					min={ 1 }
@@ -47,6 +48,7 @@ export function Count( props: PostsEditProps ) {
 			</DesktopControl>
 			<MobileControl>
 				<NumberControl
+					aria-label={ __( 'モバイル 表示件数', 'ystandard-toolbox' ) }
 					value={ countMobile }
 					onChange={ handleOnChangeMobileCount }
 				/>
