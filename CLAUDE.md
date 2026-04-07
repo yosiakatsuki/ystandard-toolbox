@@ -7,8 +7,10 @@
 ## 関連ドキュメント
 
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
+- [docs/future-improvements.md](docs/future-improvements.md) — v2 リリース後に対応したい改修リスト
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
+- [docs/testing.md](docs/testing.md) — テスト全般（unit / integration の構成、fixture 追加手順、テスト用画像URL）
 
 ## プロジェクト概要
 
@@ -90,6 +92,38 @@ build/                      # コンパイル済みアセット出力
 | `webpack.blocks.config.js` | レガシーブロック | `build/blocks/` |
 | `webpack.app.config.js` | JSアプリ | `js/app/` |
 | `webpack.plugin-settings.config.js` | プラグイン設定画面 | `build/plugin-settings/` |
+
+## 提案・実装方針の品質基準
+
+機能追加・修正・テスト方針などを提案するときの判断基準。
+
+### 原則
+
+- **WordPress コア（Gutenberg を含む）の手法に合わせる**ことを最優先とする
+  - WordPressプラグインとしての品質・保守性・他開発者にとっての読みやすさを重視
+  - 「ystdtb 流の独自手法」を勝手に作らない
+- **なるべく最新の API・パターン**を使う
+  - 非推奨APIや古いパターンは避ける
+  - 新規実装時は最新の WordPress / Gutenberg のドキュメント・実装を参考にする
+- 例: ブロック開発は `block.json` メタデータ駆動、deprecated は WordPress 標準の `deprecated` 配列、テストは Gutenberg の fixture-based test、など
+
+### オーバーエンジニアリング回避
+
+WordPress コア準拠の方法が、このプロジェクトの規模・目的に対して**過剰**になる場合は、別の現実的な選択肢も併記する。
+
+判断の目安:
+
+- セットアップ・学習コストが導入効果に見合わない
+- 単発の小規模機能のために大きな仕組みを導入する必要がある
+- 既存コードへの広範な改修が必要になる
+
+提案時は次の形式で示す:
+
+1. **推奨案**: WordPress コア準拠の方法（最新かつ標準）
+2. **代替案**: 軽量で現実的な方法（必要に応じて）
+3. **判断材料**: それぞれのメリット・デメリット・工数感
+
+ユーザーが選びやすいよう、推奨理由と妥協ポイントを明示する。
 
 ## コーディング規約
 
@@ -319,22 +353,26 @@ class [ブロック名]_Block {
 
 ## テスト
 
-- **PHPUnit**: `/phpunit/` - WordPressテストフレームワーク
-- **Jest**: `/test/` - JavaScriptコンポーネントテスト
+- **PHPUnit**: `/phpunit/` — WordPressテストフレームワーク
+- **Jest**: `/test/` — JavaScriptテスト
+  - **unit** (`test/unit/`): pure function / コンポーネント単体テスト。テストファイルは `src/` 配下に `*.test.ts(x)` で配置
+  - **integration** (`test/integration/`): Gutenberg fixture-based test（ブロックの parse / migrate / serialize / validate 検証）
 
-### テストファイル配置ルール
+詳細・実行コマンド・fixture 追加手順は [docs/testing.md](docs/testing.md) を参照。
 
-- テストファイルは該当ファイルと同階層に`test/`ディレクトリを作成
-- 関数ごとにテストファイルを作成（例: `to-bool.test.ts`）
-- インポートパスは相対パス（`../index`）を使用
+## ブロック設定例・使用例（examples）
 
-## ブロック表示テスト用フィクスチャ
+ブロックの全設定パターンをエディターに貼り付けて表示確認できるHTMLファイル群を作成する。公式サイトのデモ表示作成用、およびマニュアルの「設定例・使用例」ページとしても流用可能な品質で記述する。
 
-ブロックの全設定パターンをエディターに貼り付けて表示確認できるHTMLファイルを作成する。マニュアルの「設定例・使用例」ページとしても流用可能な品質で記述する。
+自動テスト用のフィクスチャは別管理（`test/integration/fixtures/blocks/`）。本ディレクトリは「人間がエディターに貼り付けて確認するためのサンプル」と「公開ドキュメント用の元データ」を兼ねる。
 
 ### 配置
 
-`src/blocks/block-library/[ブロック名]/test-fixtures/all-variations.html`
+`src/blocks/block-library/[ブロック名]/examples/[用途名].html`
+
+例:
+- `slider/examples/v1-deprecated.html` — v1 → v2 deprecated 変換の手動確認用
+- `posts/examples/all-variations.html` — 全設定パターン
 
 ### 構成ルール
 
@@ -362,7 +400,11 @@ class [ブロック名]_Block {
 
 ### 参考
 
-`src/blocks/block-library/posts/test-fixtures/all-variations.html` を構成の参考にすること。
+`src/blocks/block-library/posts/examples/all-variations.html` を構成の参考にすること。
+
+### テスト用画像URL
+
+examples / fixtures で画像ブロックを含める場合に使うURLは [docs/testing.md](docs/testing.md#テスト用画像url) を参照。
 
 ## 設計書運用
 

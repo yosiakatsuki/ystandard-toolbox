@@ -2,6 +2,7 @@ import { __experimentalNumberControl as WPNumberControl } from '@wordpress/compo
 
 interface NumberControlProps {
 	label?: string;
+	'aria-label'?: string;
 	value?: number | string;
 	min?: number;
 	max?: number;

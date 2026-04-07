@@ -82,6 +82,7 @@ describe( 'ThumbnailRatio', () => {
 			attributes: {
 				...createProps().attributes,
 				listType: 'simple',
+				listTypeMobile: 'card',
 			},
 		} );
 		render( <ThumbnailRatio { ...props } /> );
@@ -108,6 +109,7 @@ describe( 'ThumbnailRatio', () => {
 			attributes: {
 				...createProps().attributes,
 				listType: 'simple',
+				listTypeMobile: 'card',
 			},
 		} );
 		render( <ThumbnailRatio { ...props } /> );

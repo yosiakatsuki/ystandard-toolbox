@@ -1,0 +1,40 @@
+[
+	{
+		"blockName": "ystdtb/slider",
+		"attrs": {
+			"sliderId": "test-height-responsive",
+			"height": {
+				"desktop": "500px",
+				"tablet": "400px",
+				"mobile": "300px"
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/slider-item",
+				"attrs": {},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>スライド1</p>\n",
+						"innerContent": [ "\n<p>スライド1</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<div class=\"wp-block-ystdtb-slider-item ystdtb-slider-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"wp-block-ystdtb-slider-item ystdtb-slider-item\">",
+					null,
+					"</div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"wp-block-ystdtb-slider ystdtb-slider\"><div id=\"ystdtb-slider-test-height-responsive\" class=\"swiper ystdtb-slider__slider is-fixed-height\" style=\"--ystdtb-slide-height-desktop:500px;--ystdtb-slide-height-tablet:400px;--ystdtb-slide-height-mobile:300px\" data-slider-options=\"{&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000}}\"><div class=\"swiper-wrapper ystdtb-slider__container\">\n\n</div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"wp-block-ystdtb-slider ystdtb-slider\"><div id=\"ystdtb-slider-test-height-responsive\" class=\"swiper ystdtb-slider__slider is-fixed-height\" style=\"--ystdtb-slide-height-desktop:500px;--ystdtb-slide-height-tablet:400px;--ystdtb-slide-height-mobile:300px\" data-slider-options=\"{&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000}}\"><div class=\"swiper-wrapper ystdtb-slider__container\">\n",
+			null,
+			"\n</div></div></div>\n"
+		]
+	}
+]

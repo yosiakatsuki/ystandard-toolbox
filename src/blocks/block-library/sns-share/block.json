@@ -41,11 +41,7 @@
       "type": "boolean",
       "default": true
     },
-    "usePocket": {
-      "type": "boolean",
-      "default": true
-    },
-    "useLINE": {
+"useLINE": {
       "type": "boolean",
       "default": true
     },

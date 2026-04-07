@@ -1,14 +1,16 @@
 /**
  * https://github.com/WordPress/gutenberg/blob/trunk/test/integration/fixtures/utils.js
+ * を参考にした fixture 読み書きユーティリティ。
  */
 /**
  * External dependencies
  */
 import fs from 'fs';
 import path from 'path';
-import { uniq } from 'lodash';
 
 const FIXTURES_DIR = path.join( __dirname, 'blocks' );
+
+const uniq = ( values ) => Array.from( new Set( values ) );
 
 function readFixtureFile( fixturesDir, filename ) {
 	try {
@@ -34,6 +36,9 @@ export function getAvailableBlockFixturesBasenames() {
 	//  - fixture.json            : blocks structure
 	//  - fixture.serialized.html : re-serialized content
 	// Get the "base" name for each fixture first.
+	if ( ! fs.existsSync( FIXTURES_DIR ) ) {
+		return [];
+	}
 	return uniq(
 		fs
 			.readdirSync( FIXTURES_DIR )

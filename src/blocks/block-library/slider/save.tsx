@@ -13,7 +13,6 @@ import {
 	getPaginationClasses,
 	getPaginationStyles,
 	getSliderBlockClasses,
-	getSliderBlockStyles,
 	getSliderContainerClasses,
 	getSliderContainerStyles,
 	getSliderOptions,
@@ -27,7 +26,6 @@ export default function Save( props: SliderEditProps ): JSX.Element {
 	// スライダーブロック.
 	const blockProps = useBlockProps.save( {
 		className: getSliderBlockClasses(),
-		style: getSliderBlockStyles,
 	} );
 	// スライダーラップ.
 	const sliderWrapProps = {

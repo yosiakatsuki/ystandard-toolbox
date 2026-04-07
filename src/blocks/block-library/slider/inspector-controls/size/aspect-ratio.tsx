@@ -49,6 +49,16 @@ const OPTIONS = [
 		key: '16-9',
 		style: {},
 	},
+	{
+		name: __( '2:3', 'ystandard-toolbox' ),
+		key: '2-3',
+		style: {},
+	},
+	{
+		name: __( '9:16', 'ystandard-toolbox' ),
+		key: '9-16',
+		style: {},
+	},
 ];
 
 export function AspectRatio( props: SliderEditProps ): JSX.Element {
@@ -56,7 +66,11 @@ export function AspectRatio( props: SliderEditProps ): JSX.Element {
 	const { ratio = '' } = attributes;
 
 	const handleOnChange = ( value: string ) => {
-		setAttributes( { ratio: value || undefined } );
+		setAttributes( {
+			ratio: value || undefined ,
+			height: undefined,
+			responsiveHeight: undefined,
+		} );
 	};
 
 	return (

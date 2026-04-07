@@ -125,24 +125,35 @@ export const deprecated1341 = [
 			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
-			const { height, ...rest } = attributes;
+			const { height, slides, ...rest } = attributes;
 
+			// height の移行: レスポンシブ指定があれば responsiveHeight、
+			// desktop のみであれば height（単一値）に振り分ける.
 			let newHeight;
+			let newResponsiveHeight;
 			if ( isResponsiveObject( height ) ) {
-				newHeight = undefined;
-			} else {
-				newHeight = height?.desktop;
+				newResponsiveHeight = height;
+			} else if ( height?.desktop ) {
+				newHeight = height.desktop;
+			}
+
+			// slides の移行: レスポンシブ指定があれば responsiveSlides、
+			// desktop のみであれば slides（全デバイス共通）に振り分ける.
+			let newSlides;
+			let newResponsiveSlides;
+			if ( isResponsiveObject( slides ) ) {
+				newResponsiveSlides = slides;
+			} else if ( slides?.desktop ) {
+				newSlides = slides.desktop;
 			}
 
 			return {
 				height: newHeight,
-				responsiveHeight: isResponsiveObject( height )
-					? height
-					: undefined,
+				responsiveHeight: newResponsiveHeight,
+				slides: newSlides,
+				responsiveSlides: newResponsiveSlides,
 				...rest,
 			};
-			// TODO: slidesの移行
-			// slidesとresponsiveSlidesに分割
 		},
 		save( { attributes }: { attributes: any } ) {
 			const {
