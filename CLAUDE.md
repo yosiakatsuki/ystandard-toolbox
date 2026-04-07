@@ -9,6 +9,7 @@
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
+- [docs/block-testing.md](docs/block-testing.md) — ブロックテスト関連のメモ（テスト用画像URL等）
 
 ## プロジェクト概要
 
@@ -363,6 +364,10 @@ class [ブロック名]_Block {
 ### 参考
 
 `src/blocks/block-library/posts/test-fixtures/all-variations.html` を構成の参考にすること。
+
+### テスト用画像URL
+
+テストフィクスチャで画像ブロックを含める場合に使うURLは [docs/block-testing.md](docs/block-testing.md) を参照。
 
 ## 設計書運用
 
