@@ -1,0 +1,29 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "test-ratio",
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"ratio": "16-9",
+			"hasNavigation": false,
+			"previewType": "grid",
+			"className": "wp-block-ystdtb-slider"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {
+					"className": "wp-block-ystdtb-slider-item"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

@@ -1,0 +1,37 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "test-navigation",
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": true,
+			"paginationType": "bullets",
+			"previewType": "grid",
+			"className": "wp-block-ystdtb-slider"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {
+					"className": "wp-block-ystdtb-slider-item"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {
+					"className": "wp-block-ystdtb-slider-item"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]
