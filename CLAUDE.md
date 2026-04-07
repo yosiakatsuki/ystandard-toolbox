@@ -362,13 +362,19 @@ class [ブロック名]_Block {
 - 関数ごとにテストファイルを作成（例: `to-bool.test.ts`）
 - インポートパスは相対パス（`../index`）を使用
 
-## ブロック表示テスト用フィクスチャ
+## ブロック設定例・使用例（examples）
 
-ブロックの全設定パターンをエディターに貼り付けて表示確認できるHTMLファイルを作成する。マニュアルの「設定例・使用例」ページとしても流用可能な品質で記述する。
+ブロックの全設定パターンをエディターに貼り付けて表示確認できるHTMLファイル群を作成する。公式サイトのデモ表示作成用、およびマニュアルの「設定例・使用例」ページとしても流用可能な品質で記述する。
+
+自動テスト用のフィクスチャは別管理（`test/integration/fixtures/blocks/`）。本ディレクトリは「人間がエディターに貼り付けて確認するためのサンプル」と「公開ドキュメント用の元データ」を兼ねる。
 
 ### 配置
 
-`src/blocks/block-library/[ブロック名]/test-fixtures/all-variations.html`
+`src/blocks/block-library/[ブロック名]/examples/[用途名].html`
+
+例:
+- `slider/examples/v1-deprecated.html` — v1 → v2 deprecated 変換の手動確認用
+- `posts/examples/all-variations.html` — 全設定パターン
 
 ### 構成ルール
 
@@ -396,7 +402,7 @@ class [ブロック名]_Block {
 
 ### 参考
 
-`src/blocks/block-library/posts/test-fixtures/all-variations.html` を構成の参考にすること。
+`src/blocks/block-library/posts/examples/all-variations.html` を構成の参考にすること。
 
 ### テスト用画像URL
 
