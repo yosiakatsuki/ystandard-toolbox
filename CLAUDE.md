@@ -10,7 +10,7 @@
 - [docs/future-improvements.md](docs/future-improvements.md) — v2 リリース後に対応したい改修リスト
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
-- [docs/block-testing.md](docs/block-testing.md) — ブロックテスト関連のメモ（テスト用画像URL等）
+- [docs/testing.md](docs/testing.md) — テスト全般（unit / integration の構成、fixture 追加手順、テスト用画像URL）
 
 ## プロジェクト概要
 
@@ -353,14 +353,12 @@ class [ブロック名]_Block {
 
 ## テスト
 
-- **PHPUnit**: `/phpunit/` - WordPressテストフレームワーク
-- **Jest**: `/test/` - JavaScriptコンポーネントテスト
+- **PHPUnit**: `/phpunit/` — WordPressテストフレームワーク
+- **Jest**: `/test/` — JavaScriptテスト
+  - **unit** (`test/unit/`): pure function / コンポーネント単体テスト。テストファイルは `src/` 配下に `*.test.ts(x)` で配置
+  - **integration** (`test/integration/`): Gutenberg fixture-based test（ブロックの parse / migrate / serialize / validate 検証）
 
-### テストファイル配置ルール
-
-- テストファイルは該当ファイルと同階層に`test/`ディレクトリを作成
-- 関数ごとにテストファイルを作成（例: `to-bool.test.ts`）
-- インポートパスは相対パス（`../index`）を使用
+詳細・実行コマンド・fixture 追加手順は [docs/testing.md](docs/testing.md) を参照。
 
 ## ブロック設定例・使用例（examples）
 
@@ -406,7 +404,7 @@ class [ブロック名]_Block {
 
 ### テスト用画像URL
 
-テストフィクスチャで画像ブロックを含める場合に使うURLは [docs/block-testing.md](docs/block-testing.md) を参照。
+examples / fixtures で画像ブロックを含める場合に使うURLは [docs/testing.md](docs/testing.md#テスト用画像url) を参照。
 
 ## 設計書運用
 
