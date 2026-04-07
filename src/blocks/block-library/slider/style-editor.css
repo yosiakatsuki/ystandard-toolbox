@@ -39,7 +39,7 @@
 	}
 
 	.ystdtb-slider__container {
-		// スライダー編集画面では、画像と動画の高さを自動にする
+		/* スライダー編集画面では、画像と動画の高さを自動にする */
 		> :where(.wp-block-image) :where(img),
 		> :where(.wp-block-video) :where(video) {
 			height: auto;
