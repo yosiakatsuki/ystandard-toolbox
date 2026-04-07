@@ -19,7 +19,7 @@ import {
 	getSliderWrapClasses,
 } from './utils';
 import type { SliderEditProps } from './types';
-import './style-editor.scss';
+import './style-editor.css';
 
 const ALLOWED_BLOCKS = [
 	'core/image',
