@@ -7,6 +7,7 @@
 ## 関連ドキュメント
 
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
+- [docs/future-improvements.md](docs/future-improvements.md) — v2 リリース後に対応したい改修リスト
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
 - [docs/block-testing.md](docs/block-testing.md) — ブロックテスト関連のメモ（テスト用画像URL等）
