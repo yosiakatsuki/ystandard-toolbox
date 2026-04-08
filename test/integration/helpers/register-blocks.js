@@ -18,6 +18,15 @@ import sliderDeprecated from '@aktk/blocks/block-library/slider/deprecated';
 import sliderItemMetadata from '../../../src/blocks/block-library/slider-item/block.json';
 import sliderItemSave from '@aktk/blocks/block-library/slider-item/save';
 
+// Timeline.
+import timelineMetadata from '../../../src/blocks/block-library/timeline/block.json';
+import timelineSave from '@aktk/blocks/block-library/timeline/save';
+
+// Timeline item.
+import timelineItemMetadata from '../../../src/blocks/block-library/timeline-item/block.json';
+import timelineItemSave from '@aktk/blocks/block-library/timeline-item/save';
+import timelineItemDeprecated from '@aktk/blocks/block-library/timeline-item/deprecated';
+
 const NoopEdit = () => null;
 
 function registerOnce( metadata, settings ) {
@@ -38,5 +47,15 @@ export function registerSliderTestBlocks() {
 	} );
 	registerOnce( sliderItemMetadata, {
 		save: sliderItemSave,
+	} );
+}
+
+export function registerTimelineTestBlocks() {
+	registerOnce( timelineMetadata, {
+		save: timelineSave,
+	} );
+	registerOnce( timelineItemMetadata, {
+		save: timelineItemSave,
+		deprecated: timelineItemDeprecated,
 	} );
 }

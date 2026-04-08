@@ -1,0 +1,40 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"contentMarginTop": 0,
+					"contentsBorderColor": "ys-green"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {
+							"placeholder": "タイムラインコンテンツ…"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>contentsBorderColor（線の色）が設定されているもの</p>\n",
+						"innerContent": [
+							"\n<p>contentsBorderColor（線の色）が設定されているもの</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-border has-ys-green-border-color\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-border has-ys-green-border-color\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"</div>\n"
+		]
+	}
+]

@@ -1,0 +1,68 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"contentsInnerMargin": "large",
+					"contentMarginTop": 0
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {
+							"placeholder": "タイムラインコンテンツ…"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>contentsInnerMargin が large</p>\n",
+						"innerContent": [
+							"\n<p>contentsInnerMargin が large</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item is-margin-large\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-large\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item is-margin-large\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-large\">",
+					null,
+					"</div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"contentsInnerMargin": "small",
+					"contentMarginTop": 0
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {
+							"placeholder": "タイムラインコンテンツ…"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>contentsInnerMargin が small</p>\n",
+						"innerContent": [
+							"\n<p>contentsInnerMargin が small</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item is-margin-small\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-small\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item is-margin-small\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-small\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]
