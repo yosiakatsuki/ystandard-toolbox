@@ -3,12 +3,12 @@
  */
 
 .ystdtb-faq {
-	--ystdtb-faq-padding: 0.75em;
-	--ystdtb-faq-padding-wide: 1.5em;
-	--ystdtb-faq-item-padding-vertical: var(--ystdtb-faq-padding);
-	--ystdtb-faq-item-padding-horizon: 0;
-	--ystdtb-faq-padding-q-top: 1.5em;
-	--ystdtb-faq-padding-a-bottom: 1.5em;
+	--ystdtb--faq--padding: 0.75em;
+	--ystdtb--faq--padding-wide: 1.5em;
+	--ystdtb--faq-item--padding-vertical: var(--ystdtb--faq--padding);
+	--ystdtb--faq-item--padding-horizon: 0;
+	--ystdtb--faq--padding-q-top: 1.5em;
+	--ystdtb--faq--padding-a-bottom: 1.5em;
 
 	border: 0;
 
@@ -18,7 +18,7 @@
 
 	&.has-padding {
 		.ystdtb-faq-item {
-			--ystdtb-faq-item-padding-horizon: 1.5em;
+			--ystdtb--faq-item--padding-horizon: 1.5em;
 		}
 	}
 
@@ -48,7 +48,7 @@
 					border-bottom: 0;
 				}
 
-				padding-bottom: var(--ystdtb-faq-padding-q-top);
+				padding-bottom: var(--ystdtb--faq--padding-q-top);
 			}
 
 			&.is-faq--a {
@@ -63,8 +63,8 @@
 			&.is-open {
 				+ .is-faq--a {
 					height: auto;
-					padding-top: var(--ystdtb-faq-item-padding-vertical);
-					padding-bottom: var(--ystdtb-faq-padding-q-top);
+					padding-top: var(--ystdtb--faq-item--padding-vertical);
+					padding-bottom: var(--ystdtb--faq--padding-q-top);
 					opacity: 1;
 					visibility: visible;
 				}
