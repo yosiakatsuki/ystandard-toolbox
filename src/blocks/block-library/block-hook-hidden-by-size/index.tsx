@@ -22,9 +22,7 @@ import { BlockHookPanel } from '@aktk/components/block-hook-panel';
  * Block Dependencies
  */
 import type { BlockEditProps, ExtendedBlockConfiguration } from './types';
-
-import './style.scss';
-import './style-editor.scss';
+import './style-editor.css';
 
 const HOOK_NAME = 'hidden-by-size';
 
