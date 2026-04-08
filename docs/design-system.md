@@ -72,6 +72,49 @@ background-color: var(--ystdtb--color--blue-light);
 border-color: var(--ystdtb--color--gray-border);
 ```
 
+#### 不透明度を伴う色指定
+
+HEX 色に不透明度を組み合わせたい場合は `color-mix()` 関数を使う。
+
+**理由**:
+
+- CSS 標準で HEX を直接書ける（Sass の `rgba(#000, 0.1)` に最も近い記法）
+- `rgb(0 0 0 / 10%)` のように R/G/B を 10 進数に変換する手間がない
+- 8 桁 HEX (`#0000001a`) のような不直感的な alpha 変換が不要
+- デザイントークン（CSS カスタムプロパティ）とも自然に組み合わせられる
+
+**書き方**:
+
+```css
+/* HEX 直指定 */
+border: 1px dashed color-mix(in srgb, #000 10%, transparent);
+
+/* デザイントークンと組み合わせる場合 */
+background: color-mix(in srgb, var(--ystdtb--color--blue-dark) 20%, transparent);
+```
+
+**ブラウザ対応**:
+
+`color-mix()` は 2023 年 3 〜 5 月に主要ブラウザで対応済みで、MDN 上では Baseline "widely available" に到達している。基本的にフォールバックは不要。
+
+**フォールバックが必要な場合**:
+
+装飾的に重要な箇所で、どうしても非対応ブラウザへの対処が必要な場合は `@supports not` を使って非対応ブラウザにだけ代替指定を当てる（対応ブラウザには余分な上書きが走らないようにする）。
+
+```css
+.foo {
+	/* 通常は color-mix を使用 */
+	border: 1px dashed color-mix(in srgb, #000 10%, transparent);
+}
+
+@supports not (color: color-mix(in srgb, black, white)) {
+	.foo {
+		/* 非対応ブラウザ用のフォールバック */
+		border: 1px dashed rgb(0 0 0 / 10%);
+	}
+}
+```
+
 ### ブレークポイント
 
 | 名前 | 値（px） | 値（rem） | Custom Media | 用途 |
