@@ -1,0 +1,33 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelBorderRadius": "50px",
+					"labelType": "icon",
+					"labelContents": "bookmark",
+					"labelBold": false,
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelBorderRadius": "50px",
+					"labelType": "icon",
+					"labelContents": "sns-twitter",
+					"labelBold": false,
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

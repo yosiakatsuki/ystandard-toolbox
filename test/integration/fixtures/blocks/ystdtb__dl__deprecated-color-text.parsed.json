@@ -1,0 +1,61 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"textColor": "ys-red"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-text-color has-ys-red-color\">カラー設定</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-text-color has-ys-red-color\">カラー設定</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"textColor": "ys-green"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple has-text-color has-ys-green-color\">textColor</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple has-text-color has-ys-green-color\">textColor</dd>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"textColor": "ys-orange"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ああああ</p>\n",
+						"innerContent": [ "\n<p>ああああ</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-text-color has-ys-orange-color\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-text-color has-ys-orange-color\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

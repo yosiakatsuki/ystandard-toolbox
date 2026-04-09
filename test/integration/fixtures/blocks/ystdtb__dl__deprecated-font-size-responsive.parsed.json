@@ -1,0 +1,51 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"textSize": {
+						"desktop": {
+							"size": "20px",
+							"slug": "large"
+						},
+						"tablet": "21px",
+						"mobile": "22px"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\" style=\"--ystdtb-font-size-tablet:21px;--ystdtb-font-size-mobile:22px\">フォントサイズ 20,21,22</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\" style=\"--ystdtb-font-size-tablet:21px;--ystdtb-font-size-mobile:22px\">フォントサイズ 20,21,22</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"textSize": {
+						"desktop": {
+							"size": "21px"
+						},
+						"tablet": "22px",
+						"mobile": "23px"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\" style=\"--ystdtb-font-size-desktop:21px;--ystdtb-font-size-tablet:22px;--ystdtb-font-size-mobile:23px\">レスポンシブ 21,22,23</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\" style=\"--ystdtb-font-size-desktop:21px;--ystdtb-font-size-tablet:22px;--ystdtb-font-size-mobile:23px\">レスポンシブ 21,22,23</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

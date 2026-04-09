@@ -5,10 +5,6 @@ import {
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-/**
- * Aktk Dependencies.
- */
-import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 
 // @ts-ignore.
 export const deprecated1341 = [
@@ -71,17 +67,25 @@ export const deprecated1341 = [
 			customContentsBorderColor: {
 				type: 'string',
 			},
+			// v1 互換: アイコン SVG はアイコンライブラリ差し替えで再現不能なため、
+			// 保存済み HTML から直接吸い出して deprecated save() に戻す。
+			legacyLabelIconInnerHtml: {
+				type: 'string',
+				source: 'html',
+				selector: '.ystdtb-timeline__label-icon',
+			},
 		},
 		supports: {
 			align: false,
 			className: false,
-			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
 			const {
 				labelBorderSize,
 				labelBorderRadius,
 				contentMarginTop,
+				// v1 互換用属性は v2 へ持ち越さない.
+				legacyLabelIconInnerHtml: _legacyLabelIconInnerHtml,
 				...rest
 			} = attributes;
 
@@ -204,23 +208,25 @@ export const deprecated1341 = [
 					: undefined,
 			};
 
+			const { legacyLabelIconInnerHtml } = attributes;
 			const getLabelContents = () => {
-				const labelContentsClasses = classnames( {
-					'ystdtb-timeline__label-text': 'text' === selectLabelType,
-					'ystdtb-timeline__label-icon': 'icon' === selectLabelType,
-				} );
 				if ( 'text' === selectLabelType ) {
 					return (
-						<span className={ labelContentsClasses }>
+						<span className="ystdtb-timeline__label-text">
 							{ labelContents }
 						</span>
 					);
 				}
 				if ( 'icon' === selectLabelType ) {
+					// アイコン SVG は v1/v2 でライブラリが異なるため、
+					// 保存済み HTML をそのまま戻して 1 バイト差を防ぐ.
 					return (
-						<span className={ labelContentsClasses }>
-							<SvgIcon.Content name={ labelContents } />
-						</span>
+						<span
+							className="ystdtb-timeline__label-icon"
+							dangerouslySetInnerHTML={ {
+								__html: legacyLabelIconInnerHtml || '',
+							} }
+						/>
 					);
 				}
 				return <></>;

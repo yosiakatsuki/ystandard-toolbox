@@ -43,9 +43,17 @@ import {
 } from '../fixtures';
 
 // 対象ブロックの登録（テスト用ヘルパー経由で edit.tsx の依存を回避）.
-import { registerSliderTestBlocks } from '../helpers/register-blocks';
+import {
+	registerSliderTestBlocks,
+	registerTimelineTestBlocks,
+	registerFaqTestBlocks,
+	registerDescriptionListTestBlocks,
+} from '../helpers/register-blocks';
 
 registerSliderTestBlocks();
+registerTimelineTestBlocks();
+registerFaqTestBlocks();
+registerDescriptionListTestBlocks();
 
 /**
  * fixture と比較するときに使うプロパティだけを取り出す

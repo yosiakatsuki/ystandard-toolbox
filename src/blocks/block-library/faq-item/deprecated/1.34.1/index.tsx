@@ -5,10 +5,6 @@ import {
 	getFontSizeClass,
 	useBlockProps,
 } from '@wordpress/block-editor';
-/*
- * Aktk Dependencies
- */
-import { SvgIcon } from '@aktk/block-components/components/svg-icon';
 // @ts-ignore.
 export const deprecated1341 = [
 	{
@@ -89,18 +85,30 @@ export const deprecated1341 = [
 			customAccordionArrowColor: {
 				type: 'string',
 			},
+			// v1 互換: アコーディオン矢印 SVG はアイコンライブラリ差し替えで
+			// 再現不能なため、保存済み HTML から直接吸い出して戻す。
+			legacyArrowInnerHtml: {
+				type: 'string',
+				source: 'html',
+				selector: '.ystdtb-faq-item__arrow',
+			},
 		},
 		supports: {
 			anchor: false,
 			align: false,
 			className: false,
-			lightBlockWrapper: true,
 		},
 		migrate: ( attributes: any ) => {
-			const { labelBorderRadius, labelBorderSize, faqBorderSize } =
-				attributes;
+			const {
+				labelBorderRadius,
+				labelBorderSize,
+				faqBorderSize,
+				// v1 互換用属性は v2 へ持ち越さない.
+				legacyArrowInnerHtml: _legacyArrowInnerHtml,
+				...rest
+			} = attributes;
 			return {
-				...attributes,
+				...rest,
 				labelBorderRadius: labelBorderRadius
 					? `${ labelBorderRadius }px`
 					: undefined,
@@ -139,6 +147,7 @@ export const deprecated1341 = [
 				customLabelBorderColor,
 				accordionArrowColor,
 				customAccordionArrowColor,
+				legacyArrowInnerHtml,
 			} = attributes;
 
 			const faqTextColorClass = getColorClassName(
@@ -266,12 +275,15 @@ export const deprecated1341 = [
 						<InnerBlocks.Content />
 					</div>
 					{ 'q' === faqType && (
+						// 矢印 SVG は v1/v2 でアイコンライブラリが異なるため、
+						// 保存済み HTML をそのまま戻して 1 バイト差を防ぐ.
 						<div
 							className={ accordionArrowClass }
 							style={ accordionArrowStyle }
-						>
-							<SvgIcon.Content name={ 'chevron-down' } />
-						</div>
+							dangerouslySetInnerHTML={ {
+								__html: legacyArrowInnerHtml || '',
+							} }
+						/>
 					) }
 				</div>
 			);

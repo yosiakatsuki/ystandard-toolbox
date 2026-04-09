@@ -1,0 +1,51 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {
+			"margin": {}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "余白設定 margin / padding デスクトップのみ",
+					"margin": {
+						"top": "10px",
+						"right": "11px",
+						"bottom": "12px",
+						"left": "13px"
+					},
+					"padding": {
+						"top": "20px",
+						"right": "21px",
+						"bottom": "22px",
+						"left": "23px"
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "margin 10~13, padding 20~23",
+					"margin": {
+						"top": "10px",
+						"right": "11px",
+						"bottom": "12px",
+						"left": "13px"
+					},
+					"padding": {
+						"top": "20px",
+						"right": "21px",
+						"bottom": "22px",
+						"left": "23px"
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

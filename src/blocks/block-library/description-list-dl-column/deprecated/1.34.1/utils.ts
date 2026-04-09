@@ -97,38 +97,27 @@ const getSpacingProps = ( type, value ) => {
 			[ `${ type }` ]: `${ top } ${ right }`,
 		};
 	}
-	// 上・左右・下
+	// 上・左右・下.
 	if ( !! top && !! right && right === left && !! bottom ) {
 		return {
 			[ `${ type }` ]: `${ top } ${ right } ${ bottom }`,
 		};
 	}
+	// それ以外は個別プロパティ.
 	let result = {};
 	if ( top ) {
-		result = {
-			...result,
-			[ `${ type }-top` ]: top,
-		};
+		result[ `${ type }-top` ] = top;
 	}
 	if ( right ) {
-		result = {
-			...result,
-			[ `${ type }-right` ]: right,
-		};
+		result[ `${ type }-right` ] = right;
 	}
 	if ( bottom ) {
-		result = {
-			...result,
-			[ `${ type }-bottom` ]: bottom,
-		};
+		result[ `${ type }-bottom` ] = bottom;
 	}
 	if ( left ) {
-		result = {
-			...result,
-			[ `${ type }-left` ]: left,
-		};
+		result[ `${ type }-left` ] = left;
 	}
-	return result;
+	return Object.keys( result ).length ? result : undefined;
 };
 
 const getResponsiveSpacingCustomProps = ( type, value, suffix = '' ) => {
