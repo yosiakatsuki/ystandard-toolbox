@@ -1,14 +1,34 @@
 import { Book, Settings } from 'react-feather';
 
-/**
- * yStandard
- */
-import { getSettingPageUrl } from '../function/url';
+/* WordPress Dependencies */
+import { __ } from '@wordpress/i18n';
 
-const GridItem = ( { name, icon, description, manual, settingPage } ) => {
+/* Plugin Dependencies */
+import { getSettingPageUrl } from '../function/url';
+import { getAdminConfig } from '../function/config';
+
+export default function GridItem( {
+	name,
+	icon,
+	description,
+	manual,
+	settingPage,
+	requireYStandard,
+} ) {
+	const isYStandard = getAdminConfig( 'isYStandard', false );
+	const showSettingPage =
+		!! settingPage && ( ! requireYStandard || isYStandard );
+
 	return (
 		<div className="aktk-settings-start-page__grid-item">
-			<h3>{ name }</h3>
+			<div className="aktk-settings-start-page__grid-heading">
+				<h3>{ name }</h3>
+				{ requireYStandard && (
+					<span className="aktk-settings-start-page__badge-ystandard">
+						{ __( 'yStandard連携', 'ystandard-toolbox' ) }
+					</span>
+				) }
+			</div>
 			{ icon && (
 				<div className="flex justify-center text-4xl text-aktk-blue">
 					{ icon() }
@@ -25,17 +45,17 @@ const GridItem = ( { name, icon, description, manual, settingPage } ) => {
 						rel={ 'noreferrer noopener nofollow' }
 					>
 						<Book />
-						マニュアル
+						{ __( 'マニュアル', 'ystandard-toolbox' ) }
 					</a>
 				) }
-				{ !! settingPage && (
+				{ showSettingPage && (
 					<a href={ getSettingPageUrl( settingPage ) }>
 						<Settings />
-						設定画面
+						{ __( '設定画面', 'ystandard-toolbox' ) }
 					</a>
 				) }
 			</div>
 		</div>
 	);
 };
-export default GridItem;
+

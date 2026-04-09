@@ -130,6 +130,7 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-header-overlay/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=header',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'フォント設定', 'ystandard-toolbox' ),
@@ -149,6 +150,7 @@ const featureList = {
 					'ystandard-toolbox'
 				),
 				manual: 'https://wp-ystandard.com/manual/ystdtb-lp/',
+				requireYStandard: true,
 			},
 			{
 				name: __( '投稿詳細上下部並び替え', 'ystandard-toolbox' ),
@@ -159,6 +161,7 @@ const featureList = {
 				),
 				manual: 'https://wp-ystandard.com/manual/ystdtb-cta/',
 				settingPage: 'admin.php?page=ystdtb-settings-v2-cta',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'サブヘッダーメニュー', 'ystandard-toolbox' ),
@@ -170,6 +173,7 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-sub-header/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=header',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'TOP専用メニュー', 'ystandard-toolbox' ),
@@ -179,6 +183,7 @@ const featureList = {
 					'ystandard-toolbox'
 				),
 				manual: 'https://wp-ystandard.com/manual/ystdtb-only-front-page-menu/',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'ドロワーメニュー拡張', 'ystandard-toolbox' ),
@@ -190,6 +195,7 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-mobile-menu-widget/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=menu',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'アーカイブページ拡張', 'ystandard-toolbox' ),
@@ -201,6 +207,7 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-archive/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=archive',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'ウィジェット子階層折りたたみ', 'ystandard-toolbox' ),
@@ -210,6 +217,7 @@ const featureList = {
 					'ystandard-toolbox'
 				),
 				manual: 'https://wp-ystandard.com/manual/ystdtb-widget-accordion/',
+				requireYStandard: true,
 			},
 			{
 				name: __( 'Copyright編集', 'ystandard-toolbox' ),
@@ -221,6 +229,7 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-copyright/',
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=copyright',
+				requireYStandard: true,
 			},
 		],
 	},
@@ -233,6 +242,7 @@ const featureList = {
 				description:
 					'投稿タイトルとは別の<title>設定、メタデスクリプションを設定できる機能',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-title-dscr/',
+				requireYStandard: true,
 			},
 			{
 				name: '一覧のtitle,description設定',
@@ -240,6 +250,7 @@ const featureList = {
 				description:
 					'カテゴリー・タグ一覧ページの<title>設定、メタデスクリプションを設定できる機能',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-term-meta-seo/',
+				requireYStandard: true,
 			},
 		],
 	},
