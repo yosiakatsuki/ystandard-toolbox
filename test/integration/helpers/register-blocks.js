@@ -27,6 +27,16 @@ import timelineItemMetadata from '../../../src/blocks/block-library/timeline-ite
 import timelineItemSave from '@aktk/blocks/block-library/timeline-item/save';
 import timelineItemDeprecated from '@aktk/blocks/block-library/timeline-item/deprecated';
 
+// FAQ.
+import faqMetadata from '../../../src/blocks/block-library/faq/block.json';
+import faqSave from '@aktk/blocks/block-library/faq/save';
+import faqDeprecated from '@aktk/blocks/block-library/faq/deprecated';
+
+// FAQ item.
+import faqItemMetadata from '../../../src/blocks/block-library/faq-item/block.json';
+import faqItemSave from '@aktk/blocks/block-library/faq-item/save';
+import faqItemDeprecated from '@aktk/blocks/block-library/faq-item/deprecated';
+
 const NoopEdit = () => null;
 
 function registerOnce( metadata, settings ) {
@@ -57,5 +67,16 @@ export function registerTimelineTestBlocks() {
 	registerOnce( timelineItemMetadata, {
 		save: timelineItemSave,
 		deprecated: timelineItemDeprecated,
+	} );
+}
+
+export function registerFaqTestBlocks() {
+	registerOnce( faqMetadata, {
+		save: faqSave,
+		deprecated: faqDeprecated,
+	} );
+	registerOnce( faqItemMetadata, {
+		save: faqItemSave,
+		deprecated: faqItemDeprecated,
 	} );
 }

@@ -46,10 +46,12 @@ import {
 import {
 	registerSliderTestBlocks,
 	registerTimelineTestBlocks,
+	registerFaqTestBlocks,
 } from '../helpers/register-blocks';
 
 registerSliderTestBlocks();
 registerTimelineTestBlocks();
+registerFaqTestBlocks();
 
 /**
  * fixture と比較するときに使うプロパティだけを取り出す
