@@ -152,12 +152,15 @@ class Init {
 
 		Notice::set_notice(
 			function () {
+				if ( ! current_user_can( 'manage_options' ) ) {
+					return;
+				}
 				$dismiss_url = wp_nonce_url(
 					admin_url( 'admin-post.php?action=' . self::ACTION_DISMISS_NON_YSTANDARD_NOTICE ),
 					self::ACTION_DISMISS_NON_YSTANDARD_NOTICE
 				);
 				$message     = sprintf(
-					'%s<p style="margin-top: 0.5em;"><a href="%s" class="button button-secondary">%s</a></p>',
+					'<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;"><span>%s</span><p style="margin: 0;"><a href="%s">%s</a></p></div>',
 					esc_html__( 'お使いのテーマではyStandard ToolboxのyStandardテーマ連携機能は利用できません。', 'ystandard-toolbox' ),
 					esc_url( $dismiss_url ),
 					esc_html__( '12ヶ月非表示にする', 'ystandard-toolbox' )
