@@ -1,0 +1,107 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {
+			"margin": {}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "余白設定 上下・左右",
+					"responsiveMargin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "10px",
+							"left": "11px"
+						},
+						"tablet": {
+							"top": "11px",
+							"right": "12px",
+							"bottom": "11px",
+							"left": "12px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "13px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					},
+					"responsivePadding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "20px",
+							"left": "21px"
+						},
+						"tablet": {
+							"top": "21px",
+							"right": "22px",
+							"bottom": "21px",
+							"left": "22px"
+						},
+						"mobile": {
+							"top": "22px",
+							"right": "23px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "margin 上下・左右",
+					"responsiveMargin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "10px",
+							"left": "11px"
+						},
+						"tablet": {
+							"top": "11px",
+							"right": "12px",
+							"bottom": "11px",
+							"left": "12px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "13px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					},
+					"responsivePadding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "20px",
+							"left": "21px"
+						},
+						"tablet": {
+							"top": "21px",
+							"right": "22px",
+							"bottom": "21px",
+							"left": "22px"
+						},
+						"mobile": {
+							"top": "22px",
+							"right": "23px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]
