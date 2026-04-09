@@ -1,0 +1,68 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"padding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					},
+					"margin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-padding has-margin\" style=\"padding-top:20px;padding-right:21px;padding-bottom:22px;padding-left:23px;margin-top:10px;margin-right:11px;margin-bottom:12px;margin-left:13px\">余白設定 margin / padding デスクトップのみ</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-padding has-margin\" style=\"padding-top:20px;padding-right:21px;padding-bottom:22px;padding-left:23px;margin-top:10px;margin-right:11px;margin-bottom:12px;margin-left:13px\">余白設定 margin / padding デスクトップのみ</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"padding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					},
+					"margin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple has-padding has-margin\" style=\"padding-top:20px;padding-right:21px;padding-bottom:22px;padding-left:23px;margin-top:10px;margin-right:11px;margin-bottom:12px;margin-left:13px\">margin 10~13, padding 20~23</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple has-padding has-margin\" style=\"padding-top:20px;padding-right:21px;padding-bottom:22px;padding-left:23px;margin-top:10px;margin-right:11px;margin-bottom:12px;margin-left:13px\">margin 10~13, padding 20~23</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

@@ -58,7 +58,7 @@ export const deprecated1341 = [
 			className: false,
 		},
 		migrate: ( attributes: any ) => {
-			const { margin, padding, dtWidth, ...rest } = attributes;
+			const { margin, padding, dtWidth, border, ...rest } = attributes;
 
 			// Margin変換.
 			let newMargin;
@@ -74,16 +74,27 @@ export const deprecated1341 = [
 				newWidth = dtWidth?.desktop;
 			}
 
+			// Border変換: v1 { color: { hex, slug } } → v2 { color: hex }.
+			let newBorder;
+			if ( border ) {
+				newBorder = {
+					...border,
+					color: border?.color?.hex || border?.color,
+					style: border?.style || 'solid',
+				};
+			}
+
 			return {
 				...rest,
 				margin: ! isResponsiveObject( margin ) ? newMargin : undefined,
 				responsiveMargin: isResponsiveObject( margin )
-					? newMargin
+					? margin
 					: undefined,
 				dtWidth: newWidth,
 				responsiveDtWidth: isResponsiveObject( dtWidth )
 					? dtWidth
 					: undefined,
+				border: newBorder,
 			};
 		},
 		save( { attributes }: { attributes: any } ) {
@@ -97,7 +108,6 @@ export const deprecated1341 = [
 				border: 'has-border',
 				borderColor: 'has-border-color',
 			};
-			console.log( { attributes } );
 			const {
 				isStackedOnMobile,
 				isStackedOnTablet,

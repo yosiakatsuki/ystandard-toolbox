@@ -1,0 +1,27 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {
+			"margin": {}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "基本パターン: dl &gt; dt + dd-simple の組み合わせ"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "これは基本パターン: dl &gt; dt + dd-simple の組み合わせのddです"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]
