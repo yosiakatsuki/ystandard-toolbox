@@ -35,9 +35,10 @@ class Plugin_Settings {
 			'menu-title' => '見出しデザイン編集',
 		],
 		[
-			'slug'       => 'design',
-			'page-title' => 'サイトデザイン拡張',
-			'menu-title' => 'サイトデザイン拡張',
+			'slug'             => 'design',
+			'page-title'       => 'サイトデザイン拡張',
+			'menu-title'       => 'サイトデザイン拡張',
+			'requireYStandard' => true,
 		],
 		[
 			'slug'       => 'cta',
@@ -270,7 +271,12 @@ class Plugin_Settings {
 			Admin::get_menu_icon(),
 			59
 		);
+		$is_ystandard = Version::ystandard_version_compare();
 		foreach ( self::SUBMENU as $menu ) {
+			// yStandard必須のメニューは非yStandard環境ではスキップ.
+			if ( ! empty( $menu['requireYStandard'] ) && ! $is_ystandard ) {
+				continue;
+			}
 			$slug = Config::ADMIN_MENU_SLUG_V2;
 			if ( ! empty( $menu['slug'] ) ) {
 				$slug .= '-' . $menu['slug'];
