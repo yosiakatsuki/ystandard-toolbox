@@ -11,6 +11,7 @@ namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Admin;
 use ystandard_toolbox\Util\Post_Type;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -67,6 +68,13 @@ class Meta_Box {
 	private $screen;
 
 	/**
+	 * yStandardテーマが必要かどうか
+	 *
+	 * @var boolean
+	 */
+	private $require_ystandard;
+
+	/**
 	 * Meta_Box constructor.
 	 *
 	 * @param string     $id       ID.
@@ -74,13 +82,15 @@ class Meta_Box {
 	 * @param callable   $meta_box メタボックスForm.
 	 * @param callable   $save     Save処理.
 	 * @param array|null $screen   ページタイプ.
+	 * @param boolean    $require_ystandard yStandardテーマが必要かどうか.
 	 */
-	public function __construct( $id, $title, $meta_box, $save, $screen = null ) {
-		$this->id       = $id;
-		$this->title    = $title;
-		$this->meta_box = $meta_box;
-		$this->save     = $save;
-		$this->screen   = $screen;
+	public function __construct( $id, $title, $meta_box, $save, $screen = null, $require_ystandard = true ) {
+		$this->id                = $id;
+		$this->title             = $title;
+		$this->meta_box          = $meta_box;
+		$this->save              = $save;
+		$this->screen            = $screen;
+		$this->require_ystandard = $require_ystandard;
 
 		add_action( 'admin_menu', [ $this, 'add_meta_box' ] );
 		add_action( 'save_post', [ $this, 'save_post' ] );
@@ -91,6 +101,9 @@ class Meta_Box {
 	 */
 	public function add_meta_box() {
 		$screen = $this->screen;
+		if ( $this->require_ystandard && ! Version::ystandard_version_compare() ) {
+			return;
+		}
 		if ( is_null( $screen ) ) {
 			$screen = array_keys( Post_Type::get_post_types( [], [ 'ys-parts' ] ) );
 		}
@@ -142,6 +155,9 @@ class Meta_Box {
 			return;
 		}
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( $this->require_ystandard && ! Version::ystandard_version_compare() ) {
 			return;
 		}
 		/**

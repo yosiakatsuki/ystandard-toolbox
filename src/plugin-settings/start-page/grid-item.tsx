@@ -1,13 +1,48 @@
-import { Book, Settings } from 'react-feather';
+import { Book, Settings, Zap } from 'react-feather';
 
-/**
- * yStandard
- */
+/* WordPress Dependencies */
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+
+/* Plugin Dependencies */
 import { getSettingPageUrl } from '../function/url';
+import { getAdminConfig } from '../utils/config';
 
-const GridItem = ( { name, icon, description, manual, settingPage } ) => {
+interface GridItemProps {
+	name: string;
+	icon?: () => JSX.Element;
+	description: string;
+	manual?: string;
+	settingPage?: string;
+	requireYStandard?: boolean;
+}
+
+export default function GridItem( {
+	name,
+	icon,
+	description,
+	manual,
+	settingPage,
+	requireYStandard,
+}: GridItemProps ) {
+	const isYStandard = getAdminConfig( 'isYStandard', false );
+	const showSettingPage =
+		!! settingPage && ( ! requireYStandard || isYStandard );
+
 	return (
-		<div className="aktk-settings-start-page__grid-item">
+		<div
+			className={ `aktk-settings-start-page__grid-item${
+				requireYStandard && ! isYStandard
+					? ' aktk-settings-start-page__grid-item--disabled'
+					: ''
+			}` }
+		>
+			{ requireYStandard && (
+				<span className="aktk-settings-start-page__badge-ystandard">
+					<Zap />
+					{ __( 'yStandard連携', 'ystandard-toolbox' ) }
+				</span>
+			) }
 			<h3>{ name }</h3>
 			{ icon && (
 				<div className="flex justify-center text-4xl text-aktk-blue">
@@ -15,7 +50,12 @@ const GridItem = ( { name, icon, description, manual, settingPage } ) => {
 				</div>
 			) }
 			<div className="aktk-settings-start-page__grid-text">
-				{ description }
+				{ description.split( /<br\s*\/?>/ ).map( ( text, i, arr ) => (
+					<Fragment key={ i }>
+						{ text }
+						{ i < arr.length - 1 && <br /> }
+					</Fragment>
+				) ) }
 			</div>
 			<div className="aktk-settings-start-page__grid-buttons">
 				{ !! manual && (
@@ -25,17 +65,16 @@ const GridItem = ( { name, icon, description, manual, settingPage } ) => {
 						rel={ 'noreferrer noopener nofollow' }
 					>
 						<Book />
-						マニュアル
+						{ __( 'マニュアル', 'ystandard-toolbox' ) }
 					</a>
 				) }
-				{ !! settingPage && (
+				{ showSettingPage && (
 					<a href={ getSettingPageUrl( settingPage ) }>
 						<Settings />
-						設定画面
+						{ __( '設定画面', 'ystandard-toolbox' ) }
 					</a>
 				) }
 			</div>
 		</div>
 	);
-};
-export default GridItem;
+}

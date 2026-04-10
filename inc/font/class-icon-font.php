@@ -72,7 +72,7 @@ class Icon_Font {
 	 * ブロックエディターにアイコンフォントCSSを追加
 	 */
 	public function add_ys_icon_font_editor() {
-		if( ! is_admin() ) {
+		if ( ! is_admin() ) {
 			return;
 		}
 		wp_add_inline_style(
