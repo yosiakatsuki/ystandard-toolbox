@@ -121,6 +121,16 @@ const featureList = {
 		title: 'デザイン機能',
 		items: [
 			{
+				name: __( 'フォント設定', 'ystandard-toolbox' ),
+				icon: () => <Type />,
+				description: __(
+					'Google FontsなどのWebフォント読み込み、font-familyカスタマイズ機能',
+					'ystandard-toolbox'
+				),
+				manual: 'https://wp-ystandard.com/manual/ystdtb-add-font/',
+				settingPage: 'admin.php?page=ystdtb-settings-v2-font',
+			},
+			{
 				name: __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ),
 				icon: () => <Layers />,
 				description: __(
@@ -131,16 +141,6 @@ const featureList = {
 				settingPage:
 					'admin.php?page=ystdtb-settings-v2-design&tab=header',
 				requireYStandard: true,
-			},
-			{
-				name: __( 'フォント設定', 'ystandard-toolbox' ),
-				icon: () => <Type />,
-				description: __(
-					'Google FontsなどのWebフォント読み込み、font-familyカスタマイズ機能',
-					'ystandard-toolbox'
-				),
-				manual: 'https://wp-ystandard.com/manual/ystdtb-add-font/',
-				settingPage: 'admin.php?page=ystdtb-settings-v2-font',
 			},
 			{
 				name: __( 'LP機能', 'ystandard-toolbox' ),
