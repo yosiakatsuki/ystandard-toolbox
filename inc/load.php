@@ -31,6 +31,8 @@ require_once __DIR__ . '/code/class-code.php';
 require_once __DIR__ . '/heading/class-heading.php';
 // Icon.
 require_once __DIR__ . '/icon/class-icon.php';
+// Design.
+require_once __DIR__ . '/design/class-design.php';
 // Font.
 require_once __DIR__ . '/font/class-font.php';
 require_once __DIR__ . '/font/class-icon-font.php';

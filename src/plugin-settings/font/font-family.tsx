@@ -19,6 +19,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
+import { getAdminConfig } from '@aktk/plugin-settings/utils/config';
 import { FontContext } from './index';
 
 /**
@@ -28,6 +29,7 @@ import { FontContext } from './index';
 export default function FontFamily(): JSX.Element {
 	// フォント設定のコンテキストから必要な値と関数を取得
 	const { settings, updateSettings } = useContext( FontContext );
+	const isYStandard = getAdminConfig( 'isYStandard', false );
 	// プレースホルダーテキストの設定（値が入力されていない場合はテーマ設定を表示）
 	const placeholder = !! settings?.family ? '' : settings?.themeFontSetting;
 	/**
@@ -73,7 +75,7 @@ export default function FontFamily(): JSX.Element {
 						) }
 					</NoticeSecondaryText>
 				</PluginSettingsBaseControl>
-				{ ! settings?.family && (
+				{ isYStandard && ! settings?.family && (
 					<PluginSettingsBaseControl
 						label={ __(
 							'フォント設定のコピー',

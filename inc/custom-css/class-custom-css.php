@@ -27,6 +27,7 @@ class Custom_Css {
 	 * Construct
 	 */
 	public function __construct() {
+		add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
 		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 		add_action( Config::AFTER_ENQUEUE_CSS_HOOK, [ $this, 'add_front_css' ] );
@@ -150,6 +151,24 @@ class Custom_Css {
 			'',
 			json_encode( $data )
 		);
+	}
+
+	/**
+	 * サブメニュー登録
+	 *
+	 * @param array $submenus サブメニュー一覧.
+	 *
+	 * @return array
+	 */
+	public function add_submenu( $submenus ) {
+		$submenus[] = [
+			'slug'       => 'custom-css',
+			'page-title' => 'カスタムCSS',
+			'menu-title' => 'カスタムCSS',
+			'priority'   => 50,
+		];
+
+		return $submenus;
 	}
 }
 

@@ -29,6 +29,7 @@ class Code {
 	 * Code constructor.
 	 */
 	public function __construct() {
+		add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
 		add_action( 'wp_head', [ $this, 'add_head' ] );
 		add_action( 'wp_body_open', [ $this, 'add_body_open' ] );
 		add_action( 'wp_footer', [ $this, 'add_footer' ] );
@@ -152,6 +153,24 @@ class Code {
 			'',
 			json_encode( $data )
 		);
+	}
+
+	/**
+	 * サブメニュー登録
+	 *
+	 * @param array $submenus サブメニュー一覧.
+	 *
+	 * @return array
+	 */
+	public function add_submenu( $submenus ) {
+		$submenus[] = [
+			'slug'       => 'add-code',
+			'page-title' => 'コード追加',
+			'menu-title' => 'コード追加',
+			'priority'   => 60,
+		];
+
+		return $submenus;
 	}
 }
 

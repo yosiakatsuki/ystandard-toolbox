@@ -34,6 +34,7 @@ class CTA {
 		if ( ! Version::ystandard_version_compare( '4.23.0-beta-1' ) ) {
 			return;
 		}
+		add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
 		add_filter( 'ys_get_content_header_priority', [ $this, 'header_priority' ] );
 		add_filter( 'ys_get_content_footer_priority', [ $this, 'footer_priority' ] );
 
@@ -547,6 +548,24 @@ class CTA {
 		// 設定上書き.
 		$args['description'] = Notice::customizer_notice( $notice );
 		return $args;
+	}
+
+	/**
+	 * サブメニュー登録
+	 *
+	 * @param array $submenus サブメニュー一覧.
+	 *
+	 * @return array
+	 */
+	public function add_submenu( $submenus ) {
+		$submenus[] = [
+			'slug'       => 'cta',
+			'page-title' => '投稿詳細ページ上下拡張',
+			'menu-title' => '投稿詳細ページ拡張',
+			'priority'   => 30,
+		];
+
+		return $submenus;
 	}
 }
 

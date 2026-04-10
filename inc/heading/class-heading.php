@@ -46,6 +46,7 @@ class Heading {
 	public function __construct() {
 
 		require_once __DIR__ . '/class-heading-helper.php';
+		add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
 		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 
 		// 設定移行前は下位互換モードで起動する.
@@ -467,6 +468,24 @@ class Heading {
 		$option = apply_filters( 'get_heading_level_schema', $keys );
 
 		return is_array( $option ) ? $option : $keys;
+	}
+
+	/**
+	 * サブメニュー登録
+	 *
+	 * @param array $submenus サブメニュー一覧.
+	 *
+	 * @return array
+	 */
+	public function add_submenu( $submenus ) {
+		$submenus[] = [
+			'slug'       => 'heading-v2',
+			'page-title' => '見出しデザイン編集',
+			'menu-title' => '見出しデザイン編集',
+			'priority'   => 10,
+		];
+
+		return $submenus;
 	}
 
 }

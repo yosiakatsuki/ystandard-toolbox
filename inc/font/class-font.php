@@ -30,27 +30,117 @@ class Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Version::ystandard_version_compare() ) {
-			return;
+		if ( ! wp_is_block_theme() ) {
+			// ブロックテーマ以外なら設定画面を表示する.
+			// サブメニュー追加.
+			add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
+			// 設定画面周りの準備.
+			add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+			add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 		}
-		add_action( 'wp_head', [ $this, 'wp_head' ], 11 );
-		add_filter( 'ys_css_vars', [ $this, 'add_font_family' ], 20 );
-		add_action( 'admin_head', [ $this, 'wp_head' ], 11 );
+
+		// テーマ共通の出力.
+		add_action( 'wp_head', [ $this, 'output_font_html' ], 11 );
+		add_action( 'admin_head', [ $this, 'output_font_html' ], 11 );
+		add_filter( 'wp_resource_hints', [ $this, 'add_resource_hints' ], 10, 2 );
 		add_action( 'enqueue_block_assets', [ $this, 'add_editor_font_styles' ], 11 );
-		add_action( 'ys_customizer_parse_args__ys_design_font_type', [ $this, 'remove_customizer_font_setting' ] );
-		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
-		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
+
+		if ( Version::ystandard_version_compare() ) {
+			// yStandard テーマ固有の処理.
+			add_filter( 'ys_css_vars', [ $this, 'add_font_family' ], 20 );
+			add_action( 'ys_customizer_parse_args__ys_design_font_type', [ $this, 'remove_customizer_font_setting' ] );
+		} else {
+			// 非yStandard: font-family をインラインスタイルで出力.
+			add_action( 'wp_enqueue_scripts', [ $this, 'output_font_family_style' ], 11 );
+		}
 	}
 
 	/**
 	 * HTML出力
+	 *
+	 * 設定に保存されたHTMLを出力する.
+	 * Google Fonts 関連の preconnect はプラグイン側で自動出力するため、
+	 * 設定値からは除去して出力する.
 	 */
-	public function wp_head() {
-		$option = trim( wp_unslash( Option::get_option( Font::OPTION_NAME, 'html' ) ) );
+	public function output_font_html() {
+		$option = trim( wp_unslash( Option::get_option( self::OPTION_NAME, 'html' ) ) );
+		if ( empty( $option ) ) {
+			return;
+		}
+		// Google Fonts 関連の preconnect タグを除去（フック経由で自動出力するため）.
+		$option = self::remove_google_fonts_preconnect( $option );
+		$option = trim( $option );
 		if ( empty( $option ) ) {
 			return;
 		}
 		echo $option . PHP_EOL;
+	}
+
+	/**
+	 * Google Fonts 関連の preconnect タグを除去
+	 *
+	 * @param string $html HTML文字列.
+	 *
+	 * @return string
+	 */
+	private static function remove_google_fonts_preconnect( $html ) {
+		return preg_replace(
+			'/<link[^>]+rel=["\']preconnect["\'][^>]+href=["\']https:\/\/fonts\.(googleapis|gstatic)\.com["\'][^>]*>\s*/i',
+			'',
+			$html
+		);
+	}
+
+	/**
+	 * Google Fonts 利用時にリソースヒントを追加
+	 *
+	 * @param array  $urls          リソースヒントURL一覧.
+	 * @param string $relation_type リレーションタイプ.
+	 *
+	 * @return array
+	 */
+	public function add_resource_hints( $urls, $relation_type ) {
+		if ( 'preconnect' !== $relation_type ) {
+			return $urls;
+		}
+		if ( ! self::has_google_fonts_stylesheet() ) {
+			return $urls;
+		}
+		$urls[] = 'https://fonts.googleapis.com';
+		$urls[] = [
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		];
+
+		return $urls;
+	}
+
+	/**
+	 * Google Fonts の stylesheet が設定されているか判定
+	 *
+	 * @return bool
+	 */
+	private static function has_google_fonts_stylesheet() {
+		$html = trim( wp_unslash( Option::get_option( self::OPTION_NAME, 'html' ) ) );
+		if ( empty( $html ) ) {
+			return false;
+		}
+
+		return false !== strpos( $html, 'fonts.googleapis.com' );
+	}
+
+	/**
+	 * 非yStandard環境用の font-family CSS 出力
+	 */
+	public function output_font_family_style() {
+		$family = self::get_font_family();
+		if ( empty( $family ) ) {
+			return;
+		}
+		$css = 'body{font-family:' . $family . ';}';
+		wp_register_style( 'ystdtb-font-family', false );
+		wp_enqueue_style( 'ystdtb-font-family' );
+		wp_add_inline_style( 'ystdtb-font-family', $css );
 	}
 
 	/**
@@ -80,26 +170,60 @@ class Font {
 	 * @return string
 	 */
 	public static function get_font_family() {
-		return wp_unslash( Option::get_option( self::OPTION_NAME, 'family', '' ) );
+		$family = wp_unslash( Option::get_option( self::OPTION_NAME, 'family', '' ) );
+
+		return rtrim( $family, ';' );
 	}
 
 	/**
 	 * エディターにフォント設定反映
+	 *
+	 * enqueue_block_assets フック経由で呼ばれるため、
+	 * iframe 内のエディターにも CSS が反映される.
 	 */
 	public function add_editor_font_styles() {
 		$family = self::get_font_family();
 		if ( empty( $family ) ) {
 			return;
 		}
+		// Google Fonts 等の外部フォント読み込み用HTMLからURLを抽出してエンキュー.
+		$this->enqueue_editor_font_url();
+		// font-family CSS を反映.
 		$css = "
-		#editor .editor-styles-wrapper,
-		#editor .editor-styles-wrapper .editor-post-title__block .editor-post-title__input {
+		.editor-styles-wrapper,
+		.editor-styles-wrapper .editor-post-title__block .editor-post-title__input {
 			font-family:{$family};
 		}";
 		wp_add_inline_style(
 			Config::BLOCK_CSS_HANDLE,
 			Text::minify( $css )
 		);
+	}
+
+	/**
+	 * エディター用にフォントURLをエンキュー
+	 *
+	 * 設定に保存されたHTMLから link タグの href を抽出し、
+	 * wp_enqueue_style で登録することで iframe 内にも読み込む.
+	 */
+	private function enqueue_editor_font_url() {
+		$html = trim( wp_unslash( Option::get_option( self::OPTION_NAME, 'html' ) ) );
+		if ( empty( $html ) ) {
+			return;
+		}
+		// rel="stylesheet" を含む link タグを抽出.
+		if ( ! preg_match_all( '/<link[^>]+rel=["\']stylesheet["\'][^>]*>/i', $html, $tags ) ) {
+			return;
+		}
+		// 各タグから href を取得してエンキュー.
+		foreach ( $tags[0] as $index => $tag ) {
+			if ( preg_match( '/href=["\']([^"\']+)["\']/', $tag, $href ) ) {
+				wp_enqueue_style(
+					'ystdtb-editor-font-' . $index,
+					$href[1]
+				);
+			}
+		}
 	}
 
 	/**
@@ -208,6 +332,24 @@ class Font {
 			'',
 			json_encode( $data )
 		);
+	}
+
+	/**
+	 * サブメニュー登録
+	 *
+	 * @param array $submenus サブメニュー一覧.
+	 *
+	 * @return array
+	 */
+	public function add_submenu( $submenus ) {
+		$submenus[] = [
+			'slug'       => 'font',
+			'page-title' => 'フォント設定',
+			'menu-title' => 'フォント設定',
+			'priority'   => 40,
+		];
+
+		return $submenus;
 	}
 }
 

@@ -21,49 +21,6 @@ defined( 'ABSPATH' ) || die();
 class Plugin_Settings {
 
 	/**
-	 * サブメニュー.
-	 */
-	const SUBMENU = [
-		[
-			'slug'       => '',
-			'page-title' => 'yStandard Toolbox',
-			'menu-title' => 'yStandard Toolbox',
-		],
-		[
-			'slug'       => 'heading-v2',
-			'page-title' => '見出しデザイン編集',
-			'menu-title' => '見出しデザイン編集',
-		],
-		[
-			'slug'             => 'design',
-			'page-title'       => 'サイトデザイン拡張',
-			'menu-title'       => 'サイトデザイン拡張',
-			'requireYStandard' => true,
-		],
-		[
-			'slug'             => 'cta',
-			'page-title'       => '投稿詳細ページ上下拡張',
-			'menu-title'       => '投稿詳細ページ拡張',
-			'requireYStandard' => true,
-		],
-		[
-			'slug'       => 'font',
-			'page-title' => 'フォント設定',
-			'menu-title' => 'フォント設定',
-		],
-		[
-			'slug'       => 'custom-css',
-			'page-title' => 'カスタムCSS',
-			'menu-title' => 'カスタムCSS',
-		],
-		[
-			'slug'       => 'add-code',
-			'page-title' => 'コード追加',
-			'menu-title' => 'コード追加',
-		],
-	];
-
-	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -272,16 +229,39 @@ class Plugin_Settings {
 			Admin::get_menu_icon(),
 			59
 		);
-		$is_ystandard = Version::ystandard_version_compare();
-		foreach ( self::SUBMENU as $menu ) {
-			// yStandard必須のメニューは非yStandard環境ではスキップ.
-			if ( ! empty( $menu['requireYStandard'] ) && ! $is_ystandard ) {
-				continue;
+		// トップページ（WordPress が自動生成する重複メニューを置き換え）.
+		add_submenu_page(
+			Config::ADMIN_MENU_SLUG_V2,
+			'yStandard Toolbox',
+			'yStandard Toolbox',
+			'manage_options',
+			Config::ADMIN_MENU_SLUG_V2,
+			[ '\ystandard_toolbox\Plugin_Settings', 'menu_page' ],
+		);
+		/**
+		 * プラグイン設定画面のサブメニュー一覧をフィルターする（内部用）.
+		 *
+		 * 各機能クラスのコンストラクタからサブメニューを登録する.
+		 * 配列の各要素は以下のキーを持つ:
+		 * - slug      (string) サブメニューのスラッグ.
+		 * - page-title (string) ページタイトル.
+		 * - menu-title (string) メニュータイトル.
+		 * - priority   (int)    表示順（小さいほど先に表示、デフォルト: 50）.
+		 *
+		 * @param array $submenus サブメニュー定義の配列.
+		 */
+		$submenus = apply_filters( 'ystdtb_plugin_settings_submenus', [] );
+		usort(
+			$submenus,
+			function ( $a, $b ) {
+				$a_priority = $a['priority'] ?? 50;
+				$b_priority = $b['priority'] ?? 50;
+
+				return $a_priority - $b_priority;
 			}
-			$slug = Config::ADMIN_MENU_SLUG_V2;
-			if ( ! empty( $menu['slug'] ) ) {
-				$slug .= '-' . $menu['slug'];
-			}
+		);
+		foreach ( $submenus as $menu ) {
+			$slug = Config::ADMIN_MENU_SLUG_V2 . '-' . $menu['slug'];
 			add_submenu_page(
 				Config::ADMIN_MENU_SLUG_V2,
 				$menu['page-title'],
