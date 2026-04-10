@@ -41,9 +41,10 @@ class Plugin_Settings {
 			'requireYStandard' => true,
 		],
 		[
-			'slug'       => 'cta',
-			'page-title' => '投稿詳細ページ上下拡張',
-			'menu-title' => '投稿詳細ページ拡張',
+			'slug'             => 'cta',
+			'page-title'       => '投稿詳細ページ上下拡張',
+			'menu-title'       => '投稿詳細ページ拡張',
+			'requireYStandard' => true,
 		],
 		[
 			'slug'       => 'font',
