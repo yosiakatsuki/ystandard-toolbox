@@ -1,12 +1,21 @@
-import { Fragment } from '@wordpress/element';
 import { Book, Settings, Zap } from 'react-feather';
 
 /* WordPress Dependencies */
 import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 
 /* Plugin Dependencies */
 import { getSettingPageUrl } from '../function/url';
 import { getAdminConfig } from '../function/config';
+
+interface GridItemProps {
+	name: string;
+	icon?: () => JSX.Element;
+	description: string;
+	manual?: string;
+	settingPage?: string;
+	requireYStandard?: boolean;
+}
 
 export default function GridItem( {
 	name,
@@ -15,7 +24,7 @@ export default function GridItem( {
 	manual,
 	settingPage,
 	requireYStandard,
-} ) {
+}: GridItemProps ) {
 	const isYStandard = getAdminConfig( 'isYStandard', false );
 	const showSettingPage =
 		!! settingPage && ( ! requireYStandard || isYStandard );
