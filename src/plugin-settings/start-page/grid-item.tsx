@@ -6,7 +6,7 @@ import { Fragment } from '@wordpress/element';
 
 /* Plugin Dependencies */
 import { getSettingPageUrl } from '../function/url';
-import { getAdminConfig } from '../function/config';
+import { getAdminConfig } from '../utils/config';
 
 interface GridItemProps {
 	name: string;
