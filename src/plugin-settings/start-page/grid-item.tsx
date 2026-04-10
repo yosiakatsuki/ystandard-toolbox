@@ -1,4 +1,4 @@
-import { Book, Settings } from 'react-feather';
+import { Book, Settings, Zap } from 'react-feather';
 
 /* WordPress Dependencies */
 import { __ } from '@wordpress/i18n';
@@ -23,6 +23,7 @@ export default function GridItem( {
 		<div className="aktk-settings-start-page__grid-item">
 			{ requireYStandard && (
 				<span className="aktk-settings-start-page__badge-ystandard">
+					<Zap />
 					{ __( 'yStandard連携', 'ystandard-toolbox' ) }
 				</span>
 			) }

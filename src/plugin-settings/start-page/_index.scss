@@ -45,12 +45,20 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		padding: 0.1em 0.5em;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3em;
+		padding: 0.2em 0.6em;
 		border-radius: 0 0 3px;
-		background-color: #e8f4f8;
-		color: #07689f;
+		background-color: #fdf6e3;
+		color: #b8860b;
 		font-size: 0.625rem;
 		font-weight: 400;
+
+		svg {
+			width: 0.75em;
+			height: 0.75em;
+		}
 	}
 
 	svg {
