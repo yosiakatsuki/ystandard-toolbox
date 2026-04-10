@@ -25,15 +25,12 @@
 }
 
 .aktk-settings-start-page__grid-item {
+	position: relative;
 	padding: 20px;
 	box-shadow: 0 0 8px rgba(#000, 0.1);
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-
-	.aktk-settings-start-page__grid-heading {
-		text-align: center;
-	}
 
 	h3 {
 		margin: 0;
@@ -41,13 +38,15 @@
 		color: #07689f;
 		font-size: 1.1em;
 		font-weight: 700;
+		text-align: center;
 	}
 
 	.aktk-settings-start-page__badge-ystandard {
-		display: inline-block;
-		margin-top: 0.5em;
+		position: absolute;
+		top: 0;
+		left: 0;
 		padding: 0.1em 0.5em;
-		border-radius: 3px;
+		border-radius: 0 0 3px;
 		background-color: #e8f4f8;
 		color: #07689f;
 		font-size: 0.625rem;

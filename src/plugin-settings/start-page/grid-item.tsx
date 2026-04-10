@@ -21,14 +21,12 @@ export default function GridItem( {
 
 	return (
 		<div className="aktk-settings-start-page__grid-item">
-			<div className="aktk-settings-start-page__grid-heading">
-				<h3>{ name }</h3>
-				{ requireYStandard && (
-					<span className="aktk-settings-start-page__badge-ystandard">
-						{ __( 'yStandard連携', 'ystandard-toolbox' ) }
-					</span>
-				) }
-			</div>
+			{ requireYStandard && (
+				<span className="aktk-settings-start-page__badge-ystandard">
+					{ __( 'yStandard連携', 'ystandard-toolbox' ) }
+				</span>
+			) }
+			<h3>{ name }</h3>
 			{ icon && (
 				<div className="flex justify-center text-4xl text-aktk-blue">
 					{ icon() }
