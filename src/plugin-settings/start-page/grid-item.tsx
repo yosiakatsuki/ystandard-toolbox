@@ -1,3 +1,4 @@
+import { Fragment } from '@wordpress/element';
 import { Book, Settings, Zap } from 'react-feather';
 
 /* WordPress Dependencies */
@@ -40,7 +41,12 @@ export default function GridItem( {
 				</div>
 			) }
 			<div className="aktk-settings-start-page__grid-text">
-				{ description }
+				{ description.split( /<br\s*\/?>/ ).map( ( text, i, arr ) => (
+					<Fragment key={ i }>
+						{ text }
+						{ i < arr.length - 1 && <br /> }
+					</Fragment>
+				) ) }
 			</div>
 			<div className="aktk-settings-start-page__grid-buttons">
 				{ !! manual && (
@@ -62,5 +68,4 @@ export default function GridItem( {
 			</div>
 		</div>
 	);
-};
-
+}
