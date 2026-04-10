@@ -20,7 +20,13 @@ export default function GridItem( {
 		!! settingPage && ( ! requireYStandard || isYStandard );
 
 	return (
-		<div className="aktk-settings-start-page__grid-item">
+		<div
+			className={ `aktk-settings-start-page__grid-item${
+				requireYStandard && ! isYStandard
+					? ' aktk-settings-start-page__grid-item--disabled'
+					: ''
+			}` }
+		>
 			{ requireYStandard && (
 				<span className="aktk-settings-start-page__badge-ystandard">
 					<Zap />
