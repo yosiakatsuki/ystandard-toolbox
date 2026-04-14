@@ -22,9 +22,9 @@ master ブランチの v2 未反映コミットを仕分けした結果、取り
 - [x] スライダー: フロントエンド CSS の移行漏れ修正
   - `style.scss` に初期化前非表示・コンテナ幅・画像動画フィットを追加
   - `enqueue_responsive_style` でレスポンシブ高さ用 CSS を出力
-- [ ] LP テンプレート: 固定ヘッダー設定時の余白対応（`14370cd`）
+- [x] LP テンプレート: 固定ヘッダー設定時の余白対応（`14370cd`）
   - v1 の `inc/lp/class-lp.php` に `body_class` フィルタ（`is-lp-template` / `is-lp-template-body` 付与）と `AFTER_ENQUEUE_CSS_HOOK` でのインライン CSS 出力（`--ys-site-header-height:0` 等）が追加されているが、v2 側は未実装
-- [ ] アイコンリストブロック: コアリストブロックとの相互変換（`12e8149` / `a2ff39f`）
+- [x] アイコンリストブロック: コアリストブロックとの相互変換（`12e8149` / `a2ff39f`）
   - v1 の `blocks/icon-list/transforms.js` に `core/list` ⇔ `ystdtb/icon-list` の双方向変換があるが、v2 では `transforms.ts` 自体が未実装
   - v2 は子ブロック構造（`ystdtb/icon-list-item` / `core/list-item`）のため innerBlocks をマップして再生成する実装が必要
 
