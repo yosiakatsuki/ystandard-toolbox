@@ -126,12 +126,30 @@ class Icon_Font {
 	 * @return string
 	 */
 	public static function get_color_palette_css( $prefix = '' ) {
-		$palette = get_theme_support( 'editor-color-palette' );
-		if ( empty( $palette ) ) {
+		$palette_settings = wp_get_global_settings( [ 'color', 'palette' ] );
+		// theme.json の color.defaultPalette 設定を尊重（デフォルト true）.
+		$use_default = false !== wp_get_global_settings( [ 'color', 'defaultPalette' ] );
+		$origins     = $use_default
+			? [ 'default', 'theme', 'custom' ]
+			: [ 'theme', 'custom' ];
+		$colors      = [];
+		foreach ( $origins as $origin ) {
+			if ( ! empty( $palette_settings[ $origin ] ) && is_array( $palette_settings[ $origin ] ) ) {
+				$colors = array_merge( $colors, $palette_settings[ $origin ] );
+			}
+		}
+		// slug 重複は後勝ち（custom > theme > default の順に上書き）.
+		$unique = [];
+		foreach ( $colors as $color ) {
+			if ( ! empty( $color['slug'] ) ) {
+				$unique[ $color['slug'] ] = $color;
+			}
+		}
+		if ( empty( $unique ) ) {
 			return '';
 		}
 		$css = '';
-		foreach ( $palette[0] as $value ) {
+		foreach ( $unique as $value ) {
 			/**
 			 * Class : icon-font-color.
 			 */
