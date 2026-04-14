@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Document;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -24,6 +25,11 @@ class SEO {
 	 * SEO constructor.
 	 */
 	public function __construct() {
+		// 非 yStandard 環境では description 出力の責務を持たないため、
+		// ターム側の SEO 設定機能自体を無効化する（設定欄・フィルタともに登録しない）。
+		if ( ! Version::ystandard_version_compare() ) {
+			return;
+		}
 		add_filter( 'pre_get_document_title', [ $this, 'render_title_tag' ], 11 );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
 		add_filter( 'ys_ogp_description_archive', [ $this, 'meta_description' ], PHP_INT_MAX );
