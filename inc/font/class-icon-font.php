@@ -30,12 +30,27 @@ class Icon_Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Version::ystandard_version_compare() ) {
-			return;
-		}
-		add_filter( 'ys_get_inline_css', [ $this, 'add_ys_icon_font' ], 1 );
-		add_filter( 'ys_get_inline_css', [ $this, 'add_icon_font_color' ] );
+		// エディター向けCSSはテーマ非依存で常に登録.
 		add_action( 'enqueue_block_assets', [ $this, 'add_ys_icon_font_editor' ] );
+
+		if ( Version::ystandard_version_compare() ) {
+			// yStandard: 既存のインラインCSSフックに乗せる.
+			add_filter( 'ys_get_inline_css', [ $this, 'add_ys_icon_font' ], 1 );
+			add_filter( 'ys_get_inline_css', [ $this, 'add_icon_font_color' ] );
+		} else {
+			// 非yStandard: wp_enqueue_scripts で個別スタイルとして登録.
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_icon_font_style' ], 11 );
+		}
+	}
+
+	/**
+	 * 非yStandard環境用のアイコンフォントCSS出力
+	 */
+	public function enqueue_icon_font_style() {
+		$css = $this->get_font_face() . self::get_color_palette_css();
+		wp_register_style( 'ystdtb-icon-font', false );
+		wp_enqueue_style( 'ystdtb-icon-font' );
+		wp_add_inline_style( 'ystdtb-icon-font', Text::minify( $css ) );
 	}
 
 	/**
