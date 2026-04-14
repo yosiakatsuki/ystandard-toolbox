@@ -18,6 +18,7 @@ import { __ } from '@wordpress/i18n';
  * Block Dependencies.
  */
 import { blockClassName } from './index';
+import './style-editor.css';
 
 // @ts-ignore.
 function Edit( props ): JSX.Element {
