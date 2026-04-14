@@ -30,14 +30,16 @@ class Font {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! wp_is_block_theme() ) {
-			// ブロックテーマ以外なら設定画面を表示する.
-			// サブメニュー追加.
-			add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
-			// 設定画面周りの準備.
-			add_action( 'rest_api_init', [ $this, 'register_routes' ] );
-			add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
+		if ( wp_is_block_theme() ) {
+			// ブロックテーマではフォント機能を無効化（設定UI・CSS出力とも）.
+			return;
 		}
+
+		// サブメニュー追加.
+		add_filter( 'ystdtb_plugin_settings_submenus', [ $this, 'add_submenu' ] );
+		// 設定画面周りの準備.
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+		add_action( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 
 		// テーマ共通の出力.
 		add_action( 'wp_head', [ $this, 'output_font_html' ], 11 );
