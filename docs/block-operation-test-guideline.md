@@ -66,6 +66,16 @@ wp.data.dispatch('core/block-editor').resetBlocks([]);
 - メインテキスト・サブテキストなど、ブロック内で編集可能なテキストはすべて何か入れる
 - 設定の意味がわかる短いダミー文言でよい（例: 「メインテキスト」「サブテキスト」）
 
+#### RichText フォーマットの検証（必須）
+
+各 RichText 領域で以下を確認する:
+
+1. **太字・リンク等の基本フォーマット適用**: 一部文字を選択して太字（Ctrl/Cmd+B）・リンク挿入等を行い、保存 → 再読込で検証エラーが出ないことを確認
+2. **ツールバー制御の確認**: そのブロックの RichText が `allowedFormats` / `withoutInteractiveFormatting` 等で一部機能を制御している場合:
+   - 許可されているツールが表示されていること
+   - 無効化されているツールが表示されていないこと（例: `withoutInteractiveFormatting` ならリンクボタンが非表示）
+3. ツールバー制御の対象は edit.tsx の RichText props から確認し、spec.md に記載しておく
+
 ### インナーブロック（InnerBlocks）
 
 ブロックがインナーブロックを持つ場合、少なくとも 1 つブロックを追加した状態にする。
