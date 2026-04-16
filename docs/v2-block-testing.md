@@ -10,8 +10,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 1. **見出しツリー設計**: block.json / edit.tsx / inspector-controls を読み、パネル構成・排他関係を整理して見出しツリーを作成
 2. **examples HTML 作成**: `src/blocks/block-library/[ブロック名]/examples/all-variations.html` を執筆
-3. **エディター確認**: wp-env のエディターに貼り付け、全設定がエラーなく表示されることを確認
-4. **フロント確認**: フロントエンドで全パターンの表示を目視確認
+3. **spec.md 作成**: `src/blocks/block-library/[ブロック名]/test-results/spec.md` に操作テスト仕様を作成（[ガイドライン](block-operation-test-guideline.md)参照）
+4. **エディター確認**: wp-env のエディターに貼り付け、全設定がエラーなく表示されることを確認
+5. **フロント確認**: フロントエンドで全パターンの表示を目視確認
+6. **操作テスト**: Chrome 拡張でエディター UI から操作し、spec.md に沿って実機確認（結果は `test-results/operation.md` に記録）
 
 ## 進捗
 
@@ -21,8 +23,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### block-hook-hidden-by-size
 
@@ -32,15 +36,19 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### box
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### description-list（+ dd-box / dd-simple / dl-column / dt）
 
@@ -48,8 +56,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### faq（+ faq-item）
 
@@ -57,8 +67,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### icon-list（+ icon-list-item）
 
@@ -66,15 +78,19 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### parts
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### posts
 
@@ -82,8 +98,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成（書き直し）
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### slider（+ slider-item）
 
@@ -91,15 +109,19 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### sns-share
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
 
 ### timeline（+ timeline-item）
 
@@ -107,5 +129,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [ ] 見出しツリー設計
 - [ ] examples HTML 作成
+- [ ] spec.md 作成
 - [ ] エディター確認
 - [ ] フロント確認
+- [ ] 操作テスト
