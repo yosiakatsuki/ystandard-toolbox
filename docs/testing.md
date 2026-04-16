@@ -143,6 +143,103 @@ integration テスト用のブロック登録（`register-blocks.js`）は、edi
 
 これは「parse / migrate / serialize / validate のために必要な最小限」だけを登録する手法で、テスト環境を軽量に保つための工夫。
 
+## L1 操作テスト fixture の作成
+
+ブロックの全設定パターンを network なしで CI 検証するための fixture 作成ワークフロー。[block-operation-test-guideline.md](block-operation-test-guideline.md) の L1 層で使われる。
+
+### 命名規則
+
+```
+ystdtb__{block}__{panel}__{setting}__{variant}.html
+```
+
+- `block`: block.json の name（スラッシュを `__` に変換）
+- `panel`: spec.md のサイドバーパネル名を英語スラッグ化（例: `link` / `bg-color` / `max-width`）
+- `setting`: パネル内の設定項目名（例: `url` / `new-tab` / `font-size`）
+- `variant`: 具体値（例: `preset-blue` / `custom-hex` / `px-24` / `em-1-5` / `responsive-desktop-mobile`）
+
+例:
+```
+ystdtb__banner-link__link__url-external.html
+ystdtb__banner-link__bg-color__preset-blue.html
+ystdtb__banner-link__ratio__16-9.html
+ystdtb__banner-link__padding__shorthand-4corners.html
+ystdtb__banner-link__main-text__font-size-em-1-5.html
+ystdtb__banner-link__combo__photo-banner.html
+```
+
+deprecated 変換テストは従来通り basename に `__deprecated-` を含める（`full-content.test.js` が判定に使う）。
+
+### カテゴリ別パターン作成ルール
+
+spec.md の L1 セクションで列挙する fixture パターン生成ルール:
+
+| カテゴリ | fixture 作成数の目安 |
+|---|---|
+| ドロップダウン/ラジオ/チップ | **全選択肢を個別 fixture で**（例: 縦横比 6 選択肢 → 6 fixture） |
+| 色 | プリセット 1〜2 個 + カスタム hex 1 個 |
+| フォントサイズ | プリセット 1 個 + 直接指定 px 1 個 + em 1 個 |
+| レスポンシブ設定 | desktop 単独 / desktop+mobile / 全 3 デバイス の 3 fixture |
+| 余白・枠線 ショートハンド | 一括 / 4 箇所別 / 2 箇所（上下・左右）/ 3 箇所（上・左右・下）の 4 fixture |
+| boolean トグル | true / false の 2 fixture |
+| URL | 内部 / 外部 / 相対 の 3 fixture |
+
+加えて、各ブロックで **実用的な組み合わせパターン 5〜10 個** を `combo` として fixture 化する。examples HTML の「設定の組み合わせ例」セクションを流用できる。
+
+### fixture 大量作成の効率化
+
+1 ブロックあたり 50〜100 fixture となるため、以下の手法で効率化する。
+
+#### 方針 A: examples HTML から抽出（推奨）
+
+`src/blocks/block-library/[block-name]/examples/all-variations.html` は既に多くのバリエーションを含んでいる。ここから個別の `<!-- wp:xxx ... --> ... <!-- /wp:xxx -->` 単位で抜き出して fixture 化するのが最も効率的。
+
+手順:
+1. examples HTML を開く
+2. 各 `<!-- wp:{blockname} ... /-->`（自己閉じ）または `<!-- wp:{blockname} -->...<!-- /wp:{blockname} -->` のブロック単位を切り出す
+3. spec.md の L1 セクションの fixture 名に対応する形で個別ファイルへ保存
+
+#### 方針 B: エディター経由（examples に無いパターン）
+
+examples に無い fixture（排他境界など）はエディターで個別に作る:
+1. ブロック挿入 → 目的の設定を適用
+2. 「コードエディター」モードで HTML をコピー
+3. `test/integration/fixtures/blocks/` に保存
+
+### fixture 作成ワークフロー
+
+1. **spec.md の L1 セクションで fixture 名一覧を確定**（ユーザーと合意）
+2. **examples HTML から抽出 or エディターで作成**
+3. **`test/integration/fixtures/blocks/` に `.html` として保存**
+4. **対象ブロックが `register-blocks.js` に登録されていることを確認**（なければ追加）
+5. **`npm run fixtures:generate` で期待値ファイル自動生成**
+6. **生成された `.json` をレビュー**:
+   - `isValid: true` になっているか
+   - attributes が想定通りに保存されているか
+   - `validationIssues` が空か
+7. **`npm run test:integration` で全 fixture が通ることを確認**
+8. **git コミット**
+
+### fixture 作成時の注意点
+
+- **入力 HTML はブロックエディターが出力する save() 形式に厳密に一致させる**。少しでもズレると validation エラーになる
+- examples HTML から抽出時、親文脈の改行やインデントは除去する
+- fixture は「1 ブロック 1 ファイル」が原則（複数ブロックを含む fixture は `combo` 系のみ）
+- コメント `<!-- wp:... -->` は絶対に改変しない（属性シリアライズに使われる）
+
+### トラブルシューティング
+
+| 症状 | 対処 |
+|---|---|
+| `isValid: false` で生成される | 入力 HTML が save() 出力と不一致。エディターで該当設定を作り直して HTML をコピーし直す |
+| `validationIssues` に差分が出る | 属性値と innerHTML の対応が崩れている。ブロックの attribute source を確認 |
+| ブロックが認識されない | `register-blocks.js` に該当ブロックが登録されていない |
+| deprecated 警告が出る | basename に `__deprecated-` を含めていない |
+
+### spec.md との対応
+
+各ブロックの spec.md L1 セクションにチェックリスト形式で fixture 名を列挙する。これが ToDo リスト兼ドキュメントになる。fixture 作成が完了したら spec.md のチェックボックスを更新するのは **行わない**（spec.md は仕様で、進捗管理は operation.md で行う。fixture 自体は `git ls-files test/integration/fixtures/blocks/` で存在確認可能）。
+
 ## ブロックの設定例・使用例（examples）
 
 ブロックの全設定パターンをエディターに貼り付けて表示確認するための HTML ファイル群。
