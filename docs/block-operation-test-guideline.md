@@ -76,6 +76,8 @@ wp.data.dispatch('core/block-editor').resetBlocks([]);
    - 無効化されているツールが表示されていないこと（例: `withoutInteractiveFormatting` ならリンクボタンが非表示）
 3. ツールバー制御の対象は edit.tsx の RichText props から確認し、spec.md に記載しておく
 
+**検証対象の数**: 同じブロック内に同じ設定の RichText が複数ある場合（例: メインテキストとサブテキストが両方 `withoutInteractiveFormatting`）、**代表 1 つで確認すれば OK**（同じ React コンポーネントの使い回しのため挙動は共通）。RichText ごとに props が異なる場合は個別に確認する。
+
 ### インナーブロック（InnerBlocks）
 
 ブロックがインナーブロックを持つ場合、少なくとも 1 つブロックを追加した状態にする。
