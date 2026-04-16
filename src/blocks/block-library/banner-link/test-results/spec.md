@@ -1,6 +1,12 @@
 # バナーリンクブロック 操作テスト仕様
 
-エディター上の UI 操作で設定を変更し、保存 → 再読込で検証エラー・コンソールエラーが発生しないかを確認する仕様書。
+エディター上の UI 操作・fixture による HTML 往復検証・手動確認の三層で動作を検証する仕様書。
+
+## テスト方針
+
+- **L1 (fixture-based integration test)**: 属性 → HTML 出力・parse/serialize 往復を全パターン網羅で自動検証（CI 毎回）
+- **L2 (Chrome UI 自動テスト)**: 排他関係・条件付き表示・ラベル-値対応・複雑 UI・操作順序・RichText 挙動のスポット検証
+- **L3 (手動確認)**: フロント見た目・レスポンシブ挙動の目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
 
@@ -11,7 +17,7 @@
 | パネル | 主な設定項目 |
 |---|---|
 | リンク | リンク先URL / 新しいタブで開く / rel 属性 / リセット |
-| バナー設定 | 画像設定（画像・焦点） / 背景色 / グラデーション / 不透明度 / 縦横比 / 最大幅 / 最小高さ / 角丸 |
+| バナー設定 | 画像設定（画像・焦点） / 背景色 / グラデーション（UI 未実装） / 不透明度 / 縦横比 / 最大幅 / 最小高さ / 角丸 |
 | 枠線設定 | 枠線（太さ・スタイル・色） |
 | メインテキスト | フォントサイズ / 文字色 / 行の高さ / 文字間隔 / HTMLタグ / 見出しスタイル削除 |
 | サブテキスト | フォントサイズ / 文字色 / 行の高さ / 文字間隔 / HTMLタグ / 見出しスタイル削除 / メインテキストとの間隔 |
@@ -33,15 +39,19 @@
 | `subTextHtml` が見出しタグ（h1〜h6） | 「見出しスタイル削除」トグル表示 |
 | `size.maxWidth` 設定あり | ツールバーに「ブロックの位置」表示 |
 | `backgroundImage` 設定あり | 画像設定パネル内に「焦点」タブ表示 |
+| 画像クリア | 焦点（`backgroundImageFocalPoint`）も同時にクリア |
+| 焦点を `{x:0.5, y:0.5}` に戻す | `backgroundImageFocalPoint` が undefined に（edit.tsx `handleFocalPointOnChange` の仕様） |
+| 新しいタブで開く ON | `rel` に `noreferrer noopener` が自動設定 |
+| 見出しタグ → 非見出しタグに戻す | `mainTextStyleClear` が自動で undefined に |
 
 ## RichText ツールバー制御
 
 | 対象 | 制御 | 期待動作 |
 |---|---|---|
-| `mainText` | `withoutInteractiveFormatting` 指定あり | リンク挿入ボタンが非表示（ブロック全体が `<a>` のため、ネストしたリンクを防ぐ） |
-| `subText` | `withoutInteractiveFormatting` 指定あり | リンク挿入ボタンが非表示 |
+| `mainText` | `withoutInteractiveFormatting` 指定あり | ツールバーにインラインリンク挿入ボタンが非表示 |
+| `subText` | `withoutInteractiveFormatting` 指定あり | ツールバーにインラインリンク挿入ボタンが非表示 |
 
-基本フォーマット（太字・斜体・下線・取り消し線・インラインコード など）は許可されている。
+基本フォーマット（太字・斜体・下線・取り消し線・インラインコード など）は許可。
 
 ## デバイス別テスト対象
 
@@ -53,291 +63,259 @@
 - `subTextMargin`
 - `padding`
 
-各対象について以下のパターンで最低 1 回はテストする:
+各対象について以下のパターン:
 - desktop のみ
 - desktop + mobile（2 デバイス混在）
 - desktop + tablet + mobile（全 3 デバイス別値）
 
-## テストパターン
+---
 
-「1 設定変更 → 保存 → 再読込 → 検証エラー / コンソールエラーの確認 → フロント表示確認」を 1 件ずつ実施する。
+## L1 fixture テストパターン（全パターン網羅）
 
-### 初期状態セットアップ（他のパネルテスト前に必須）
-
-- [ ] メインテキストに「メインテキスト」と入力
-- [ ] サブテキストに「サブテキスト」と入力
-- [ ] 初期状態で保存 → 再読込 → 検証エラーなしを確認
-
-### RichText フォーマット検証
-
-メインテキスト・サブテキスト両方で確認する。
-
-- [ ] メインテキスト: 一部文字を太字にする → 保存・再読込で維持されるか
-- [ ] メインテキスト: 斜体を適用 → 保存・再読込で維持されるか
-- [ ] メインテキスト: 選択時のツールバーに**リンク挿入ボタンが非表示**（`withoutInteractiveFormatting`）
-- [ ] サブテキスト: 一部文字を太字にする → 保存・再読込で維持されるか
-- [ ] サブテキスト: 選択時のツールバーに**リンク挿入ボタンが非表示**
-- [ ] **粗探し**: 太字をかけた状態で HTML タグを h2 に変更 → フォーマットが崩れないか
+L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture は 1 設定を代表する HTML スナップショット。
 
 ### リンクパネル
 
-- [ ] リンクURL: サイト内リンク（`/sample-page/`）
-- [ ] リンクURL: 外部リンク（`https://example.com/`）
-- [ ] リンクURL: 相対パス（`../page/`）
-- [ ] 新しいタブで開く: OFF（デフォルト）
-- [ ] 新しいタブで開く: ON → `rel="noreferrer noopener"` が自動で設定されるか
-- [ ] 新しいタブで開く ON → OFF に戻す → rel が元に戻るか
-- [ ] rel に `nofollow` を直接入力
-- [ ] rel を空欄に戻す
-- [ ] リセットボタン（URL・target・rel が全てクリアされるか）
-- [ ] **粗探し**: リンクURL 空欄のまま保存 → エラーが出ないか
-- [ ] **粗探し**: リンクURL に特殊文字（`javascript:alert(1)` 等）を入力してもサニタイズされるか
+- [ ] `ystdtb__banner-link__link__url-internal` — サイト内 `/sample-page/`
+- [ ] `ystdtb__banner-link__link__url-external` — `https://example.com/`
+- [ ] `ystdtb__banner-link__link__url-relative` — `../page/`
+- [ ] `ystdtb__banner-link__link__new-tab-on` — `linkTarget=_blank` + `rel="noreferrer noopener"`
+- [ ] `ystdtb__banner-link__link__rel-nofollow` — `rel="nofollow"`（new tab は OFF）
 
-### バナー設定パネル
+### バナー設定 > 画像
 
-#### 画像設定
+- [ ] `ystdtb__banner-link__image__with-image` — 画像あり・焦点なし
+- [ ] `ystdtb__banner-link__image__with-focal-top-left` — 焦点 `{x:0, y:0}`
+- [ ] `ystdtb__banner-link__image__with-focal-bottom-right` — 焦点 `{x:1, y:1}`
+- [ ] `ystdtb__banner-link__image__with-focal-custom` — 焦点 `{x:0.3, y:0.7}`
 
-- [ ] 画像なし（デフォルト）
-- [ ] 画像を選択
-- [ ] 画像選択後に「焦点」タブが表示されるか
-- [ ] 焦点: 左上（0, 0）
-- [ ] 焦点: 右下（1, 1）
-- [ ] 焦点: 中央（0.5, 0.5）に戻す → 値が削除されるか
-- [ ] 画像をクリア → 焦点の値も同時にクリアされるか
-- [ ] **粗探し**: 画像設定後に画像のみ差し替え → 焦点値が保持されるか
+### バナー設定 > 背景色
 
-#### 背景色
+- [ ] `ystdtb__banner-link__bg-color__preset-blue` — `backgroundColor: "ys-blue"`
+- [ ] `ystdtb__banner-link__bg-color__preset-red` — `backgroundColor: "ys-red"`
+- [ ] `ystdtb__banner-link__bg-color__custom-hex` — `customBackgroundColor: "#10b981"`
 
-- [ ] プリセット色から選択
-- [ ] カスタム色（hex 直接指定）
-- [ ] 背景色をクリア
-- [ ] **粗探し**: プリセット → カスタム → プリセットに切り替え（切り替えの整合性）
+### バナー設定 > グラデーション
 
-#### グラデーション
+**対象外**: UI 未実装のため fixture 作成は保留（`gradient` / `customGradient` 属性は block.json に存在）。UI が追加された段階で fixture 作成。
 
-- [ ] プリセットグラデーションから選択
-- [ ] カスタムグラデーション設定
-- [ ] **排他関係境界**: グラデーション + 背景色 の併用時の挙動確認（どちらが優先されるか）
+### バナー設定 > 不透明度
 
-#### 不透明度
+- [ ] `ystdtb__banner-link__opacity__05` — `backgroundOpacity: 0.5`
+- [ ] `ystdtb__banner-link__opacity__0` — `backgroundOpacity: 0`
 
-- [ ] 1.0（デフォルト）
-- [ ] 0.5
-- [ ] 0（完全透明）
-- [ ] 0.1 刻みでスライダーが動くか
-- [ ] **粗探し**: スライダーの最大値・最小値でバタつきがないか
+### バナー設定 > 縦横比（全選択肢網羅）
 
-#### 縦横比
+- [ ] `ystdtb__banner-link__ratio__1-1`
+- [ ] `ystdtb__banner-link__ratio__2-1`
+- [ ] `ystdtb__banner-link__ratio__3-1`
+- [ ] `ystdtb__banner-link__ratio__3-2`
+- [ ] `ystdtb__banner-link__ratio__4-3`
+- [ ] `ystdtb__banner-link__ratio__16-9`
 
-- [ ] 未設定（デフォルト）
-- [ ] 1:1
-- [ ] 2:1
-- [ ] 3:1
-- [ ] 3:2
-- [ ] 4:3
-- [ ] 16:9
-- [ ] **排他関係**: ratio 設定 → 最小高さ項目が非表示になるか
-- [ ] **排他関係境界**: minHeight 設定済み → ratio 設定 → 内部の minHeight 値がクリアされるか
-- [ ] **排他関係境界**: ratio 設定 → ratio クリア → 最小高さ項目が再表示されるか
+### バナー設定 > 最大幅（デバイス別網羅）
 
-#### 最大幅
+- [ ] `ystdtb__banner-link__max-width__desktop-400px`
+- [ ] `ystdtb__banner-link__max-width__desktop-100percent`
+- [ ] `ystdtb__banner-link__max-width__responsive-desktop-mobile`
+- [ ] `ystdtb__banner-link__max-width__responsive-all-devices`
 
-- [ ] 未設定
-- [ ] desktop のみ: 400px
-- [ ] desktop のみ: 100%（相対値）
-- [ ] desktop + mobile: 400px / 100%
-- [ ] 全 3 デバイス別値: desktop 500px / tablet 400px / mobile 100%
-- [ ] **条件付き表示**: 最大幅設定 → ツールバーに「ブロックの位置」が表示されるか
-- [ ] **粗探し**: 極端値 9999px
-- [ ] **粗探し**: 0px
-- [ ] **粗探し**: 単位違い（em / vw / auto）
+### バナー設定 > 最小高さ（デバイス別網羅）
 
-#### 最小高さ
+- [ ] `ystdtb__banner-link__min-height__desktop-200px`
+- [ ] `ystdtb__banner-link__min-height__responsive-desktop-mobile`
+- [ ] `ystdtb__banner-link__min-height__responsive-all-devices`
 
-- [ ] 未設定
-- [ ] desktop のみ: 200px
-- [ ] desktop + mobile: 300px / 150px
-- [ ] 全 3 デバイス別値
+### バナー設定 > 角丸
 
-#### 角丸
+- [ ] `ystdtb__banner-link__border-radius__8px`
+- [ ] `ystdtb__banner-link__border-radius__50percent` — 正方形比率と組み合わせて丸
+- [ ] `ystdtb__banner-link__border-radius__4corners` — 4 隅別指定（UI が対応している場合）
 
-- [ ] なし（デフォルト）
-- [ ] 一括指定: 8px
-- [ ] 一括指定: 50%
-- [ ] 4 隅別指定（UI が対応している場合）
-- [ ] **粗探し**: 極端値 9999px
+### 枠線設定（スタイル全選択肢網羅）
 
-### 枠線設定パネル
+- [ ] `ystdtb__banner-link__border__solid-2px-custom` — solid + カスタム色
+- [ ] `ystdtb__banner-link__border__solid-2px-preset` — solid + プリセット色
+- [ ] `ystdtb__banner-link__border__dotted-2px`
+- [ ] `ystdtb__banner-link__border__dashed-2px`
+- [ ] `ystdtb__banner-link__border__double-4px`
 
-- [ ] なし（デフォルト）
-- [ ] 太さのみ指定（色・スタイル未指定）→ 枠線が表示されないこと確認
-- [ ] 色のみ指定（太さ未指定）→ 枠線が表示されないこと確認
-- [ ] スタイル: solid
-- [ ] スタイル: dotted
-- [ ] スタイル: dashed
-- [ ] スタイル: double
-- [ ] 色: プリセット
-- [ ] 色: カスタム hex
-- [ ] **粗探し**: 極端値 10px 以上の太さ
+### メインテキスト
 
-### メインテキストパネル
+- [ ] `ystdtb__banner-link__main-text__bold` — RichText 内に太字
+- [ ] `ystdtb__banner-link__main-text__font-size-px-24`
+- [ ] `ystdtb__banner-link__main-text__font-size-em-1-5`
+- [ ] `ystdtb__banner-link__main-text__font-size-responsive-desktop-mobile`
+- [ ] `ystdtb__banner-link__main-text__font-size-responsive-all-devices`
+- [ ] `ystdtb__banner-link__main-text__color-preset` — プリセット slug
+- [ ] `ystdtb__banner-link__main-text__color-custom-hex` — hex
+- [ ] `ystdtb__banner-link__main-text__line-height-1-8`
+- [ ] `ystdtb__banner-link__main-text__letter-spacing-0-1em`
+- [ ] `ystdtb__banner-link__main-text__tag-h2-clear-on` — h2 + `mainTextStyleClear: true`
+- [ ] `ystdtb__banner-link__main-text__tag-h3-clear-off` — h3 + `mainTextStyleClear: false`
+- [ ] `ystdtb__banner-link__main-text__tag-p`
+- [ ] `ystdtb__banner-link__main-text__tag-div` — デフォルト
 
-#### フォントサイズ
+### サブテキスト
 
-- [ ] デフォルト
-- [ ] プリセットから選択
-- [ ] 直接指定: 24px
-- [ ] 直接指定: 1.5em
-- [ ] desktop + mobile: 32px / 18px
-- [ ] 全 3 デバイス別値
+- [ ] `ystdtb__banner-link__sub-text__bold` — RichText 内に太字
+- [ ] `ystdtb__banner-link__sub-text__font-size-px-14`
+- [ ] `ystdtb__banner-link__sub-text__font-size-em-0-875`
+- [ ] `ystdtb__banner-link__sub-text__font-size-responsive`
+- [ ] `ystdtb__banner-link__sub-text__color-preset`
+- [ ] `ystdtb__banner-link__sub-text__color-custom-hex`
+- [ ] `ystdtb__banner-link__sub-text__line-height-1-6`
+- [ ] `ystdtb__banner-link__sub-text__letter-spacing-0-05em`
+- [ ] `ystdtb__banner-link__sub-text__tag-p`
+- [ ] `ystdtb__banner-link__sub-text__tag-h3-clear-on`
+- [ ] `ystdtb__banner-link__sub-text__margin-16px`
+- [ ] `ystdtb__banner-link__sub-text__margin-responsive-desktop-mobile`
+- [ ] `ystdtb__banner-link__sub-text__margin-responsive-all-devices`
 
-#### 文字色 + 背景色の組み合わせ
+### 余白（ショートハンド網羅）
 
-メインテキストの文字色とバナーの背景色の組み合わせパターン:
-- [ ] 文字色のみ設定
-- [ ] 背景色のみ設定
-- [ ] 文字色 + 背景色の両方設定
+- [ ] `ystdtb__banner-link__padding__shorthand-all-32` — 4 辺同値
+- [ ] `ystdtb__banner-link__padding__shorthand-4corners` — 4 辺別値
+- [ ] `ystdtb__banner-link__padding__shorthand-2-pairs` — 上下・左右（2 ペア）
+- [ ] `ystdtb__banner-link__padding__shorthand-3-pairs` — 上・左右・下（3 分割）
+- [ ] `ystdtb__banner-link__padding__responsive-desktop-mobile`
+- [ ] `ystdtb__banner-link__padding__responsive-all-devices`
 
-#### 文字色
+### 影
 
-- [ ] プリセット
-- [ ] カスタム hex
-- [ ] クリア
+- [ ] `ystdtb__banner-link__box-shadow__basic` — オフセット・ぼかし・色・透明度あり
 
-#### 行の高さ
+### ツールバー設定
 
-- [ ] デフォルト
-- [ ] 1.8
-- [ ] **粗探し**: 0.5
-- [ ] **粗探し**: 5
+- [ ] `ystdtb__banner-link__content-position__horizontal-left`
+- [ ] `ystdtb__banner-link__content-position__horizontal-right`
+- [ ] `ystdtb__banner-link__content-position__vertical-top`
+- [ ] `ystdtb__banner-link__content-position__vertical-bottom`
+- [ ] `ystdtb__banner-link__block-position__center` — maxWidth 設定時
+- [ ] `ystdtb__banner-link__block-position__right` — maxWidth 設定時
 
-#### 文字間隔
+### 代表的な組み合わせパターン（実用シナリオ）
 
-- [ ] デフォルト
-- [ ] 0.1em
-- [ ] **粗探し**: -0.05em（負値）
+examples HTML の組み合わせ例を流用。
 
-#### HTMLタグ
+- [ ] `ystdtb__banner-link__combo__simple` — シンプル（背景色 + 白テキスト）
+- [ ] `ystdtb__banner-link__combo__photo-banner` — 背景画像 + オーバーレイ
+- [ ] `ystdtb__banner-link__combo__card` — カード風（角丸 + 影 + 最大幅 + 中央）
+- [ ] `ystdtb__banner-link__combo__campaign` — キャンペーン風（大文字 + 余白広め）※グラデーションは UI 未実装のため省略
 
-- [ ] div（デフォルト）
-- [ ] h1
-- [ ] h2
-- [ ] h3
-- [ ] h4
-- [ ] h5
-- [ ] h6
-- [ ] p
-- [ ] **条件付き表示**: 見出しタグ選択時に「見出しスタイル削除」トグルが表示されるか
-- [ ] **条件付き表示**: 見出しタグ以外（div, p）では「見出しスタイル削除」トグルが非表示か
-- [ ] 見出しスタイル削除: ON（デフォルト）
-- [ ] 見出しスタイル削除: OFF
-- [ ] **排他関係境界**: 見出しタグ → styleClear 設定 → div に戻す → styleClear が自動クリアされるか
+---
 
-#### テキスト入力（粗探し）
+## L2 Chrome UI テストパターン（絞り込み）
 
-- [ ] **粗探し**: 空欄で保存
-- [ ] **粗探し**: 改行を含むテキスト
-- [ ] **粗探し**: 絵文字を含むテキスト
-- [ ] **粗探し**: HTML 特殊文字（`<>&`）がエスケープされるか
+### 排他関係・カスケード
 
-### サブテキストパネル
+- [ ] `ratio` 設定 → UI 上で「最小高さ」項目が非表示になる
+- [ ] `ratio` 設定 → 内部の `minHeight` 属性がクリアされる（事前に minHeight 設定済みの状態から）
+- [ ] `ratio` クリア → 「最小高さ」項目が再表示される
+- [ ] `backgroundImage` 設定 → 画像設定パネル内に「焦点」タブが出現
+- [ ] 画像クリア → `backgroundImage` と `backgroundImageFocalPoint` が両方 undefined に
+- [ ] 焦点を `{x:0.5, y:0.5}` に戻す → `backgroundImageFocalPoint` が undefined に
+- [ ] 画像のみ差し替え → `backgroundImageFocalPoint` が保持
+- [ ] `mainTextHtml` = h1〜h6 → 「見出しスタイル削除」トグル表示
+- [ ] `mainTextHtml` = div/p → 「見出しスタイル削除」トグル非表示
+- [ ] 見出しタグ → 非見出しタグに戻す → `mainTextStyleClear` が自動クリア
+- [ ] `subTextHtml` でも同様（代表 1 ケース）
+- [ ] `size.maxWidth` 設定 → ツールバーに「ブロックの位置」が出現
+- [ ] `size.maxWidth` クリア → 「ブロックの位置」が消失
+- [ ] 新しいタブ ON → `rel` に `noreferrer noopener` が自動セット
+- [ ] 新しいタブ ON → OFF → `rel` が空文字（または undefined）に
+- [ ] リンク「リセット」ボタン → URL / linkTarget / rel が全て undefined に
 
-メインテキストとほぼ同じ設定項目のため、メインテキスト側で共通パターンを確認後、サブテキスト固有のみ個別テストする。
+### ラベル-値対応（全選択肢網羅）
 
-- [ ] フォントサイズ直接指定: 14px
-- [ ] フォントサイズ直接指定: 0.875em
-- [ ] フォントサイズ レスポンシブ: desktop + mobile
-- [ ] フォントサイズ レスポンシブ: 全 3 デバイス別値
-- [ ] 文字色: プリセット
-- [ ] 文字色: カスタム hex
-- [ ] 行の高さ: 1.6
-- [ ] 文字間隔: 0.05em
-- [ ] HTMLタグ: p
-- [ ] HTMLタグ: 見出しタグ（`subTextStyleClear` トグル表示）
+ドロップダウン・ラジオ・チップの **全選択肢をクリック** し、それぞれ対応する属性値が保存されることを確認。
 
-#### メインテキストとの間隔
+- [ ] 縦横比ドロップダウン（6 選択肢: 1-1, 2-1, 3-1, 3-2, 4-3, 16-9）
+- [ ] メインテキスト HTMLタグ（8 選択肢: div, h1, h2, h3, h4, h5, h6, p）
+- [ ] サブテキスト HTMLタグ（同上、代表 2〜3 ケースで可）
+- [ ] 枠線スタイル（4 選択肢: solid, dotted, dashed, double）
+- [ ] 背景色プリセット（主要 2〜3 色で代表確認、全色は L1 でカバー）
+- [ ] メインテキスト文字色プリセット（同上）
+- [ ] コンテンツ位置 水平（3 選択肢: 左・中央・右）
+- [ ] コンテンツ位置 垂直（3 選択肢: 上・中央・下）
+- [ ] ブロック位置（3 選択肢: 左・中央・右、maxWidth 設定時）
 
-- [ ] デフォルト（未設定）
-- [ ] 16px
-- [ ] desktop + mobile: 16px / 8px
-- [ ] 全 3 デバイス別値
+### 条件付き表示
 
-### 余白パネル
+- [ ] `backgroundImage` 設定 → 画像設定パネルに「焦点」タブが出現
+- [ ] `ratio` 設定 → 「最小高さ」項目が消える
+- [ ] `mainTextHtml` 見出しタグ選択 → 「見出しスタイル削除」トグル出現
+- [ ] `size.maxWidth` 設定 → ツールバー「ブロックの位置」出現
 
-#### 内側余白（ショートハンド構造）
+### 複雑 UI
 
-- [ ] 一括（4 辺すべて同じ値）: 32px
-- [ ] 4 箇所別指定: 10/20/30/40px
-- [ ] 上下・左右（2 箇所）: top=bottom=20px / right=left=40px
-- [ ] 上・左右・下（3 箇所）: top=10px / right=left=20px / bottom=30px
-- [ ] 一部のみ設定: top のみ設定
-- [ ] desktop + mobile（一括値）
-- [ ] desktop + tablet + mobile（全 3 デバイス別値）
-- [ ] **粗探し**: 0px
-- [ ] **粗探し**: 極端値 200px
+- [ ] メディアライブラリから画像を選択（モーダル操作 → 画像クリック → 選択）
+- [ ] FocalPointPicker: X/Y 数値入力で焦点設定
+- [ ] ColorPalette: プリセット色クリック
+- [ ] ColorPalette: カスタム hex 入力
+- [ ] リンクパネルのリセットボタン（全クリア）
 
-### 影パネル
+### 操作順序（切り替え・リセットの整合性）
 
-- [ ] なし（デフォルト）
-- [ ] 通常の影（オフセット: 0/4px、ぼかし: 12px、色: 黒、透明度: 0.2）
-- [ ] 色: プリセット
-- [ ] 色: カスタム hex
-- [ ] **粗探し**: 大きなオフセット（50/50px）
-- [ ] **粗探し**: ぼかし 0（ハード影）
-- [ ] **粗探し**: 透明度 0（見えない影）
+- [ ] 背景色: プリセット → カスタム → プリセット 切り替え（`backgroundColor` / `customBackgroundColor` が排他的に切り替わる）
+- [ ] 新しいタブ ON → OFF → rel 解除
+- [ ] ratio 設定 → クリア → 再設定（minHeight との相互作用確認）
+- [ ] 画像 → 焦点設定 → 画像差し替え（焦点保持）
+- [ ] 見出しタグ → 見出しスタイル削除 OFF → 非見出しに戻す → 再度見出し（`mainTextStyleClear` のリセット挙動）
 
-### ツールバー
+### RichText フォーマット・ツールバー制御
 
-#### リンクボタン
+- [ ] メインテキストに太字（Cmd+B）→ `<strong>` で保存・再読込で維持
+- [ ] メインテキストに斜体適用 → 保存・再読込で維持
+- [ ] メインテキスト選択時のツールバーに**インラインリンク挿入ボタンが非表示**（`withoutInteractiveFormatting` 動作）
+- [ ] サブテキストは実装共通のため代表 1 ケースで OK
 
-- [ ] ツールバーからリンク追加
-- [ ] ツールバーからリンク編集
-- [ ] ツールバーからリンク削除
+---
 
-#### ブロック位置（最大幅設定時のみ表示）
+## L3 手動確認チェックリスト
 
-- [ ] 左寄せ（デフォルト）
-- [ ] 中央
-- [ ] 右寄せ
-- [ ] **条件付き表示**: 最大幅をクリア → ブロック位置ツールバーが消えるか
+### フロント見た目（examples/all-variations.html ベース）
 
-#### コンテンツ位置（水平）
+- [ ] examples HTML をエディターに貼り付け → 全パターンの見た目を目視確認
+- [ ] 代表的な組み合わせ（シンプル / 写真バナー / カード / キャンペーン）の最終見た目
+- [ ] 画像あり + 焦点設定時の背景位置
+- [ ] 枠線スタイル 4 種（solid / dotted / dashed / double）の実描画
 
-- [ ] 左寄せ
-- [ ] 中央（デフォルト）
-- [ ] 右寄せ
+### レスポンシブ挙動（実機ビューポート切替）
 
-#### コンテンツ位置（垂直）
+- [ ] 最大幅: desktop 400px → mobile 100% の切り替え確認
+- [ ] 最小高さ: desktop 300px → mobile 150px の切り替え確認
+- [ ] メインテキスト フォントサイズ: desktop 32px → mobile 18px
+- [ ] サブテキスト フォントサイズ: 同様
+- [ ] 余白: desktop 40px → mobile 16px
+- [ ] サブテキスト間隔: desktop 16px → mobile 8px
 
-- [ ] 上寄せ
-- [ ] 中央（デフォルト）
-- [ ] 下寄せ
-- [ ] 垂直位置の効果確認（ratio または minHeight 設定状態で確認すると変化が見える）
+### 検証エラー・コンソールエラー（最終確認）
 
-## 特殊テスト
+- [ ] examples HTML ペースト → 保存 → 再読込 で検証エラーが出ないこと
+- [ ] ブラウザコンソールにエラー・警告なし
 
-### 複製テスト
+### テーマとの干渉
 
-- [ ] 設定済みブロックを複製 → 両方独立して表示されるか
-- [ ] 複製後、片方を編集 → もう片方に影響しないか
-- [ ] 複製後、片方を削除 → もう片方が残るか
+- [ ] yStandard テーマで見た目が壊れない
+- [ ] 他のブロックと並べた時の整合性
 
-### リセット操作の完全性
+---
 
-- [ ] 全設定を実施 → 全設定を個別リセット → 保存 → 再読込 → 全て初期値になっているか
-- [ ] ブロック削除 → 保存 → 再読込 → DB に残存データがないか
+## 意地悪パターン（粗探し観点）
 
-### 深いネスト（親ブロック内への配置）
+共通観点は [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md#粗探しのプロ観点意地悪パターン) を参照。
 
-- [ ] Group ブロック内に banner-link を配置 → 正常に保存・表示されるか
-- [ ] Columns ブロック内（複数カラム）に banner-link を配置
+バナーリンクブロック固有の観点:
 
-## 粗探し観点サマリ
-
-本仕様内に `**粗探し**` マークで埋め込み済み。共通観点は [ガイドライン](../../../../../docs/block-operation-test-guideline.md#粗探しのプロ観点意地悪パターン) を参照。
+- **排他境界**: `ratio` 設定 → `minHeight` クリア → ratio クリアしても minHeight は戻らないのが仕様
+- **画像 focal 境界**: `{x:0, y:0}` は保存されるが save.tsx 側で `background-position` CSS を出さない（CSS デフォルトと一致する最適化）
+- **リンクのスキーマ**: URL 形式以外の文字列（`javascript:` 等）は WordPress コア準拠で `wp_kses_bad_protocol` に委任。クライアント側サニタイズなし。テスト対象外
 
 ## 補足
 
-- 本仕様は block.json / inspector-controls / examples HTML の設計時点（作成日: 2026-04-16）の情報に基づく
+- 本仕様は block.json / inspector-controls / examples HTML の構造に基づく
 - ブロックの仕様変更時は本仕様も更新する
-- 各テスト項目の結果は `operation.md` に記録（Git 管理外）
+- L2 セッション結果は `operation.md`（Git 管理外）に記録
+- L1 fixture は `test/integration/fixtures/blocks/` 配下
+- L3 手動確認結果は開発者がローカルにメモ（operation.md 等にまとめない）
