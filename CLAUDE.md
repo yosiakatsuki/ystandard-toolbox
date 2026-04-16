@@ -11,6 +11,7 @@
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
 - [docs/testing.md](docs/testing.md) — テスト全般（unit / integration の構成、fixture 追加手順、テスト用画像URL）
+- [docs/block-examples-guideline.md](docs/block-examples-guideline.md) — ブロック設定例・使用例（examples）の作成ガイドライン
 
 ## プロジェクト概要
 
@@ -362,49 +363,7 @@ class [ブロック名]_Block {
 
 ## ブロック設定例・使用例（examples）
 
-ブロックの全設定パターンをエディターに貼り付けて表示確認できるHTMLファイル群を作成する。公式サイトのデモ表示作成用、およびマニュアルの「設定例・使用例」ページとしても流用可能な品質で記述する。
-
-自動テスト用のフィクスチャは別管理（`test/integration/fixtures/blocks/`）。本ディレクトリは「人間がエディターに貼り付けて確認するためのサンプル」と「公開ドキュメント用の元データ」を兼ねる。
-
-### 配置
-
-`src/blocks/block-library/[ブロック名]/examples/[用途名].html`
-
-例:
-- `slider/examples/v1-deprecated.html` — v1 → v2 deprecated 変換の手動確認用
-- `posts/examples/all-variations.html` — 全設定パターン
-
-### 構成ルール
-
-- **見出し階層**: h2（ページタイトル）→ h3（設定パネル単位）→ h4（設定項目）→ h5（各バリエーション）
-- **h3（パネル）の直後**: そのパネルで何ができるのかを説明する導入文（`<p>`）を配置
-- **h4（設定項目）の直後**: その設定の意味・用途を説明する文を配置
-- **h5（バリエーション）**: 具体的な設定値がわかる見出し（例: 「3件（デフォルト）」「16:9（デフォルト・横長ワイド）」）
-- **セパレーター**: パネル間に`<!-- wp:separator -->`を挿入
-- **サイトデータ依存の設定**: 「サイトに合わせて変更してください」等の注記を入れる
-- **末尾に「設定の組み合わせ例」セクション**: 実用的なパターンに用途を示す名前と説明文をつける（例: 「ブログ記事一覧」「ギャラリー風」「サイドバー向け」）
-
-### ブロック形式
-
-- **ダイナミックブロック**: `<!-- wp:ystdtb/[ブロック名] {"attr":"value"} /-->`
-- **通常ブロック**: `<!-- wp:ystdtb/[ブロック名] {"attr":"value"} -->` + innerHTML + `<!-- /wp:ystdtb/[ブロック名] -->`
-- **インナーブロックを持つブロック**: 親ブロック内に子ブロックを含めた完全なHTMLを記述。サンプルテキストには日本語のダミーテキストを使用
-
-### 網羅基準
-
-- `block.json`のattributesに定義された全属性を対象にする
-- 各属性のデフォルト値、主要な選択肢、境界値（最小・最大）を含める
-- boolean属性はtrue/false両方を含める
-- レスポンシブ属性（モバイル/タブレット別設定）がある場合、別設定ありのパターンも含める
-- 属性の組み合わせで見え方が変わるもの（例: デザインタイプ × メタ情報表示）はクロスパターンを含める
-
-### 参考
-
-`src/blocks/block-library/posts/examples/all-variations.html` を構成の参考にすること。
-
-### テスト用画像URL
-
-examples / fixtures で画像ブロックを含める場合に使うURLは [docs/testing.md](docs/testing.md#テスト用画像url) を参照。
+詳細は [docs/block-examples-guideline.md](docs/block-examples-guideline.md) を参照。
 
 ## 設計書運用
 

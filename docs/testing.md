@@ -147,7 +147,7 @@ integration テスト用のブロック登録（`register-blocks.js`）は、edi
 
 ブロックの全設定パターンをエディターに貼り付けて表示確認するための HTML ファイル群。
 
-詳細は [CLAUDE.md](../CLAUDE.md#ブロック設定例使用例examples) の「ブロック設定例・使用例（examples）」セクションを参照。
+詳細は [docs/block-examples-guideline.md](block-examples-guideline.md) を参照。
 
 ### テスト用画像URL
 
