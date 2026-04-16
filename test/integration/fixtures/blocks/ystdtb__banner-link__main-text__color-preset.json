@@ -1,0 +1,19 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#1e293b",
+			"mainText": "プリセット文字色",
+			"mainTextColor": "ys-white",
+			"mainTextStyleClear": true,
+			"subText": "テーマプリセットの白色",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

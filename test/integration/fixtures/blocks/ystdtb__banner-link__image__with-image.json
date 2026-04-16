@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"backgroundImage": {
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg",
+				"id": 1
+			},
+			"customBackgroundColor": "#000000",
+			"backgroundOpacity": 0.4,
+			"mainText": "背景画像あり",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "写真の上にテキストを重ねています",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

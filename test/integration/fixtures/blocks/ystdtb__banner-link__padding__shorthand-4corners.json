@@ -1,0 +1,27 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "4 辺別値余白",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "上下左右で異なる値",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true,
+			"padding": {
+				"desktop": {
+					"top": "32px",
+					"right": "24px",
+					"bottom": "16px",
+					"left": "8px"
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

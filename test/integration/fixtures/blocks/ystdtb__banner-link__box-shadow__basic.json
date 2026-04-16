@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#e2e8f0",
+			"mainText": "影あり",
+			"mainTextStyleClear": true,
+			"subText": "ふわっと浮き出たような見た目になります",
+			"subTextStyleClear": true,
+			"boxShadow": {
+				"offsetX": "0px",
+				"offsetY": "4px",
+				"blurRadius": "12px",
+				"color": "#000000",
+				"opacity": 0.2
+			}
+		},
+		"innerBlocks": []
+	}
+]

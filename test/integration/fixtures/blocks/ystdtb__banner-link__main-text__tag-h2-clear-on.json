@@ -1,0 +1,20 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "h2タグ（スタイル削除ON）",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "h2",
+			"mainTextStyleClear": true,
+			"subText": "見出しスタイル削除がデフォルトでONです",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

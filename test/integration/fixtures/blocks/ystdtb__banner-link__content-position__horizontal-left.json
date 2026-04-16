@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "左寄せ",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "テキストを左側に寄せています",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true,
+			"contentPosition": {
+				"horizontal": "left"
+			}
+		},
+		"innerBlocks": []
+	}
+]

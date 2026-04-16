@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"backgroundImage": {
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg",
+				"id": 2
+			},
+			"customBackgroundColor": "#000000",
+			"backgroundOpacity": 0.5,
+			"mainText": "不透明度 0.5",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "背景画像がうっすら透けて見えます",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#f1f5f9",
+			"border": {
+				"width": "2px",
+				"style": "solid",
+				"color": {
+					"slug": "ys-blue"
+				}
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#f1f5f9\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__overlay-border has-border has-ys-blue-border-color\" style=\"border-width:2px;border-style:solid\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">プリセット色の枠線</div><div class=\"ystdtb-banner-link__sub-text\">2px solid + プリセット色</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#f1f5f9\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__overlay-border has-border has-ys-blue-border-color\" style=\"border-width:2px;border-style:solid\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">プリセット色の枠線</div><div class=\"ystdtb-banner-link__sub-text\">2px solid + プリセット色</div></div></div></a>\n"
+		]
+	}
+]

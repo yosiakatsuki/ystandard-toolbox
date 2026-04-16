@@ -1,0 +1,19 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "太字の<strong>強調</strong>テキスト",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "メインテキスト内に太字を含めています",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#f1f5f9",
+			"border": {
+				"width": "2px",
+				"style": "dotted",
+				"color": {
+					"hex": "#333333"
+				}
+			},
+			"mainText": "点線の枠線",
+			"mainTextStyleClear": true,
+			"subText": "2pxの点線で囲んでいます",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/",
+				"linkTarget": "_blank",
+				"rel": "noreferrer noopener"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "新しいタブで開きます",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "クリックすると別のタブで開きます",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

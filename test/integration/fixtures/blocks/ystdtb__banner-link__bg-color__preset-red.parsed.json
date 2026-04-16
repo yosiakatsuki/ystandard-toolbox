@@ -1,0 +1,18 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"backgroundColor": "ys-red",
+			"customMainTextColor": "#ffffff",
+			"customSubTextColor": "#ffffff"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background has-ys-red-background-color\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">プリセット赤</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">テーマプリセットの赤色</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background has-ys-red-background-color\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">プリセット赤</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">テーマプリセットの赤色</div></div></div></a>\n"
+		]
+	}
+]

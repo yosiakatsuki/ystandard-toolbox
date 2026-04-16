@@ -1,0 +1,26 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "全デバイス別フォントサイズ",
+			"mainTextFontSize": {
+				"desktop": {
+					"size": "32px"
+				},
+				"tablet": "24px",
+				"mobile": "18px"
+			},
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "3 デバイス別の値を設定",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

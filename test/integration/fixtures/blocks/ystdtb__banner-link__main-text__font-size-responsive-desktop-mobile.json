@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "レスポンシブサイズ",
+			"mainTextFontSize": {
+				"desktop": {
+					"size": "32px"
+				},
+				"mobile": "18px"
+			},
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "スマホでは18px、PCでは32pxで表示します",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

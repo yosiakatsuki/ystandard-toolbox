@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"size": {
+				"maxWidth": {
+					"desktop": "300px"
+				}
+			},
+			"mainText": "中央",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "ブロックを中央に配置しています",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true,
+			"blockPosition": "center"
+		},
+		"innerBlocks": []
+	}
+]

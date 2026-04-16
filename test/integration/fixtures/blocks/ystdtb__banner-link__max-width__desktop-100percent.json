@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"size": {
+				"maxWidth": {
+					"desktop": "100%"
+				}
+			},
+			"mainText": "最大幅 100%",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "幅いっぱいに表示",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

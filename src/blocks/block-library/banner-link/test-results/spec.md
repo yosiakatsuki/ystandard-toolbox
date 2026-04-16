@@ -76,24 +76,24 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ### リンクパネル
 
-- [ ] `ystdtb__banner-link__link__url-internal` — サイト内 `/sample-page/`
-- [ ] `ystdtb__banner-link__link__url-external` — `https://example.com/`
-- [ ] `ystdtb__banner-link__link__url-relative` — `../page/`
-- [ ] `ystdtb__banner-link__link__new-tab-on` — `linkTarget=_blank` + `rel="noreferrer noopener"`
-- [ ] `ystdtb__banner-link__link__rel-nofollow` — `rel="nofollow"`（new tab は OFF）
+- [x] `ystdtb__banner-link__link__url-internal` — サイト内 `/sample-page/`
+- [x] `ystdtb__banner-link__link__url-external` — `https://example.com/`
+- [x] `ystdtb__banner-link__link__url-relative` — `../page/`
+- [x] `ystdtb__banner-link__link__new-tab-on` — `linkTarget=_blank` + `rel="noreferrer noopener"`
+- [x] `ystdtb__banner-link__link__rel-nofollow` — `rel="nofollow"`（new tab は OFF）
 
 ### バナー設定 > 画像
 
-- [ ] `ystdtb__banner-link__image__with-image` — 画像あり・焦点なし
-- [ ] `ystdtb__banner-link__image__with-focal-top-left` — 焦点 `{x:0, y:0}`
-- [ ] `ystdtb__banner-link__image__with-focal-bottom-right` — 焦点 `{x:1, y:1}`
-- [ ] `ystdtb__banner-link__image__with-focal-custom` — 焦点 `{x:0.3, y:0.7}`
+- [x] `ystdtb__banner-link__image__with-image` — 画像あり・焦点なし
+- [x] `ystdtb__banner-link__image__with-focal-top-left` — 焦点 `{x:0, y:0}`
+- [x] `ystdtb__banner-link__image__with-focal-bottom-right` — 焦点 `{x:1, y:1}`
+- [x] `ystdtb__banner-link__image__with-focal-custom` — 焦点 `{x:0.3, y:0.2}`
 
 ### バナー設定 > 背景色
 
-- [ ] `ystdtb__banner-link__bg-color__preset-blue` — `backgroundColor: "ys-blue"`
-- [ ] `ystdtb__banner-link__bg-color__preset-red` — `backgroundColor: "ys-red"`
-- [ ] `ystdtb__banner-link__bg-color__custom-hex` — `customBackgroundColor: "#10b981"`
+- [x] `ystdtb__banner-link__bg-color__preset-blue` — `backgroundColor: "ys-blue"`
+- [x] `ystdtb__banner-link__bg-color__preset-red` — `backgroundColor: "ys-red"`
+- [x] `ystdtb__banner-link__bg-color__custom-hex` — `customBackgroundColor: "#10b981"`
 
 ### バナー設定 > グラデーション
 
@@ -101,107 +101,107 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ### バナー設定 > 不透明度
 
-- [ ] `ystdtb__banner-link__opacity__05` — `backgroundOpacity: 0.5`
-- [ ] `ystdtb__banner-link__opacity__0` — `backgroundOpacity: 0`
+- [x] `ystdtb__banner-link__opacity__05` — `backgroundOpacity: 0.5`
+- [x] `ystdtb__banner-link__opacity__0` — `backgroundOpacity: 0`
 
 ### バナー設定 > 縦横比（全選択肢網羅）
 
-- [ ] `ystdtb__banner-link__ratio__1-1`
-- [ ] `ystdtb__banner-link__ratio__2-1`
-- [ ] `ystdtb__banner-link__ratio__3-1`
-- [ ] `ystdtb__banner-link__ratio__3-2`
-- [ ] `ystdtb__banner-link__ratio__4-3`
-- [ ] `ystdtb__banner-link__ratio__16-9`
+- [x] `ystdtb__banner-link__ratio__1-1`
+- [x] `ystdtb__banner-link__ratio__2-1`
+- [x] `ystdtb__banner-link__ratio__3-1`
+- [x] `ystdtb__banner-link__ratio__3-2`
+- [x] `ystdtb__banner-link__ratio__4-3`
+- [x] `ystdtb__banner-link__ratio__16-9`
 
 ### バナー設定 > 最大幅（デバイス別網羅）
 
-- [ ] `ystdtb__banner-link__max-width__desktop-400px`
-- [ ] `ystdtb__banner-link__max-width__desktop-100percent`
-- [ ] `ystdtb__banner-link__max-width__responsive-desktop-mobile`
-- [ ] `ystdtb__banner-link__max-width__responsive-all-devices`
+- [x] `ystdtb__banner-link__max-width__desktop-400px`
+- [x] `ystdtb__banner-link__max-width__desktop-100percent`
+- [x] `ystdtb__banner-link__max-width__responsive-desktop-mobile`
+- [x] `ystdtb__banner-link__max-width__responsive-all-devices`
 
 ### バナー設定 > 最小高さ（デバイス別網羅）
 
-- [ ] `ystdtb__banner-link__min-height__desktop-200px`
-- [ ] `ystdtb__banner-link__min-height__responsive-desktop-mobile`
-- [ ] `ystdtb__banner-link__min-height__responsive-all-devices`
+- [x] `ystdtb__banner-link__min-height__desktop-200px`
+- [x] `ystdtb__banner-link__min-height__responsive-desktop-mobile`
+- [x] `ystdtb__banner-link__min-height__responsive-all-devices`
 
 ### バナー設定 > 角丸
 
-- [ ] `ystdtb__banner-link__border-radius__8px`
-- [ ] `ystdtb__banner-link__border-radius__50percent` — 正方形比率と組み合わせて丸
-- [ ] `ystdtb__banner-link__border-radius__4corners` — 4 隅別指定（UI が対応している場合）
+- [x] `ystdtb__banner-link__border-radius__8px`
+- [x] `ystdtb__banner-link__border-radius__50percent` — 正方形比率と組み合わせて丸
+- [ ] `ystdtb__banner-link__border-radius__4corners` — 4 隅別指定（**UI 未対応のため保留**）
 
 ### 枠線設定（スタイル全選択肢網羅）
 
-- [ ] `ystdtb__banner-link__border__solid-2px-custom` — solid + カスタム色
-- [ ] `ystdtb__banner-link__border__solid-2px-preset` — solid + プリセット色
-- [ ] `ystdtb__banner-link__border__dotted-2px`
-- [ ] `ystdtb__banner-link__border__dashed-2px`
-- [ ] `ystdtb__banner-link__border__double-4px`
+- [x] `ystdtb__banner-link__border__solid-2px-custom` — solid + カスタム色
+- [x] `ystdtb__banner-link__border__solid-2px-preset` — solid + プリセット色
+- [x] `ystdtb__banner-link__border__dotted-2px`
+- [x] `ystdtb__banner-link__border__dashed-2px`
+- [x] `ystdtb__banner-link__border__double-4px`
 
 ### メインテキスト
 
-- [ ] `ystdtb__banner-link__main-text__bold` — RichText 内に太字
-- [ ] `ystdtb__banner-link__main-text__font-size-px-24`
-- [ ] `ystdtb__banner-link__main-text__font-size-em-1-5`
-- [ ] `ystdtb__banner-link__main-text__font-size-responsive-desktop-mobile`
-- [ ] `ystdtb__banner-link__main-text__font-size-responsive-all-devices`
-- [ ] `ystdtb__banner-link__main-text__color-preset` — プリセット slug
-- [ ] `ystdtb__banner-link__main-text__color-custom-hex` — hex
-- [ ] `ystdtb__banner-link__main-text__line-height-1-8`
-- [ ] `ystdtb__banner-link__main-text__letter-spacing-0-1em`
-- [ ] `ystdtb__banner-link__main-text__tag-h2-clear-on` — h2 + `mainTextStyleClear: true`
-- [ ] `ystdtb__banner-link__main-text__tag-h3-clear-off` — h3 + `mainTextStyleClear: false`
-- [ ] `ystdtb__banner-link__main-text__tag-p`
-- [ ] `ystdtb__banner-link__main-text__tag-div` — デフォルト
+- [x] `ystdtb__banner-link__main-text__bold` — RichText 内に太字
+- [x] `ystdtb__banner-link__main-text__font-size-px-24`
+- [x] `ystdtb__banner-link__main-text__font-size-em-1-5`
+- [x] `ystdtb__banner-link__main-text__font-size-responsive-desktop-mobile`
+- [x] `ystdtb__banner-link__main-text__font-size-responsive-all-devices`
+- [x] `ystdtb__banner-link__main-text__color-preset` — プリセット slug
+- [x] `ystdtb__banner-link__main-text__color-custom-hex` — hex
+- [x] `ystdtb__banner-link__main-text__line-height-1-8`
+- [x] `ystdtb__banner-link__main-text__letter-spacing-0-1em`
+- [x] `ystdtb__banner-link__main-text__tag-h2-clear-on` — h2 + `mainTextStyleClear: true`
+- [x] `ystdtb__banner-link__main-text__tag-h3-clear-off` — h3 + `mainTextStyleClear: false`
+- [x] `ystdtb__banner-link__main-text__tag-p`
+- [x] `ystdtb__banner-link__main-text__tag-div` — デフォルト
 
 ### サブテキスト
 
-- [ ] `ystdtb__banner-link__sub-text__bold` — RichText 内に太字
-- [ ] `ystdtb__banner-link__sub-text__font-size-px-14`
-- [ ] `ystdtb__banner-link__sub-text__font-size-em-0-875`
-- [ ] `ystdtb__banner-link__sub-text__font-size-responsive`
-- [ ] `ystdtb__banner-link__sub-text__color-preset`
-- [ ] `ystdtb__banner-link__sub-text__color-custom-hex`
-- [ ] `ystdtb__banner-link__sub-text__line-height-1-6`
-- [ ] `ystdtb__banner-link__sub-text__letter-spacing-0-05em`
-- [ ] `ystdtb__banner-link__sub-text__tag-p`
-- [ ] `ystdtb__banner-link__sub-text__tag-h3-clear-on`
-- [ ] `ystdtb__banner-link__sub-text__margin-16px`
-- [ ] `ystdtb__banner-link__sub-text__margin-responsive-desktop-mobile`
-- [ ] `ystdtb__banner-link__sub-text__margin-responsive-all-devices`
+- [x] `ystdtb__banner-link__sub-text__bold` — RichText 内に太字
+- [x] `ystdtb__banner-link__sub-text__font-size-px-14`
+- [x] `ystdtb__banner-link__sub-text__font-size-em-0-875`
+- [x] `ystdtb__banner-link__sub-text__font-size-responsive`
+- [x] `ystdtb__banner-link__sub-text__color-preset`
+- [x] `ystdtb__banner-link__sub-text__color-custom-hex`
+- [x] `ystdtb__banner-link__sub-text__line-height-1-6`
+- [x] `ystdtb__banner-link__sub-text__letter-spacing-0-05em`
+- [x] `ystdtb__banner-link__sub-text__tag-p`
+- [x] `ystdtb__banner-link__sub-text__tag-h3-clear-on`
+- [x] `ystdtb__banner-link__sub-text__margin-16px`
+- [x] `ystdtb__banner-link__sub-text__margin-responsive-desktop-mobile`
+- [x] `ystdtb__banner-link__sub-text__margin-responsive-all-devices`
 
 ### 余白（ショートハンド網羅）
 
-- [ ] `ystdtb__banner-link__padding__shorthand-all-32` — 4 辺同値
-- [ ] `ystdtb__banner-link__padding__shorthand-4corners` — 4 辺別値
-- [ ] `ystdtb__banner-link__padding__shorthand-2-pairs` — 上下・左右（2 ペア）
-- [ ] `ystdtb__banner-link__padding__shorthand-3-pairs` — 上・左右・下（3 分割）
-- [ ] `ystdtb__banner-link__padding__responsive-desktop-mobile`
-- [ ] `ystdtb__banner-link__padding__responsive-all-devices`
+- [x] `ystdtb__banner-link__padding__shorthand-all-32` — 4 辺同値
+- [x] `ystdtb__banner-link__padding__shorthand-4corners` — 4 辺別値
+- [x] `ystdtb__banner-link__padding__shorthand-2-pairs` — 上下・左右（2 ペア）
+- [x] `ystdtb__banner-link__padding__shorthand-3-pairs` — 上・左右・下（3 分割）
+- [x] `ystdtb__banner-link__padding__responsive-desktop-mobile`
+- [x] `ystdtb__banner-link__padding__responsive-all-devices`
 
 ### 影
 
-- [ ] `ystdtb__banner-link__box-shadow__basic` — オフセット・ぼかし・色・透明度あり
+- [x] `ystdtb__banner-link__box-shadow__basic` — オフセット・ぼかし・色・透明度あり
 
 ### ツールバー設定
 
-- [ ] `ystdtb__banner-link__content-position__horizontal-left`
-- [ ] `ystdtb__banner-link__content-position__horizontal-right`
-- [ ] `ystdtb__banner-link__content-position__vertical-top`
-- [ ] `ystdtb__banner-link__content-position__vertical-bottom`
-- [ ] `ystdtb__banner-link__block-position__center` — maxWidth 設定時
-- [ ] `ystdtb__banner-link__block-position__right` — maxWidth 設定時
+- [x] `ystdtb__banner-link__content-position__horizontal-left`
+- [x] `ystdtb__banner-link__content-position__horizontal-right`
+- [x] `ystdtb__banner-link__content-position__vertical-top`
+- [x] `ystdtb__banner-link__content-position__vertical-bottom`
+- [x] `ystdtb__banner-link__block-position__center` — maxWidth 設定時
+- [x] `ystdtb__banner-link__block-position__right` — maxWidth 設定時
 
 ### 代表的な組み合わせパターン（実用シナリオ）
 
 examples HTML の組み合わせ例を流用。
 
-- [ ] `ystdtb__banner-link__combo__simple` — シンプル（背景色 + 白テキスト）
-- [ ] `ystdtb__banner-link__combo__photo-banner` — 背景画像 + オーバーレイ
-- [ ] `ystdtb__banner-link__combo__card` — カード風（角丸 + 影 + 最大幅 + 中央）
-- [ ] `ystdtb__banner-link__combo__campaign` — キャンペーン風（大文字 + 余白広め）※グラデーションは UI 未実装のため省略
+- [x] `ystdtb__banner-link__combo__simple` — シンプル（背景色 + 白テキスト）
+- [x] `ystdtb__banner-link__combo__photo-banner` — 背景画像 + オーバーレイ
+- [x] `ystdtb__banner-link__combo__card` — カード風（角丸 + 影 + 最大幅 + 中央）
+- [ ] `ystdtb__banner-link__combo__campaign` — キャンペーン風（大文字 + 余白広め）※グラデーションは UI 未実装のため**保留**
 
 ---
 
