@@ -12,6 +12,7 @@
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
 - [docs/testing.md](docs/testing.md) — テスト全般（unit / integration の構成、fixture 追加手順、テスト用画像URL）
 - [docs/block-examples-guideline.md](docs/block-examples-guideline.md) — ブロック設定例・使用例（examples）の作成ガイドライン
+- [docs/v2-block-testing.md](docs/v2-block-testing.md) — v2 ブロック全体テストの対象・進捗管理
 
 ## プロジェクト概要
 
