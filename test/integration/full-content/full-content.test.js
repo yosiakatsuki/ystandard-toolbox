@@ -48,12 +48,14 @@ import {
 	registerTimelineTestBlocks,
 	registerFaqTestBlocks,
 	registerDescriptionListTestBlocks,
+	registerBannerLinkTestBlocks,
 } from '../helpers/register-blocks';
 
 registerSliderTestBlocks();
 registerTimelineTestBlocks();
 registerFaqTestBlocks();
 registerDescriptionListTestBlocks();
+registerBannerLinkTestBlocks();
 
 /**
  * fixture と比較するときに使うプロパティだけを取り出す

@@ -1,0 +1,20 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"ratio": "16-9",
+			"mainText": "16:9",
+			"customMainTextColor": "#ffffff",
+			"mainTextStyleClear": true,
+			"subText": "動画のような横長ワイドの比率です",
+			"customSubTextColor": "#ffffff",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

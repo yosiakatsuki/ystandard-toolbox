@@ -46,9 +46,7 @@
 						},
 						"innerBlocks": [],
 						"innerHTML": "\n<p>A側</p>\n",
-						"innerContent": [
-							"\n<p>A側</p>\n"
-						]
+						"innerContent": [ "\n<p>A側</p>\n" ]
 					}
 				],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-border-bottom has-border has-ys-red-border-color\" style=\"border-width:2px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",

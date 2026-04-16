@@ -25,9 +25,7 @@
 						"attrs": {},
 						"innerBlocks": [],
 						"innerHTML": "\n<p>タイムライン１の内容</p>\n",
-						"innerContent": [
-							"\n<p>タイムライン１の内容</p>\n"
-						]
+						"innerContent": [ "\n<p>タイムライン１の内容</p>\n" ]
 					}
 				],
 				"innerHTML": "\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\">\n\n</div></div>\n",
@@ -52,18 +50,14 @@
 						},
 						"innerBlocks": [],
 						"innerHTML": "\n<p>タイムライン２</p>\n",
-						"innerContent": [
-							"\n<p>タイムライン２</p>\n"
-						]
+						"innerContent": [ "\n<p>タイムライン２</p>\n" ]
 					},
 					{
 						"blockName": "core/paragraph",
 						"attrs": {},
 						"innerBlocks": [],
 						"innerHTML": "\n<p>タイムライン２の内容</p>\n",
-						"innerContent": [
-							"\n<p>タイムライン２の内容</p>\n"
-						]
+						"innerContent": [ "\n<p>タイムライン２の内容</p>\n" ]
 					}
 				],
 				"innerHTML": "\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\">\n\n</div></div>\n",

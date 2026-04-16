@@ -62,6 +62,10 @@ import dlColumnMetadata from '../../../src/blocks/block-library/description-list
 import dlColumnSave from '@aktk/blocks/block-library/description-list-dl-column/save';
 import dlColumnDeprecated from '@aktk/blocks/block-library/description-list-dl-column/deprecated';
 
+// Banner Link.
+import bannerLinkMetadata from '../../../src/blocks/block-library/banner-link/block.json';
+import bannerLinkSave from '@aktk/blocks/block-library/banner-link/save';
+
 const NoopEdit = () => null;
 
 function registerOnce( metadata, settings ) {
@@ -126,5 +130,11 @@ export function registerDescriptionListTestBlocks() {
 	registerOnce( dlColumnMetadata, {
 		save: dlColumnSave,
 		deprecated: dlColumnDeprecated,
+	} );
+}
+
+export function registerBannerLinkTestBlocks() {
+	registerOnce( bannerLinkMetadata, {
+		save: bannerLinkSave,
 	} );
 }

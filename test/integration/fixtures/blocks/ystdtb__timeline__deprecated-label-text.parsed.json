@@ -27,9 +27,7 @@
 						"attrs": {},
 						"innerBlocks": [],
 						"innerHTML": "\n<p>タイムライン１の内容</p>\n",
-						"innerContent": [
-							"\n<p>タイムライン１の内容</p>\n"
-						]
+						"innerContent": [ "\n<p>タイムライン１の内容</p>\n" ]
 					}
 				],
 				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:calc(-1.3em + 10px)\">\n\n</div></div>\n",

@@ -31,3 +31,14 @@ jest.mock( '@wordpress/private-apis', () => {
 		} ),
 	};
 } );
+
+// @wordpress/editor は register-blocks.js 経由で save.tsx が間接的にロードする
+// アクセサリコンポーネント（ColorPalette 等）が要求するため、fixture-based test では
+// 実体不要な最小モックで置き換える（virtual: true は実モジュール未インストール環境向け）。
+jest.mock(
+	'@wordpress/editor',
+	() => ( {
+		store: { name: 'core/editor' },
+	} ),
+	{ virtual: true }
+);
