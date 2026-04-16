@@ -29,13 +29,32 @@ block-library 配下のすべてのブロックに適用される恒久ルール
 3. Claude: 既存タブを該当 URL へ navigate
 4. Claude: src/blocks/block-library/[block-name]/test-results/spec.md を読み込む
    - spec.md が存在しない → 作成フローへ（後述）
-5. Claude: 当セッションの実施範囲を宣言
+5. Claude: テスト開始前のクリーンアップ（後述）
+6. Claude: 当セッションの実施範囲を宣言
    例: 「spec.md の項目 1〜3 を今回実施します。4 以降は次回」
-6. ユーザー: 承認 or 調整
-7. Claude: 1 設定ずつ実行 → operation.md に追記
-8. Claude: 完了時、サマリと発見した問題を報告
-9. Claude: spec.md のチェックボックスを進捗として更新
+7. ユーザー: 承認 or 調整
+8. Claude: 1 設定ずつ実行 → operation.md に追記
+9. Claude: テスト完了後のクリーンアップ
+10. Claude: 完了時、サマリと発見した問題を報告
 ```
+
+**重要**: spec.md は Claude による自動更新をしない。spec.md は「テスト仕様（繰り返し実行される検証項目）」として使い、セッションごとの進捗や結果は operation.md 側に記録する。仕様変更があった場合のみ、ユーザー承認のもとで spec.md を更新する。
+
+## テスト開始・完了時のクリーンアップ
+
+**テスト開始時**: 本文（エディターコンテンツ）が完全に空の状態にする
+- 既存ブロックがあればすべて削除してから保存する
+- 前回のセッションの残骸や、他のテストブロックが残っていると検証に影響するため
+
+**テスト完了時**: 本文を再度完全に空の状態に戻す
+- テストで挿入したブロックをすべて削除
+- 保存して次回セッションの開始時にきれいな状態で始められるようにする
+
+**JS で全ブロック削除する snippet**:
+```js
+wp.data.dispatch('core/block-editor').resetBlocks([]);
+```
+実行後は「更新」ボタンで保存。
 
 ## ファイル構成
 
@@ -218,6 +237,90 @@ src/blocks/block-library/[block-name]/
 - 新しいセッションの結果を**上**に追記（逆時系列）
 - URL はそのセッションで使ったものをそのまま記載（テスト環境 / ライブ環境の追跡用）
 - NG があった場合は「発見した問題」セクションに詳細を記載
+
+## 役立つ JS snippet 集
+
+`javascript_tool` で実行できる、テストの品質向上・速度アップに役立つ snippet。
+
+### ブロック一覧と検証状態の取得
+
+全ブロックの検証状態を一度に把握する。問題あるブロックを特定しやすい。
+
+```js
+wp.data.select('core/block-editor').getBlocks()
+  .map(b => ({
+    name: b.name,
+    clientId: b.clientId,
+    isValid: b.isValid,
+    validationIssues: b.validationIssues ?? []
+  }))
+```
+
+### 対象ブロックの属性取得
+
+現在選択中のブロック、または先頭ブロックの属性を取得。
+
+```js
+// 先頭ブロック
+wp.data.select('core/block-editor').getBlocks()[0].attributes
+
+// 選択中のブロック
+const clientId = wp.data.select('core/block-editor').getSelectedBlockClientId();
+wp.data.select('core/block-editor').getBlock(clientId)?.attributes
+```
+
+### 保存状態の確認
+
+保存ボタンクリック後に呼び出して、保存が完了したかを確認。
+
+```js
+({
+  isSaving: wp.data.select('core/editor').isSavingPost(),
+  didSave: wp.data.select('core/editor').didPostSaveRequestSucceed(),
+  isDirty: wp.data.select('core/editor').isEditedPostDirty()
+})
+```
+
+`isDirty: false` かつ `didSave: true` なら保存成功。
+
+### 全ブロック削除（クリーンアップ用）
+
+テスト開始時・完了時の本文クリア。
+
+```js
+wp.data.dispatch('core/block-editor').resetBlocks([]);
+```
+実行後「更新」ボタンで保存する。
+
+### 属性一括設定（UI 操作を省略したい場合）
+
+UI での属性設定が複雑すぎる場合や、前提条件として素早く属性をセットしたい場合に利用。
+**ただし「UI 操作が正しく動くか」が検証対象の場合は UI 経由で設定すること。**
+
+```js
+const clientId = wp.data.select('core/block-editor').getBlocks()[0].clientId;
+wp.data.dispatch('core/block-editor').updateBlockAttributes(clientId, {
+  customBackgroundColor: '#3b82f6',
+  mainText: 'テキスト'
+});
+```
+
+### 特定ブロック名で検索
+
+複数ブロックが混在する場面で対象ブロックを特定。
+
+```js
+wp.data.select('core/block-editor').getBlocks()
+  .filter(b => b.name === 'ystdtb/banner-link')
+```
+
+### 保存後の HTML ソース取得
+
+save() 関数が生成した実際の HTML を確認する（検証エラー原因の特定に）。
+
+```js
+wp.blocks.serialize(wp.data.select('core/block-editor').getBlocks())
+```
 
 ## GIF 録画について
 
