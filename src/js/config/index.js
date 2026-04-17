@@ -81,7 +81,7 @@ export const ystdtbConfig = {
 		borderStyles: [
 			{
 				value: 'solid',
-				label: _x( '直線', 'component-config', 'ystandard-toolbox' ),
+				label: _x( '実線', 'component-config', 'ystandard-toolbox' ),
 			},
 			{
 				value: 'dotted',
