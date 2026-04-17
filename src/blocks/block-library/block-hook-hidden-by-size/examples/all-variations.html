@@ -1,0 +1,167 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">設定一覧</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">画面サイズによる非表示</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>既存のブロックに「モバイル・タブレット・PC のどれで非表示にするか」を設定できます。対象は core / ystdb / ystdtb 名前空間のブロックで、customClassName と ystdtdHiddenBySize サポートが有効なものです。ここでは段落ブロックと Box ブロックで確認します。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">モバイルのみ非表示</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>スマホでは見えず、タブレットと PC で表示されるパターンです。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenMobile":true,"className":"ystdtb-hidden-mobile"} -->
+<p class="ystdtb-hidden-mobile">[段落] PC とタブレットで表示されます（モバイル非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-mobile","ystdtbIsHiddenMobile":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-mobile" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] PC とタブレットで表示されます（モバイル非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">タブレットのみ非表示</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>タブレットだけ見えず、スマホと PC で表示されるパターンです。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenTablet":true,"className":"ystdtb-hidden-tablet"} -->
+<p class="ystdtb-hidden-tablet">[段落] PC とモバイルで表示されます（タブレット非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-tablet","ystdtbIsHiddenTablet":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-tablet" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] PC とモバイルで表示されます（タブレット非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">PC のみ非表示</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PC では見えず、スマホとタブレットで表示されるパターンです。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenDesktop":true,"className":"ystdtb-hidden-desktop"} -->
+<p class="ystdtb-hidden-desktop">[段落] モバイルとタブレットで表示されます（PC 非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-desktop","ystdtbIsHiddenDesktop":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-desktop" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] モバイルとタブレットで表示されます（PC 非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">モバイル + タブレット（PC のみ表示）</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PC だけ表示したいときに使います。スマホ・タブレットの両方で非表示になります。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenMobile":true,"ystdtbIsHiddenTablet":true,"className":"ystdtb-hidden-mobile ystdtb-hidden-tablet"} -->
+<p class="ystdtb-hidden-mobile ystdtb-hidden-tablet">[段落] PC のみで表示されます（モバイル + タブレット非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-mobile ystdtb-hidden-tablet","ystdtbIsHiddenMobile":true,"ystdtbIsHiddenTablet":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-mobile ystdtb-hidden-tablet" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] PC のみで表示されます（モバイル + タブレット非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">タブレット + PC（モバイルのみ表示）</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>スマホだけ表示したいときに使います。タブレット・PC の両方で非表示になります。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenTablet":true,"ystdtbIsHiddenDesktop":true,"className":"ystdtb-hidden-tablet ystdtb-hidden-desktop"} -->
+<p class="ystdtb-hidden-tablet ystdtb-hidden-desktop">[段落] モバイルのみで表示されます（タブレット + PC 非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-tablet ystdtb-hidden-desktop","ystdtbIsHiddenTablet":true,"ystdtbIsHiddenDesktop":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-tablet ystdtb-hidden-desktop" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] モバイルのみで表示されます（タブレット + PC 非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">モバイル + PC（タブレットのみ表示）</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>タブレットだけ表示したいときに使います。スマホ・PC の両方で非表示になります。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">段落ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"ystdtbIsHiddenMobile":true,"ystdtbIsHiddenDesktop":true,"className":"ystdtb-hidden-mobile ystdtb-hidden-desktop"} -->
+<p class="ystdtb-hidden-mobile ystdtb-hidden-desktop">[段落] タブレットのみで表示されます（モバイル + PC 非表示）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">Box ブロック</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/box {"className":"ystdtb-hidden-mobile ystdtb-hidden-desktop","ystdtbIsHiddenMobile":true,"ystdtbIsHiddenDesktop":true} -->
+<div class="ystdtb-box is-box-style--label-none ystdtb-hidden-mobile ystdtb-hidden-desktop" style="--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em"><div class="ystdtb-box__inner-container show-default-border" style="border-style:solid" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><div class="ystdtb-box__content" data-ys-ie-styles="{&quot;border-width&quot;:&quot;1px&quot;}"><!-- wp:paragraph -->
+<p>[Box] タブレットのみで表示されます（モバイル + PC 非表示）</p>
+<!-- /wp:paragraph --></div></div></div>
+<!-- /wp:ystdtb/box -->
