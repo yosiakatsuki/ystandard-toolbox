@@ -109,10 +109,12 @@
 .ystdtb-box__label {
 	max-width: 100%;
 	overflow: hidden;
-}
 
-.ystdtb-box__label-text {
-	font-size: var(--ystdtb-box-label-font-size);
+	// StretchTextControl 内部要素（dummy div / input）へフォントサイズを伝播させる
+	input,
+	.aktk-component-stretch-text-control__dummy {
+		font-size: inherit;
+	}
 }
 
 .ystdtb-box__content {

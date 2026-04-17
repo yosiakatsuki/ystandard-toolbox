@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import Button from '@aktk/block-components/wp-controls/button';
+import { HorizonButtonSelect } from '@aktk/block-components/components/buttons';
 
 /*
  * Plugin Dependencies
@@ -34,23 +34,15 @@ const LabelFontWeight = ( props: LabelFontWeightProps ): React.ReactElement => {
 			id="label-font-weight"
 			label={ __( '文字の太さ', 'ystandard-toolbox' ) }
 		>
-			<div className="ystdtb__horizon-buttons">
-				{ fontWeightList.map( ( item ) => {
-					return (
-						<Button
-							key={ item.value }
-							variant={ labelWeight === item.value ? 'primary' : 'secondary' }
-							onClick={ () => {
-								setAttributes( {
-									labelWeight: item.value as BoxAttributes['labelWeight'],
-								} );
-							} }
-						>
-							<span>{ item.label }</span>
-						</Button>
-					);
-				} ) }
-			</div>
+			<HorizonButtonSelect
+				value={ labelWeight }
+				options={ fontWeightList }
+				onChange={ ( value ) =>
+					setAttributes( {
+						labelWeight: value as BoxAttributes[ 'labelWeight' ],
+					} )
+				}
+			/>
 		</BaseControl>
 	);
 };
