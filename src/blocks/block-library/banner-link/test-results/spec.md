@@ -316,6 +316,5 @@ examples HTML の組み合わせ例を流用。
 
 - 本仕様は block.json / inspector-controls / examples HTML の構造に基づく
 - ブロックの仕様変更時は本仕様も更新する
-- L2 セッション結果は `operation.md`（Git 管理外）に記録
+- L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/` 配下
-- L3 手動確認結果は開発者がローカルにメモ（operation.md 等にまとめない）
