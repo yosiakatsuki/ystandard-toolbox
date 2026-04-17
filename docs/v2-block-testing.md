@@ -35,7 +35,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 | ブロック | examples | spec.md | L1 fixture | L2 Chrome UI | L3 フロント |
 |---|:-:|:-:|:-:|:-:|:-:|
-| [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | 🔄 部分 | ❌ |
+| [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [box](#box) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -57,17 +57,19 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 ### banner-link
 
-- [x] examples HTML 作成（847 行、70+ バリエーション）
+- [x] examples HTML 作成（グラデーション例削除・レスポンシブ 3 デバイス化などの手動テストフィードバック反映済み）
 - [x] spec.md 作成（三層 L1/L2/L3 対応）
 - [x] L1 fixture 作成（76 件、`npm run test:integration` 全 113 件パス）
-- [ ] L2 Chrome UI テスト（前セッションで 27/43 程度まで実施、`test-results/operation.md` に記録。Git 管理外）
-- [ ] L3 フロント確認
+- [x] L2 Chrome UI テスト完了（複数セッションで実施、結果は `test-results/operation.md` に集約。Git 管理外）
+- [x] L3 フロント確認（ユーザー手動確認にて完了）
 
-**保留項目（UI 未対応のため）**:
+**スコープ外（UI 未対応のため fixture 保留）**:
 - `border-radius__4corners` — `borderRadius` 属性は単一 string 値のみで 4 隅個別指定 UI 未対応
-- `combo__campaign` — グラデーション UI 未実装
+- `combo__campaign` — グラデーション UI 未実装（examples のキャンペーン例は単色に書き換え済）
 
-**次にやること**: L2 Chrome UI テストの再開（spec.md の L2 セクション参照）、または L3 フロント確認
+**手動テストで判明した実装修正**:
+- メインテキスト/サブテキストの HTMLタグ UI を v1 挙動に合わせ、「-- 選択してください --」を非表示化、初期値を `div` に統一（`block.json` default + `useEmptyValue={ false }`）
+- HTMLタグを一度選択後に空値へ戻した際の `InvalidCharacterError` に対する多層防御ガードを追加
 
 ### block-hook-hidden-by-size
 
