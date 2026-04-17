@@ -236,6 +236,19 @@ examples に無い fixture（排他境界など）はエディターで個別に
 | ブロックが認識されない | `register-blocks.js` に該当ブロックが登録されていない |
 | deprecated 警告が出る | basename に `__deprecated-` を含めていない |
 
+### エラー・warning 発生時の運用
+
+`npm run test:integration` / `npm run fixtures:generate` でテスト失敗や
+Block validation warning が出た場合、**即座に修正コードを書かない**。
+まず以下を提示して方針の合意を取る:
+
+1. 失敗テスト名とエラーメッセージの要点
+2. 原因の見立て（save.tsx 出力との差異、期待値ファイルの古さ 等）
+3. 修正案と影響範囲
+
+原因の読み違いや、修正パスが複数あるケースがあるため、
+手を動かす前に確認を挟む。unit テストや他の自動テストでも同様。
+
 ### spec.md との対応
 
 各ブロックの spec.md L1 セクションにチェックリスト形式で fixture 名を列挙する。これが ToDo リスト兼ドキュメントになる。fixture 作成が完了したら spec.md のチェックボックスを更新するのは **行わない**（spec.md は仕様で、進捗管理は operation.md で行う。fixture 自体は `git ls-files test/integration/fixtures/blocks/` で存在確認可能）。
