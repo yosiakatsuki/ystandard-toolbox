@@ -178,7 +178,7 @@ const save = ( { attributes } ) => {
 	const hasMainTextColor = colorClasses.mainText || customMainTextColor;
 	const mainTextProps = {
 		value: mainText,
-		tagName: mainTextHtml ?? 'div',
+		tagName: mainTextHtml || 'div',
 		className: classnames( blockClasses.mainText, {
 			'has-font-size': mainTextFontSize,
 			'has-text-color': hasMainTextColor,
@@ -203,7 +203,7 @@ const save = ( { attributes } ) => {
 	const hasSubTextColor = colorClasses.subText || customSubTextColor;
 	const subTextProps = {
 		value: subText,
-		tagName: subTextHtml ?? 'div',
+		tagName: subTextHtml || 'div',
 		className: classnames( blockClasses.subText, {
 			'has-margin-top': getCustomProperty( 'margin-top', subTextMargin ),
 			'has-font-size': subTextFontSize,

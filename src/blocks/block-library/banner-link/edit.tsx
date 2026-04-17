@@ -218,7 +218,7 @@ const BannerLink = ( props ) => {
 					<div { ...containerProps }>
 						<div { ...textWrapProps }>
 							<RichText
-								tagName={ mainTextHtml }
+								tagName={ mainTextHtml || 'div' }
 								className={ mainTextClass }
 								style={ mainTextStyles }
 								value={ mainText }
@@ -233,7 +233,7 @@ const BannerLink = ( props ) => {
 								withoutInteractiveFormatting
 							/>
 							<RichText
-								tagName={ subTextHtml }
+								tagName={ subTextHtml || 'div' }
 								className={ subTextClass }
 								style={ subTextStyles }
 								value={ subText }
