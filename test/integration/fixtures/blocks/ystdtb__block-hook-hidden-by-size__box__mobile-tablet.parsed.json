@@ -1,0 +1,27 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"className": "ystdtb-hidden-mobile ystdtb-hidden-tablet",
+			"ystdtbIsHiddenMobile": true,
+			"ystdtbIsHiddenTablet": true
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>[Box] PC のみで表示されます（モバイル + タブレット非表示）</p>\n",
+				"innerContent": [
+					"\n<p>[Box] PC のみで表示されます（モバイル + タブレット非表示）</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none ystdtb-hidden-mobile ystdtb-hidden-tablet\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none ystdtb-hidden-mobile ystdtb-hidden-tablet\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

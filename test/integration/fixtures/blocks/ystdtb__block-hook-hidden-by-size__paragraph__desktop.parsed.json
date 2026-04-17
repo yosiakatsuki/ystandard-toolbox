@@ -1,0 +1,14 @@
+[
+	{
+		"blockName": "core/paragraph",
+		"attrs": {
+			"ystdtbIsHiddenDesktop": true,
+			"className": "ystdtb-hidden-desktop"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<p class=\"ystdtb-hidden-desktop\">[段落] モバイルとタブレットで表示されます（PC 非表示）</p>\n",
+		"innerContent": [
+			"\n<p class=\"ystdtb-hidden-desktop\">[段落] モバイルとタブレットで表示されます（PC 非表示）</p>\n"
+		]
+	}
+]

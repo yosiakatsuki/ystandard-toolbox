@@ -36,7 +36,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | ブロック | examples | spec.md | L1 fixture | L2 Chrome UI | L3 フロント |
 |---|:-:|:-:|:-:|:-:|:-:|
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
-| [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | ✅ 12件 | ✅ | ✅ |
 | [box](#box) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -77,13 +77,11 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 確認パターン: モバイルのみ / タブレットのみ / デスクトップのみ / モバイル+タブレット / タブレット+デスクトップ / モバイル+デスクトップ の 6 パターン。
 「設定の組み合わせ例」セクションは省略。
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
-
-**次にやること**: examples HTML 作成
+- [x] examples HTML 作成（6 パターン × 段落/Box = 12 ブロックペア）
+- [x] spec.md 作成（三層 L1/L2/L3 対応、非対応ブロック例示は core/nextpage に修正済）
+- [x] L1 fixture 作成（12 件、`npm run test:integration` 全 125 件パス）
+- [x] L2 Chrome UI テスト完了（`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### box
 

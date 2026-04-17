@@ -56,21 +56,21 @@
 
 ### 段落ブロック
 
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__mobile` — モバイルのみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__tablet` — タブレットのみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__desktop` — PC のみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-tablet` — モバイル + タブレット
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__tablet-desktop` — タブレット + PC
-- [ ] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-desktop` — モバイル + PC
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile` — モバイルのみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__tablet` — タブレットのみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__desktop` — PC のみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-tablet` — モバイル + タブレット
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__tablet-desktop` — タブレット + PC
+- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-desktop` — モバイル + PC
 
 ### Box ブロック
 
-- [ ] `ystdtb__block-hook-hidden-by-size__box__mobile` — モバイルのみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__box__tablet` — タブレットのみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__box__desktop` — PC のみ非表示
-- [ ] `ystdtb__block-hook-hidden-by-size__box__mobile-tablet` — モバイル + タブレット
-- [ ] `ystdtb__block-hook-hidden-by-size__box__tablet-desktop` — タブレット + PC
-- [ ] `ystdtb__block-hook-hidden-by-size__box__mobile-desktop` — モバイル + PC
+- [x] `ystdtb__block-hook-hidden-by-size__box__mobile` — モバイルのみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__box__tablet` — タブレットのみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__box__desktop` — PC のみ非表示
+- [x] `ystdtb__block-hook-hidden-by-size__box__mobile-tablet` — モバイル + タブレット
+- [x] `ystdtb__block-hook-hidden-by-size__box__tablet-desktop` — タブレット + PC
+- [x] `ystdtb__block-hook-hidden-by-size__box__mobile-desktop` — モバイル + PC
 
 **備考**: デフォルト（すべて false）は属性値が既存ブロックの初期状態と同じで独自検証価値が薄いため fixture 化しない。
 
@@ -82,7 +82,7 @@
 
 - [ ] core/paragraph にパネル「非表示設定(画面サイズ)」が表示される
 - [ ] ystdtb/box にパネル「非表示設定(画面サイズ)」が表示される
-- [ ] core/spacer（`customClassName: false`）にパネルが表示されない
+- [ ] core/nextpage（`customClassName: false`）にパネルが表示されない
 
 ### トグル動作と属性・クラス付与
 
