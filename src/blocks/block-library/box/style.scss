@@ -1,15 +1,14 @@
 @use "../../../sass/global";
 
-$default_padding: 1em;
-$box_color_default: #666;
-
 .ystdtb-box {
-	--ystdtb-box-padding-top: #{$default_padding};
-	--ystdtb-box-padding-right: #{$default_padding};
-	--ystdtb-box-padding-bottom: #{$default_padding};
-	--ystdtb-box-padding-left: #{$default_padding};
+	--ystdtb-box-padding-top: 1rem;
+	--ystdtb-box-padding-right: 1rem;
+	--ystdtb-box-padding-bottom: 1rem;
+	--ystdtb-box-padding-left: 1rem;
 	--ystdtb-box-border-width: 0;
 	--ystdtb-box-label-font-size: 0.9em;
+	--ystdtb--box--background-color: #666;
+	--ystdtb--box--border-color: #666;
 	border: 0;
 }
 
@@ -18,7 +17,7 @@ $box_color_default: #666;
 	border-width: var(--ystdtb-box-border-width, 0);
 
 	&.show-default-border {
-		border-color: $box_color_default;
+		border-color: var(--ystdtb--box--border-color);
 	}
 }
 
@@ -40,7 +39,6 @@ $box_color_default: #666;
 
 .ystdtb-box__content {
 	position: relative;
-	padding: #{$default_padding};
 	padding-top: var(--ystdtb-box-padding-top);
 	padding-right: var(--ystdtb-box-padding-right);
 	padding-bottom: var(--ystdtb-box-padding-bottom);
@@ -89,7 +87,7 @@ $box_color_default: #666;
 	}
 
 	&:not(.has-background) {
-		background-color: $box_color_default;
+		background-color: var(--ystdtb--box--background-color);
 	}
 
 	&:not(.has-text-color) {
