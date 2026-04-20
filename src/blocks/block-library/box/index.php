@@ -75,6 +75,12 @@ class Box_Block {
 	padding-bottom: var(--ystdtb-box-padding-bottom-tablet, var(--ystdtb-box-padding-bottom));
 	padding-left: var(--ystdtb-box-padding-left-tablet, var(--ystdtb-box-padding-left));
 }
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__content {
+	padding-top: calc(var(--ystdtb-box-padding-top-tablet, var(--ystdtb-box-padding-top)) + var(--ystdtb-box-label-font-size));
+}
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__label {
+	left: calc(var(--ystdtb-box-padding-left-tablet, var(--ystdtb-box-padding-left, 1em)) + var(--ystdtb-box-border-width, 1px));
+}
 CSS;
 
 		$mobile_css = <<<'CSS'
@@ -83,6 +89,12 @@ CSS;
 	padding-right: var(--ystdtb-box-padding-right-mobile, var(--ystdtb-box-padding-right));
 	padding-bottom: var(--ystdtb-box-padding-bottom-mobile, var(--ystdtb-box-padding-bottom));
 	padding-left: var(--ystdtb-box-padding-left-mobile, var(--ystdtb-box-padding-left));
+}
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__content {
+	padding-top: calc(var(--ystdtb-box-padding-top-mobile, var(--ystdtb-box-padding-top)) + var(--ystdtb-box-label-font-size));
+}
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__label {
+	left: calc(var(--ystdtb-box-padding-left-mobile, var(--ystdtb-box-padding-left, 1em)) + var(--ystdtb-box-border-width, 1px));
 }
 CSS;
 

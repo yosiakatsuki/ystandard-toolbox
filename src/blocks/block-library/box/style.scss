@@ -132,17 +132,16 @@
 			justify-content: center;
 		}
 	}
+}
 
-	&.is-box-style--label-line {
-		.ystdtb-box__label {
-			position: absolute;
-			left: calc(var(--ystdtb-box-padding-left, 1em) + var(--ystdtb-box-border-width, 1px));
-			transform: translateY(-50%);
-			z-index: 1;
-		}
+// 線上ラベル（label-line）: レスポンシブ時の上書きは index.php 側で生成
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__label {
+	position: absolute;
+	left: calc(var(--ystdtb-box-padding-left, 1em) + var(--ystdtb-box-border-width, 1px));
+	transform: translateY(-50%);
+	z-index: 1;
+}
 
-		.ystdtb-box__content {
-			padding-top: calc(var(--ystdtb-box-padding-top) + var(--ystdtb-box-label-font-size));
-		}
-	}
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__content {
+	padding-top: calc(var(--ystdtb-box-padding-top) + var(--ystdtb-box-label-font-size));
 }
