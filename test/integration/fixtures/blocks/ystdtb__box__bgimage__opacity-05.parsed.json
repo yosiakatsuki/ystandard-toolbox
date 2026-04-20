@@ -1,0 +1,31 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"customBoxBackgroundColor": "#0f172a",
+			"customBoxTextColor": "#ffffff",
+			"backgroundImage": {
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg",
+				"id": 2
+			},
+			"backgroundImageCoverOpacity": 0.5
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>背景画像に半透明オーバーレイ（0.5）を重ねています。</p>\n",
+				"innerContent": [
+					"\n<p>背景画像に半透明オーバーレイ（0.5）を重ねています。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container has-background\" style=\"background-color:#0f172a;border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__background\" style=\"background-image:url('https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg');background-repeat:no-repeat\" aria-hidden=\"true\"><div class=\"ystdtb-box__background-cover has-background\" style=\"background-color:#0f172a;opacity:0.5\"></div></div><div class=\"ystdtb-box__content has-text-color\" style=\"color:#ffffff\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container has-background\" style=\"background-color:#0f172a;border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__background\" style=\"background-image:url('https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg');background-repeat:no-repeat\" aria-hidden=\"true\"><div class=\"ystdtb-box__background-cover has-background\" style=\"background-color:#0f172a;opacity:0.5\"></div></div><div class=\"ystdtb-box__content has-text-color\" style=\"color:#ffffff\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

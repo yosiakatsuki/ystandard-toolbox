@@ -1,0 +1,32 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxPadding": {
+				"desktop": {
+					"top": "var:preset|spacing|30",
+					"right": "var:preset|spacing|30",
+					"bottom": "var:preset|spacing|30",
+					"left": "var:preset|spacing|30"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>余白にプリセット値（spacing/30）を指定しています。</p>\n",
+				"innerContent": [
+					"\n<p>余白にプリセット値（spacing/30）を指定しています。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-padding-top:var(--wp--preset--spacing--30);--ystdtb-box-padding-right:var(--wp--preset--spacing--30);--ystdtb-box-padding-bottom:var(--wp--preset--spacing--30);--ystdtb-box-padding-left:var(--wp--preset--spacing--30);--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;,&quot;padding-top&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-right&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-bottom&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-left&quot;:&quot;var:preset|spacing|30&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-padding-top:var(--wp--preset--spacing--30);--ystdtb-box-padding-right:var(--wp--preset--spacing--30);--ystdtb-box-padding-bottom:var(--wp--preset--spacing--30);--ystdtb-box-padding-left:var(--wp--preset--spacing--30);--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;,&quot;padding-top&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-right&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-bottom&quot;:&quot;var:preset|spacing|30&quot;,&quot;padding-left&quot;:&quot;var:preset|spacing|30&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

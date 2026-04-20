@@ -1,0 +1,27 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxStyle": "label-out",
+			"label": "ラベル文字サイズ 0.75em",
+			"customLabelFontSize": "0.75em"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>ystdtb__box__label__font-size-small</p>\n",
+				"innerContent": [
+					"\n<p>ystdtb__box__label__font-size-small</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-out\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.75em\"><div class=\"ystdtb-box__label is-label-normal\"><div class=\"ystdtb-box__label-contents\"><span class=\"ystdtb-box__label-text\">ラベル文字サイズ 0.75em</span></div></div><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-out\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.75em\"><div class=\"ystdtb-box__label is-label-normal\"><div class=\"ystdtb-box__label-contents\"><span class=\"ystdtb-box__label-text\">ラベル文字サイズ 0.75em</span></div></div><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]
