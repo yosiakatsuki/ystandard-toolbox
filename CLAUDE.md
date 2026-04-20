@@ -353,6 +353,8 @@ class [ブロック名]_Block {
 - **Tailwind CSS**: カスタムデザイントークン（preflight無効）
 - **レスポンシブブレークポイント**: `mobile`, `tablet`, `desktop`
 - **SMACSS**: プロパティ順序（CSS Declaration Sorter）
+- **PHPでインラインCSSをenqueueする場合**: `wp_add_inline_style()` に渡す CSS は必ず `ystandard_toolbox\Util\Text::minify()` で圧縮する。NOWDOC 等で書いた読みやすい CSS もそのまま enqueue せず minify を通すこと。
+- **レスポンシブ用メディアクエリ**: SCSS の `@include media-breakpoint-*` ではなく、PHP 側の `Styles::add_media_query_only_mobile` / `only_tablet` / `over_desktop` を使う。ブレークポイント定義の一元化（`Styles::BREAKPOINTS` / `ystdtb_css_breakpoints` フィルター）を活かすため。
 
 ## テスト
 

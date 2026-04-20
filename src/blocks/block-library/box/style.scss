@@ -1,5 +1,3 @@
-@use "../../../sass/global";
-
 .ystdtb-box {
 	--ystdtb-box-padding-top: 1rem;
 	--ystdtb-box-padding-right: 1rem;
@@ -45,19 +43,7 @@
 	padding-left: var(--ystdtb-box-padding-left);
 	z-index: 1;
 
-	@include global.media-breakpoint-down(md) {
-		padding-top: var(--ystdtb-box-padding-top-tablet, var(--ystdtb-box-padding-top));
-		padding-right: var(--ystdtb-box-padding-right-tablet, var(--ystdtb-box-padding-right));
-		padding-bottom: var(--ystdtb-box-padding-bottom-tablet, var(--ystdtb-box-padding-bottom));
-		padding-left: var(--ystdtb-box-padding-left-tablet, var(--ystdtb-box-padding-left));
-	}
-
-	@include global.media-breakpoint-down(sm) {
-		padding-top: var(--ystdtb-box-padding-top-mobile, var(--ystdtb-box-padding-top));
-		padding-right: var(--ystdtb-box-padding-right-mobile, var(--ystdtb-box-padding-right));
-		padding-bottom: var(--ystdtb-box-padding-bottom-mobile, var(--ystdtb-box-padding-bottom));
-		padding-left: var(--ystdtb-box-padding-left-mobile, var(--ystdtb-box-padding-left));
-	}
+	// レスポンシブの padding（tablet / mobile）は index.php で生成
 
 	> * {
 		margin-top: 1em;
