@@ -45,7 +45,7 @@
 
 	// レスポンシブの padding（tablet / mobile）は index.php で生成
 
-	> * {
+	> :where(*) {
 		margin-top: 1em;
 		margin-bottom: 0;
 
@@ -54,7 +54,7 @@
 		}
 	}
 
-	&.has-text-color {
+	&:where(.has-text-color) {
 		a {
 			color: currentcolor;
 		}
@@ -68,19 +68,19 @@
 	padding: 0.3em 1em;
 	white-space: nowrap;
 
-	&.is-label-bold {
+	&:where(.is-label-bold) {
 		font-weight: 700;
 	}
 
-	&:not(.has-background) {
+	&:where(:not(.has-background)) {
 		background-color: var(--ystdtb--box--background-color);
 	}
 
-	&:not(.has-text-color) {
+	&:where(:not(.has-text-color)) {
 		color: #fff;
 	}
 
-	&:not(.has-font-size-class) {
+	&:where(:not(.has-font-size-class)) {
 		font-size: var(--ystdtb-box-label-font-size);
 	}
 }
@@ -96,7 +96,7 @@
 	display: block;
 	margin-right: 0.25em;
 
-	* {
+	:where(*) {
 		display: block;
 	}
 }
@@ -109,26 +109,26 @@
 
 // スタイル別.
 .ystdtb-box {
-	&.is-box-style--label-none {
-		.ystdtb-box__label {
+	&:where(.is-box-style--label-none) {
+		:where(.ystdtb-box__label) {
 			display: none;
 		}
 	}
 
-	&.is-box-style--label-in {
-		.ystdtb-box__inner-container {
+	&:where(.is-box-style--label-in) {
+		:where(.ystdtb-box__inner-container) {
 			overflow: hidden;
 		}
 	}
 
-	&.is-box-style--label-wide {
-		.ystdtb-box__label {
+	&:where(.is-box-style--label-wide) {
+		:where(.ystdtb-box__label) {
 			display: block;
 			width: 100%;
 			padding: 0.5em 0.75em;
 		}
 
-		.ystdtb-box__label-contents {
+		:where(.ystdtb-box__label-contents) {
 			justify-content: center;
 		}
 	}
