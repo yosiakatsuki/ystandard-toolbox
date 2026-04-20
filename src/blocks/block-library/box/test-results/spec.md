@@ -87,6 +87,11 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 - [ ] `ystdtb__box__padding__4corners` — 4 辺別値
 - [ ] `ystdtb__box__padding__responsive-desktop-mobile`
 - [ ] `ystdtb__box__padding__responsive-all-devices`
+- [ ] `ystdtb__box__padding__preset` — `boxPadding` で `var:preset|spacing|*` プリセット値選択 → save HTML で `var(--wp--preset--spacing--*)` に展開
+
+### タイプ別組み合わせ
+
+- [ ] `ystdtb__box__type__label-line-with-responsive-padding` — `boxStyle: "label-line"` + 余白レスポンシブ（desktop/tablet/mobile）
 
 ### ラベル設定
 
@@ -183,6 +188,8 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 ### レスポンシブ挙動
 
 - [ ] 余白レスポンシブ: desktop 32px → tablet 24px → mobile 16px の切り替え
+- [ ] 線上ラベル（label-line）+ 余白レスポンシブ: 画面幅を変えたときに上側余白（padding-top）とラベルの横位置（padding-left 連動）が tablet/mobile 値に追従する
+- [ ] 余白プリセット: `boxPadding` にプリセット値（例: `var:preset|spacing|30`）を選択したとき、フロント表示で余白が `--wp--preset--spacing--30` の値として反映される
 
 ### 検証エラー・コンソールエラー
 
