@@ -148,6 +148,8 @@ WordPress コア（`--wp--preset--color--black`）や yStandard テーマ（`--y
 
 そのため、各ブロックで **deprecated を追加して旧形式 HTML を吸収する**方針で進める。
 
+> **検討済み代替案**: SCSS 側で `var(--ystdtb--box--padding-top, var(--ystdtb-box-padding-top))` のようにフォールバックを書いて CSS 側のみで対応する案も検討したが、save.tsx を据え置いたままだと新名前は誰も書き込まないため実効性がなく、save.tsx を変更する場合は block 検証エラーを避けるために deprecated が必須となる。結論として deprecated 追加方針が不可避。
+
 #### 手順（ブロック単位）
 
 1. **現状の save 関数を deprecated としてコピー**
