@@ -20,6 +20,10 @@ class Styles {
 
 	/**
 	 * ブレークポイント
+	 * memo: WordPress 7.0のブレークポイント
+	 *   mobile: width <= 480px
+	 *   tablet: 480px < width <= 782px
+	 *   desktop: 782px < width
 	 *
 	 * @var array
 	 */
