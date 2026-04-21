@@ -9,6 +9,10 @@
 	--ystdtb--box--border-color: #666;
 	--ystdtb--box--label-icon-size: var(--ystd--icon--size, 1.25em);
 	border: 0;
+
+	:where(*) {
+		box-sizing: border-box;
+	}
 }
 
 .ystdtb-box__inner-container {
