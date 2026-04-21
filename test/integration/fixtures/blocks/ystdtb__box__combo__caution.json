@@ -1,1 +1,22 @@
-[]
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-in",
+			"customBoxBackgroundColor": "#fef2f2",
+			"customBoxBorderColor": "#dc2626",
+			"boxBorderSize": "2px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"label": "注意",
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "bold",
+			"customLabelBackgroundColor": "#dc2626",
+			"customLabelTextColor": "#ffffff",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

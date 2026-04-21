@@ -49,6 +49,7 @@ import {
 	registerFaqTestBlocks,
 	registerDescriptionListTestBlocks,
 	registerBannerLinkTestBlocks,
+	registerBoxTestBlocks,
 	registerSnsShareTestBlocks,
 } from '../helpers/register-blocks';
 
@@ -57,6 +58,7 @@ registerTimelineTestBlocks();
 registerFaqTestBlocks();
 registerDescriptionListTestBlocks();
 registerBannerLinkTestBlocks();
+registerBoxTestBlocks();
 registerSnsShareTestBlocks();
 
 /**

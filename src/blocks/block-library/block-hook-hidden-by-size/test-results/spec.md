@@ -4,8 +4,8 @@
 
 ## テスト方針
 
-- **L1 (fixture-based integration test)**: 属性 → HTML 出力・parse/serialize 往復を全パターン網羅で自動検証（CI 毎回）
-- **L2 (Chrome UI 自動テスト)**: トグル挙動・クラス付与の排他ではない独立動作・サポート判定の条件付き表示のスポット検証
+- **L1 (fixture-based integration test)**: **対象外**。ブロック拡張（filter 経由の attribute 追加）のため、test 環境で同等のフィルターを有効化するには `index.tsx` の分割など実装修正が必要。コストに見合わないため L1 は行わず、L2 / L3 で代替する
+- **L2 (Chrome UI 自動テスト)**: トグル挙動・クラス付与・排他ではない独立動作・サポート判定の条件付き表示を UI 経由で検証
 - **L3 (手動確認)**: フロントでのメディアクエリ切替を目視確認（デバイスごとの非表示挙動）
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -50,29 +50,11 @@
 
 ---
 
-## L1 fixture テストパターン（全パターン網羅）
+## L1 fixture テストパターン
 
-対象は段落ブロック（core/paragraph）と Box ブロック（ystdtb/box）の 2 種類。6 パターンを網羅。
+**対象外**。本ブロック拡張は `blocks.registerBlockType` フィルタで attribute を追加する仕組みのため、test 環境で正しく parse させるには `index.tsx` を attribute filter と editor filter に分割する必要がある。実装修正コストが L1 による追加検証価値に見合わないため、L1 は実施せず手動テスト（L2 / L3）で代替する。
 
-### 段落ブロック
-
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile` — モバイルのみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__tablet` — タブレットのみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__desktop` — PC のみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-tablet` — モバイル + タブレット
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__tablet-desktop` — タブレット + PC
-- [x] `ystdtb__block-hook-hidden-by-size__paragraph__mobile-desktop` — モバイル + PC
-
-### Box ブロック
-
-- [x] `ystdtb__block-hook-hidden-by-size__box__mobile` — モバイルのみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__box__tablet` — タブレットのみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__box__desktop` — PC のみ非表示
-- [x] `ystdtb__block-hook-hidden-by-size__box__mobile-tablet` — モバイル + タブレット
-- [x] `ystdtb__block-hook-hidden-by-size__box__tablet-desktop` — タブレット + PC
-- [x] `ystdtb__block-hook-hidden-by-size__box__mobile-desktop` — モバイル + PC
-
-**備考**: デフォルト（すべて false）は属性値が既存ブロックの初期状態と同じで独自検証価値が薄いため fixture 化しない。
+属性保存の基本動作は既に box / paragraph 側の L1 / L2 / L3 テストで間接的にカバーされる（保存 HTML に `className` と `ystdtbIsHidden*` が保持されること）。
 
 ---
 

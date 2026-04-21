@@ -1,1 +1,31 @@
-[]
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-none",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"boxPadding": {
+				"desktop": {
+					"top": "32px",
+					"right": "32px",
+					"bottom": "32px",
+					"left": "32px"
+				},
+				"mobile": {
+					"top": "16px",
+					"right": "16px",
+					"bottom": "16px",
+					"left": "16px"
+				}
+			},
+			"isResponsiveBoxPadding": false,
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

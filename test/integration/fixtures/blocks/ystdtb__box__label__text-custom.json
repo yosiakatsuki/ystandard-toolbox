@@ -1,1 +1,19 @@
-[]
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-out",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"label": "ラベル文字色カスタム",
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "bold",
+			"customLabelTextColor": "#f2f2f2",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,1 +1,17 @@
-[]
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-none",
+			"boxBorderSize": "2px",
+			"boxBorderStyle": "dashed",
+			"isResponsiveBoxPadding": false,
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

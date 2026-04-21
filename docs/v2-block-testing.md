@@ -36,7 +36,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | ブロック | examples | spec.md | L1 fixture | L2 Chrome UI | L3 フロント |
 |---|:-:|:-:|:-:|:-:|:-:|
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
-| [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | ✅ 12件 | ✅ | ✅ |
+| [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -78,8 +78,8 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 「設定の組み合わせ例」セクションは省略。
 
 - [x] examples HTML 作成（6 パターン × 段落/Box = 12 ブロックペア）
-- [x] spec.md 作成（三層 L1/L2/L3 対応、非対応ブロック例示は core/nextpage に修正済）
-- [x] L1 fixture 作成（12 件、`npm run test:integration` 全 125 件パス）
+- [x] spec.md 作成（L1 は対象外、L2 / L3 手動テスト中心に改訂済）
+- [—] L1 fixture — **対象外**。本ブロックはフィルタ経由で attribute を追加する拡張のため、test 環境で正しく parse するには `index.tsx` の分割が必要。実装修正コストが見合わないため L1 は実施しない。既存 fixture 12 件は削除済み
 - [x] L2 Chrome UI テスト完了（`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 

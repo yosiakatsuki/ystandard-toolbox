@@ -66,6 +66,11 @@ import dlColumnDeprecated from '@aktk/blocks/block-library/description-list-dl-c
 import bannerLinkMetadata from '../../../src/blocks/block-library/banner-link/block.json';
 import bannerLinkSave from '@aktk/blocks/block-library/banner-link/save';
 
+// Box.
+import boxMetadata from '../../../src/blocks/block-library/box/block.json';
+import boxSave from '@aktk/blocks/block-library/box/save';
+import { deprecated as boxDeprecated } from '@aktk/blocks/block-library/box/deprecated';
+
 // SNS Share (動的ブロック: save は null).
 import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.json';
 
@@ -140,6 +145,13 @@ export function registerDescriptionListTestBlocks() {
 export function registerBannerLinkTestBlocks() {
 	registerOnce( bannerLinkMetadata, {
 		save: bannerLinkSave,
+	} );
+}
+
+export function registerBoxTestBlocks() {
+	registerOnce( boxMetadata, {
+		save: boxSave,
+		deprecated: boxDeprecated,
 	} );
 }
 
