@@ -39,9 +39,9 @@
 
 ### 親 dl（description-list）
 
-| 設定項目 | 属性 | レスポンシブ |
-|---|---|---|
-| 外側余白 | `margin` | `responsiveMargin` |
+| 設定項目 | 属性 | レスポンシブ | 対応辺 |
+|---|---|---|---|
+| 外側余白 | `margin` | `responsiveMargin` | **上・下のみ**（左右は UI 設定不可） |
 
 ### 用語 dt（description-list-dt）
 
@@ -129,12 +129,13 @@ fixture は `test/integration/fixtures/blocks/dl/` 配下に配置。既存の `
 
 命名規則: `ystdtb__dl__{subblock}__{panel-or-setting}__{variant}`
 
-### 親 dl > 外側余白
+### 親 dl > 外側余白（上下のみ）
 
-- [ ] `ystdtb__dl__dl__margin__shorthand-all` — 4 辺同値（`margin: {top, right, bottom, left}` 同一値）
-- [ ] `ystdtb__dl__dl__margin__shorthand-4corners` — 4 辺別値
-- [ ] `ystdtb__dl__dl__margin__shorthand-2corners` — 上下・左右の 2 値パターン
-- [ ] `ystdtb__dl__dl__margin__shorthand-3corners` — 上・左右・下の 3 値パターン
+dl の margin は **上・下の 2 辺のみ** 設定可能（UI 仕様）。左右を指定した fixture は作成対象外。
+
+- [ ] `ystdtb__dl__dl__margin__top-bottom` — `margin: {top, bottom}` を同値で指定
+- [ ] `ystdtb__dl__dl__margin__top-only` — `margin: {top}` のみ
+- [ ] `ystdtb__dl__dl__margin__bottom-only` — `margin: {bottom}` のみ
 - [ ] `ystdtb__dl__dl__responsive-margin__desktop-only` — desktop のみ
 - [ ] `ystdtb__dl__dl__responsive-margin__desktop-mobile` — desktop + mobile
 - [ ] `ystdtb__dl__dl__responsive-margin__all-devices` — 全 3 デバイス
@@ -267,7 +268,6 @@ dt で shorthand 網羅・device 別網羅は担保されているため、dd-si
 ### 代表的な組み合わせパターン（examples HTML の組み合わせ例を流用）
 
 - [ ] `ystdtb__dl__combo__glossary` — 用語集（dl + dt + dd-simple × 3、太字強調）
-- [ ] `ystdtb__dl__combo__faq` — FAQ 風（dt 背景色 + dd-box padding）
 - [ ] `ystdtb__dl__combo__pricing` — 料金プラン表（dl-column + dtWidth + border × 3 行）
 - [ ] `ystdtb__dl__combo__spec-table` — スペック表（dl-column + モバイル非スタック + 細め dtWidth）
 
@@ -377,4 +377,4 @@ description-list ブロック固有の観点:
 - ブロックの仕様変更時は本仕様も更新する
 - L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/dl/` 配下（既存 `ystdtb__dl__deprecated-*` と同ディレクトリに追加）
-- 本仕様の fixture 数はおよそ 95 件（dl 7 / dt 31 / dd-simple 16 / dd-box 20 / dl-column 17 / combo 4）
+- 本仕様の fixture 数はおよそ 90 件（dl 6 / dt 31 / dd-simple 16 / dd-box 20 / dl-column 17 / combo 3）
