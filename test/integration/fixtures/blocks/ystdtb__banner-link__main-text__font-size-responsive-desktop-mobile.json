@@ -15,9 +15,11 @@
 				"mobile": "18px"
 			},
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "スマホでは18px、PCでは32pxで表示します",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

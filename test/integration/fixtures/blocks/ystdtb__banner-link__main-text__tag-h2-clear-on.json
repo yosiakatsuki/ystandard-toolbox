@@ -13,6 +13,7 @@
 			"mainTextStyleClear": true,
 			"subText": "見出しスタイル削除がデフォルトでONです",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

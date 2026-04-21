@@ -15,9 +15,11 @@
 			},
 			"mainText": "レスポンシブ最小高さ",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "スマホでは150px、PCでは300pxの高さを確保します",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

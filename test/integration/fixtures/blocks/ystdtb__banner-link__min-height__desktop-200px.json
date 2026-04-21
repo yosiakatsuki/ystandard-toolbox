@@ -14,9 +14,11 @@
 			},
 			"mainText": "最小高さ 200px",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "最低でも200pxの高さが確保されます",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

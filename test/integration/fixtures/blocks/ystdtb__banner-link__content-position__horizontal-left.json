@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "左寄せ",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "テキストを左側に寄せています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"contentPosition": {
 				"horizontal": "left"

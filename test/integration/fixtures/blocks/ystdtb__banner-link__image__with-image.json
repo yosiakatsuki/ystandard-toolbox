@@ -14,9 +14,11 @@
 			"backgroundOpacity": 0.4,
 			"mainText": "背景画像あり",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "写真の上にテキストを重ねています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

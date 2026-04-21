@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#1e293b",
 			"mainText": "白色テキスト",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "暗い背景に白い文字で読みやすくしています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

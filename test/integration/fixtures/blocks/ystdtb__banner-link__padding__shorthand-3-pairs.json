@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "3 分割余白",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "上・左右・下で 3 値指定",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"padding": {
 				"desktop": {

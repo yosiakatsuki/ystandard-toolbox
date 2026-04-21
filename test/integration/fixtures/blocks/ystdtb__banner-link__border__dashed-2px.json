@@ -15,8 +15,10 @@
 				}
 			},
 			"mainText": "破線の枠線",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "2pxの破線で囲んでいます",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

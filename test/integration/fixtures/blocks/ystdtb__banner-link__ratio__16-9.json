@@ -10,9 +10,11 @@
 			"ratio": "16-9",
 			"mainText": "16:9",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "動画のような横長ワイドの比率です",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

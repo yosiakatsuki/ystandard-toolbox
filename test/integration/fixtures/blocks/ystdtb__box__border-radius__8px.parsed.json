@@ -10,9 +10,7 @@
 				"attrs": {},
 				"innerBlocks": [],
 				"innerHTML": "\n<p>角丸 8px にしています。</p>\n",
-				"innerContent": [
-					"\n<p>角丸 8px にしています。</p>\n"
-				]
+				"innerContent": [ "\n<p>角丸 8px にしています。</p>\n" ]
 			}
 		],
 		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-right-radius:8px;border-bottom-left-radius:8px\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",

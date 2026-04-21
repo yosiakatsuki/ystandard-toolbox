@@ -14,9 +14,11 @@
 			"backgroundOpacity": 0.5,
 			"mainText": "不透明度 0.5",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "背景画像がうっすら透けて見えます",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

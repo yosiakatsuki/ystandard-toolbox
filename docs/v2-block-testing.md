@@ -37,7 +37,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 |---|:-:|:-:|:-:|:-:|:-:|
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | ✅ 12件 | ✅ | ✅ |
-| [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ❌ |
+| [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [icon-list](#icon-list--icon-list-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -89,7 +89,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] spec.md 作成（三層 L1/L2/L3 対応。BOX角丸・ラベル角丸の適用ルール表を実装準拠に更新済み）
 - [x] L1 fixture 作成（48 件、`npm run test:integration` box 分全通過）
 - [x] L2 Chrome UI テスト完了（spec.md 記述の不一致 1 件を発見 → 実装準拠に修正。`test-results/operation.md` に記録）
-- [ ] L3 フロント確認
+- [x] L3 フロント確認（ユーザー手動確認にて完了）
 
 **今日の box 改修で対応した実装修正**:
 
@@ -99,8 +99,6 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - エディタ表示: ラベル文字サイズ／アイコンサイズが反映されない不具合修正、ラベル太さボタンの角丸修正
 - CSS 詳細度を `:where()` で (0,0,1,0) に統一
 - SCSS 変数をグローバル CSS カスタムプロパティへ移行
-
-**次にやること**: L3 フロント確認（ユーザー手動確認）
 
 **次のターン以降**: description-list（+ dd-box / dd-simple / dl-column / dt）
 

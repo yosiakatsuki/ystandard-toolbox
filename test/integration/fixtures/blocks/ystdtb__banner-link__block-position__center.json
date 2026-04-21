@@ -14,9 +14,11 @@
 			},
 			"mainText": "中央",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "ブロックを中央に配置しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"blockPosition": "center"
 		},

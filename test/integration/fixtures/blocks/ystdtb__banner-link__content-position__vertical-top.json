@@ -10,9 +10,11 @@
 			"ratio": "16-9",
 			"mainText": "上寄せ",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "テキストを上側に寄せています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"contentPosition": {
 				"vertical": "top"

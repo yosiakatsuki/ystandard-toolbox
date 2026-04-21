@@ -10,9 +10,11 @@
 			"mainText": "文字間隔 0.1em",
 			"customMainTextColor": "#ffffff",
 			"mainTextLetterSpacing": "0.1em",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "文字の間隔を少し広げています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

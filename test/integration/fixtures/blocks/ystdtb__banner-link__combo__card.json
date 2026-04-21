@@ -14,8 +14,10 @@
 			},
 			"borderRadius": "8px",
 			"mainText": "詳しくはこちら",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "サービスの詳細ページへ移動します",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"padding": {
 				"desktop": {

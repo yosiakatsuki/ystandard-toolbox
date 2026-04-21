@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "レスポンシブ余白",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "スマホでは16px、PCでは40pxの余白です",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"padding": {
 				"desktop": {

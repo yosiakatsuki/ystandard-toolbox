@@ -9,6 +9,7 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "メインテキスト",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "h3タグ サブテキスト（スタイル削除ON）",
 			"customSubTextColor": "#ffffff",

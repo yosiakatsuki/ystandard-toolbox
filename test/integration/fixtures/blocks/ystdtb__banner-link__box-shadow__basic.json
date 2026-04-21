@@ -8,8 +8,10 @@
 			},
 			"customBackgroundColor": "#e2e8f0",
 			"mainText": "影あり",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "ふわっと浮き出たような見た目になります",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"boxShadow": {
 				"offsetX": "0px",

@@ -8,9 +8,11 @@
 			},
 			"customBackgroundColor": "#1e293b",
 			"mainText": "メインテキスト",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "サブテキストだけ白色に設定しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

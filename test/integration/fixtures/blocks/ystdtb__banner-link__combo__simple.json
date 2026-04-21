@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "お知らせページへ",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "最新情報をチェックする",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

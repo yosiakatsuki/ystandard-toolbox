@@ -15,8 +15,10 @@
 				}
 			},
 			"mainText": "プリセット色の枠線",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "2px solid + プリセット色",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "相対リンク",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "相対パスでリンクしています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

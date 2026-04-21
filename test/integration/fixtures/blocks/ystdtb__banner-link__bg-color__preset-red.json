@@ -9,9 +9,11 @@
 			"backgroundColor": "ys-red",
 			"mainText": "プリセット赤",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "テーマプリセットの赤色",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

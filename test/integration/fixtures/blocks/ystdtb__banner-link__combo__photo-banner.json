@@ -14,9 +14,11 @@
 			"backgroundOpacity": 0.5,
 			"mainText": "ギャラリーを見る",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "これまでの制作実績をご紹介しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

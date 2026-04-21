@@ -13,6 +13,7 @@
 			"mainTextStyleClear": false,
 			"subText": "テーマの見出しデザインがそのまま適用されます",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

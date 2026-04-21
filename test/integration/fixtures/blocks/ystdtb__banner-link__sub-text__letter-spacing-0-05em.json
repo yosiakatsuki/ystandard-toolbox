@@ -9,10 +9,12 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "メインテキスト",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "文字間隔 0.05em のサブテキストです",
 			"customSubTextColor": "#ffffff",
 			"subTextLetterSpacing": "0.05em",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

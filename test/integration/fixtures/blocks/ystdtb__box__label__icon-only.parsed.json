@@ -12,9 +12,7 @@
 				"attrs": {},
 				"innerBlocks": [],
 				"innerHTML": "\n<p>ystdtb__box__label__icon-only</p>\n",
-				"innerContent": [
-					"\n<p>ystdtb__box__label__icon-only</p>\n"
-				]
+				"innerContent": [ "\n<p>ystdtb__box__label__icon-only</p>\n" ]
 			}
 		],
 		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-out\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__label is-label-normal\"><div class=\"ystdtb-box__label-contents\"><span class=\"ystdtb-box__label-icon\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-star\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg></span></span></div></div><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",

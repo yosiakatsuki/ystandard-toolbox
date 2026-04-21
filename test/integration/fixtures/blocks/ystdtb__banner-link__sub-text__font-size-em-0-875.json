@@ -9,6 +9,7 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "メインテキスト",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "em単位のサブテキストフォントサイズ",
 			"subTextFontSize": {
@@ -17,6 +18,7 @@
 				}
 			},
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

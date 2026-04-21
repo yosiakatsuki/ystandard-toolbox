@@ -9,9 +9,11 @@
 			"customBackgroundColor": "#10b981",
 			"mainText": "カスタムカラー",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "好きな色を自由に指定できます",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

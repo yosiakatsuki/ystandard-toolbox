@@ -16,9 +16,11 @@
 			"borderRadius": "50%",
 			"mainText": "丸",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "正方形+50%で丸くなります",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"blockPosition": "center"
 		},

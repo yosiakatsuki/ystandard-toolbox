@@ -9,10 +9,12 @@
 			"customBackgroundColor": "#3b82f6",
 			"mainText": "メインテキスト",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "行の高さ 1.6 のサブテキストです<br>2行目のテキストです",
 			"customSubTextColor": "#ffffff",
 			"subTextLineHeight": 1.6,
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

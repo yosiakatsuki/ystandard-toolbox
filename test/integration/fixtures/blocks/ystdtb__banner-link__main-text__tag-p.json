@@ -13,6 +13,7 @@
 			"mainTextStyleClear": true,
 			"subText": "段落要素として出力されます",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

@@ -10,9 +10,11 @@
 			"ratio": "4-3",
 			"mainText": "4:3",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "写真でよく使われるオーソドックスな比率です",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

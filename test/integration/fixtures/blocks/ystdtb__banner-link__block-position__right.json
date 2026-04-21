@@ -14,9 +14,11 @@
 			},
 			"mainText": "右寄せ",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "ブロックを右側に配置しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true,
 			"blockPosition": "right"
 		},

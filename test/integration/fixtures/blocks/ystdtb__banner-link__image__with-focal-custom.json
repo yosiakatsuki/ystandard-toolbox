@@ -18,9 +18,11 @@
 			"backgroundOpacity": 0.4,
 			"mainText": "焦点を変更",
 			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "左上寄りに焦点を設定しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []

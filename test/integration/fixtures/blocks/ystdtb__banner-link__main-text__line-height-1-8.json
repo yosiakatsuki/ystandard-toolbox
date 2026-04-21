@@ -10,9 +10,11 @@
 			"mainText": "行の高さ 1.8<br>2行目のテキストです",
 			"customMainTextColor": "#ffffff",
 			"mainTextLineHeight": 1.8,
+			"mainTextHtml": "div",
 			"mainTextStyleClear": true,
 			"subText": "行間を広めに設定しています",
 			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
 			"subTextStyleClear": true
 		},
 		"innerBlocks": []
