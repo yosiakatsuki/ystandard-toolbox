@@ -66,7 +66,11 @@ import dlColumnDeprecated from '@aktk/blocks/block-library/description-list-dl-c
 import bannerLinkMetadata from '../../../src/blocks/block-library/banner-link/block.json';
 import bannerLinkSave from '@aktk/blocks/block-library/banner-link/save';
 
+// SNS Share (動的ブロック: save は null).
+import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.json';
+
 const NoopEdit = () => null;
+const NoopSave = () => null;
 
 function registerOnce( metadata, settings ) {
 	if ( getBlockType( metadata.name ) ) {
@@ -136,5 +140,11 @@ export function registerDescriptionListTestBlocks() {
 export function registerBannerLinkTestBlocks() {
 	registerOnce( bannerLinkMetadata, {
 		save: bannerLinkSave,
+	} );
+}
+
+export function registerSnsShareTestBlocks() {
+	registerOnce( snsShareMetadata, {
+		save: NoopSave,
 	} );
 }

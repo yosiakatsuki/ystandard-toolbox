@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/sns-share",
+		"isValid": true,
+		"attributes": {
+			"align": "center",
+			"buttonType": "circle",
+			"labelBefore": "この記事をシェア！",
+			"labelAfter": "",
+			"useX": true,
+			"useTwitter": false,
+			"useFacebook": true,
+			"useHatenaBookmark": true,
+			"useLINE": true,
+			"useBluesky": false,
+			"twitterVia": "",
+			"twitterRelatedUser": "",
+			"twitterHashTags": ""
+		},
+		"innerBlocks": []
+	}
+]

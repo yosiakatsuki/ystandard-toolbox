@@ -49,6 +49,7 @@ import {
 	registerFaqTestBlocks,
 	registerDescriptionListTestBlocks,
 	registerBannerLinkTestBlocks,
+	registerSnsShareTestBlocks,
 } from '../helpers/register-blocks';
 
 registerSliderTestBlocks();
@@ -56,6 +57,7 @@ registerTimelineTestBlocks();
 registerFaqTestBlocks();
 registerDescriptionListTestBlocks();
 registerBannerLinkTestBlocks();
+registerSnsShareTestBlocks();
 
 /**
  * fixture と比較するときに使うプロパティだけを取り出す
