@@ -44,7 +44,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| [sns-share](#sns-share) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
 | [timeline](#timeline--timeline-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 凡例: ✅ 完了 / 🔄 進行中 / ⚠️ 要対応 / ❌ 未着手
@@ -174,13 +174,11 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 ### sns-share
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
-
-**次にやること**: examples HTML 作成
+- [x] examples HTML 作成
+- [x] spec.md 作成（三層 L1/L2/L3 対応）
+- [x] L1 fixture 作成（23 件、`npm run test:integration` 全通過）
+- [x] L2 Chrome UI テスト完了（24 項目すべて OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### timeline（+ timeline-item）
 
