@@ -15,6 +15,10 @@
 	--ystdtb--sns-share--button-color--line: #00c300;
 	--ystdtb--sns-share--button-size: 40px;
 
+	&,
+	:where(*) {
+		box-sizing: border-box;
+	}
 
 	&:where(.has-align-center) {
 		text-align: center;
