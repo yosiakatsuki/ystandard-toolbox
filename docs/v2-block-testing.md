@@ -38,7 +38,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
-| [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ❌ | ❌ |
+| [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
 | [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [icon-list](#icon-list--icon-list-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -109,10 +109,10 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（「FAQ 風」例削除・親 dl の margin を上下限定仕様に合わせて修正済み）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、約 95 件 → 修正後 90 件）
 - [x] L1 fixture 作成（93 件、`npm run test:integration` 全 277 件パス）
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
+- [x] L2 Chrome UI テスト完了（全 6 サブセクション OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認（ユーザー手動確認にて完了）
 
-**次にやること**: L2 Chrome UI テスト
+**L2 で発見した注意点（P-001）**: backgroundColor と gradient は UI 片方向排他のみ。gradient → bg で bg クリア、bg 設定中に gradient を追加するルートでは gradient 残存。詳細は operation.md 参照
 
 ### faq（+ faq-item）
 
