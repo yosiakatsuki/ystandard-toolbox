@@ -17,8 +17,8 @@
 | パネル | 主な設定項目 |
 |---|---|
 | タイプ | ボックススタイル 5 択（label-none / label-out / label-in / label-wide / label-line） |
-| ボックス設定 | 背景色 / 文字色 / 枠線色 / 枠線サイズ / 枠線スタイル / 角丸 / 余白（レスポンシブ） |
-| ラベル設定 | ラベルテキスト / アイコン / 文字サイズ / フォントウェイト / 背景色 / 文字色 / 角丸 |
+| ボックス設定 | BOX背景色 / BOX文字色 / BOX枠線色 / BOX枠線サイズ / BOX枠線スタイル / BOX角丸 / BOX余白（レスポンシブ） |
+| ラベル設定 | ラベルテキスト / ラベルアイコン / ラベル文字サイズ / ラベルフォントウェイト / ラベル背景色 / ラベル文字色 / ラベル角丸 |
 | 背景画像 | 画像選択 / オーバーレイ不透明度 / 繰り返し |
 
 ## 排他関係・条件付き表示
@@ -31,13 +31,26 @@
 | `boxBorderColor` あり or `customBoxBorderColor` あり | `has-border` + `has-border-color` クラスが付き、`show-default-border` が外れる |
 | `boxBackgroundColor` / `customBoxBackgroundColor` なし かつ 枠線色なし | `show-default-border` が付与（デフォルトの薄い枠線を表示） |
 
-## 角丸・ラベル角丸の適用ルール（save.tsx の function.ts）
+## BOX角丸・ラベル角丸の適用ルール（save.tsx / function.ts）
 
-| boxStyle | 角丸の適用位置 |
+**BOX角丸（`boxBorderRadius` → `.ystdtb-box__inner-container` に適用）**
+
+| boxStyle | BOX角丸の適用位置 |
 |---|---|
 | label-none（hasLabel false） | 4 隅すべてに `boxBorderRadius` |
-| label-out / label-wide | bottom-left / bottom-right のみに `boxBorderRadius`（top はラベル側） |
-| label-in / label-line | 4 隅すべてに `boxBorderRadius`（ラベルは内側） |
+| label-out | top-left のみ `undefined`。残り 3 隅（top-right / bottom-right / bottom-left）に `boxBorderRadius`（ラベルが左上にはみ出すため top-left を角張らせる） |
+| label-wide | top-left / top-right ともに `undefined`。bottom-left / bottom-right のみに `boxBorderRadius`（全幅ラベルで上端を覆うため） |
+| label-in | 4 隅すべてに `boxBorderRadius`（ラベルは内側） |
+| label-line | 4 隅すべてに `boxBorderRadius`（ラベルは枠線上に重ねる） |
+
+**ラベル角丸（`labelBorderRadius` → `.ystdtb-box__label` に適用）**
+
+| boxStyle | ラベル角丸の適用位置 |
+|---|---|
+| label-out / label-wide | top-left / top-right のみ（ラベル上端をボックスからはみ出させるため） |
+| label-line | top-left / top-right / bottom-left / bottom-right 全 4 隅 |
+| label-in | bottom-right のみ |
+| label-none | ラベル非表示のため実質無効 |
 
 ---
 
@@ -53,16 +66,16 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 - [ ] `ystdtb__box__type__label-wide`
 - [ ] `ystdtb__box__type__label-line`
 
-### ボックス設定 > 背景色
+### ボックス設定 > BOX背景色
 
 - [ ] `ystdtb__box__bg__preset` — `boxBackgroundColor: "ys-blue"`
 - [ ] `ystdtb__box__bg__custom` — `customBoxBackgroundColor: "#fef08a"`
 
-### ボックス設定 > 文字色
+### ボックス設定 > BOX文字色
 
 - [ ] `ystdtb__box__text__custom` — `customBoxTextColor: "#0284c7"`
 
-### ボックス設定 > 枠線
+### ボックス設定 > BOX枠線
 
 - [ ] `ystdtb__box__border__color-preset`
 - [ ] `ystdtb__box__border__color-custom`
@@ -74,14 +87,14 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 - [ ] `ystdtb__box__border__style-dashed`
 - [ ] `ystdtb__box__border__style-double`
 
-### ボックス設定 > 角丸
+### ボックス設定 > BOX角丸
 
 - [ ] `ystdtb__box__border-radius__8px`
 - [ ] `ystdtb__box__border-radius__16px`
 - [ ] `ystdtb__box__border-radius__50percent`
 - [ ] `ystdtb__box__border-radius__1em`
 
-### ボックス設定 > 余白（ショートハンド網羅）
+### ボックス設定 > BOX余白（ショートハンド網羅）
 
 - [ ] `ystdtb__box__padding__all-16` — 4 辺同値
 - [ ] `ystdtb__box__padding__4corners` — 4 辺別値
@@ -91,7 +104,7 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ### タイプ別組み合わせ
 
-- [ ] `ystdtb__box__type__label-line-with-responsive-padding` — `boxStyle: "label-line"` + 余白レスポンシブ（desktop/tablet/mobile）
+- [ ] `ystdtb__box__type__label-line-with-responsive-padding` — `boxStyle: "label-line"` + BOX余白レスポンシブ（desktop/tablet/mobile）
 
 ### ラベル設定
 
@@ -120,7 +133,7 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 - [ ] `ystdtb__box__combo__guide` — 解説ボックス（label-out + 淡色背景）
 - [ ] `ystdtb__box__combo__caution` — 注意喚起（label-in + 赤系 + 太字）
-- [ ] `ystdtb__box__combo__hint` — ヒント（label-none + 枠線 + 角丸）
+- [ ] `ystdtb__box__combo__hint` — ヒント（label-none + BOX枠線 + BOX角丸）
 - [ ] `ystdtb__box__combo__promo` — プロモ（背景画像 + オーバーレイ）
 
 ---
@@ -142,25 +155,27 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ### 色パレット
 
-- [ ] ボックス背景色プリセット → `has-{slug}-background-color` + `has-background`
-- [ ] ボックス背景色カスタム → inline `background-color:#xxx` + `has-background`
+- [ ] BOX背景色プリセット → `has-{slug}-background-color` + `has-background`
+- [ ] BOX背景色カスタム → inline `background-color:#xxx` + `has-background`
 - [ ] ラベル背景色プリセット / カスタム（同様）
-- [ ] 文字色プリセット → `has-{slug}-color` + `has-text-color`
-- [ ] 枠線色プリセット → `has-{slug}-border-color`（`has-border` も付与）
+- [ ] BOX文字色プリセット → `has-{slug}-color` + `has-text-color`
+- [ ] BOX枠線色プリセット → `has-{slug}-border-color`（`has-border` も付与）
 
-### 枠線
+### BOX枠線
 
-- [ ] 枠線スタイル 4 択（solid / dotted / dashed / double）全てで `border-style` が変化
-- [ ] 枠線サイズ UnitControl で px 入力 → `--ystdtb-box-border-width` + `data-ys-ie-styles` 反映
-- [ ] 枠線色クリア → `show-default-border` 付与（背景色もない前提）
+- [ ] BOX枠線スタイル 4 択（solid / dotted / dashed / double）全てで `border-style` が変化
+- [ ] BOX枠線サイズ UnitControl で px 入力 → `--ystdtb-box-border-width` + `data-ys-ie-styles` 反映
+- [ ] BOX枠線色クリア → `show-default-border` 付与（BOX背景色もない前提）
 
-### 角丸
+### BOX角丸
 
-- [ ] UnitControl で px / em / % の 3 単位で値入力 → `border-top-left-radius` 等 4 方向に同値で出力
-- [ ] label-out 時、top-left / top-right は `undefined`（ラベルで上側が覆われるため）
-- [ ] label-in 時、4 隅すべてに値が入る
+- [ ] UnitControl で px / em / % の 3 単位で BOX角丸を入力 → `border-top-left-radius` 等 4 方向に同値で出力
+- [ ] label-out 時、BOX角丸の top-left のみ `undefined`（ラベルが左上に飛び出すため）
+- [ ] label-wide 時、BOX角丸の top-left / top-right ともに `undefined`（全幅ラベルで上側を覆うため）
+- [ ] label-in 時、BOX角丸が 4 隅すべてに入る
+- [ ] label-line 時、BOX角丸が 4 隅すべてに入る
 
-### 余白（レスポンシブ）
+### BOX余白（レスポンシブ）
 
 - [ ] 標準タブで 4 辺一括入力 → desktop のみ CSS 変数化
 - [ ] 標準タブで 4 辺別入力 → 4 方向個別 CSS 変数
@@ -182,14 +197,14 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 - [ ] examples HTML をエディターに貼り付け → 保存 → フロントで全パターンの見た目を目視確認
 - [ ] 代表的な組み合わせ（解説 / 注意喚起 / ヒント / プロモ）の最終見た目
 - [ ] ラベル位置（label-out / label-in / label-wide / label-line）の視覚差
-- [ ] 角丸時、ラベル部との繋ぎ目に不自然な隙間がないか
+- [ ] BOX角丸／ラベル角丸を設定したとき、ラベル部との繋ぎ目に不自然な隙間がないか
 - [ ] 背景画像 + オーバーレイの重ね順が正しいか
 
 ### レスポンシブ挙動
 
-- [ ] 余白レスポンシブ: desktop 32px → tablet 24px → mobile 16px の切り替え
-- [ ] 線上ラベル（label-line）+ 余白レスポンシブ: 画面幅を変えたときに上側余白（padding-top）とラベルの横位置（padding-left 連動）が tablet/mobile 値に追従する
-- [ ] 余白プリセット: `boxPadding` にプリセット値（例: `var:preset|spacing|30`）を選択したとき、フロント表示で余白が `--wp--preset--spacing--30` の値として反映される
+- [ ] BOX余白レスポンシブ: desktop 32px → tablet 24px → mobile 16px の切り替え
+- [ ] 線上ラベル（label-line）+ BOX余白レスポンシブ: 画面幅を変えたときに上側余白（padding-top）とラベルの横位置（BOX余白 padding-left 連動）が tablet/mobile 値に追従する
+- [ ] BOX余白プリセット: `boxPadding` にプリセット値（例: `var:preset|spacing|30`）を選択したとき、フロント表示で余白が `--wp--preset--spacing--30` の値として反映される
 
 ### 検証エラー・コンソールエラー
 
@@ -210,10 +225,10 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 ボックスブロック固有の観点:
 
 - **ラベル空 + アイコン空 + label-out**: 空のラベルコンテナが表示されるか / 非表示か
-- **背景色なし + 枠線色なし**: `show-default-border` でデフォルトの薄い枠線が表示される
+- **BOX背景色なし + BOX枠線色なし**: `show-default-border` でデフォルトの薄い枠線が表示される
 - **label-none に切り替えても label / labelIcon 属性が残る**: 属性はクリアされず、他スタイルに戻すと復活
 - **boxBorderSize = "0"**: 枠線消滅、ただし `data-ys-ie-styles` には `border-width:"0"` が残る
-- **角丸 + label-out**: top-left / top-right の角丸がラベル側に適用される（function.ts の getLabelBorderRadius 準拠）
+- **ラベル角丸 + label-out / label-wide / label-line**: ラベル上側（top-left / top-right）に角丸が入る（function.ts の getLabelBorderRadius 準拠）
 
 ## 補足
 
