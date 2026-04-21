@@ -1,0 +1,84 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"fontWeight": "bold"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">WordPress</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">WordPress</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">ブログや Web サイトを作るためのオープンソース CMS です。</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">ブログや Web サイトを作るためのオープンソース CMS です。</dd>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"fontWeight": "bold"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">Gutenberg</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">Gutenberg</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">WordPress のブロックエディターの名前です。</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">WordPress のブロックエディターの名前です。</dd>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"fontWeight": "bold"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">yStandard</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt\" style=\"font-weight:bold\">yStandard</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">シンプルで使いやすさを追求した無料 WordPress テーマです。</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">シンプルで使いやすさを追求した無料 WordPress テーマです。</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">\n\n\n\n\n\n\n\n\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

@@ -1,0 +1,23 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "用語",
+					"padding": {
+						"top": "12px",
+						"right": "20px",
+						"bottom": "12px",
+						"left": "20px"
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

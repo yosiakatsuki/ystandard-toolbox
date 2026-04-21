@@ -1,0 +1,25 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"customGradient": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-background has-background-gradient\" style=\"background:linear-gradient(135deg,#f6d365 0%,#fda085 100%)\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-background has-background-gradient\" style=\"background:linear-gradient(135deg,#f6d365 0%,#fda085 100%)\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"</dl>\n"
+		]
+	}
+]

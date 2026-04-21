@@ -1,0 +1,25 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"textSize": "large"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"</dl>\n"
+		]
+	}
+]

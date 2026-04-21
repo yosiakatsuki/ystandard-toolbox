@@ -1,0 +1,20 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "用語",
+					"responsiveTextSize": {
+						"desktop": "24px"
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

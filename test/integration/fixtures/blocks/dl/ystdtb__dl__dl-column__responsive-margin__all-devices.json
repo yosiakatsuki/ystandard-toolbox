@@ -1,0 +1,44 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": false,
+					"isStackedOnTablet": false,
+					"responsiveMargin": {
+						"desktop": {
+							"bottom": "16px"
+						},
+						"tablet": {
+							"bottom": "12px"
+						},
+						"mobile": {
+							"bottom": "8px"
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "用語"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

@@ -1,0 +1,58 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-column",
+				"attrs": {
+					"isStackedOnTablet": true
+				},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/description-list-dt",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<dt class=\"ystdtb-dt\">用語</dt>\n",
+						"innerContent": [
+							"\n<dt class=\"ystdtb-dt\">用語</dt>\n"
+						]
+					},
+					{
+						"blockName": "ystdtb/description-list-dd-box",
+						"attrs": {},
+						"innerBlocks": [
+							{
+								"blockName": "core/paragraph",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<p>説明文</p>\n",
+								"innerContent": [ "\n<p>説明文</p>\n" ]
+							}
+						],
+						"innerHTML": "\n<dd class=\"ystdtb-dd-box\"></dd>\n",
+						"innerContent": [
+							"\n<dd class=\"ystdtb-dd-box\">",
+							null,
+							"</dd>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-dl-column is-stacked-on-mobile is-stacked-on-tablet\">\n\n</div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-dl-column is-stacked-on-mobile is-stacked-on-tablet\">",
+					null,
+					"\n\n",
+					null,
+					"</div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"</dl>\n"
+		]
+	}
+]

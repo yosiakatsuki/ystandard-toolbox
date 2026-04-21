@@ -1,0 +1,33 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": true,
+					"isStackedOnTablet": true
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "用語"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

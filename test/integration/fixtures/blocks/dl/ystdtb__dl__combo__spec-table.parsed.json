@@ -1,0 +1,157 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-column",
+				"attrs": {
+					"isStackedOnMobile": false,
+					"dtWidth": "120px"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/description-list-dt",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<dt class=\"ystdtb-dt\">サイズ</dt>\n",
+						"innerContent": [
+							"\n<dt class=\"ystdtb-dt\">サイズ</dt>\n"
+						]
+					},
+					{
+						"blockName": "ystdtb/description-list-dd-box",
+						"attrs": {},
+						"innerBlocks": [
+							{
+								"blockName": "core/paragraph",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<p>W120 × D60 × H180 mm</p>\n",
+								"innerContent": [
+									"\n<p>W120 × D60 × H180 mm</p>\n"
+								]
+							}
+						],
+						"innerHTML": "\n<dd class=\"ystdtb-dd-box\"></dd>\n",
+						"innerContent": [
+							"\n<dd class=\"ystdtb-dd-box\">",
+							null,
+							"</dd>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">\n\n</div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">",
+					null,
+					"\n\n",
+					null,
+					"</div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-column",
+				"attrs": {
+					"isStackedOnMobile": false,
+					"dtWidth": "120px"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/description-list-dt",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<dt class=\"ystdtb-dt\">重量</dt>\n",
+						"innerContent": [
+							"\n<dt class=\"ystdtb-dt\">重量</dt>\n"
+						]
+					},
+					{
+						"blockName": "ystdtb/description-list-dd-box",
+						"attrs": {},
+						"innerBlocks": [
+							{
+								"blockName": "core/paragraph",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<p>約 520 g</p>\n",
+								"innerContent": [ "\n<p>約 520 g</p>\n" ]
+							}
+						],
+						"innerHTML": "\n<dd class=\"ystdtb-dd-box\"></dd>\n",
+						"innerContent": [
+							"\n<dd class=\"ystdtb-dd-box\">",
+							null,
+							"</dd>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">\n\n</div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">",
+					null,
+					"\n\n",
+					null,
+					"</div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-column",
+				"attrs": {
+					"isStackedOnMobile": false,
+					"dtWidth": "120px"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/description-list-dt",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<dt class=\"ystdtb-dt\">材質</dt>\n",
+						"innerContent": [
+							"\n<dt class=\"ystdtb-dt\">材質</dt>\n"
+						]
+					},
+					{
+						"blockName": "ystdtb/description-list-dd-box",
+						"attrs": {},
+						"innerBlocks": [
+							{
+								"blockName": "core/paragraph",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<p>アルミニウム合金、ポリカーボネート</p>\n",
+								"innerContent": [
+									"\n<p>アルミニウム合金、ポリカーボネート</p>\n"
+								]
+							}
+						],
+						"innerHTML": "\n<dd class=\"ystdtb-dd-box\"></dd>\n",
+						"innerContent": [
+							"\n<dd class=\"ystdtb-dd-box\">",
+							null,
+							"</dd>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">\n\n</div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-dl-column\" style=\"--ystdtb--dl-column--width:120px\">",
+					null,
+					"\n\n",
+					null,
+					"</div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">\n\n\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

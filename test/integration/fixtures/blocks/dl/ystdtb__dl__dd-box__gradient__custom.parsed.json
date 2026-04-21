@@ -1,0 +1,35 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"customGradient": "linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-background has-background-gradient\" style=\"background:linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-background has-background-gradient\" style=\"background:linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"</dl>\n"
+		]
+	}
+]

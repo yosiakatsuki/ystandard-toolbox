@@ -38,7 +38,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
-| [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ❌ | ❌ |
 | [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [icon-list](#icon-list--icon-list-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -106,13 +106,13 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 親ブロック側に 1 ファイルで集約。子ブロックの設定も含めて網羅。
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
+- [x] examples HTML 作成（「FAQ 風」例削除・親 dl の margin を上下限定仕様に合わせて修正済み）
+- [x] spec.md 作成（三層 L1/L2/L3 対応、約 95 件 → 修正後 90 件）
+- [x] L1 fixture 作成（93 件、`npm run test:integration` 全 277 件パス）
 - [ ] L2 Chrome UI テスト
 - [ ] L3 フロント確認
 
-**次にやること**: examples HTML 作成
+**次にやること**: L2 Chrome UI テスト
 
 ### faq（+ faq-item）
 

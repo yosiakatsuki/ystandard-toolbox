@@ -1,0 +1,105 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": true,
+					"isStackedOnTablet": false,
+					"dtWidth": "160px",
+					"border": {
+						"width": "1px",
+						"style": "solid",
+						"color": "#dddddd"
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "フリー",
+							"backgroundColor": "ys-light-gray",
+							"fontWeight": "bold"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": true,
+					"isStackedOnTablet": false,
+					"dtWidth": "160px",
+					"border": {
+						"width": "1px",
+						"style": "solid",
+						"color": "#dddddd"
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "スタンダード",
+							"backgroundColor": "ys-light-gray",
+							"fontWeight": "bold"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": true,
+					"isStackedOnTablet": false,
+					"dtWidth": "160px",
+					"border": {
+						"width": "1px",
+						"style": "solid",
+						"color": "#dddddd"
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "プロ",
+							"backgroundColor": "ys-light-gray",
+							"fontWeight": "bold"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

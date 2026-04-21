@@ -1,0 +1,43 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {
+			"responsiveMargin": {
+				"desktop": {
+					"top": "40px",
+					"bottom": "40px"
+				},
+				"mobile": {
+					"top": "16px",
+					"bottom": "16px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\">用語</dt>\n",
+				"innerContent": [ "\n<dt class=\"ystdtb-dt\">用語</dt>\n" ]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">説明文</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">説明文</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px;--ystdtb--mobile--dl--margin-top:16px;--ystdtb--mobile--dl--margin-bottom:16px\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px;--ystdtb--mobile--dl--margin-top:16px;--ystdtb--mobile--dl--margin-bottom:16px\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

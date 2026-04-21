@@ -1,0 +1,30 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"margin": {
+						"top": "8px",
+						"right": "12px",
+						"bottom": "8px",
+						"left": "12px"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-margin\" style=\"margin-top:8px;margin-right:12px;margin-bottom:8px;margin-left:12px\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-margin\" style=\"margin-top:8px;margin-right:12px;margin-bottom:8px;margin-left:12px\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
+		"innerContent": [
+			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
+			null,
+			"</dl>\n"
+		]
+	}
+]
