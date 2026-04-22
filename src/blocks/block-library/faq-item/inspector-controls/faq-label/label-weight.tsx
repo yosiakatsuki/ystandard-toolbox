@@ -22,7 +22,7 @@ export function LabelWeight( props ): JSX.Element {
 	return (
 		<BaseControl
 			id="faq-item-label-weight"
-			label={ __( 'FAQラベル表示位置', 'ystandard-toolbox' ) }
+			label={ __( 'FAQラベルを太字にする', 'ystandard-toolbox' ) }
 		>
 			<ToggleControl
 				label={ __( '太字にする', 'ystandard-toolbox' ) }
