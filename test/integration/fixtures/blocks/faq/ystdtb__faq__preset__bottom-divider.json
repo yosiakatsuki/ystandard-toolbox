@@ -16,7 +16,9 @@
 					"faqBorderSize": "1px",
 					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"labelBorderSize": "0px",
+					"labelBorderRadius": "0px"
 				},
 				"innerBlocks": []
 			},
@@ -29,7 +31,9 @@
 					"faqBorderSize": "1px",
 					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"labelBorderSize": "0px",
+					"labelBorderRadius": "0px"
 				},
 				"innerBlocks": []
 			}
