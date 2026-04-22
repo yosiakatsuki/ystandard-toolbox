@@ -1,0 +1,43 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"customLabelColor": "#222222",
+					"customLabelBackgroundColor": "#f1f1f3",
+					"labelBorderRadius": "50px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-padding\" style=\"color:#222222;background-color:#f1f1f3;border-radius:50px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-padding\" style=\"color:#222222;background-color:#f1f1f3;border-radius:50px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"customLabelColor": "#222222",
+					"customLabelBackgroundColor": "#f1f1f3",
+					"labelBorderRadius": "50px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-padding\" style=\"color:#222222;background-color:#f1f1f3;border-radius:50px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-padding\" style=\"color:#222222;background-color:#f1f1f3;border-radius:50px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

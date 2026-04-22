@@ -39,7 +39,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
-| [faq](#faq--faq-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ❌ | ❌ |
 | [icon-list](#icon-list--icon-list-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
@@ -118,13 +118,13 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 親ブロック側に 1 ファイルで集約。
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
+- [x] examples HTML 作成（設定の組み合わせ例 5 + 設定一覧 全網羅 + デザインプリセット 6 種）
+- [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 数約 42 件）
+- [x] L1 fixture 作成（42 件、`npm run test:integration` 全 319 件パス）
 - [ ] L2 Chrome UI テスト
 - [ ] L3 フロント確認
 
-**次にやること**: examples HTML 作成
+**次にやること**: L2 Chrome UI テスト
 
 ### icon-list（+ icon-list-item）
 
