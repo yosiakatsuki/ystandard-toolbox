@@ -12,6 +12,7 @@ import {
 	CustomSelectControl,
 	type CustomSelectControlOption,
 } from '@aktk/block-components/components/custom-select-control';
+import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 
 /**
  * Block dependencies.
@@ -27,6 +28,7 @@ export function ContentsBorder( props ): JSX.Element {
 		props;
 	const { faqBorderType, faqBorderSize } = attributes;
 
+	// 区切り線タイプ変更時の処理.
 	const handleOnBorderTypeChange = ( value: string ) => {
 		if ( ! value ) {
 			setAttributes( { faqBorderType: value, faqBorderSize: undefined } );
@@ -37,8 +39,9 @@ export function ContentsBorder( props ): JSX.Element {
 		}
 	};
 
+	// 区切り線サイズ変更時の処理.
 	const handleOnBorderSizeChange = ( value: string ) => {
-		setAttributes( { faqBorderSize: value || undefined } );
+		setAttributes( { faqBorderSize: normalizeSizeValue( value ) } );
 	};
 
 	return (
@@ -58,11 +61,12 @@ export function ContentsBorder( props ): JSX.Element {
 				<>
 					<BaseControl
 						id="faq-item-contents-border-size"
-						label={ __( 'ラベル枠線サイズ', 'ystandard-toolbox' ) }
+						label={ __( 'FAQ枠線サイズ', 'ystandard-toolbox' ) }
 					>
 						<UnitControl
 							value={ faqBorderSize }
 							onChange={ handleOnBorderSizeChange }
+							min={0}
 						/>
 					</BaseControl>
 					<BaseControl
