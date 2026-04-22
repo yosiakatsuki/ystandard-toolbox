@@ -61,7 +61,7 @@ export function ContentsBorder( props ): JSX.Element {
 				<>
 					<BaseControl
 						id="faq-item-contents-border-size"
-						label={ __( 'FAQ枠線サイズ', 'ystandard-toolbox' ) }
+						label={ __( '区切り線サイズ', 'ystandard-toolbox' ) }
 					>
 						<UnitControl
 							value={ faqBorderSize }
