@@ -17,8 +17,8 @@
 					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
 					"labelBold": true,
-					"labelBorderSize": "0px",
-					"labelBorderRadius": "0px"
+					"labelBorderSize": "0",
+					"labelBorderRadius": "0"
 				},
 				"innerBlocks": []
 			},
@@ -32,8 +32,8 @@
 					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
 					"labelBold": true,
-					"labelBorderSize": "0px",
-					"labelBorderRadius": "0px"
+					"labelBorderSize": "0",
+					"labelBorderRadius": "0"
 				},
 				"innerBlocks": []
 			}

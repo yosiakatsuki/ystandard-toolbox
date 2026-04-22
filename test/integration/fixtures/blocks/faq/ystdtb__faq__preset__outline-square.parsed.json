@@ -6,36 +6,36 @@
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"faqBorderSize": "0px",
+					"faqBorderSize": "0",
 					"customLabelColor": "#666666",
 					"customLabelBackgroundColor": "#ffffff",
 					"labelBorderSize": "2px",
-					"labelBorderRadius": "0px",
+					"labelBorderRadius": "0",
 					"customLabelBorderColor": "#666666",
 					"customAccordionArrowColor": "#666666"
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-width:0px\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:#666666\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-width:0\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:#666666\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-width:0px\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:#666666\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-width:0\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:#666666\"></div></div>\n"
 				]
 			},
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"faqBorderSize": "0px",
+					"faqBorderSize": "0",
 					"customLabelColor": "#666666",
 					"customLabelBackgroundColor": "#ffffff",
 					"labelBorderSize": "2px",
-					"labelBorderRadius": "0px",
+					"labelBorderRadius": "0",
 					"customLabelBorderColor": "#666666",
 					"customAccordionArrowColor": "#666666"
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-width:0px\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-width:0\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-width:0px\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-width:0\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"color:#666666;background-color:#ffffff;border-color:#666666;border-width:2px;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
 				]
 			}
 		],

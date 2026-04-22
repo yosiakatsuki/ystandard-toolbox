@@ -13,7 +13,7 @@
 				"attributes": {
 					"faqType": "q",
 					"faqBorderType": "",
-					"faqBorderSize": "0px",
+					"faqBorderSize": "0",
 					"labelPosition": "center",
 					"customLabelColor": "#666666",
 					"labelBold": true,
@@ -31,7 +31,7 @@
 				"attributes": {
 					"faqType": "a",
 					"faqBorderType": "",
-					"faqBorderSize": "0px",
+					"faqBorderSize": "0",
 					"labelPosition": "center",
 					"customLabelColor": "#666666",
 					"labelBold": true,
