@@ -26,7 +26,7 @@
 
 .ystdtb-faq-item__label {
 	margin: 0;
-	font-size: 1.5em;
+	font-size: var(--ystdtb--faq-item--label--font-size);
 	font-weight: 700;
 	line-height: 1;
 	text-transform: uppercase;
@@ -37,26 +37,23 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2em;
-		height: 2em;
-		min-width: 2em;
-		min-height: 2em;
+		width: var(--ystdtb--faq-item--label--size);
+		height: var(--ystdtb--faq-item--label--size);
+		min-width: var(--ystdtb--faq-item--label--size);
+		min-height: var(--ystdtb--faq-item--label--size);
 	}
 }
 
 .ystdtb-faq-item__contents {
-	margin: 0 0 0 1.5em;
+	margin: 0 0 0 var(--ystdtb--faq-item--gap);
 	flex-grow: 1;
 
 	> :where(*) {
-		margin-top: 1em;
+		margin-top: var(--ystdtb--faq-item--contents-gap);
+		margin-bottom: 0;
 
 		&:where(:first-child) {
 			margin-top: 0;
-		}
-
-		&:where(:last-child) {
-			margin-bottom: 0;
 		}
 	}
 }

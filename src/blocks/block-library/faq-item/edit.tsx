@@ -26,6 +26,8 @@ import { InspectorControls } from './inspector-controls';
 import type { FaqItemEditProps } from './types';
 import { compose } from '@wordpress/compose';
 
+import './style-editor.scss';
+
 /**
  * FAQアイテムの初期テンプレート
  */
