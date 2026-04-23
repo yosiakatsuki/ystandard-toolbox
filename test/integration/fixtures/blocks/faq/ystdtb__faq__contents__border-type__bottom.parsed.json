@@ -11,9 +11,9 @@
 					"faqBorderColor": "ys-black"
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q has-border-bottom has-border has-ys-black-border-color\" style=\"border-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q has-border-bottom has-border has-ys-black-border-color\" style=\"border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--q has-border-bottom has-border has-ys-black-border-color\" style=\"border-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--q has-border-bottom has-border has-ys-black-border-color\" style=\"border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
 				]
 			},
 			{
@@ -25,9 +25,9 @@
 					"faqBorderColor": "ys-black"
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-border-bottom has-border has-ys-black-border-color\" style=\"border-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-border-bottom has-border has-ys-black-border-color\" style=\"border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--a has-border-bottom has-border has-ys-black-border-color\" style=\"border-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--a has-border-bottom has-border has-ys-black-border-color\" style=\"border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
 				]
 			}
 		],

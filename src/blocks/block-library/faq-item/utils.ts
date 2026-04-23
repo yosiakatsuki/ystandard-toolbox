@@ -71,21 +71,25 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 	const {
 		faqBackgroundColor,
 		customFaqBackgroundColor,
+		faqBorderType,
 		faqBorderColor,
 		customFaqBorderColor,
 		faqBorderSize,
 		labelPosition,
 	} = attributes;
 
+	const isBottomBorder = 'bottom' === faqBorderType;
+
 	return {
 		backgroundColor: faqBackgroundColor
 			? undefined
 			: customFaqBackgroundColor,
-		borderColor:
-			! faqBorderSize || faqBorderColor
+		borderBottomColor:
+			! isBottomBorder || ! faqBorderSize || faqBorderColor
 				? undefined
 				: customFaqBorderColor,
-		borderWidth: ! faqBorderSize ? undefined : faqBorderSize,
+		borderBottomWidth:
+			! isBottomBorder || ! faqBorderSize ? undefined : faqBorderSize,
 		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 }

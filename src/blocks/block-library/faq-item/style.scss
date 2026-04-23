@@ -18,6 +18,10 @@
 		--ystdtb--faq-item--padding-vertical: 1.5em;
 		--ystdtb--faq-item--padding-horizon: 1.5em;
 	}
+
+	&:where(.has-border-bottom) {
+		border-bottom-style: solid;
+	}
 }
 
 .ystdtb-faq-item__label {
