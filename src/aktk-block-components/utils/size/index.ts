@@ -18,3 +18,21 @@ export const normalizeSizeValue = (
 	const strValue = String( value );
 	return parseFloat( strValue ) === 0 ? '0' : strValue;
 };
+
+/**
+ * サイズ値が border として CSS 上に表示される太さを持つかを判定する。
+ *
+ * - 空値（undefined / null / 空文字列 / 数値の 0）→ false
+ * - 数値部分が 0（'0' / '0px' / '0em' 等）→ false（枠線として描画されない）
+ * - 0 でない数値（'1px' / '0.5em' / 数値の 10 等、正負問わず）→ true
+ * - 数値化できない文字列（'auto' / 'calc(...)' 等）→ true（計算結果は呼び出し側で判断）
+ *
+ * @param value - 判定対象の値
+ * @return border として描画されうるかどうか
+ */
+export const hasBorderWidth = (
+	value: string | number | null | undefined
+): boolean => {
+	if ( ! value ) return false;
+	return parseFloat( String( value ) ) !== 0;
+};
