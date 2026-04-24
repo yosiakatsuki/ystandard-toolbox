@@ -39,7 +39,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
-| [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ❌ | ❌ |
+| [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
 | [icon-list](#icon-list--icon-list-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
@@ -121,10 +121,28 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（設定の組み合わせ例 5 + 設定一覧 全網羅 + デザインプリセット 6 種）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 数約 42 件）
 - [x] L1 fixture 作成（42 件、`npm run test:integration` 全 319 件パス）
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
+- [x] L2 Chrome UI テスト完了（3 セッション：親 FAQ / 子 faq-item / 修正後再検証。`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認完了（ユーザー手動確認にて完了）
 
-**次にやること**: L2 Chrome UI テスト
+**L2 で発見した問題と対応**:
+- **P001**: `LabelSize` / `LabelWeight` の BaseControl label が「FAQラベル表示位置」で重複 → 「FAQラベル文字サイズ」「FAQラベルを太字にする」に修正
+- **P002**: デザインプリセット適用時、色 hex 値が slug 側 attribute（`labelColor` 等）に入っていた → `customLabelColor` 等の custom 側 attribute へ移動
+- **P003**: デザインプリセット適用時、サイズ系が number 型（`1`, `50` 等）で保存 → string 型（`'0'`, `'1px'`, `'50px'` 等）に統一。`0` は単位なし `'0'` で保存
+- **P004**: プリセットの `accordionArrowColor` が親 FAQ に同期されない → Q/A で個別にデザイン選択できる仕様として割り切り、子のみ `customAccordionArrowColor` を設定
+
+**L3 で発見した問題と対応**:
+- examples HTML のプリセット系 5 箇所で item div に `style="border-width:0"` が残存 → 実装修正（下区切り線 bottom 限定化）で item div には style が出ない仕様に変わったため削除
+
+**付随する共通実装の追加**:
+- `src/aktk-block-components/utils/size/` に `normalizeSizeValue` と `hasBorderWidth` を追加（ユニットテスト 35 ケース）
+  - `normalizeSizeValue`: UnitControl 入力を正規化（`'0px'` / `'0em'` 等のゼロ値を単位なし `'0'` に統一）
+  - `hasBorderWidth`: border として描画される太さかを判定（ゼロ値 / 空値を false、その他 true）
+- `faq-item/utils.ts` で `hasBorderWidth` を使い、サイズ 0 時に `has-padding` / `has-border` / `has-{slug}-border-color` を付けないよう変更
+- `label-border-radius` / `label-border` / `contents-border` の UnitControl onChange で `normalizeSizeValue` を使用
+
+**faq-item の下区切り線実装を bottom 限定化**:
+- `getItemStyles`: `borderColor` / `borderWidth`（4 辺）→ `borderBottomColor` / `borderBottomWidth`（下辺のみ）に変更
+- `style.scss`: `.has-border-bottom` に `border-bottom-style: solid` を追加（`border: 0` 初期値の上書き用）
 
 ### icon-list（+ icon-list-item）
 
