@@ -24,7 +24,8 @@
 	},
 	"supports": {
 		"anchor": false,
-		"align": false
+		"align": false,
+		"className": false
 	},
 	"example": {
 		"attributes": {},
