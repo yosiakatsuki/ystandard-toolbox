@@ -27,9 +27,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px\">\n\n</dl>\n",
+		"innerHTML": "\n<dl class=\"ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px\">\n\n</dl>\n",
 		"innerContent": [
-			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px\">",
+			"\n<dl class=\"ystdtb-dl has-margin\" style=\"--ystdtb--desktop--dl--margin-top:40px;--ystdtb--desktop--dl--margin-bottom:40px\">",
 			null,
 			"\n\n",
 			null,

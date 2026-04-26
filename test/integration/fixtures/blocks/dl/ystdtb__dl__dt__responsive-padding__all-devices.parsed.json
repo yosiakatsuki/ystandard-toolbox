@@ -34,11 +34,7 @@
 				]
 			}
 		],
-		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\"></dl>\n",
-		"innerContent": [
-			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl\">",
-			null,
-			"</dl>\n"
-		]
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
 	}
 ]

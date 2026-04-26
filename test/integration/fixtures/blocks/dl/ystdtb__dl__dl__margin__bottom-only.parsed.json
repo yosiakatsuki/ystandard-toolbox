@@ -24,9 +24,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"margin-bottom:16px\">\n\n</dl>\n",
+		"innerHTML": "\n<dl class=\"ystdtb-dl has-margin\" style=\"margin-bottom:16px\">\n\n</dl>\n",
 		"innerContent": [
-			"\n<dl class=\"wp-block-ystdtb-description-list ystdtb-dl has-margin\" style=\"margin-bottom:16px\">",
+			"\n<dl class=\"ystdtb-dl has-margin\" style=\"margin-bottom:16px\">",
 			null,
 			"\n\n",
 			null,
