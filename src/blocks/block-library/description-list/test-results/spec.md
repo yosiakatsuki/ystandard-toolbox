@@ -33,7 +33,7 @@
 - **カラー系**:
   - dt / dd-simple / dd-box: `backgroundColor` / `customBackgroundColor` / `gradient` / `customGradient` / `textColor` / `customTextColor`
 - **border**: dl-column のみ（`{width, style, color}` の FlatBorder）
-- **className サポート**: dl のみ true（`wp-block-ystdtb-description-list` 付与）、他は全て false
+- **className サポート**: 全ブロック false（`wp-block-ystdtb-*` プレフィックスを出力しない方針）
 
 ## テスト対象の設定一覧
 
