@@ -20,9 +20,12 @@ import { getBlockEditorConfig } from '@aktk/utils/config';
 import type { IconListAttributes, IconListEditProps } from '../../types';
 
 const iconTypes = [
-	{ label: __( '右矢印', 'ystandard-toolbox' ), name: 'chevron-right' },
-	{ label: __( '右二重矢印', 'ystandard-toolbox' ), name: 'chevrons-right' },
-	{ label: __( '右矢印', 'ystandard-toolbox' ), name: 'arrow-right' },
+	{ label: __( '右矢印（>）', 'ystandard-toolbox' ), name: 'chevron-right' },
+	{
+		label: __( '右二重矢印（>>）', 'ystandard-toolbox' ),
+		name: 'chevrons-right',
+	},
+	{ label: __( '右矢印（→）', 'ystandard-toolbox' ), name: 'arrow-right' },
 	{
 		label: __( '右丸矢印', 'ystandard-toolbox' ),
 		name: 'arrow-right-circle',
@@ -82,6 +85,7 @@ export function ListIcon( props: IconListEditProps ): JSX.Element {
 						<Button
 							key={ option.name }
 							variant={ variant }
+							label={ option.label }
 							onClick={ handleOnClick }
 						>
 							<ul
