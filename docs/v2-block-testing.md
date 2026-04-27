@@ -40,7 +40,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
 | [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
-| [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ❌ | ❌ | ❌ |
+| [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ❌ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -150,11 +150,11 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 - [x] examples HTML 作成（設定の組み合わせ例 5 個 + 設定一覧：アイコン設定／タイポグラフィ／色／枠線／余白／子アイテム個別設定）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 約 26 件）
-- [ ] L1 fixture 作成
+- [x] L1 fixture 作成（28 件、`npm run test:integration` 全 347 件パス）
 - [ ] L2 Chrome UI テスト
 - [ ] L3 フロント確認
 
-**次にやること**: L1 fixture 作成
+**次にやること**: L2 Chrome UI テスト
 
 ### parts
 

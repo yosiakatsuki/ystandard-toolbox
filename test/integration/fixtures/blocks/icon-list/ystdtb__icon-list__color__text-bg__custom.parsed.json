@@ -1,0 +1,30 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"style": {
+				"color": {
+					"text": "#1e293b",
+					"background": "#fef3c7"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right has-text-color has-background\" style=\"color:#1e293b;background-color:#fef3c7\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right has-text-color has-background\" style=\"color:#1e293b;background-color:#fef3c7\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

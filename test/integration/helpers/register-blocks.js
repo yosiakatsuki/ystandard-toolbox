@@ -71,6 +71,14 @@ import boxMetadata from '../../../src/blocks/block-library/box/block.json';
 import boxSave from '@aktk/blocks/block-library/box/save';
 import { deprecated as boxDeprecated } from '@aktk/blocks/block-library/box/deprecated';
 
+// Icon list.
+import iconListMetadata from '../../../src/blocks/block-library/icon-list/block.json';
+import iconListSave from '@aktk/blocks/block-library/icon-list/save';
+
+// Icon list item.
+import iconListItemMetadata from '../../../src/blocks/block-library/icon-list-item/block.json';
+import iconListItemSave from '@aktk/blocks/block-library/icon-list-item/save';
+
 // SNS Share (動的ブロック: save は null).
 import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.json';
 
@@ -152,6 +160,15 @@ export function registerBoxTestBlocks() {
 	registerOnce( boxMetadata, {
 		save: boxSave,
 		deprecated: boxDeprecated,
+	} );
+}
+
+export function registerIconListTestBlocks() {
+	registerOnce( iconListMetadata, {
+		save: iconListSave,
+	} );
+	registerOnce( iconListItemMetadata, {
+		save: iconListItemSave,
 	} );
 }
 

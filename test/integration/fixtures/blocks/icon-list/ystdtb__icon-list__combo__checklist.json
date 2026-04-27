@@ -1,0 +1,37 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "check",
+			"iconBold": true,
+			"customIconColor": "#22c55e"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "必要な情報を整理する"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "画像の準備を済ませる"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "公開前にプレビューで最終チェック"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

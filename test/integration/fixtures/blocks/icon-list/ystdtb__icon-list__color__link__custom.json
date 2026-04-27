@@ -1,0 +1,29 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false,
+			"style": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "#0284c7"
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "<a href=\"#\">サンプルリンク</a>"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]
