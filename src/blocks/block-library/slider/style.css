@@ -1,3 +1,7 @@
+:where(.ystdtb-slider__slider) {
+	--swiper-navigation-color: currentColor;
+	--swiper-pagination-color: currentColor;
+}
 .ystdtb-slider__slider {
 	/* Swiper 初期化前に最初のスライド以外を非表示 */
 	&:not(:where(.swiper-initialized, .is-edit)) {

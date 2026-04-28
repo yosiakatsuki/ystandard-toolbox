@@ -36,6 +36,13 @@ jest.mock( '@wordpress/data', () => ( {
 jest.mock( '@wordpress/block-editor', () => ( {
 	// @ts-ignore
 	getFontSizeClass: ( fontSize ) => fontSize,
+	// @ts-ignore
+	getColorClassName: ( colorContextName, colorSlug ) => {
+		if ( ! colorContextName || ! colorSlug ) {
+			return undefined;
+		}
+		return `has-${ colorSlug }-${ colorContextName }`;
+	},
 	store: 'core/block-editor',
 } ) );
 
