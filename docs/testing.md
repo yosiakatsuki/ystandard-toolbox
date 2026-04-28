@@ -338,3 +338,9 @@ examples / fixtures で画像ブロックを含める場合、以下のURLを使
 - `https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg`
 - `https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg`
 - `https://wp-ystandard.com/wp/wp-content/uploads/2022/05/image-clock.jpg`
+
+### テスト用動画URL
+
+examples / fixtures で動画ブロック（`core/video`）を含める場合、以下のURLを使用する。
+
+- `https://wp-ystandard.com/wp/wp-content/uploads/2020/12/top-movie.mp4`
