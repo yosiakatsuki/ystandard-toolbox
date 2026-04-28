@@ -13,6 +13,7 @@ debug-*
 block-example/
 .serena
 .claude
+claude-temp/
 tsconfig.tsbuildinfo
 .phpunit.result.cache
 src/blocks/block-library/*/test-results/operation.md
