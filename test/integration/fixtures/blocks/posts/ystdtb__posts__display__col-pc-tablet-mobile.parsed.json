@@ -1,0 +1,13 @@
+[
+	{
+		"blockName": "ystdtb/posts",
+		"attrs": {
+			"colMobile": 2,
+			"colTablet": 2,
+			"colPc": 4
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

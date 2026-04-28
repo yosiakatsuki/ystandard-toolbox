@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/posts",
+		"isValid": true,
+		"attributes": {
+			"count": 8,
+			"orderby": "date",
+			"order": "DESC",
+			"listType": "card",
+			"colMobile": 2,
+			"colTablet": 2,
+			"colPc": 4,
+			"showImg": true,
+			"showDate": false,
+			"showCategory": false,
+			"showExcerpt": false,
+			"excerptLines": 2,
+			"thumbnailSize": "full",
+			"thumbnailRatio": "1-1",
+			"thumbnailRatioMobile": "16-9",
+			"postType": "post"
+		},
+		"innerBlocks": []
+	}
+]

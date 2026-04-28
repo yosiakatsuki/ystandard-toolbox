@@ -1,0 +1,17 @@
+[
+	{
+		"blockName": "ystdtb/posts",
+		"attrs": {
+			"count": 8,
+			"colMobile": 2,
+			"colTablet": 2,
+			"colPc": 4,
+			"showDate": false,
+			"showCategory": false,
+			"thumbnailRatio": "1-1"
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

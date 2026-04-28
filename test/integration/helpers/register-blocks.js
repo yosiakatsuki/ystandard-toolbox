@@ -82,6 +82,9 @@ import iconListItemSave from '@aktk/blocks/block-library/icon-list-item/save';
 // SNS Share (動的ブロック: save は null).
 import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.json';
 
+// Posts (動的ブロック: save は null).
+import postsMetadata from '../../../src/blocks/block-library/posts/block.json';
+
 const NoopEdit = () => null;
 const NoopSave = () => null;
 
@@ -174,6 +177,12 @@ export function registerIconListTestBlocks() {
 
 export function registerSnsShareTestBlocks() {
 	registerOnce( snsShareMetadata, {
+		save: NoopSave,
+	} );
+}
+
+export function registerPostsTestBlocks() {
+	registerOnce( postsMetadata, {
 		save: NoopSave,
 	} );
 }

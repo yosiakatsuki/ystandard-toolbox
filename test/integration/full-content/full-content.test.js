@@ -52,6 +52,7 @@ import {
 	registerBoxTestBlocks,
 	registerIconListTestBlocks,
 	registerSnsShareTestBlocks,
+	registerPostsTestBlocks,
 } from '../helpers/register-blocks';
 
 registerSliderTestBlocks();
@@ -62,6 +63,7 @@ registerBannerLinkTestBlocks();
 registerBoxTestBlocks();
 registerIconListTestBlocks();
 registerSnsShareTestBlocks();
+registerPostsTestBlocks();
 
 /**
  * fixture と比較するときに使うプロパティだけを取り出す
