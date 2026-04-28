@@ -19,14 +19,14 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">ブログ記事一覧（2列 + 概要つき）</h4>
+<h4 class="wp-block-heading">ブログ記事一覧（PC：4列、タブレット・モバイル：2列 + 概要つき）</h4>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>記事の内容がわかりやすい、概要文つきの2列カード表示です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":4,"listType":"card","colPc":2,"colTablet":2,"colMobile":1,"thumbnailRatio":"4-3","showExcerpt":true,"excerptLines":2} /-->
+<!-- wp:ystdtb/posts {"count":4,"colMobile":2,"colTablet":2,"colPc":4,"showExcerpt":true,"excerptLines":0,"thumbnailRatio":"4-3"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">ギャラリー風（4列 + 正方形 + メタなし）</h4>
@@ -36,7 +36,7 @@
 <p>画像を主役にした、ギャラリーのような表示です。メタ情報を非表示にすることで、よりビジュアルに特化した一覧になります。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":8,"listType":"card","colPc":4,"colTablet":2,"colMobile":2,"thumbnailRatio":"1-1","showDate":false,"showCategory":false} /-->
+<!-- wp:ystdtb/posts {"count":8,"colMobile":2,"colTablet":2,"colPc":4,"showDate":false,"showCategory":false,"thumbnailRatio":"1-1"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">ニュース一覧（リスト + 画像なし + 概要つき）</h4>
@@ -46,7 +46,7 @@
 <p>お知らせやニュースのようなテキスト重視の一覧に適しています。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":5,"listType":"list","showImg":false,"showExcerpt":true,"excerptLines":2} /-->
+<!-- wp:ystdtb/posts {"count":5,"listType":"list","showImg":false,"showExcerpt":true} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">おすすめ記事（リスト + 正方形画像 + 概要つき）</h4>
@@ -56,17 +56,17 @@
 <p>正方形の画像と概要文で記事の内容をしっかり伝えるレイアウトです。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":5,"listType":"list","thumbnailRatio":"1-1","showDate":true,"showCategory":true,"showExcerpt":true,"excerptLines":3} /-->
+<!-- wp:ystdtb/posts {"listType":"list","showExcerpt":true,"excerptLines":3,"thumbnailRatio":"1-1"} /-->
 
 <!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">サイドバー向け（シンプル + 10件 + 日付のみ）</h4>
+<h4 class="wp-block-heading">ニュース一覧（シンプル + 10件 + 日付のみ）</h4>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>サイドバーウィジェットやフッターなど狭いスペースに最適な、コンパクトな一覧です。</p>
+<p>テキストのみのコンパクトな一覧です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":10,"listType":"simple","showDate":true,"showCategory":false} /-->
+<!-- wp:ystdtb/posts {"count":10,"listType":"simple","showCategory":false} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">最近更新された記事（3列 + 概要つき + 更新日順）</h4>
@@ -76,17 +76,7 @@
 <p>リライトした記事を目立たせたいときに便利な、更新日順の表示です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":6,"listType":"card","orderby":"modified","colPc":3,"colTablet":2,"colMobile":1,"showExcerpt":true,"excerptLines":2} /-->
-
-<!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">ピックアップ（ランダム + オフセット）</h4>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>最新記事を除いた中からランダムに表示する設定例です。「こんな記事もあります」のような導線づくりに活用できます。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:ystdtb/posts {"count":3,"orderby":"rand","offset":3} /-->
+<!-- wp:ystdtb/posts {"orderby":"modified","showExcerpt":true} /-->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -115,32 +105,20 @@
 <!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">1件のみ表示</h5>
-<!-- /wp:heading -->
-
-<!-- wp:ystdtb/posts {"count":1} /-->
-
-<!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">6件表示</h5>
 <!-- /wp:heading -->
 
 <!-- wp:ystdtb/posts {"count":6} /-->
 
 <!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">12件表示</h5>
-<!-- /wp:heading -->
-
-<!-- wp:ystdtb/posts {"count":12} /-->
-
-<!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">PC・モバイルで件数を変える（PC:6件 / モバイル:2件）</h5>
+<h5 class="wp-block-heading">PC・モバイルで件数を変える（PC:6件 / モバイル:3件）</h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>モバイル端末ではスクロール量を減らすため、表示件数を少なくする設定例です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":6,"countMobile":2} /-->
+<!-- wp:ystdtb/posts {"count":6,"countMobile":3} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">並び順の設定例</h4>
@@ -154,19 +132,19 @@
 <h5 class="wp-block-heading">公開日が新しい順（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"orderby":"date","order":"DESC"} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">公開日が古い順</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"orderby":"date","order":"ASC"} /-->
+<!-- wp:ystdtb/posts {"order":"ASC"} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">最近更新された順</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"orderby":"modified","order":"DESC"} /-->
+<!-- wp:ystdtb/posts {"orderby":"modified"} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">タイトルのあいうえお順</h5>
@@ -208,7 +186,7 @@
 <p>画像を上部に大きく表示するカード型レイアウトです。ビジュアルを重視した一覧に向いています。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"listType":"card"} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">リスト</h5>
@@ -225,7 +203,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>画像なしのテキストのみの一覧です。サイドバーやフッターなど狭いスペースでの使用に適しています。</p>
+<p>画像なしのテキストのみの一覧です。シンプルに表示したいときに適しています。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:ystdtb/posts {"listType":"simple"} /-->
@@ -238,13 +216,13 @@
 <p>PCではカード表示、モバイルではコンパクトなリスト表示に切り替える設定例です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"listType":"card","listTypeMobile":"list"} /-->
+<!-- wp:ystdtb/posts {"listTypeMobile":"list"} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">PC・モバイルでデザインを変える（PC:カード / モバイル:シンプル）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"listType":"card","listTypeMobile":"simple"} /-->
+<!-- wp:ystdtb/posts {"listTypeMobile":"simple"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">カラム数（列数）の設定例</h4>
@@ -258,13 +236,13 @@
 <h5 class="wp-block-heading">3列（デフォルト: PC:3 / タブレット:3 / モバイル:1）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"count":6,"colPc":3,"colTablet":3,"colMobile":1} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">2列（PC:2 / タブレット:2 / モバイル:1）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"count":6,"colPc":2,"colTablet":2,"colMobile":1} /-->
+<!-- wp:ystdtb/posts {"count":4,"colTablet":2,"colPc":2} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">4列（PC:4 / タブレット:2 / モバイル:2）</h5>
@@ -274,13 +252,13 @@
 <p>PC画面では4列で表示し、タブレット以下では2列に切り替える設定例です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"count":8,"colPc":4,"colTablet":2,"colMobile":2} /-->
+<!-- wp:ystdtb/posts {"count":4,"colMobile":2,"colTablet":2,"colPc":4} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">1列（カードを縦に並べる）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"count":3,"colPc":1,"colTablet":1,"colMobile":1} /-->
+<!-- wp:ystdtb/posts {"colTablet":1,"colPc":1} /-->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -302,7 +280,7 @@
 <h5 class="wp-block-heading">画像あり（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showImg":true} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">画像なし</h5>
@@ -326,7 +304,7 @@
 <h5 class="wp-block-heading">16:9（デフォルト・横長ワイド）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"thumbnailRatio":"16-9"} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">4:3（横長スタンダード）</h5>
@@ -384,7 +362,7 @@
 <p>PC画面ではワイドな画像、モバイルでは正方形に切り替える設定例です。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/posts {"thumbnailRatio":"16-9","thumbnailRatioMobile":"1-1"} /-->
+<!-- wp:ystdtb/posts {"thumbnailRatioMobile":"1-1"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">画像サイズの設定例</h4>
@@ -398,7 +376,7 @@
 <h5 class="wp-block-heading">フルサイズ（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"thumbnailSize":"full"} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">サムネイル（150×150）</h5>
@@ -458,19 +436,19 @@
 <h5 class="wp-block-heading">日付・カテゴリーともに表示（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showDate":true,"showCategory":true} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">日付のみ表示</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showDate":true,"showCategory":false} /-->
+<!-- wp:ystdtb/posts {"showCategory":false} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">カテゴリーのみ表示</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showDate":false,"showCategory":true} /-->
+<!-- wp:ystdtb/posts {"showDate":false} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">日付・カテゴリーともに非表示</h5>
@@ -494,13 +472,13 @@
 <h5 class="wp-block-heading">概要なし（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showExcerpt":false} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">概要あり（2行まで表示）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"showExcerpt":true,"excerptLines":2} /-->
+<!-- wp:ystdtb/posts {"showExcerpt":true} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">概要あり（1行のみ表示）</h5>
@@ -526,13 +504,13 @@
 <h5 class="wp-block-heading">リスト表示 + 全メタ情報 + 概要2行</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"listType":"list","showDate":true,"showCategory":true,"showExcerpt":true,"excerptLines":2} /-->
+<!-- wp:ystdtb/posts {"listType":"list","showExcerpt":true} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">シンプル表示 + 日付のみ</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"listType":"simple","showDate":true,"showCategory":false} /-->
+<!-- wp:ystdtb/posts {"listType":"simple","showCategory":false} /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">シンプル表示 + メタ情報なし(タイトルのみ)</h5>
@@ -544,7 +522,7 @@
 <h5 class="wp-block-heading">シンプル表示 + 概要あり</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"listType":"simple","showDate":true,"showCategory":true,"showExcerpt":true,"excerptLines":2} /-->
+<!-- wp:ystdtb/posts {"listType":"simple","showExcerpt":true} /-->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -570,7 +548,7 @@
 <h5 class="wp-block-heading">投稿（デフォルト）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"postType":"post"} /-->
+<!-- wp:ystdtb/posts /-->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">固定ページ</h5>
@@ -590,7 +568,7 @@
 <h5 class="wp-block-heading">カテゴリー「未分類」で絞り込み</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"taxonomy":"category","termSlug":"uncategorized"} /-->
+<!-- wp:ystdtb/posts {"taxonomy":"category","termSlug":"infomation"} /-->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -613,10 +591,10 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">投稿ID 1, 2, 3 を指定</h5>
+<h5 class="wp-block-heading">投稿IDを指定（複数）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"postIn":"1,2,3"} /-->
+<!-- wp:ystdtb/posts {"postIn":"9262,9244"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">投稿名(スラッグ)で指定</h4>
@@ -627,10 +605,10 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">スラッグ「hello-world」を指定</h5>
+<h5 class="wp-block-heading">スラッグを指定（複数）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"postNameIn":"hello-world"} /-->
+<!-- wp:ystdtb/posts {"postNameIn":"ystandard-blocks-v3-21,ystandard-community-renewal"} /-->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">親ページで絞り込み</h4>
@@ -641,10 +619,10 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading">親ページID 2 の子ページを表示</h5>
+<h5 class="wp-block-heading">親ページの子ページを表示</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/posts {"postType":"page","postParent":"2"} /-->
+<!-- wp:ystdtb/posts {"postType":"page","postParent":"7497"} /-->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
