@@ -41,7 +41,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
 | [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
 | [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ✅ | ✅ |
-| [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [parts](#parts) | — 対象外 | — 対象外 | — 対象外 | — 対象外 | ✅ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
@@ -159,13 +159,13 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 ### parts
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
+属性は `partsId: string` 1 個のみ・dynamic block（`save()` は `null`、`render_callback` 経由でショートコード `[ys_parts]` に委譲）の極小ブロック。検証対象が「[ys]パーツ投稿の選択 → ServerSideRender プレビュー → フロント表示」に集約されるため、**L1 fixture / L2 Chrome UI / examples HTML / spec.md は対象外**として L3 手動テストのみで完了とする。
 
-**次にやること**: examples HTML 作成
+- [—] examples HTML — 対象外（バリエーションが極めて限定的）
+- [—] spec.md — 対象外
+- [—] L1 fixture — 対象外
+- [—] L2 Chrome UI テスト — 対象外
+- [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### posts
 
