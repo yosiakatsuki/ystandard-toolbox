@@ -90,10 +90,13 @@ npm run test:unit:php     # wp-env 経由で PHPUnit 実行
 
 ### ファイル配置
 
+ブロック単位のテストは `phpunit/blocks/` 配下にまとめる（PHPUnit の `<directory>` 設定は再帰的にスキャンするため、`phpunit.xml.dist` 側の追加設定は不要）。
+
 ```
 phpunit/
 ├── bootstrap.php
-├── test-{block-name}-block.php   # ブロック単位のテスト
+├── blocks/
+│   └── test-{block-name}.php     # ブロック単位のテスト
 └── data/                          # フィクスチャデータ
 ```
 

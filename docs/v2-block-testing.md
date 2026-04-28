@@ -173,7 +173,7 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 
 - [x] examples HTML 作成（既存 695 行 → 685 行に再構成: 「設定の組み合わせ例」を冒頭移動・「フル設定」削除）
 - [x] spec.md 作成（四層 L0/L1/L2/L3 対応）
-- [x] **L0 PHPUnit テスト作成（`phpunit/test-posts-block.php`、40 テスト / 54 アサーション全パス）**
+- [x] **L0 PHPUnit テスト作成（`phpunit/blocks/test-posts.php`、40 テスト / 54 アサーション全パス）**
 - [ ] L1 fixture 作成（約 25 件、parse → serialize の attributes 保持のみ検証）
 - [ ] L2 Chrome UI テスト
 - [ ] L3 フロント確認
