@@ -238,9 +238,10 @@ L1 fixture / L0 PHPUnit でカバーできない UI 経由の挙動のみを Chr
 | `postType` 切替 | タクソノミー候補が連動して切り替わる |
 | `taxonomy` 切替 | ターム候補が連動して切り替わる |
 | `postIn` / `postNameIn` を入力 | UI 上で「絞り込み設定はクリアされる」旨の説明と整合する挙動 |
-| `showImg: false` | サムネイル関連 UI（アスペクト比・画像サイズ）の表示状態 |
-| `showExcerpt: false` | 概要行数 UI の表示状態 |
-| `listType: 'simple'` | カラム数 UI / アスペクト比 UI の表示状態 |
+| `showImg: false` | 「画像表示」ToggleControl のみ OFF。サムネイル関連 SelectControl（thumbnailSize / thumbnailRatio / thumbnailRatioMobile）の表示状態は変化しない（実装仕様） |
+| `showExcerpt: false` | 概要行数 NumberControl が非表示（`excerpt-lines.tsx` の早期 return） |
+| `listType: 'simple'`（mobile も simple か未設定） | サムネイル関連 SelectControl 3 つすべてが非表示（`isAllSimpleDesign` 条件） |
+| `listType: 'simple'`（部分） | 概要行数 UI 内に「シンプルデザインでは概要文は表示されません」notice 表示 |
 
 ### 操作順序（切り替え・リセット）
 

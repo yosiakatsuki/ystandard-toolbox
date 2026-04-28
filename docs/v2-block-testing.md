@@ -42,7 +42,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
 | [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ✅ | ✅ |
 | [parts](#parts) | — 対象外 | — 対象外 | — 対象外 | — 対象外 | ✅ |
-| [posts](#posts) | ✅ | ✅ | ✅ 29件 | ❌ | ❌ |
+| [posts](#posts) | ✅ | ✅ | ✅ 29件 | ✅ | ✅ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
 | [timeline](#timeline--timeline-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -175,8 +175,8 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - [x] spec.md 作成（四層 L0/L1/L2/L3 対応）
 - [x] **L0 PHPUnit テスト作成（`phpunit/blocks/test-posts.php`、40 テスト / 54 アサーション全パス）**
 - [x] L1 fixture 作成（29 件、`npm run test:integration` 全 376 件パス。dynamic block のため serialize 出力はブロックコメントのみ）
-- [ ] L2 Chrome UI テスト
-- [ ] L3 フロント確認
+- [x] L2 Chrome UI テスト完了（4 大カテゴリすべて OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 **手動テストで判明・対応した実装修正**:
 - アイキャッチ未設定時の画像 `object-fit: cover` がエディターで効かない問題 → ユーザー手動修正（詳細は実装側コミット参照）
@@ -185,7 +185,10 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - **`.wp-env.json` から `testsEnvironment: false` を削除**（wp-env 現行バージョンで未定義オプションのため `wp-env start` が失敗していた）
 - **PHPUnit テスト導入**: 上記 excerpt バグの再発防止 + 26 属性の組み合わせ網羅検証のため、ブロック単位でオプトイン PHPUnit テストを導入する方針を策定。`docs/testing.md` / `docs/block-operation-test-guideline.md` に運用ルール追記
 
-**次にやること**: L2 Chrome UI テスト（7 パネルの Inspector Controls 動作 + ServerSideRender プレビュー反映確認）
+**L2 で発見した問題と判断**:
+- **P001（要判断）**: postType 切替時に taxonomy / termSlug が自動クリアされない（古い値が残る）。実害は WP_Query が結果を返さないだけで最小限。**暫定判断: 仕様として運用、L3 でフロント挙動を再確認**
+- **spec.md 仕様の再整理**: `showImg: false` は SelectControl 表示状態を変えない（ToggleControl のみ OFF）→ spec.md を実装準拠に微修正済
+
 
 ### slider（+ slider-item）
 
