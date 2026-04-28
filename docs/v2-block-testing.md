@@ -40,7 +40,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [box](#box) | ✅ | ✅ | ✅ 48件 | ✅ | ✅ |
 | [description-list](#description-list--dd-box--dd-simple--dl-column--dt) | ✅ | ✅ | ✅ 93件 | ✅ | ✅ |
 | [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
-| [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ❌ | ❌ |
+| [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ✅ | ❌ |
 | [parts](#parts) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -151,10 +151,13 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（設定の組み合わせ例 5 個 + 設定一覧：アイコン設定／タイポグラフィ／色／枠線／余白／子アイテム個別設定）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 約 26 件）
 - [x] L1 fixture 作成（28 件、`npm run test:integration` 全 347 件パス）
-- [ ] L2 Chrome UI テスト
+- [x] L2 Chrome UI テスト完了（2 セッション：親 / 子。`test-results/operation.md` に記録。Git 管理外）
 - [ ] L3 フロント確認
 
-**次にやること**: L2 Chrome UI テスト
+**L2 で発見した問題と対応**:
+- **P001（修正済み）**: 親「リストアイコン」ボタングリッドに `aria-label` / `title` が無く、同名ラベル「右矢印」が 2 つ存在 → aktk Button ラッパーに `label` プロパティ追加 + `<Button label={ option.label }>` 渡し + 同名ラベルを「右矢印（>）」「右矢印（→）」「右二重矢印（>>）」で区別
+
+**次にやること**: L3 フロント確認
 
 ### parts
 
