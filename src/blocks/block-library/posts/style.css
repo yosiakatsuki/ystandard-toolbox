@@ -48,7 +48,10 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	grid-template-columns: repeat(var(--ystdtb--posts--columns), minmax(0, 1fr));
+	grid-template-columns: repeat(
+		var(--ystdtb--posts--columns),
+		minmax(0, 1fr)
+	);
 }
 
 /* リンク */
@@ -297,6 +300,10 @@
 	:where(.ystdtb-posts__meta) {
 		flex-shrink: 0;
 		margin-block-start: 0.15em;
+		color: currentColor;
+	}
+	:where(.ystdtb-posts__date) {
+		color: currentColor;
 	}
 	:where(.ystdtb-posts__cat) {
 		background-color: var(--ystdtb--color--gray-text);
