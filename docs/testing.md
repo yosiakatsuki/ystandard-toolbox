@@ -28,8 +28,9 @@ unit テスト本体は `src/` 配下に `*.test.[jt]s(x)` として配置する
 
 ```bash
 npm run test                  # すべてのテスト（unit + integration）
-npm run test:unit             # unit テストのみ
+npm run test:unit             # unit テストのみ（JS unit + PHP unit）
 npm run test:unit:component   # コンポーネント単体テスト
+npm run test:unit:php         # PHPUnit（wp-env 経由）
 npm run test:integration      # integration テスト（fixture-based）
 npm run fixtures:generate     # 期待値ファイル未生成のものを自動生成
 npm run fixtures:regenerate   # 期待値ファイルを全削除して再生成
@@ -52,6 +53,53 @@ src/aktk-block-components/utils/number/
 └── test/
     └── to-int.test.ts
 ```
+
+## PHPUnit テスト（オプトイン）
+
+`phpunit/` 配下に PHP ロジック単体テストを格納する。WordPress の `WP_UnitTestCase` ベース。
+
+### 適用方針
+
+三層テスト戦略（L1 fixture / L2 Chrome UI / L3 手動）の枠外で、**PHP ロジックが複雑なブロックに限ってオプトインで追加する**。全ブロック必須ではない。
+
+判定基準:
+
+- `render_callback` 内で投稿クエリ・テンプレート変数組み立て・条件分岐・属性正規化が多数含まれる
+- 出力 HTML（クラス / 要素 / inline style）の組み合わせが多く、目視（L3）だけでは網羅検証が難しい
+- 過去にバグの実績があり、再発防止が必要
+
+### 実行コマンド
+
+```bash
+npm run test:unit:php     # wp-env 経由で PHPUnit 実行
+```
+
+`wp-env start` が事前に必要。
+
+### テスト方針
+
+ブロックの `render_callback($attributes)` の戻り値（HTML 文字列）を `DOMDocument` + `DOMXPath` で解析し、以下を網羅検証する:
+
+- 特定の CSS クラスの有無（wrapper class / `is-{listType}` / `col-mobile--N` 等）
+- 特定の要素の有無（`<figure>` / `<p class="ystdtb-posts__excerpt">` 等）
+- inline style の文字列（CSS カスタムプロパティ等）
+- 件数（`<li>` の出現回数）
+- 並び順（タイトル文字列の出現順序）
+
+投稿は `$this->factory->post->create_many()` で生成。モバイル切替は `wp_is_mobile` フィルターで制御。
+
+### ファイル配置
+
+```
+phpunit/
+├── bootstrap.php
+├── test-{block-name}-block.php   # ブロック単位のテスト
+└── data/                          # フィクスチャデータ
+```
+
+### spec.md との対応
+
+PHPUnit テストを追加するブロックは、`test-results/spec.md` に「L0: PHPUnit テスト」セクションを設けて、テスト対象メソッド・ケース一覧・出力検証ポイントを記述する。spec.md を読めば PHPUnit テストの意図が把握できる状態にする。
 
 ## integration テスト（fixture-based test）
 

@@ -42,7 +42,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [faq](#faq--faq-item) | ✅ | ✅ | ✅ 42件 | ✅ | ✅ |
 | [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ✅ | ✅ |
 | [parts](#parts) | — 対象外 | — 対象外 | — 対象外 | — 対象外 | ✅ |
-| [posts](#posts) | ⚠️ 要書直し | ❌ | ❌ | ❌ | ❌ |
+| [posts](#posts) | ✅ | ✅ | ❌ | ❌ | ❌ |
 | [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
 | [timeline](#timeline--timeline-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -169,15 +169,23 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 ### posts
 
-既存の `all-variations.html` が 695 行存在するが、v2 向けに全面書き直しが必要。
+dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジックが多いため、三層（L1/L2/L3）に加えて **L0: PHPUnit テスト**をオプトイン追加した（[testing.md の PHPUnit セクション](testing.md#phpunit-テストオプトイン) 参照）。
 
-- [ ] examples HTML 作成（既存ファイル書き直し）
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
+- [x] examples HTML 作成（既存 695 行 → 685 行に再構成: 「設定の組み合わせ例」を冒頭移動・「フル設定」削除）
+- [x] spec.md 作成（四層 L0/L1/L2/L3 対応）
+- [x] **L0 PHPUnit テスト作成（`phpunit/test-posts-block.php`、40 テスト / 54 アサーション全パス）**
+- [ ] L1 fixture 作成（約 25 件、parse → serialize の attributes 保持のみ検証）
 - [ ] L2 Chrome UI テスト
 - [ ] L3 フロント確認
 
-**次にやること**: 既存 examples の内容を確認して書き直し方針を決める
+**手動テストで判明・対応した実装修正**:
+- アイキャッチ未設定時の画像 `object-fit: cover` がエディターで効かない問題 → ユーザー手動修正（詳細は実装側コミット参照）
+- シンプルレイアウト時の日付文字色をテキストカラーに → ユーザー手動修正
+- **`excerptLines: 1/4` 指定時に `style="1"` のような壊れた CSS が出力されるバグ修正**（`index.php:283-285`）: `array_filter` + `implode` で配列キーが捨てられて値だけ連結されていた → CSS カスタムプロパティ `--ystdtb--posts--excerpt-line-clamp:N` を直接組み立てる方式に変更
+- **`.wp-env.json` から `testsEnvironment: false` を削除**（wp-env 現行バージョンで未定義オプションのため `wp-env start` が失敗していた）
+- **PHPUnit テスト導入**: 上記 excerpt バグの再発防止 + 26 属性の組み合わせ網羅検証のため、ブロック単位でオプトイン PHPUnit テストを導入する方針を策定。`docs/testing.md` / `docs/block-operation-test-guideline.md` に運用ルール追記
+
+**次にやること**: L1 fixture 作成（約 25 件、属性の代表値ベース）
 
 ### slider（+ slider-item）
 

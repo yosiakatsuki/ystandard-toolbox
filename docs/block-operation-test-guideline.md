@@ -66,6 +66,17 @@ block-library 配下のすべてのブロックに適用される恒久ルール
   - 最終的な見た目判断
   - 想定外の視覚不具合検出
 
+### 補足: PHPUnit テスト（オプトイン）
+
+三層（L1 / L2 / L3）の枠外で、**PHP ロジックが複雑なブロックに限ってオプトインで PHPUnit テストを追加できる**。全ブロック必須ではない。
+
+- **手段**: PHPUnit + `WP_UnitTestCase`（`phpunit/test-{block}-block.php`）
+- **対象**: dynamic block（`render_callback` 経由で HTML を生成するブロック）で、出力 HTML の組み合わせが多く目視（L3）だけでは網羅検証が難しいもの
+- **検証内容**: `render_callback($attributes)` の戻り値 HTML を `DOMDocument` + `DOMXPath` で解析し、クラス・要素・inline style・件数・順序を検証
+- **運用**: 採用ブロックの spec.md に「L0: PHPUnit テスト」セクションを設けて、対象メソッド・ケース一覧を記載する
+
+詳細は [testing.md の PHPUnit セクション](testing.md#phpunit-テストオプトイン) を参照。
+
 ## 責任分担表
 
 各検証項目をどの層で扱うかの目安。
