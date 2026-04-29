@@ -124,15 +124,17 @@
 | `slidesPerView: 'auto'` | 上級者向け設定の警告 NoticeWarning が表示される |
 | `ratio` または `height` または `responsiveHeight` のいずれか設定 | `getSliderWrapClasses()` で `is-fixed-height` クラス追加 |
 
-## 実装上のバグ・注意点（L2 / L3 で挙動再確認）
+## 実装上のバグ・修正履歴
 
-| ID | 内容 | 出典 |
+L0 Jest unit テスト導入時に Swiper 仕様（[Breakpoints](https://swiperjs.com/swiper-api#param-breakpoints)）と実装出力を突き合わせて以下 3 件のバグを発見し、本テスト導入と同時に修正した。
+
+| ID | 内容 | 出典・修正 |
 |---|---|---|
-| B001 | `responsiveSlides` のタブレット用設定値が、実装上は `slidesMobile` から取られている | `src/blocks/block-library/slider/utils.ts:212`（変数分割代入で `slidesTablet` ではなく `slidesMobile` を参照） |
-| B002 | `responsiveSlides` のデスクトップ用設定で、`breakpointsOptions[breakpointsDesktop]` のキー名が `desktopSlidesPerView` などになっており Swiper 仕様の `slidesPerView` で受け付けられない | `src/blocks/block-library/slider/utils.ts:230-235` |
-| B003 | `breakpointsOptions` がトップレベル（`{ "640": {...}, "1024": {...}, ... }`）に展開されている。Swiper 仕様では `breakpoints: { 640: {...}, 1024: {...} }` のネスト構造が期待される | `src/blocks/block-library/slider/utils.ts:262`（`...stripUndefined(breakpointsOptions)` のスプレッド） |
+| B001 | `responsiveSlides` のタブレット用設定値が `slidesMobile` から取られていた（タブレット値が反映されず、モバイル値がコピーされる） | `src/blocks/block-library/slider/utils.ts` のタブレット用分割代入を `slidesMobile` → `slidesTablet` に修正 |
+| B002 | `responsiveSlides` のデスクトップ用設定で `breakpointsOptions[breakpointsDesktop]` のキー名が `desktopSlidesPerView` などになっており Swiper 仕様の `slidesPerView` で受け付けられなかった | `src/blocks/block-library/slider/utils.ts` のデスクトップ用キー名を Swiper 仕様（`slidesPerView` / `spaceBetween` / `slidesPerGroup` / `centeredSlides`）に修正 |
+| B003 | `breakpointsOptions` がトップレベル（`{ "640": {...}, "1024": {...}, ... }`）に展開されていた。Swiper 仕様では `breakpoints: { 640: {...}, 1024: {...} }` のネスト構造が期待される | `src/blocks/block-library/slider/utils.ts` の `...stripUndefined(breakpointsOptions)` を `breakpoints: stripUndefined(breakpointsOptions)` に修正 |
 
-これらは v2 リリースのスコープ外として **本テストでは「実装通り」を期待値として記録**する（修正は別タスク）。
+修正後の期待値は L0 Jest unit テスト（`utils.test.ts` の `responsiveSlides` セクション）で固定化されており、リグレッション検出が可能。
 
 ---
 
@@ -169,8 +171,8 @@
 | 23 | `slides: { slidesPerView: 2, spaceBetween: '16px' }` | `spaceBetween: '16px'` |
 | 24 | `slides: { slidesPerView: 2, centeredSlides: true }` | `centeredSlides: true` |
 | 25 | `responsiveSlides: { mobile: { slidesPerView: 1 } }` | base に `slidesPerView: 1`、`breakpointsOptions` には何も追加されない |
-| 26 | `responsiveSlides: { mobile, tablet }` | `breakpointsOptions[640]` に **mobile から取られた値**（B001 再現） |
-| 27 | `responsiveSlides: { mobile, tablet, desktop }` | `breakpointsOptions[1024]` に **`desktop*` プレフィックスのキー**（B002 再現） |
+| 26 | `responsiveSlides: { mobile, tablet }` | `breakpoints[640]` に tablet の値（B001 修正後） |
+| 27 | `responsiveSlides: { mobile, tablet, desktop }` | `breakpoints[640]` / `breakpoints[1024]` のネスト構造、各デバイス値が Swiper 仕様のキー名で出力（B002 / B003 修正後） |
 | 28 | `effect: 'fade'` + `slides: {...}` | `slidesPerView` は出力されない（`hasSlidesOption('fade')` false） |
 
 ### その他のヘルパー関数
@@ -377,7 +379,7 @@ L1 fixture / L0 Jest unit でカバーできない UI 経由の挙動のみを C
 ### レスポンシブ・テーマ互換
 
 - [ ] レスポンシブ高さ（desktop / tablet / mobile）が CSS メディアクエリで切り替わる
-- [ ] `responsiveSlides` が動作する（**※ B001 / B002 / B003 のバグ確認込み**）
+- [ ] `responsiveSlides` が動作する（B001 / B002 / B003 修正後の Swiper breakpoints ネスト構造で動作することを実機確認）
 - [ ] `align: 'full'` で yStandard テーマの全幅表示が padding 0 で正しく描画される
 - [ ] エディター内表示と、フロント表示で崩れがない
 

@@ -430,8 +430,10 @@ describe( 'getSliderOptions', () => {
 		} );
 	} );
 
-	describe( 'responsiveSlides（デバイス別、実装バグの再現を含む）', () => {
-		it( 'mobile のみ → ベース値に slidesPerView 1、breakpoints は出力されない', () => {
+	// Swiper の breakpoints 仕様（https://swiperjs.com/swiper-api#param-breakpoints）に
+	// 準拠した期待値で書く。実装が仕様通りでない場合（B001 / B002 / B003）は失敗する。
+	describe( 'responsiveSlides（デバイス別、Swiper 仕様準拠）', () => {
+		it( 'mobile のみ → ベース値に mobile の値、breakpoints は出力されない', () => {
 			const opts = parseOptions(
 				withDefaults( {
 					responsiveSlides: { mobile: { slidesPerView: 1 } },
@@ -439,12 +441,15 @@ describe( 'getSliderOptions', () => {
 			);
 			// mobile はベース（トップレベル）に出る
 			expect( opts.slidesPerView ).toBe( 1 );
-			// tablet / desktop の breakpoint キーは出力されない
+			expect( opts.slidesPerGroup ).toBe( 1 );
+			// breakpoints は出力されない（他デバイス未指定）
+			expect( opts.breakpoints ).toBeUndefined();
+			// トップレベルにも数値キー（640 / 1024）は出ない
 			expect( opts[ '640' ] ).toBeUndefined();
 			expect( opts[ '1024' ] ).toBeUndefined();
 		} );
 
-		it( 'mobile + tablet → 640 ブレークポイントに mobile から取った値が入る（B001 の再現）', () => {
+		it( 'mobile + tablet → breakpoints.640 に tablet の値が入る', () => {
 			const opts = parseOptions(
 				withDefaults( {
 					responsiveSlides: {
@@ -453,14 +458,20 @@ describe( 'getSliderOptions', () => {
 					},
 				} )
 			);
-			// 実装上のバグ: tablet の値ではなく mobile の値が breakpoints[640] に入る
-			expect( opts[ '640' ] ).toEqual( {
-				slidesPerView: 1,
-				slidesPerGroup: 1,
+			// ベースは mobile
+			expect( opts.slidesPerView ).toBe( 1 );
+			// breakpoints は Swiper 仕様のネスト構造、640 には tablet の値が入る
+			expect( opts.breakpoints ).toEqual( {
+				640: {
+					slidesPerView: 2,
+					slidesPerGroup: 1,
+				},
 			} );
+			// トップレベルに数値キーが直接展開されてはいけない
+			expect( opts[ '640' ] ).toBeUndefined();
 		} );
 
-		it( 'mobile + tablet + desktop → 1024 ブレークポイントに desktop* プレフィックスのキー（B002 の再現）', () => {
+		it( 'mobile + tablet + desktop → breakpoints.640 に tablet、breakpoints.1024 に desktop の値', () => {
 			const opts = parseOptions(
 				withDefaults( {
 					responsiveSlides: {
@@ -473,12 +484,23 @@ describe( 'getSliderOptions', () => {
 					},
 				} )
 			);
-			// 実装上のバグ: Swiper 仕様の slidesPerView ではなく desktopSlidesPerView 等のキーになる
-			expect( opts[ '1024' ] ).toEqual( {
-				desktopSlidesPerView: 3,
-				desktopSpaceBetween: '24px',
-				desktopSlidesPerGroup: 1,
+			// ベースは mobile
+			expect( opts.slidesPerView ).toBe( 1 );
+			// breakpoints はネスト構造、各デバイスは Swiper 仕様のキー名
+			expect( opts.breakpoints ).toEqual( {
+				640: {
+					slidesPerView: 2,
+					slidesPerGroup: 1,
+				},
+				1024: {
+					slidesPerView: 3,
+					spaceBetween: '24px',
+					slidesPerGroup: 1,
+				},
 			} );
+			// トップレベルに数値キーが直接展開されてはいけない
+			expect( opts[ '640' ] ).toBeUndefined();
+			expect( opts[ '1024' ] ).toBeUndefined();
 		} );
 	} );
 } );
