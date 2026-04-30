@@ -37,9 +37,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-slides-per-group-2\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:false,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:2}\"><div class=\"ystdtb-slider__container swiper-wrapper\">\n\n\n\n</div></div></div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-slides-per-group-2\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:2}\"><div class=\"ystdtb-slider__container swiper-wrapper\">\n\n\n\n</div></div></div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-slides-per-group-2\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:false,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:2}\"><div class=\"ystdtb-slider__container swiper-wrapper\">",
+			"\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-slides-per-group-2\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:2}\"><div class=\"ystdtb-slider__container swiper-wrapper\">",
 			null,
 			"\n\n",
 			null,

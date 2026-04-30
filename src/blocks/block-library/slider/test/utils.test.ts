@@ -238,7 +238,7 @@ describe( 'getSliderOptions', () => {
 		expect( opts.autoplay ).toEqual( {
 			delay: 8000,
 			pauseOnMouseEnter: false,
-			disableOnInteraction: false,
+			disableOnInteraction: true,
 			reverseDirection: false,
 		} );
 		expect( opts.navigation ).toBeUndefined();
@@ -301,19 +301,18 @@ describe( 'getSliderOptions', () => {
 			expect( opts.autoplay.pauseOnMouseEnter ).toBe( true );
 		} );
 
-		// 実装の反転動作: autoplayDisableOnInteraction を !value で渡す
-		it( 'autoplayDisableOnInteraction: false → disableOnInteraction: true（反転）', () => {
+		it( 'autoplayDisableOnInteraction: false → disableOnInteraction: false', () => {
 			const opts = parseOptions(
 				withDefaults( { autoplayDisableOnInteraction: false } )
 			);
-			expect( opts.autoplay.disableOnInteraction ).toBe( true );
+			expect( opts.autoplay.disableOnInteraction ).toBe( false );
 		} );
 
-		it( 'autoplayDisableOnInteraction: true → disableOnInteraction: false（反転）', () => {
+		it( 'autoplayDisableOnInteraction: true → disableOnInteraction: true', () => {
 			const opts = parseOptions(
 				withDefaults( { autoplayDisableOnInteraction: true } )
 			);
-			expect( opts.autoplay.disableOnInteraction ).toBe( false );
+			expect( opts.autoplay.disableOnInteraction ).toBe( true );
 		} );
 
 		it( 'autoplayReverseDirection: true → reverseDirection: true', () => {

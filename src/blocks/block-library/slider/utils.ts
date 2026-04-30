@@ -163,7 +163,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 		autoplayOptions = {
 			delay: getMilliseconds( autoplayDelay ) || 3000,
 			pauseOnMouseEnter: autoplayPauseOnMouse,
-			disableOnInteraction: ! autoplayDisableOnInteraction,
+			disableOnInteraction: autoplayDisableOnInteraction,
 			reverseDirection: autoplayReverseDirection,
 		};
 	}

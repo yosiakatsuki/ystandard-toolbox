@@ -53,7 +53,7 @@
 | 自動再生有効化 | `autoplay` | boolean | `true` |
 | 自動再生の表示時間 | `autoplayDelay` | number | `8`（秒、`× 1000` で ms 化） |
 | マウスホバー時に停止 | `autoplayPauseOnMouse` | boolean | `false` |
-| 操作後に再開 | `autoplayDisableOnInteraction` | boolean | `true`（**実装上 Swiper の `disableOnInteraction` には反転値が渡る**） |
+| 手動スライドで再生を止める | `autoplayDisableOnInteraction` | boolean | `true` |
 | 逆方向再生 | `autoplayReverseDirection` | boolean | `false` |
 
 ### サイズ（パネル: Size）
@@ -148,7 +148,7 @@ L0 Jest unit テスト導入時に Swiper 仕様（[Breakpoints](https://swiperj
 
 | # | テスト名 | 検証内容 |
 |---|---|---|
-| 1 | `default attributes` | デフォルトで `effect:'slide', speed:300, loop:true, autoplay:{delay:8000, pauseOnMouseEnter:false, disableOnInteraction:false, reverseDirection:false}` |
+| 1 | `default attributes` | デフォルトで `effect:'slide', speed:300, loop:true, autoplay:{delay:8000, pauseOnMouseEnter:false, disableOnInteraction:true, reverseDirection:false}` |
 | 2-4 | `effect: fade / coverflow / cube` | 指定 effect が JSON に含まれる |
 | 5 | `speed: 1` | `speed: 1000` |
 | 6 | `speed: 5` | `speed: 5000` |
@@ -157,8 +157,8 @@ L0 Jest unit テスト導入時に Swiper 仕様（[Breakpoints](https://swiperj
 | 9 | `autoplayDelay: 5` | `autoplay.delay: 5000` |
 | 10 | `autoplayDelay: 15` | `autoplay.delay: 15000` |
 | 11 | `autoplayPauseOnMouse: true` | `autoplay.pauseOnMouseEnter: true` |
-| 12 | `autoplayDisableOnInteraction: false` | `autoplay.disableOnInteraction: true`（**反転動作**） |
-| 13 | `autoplayDisableOnInteraction: true` | `autoplay.disableOnInteraction: false`（**反転動作**） |
+| 12 | `autoplayDisableOnInteraction: false` | `autoplay.disableOnInteraction: false` |
+| 13 | `autoplayDisableOnInteraction: true` | `autoplay.disableOnInteraction: true` |
 | 14 | `autoplayReverseDirection: true` | `autoplay.reverseDirection: true` |
 | 15 | `hasNavigation: true` | `navigation: { nextEl, prevEl }` |
 | 16 | `paginationType: 'bullets'` | `pagination: { type:'bullets', el, dynamicBullets:false }` |
