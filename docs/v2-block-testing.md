@@ -43,7 +43,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [icon-list](#icon-list--icon-list-item) | ✅ | ✅ | ✅ 28件 | ✅ | ✅ |
 | [parts](#parts) | — 対象外 | — 対象外 | — 対象外 | — 対象外 | ✅ |
 | [posts](#posts) | ✅ | ✅ | ✅ 29件 | ✅ | ✅ |
-| [slider](#slider--slider-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [slider](#slider--slider-item) | ✅ | ✅ | ✅ 44件 | ✅ | ✅ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
 | [timeline](#timeline--timeline-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -194,13 +194,19 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 
 親ブロック側に 1 ファイルで集約。
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
-- [ ] L2 Playwright UI テスト
-- [ ] L3 フロント確認
+- [x] examples HTML 作成（設定の組み合わせ例・子ブロック種類・全設定パネルを網羅）
+- [x] spec.md 作成（四層 L0/L1/L2/L3 対応）
+- [x] **L0 Jest unit テスト作成**（`utils.test.ts` / `view-utils.test.ts`、Swiper options・runtime breakpoint 正規化を検証）
+- [x] L1 fixture 作成（44 件、deprecated fixture とは別枠）
+- [x] L2 Playwright UI テスト完了（1 セッション 44 件すべて OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
-**次にやること**: examples HTML 作成
+**L3 で確認した内容と対応**:
+- Swiper 実動作（自動再生・ナビゲーション・ページネーション・各エフェクト）を確認
+- レスポンシブ高さ・レスポンシブスライド数の切り替えを確認
+- yStandard v4 / 非 yStandard テーマでの breakpoint 挙動を確認
+- `data-slider-options` の保存値は変更せず、フロント初期化前の runtime option で breakpoint 補正・`resizeObserver: false` を適用
+- yStandard v4 向け breakpoint 互換処理は `inc/compat/class-compat.php` に集約
 
 ### sns-share
 
