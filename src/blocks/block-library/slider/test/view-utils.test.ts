@@ -30,9 +30,10 @@ describe( 'normalizeSliderOptions', () => {
 				slidesPerView: 3,
 			},
 		} );
+		expect( options.resizeObserver ).toBe( false );
 	} );
 
-	it( 'runtime breakpointがない場合は変更しない', () => {
+	it( 'runtime breakpointがない場合もresizeObserverを無効化する', () => {
 		const options = {
 			slidesPerView: 1,
 			breakpoints: {
@@ -42,7 +43,10 @@ describe( 'normalizeSliderOptions', () => {
 			},
 		};
 
-		expect( normalizeSliderOptions( options ) ).toBe( options );
+		expect( normalizeSliderOptions( options ) ).toEqual( {
+			...options,
+			resizeObserver: false,
+		} );
 	} );
 
 	it( '既知キー以外のbreakpointは維持する', () => {

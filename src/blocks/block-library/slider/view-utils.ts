@@ -20,15 +20,19 @@ export function normalizeSliderOptions(
 	options: SwiperOptions,
 	settings?: SliderRuntimeSettings
 ): SwiperOptions {
+	const normalizedOptions = {
+		...options,
+		resizeObserver: false,
+	};
 	const runtimeBreakpoints = settings?.breakpoints;
-	if ( ! runtimeBreakpoints || ! options.breakpoints ) {
-		return options;
+	if ( ! runtimeBreakpoints || ! normalizedOptions.breakpoints ) {
+		return normalizedOptions;
 	}
 
 	return {
-		...options,
+		...normalizedOptions,
 		breakpoints: normalizeBreakpoints(
-			options.breakpoints,
+			normalizedOptions.breakpoints,
 			runtimeBreakpoints
 		),
 	};
