@@ -11,6 +11,10 @@ import {
 	EffectCoverflow,
 	EffectCube,
 } from 'swiper/modules';
+import {
+	normalizeSliderOptions,
+	type SliderRuntimeSettings,
+} from './view-utils';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -26,6 +30,12 @@ const EFFECT_MODULES: Record< string, SwiperModule > = {
 	coverflow: EffectCoverflow,
 	cube: EffectCube,
 };
+
+declare global {
+	interface Window {
+		ystdtbSliderSettings?: SliderRuntimeSettings;
+	}
+}
 
 /**
  * オプションに基づいて必要なSwiperモジュールを取得
@@ -79,6 +89,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				options = {};
 			}
 		}
+		options = normalizeSliderOptions(
+			options,
+			window.ystdtbSliderSettings
+		);
 		// オプションに基づいたモジュールを設定.
 		options.modules = getModules( options );
 		const slider = new Swiper( element as HTMLElement, options );

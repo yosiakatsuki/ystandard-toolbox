@@ -21,6 +21,8 @@ if ( ! \ystandard_toolbox\Init::check_build_files() ) {
 require_once __DIR__ . '/api/class-api.php';
 require_once __DIR__ . '/meta-box/class-meta-box.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
+// Compat.
+require_once __DIR__ . '/compat/class-compat.php';
 // Blocks.
 require_once __DIR__ . '/blocks/class-shared-styles.php';
 require_once __DIR__ . '/blocks/class-blocks.php';
