@@ -1,7 +1,6 @@
 /**
  * FAQブロック エディター専用スタイル
  */
-@use "style";
 
 [data-type="ystdtb/faq"] {
 	&,
@@ -30,8 +29,6 @@
 			&.is-faq--a {
 				// エディター内では常に表示
 				height: auto;
-				padding-top: 1.5em;
-				padding-bottom: 1.5em;
 				opacity: 1;
 				visibility: visible;
 			}

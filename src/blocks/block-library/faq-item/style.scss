@@ -1,18 +1,11 @@
-
 .ystdtb-faq-item {
 	display: flex;
 	align-items: center;
+	gap: var(--ystdtb--faq-item--gap);
 	margin: 0;
-	padding: var(--ystdtb--faq-item--padding-vertical) var(--ystdtb--faq-item--padding-horizon);
+	padding: var(--ystdtb--faq-item--padding-vertical)
+		var(--ystdtb--faq-item--padding-horizon);
 	border: 0;
-
-	&:where(.is-faq--q) {
-		padding-top: var(--ystdtb--faq--padding-q-top);
-	}
-
-	&:where(.is-faq--a) {
-		padding-bottom: var(--ystdtb--faq--padding-a-bottom);
-	}
 
 	&:where(.has-background) {
 		--ystdtb--faq-item--padding-vertical: 1.5em;
@@ -21,6 +14,15 @@
 
 	&:where(.has-border-bottom) {
 		border-bottom-style: solid;
+	}
+
+	&:where(:not(.has-border)) {
+		&:where(.is-faq--q) {
+			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
+		}
+		&:where(.is-faq--a) {
+			padding-top: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
+		}
 	}
 }
 
@@ -45,7 +47,7 @@
 }
 
 .ystdtb-faq-item__contents {
-	margin: 0 0 0 var(--ystdtb--faq-item--gap);
+	margin: 0;
 	flex-grow: 1;
 
 	> :where(*) {
