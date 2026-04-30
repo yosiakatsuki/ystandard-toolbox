@@ -281,7 +281,11 @@ banner-link/ystdtb__banner-link__combo__simple-card.html
 
 ### Playwright MCP の準備
 
-Codex から Playwright MCP を使う場合は、プロジェクトローカル設定として `.codex/config.toml` に追加する。`.codex/` は Git 管理外のため、各開発環境で設定する。
+利用する AI エージェントごとに MCP サーバーの登録方法が異なる。
+
+#### Codex
+
+プロジェクトローカル設定として `.codex/config.toml` に追加する。`.codex/` は Git 管理外（`.gitignore` 対象）のため、各開発環境で個別に設定する。
 
 ```toml
 [mcp_servers.playwright]
@@ -289,12 +293,32 @@ command = "npx"
 args = ["@playwright/mcp@latest"]
 ```
 
-前提:
+設定後は Codex を再起動し、`codex mcp list` で `playwright` が表示されることを確認する。
+
+#### Claude Code
+
+プロジェクト直下の `.mcp.json` に追加する。`.mcp.json` は Git 管理対象のため、リポジトリ全体で共有される。
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+設定後は Claude Code を再起動し、`/mcp` コマンドで `playwright` サーバーが接続済みになっていることを確認する。
+
+#### 共通の前提
+
 - Node.js 20 以上
 - 初回起動時に Playwright 用ブラウザが自動取得されるため、ネットワーク接続が必要
 - WordPress の編集画面にアクセスできるローカル環境とログイン状態
-
-設定後は Codex を再起動し、`codex mcp list` で `playwright` が表示されることを確認する。
 
 ### セッション開始フロー
 
