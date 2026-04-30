@@ -300,15 +300,15 @@ args = ["@playwright/mcp@latest"]
 
 ```
 1. ユーザー: 「[ブロック名] の L2 テスト開始。編集URL: ○○」
-2. Codex: Playwright MCP でブラウザを起動し、該当 URL へ navigate
-3. Codex: src/blocks/block-library/[block-name]/test-results/spec.md の L2 セクションを読み込む
-4. Codex: テスト開始前のクリーンアップ（後述）
-5. Codex: 当セッションの実施範囲を宣言（L2 のサブセクション単位）
+2. AIエージェント: Playwright MCP でブラウザを起動し、該当 URL へ navigate
+3. AIエージェント: src/blocks/block-library/[block-name]/test-results/spec.md の L2 セクションを読み込む
+4. AIエージェント: テスト開始前のクリーンアップ（後述）
+5. AIエージェント: 当セッションの実施範囲を宣言（L2 のサブセクション単位）
 6. ユーザー: 承認 or 調整
-7. Codex: Playwright MCP で UI 操作・状態確認・保存・再読込確認を実施
-8. Codex: サブセクション単位でまとめて操作 → まとめて保存・再読込・検証 → operation.md に追記
-9. Codex: テスト完了後のクリーンアップ
-10. Codex: 完了時、サマリと発見した問題を報告
+7. AIエージェント: Playwright MCP で UI 操作・状態確認・保存・再読込確認を実施
+8. AIエージェント: サブセクション単位でまとめて操作 → まとめて保存・再読込・検証 → operation.md に追記
+9. AIエージェント: テスト完了後のクリーンアップ
+10. AIエージェント: 完了時、サマリと発見した問題を報告
 ```
 
 ### Playwright MCP 運用ルール
