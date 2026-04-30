@@ -14,7 +14,7 @@
 ## テスト方針
 
 - **L1 (fixture-based integration test)**: 属性 → HTML 出力・parse/serialize 往復を全設定パターン網羅で自動検証（CI 毎回）
-- **L2 (Chrome UI 自動テスト)**: 親子テンプレート制約・カラーパレット/グラデーション UI・border UI・templateLock 挙動のスポット検証
+- **L2 (Playwright UI 自動テスト)**: 親子テンプレート制約・カラーパレット/グラデーション UI・border UI・templateLock 挙動のスポット検証
 - **L3 (手動確認)**: フロント見た目・dl-column のレスポンシブスタック切替・dtWidth 反映を目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -273,7 +273,7 @@ dt で shorthand 網羅・device 別網羅は担保されているため、dd-si
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
 ### 排他関係・カスケード
 

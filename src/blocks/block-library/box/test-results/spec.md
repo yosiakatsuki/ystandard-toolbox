@@ -5,7 +5,7 @@
 ## テスト方針
 
 - **L1 (fixture-based integration test)**: 属性 → HTML 出力・parse/serialize 往復を代表パターン + 属性網羅で自動検証（CI 毎回）
-- **L2 (Chrome UI 自動テスト)**: タイプ切替・色パレット・ラベル UI・背景画像アップロードのスポット検証
+- **L2 (Playwright UI 自動テスト)**: タイプ切替・色パレット・ラベル UI・背景画像アップロードのスポット検証
 - **L3 (手動確認)**: フロント見た目・レスポンシブ挙動の目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -138,7 +138,7 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
 ### タイプ切替
 

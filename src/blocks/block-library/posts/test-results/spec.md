@@ -5,13 +5,13 @@
 対象ブロック:
 - `ystdtb/posts`（dynamic block、`save() = null`、`render_callback` 経由でフロント描画）
 
-dynamic block かつ PHP 側ロジックが多いブロックのため、四層構成（L0 PHPUnit / L1 fixture / L2 Chrome UI / L3 手動）で動作を検証する。
+dynamic block かつ PHP 側ロジックが多いブロックのため、四層構成（L0 PHPUnit / L1 fixture / L2 Playwright UI / L3 手動）で動作を検証する。
 
 ## テスト方針
 
 - **L0 (PHPUnit)**: `render_callback($attributes)` の出力 HTML を `DOMDocument` + `DOMXPath` で網羅検証（CI 毎回、`phpunit/test-posts-block.php`）
 - **L1 (fixture-based integration test)**: 属性の parse → serialize 往復（dynamic block なのでシリアライズ後はブロックコメントのみ。属性 JSON のロスなし保持を確認）
-- **L2 (Chrome UI 自動テスト)**: 7 つの Inspector Controls パネルのラベル-値対応・条件付き表示・操作順序をスポット検証
+- **L2 (Playwright UI 自動テスト)**: 7 つの Inspector Controls パネルのラベル-値対応・条件付き表示・操作順序をスポット検証
 - **L3 (手動確認)**: フロントエンドでの実投稿データ表示・レスポンシブ挙動・テーマとの相互作用を目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。L0 PHPUnit は本ブロック固有のオプトイン対応（[testing.md の PHPUnit セクション](../../../../../docs/testing.md#phpunit-テストオプトイン)）。
@@ -213,9 +213,9 @@ fixture は `test/integration/fixtures/blocks/posts/` 配下に配置。
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
-L1 fixture / L0 PHPUnit でカバーできない UI 経由の挙動のみを Chrome 拡張で検証する。
+L1 fixture / L0 PHPUnit でカバーできない UI 経由の挙動のみを Playwright MCP で検証する。
 
 ### ラベル-値対応（全選択肢網羅）
 

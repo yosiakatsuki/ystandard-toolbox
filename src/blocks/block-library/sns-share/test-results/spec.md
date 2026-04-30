@@ -5,7 +5,7 @@
 ## テスト方針
 
 - **L1 (fixture-based integration test)**: 属性 → serialize/parse 往復を全パターン網羅で自動検証（CI 毎回）
-- **L2 (Chrome UI 自動テスト)**: 排他関係・条件付き表示・ラベル-値対応・操作順序のスポット検証
+- **L2 (Playwright UI 自動テスト)**: 排他関係・条件付き表示・ラベル-値対応・操作順序のスポット検証
 - **L3 (手動確認)**: フロント見た目・公式ボタン動作・実際のシェア URL パラメータを目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -107,7 +107,7 @@ examples HTML の組み合わせ例を流用。
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
 ### 排他関係・カスケード
 

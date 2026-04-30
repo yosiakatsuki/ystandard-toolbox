@@ -60,7 +60,7 @@ src/aktk-block-components/utils/number/
 
 ### 適用方針
 
-三層テスト戦略（L1 fixture / L2 Chrome UI / L3 手動）の枠外で、**PHP ロジックが複雑なブロックに限ってオプトインで追加する**。全ブロック必須ではない。
+三層テスト戦略（L1 fixture / L2 Playwright UI / L3 手動）の枠外で、**PHP ロジックが複雑なブロックに限ってオプトインで追加する**。全ブロック必須ではない。
 
 判定基準:
 

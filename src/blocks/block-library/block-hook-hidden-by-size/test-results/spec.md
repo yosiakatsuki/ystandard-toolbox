@@ -5,7 +5,7 @@
 ## テスト方針
 
 - **L1 (fixture-based integration test)**: **対象外**。ブロック拡張（filter 経由の attribute 追加）のため、test 環境で同等のフィルターを有効化するには `index.tsx` の分割など実装修正が必要。コストに見合わないため L1 は行わず、L2 / L3 で代替する
-- **L2 (Chrome UI 自動テスト)**: トグル挙動・クラス付与・排他ではない独立動作・サポート判定の条件付き表示を UI 経由で検証
+- **L2 (Playwright UI 自動テスト)**: トグル挙動・クラス付与・排他ではない独立動作・サポート判定の条件付き表示を UI 経由で検証
 - **L3 (手動確認)**: フロントでのメディアクエリ切替を目視確認（デバイスごとの非表示挙動）
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -58,7 +58,7 @@
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
 ### 対象ブロックのパネル表示
 

@@ -11,7 +11,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 ## テスト方針
 
 - **L1 (fixture-based integration test)**: 属性 → HTML 出力・parse/serialize 往復を全設定パターン網羅で自動検証（CI 毎回）
-- **L2 (Chrome UI 自動テスト)**: テンプレート固定制約・デザインプリセット適用・親子間の属性同期・ボーダータイプ選択肢・カラーパレット UI のスポット検証
+- **L2 (Playwright UI 自動テスト)**: テンプレート固定制約・デザインプリセット適用・親子間の属性同期・ボーダータイプ選択肢・カラーパレット UI のスポット検証
 - **L3 (手動確認)**: フロント見た目・アコーディオン開閉動作・複数パターン並列表示を目視確認
 
 運用ルールは [docs/block-operation-test-guideline.md](../../../../../docs/block-operation-test-guideline.md) を参照。
@@ -169,7 +169,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 ---
 
-## L2 Chrome UI テストパターン（絞り込み）
+## L2 Playwright UI テストパターン（絞り込み）
 
 ### 排他関係・カスケード
 

@@ -2,7 +2,7 @@
 
 v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全体テスト」のうち、`src/blocks/block-library/` 配下の全ブロックを対象とした編集・保存・フロント表示確認の進捗管理。
 
-三層テスト戦略（L1 fixture / L2 Chrome UI / L3 手動）で進める。
+三層テスト戦略（L1 fixture / L2 UI / L3 手動）で進める。
 
 ## このドキュメントの読み方
 
@@ -28,12 +28,12 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 1. **examples HTML 作成**: `src/blocks/block-library/[ブロック名]/examples/all-variations.html` を執筆（見出しツリー設計を兼ねる）
 2. **spec.md 作成**: `src/blocks/block-library/[ブロック名]/test-results/spec.md` に三層対応の操作テスト仕様を作成
 3. **L1 fixture 作成**: `test/integration/fixtures/blocks/` 配下に spec.md の L1 リストに対応する fixture を作成し、`npm run test:integration` で全通過を確認
-4. **L2 Chrome UI テスト**: Chrome 拡張で spec.md の L2 絞り込み項目を実機確認（結果は `test-results/operation.md` に記録、Git 管理外）
+4. **L2 Playwright UI テスト**: Playwright MCP で spec.md の L2 絞り込み項目を実 UI 確認（結果は `test-results/operation.md` に記録、Git 管理外）
 5. **L3 手動確認（フロント）**: フロントエンドで全パターンの表示を目視確認
 
 ## 全体進捗サマリー
 
-| ブロック | examples | spec.md | L1 fixture | L2 Chrome UI | L3 フロント |
+| ブロック | examples | spec.md | L1 fixture | L2 UI | L3 フロント |
 |---|:-:|:-:|:-:|:-:|:-:|
 | [banner-link](#banner-link) | ✅ | ✅ | ✅ 76件 | ✅ | ✅ |
 | [block-hook-hidden-by-size](#block-hook-hidden-by-size) | ✅ | ✅ | — 対象外 | ✅ | ✅ |
@@ -60,7 +60,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（グラデーション例削除・レスポンシブ 3 デバイス化などの手動テストフィードバック反映済み）
 - [x] spec.md 作成（三層 L1/L2/L3 対応）
 - [x] L1 fixture 作成（76 件、`npm run test:integration` 全 113 件パス）
-- [x] L2 Chrome UI テスト完了（複数セッションで実施、結果は `test-results/operation.md` に集約。Git 管理外）
+- [x] L2 UI テスト完了（複数セッションで実施、結果は `test-results/operation.md` に集約。Git 管理外）
 - [x] L3 フロント確認（ユーザー手動確認にて完了）
 
 **スコープ外（UI 未対応のため fixture 保留）**:
@@ -80,7 +80,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（6 パターン × 段落/Box = 12 ブロックペア）
 - [x] spec.md 作成（L1 は対象外、L2 / L3 手動テスト中心に改訂済）
 - [—] L1 fixture — **対象外**。本ブロックはフィルタ経由で attribute を追加する拡張のため、test 環境で正しく parse するには `index.tsx` の分割が必要。実装修正コストが見合わないため L1 は実施しない。既存 fixture 12 件は削除済み
-- [x] L2 Chrome UI テスト完了（`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### box
@@ -88,7 +88,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（25 ボックス + 4 コンボ例 + 余白プリセット例 + label-line + レスポンシブ余白例）
 - [x] spec.md 作成（三層 L1/L2/L3 対応。BOX角丸・ラベル角丸の適用ルール表を実装準拠に更新済み）
 - [x] L1 fixture 作成（48 件、`npm run test:integration` box 分全通過）
-- [x] L2 Chrome UI テスト完了（spec.md 記述の不一致 1 件を発見 → 実装準拠に修正。`test-results/operation.md` に記録）
+- [x] L2 UI テスト完了（spec.md 記述の不一致 1 件を発見 → 実装準拠に修正。`test-results/operation.md` に記録）
 - [x] L3 フロント確認（ユーザー手動確認にて完了）
 
 **今日の box 改修で対応した実装修正**:
@@ -109,7 +109,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（「FAQ 風」例削除・親 dl の margin を上下限定仕様に合わせて修正済み）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、約 95 件 → 修正後 90 件）
 - [x] L1 fixture 作成（93 件、`npm run test:integration` 全 277 件パス）
-- [x] L2 Chrome UI テスト完了（全 6 サブセクション OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（全 6 サブセクション OK、`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認（ユーザー手動確認にて完了）
 
 **L2 で発見した注意点（P-001）**: backgroundColor と gradient は UI 片方向排他のみ。gradient → bg で bg クリア、bg 設定中に gradient を追加するルートでは gradient 残存。詳細は operation.md 参照
@@ -121,7 +121,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（設定の組み合わせ例 5 + 設定一覧 全網羅 + デザインプリセット 6 種）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 数約 42 件）
 - [x] L1 fixture 作成（42 件、`npm run test:integration` 全 319 件パス）
-- [x] L2 Chrome UI テスト完了（3 セッション：親 FAQ / 子 faq-item / 修正後再検証。`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（3 セッション：親 FAQ / 子 faq-item / 修正後再検証。`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて完了）
 
 **L2 で発見した問題と対応**:
@@ -151,7 +151,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 - [x] examples HTML 作成（設定の組み合わせ例 5 個 + 設定一覧：アイコン設定／タイポグラフィ／色／枠線／余白／子アイテム個別設定）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、fixture 約 26 件）
 - [x] L1 fixture 作成（28 件、`npm run test:integration` 全 347 件パス）
-- [x] L2 Chrome UI テスト完了（2 セッション：親 / 子。`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（2 セッション：親 / 子。`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて完了）
 
 **L2 で発見した問題と対応**:
@@ -159,12 +159,12 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 
 ### parts
 
-属性は `partsId: string` 1 個のみ・dynamic block（`save()` は `null`、`render_callback` 経由でショートコード `[ys_parts]` に委譲）の極小ブロック。検証対象が「[ys]パーツ投稿の選択 → ServerSideRender プレビュー → フロント表示」に集約されるため、**L1 fixture / L2 Chrome UI / examples HTML / spec.md は対象外**として L3 手動テストのみで完了とする。
+属性は `partsId: string` 1 個のみ・dynamic block（`save()` は `null`、`render_callback` 経由でショートコード `[ys_parts]` に委譲）の極小ブロック。検証対象が「[ys]パーツ投稿の選択 → ServerSideRender プレビュー → フロント表示」に集約されるため、**L1 fixture / L2 UI / examples HTML / spec.md は対象外**として L3 手動テストのみで完了とする。
 
 - [—] examples HTML — 対象外（バリエーションが極めて限定的）
 - [—] spec.md — 対象外
 - [—] L1 fixture — 対象外
-- [—] L2 Chrome UI テスト — 対象外
+- [—] L2 UI テスト — 対象外
 - [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### posts
@@ -175,7 +175,7 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - [x] spec.md 作成（四層 L0/L1/L2/L3 対応）
 - [x] **L0 PHPUnit テスト作成（`phpunit/blocks/test-posts.php`、40 テスト / 54 アサーション全パス）**
 - [x] L1 fixture 作成（29 件、`npm run test:integration` 全 376 件パス。dynamic block のため serialize 出力はブロックコメントのみ）
-- [x] L2 Chrome UI テスト完了（4 大カテゴリすべて OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（4 大カテゴリすべて OK、`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 **手動テストで判明・対応した実装修正**:
@@ -197,7 +197,7 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - [ ] examples HTML 作成
 - [ ] spec.md 作成
 - [ ] L1 fixture 作成
-- [ ] L2 Chrome UI テスト
+- [ ] L2 Playwright UI テスト
 - [ ] L3 フロント確認
 
 **次にやること**: examples HTML 作成
@@ -207,7 +207,7 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - [x] examples HTML 作成
 - [x] spec.md 作成（三層 L1/L2/L3 対応）
 - [x] L1 fixture 作成（23 件、`npm run test:integration` 全通過）
-- [x] L2 Chrome UI テスト完了（24 項目すべて OK、`test-results/operation.md` に記録。Git 管理外）
+- [x] L2 UI テスト完了（24 項目すべて OK、`test-results/operation.md` に記録。Git 管理外）
 - [x] L3 フロント確認完了（ユーザー手動確認にて OK）
 
 ### timeline（+ timeline-item）
@@ -217,7 +217,7 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - [ ] examples HTML 作成
 - [ ] spec.md 作成
 - [ ] L1 fixture 作成
-- [ ] L2 Chrome UI テスト
+- [ ] L2 Playwright UI テスト
 - [ ] L3 フロント確認
 
 **次にやること**: examples HTML 作成
