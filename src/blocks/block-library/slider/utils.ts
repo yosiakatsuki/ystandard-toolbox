@@ -161,7 +161,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 	let autoplayOptions;
 	if ( autoplay ) {
 		autoplayOptions = {
-			delay: getMilliseconds( autoplayDelay ) || 3000,
+			delay: getMilliseconds( autoplayDelay ) ?? 3000,
 			pauseOnMouseEnter: autoplayPauseOnMouse,
 			disableOnInteraction: autoplayDisableOnInteraction,
 			reverseDirection: autoplayReverseDirection,

@@ -294,6 +294,14 @@ describe( 'getSliderOptions', () => {
 			expect( opts.autoplay.delay ).toBe( 15000 );
 		} );
 
+
+		it( 'autoplayDelay: 0 → delay: 0', () => {
+			const opts = parseOptions(
+				withDefaults( { autoplayDelay: 0 } )
+			);
+			expect( opts.autoplay.delay ).toBe( 0 );
+		} );
+
 		it( 'autoplayPauseOnMouse: true → pauseOnMouseEnter: true', () => {
 			const opts = parseOptions(
 				withDefaults( { autoplayPauseOnMouse: true } )
