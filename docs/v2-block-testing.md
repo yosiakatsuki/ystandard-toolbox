@@ -45,7 +45,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [posts](#posts) | ✅ | ✅ | ✅ 29件 | ✅ | ✅ |
 | [slider](#slider--slider-item) | ✅ | ✅ | ✅ 44件 | ✅ | ✅ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
-| [timeline](#timeline--timeline-item) | ✅ | ✅ | ✅ 38件 | 🔄 | ❌ |
+| [timeline](#timeline--timeline-item) | ✅ | ✅ | ✅ 39件 | ✅ | ✅ |
 
 凡例: ✅ 完了 / 🔄 進行中 / ⚠️ 要対応 / ❌ 未着手
 
@@ -222,9 +222,9 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 
 - [x] examples HTML 作成（実装齟齬「`labelWeight` → `labelBold`」修正を含む。実機エディタで正規化済み）
 - [x] spec.md 作成（三層 L1/L2/L3 対応、L1 fixture 38 件）
-- [x] L1 fixture 作成（38 件、`npm run test:integration` 全 459 件パス）
-- [x] L2 Playwright UI テスト 1 セッション完了（子 + 親 + テンプレート制約 23 項目すべて OK）。発見問題 P-001 / P-002 への対応判断待ち
-- [ ] L3 フロント確認
+- [x] L1 fixture 作成（39 件、`npm run test:integration` 全 460 件パス。P-001 対応で `bulk__sequential` 1 件追加）
+- [x] L2 Playwright UI テスト完了（子 + 親 + テンプレート制約 23 項目すべて OK、発見問題 P-001 / P-002 を同日中に対応）
+- [x] L3 フロント確認完了（ユーザ手動確認にて OK。P-002 ラベル名修正反映 / 親「連番」ボタン動作 / examples HTML 全パターン目視）
 
 **実装修正（examples 作成中に発見）**:
 - `labelWeight` → `labelBold` 属性名のずれ（`block.json` のみ古い `labelWeight: string` のまま、UI / utils / v1 deprecated migrate はすべて `labelBold: boolean` 想定）→ `block.json` を `labelBold: { type: "boolean" }` に修正、`types.ts` から未使用の `labelWeight` を削除、deprecated fixture 3 件（`deprecated-no-label` / `deprecated-contents-border-color` / `deprecated-contents-inner-margin`）に `"labelBold": false` を追加
@@ -233,8 +233,8 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 - `setup-tests.js` で `window.ystdtbIconList` モックが `star` のみ。`star` を含む fixture（`label-icon__star` / `label-font__preset` / `label-font__custom` / `child__mixed-label` / `combo__event`）は SVG 込みで HTML を書く必要あり（モックされていないアイコンは空タグで OK）
 - `labelBorderRadius: "0"` のような明示的「ゼロ値」は `labelBorderRadius ? labelBorderRadius : undefined` で truthy 扱いとなり `style="border-radius:0"` が出力される（fixture HTML にも反映が必要）
 
-**L2 で発見した問題（対応判断待ち）**:
-- **P-001（仕様未記載）**: 親「ラベルタイプ」HorizonButtonSelect に**「連番」**選択肢があり、選択時に各子の `labelContents` を `1, 2, 3, ...` と自動設定する親一括専用ショートカット機能。子側「タイプ」は「なし/アイコン/テキスト」と異なる。spec.md / examples / fixture に未記載
-- **P-002（命名不揃い）**: 親側 BaseControl ラベル「ラベルタイプ」「ラベル角丸」に対し、子側は「タイプ」「角丸」と前置なし。CLAUDE.md 命名規則（同名設定の曖昧さ回避）からは子側を「ラベルタイプ」「ラベル角丸」に揃えるべき。v2 リリース観点で「リリース後対応」も選択肢
+**L2 で発見・対応した問題**:
+- **P-001 対応済**: 親「ラベルタイプ」HorizonButtonSelect の隠し選択肢「連番」（選択時に各子の `labelContents` を `1, 2, 3, ...` と自動設定する親一括専用ショートカット）を spec.md / examples「ステップガイド風」説明文 / L1 fixture（`bulk__sequential`）に明記
+- **P-002 対応済**: 子側 BaseControl ラベル「タイプ」「角丸」を親側に揃えて「ラベルタイプ」「ラベル角丸」に変更（`label-type.tsx` / `border-radius.tsx`）。`npm run build:blocks:v2` 実行済み
 
-**次にやること**: P-001 / P-002 への対応判断 → L3 フロント確認
+**完了**（v2 リリースに向けたフェーズ 3.2「yStandard テーマでの全体テスト」のうち block-library 配下のすべてのブロック対応が完了）
