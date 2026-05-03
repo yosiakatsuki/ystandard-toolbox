@@ -16,7 +16,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { PanelProps } from './index';
+import type { PanelProps } from './index';
 
 export default function RichDrawerMenu( {
 	updateSection,
@@ -52,6 +52,12 @@ export default function RichDrawerMenu( {
 			title={ __( 'リッチドロワーメニュー', 'ystandard-toolbox' ) }
 		>
 			<PanelInner>
+				<NoticeSecondaryText>
+					{ __(
+						'モバイル表示のメニュー項目を編集できるようにする機能です。',
+						'ystandard-toolbox'
+					) }
+				</NoticeSecondaryText>
 				<PluginSettingsBaseControl
 					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
 					id={ 'enable' }
@@ -62,14 +68,22 @@ export default function RichDrawerMenu( {
 						options={ [
 							{
 								value: true,
-								label: __( 'ON', 'ystandard-toolbox' ),
+								label: __( '有効', 'ystandard-toolbox' ),
 							},
 							{
 								value: false,
-								label: __( 'OFF', 'ystandard-toolbox' ),
+								label: __( '無効', 'ystandard-toolbox' ),
 							},
 						] }
 					/>
+					{ toBool( enableRichDrawerMenu ) && (
+						<NoticeSecondaryText>
+							{ __(
+								'メニューの編集は外観 -> ウィジェットから「ドロワーメニュー(上)」または「ドロワーメニュー(下)」を編集してください。',
+								'ystandard-toolbox'
+							) }
+						</NoticeSecondaryText>
+					) }
 				</PluginSettingsBaseControl>
 				{ toBool( enableRichDrawerMenu ) && (
 					<>
