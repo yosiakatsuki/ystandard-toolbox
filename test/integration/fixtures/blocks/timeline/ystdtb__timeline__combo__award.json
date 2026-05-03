@@ -1,0 +1,39 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "icon",
+					"labelContents": "award",
+					"labelSize": "50px",
+					"labelBold": false,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-orange",
+					"labelBorderRadius": "8px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "icon",
+					"labelContents": "award",
+					"labelSize": "50px",
+					"labelBold": false,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-orange",
+					"labelBorderRadius": "8px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

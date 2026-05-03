@@ -45,7 +45,7 @@ v2 リリースロードマップ フェーズ3.2「yStandard テーマでの全
 | [posts](#posts) | ✅ | ✅ | ✅ 29件 | ✅ | ✅ |
 | [slider](#slider--slider-item) | ✅ | ✅ | ✅ 44件 | ✅ | ✅ |
 | [sns-share](#sns-share) | ✅ | ✅ | ✅ 23件 | ✅ | ✅ |
-| [timeline](#timeline--timeline-item) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [timeline](#timeline--timeline-item) | ✅ | ✅ | ✅ 38件 | ❌ | ❌ |
 
 凡例: ✅ 完了 / 🔄 進行中 / ⚠️ 要対応 / ❌ 未着手
 
@@ -220,10 +220,17 @@ dynamic block（`save() = null`、`render_callback` 経由）。PHP ロジック
 
 親ブロック側に 1 ファイルで集約。
 
-- [ ] examples HTML 作成
-- [ ] spec.md 作成
-- [ ] L1 fixture 作成
+- [x] examples HTML 作成（実装齟齬「`labelWeight` → `labelBold`」修正を含む。実機エディタで正規化済み）
+- [x] spec.md 作成（三層 L1/L2/L3 対応、L1 fixture 38 件）
+- [x] L1 fixture 作成（38 件、`npm run test:integration` 全 459 件パス）
 - [ ] L2 Playwright UI テスト
 - [ ] L3 フロント確認
 
-**次にやること**: examples HTML 作成
+**実装修正（examples 作成中に発見）**:
+- `labelWeight` → `labelBold` 属性名のずれ（`block.json` のみ古い `labelWeight: string` のまま、UI / utils / v1 deprecated migrate はすべて `labelBold: boolean` 想定）→ `block.json` を `labelBold: { type: "boolean" }` に修正、`types.ts` から未使用の `labelWeight` を削除、deprecated fixture 3 件（`deprecated-no-label` / `deprecated-contents-border-color` / `deprecated-contents-inner-margin`）に `"labelBold": false` を追加
+
+**L1 fixture 作成中の発見**:
+- `setup-tests.js` で `window.ystdtbIconList` モックが `star` のみ。`star` を含む fixture（`label-icon__star` / `label-font__preset` / `label-font__custom` / `child__mixed-label` / `combo__event`）は SVG 込みで HTML を書く必要あり（モックされていないアイコンは空タグで OK）
+- `labelBorderRadius: "0"` のような明示的「ゼロ値」は `labelBorderRadius ? labelBorderRadius : undefined` で truthy 扱いとなり `style="border-radius:0"` が出力される（fixture HTML にも反映が必要）
+
+**次にやること**: L2 Playwright UI テスト

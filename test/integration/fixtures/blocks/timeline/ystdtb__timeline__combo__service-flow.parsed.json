@@ -1,0 +1,69 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "STEP 1",
+					"labelBold": true,
+					"labelBorderRadius": "4px",
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "STEP 2",
+					"labelBold": true,
+					"labelBorderRadius": "4px",
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 2</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 2</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "STEP 3",
+					"labelBold": true,
+					"labelBorderRadius": "4px",
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 3</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-background\" style=\"font-size:14px;font-weight:700;color:#ffffff;background-color:#0f172a;border-radius:4px\"><span class=\"ystdtb-timeline__label-text\">STEP 3</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\">\n\n\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

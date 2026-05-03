@@ -1,0 +1,54 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "STEP 1",
+					"labelBold": true,
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px",
+					"labelBorderRadius": "4px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "STEP 2",
+					"labelBold": true,
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px",
+					"labelBorderRadius": "4px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "STEP 3",
+					"labelBold": true,
+					"customLabelColor": "#ffffff",
+					"customLabelBackgroundColor": "#0f172a",
+					"customLabelFontSize": "14px",
+					"labelBorderRadius": "4px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]
