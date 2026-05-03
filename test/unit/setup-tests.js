@@ -160,6 +160,18 @@ jest.mock( '@wordpress/components', () => ( {
 		</div>
 	),
 	// @ts-ignore
+	CheckboxControl: ( { label, checked, onChange, ...rest } ) => (
+		<label>
+			<input
+				type="checkbox"
+				checked={ checked }
+				onChange={ ( e ) => onChange( e.target.checked ) }
+				{ ...rest }
+			/>
+			{ label }
+		</label>
+	),
+	// @ts-ignore
 	PanelBody: ( { title, children } ) => (
 		<div>
 			<h2>{ title }</h2>

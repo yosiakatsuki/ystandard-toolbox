@@ -27,6 +27,10 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
+	/**
+	 * mobileMenuEnable=true のみ設定された状態で inline_css() がベース CSS のみを出力し、
+	 * グローバルメニュー非表示 / 検索非表示の追加ルールが含まれないことを確認。
+	 */
 	public function test_inline_css_default_enabled_only_outputs_base_css() {
 		$this->update_option( [ 'mobileMenuEnable' => true ] );
 		$instance = new \ystandard_toolbox\Drawer_Menu();
@@ -39,6 +43,11 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '.global-nav__search', $css );
 	}
 
+	/**
+	 * mobileMenuHideGlobalMenu=true 設定時に inline_css() に
+	 * グローバルメニュー非表示の display:none ルールが追加されることを確認。
+	 * 検索ルールは含まれないことも併せて検証。
+	 */
 	public function test_inline_css_hide_global_menu_outputs_display_none_rule() {
 		$this->update_option(
 			[
@@ -58,6 +67,11 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '.global-nav__search', $css );
 	}
 
+	/**
+	 * mobileMenuHideSearch=true 設定時に inline_css() に
+	 * 検索フォーム非表示の display:none ルールが追加されることを確認。
+	 * グローバルメニュールールは含まれないことも併せて検証。
+	 */
 	public function test_inline_css_hide_search_outputs_display_none_rule() {
 		$this->update_option(
 			[
@@ -77,6 +91,10 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		);
 	}
 
+	/**
+	 * mobileMenuHideGlobalMenu / mobileMenuHideSearch を両方 true にした際、
+	 * inline_css() に両方の display:none ルールが含まれることを確認。
+	 */
 	public function test_inline_css_hide_both_outputs_both_rules() {
 		$this->update_option(
 			[
@@ -95,6 +113,10 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		$this->assertStringContainsString( '.global-nav__search', $css );
 	}
 
+	/**
+	 * inline_css() が引数で渡された既存 CSS を結果の先頭に保持し、
+	 * その後にベースルールを連結する形で出力することを確認。
+	 */
 	public function test_inline_css_preserves_input_css_at_head() {
 		$this->update_option( [ 'mobileMenuEnable' => true ] );
 		$instance = new \ystandard_toolbox\Drawer_Menu();

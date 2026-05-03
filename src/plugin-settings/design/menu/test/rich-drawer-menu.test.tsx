@@ -9,7 +9,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
 /* Plugin Dependencies */
-import RichDrawerMenu from './rich-drawer-menu';
+import RichDrawerMenu from '../rich-drawer-menu';
 
 type SectionSettings = Record< string, unknown >;
 type RenderProps = {
