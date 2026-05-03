@@ -77,7 +77,7 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 
 | 機能 | UI コンポーネント | 消費側 PHP | JS | PHP |
 |---|---|---|:-:|:-:|
-| ヘッダー オーバーレイ | `header/overlay.tsx` | `inc/header/class-header-overlay.php` | ❌ | ❌ |
+| ヘッダー オーバーレイ | `header/overlay.tsx` | `inc/header/class-header-overlay.php` | ✅ | ✅ |
 | サブヘッダー | `header/sub-header.tsx` | `inc/header/class-sub-header.php` | ❌ | △ |
 | リッチドロワーメニュー | `menu/rich-drawer-menu.tsx` | `inc/navigation/class-drawer-menu.php` | ✅ | ✅ |
 | アーカイブ レイアウト | `archive/layout.tsx` | `inc/archive/class-archive.php` | ❌ | △ |
