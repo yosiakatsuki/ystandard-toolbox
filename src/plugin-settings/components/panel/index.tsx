@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 /**
- * Akatsuki
+ * Aktk dependencies
  */
 import { Panel } from '@aktk/block-components/components/panel';
 
@@ -8,7 +8,7 @@ import './style-editor.scss';
 
 interface PluginSettingsPanelProps {
 	title: string;
-	initialOpen?: ( () => boolean ) | boolean;
+	initialOpen?: boolean;
 	children: React.ReactNode;
 	isNested?: boolean;
 }
