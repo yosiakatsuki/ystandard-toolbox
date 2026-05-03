@@ -26,7 +26,7 @@ export function BorderRadius( props: TimeLineItemProps ): JSX.Element {
 	return (
 		<BaseControl
 			id="border-radius"
-			label={ __( '角丸', 'ystandard-toolbox' ) }
+			label={ __( 'ラベル角丸', 'ystandard-toolbox' ) }
 		>
 			<UnitControl
 				value={ labelBorderRadius }

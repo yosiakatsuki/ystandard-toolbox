@@ -38,7 +38,7 @@ export function LabelType( props: TimeLineItemProps ): JSX.Element {
 	return (
 		<BaseControl
 			id="label-type"
-			label={ __( 'タイプ', 'ystandard-toolbox' ) }
+			label={ __( 'ラベルタイプ', 'ystandard-toolbox' ) }
 		>
 			<HorizonButtonSelect
 				value={ labelType }
