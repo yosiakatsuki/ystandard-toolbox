@@ -14,6 +14,7 @@
 - [docs/block-examples-guideline.md](docs/block-examples-guideline.md) — ブロック設定例・使用例（examples）の作成ガイドライン
 - [docs/block-operation-test-guideline.md](docs/block-operation-test-guideline.md) — ブロック操作テスト（Playwright MCP を使った UI 自動テスト）の共通ガイドライン
 - [docs/v2-block-testing.md](docs/v2-block-testing.md) — v2 ブロック全体テストの対象・進捗管理
+- [docs/v2-settings-testing.md](docs/v2-settings-testing.md) — プラグイン設定画面テスト（JS/PHP）の方針・命名規則・進捗管理
 
 ## プロジェクト概要
 
