@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import {
 	MediaUpload,
-	MediaObject,
+	type MediaObject,
 } from '@aktk/block-components/components/media-upload';
 import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
@@ -19,7 +19,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { PanelProps } from './index';
+import type { PanelProps } from './index';
 
 interface RatioOption {
 	key: string;
