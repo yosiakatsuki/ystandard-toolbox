@@ -80,10 +80,10 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | ヘッダー オーバーレイ | `header/overlay.tsx` | `inc/header/class-header-overlay.php` | ✅ | ✅ |
 | サブヘッダー | `header/sub-header.tsx` | `inc/header/class-sub-header.php` | ✅ | ✅（既存 `Sub_Header_Test` + 新規 `Settings_Sub_Header_Test`） |
 | リッチドロワーメニュー | `menu/rich-drawer-menu.tsx` | `inc/navigation/class-drawer-menu.php` | ✅ | ✅ |
-| アーカイブ レイアウト | `archive/layout.tsx` | `inc/archive/class-archive.php` | ❌ | △ |
-| アーカイブ ソート | `archive/sort.tsx` | 同上 | ❌ | △ |
-| アーカイブ 日付 | `archive/date.tsx` | 同上 | ❌ | △ |
-| アーカイブ 画像 | `archive/image.tsx` | 同上 | ❌ | △ |
+| アーカイブ レイアウト | `archive/layout.tsx` | `inc/archive/class-archive.php` | ✅ | ✅（既存 `Archive_Test` + 新規 `Settings_Archive_Test`） |
+| アーカイブ ソート | `archive/sort.tsx` | 同上 | ✅ | 同上 |
+| アーカイブ 日付 | `archive/date.tsx` | 同上 | ✅ | 同上 |
+| アーカイブ 画像 | `archive/image.tsx` | 同上 | ✅ | 同上 |
 | Copyright | `copyright/index.tsx` | `inc/copyright/class-copyright.php` | ❌ | ❌ |
 
 ### その他の設定画面（リリース後でも可）
