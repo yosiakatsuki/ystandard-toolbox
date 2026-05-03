@@ -33,19 +33,19 @@ const renderPanel = ( overrides: Partial< RenderProps > = {} ) => {
 };
 
 describe( 'RichDrawerMenu — handleOnChange ロジック', () => {
-	it( '「ON」ボタンクリック → updateSection({ mobileMenuEnable: true }) が呼ばれる', () => {
+	it( '「有効」ボタンクリック → updateSection({ mobileMenuEnable: true }) が呼ばれる', () => {
 		const { updateSection } = renderPanel();
-		fireEvent.click( screen.getByRole( 'button', { name: 'ON' } ) );
+		fireEvent.click( screen.getByRole( 'button', { name: '有効' } ) );
 		expect( updateSection ).toHaveBeenCalledWith( {
 			mobileMenuEnable: true,
 		} );
 	} );
 
-	it( '「OFF」ボタンクリック → updateSection({ mobileMenuEnable: false }) が呼ばれる', () => {
+	it( '「無効」ボタンクリック → updateSection({ mobileMenuEnable: false }) が呼ばれる', () => {
 		const { updateSection } = renderPanel( {
 			sectionSettings: { mobileMenuEnable: true },
 		} );
-		fireEvent.click( screen.getByRole( 'button', { name: 'OFF' } ) );
+		fireEvent.click( screen.getByRole( 'button', { name: '無効' } ) );
 		expect( updateSection ).toHaveBeenCalledWith( {
 			mobileMenuEnable: false,
 		} );

@@ -92,8 +92,8 @@ jest.mock( '@wordpress/components', () => ( {
 		);
 	},
 	// @ts-ignore
-	Button: ( { onClick, children } ) => (
-		<button onClick={ onClick }>{ children }</button>
+	Button: ( { onClick, children, text } ) => (
+		<button onClick={ onClick }>{ children ?? text }</button>
 	),
 	// @ts-ignore
 	// eslint-disable-next-line no-unused-vars

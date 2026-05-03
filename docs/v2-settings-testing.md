@@ -84,7 +84,7 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | アーカイブ ソート | `archive/sort.tsx` | 同上 | ✅ | 同上 |
 | アーカイブ 日付 | `archive/date.tsx` | 同上 | ✅ | 同上 |
 | アーカイブ 画像 | `archive/image.tsx` | 同上 | ✅ | 同上 |
-| Copyright | `copyright/index.tsx` | `inc/copyright/class-copyright.php` | ❌ | ❌ |
+| Copyright | `copyright/index.tsx` | `inc/copyright/class-copyright.php` | ✅ | ✅ |
 
 ### その他の設定画面（リリース後でも可）
 
