@@ -21,7 +21,7 @@ export interface AppContainerProps {
 export default function AppContainer( props: AppContainerProps ) {
 	const { title, children, manual, loading = false } = props;
 	const loadingPanelStyle = {
-		height: 'calc(100vh - var(--wp-admin--admin-bar--height, 32px))',
+		height: '100%',
 	};
 	return (
 		<div className="relative text-base">

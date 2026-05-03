@@ -33,7 +33,7 @@ import { getEditorColors } from '@aktk/plugin-settings/utils';
 /**
  * App
  */
-import {
+import type {
 	DesignSettings,
 	DesignSettingsTab,
 	DesignSettingsSection,
@@ -43,6 +43,9 @@ import Header from './header';
 import Menu from './menu';
 import Archive from './archive';
 
+/**
+ * デザイン設定のコンテキスト
+ */
 interface DesignContextProps {
 	settings: { [ key: string ]: any };
 	isLoading: boolean;
