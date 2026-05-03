@@ -24,8 +24,8 @@
 		"labelSize": {
 			"type": "string"
 		},
-		"labelWeight": {
-			"type": "string"
+		"labelBold": {
+			"type": "boolean"
 		},
 		"labelColor": {
 			"type": "string"
