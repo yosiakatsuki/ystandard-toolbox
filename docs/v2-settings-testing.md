@@ -93,7 +93,7 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | フォント | `src/plugin-settings/font/` | ✅ | ✅ |
 | アイコンフォント | `src/plugin-settings/icon-font/` | ❌ | ❌ |
 | 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル |
-| カスタム CSS | `src/plugin-settings/custom-css/` | ❌ | ❌ |
+| カスタム CSS | `src/plugin-settings/custom-css/` | ✅ | ✅ |
 | コード追加 | `src/plugin-settings/add-code/` | ❌ | ❌ |
 | 投稿詳細ページ拡張（CTA 等） | `src/plugin-settings/cta/` | ❌ | ❌ |
 
