@@ -86,11 +86,11 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | アーカイブ 画像 | `archive/image.tsx` | 同上 | ✅ | 同上 |
 | Copyright | `copyright/index.tsx` | `inc/copyright/class-copyright.php` | ✅ | ✅ |
 
-### その他の設定画面（リリース後でも可）
+### その他の設定画面
 
 | 設定画面 | 配置 | JS | PHP |
 |---|---|:-:|:-:|
-| フォント | `src/plugin-settings/font/` | ❌ | ❌ |
+| フォント | `src/plugin-settings/font/` | ✅ | ✅ |
 | アイコンフォント | `src/plugin-settings/icon-font/` | ❌ | ❌ |
 | 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル |
 | カスタム CSS | `src/plugin-settings/custom-css/` | ❌ | ❌ |
