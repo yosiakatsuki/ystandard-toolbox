@@ -2,15 +2,34 @@
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 /**
+ * WordPress dependencies.
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Aktk Block Components
+ */
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
+
+/**
  * Components
  */
 import ListItem from './list-item';
+
+const TAB_NOTE = {
+	header: __( 'ページ本文上部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。', 'ystandard-toolbox' ),
+	footer: __( 'ページ本文下部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。', 'ystandard-toolbox' ),
+} as const;
+
+type TabName = keyof typeof TAB_NOTE;
 
 interface ListContainerProps {
 	items: any[];
 	setItems: ( items: any[] ) => void;
 	position: string;
+	tabName: TabName;
 }
+
 
 /**
  * CTAアイテムリストコンテナコンポーネント
@@ -24,6 +43,7 @@ export default function ListContainer( {
 	items,
 	setItems,
 	position,
+	tabName,
 }: ListContainerProps ): JSX.Element {
 	/**
 	 * アイテムの優先度を設定する関数
@@ -66,29 +86,32 @@ export default function ListContainer( {
 		setItems( newItems );
 	};
 	return (
-		<DragDropContext onDragEnd={ handleOnDragEnd }>
-			<Droppable droppableId={ position }>
-				{ /* @ts-ignore */ }
-				{ ( provided ) => (
-					<div
-						className={ 'ystdtb-settings-cta__list-container' }
-						{ ...provided.droppableProps }
-						ref={ provided.innerRef }
-					>
-						{ items.map( ( item, index ) => {
-							return (
-								<ListItem
-									key={ item.id }
-									item={ item }
-									index={ index }
-									onChange={ handleOnChangeListItem }
-								/>
-							);
-						} ) }
-						{ provided.placeholder }
-					</div>
-				) }
-			</Droppable>
-		</DragDropContext>
+		<>
+			<NoticeSecondaryText className='mt-0 mb-4'>{ TAB_NOTE[ tabName ] }</NoticeSecondaryText>
+			<DragDropContext onDragEnd={ handleOnDragEnd }>
+				<Droppable droppableId={ position }>
+					{ /* @ts-ignore */ }
+					{ ( provided ) => (
+						<div
+							className={ 'ystdtb-settings-cta__list-container' }
+							{ ...provided.droppableProps }
+							ref={ provided.innerRef }
+						>
+							{ items.map( ( item, index ) => {
+								return (
+									<ListItem
+										key={ item.id }
+										item={ item }
+										index={ index }
+										onChange={ handleOnChangeListItem }
+									/>
+								);
+							} ) }
+							{ provided.placeholder }
+						</div>
+					) }
+				</Droppable>
+			</DragDropContext>
+		</>
 	);
 }
