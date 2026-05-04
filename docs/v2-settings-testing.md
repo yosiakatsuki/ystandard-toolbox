@@ -91,11 +91,12 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | 設定画面 | 配置 | JS | PHP |
 |---|---|:-:|:-:|
 | フォント | `src/plugin-settings/font/` | ✅ | ✅ |
-| アイコンフォント | `src/plugin-settings/icon-font/` | ❌ | ❌ |
 | 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル |
 | カスタム CSS | `src/plugin-settings/custom-css/` | ✅ | ✅ |
 | コード追加 | `src/plugin-settings/add-code/` | ❌ | ❌ |
 | 投稿詳細ページ拡張（CTA 等） | `src/plugin-settings/cta/` | ❌ | ❌ |
+
+> アイコンフォント（`inc/font/class-icon-font.php`）は管理 UI を持たないフロント機能のため、本ドキュメントのスコープ外。機能ロジックテストとして別途整備する。
 
 ### 既存 PHP テストとの関係
 
