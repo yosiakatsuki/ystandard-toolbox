@@ -206,10 +206,10 @@ class Sns_Share_Block {
 		$title        = $share_button['official']['title'];
 		$twitter_attr = '';
 		if ( isset( $share_button['official']['twitter-via'] ) && $share_button['official']['twitter-via'] ) {
-			$twitter_attr .= ' data-via="' . $share_button['official']['twitter-via'] . '"';
+			$twitter_attr .= ' data-via="' . esc_attr( $share_button['official']['twitter-via'] ) . '"';
 		}
 		if ( isset( $share_button['official']['twitter-related'] ) && $share_button['official']['twitter-related'] ) {
-			$twitter_attr .= ' data-related="' . $share_button['official']['twitter-related'] . '"';
+			$twitter_attr .= ' data-related="' . esc_attr( $share_button['official']['twitter-related'] ) . '"';
 		}
 		// クラス名作成.
 		$classes = self::get_wrap_class_names( self::$attributes );
@@ -282,15 +282,15 @@ class Sns_Share_Block {
 		$twitter_url_option = '';
 		if ( ! empty( $twitter_via ) ) {
 			$result['official']['twitter-via'] = $twitter_via;
-			$twitter_url_option                .= "&via={$twitter_via}";
+			$twitter_url_option                .= '&via=' . rawurlencode( $twitter_via );
 		}
 		if ( ! empty( $twitter_related ) ) {
 			$result['official']['twitter-related'] = $twitter_related;
-			$twitter_url_option                    .= "&related={$twitter_related}";
+			$twitter_url_option                    .= '&related=' . rawurlencode( $twitter_related );
 		}
 		if ( ! empty( $twitter_hash_tags ) ) {
 			$result['official']['twitter-hash-tags'] = $twitter_hash_tags;
-			$twitter_url_option                      .= "&hashtags={$twitter_hash_tags}";
+			$twitter_url_option                      .= '&hashtags=' . rawurlencode( $twitter_hash_tags );
 		}
 		$twitter_share_url = "https://twitter.com/intent/tweet?text={$share_title}&url={$share_url}{$twitter_url_option}";
 
