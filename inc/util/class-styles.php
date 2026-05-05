@@ -149,7 +149,7 @@ class Styles {
 					// 色.
 					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
 					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
-					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rbga-opacity,1))";
+					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rgba-opacity,1))";
 					// マージ.
 					$desktop = array_merge( $color_var, $desktop );
 				}

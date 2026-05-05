@@ -782,9 +782,9 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 				'background-position'                   => 'center center',
 				'background-repeat'                     => 'no-repeat',
 				'background-size'                       => 'cover',
-				'--ystdtb-custom-heading-bg-color'      => '#222222',
-				'--ystdtb-custom-heading-bg-color-rgb'  => 'rgb(34,34,34)',
-				'--ystdtb-custom-heading-bg-color-rgba' => 'rgba(34,34,34,var(--ystdtb-custom-heading-bg-color-rbga-opacity,1))',
+				'--ystdtb-custom-heading-background-color'      => '#222222',
+				'--ystdtb-custom-heading-background-color-rgb'  => 'rgb(34,34,34)',
+				'--ystdtb-custom-heading-background-color-rgba' => 'rgba(34,34,34,var(--ystdtb-custom-heading-background-color-rgba-opacity,1))',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
@@ -888,7 +888,7 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 				'text-decoration'                    => 'underline',
 				'--ystdtb-custom-heading-color'      => '#222222',
 				'--ystdtb-custom-heading-color-rgb'  => 'rgb(34,34,34)',
-				'--ystdtb-custom-heading-color-rgba' => 'rgba(34,34,34,var(--ystdtb-custom-heading-color-rbga-opacity,1))',
+				'--ystdtb-custom-heading-color-rgba' => 'rgba(34,34,34,var(--ystdtb-custom-heading-color-rgba-opacity,1))',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
