@@ -1,6 +1,6 @@
 <?php
 
-class Heading_Design_Style_Test extends WP_UnitTestCase {
+class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 
 	public function test_parse_style_font_family() {
 		$input    = [

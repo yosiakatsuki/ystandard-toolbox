@@ -91,7 +91,7 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | 設定画面 | 配置 | JS | PHP |
 |---|---|:-:|:-:|
 | フォント | `src/plugin-settings/font/` | ✅ | ✅ |
-| 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル |
+| 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル（`Settings_Heading_Design_*_Test` に統一済み） |
 | カスタム CSS | `src/plugin-settings/custom-css/` | ✅ | ✅ |
 | コード追加 | `src/plugin-settings/add-code/` | ✅ | ✅ |
 | 投稿詳細ページ拡張（CTA 等） | `src/plugin-settings/cta/` | ✅ | ✅ |
@@ -105,9 +105,10 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 - `phpunit/test-archive.php` — `Archive_Test`
 - `phpunit/test-sub-header.php` — `Sub_Header_Test`
 - `phpunit/test-lp.php` — `LP_Test`
-- `phpunit/test-heading-design-*.php` — 見出しデザイン関連 4 ファイル
 
-これらを `phpunit/settings/` 配下に移して命名統一するかは別途判断（現状は機能している前提でそのまま）。新規追加分のみ `Settings_*_Test` 命名で進める。
+見出しデザイン関連 4 ファイルは `phpunit/settings/test-heading-design-*.php` / `Settings_Heading_Design_*_Test` に統一済み（中身のロジックは未レビュー）。
+
+残りについても `phpunit/settings/` 配下への移動・命名統一は別途判断（現状は機能している前提でそのまま）。新規追加分のみ `Settings_*_Test` 命名で進める。
 
 ## 命名・配置サマリ
 

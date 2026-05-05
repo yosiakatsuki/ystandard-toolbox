@@ -1,6 +1,6 @@
 <?php
 
-class Heading_Design_Migration_Test extends WP_UnitTestCase {
+class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 	public function set_up() {
 		parent::set_up();

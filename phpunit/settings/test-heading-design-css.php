@@ -1,6 +1,6 @@
 <?php
 
-class Heading_Design_CSS_Test extends WP_UnitTestCase {
+class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 
 	public function breakpoints_base_size() {
 		return 10;
