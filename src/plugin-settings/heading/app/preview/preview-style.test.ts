@@ -1686,3 +1686,90 @@ describe( 'ユーティリティ関数', () => {
 		expect( result.desktop ).toBe( '24px' );
 	} );
 } );
+
+/**
+ * CSS カスタムプロパティ（color / backgroundColor 由来の var）の生成テスト.
+ *
+ * preset.json で `var(--ystdtb-custom-heading-background-color)` 等を参照する
+ * デザイン（stitch の boxShadow など）が、設定画面プレビューでも正しく描画されるための回帰防止.
+ */
+describe( 'CSS カスタムプロパティ生成', () => {
+	it( 'color が HEX のとき --ystdtb-custom-heading-color 系 3 種が生成される', () => {
+		const styles = { color: '#000000' };
+		const result = parseStyles( styles );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color: #000000;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color-rgb: rgb(0,0,0);'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color-rgba: rgba(0,0,0,var(--ystdtb-custom-heading-color-rgba-opacity,1));'
+		);
+	} );
+
+	it( 'backgroundColor が HEX のとき --ystdtb-custom-heading-background-color 系 3 種が生成される', () => {
+		const styles = { backgroundColor: '#eeeeee' };
+		const result = parseStyles( styles );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color: #eeeeee;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color-rgb: rgb(238,238,238);'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color-rgba: rgba(238,238,238,var(--ystdtb-custom-heading-background-color-rgba-opacity,1));'
+		);
+	} );
+
+	it( 'parseStylesPseudoElements で before 指定時、変数名に -before プレフィックスがつく', () => {
+		const styles = {
+			enable: true,
+			color: '#222222',
+			backgroundColor: '#ffffff',
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'before' );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-before-color: #222222;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-before-background-color: #ffffff;'
+		);
+	} );
+
+	it( 'parseStylesPseudoElements で after 指定時、変数名に -after プレフィックスがつく', () => {
+		const styles = {
+			enable: true,
+			color: '#aaaaaa',
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'after' );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-after-color: #aaaaaa;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-after-color-rgb: rgb(170,170,170);'
+		);
+	} );
+
+	it( 'HEX 以外（transparent / currentColor / var(...)）は CSS 変数を生成しない', () => {
+		const transparentResult = parseStyles( { color: 'transparent' } );
+		expect( transparentResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-color:'
+		);
+		expect( transparentResult.desktop ).toContain( 'color: transparent;' );
+
+		const currentColorResult = parseStyles( {
+			backgroundColor: 'currentColor',
+		} );
+		expect( currentColorResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-background-color:'
+		);
+
+		const varResult = parseStyles( {
+			color: 'var(--some-var)',
+		} );
+		expect( varResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-color:'
+		);
+	} );
+} );

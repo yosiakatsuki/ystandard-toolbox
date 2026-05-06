@@ -9,6 +9,7 @@ import {
 	isObject,
 } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+import { hex2rgb } from '@aktk/block-components/utils/color';
 /**
  * Plugin dependencies.
  */
@@ -47,8 +48,11 @@ export default function PreviewStyle( props: PreviewStyleProps ) {
 function getStyles( props: PreviewStyleProps ) {
 	const styleProps = { ...props };
 	const style = parseStyles( styleProps?.style as unknown as object );
-	const before = parseStylesPseudoElements( styleProps?.before || {} );
-	const after = parseStylesPseudoElements( styleProps?.after || {} );
+	const before = parseStylesPseudoElements(
+		styleProps?.before || {},
+		'before'
+	);
+	const after = parseStylesPseudoElements( styleProps?.after || {}, 'after' );
 	const selector =
 		styleProps?.selector || 'ystdtb-setting-heading__preview-text';
 
@@ -62,8 +66,12 @@ function getStyles( props: PreviewStyleProps ) {
 /**
  * スタイルの解析
  * @param styles
+ * @param pseudoElement 疑似要素種別（'before' / 'after'）。CSS 変数のプレフィックスに使用.
  */
-export function parseStyles( styles: object ) {
+export function parseStyles(
+	styles: object,
+	pseudoElement: '' | 'before' | 'after' = ''
+) {
 	// 空の場合は空のオブジェクトを返す.
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -101,6 +109,29 @@ export function parseStyles( styles: object ) {
 		// spacingの場合.
 		if ( isSpacing( property ) ) {
 			value = parseLongHandStyle( value, property, parseSpacingProperty );
+		}
+
+		// 色関係のカスタムプロパティを desktop の先頭に差し込む.
+		// PHP 側 Styles::parse_styles の挙動に合わせる.
+		if ( 'backgroundColor' === key || 'color' === key ) {
+			const desktopColor = value?.desktop;
+			if (
+				typeof desktopColor === 'string' &&
+				desktopColor.includes( '#' )
+			) {
+				const varPrefix = `--ystdtb-custom-heading${
+					pseudoElement ? `-${ pseudoElement }` : ''
+				}`;
+				const colorRgb = hex2rgb( desktopColor ).join( ',' );
+				const type =
+					'backgroundColor' === key ? 'background-color' : 'color';
+				desktop = [
+					`${ varPrefix }-${ type }: ${ desktopColor };`,
+					`${ varPrefix }-${ type }-rgb: rgb(${ colorRgb });`,
+					`${ varPrefix }-${ type }-rgba: rgba(${ colorRgb },var(${ varPrefix }-${ type }-rgba-opacity,1));`,
+					...desktop,
+				];
+			}
 		}
 
 		// デスクトップの場合.
@@ -144,7 +175,8 @@ export function parseStyles( styles: object ) {
 }
 
 export function parseStylesPseudoElements(
-	styles: HeadingPseudoElementsStyle
+	styles: HeadingPseudoElementsStyle,
+	pseudoElement: 'before' | 'after' = 'before'
 ) {
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -199,7 +231,7 @@ export function parseStylesPseudoElements(
 		delete styles.iconColor;
 	}
 
-	return parseStyles( styles );
+	return parseStyles( styles, pseudoElement );
 }
 
 /**
