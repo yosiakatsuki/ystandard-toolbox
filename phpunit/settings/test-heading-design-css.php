@@ -37,12 +37,14 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 					],
 				],
 				'before' => [
+					'enable'    => true,
 					'content'   => '"before"',
 					'font-size' => [
 						'desktop' => '15px',
 					],
 				],
 				'after'  => [
+					'enable'    => true,
 					'font-size' => [
 						'desktop' => '14px',
 					],
@@ -63,6 +65,7 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 					],
 				],
 				'after'  => [
+					'enable'    => true,
 					'font-size' => [
 						'desktop' => '11px',
 					],
@@ -76,21 +79,35 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 		];
 		$expected   = <<<EOD
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
 font-size:16px;
 	margin-top:10px;
 	position:relative;
 }
+@media (min-width: 40rem) AND (max-width: 63.999rem) {
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+	font-size:17px;
+}
+}
+@media (max-width: 39.999rem) {
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+	font-size:18px;
+}
+}
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::before,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
 	content:"before";
 	font-size:15px;
 }
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::after,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
 	font-size:14px;
 	content:"";
 }
@@ -132,12 +149,14 @@ EOD;
 					],
 				],
 				'before' => [
+					'enable'    => true,
 					'content'   => '"before"',
 					'font-size' => [
 						'desktop' => '15px',
 					],
 				],
 				'after'  => [
+					'enable'    => true,
 					'font-size' => [
 						'desktop' => '14px',
 					],
@@ -158,6 +177,7 @@ EOD;
 					],
 				],
 				'after'  => [
+					'enable'    => true,
 					'font-size' => [
 						'desktop' => '11px',
 					],
@@ -171,21 +191,21 @@ EOD;
 		];
 		$expected   = <<<EOD
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
 font-size:16px;
 	margin-top:10px;
 	position:relative;
 }
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::before,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
 	content:"before";
 	font-size:15px;
 }
 .ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::after,
-.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
-.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
 	font-size:14px;
 	content:"";
 }
@@ -219,8 +239,8 @@ EOD;
 			'sidebar'    => 'heading-3',
 		];
 		$expected       = [
-			'.ystdtb .entry-content h1:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
-			'.ystdtb .entry-content h2:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 		];
 		$actual         = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,
@@ -240,7 +260,7 @@ EOD;
 		$this->assertEquals( $expected, $actual );
 
 		$expected = [
-			'.ystdtb .entry-content h3:not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .entry-content h3:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 			'.ystdtb .sidebar .widget-title',
 			'.ystdtb .sidebar .widgettitle',
 		];
