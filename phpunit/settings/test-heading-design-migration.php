@@ -4,7 +4,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 	public function set_up() {
 		parent::set_up();
-		update_option( 'ystdtb_heading', [ 'hoge' => 'fuga' ] );
+		// v2 設定はマイグレーション前提として常に未設定状態にする.
 		update_option( 'ystdtb_heading_v2', false );
 		if ( ! class_exists( '\ystandard_toolbox\Heading_Compatible' ) ) {
 			require_once YSTDTB_PATH . '/inc/heading/class-heading-compatible.php';
@@ -14,10 +14,18 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		}
 	}
 
-	public function set_option( $value ) {
+	/**
+	 * v1 設定を保存するヘルパ.
+	 *
+	 * @param array $value v1 設定値.
+	 */
+	private function set_v1_option( $value ) {
 		update_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME, $value );
 	}
 
+	/**
+	 * preset:icons でアイコンタイプの疑似要素設定が v2 に正しく移行される.
+	 */
 	public function test_icon_type() {
 		$option = json_decode( '{
 		"preset": "icons",
@@ -85,9 +93,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'h1' => $option,
 		];
 
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -133,6 +142,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * margin の一部の方向のみ指定された場合、指定方向のみが v2 に出力される.
+	 */
 	public function test_margin_right_left() {
 		$input = [
 			'h1' => [
@@ -148,9 +160,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'marginLeftUnit'   => 'vw',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -168,6 +181,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * margin の全方向（top/right/bottom/left）が v2 に正しく移行される.
+	 */
 	public function test_margin_all() {
 		$input = [
 			'h1' => [
@@ -183,9 +199,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'marginLeftUnit'   => 'vw',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -205,6 +222,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * padding の一部の方向のみ指定された場合、指定方向のみが v2 に出力される.
+	 */
 	public function test_padding_top_bottom() {
 		$input = [
 			'h1' => [
@@ -220,9 +240,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'paddingLeftUnit'   => 'vw',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -241,6 +262,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 
+	/**
+	 * padding の全方向（top/right/bottom/left）が v2 に正しく移行される.
+	 */
 	public function test_padding_all() {
 		$input = [
 			'h1' => [
@@ -256,9 +280,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'paddingLeftUnit'   => 'vw',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -279,6 +304,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 
+	/**
+	 * border の一部の方向のみ指定された場合、指定方向のみが v2 に出力される.
+	 */
 	public function test_border_top_bottom() {
 		$input = [
 			'h1' => [
@@ -302,9 +330,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'borderLeftColor'       => '',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -331,6 +360,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 
+	/**
+	 * border の全方向（top/right/bottom/left）が v2 に正しく移行される.
+	 */
 	public function test_border_all() {
 		$input = [
 			'h1' => [
@@ -354,9 +386,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'borderLeftColor'       => '#333333',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -392,6 +425,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * background 関連の各設定が v2 に正しく移行される.
+	 */
 	public function test_background() {
 		$input = [
 			'h1' => [
@@ -404,9 +440,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'backgroundSize'     => 'cover',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -423,6 +460,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * フォントサイズのレスポンシブ設定が desktop/tablet/mobile 別に v2 へ移行される.
+	 */
 	public function test_typography_responsive() {
 		$input = [
 			'h1' => [
@@ -435,9 +475,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'fontSizeResponsive' => true,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -454,6 +495,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * 文字関連の基本設定（色・揃え・太さ・行間など）が v2 に正しく移行される.
+	 */
 	public function test_typography_basic() {
 		$input = [
 			'h1' => [
@@ -474,9 +518,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'letterSpacing'      => '0.05',
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -502,6 +547,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * preset:icons のアイコン設定が疑似要素として v2 に展開される.
+	 */
 	public function test_preset_icons() {
 		$input = [
 			'h1' => [
@@ -509,9 +557,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => false,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -536,6 +585,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * preset:balloon の吹き出し三角（after 疑似要素）が v2 に展開される.
+	 */
 	public function test_preset_balloon() {
 		$input = [
 			'h1' => [
@@ -543,9 +595,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => false,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -598,6 +651,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * preset:double-border-bottom の after 疑似要素（下線2種類目）が v2 に展開される.
+	 */
 	public function test_preset_after() {
 		$input = [
 			'h1' => [
@@ -605,9 +661,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => false,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -643,6 +700,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * preset:border-bottom（基本プリセット）が v2 にスタイルとして展開される.
+	 */
 	public function test_preset() {
 		$input = [
 			'h1' => [
@@ -650,9 +710,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => false,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -678,6 +739,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * 見出しレベル名（sidebar / footer / *-title）が v2 で日本語ラベルに変換される.
+	 */
 	public function test_basic_name() {
 		$input = [
 			'sidebar'       => [
@@ -701,9 +765,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => true,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-sidebar'       => [
 				'slug'   => 'v1-sidebar',
@@ -734,6 +799,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $v2 );
 	}
 
+	/**
+	 * 複数レベル（h1, h2）の基本構造（slug / label / 空style）が v2 に正しく作成される.
+	 */
 	public function test_basic() {
 		$input = [
 			'h1' => [
@@ -745,9 +813,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'useCustomStyle' => true,
 			],
 		];
-		$this->set_option( $input );
-		$heading  = new \ystandard_toolbox\Heading_Migration();
-		$v2       = $heading->migration( $data );
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
 		$expected = [
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
@@ -761,5 +830,251 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			],
 		];
 		$this->assertEquals( $expected, $v2 );
+	}
+
+	/**
+	 * useCustomStyle:true のレベルは heading_level マップに登録される（手動割当不要で自動有効化）.
+	 */
+	public function test_heading_level_mapped_when_use_custom_style_true() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$heading->migration( $data );
+		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+	}
+
+	/**
+	 * useCustomStyle:false のレベルは heading_level マップに登録されない（手動割当待ち）.
+	 */
+	public function test_heading_level_not_mapped_when_use_custom_style_false() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => false ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$heading->migration( $data );
+		$this->assertEquals( [], $data['level'] );
+	}
+
+	/**
+	 * useCustomStyle が文字列 "true" / "false" でも boolean として正しく解釈される.
+	 */
+	public function test_heading_level_with_string_boolean() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => 'true' ],
+			'h2' => [ 'preset' => 'custom', 'useCustomStyle' => 'false' ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$heading->migration( $data );
+		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+	}
+
+	/**
+	 * 複数レベル混在で useCustomStyle:true のものだけが heading_level マップに登録される.
+	 */
+	public function test_heading_level_mixed() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+			'h2' => [ 'preset' => 'custom', 'useCustomStyle' => false ],
+			'h3' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$heading->migration( $data );
+		$this->assertEquals(
+			[
+				'h1' => 'v1-h1',
+				'h3' => 'v1-h3',
+			],
+			$data['level']
+		);
+	}
+
+	/**
+	 * migration() の参照引数 $data に v1 / v2 / level の3キーが書き込まれる.
+	 */
+	public function test_migration_writes_to_data_reference() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		// v1 が参照引数経由で保持される.
+		$this->assertEquals( $input, $data['v1'] );
+		// v2 は戻り値と一致する.
+		$this->assertEquals( $v2, $data['v2'] );
+		// level マップが書き込まれる.
+		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+	}
+
+	/**
+	 * api_route() がパラメータ不正（migration キーなし）でエラー応答を返す.
+	 */
+	public function test_api_route_invalid_param() {
+		$request = new \WP_REST_Request();
+		$request->set_body( wp_json_encode( [ 'foo' => 'bar' ] ) );
+		$request->set_header( 'content-type', 'application/json' );
+
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$response = $heading->api_route( $request );
+		$body     = $response->get_data();
+
+		$this->assertEquals( \ystandard_toolbox\Api::STATUS_ERROR, $body['status'] );
+	}
+
+	/**
+	 * api_route() が migration:false のときエラー応答を返す.
+	 */
+	public function test_api_route_migration_false() {
+		$request = new \WP_REST_Request();
+		$request->set_body( wp_json_encode( [ 'migration' => false ] ) );
+		$request->set_header( 'content-type', 'application/json' );
+
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$response = $heading->api_route( $request );
+		$body     = $response->get_data();
+
+		$this->assertEquals( \ystandard_toolbox\Api::STATUS_ERROR, $body['status'] );
+	}
+
+	/**
+	 * api_route() が migration:true で v1 設定を v2 / level option に書き込み、成功応答を返す.
+	 */
+	public function test_api_route_success() {
+		$input = [
+			'h1' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+
+		$request = new \WP_REST_Request();
+		$request->set_body( wp_json_encode( [ 'migration' => true ] ) );
+		$request->set_header( 'content-type', 'application/json' );
+
+		$heading  = new \ystandard_toolbox\Heading_Migration();
+		$response = $heading->api_route( $request );
+		$body     = $response->get_data();
+
+		$this->assertEquals( \ystandard_toolbox\Api::STATUS_SUCCESS, $body['status'] );
+		// v2 設定が保存されている.
+		$this->assertArrayHasKey( 'v1-h1', get_option( \ystandard_toolbox\Heading::OPTION_MAIN ) );
+		// level マップが保存されている.
+		$this->assertEquals(
+			[ 'h1' => 'v1-h1' ],
+			get_option( \ystandard_toolbox\Heading::OPTION_LEVEL )
+		);
+	}
+
+	/**
+	 * v1 設定が未保存（option 未登録）の場合、migration() は空配列を返す.
+	 */
+	public function test_migration_with_empty_v1() {
+		delete_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+		$this->assertEquals( [], $v2 );
+	}
+
+	/**
+	 * v1 設定が空配列の場合、migration() は空配列を返す.
+	 */
+	public function test_migration_with_empty_array_v1() {
+		$this->set_v1_option( [] );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+		$this->assertEquals( [], $v2 );
+	}
+
+	/**
+	 * borderRadius は px 単位を付加されて desktop キー配下に v2 へ移行される.
+	 */
+	public function test_border_radius() {
+		$input = [
+			'h1' => [
+				'preset'         => 'custom',
+				'useCustomStyle' => true,
+				'borderRadius'   => '5',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals(
+			[ 'desktop' => '5px' ],
+			$v2['v1-h1']['style']['borderRadius']
+		);
+	}
+
+	/**
+	 * preset 値に含まれる旧プロパティ名 --ystdtb-custom-header-* が --ystdtb-custom-heading-* に置換される.
+	 *
+	 * library/ystandard-toolbox-heading/preset.json の stitch プリセット boxShadow に旧名が含まれる.
+	 */
+	public function test_custom_property_rename() {
+		$input = [
+			'h1' => [
+				'preset'         => 'stitch',
+				'useCustomStyle' => true,
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$box_shadow = $v2['v1-h1']['style']['boxShadow'] ?? '';
+		$this->assertStringContainsString( '--ystdtb-custom-heading', $box_shadow );
+		$this->assertStringNotContainsString( '--ystdtb-custom-header', $box_shadow );
+	}
+
+	/**
+	 * 同一の v1 設定に対して migration() を 2 回実行しても結果が一致する（冪等性）.
+	 */
+	public function test_migration_is_idempotent() {
+		$input = [
+			'h1' => [ 'preset' => 'border-bottom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+
+		$heading = new \ystandard_toolbox\Heading_Migration();
+
+		$data_first = [];
+		$v2_first   = $heading->migration( $data_first );
+
+		$data_second = [];
+		$v2_second   = $heading->migration( $data_second );
+
+		$this->assertEquals( $v2_first, $v2_second );
+		$this->assertEquals( $data_first['level'], $data_second['level'] );
+	}
+
+	/**
+	 * ラベル定義表にないレベル名（h7 など）でも v1-{level} スラッグで生成され、ラベルは slug がそのまま使われる.
+	 */
+	public function test_unknown_level() {
+		$input = [
+			'h7' => [ 'preset' => 'custom', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertArrayHasKey( 'v1-h7', $v2 );
+		$this->assertEquals( 'v1-h7', $v2['v1-h7']['slug'] );
+		$this->assertEquals( 'v1-h7', $v2['v1-h7']['label'] );
 	}
 }
