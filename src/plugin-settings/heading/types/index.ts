@@ -18,7 +18,6 @@ export type HeadingOptions = {
 export interface HeadingOption {
 	slug: string;
 	label: string;
-	enable: boolean;
 	useHeadingStyle?: boolean;
 	useParagraphStyle?: boolean;
 	style: HeadingStyle;

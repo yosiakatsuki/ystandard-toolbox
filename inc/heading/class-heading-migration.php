@@ -426,11 +426,9 @@ class Heading_Migration {
 		$this->new_option['slug']  = $this->get_option_slug( $level );
 		$this->new_option['label'] = $this->get_option_label( $level );
 		$this->new_option['style'] = [];
-		// 有効化.
-		$is_enable                  = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
-		$this->new_option['enable'] = $is_enable;
-
-		if ( $is_enable ) {
+		// v1 で「使う」設定（useCustomStyle）になっていたものだけ、見出しレベルへ自動割り当てする.
+		$is_assigned = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
+		if ( $is_assigned ) {
 			$this->heading_level[ $level ] = $this->new_option['slug'];
 		}
 	}

@@ -38,11 +38,9 @@ class Heading_Helper {
 		foreach ( $heading as $name => $item ) {
 			$slug   = Types::get_array_value( $item, 'slug', '' );
 			$label  = Types::get_array_value( $item, 'label', '' );
-			$enable = Types::get_array_value( $item, 'enable', true );
 			$styles = Types::get_array_value( $item, 'style', [] );
 			$before = Types::get_array_value( $item, 'before', [] );
 			$after  = Types::get_array_value( $item, 'after', [] );
-			$enable = Types::to_bool( $enable );
 			// カスタムCSS.
 			$custom_css    = apply_filters(
 				'ystdtb_custom_heading_custom_css',
@@ -64,8 +62,8 @@ class Heading_Helper {
 					$custom_after = $custom_css['after'];
 				}
 			}
-			// スラッグ不明 or 無効の場合はスキップ.
-			if ( empty( $slug ) || false === $enable ) {
+			// スラッグ不明の場合はスキップ.
+			if ( empty( $slug ) ) {
 				continue;
 			}
 			// ラベルが未設定の場合はスラッグを使用.

@@ -92,7 +92,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'fontSize'      => [
 						'desktop' => '1.2em',
@@ -156,7 +155,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'margin' => [
 						'desktop' => [
@@ -192,7 +190,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'margin' => [
 						'desktop' => [
@@ -230,7 +227,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'padding' => [
 						'desktop' => [
@@ -267,7 +263,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'padding' => [
 						'desktop' => [
@@ -314,7 +309,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'border' => [
 						'desktop' => [
@@ -367,7 +361,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					'border' => [
 						'desktop' => [
@@ -418,7 +411,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					"backgroundColor"    => "#fafafa",
 					"backgroundImage"    => "https://example.com/image.jpg",
@@ -450,7 +442,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					"fontSize" => [
 						"desktop" => "14px",
@@ -490,7 +481,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => true,
 				'style'  => [
 					"fontSize"      => [
 						"desktop" => "1.4em",
@@ -526,7 +516,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => false,
 				'style'  => [
 					"display"    => "flex",
 					"gap"        => "0.5em",
@@ -561,7 +550,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => false,
 				'style'  => [
 					"backgroundColor" => "#d4e7f2",
 					'padding'         => [
@@ -624,7 +612,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => false,
 				'style'  => [
 					'border'   => [
 						'desktop' => [
@@ -670,7 +657,6 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => false,
 				'style'  => [
 					'border'  => [
 						'desktop' => [
@@ -722,31 +708,26 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-sidebar'       => [
 				'slug'   => 'v1-sidebar',
 				'label'  => 'v1:サイドバー',
-				'enable' => false,
 				'style'  => [],
 			],
 			'v1-footer'        => [
 				'slug'   => 'v1-footer',
 				'label'  => 'v1:フッター',
-				'enable' => true,
 				'style'  => [],
 			],
 			'v1-post-title'    => [
 				'slug'   => 'v1-post-title',
 				'label'  => 'v1:投稿タイトル',
-				'enable' => true,
 				'style'  => [],
 			],
 			'v1-page-title'    => [
 				'slug'   => 'v1-page-title',
 				'label'  => 'v1:固定ページタイトル',
-				'enable' => true,
 				'style'  => [],
 			],
 			'v1-archive-title' => [
 				'slug'   => 'v1-archive-title',
 				'label'  => 'v1:一覧ページタイトル',
-				'enable' => true,
 				'style'  => [],
 			],
 		];
@@ -771,13 +752,11 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			'v1-h1' => [
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
-				'enable' => false,
 				'style'  => [],
 			],
 			'v1-h2' => [
 				'slug'   => 'v1-h2',
 				'label'  => 'v1:h2',
-				'enable' => true,
 				'style'  => [],
 			],
 		];
