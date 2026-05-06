@@ -111,9 +111,11 @@ class Heading_Migration {
 			$size_unit  = 'px';
 			$icon_size  = '';
 
-			// content.
+			// content と enable.
 			if ( $this->has_pseudo_elements( $type ) ) {
-				$this->new_option[ $type ]['enable']  = ! empty( $content ) ? true : false;
+				// 疑似要素として描画される条件: content / icon / preset 由来の疑似要素定義のいずれか.
+				$has_preset_pseudo                    = isset( $preset[ $type ] ) && ! empty( $preset[ $type ] );
+				$this->new_option[ $type ]['enable']  = ! empty( $content ) || ! empty( $icon ) || $has_preset_pseudo;
 				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
 			}
 			// 色設定.

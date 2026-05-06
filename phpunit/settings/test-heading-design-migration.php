@@ -571,7 +571,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					"alignItems" => "center",
 				],
 				'before' => [
-					'enable'   => false,
+					'enable'   => true,
 					'fontSize' => [
 						'desktop' => '1.2em',
 					],
@@ -1076,5 +1076,76 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'v1-h7', $v2 );
 		$this->assertEquals( 'v1-h7', $v2['v1-h7']['slug'] );
 		$this->assertEquals( 'v1-h7', $v2['v1-h7']['label'] );
+	}
+
+	/**
+	 * preset:ribbon で afterColor / afterSize のみ指定された場合、
+	 * preset 由来の after 定義（吹き出し三角）があるため after.enable=true となる.
+	 *
+	 * 旧ロジックでは afterContent が空だと enable=false に上書きされていたバグの回帰テスト.
+	 */
+	public function test_pseudo_elements_enable_with_preset_after_color_only() {
+		$input = [
+			'h1' => [
+				'preset'          => 'ribbon',
+				'useCustomStyle'  => true,
+				'afterColorType'  => 'color',
+				'afterSize'       => '20',
+				'afterColor'      => '#aaaaaa',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertTrue( $v2['v1-h1']['after']['enable'] );
+	}
+
+	/**
+	 * preset:text-center-border で before / after の色サイズが両方指定された場合、
+	 * preset 由来の before / after 定義（左右の線）があるため両方 enable=true となる.
+	 */
+	public function test_pseudo_elements_enable_with_preset_both_sides() {
+		$input = [
+			'h1' => [
+				'preset'          => 'text-center-border',
+				'useCustomStyle'  => true,
+				'beforeColorType' => 'background',
+				'beforeSize'      => '2',
+				'beforeColor'     => '#222222',
+				'afterColorType'  => 'background',
+				'afterSize'       => '2',
+				'afterColor'      => '#222222',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertTrue( $v2['v1-h1']['before']['enable'] );
+		$this->assertTrue( $v2['v1-h1']['after']['enable'] );
+	}
+
+	/**
+	 * preset:icons では preset 側に after 定義がないため、
+	 * v1 で afterColor のみ指定（content / icon なし）のとき after.enable=false となる.
+	 */
+	public function test_pseudo_elements_disabled_when_color_only_without_preset() {
+		$input = [
+			'h1' => [
+				'preset'         => 'icons',
+				'useCustomStyle' => true,
+				'afterColorType' => 'color',
+				'afterColor'     => '#222222',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertFalse( $v2['v1-h1']['after']['enable'] );
 	}
 }
