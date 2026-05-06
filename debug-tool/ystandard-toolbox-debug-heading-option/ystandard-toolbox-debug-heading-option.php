@@ -11,8 +11,9 @@
 defined( 'ABSPATH' ) || die();
 
 // 共通定数.
-define( 'YSTDTB_DEBUG_HEADING_OPTION_PARENT_SLUG', 'ystdtb-settings-v2' );
+define( 'YSTDTB_DEBUG_HEADING_OPTION_PARENT_SLUG', 'tools.php' );
 define( 'YSTDTB_DEBUG_HEADING_OPTION_PAGE_SLUG', 'ystdtb-debug-heading-option' );
+define( 'YSTDTB_DEBUG_HEADING_OPTION_MENU_TITLE', '[ys]見出し編集機能デバッグ' );
 define( 'YSTDTB_DEBUG_HEADING_OPTION_NONCE_ACTION', 'ystdtb_debug_heading_option_action' );
 define( 'YSTDTB_DEBUG_HEADING_OPTION_NONCE_NAME', 'ystdtb_debug_nonce' );
 
@@ -32,8 +33,8 @@ require_once __DIR__ . '/handler.php';
 function ystdtb_debug_heading_option_register_menu() {
 	add_submenu_page(
 		YSTDTB_DEBUG_HEADING_OPTION_PARENT_SLUG,
-		'Debug: 見出し設定',
-		'Debug: 見出し設定',
+		YSTDTB_DEBUG_HEADING_OPTION_MENU_TITLE,
+		YSTDTB_DEBUG_HEADING_OPTION_MENU_TITLE,
 		'manage_options',
 		YSTDTB_DEBUG_HEADING_OPTION_PAGE_SLUG,
 		'ystdtb_debug_heading_option_render_page',
@@ -103,7 +104,7 @@ function ystdtb_debug_heading_option_render_page() {
 	$action_url = admin_url( 'admin-post.php' );
 	?>
 	<div class="wrap">
-		<h1>Debug: 見出し設定</h1>
+		<h1><?php echo esc_html( YSTDTB_DEBUG_HEADING_OPTION_MENU_TITLE ); ?></h1>
 		<p>yStandard Toolbox の見出しデザイン設定（v1 / v2）の確認・削除・エクスポート・インポートを行います。</p>
 
 		<h2>設定値の確認</h2>
@@ -219,7 +220,7 @@ function ystdtb_debug_heading_option_redirect_with_notice( $notice ) {
 			'page'   => YSTDTB_DEBUG_HEADING_OPTION_PAGE_SLUG,
 			'notice' => $notice,
 		],
-		admin_url( 'admin.php' )
+		admin_url( YSTDTB_DEBUG_HEADING_OPTION_PARENT_SLUG )
 	);
 	wp_safe_redirect( $url );
 	exit;
