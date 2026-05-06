@@ -21,7 +21,7 @@ export type FaqItemBlockAttributes = {
 	faqBackgroundColor?: string;
 	customFaqBackgroundColor?: string;
 	faqBorderType: string;
-	faqBorderSize: number;
+	faqBorderSize?: string;
 	faqBorderColor?: string;
 	customFaqBorderColor?: string;
 	labelPosition: string;
@@ -32,8 +32,8 @@ export type FaqItemBlockAttributes = {
 	labelBold: boolean;
 	labelBackgroundColor?: string;
 	customLabelBackgroundColor?: string;
-	labelBorderSize: number;
-	labelBorderRadius: number;
+	labelBorderSize?: string;
+	labelBorderRadius?: string;
 	labelBorderColor?: string;
 	customLabelBorderColor?: string;
 	accordionArrowColor?: string;

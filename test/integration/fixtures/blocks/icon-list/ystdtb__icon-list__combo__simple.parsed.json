@@ -1,0 +1,45 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">記事タイトルから読みやすく</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">記事タイトルから読みやすく</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">アイキャッチで内容がひと目で分かる</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">アイキャッチで内容がひと目で分かる</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">関連記事への導線がスムーズ</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">関連記事への導線がスムーズ</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right\">\n\n\n\n</ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</ul>\n"
+		]
+	}
+]

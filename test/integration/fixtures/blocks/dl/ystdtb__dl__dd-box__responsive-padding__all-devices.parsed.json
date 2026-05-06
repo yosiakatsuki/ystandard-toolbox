@@ -1,0 +1,50 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"responsivePadding": {
+						"desktop": {
+							"top": "24px",
+							"right": "24px",
+							"bottom": "24px",
+							"left": "24px"
+						},
+						"tablet": {
+							"top": "20px",
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px"
+						},
+						"mobile": {
+							"top": "16px",
+							"right": "16px",
+							"bottom": "16px",
+							"left": "16px"
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-padding\" style=\"--ystdtb--desktop--dd-box--padding-top:24px;--ystdtb--desktop--dd-box--padding-right:24px;--ystdtb--desktop--dd-box--padding-bottom:24px;--ystdtb--desktop--dd-box--padding-left:24px;--ystdtb--tablet--dd-box--padding-top:20px;--ystdtb--tablet--dd-box--padding-right:20px;--ystdtb--tablet--dd-box--padding-bottom:20px;--ystdtb--tablet--dd-box--padding-left:20px;--ystdtb--mobile--dd-box--padding-top:16px;--ystdtb--mobile--dd-box--padding-right:16px;--ystdtb--mobile--dd-box--padding-bottom:16px;--ystdtb--mobile--dd-box--padding-left:16px\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-padding\" style=\"--ystdtb--desktop--dd-box--padding-top:24px;--ystdtb--desktop--dd-box--padding-right:24px;--ystdtb--desktop--dd-box--padding-bottom:24px;--ystdtb--desktop--dd-box--padding-left:24px;--ystdtb--tablet--dd-box--padding-top:20px;--ystdtb--tablet--dd-box--padding-right:20px;--ystdtb--tablet--dd-box--padding-bottom:20px;--ystdtb--tablet--dd-box--padding-left:20px;--ystdtb--mobile--dd-box--padding-top:16px;--ystdtb--mobile--dd-box--padding-right:16px;--ystdtb--mobile--dd-box--padding-bottom:16px;--ystdtb--mobile--dd-box--padding-left:16px\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

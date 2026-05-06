@@ -1,0 +1,42 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "alert-triangle",
+			"iconBold": true,
+			"customIconColor": "#dc2626",
+			"style": {
+				"color": {
+					"text": "#7f1d1d"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "作業前にバックアップを取得してください"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "プラグインのバージョン確認をお願いします"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "本番反映は必ずステージングで動作確認の後に"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

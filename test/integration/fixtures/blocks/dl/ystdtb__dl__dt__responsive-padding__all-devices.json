@@ -1,0 +1,37 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "用語",
+					"responsivePadding": {
+						"desktop": {
+							"top": "20px",
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px"
+						},
+						"tablet": {
+							"top": "16px",
+							"right": "16px",
+							"bottom": "16px",
+							"left": "16px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "12px",
+							"bottom": "12px",
+							"left": "12px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

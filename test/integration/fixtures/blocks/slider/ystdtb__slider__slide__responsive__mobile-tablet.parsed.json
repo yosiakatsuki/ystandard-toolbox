@@ -1,0 +1,55 @@
+[
+	{
+		"blockName": "ystdtb/slider",
+		"attrs": {
+			"sliderId": "slide-responsive-mobile-tablet",
+			"responsiveSlides": {
+				"mobile": {
+					"slidesPerView": 1
+				},
+				"tablet": {
+					"slidesPerView": 2
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/image",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" alt=\"\"/></figure>\n",
+				"innerContent": [
+					"\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" alt=\"\"/></figure>\n"
+				]
+			},
+			{
+				"blockName": "core/image",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" alt=\"\"/></figure>\n",
+				"innerContent": [
+					"\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" alt=\"\"/></figure>\n"
+				]
+			},
+			{
+				"blockName": "core/image",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/05/image-clock.jpg\" alt=\"\"/></figure>\n",
+				"innerContent": [
+					"\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/05/image-clock.jpg\" alt=\"\"/></figure>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-responsive-mobile-tablet\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:1,&quot;slidesPerGroup&quot;:1,&quot;breakpoints&quot;:{&quot;640&quot;:{&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:1}}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">\n\n\n\n</div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-slide-responsive-mobile-tablet\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false},&quot;slidesPerView&quot;:1,&quot;slidesPerGroup&quot;:1,&quot;breakpoints&quot;:{&quot;640&quot;:{&quot;slidesPerView&quot;:2,&quot;slidesPerGroup&quot;:1}}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

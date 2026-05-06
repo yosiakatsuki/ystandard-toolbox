@@ -1,0 +1,14 @@
+[
+	{
+		"blockName": "ystdtb/posts",
+		"attrs": {
+			"count": 5,
+			"listType": "list",
+			"showImg": false,
+			"showExcerpt": true
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

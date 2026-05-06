@@ -10,10 +10,14 @@
         "start-mcp-server",
         "--context",
         "ide-assistant",
-        "--project",
-        "/Users/yosiakatsuki/Local",
-        "Sites/dev-ystandard/app/public/wp/wp-content/plugins/ystandard-toolbox"
+        "--project-from-cwd"
       ],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
       "env": {}
     }
   }

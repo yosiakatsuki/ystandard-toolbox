@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"</div>\n"
+		]
+	}
+]

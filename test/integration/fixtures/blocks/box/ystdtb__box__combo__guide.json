@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-out",
+			"customBoxBackgroundColor": "#f0f9ff",
+			"customBoxBorderColor": "#0284c7",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"label": "解説",
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"customLabelBackgroundColor": "#0284c7",
+			"customLabelTextColor": "#ffffff",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

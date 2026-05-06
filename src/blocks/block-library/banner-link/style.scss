@@ -15,6 +15,11 @@
     color: currentColor;
   }
 
+  &,
+  :where(*) {
+	box-sizing: border-box
+  }
+
   @include customProperty.banner-link();
 }
 

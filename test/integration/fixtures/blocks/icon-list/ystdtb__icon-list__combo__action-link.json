@@ -1,0 +1,46 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevrons-right",
+			"iconBold": false,
+			"customIconColor": "#0284c7",
+			"style": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "#0284c7"
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "<a href=\"#\">yStandard のはじめかた</a>"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "<a href=\"#\">Toolbox のおすすめ機能まとめ</a>"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "<a href=\"#\">よくある質問はこちら</a>"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

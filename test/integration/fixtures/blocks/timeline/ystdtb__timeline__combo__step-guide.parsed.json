@@ -1,0 +1,63 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "1",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "2",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">2</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">2</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "3",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">3</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-text-color has-ys-white-color has-background has-ys-blue-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">3</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\">\n\n\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

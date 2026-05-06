@@ -1,0 +1,41 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#f8fafc",
+			"size": {
+				"maxWidth": {
+					"desktop": "400px"
+				}
+			},
+			"borderRadius": "8px",
+			"mainText": "詳しくはこちら",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "サービスの詳細ページへ移動します",
+			"subTextHtml": "div",
+			"subTextStyleClear": true,
+			"padding": {
+				"desktop": {
+					"top": "24px",
+					"right": "24px",
+					"bottom": "24px",
+					"left": "24px"
+				}
+			},
+			"boxShadow": {
+				"offsetX": "0px",
+				"offsetY": "2px",
+				"blurRadius": "8px",
+				"color": "#000000",
+				"opacity": 0.15
+			},
+			"blockPosition": "center"
+		},
+		"innerBlocks": []
+	}
+]

@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 
 // @ts-ignore.
 export function LabelBorderRadius( props ): JSX.Element {
@@ -14,7 +15,7 @@ export function LabelBorderRadius( props ): JSX.Element {
 	const { labelBorderRadius } = attributes;
 
 	const handleOnChange = ( value: string ) => {
-		setAttributes( { labelBorderRadius: value || undefined } );
+		setAttributes( { labelBorderRadius: normalizeSizeValue( value ) } );
 	};
 	return (
 		<BaseControl
@@ -24,6 +25,7 @@ export function LabelBorderRadius( props ): JSX.Element {
 			<UnitControl
 				value={ labelBorderRadius }
 				onChange={ handleOnChange }
+				min={0}
 			/>
 		</BaseControl>
 	);

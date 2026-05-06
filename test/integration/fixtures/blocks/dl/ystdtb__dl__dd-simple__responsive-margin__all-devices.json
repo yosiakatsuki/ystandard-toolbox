@@ -1,0 +1,28 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "説明文",
+					"responsiveMargin": {
+						"desktop": {
+							"top": "8px"
+						},
+						"tablet": {
+							"top": "6px"
+						},
+						"mobile": {
+							"top": "4px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

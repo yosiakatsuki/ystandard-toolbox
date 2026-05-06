@@ -30,7 +30,7 @@ export function AutoplayDelay( props: SliderEditProps ): JSX.Element {
 				value={ autoplayDelay }
 				onChange={ handleOnChange }
 				initialPosition={ 8 }
-				min={ 0.1 }
+				min={ 0.0 }
 				max={ 100 }
 				step={ 0.1 }
 				allowReset={ true }

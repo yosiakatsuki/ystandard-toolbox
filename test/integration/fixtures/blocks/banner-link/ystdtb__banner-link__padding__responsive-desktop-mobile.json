@@ -1,0 +1,35 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "レスポンシブ余白",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "スマホでは16px、PCでは40pxの余白です",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true,
+			"padding": {
+				"desktop": {
+					"top": "40px",
+					"right": "40px",
+					"bottom": "40px",
+					"left": "40px"
+				},
+				"mobile": {
+					"top": "16px",
+					"right": "16px",
+					"bottom": "16px",
+					"left": "16px"
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

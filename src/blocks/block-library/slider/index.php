@@ -38,6 +38,7 @@ class Slider_Block {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_compat_style' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_frontend_settings' ] );
 	}
 
 	/**
@@ -101,6 +102,96 @@ class Slider_Block {
 		wp_register_style( $handle, false );
 		wp_add_inline_style( $handle, Text::minify( $css ) );
 		wp_enqueue_style( $handle );
+	}
+
+	/**
+	 * フロントエンド用設定を出力.
+	 *
+	 * @return void
+	 */
+	public function enqueue_frontend_settings() {
+		$breakpoints = $this->get_slider_breakpoints();
+		if ( empty( $breakpoints ) ) {
+			return;
+		}
+
+		$handle = generate_block_asset_handle( self::BLOCK_NAME, 'viewScript' );
+		$config = [
+			'breakpoints' => $breakpoints,
+		];
+		$script = sprintf(
+			'window.ystdtbSliderSettings = %s;',
+			wp_json_encode( $config )
+		);
+
+		wp_add_inline_script( $handle, $script, 'before' );
+	}
+
+	/**
+	 * スライダー用ブレークポイントを取得.
+	 *
+	 * Swiperのtabletキーは、Toolboxのタブレット範囲開始値に合わせる.
+	 *
+	 * @return array
+	 */
+	private function get_slider_breakpoints() {
+		$breakpoints = Styles::get_breakpoints();
+		if ( ! is_array( $breakpoints ) ) {
+			return [];
+		}
+		if ( ! array_key_exists( 'mobile', $breakpoints ) || ! array_key_exists( 'desktop', $breakpoints ) ) {
+			return [];
+		}
+
+		$unit    = Styles::get_breakpoint_unit();
+		$tablet  = $this->convert_breakpoint_to_px( $breakpoints['mobile'], $unit );
+		$desktop = $this->convert_breakpoint_to_px( $breakpoints['desktop'], $unit );
+		if ( ! $tablet || ! $desktop ) {
+			return [];
+		}
+
+		return [
+			'tablet'  => $tablet,
+			'desktop' => $desktop,
+		];
+	}
+
+	/**
+	 * ブレークポイント値をpxに変換.
+	 *
+	 * CSSメディアクエリのem/remは初期フォントサイズ基準として扱う.
+	 *
+	 * @param int|float|string $value ブレークポイント値.
+	 * @param string           $unit  単位.
+	 *
+	 * @return int|float|null
+	 */
+	private function convert_breakpoint_to_px( $value, $unit ) {
+		if ( ! is_numeric( $value ) ) {
+			return null;
+		}
+
+		$value = (float) $value;
+		$unit  = strtolower( $unit );
+		$rates = [
+			'px'  => 1,
+			'rem' => 16,
+			'em'  => 16,
+			'in'  => 96,
+			'cm'  => 96 / 2.54,
+			'mm'  => 96 / 25.4,
+			'q'   => 96 / 101.6,
+			'pt'  => 96 / 72,
+			'pc'  => 16,
+		];
+
+		if ( ! array_key_exists( $unit, $rates ) ) {
+			return null;
+		}
+
+		$result = $value * $rates[ $unit ];
+
+		return floor( $result ) === $result ? (int) $result : $result;
 	}
 
 	/**

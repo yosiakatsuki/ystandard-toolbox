@@ -36,6 +36,13 @@ jest.mock( '@wordpress/data', () => ( {
 jest.mock( '@wordpress/block-editor', () => ( {
 	// @ts-ignore
 	getFontSizeClass: ( fontSize ) => fontSize,
+	// @ts-ignore
+	getColorClassName: ( colorContextName, colorSlug ) => {
+		if ( ! colorContextName || ! colorSlug ) {
+			return undefined;
+		}
+		return `has-${ colorSlug }-${ colorContextName }`;
+	},
 	store: 'core/block-editor',
 } ) );
 
@@ -85,8 +92,8 @@ jest.mock( '@wordpress/components', () => ( {
 		);
 	},
 	// @ts-ignore
-	Button: ( { onClick, children } ) => (
-		<button onClick={ onClick }>{ children }</button>
+	Button: ( { onClick, children, text } ) => (
+		<button onClick={ onClick }>{ children ?? text }</button>
 	),
 	// @ts-ignore
 	// eslint-disable-next-line no-unused-vars
@@ -151,6 +158,18 @@ jest.mock( '@wordpress/components', () => ( {
 				{ label }
 			</label>
 		</div>
+	),
+	// @ts-ignore
+	CheckboxControl: ( { label, checked, onChange, ...rest } ) => (
+		<label>
+			<input
+				type="checkbox"
+				checked={ checked }
+				onChange={ ( e ) => onChange( e.target.checked ) }
+				{ ...rest }
+			/>
+			{ label }
+		</label>
 	),
 	// @ts-ignore
 	PanelBody: ( { title, children } ) => (

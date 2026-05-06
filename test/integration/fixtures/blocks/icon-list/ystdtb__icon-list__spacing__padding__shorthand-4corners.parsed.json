@@ -1,0 +1,34 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"style": {
+				"spacing": {
+					"padding": {
+						"top": "16px",
+						"right": "24px",
+						"bottom": "32px",
+						"left": "40px"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"padding-top:16px;padding-right:24px;padding-bottom:32px;padding-left:40px\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"padding-top:16px;padding-right:24px;padding-bottom:32px;padding-left:40px\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

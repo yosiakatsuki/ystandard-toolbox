@@ -14,9 +14,12 @@ import { headingTag, textHtmlTag } from '../../config';
 const HtmlTag = ( { attributes, setAttributes } ) => {
 	const { subTextHtml, subTextStyleClear } = attributes;
 	const handleHtmlTagOnChange = ( value ) => {
+		// 「-- 選択してください --」を選んだ時は空文字が渡ってくるため undefined に揃える。
+		// 空文字をそのまま保持すると RichText の tagName="" で createElement が失敗する。
+		const nextValue = value || undefined;
 		setAttributes( {
-			subTextHtml: value,
-			subTextStyleClear: ! headingTag.includes( value )
+			subTextHtml: nextValue,
+			subTextStyleClear: ! headingTag.includes( nextValue )
 				? undefined
 				: subTextStyleClear,
 		} );
@@ -36,6 +39,7 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 					value={ subTextHtml }
 					options={ textHtmlTag }
 					onChange={ handleHtmlTagOnChange }
+					useEmptyValue={ false }
 				/>
 			</BaseControl>
 			{ headingTag.includes( subTextHtml ) && (

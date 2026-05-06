@@ -1,0 +1,29 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"backgroundImage": {
+				"id": 2,
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg"
+			},
+			"backgroundImageRepeat": "repeat-x"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>背景画像を横方向に繰り返し表示しています。</p>\n",
+				"innerContent": [
+					"\n<p>背景画像を横方向に繰り返し表示しています。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__background\" style=\"background-image:url('https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg');background-repeat:repeat-x;background-size:auto\" aria-hidden=\"true\"><div class=\"ystdtb-box__background-cover\" style=\"opacity:0.8\"></div></div><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__background\" style=\"background-image:url('https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg');background-repeat:repeat-x;background-size:auto\" aria-hidden=\"true\"><div class=\"ystdtb-box__background-cover\" style=\"opacity:0.8\"></div></div><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

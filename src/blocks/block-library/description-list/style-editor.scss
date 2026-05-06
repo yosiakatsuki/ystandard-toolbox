@@ -18,12 +18,5 @@
 	}
 }
 
-.ystdtb-dl {
-	> * + * {
-		margin-block-start: var(--ystd-layout-gap, 1.5rem);
-		margin-block-end: 0;
-	}
-}
-
 
 

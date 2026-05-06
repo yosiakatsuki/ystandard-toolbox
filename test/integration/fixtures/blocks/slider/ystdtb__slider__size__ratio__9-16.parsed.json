@@ -1,0 +1,37 @@
+[
+	{
+		"blockName": "ystdtb/slider",
+		"attrs": {
+			"sliderId": "size-ratio-9-16",
+			"ratio": "9-16"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/image",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" alt=\"\"/></figure>\n",
+				"innerContent": [
+					"\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" alt=\"\"/></figure>\n"
+				]
+			},
+			{
+				"blockName": "core/image",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" alt=\"\"/></figure>\n",
+				"innerContent": [
+					"\n<figure class=\"wp-block-image\"><img src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" alt=\"\"/></figure>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-size-ratio-9-16\" class=\"ystdtb-slider__slider swiper is-fixed-height\" style=\"aspect-ratio:9 / 16\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">\n\n</div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-size-ratio-9-16\" class=\"ystdtb-slider__slider swiper is-fixed-height\" style=\"aspect-ratio:9 / 16\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">",
+			null,
+			"\n\n",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

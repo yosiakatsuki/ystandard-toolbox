@@ -1,0 +1,60 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "icon",
+					"labelContents": "bookmark",
+					"labelColor": "ys-blue",
+					"contentsBorderColor": "ys-blue"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-blue-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-blue-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-blue-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-blue-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "icon",
+					"labelContents": "star",
+					"labelColor": "ys-orange",
+					"contentsBorderColor": "ys-orange"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-orange-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-orange-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-star\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg></span></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-orange-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-orange-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-star\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg></span></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "icon",
+					"labelContents": "heart",
+					"labelColor": "ys-red",
+					"contentsBorderColor": "ys-red"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-red-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-red-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-icon has-border has-ys-red-border-color\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-red-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\">\n\n\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

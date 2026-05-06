@@ -1,0 +1,67 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": false,
+					"isStackedOnTablet": false,
+					"responsiveDtWidth": {
+						"desktop": "100px",
+						"tablet": "101px",
+						"mobile": "102px"
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "dl-column: 横並びレイアウト"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/description-list-column",
+				"isValid": true,
+				"attributes": {
+					"isStackedOnMobile": false,
+					"isStackedOnTablet": false,
+					"responsiveDtWidth": {
+						"desktop": "100px",
+						"tablet": "101px",
+						"mobile": "102px"
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/description-list-dt",
+						"isValid": true,
+						"attributes": {
+							"text": "dl-column: 横並びレイアウト"
+						},
+						"innerBlocks": []
+					},
+					{
+						"name": "ystdtb/description-list-dd-box",
+						"isValid": true,
+						"attributes": {},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

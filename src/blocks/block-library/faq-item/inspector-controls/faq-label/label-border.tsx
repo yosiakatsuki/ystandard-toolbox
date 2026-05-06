@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 import type { FaqItemBlockAttributes } from '../../types';
 
 // @ts-ignore.
@@ -17,7 +18,7 @@ export function LabelBorder( props ): JSX.Element {
 	const { labelBorderSize } = attributes as FaqItemBlockAttributes;
 
 	const handleOnChange = ( value: string ) => {
-		setAttributes( { labelBorderSize: value || undefined } );
+		setAttributes( { labelBorderSize: normalizeSizeValue( value ) } );
 	};
 	return (
 		<>
@@ -28,6 +29,7 @@ export function LabelBorder( props ): JSX.Element {
 				<UnitControl
 					value={ labelBorderSize }
 					onChange={ handleOnChange }
+					min={0}
 				/>
 			</BaseControl>
 			<BaseControl

@@ -1,0 +1,27 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "icon",
+					"labelContents": "bookmark",
+					"contentMarginTop": "20px"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-icon\"><div class=\"ystdtb-timeline__label has-icon\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:20px\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-icon\"><div class=\"ystdtb-timeline__label has-icon\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:20px\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"</div>\n"
+		]
+	}
+]

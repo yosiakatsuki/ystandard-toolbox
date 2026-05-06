@@ -1,0 +1,48 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "star",
+			"iconBold": false,
+			"customIconColor": "#f59e0b",
+			"style": {
+				"color": {
+					"background": "#fef3c7"
+				},
+				"border": {
+					"color": "#fbbf24",
+					"width": "1px",
+					"style": "solid",
+					"radius": "8px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "読みやすさを最優先に設計しています"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "スマホからも快適に閲覧できます"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "細かいデザインまでカスタマイズ可能"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

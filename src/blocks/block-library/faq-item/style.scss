@@ -1,28 +1,34 @@
-
 .ystdtb-faq-item {
 	display: flex;
 	align-items: center;
+	gap: var(--ystdtb--faq-item--gap);
 	margin: 0;
-	padding: var(--ystdtb--faq-item--padding-vertical) var(--ystdtb--faq-item--padding-horizon);
+	padding: var(--ystdtb--faq-item--padding-vertical)
+		var(--ystdtb--faq-item--padding-horizon);
 	border: 0;
-
-	&:where(.is-faq--q) {
-		padding-top: var(--ystdtb--faq--padding-q-top);
-	}
-
-	&:where(.is-faq--a) {
-		padding-bottom: var(--ystdtb--faq--padding-a-bottom);
-	}
 
 	&:where(.has-background) {
 		--ystdtb--faq-item--padding-vertical: 1.5em;
 		--ystdtb--faq-item--padding-horizon: 1.5em;
 	}
+
+	&:where(.has-border-bottom) {
+		border-bottom-style: solid;
+	}
+
+	&:where(:not(.has-border)) {
+		&:where(.is-faq--q) {
+			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
+		}
+		&:where(.is-faq--a) {
+			padding-top: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
+		}
+	}
 }
 
 .ystdtb-faq-item__label {
 	margin: 0;
-	font-size: 1.5em;
+	font-size: var(--ystdtb--faq-item--label--font-size);
 	font-weight: 700;
 	line-height: 1;
 	text-transform: uppercase;
@@ -33,26 +39,23 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2em;
-		height: 2em;
-		min-width: 2em;
-		min-height: 2em;
+		width: var(--ystdtb--faq-item--label--size);
+		height: var(--ystdtb--faq-item--label--size);
+		min-width: var(--ystdtb--faq-item--label--size);
+		min-height: var(--ystdtb--faq-item--label--size);
 	}
 }
 
 .ystdtb-faq-item__contents {
-	margin: 0 0 0 1.5em;
+	margin: 0;
 	flex-grow: 1;
 
 	> :where(*) {
-		margin-top: 1em;
+		margin-top: var(--ystdtb--faq-item--contents-gap);
+		margin-bottom: 0;
 
 		&:where(:first-child) {
 			margin-top: 0;
-		}
-
-		&:where(:last-child) {
-			margin-bottom: 0;
 		}
 	}
 }

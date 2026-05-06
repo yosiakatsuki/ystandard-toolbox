@@ -1,0 +1,29 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {
+			"margin": {
+				"top": "16px"
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "用語"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "説明文"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

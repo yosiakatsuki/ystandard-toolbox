@@ -1,1 +1,5 @@
-
+.ystdtb-posts {
+	.ystdtb-posts__image {
+		height: 100%;
+	}
+}

@@ -4,7 +4,7 @@ import NumberControl from '@ystd/components/number-control';
 const ExcerptLength = ( { attributes, setAttributes } ) => {
 	const { excerptLength } = attributes;
 	const handleOnChange = ( newValue ) => {
-		const parsedValue = newValue === '' ? undefined : Number(newValue);
+		const parsedValue = newValue === '' ? undefined : Number( newValue );
 		setAttributes( {
 			excerptLength: parsedValue,
 		} );

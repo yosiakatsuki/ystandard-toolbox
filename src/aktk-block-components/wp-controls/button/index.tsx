@@ -10,6 +10,8 @@ interface ButtonProps {
 	onClick: () => void;
 	disabled?: boolean;
 	isBusy?: boolean;
+	// aria-label とツールチップ表示を兼ねる
+	label?: string;
 }
 
 export default function Button( props: ButtonProps ): JSX.Element {

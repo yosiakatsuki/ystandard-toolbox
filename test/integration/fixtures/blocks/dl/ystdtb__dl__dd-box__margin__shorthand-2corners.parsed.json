@@ -1,0 +1,36 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"margin": {
+						"top": "8px",
+						"right": "12px",
+						"bottom": "8px",
+						"left": "12px"
+					}
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-margin\" style=\"margin-top:8px;margin-right:12px;margin-bottom:8px;margin-left:12px\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-margin\" style=\"margin-top:8px;margin-right:12px;margin-bottom:8px;margin-left:12px\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

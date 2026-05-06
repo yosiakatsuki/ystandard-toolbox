@@ -1,0 +1,41 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"responsiveMargin": {
+						"desktop": {
+							"bottom": "24px"
+						},
+						"tablet": {
+							"bottom": "16px"
+						},
+						"mobile": {
+							"bottom": "12px"
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-margin\" style=\"--ystdtb--desktop--dd-box--margin-bottom:24px;--ystdtb--tablet--dd-box--margin-bottom:16px;--ystdtb--mobile--dd-box--margin-bottom:12px\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-margin\" style=\"--ystdtb--desktop--dd-box--margin-bottom:24px;--ystdtb--tablet--dd-box--margin-bottom:16px;--ystdtb--mobile--dd-box--margin-bottom:12px\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

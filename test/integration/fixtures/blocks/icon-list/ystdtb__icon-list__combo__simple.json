@@ -1,0 +1,36 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "記事タイトルから読みやすく"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "アイキャッチで内容がひと目で分かる"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "関連記事への導線がスムーズ"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

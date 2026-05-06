@@ -1,0 +1,26 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxStyle": "label-line",
+			"label": "補足"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>線上ラベルは下線に乗せたラベル風の見た目です。</p>\n",
+				"innerContent": [
+					"\n<p>線上ラベルは下線に乗せたラベル風の見た目です。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-line\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__label is-label-normal\"><div class=\"ystdtb-box__label-contents\"><span class=\"ystdtb-box__label-text\">補足</span></div></div><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-line\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__label is-label-normal\"><div class=\"ystdtb-box__label-contents\"><span class=\"ystdtb-box__label-text\">補足</span></div></div><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

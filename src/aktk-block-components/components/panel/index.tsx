@@ -9,6 +9,7 @@ interface PanelProps {
 	initialOpen?: boolean;
 	initialOpenControlled?: ( () => boolean ) | boolean;
 	children: React.ReactNode;
+	className?: string;
 }
 
 // @ts-ignore.
@@ -18,6 +19,7 @@ export function Panel( props: PanelProps ): JSX.Element {
 		initialOpen = true,
 		initialOpenControlled = false,
 		children,
+		className,
 	} = props;
 	const [ panelOpen, setPanelOpen ] = useState( initialOpen );
 
@@ -46,6 +48,7 @@ export function Panel( props: PanelProps ): JSX.Element {
 			title={ title }
 			initialOpen={ panelOpen }
 			onToggle={ togglePanel }
+			className={ className }
 		>
 			{ children }
 		</PanelBody>

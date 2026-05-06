@@ -48,9 +48,13 @@ export function Count( props: PostsEditProps ) {
 			</DesktopControl>
 			<MobileControl>
 				<NumberControl
-					aria-label={ __( 'モバイル 表示件数', 'ystandard-toolbox' ) }
+					aria-label={ __(
+						'モバイル 表示件数',
+						'ystandard-toolbox'
+					) }
 					value={ countMobile }
 					onChange={ handleOnChangeMobileCount }
+					min={ 0 }
 				/>
 			</MobileControl>
 		</BaseControl>

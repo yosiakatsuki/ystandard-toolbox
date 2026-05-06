@@ -109,10 +109,14 @@
 .ystdtb-box__label {
 	max-width: 100%;
 	overflow: hidden;
-}
 
-.ystdtb-box__label-text {
-	font-size: var(--ystdtb-box-label-font-size);
+	.ystdtb-box__label-contents {
+		input,
+		.components-text-control__input[type="text"]
+			.aktk-component-stretch-text-control__dummy {
+			font-size: 1em;
+		}
+	}
 }
 
 .ystdtb-box__content {

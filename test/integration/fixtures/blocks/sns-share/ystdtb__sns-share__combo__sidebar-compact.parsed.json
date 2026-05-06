@@ -1,0 +1,16 @@
+[
+	{
+		"blockName": "ystdtb/sns-share",
+		"attrs": {
+			"buttonType": "icon",
+			"align": "left",
+			"useX": true,
+			"useFacebook": true,
+			"useHatenaBookmark": false,
+			"useLINE": false
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

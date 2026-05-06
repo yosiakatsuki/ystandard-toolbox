@@ -1,0 +1,26 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxBorderStyle": "double",
+			"boxBorderSize": "4px"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>枠線のスタイルを double（二重線）にしています。</p>\n",
+				"innerContent": [
+					"\n<p>枠線のスタイルを double（二重線）にしています。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:4px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:double\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;4px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;4px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:4px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:double\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;4px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;4px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

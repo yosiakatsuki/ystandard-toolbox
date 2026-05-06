@@ -6,6 +6,11 @@ import { __ } from '@wordpress/i18n';
 import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
 
 /**
+ * Aktk dependencies.
+ */
+import { hasBorderWidth } from '@aktk/block-components/utils/size';
+
+/**
  * Block dependencies.
  */
 import type { FaqItemBlockAttributes, LabelPositionOption } from './types';
@@ -51,15 +56,16 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
 		getColorClassName( 'background-color', faqBackgroundColor ) || '';
 	const faqBorderColorClass =
 		getColorClassName( 'border-color', faqBorderColor ) || '';
+	const hasFaqBorderSize = hasBorderWidth( faqBorderSize );
 
 	return classnames( 'ystdtb-faq-item', {
 		[ `is-faq--${ faqType }` ]: faqType,
 		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
 		'has-background': faqBackgroundColor || customFaqBackgroundColor,
 		'has-border':
-			!! faqBorderSize && ( faqBorderColor || customFaqBorderColor ),
+			hasFaqBorderSize && ( faqBorderColor || customFaqBorderColor ),
 		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
-		[ faqBorderColorClass ]: faqBorderSize && faqBorderColorClass,
+		[ faqBorderColorClass ]: hasFaqBorderSize && faqBorderColorClass,
 	} );
 }
 
@@ -71,21 +77,25 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 	const {
 		faqBackgroundColor,
 		customFaqBackgroundColor,
+		faqBorderType,
 		faqBorderColor,
 		customFaqBorderColor,
 		faqBorderSize,
 		labelPosition,
 	} = attributes;
 
+	const isBottomBorder = 'bottom' === faqBorderType;
+
 	return {
 		backgroundColor: faqBackgroundColor
 			? undefined
 			: customFaqBackgroundColor,
-		borderColor:
-			! faqBorderSize || faqBorderColor
+		borderBottomColor:
+			! isBottomBorder || ! faqBorderSize || faqBorderColor
 				? undefined
 				: customFaqBorderColor,
-		borderWidth: ! faqBorderSize ? undefined : faqBorderSize,
+		borderBottomWidth:
+			! isBottomBorder || ! faqBorderSize ? undefined : faqBorderSize,
 		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 }
@@ -118,7 +128,7 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
 		customLabelBackgroundColor ||
 		labelBorderColor ||
 		customLabelBorderColor ||
-		labelBorderSize;
+		hasBorderWidth( labelBorderSize );
 
 	return classnames( 'ystdtb-faq-item__label', {
 		[ labelSizeClass ]: labelSizeClass,

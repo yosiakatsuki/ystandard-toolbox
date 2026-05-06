@@ -2,6 +2,7 @@
  * WordPress
  */
 import { useContext } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 /**
  * Plugin dependencies
  */
@@ -20,12 +21,12 @@ import PostTypeSelector from './post-type-selector';
  */
 const TABS = [
 	{
-		name: 'footer',
-		title: 'フッター',
+		name: 'header',
+		title: __( 'ヘッダー', 'ystandard-toolbox' ),
 	},
 	{
-		name: 'header',
-		title: 'ヘッダー',
+		name: 'footer',
+		title: __( 'フッター', 'ystandard-toolbox' ),
 	},
 ];
 
@@ -124,6 +125,7 @@ export default function Tab(): JSX.Element {
 					{ ( tab ) => {
 						return (
 							<ListContainer
+								tabName={ tab.name }
 								items={ getItems( tab.name ) }
 								setItems={ ( newValue ) => {
 									handleOnChangeCta( newValue, tab.name );

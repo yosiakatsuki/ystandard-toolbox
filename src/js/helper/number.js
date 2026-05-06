@@ -3,6 +3,8 @@ export const isNumber = ( value ) => {
 };
 
 /**
+ * @param      value
+ * @param      defaultValue
  * @deprecated aktk-block-components の toNumber を使用してください。
  * @see {@link src/aktk-block-components/utils/number/index.ts toNumber}
  */
@@ -15,6 +17,8 @@ export const toNumber = ( value, defaultValue = undefined ) => {
 };
 
 /**
+ * @param      value
+ * @param      defaultValue
  * @deprecated aktk-block-components の toInt を使用してください。
  * @see {@link src/aktk-block-components/utils/number/index.ts toInt}
  */

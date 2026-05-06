@@ -1,0 +1,72 @@
+[
+	{
+		"blockName": "ystdtb/slider",
+		"attrs": {
+			"sliderId": "variant-cover"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/cover",
+				"attrs": {
+					"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg",
+					"dimRatio": 50
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/heading",
+						"attrs": {
+							"textAlign": "center",
+							"textColor": "white"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<h2 class=\"wp-block-heading has-text-align-center has-white-color has-text-color\">スライド 1</h2>\n",
+						"innerContent": [
+							"\n<h2 class=\"wp-block-heading has-text-align-center has-white-color has-text-color\">スライド 1</h2>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"wp-block-cover\"><img class=\"wp-block-cover__image-background\" alt=\"\" src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" data-object-fit=\"cover\"/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"></span><div class=\"wp-block-cover__inner-container\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"wp-block-cover\"><img class=\"wp-block-cover__image-background\" alt=\"\" src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg\" data-object-fit=\"cover\"/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"></span><div class=\"wp-block-cover__inner-container\">",
+					null,
+					"</div></div>\n"
+				]
+			},
+			{
+				"blockName": "core/cover",
+				"attrs": {
+					"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg",
+					"dimRatio": 50
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/heading",
+						"attrs": {
+							"textAlign": "center",
+							"textColor": "white"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<h2 class=\"wp-block-heading has-text-align-center has-white-color has-text-color\">スライド 2</h2>\n",
+						"innerContent": [
+							"\n<h2 class=\"wp-block-heading has-text-align-center has-white-color has-text-color\">スライド 2</h2>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"wp-block-cover\"><img class=\"wp-block-cover__image-background\" alt=\"\" src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" data-object-fit=\"cover\"/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"></span><div class=\"wp-block-cover__inner-container\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"wp-block-cover\"><img class=\"wp-block-cover__image-background\" alt=\"\" src=\"https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg\" data-object-fit=\"cover\"/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"></span><div class=\"wp-block-cover__inner-container\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-variant-cover\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">\n\n</div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-slider\"><div id=\"ystdtb-slider-variant-cover\" class=\"ystdtb-slider__slider swiper\" data-slider-options=\"{&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:300,&quot;loop&quot;:true,&quot;autoplay&quot;:{&quot;delay&quot;:8000,&quot;pauseOnMouseEnter&quot;:false,&quot;disableOnInteraction&quot;:true,&quot;reverseDirection&quot;:false}}\"><div class=\"ystdtb-slider__container swiper-wrapper\">",
+			null,
+			"\n\n",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

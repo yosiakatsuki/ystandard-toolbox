@@ -29,7 +29,7 @@ export const units = [
  * ボーダースタイル選択肢
  */
 export const borderStyles = [
-	{ value: 'solid', label: __( '直線', 'ystandard-toolbox' ) },
+	{ value: 'solid', label: __( '実線', 'ystandard-toolbox' ) },
 	{ value: 'dotted', label: __( '点線', 'ystandard-toolbox' ) },
 	{ value: 'dashed', label: __( '破線', 'ystandard-toolbox' ) },
 	{ value: 'double', label: __( '二重線', 'ystandard-toolbox' ) },

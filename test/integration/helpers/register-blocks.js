@@ -62,7 +62,31 @@ import dlColumnMetadata from '../../../src/blocks/block-library/description-list
 import dlColumnSave from '@aktk/blocks/block-library/description-list-dl-column/save';
 import dlColumnDeprecated from '@aktk/blocks/block-library/description-list-dl-column/deprecated';
 
+// Banner Link.
+import bannerLinkMetadata from '../../../src/blocks/block-library/banner-link/block.json';
+import bannerLinkSave from '@aktk/blocks/block-library/banner-link/save';
+
+// Box.
+import boxMetadata from '../../../src/blocks/block-library/box/block.json';
+import boxSave from '@aktk/blocks/block-library/box/save';
+import { deprecated as boxDeprecated } from '@aktk/blocks/block-library/box/deprecated';
+
+// Icon list.
+import iconListMetadata from '../../../src/blocks/block-library/icon-list/block.json';
+import iconListSave from '@aktk/blocks/block-library/icon-list/save';
+
+// Icon list item.
+import iconListItemMetadata from '../../../src/blocks/block-library/icon-list-item/block.json';
+import iconListItemSave from '@aktk/blocks/block-library/icon-list-item/save';
+
+// SNS Share (動的ブロック: save は null).
+import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.json';
+
+// Posts (動的ブロック: save は null).
+import postsMetadata from '../../../src/blocks/block-library/posts/block.json';
+
 const NoopEdit = () => null;
+const NoopSave = () => null;
 
 function registerOnce( metadata, settings ) {
 	if ( getBlockType( metadata.name ) ) {
@@ -126,5 +150,39 @@ export function registerDescriptionListTestBlocks() {
 	registerOnce( dlColumnMetadata, {
 		save: dlColumnSave,
 		deprecated: dlColumnDeprecated,
+	} );
+}
+
+export function registerBannerLinkTestBlocks() {
+	registerOnce( bannerLinkMetadata, {
+		save: bannerLinkSave,
+	} );
+}
+
+export function registerBoxTestBlocks() {
+	registerOnce( boxMetadata, {
+		save: boxSave,
+		deprecated: boxDeprecated,
+	} );
+}
+
+export function registerIconListTestBlocks() {
+	registerOnce( iconListMetadata, {
+		save: iconListSave,
+	} );
+	registerOnce( iconListItemMetadata, {
+		save: iconListItemSave,
+	} );
+}
+
+export function registerSnsShareTestBlocks() {
+	registerOnce( snsShareMetadata, {
+		save: NoopSave,
+	} );
+}
+
+export function registerPostsTestBlocks() {
+	registerOnce( postsMetadata, {
+		save: NoopSave,
 	} );
 }

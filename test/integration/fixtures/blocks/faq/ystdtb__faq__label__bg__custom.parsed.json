@@ -1,0 +1,39 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"customLabelBackgroundColor": "#fde68a"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label has-background has-padding\" style=\"background-color:#fde68a\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label has-background has-padding\" style=\"background-color:#fde68a\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"customLabelBackgroundColor": "#fde68a"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label has-background has-padding\" style=\"background-color:#fde68a\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label has-background has-padding\" style=\"background-color:#fde68a\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

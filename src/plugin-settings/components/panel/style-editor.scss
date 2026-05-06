@@ -1,6 +1,13 @@
 .ystdtb-plugin-settings-panel {
 	--plugin-settings-panel--border-color: #e0e0e0;
 
+	.components-panel__body-title {
+		background-color: #fafafa;
+		.components-button {
+			font-size: 14px;
+		}
+	}
+
 	&.components-panel__body {
 		margin: 2em 0;
 		border: 1px solid var(--plugin-settings-panel--border-color);

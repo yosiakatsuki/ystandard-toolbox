@@ -161,9 +161,9 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 	let autoplayOptions;
 	if ( autoplay ) {
 		autoplayOptions = {
-			delay: getMilliseconds( autoplayDelay ) || 3000,
+			delay: getMilliseconds( autoplayDelay ) ?? 3000,
 			pauseOnMouseEnter: autoplayPauseOnMouse,
-			disableOnInteraction: ! autoplayDisableOnInteraction,
+			disableOnInteraction: autoplayDisableOnInteraction,
 			reverseDirection: autoplayReverseDirection,
 		};
 	}
@@ -209,7 +209,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 					spaceBetween: tabletSpaceBetween,
 					slidesPerGroup: tabletSlidesPerGroup = 1,
 					centeredSlides: tabletCenteredSlides,
-				} = slidesMobile || {};
+				} = slidesTablet || {};
 				breakpointsOptions[ breakpointsTablet ] = {
 					slidesPerView: tabletSlidesPerView,
 					spaceBetween: tabletSpaceBetween,
@@ -228,10 +228,10 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 					centeredSlides: desktopCenteredSlides,
 				} = slidesDesktop || {};
 				breakpointsOptions[ breakpointsDesktop ] = {
-					desktopSlidesPerView,
-					desktopSpaceBetween,
-					desktopSlidesPerGroup,
-					desktopCenteredSlides,
+					slidesPerView: desktopSlidesPerView,
+					spaceBetween: desktopSpaceBetween,
+					slidesPerGroup: desktopSlidesPerGroup,
+					centeredSlides: desktopCenteredSlides,
 				};
 			}
 		}
@@ -259,7 +259,7 @@ export function getSliderOptions( attributes: SliderBlockAttributes ) {
 			  }
 			: undefined,
 		...stripUndefined( slideEffectOptions ),
-		...stripUndefined( breakpointsOptions ),
+		breakpoints: stripUndefined( breakpointsOptions ),
 	};
 
 	return JSON.stringify( sliderOptions );

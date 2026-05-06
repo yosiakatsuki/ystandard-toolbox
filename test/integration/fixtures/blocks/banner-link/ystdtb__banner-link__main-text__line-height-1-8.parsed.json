@@ -1,0 +1,19 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"customMainTextColor": "#ffffff",
+			"mainTextLineHeight": 1.8,
+			"customSubTextColor": "#ffffff"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff;line-height:1.8\">行の高さ 1.8<br>2行目のテキストです</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">行間を広めに設定しています</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff;line-height:1.8\">行の高さ 1.8<br>2行目のテキストです</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">行間を広めに設定しています</div></div></div></a>\n"
+		]
+	}
+]

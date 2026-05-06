@@ -24,7 +24,7 @@
 	},
 	"supports": {
 		"align": false,
-		"className": true,
+		"className": false,
 		"splitting": true,
 		"typography": {
 			"fontSize": true,

@@ -1,0 +1,26 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"padding": {
+						"top": "10px",
+						"right": "12px",
+						"bottom": "14px",
+						"left": "16px"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-padding\" style=\"padding-top:10px;padding-right:12px;padding-bottom:14px;padding-left:16px\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-padding\" style=\"padding-top:10px;padding-right:12px;padding-bottom:14px;padding-left:16px\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

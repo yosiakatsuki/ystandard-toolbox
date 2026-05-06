@@ -1,0 +1,60 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "WordPress",
+					"fontWeight": "bold"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "ブログや Web サイトを作るためのオープンソース CMS です。"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "Gutenberg",
+					"fontWeight": "bold"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "WordPress のブロックエディターの名前です。"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "yStandard",
+					"fontWeight": "bold"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "シンプルで使いやすさを追求した無料 WordPress テーマです。"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

@@ -17,6 +17,7 @@ import { compose } from '@wordpress/compose';
  * Aktk Dependencies
  */
 import { StretchTextControl } from '@aktk/block-components/components/text-control';
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 
 /*
  * Plugin Dependencies
@@ -78,65 +79,41 @@ function Box( props: BoxEditProps ) {
 		className: classnames( blockClassName, `is-box-style--${ boxStyle }` ),
 		style: {
 			'--ystdtb-box-border-width': boxBorderSize || undefined,
-			'--ystdtb-box-padding-top': getSpacing(
-				boxPadding,
-				'top',
-				'desktop'
+			'--ystdtb-box-padding-top': presetTokenToCssVar(
+				getSpacing( boxPadding, 'top', 'desktop' )
 			),
-			'--ystdtb-box-padding-right': getSpacing(
-				boxPadding,
-				'right',
-				'desktop'
+			'--ystdtb-box-padding-right': presetTokenToCssVar(
+				getSpacing( boxPadding, 'right', 'desktop' )
 			),
-			'--ystdtb-box-padding-bottom': getSpacing(
-				boxPadding,
-				'bottom',
-				'desktop'
+			'--ystdtb-box-padding-bottom': presetTokenToCssVar(
+				getSpacing( boxPadding, 'bottom', 'desktop' )
 			),
-			'--ystdtb-box-padding-left': getSpacing(
-				boxPadding,
-				'left',
-				'desktop'
+			'--ystdtb-box-padding-left': presetTokenToCssVar(
+				getSpacing( boxPadding, 'left', 'desktop' )
 			),
-			'--ystdtb-box-padding-top-tablet': getSpacing(
-				boxPadding,
-				'top',
-				'tablet'
+			'--ystdtb-box-padding-top-tablet': presetTokenToCssVar(
+				getSpacing( boxPadding, 'top', 'tablet' )
 			),
-			'--ystdtb-box-padding-right-tablet': getSpacing(
-				boxPadding,
-				'right',
-				'tablet'
+			'--ystdtb-box-padding-right-tablet': presetTokenToCssVar(
+				getSpacing( boxPadding, 'right', 'tablet' )
 			),
-			'--ystdtb-box-padding-bottom-tablet': getSpacing(
-				boxPadding,
-				'bottom',
-				'tablet'
+			'--ystdtb-box-padding-bottom-tablet': presetTokenToCssVar(
+				getSpacing( boxPadding, 'bottom', 'tablet' )
 			),
-			'--ystdtb-box-padding-left-tablet': getSpacing(
-				boxPadding,
-				'left',
-				'tablet'
+			'--ystdtb-box-padding-left-tablet': presetTokenToCssVar(
+				getSpacing( boxPadding, 'left', 'tablet' )
 			),
-			'--ystdtb-box-padding-top-mobile': getSpacing(
-				boxPadding,
-				'top',
-				'mobile'
+			'--ystdtb-box-padding-top-mobile': presetTokenToCssVar(
+				getSpacing( boxPadding, 'top', 'mobile' )
 			),
-			'--ystdtb-box-padding-right-mobile': getSpacing(
-				boxPadding,
-				'right',
-				'mobile'
+			'--ystdtb-box-padding-right-mobile': presetTokenToCssVar(
+				getSpacing( boxPadding, 'right', 'mobile' )
 			),
-			'--ystdtb-box-padding-bottom-mobile': getSpacing(
-				boxPadding,
-				'bottom',
-				'mobile'
+			'--ystdtb-box-padding-bottom-mobile': presetTokenToCssVar(
+				getSpacing( boxPadding, 'bottom', 'mobile' )
 			),
-			'--ystdtb-box-padding-left-mobile': getSpacing(
-				boxPadding,
-				'left',
-				'mobile'
+			'--ystdtb-box-padding-left-mobile': presetTokenToCssVar(
+				getSpacing( boxPadding, 'left', 'mobile' )
 			),
 			'--ystdtb-box-label-font-size': labelFontSize.size,
 		},

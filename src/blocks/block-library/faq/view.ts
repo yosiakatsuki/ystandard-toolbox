@@ -12,7 +12,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	faqQuestions.forEach( ( element ) => {
 		element.addEventListener( 'click', () => {
 			// is-openクラスをトグル
-			element.classList.toggle( 'is-open' );
+			element.parentElement?.classList?.toggle( 'is-open' );
 		} );
 	} );
 } );

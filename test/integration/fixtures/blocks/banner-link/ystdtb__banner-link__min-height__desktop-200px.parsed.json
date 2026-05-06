@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"size": {
+				"minHeight": {
+					"desktop": "200px"
+				}
+			},
+			"customMainTextColor": "#ffffff",
+			"customSubTextColor": "#ffffff"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\" style=\"min-height:200px\" data-ys-ie-styles=\"{&quot;min-height&quot;:&quot;200px&quot;}\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">最小高さ 200px</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">最低でも200pxの高さが確保されます</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\" style=\"min-height:200px\" data-ys-ie-styles=\"{&quot;min-height&quot;:&quot;200px&quot;}\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">最小高さ 200px</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">最低でも200pxの高さが確保されます</div></div></div></a>\n"
+		]
+	}
+]

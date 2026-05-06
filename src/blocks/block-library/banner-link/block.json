@@ -70,7 +70,8 @@
 			"type": "string"
 		},
 		"mainTextHtml": {
-			"type": "string"
+			"type": "string",
+			"default": "div"
 		},
 		"mainTextStyleClear": {
 			"type": "boolean",
@@ -97,7 +98,8 @@
 			"type": "string"
 		},
 		"subTextHtml": {
-			"type": "string"
+			"type": "string",
+			"default": "div"
 		},
 		"subTextStyleClear": {
 			"type": "boolean",

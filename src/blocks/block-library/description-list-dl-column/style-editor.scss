@@ -6,6 +6,8 @@
 }
 
 .ystdtb-dl-column {
+	margin-block-end: 0;
+
 	&.has-border:not(:last-child) {
 		margin-bottom: 0;
 	}

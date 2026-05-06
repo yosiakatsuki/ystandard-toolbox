@@ -1,0 +1,19 @@
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-out",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"label": "ラベル角丸 4px",
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "bold",
+			"labelBorderRadius": "4px",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

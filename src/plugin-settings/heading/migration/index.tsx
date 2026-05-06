@@ -1,7 +1,6 @@
 /**
  * WordPress
  */
-import { PanelBody } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 /**
@@ -9,6 +8,10 @@ import { useState } from '@wordpress/element';
  */
 import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
 import Buttons from '@aktk/plugin-settings/components/buttons';
+import {
+	PluginSettingsPanel,
+	PanelInner,
+} from '@aktk/plugin-settings/components/panel';
 import {
 	notifyError,
 	notifySuccess,
@@ -40,10 +43,10 @@ export default function Migration() {
 	return (
 		<>
 			{ /* @ts-ignore */ }
-			<PanelBody title={ '旧設定から新設定への移行' }>
-				<>
+			<PluginSettingsPanel title={ '旧設定から新設定への移行' }>
+				<PanelInner>
 					{ isCompletedMigration ? (
-						<>
+						<div>
 							<p>設定移行が完了しました。</p>
 							<p>ページ再読み込みをしてください。</p>
 							<p>
@@ -51,9 +54,9 @@ export default function Migration() {
 									» ページを再読み込みする «
 								</a>
 							</p>
-						</>
+						</div>
 					) : (
-						<>
+						<div>
 							<p>見出し設定は旧バージョンで動作しています。</p>
 							<p>
 								設定を変更するためには新バージョンへ設定を変換する必要があります。
@@ -67,10 +70,10 @@ export default function Migration() {
 								text={ '設定変換を実行する' }
 								isDisabled={ isButtonDisable }
 							/>
-						</>
+						</div>
 					) }
-				</>
-			</PanelBody>
+				</PanelInner>
+			</PluginSettingsPanel>
 		</>
 	);
 }

@@ -1,0 +1,55 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "NEW",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-red"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-ys-white-color has-background has-ys-red-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">NEW</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text has-long-text has-text-color has-ys-white-color has-background has-ys-red-background-color\" style=\"font-weight:700;border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">NEW</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "icon",
+					"labelContents": "star",
+					"labelColor": "ys-orange"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-icon\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-orange-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-star\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg></span></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-icon\"><div class=\"ystdtb-timeline__label has-icon has-text-color has-ys-orange-color\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-icon\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-star\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"></polygon></svg></span></span></div><div class=\"ystdtb-timeline__contents is-margin-normal\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\">\n\n\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

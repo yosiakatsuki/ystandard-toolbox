@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "説明文",
+					"responsiveTextSize": {
+						"desktop": "18px",
+						"tablet": "16px",
+						"mobile": "14px"
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

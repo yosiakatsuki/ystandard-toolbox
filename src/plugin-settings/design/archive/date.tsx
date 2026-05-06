@@ -16,7 +16,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { PanelProps } from './index';
+import type { PanelProps } from './index';
 
 /**
  * 日付表示オプション
@@ -54,12 +54,12 @@ export default function Date({
 			<PanelInner>
 				<PluginSettingsBaseControl
 					label={__('日付表示', 'ystandard-toolbox')}
-					isFullWidth
 				>
 					<CustomSelectControl
 						options={DISPLAY_DATE}
 						value={sectionSettings?.archiveDisplayDate || ''}
 						onChange={handleOnChangeDisplayDate}
+						useEmptyValue={false}
 					/>
 				</PluginSettingsBaseControl>
 			</PanelInner>

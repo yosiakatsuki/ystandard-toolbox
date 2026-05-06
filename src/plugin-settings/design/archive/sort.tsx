@@ -14,7 +14,7 @@ import {
 	PanelInner,
 } from '@aktk/plugin-settings/components/panel';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
-import { PanelProps } from './index';
+import type { PanelProps } from './index';
 
 interface OrderOption {
 	key: string;
@@ -45,12 +45,12 @@ export default function Sort( {
 			<PanelInner>
 				<PluginSettingsBaseControl
 					label={ __( '投稿の並び順', 'ystandard-toolbox' ) }
-					isFullWidth
 				>
 					<CustomSelectControl
 						options={ ORDER }
 						value={ sectionSettings?.archiveOrder || '' }
 						onChange={ handleOnChangeOrder }
+						useEmptyValue={ false }
 					/>
 				</PluginSettingsBaseControl>
 			</PanelInner>

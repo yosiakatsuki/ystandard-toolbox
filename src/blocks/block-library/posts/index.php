@@ -279,12 +279,10 @@ class Posts_Block {
 		$custom_class  = ! empty( $attributes['className'] ) ? $attributes['className'] : '';
 		$wrapper_class = implode( ' ', array_filter( [ 'ystdtb-posts', 'is-' . $list_type, $custom_class ] ) );
 
-		// excerpt の style.
-		$excerpt_styles = array_filter(
-			[
-				'-webkit-line-clamp' => $excerpt_lines,
-			]
-		);
+		// excerpt の style（CSS カスタムプロパティ経由で line-clamp を上書き）.
+		$excerpt_styles = '' !== $excerpt_lines
+			? '--ystdtb--posts--excerpt-line-clamp:' . (int) $excerpt_lines
+			: '';
 
 		// 画像関連.
 		$thumbnail_size = $attributes['thumbnailSize'] ?? 'full';
@@ -309,7 +307,7 @@ class Posts_Block {
 				'taxonomy'        => $taxonomy,
 				'show_excerpt'    => $attributes['showExcerpt'] ?? false,
 				'excerpt_lines'   => $excerpt_lines,
-				'excerpt_styles'  => implode( ' ', $excerpt_styles ),
+				'excerpt_styles'  => $excerpt_styles,
 				'col_class'       => "col-mobile--{$col_mobile} col-tablet--{$col_tablet} col-desktop--{$col_pc}",
 				'calendar_icon'   => $calendar_icon,
 				'taxonomy_icon'   => $taxonomy_icon,

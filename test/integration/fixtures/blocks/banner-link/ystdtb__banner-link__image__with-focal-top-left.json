@@ -1,0 +1,30 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"backgroundImage": {
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/11/wugqj4whqka.jpg",
+				"id": 1
+			},
+			"backgroundImageFocalPoint": {
+				"x": 0,
+				"y": 0
+			},
+			"customBackgroundColor": "#000000",
+			"backgroundOpacity": 0.4,
+			"mainText": "焦点 左上",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "焦点を左上に設定しています",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,27 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "フォントサイズ 20",
+					"className": "has-font-size has-large-font-size"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "デスクトップのみ 21",
+					"customTextSize": "21px"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

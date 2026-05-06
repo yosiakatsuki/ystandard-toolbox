@@ -1,0 +1,71 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "余白設定 margin / padding レスポンシブ",
+					"responsiveMargin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "12px",
+							"left": "13px"
+						},
+						"tablet": {
+							"top": "11px",
+							"right": "12px",
+							"bottom": "13px",
+							"left": "14px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "13px",
+							"bottom": "14px",
+							"left": "15px"
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "margin 10,11,12, padding 20,21,22",
+					"margin": {
+						"top": "10px",
+						"right": "11px",
+						"bottom": "12px",
+						"left": "13px"
+					},
+					"responsivePadding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "22px",
+							"left": "23px"
+						},
+						"tablet": {
+							"top": "21px",
+							"right": "22px",
+							"bottom": "23px",
+							"left": "24px"
+						},
+						"mobile": {
+							"top": "22px",
+							"right": "23px",
+							"bottom": "24px",
+							"left": "25px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

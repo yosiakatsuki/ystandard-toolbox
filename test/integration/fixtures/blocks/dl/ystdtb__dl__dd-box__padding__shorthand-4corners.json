@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-box",
+				"isValid": true,
+				"attributes": {
+					"padding": {
+						"top": "10px",
+						"right": "12px",
+						"bottom": "14px",
+						"left": "16px"
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

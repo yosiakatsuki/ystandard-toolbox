@@ -1,0 +1,18 @@
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-line",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"label": "補足",
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

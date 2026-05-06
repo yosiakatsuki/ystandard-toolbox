@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "行の高さ 1.8<br>2行目のテキストです",
+			"customMainTextColor": "#ffffff",
+			"mainTextLineHeight": 1.8,
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "行間を広めに設定しています",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

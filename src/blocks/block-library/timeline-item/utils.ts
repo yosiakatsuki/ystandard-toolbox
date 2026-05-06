@@ -96,7 +96,7 @@ export function getLabelStyles( attributes: TimeLineItemAttributes ) {
 		labelSize,
 		labelFontSize,
 		customLabelFontSize,
-		labelWeight,
+		labelBold,
 		labelColor,
 		customLabelColor,
 		labelBackgroundColor,
@@ -120,7 +120,7 @@ export function getLabelStyles( attributes: TimeLineItemAttributes ) {
 		width: labelSize || undefined,
 		height: labelSize || undefined,
 		fontSize: labelFontSizeClass ? undefined : customLabelFontSize,
-		fontWeight: !! labelWeight ? labelWeight : undefined,
+		fontWeight: !! labelBold ? 700 : undefined,
 		color: labelColorClass ? undefined : customLabelColor,
 		backgroundColor: labelBgColorClass
 			? undefined

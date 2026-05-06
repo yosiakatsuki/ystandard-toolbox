@@ -17,7 +17,7 @@ import { getColorSetting } from '@aktk/helper/color';
 // ボーダースタイル定数
 const BORDER_STYLES = [
 	{
-		name: _x( '直線', 'border style', 'ystandard-toolbox' ),
+		name: _x( '実線', 'border style', 'ystandard-toolbox' ),
 		key: 'solid',
 	},
 	{

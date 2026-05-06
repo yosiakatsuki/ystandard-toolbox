@@ -1,16 +1,18 @@
-@use "../../../sass/global";
-
-$default_padding: 1em;
-$box_color_default: #666;
-
 .ystdtb-box {
-	--ystdtb-box-padding-top: #{$default_padding};
-	--ystdtb-box-padding-right: #{$default_padding};
-	--ystdtb-box-padding-bottom: #{$default_padding};
-	--ystdtb-box-padding-left: #{$default_padding};
+	--ystdtb-box-padding-top: 1rem;
+	--ystdtb-box-padding-right: 1rem;
+	--ystdtb-box-padding-bottom: 1rem;
+	--ystdtb-box-padding-left: 1rem;
 	--ystdtb-box-border-width: 0;
 	--ystdtb-box-label-font-size: 0.9em;
+	--ystdtb--box--background-color: #666;
+	--ystdtb--box--border-color: #666;
+	--ystdtb--box--label-icon-size: var(--ystd--icon--size, 1.25em);
 	border: 0;
+
+	:where(*) {
+		box-sizing: border-box;
+	}
 }
 
 .ystdtb-box__inner-container {
@@ -18,7 +20,7 @@ $box_color_default: #666;
 	border-width: var(--ystdtb-box-border-width, 0);
 
 	&.show-default-border {
-		border-color: $box_color_default;
+		border-color: var(--ystdtb--box--border-color);
 	}
 }
 
@@ -40,28 +42,15 @@ $box_color_default: #666;
 
 .ystdtb-box__content {
 	position: relative;
-	padding: #{$default_padding};
 	padding-top: var(--ystdtb-box-padding-top);
 	padding-right: var(--ystdtb-box-padding-right);
 	padding-bottom: var(--ystdtb-box-padding-bottom);
 	padding-left: var(--ystdtb-box-padding-left);
 	z-index: 1;
 
-	@include global.media-breakpoint-down(md) {
-		padding-top: var(--ystdtb-box-padding-top-tablet, var(--ystdtb-box-padding-top));
-		padding-right: var(--ystdtb-box-padding-right-tablet, var(--ystdtb-box-padding-right));
-		padding-bottom: var(--ystdtb-box-padding-bottom-tablet, var(--ystdtb-box-padding-bottom));
-		padding-left: var(--ystdtb-box-padding-left-tablet, var(--ystdtb-box-padding-left));
-	}
+	// レスポンシブの padding（tablet / mobile）は index.php で生成
 
-	@include global.media-breakpoint-down(sm) {
-		padding-top: var(--ystdtb-box-padding-top-mobile, var(--ystdtb-box-padding-top));
-		padding-right: var(--ystdtb-box-padding-right-mobile, var(--ystdtb-box-padding-right));
-		padding-bottom: var(--ystdtb-box-padding-bottom-mobile, var(--ystdtb-box-padding-bottom));
-		padding-left: var(--ystdtb-box-padding-left-mobile, var(--ystdtb-box-padding-left));
-	}
-
-	> * {
+	> :where(*) {
 		margin-top: 1em;
 		margin-bottom: 0;
 
@@ -70,7 +59,7 @@ $box_color_default: #666;
 		}
 	}
 
-	&.has-text-color {
+	&:where(.has-text-color) {
 		a {
 			color: currentcolor;
 		}
@@ -84,19 +73,19 @@ $box_color_default: #666;
 	padding: 0.3em 1em;
 	white-space: nowrap;
 
-	&.is-label-bold {
+	&:where(.is-label-bold) {
 		font-weight: 700;
 	}
 
-	&:not(.has-background) {
-		background-color: $box_color_default;
+	&:where(:not(.has-background)) {
+		background-color: var(--ystdtb--box--background-color);
 	}
 
-	&:not(.has-text-color) {
+	&:where(:not(.has-text-color)) {
 		color: #fff;
 	}
 
-	&:not(.has-font-size-class) {
+	&:where(:not(.has-font-size-class)) {
 		font-size: var(--ystdtb-box-label-font-size);
 	}
 }
@@ -109,11 +98,17 @@ $box_color_default: #666;
 }
 
 .ystdtb-box__label-icon {
-	display: block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	margin-right: 0.25em;
 
-	* {
-		display: block;
+	:where(span, svg) {
+		display: inline-flex;
+	}
+	:where(svg) {
+		width: var(--ystdtb--box--label-icon-size);
+		height: var(--ystdtb--box--label-icon-size);
 	}
 }
 
@@ -125,40 +120,44 @@ $box_color_default: #666;
 
 // スタイル別.
 .ystdtb-box {
-	&.is-box-style--label-none {
-		.ystdtb-box__label {
+	&:where(.is-box-style--label-none) {
+		:where(.ystdtb-box__label) {
 			display: none;
 		}
 	}
 
-	&.is-box-style--label-in {
-		.ystdtb-box__inner-container {
+	&:where(.is-box-style--label-in) {
+		:where(.ystdtb-box__inner-container) {
 			overflow: hidden;
 		}
 	}
 
-	&.is-box-style--label-wide {
-		.ystdtb-box__label {
+	&:where(.is-box-style--label-wide) {
+		:where(.ystdtb-box__label) {
 			display: block;
 			width: 100%;
 			padding: 0.5em 0.75em;
 		}
 
-		.ystdtb-box__label-contents {
+		:where(.ystdtb-box__label-contents) {
 			justify-content: center;
 		}
 	}
+}
 
-	&.is-box-style--label-line {
-		.ystdtb-box__label {
-			position: absolute;
-			left: calc(var(--ystdtb-box-padding-left, 1em) + var(--ystdtb-box-border-width, 1px));
-			transform: translateY(-50%);
-			z-index: 1;
-		}
+// 線上ラベル（label-line）: レスポンシブ時の上書きは index.php 側で生成
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__label {
+	position: absolute;
+	left: calc(
+		var(--ystdtb-box-padding-left, 1em) +
+			var(--ystdtb-box-border-width, 1px)
+	);
+	transform: translateY(-50%);
+	z-index: 1;
+}
 
-		.ystdtb-box__content {
-			padding-top: calc(var(--ystdtb-box-padding-top) + var(--ystdtb-box-label-font-size));
-		}
-	}
+:where(.ystdtb-box.is-box-style--label-line) .ystdtb-box__content {
+	padding-top: calc(
+		var(--ystdtb-box-padding-top) + var(--ystdtb-box-label-font-size)
+	);
 }
