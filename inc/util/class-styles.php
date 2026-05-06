@@ -141,12 +141,18 @@ class Styles {
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
 				if ( is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
+					// カスタムプロパティ名のプレフィックスを作成。疑似要素がある場合はbefore,afterを追加.
 					$var_prefix = ! empty( $pseudo_elements ) ? "-{$pseudo_elements}" : '';
 					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
-					$color_rgb  = self::hex_2_rgb( $value['desktop'] );
-					$color_rgb  = implode( ',', $color_rgb );
-					$type       = 'backgroundColor' === $key ? 'background-color' : 'color';
-					// 色.
+					// RGB値を作成.
+					$color_rgb = self::hex_2_rgb( $value['desktop'] );
+					$color_rgb = implode( ',', $color_rgb );
+					// カスタムプロパティの値を作成.
+					$type = 'backgroundColor' === $key ? 'background-color' : 'color';
+					/**
+					 * 色のカスタムプロパティとRGB/RGBAのカスタムプロパティをセット
+					 * （例：--ystdtb-custom-heading-background-color, --ystdtb-custom-heading-background-color-rgb, --ystdtb-custom-heading-background-color-rgba）.
+					 */
 					$color_var[ "{$var_prefix}-{$type}" ]      = $value['desktop'];
 					$color_var[ "{$var_prefix}-{$type}-rgb" ]  = "rgb({$color_rgb})";
 					$color_var[ "{$var_prefix}-{$type}-rgba" ] = "rgba({$color_rgb},var({$var_prefix}-{$type}-rgba-opacity,1))";
@@ -367,9 +373,11 @@ class Styles {
 	 * @return bool
 	 */
 	public static function is_responsive_style( $value ) {
+		// 配列でない場合はレスポンシブ設定ではないと判断.
 		if ( ! is_array( $value ) ) {
 			return false;
 		}
+		// 配列のキーにレスポンシブタイプがあるかどうかで判断.
 		foreach ( array_keys( Config::RESPONSIVE_TYPE ) as $key ) {
 			if ( array_key_exists( $key, $value ) ) {
 				return true;
