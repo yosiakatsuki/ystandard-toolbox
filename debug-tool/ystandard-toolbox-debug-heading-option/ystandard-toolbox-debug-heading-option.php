@@ -114,13 +114,13 @@ function ystdtb_debug_heading_option_render_page() {
 		</p>
 
 		<h3><code>ystdtb_heading</code>（v1）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v1 ); ?>
+		<?php ystdtb_debug_heading_option_render_value( $v1, 'v1' ); ?>
 
 		<h3><code>ystdtb_heading_v2</code>（v2 メイン）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v2_main ); ?>
+		<?php ystdtb_debug_heading_option_render_value( $v2_main, 'v2-main' ); ?>
 
 		<h3><code>ystdtb_heading_level</code>（v2 レベル別）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v2_level ); ?>
+		<?php ystdtb_debug_heading_option_render_value( $v2_level, 'v2-level' ); ?>
 
 		<hr />
 
@@ -176,26 +176,76 @@ function ystdtb_debug_heading_option_render_page() {
 			</p>
 		</form>
 	</div>
+	<script>
+		( function () {
+			document.addEventListener( 'click', function ( event ) {
+				var button = event.target.closest( '.ystdtb-debug-copy-button' );
+				if ( ! button ) {
+					return;
+				}
+				var targetId = button.getAttribute( 'data-target-id' );
+				var pre      = document.getElementById( targetId );
+				if ( ! pre ) {
+					return;
+				}
+				var text     = pre.textContent;
+				var original = button.textContent;
+				var restore  = function ( label ) {
+					button.textContent = label;
+					setTimeout( function () { button.textContent = original; }, 1500 );
+				};
+				if ( navigator.clipboard && navigator.clipboard.writeText ) {
+					navigator.clipboard.writeText( text ).then(
+						function () { restore( 'コピーしました' ); },
+						function () { restore( 'コピー失敗' ); }
+					);
+					return;
+				}
+				// Clipboard API 非対応環境向けフォールバック.
+				var textarea = document.createElement( 'textarea' );
+				textarea.value         = text;
+				textarea.style.position = 'fixed';
+				textarea.style.opacity  = '0';
+				document.body.appendChild( textarea );
+				textarea.select();
+				try {
+					document.execCommand( 'copy' );
+					restore( 'コピーしました' );
+				} catch ( e ) {
+					restore( 'コピー失敗' );
+				}
+				document.body.removeChild( textarea );
+			} );
+		} )();
+	</script>
 	<?php
 }
 
 /**
  * 値を整形して表示するヘルパ.
  *
- * @param mixed $value 表示する値.
+ * @param mixed  $value     表示する値.
+ * @param string $id_suffix DOM ID のサフィックス（コピー対象指定用）.
  *
  * @return void
  */
-function ystdtb_debug_heading_option_render_value( $value ) {
+function ystdtb_debug_heading_option_render_value( $value, $id_suffix ) {
 	if ( is_null( $value ) || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
 		echo '<p><em>(未設定)</em></p>';
 		return;
 	}
-	$json = wp_json_encode( $value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
-	printf(
-		'<pre style="background:#f6f7f7;padding:12px;max-height:400px;overflow:auto;">%s</pre>',
-		esc_html( $json )
-	);
+	$json       = wp_json_encode( $value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+	$element_id = 'ystdtb-debug-value-' . $id_suffix;
+	?>
+	<p>
+		<button
+			type="button"
+			class="button ystdtb-debug-copy-button"
+			data-target-id="<?php echo esc_attr( $element_id ); ?>"
+		>クリップボードにコピー</button>
+	</p>
+	<pre id="<?php echo esc_attr( $element_id ); ?>" style="background:#f6f7f7;padding:12px;max-height:400px;overflow:auto;"><?php echo esc_html( $json ); ?></pre>
+	<?php
 }
 
 /**
