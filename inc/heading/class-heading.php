@@ -12,6 +12,7 @@ namespace ystandard_toolbox;
 use ystandard_toolbox\Util\Debug;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Text;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -437,6 +438,18 @@ class Heading {
 	}
 
 	/**
+	 * ystandard シリーズ環境かどうか判定.
+	 *
+	 * 戻り値は `ystdtb_heading_level_additional` フィルターのデフォルト値として使われ、
+	 * クラシックウィジェット向けのレベル定義（sidebar / footer）を schema に含めるかの起点となる.
+	 *
+	 * @return bool
+	 */
+	public static function is_ystandard_active() {
+		return (bool) Version::ystandard_version_compare();
+	}
+
+	/**
 	 * 見出しカスタマイズ機能 レベル設定の定義取得
 	 *
 	 * @return array
@@ -455,7 +468,7 @@ class Heading {
 		];
 
 		// サイドバー・フッターは追加設定.
-		if ( apply_filters( 'ystdtb_heading_level_additional', false ) ) {
+		if ( apply_filters( 'ystdtb_heading_level_additional', self::is_ystandard_active() ) ) {
 			$keys = array_merge(
 				$keys,
 				[

@@ -9,7 +9,6 @@
 
 namespace ystandard_toolbox;
 
-use ystandard_toolbox\Util\Debug;
 use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Types;
@@ -112,7 +111,6 @@ class Heading_Helper {
 			// 各スタイルを結合.
 			$result .= $style_css . $before_css . $after_css;
 		}
-
 
 		return $result;
 	}
