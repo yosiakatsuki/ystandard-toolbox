@@ -195,7 +195,7 @@
 			"height": "5px",
 			"color": "#cccccc",
 			"zIndex": -1,
-			"--ystdtb-custom-header-after-color-rbga-opacity": 0.3,
+			"--ystdtb-custom-header-after-color-rgba-opacity": 0.3,
 			"background": "repeating-linear-gradient(-45deg,var(--ystdtb-custom-header-after-color-rgba),var(--ystdtb-custom-header-after-color-rgba) 2px,#fff 0,#fff 4px)"
 		}
 	},
@@ -237,7 +237,7 @@
 				"top": {
 					"width": "0.9em",
 					"style": "solid",
-					"color": "var(--ystdtb-custom-header-after-bg-color,var(--ystdtb-custom-header-bg-color))"
+					"color": "#d4e7f2"
 				},
 				"right": {
 					"width": "0.9em",
@@ -288,7 +288,7 @@
 				"right": {
 					"width": "20px",
 					"style": "solid",
-					"color": "var(--ystdtb-custom-header-after-color)"
+					"color": "#aaaaaa"
 				},
 				"bottom": {
 					"width": "10px",

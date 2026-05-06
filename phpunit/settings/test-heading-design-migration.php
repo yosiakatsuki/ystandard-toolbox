@@ -621,7 +621,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 							"top"    => [
 								"width" => "0.9em",
 								"style" => "solid",
-								"color" => "var(--ystdtb-custom-heading-after-bg-color,var(--ystdtb-custom-heading-bg-color))",
+								"color" => "#d4e7f2",
 							],
 							"right"  => [
 								"width" => "0.9em",
@@ -640,8 +640,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 							],
 						],
 					],
-					'height'   => 0,
-					'width'    => 0,
+					'height'   => '0',
+					'width'    => '0',
 					'position' => 'absolute',
 					'top'      => '100%',
 					'left'     => '1.5em',
@@ -1206,5 +1206,66 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals( '20px', $v2['v1-h1']['after']['border']['desktop']['right']['width'] );
 		$this->assertEquals( '10px', $v2['v1-h1']['after']['border']['desktop']['bottom']['width'] );
+	}
+
+	/**
+	 * preset:repeating-linear-gradient の透明度カスタムプロパティが
+	 * `rgba-opacity`（タイポなし）で出力される.
+	 *
+	 * Styles::parse_styles 側の rgba 値生成と名前を一致させ、半透明グラデーションが
+	 * 正しく描画される回帰防止.
+	 */
+	public function test_repeating_linear_gradient_opacity_var_no_typo() {
+		$input = [
+			'h1' => [ 'preset' => 'repeating-linear-gradient', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertArrayHasKey( '--ystdtb-custom-heading-after-color-rgba-opacity', $v2['v1-h1']['after'] );
+		$this->assertArrayNotHasKey( '--ystdtb-custom-heading-after-color-rbga-opacity', $v2['v1-h1']['after'] );
+	}
+
+	/**
+	 * preset:ribbon の after.border.right.color は具体的な色値で出力される.
+	 *
+	 * CSS 変数 var(...) を直接 preset に書くと UI のカラーピッカーで認識できず
+	 * 色選択が機能しなくなるため、preset には固定色を使う.
+	 */
+	public function test_ribbon_after_border_right_uses_solid_color() {
+		$input = [
+			'h1' => [ 'preset' => 'ribbon', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals(
+			'#aaaaaa',
+			$v2['v1-h1']['after']['border']['desktop']['right']['color']
+		);
+	}
+
+	/**
+	 * preset:balloon の after.border.top.color は具体的な色値（balloon の背景色と同色）で出力される.
+	 *
+	 * preset に CSS 変数を残すとフロントで未定義変数を参照して三角が描画されない問題が発生する.
+	 */
+	public function test_balloon_preset_after_border_uses_solid_color() {
+		$input = [
+			'h1' => [ 'preset' => 'balloon', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals(
+			'#d4e7f2',
+			$v2['v1-h1']['after']['border']['desktop']['top']['color']
+		);
 	}
 }
