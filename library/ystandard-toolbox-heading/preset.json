@@ -151,7 +151,7 @@
 				"bottom": "0.5em",
 				"left": "0.5em"
 			},
-			"boxShadow": "0 0 0 8px var(--ystdtb-custom-header-bg-color)",
+			"boxShadow": "0 0 0 8px var(--ystdtb-custom-heading-background-color)",
 			"borderRadius": "2px"
 		}
 	},
@@ -271,7 +271,8 @@
 				"right": "0.5em",
 				"bottom": "0.5em",
 				"left": "0.5em"
-			}
+			},
+			"position": "relative"
 		},
 		"after": {
 			"content": "\"\"",
@@ -285,12 +286,12 @@
 					"color": "transparent"
 				},
 				"right": {
-					"width": "1em",
+					"width": "20px",
 					"style": "solid",
 					"color": "var(--ystdtb-custom-header-after-color)"
 				},
 				"bottom": {
-					"width": "0.5em",
+					"width": "10px",
 					"style": "solid",
 					"color": "transparent"
 				},

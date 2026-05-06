@@ -1148,4 +1148,63 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertFalse( $v2['v1-h1']['after']['enable'] );
 	}
+
+	/**
+	 * preset:ribbon を移行した結果、style.position が 'relative' になる.
+	 *
+	 * after を position:absolute で配置するために親に position:relative が必要なので、
+	 * preset 側にこの指定が抜けているとリボン三角の位置が崩れる回帰防止.
+	 */
+	public function test_ribbon_preset_has_position_relative() {
+		$input = [
+			'h1' => [ 'preset' => 'ribbon', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( 'relative', $v2['v1-h1']['style']['position'] );
+	}
+
+	/**
+	 * preset:stitch を移行した結果、boxShadow が `--ystdtb-custom-heading-background-color` を参照する.
+	 *
+	 * 旧名 `--ystdtb-custom-header-bg-color` のままでは Styles::parse_styles で定義される
+	 * 変数名と一致せず、CSS 変数が未定義となりボックスシャドウが描画されない回帰防止.
+	 */
+	public function test_stitch_preset_box_shadow_uses_correct_var() {
+		$input = [
+			'h1' => [ 'preset' => 'stitch', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertStringContainsString(
+			'--ystdtb-custom-heading-background-color',
+			$v2['v1-h1']['style']['boxShadow']
+		);
+		$this->assertStringNotContainsString(
+			'--ystdtb-custom-heading-bg-color',
+			$v2['v1-h1']['style']['boxShadow']
+		);
+	}
+
+	/**
+	 * preset:ribbon の after.border は px 単位で出力される（em 単位だと font-size 依存で三角の形が崩れる）.
+	 */
+	public function test_ribbon_after_border_uses_pixel_width() {
+		$input = [
+			'h1' => [ 'preset' => 'ribbon', 'useCustomStyle' => true ],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( '20px', $v2['v1-h1']['after']['border']['desktop']['right']['width'] );
+		$this->assertEquals( '10px', $v2['v1-h1']['after']['border']['desktop']['bottom']['width'] );
+	}
 }
