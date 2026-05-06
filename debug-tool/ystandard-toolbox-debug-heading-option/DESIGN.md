@@ -82,6 +82,18 @@ POST フォームで以下のボタンを 4 個並べる:
 - 完了後、ページにリダイレクトして notice 表示
 - 成功・失敗時のメッセージは admin_notices で表示
 
+### ペーストで上書き保存（option ごと）
+
+「設定値の確認」セクション内で、各 option の表示直下に個別のペーストフォームを配置する（option 単位の上書き保存）。
+
+- 対象 option: 3 種（`ystdtb_heading` / `ystdtb_heading_v2` / `ystdtb_heading_level`）。それぞれにフォーム 1 つ。
+- フォーム要素:
+  - `<textarea rows="8">`（JSON テキスト直接入力）
+  - 上書き保存ボタン
+- 受け付ける JSON は **コピーボタンで取得した値そのもの**（option の中身）。エクスポート JSON（`{"options": ...}` でラップした形式）とは別フォーマット。
+- 確認ダイアログは出さない（コピー → ペーストの素早い往復を阻害しないため）。
+- 成功・失敗は admin_notices で通知。
+
 ## エクスポート JSON フォーマット
 
 ```json
@@ -121,6 +133,24 @@ POST フォームで以下のボタンを 4 個並べる:
 - JSON 解析失敗 → `import_error_invalid_json`
 - `options` キー欠如 → `import_error_invalid_format`
 
+## ペースト仕様（option 単位上書き）
+
+- POST `target` (`v1` / `v2_main` / `v2_level`) と `value`（JSON テキスト）を受け取る
+- `value` を `trim` し、空文字なら `paste_error_empty` で notice
+- `json_decode( ..., true )` で解析。`json_last_error()` が `JSON_ERROR_NONE` 以外なら `paste_error_invalid_json` で notice
+- 解析結果が **配列以外**（数値・文字列・null・bool）なら `paste_error_not_array` で notice（誤削除防止のため、配列以外は受け付けない）
+- 解析結果が配列なら、`target` から導出した option キーへ `update_option()` で書き戻し
+- 書き戻し後は CSS キャッシュ transient を削除
+- 成功時 notice キー: `pasted_v1` / `pasted_v2_main` / `pasted_v2_level`
+
+target → option キーの対応:
+
+| target | option キー |
+|---|---|
+| `v1` | `ystdtb_heading` |
+| `v2_main` | `ystdtb_heading_v2` |
+| `v2_level` | `ystdtb_heading_level` |
+
 ## 削除仕様
 
 - 削除前の確認は JS `confirm()` のみ
@@ -154,9 +184,13 @@ delete_transient( 'ystdtb_heading_v2_css' );
   ├── エクスポートボタン押下 → admin-post.php → ystdtb_debug_heading_option_handle_export
   │     → ヘッダ + JSON 出力 → exit
   │
-  └── インポートボタン押下 → admin-post.php → ystdtb_debug_heading_option_handle_import
-        → ファイル解析 → update_option / delete_option → delete_transient
-        → wp_safe_redirect( ?notice=imported|import_error_xxx )
+  ├── インポートボタン押下 → admin-post.php → ystdtb_debug_heading_option_handle_import
+  │     → ファイル解析 → update_option / delete_option → delete_transient
+  │     → wp_safe_redirect( ?notice=imported|import_error_xxx )
+  │
+  └── ペーストで上書き保存ボタン押下 → admin-post.php → ystdtb_debug_heading_option_handle_paste
+        → JSON 解析 → 該当 option へ update_option → delete_transient
+        → wp_safe_redirect( ?notice=pasted_xxx|paste_error_xxx )
 ```
 
 ## ファイル構成
@@ -180,6 +214,8 @@ delete_transient( 'ystdtb_heading_v2_css' );
 | `ystdtb_debug_heading_option_handle_delete()` | `admin_post_ystdtb_debug_heading_option_delete` |
 | `ystdtb_debug_heading_option_handle_export()` | `admin_post_ystdtb_debug_heading_option_export` |
 | `ystdtb_debug_heading_option_handle_import()` | `admin_post_ystdtb_debug_heading_option_import` |
+| `ystdtb_debug_heading_option_handle_paste()` | `admin_post_ystdtb_debug_heading_option_paste` |
+| `ystdtb_debug_heading_option_render_paste_form()` | option 単位ペーストフォームの描画 |
 | `ystdtb_debug_heading_option_clear_cache()` | CSS キャッシュ transient 削除（共通処理） |
 | `ystdtb_debug_heading_option_redirect_with_notice( $notice )` | リダイレクト共通処理 |
 

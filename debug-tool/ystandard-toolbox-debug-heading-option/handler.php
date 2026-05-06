@@ -147,3 +147,47 @@ function ystdtb_debug_heading_option_handle_import() {
 	ystdtb_debug_heading_option_redirect_with_notice( 'imported' );
 }
 add_action( 'admin_post_ystdtb_debug_heading_option_import', 'ystdtb_debug_heading_option_handle_import' );
+
+/**
+ * ペーストで上書き保存処理.
+ *
+ * 単一 option へ JSON テキストを書き戻す（複数 option をまとめて扱う import とは別物）.
+ *
+ * @return void
+ */
+function ystdtb_debug_heading_option_handle_paste() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	check_admin_referer( YSTDTB_DEBUG_HEADING_OPTION_NONCE_ACTION, YSTDTB_DEBUG_HEADING_OPTION_NONCE_NAME );
+
+	$target = isset( $_POST['target'] ) ? sanitize_key( wp_unslash( $_POST['target'] ) ) : '';
+	$value  = isset( $_POST['value'] ) ? wp_unslash( $_POST['value'] ) : '';
+
+	$option_key_map = [
+		'v1'       => YSTDTB_DEBUG_HEADING_OPTION_KEY_V1,
+		'v2_main'  => YSTDTB_DEBUG_HEADING_OPTION_KEY_V2_MAIN,
+		'v2_level' => YSTDTB_DEBUG_HEADING_OPTION_KEY_V2_LEVEL,
+	];
+	if ( ! array_key_exists( $target, $option_key_map ) ) {
+		wp_die( esc_html__( '不正な保存対象です。', 'ystandard-toolbox' ) );
+	}
+
+	$value = is_string( $value ) ? trim( $value ) : '';
+	if ( '' === $value ) {
+		ystdtb_debug_heading_option_redirect_with_notice( 'paste_error_empty' );
+	}
+
+	$decoded = json_decode( $value, true );
+	if ( JSON_ERROR_NONE !== json_last_error() ) {
+		ystdtb_debug_heading_option_redirect_with_notice( 'paste_error_invalid_json' );
+	}
+	if ( ! is_array( $decoded ) ) {
+		ystdtb_debug_heading_option_redirect_with_notice( 'paste_error_not_array' );
+	}
+
+	update_option( $option_key_map[ $target ], $decoded );
+	ystdtb_debug_heading_option_clear_cache();
+	ystdtb_debug_heading_option_redirect_with_notice( "pasted_{$target}" );
+}
+add_action( 'admin_post_ystdtb_debug_heading_option_paste', 'ystdtb_debug_heading_option_handle_paste' );

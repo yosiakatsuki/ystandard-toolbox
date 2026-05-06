@@ -61,15 +61,21 @@ function ystdtb_debug_heading_option_render_notice() {
 	$notice = sanitize_key( wp_unslash( $_GET['notice'] ) );
 
 	$messages = [
-		'deleted_v1'                 => [ 'success', 'v1 設定（ystdtb_heading）を削除しました。' ],
-		'deleted_v2_main'            => [ 'success', 'v2 メイン設定（ystdtb_heading_v2）を削除しました。' ],
-		'deleted_v2_level'           => [ 'success', 'v2 レベル設定（ystdtb_heading_level）を削除しました。' ],
-		'deleted_all'                => [ 'success', 'すべての見出し設定を削除しました。' ],
-		'imported'                   => [ 'success', '設定をインポートしました。' ],
-		'import_error_no_file'       => [ 'error', 'ファイルが選択されていません。' ],
-		'import_error_invalid_json'  => [ 'error', 'JSON の解析に失敗しました。' ],
+		'deleted_v1'                  => [ 'success', 'v1 設定（ystdtb_heading）を削除しました。' ],
+		'deleted_v2_main'             => [ 'success', 'v2 メイン設定（ystdtb_heading_v2）を削除しました。' ],
+		'deleted_v2_level'            => [ 'success', 'v2 レベル設定（ystdtb_heading_level）を削除しました。' ],
+		'deleted_all'                 => [ 'success', 'すべての見出し設定を削除しました。' ],
+		'imported'                    => [ 'success', '設定をインポートしました。' ],
+		'import_error_no_file'        => [ 'error', 'ファイルが選択されていません。' ],
+		'import_error_invalid_json'   => [ 'error', 'JSON の解析に失敗しました。' ],
 		'import_error_invalid_format' => [ 'error', 'JSON 構造が正しくありません（options キーが必要）。' ],
-		'import_error_upload'        => [ 'error', 'ファイルのアップロードに失敗しました。' ],
+		'import_error_upload'         => [ 'error', 'ファイルのアップロードに失敗しました。' ],
+		'pasted_v1'                   => [ 'success', 'v1 設定をペーストで上書き保存しました。' ],
+		'pasted_v2_main'              => [ 'success', 'v2 メイン設定をペーストで上書き保存しました。' ],
+		'pasted_v2_level'             => [ 'success', 'v2 レベル設定をペーストで上書き保存しました。' ],
+		'paste_error_empty'           => [ 'error', 'JSON テキストが空です。' ],
+		'paste_error_invalid_json'    => [ 'error', 'JSON の解析に失敗しました。' ],
+		'paste_error_not_array'       => [ 'error', 'JSON が配列／オブジェクト形式ではありません。' ],
 	];
 
 	if ( ! isset( $messages[ $notice ] ) ) {
@@ -115,12 +121,15 @@ function ystdtb_debug_heading_option_render_page() {
 
 		<h3><code>ystdtb_heading</code>（v1）</h3>
 		<?php ystdtb_debug_heading_option_render_value( $v1, 'v1' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v1', 'v1 設定' ); ?>
 
 		<h3><code>ystdtb_heading_v2</code>（v2 メイン）</h3>
 		<?php ystdtb_debug_heading_option_render_value( $v2_main, 'v2-main' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_main', 'v2 メイン設定' ); ?>
 
 		<h3><code>ystdtb_heading_level</code>（v2 レベル別）</h3>
 		<?php ystdtb_debug_heading_option_render_value( $v2_level, 'v2-level' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_level', 'v2 レベル設定' ); ?>
 
 		<hr />
 
@@ -245,6 +254,32 @@ function ystdtb_debug_heading_option_render_value( $value, $id_suffix ) {
 		>クリップボードにコピー</button>
 	</p>
 	<pre id="<?php echo esc_attr( $element_id ); ?>" style="background:#f6f7f7;padding:12px;max-height:400px;overflow:auto;"><?php echo esc_html( $json ); ?></pre>
+	<?php
+}
+
+/**
+ * 単一 option へのペースト用フォーム.
+ *
+ * @param string $target option 識別子（v1 / v2_main / v2_level）.
+ * @param string $label  ボタンラベル用の表示名.
+ *
+ * @return void
+ */
+function ystdtb_debug_heading_option_render_paste_form( $target, $label ) {
+	$action_url = admin_url( 'admin-post.php' );
+	?>
+	<form method="post" action="<?php echo esc_url( $action_url ); ?>" style="margin:8px 0 24px;">
+		<?php wp_nonce_field( YSTDTB_DEBUG_HEADING_OPTION_NONCE_ACTION, YSTDTB_DEBUG_HEADING_OPTION_NONCE_NAME ); ?>
+		<input type="hidden" name="action" value="ystdtb_debug_heading_option_paste" />
+		<input type="hidden" name="target" value="<?php echo esc_attr( $target ); ?>" />
+		<p style="margin:0 0 4px;">ペーストで上書き保存:</p>
+		<p>
+			<textarea name="value" rows="8" style="width:100%;font-family:monospace;" placeholder='例: { "v1-h1": { ... } }'></textarea>
+		</p>
+		<p>
+			<button type="submit" class="button"><?php echo esc_html( $label ); ?>を上書き保存</button>
+		</p>
+	</form>
 	<?php
 }
 
