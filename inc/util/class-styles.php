@@ -223,7 +223,7 @@ class Styles {
 		if ( false !== strpos( $content, '<svg' ) ) {
 			$svg_icon = rawurlencode( $content );
 			// 背景色を現在の文字色に設定.
-			$styles['backgroundColor'] = $styles['iconColor'] ? $styles['iconColor'] : 'currentColor';
+			$styles['backgroundColor'] = ! empty( $styles['iconColor'] ) ? $styles['iconColor'] : 'currentColor';
 			// マスク関連.
 			$icon_content                 = "data:image/svg+xml;charset=UTF-8,{$svg_icon}";
 			$styles['-webkit-mask-image'] = $icon_content;
@@ -238,10 +238,12 @@ class Styles {
 			$styles['backgroundPosition'] = 'center';
 			$styles['verticalAlign']      = '-0.125em';
 			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
-			// サイズの指定がなければ 1em で設定.
-			$default_size     = [ 'desktop' => '1em' ];
-			$styles['width']  = empty( $styles['fontSize'] ) ? $default_size : $styles['width'];
-			$styles['height'] = empty( $styles['fontSize'] ) ? $default_size : $styles['height'];
+			// fontSize の指定がなければ width/height を 1em で設定.
+			if ( empty( $styles['fontSize'] ) ) {
+				$default_size     = [ 'desktop' => '1em' ];
+				$styles['width']  = $default_size;
+				$styles['height'] = $default_size;
+			}
 			// contentは空に.
 			$content = '';
 		}
