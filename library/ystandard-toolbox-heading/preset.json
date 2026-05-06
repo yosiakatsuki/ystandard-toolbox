@@ -186,6 +186,7 @@
 			"position": "relative",
 			"zIndex": 1
 		},
+		"usePseudoElementsSize": [],
 		"after": {
 			"content": "\"\"",
 			"position": "absolute",

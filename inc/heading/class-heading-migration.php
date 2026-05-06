@@ -140,14 +140,30 @@ class Heading_Migration {
 			}
 
 			if ( ! empty( $size ) ) {
-				if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
-					$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
-				}
-				if ( isset( $preset[ $type ]['width'] ) && 0 !== $preset[ $type ]['width'] ) {
-					$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
-				}
-				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
-					$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+				if ( isset( $preset['usePseudoElementsSize'] ) ) {
+					// preset で適用先を明示している場合: その指示に従う（空配列なら何もしない）.
+					foreach ( $preset['usePseudoElementsSize'] as $size_target ) {
+						if ( 'iconSize' === $size_target ) {
+							// アイコン用の size 適用は後段の icon 処理側で行う.
+							continue;
+						}
+						if ( 'fontSize' === $size_target ) {
+							$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+						} else {
+							$this->add_pseudo_elements_style( $type, $size_target, "{$size}{$size_unit}" );
+						}
+					}
+				} else {
+					// preset で明示なし: 既存挙動（preset.height/width/fontSize が 0 でなければ size で上書き）.
+					if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
+						$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
+					}
+					if ( isset( $preset[ $type ]['width'] ) && 0 !== $preset[ $type ]['width'] ) {
+						$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
+					}
+					if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
+						$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+					}
 				}
 			}
 			// アイコンの場合.

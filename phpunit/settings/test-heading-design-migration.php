@@ -1268,4 +1268,30 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 			$v2['v1-h1']['after']['border']['desktop']['top']['color']
 		);
 	}
+
+	/**
+	 * preset:repeating-linear-gradient で afterSize 指定があっても、preset の width=100%/height=5px が上書きされない.
+	 *
+	 * v1 の preset 仕様では `usePseudoElementsSize` フラグ未指定の preset は size を適用しない動作だった.
+	 * この preset は `usePseudoElementsSize: []` を持ち、size 適用先がない（=上書きしない）ことを表す.
+	 */
+	public function test_repeating_linear_gradient_does_not_overwrite_size() {
+		$input = [
+			'h1' => [
+				'preset'         => 'repeating-linear-gradient',
+				'useCustomStyle' => true,
+				'afterColorType' => 'color',
+				'afterColor'     => '#cccccc',
+				'afterSize'      => '2',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( '100%', $v2['v1-h1']['after']['width'] );
+		$this->assertEquals( '5px', $v2['v1-h1']['after']['height'] );
+	}
+
 }
