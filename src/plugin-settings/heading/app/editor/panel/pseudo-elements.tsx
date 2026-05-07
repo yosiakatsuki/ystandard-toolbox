@@ -249,6 +249,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							'fontSize',
 							'color',
 							'fontWeight',
+							'responsiveFontWeight',
 							'fontStyle',
 							'lineHeight',
 							'letterSpacing',
@@ -266,6 +267,9 @@ function PseudoElements( props: PseudoElementsProps ) {
 								/>
 								<FontWeight
 									value={ option?.fontWeight }
+									responsiveValue={
+										option?.responsiveFontWeight
+									}
 									onChange={ handleOnChange }
 								/>
 								<FontStyle
@@ -410,6 +414,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '上級者向け', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'display',
+								'responsiveDisplay',
 								'fontFamily',
 								'background',
 								'textShadow',
@@ -420,6 +425,9 @@ function PseudoElements( props: PseudoElementsProps ) {
 							<PanelInner>
 								<ResponsiveDisplay
 									value={ option?.display }
+									responsiveValue={
+										option?.responsiveDisplay
+									}
 									onChange={ handleOnChange }
 								/>
 								<Position

@@ -122,7 +122,9 @@ export function StylePanel() {
 					'fontSize',
 					'color',
 					'textAlign',
+					'responsiveTextAlign',
 					'fontWeight',
+					'responsiveFontWeight',
 					'fontStyle',
 					'lineHeight',
 					'letterSpacing',
@@ -139,10 +141,12 @@ export function StylePanel() {
 					/>
 					<TextAlign
 						value={ option?.textAlign }
+						responsiveValue={ option?.responsiveTextAlign }
 						onChange={ handleOnChange }
 					/>
 					<FontWeight
 						value={ option?.fontWeight }
+						responsiveValue={ option?.responsiveFontWeight }
 						onChange={ handleOnChange }
 					/>
 					<FontStyle
@@ -276,6 +280,15 @@ export function StylePanel() {
 				title={ __( '上級者向け', 'ystandard-toolbox' ) }
 				initialOpen={ isInitialOpen( option, [
 					'display',
+					'responsiveDisplay',
+					'flexDirection',
+					'responsiveFlexDirection',
+					'alignItems',
+					'responsiveAlignItems',
+					'justifyContent',
+					'responsiveJustifyContent',
+					'gap',
+					'responsiveGap',
 					'fontFamily',
 					'background',
 					'textShadow',
@@ -286,27 +299,36 @@ export function StylePanel() {
 				<PanelInner>
 					<ResponsiveDisplay
 						value={ option?.display }
+						responsiveValue={ option?.responsiveDisplay }
 						onChange={ handleOnChange }
 					/>
 					<FlexDirection
 						value={ option?.flexDirection }
+						responsiveValue={ option?.responsiveFlexDirection }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+						responsiveDisplayValue={ option?.responsiveDisplay }
 					/>
 					<AlignItems
 						value={ option?.alignItems }
+						responsiveValue={ option?.responsiveAlignItems }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+						responsiveDisplayValue={ option?.responsiveDisplay }
 					/>
 					<JustifyContent
 						value={ option?.justifyContent }
+						responsiveValue={ option?.responsiveJustifyContent }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+						responsiveDisplayValue={ option?.responsiveDisplay }
 					/>
 					<Gap
 						value={ option?.gap }
+						responsiveValue={ option?.responsiveGap }
 						onChange={ handleOnChange }
 						displayValue={ option?.display }
+						responsiveDisplayValue={ option?.responsiveDisplay }
 					/>
 					<Position
 						value={ option?.position }

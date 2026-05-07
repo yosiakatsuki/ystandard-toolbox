@@ -107,6 +107,10 @@ class Styles {
 		$mobile  = [];
 
 		foreach ( $styles as $key => $value ) {
+			// responsiveXxx キーは元プロパティ名（xxx）として扱い、CSS プロパティ名を導出する.
+			if ( 0 === strpos( $key, 'responsive' ) && strlen( $key ) > 10 ) {
+				$key = lcfirst( substr( $key, 10 ) );
+			}
 			$property = Text::camel_to_kebab( $key );
 
 			// レスポンシブではない設定をDesktopの設定として扱う.

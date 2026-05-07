@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
-	const RESPONSIVE_PROPERTY = [ 'fontSize', 'textAlign', 'fontWeight', 'padding', 'margin', 'border' ];
+	const RESPONSIVE_PROPERTY = [ 'fontSize', 'padding', 'margin', 'border' ];
 
 	/**
 	 * 新設定.
@@ -404,12 +404,12 @@ class Heading_Migration {
 		// 揃え位置.
 		$align = $this->get_old_option( 'fontAlign', '' );
 		if ( $align ) {
-			$this->add_responsive_style( 'textAlign', $align );
+			$this->add_style( 'textAlign', $align );
 		}
 		// 太さ.
 		$weight = $this->get_old_option( 'fontWeight', '' );
 		if ( $weight ) {
-			$this->add_responsive_style( 'fontWeight', $weight );
+			$this->add_style( 'fontWeight', $weight );
 		}
 		// スタイル.
 		$font_style = $this->get_old_option( 'fontStyle', '' );

@@ -106,6 +106,33 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	/**
+	 * responsiveXxx キーは元プロパティ名（xxx）として CSS 出力される.
+	 *
+	 * Phase 1 で導入した `xxx` + `responsiveXxx` 別キー方式の動作確認.
+	 */
+	public function test_parse_style_responsive_text_align() {
+		$input    = [
+			'responsiveTextAlign' => [
+				'desktop' => 'center',
+				'tablet'  => 'left',
+				'mobile'  => 'right',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'text-align' => 'center',
+			],
+			'tablet'  => [
+				'text-align' => 'left',
+			],
+			'mobile'  => [
+				'text-align' => 'right',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_height_min_height_responsive() {
 		$input    = [
 			'height'    => [

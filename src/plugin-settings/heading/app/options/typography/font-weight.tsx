@@ -23,8 +23,12 @@ import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface FontWeightControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { fontWeight?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		fontWeight?: string;
+		responsiveFontWeight?: ResponsiveValues;
+	} ) => void;
 }
 
 interface FontWeightEditProps {
@@ -33,12 +37,21 @@ interface FontWeightEditProps {
 }
 
 export default function FontWeight( props: FontWeightControlProps ) {
-	const { value, onChange } = props;
+	const { value, responsiveValue, onChange } = props;
 
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
+	// 単一値モード: 単一値を更新、レスポンシブは削除.
+	const handleDefaultChange = ( newValue: string | undefined ) => {
 		onChange( {
-			fontWeight: deleteUndefined( {
-				...value,
+			fontWeight: newValue,
+			responsiveFontWeight: undefined,
+		} );
+	};
+	// レスポンシブモード: レスポンシブを更新、単一値は削除.
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			fontWeight: undefined,
+			responsiveFontWeight: deleteUndefined( {
+				...responsiveValue,
 				...newValue,
 			} ),
 		} );
@@ -51,41 +64,44 @@ export default function FontWeight( props: FontWeightControlProps ) {
 			className={ '[&_.components-custom-select-control__label]:hidden' }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
 				defaultTabContent={
 					<DefaultFontWeightEdit
 						value={ value }
-						onChange={ handleOnChange }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveFontWeightEdit
-						value={ value }
-						onChange={ handleOnChange }
+						value={ responsiveValue }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
 			<ClearButton
-				onClick={ () => onChange( { fontWeight: undefined } ) }
+				onClick={ () =>
+					onChange( {
+						fontWeight: undefined,
+						responsiveFontWeight: undefined,
+					} )
+				}
 			/>
 		</PluginSettingsBaseControl>
 	);
 }
 
-export function DefaultFontWeightEdit( props: FontWeightEditProps ) {
-	const { value, onChange } = props;
+export function DefaultFontWeightEdit( {
+	value,
+	onChange,
+}: {
+	value: string | undefined;
+	onChange: ( value: string | undefined ) => void;
+} ) {
 	const handleOnChange = ( newValue: string ) => {
-		onChange( {
-			desktop: newValue || undefined,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( newValue || undefined );
 	};
 	return (
-		<FontWeightControl
-			value={ value?.desktop || '' }
-			onChange={ handleOnChange }
-		/>
+		<FontWeightControl value={ value || '' } onChange={ handleOnChange } />
 	);
 }
 

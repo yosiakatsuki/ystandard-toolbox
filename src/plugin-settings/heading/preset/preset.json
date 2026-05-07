@@ -233,15 +233,9 @@
 		"slug": "text-center-border",
 		"label": "左右に直線",
 		"style": {
-			"display": {
-				"desktop": "flex"
-			},
-			"alignItems": {
-				"desktop": "center"
-			},
-			"gap": {
-				"desktop": "0.5em"
-			}
+			"display": "flex",
+			"alignItems": "center",
+			"gap": "0.5em"
 		},
 		"before": {
 			"enable": true,
@@ -367,15 +361,9 @@
 		"slug": "icons",
 		"label": "アイコン（バッジ）",
 		"style": {
-			"display": {
-				"desktop": "flex"
-			},
-			"alignItems": {
-				"desktop": "center"
-			},
-			"gap": {
-				"desktop": "0.2em"
-			}
+			"display": "flex",
+			"alignItems": "center",
+			"gap": "0.2em"
 		},
 		"before": {
 			"enable": true,

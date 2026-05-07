@@ -105,9 +105,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'fontSize'      => [
 						'desktop' => '1.2em',
 					],
-					'fontWeight'    => [
-						'desktop' => 'bold',
-					],
+					'fontWeight'    => 'bold',
 					'fontStyle'     => 'normal',
 					'lineHeight'    => 1.3,
 					'letterSpacing' => '0.05em',
@@ -531,12 +529,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 						"desktop" => "1.4em",
 					],
 					"color"         => "#222222",
-					"textAlign"     => [
-						"desktop" => "center",
-					],
-					"fontWeight"    => [
-						"desktop" => "bold",
-					],
+					"textAlign"     => "center",
+					"fontWeight"    => "bold",
 					"fontStyle"     => "normal",
 					"fontFamily"    => "'Noto Sans JP', sans-serif",
 					"lineHeight"    => "1.3",

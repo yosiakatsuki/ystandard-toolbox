@@ -32,8 +32,10 @@ export interface HeadingStyle {
 	// typography.
 	fontSize?: CustomFontSize;
 	color?: string;
-	textAlign?: ResponsiveValues;
-	fontWeight?: ResponsiveValues;
+	textAlign?: string;
+	responsiveTextAlign?: ResponsiveValues;
+	fontWeight?: string;
+	responsiveFontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;
@@ -64,11 +66,16 @@ export interface HeadingStyle {
 	maxHeight?: ResponsiveValues;
 
 	// advanced.
-	display?: ResponsiveValues;
-	flexDirection?: ResponsiveValues;
-	alignItems?: ResponsiveValues;
-	justifyContent?: ResponsiveValues;
-	gap?: ResponsiveValues;
+	display?: string;
+	responsiveDisplay?: ResponsiveValues;
+	flexDirection?: string;
+	responsiveFlexDirection?: ResponsiveValues;
+	alignItems?: string;
+	responsiveAlignItems?: ResponsiveValues;
+	justifyContent?: string;
+	responsiveJustifyContent?: ResponsiveValues;
+	gap?: string;
+	responsiveGap?: ResponsiveValues;
 	position?: string;
 	top?: string;
 	right?: string;
@@ -93,7 +100,8 @@ export interface HeadingPseudoElementsStyle {
 	useIconMask?: boolean;
 	fontSize?: ResponsiveValues;
 	color?: string;
-	fontWeight?: ResponsiveValues;
+	fontWeight?: string;
+	responsiveFontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;
@@ -120,7 +128,8 @@ export interface HeadingPseudoElementsStyle {
 	maxHeight?: ResponsiveValues;
 	// advanced.
 	background?: string;
-	display?: ResponsiveValues;
+	display?: string;
+	responsiveDisplay?: ResponsiveValues;
 	textShadow?: string;
 	boxShadow?: string;
 	fontFamily?: string;

@@ -15,9 +15,14 @@ import { AdvancedResponsiveSelectControl } from './controls';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
 interface JustifyContentProps {
-	value: ResponsiveValues | undefined;
-	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { justifyContent?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	displayValue: string | undefined;
+	responsiveDisplayValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		justifyContent?: string;
+		responsiveJustifyContent?: ResponsiveValues;
+	} ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -44,12 +49,30 @@ const SELECT_OPTIONS = [
 ];
 
 export default function JustifyContent( props: JustifyContentProps ) {
-	const { value, onChange, displayValue } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { justifyContent: deleteUndefined( newValue ) } );
+	const {
+		value,
+		responsiveValue,
+		onChange,
+		displayValue,
+		responsiveDisplayValue,
+	} = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( {
+			justifyContent: newValue,
+			responsiveJustifyContent: undefined,
+		} );
 	};
-	// flexが選択されていない場合は非表示.
-	if ( ! isUseFlex( displayValue ) ) {
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			justifyContent: undefined,
+			responsiveJustifyContent: deleteUndefined( newValue ),
+		} );
+	};
+	const isFlex =
+		displayValue === 'flex' ||
+		displayValue === 'inline-flex' ||
+		isUseFlex( responsiveDisplayValue );
+	if ( ! isFlex ) {
 		return <></>;
 	}
 	return (
@@ -57,8 +80,15 @@ export default function JustifyContent( props: JustifyContentProps ) {
 			id={ 'justify-content' }
 			label={ __( 'justify-content', 'ystandard-toolbox' ) }
 			value={ value }
-			onChange={ handleOnChange }
-			onClear={ () => onChange( { justifyContent: undefined } ) }
+			responsiveValue={ responsiveValue }
+			onDefaultChange={ handleDefaultChange }
+			onResponsiveChange={ handleResponsiveChange }
+			onClear={ () =>
+				onChange( {
+					justifyContent: undefined,
+					responsiveJustifyContent: undefined,
+				} )
+			}
 			options={ SELECT_OPTIONS }
 		/>
 	);

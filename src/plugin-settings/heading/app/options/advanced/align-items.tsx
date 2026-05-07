@@ -15,9 +15,14 @@ import { AdvancedResponsiveSelectControl } from './controls';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
 interface AlignItemsProps {
-	value: ResponsiveValues | undefined;
-	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { alignItems?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	displayValue: string | undefined;
+	responsiveDisplayValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		alignItems?: string;
+		responsiveAlignItems?: ResponsiveValues;
+	} ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -40,12 +45,30 @@ const SELECT_OPTIONS = [
 ];
 
 export default function AlignItems( props: AlignItemsProps ) {
-	const { value, onChange, displayValue } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { alignItems: deleteUndefined( newValue ) } );
+	const {
+		value,
+		responsiveValue,
+		onChange,
+		displayValue,
+		responsiveDisplayValue,
+	} = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( {
+			alignItems: newValue,
+			responsiveAlignItems: undefined,
+		} );
 	};
-	// flexが選択されていない場合は非表示.
-	if ( ! isUseFlex( displayValue ) ) {
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			alignItems: undefined,
+			responsiveAlignItems: deleteUndefined( newValue ),
+		} );
+	};
+	const isFlex =
+		displayValue === 'flex' ||
+		displayValue === 'inline-flex' ||
+		isUseFlex( responsiveDisplayValue );
+	if ( ! isFlex ) {
 		return <></>;
 	}
 	return (
@@ -53,9 +76,16 @@ export default function AlignItems( props: AlignItemsProps ) {
 			id={ 'align-items' }
 			label={ __( 'align-items', 'ystandard-toolbox' ) }
 			value={ value }
-			onChange={ handleOnChange }
+			responsiveValue={ responsiveValue }
+			onDefaultChange={ handleDefaultChange }
+			onResponsiveChange={ handleResponsiveChange }
 			options={ SELECT_OPTIONS }
-			onClear={ () => onChange( { alignItems: undefined } ) }
+			onClear={ () =>
+				onChange( {
+					alignItems: undefined,
+					responsiveAlignItems: undefined,
+				} )
+			}
 		/>
 	);
 }

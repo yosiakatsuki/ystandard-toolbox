@@ -1751,6 +1751,22 @@ describe( 'CSS カスタムプロパティ生成', () => {
 		);
 	} );
 
+	it( 'responsiveXxx キーは元プロパティ名（xxx）として CSS 出力される', () => {
+		// responsiveTextAlign を渡すと CSS は text-align として出力される.
+		const result = parseStyles( {
+			responsiveTextAlign: {
+				desktop: 'center',
+				tablet: 'left',
+				mobile: 'right',
+			},
+		} );
+		expect( result.desktop ).toContain( 'text-align: center;' );
+		expect( result.tablet ).toContain( 'text-align: left;' );
+		expect( result.mobile ).toContain( 'text-align: right;' );
+		// responsive プレフィックス付きの CSS プロパティは出力されない.
+		expect( result.desktop ).not.toContain( 'responsive-text-align' );
+	} );
+
 	it( 'HEX 以外（transparent / currentColor / var(...)）は CSS 変数を生成しない', () => {
 		const transparentResult = parseStyles( { color: 'transparent' } );
 		expect( transparentResult.desktop ).not.toContain(

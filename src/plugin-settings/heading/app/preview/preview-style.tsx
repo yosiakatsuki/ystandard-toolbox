@@ -81,11 +81,17 @@ export function parseStyles(
 	let tablet: any[] = [];
 	let mobile: any[] = [];
 
-	Object.keys( styles ).forEach( ( key: string ) => {
+	Object.keys( styles ).forEach( ( originalKey: string ) => {
+		// responsiveXxx キーは元プロパティ名（xxx）として扱い、CSS プロパティ名を導出する.
+		const key =
+			originalKey.startsWith( 'responsive' ) && originalKey.length > 10
+				? originalKey.charAt( 10 ).toLowerCase() +
+				  originalKey.slice( 11 )
+				: originalKey;
 		// キーをケバブケースに変換.
 		const property = kebabCase( key );
 		// @ts-ignore
-		let value = styles[ key ];
+		let value = styles[ originalKey ];
 		// フォントサイズの場合特殊処理.
 		if ( isFontSize( property ) ) {
 			value = parseFontSizeStyle( value );

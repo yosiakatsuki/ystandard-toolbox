@@ -26,14 +26,27 @@ import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface TextAlignControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { textAlign?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		textAlign?: string;
+		responsiveTextAlign?: ResponsiveValues;
+	} ) => void;
 }
 export default function TextAlign( props: TextAlignControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
+	const { value, responsiveValue, onChange } = props;
+	// 単一値モード: 単一値を更新、レスポンシブは削除.
+	const handleDefaultChange = ( newValue: string | undefined ) => {
 		onChange( {
-			textAlign: deleteUndefined( newValue ),
+			textAlign: newValue,
+			responsiveTextAlign: undefined,
+		} );
+	};
+	// レスポンシブモード: レスポンシブを更新、単一値は削除.
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			textAlign: undefined,
+			responsiveTextAlign: deleteUndefined( newValue ),
 		} );
 	};
 	return (
@@ -43,23 +56,26 @@ export default function TextAlign( props: TextAlignControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
 				defaultTabContent={
 					<DefaultTextAlignEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveTextAlignEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
 			<ClearButton
 				onClick={ () => {
-					onChange( { textAlign: undefined } );
+					onChange( {
+						textAlign: undefined,
+						responsiveTextAlign: undefined,
+					} );
 				} }
 			/>
 		</PluginSettingsBaseControl>
@@ -79,17 +95,9 @@ function DefaultTextAlignEdit( {
 	onChange,
 }: {
 	value: string | undefined;
-	onChange: ( value: ResponsiveValues ) => void;
+	onChange: ( value: string | undefined ) => void;
 } ) {
-	const handleOnChange = ( newValue: string | undefined ) => {
-		// 共通設定の場合、tablet,mobileは削除
-		onChange( {
-			desktop: newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
-	};
-	return <TextAlignButtons value={ value } onChange={ handleOnChange } />;
+	return <TextAlignButtons value={ value } onChange={ onChange } />;
 }
 
 function ResponsiveTextAlignEdit( {
