@@ -113,26 +113,6 @@ function ystdtb_debug_heading_option_render_page() {
 		<h1><?php echo esc_html( YSTDTB_DEBUG_HEADING_OPTION_MENU_TITLE ); ?></h1>
 		<p>yStandard Toolbox の見出しデザイン設定（v1 / v2）の確認・削除・エクスポート・インポートを行います。</p>
 
-		<h2>設定値の確認</h2>
-		<p>
-			互換モード（v1 を使う状態）:
-			<strong><?php echo $is_compatible ? 'true' : 'false'; ?></strong>
-		</p>
-
-		<h3><code>ystdtb_heading</code>（v1）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v1, 'v1' ); ?>
-		<?php ystdtb_debug_heading_option_render_paste_form( 'v1', 'v1 設定' ); ?>
-
-		<h3><code>ystdtb_heading_v2</code>（v2 メイン）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v2_main, 'v2-main' ); ?>
-		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_main', 'v2 メイン設定' ); ?>
-
-		<h3><code>ystdtb_heading_level</code>（v2 レベル別）</h3>
-		<?php ystdtb_debug_heading_option_render_value( $v2_level, 'v2-level' ); ?>
-		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_level', 'v2 レベル設定' ); ?>
-
-		<hr />
-
 		<h2>削除</h2>
 		<p>削除前に CSS キャッシュ（transient <code><?php echo esc_html( YSTDTB_DEBUG_HEADING_OPTION_TRANSIENT_CSS ); ?></code>）も合わせてクリアされます。</p>
 		<form method="post" action="<?php echo esc_url( $action_url ); ?>" style="display:inline-block;margin-right:8px;">
@@ -159,6 +139,26 @@ function ystdtb_debug_heading_option_render_page() {
 			<input type="hidden" name="target" value="all" />
 			<button type="submit" class="button button-secondary" onclick="return confirm('すべての見出し設定（v1 / v2 メイン / v2 レベル）を削除します。よろしいですか？');">すべて削除</button>
 		</form>
+
+		<hr />
+
+		<h2>設定値の確認</h2>
+		<p>
+			互換モード（v1 を使う状態）:
+			<strong><?php echo $is_compatible ? 'true' : 'false'; ?></strong>
+		</p>
+
+		<h3><code>ystdtb_heading</code>（v1）</h3>
+		<?php ystdtb_debug_heading_option_render_value( $v1, 'v1' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v1', 'v1 設定' ); ?>
+
+		<h3><code>ystdtb_heading_v2</code>（v2 メイン）</h3>
+		<?php ystdtb_debug_heading_option_render_value( $v2_main, 'v2-main' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_main', 'v2 メイン設定' ); ?>
+
+		<h3><code>ystdtb_heading_level</code>（v2 レベル別）</h3>
+		<?php ystdtb_debug_heading_option_render_value( $v2_level, 'v2-level' ); ?>
+		<?php ystdtb_debug_heading_option_render_paste_form( 'v2_level', 'v2 レベル設定' ); ?>
 
 		<hr />
 
@@ -274,7 +274,7 @@ function ystdtb_debug_heading_option_render_paste_form( $target, $label ) {
 		<input type="hidden" name="target" value="<?php echo esc_attr( $target ); ?>" />
 		<p style="margin:0 0 4px;">ペーストで上書き保存:</p>
 		<p>
-			<textarea name="value" rows="8" style="width:100%;font-family:monospace;" placeholder='例: { "v1-h1": { ... } }'></textarea>
+			<textarea name="value" rows="3" style="width:100%;font-family:monospace;" placeholder='例: { "v1-h1": { ... } }'></textarea>
 		</p>
 		<p>
 			<button type="submit" class="button"><?php echo esc_html( $label ); ?>を上書き保存</button>
