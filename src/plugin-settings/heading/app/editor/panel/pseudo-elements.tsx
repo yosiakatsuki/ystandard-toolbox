@@ -331,6 +331,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							initialOpen={ isInitialOpen( option || {}, [
 								'border',
 								'borderRadius',
+								'responsiveBorderRadius',
 							] ) }
 						>
 							<PanelInner>
@@ -341,6 +342,9 @@ function PseudoElements( props: PseudoElementsProps ) {
 								<BorderRadius
 									onChange={ handleOnChange }
 									value={ option?.borderRadius }
+									responsiveValue={
+										option?.responsiveBorderRadius
+									}
 								/>
 							</PanelInner>
 						</PluginSettingsPanel>
@@ -368,21 +372,33 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '幅設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'width',
+								'responsiveWidth',
 								'maxWidth',
+								'responsiveMaxWidth',
 								'minWidth',
+								'responsiveMinWidth',
 							] ) }
 						>
 							<PanelInner>
 								<Width
 									value={ option?.width }
+									responsiveValue={
+										option?.responsiveWidth
+									}
 									onChange={ handleOnChange }
 								/>
 								<MaxWidth
 									value={ option?.maxWidth }
+									responsiveValue={
+										option?.responsiveMaxWidth
+									}
 									onChange={ handleOnChange }
 								/>
 								<MinWidth
 									value={ option?.minWidth }
+									responsiveValue={
+										option?.responsiveMinWidth
+									}
 									onChange={ handleOnChange }
 								/>
 							</PanelInner>
@@ -391,21 +407,33 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '高さ設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'height',
+								'responsiveHeight',
 								'maxHeight',
+								'responsiveMaxHeight',
 								'minHeight',
+								'responsiveMinHeight',
 							] ) }
 						>
 							<PanelInner>
 								<Height
 									value={ option?.height }
+									responsiveValue={
+										option?.responsiveHeight
+									}
 									onChange={ handleOnChange }
 								/>
 								<MaxHeight
 									value={ option?.maxHeight }
+									responsiveValue={
+										option?.responsiveMaxHeight
+									}
 									onChange={ handleOnChange }
 								/>
 								<MinHeight
 									value={ option?.minHeight }
+									responsiveValue={
+										option?.responsiveMinHeight
+									}
 									onChange={ handleOnChange }
 								/>
 							</PanelInner>

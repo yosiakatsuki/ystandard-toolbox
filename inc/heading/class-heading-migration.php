@@ -266,7 +266,7 @@ class Heading_Migration {
 		// 角丸.
 		$radius = $this->get_old_option( 'borderRadius', '' );
 		if ( $radius ) {
-			$this->add_responsive_style( 'borderRadius', "{$radius}px" );
+			$this->add_style( 'borderRadius', "{$radius}px" );
 		}
 
 		$border = [];

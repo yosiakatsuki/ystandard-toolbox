@@ -997,7 +997,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * borderRadius は px 単位を付加されて desktop キー配下に v2 へ移行される.
+	 * borderRadius は px 単位を付加されて単一値で v2 へ移行される.
 	 */
 	public function test_border_radius() {
 		$input = [
@@ -1012,10 +1012,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals(
-			[ 'desktop' => '5px' ],
-			$v2['v1-h1']['style']['borderRadius']
-		);
+		$this->assertEquals( '5px', $v2['v1-h1']['style']['borderRadius'] );
 	}
 
 	/**

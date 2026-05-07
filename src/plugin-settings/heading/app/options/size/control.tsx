@@ -12,15 +12,11 @@ import { IconUnitControl } from '@aktk/block-components/components/icon-control'
 
 export function DefaultSizeEdit( props: {
 	value: string | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	onChange: ( newValue: string | undefined ) => void;
 } ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
-		onChange( {
-			desktop: '' === newValue ? undefined : newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( '' === newValue ? undefined : newValue );
 	};
 	return (
 		<IconUnitControl

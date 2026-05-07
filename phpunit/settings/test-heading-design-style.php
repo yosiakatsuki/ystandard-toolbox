@@ -107,6 +107,52 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * responsiveWidth キーは width として CSS 出力される（Phase 2 動作確認）.
+	 */
+	public function test_parse_style_responsive_width() {
+		$input    = [
+			'responsiveWidth' => [
+				'desktop' => '100px',
+				'tablet'  => '80px',
+				'mobile'  => '60px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'width' => '100px',
+			],
+			'tablet'  => [
+				'width' => '80px',
+			],
+			'mobile'  => [
+				'width' => '60px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * responsiveBorderRadius キーは border-radius として CSS 出力される（Phase 2 動作確認）.
+	 */
+	public function test_parse_style_responsive_border_radius() {
+		$input    = [
+			'responsiveBorderRadius' => [
+				'desktop' => '4px',
+				'tablet'  => '6px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-radius' => '4px',
+			],
+			'tablet'  => [
+				'border-radius' => '6px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
 	 * responsiveXxx キーは元プロパティ名（xxx）として CSS 出力される.
 	 *
 	 * Phase 1 で導入した `xxx` + `responsiveXxx` 別キー方式の動作確認.

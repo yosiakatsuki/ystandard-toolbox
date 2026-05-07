@@ -51,19 +51,26 @@ export interface HeadingStyle {
 
 	// Border.
 	border?: SplitBorders | FlatBorder;
-	borderRadius?: ResponsiveValues;
+	borderRadius?: string;
+	responsiveBorderRadius?: ResponsiveValues;
 
 	// Spacing.
 	padding?: ResponsiveSpacing;
 	margin?: ResponsiveSpacing;
 
 	// Size.
-	width?: ResponsiveValues;
-	minWidth?: ResponsiveValues;
-	maxWidth?: ResponsiveValues;
-	height?: ResponsiveValues;
-	minHeight?: ResponsiveValues;
-	maxHeight?: ResponsiveValues;
+	width?: string;
+	responsiveWidth?: ResponsiveValues;
+	minWidth?: string;
+	responsiveMinWidth?: ResponsiveValues;
+	maxWidth?: string;
+	responsiveMaxWidth?: ResponsiveValues;
+	height?: string;
+	responsiveHeight?: ResponsiveValues;
+	minHeight?: string;
+	responsiveMinHeight?: ResponsiveValues;
+	maxHeight?: string;
+	responsiveMaxHeight?: ResponsiveValues;
 
 	// advanced.
 	display?: string;
@@ -115,17 +122,24 @@ export interface HeadingPseudoElementsStyle {
 	backgroundSize?: string;
 	// Border.
 	border?: SplitBorders | FlatBorder;
-	borderRadius?: ResponsiveValues;
+	borderRadius?: string;
+	responsiveBorderRadius?: ResponsiveValues;
 	// Spacing.
 	padding?: ResponsiveSpacing;
 	margin?: ResponsiveSpacing;
 	// Size.
-	width?: ResponsiveValues;
-	minWidth?: ResponsiveValues;
-	maxWidth?: ResponsiveValues;
-	height?: ResponsiveValues;
-	minHeight?: ResponsiveValues;
-	maxHeight?: ResponsiveValues;
+	width?: string;
+	responsiveWidth?: ResponsiveValues;
+	minWidth?: string;
+	responsiveMinWidth?: ResponsiveValues;
+	maxWidth?: string;
+	responsiveMaxWidth?: ResponsiveValues;
+	height?: string;
+	responsiveHeight?: ResponsiveValues;
+	minHeight?: string;
+	responsiveMinHeight?: ResponsiveValues;
+	maxHeight?: string;
+	responsiveMaxHeight?: ResponsiveValues;
 	// advanced.
 	background?: string;
 	display?: string;

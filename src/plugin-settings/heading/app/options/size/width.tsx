@@ -19,14 +19,24 @@ import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/opt
 import { DefaultSizeEdit, ResponsiveSizeEdit } from './control';
 
 interface WidthControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { width?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		width?: string;
+		responsiveWidth?: ResponsiveValues;
+	} ) => void;
 }
 
 export default function Width( props: WidthControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { width: deleteUndefined( newValue ) } );
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( { width: newValue, responsiveWidth: undefined } );
+	};
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			width: undefined,
+			responsiveWidth: deleteUndefined( newValue ),
+		} );
 	};
 
 	return (
@@ -36,21 +46,28 @@ export default function Width( props: WidthControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSizeEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveSizeEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
-			<ClearButton onClick={ () => onChange( { width: undefined } ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						width: undefined,
+						responsiveWidth: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
 }

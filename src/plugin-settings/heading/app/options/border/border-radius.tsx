@@ -21,15 +21,26 @@ import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface BorderRadiusControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { borderRadius?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		borderRadius?: string;
+		responsiveBorderRadius?: ResponsiveValues;
+	} ) => void;
 }
 
 export default function BorderRadius( props: BorderRadiusControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
 		onChange( {
-			borderRadius: deleteUndefined( newValue ),
+			borderRadius: newValue,
+			responsiveBorderRadius: undefined,
+		} );
+	};
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			borderRadius: undefined,
+			responsiveBorderRadius: deleteUndefined( newValue ),
 		} );
 	};
 	return (
@@ -39,22 +50,27 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
 				defaultTabContent={
 					<DefaultBorderRadiusEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveBorderRadiusEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
 			<ClearButton
-				onClick={ () => onChange( { borderRadius: undefined } ) }
+				onClick={ () =>
+					onChange( {
+						borderRadius: undefined,
+						responsiveBorderRadius: undefined,
+					} )
+				}
 			/>
 		</PluginSettingsBaseControl>
 	);
@@ -62,15 +78,11 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 
 export function DefaultBorderRadiusEdit( props: {
 	value: string | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	onChange: ( newValue: string | undefined ) => void;
 } ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
-		onChange( {
-			desktop: '' === newValue ? undefined : newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( '' === newValue ? undefined : newValue );
 	};
 	return <IconUnitControl value={ value } onChange={ handleOnChange } />;
 }

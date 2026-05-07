@@ -22,14 +22,24 @@ import {
 } from '@aktk/plugin-settings/heading/app/options/size/control';
 
 interface HeightControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { height?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		height?: string;
+		responsiveHeight?: ResponsiveValues;
+	} ) => void;
 }
 
 export default function Height( props: HeightControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { height: deleteUndefined( newValue ) } );
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( { height: newValue, responsiveHeight: undefined } );
+	};
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			height: undefined,
+			responsiveHeight: deleteUndefined( newValue ),
+		} );
 	};
 
 	return (
@@ -39,21 +49,28 @@ export default function Height( props: HeightControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSizeEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveSizeEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
-			<ClearButton onClick={ () => onChange( { height: undefined } ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						height: undefined,
+						responsiveHeight: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
 }
