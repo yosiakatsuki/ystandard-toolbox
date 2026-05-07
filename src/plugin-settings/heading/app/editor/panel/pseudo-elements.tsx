@@ -361,14 +361,11 @@ function PseudoElements( props: PseudoElementsProps ) {
 					</PluginSettingsPanel>
 					<DisableHasIcon>
 						<PluginSettingsPanel
-							title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+							title={ __( '幅設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'width',
-								'height',
 								'maxWidth',
-								'maxHeight',
 								'minWidth',
-								'minHeight',
 							] ) }
 						>
 							<PanelInner>
@@ -376,20 +373,31 @@ function PseudoElements( props: PseudoElementsProps ) {
 									value={ option?.width }
 									onChange={ handleOnChange }
 								/>
-								<Height
-									value={ option?.height }
-									onChange={ handleOnChange }
-								/>
 								<MaxWidth
 									value={ option?.maxWidth }
 									onChange={ handleOnChange }
 								/>
-								<MaxHeight
-									value={ option?.maxHeight }
-									onChange={ handleOnChange }
-								/>
 								<MinWidth
 									value={ option?.minWidth }
+									onChange={ handleOnChange }
+								/>
+							</PanelInner>
+						</PluginSettingsPanel>
+						<PluginSettingsPanel
+							title={ __( '高さ設定', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option, [
+								'height',
+								'maxHeight',
+								'minHeight',
+							] ) }
+						>
+							<PanelInner>
+								<Height
+									value={ option?.height }
+									onChange={ handleOnChange }
+								/>
+								<MaxHeight
+									value={ option?.maxHeight }
 									onChange={ handleOnChange }
 								/>
 								<MinHeight

@@ -227,14 +227,11 @@ export function StylePanel() {
 				</PanelInner>
 			</PluginSettingsPanel>
 			<PluginSettingsPanel
-				title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+				title={ __( '幅設定', 'ystandard-toolbox' ) }
 				initialOpen={ isInitialOpen( option, [
 					'width',
 					'maxWidth',
 					'minWidth',
-					'height',
-					'maxHeight',
-					'minHeight',
 				] ) }
 			>
 				<PanelInner>
@@ -242,20 +239,31 @@ export function StylePanel() {
 						value={ option?.width }
 						onChange={ handleOnChange }
 					/>
-					<Height
-						value={ option?.height }
-						onChange={ handleOnChange }
-					/>
 					<MaxWidth
 						value={ option?.maxWidth }
 						onChange={ handleOnChange }
 					/>
-					<MaxHeight
-						value={ option?.maxHeight }
-						onChange={ handleOnChange }
-					/>
 					<MinWidth
 						value={ option?.minWidth }
+						onChange={ handleOnChange }
+					/>
+				</PanelInner>
+			</PluginSettingsPanel>
+			<PluginSettingsPanel
+				title={ __( '高さ設定', 'ystandard-toolbox' ) }
+				initialOpen={ isInitialOpen( option, [
+					'height',
+					'maxHeight',
+					'minHeight',
+				] ) }
+			>
+				<PanelInner>
+					<Height
+						value={ option?.height }
+						onChange={ handleOnChange }
+					/>
+					<MaxHeight
+						value={ option?.maxHeight }
 						onChange={ handleOnChange }
 					/>
 					<MinHeight
