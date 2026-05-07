@@ -110,15 +110,24 @@ responsiveFontSize: { desktop, tablet, mobile }   // レスポンシブ値（新
 
 ## 進め方
 
-### Stage 0: 事前準備（一気に対応）
+型定義 / preset.json も含め、すべて Phase 内で書き換える。Stage 0 は事前準備（ドキュメント作成）のみ。
+
+### Stage 0: 事前準備
 
 1. このドキュメント作成
-2. 型定義修正（全プロパティの新型を一気に定義）
-3. `src/plugin-settings/heading/preset/preset.json` 書き換え（全プリセットを新構造に）
 
 ### Stage 1: Phase 1 をまとめて対応・まとめてテスト
 
-Phase 1 の 7 プロパティについて、修正レイヤー 2〜5, 7 をまとめて対応・まとめてテスト。
+Phase 1 の 7 プロパティについて、以下のレイヤーをまとめて修正:
+
+1. 型定義（旧型を削除、新型 `xxx` + `responsiveXxx` を追加）
+2. `preset.json` 書き換え（該当プロパティ部分）
+3. migrate ロジック（v1 → v2 変換を新形式に）
+4. UI コンポーネント
+5. preview-style.tsx
+6. PHP CSS 出力
+7. テスト
+8. 動作確認
 
 ### Stage 2: Phase 2 をまとめて対応・まとめてテスト
 
@@ -129,39 +138,45 @@ Phase 2 の 7 プロパティについて同様。
 Phase 3 の 4 プロパティは構造が複雑なため、1 プロパティずつ:
 
 1. 設計（必要に応じて）
-2. 実装
-3. テスト
-4. 動作確認
+2. 型定義
+3. preset.json 書き換え
+4. 実装（migrate / UI / preview / PHP CSS 出力）
+5. テスト
+6. 動作確認
 
 ## 進捗管理
 
 ### Stage 0
 
 - [x] ドキュメント作成
-- [ ] 型定義修正
+
+### Stage 1: Phase 1（typography & advanced 7 プロパティをまとめて）
+
+対象: `textAlign` / `fontWeight` / `display` / `flexDirection` / `alignItems` / `justifyContent` / `gap`
+
+- [ ] 型定義
 - [ ] preset.json 書き換え
-
-### Stage 1: Phase 1
-
-- [ ] `textAlign`
-- [ ] `fontWeight`
-- [ ] `display`
-- [ ] `flexDirection`
-- [ ] `alignItems`
-- [ ] `justifyContent`
-- [ ] `gap`
+- [ ] migrate
+- [ ] UI コンポーネント
+- [ ] preview-style.tsx
+- [ ] PHP CSS 出力
 - [ ] テスト
 - [ ] 動作確認
 
-### Stage 2: Phase 2
+### Stage 2: Phase 2（size & borderRadius 7 プロパティをまとめて）
 
-- [ ] `width` / `minWidth` / `maxWidth`
-- [ ] `height` / `minHeight` / `maxHeight`
-- [ ] `borderRadius`
+対象: `width` / `minWidth` / `maxWidth` / `height` / `minHeight` / `maxHeight` / `borderRadius`
+
+- [ ] 型定義
+- [ ] preset.json 書き換え
+- [ ] migrate
+- [ ] UI コンポーネント
+- [ ] preview-style.tsx
+- [ ] PHP CSS 出力
 - [ ] テスト
 - [ ] 動作確認
 
-### Stage 3: Phase 3
+### Stage 3: Phase 3（プロパティごと）
 
 - [ ] `padding`
 - [ ] `margin`
