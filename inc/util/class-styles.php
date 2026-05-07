@@ -290,8 +290,8 @@ class Styles {
 					$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
 					$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
 					$value        = "{$border_width} {$border_style} {$border_color}";
-					// width=0の場合は0のみセット.
-					if ( '' !== $border_width && 0 === (int) $border_width ) {
+					// width=0の場合は0のみセット（"0.9em" 等の小数点 em を 0 と誤判定しないよう float キャストで判定）.
+					if ( '' !== $border_width && 0.0 === (float) $border_width ) {
 						$value = 0;
 					}
 				} else {

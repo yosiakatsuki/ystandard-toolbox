@@ -306,6 +306,50 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	/**
+	 * border-width が 0.x em（小数点以下のみの em）の場合、0 と誤判定されずに正しいショートハンドが出力される.
+	 *
+	 * 旧実装は (int) キャストで判定していたため "0.9em" → 0 になり、
+	 * balloon プリセット由来の三角（width=0.9em）が描画されない不具合があった回帰防止.
+	 */
+	public function test_parse_style_border_decimal_em_width() {
+		$input    = [
+			'border' => [
+				'desktop' => [
+					'top'    => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => '#d4e7f2',
+					],
+					'right'  => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+					'bottom' => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+					'left'   => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-top'    => '0.9em solid #d4e7f2',
+				'border-right'  => '0.9em solid transparent',
+				'border-bottom' => '0.9em solid transparent',
+				'border-left'   => '0.9em solid transparent',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_border_responsive() {
 		$input    = [
 			'border' => [
