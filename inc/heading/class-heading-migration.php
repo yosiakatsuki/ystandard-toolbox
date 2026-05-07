@@ -636,9 +636,11 @@ class Heading_Migration {
 		if ( ! empty( $result ) ) {
 			$update       = Heading::update_heading_design_option( $result );
 			$update_level = Heading::update_heading_level_option( $data['level'] );
-			// if ( $update && $update_level ) {
-			// Heading_Compatible::delete_option();
-			// }
+			// v2 メイン / レベル設定の保存に両方成功した場合のみ v1 設定を削除する.
+			// 部分的失敗時に v1 を残すことで、再マイグレーションを可能にする.
+			if ( $update && $update_level ) {
+				Heading_Compatible::delete_option();
+			}
 		}
 
 		return Api::create_response(

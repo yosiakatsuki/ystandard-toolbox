@@ -949,6 +949,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 	/**
 	 * api_route() が migration:true で v1 設定を v2 / level option に書き込み、成功応答を返す.
+	 *
+	 * 両方の保存に成功した場合は v1 設定（ystdtb_heading）が削除されることも検証する.
 	 */
 	public function test_api_route_success() {
 		$input = [
@@ -971,6 +973,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->assertEquals(
 			[ 'h1' => 'v1-h1' ],
 			get_option( \ystandard_toolbox\Heading::OPTION_LEVEL )
+		);
+		// v1 設定（ystdtb_heading）は削除されている.
+		$this->assertFalse(
+			get_option( \ystandard_toolbox\Heading_Compatible::OPTION_NAME )
 		);
 	}
 
