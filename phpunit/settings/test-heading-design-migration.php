@@ -168,10 +168,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'margin' => [
-						'desktop' => [
-							'right' => 0,
-							'left'  => '3vw',
-						],
+						'right' => 0,
+						'left'  => '3vw',
 					],
 				],
 			],
@@ -207,12 +205,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'margin' => [
-						'desktop' => [
-							'top'    => 0,
-							'right'  => '1em',
-							'bottom' => '2rem',
-							'left'   => '3vw',
-						],
+						'top'    => 0,
+						'right'  => '1em',
+						'bottom' => '2rem',
+						'left'   => '3vw',
 					],
 				],
 			],

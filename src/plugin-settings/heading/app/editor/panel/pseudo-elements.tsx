@@ -355,6 +355,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							'padding',
 							'responsivePadding',
 							'margin',
+							'responsiveMargin',
 						] ) }
 					>
 						<PanelInner>
@@ -365,6 +366,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							/>
 							<Margin
 								value={ option?.margin }
+								responsiveValue={ option?.responsiveMargin }
 								onChange={ handleOnChange }
 							/>
 						</PanelInner>

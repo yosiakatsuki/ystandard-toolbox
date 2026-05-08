@@ -138,6 +138,33 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * responsiveMargin キーは margin として CSS 出力される（Phase 3 動作確認）.
+	 */
+	public function test_parse_style_responsive_margin() {
+		$input    = [
+			'responsiveMargin' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'bottom' => '1em',
+				],
+				'mobile'  => [
+					'top' => '1.5em',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'margin-top'    => '0.5em',
+				'margin-bottom' => '1em',
+			],
+			'mobile'  => [
+				'margin-top' => '1.5em',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
 	 * responsiveWidth キーは width として CSS 出力される（Phase 2 動作確認）.
 	 */
 	public function test_parse_style_responsive_width() {
@@ -936,6 +963,25 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 			'desktop' => [
 				'margin-right' => '20px',
 				'margin-left'  => '40px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_margin_mixed_old_and_new_values() {
+		$input    = [
+			'margin' => [
+				'desktop' => [
+					'top' => '0.5em',
+				],
+				'top'     => '35px',
+				'bottom'  => '5px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'margin-top'    => '35px',
+				'margin-bottom' => '5px',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );

@@ -60,7 +60,8 @@ export interface HeadingStyle {
 	// Spacing.
 	padding?: Spacing;
 	responsivePadding?: ResponsiveSpacing;
-	margin?: ResponsiveSpacing;
+	margin?: Spacing;
+	responsiveMargin?: ResponsiveSpacing;
 
 	// Size.
 	width?: string;
@@ -131,7 +132,8 @@ export interface HeadingPseudoElementsStyle {
 	// Spacing.
 	padding?: Spacing;
 	responsivePadding?: ResponsiveSpacing;
-	margin?: ResponsiveSpacing;
+	margin?: Spacing;
+	responsiveMargin?: ResponsiveSpacing;
 	// Size.
 	width?: string;
 	responsiveWidth?: ResponsiveValues;

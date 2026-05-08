@@ -823,6 +823,40 @@ describe( 'parseStyles', () => {
 			expect( result.mobile ).toContain( 'margin-bottom: 40px;' );
 			expect( result.mobile ).toContain( 'margin-left: 50px;' );
 		} );
+		it( 'responsiveMarginがある場合', () => {
+			const styles = {
+				responsiveMargin: {
+					desktop: {
+						top: '10px',
+						bottom: '30px',
+					},
+					mobile: {
+						top: '20px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 10px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 30px;' );
+			expect( result.mobile ).toContain( 'margin-top: 20px;' );
+		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				margin: {
+					desktop: {
+						top: '0.5em',
+					},
+					top: '35px',
+					bottom: '5px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 35px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 5px;' );
+			expect( result.desktop ).not.toContain( 'margin-desktop:' );
+			expect( result.tablet ).toHaveLength( 0 );
+			expect( result.mobile ).toHaveLength( 0 );
+		} );
 	} );
 
 	// Size.

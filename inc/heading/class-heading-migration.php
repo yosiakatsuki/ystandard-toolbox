@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
-	const RESPONSIVE_PROPERTY = [ 'fontSize', 'margin', 'border' ];
+	const RESPONSIVE_PROPERTY = [ 'fontSize', 'border' ];
 
 	/**
 	 * 新設定.
@@ -252,7 +252,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $margin ) ) {
-			$this->add_responsive_style( 'margin', [ 'desktop' => $margin ] );
+			$this->add_style( 'margin', $margin );
 		}
 	}
 

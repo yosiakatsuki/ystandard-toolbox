@@ -223,6 +223,7 @@ export function StylePanel() {
 					'padding',
 					'responsivePadding',
 					'margin',
+					'responsiveMargin',
 				] ) }
 			>
 				<PanelInner>
@@ -233,6 +234,7 @@ export function StylePanel() {
 					/>
 					<Margin
 						value={ option?.margin }
+						responsiveValue={ option?.responsiveMargin }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
