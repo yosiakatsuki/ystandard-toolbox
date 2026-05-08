@@ -10,7 +10,7 @@ export function isResponsiveHeadingOption( value: unknown ) {
 	if ( 0 >= keys.length ) {
 		return false;
 	}
-	const responsiveKeys = [ 'tablet', 'mobile' ];
+	const responsiveKeys = [ 'desktop', 'tablet', 'mobile' ];
 
 	// モバイル・タブレットがあればレスポンシブ、それ以外はfalse.
 	return responsiveKeys.some( ( key ) => keys.includes( key ) );

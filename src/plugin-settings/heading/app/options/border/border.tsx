@@ -104,9 +104,7 @@ function ResponsiveBorderEdit( props: {
 					value={ value?.desktop }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {
-							desktop: getNewBorderOption(
-								newValue
-							) as SplitBorders,
+							desktop: getNewBorderOption( newValue ),
 						} );
 					} }
 					enableCurrentColor={ true }
@@ -118,9 +116,7 @@ function ResponsiveBorderEdit( props: {
 					value={ value?.tablet }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {
-							tablet: getNewBorderOption(
-								newValue
-							) as SplitBorders,
+							tablet: getNewBorderOption( newValue ),
 						} );
 					} }
 					enableCurrentColor={ true }
@@ -132,9 +128,7 @@ function ResponsiveBorderEdit( props: {
 					value={ value?.mobile }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {
-							mobile: getNewBorderOption(
-								newValue
-							) as SplitBorders,
+							mobile: getNewBorderOption( newValue ),
 						} );
 					} }
 					enableCurrentColor={ true }

@@ -1,7 +1,7 @@
 export interface CustomBorder {
-	desktop?: SplitBorders;
-	tablet?: SplitBorders;
-	mobile?: SplitBorders;
+	desktop?: SplitBorders | FlatBorder;
+	tablet?: SplitBorders | FlatBorder;
+	mobile?: SplitBorders | FlatBorder;
 }
 
 export interface SplitBorders {
