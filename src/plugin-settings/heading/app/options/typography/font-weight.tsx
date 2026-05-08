@@ -14,13 +14,13 @@ import type { ResponsiveValues } from '@aktk/block-components/types';
 import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
 import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface FontWeightControlProps {
 	value: string | undefined;
@@ -64,7 +64,7 @@ export default function FontWeight( props: FontWeightControlProps ) {
 			className={ '[&_.components-custom-select-control__label]:hidden' }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultFontWeightEdit
 						value={ value }

@@ -12,12 +12,13 @@ import type {
 } from '@aktk/block-components/components/custom-spacing-select';
 import { useThemeSpacingSizes } from '@aktk/block-components/hooks';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 import { filterSpacingSizes } from './function';
 
@@ -76,7 +77,7 @@ export default function Padding( props: PaddingControlProps ) {
 			className={ '[&_.components-range-control]:hidden' }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSpacingEdit
 						value={ getDefaultSpacingValue( value ) }

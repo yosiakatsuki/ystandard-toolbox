@@ -16,12 +16,12 @@ import {
 	ResponsiveSelectTab,
 } from '@aktk/block-components/components/tab-panel';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface BorderProps {
 	value?: SplitBorders | FlatBorder;
@@ -58,7 +58,7 @@ export default function Border( props: BorderProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<BorderControl
 						value={ getDefaultBorderValue( value ) }

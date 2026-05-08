@@ -9,14 +9,16 @@ import {
 	ResponsiveControlGrid,
 	ResponsiveSelectTab,
 } from '@aktk/block-components/components/tab-panel';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+import type { ResponsiveValues } from '@aktk/block-components/types';
+import { IconSelectControl } from '@aktk/block-components/components/icon-control';
+
 /**
  * Plugin Dependencies
  */
-import type { ResponsiveValues } from '@aktk/block-components/types';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
-import { IconSelectControl } from '@aktk/block-components/components/icon-control';
+
 
 interface AdvancedResponsiveSelectControlProps {
 	id: string;
@@ -49,7 +51,7 @@ export function AdvancedResponsiveSelectControl(
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DesktopResponsiveSelectEdit
 						value={ value }

@@ -13,12 +13,13 @@ import {
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import { deleteUndefined } from '@aktk/block-components/utils/object';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 
 interface BorderRadiusControlProps {
 	value: string | undefined;
@@ -50,7 +51,7 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( responsiveValue ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultBorderRadiusEdit
 						value={ value }
