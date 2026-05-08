@@ -203,6 +203,7 @@ export function StylePanel() {
 				title={ __( '枠線設定', 'ystandard-toolbox' ) }
 				initialOpen={ isInitialOpen( option, [
 					'border',
+					'responsiveBorder',
 					'borderRadius',
 					'responsiveBorderRadius',
 				] ) }
@@ -211,6 +212,7 @@ export function StylePanel() {
 					<Border
 						onChange={ handleOnChange }
 						value={ option?.border }
+						responsiveValue={ option?.responsiveBorder }
 					/>
 					<BorderRadius
 						onChange={ handleOnChange }

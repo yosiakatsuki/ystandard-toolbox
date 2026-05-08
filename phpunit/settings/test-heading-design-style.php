@@ -693,6 +693,61 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	public function test_parse_style_responsive_border() {
+		$input    = [
+			'responsiveBorder' => [
+				'desktop' => [
+					'top' => [
+						'width' => '10px',
+						'style' => 'solid',
+						'color' => '#000000',
+					],
+				],
+				'mobile'  => [
+					'bottom' => [
+						'width' => '12px',
+						'style' => 'dashed',
+						'color' => '#222222',
+					],
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-top' => '10px solid #000000',
+			],
+			'mobile'  => [
+				'border-bottom' => '12px dashed #222222',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_border_mixed_old_and_new_values() {
+		$input    = [
+			'border' => [
+				'desktop' => [
+					'top' => [
+						'width' => '1px',
+						'style' => 'solid',
+						'color' => '#000000',
+					],
+				],
+				'bottom'  => [
+					'width' => '2px',
+					'style' => 'dashed',
+					'color' => '#222222',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-bottom' => '2px dashed #222222',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_padding_responsive() {
 		$input    = [
 			'padding' => [

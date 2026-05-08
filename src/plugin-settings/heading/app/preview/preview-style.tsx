@@ -332,6 +332,9 @@ export function parseBorderProperty( value: object, name: string = 'border' ) {
 	if ( isSplit( value ) ) {
 		// Splitの場合.
 		Object.keys( value ).forEach( ( position: string ) => {
+			if ( RESPONSIVE_KEYS.includes( position ) ) {
+				return;
+			}
 			// @ts-ignore
 			const borderValue = value[ position ] || {};
 			Object.keys( borderValue ).forEach( ( key: string ) => {

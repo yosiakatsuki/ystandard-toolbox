@@ -564,6 +564,56 @@ describe( 'parseStyles', () => {
 			expect( result.tablet ).not.toContain( 'border:' );
 			expect( result.mobile ).not.toContain( 'border:' );
 		} );
+		it( 'responsiveBorderの場合', () => {
+			const styles = {
+				responsiveBorder: {
+					desktop: {
+						top: {
+							color: '#000000',
+							style: 'solid',
+							width: '1px',
+						},
+					},
+					mobile: {
+						bottom: {
+							color: '#222222',
+							style: 'dashed',
+							width: '3px',
+						},
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-top-color: #000000;' );
+			expect( result.desktop ).toContain( 'border-top-style: solid;' );
+			expect( result.desktop ).toContain( 'border-top-width: 1px;' );
+			expect( result.mobile ).toContain( 'border-bottom-color: #222222;' );
+			expect( result.mobile ).toContain( 'border-bottom-style: dashed;' );
+			expect( result.mobile ).toContain( 'border-bottom-width: 3px;' );
+		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				border: {
+					desktop: {
+						top: {
+							color: '#000000',
+							style: 'solid',
+							width: '1px',
+						},
+					},
+					bottom: {
+						color: '#222222',
+						style: 'dashed',
+						width: '3px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-bottom-color: #222222;' );
+			expect( result.desktop ).toContain( 'border-bottom-style: dashed;' );
+			expect( result.desktop ).toContain( 'border-bottom-width: 3px;' );
+			expect( result.desktop ).not.toContain( 'border-desktop' );
+		} );
 	} );
 
 	describe( 'borderRadius', () => {

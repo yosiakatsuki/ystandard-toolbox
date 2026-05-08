@@ -4,12 +4,10 @@
 		"label": "下線",
 		"style": {
 			"border": {
-				"desktop": {
-					"bottom": {
-						"color": "#222222",
-						"style": "solid",
-						"width": "1px"
-					}
+				"bottom": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
 				}
 			},
 			"padding": {
@@ -22,12 +20,10 @@
 		"label": "下線(点線)",
 		"style": {
 			"border": {
-				"desktop": {
-					"bottom": {
-						"color": "#222222",
-						"style": "dotted",
-						"width": "1px"
-					}
+				"bottom": {
+					"color": "#222222",
+					"style": "dotted",
+					"width": "1px"
 				}
 			},
 			"padding": {
@@ -40,12 +36,10 @@
 		"label": "下線(破線)",
 		"style": {
 			"border": {
-				"desktop": {
-					"bottom": {
-						"color": "#222222",
-						"style": "dashed",
-						"width": "1px"
-					}
+				"bottom": {
+					"color": "#222222",
+					"style": "dashed",
+					"width": "1px"
 				}
 			},
 			"padding": {
@@ -58,12 +52,10 @@
 		"label": "左線",
 		"style": {
 			"border": {
-				"desktop": {
-					"left": {
-						"color": "#222222",
-						"style": "solid",
-						"width": "4px"
-					}
+				"left": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "4px"
 				}
 			},
 			"padding": {
@@ -78,17 +70,15 @@
 		"label": "上下の直線",
 		"style": {
 			"border": {
-				"desktop": {
-					"top": {
-						"color": "#222222",
-						"style": "solid",
-						"width": "1px"
-					},
-					"bottom": {
-						"color": "#222222",
-						"style": "solid",
-						"width": "1px"
-					}
+				"top": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
+				},
+				"bottom": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
 				}
 			},
 			"padding": {
@@ -116,12 +106,10 @@
 		"style": {
 			"backgroundColor": "#f7f7f7",
 			"border": {
-				"desktop": {
-					"left": {
-						"color": "#222222",
-						"style": "solid",
-						"width": "4px"
-					}
+				"left": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "4px"
 				}
 			},
 			"padding": {
@@ -138,27 +126,25 @@
 		"style": {
 			"backgroundColor": "#eeeeee",
 			"border": {
-				"desktop": {
-					"top": {
-						"color": "#ffffff",
-						"style": "dashed",
-						"width": "2px"
-					},
-					"right": {
-						"color": "#ffffff",
-						"style": "dashed",
-						"width": "2px"
-					},
-					"bottom": {
-						"color": "#ffffff",
-						"style": "dashed",
-						"width": "2px"
-					},
-					"left": {
-						"color": "#ffffff",
-						"style": "dashed",
-						"width": "2px"
-					}
+				"top": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"right": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"bottom": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"left": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
 				}
 			},
 			"borderRadius": "2px",
@@ -179,12 +165,10 @@
 		"label": "下線2種類",
 		"style": {
 			"border": {
-				"desktop": {
-					"bottom": {
-						"color": "#eeeeee",
-						"style": "solid",
-						"width": "2px"
-					}
+				"bottom": {
+					"color": "#eeeeee",
+					"style": "solid",
+					"width": "2px"
 				}
 			},
 			"padding": {
@@ -253,27 +237,25 @@
 			"top": "100%",
 			"left": "1.5em",
 			"border": {
-				"desktop": {
-					"top": {
-						"color": "#d4e7f2",
-						"style": "solid",
-						"width": "1em"
-					},
-					"right": {
-						"color": "transparent",
-						"style": "solid",
-						"width": "1em"
-					},
-					"bottom": {
-						"color": "transparent",
-						"style": "solid",
-						"width": "1em"
-					},
-					"left": {
-						"color": "transparent",
-						"style": "solid",
-						"width": "1em"
-					}
+				"top": {
+					"color": "#d4e7f2",
+					"style": "solid",
+					"width": "1em"
+				},
+				"right": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
+				},
+				"bottom": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
+				},
+				"left": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
 				}
 			}
 		}
@@ -298,17 +280,15 @@
 			"top": "100%",
 			"left": 0,
 			"border": {
-				"desktop": {
-					"right": {
-						"color": "#aaaaaa",
-						"style": "solid",
-						"width": "20px"
-					},
-					"bottom": {
-						"color": "transparent",
-						"style": "solid",
-						"width": "10px"
-					}
+				"right": {
+					"color": "#aaaaaa",
+					"style": "solid",
+					"width": "20px"
+				},
+				"bottom": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "10px"
 				}
 			}
 		}

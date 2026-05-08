@@ -324,17 +324,15 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
 						],
 					],
 				],
@@ -380,27 +378,25 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border' => [
-						'desktop' => [
-							'top'    => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#aaaaaa',
-							],
-							'right'  => [
-								'width' => '2em',
-								'style' => 'dotted',
-								'color' => '#111111',
-							],
-							'bottom' => [
-								'width' => '3vw',
-								'style' => 'dashed',
-								'color' => '#222222',
-							],
-							'left'   => [
-								'width' => '4vh',
-								'style' => 'double',
-								'color' => '#333333',
-							],
+						'top'    => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#aaaaaa',
+						],
+						'right'  => [
+							'width' => '2em',
+							'style' => 'dotted',
+							'color' => '#111111',
+						],
+						'bottom' => [
+							'width' => '3vw',
+							'style' => 'dashed',
+							'color' => '#222222',
+						],
+						'left'   => [
+							'width' => '4vh',
+							'style' => 'double',
+							'color' => '#333333',
 						],
 					],
 				],
@@ -591,27 +587,25 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 				'after'  => [
 					'border'   => [
-						'desktop' => [
-							"top"    => [
-								"width" => "0.9em",
-								"style" => "solid",
-								"color" => "#d4e7f2",
-							],
-							"right"  => [
-								"width" => "0.9em",
-								"style" => "solid",
-								"color" => "transparent",
-							],
-							"bottom" => [
-								"width" => "0.9em",
-								"style" => "solid",
-								"color" => "transparent",
-							],
-							"left"   => [
-								"width" => "0.9em",
-								"style" => "solid",
-								"color" => "transparent",
-							],
+						"top"    => [
+							"width" => "0.9em",
+							"style" => "solid",
+							"color" => "#d4e7f2",
+						],
+						"right"  => [
+							"width" => "0.9em",
+							"style" => "solid",
+							"color" => "transparent",
+						],
+						"bottom" => [
+							"width" => "0.9em",
+							"style" => "solid",
+							"color" => "transparent",
+						],
+						"left"   => [
+							"width" => "0.9em",
+							"style" => "solid",
+							"color" => "transparent",
 						],
 					],
 					'height'   => '0',
@@ -645,12 +639,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border'   => [
-						'desktop' => [
-							'bottom' => [
-								'width' => '2px',
-								'style' => 'solid',
-								'color' => '#eeeeee',
-							],
+						'bottom' => [
+							'width' => '2px',
+							'style' => 'solid',
+							'color' => '#eeeeee',
 						],
 					],
 					'padding'  => [
@@ -692,12 +684,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border'  => [
-						'desktop' => [
-							'bottom' => [
-								'width' => '1px',
-								'style' => 'solid',
-								'color' => '#222222',
-							],
+						'bottom' => [
+							'width' => '1px',
+							'style' => 'solid',
+							'color' => '#222222',
 						],
 					],
 					'padding' => [
@@ -1177,8 +1167,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '20px', $v2['v1-h1']['after']['border']['desktop']['right']['width'] );
-		$this->assertEquals( '10px', $v2['v1-h1']['after']['border']['desktop']['bottom']['width'] );
+		$this->assertEquals( '20px', $v2['v1-h1']['after']['border']['right']['width'] );
+		$this->assertEquals( '10px', $v2['v1-h1']['after']['border']['bottom']['width'] );
 	}
 
 	/**
@@ -1218,7 +1208,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals(
 			'#aaaaaa',
-			$v2['v1-h1']['after']['border']['desktop']['right']['color']
+			$v2['v1-h1']['after']['border']['right']['color']
 		);
 	}
 
@@ -1238,7 +1228,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals(
 			'#d4e7f2',
-			$v2['v1-h1']['after']['border']['desktop']['top']['color']
+			$v2['v1-h1']['after']['border']['top']['color']
 		);
 	}
 

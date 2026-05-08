@@ -325,6 +325,9 @@ class Styles {
 		$parse = function ( $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $border_value ) {
+				if ( in_array( $position, array_keys( Config::RESPONSIVE_TYPE ), true ) ) {
+					continue;
+				}
 
 				if ( in_array( $position, self::AXIS_POSITION, true ) ) {
 					// 上下左右に分かれての指定の場合.
@@ -347,7 +350,9 @@ class Styles {
 			return $parse_result;
 		};
 
-		$result['desktop'] = $parse( $border['desktop'] );
+		if ( array_key_exists( 'desktop', $border ) ) {
+			$result['desktop'] = $parse( $border['desktop'] );
+		}
 
 		if ( array_key_exists( 'tablet', $border ) ) {
 			$result['tablet'] = $parse( $border['tablet'] );

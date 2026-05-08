@@ -332,6 +332,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '枠線設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option || {}, [
 								'border',
+								'responsiveBorder',
 								'borderRadius',
 								'responsiveBorderRadius',
 							] ) }
@@ -340,6 +341,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 								<Border
 									onChange={ handleOnChange }
 									value={ option?.border }
+									responsiveValue={ option?.responsiveBorder }
 								/>
 								<BorderRadius
 									onChange={ handleOnChange }

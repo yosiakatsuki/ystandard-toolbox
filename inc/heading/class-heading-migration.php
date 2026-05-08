@@ -19,8 +19,6 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
-	const RESPONSIVE_PROPERTY = [ 'border' ];
-
 	/**
 	 * 新設定.
 	 *
@@ -206,11 +204,7 @@ class Heading_Migration {
 				// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
 				$key   = $this->replace_custom_property( $key );
 				$value = $this->replace_custom_property( $value );
-				if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
-					$this->add_pseudo_elements_responsive_style( $type, $key, $value );
-				} else {
-					$this->add_pseudo_elements_style( $type, $key, $value );
-				}
+				$this->add_pseudo_elements_style( $type, $key, $value );
 			}
 		}
 	}
@@ -288,7 +282,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $border ) ) {
-			$this->add_responsive_style( 'border', $border );
+			$this->add_style( 'border', $border );
 		}
 	}
 
@@ -340,11 +334,7 @@ class Heading_Migration {
 			$key   = $this->replace_custom_property( $key );
 			$value = $this->replace_custom_property( $value );
 			// スタイルのセット.
-			if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
-				$this->add_responsive_style( $key, $value );
-			} else {
-				$this->add_style( $key, $value );
-			}
+			$this->add_style( $key, $value );
 		}
 	}
 
