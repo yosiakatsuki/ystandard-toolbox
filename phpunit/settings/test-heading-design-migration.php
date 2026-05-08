@@ -248,10 +248,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'padding' => [
-						'desktop' => [
-							'top'    => '1px',
-							'bottom' => '3rem',
-						],
+						'top'    => '1px',
+						'bottom' => '3rem',
 					],
 				],
 			],
@@ -288,12 +286,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'label'  => 'v1:h1',
 				'style'  => [
 					'padding' => [
-						'desktop' => [
-							'top'    => 0,
-							'right'  => '2em',
-							'bottom' => '3rem',
-							'left'   => '4vw',
-						],
+						'top'    => 0,
+						'right'  => '2em',
+						'bottom' => '3rem',
+						'left'   => '4vw',
 					],
 				],
 			],
@@ -600,12 +596,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'style'  => [
 					"backgroundColor" => "#d4e7f2",
 					'padding'         => [
-						'desktop' => [
-							"top"    => "0.5em",
-							"right"  => "0.7em",
-							"bottom" => "0.5em",
-							"left"   => "0.7em",
-						],
+						"top"    => "0.5em",
+						"right"  => "0.7em",
+						"bottom" => "0.5em",
+						"left"   => "0.7em",
 					],
 					"position"        => "relative",
 				],
@@ -674,9 +668,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 						],
 					],
 					'padding'  => [
-						'desktop' => [
-							'bottom' => '0.5em',
-						],
+						'bottom' => '0.5em',
 					],
 					'position' => 'relative',
 				],
@@ -723,9 +715,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 						],
 					],
 					'padding' => [
-						'desktop' => [
-							'bottom' => '0.5em',
-						],
+						'bottom' => '0.5em',
 					],
 				],
 			],

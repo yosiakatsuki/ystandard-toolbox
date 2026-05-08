@@ -353,12 +353,14 @@ function PseudoElements( props: PseudoElementsProps ) {
 						title={ __( '余白設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option, [
 							'padding',
+							'responsivePadding',
 							'margin',
 						] ) }
 					>
 						<PanelInner>
 							<Padding
 								value={ option?.padding }
+								responsiveValue={ option?.responsivePadding }
 								onChange={ handleOnChange }
 							/>
 							<Margin

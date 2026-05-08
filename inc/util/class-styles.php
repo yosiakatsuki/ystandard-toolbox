@@ -349,6 +349,9 @@ class Styles {
 			$parse_result = [];
 
 			foreach ( $list as $position => $value ) {
+				if ( ! in_array( $position, self::AXIS_POSITION, true ) ) {
+					continue;
+				}
 				// 0pxなど0の場合は単位なしの0をセット.
 				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
 					$value = 0;
@@ -383,14 +386,12 @@ class Styles {
 		if ( ! is_array( $value ) ) {
 			return false;
 		}
-		// 配列のキーにレスポンシブタイプがあるかどうかで判断.
-		foreach ( array_keys( Config::RESPONSIVE_TYPE ) as $key ) {
-			if ( array_key_exists( $key, $value ) ) {
-				return true;
-			}
+		$keys = array_keys( $value );
+		if ( empty( $keys ) ) {
+			return false;
 		}
 
-		return false;
+		return empty( array_diff( $keys, array_keys( Config::RESPONSIVE_TYPE ) ) );
 	}
 
 	/**

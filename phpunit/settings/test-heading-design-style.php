@@ -107,6 +107,37 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * responsivePadding キーは padding として CSS 出力される（Phase 3 動作確認）.
+	 */
+	public function test_parse_style_responsive_padding() {
+		$input    = [
+			'responsivePadding' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'right'  => '0.5em',
+					'bottom' => '0.5em',
+					'left'   => '0.5em',
+				],
+				'tablet'  => [
+					'top'    => '1em',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'padding-top'    => '0.5em',
+				'padding-right'  => '0.5em',
+				'padding-bottom' => '0.5em',
+				'padding-left'   => '0.5em',
+			],
+			'tablet'  => [
+				'padding-top'    => '1em',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
 	 * responsiveWidth キーは width として CSS 出力される（Phase 2 動作確認）.
 	 */
 	public function test_parse_style_responsive_width() {
@@ -762,6 +793,32 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 			'desktop' => [
 				'padding-right' => 0,
 				'padding-left'  => 0,
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_padding_mixed_old_and_new_values() {
+		$input    = [
+			'padding' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'right'  => '0.5em',
+					'bottom' => '0.5em',
+					'left'   => '0.5em',
+				],
+				'top'     => '35px',
+				'right'   => '5px',
+				'bottom'  => '35px',
+				'left'    => '5px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'padding-top'    => '35px',
+				'padding-right'  => '5px',
+				'padding-bottom' => '35px',
+				'padding-left'   => '5px',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );

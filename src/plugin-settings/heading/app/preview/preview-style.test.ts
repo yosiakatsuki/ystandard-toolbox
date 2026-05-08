@@ -695,6 +695,30 @@ describe( 'parseStyles', () => {
 			expect( result.mobile ).toContain( 'padding-bottom: 40px;' );
 			expect( result.mobile ).toContain( 'padding-left: 50px;' );
 		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				padding: {
+					desktop: {
+						top: '0.5em',
+						right: '0.5em',
+						bottom: '0.5em',
+						left: '0.5em',
+					},
+					top: '35px',
+					right: '5px',
+					bottom: '35px',
+					left: '5px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'padding-top: 35px;' );
+			expect( result.desktop ).toContain( 'padding-right: 5px;' );
+			expect( result.desktop ).toContain( 'padding-bottom: 35px;' );
+			expect( result.desktop ).toContain( 'padding-left: 5px;' );
+			expect( result.desktop ).not.toContain( 'padding-desktop:' );
+			expect( result.tablet ).toHaveLength( 0 );
+			expect( result.mobile ).toHaveLength( 0 );
+		} );
 	} );
 
 	describe( 'margin', () => {

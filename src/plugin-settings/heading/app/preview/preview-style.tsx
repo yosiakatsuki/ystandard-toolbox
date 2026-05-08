@@ -21,6 +21,9 @@ import type {
 } from '@aktk/plugin-settings/heading/types';
 import { isSplit } from '@aktk/block-components/components/custom-border-select/utils';
 
+const RESPONSIVE_KEYS = [ 'desktop', 'tablet', 'mobile' ];
+const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ];
+
 /**
  * Component.
  */
@@ -105,7 +108,7 @@ export function parseStyles(
 			value = `url("${ value }")`;
 		}
 		// レスポンシブ値でない場合はデスクトップのみの値として扱う
-		if ( ! isResponsiveValue( value ) ) {
+		if ( ! isStrictResponsiveValue( value ) ) {
 			value = { desktop: value };
 		}
 		// borderの場合.
@@ -286,7 +289,7 @@ export function parseLongHandStyle(
 	parser: ( style: object, name: string ) => string[]
 ) {
 	// レスポンシブではない場合
-	if ( ! isResponsiveValue( value ) ) {
+	if ( ! isStrictResponsiveValue( value ) ) {
 		value = { desktop: value };
 	}
 	// レスポンシブは未実装。desktopで処理される.
@@ -352,6 +355,20 @@ export function isSpacing( property: string ) {
 }
 
 /**
+ * レスポンシブ値だけで構成されているか判定.
+ * @param value
+ */
+export function isStrictResponsiveValue( value: unknown ) {
+	if ( ! isResponsiveValue( value ) ) {
+		return false;
+	}
+
+	return Object.keys( value as object ).every( ( key ) =>
+		RESPONSIVE_KEYS.includes( key )
+	);
+}
+
+/**
  * 余白設定の分解.
  * @param value
  * @param name
@@ -364,6 +381,9 @@ export function parseSpacingProperty( value: object, name: string ) {
 	}
 
 	Object.keys( value ).forEach( ( key: string ) => {
+		if ( ! SPACING_KEYS.includes( key ) ) {
+			return;
+		}
 		// @ts-ignore
 		result = [ ...result, `${ name }-${ key }: ${ value[ key ] };` ];
 	} );

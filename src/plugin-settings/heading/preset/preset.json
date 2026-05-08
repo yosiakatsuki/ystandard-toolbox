@@ -13,9 +13,7 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"bottom": "0.5em"
-				}
+				"bottom": "0.5em"
 			}
 		}
 	},
@@ -33,9 +31,7 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"bottom": "0.5em"
-				}
+				"bottom": "0.5em"
 			}
 		}
 	},
@@ -53,9 +49,7 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"bottom": "0.5em"
-				}
+				"bottom": "0.5em"
 			}
 		}
 	},
@@ -73,11 +67,9 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"top": "0.3em",
-					"left": "0.5em",
-					"bottom": "0.3em"
-				}
+				"top": "0.3em",
+				"left": "0.5em",
+				"bottom": "0.3em"
 			}
 		}
 	},
@@ -100,10 +92,8 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"bottom": "0.5em"
-				}
+				"top": "0.5em",
+				"bottom": "0.5em"
 			}
 		}
 	},
@@ -113,12 +103,10 @@
 		"style": {
 			"backgroundColor": "#eeeeee",
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"right": "0.5em",
-					"bottom": "0.5em",
-					"left": "0.5em"
-				}
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
 			}
 		}
 	},
@@ -137,12 +125,10 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"right": "0.5em",
-					"bottom": "0.5em",
-					"left": "0.5em"
-				}
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
 			}
 		}
 	},
@@ -177,12 +163,10 @@
 			},
 			"borderRadius": "2px",
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"right": "0.5em",
-					"bottom": "0.5em",
-					"left": "0.5em"
-				}
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
 			},
 			"margin": {
 				"desktop": {
@@ -206,9 +190,7 @@
 				}
 			},
 			"padding": {
-				"desktop": {
-					"bottom": "0.5em"
-				}
+				"bottom": "0.5em"
 			},
 			"position": "relative"
 		},
@@ -254,12 +236,10 @@
 		"style": {
 			"backgroundColor": "#d4e7f2",
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"right": "0.5em",
-					"bottom": "0.5em",
-					"left": "0.5em"
-				}
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
 			},
 			"margin": {
 				"desktop": {
@@ -308,12 +288,10 @@
 		"style": {
 			"backgroundColor": "#eeeeee",
 			"padding": {
-				"desktop": {
-					"top": "0.5em",
-					"right": "0.5em",
-					"bottom": "0.5em",
-					"left": "0.5em"
-				}
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
 			},
 			"position": "relative"
 		},
