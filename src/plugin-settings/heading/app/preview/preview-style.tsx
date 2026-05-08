@@ -256,6 +256,13 @@ export function isFontSize( property: string ) {
  * @param value
  */
 export function parseFontSizeStyle( value: CustomFontSize ) {
+	if ( 'string' === typeof value ) {
+		return value;
+	}
+	// テーマ設定をそのまま使っている場合はプレビュー用に値を返す.
+	if ( value?.size ) {
+		return isNumber( value.size ) ? `${ value.size }px` : value.size;
+	}
 	// テーマ設定を使っている場合はプレビュー用としてdesktopに値を設定する.
 	if ( value?.fontSize?.size ) {
 		let fontSize = value.fontSize.size;

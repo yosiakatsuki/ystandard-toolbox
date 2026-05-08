@@ -102,9 +102,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
 				'style'  => [
-					'fontSize'      => [
-						'desktop' => '1.2em',
-					],
+					'fontSize'      => '1.2em',
 					'fontWeight'    => 'bold',
 					'fontStyle'     => 'normal',
 					'lineHeight'    => 1.3,
@@ -117,9 +115,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'enable' => true,
 					'icon' => 'award',
 					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CF4747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award" style="width:1.3em;height:1.3em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
-					'fontSize' => [
-						'desktop' => '1.3em',
-					],
+					'fontSize' => '1.3em',
 					'color' => '#CF4747',
 					'width' => '1.3em',
 					'height' => '1.3em',
@@ -128,9 +124,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'enable' => true,
 					'icon' => 'book-open',
 					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64389D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open" style="width:0.8em;height:0.8em;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
-					'fontSize' => [
-						'desktop' => '0.8em',
-					],
+					'fontSize' => '0.8em',
 					'color' => '#64389D',
 					'width' => '0.8em',
 					'height' => '0.8em',
@@ -474,7 +468,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
 				'style'  => [
-					"fontSize" => [
+					"responsiveFontSize" => [
 						"desktop" => "14px",
 						"tablet"  => "15px",
 						"mobile"  => "16px",
@@ -517,9 +511,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				'slug'   => 'v1-h1',
 				'label'  => 'v1:h1',
 				'style'  => [
-					"fontSize"      => [
-						"desktop" => "1.4em",
-					],
+					"fontSize"      => "1.4em",
 					"color"         => "#222222",
 					"textAlign"     => "center",
 					"fontWeight"    => "bold",
@@ -558,9 +550,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 				'before' => [
 					'enable'   => true,
-					'fontSize' => [
-						'desktop' => '1.2em',
-					],
+					'fontSize' => '1.2em',
 					'content'  => '""',
 					'height'   => '1.2em',
 					'width'    => '1.2em',

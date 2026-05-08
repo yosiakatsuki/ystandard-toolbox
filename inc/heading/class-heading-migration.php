@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
-	const RESPONSIVE_PROPERTY = [ 'fontSize', 'border' ];
+	const RESPONSIVE_PROPERTY = [ 'border' ];
 
 	/**
 	 * 新設定.
@@ -135,7 +135,7 @@ class Heading_Migration {
 				}
 
 				// サイズ変更.
-				$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$font_size}" );
+				$this->add_pseudo_elements_style( $type, 'fontSize', "{$font_size}" );
 				$size_unit = 'em';
 			}
 
@@ -148,7 +148,7 @@ class Heading_Migration {
 							continue;
 						}
 						if ( 'fontSize' === $size_target ) {
-							$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+							$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
 						} else {
 							$this->add_pseudo_elements_style( $type, $size_target, "{$size}{$size_unit}" );
 						}
@@ -162,7 +162,7 @@ class Heading_Migration {
 						$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
 					}
 					if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
-						$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
+						$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
 					}
 				}
 			}
@@ -394,7 +394,11 @@ class Heading_Migration {
 			$v2_fz['mobile'] = "{$size_mobile}{$unit}";
 		}
 		if ( ! empty( $v2_fz ) ) {
-			$this->add_style( 'fontSize', $v2_fz );
+			if ( $responsive ) {
+				$this->add_style( 'responsiveFontSize', $v2_fz );
+			} elseif ( isset( $v2_fz['desktop'] ) ) {
+				$this->add_style( 'fontSize', $v2_fz['desktop'] );
+			}
 		}
 		// 文字色.
 		$color = $this->get_old_option( 'fontColor', '' );

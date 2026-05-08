@@ -113,6 +113,10 @@ class Styles {
 			}
 			$property = Text::camel_to_kebab( $key );
 
+			if ( 'font-size' === $property ) {
+				$value = self::parse_font_size_style( $value );
+			}
+
 			// レスポンシブではない設定をDesktopの設定として扱う.
 			if ( ! self::is_responsive_style( $value ) ) {
 				$value = [ 'desktop' => $value ];
@@ -127,24 +131,26 @@ class Styles {
 				$value = self::parse_spacing_style( $property, $value );
 			}
 
-			if ( is_array( $value['desktop'] ) ) {
-				$desktop = array_merge( $desktop, $value['desktop'] );
-			} else {
-				$desktop[ $property ] = $value['desktop'];
-			}
+			if ( array_key_exists( 'desktop', $value ) ) {
+				if ( is_array( $value['desktop'] ) ) {
+					$desktop = array_merge( $desktop, $value['desktop'] );
+				} else {
+					$desktop[ $property ] = $value['desktop'];
+				}
 
-			// 画像の処理.
-			if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
-				$desktop[ $property ] = "url('{$value['desktop']}')";
-			}
-			// 画像の処理.
-			if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
-				$desktop[ $property ] = "url('{$value['desktop']}')";
+				// 画像の処理.
+				if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+					$desktop[ $property ] = "url('{$value['desktop']}')";
+				}
+				// 画像の処理.
+				if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+					$desktop[ $property ] = "url('{$value['desktop']}')";
+				}
 			}
 
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
-				if ( is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
+				if ( isset( $value['desktop'] ) && is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
 					// カスタムプロパティ名のプレフィックスを作成。疑似要素がある場合はbefore,afterを追加.
 					$var_prefix = ! empty( $pseudo_elements ) ? "-{$pseudo_elements}" : '';
 					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
@@ -268,6 +274,38 @@ class Styles {
 	 */
 	public static function is_border( $property ) {
 		return 'border' === $property;
+	}
+
+	/**
+	 * Font Size 展開.
+	 *
+	 * @param mixed $font_size Font Size.
+	 *
+	 * @return mixed
+	 */
+	public static function parse_font_size_style( $font_size ) {
+		if ( ! is_array( $font_size ) ) {
+			return $font_size;
+		}
+		if ( isset( $font_size['size'] ) ) {
+			return self::parse_font_size_value( $font_size['size'] );
+		}
+		if ( isset( $font_size['fontSize']['size'] ) ) {
+			return self::parse_font_size_value( $font_size['fontSize']['size'] );
+		}
+
+		return $font_size;
+	}
+
+	/**
+	 * Font Size Value 展開.
+	 *
+	 * @param mixed $font_size Font Size.
+	 *
+	 * @return mixed
+	 */
+	private static function parse_font_size_value( $font_size ) {
+		return is_numeric( $font_size ) ? "{$font_size}px" : $font_size;
 	}
 
 	/**

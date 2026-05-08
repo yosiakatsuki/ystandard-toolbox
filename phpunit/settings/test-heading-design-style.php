@@ -1041,6 +1041,44 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	public function test_parse_style_responsive_font_size() {
+		$input    = [
+			'responsiveFontSize' => [
+				'desktop' => '16px',
+				'tablet'  => '15px',
+				'mobile'  => '14px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'font-size' => '16px',
+			],
+			'tablet'  => [
+				'font-size' => '15px',
+			],
+			'mobile'  => [
+				'font-size' => '14px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_font_size_preset_object() {
+		$input    = [
+			'fontSize' => [
+				'size' => 24,
+				'slug' => 'large',
+				'name' => 'Large',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'font-size' => '24px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_typography_responsive() {
 		$input    = [
 			'fontSize'   => [

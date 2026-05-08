@@ -247,6 +247,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 						title={ __( '文字設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option || {}, [
 							'fontSize',
+							'responsiveFontSize',
 							'color',
 							'fontWeight',
 							'responsiveFontWeight',
@@ -258,6 +259,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 						<PanelInner>
 							<FontSize
 								value={ option?.fontSize }
+								responsiveValue={ option?.responsiveFontSize }
 								onChange={ handleOnChange }
 							/>
 							<DisableHasIcon>

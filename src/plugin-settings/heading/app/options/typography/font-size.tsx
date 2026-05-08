@@ -11,7 +11,7 @@ import {
 	type ResponsiveFontSize,
 	type CustomFontSizePickerOnChangeProps,
 } from '@aktk/block-components/components/custom-font-size-picker';
-import { isEmpty } from '@aktk/block-components/utils/object';
+import { deleteUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Plugin Dependencies
@@ -23,40 +23,45 @@ import { isNumber } from 'lodash';
 
 interface FontSizeControlProps {
 	value: CustomFontSize | undefined;
-	onChange: ( newValue: { fontSize: CustomFontSize | undefined } ) => void;
+	responsiveValue: ResponsiveFontSize | undefined;
+	onChange: ( newValue: {
+		fontSize: CustomFontSize | undefined;
+		responsiveFontSize?: ResponsiveFontSize;
+	} ) => void;
 }
 
 export default function FontSize( props: FontSizeControlProps ) {
-	const { value, onChange } = props;
+	const { value, responsiveValue, onChange } = props;
 
 	const handleOnChange = ( newValue: CustomFontSizePickerOnChangeProps ) => {
 		// fontSize の size が number の場合、px を付与
 		const fontSizeSize = isNumber( newValue?.fontSize?.size )
 			? `${ newValue?.fontSize?.size }px`
 			: newValue?.fontSize?.size;
-		// 更新用のフォントサイズを作成
-		const newFontSize = {
-			desktop:
-				newValue?.responsiveFontSize?.desktop ??
-				fontSizeSize ??
-				newValue?.customFontSize,
-			tablet: newValue?.responsiveFontSize?.tablet,
-			mobile: newValue?.responsiveFontSize?.mobile,
-			fontSize: newValue?.fontSize,
-		} as CustomFontSize;
-		// @ts-ignore
+		if ( newValue?.responsiveFontSize ) {
+			onChange( {
+				fontSize: undefined,
+				responsiveFontSize: sanitizeResponsiveFontSize(
+					newValue.responsiveFontSize
+				),
+			} );
+			return;
+		}
+
 		onChange( {
-			fontSize: sanitizeFontSize( newFontSize ),
+			fontSize: sanitizeFontSize(
+				newValue?.fontSize ?? fontSizeSize ?? newValue?.customFontSize
+			),
+			responsiveFontSize: undefined,
 		} );
 	};
 
-	const fontSize = value?.fontSize as FontSize;
-	const customFontSize = value?.fontSize?.size ?? value?.desktop;
-	const responsiveFontSize: ResponsiveFontSize = {
-		desktop: value?.desktop,
-		tablet: value?.tablet,
-		mobile: value?.mobile,
-	};
+	const fontSize = getFontSizeValue( value );
+	const customFontSize = getCustomFontSizeValue( value );
+	const responsiveFontSize = getResponsiveFontSizeValue(
+		value,
+		responsiveValue
+	);
 
 	return (
 		<PluginSettingsBaseControl
@@ -75,39 +80,84 @@ export default function FontSize( props: FontSizeControlProps ) {
 				showResetButton={ false }
 			/>
 			<ClearButton
-				onClick={ () => onChange( { fontSize: undefined } ) }
+				onClick={ () =>
+					onChange( {
+						fontSize: undefined,
+						responsiveFontSize: undefined,
+					} )
+				}
 			/>
 		</PluginSettingsBaseControl>
 	);
 }
 
 function sanitizeFontSize(
-	fontSize: CustomFontSize
+	fontSize: CustomFontSize | undefined
 ): CustomFontSize | undefined {
-	// fontSize.fontSize が存在しない場合、fontSize を削除
-	if ( fontSize?.fontSize ) {
-		const size = fontSize.fontSize?.size;
-		const slug = fontSize.fontSize?.slug;
-		const name = fontSize.fontSize?.name;
-		if ( ! size || ! slug || ! name ) {
-			// fontSize.fontSize を削除
-			delete fontSize.fontSize;
-		}
-	} else {
-		delete fontSize.fontSize;
+	if ( ! fontSize ) {
+		return undefined;
 	}
-	// desktop が存在しない場合、desktop を削除
-	if ( ! fontSize?.desktop ) {
-		delete fontSize.desktop;
+	if ( 'string' === typeof fontSize ) {
+		return fontSize;
 	}
-	// tablet が存在しない場合、tablet を削除
-	if ( ! fontSize?.tablet ) {
-		delete fontSize.tablet;
-	}
-	// mobile が存在しない場合、mobile を削除
-	if ( ! fontSize?.mobile ) {
-		delete fontSize.mobile;
+	const size = fontSize?.size;
+	const slug = fontSize?.slug;
+	const name = fontSize?.name;
+	if ( size && slug && name ) {
+		return fontSize;
 	}
 
-	return isEmpty( fontSize ) ? undefined : fontSize;
+	return undefined;
+}
+
+function sanitizeResponsiveFontSize(
+	fontSize: ResponsiveFontSize
+): ResponsiveFontSize | undefined {
+	const result = {
+		desktop: fontSize.desktop,
+		tablet: fontSize.tablet,
+		mobile: fontSize.mobile,
+	};
+	return deleteUndefined( result ) as ResponsiveFontSize | undefined;
+}
+
+function getFontSizeValue( value: CustomFontSize | undefined ) {
+	if ( ! value || 'string' === typeof value ) {
+		return undefined;
+	}
+	if ( value.fontSize ) {
+		return value.fontSize as FontSize;
+	}
+	if ( value.slug ) {
+		return value as FontSize;
+	}
+	return undefined;
+}
+
+function getCustomFontSizeValue( value: CustomFontSize | undefined ) {
+	if ( ! value ) {
+		return undefined;
+	}
+	if ( 'string' === typeof value ) {
+		return value;
+	}
+	const customSize = value.fontSize?.size ?? value.desktop ?? value.size;
+	return customSize ? `${ customSize }` : undefined;
+}
+
+function getResponsiveFontSizeValue(
+	value: CustomFontSize | undefined,
+	responsiveValue: ResponsiveFontSize | undefined
+) {
+	if ( responsiveValue ) {
+		return responsiveValue;
+	}
+	if ( value && 'object' === typeof value ) {
+		return {
+			desktop: value.desktop,
+			tablet: value.tablet,
+			mobile: value.mobile,
+		};
+	}
+	return undefined;
 }

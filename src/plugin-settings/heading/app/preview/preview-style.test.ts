@@ -86,6 +86,39 @@ describe( 'parseStyles', () => {
 			expect( result.tablet ).not.toContain( 'font-size:' );
 			expect( result.mobile ).not.toContain( 'font-size:' );
 		} );
+		it( 'fontSizeの値が単一値の場合', () => {
+			const styles = {
+				fontSize: '24px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+			expect( result.tablet ).not.toContain( 'font-size:' );
+			expect( result.mobile ).not.toContain( 'font-size:' );
+		} );
+		it( 'responsiveFontSizeの値をfont-sizeとして解析すること', () => {
+			const styles = {
+				responsiveFontSize: {
+					desktop: '24px',
+					tablet: '20px',
+					mobile: '18px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+			expect( result.tablet ).toContain( 'font-size: 20px;' );
+			expect( result.mobile ).toContain( 'font-size: 18px;' );
+		} );
+		it( 'fontSizeの値がテーマフォントサイズの場合', () => {
+			const styles = {
+				fontSize: {
+					size: 24,
+					slug: 'large',
+					name: 'Large',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+		} );
 		it( 'fontSizeの値がレスポンシブ指定の場合', () => {
 			const styles = {
 				fontSize: {

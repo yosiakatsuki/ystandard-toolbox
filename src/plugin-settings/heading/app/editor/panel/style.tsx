@@ -120,6 +120,7 @@ export function StylePanel() {
 				title={ __( '文字設定', 'ystandard-toolbox' ) }
 				initialOpen={ isInitialOpen( option, [
 					'fontSize',
+					'responsiveFontSize',
 					'color',
 					'textAlign',
 					'responsiveTextAlign',
@@ -133,6 +134,7 @@ export function StylePanel() {
 				<PanelInner>
 					<FontSize
 						value={ option?.fontSize }
+						responsiveValue={ option?.responsiveFontSize }
 						onChange={ handleOnChange }
 					/>
 					<TextColor

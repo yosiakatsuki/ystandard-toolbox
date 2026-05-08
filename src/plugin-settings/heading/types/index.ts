@@ -1,4 +1,5 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
+import type { ResponsiveFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 import type {
 	Spacing,
 	ResponsiveSpacing,
@@ -34,6 +35,7 @@ export interface HeadingOption {
 export interface HeadingStyle {
 	// typography.
 	fontSize?: CustomFontSize;
+	responsiveFontSize?: ResponsiveFontSize;
 	color?: string;
 	textAlign?: string;
 	responsiveTextAlign?: ResponsiveValues;
@@ -110,7 +112,8 @@ export interface HeadingPseudoElementsStyle {
 	icon?: string;
 	iconColor?: string;
 	useIconMask?: boolean;
-	fontSize?: ResponsiveValues;
+	fontSize?: CustomFontSize;
+	responsiveFontSize?: ResponsiveFontSize;
 	color?: string;
 	fontWeight?: string;
 	responsiveFontWeight?: ResponsiveValues;
@@ -177,7 +180,12 @@ export interface LevelList {
 	[ key: string ]: string;
 }
 
-export interface CustomFontSize {
+export type CustomFontSize = string | CustomFontSizeObject;
+
+export interface CustomFontSizeObject {
+	size?: number | string;
+	slug?: string;
+	name?: string;
 	desktop?: string;
 	tablet?: string;
 	mobile?: string;
