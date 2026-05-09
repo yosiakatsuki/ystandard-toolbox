@@ -665,6 +665,30 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * preset:double-border-bottom で afterSize が指定されても、プリセット由来の after.width は上書きされない.
+	 */
+	public function test_double_border_bottom_after_size_does_not_overwrite_width() {
+		$input = [
+			'h3' => [
+				'preset'         => 'double-border-bottom',
+				'useCustomStyle' => true,
+				'afterColorType' => 'background',
+				'afterSize'      => '2',
+				'afterColor'     => '#DC2222',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( '3em', $v2['v1-h3']['after']['width'] );
+		$this->assertEquals( '2px', $v2['v1-h3']['after']['height'] );
+		$this->assertEquals( '#DC2222', $v2['v1-h3']['after']['backgroundColor'] );
+		$this->assertTrue( $v2['v1-h3']['after']['enable'] );
+	}
+
+	/**
 	 * preset:border-bottom（基本プリセット）が v2 にスタイルとして展開される.
 	 */
 	public function test_preset() {

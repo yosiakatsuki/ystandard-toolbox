@@ -151,17 +151,6 @@ class Heading_Migration {
 							$this->add_pseudo_elements_style( $type, $size_target, "{$size}{$size_unit}" );
 						}
 					}
-				} else {
-					// preset で明示なし: 既存挙動（preset.height/width/fontSize が 0 でなければ size で上書き）.
-					if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
-						$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
-					}
-					if ( isset( $preset[ $type ]['width'] ) && 0 !== $preset[ $type ]['width'] ) {
-						$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
-					}
-					if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
-						$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
-					}
 				}
 			}
 			// アイコンの場合.
