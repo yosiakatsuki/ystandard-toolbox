@@ -151,7 +151,7 @@
 				"bottom": "0.5em",
 				"left": "0.5em"
 			},
-			"boxShadow": "0 0 0 8px var(--ystdtb-custom-header-bg-color)",
+			"boxShadow": "0 0 0 8px var(--ystdtb-custom-heading-background-color)",
 			"borderRadius": "2px"
 		}
 	},
@@ -170,6 +170,7 @@
 			},
 			"position": "relative"
 		},
+		"usePseudoElementsSize": ["height"],
 		"after": {
 			"content": "\"\"",
 			"height": "2px",
@@ -186,6 +187,7 @@
 			"position": "relative",
 			"zIndex": 1
 		},
+		"usePseudoElementsSize": [],
 		"after": {
 			"content": "\"\"",
 			"position": "absolute",
@@ -195,7 +197,7 @@
 			"height": "5px",
 			"color": "#cccccc",
 			"zIndex": -1,
-			"--ystdtb-custom-header-after-color-rbga-opacity": 0.3,
+			"--ystdtb-custom-header-after-color-rgba-opacity": 0.3,
 			"background": "repeating-linear-gradient(-45deg,var(--ystdtb-custom-header-after-color-rgba),var(--ystdtb-custom-header-after-color-rgba) 2px,#fff 0,#fff 4px)"
 		}
 	},
@@ -205,6 +207,7 @@
 			"display": "flex",
 			"gap": "0.5em"
 		},
+		"usePseudoElementsSize": ["height"],
 		"before": {
 			"backgroundColor": "#222222",
 			"height": "2px",
@@ -232,12 +235,13 @@
 			},
 			"position": "relative"
 		},
+		"usePseudoElementsSize": ["borderWidth"],
 		"after": {
 			"border": {
 				"top": {
 					"width": "0.9em",
 					"style": "solid",
-					"color": "var(--ystdtb-custom-header-after-bg-color,var(--ystdtb-custom-header-bg-color))"
+					"color": "#d4e7f2"
 				},
 				"right": {
 					"width": "0.9em",
@@ -271,7 +275,8 @@
 				"right": "0.5em",
 				"bottom": "0.5em",
 				"left": "0.5em"
-			}
+			},
+			"position": "relative"
 		},
 		"after": {
 			"content": "\"\"",
@@ -285,12 +290,12 @@
 					"color": "transparent"
 				},
 				"right": {
-					"width": "1em",
+					"width": "20px",
 					"style": "solid",
-					"color": "var(--ystdtb-custom-header-after-color)"
+					"color": "#aaaaaa"
 				},
 				"bottom": {
-					"width": "0.5em",
+					"width": "10px",
 					"style": "solid",
 					"color": "transparent"
 				},
@@ -312,11 +317,10 @@
 			"gap": "0.5em",
 			"alignItems": "center"
 		},
+		"usePseudoElementsSize": ["fontSize"],
 		"before": {
 			"icon": "award",
-			"fontSize": "1.2em",
-			"width": "1.2em",
-			"height": "1.2em"
+			"fontSize": "1.2em"
 		}
 	}
 }

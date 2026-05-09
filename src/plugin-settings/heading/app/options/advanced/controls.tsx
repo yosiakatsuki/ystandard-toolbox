@@ -9,36 +9,41 @@ import {
 	ResponsiveControlGrid,
 	ResponsiveSelectTab,
 } from '@aktk/block-components/components/tab-panel';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+import type { ResponsiveValues } from '@aktk/block-components/types';
+import { IconSelectControl } from '@aktk/block-components/components/icon-control';
+
 /**
  * Plugin Dependencies
  */
-import type { ResponsiveValues } from '@aktk/block-components/types';
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
-import { IconSelectControl } from '@aktk/block-components/components/icon-control';
+
 
 interface AdvancedResponsiveSelectControlProps {
 	id: string;
 	label: string;
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onDefaultChange: ( newValue: string | undefined ) => void;
+	onResponsiveChange: ( newValue: ResponsiveValues ) => void;
 	onClear: () => void;
-	options: CustomSelectControlOption[];
-}
-interface AdvancedResponsiveSelectEditProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
 	options: CustomSelectControlOption[];
 }
 
 export function AdvancedResponsiveSelectControl(
 	props: AdvancedResponsiveSelectControlProps
 ) {
-	const { id, label, value, onChange, onClear, options } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( newValue );
-	};
+	const {
+		id,
+		label,
+		value,
+		responsiveValue,
+		onDefaultChange,
+		onResponsiveChange,
+		onClear,
+		options,
+	} = props;
 	return (
 		<PluginSettingsBaseControl
 			id={ id }
@@ -46,18 +51,18 @@ export function AdvancedResponsiveSelectControl(
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DesktopResponsiveSelectEdit
 						value={ value }
-						onChange={ handleOnChange }
+						onChange={ onDefaultChange }
 						options={ options }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveResponsiveSelectControl
-						value={ value }
-						onChange={ handleOnChange }
+						value={ responsiveValue }
+						onChange={ onResponsiveChange }
 						options={ options }
 					/>
 				}
@@ -67,29 +72,29 @@ export function AdvancedResponsiveSelectControl(
 	);
 }
 
-function DesktopResponsiveSelectEdit(
-	props: AdvancedResponsiveSelectEditProps
-) {
+function DesktopResponsiveSelectEdit( props: {
+	value: string | undefined;
+	onChange: ( newValue: string | undefined ) => void;
+	options: CustomSelectControlOption[];
+} ) {
 	const { value, onChange, options } = props;
 	const handleOnSelectChange = ( newValue: string ) => {
-		onChange( {
-			desktop: '' === newValue ? undefined : newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( '' === newValue ? undefined : newValue );
 	};
 	return (
 		<CustomSelectControl
-			value={ value?.desktop || '' }
+			value={ value || '' }
 			options={ options }
 			onChange={ handleOnSelectChange }
 		/>
 	);
 }
 
-function ResponsiveResponsiveSelectControl(
-	props: AdvancedResponsiveSelectEditProps
-) {
+function ResponsiveResponsiveSelectControl( props: {
+	value: ResponsiveValues | undefined;
+	onChange: ( newValue: ResponsiveValues ) => void;
+	options: CustomSelectControlOption[];
+} ) {
 	const { value, onChange, options } = props;
 	const handleOnChange = ( newValue: ResponsiveValues ) => {
 		onChange( {

@@ -8,28 +8,38 @@ import { __ } from '@wordpress/i18n';
  */
 import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
 	DefaultSizeEdit,
 	ResponsiveSizeEdit,
 } from '@aktk/plugin-settings/heading/app/options/size/control';
 
 interface MinWidthControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { minWidth?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		minWidth?: string;
+		responsiveMinWidth?: ResponsiveValues;
+	} ) => void;
 }
 
 export default function MinWidth( props: MinWidthControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { minWidth: deleteUndefined( newValue ) } );
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( { minWidth: newValue, responsiveMinWidth: undefined } );
+	};
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			minWidth: undefined,
+			responsiveMinWidth: stripUndefined( newValue ),
+		} );
 	};
 
 	return (
@@ -39,22 +49,27 @@ export default function MinWidth( props: MinWidthControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSizeEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveSizeEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
 			<ClearButton
-				onClick={ () => onChange( { minWidth: undefined } ) }
+				onClick={ () =>
+					onChange( {
+						minWidth: undefined,
+						responsiveMinWidth: undefined,
+					} )
+				}
 			/>
 		</PluginSettingsBaseControl>
 	);

@@ -11,6 +11,7 @@ export interface FontAppearanceControlProps {
 	hasFontStyles?: boolean;
 	hasFontWeights?: boolean;
 	value: FontAppearanceValue;
+	label?: string;
 }
 
 /**
@@ -26,6 +27,7 @@ export interface FontWeightStyleControlProps {
 	onChange: ( value: string ) => void;
 	value: string;
 	className?: string;
+	label?: string;
 }
 
 /**
@@ -34,12 +36,13 @@ export interface FontWeightStyleControlProps {
  * @class
  */
 export function FontWeightControl( props: FontWeightStyleControlProps ) {
-	const { onChange, value } = props;
+	const { onChange, value, label } = props;
 	const handleOnChange = ( newValue: FontAppearanceValue ) => {
 		onChange( newValue?.fontWeight || '' );
 	};
 	return (
 		<WPFontAppearanceControl
+			label={ label }
 			value={ { fontWeight: value } }
 			onChange={ handleOnChange }
 			hasFontStyles={ false }

@@ -107,7 +107,15 @@ class Styles {
 		$mobile  = [];
 
 		foreach ( $styles as $key => $value ) {
+			// responsiveXxx キーは元プロパティ名（xxx）として扱い、CSS プロパティ名を導出する.
+			if ( 0 === strpos( $key, 'responsive' ) && strlen( $key ) > 10 ) {
+				$key = lcfirst( substr( $key, 10 ) );
+			}
 			$property = Text::camel_to_kebab( $key );
+
+			if ( 'font-size' === $property ) {
+				$value = self::parse_font_size_style( $value );
+			}
 
 			// レスポンシブではない設定をDesktopの設定として扱う.
 			if ( ! self::is_responsive_style( $value ) ) {
@@ -123,24 +131,26 @@ class Styles {
 				$value = self::parse_spacing_style( $property, $value );
 			}
 
-			if ( is_array( $value['desktop'] ) ) {
-				$desktop = array_merge( $desktop, $value['desktop'] );
-			} else {
-				$desktop[ $property ] = $value['desktop'];
-			}
+			if ( array_key_exists( 'desktop', $value ) ) {
+				if ( is_array( $value['desktop'] ) ) {
+					$desktop = array_merge( $desktop, $value['desktop'] );
+				} else {
+					$desktop[ $property ] = $value['desktop'];
+				}
 
-			// 画像の処理.
-			if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
-				$desktop[ $property ] = "url('{$value['desktop']}')";
-			}
-			// 画像の処理.
-			if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
-				$desktop[ $property ] = "url('{$value['desktop']}')";
+				// 画像の処理.
+				if ( 'backgroundImage' === $key && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+					$desktop[ $property ] = "url('{$value['desktop']}')";
+				}
+				// 画像の処理.
+				if ( ( 'maskImage' === $key || '-webkit-mask-image' === $key ) && is_string( $value['desktop'] ) && ! empty( $value['desktop'] ) ) {
+					$desktop[ $property ] = "url('{$value['desktop']}')";
+				}
 			}
 
 			// 色関係のカスタム変数追加.
 			if ( 'backgroundColor' === $key || 'color' === $key ) {
-				if ( is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
+				if ( isset( $value['desktop'] ) && is_string( $value['desktop'] ) && false !== strpos( $value['desktop'], '#' ) ) {
 					// カスタムプロパティ名のプレフィックスを作成。疑似要素がある場合はbefore,afterを追加.
 					$var_prefix = ! empty( $pseudo_elements ) ? "-{$pseudo_elements}" : '';
 					$var_prefix = "--ystdtb-custom-heading{$var_prefix}";
@@ -238,12 +248,10 @@ class Styles {
 			$styles['backgroundPosition'] = 'center';
 			$styles['verticalAlign']      = '-0.125em';
 			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
-			// fontSize の指定がなければ width/height を 1em で設定.
-			if ( empty( $styles['fontSize'] ) ) {
-				$default_size     = [ 'desktop' => '1em' ];
-				$styles['width']  = $default_size;
-				$styles['height'] = $default_size;
-			}
+			// アイコン描画時は fontSize に連動した正方形にするため width/height は 1em 固定（attributes 値は無視）.
+			$styles['width']  = '1em';
+			$styles['height'] = '1em';
+			unset( $styles['responsiveWidth'], $styles['responsiveHeight'] );
 			// contentは空に.
 			$content = '';
 		}
@@ -267,6 +275,38 @@ class Styles {
 	}
 
 	/**
+	 * Font Size 展開.
+	 *
+	 * @param mixed $font_size Font Size.
+	 *
+	 * @return mixed
+	 */
+	public static function parse_font_size_style( $font_size ) {
+		if ( ! is_array( $font_size ) ) {
+			return $font_size;
+		}
+		if ( isset( $font_size['size'] ) ) {
+			return self::parse_font_size_value( $font_size['size'] );
+		}
+		if ( isset( $font_size['fontSize']['size'] ) ) {
+			return self::parse_font_size_value( $font_size['fontSize']['size'] );
+		}
+
+		return $font_size;
+	}
+
+	/**
+	 * Font Size Value 展開.
+	 *
+	 * @param mixed $font_size Font Size.
+	 *
+	 * @return mixed
+	 */
+	private static function parse_font_size_value( $font_size ) {
+		return is_numeric( $font_size ) ? "{$font_size}px" : $font_size;
+	}
+
+	/**
 	 * Border 展開
 	 *
 	 * @param array $border value.
@@ -283,6 +323,9 @@ class Styles {
 		$parse = function ( $list ) {
 			$parse_result = [];
 			foreach ( $list as $position => $border_value ) {
+				if ( in_array( $position, array_keys( Config::RESPONSIVE_TYPE ), true ) ) {
+					continue;
+				}
 
 				if ( in_array( $position, self::AXIS_POSITION, true ) ) {
 					// 上下左右に分かれての指定の場合.
@@ -290,8 +333,8 @@ class Styles {
 					$border_style = isset( $border_value['style'] ) ? $border_value['style'] : '';
 					$border_color = isset( $border_value['color'] ) ? $border_value['color'] : '';
 					$value        = "{$border_width} {$border_style} {$border_color}";
-					// width=0の場合は0のみセット.
-					if ( '' !== $border_width && 0 === (int) $border_width ) {
+					// width=0の場合は0のみセット（"0.9em" 等の小数点 em を 0 と誤判定しないよう float キャストで判定）.
+					if ( '' !== $border_width && 0.0 === (float) $border_width ) {
 						$value = 0;
 					}
 				} else {
@@ -305,7 +348,9 @@ class Styles {
 			return $parse_result;
 		};
 
-		$result['desktop'] = $parse( $border['desktop'] );
+		if ( array_key_exists( 'desktop', $border ) ) {
+			$result['desktop'] = $parse( $border['desktop'] );
+		}
 
 		if ( array_key_exists( 'tablet', $border ) ) {
 			$result['tablet'] = $parse( $border['tablet'] );
@@ -345,6 +390,9 @@ class Styles {
 			$parse_result = [];
 
 			foreach ( $list as $position => $value ) {
+				if ( ! in_array( $position, self::AXIS_POSITION, true ) ) {
+					continue;
+				}
 				// 0pxなど0の場合は単位なしの0をセット.
 				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
 					$value = 0;
@@ -379,14 +427,12 @@ class Styles {
 		if ( ! is_array( $value ) ) {
 			return false;
 		}
-		// 配列のキーにレスポンシブタイプがあるかどうかで判断.
-		foreach ( array_keys( Config::RESPONSIVE_TYPE ) as $key ) {
-			if ( array_key_exists( $key, $value ) ) {
-				return true;
-			}
+		$keys = array_keys( $value );
+		if ( empty( $keys ) ) {
+			return false;
 		}
 
-		return false;
+		return empty( array_diff( $keys, array_keys( Config::RESPONSIVE_TYPE ) ) );
 	}
 
 	/**

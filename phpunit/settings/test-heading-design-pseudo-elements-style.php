@@ -27,6 +27,8 @@ class Settings_Heading_Design_Pseudo_Elements_Style_Test extends WP_UnitTestCase
 				'background-position' => 'center',
 				'vertical-align'      => '-0.125em',
 				'display'             => 'inline-flex',
+				'width'               => '1em',
+				'height'              => '1em',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles_pseudo_elements( $input, 'before' ) );
@@ -142,5 +144,60 @@ class Settings_Heading_Design_Pseudo_Elements_Style_Test extends WP_UnitTestCase
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles_pseudo_elements( $input, 'before' ) );
+	}
+
+	/**
+	 * アイコン使用時、fontSize がレスポンシブ指定（responsiveFontSize）でも
+	 * width / height は 1em で固定出力されることを保証する.
+	 *
+	 * 旧実装では `empty($styles['fontSize'])` の判定を見ていたため、
+	 * responsiveFontSize 指定で fontSize 単一値が空のケースで width/height の補完が機能しないことがあった.
+	 */
+	public function test_parse_styles_pseudo_elements_icon_with_responsive_font_size() {
+		$svg   = '<svg width="100" height="100"></svg>';
+		$input = [
+			'enable'             => true,
+			'content'            => $svg,
+			'icon'               => 'circle',
+			'responsiveFontSize' => [
+				'desktop' => '2em',
+				'tablet'  => '1.8em',
+				'mobile'  => '1.5em',
+			],
+		];
+
+		$result = \ystandard_toolbox\Util\Styles::parse_styles_pseudo_elements( $input, 'before' );
+
+		// width / height は 1em で固定.
+		$this->assertEquals( '1em', $result['desktop']['width'] );
+		$this->assertEquals( '1em', $result['desktop']['height'] );
+		// responsiveFontSize は font-size として各デバイスに反映される.
+		$this->assertEquals( '2em', $result['desktop']['font-size'] );
+		$this->assertEquals( '1.8em', $result['tablet']['font-size'] );
+		$this->assertEquals( '1.5em', $result['mobile']['font-size'] );
+	}
+
+	/**
+	 * アイコン使用時、fontSize にオブジェクト形式（desktop/tablet/mobile）で
+	 * レスポンシブ値が直接入っているケースでも、各デバイスの font-size として出力される.
+	 */
+	public function test_parse_styles_pseudo_elements_icon_with_font_size_object() {
+		$svg   = '<svg width="100" height="100"></svg>';
+		$input = [
+			'enable'   => true,
+			'content'  => $svg,
+			'icon'     => 'circle',
+			'fontSize' => [
+				'desktop' => '2em',
+				'tablet'  => '1.8em',
+				'mobile'  => '1.5em',
+			],
+		];
+
+		$result = \ystandard_toolbox\Util\Styles::parse_styles_pseudo_elements( $input, 'before' );
+
+		$this->assertEquals( '2em', $result['desktop']['font-size'] );
+		$this->assertEquals( '1.8em', $result['tablet']['font-size'] );
+		$this->assertEquals( '1.5em', $result['mobile']['font-size'] );
 	}
 }

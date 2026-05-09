@@ -19,6 +19,14 @@
 
 レンダリング・見た目・操作感は **手動 UI テスト**で担保する（`docs/v2-roadmap.md` フェーズ 3.2）。
 
+## 現在地
+
+自動テストは、設定値の変換・保存ロジックと PHP 側の出力検証を中心に整備済み。サイトデザイン拡張は JS / PHP ともに完了。
+
+見出しデザインは、v2 見出し編集機能のレスポンシブデータ構造統一が完了済み。PHP 側は migration / style / CSS / 疑似要素のテストを `Settings_Heading_Design_*_Test` に統一済みで、JS 側は preview-style と util の単体テストが中心。各設定コントロールの UI 操作テストは未整備のため、手動 UI テストで重点確認する。
+
+手動 UI テストはサイトデザイン拡張まで完了。次は見出しデザインのレスポンシブ構造統一後の再確認から再開する。
+
 ## テスト方針
 
 ### JS テスト
@@ -91,10 +99,11 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 | 設定画面 | 配置 | JS | PHP |
 |---|---|:-:|:-:|
 | フォント | `src/plugin-settings/font/` | ✅ | ✅ |
-| 見出しデザイン | `src/plugin-settings/heading/` | △ | △ 既存 4 ファイル（`Settings_Heading_Design_*_Test` に統一済み） |
+| 見出しデザイン | `src/plugin-settings/heading/` | △ preview-style / util 中心。各設定 UI 操作は未整備 | ✅ `Settings_Heading_Design_*_Test` に統一済み |
 | カスタム CSS | `src/plugin-settings/custom-css/` | ✅ | ✅ |
 | コード追加 | `src/plugin-settings/add-code/` | ✅ | ✅ |
 | 投稿詳細ページ拡張（CTA 等） | `src/plugin-settings/cta/` | ✅ | ✅ |
+| ブロックパターン設定 | `src/plugin-settings/block-patterns/` | ❌ | ❌ |
 
 > アイコンフォント（`inc/font/class-icon-font.php`）は管理 UI を持たないフロント機能のため、本ドキュメントのスコープ外。機能ロジックテストとして別途整備する。
 
@@ -106,9 +115,30 @@ npm run test:unit:php -- --filter=Settings_{機能}_Test
 - `phpunit/test-sub-header.php` — `Sub_Header_Test`
 - `phpunit/test-lp.php` — `LP_Test`
 
-見出しデザイン関連 4 ファイルは `phpunit/settings/test-heading-design-*.php` / `Settings_Heading_Design_*_Test` に統一済み（中身のロジックは未レビュー）。
+見出しデザイン関連 4 ファイルは `phpunit/settings/test-heading-design-*.php` / `Settings_Heading_Design_*_Test` に統一済み。
 
 残りについても `phpunit/settings/` 配下への移動・命名統一は別途判断（現状は機能している前提でそのまま）。新規追加分のみ `Settings_*_Test` 命名で進める。
+
+## 手動 UI テスト進捗
+
+`docs/v2-roadmap.md` フェーズ 3.2 の「プラグイン設定画面の全項目」は途中。
+
+- 完了: サイトデザイン拡張
+- 次に確認: 見出しデザイン
+- 残り: フォント、カスタム CSS、コード追加、投稿詳細ページ拡張（CTA 等）、ブロックパターン設定
+
+見出しデザインは、レスポンシブデータ構造統一後の確認として次を重点的に見る。
+
+- v1 → v2 マイグレーション結果に旧構造と新構造が混在しないこと
+- プリセット適用後の保存値に旧構造が残らないこと
+- typography / layout / spacing / border の各設定で単一値とレスポンシブ値が期待どおりに切り替わること
+- エディター preview とフロント CSS 出力が同じ設定値を参照していること
+
+## 次に再開する作業
+
+1. 見出しデザインの手動 UI テストを実施する。
+2. フォント、カスタム CSS、コード追加、投稿詳細ページ拡張（CTA 等）、ブロックパターン設定の順に設定画面を確認する。
+3. 手動確認で見つかった差分を、必要に応じて JS / PHP の自動テストへ追加する。
 
 ## 命名・配置サマリ
 

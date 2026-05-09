@@ -28,6 +28,24 @@ export function getEditorColors() {
 }
 
 /**
+ * 設定からエディターのフォントサイズ設定を取得
+ *
+ * @returns
+ */
+export function getEditorFontSizes() {
+	return getAdminConfig( 'editorFontSizes' );
+}
+
+/**
+ * 設定からエディターの余白サイズ設定を取得
+ *
+ * @returns
+ */
+export function getEditorSpacingSizes() {
+	return getAdminConfig( 'editorSpacingSizes' );
+}
+
+/**
  * プラグインのアセットURLを取得
  *
  * @returns

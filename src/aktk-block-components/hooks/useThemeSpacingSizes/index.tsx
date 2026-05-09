@@ -3,17 +3,60 @@
  */
 // @ts-ignore
 import { useSettings } from '@wordpress/block-editor';
+import { useMemo } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { store as editorStore } from '@wordpress/editor';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * 余白設定を取得する（設定画面用）
  */
 const useThemeSpacingSizes = () => {
-	const [ themeSpacingSizes ] = useSettings( 'spacing.spacingSizes.theme' );
+	// useSettingsから余白サイズ情報を取得.
+	const [ defaultSpacingSizes, themeSpacingSizes ] = useSettings(
+		'spacing.spacingSizes.default',
+		'spacing.spacingSizes.theme'
+	);
 
-	return themeSpacingSizes ?? getDefaultSpacingSizes();
+	// useSelectから余白サイズ情報を取得(主に設定画面用).
+	const dataSpacingSizes = useSelect(
+		// @ts-ignore
+		( select ) => {
+			const settings = select( editorStore )?.getEditorSettings();
+			return settings?.spacingSizes;
+		},
+		[]
+	);
+
+	// フィルター経由のフォールバック（プラグイン設定画面など editor store が無い環境用）.
+	const hookSpacingSizes = applyFilters(
+		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
+		[]
+	) as Array< { name: string; slug: string; size: string } >;
+
+	return useMemo( () => {
+		if ( themeSpacingSizes && themeSpacingSizes.length ) {
+			return themeSpacingSizes;
+		}
+		if ( Array.isArray( hookSpacingSizes ) && hookSpacingSizes.length ) {
+			return hookSpacingSizes;
+		}
+		if ( dataSpacingSizes && dataSpacingSizes.length ) {
+			return dataSpacingSizes;
+		}
+		if ( defaultSpacingSizes && defaultSpacingSizes.length ) {
+			return defaultSpacingSizes;
+		}
+		return getDefaultSpacingSizes();
+	}, [
+		themeSpacingSizes,
+		hookSpacingSizes,
+		dataSpacingSizes,
+		defaultSpacingSizes,
+	] );
 };
 
-function getDefaultSpacingSizes() {
+export function getDefaultSpacingSizes() {
 	return [
 		{
 			name: '5px',

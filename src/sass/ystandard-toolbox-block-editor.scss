@@ -1,11 +1,7 @@
 @use "./tailwind";
+@use "./foundation/custom-property/style-editor";
 @use "component/blocks/inspector-controls";
 @use "component/ratio";
-
-:root {
-	--ystdtb--editor--text-color--gray: #6b7280;
-	--ystdtb--editor--block-outline: 1px solid #ddd;
-}
 
 .wp-block {
 	&[class*="ystdtb-"] {

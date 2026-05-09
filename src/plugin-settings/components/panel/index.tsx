@@ -30,5 +30,5 @@ export function PluginSettingsPanel( props: PluginSettingsPanelProps ) {
 }
 
 export function PanelInner( { children }: { children: React.ReactNode } ) {
-	return <div className={ 'flex flex-col gap-8' }>{ children }</div>;
+	return <div className={ 'ystdtb-plugin-settings-panel__inner' }>{ children }</div>;
 }

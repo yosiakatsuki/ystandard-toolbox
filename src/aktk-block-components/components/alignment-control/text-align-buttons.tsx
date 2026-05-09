@@ -1,8 +1,15 @@
 /**
  * WordPress dependencies
  */
-import { Button, ButtonGroup } from '@wordpress/components';
-import { Icon } from '@wordpress/icons';
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Aktk dependencies
+ */
+import {
+	ToggleGroupControl,
+	ToggleGroupControlOptionIcon,
+} from '@aktk/block-components/wp-controls/toggle-group-control';
 
 import { TEXT_ALIGNMENT_OPTIONS } from './const';
 
@@ -14,23 +21,25 @@ interface TextAlignButtonsProps {
 export function TextAlignButtons( props: TextAlignButtonsProps ) {
 	const { onChange, value } = props;
 	return (
-		<ButtonGroup>
-			{ TEXT_ALIGNMENT_OPTIONS.map( ( { icon, title, align } ) => {
-				const variant = value === align ? 'primary' : 'tertiary';
-				return (
-					<Button
-						key={ align }
-						title={ title }
-						variant={ variant }
-						onClick={ () => {
-							onChange( value !== align ? align : undefined );
-						} }
-					>
-						{ /* @ts-ignore */ }
-						<Icon icon={ icon } />
-					</Button>
-				);
-			} ) }
-		</ButtonGroup>
+		<ToggleGroupControl
+			label={ __( 'テキスト揃え', 'ystandard-toolbox' ) }
+			hideLabelFromVision
+			value={ value }
+			onChange={ ( newValue ) =>
+				onChange( newValue as string | undefined )
+			}
+			isBlock
+			isDeselectable
+			className='aktk-components__text-align-buttons'
+		>
+			{ TEXT_ALIGNMENT_OPTIONS.map( ( { icon, title, align } ) => (
+				<ToggleGroupControlOptionIcon
+					key={ align }
+					value={ align }
+					icon={ icon }
+					label={ title }
+				/>
+			) ) }
+		</ToggleGroupControl>
 	);
 }

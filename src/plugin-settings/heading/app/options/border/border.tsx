@@ -7,30 +7,47 @@ import { __ } from '@wordpress/i18n';
  */
 import { BorderControl } from '@aktk/block-components/components/custom-border-select';
 import type {
+	CustomBorder,
 	FlatBorder,
 	SplitBorders,
 } from '@aktk/block-components/components/custom-border-select';
+import {
+	ResponsiveControlGrid,
+	ResponsiveSelectTab,
+} from '@aktk/block-components/components/tab-panel';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { getFlatValue } from '@aktk/block-components/utils/responsive-value';
 
 interface BorderProps {
 	value?: SplitBorders | FlatBorder;
-	onChange: ( newValue: { border?: SplitBorders | FlatBorder } ) => void;
+	responsiveValue?: CustomBorder;
+	onChange: ( newValue: {
+		border?: SplitBorders | FlatBorder;
+		responsiveBorder?: CustomBorder;
+	} ) => void;
 }
 
 export default function Border( props: BorderProps ) {
-	const { value, onChange } = props;
+	const { value, responsiveValue, onChange } = props;
 
 	// 枠線設定更新.
-	const handleOnChange = (
+	const handleDefaultChange = (
 		newValue: SplitBorders | FlatBorder | undefined
 	) => {
 		onChange( {
 			border: getNewBorderOption( newValue ),
+			responsiveBorder: undefined,
+		} );
+	};
+	const handleResponsiveChange = ( newValue: CustomBorder ) => {
+		onChange( {
+			border: undefined,
+			responsiveBorder: stripUndefined( newValue ) as CustomBorder,
 		} );
 	};
 
@@ -40,19 +57,99 @@ export default function Border( props: BorderProps ) {
 			label={ __( '枠線', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
 		>
-			<BorderControl
-				value={
-					getFlatValue( value, undefined ) as unknown as
-						| SplitBorders
-						| FlatBorder
+			<ResponsiveSelectTab
+				isResponsive={ isResponsiveValue( responsiveValue ) }
+				defaultTabContent={
+					<BorderControl
+						value={ getDefaultBorderValue( value ) }
+						onChange={ handleDefaultChange }
+						enableCurrentColor={ true }
+						enableTransparent={ true }
+					/>
 				}
-				onChange={ handleOnChange }
-				enableCurrentColor={ true }
-				enableTransparent={ true }
+				responsiveTabContent={
+					<ResponsiveBorderEdit
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
+					/>
+				}
 			/>
-			<ClearButton onClick={ () => handleOnChange( undefined ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						border: undefined,
+						responsiveBorder: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
+}
+
+function ResponsiveBorderEdit( props: {
+	value: CustomBorder;
+	onChange: ( newValue: CustomBorder ) => void;
+} ) {
+	const { value, onChange } = props;
+	const handleOnChange = ( newValue: CustomBorder ) => {
+		onChange( {
+			...value,
+			...newValue,
+		} );
+	};
+	return (
+		<ResponsiveControlGrid customClassName={ { 'md:grid-cols-3': false } }>
+			<div>
+				<BorderControl
+					label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
+					value={ value?.desktop }
+					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
+						handleOnChange( {
+							desktop: getNewBorderOption( newValue ),
+						} );
+					} }
+					enableCurrentColor={ true }
+					enableTransparent={ true }
+				/>
+			</div>
+			<div>
+				<BorderControl
+					label={ __( 'タブレット', 'ystandard-toolbox' ) }
+					value={ value?.tablet }
+					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
+						handleOnChange( {
+							tablet: getNewBorderOption( newValue ),
+						} );
+					} }
+					enableCurrentColor={ true }
+					enableTransparent={ true }
+				/>
+			</div>
+			<div>
+				<BorderControl
+					label={ __( 'モバイル', 'ystandard-toolbox' ) }
+					value={ value?.mobile }
+					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
+						handleOnChange( {
+							mobile: getNewBorderOption( newValue ),
+						} );
+					} }
+					enableCurrentColor={ true }
+					enableTransparent={ true }
+				/>
+			</div>
+		</ResponsiveControlGrid>
+	);
+}
+
+function getDefaultBorderValue( value?: SplitBorders | FlatBorder ) {
+	if ( ! value ) {
+		return value;
+	}
+	if ( 'desktop' in value ) {
+		return ( value as unknown as CustomBorder ).desktop;
+	}
+	return value;
 }
 
 function getNewBorderOption(

@@ -8,28 +8,38 @@ import { __ } from '@wordpress/i18n';
  */
 import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import {
 	DefaultSizeEdit,
 	ResponsiveSizeEdit,
 } from '@aktk/plugin-settings/heading/app/options/size/control';
 
 interface HeightControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { height?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		height?: string;
+		responsiveHeight?: ResponsiveValues;
+	} ) => void;
 }
 
 export default function Height( props: HeightControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { height: deleteUndefined( newValue ) } );
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( { height: newValue, responsiveHeight: undefined } );
+	};
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			height: undefined,
+			responsiveHeight: stripUndefined( newValue ),
+		} );
 	};
 
 	return (
@@ -39,21 +49,28 @@ export default function Height( props: HeightControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSizeEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveSizeEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
-			<ClearButton onClick={ () => onChange( { height: undefined } ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						height: undefined,
+						responsiveHeight: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
 }

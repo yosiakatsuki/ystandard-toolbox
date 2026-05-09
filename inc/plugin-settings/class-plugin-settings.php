@@ -151,13 +151,14 @@ class Plugin_Settings {
 			apply_filters(
 				'ystdtb_admin_config',
 				[
-					'siteUrl'      => esc_url_raw( home_url() ),
-					'pluginUrl'    => YSTDTB_URL,
-					'adminUrl'     => esc_url_raw( admin_url() ),
-					'isYStandard'  => Version::ystandard_version_compare(),
-					'isAmpEnable'  => AMP::is_amp_enable(),
-					'editorColors' => self::get_editor_colors(),
-					'fontSizes'    => self::get_editor_font_sizes(),
+					'siteUrl'            => esc_url_raw( home_url() ),
+					'pluginUrl'          => YSTDTB_URL,
+					'adminUrl'           => esc_url_raw( admin_url() ),
+					'isYStandard'        => Version::ystandard_version_compare(),
+					'isAmpEnable'        => AMP::is_amp_enable(),
+					'editorColors'       => self::get_editor_colors(),
+					'editorFontSizes'    => self::get_editor_font_sizes(),
+					'editorSpacingSizes' => self::get_editor_spacing_sizes(),
 				]
 			)
 		);
@@ -418,6 +419,40 @@ class Plugin_Settings {
 		}
 
 		return array_values( $unique_font_sizes );
+	}
+
+	/**
+	 * 余白サイズ（spacingSizes）の取得
+	 *
+	 * theme.json の typography.fontSizes と同パターンで spacing.spacingSizes.theme を取得する.
+	 *
+	 * @return array 余白サイズの配列
+	 */
+	private static function get_editor_spacing_sizes() {
+		$spacing_sizes = [];
+
+		// theme.json から余白サイズを取得.
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			if ( isset( $settings['spacing']['spacingSizes']['theme'] ) ) {
+				$theme_spacing_sizes = $settings['spacing']['spacingSizes']['theme'];
+				if ( is_array( $theme_spacing_sizes ) ) {
+					$spacing_sizes = $theme_spacing_sizes;
+				}
+			}
+		}
+
+		// 重複を除去（slugをキーとして使用）.
+		$unique_spacing_sizes = [];
+		foreach ( $spacing_sizes as $spacing_size ) {
+			if ( isset( $spacing_size['slug'] ) ) {
+				$unique_spacing_sizes[ $spacing_size['slug'] ] = $spacing_size;
+			}
+		}
+
+		return array_values( $unique_spacing_sizes );
 	}
 
 }

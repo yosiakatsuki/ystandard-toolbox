@@ -19,8 +19,6 @@ defined( 'ABSPATH' ) || die();
  */
 class Heading_Migration {
 
-	const RESPONSIVE_PROPERTY = [ 'fontSize', 'textAlign', 'fontWeight', 'padding', 'margin', 'border' ];
-
 	/**
 	 * 新設定.
 	 *
@@ -109,11 +107,12 @@ class Heading_Migration {
 			$icon       = $this->get_pseudo_elements_icon( $type );
 			$size       = $this->get_old_option( "{$type}Size", '' );
 			$size_unit  = 'px';
-			$icon_size  = '';
 
-			// content.
+			// content と enable.
 			if ( $this->has_pseudo_elements( $type ) ) {
-				$this->new_option[ $type ]['enable']  = ! empty( $content ) ? true : false;
+				// 疑似要素として描画される条件: content / icon / preset 由来の疑似要素定義のいずれか.
+				$has_preset_pseudo                    = isset( $preset[ $type ] ) && ! empty( $preset[ $type ] );
+				$this->new_option[ $type ]['enable']  = ! empty( $content ) || ! empty( $icon ) || $has_preset_pseudo;
 				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
 			}
 			// 色設定.
@@ -127,31 +126,53 @@ class Heading_Migration {
 				$this->new_option['style']['alignItems'] = 'center';
 
 				$font_size = "{$size}em";
-				$icon_size = ! empty( $size ) ? "{$size}em" : '';
 				if ( empty( $size ) && isset( $preset[ $type ]['fontSize'] ) && ! empty( $preset[ $type ]['fontSize'] ) ) {
 					$font_size = $preset[ $type ]['fontSize'];
 				}
 
 				// サイズ変更.
-				$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$font_size}" );
+				$this->add_pseudo_elements_style( $type, 'fontSize', "{$font_size}" );
 				$size_unit = 'em';
+
+				// アイコン描画時は width/height を CSS 出力側で 1em 固定するため attributes には保存しない.
+				unset( $this->new_option[ $type ]['width'], $this->new_option[ $type ]['height'] );
+
+				// v2 UI ではアイコン色を iconColor で管理するため、color / backgroundColor から移し替える.
+				if ( isset( $this->new_option[ $type ]['color'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['color'];
+					unset( $this->new_option[ $type ]['color'] );
+				}
+				if ( isset( $this->new_option[ $type ]['backgroundColor'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['backgroundColor'];
+					unset( $this->new_option[ $type ]['backgroundColor'] );
+				}
 			}
 
 			if ( ! empty( $size ) ) {
-				if ( isset( $preset[ $type ]['height'] ) && 0 !== $preset[ $type ]['height'] ) {
-					$this->add_pseudo_elements_style( $type, 'height', "{$size}{$size_unit}" );
+				if ( isset( $preset['usePseudoElementsSize'] ) ) {
+					// preset で適用先を明示している場合: その指示に従う（空配列なら何もしない）.
+					foreach ( $preset['usePseudoElementsSize'] as $size_target ) {
+						if ( 'iconSize' === $size_target ) {
+							// アイコン用の size 適用は後段の icon 処理側で行う.
+							continue;
+						}
+						if ( 'borderWidth' === $size_target ) {
+							// border 各辺の width を一括で size に上書き（balloon の三角サイズ等）.
+							foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
+								if ( ! isset( $this->new_option[ $type ]['border'][ $side ] ) ) {
+									continue;
+								}
+								$this->new_option[ $type ]['border'][ $side ]['width'] = "{$size}{$size_unit}";
+							}
+							continue;
+						}
+						if ( 'fontSize' === $size_target ) {
+							$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
+						} else {
+							$this->add_pseudo_elements_style( $type, $size_target, "{$size}{$size_unit}" );
+						}
+					}
 				}
-				if ( isset( $preset[ $type ]['width'] ) && 0 !== $preset[ $type ]['width'] ) {
-					$this->add_pseudo_elements_style( $type, 'width', "{$size}{$size_unit}" );
-				}
-				if ( isset( $preset[ $type ]['fontSize'] ) && 0 !== $preset[ $type ]['fontSize'] ) {
-					$this->add_pseudo_elements_responsive_style( $type, 'fontSize', "{$size}{$size_unit}" );
-				}
-			}
-			// アイコンの場合.
-			if ( ! empty( $icon_size ) ) {
-				$this->add_pseudo_elements_style( $type, 'height', $icon_size );
-				$this->add_pseudo_elements_style( $type, 'width', $icon_size );
 			}
 		}
 	}
@@ -188,11 +209,7 @@ class Heading_Migration {
 				// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
 				$key   = $this->replace_custom_property( $key );
 				$value = $this->replace_custom_property( $value );
-				if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
-					$this->add_pseudo_elements_responsive_style( $type, $key, $value );
-				} else {
-					$this->add_pseudo_elements_style( $type, $key, $value );
-				}
+				$this->add_pseudo_elements_style( $type, $key, $value );
 			}
 		}
 	}
@@ -219,7 +236,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $padding ) ) {
-			$this->add_responsive_style( 'padding', [ 'desktop' => $padding ] );
+			$this->add_style( 'padding', $padding );
 		}
 
 		// margin.
@@ -234,7 +251,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $margin ) ) {
-			$this->add_responsive_style( 'margin', [ 'desktop' => $margin ] );
+			$this->add_style( 'margin', $margin );
 		}
 	}
 
@@ -248,7 +265,7 @@ class Heading_Migration {
 		// 角丸.
 		$radius = $this->get_old_option( 'borderRadius', '' );
 		if ( $radius ) {
-			$this->add_responsive_style( 'borderRadius', "{$radius}px" );
+			$this->add_style( 'borderRadius', "{$radius}px" );
 		}
 
 		$border = [];
@@ -270,7 +287,7 @@ class Heading_Migration {
 			}
 		}
 		if ( ! empty( $border ) ) {
-			$this->add_responsive_style( 'border', $border );
+			$this->add_style( 'border', $border );
 		}
 	}
 
@@ -293,7 +310,9 @@ class Heading_Migration {
 		// 背景 位置.
 		$bg_pos = $this->get_old_option( 'backgroundPosition', '' );
 		if ( $bg_pos ) {
-			$this->add_style( 'backgroundPosition', $bg_pos );
+			// v1 ではハイフン区切り（例: center-left）で保存され CSS 出力時に空白区切りへ変換していた.
+			// v2 attributes は CSS 仕様準拠の空白区切りで保持し、UI のドロップダウン選択肢と一致させる.
+			$this->add_style( 'backgroundPosition', str_replace( '-', ' ', $bg_pos ) );
 		}
 		// 背景 繰り返し.
 		$bg_repeat = $this->get_old_option( 'backgroundRepeat', '' );
@@ -322,11 +341,7 @@ class Heading_Migration {
 			$key   = $this->replace_custom_property( $key );
 			$value = $this->replace_custom_property( $value );
 			// スタイルのセット.
-			if ( in_array( $key, self::RESPONSIVE_PROPERTY, true ) ) {
-				$this->add_responsive_style( $key, $value );
-			} else {
-				$this->add_style( $key, $value );
-			}
+			$this->add_style( $key, $value );
 		}
 	}
 
@@ -376,7 +391,11 @@ class Heading_Migration {
 			$v2_fz['mobile'] = "{$size_mobile}{$unit}";
 		}
 		if ( ! empty( $v2_fz ) ) {
-			$this->add_style( 'fontSize', $v2_fz );
+			if ( $responsive ) {
+				$this->add_style( 'responsiveFontSize', $v2_fz );
+			} elseif ( isset( $v2_fz['desktop'] ) ) {
+				$this->add_style( 'fontSize', $v2_fz['desktop'] );
+			}
 		}
 		// 文字色.
 		$color = $this->get_old_option( 'fontColor', '' );
@@ -386,12 +405,12 @@ class Heading_Migration {
 		// 揃え位置.
 		$align = $this->get_old_option( 'fontAlign', '' );
 		if ( $align ) {
-			$this->add_responsive_style( 'textAlign', $align );
+			$this->add_style( 'textAlign', $align );
 		}
 		// 太さ.
 		$weight = $this->get_old_option( 'fontWeight', '' );
 		if ( $weight ) {
-			$this->add_responsive_style( 'fontWeight', $weight );
+			$this->add_style( 'fontWeight', $weight );
 		}
 		// スタイル.
 		$font_style = $this->get_old_option( 'fontStyle', '' );
@@ -426,11 +445,9 @@ class Heading_Migration {
 		$this->new_option['slug']  = $this->get_option_slug( $level );
 		$this->new_option['label'] = $this->get_option_label( $level );
 		$this->new_option['style'] = [];
-		// 有効化.
-		$is_enable                  = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
-		$this->new_option['enable'] = $is_enable;
-
-		if ( $is_enable ) {
+		// v1 で「使う」設定（useCustomStyle）になっていたものだけ、見出しレベルへ自動割り当てする.
+		$is_assigned = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
+		if ( $is_assigned ) {
 			$this->heading_level[ $level ] = $this->new_option['slug'];
 		}
 	}
@@ -620,9 +637,11 @@ class Heading_Migration {
 		if ( ! empty( $result ) ) {
 			$update       = Heading::update_heading_design_option( $result );
 			$update_level = Heading::update_heading_level_option( $data['level'] );
-			// if ( $update && $update_level ) {
-			// Heading_Compatible::delete_option();
-			// }
+			// v2 メイン / レベル設定の保存に両方成功した場合のみ v1 設定を削除する.
+			// 部分的失敗時に v1 を残すことで、再マイグレーションを可能にする.
+			if ( $update && $update_level ) {
+				Heading_Compatible::delete_option();
+			}
 		}
 
 		return Api::create_response(

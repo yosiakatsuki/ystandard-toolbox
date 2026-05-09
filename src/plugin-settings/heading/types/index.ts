@@ -1,6 +1,11 @@
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import type { ResponsiveSpacing } from '@aktk/block-components/components/custom-spacing-select';
+import type { ResponsiveFontSize } from '@aktk/block-components/components/custom-font-size-picker';
 import type {
+	Spacing,
+	ResponsiveSpacing,
+} from '@aktk/block-components/components/custom-spacing-select';
+import type {
+	CustomBorder,
 	SplitBorders,
 	FlatBorder,
 } from '@aktk/block-components/components/custom-border-select';
@@ -18,7 +23,6 @@ export type HeadingOptions = {
 export interface HeadingOption {
 	slug: string;
 	label: string;
-	enable: boolean;
 	useHeadingStyle?: boolean;
 	useParagraphStyle?: boolean;
 	style: HeadingStyle;
@@ -32,9 +36,12 @@ export interface HeadingOption {
 export interface HeadingStyle {
 	// typography.
 	fontSize?: CustomFontSize;
+	responsiveFontSize?: ResponsiveFontSize;
 	color?: string;
-	textAlign?: ResponsiveValues;
-	fontWeight?: ResponsiveValues;
+	textAlign?: string;
+	responsiveTextAlign?: ResponsiveValues;
+	fontWeight?: string;
+	responsiveFontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;
@@ -50,26 +57,41 @@ export interface HeadingStyle {
 
 	// Border.
 	border?: SplitBorders | FlatBorder;
-	borderRadius?: ResponsiveValues;
+	responsiveBorder?: CustomBorder;
+	borderRadius?: string;
+	responsiveBorderRadius?: ResponsiveValues;
 
 	// Spacing.
-	padding?: ResponsiveSpacing;
-	margin?: ResponsiveSpacing;
+	padding?: Spacing;
+	responsivePadding?: ResponsiveSpacing;
+	margin?: Spacing;
+	responsiveMargin?: ResponsiveSpacing;
 
 	// Size.
-	width?: ResponsiveValues;
-	minWidth?: ResponsiveValues;
-	maxWidth?: ResponsiveValues;
-	height?: ResponsiveValues;
-	minHeight?: ResponsiveValues;
-	maxHeight?: ResponsiveValues;
+	width?: string;
+	responsiveWidth?: ResponsiveValues;
+	minWidth?: string;
+	responsiveMinWidth?: ResponsiveValues;
+	maxWidth?: string;
+	responsiveMaxWidth?: ResponsiveValues;
+	height?: string;
+	responsiveHeight?: ResponsiveValues;
+	minHeight?: string;
+	responsiveMinHeight?: ResponsiveValues;
+	maxHeight?: string;
+	responsiveMaxHeight?: ResponsiveValues;
 
 	// advanced.
-	display?: ResponsiveValues;
-	flexDirection?: ResponsiveValues;
-	alignItems?: ResponsiveValues;
-	justifyContent?: ResponsiveValues;
-	gap?: ResponsiveValues;
+	display?: string;
+	responsiveDisplay?: ResponsiveValues;
+	flexDirection?: string;
+	responsiveFlexDirection?: ResponsiveValues;
+	alignItems?: string;
+	responsiveAlignItems?: ResponsiveValues;
+	justifyContent?: string;
+	responsiveJustifyContent?: ResponsiveValues;
+	gap?: string;
+	responsiveGap?: ResponsiveValues;
 	position?: string;
 	top?: string;
 	right?: string;
@@ -92,9 +114,11 @@ export interface HeadingPseudoElementsStyle {
 	icon?: string;
 	iconColor?: string;
 	useIconMask?: boolean;
-	fontSize?: ResponsiveValues;
+	fontSize?: CustomFontSize;
+	responsiveFontSize?: ResponsiveFontSize;
 	color?: string;
-	fontWeight?: ResponsiveValues;
+	fontWeight?: string;
+	responsiveFontWeight?: ResponsiveValues;
 	fontStyle?: string;
 	lineHeight?: string;
 	letterSpacing?: string;
@@ -108,20 +132,31 @@ export interface HeadingPseudoElementsStyle {
 	backgroundSize?: string;
 	// Border.
 	border?: SplitBorders | FlatBorder;
-	borderRadius?: ResponsiveValues;
+	responsiveBorder?: CustomBorder;
+	borderRadius?: string;
+	responsiveBorderRadius?: ResponsiveValues;
 	// Spacing.
-	padding?: ResponsiveSpacing;
-	margin?: ResponsiveSpacing;
+	padding?: Spacing;
+	responsivePadding?: ResponsiveSpacing;
+	margin?: Spacing;
+	responsiveMargin?: ResponsiveSpacing;
 	// Size.
-	width?: ResponsiveValues;
-	minWidth?: ResponsiveValues;
-	maxWidth?: ResponsiveValues;
-	height?: ResponsiveValues;
-	minHeight?: ResponsiveValues;
-	maxHeight?: ResponsiveValues;
+	width?: string;
+	responsiveWidth?: ResponsiveValues;
+	minWidth?: string;
+	responsiveMinWidth?: ResponsiveValues;
+	maxWidth?: string;
+	responsiveMaxWidth?: ResponsiveValues;
+	height?: string;
+	responsiveHeight?: ResponsiveValues;
+	minHeight?: string;
+	responsiveMinHeight?: ResponsiveValues;
+	maxHeight?: string;
+	responsiveMaxHeight?: ResponsiveValues;
 	// advanced.
 	background?: string;
-	display?: ResponsiveValues;
+	display?: string;
+	responsiveDisplay?: ResponsiveValues;
 	textShadow?: string;
 	boxShadow?: string;
 	fontFamily?: string;
@@ -148,7 +183,12 @@ export interface LevelList {
 	[ key: string ]: string;
 }
 
-export interface CustomFontSize {
+export type CustomFontSize = string | CustomFontSizeObject;
+
+export interface CustomFontSizeObject {
+	size?: number | string;
+	slug?: string;
+	name?: string;
 	desktop?: string;
 	tablet?: string;
 	mobile?: string;

@@ -247,8 +247,10 @@ function PseudoElements( props: PseudoElementsProps ) {
 						title={ __( '文字設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option || {}, [
 							'fontSize',
+							'responsiveFontSize',
 							'color',
 							'fontWeight',
+							'responsiveFontWeight',
 							'fontStyle',
 							'lineHeight',
 							'letterSpacing',
@@ -257,6 +259,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 						<PanelInner>
 							<FontSize
 								value={ option?.fontSize }
+								responsiveValue={ option?.responsiveFontSize }
 								onChange={ handleOnChange }
 							/>
 							<DisableHasIcon>
@@ -266,6 +269,9 @@ function PseudoElements( props: PseudoElementsProps ) {
 								/>
 								<FontWeight
 									value={ option?.fontWeight }
+									responsiveValue={
+										option?.responsiveFontWeight
+									}
 									onChange={ handleOnChange }
 								/>
 								<FontStyle
@@ -326,17 +332,23 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '枠線設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option || {}, [
 								'border',
+								'responsiveBorder',
 								'borderRadius',
+								'responsiveBorderRadius',
 							] ) }
 						>
 							<PanelInner>
 								<Border
 									onChange={ handleOnChange }
 									value={ option?.border }
+									responsiveValue={ option?.responsiveBorder }
 								/>
 								<BorderRadius
 									onChange={ handleOnChange }
 									value={ option?.borderRadius }
+									responsiveValue={
+										option?.responsiveBorderRadius
+									}
 								/>
 							</PanelInner>
 						</PluginSettingsPanel>
@@ -345,55 +357,91 @@ function PseudoElements( props: PseudoElementsProps ) {
 						title={ __( '余白設定', 'ystandard-toolbox' ) }
 						initialOpen={ isInitialOpen( option, [
 							'padding',
+							'responsivePadding',
 							'margin',
+							'responsiveMargin',
 						] ) }
 					>
 						<PanelInner>
 							<Padding
 								value={ option?.padding }
+								responsiveValue={ option?.responsivePadding }
 								onChange={ handleOnChange }
 							/>
 							<Margin
 								value={ option?.margin }
+								responsiveValue={ option?.responsiveMargin }
 								onChange={ handleOnChange }
 							/>
 						</PanelInner>
 					</PluginSettingsPanel>
 					<DisableHasIcon>
 						<PluginSettingsPanel
-							title={ __( '幅・高さ設定', 'ystandard-toolbox' ) }
+							title={ __( '幅設定', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'width',
-								'height',
+								'responsiveWidth',
 								'maxWidth',
-								'maxHeight',
+								'responsiveMaxWidth',
 								'minWidth',
-								'minHeight',
+								'responsiveMinWidth',
 							] ) }
 						>
 							<PanelInner>
 								<Width
 									value={ option?.width }
-									onChange={ handleOnChange }
-								/>
-								<Height
-									value={ option?.height }
+									responsiveValue={
+										option?.responsiveWidth
+									}
 									onChange={ handleOnChange }
 								/>
 								<MaxWidth
 									value={ option?.maxWidth }
-									onChange={ handleOnChange }
-								/>
-								<MaxHeight
-									value={ option?.maxHeight }
+									responsiveValue={
+										option?.responsiveMaxWidth
+									}
 									onChange={ handleOnChange }
 								/>
 								<MinWidth
 									value={ option?.minWidth }
+									responsiveValue={
+										option?.responsiveMinWidth
+									}
+									onChange={ handleOnChange }
+								/>
+							</PanelInner>
+						</PluginSettingsPanel>
+						<PluginSettingsPanel
+							title={ __( '高さ設定', 'ystandard-toolbox' ) }
+							initialOpen={ isInitialOpen( option, [
+								'height',
+								'responsiveHeight',
+								'maxHeight',
+								'responsiveMaxHeight',
+								'minHeight',
+								'responsiveMinHeight',
+							] ) }
+						>
+							<PanelInner>
+								<Height
+									value={ option?.height }
+									responsiveValue={
+										option?.responsiveHeight
+									}
+									onChange={ handleOnChange }
+								/>
+								<MaxHeight
+									value={ option?.maxHeight }
+									responsiveValue={
+										option?.responsiveMaxHeight
+									}
 									onChange={ handleOnChange }
 								/>
 								<MinHeight
 									value={ option?.minHeight }
+									responsiveValue={
+										option?.responsiveMinHeight
+									}
 									onChange={ handleOnChange }
 								/>
 							</PanelInner>
@@ -402,6 +450,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							title={ __( '上級者向け', 'ystandard-toolbox' ) }
 							initialOpen={ isInitialOpen( option, [
 								'display',
+								'responsiveDisplay',
 								'fontFamily',
 								'background',
 								'textShadow',
@@ -412,6 +461,9 @@ function PseudoElements( props: PseudoElementsProps ) {
 							<PanelInner>
 								<ResponsiveDisplay
 									value={ option?.display }
+									responsiveValue={
+										option?.responsiveDisplay
+									}
 									onChange={ handleOnChange }
 								/>
 								<Position

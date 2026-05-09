@@ -4,11 +4,12 @@ import { kebabCase, isArray, isNumber } from 'lodash';
  * Aktk dependencies.
  */
 import {
-	deleteUndefined,
+	stripUndefined,
 	isEmpty,
 	isObject,
 } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+import { hex2rgb } from '@aktk/block-components/utils/color';
 /**
  * Plugin dependencies.
  */
@@ -19,6 +20,9 @@ import type {
 	HeadingStyle,
 } from '@aktk/plugin-settings/heading/types';
 import { isSplit } from '@aktk/block-components/components/custom-border-select/utils';
+
+const RESPONSIVE_KEYS = [ 'desktop', 'tablet', 'mobile' ];
+const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ];
 
 /**
  * Component.
@@ -47,8 +51,11 @@ export default function PreviewStyle( props: PreviewStyleProps ) {
 function getStyles( props: PreviewStyleProps ) {
 	const styleProps = { ...props };
 	const style = parseStyles( styleProps?.style as unknown as object );
-	const before = parseStylesPseudoElements( styleProps?.before || {} );
-	const after = parseStylesPseudoElements( styleProps?.after || {} );
+	const before = parseStylesPseudoElements(
+		styleProps?.before || {},
+		'before'
+	);
+	const after = parseStylesPseudoElements( styleProps?.after || {}, 'after' );
 	const selector =
 		styleProps?.selector || 'ystdtb-setting-heading__preview-text';
 
@@ -62,8 +69,12 @@ function getStyles( props: PreviewStyleProps ) {
 /**
  * スタイルの解析
  * @param styles
+ * @param pseudoElement 疑似要素種別（'before' / 'after'）。CSS 変数のプレフィックスに使用.
  */
-export function parseStyles( styles: object ) {
+export function parseStyles(
+	styles: object,
+	pseudoElement: '' | 'before' | 'after' = ''
+) {
 	// 空の場合は空のオブジェクトを返す.
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -73,11 +84,17 @@ export function parseStyles( styles: object ) {
 	let tablet: any[] = [];
 	let mobile: any[] = [];
 
-	Object.keys( styles ).forEach( ( key: string ) => {
+	Object.keys( styles ).forEach( ( originalKey: string ) => {
+		// responsiveXxx キーは元プロパティ名（xxx）として扱い、CSS プロパティ名を導出する.
+		const key =
+			originalKey.startsWith( 'responsive' ) && originalKey.length > 10
+				? originalKey.charAt( 10 ).toLowerCase() +
+				  originalKey.slice( 11 )
+				: originalKey;
 		// キーをケバブケースに変換.
 		const property = kebabCase( key );
 		// @ts-ignore
-		let value = styles[ key ];
+		let value = styles[ originalKey ];
 		// フォントサイズの場合特殊処理.
 		if ( isFontSize( property ) ) {
 			value = parseFontSizeStyle( value );
@@ -91,7 +108,7 @@ export function parseStyles( styles: object ) {
 			value = `url("${ value }")`;
 		}
 		// レスポンシブ値でない場合はデスクトップのみの値として扱う
-		if ( ! isResponsiveValue( value ) ) {
+		if ( ! isStrictResponsiveValue( value ) ) {
 			value = { desktop: value };
 		}
 		// borderの場合.
@@ -101,6 +118,29 @@ export function parseStyles( styles: object ) {
 		// spacingの場合.
 		if ( isSpacing( property ) ) {
 			value = parseLongHandStyle( value, property, parseSpacingProperty );
+		}
+
+		// 色関係のカスタムプロパティを desktop の先頭に差し込む.
+		// PHP 側 Styles::parse_styles の挙動に合わせる.
+		if ( 'backgroundColor' === key || 'color' === key ) {
+			const desktopColor = value?.desktop;
+			if (
+				typeof desktopColor === 'string' &&
+				desktopColor.includes( '#' )
+			) {
+				const varPrefix = `--ystdtb-custom-heading${
+					pseudoElement ? `-${ pseudoElement }` : ''
+				}`;
+				const colorRgb = hex2rgb( desktopColor ).join( ',' );
+				const type =
+					'backgroundColor' === key ? 'background-color' : 'color';
+				desktop = [
+					`${ varPrefix }-${ type }: ${ desktopColor };`,
+					`${ varPrefix }-${ type }-rgb: rgb(${ colorRgb });`,
+					`${ varPrefix }-${ type }-rgba: rgba(${ colorRgb },var(${ varPrefix }-${ type }-rgba-opacity,1));`,
+					...desktop,
+				];
+			}
 		}
 
 		// デスクトップの場合.
@@ -136,7 +176,7 @@ export function parseStyles( styles: object ) {
 		}
 	} );
 
-	return deleteUndefined( {
+	return stripUndefined( {
 		desktop,
 		tablet,
 		mobile,
@@ -144,7 +184,8 @@ export function parseStyles( styles: object ) {
 }
 
 export function parseStylesPseudoElements(
-	styles: HeadingPseudoElementsStyle
+	styles: HeadingPseudoElementsStyle,
+	pseudoElement: 'before' | 'after' = 'before'
 ) {
 	if ( isEmpty( styles ) ) {
 		return {};
@@ -159,10 +200,12 @@ export function parseStylesPseudoElements(
 	if ( styles?.icon ) {
 		delete styles.icon;
 	}
+	// contentの調整.
 	if ( styles?.content ) {
 		let styleContent = styles.content.replace( /\\(.)/g, '$1' );
 		styleContent = styleContent.replace( /\'/g, '"' );
 		styles.content = styleContent;
+		// SVGアイコンの場合は content を空にして、mask-image として表示する.
 		if ( styleContent.includes( '<svg' ) ) {
 			styleContent = encodeURIComponent( styleContent );
 			// アイコン使用時の調整.
@@ -185,21 +228,25 @@ export function parseStylesPseudoElements(
 			// 位置調整.
 			styles.verticalAlign = '-0.15em';
 			// Display調整・サイズ調整
-			styles.display = styles?.display || { desktop: 'inline-flex' };
-			styles.width = styles?.fontSize || { desktop: '1em' };
-			styles.height = styles?.fontSize || { desktop: '1em' };
+			styles.display = styles?.display || 'inline-flex';
+			// アイコン描画時は fontSize に連動した正方形にするため width/height は 1em 固定（attributes 値は無視）.
+			styles.width = '1em';
+			styles.height = '1em';
+			delete styles.responsiveWidth;
+			delete styles.responsiveHeight;
 			// 位置調整.
 			styles.verticalAlign = '-0.125em';
 			// 使わない値を削除.
 			delete styles.color;
 		} else if ( ! styleContent.includes( '"' ) ) {
+			// content の値がSVG以外、かつ、" が含まれていない場合は、全体を " で囲む.
 			styles.content = `"${ styleContent }"`;
 		}
 		// 絶対に不要になる値を削除.
 		delete styles.iconColor;
 	}
 
-	return parseStyles( styles );
+	return parseStyles( styles, pseudoElement );
 }
 
 /**
@@ -215,6 +262,13 @@ export function isFontSize( property: string ) {
  * @param value
  */
 export function parseFontSizeStyle( value: CustomFontSize ) {
+	if ( 'string' === typeof value ) {
+		return value;
+	}
+	// テーマ設定をそのまま使っている場合はプレビュー用に値を返す.
+	if ( value?.size ) {
+		return isNumber( value.size ) ? `${ value.size }px` : value.size;
+	}
 	// テーマ設定を使っている場合はプレビュー用としてdesktopに値を設定する.
 	if ( value?.fontSize?.size ) {
 		let fontSize = value.fontSize.size;
@@ -248,7 +302,7 @@ export function parseLongHandStyle(
 	parser: ( style: object, name: string ) => string[]
 ) {
 	// レスポンシブではない場合
-	if ( ! isResponsiveValue( value ) ) {
+	if ( ! isStrictResponsiveValue( value ) ) {
 		value = { desktop: value };
 	}
 	// レスポンシブは未実装。desktopで処理される.
@@ -284,6 +338,9 @@ export function parseBorderProperty( value: object, name: string = 'border' ) {
 	if ( isSplit( value ) ) {
 		// Splitの場合.
 		Object.keys( value ).forEach( ( position: string ) => {
+			if ( RESPONSIVE_KEYS.includes( position ) ) {
+				return;
+			}
 			// @ts-ignore
 			const borderValue = value[ position ] || {};
 			Object.keys( borderValue ).forEach( ( key: string ) => {
@@ -314,6 +371,20 @@ export function isSpacing( property: string ) {
 }
 
 /**
+ * レスポンシブ値だけで構成されているか判定.
+ * @param value
+ */
+export function isStrictResponsiveValue( value: unknown ) {
+	if ( ! isResponsiveValue( value ) ) {
+		return false;
+	}
+
+	return Object.keys( value as object ).every( ( key ) =>
+		RESPONSIVE_KEYS.includes( key )
+	);
+}
+
+/**
  * 余白設定の分解.
  * @param value
  * @param name
@@ -326,6 +397,9 @@ export function parseSpacingProperty( value: object, name: string ) {
 	}
 
 	Object.keys( value ).forEach( ( key: string ) => {
+		if ( ! SPACING_KEYS.includes( key ) ) {
+			return;
+		}
 		// @ts-ignore
 		result = [ ...result, `${ name }-${ key }: ${ value[ key ] };` ];
 	} );

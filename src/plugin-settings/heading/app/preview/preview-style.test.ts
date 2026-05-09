@@ -86,6 +86,39 @@ describe( 'parseStyles', () => {
 			expect( result.tablet ).not.toContain( 'font-size:' );
 			expect( result.mobile ).not.toContain( 'font-size:' );
 		} );
+		it( 'fontSizeの値が単一値の場合', () => {
+			const styles = {
+				fontSize: '24px',
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+			expect( result.tablet ).not.toContain( 'font-size:' );
+			expect( result.mobile ).not.toContain( 'font-size:' );
+		} );
+		it( 'responsiveFontSizeの値をfont-sizeとして解析すること', () => {
+			const styles = {
+				responsiveFontSize: {
+					desktop: '24px',
+					tablet: '20px',
+					mobile: '18px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+			expect( result.tablet ).toContain( 'font-size: 20px;' );
+			expect( result.mobile ).toContain( 'font-size: 18px;' );
+		} );
+		it( 'fontSizeの値がテーマフォントサイズの場合', () => {
+			const styles = {
+				fontSize: {
+					size: 24,
+					slug: 'large',
+					name: 'Large',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'font-size: 24px;' );
+		} );
 		it( 'fontSizeの値がレスポンシブ指定の場合', () => {
 			const styles = {
 				fontSize: {
@@ -531,6 +564,56 @@ describe( 'parseStyles', () => {
 			expect( result.tablet ).not.toContain( 'border:' );
 			expect( result.mobile ).not.toContain( 'border:' );
 		} );
+		it( 'responsiveBorderの場合', () => {
+			const styles = {
+				responsiveBorder: {
+					desktop: {
+						top: {
+							color: '#000000',
+							style: 'solid',
+							width: '1px',
+						},
+					},
+					mobile: {
+						bottom: {
+							color: '#222222',
+							style: 'dashed',
+							width: '3px',
+						},
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-top-color: #000000;' );
+			expect( result.desktop ).toContain( 'border-top-style: solid;' );
+			expect( result.desktop ).toContain( 'border-top-width: 1px;' );
+			expect( result.mobile ).toContain( 'border-bottom-color: #222222;' );
+			expect( result.mobile ).toContain( 'border-bottom-style: dashed;' );
+			expect( result.mobile ).toContain( 'border-bottom-width: 3px;' );
+		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				border: {
+					desktop: {
+						top: {
+							color: '#000000',
+							style: 'solid',
+							width: '1px',
+						},
+					},
+					bottom: {
+						color: '#222222',
+						style: 'dashed',
+						width: '3px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'border-bottom-color: #222222;' );
+			expect( result.desktop ).toContain( 'border-bottom-style: dashed;' );
+			expect( result.desktop ).toContain( 'border-bottom-width: 3px;' );
+			expect( result.desktop ).not.toContain( 'border-desktop' );
+		} );
 	} );
 
 	describe( 'borderRadius', () => {
@@ -695,6 +778,30 @@ describe( 'parseStyles', () => {
 			expect( result.mobile ).toContain( 'padding-bottom: 40px;' );
 			expect( result.mobile ).toContain( 'padding-left: 50px;' );
 		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				padding: {
+					desktop: {
+						top: '0.5em',
+						right: '0.5em',
+						bottom: '0.5em',
+						left: '0.5em',
+					},
+					top: '35px',
+					right: '5px',
+					bottom: '35px',
+					left: '5px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'padding-top: 35px;' );
+			expect( result.desktop ).toContain( 'padding-right: 5px;' );
+			expect( result.desktop ).toContain( 'padding-bottom: 35px;' );
+			expect( result.desktop ).toContain( 'padding-left: 5px;' );
+			expect( result.desktop ).not.toContain( 'padding-desktop:' );
+			expect( result.tablet ).toHaveLength( 0 );
+			expect( result.mobile ).toHaveLength( 0 );
+		} );
 	} );
 
 	describe( 'margin', () => {
@@ -798,6 +905,40 @@ describe( 'parseStyles', () => {
 			expect( result.mobile ).toContain( 'margin-right: 30px;' );
 			expect( result.mobile ).toContain( 'margin-bottom: 40px;' );
 			expect( result.mobile ).toContain( 'margin-left: 50px;' );
+		} );
+		it( 'responsiveMarginがある場合', () => {
+			const styles = {
+				responsiveMargin: {
+					desktop: {
+						top: '10px',
+						bottom: '30px',
+					},
+					mobile: {
+						top: '20px',
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 10px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 30px;' );
+			expect( result.mobile ).toContain( 'margin-top: 20px;' );
+		} );
+		it( '旧形式と新形式が混在した場合は新形式の値を出力する', () => {
+			const styles = {
+				margin: {
+					desktop: {
+						top: '0.5em',
+					},
+					top: '35px',
+					bottom: '5px',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 35px;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 5px;' );
+			expect( result.desktop ).not.toContain( 'margin-desktop:' );
+			expect( result.tablet ).toHaveLength( 0 );
+			expect( result.mobile ).toHaveLength( 0 );
 		} );
 	} );
 
@@ -1662,6 +1803,26 @@ describe( 'parseStylesPseudoElements', () => {
 		const result = parseStylesPseudoElements( styles );
 		expect( result.desktop ).toContain( 'content: "test";' );
 	} );
+
+	it( 'SVGアイコン + responsiveFontSize 指定時、font-size が各デバイスの CSS に出力される', () => {
+		const styles = {
+			enable: true,
+			icon: 'circle',
+			content: '<svg width="100" height="100"></svg>',
+			responsiveFontSize: {
+				desktop: '2em',
+				tablet: '1.8em',
+				mobile: '1.5em',
+			},
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'before' );
+		expect( result.desktop ).toContain( 'font-size: 2em;' );
+		expect( result.tablet ).toContain( 'font-size: 1.8em;' );
+		expect( result.mobile ).toContain( 'font-size: 1.5em;' );
+		// width / height は 1em で固定.
+		expect( result.desktop ).toContain( 'width: 1em;' );
+		expect( result.desktop ).toContain( 'height: 1em;' );
+	} );
 } );
 
 /**
@@ -1684,5 +1845,108 @@ describe( 'ユーティリティ関数', () => {
 		};
 		const result = parseFontSizeStyle( value );
 		expect( result.desktop ).toBe( '24px' );
+	} );
+} );
+
+/**
+ * CSS カスタムプロパティ（color / backgroundColor 由来の var）の生成テスト.
+ *
+ * preset.json で `var(--ystdtb-custom-heading-background-color)` 等を参照する
+ * デザイン（stitch の boxShadow など）が、設定画面プレビューでも正しく描画されるための回帰防止.
+ */
+describe( 'CSS カスタムプロパティ生成', () => {
+	it( 'color が HEX のとき --ystdtb-custom-heading-color 系 3 種が生成される', () => {
+		const styles = { color: '#000000' };
+		const result = parseStyles( styles );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color: #000000;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color-rgb: rgb(0,0,0);'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-color-rgba: rgba(0,0,0,var(--ystdtb-custom-heading-color-rgba-opacity,1));'
+		);
+	} );
+
+	it( 'backgroundColor が HEX のとき --ystdtb-custom-heading-background-color 系 3 種が生成される', () => {
+		const styles = { backgroundColor: '#eeeeee' };
+		const result = parseStyles( styles );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color: #eeeeee;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color-rgb: rgb(238,238,238);'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-background-color-rgba: rgba(238,238,238,var(--ystdtb-custom-heading-background-color-rgba-opacity,1));'
+		);
+	} );
+
+	it( 'parseStylesPseudoElements で before 指定時、変数名に -before プレフィックスがつく', () => {
+		const styles = {
+			enable: true,
+			color: '#222222',
+			backgroundColor: '#ffffff',
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'before' );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-before-color: #222222;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-before-background-color: #ffffff;'
+		);
+	} );
+
+	it( 'parseStylesPseudoElements で after 指定時、変数名に -after プレフィックスがつく', () => {
+		const styles = {
+			enable: true,
+			color: '#aaaaaa',
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'after' );
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-after-color: #aaaaaa;'
+		);
+		expect( result.desktop ).toContain(
+			'--ystdtb-custom-heading-after-color-rgb: rgb(170,170,170);'
+		);
+	} );
+
+	it( 'responsiveXxx キーは元プロパティ名（xxx）として CSS 出力される', () => {
+		// responsiveTextAlign を渡すと CSS は text-align として出力される.
+		const result = parseStyles( {
+			responsiveTextAlign: {
+				desktop: 'center',
+				tablet: 'left',
+				mobile: 'right',
+			},
+		} );
+		expect( result.desktop ).toContain( 'text-align: center;' );
+		expect( result.tablet ).toContain( 'text-align: left;' );
+		expect( result.mobile ).toContain( 'text-align: right;' );
+		// responsive プレフィックス付きの CSS プロパティは出力されない.
+		expect( result.desktop ).not.toContain( 'responsive-text-align' );
+	} );
+
+	it( 'HEX 以外（transparent / currentColor / var(...)）は CSS 変数を生成しない', () => {
+		const transparentResult = parseStyles( { color: 'transparent' } );
+		expect( transparentResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-color:'
+		);
+		expect( transparentResult.desktop ).toContain( 'color: transparent;' );
+
+		const currentColorResult = parseStyles( {
+			backgroundColor: 'currentColor',
+		} );
+		expect( currentColorResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-background-color:'
+		);
+
+		const varResult = parseStyles( {
+			color: 'var(--some-var)',
+		} );
+		expect( varResult.desktop ).not.toContain(
+			'--ystdtb-custom-heading-color:'
+		);
 	} );
 } );

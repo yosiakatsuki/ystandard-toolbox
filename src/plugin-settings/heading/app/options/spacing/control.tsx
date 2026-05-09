@@ -13,9 +13,23 @@ import {
 import { ResponsiveControlGrid } from '@aktk/block-components/components/tab-panel';
 import type { SpacingSizeValues } from '@aktk/block-components/wp-controls/spacing-size-control';
 
+const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ] as const;
+
+function getSpacingValue( value: SpacingSizeValues | undefined ) {
+	if ( ! value ) {
+		return undefined;
+	}
+	return SPACING_KEYS.reduce< SpacingSizeValues >( ( result, key ) => {
+		if ( value.hasOwnProperty( key ) ) {
+			result[ key ] = value[ key ];
+		}
+		return result;
+	}, {} );
+}
+
 export function DefaultSpacingEdit( props: {
 	value: SpacingSizeValues | undefined;
-	onChange: ( newValue: ResponsiveSpacing ) => void;
+	onChange: ( newValue: SpacingSizeValues | undefined ) => void;
 	spacingSizes: object[];
 	label: string;
 	minimumCustomValue?: number;
@@ -27,18 +41,11 @@ export function DefaultSpacingEdit( props: {
 		label,
 		minimumCustomValue = 0,
 	} = props;
-	const handleOnChange = ( newValue: SpacingSizeValues ) => {
-		onChange( {
-			desktop: newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
-	};
 	return (
 		<CustomSpacingSelectControl.CustomValue
 			label={ label }
-			values={ value }
-			onChange={ handleOnChange }
+			values={ getSpacingValue( value ) }
+			onChange={ onChange }
 			spacingSizes={ spacingSizes }
 			minimumCustomValue={ minimumCustomValue }
 		/>
@@ -63,7 +70,7 @@ export function ResponsiveSpacingEdit( props: {
 			<div>
 				<CustomSpacingSelectControl.CustomValue
 					label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
-					values={ value?.desktop }
+					values={ getSpacingValue( value?.desktop ) }
 					onChange={ ( newValue: SpacingSizeValues ) => {
 						handleOnChange( { desktop: newValue } );
 					} }
@@ -74,7 +81,7 @@ export function ResponsiveSpacingEdit( props: {
 			<div>
 				<CustomSpacingSelectControl.CustomValue
 					label={ __( 'タブレット', 'ystandard-toolbox' ) }
-					values={ value?.tablet }
+					values={ getSpacingValue( value?.tablet ) }
 					onChange={ ( newValue: SpacingSizeValues ) => {
 						handleOnChange( { tablet: newValue } );
 					} }
@@ -85,7 +92,7 @@ export function ResponsiveSpacingEdit( props: {
 			<div>
 				<CustomSpacingSelectControl.CustomValue
 					label={ __( 'スマートフォン', 'ystandard-toolbox' ) }
-					values={ value?.mobile }
+					values={ getSpacingValue( value?.mobile ) }
 					onChange={ ( newValue: SpacingSizeValues ) => {
 						handleOnChange( { mobile: newValue } );
 					} }

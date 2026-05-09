@@ -9,6 +9,7 @@ import { useState } from '@wordpress/element';
  */
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import InputControl from '@aktk/block-components/wp-controls/input-control';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
  * Plugin Dependencies
  */
@@ -81,6 +82,12 @@ export default function BackgroundSize( props: BackgroundSizeProps ) {
 						value={ customSize }
 						onChange={ handleOnInputChange }
 					/>
+					<NoticeSecondaryText>
+						{ __(
+							'カスタム指定の場合はpxなどの単位まで入力してください。',
+							'ystandard-toolbox'
+						) }
+					</NoticeSecondaryText>
 				</div>
 			) }
 			<ClearButton onClick={ () => handleOnSelectChange( undefined ) } />

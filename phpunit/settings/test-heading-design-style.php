@@ -106,6 +106,137 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	/**
+	 * responsivePadding キーは padding として CSS 出力される（Phase 3 動作確認）.
+	 */
+	public function test_parse_style_responsive_padding() {
+		$input    = [
+			'responsivePadding' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'right'  => '0.5em',
+					'bottom' => '0.5em',
+					'left'   => '0.5em',
+				],
+				'tablet'  => [
+					'top'    => '1em',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'padding-top'    => '0.5em',
+				'padding-right'  => '0.5em',
+				'padding-bottom' => '0.5em',
+				'padding-left'   => '0.5em',
+			],
+			'tablet'  => [
+				'padding-top'    => '1em',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * responsiveMargin キーは margin として CSS 出力される（Phase 3 動作確認）.
+	 */
+	public function test_parse_style_responsive_margin() {
+		$input    = [
+			'responsiveMargin' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'bottom' => '1em',
+				],
+				'mobile'  => [
+					'top' => '1.5em',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'margin-top'    => '0.5em',
+				'margin-bottom' => '1em',
+			],
+			'mobile'  => [
+				'margin-top' => '1.5em',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * responsiveWidth キーは width として CSS 出力される（Phase 2 動作確認）.
+	 */
+	public function test_parse_style_responsive_width() {
+		$input    = [
+			'responsiveWidth' => [
+				'desktop' => '100px',
+				'tablet'  => '80px',
+				'mobile'  => '60px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'width' => '100px',
+			],
+			'tablet'  => [
+				'width' => '80px',
+			],
+			'mobile'  => [
+				'width' => '60px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * responsiveBorderRadius キーは border-radius として CSS 出力される（Phase 2 動作確認）.
+	 */
+	public function test_parse_style_responsive_border_radius() {
+		$input    = [
+			'responsiveBorderRadius' => [
+				'desktop' => '4px',
+				'tablet'  => '6px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-radius' => '4px',
+			],
+			'tablet'  => [
+				'border-radius' => '6px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * responsiveXxx キーは元プロパティ名（xxx）として CSS 出力される.
+	 *
+	 * Phase 1 で導入した `xxx` + `responsiveXxx` 別キー方式の動作確認.
+	 */
+	public function test_parse_style_responsive_text_align() {
+		$input    = [
+			'responsiveTextAlign' => [
+				'desktop' => 'center',
+				'tablet'  => 'left',
+				'mobile'  => 'right',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'text-align' => 'center',
+			],
+			'tablet'  => [
+				'text-align' => 'left',
+			],
+			'mobile'  => [
+				'text-align' => 'right',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_height_min_height_responsive() {
 		$input    = [
 			'height'    => [
@@ -301,6 +432,50 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 				'border-top'    => '10px solid #000000',
 				'border-right'  => 0,
 				'border-bottom' => 0,
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	/**
+	 * border-width が 0.x em（小数点以下のみの em）の場合、0 と誤判定されずに正しいショートハンドが出力される.
+	 *
+	 * 旧実装は (int) キャストで判定していたため "0.9em" → 0 になり、
+	 * balloon プリセット由来の三角（width=0.9em）が描画されない不具合があった回帰防止.
+	 */
+	public function test_parse_style_border_decimal_em_width() {
+		$input    = [
+			'border' => [
+				'desktop' => [
+					'top'    => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => '#d4e7f2',
+					],
+					'right'  => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+					'bottom' => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+					'left'   => [
+						'width' => '0.9em',
+						'style' => 'solid',
+						'color' => 'transparent',
+					],
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-top'    => '0.9em solid #d4e7f2',
+				'border-right'  => '0.9em solid transparent',
+				'border-bottom' => '0.9em solid transparent',
+				'border-left'   => '0.9em solid transparent',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
@@ -518,6 +693,61 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	public function test_parse_style_responsive_border() {
+		$input    = [
+			'responsiveBorder' => [
+				'desktop' => [
+					'top' => [
+						'width' => '10px',
+						'style' => 'solid',
+						'color' => '#000000',
+					],
+				],
+				'mobile'  => [
+					'bottom' => [
+						'width' => '12px',
+						'style' => 'dashed',
+						'color' => '#222222',
+					],
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-top' => '10px solid #000000',
+			],
+			'mobile'  => [
+				'border-bottom' => '12px dashed #222222',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_border_mixed_old_and_new_values() {
+		$input    = [
+			'border' => [
+				'desktop' => [
+					'top' => [
+						'width' => '1px',
+						'style' => 'solid',
+						'color' => '#000000',
+					],
+				],
+				'bottom'  => [
+					'width' => '2px',
+					'style' => 'dashed',
+					'color' => '#222222',
+				],
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'border-bottom' => '2px dashed #222222',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_padding_responsive() {
 		$input    = [
 			'padding' => [
@@ -650,6 +880,32 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	public function test_parse_style_padding_mixed_old_and_new_values() {
+		$input    = [
+			'padding' => [
+				'desktop' => [
+					'top'    => '0.5em',
+					'right'  => '0.5em',
+					'bottom' => '0.5em',
+					'left'   => '0.5em',
+				],
+				'top'     => '35px',
+				'right'   => '5px',
+				'bottom'  => '35px',
+				'left'    => '5px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'padding-top'    => '35px',
+				'padding-right'  => '5px',
+				'padding-bottom' => '35px',
+				'padding-left'   => '5px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 
 	public function test_parse_style_margin_responsive() {
 		$input    = [
@@ -767,6 +1023,25 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
 	}
 
+	public function test_parse_style_margin_mixed_old_and_new_values() {
+		$input    = [
+			'margin' => [
+				'desktop' => [
+					'top' => '0.5em',
+				],
+				'top'     => '35px',
+				'bottom'  => '5px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'margin-top'    => '35px',
+				'margin-bottom' => '5px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
 	public function test_parse_style_background() {
 		$input    = [
 			'backgroundColor'    => '#222222',
@@ -816,6 +1091,44 @@ class Settings_Heading_Design_Style_Test extends WP_UnitTestCase {
 			],
 			'mobile'  => [
 				'font-size' => '14px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_responsive_font_size() {
+		$input    = [
+			'responsiveFontSize' => [
+				'desktop' => '16px',
+				'tablet'  => '15px',
+				'mobile'  => '14px',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'font-size' => '16px',
+			],
+			'tablet'  => [
+				'font-size' => '15px',
+			],
+			'mobile'  => [
+				'font-size' => '14px',
+			],
+		];
+		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );
+	}
+
+	public function test_parse_style_font_size_preset_object() {
+		$input    = [
+			'fontSize' => [
+				'size' => 24,
+				'slug' => 'large',
+				'name' => 'Large',
+			],
+		];
+		$expected = [
+			'desktop' => [
+				'font-size' => '24px',
 			],
 		];
 		$this->assertEquals( $expected, \ystandard_toolbox\Util\Styles::parse_styles( $input ) );

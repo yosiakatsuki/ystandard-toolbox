@@ -6,36 +6,70 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel';
-import type { CustomSpacing } from '@aktk/block-components/components/custom-spacing-select';
+import type {
+	Spacing,
+	ResponsiveSpacing,
+} from '@aktk/block-components/components/custom-spacing-select';
 import { useThemeSpacingSizes } from '@aktk/block-components/hooks';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
+
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 /**
  * Block.
  */
-import { filterSpacingSizes } from './function';
 import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 
+const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ] as const;
+
 interface MarginControlProps {
-	value: CustomSpacing | undefined;
-	onChange: ( newValue: { margin?: CustomSpacing } ) => void;
+	value: Spacing | undefined;
+	responsiveValue: ResponsiveSpacing | undefined;
+	onChange: ( newValue: {
+		margin?: Spacing;
+		responsiveMargin?: ResponsiveSpacing;
+	} ) => void;
+}
+
+function getDefaultSpacingValue( value: Spacing | undefined ) {
+	if ( ! value ) {
+		return undefined;
+	}
+	const result = SPACING_KEYS.reduce< Spacing >( ( spacing, key ) => {
+		if ( value.hasOwnProperty( key ) ) {
+			spacing[ key ] = value[ key ];
+		}
+		return spacing;
+	}, {} );
+	if ( 0 < Object.keys( result ).length ) {
+		return result;
+	}
+	if ( 'desktop' in value ) {
+		return ( value as unknown as ResponsiveSpacing ).desktop;
+	}
+	return undefined;
 }
 
 export default function Margin( props: MarginControlProps ) {
-	const { value, onChange } = props;
-	const handleOnChange = ( newValue: CustomSpacing ) => {
+	const { value, responsiveValue, onChange } = props;
+	const handleDefaultChange = ( newValue: Spacing | undefined ) => {
 		onChange( {
-			margin: deleteUndefined( newValue ),
+			margin: newValue,
+			responsiveMargin: undefined,
 		} );
 	};
-	// 余白設定のフィルタ.
+	const handleResponsiveChange = ( newValue: ResponsiveSpacing ) => {
+		onChange( {
+			margin: undefined,
+			responsiveMargin: stripUndefined( newValue ),
+		} );
+	};
 	const spacingSizes = useThemeSpacingSizes();
-	filterSpacingSizes( spacingSizes );
+
 	return (
 		<PluginSettingsBaseControl
 			id={ 'margin' }
@@ -44,11 +78,11 @@ export default function Margin( props: MarginControlProps ) {
 			className={ '[&_.components-range-control]:hidden' }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultSpacingEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ getDefaultSpacingValue( value ) }
+						onChange={ handleDefaultChange }
 						spacingSizes={ spacingSizes }
 						label={ __( '外側余白', 'ystandard-toolbox' ) }
 						minimumCustomValue={ -9999 }
@@ -56,14 +90,21 @@ export default function Margin( props: MarginControlProps ) {
 				}
 				responsiveTabContent={
 					<ResponsiveSpacingEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 						spacingSizes={ spacingSizes }
 						minimumCustomValue={ -9999 }
 					/>
 				}
 			/>
-			<ClearButton onClick={ () => onChange( { margin: undefined } ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						margin: undefined,
+						responsiveMargin: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
 }

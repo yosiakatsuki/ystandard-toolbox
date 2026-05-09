@@ -11,31 +11,52 @@ import {
 	ResponsiveControlGrid,
 } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
+import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 /**
  * Plugin Dependencies
  */
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
-import { isResponsiveHeadingOption } from '@aktk/plugin-settings/heading/app/options/util';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
 interface GapControlProps {
-	value: ResponsiveValues | undefined;
-	onChange: ( newValue: { gap?: ResponsiveValues } ) => void;
-	displayValue: ResponsiveValues | undefined;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		gap?: string;
+		responsiveGap?: ResponsiveValues;
+	} ) => void;
+	displayValue: string | undefined;
+	responsiveDisplayValue: ResponsiveValues | undefined;
 }
 
 export default function Gap( props: GapControlProps ) {
-	const { value, onChange, displayValue } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
+	const {
+		value,
+		responsiveValue,
+		onChange,
+		displayValue,
+		responsiveDisplayValue,
+	} = props;
+	const handleDefaultChange = ( newValue: string | undefined ) => {
 		onChange( {
-			gap: deleteUndefined( newValue ),
+			gap: newValue,
+			responsiveGap: undefined,
 		} );
 	};
-	// flexが選択されていない場合は非表示.
-	if ( ! isUseFlex( displayValue ) ) {
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			gap: undefined,
+			responsiveGap: stripUndefined( newValue ),
+		} );
+	};
+	const isFlex =
+		displayValue === 'flex' ||
+		displayValue === 'inline-flex' ||
+		isUseFlex( responsiveDisplayValue );
+	if ( ! isFlex ) {
 		return <></>;
 	}
 	return (
@@ -45,36 +66,39 @@ export default function Gap( props: GapControlProps ) {
 			isFullWidth={ true }
 		>
 			<ResponsiveSelectTab
-				isResponsive={ isResponsiveHeadingOption( value ) }
+				isResponsive={ isResponsiveValue( responsiveValue ) }
 				defaultTabContent={
 					<DefaultGapEdit
-						value={ value?.desktop }
-						onChange={ handleOnChange }
+						value={ value }
+						onChange={ handleDefaultChange }
 					/>
 				}
 				responsiveTabContent={
 					<ResponsiveGapEdit
-						value={ value || {} }
-						onChange={ handleOnChange }
+						value={ responsiveValue || {} }
+						onChange={ handleResponsiveChange }
 					/>
 				}
 			/>
-			<ClearButton onClick={ () => onChange( { gap: undefined } ) } />
+			<ClearButton
+				onClick={ () =>
+					onChange( {
+						gap: undefined,
+						responsiveGap: undefined,
+					} )
+				}
+			/>
 		</PluginSettingsBaseControl>
 	);
 }
 
 export function DefaultGapEdit( props: {
 	value: string | undefined;
-	onChange: ( newValue: ResponsiveValues ) => void;
+	onChange: ( newValue: string | undefined ) => void;
 } ) {
 	const { value, onChange } = props;
 	const handleOnChange = ( newValue: string ) => {
-		onChange( {
-			desktop: '' === newValue ? undefined : newValue,
-			tablet: undefined,
-			mobile: undefined,
-		} );
+		onChange( '' === newValue ? undefined : newValue );
 	};
 	return <IconUnitControl value={ value } onChange={ handleOnChange } />;
 }

@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Internal Dependencies
  */
@@ -15,9 +15,14 @@ import { AdvancedResponsiveSelectControl } from './controls';
 import { isUseFlex } from '@aktk/plugin-settings/heading/app/options/advanced/utils';
 
 interface FlexDirectionProps {
-	value: ResponsiveValues | undefined;
-	displayValue: ResponsiveValues | undefined;
-	onChange: ( newValue: { flexDirection?: ResponsiveValues } ) => void;
+	value: string | undefined;
+	responsiveValue: ResponsiveValues | undefined;
+	displayValue: string | undefined;
+	responsiveDisplayValue: ResponsiveValues | undefined;
+	onChange: ( newValue: {
+		flexDirection?: string;
+		responsiveFlexDirection?: ResponsiveValues;
+	} ) => void;
 }
 
 const SELECT_OPTIONS = [
@@ -40,12 +45,33 @@ const SELECT_OPTIONS = [
 ];
 
 export default function FlexDirection( props: FlexDirectionProps ) {
-	const { value, onChange, displayValue } = props;
-	const handleOnChange = ( newValue: ResponsiveValues ) => {
-		onChange( { flexDirection: deleteUndefined( newValue ) } );
+	const {
+		value,
+		responsiveValue,
+		onChange,
+		displayValue,
+		responsiveDisplayValue,
+	} = props;
+	// 単一値モード: 単一値を更新、レスポンシブは削除.
+	const handleDefaultChange = ( newValue: string | undefined ) => {
+		onChange( {
+			flexDirection: newValue,
+			responsiveFlexDirection: undefined,
+		} );
 	};
-	// flexが選択されていない場合は非表示.
-	if ( ! isUseFlex( displayValue ) ) {
+	// レスポンシブモード: レスポンシブを更新、単一値は削除.
+	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
+		onChange( {
+			flexDirection: undefined,
+			responsiveFlexDirection: stripUndefined( newValue ),
+		} );
+	};
+	// flex が選択されていない場合は非表示（単一値モード or レスポンシブモードで判定）.
+	const isFlex =
+		displayValue === 'flex' ||
+		displayValue === 'inline-flex' ||
+		isUseFlex( responsiveDisplayValue );
+	if ( ! isFlex ) {
 		return <></>;
 	}
 	return (
@@ -53,8 +79,15 @@ export default function FlexDirection( props: FlexDirectionProps ) {
 			id={ 'flex-direction' }
 			label={ __( 'flex-direction', 'ystandard-toolbox' ) }
 			value={ value }
-			onChange={ handleOnChange }
-			onClear={ () => onChange( { flexDirection: undefined } ) }
+			responsiveValue={ responsiveValue }
+			onDefaultChange={ handleDefaultChange }
+			onResponsiveChange={ handleResponsiveChange }
+			onClear={ () =>
+				onChange( {
+					flexDirection: undefined,
+					responsiveFlexDirection: undefined,
+				} )
+			}
 			options={ SELECT_OPTIONS }
 		/>
 	);

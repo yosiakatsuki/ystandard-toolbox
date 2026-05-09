@@ -23,8 +23,7 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 			'heading-1' => [
 				'slug'   => 'heading-1',
 				'label'  => '見出し1',
-				'enable' => true,
-				'style'  => [
+					'style'  => [
 					'font-size' => [
 						'desktop' => '16px',
 						'tablet'  => '17px',
@@ -53,8 +52,7 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 			'heading-2' => [
 				'slug'   => 'heading-2',
 				'label'  => '見出し2',
-				'enable' => true,
-				'style'  => [
+					'style'  => [
 					'font-size' => [
 						'desktop' => '13px',
 					],
@@ -137,8 +135,7 @@ EOD;
 			'heading-1' => [
 				'slug'   => 'heading-1',
 				'label'  => '見出し1',
-				'enable' => true,
-				'style'  => [
+					'style'  => [
 					'font-size' => [
 						'desktop' => '16px',
 					],
@@ -165,8 +162,7 @@ EOD;
 			'heading-2' => [
 				'slug'   => 'heading-2',
 				'label'  => '見出し2',
-				'enable' => true,
-				'style'  => [
+					'style'  => [
 					'font-size' => [
 						'desktop' => '13px',
 					],
