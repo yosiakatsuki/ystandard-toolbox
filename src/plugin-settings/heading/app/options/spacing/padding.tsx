@@ -11,7 +11,7 @@ import type {
 	ResponsiveSpacing,
 } from '@aktk/block-components/components/custom-spacing-select';
 import { useThemeSpacingSizes } from '@aktk/block-components/hooks';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
@@ -63,7 +63,7 @@ export default function Padding( props: PaddingControlProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveSpacing ) => {
 		onChange( {
 			padding: undefined,
-			responsivePadding: deleteUndefined( newValue ),
+			responsivePadding: stripUndefined( newValue ),
 		} );
 	};
 	// 余白設定のフィルタ.

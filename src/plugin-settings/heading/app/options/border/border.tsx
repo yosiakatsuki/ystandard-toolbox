@@ -15,7 +15,7 @@ import {
 	ResponsiveControlGrid,
 	ResponsiveSelectTab,
 } from '@aktk/block-components/components/tab-panel';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 /**
  * Plugin Dependencies
@@ -47,7 +47,7 @@ export default function Border( props: BorderProps ) {
 	const handleResponsiveChange = ( newValue: CustomBorder ) => {
 		onChange( {
 			border: undefined,
-			responsiveBorder: deleteUndefined( newValue ) as CustomBorder,
+			responsiveBorder: stripUndefined( newValue ) as CustomBorder,
 		} );
 	};
 

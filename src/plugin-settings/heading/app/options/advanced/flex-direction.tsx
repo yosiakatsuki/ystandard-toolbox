@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Internal Dependencies
  */
@@ -63,7 +63,7 @@ export default function FlexDirection( props: FlexDirectionProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			flexDirection: undefined,
-			responsiveFlexDirection: deleteUndefined( newValue ),
+			responsiveFlexDirection: stripUndefined( newValue ),
 		} );
 	};
 	// flex が選択されていない場合は非表示（単一値モード or レスポンシブモードで判定）.

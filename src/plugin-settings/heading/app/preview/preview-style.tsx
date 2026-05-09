@@ -4,7 +4,7 @@ import { kebabCase, isArray, isNumber } from 'lodash';
  * Aktk dependencies.
  */
 import {
-	deleteUndefined,
+	stripUndefined,
 	isEmpty,
 	isObject,
 } from '@aktk/block-components/utils/object';
@@ -176,7 +176,7 @@ export function parseStyles(
 		}
 	} );
 
-	return deleteUndefined( {
+	return stripUndefined( {
 		desktop,
 		tablet,
 		mobile,

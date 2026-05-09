@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Internal Dependencies
  */
@@ -65,7 +65,7 @@ export default function JustifyContent( props: JustifyContentProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			justifyContent: undefined,
-			responsiveJustifyContent: deleteUndefined( newValue ),
+			responsiveJustifyContent: stripUndefined( newValue ),
 		} );
 	};
 	const isFlex =

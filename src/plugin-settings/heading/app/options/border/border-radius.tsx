@@ -11,7 +11,7 @@ import {
 	ResponsiveControlGrid,
 } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
@@ -41,7 +41,7 @@ export default function BorderRadius( props: BorderRadiusControlProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			borderRadius: undefined,
-			responsiveBorderRadius: deleteUndefined( newValue ),
+			responsiveBorderRadius: stripUndefined( newValue ),
 		} );
 	};
 	return (

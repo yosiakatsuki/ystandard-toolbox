@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Internal Dependencies
  */
@@ -61,7 +61,7 @@ export default function AlignItems( props: AlignItemsProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			alignItems: undefined,
-			responsiveAlignItems: deleteUndefined( newValue ),
+			responsiveAlignItems: stripUndefined( newValue ),
 		} );
 	};
 	const isFlex =

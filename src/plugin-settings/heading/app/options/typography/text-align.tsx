@@ -17,7 +17,7 @@ import {
 	ResponsiveControlGrid,
 } from '@aktk/block-components/components/tab-panel';
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
@@ -47,7 +47,7 @@ export default function TextAlign( props: TextAlignControlProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			textAlign: undefined,
-			responsiveTextAlign: deleteUndefined( newValue ),
+			responsiveTextAlign: stripUndefined( newValue ),
 		} );
 	};
 	return (

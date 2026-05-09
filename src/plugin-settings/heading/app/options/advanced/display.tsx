@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Plugin Dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Internal Dependencies
  */
@@ -80,7 +80,7 @@ export function ResponsiveDisplay( props: ResponsiveDisplayProps ) {
 	};
 	// レスポンシブモード: レスポンシブを更新、単一値は削除.
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
-		const cleanedValue = deleteUndefined( newValue );
+		const cleanedValue = stripUndefined( newValue );
 		onChange( {
 			display: undefined,
 			responsiveDisplay: cleanedValue,

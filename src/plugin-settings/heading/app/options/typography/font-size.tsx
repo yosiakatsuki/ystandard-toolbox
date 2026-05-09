@@ -11,7 +11,7 @@ import {
 	type ResponsiveFontSize,
 	type CustomFontSizePickerOnChangeProps,
 } from '@aktk/block-components/components/custom-font-size-picker';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Plugin Dependencies
@@ -118,7 +118,7 @@ function sanitizeResponsiveFontSize(
 		tablet: fontSize.tablet,
 		mobile: fontSize.mobile,
 	};
-	return deleteUndefined( result ) as ResponsiveFontSize | undefined;
+	return stripUndefined( result ) as ResponsiveFontSize | undefined;
 }
 
 function getFontSizeValue( value: CustomFontSize | undefined ) {

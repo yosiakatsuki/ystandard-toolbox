@@ -11,7 +11,7 @@ import type {
 	ResponsiveSpacing,
 } from '@aktk/block-components/components/custom-spacing-select';
 import { useThemeSpacingSizes } from '@aktk/block-components/hooks';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
@@ -66,7 +66,7 @@ export default function Margin( props: MarginControlProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveSpacing ) => {
 		onChange( {
 			margin: undefined,
-			responsiveMargin: deleteUndefined( newValue ),
+			responsiveMargin: stripUndefined( newValue ),
 		} );
 	};
 	// 余白設定のフィルタ.

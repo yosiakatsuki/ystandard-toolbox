@@ -13,7 +13,7 @@ import {
 import type { ResponsiveValues } from '@aktk/block-components/types';
 import { IconFontWeightControl } from '@aktk/block-components/components/icon-control';
 import { FontWeightControl } from '@aktk/block-components/wp-controls/font-appearance-control';
-import { deleteUndefined } from '@aktk/block-components/utils/object';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value';
 
 /**
@@ -50,7 +50,7 @@ export default function FontWeight( props: FontWeightControlProps ) {
 	const handleResponsiveChange = ( newValue: ResponsiveValues ) => {
 		onChange( {
 			fontWeight: undefined,
-			responsiveFontWeight: deleteUndefined( {
+			responsiveFontWeight: stripUndefined( {
 				...responsiveValue,
 				...newValue,
 			} ),
