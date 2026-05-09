@@ -137,6 +137,16 @@ class Heading_Migration {
 				// width/height は fontSize に連動するため 1em 固定（v2 UI では fontSize のみ操作可能なため）.
 				$this->add_pseudo_elements_style( $type, 'width', '1em' );
 				$this->add_pseudo_elements_style( $type, 'height', '1em' );
+
+				// v2 UI ではアイコン色を iconColor で管理するため、color / backgroundColor から移し替える.
+				if ( isset( $this->new_option[ $type ]['color'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['color'];
+					unset( $this->new_option[ $type ]['color'] );
+				}
+				if ( isset( $this->new_option[ $type ]['backgroundColor'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['backgroundColor'];
+					unset( $this->new_option[ $type ]['backgroundColor'] );
+				}
 			}
 
 			if ( ! empty( $size ) ) {
