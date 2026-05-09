@@ -1803,6 +1803,26 @@ describe( 'parseStylesPseudoElements', () => {
 		const result = parseStylesPseudoElements( styles );
 		expect( result.desktop ).toContain( 'content: "test";' );
 	} );
+
+	it( 'SVGアイコン + responsiveFontSize 指定時、font-size が各デバイスの CSS に出力される', () => {
+		const styles = {
+			enable: true,
+			icon: 'circle',
+			content: '<svg width="100" height="100"></svg>',
+			responsiveFontSize: {
+				desktop: '2em',
+				tablet: '1.8em',
+				mobile: '1.5em',
+			},
+		} as HeadingPseudoElementsStyle;
+		const result = parseStylesPseudoElements( styles, 'before' );
+		expect( result.desktop ).toContain( 'font-size: 2em;' );
+		expect( result.tablet ).toContain( 'font-size: 1.8em;' );
+		expect( result.mobile ).toContain( 'font-size: 1.5em;' );
+		// width / height は 1em で固定.
+		expect( result.desktop ).toContain( 'width: 1em;' );
+		expect( result.desktop ).toContain( 'height: 1em;' );
+	} );
 } );
 
 /**

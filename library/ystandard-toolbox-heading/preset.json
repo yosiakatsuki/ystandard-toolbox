@@ -320,9 +320,7 @@
 		"usePseudoElementsSize": ["fontSize"],
 		"before": {
 			"icon": "award",
-			"fontSize": "1.2em",
-			"width": "1em",
-			"height": "1em"
+			"fontSize": "1.2em"
 		}
 	}
 }

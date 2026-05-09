@@ -248,12 +248,10 @@ class Styles {
 			$styles['backgroundPosition'] = 'center';
 			$styles['verticalAlign']      = '-0.125em';
 			$styles['display']            = empty( $styles['display'] ) ? 'inline-flex' : $styles['display'];
-			// fontSize の指定がなければ width/height を 1em で設定.
-			if ( empty( $styles['fontSize'] ) ) {
-				$default_size     = [ 'desktop' => '1em' ];
-				$styles['width']  = $default_size;
-				$styles['height'] = $default_size;
-			}
+			// アイコン描画時は fontSize に連動した正方形にするため width/height は 1em 固定（attributes 値は無視）.
+			$styles['width']  = '1em';
+			$styles['height'] = '1em';
+			unset( $styles['responsiveWidth'], $styles['responsiveHeight'] );
 			// contentは空に.
 			$content = '';
 		}

@@ -229,8 +229,11 @@ export function parseStylesPseudoElements(
 			styles.verticalAlign = '-0.15em';
 			// Display調整・サイズ調整
 			styles.display = styles?.display || 'inline-flex';
-			styles.width = styles?.width || '1em';
-			styles.height = styles?.height || '1em';
+			// アイコン描画時は fontSize に連動した正方形にするため width/height は 1em 固定（attributes 値は無視）.
+			styles.width = '1em';
+			styles.height = '1em';
+			delete styles.responsiveWidth;
+			delete styles.responsiveHeight;
 			// 位置調整.
 			styles.verticalAlign = '-0.125em';
 			// 使わない値を削除.

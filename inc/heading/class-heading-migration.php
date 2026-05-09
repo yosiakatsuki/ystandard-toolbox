@@ -134,9 +134,8 @@ class Heading_Migration {
 				$this->add_pseudo_elements_style( $type, 'fontSize', "{$font_size}" );
 				$size_unit = 'em';
 
-				// width/height は fontSize に連動するため 1em 固定（v2 UI では fontSize のみ操作可能なため）.
-				$this->add_pseudo_elements_style( $type, 'width', '1em' );
-				$this->add_pseudo_elements_style( $type, 'height', '1em' );
+				// アイコン描画時は width/height を CSS 出力側で 1em 固定するため attributes には保存しない.
+				unset( $this->new_option[ $type ]['width'], $this->new_option[ $type ]['height'] );
 
 				// v2 UI ではアイコン色を iconColor で管理するため、color / backgroundColor から移し替える.
 				if ( isset( $this->new_option[ $type ]['color'] ) ) {
