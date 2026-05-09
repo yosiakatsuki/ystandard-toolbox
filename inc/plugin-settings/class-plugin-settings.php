@@ -151,13 +151,13 @@ class Plugin_Settings {
 			apply_filters(
 				'ystdtb_admin_config',
 				[
-					'siteUrl'      => esc_url_raw( home_url() ),
-					'pluginUrl'    => YSTDTB_URL,
-					'adminUrl'     => esc_url_raw( admin_url() ),
-					'isYStandard'  => Version::ystandard_version_compare(),
-					'isAmpEnable'  => AMP::is_amp_enable(),
-					'editorColors' => self::get_editor_colors(),
-					'fontSizes'    => self::get_editor_font_sizes(),
+					'siteUrl'         => esc_url_raw( home_url() ),
+					'pluginUrl'       => YSTDTB_URL,
+					'adminUrl'        => esc_url_raw( admin_url() ),
+					'isYStandard'     => Version::ystandard_version_compare(),
+					'isAmpEnable'     => AMP::is_amp_enable(),
+					'editorColors'    => self::get_editor_colors(),
+					'editorFontSizes' => self::get_editor_font_sizes(),
 				]
 			)
 		);

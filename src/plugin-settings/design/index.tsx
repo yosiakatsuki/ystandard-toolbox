@@ -28,7 +28,10 @@ import { apiPost, getEndpoint } from '@aktk/api';
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
-import { getEditorColors } from '@aktk/plugin-settings/utils';
+import {
+	getEditorColors,
+	getEditorFontSizes,
+} from '@aktk/plugin-settings/utils';
 
 /**
  * App
@@ -146,6 +149,12 @@ const Design = () => {
 		'aktk.hooks.getThemeColors.themeColors',
 		'ystandard-toolbox/settings/design/getThemeColors',
 		() => getEditorColors()
+	);
+	// addFilter で テーマフォントサイズを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeFontSizes.themeFontSizes',
+		'ystandard-toolbox/settings/design/getThemeFontSizes',
+		() => getEditorFontSizes()
 	);
 
 	return (

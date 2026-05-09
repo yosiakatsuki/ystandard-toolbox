@@ -28,6 +28,15 @@ export function getEditorColors() {
 }
 
 /**
+ * 設定からエディターのフォントサイズ設定を取得
+ *
+ * @returns
+ */
+export function getEditorFontSizes() {
+	return getAdminConfig( 'editorFontSizes' );
+}
+
+/**
  * プラグインのアセットURLを取得
  *
  * @returns

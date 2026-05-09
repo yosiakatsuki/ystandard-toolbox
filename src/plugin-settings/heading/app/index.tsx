@@ -35,7 +35,10 @@ import {
 /**
  * Plugin-Setting dependencies.
  */
-import { getEditorColors } from '@aktk/plugin-settings/utils';
+import {
+	getEditorColors,
+	getEditorFontSizes,
+} from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -204,6 +207,12 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		'aktk.hooks.getThemeColors.themeColors',
 		'ystandard-toolbox/settings/design/getThemeColors',
 		() => getEditorColors()
+	);
+	// addFilter で テーマフォントサイズを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeFontSizes.themeFontSizes',
+		'ystandard-toolbox/settings/heading/getThemeFontSizes',
+		() => getEditorFontSizes()
 	);
 
 	return (
