@@ -200,10 +200,12 @@ export function parseStylesPseudoElements(
 	if ( styles?.icon ) {
 		delete styles.icon;
 	}
+	// contentの調整.
 	if ( styles?.content ) {
 		let styleContent = styles.content.replace( /\\(.)/g, '$1' );
 		styleContent = styleContent.replace( /\'/g, '"' );
 		styles.content = styleContent;
+		// SVGアイコンの場合は content を空にして、mask-image として表示する.
 		if ( styleContent.includes( '<svg' ) ) {
 			styleContent = encodeURIComponent( styleContent );
 			// アイコン使用時の調整.
@@ -226,14 +228,15 @@ export function parseStylesPseudoElements(
 			// 位置調整.
 			styles.verticalAlign = '-0.15em';
 			// Display調整・サイズ調整
-			styles.display = styles?.display || { desktop: 'inline-flex' };
-			styles.width = styles?.fontSize || { desktop: '1em' };
-			styles.height = styles?.fontSize || { desktop: '1em' };
+			styles.display = styles?.display || 'inline-flex';
+			styles.width = styles?.width || '1em';
+			styles.height = styles?.height || '1em';
 			// 位置調整.
 			styles.verticalAlign = '-0.125em';
 			// 使わない値を削除.
 			delete styles.color;
 		} else if ( ! styleContent.includes( '"' ) ) {
+			// content の値がSVG以外、かつ、" が含まれていない場合は、全体を " で囲む.
 			styles.content = `"${ styleContent }"`;
 		}
 		// 絶対に不要になる値を削除.
