@@ -310,7 +310,9 @@ class Heading_Migration {
 		// 背景 位置.
 		$bg_pos = $this->get_old_option( 'backgroundPosition', '' );
 		if ( $bg_pos ) {
-			$this->add_style( 'backgroundPosition', $bg_pos );
+			// v1 ではハイフン区切り（例: center-left）で保存され CSS 出力時に空白区切りへ変換していた.
+			// v2 attributes は CSS 仕様準拠の空白区切りで保持し、UI のドロップダウン選択肢と一致させる.
+			$this->add_style( 'backgroundPosition', str_replace( '-', ' ', $bg_pos ) );
 		}
 		// 背景 繰り返し.
 		$bg_repeat = $this->get_old_option( 'backgroundRepeat', '' );

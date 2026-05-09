@@ -437,6 +437,29 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * backgroundPosition のハイフン区切り（v1 形式: center-left）が
+	 * v2 で空白区切り（CSS 仕様: center left）に正規化される.
+	 *
+	 * v1 のレガシー実装でも CSS 出力時に str_replace で空白区切りに変換していたが、
+	 * v2 attributes として保持する段階で正規化することで、UI のドロップダウン候補と一致させる.
+	 */
+	public function test_background_position_normalize() {
+		$input = [
+			'h1' => [
+				'preset'             => 'custom',
+				'useCustomStyle'     => true,
+				'backgroundPosition' => 'center-left',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( 'center left', $v2['v1-h1']['style']['backgroundPosition'] );
+	}
+
+	/**
 	 * フォントサイズのレスポンシブ設定が desktop/tablet/mobile 別に v2 へ移行される.
 	 */
 	public function test_typography_responsive() {
