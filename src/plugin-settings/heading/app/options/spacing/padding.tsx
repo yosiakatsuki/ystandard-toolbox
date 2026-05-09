@@ -20,7 +20,6 @@ import { isResponsiveValue } from '@aktk/block-components/utils/responsive-value
 import PluginSettingsBaseControl from '@aktk/plugin-settings/components/base-control';
 import ClearButton from '@aktk/plugin-settings/components/clear-button';
 import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
-import { filterSpacingSizes } from './function';
 
 const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ] as const;
 
@@ -66,9 +65,7 @@ export default function Padding( props: PaddingControlProps ) {
 			responsivePadding: stripUndefined( newValue ),
 		} );
 	};
-	// 余白設定のフィルタ.
 	const spacingSizes = useThemeSpacingSizes();
-	filterSpacingSizes( spacingSizes );
 	return (
 		<PluginSettingsBaseControl
 			id={ 'padding' }

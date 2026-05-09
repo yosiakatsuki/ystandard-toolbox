@@ -22,7 +22,6 @@ import ClearButton from '@aktk/plugin-settings/components/clear-button';
 /**
  * Block.
  */
-import { filterSpacingSizes } from './function';
 import { DefaultSpacingEdit, ResponsiveSpacingEdit } from './control';
 
 const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ] as const;
@@ -69,9 +68,8 @@ export default function Margin( props: MarginControlProps ) {
 			responsiveMargin: stripUndefined( newValue ),
 		} );
 	};
-	// 余白設定のフィルタ.
 	const spacingSizes = useThemeSpacingSizes();
-	filterSpacingSizes( spacingSizes );
+
 	return (
 		<PluginSettingsBaseControl
 			id={ 'margin' }

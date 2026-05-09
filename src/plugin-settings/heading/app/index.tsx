@@ -17,6 +17,7 @@ import { addFilter } from '@wordpress/hooks';
  */
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import { ConfirmModal } from '@aktk/block-components/components/modal';
+import { getDefaultSpacingSizes } from '@aktk/block-components/hooks/useThemeSpacingSizes';
 /**
  * Plugin dependencies
  */
@@ -38,6 +39,7 @@ import {
 import {
 	getEditorColors,
 	getEditorFontSizes,
+	getEditorSpacingSizes,
 } from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
@@ -213,6 +215,33 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		'aktk.hooks.getThemeFontSizes.themeFontSizes',
 		'ystandard-toolbox/settings/heading/getThemeFontSizes',
 		() => getEditorFontSizes()
+	);
+	// addFilter で テーマ余白サイズを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
+		'ystandard-toolbox/settings/heading/getThemeSpacingSizes',
+		() => getEditorSpacingSizes()
+	);
+	// Gutenberg コアの SpacingSizesControl は内部で useSettings('spacing.spacingSizes.theme') を呼ぶため、
+	// 設定画面では block-editor ストアが空となり UI にプリセットが出ない。
+	// blockEditor.useSetting.before で値を注入し、さらにデフォルトサイズを末尾結合して
+	// RANGE_CONTROL_MAX_SIZE (8) を超えるサイズ数とすることで CustomSelectControl 表示にする.
+	addFilter(
+		'blockEditor.useSetting.before',
+		'ystandard-toolbox/settings/heading/spacingSizes',
+		( settingValue: unknown, settingName: string ) => {
+			if (
+				'spacing.spacingSizes.theme' === settingName &&
+				! settingValue
+			) {
+				const editorSpacingSizes = getEditorSpacingSizes();
+				const themeSizes = Array.isArray( editorSpacingSizes )
+					? editorSpacingSizes
+					: [];
+				return [ ...themeSizes, ...getDefaultSpacingSizes() ];
+			}
+			return settingValue;
+		}
 	);
 
 	return (

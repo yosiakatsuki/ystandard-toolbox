@@ -37,6 +37,15 @@ export function getEditorFontSizes() {
 }
 
 /**
+ * 設定からエディターの余白サイズ設定を取得
+ *
+ * @returns
+ */
+export function getEditorSpacingSizes() {
+	return getAdminConfig( 'editorSpacingSizes' );
+}
+
+/**
  * プラグインのアセットURLを取得
  *
  * @returns
