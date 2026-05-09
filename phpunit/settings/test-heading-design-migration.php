@@ -117,8 +117,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CF4747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award" style="width:1.3em;height:1.3em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
 					'fontSize' => '1.3em',
 					'color' => '#CF4747',
-					'width' => '1.3em',
-					'height' => '1.3em',
+					'width' => '1em',
+					'height' => '1em',
 				],
 				'after' => [
 					'enable' => true,
@@ -126,8 +126,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'content' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64389D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open" style="width:0.8em;height:0.8em;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
 					'fontSize' => '0.8em',
 					'color' => '#64389D',
-					'width' => '0.8em',
-					'height' => '0.8em',
+					'width' => '1em',
+					'height' => '1em',
 				],
 			],
 		];
@@ -548,8 +548,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 					'enable'   => true,
 					'fontSize' => '1.2em',
 					'content'  => '""',
-					'height'   => '1.2em',
-					'width'    => '1.2em',
+					'height'   => '1em',
+					'width'    => '1em',
 					'icon'     => 'award',
 				],
 			],
@@ -665,15 +665,16 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * preset:double-border-bottom で afterSize が指定されても、プリセット由来の after.width は上書きされない.
+	 * preset:double-border-bottom で afterSize が指定された場合、after.height だけ size で上書きされ、
+	 * after.width は preset の 3em が維持される（usePseudoElementsSize: ["height"]）.
 	 */
-	public function test_double_border_bottom_after_size_does_not_overwrite_width() {
+	public function test_double_border_bottom_after_size_overwrites_height_only() {
 		$input = [
 			'h3' => [
 				'preset'         => 'double-border-bottom',
 				'useCustomStyle' => true,
 				'afterColorType' => 'background',
-				'afterSize'      => '2',
+				'afterSize'      => '10',
 				'afterColor'     => '#DC2222',
 			],
 		];
@@ -682,10 +683,70 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
+		$this->assertEquals( '10px', $v2['v1-h3']['after']['height'] );
 		$this->assertEquals( '3em', $v2['v1-h3']['after']['width'] );
-		$this->assertEquals( '2px', $v2['v1-h3']['after']['height'] );
 		$this->assertEquals( '#DC2222', $v2['v1-h3']['after']['backgroundColor'] );
 		$this->assertTrue( $v2['v1-h3']['after']['enable'] );
+	}
+
+	/**
+	 * preset:text-center-border で beforeSize / afterSize が指定された場合、
+	 * before.height / after.height がそれぞれ size で上書きされる（usePseudoElementsSize: ["height"]）.
+	 */
+	public function test_text_center_border_before_after_size_overwrites_height() {
+		$input = [
+			'h5' => [
+				'preset'          => 'text-center-border',
+				'useCustomStyle'  => true,
+				'beforeColorType' => 'background',
+				'beforeSize'      => '8',
+				'beforeColor'     => '#0B9E00',
+				'afterColorType'  => 'background',
+				'afterSize'       => '1',
+				'afterColor'      => '#1ADEFF',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( '8px', $v2['v1-h5']['before']['height'] );
+		$this->assertEquals( '#0B9E00', $v2['v1-h5']['before']['backgroundColor'] );
+		$this->assertTrue( $v2['v1-h5']['before']['enable'] );
+
+		$this->assertEquals( '1px', $v2['v1-h5']['after']['height'] );
+		$this->assertEquals( '#1ADEFF', $v2['v1-h5']['after']['backgroundColor'] );
+		$this->assertTrue( $v2['v1-h5']['after']['enable'] );
+	}
+
+	/**
+	 * preset:balloon で afterSize が指定された場合、after.border の各辺 width が
+	 * 一括で size に上書きされる（usePseudoElementsSize: ["borderWidth"]）.
+	 *
+	 * v1 では size がどこにも反映されていなかったが、v2 で吹き出し三角のサイズ調整として有効化.
+	 */
+	public function test_balloon_after_size_overwrites_border_width() {
+		$input = [
+			'h6' => [
+				'preset'         => 'balloon',
+				'useCustomStyle' => true,
+				'afterColorType' => 'borderTopColor',
+				'afterSize'      => '10',
+				'afterColor'     => '#326182',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['top']['width'] );
+		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['right']['width'] );
+		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['bottom']['width'] );
+		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['left']['width'] );
+		$this->assertEquals( '#326182', $v2['v1-h6']['after']['borderTopColor'] );
+		$this->assertTrue( $v2['v1-h6']['after']['enable'] );
 	}
 
 	/**

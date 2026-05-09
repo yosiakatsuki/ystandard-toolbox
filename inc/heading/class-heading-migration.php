@@ -107,7 +107,6 @@ class Heading_Migration {
 			$icon       = $this->get_pseudo_elements_icon( $type );
 			$size       = $this->get_old_option( "{$type}Size", '' );
 			$size_unit  = 'px';
-			$icon_size  = '';
 
 			// content と enable.
 			if ( $this->has_pseudo_elements( $type ) ) {
@@ -127,7 +126,6 @@ class Heading_Migration {
 				$this->new_option['style']['alignItems'] = 'center';
 
 				$font_size = "{$size}em";
-				$icon_size = ! empty( $size ) ? "{$size}em" : '';
 				if ( empty( $size ) && isset( $preset[ $type ]['fontSize'] ) && ! empty( $preset[ $type ]['fontSize'] ) ) {
 					$font_size = $preset[ $type ]['fontSize'];
 				}
@@ -135,6 +133,10 @@ class Heading_Migration {
 				// サイズ変更.
 				$this->add_pseudo_elements_style( $type, 'fontSize', "{$font_size}" );
 				$size_unit = 'em';
+
+				// width/height は fontSize に連動するため 1em 固定（v2 UI では fontSize のみ操作可能なため）.
+				$this->add_pseudo_elements_style( $type, 'width', '1em' );
+				$this->add_pseudo_elements_style( $type, 'height', '1em' );
 			}
 
 			if ( ! empty( $size ) ) {
@@ -145,6 +147,16 @@ class Heading_Migration {
 							// アイコン用の size 適用は後段の icon 処理側で行う.
 							continue;
 						}
+						if ( 'borderWidth' === $size_target ) {
+							// border 各辺の width を一括で size に上書き（balloon の三角サイズ等）.
+							foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
+								if ( ! isset( $this->new_option[ $type ]['border'][ $side ] ) ) {
+									continue;
+								}
+								$this->new_option[ $type ]['border'][ $side ]['width'] = "{$size}{$size_unit}";
+							}
+							continue;
+						}
 						if ( 'fontSize' === $size_target ) {
 							$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
 						} else {
@@ -152,11 +164,6 @@ class Heading_Migration {
 						}
 					}
 				}
-			}
-			// アイコンの場合.
-			if ( ! empty( $icon_size ) ) {
-				$this->add_pseudo_elements_style( $type, 'height', $icon_size );
-				$this->add_pseudo_elements_style( $type, 'width', $icon_size );
 			}
 		}
 	}

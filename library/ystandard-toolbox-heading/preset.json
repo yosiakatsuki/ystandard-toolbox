@@ -170,6 +170,7 @@
 			},
 			"position": "relative"
 		},
+		"usePseudoElementsSize": ["height"],
 		"after": {
 			"content": "\"\"",
 			"height": "2px",
@@ -206,6 +207,7 @@
 			"display": "flex",
 			"gap": "0.5em"
 		},
+		"usePseudoElementsSize": ["height"],
 		"before": {
 			"backgroundColor": "#222222",
 			"height": "2px",
@@ -233,6 +235,7 @@
 			},
 			"position": "relative"
 		},
+		"usePseudoElementsSize": ["borderWidth"],
 		"after": {
 			"border": {
 				"top": {
@@ -314,11 +317,12 @@
 			"gap": "0.5em",
 			"alignItems": "center"
 		},
+		"usePseudoElementsSize": ["fontSize"],
 		"before": {
 			"icon": "award",
 			"fontSize": "1.2em",
-			"width": "1.2em",
-			"height": "1.2em"
+			"width": "1em",
+			"height": "1em"
 		}
 	}
 }
