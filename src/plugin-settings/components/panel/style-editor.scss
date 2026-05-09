@@ -1,8 +1,9 @@
 .ystdtb-plugin-settings-panel {
-	--plugin-settings-panel--border-color: #e0e0e0;
+	--ystdtb--plugin-settings-panel--border-color: #e0e0e0;
 
 	.components-panel__body-title {
 		background-color: #fafafa;
+
 		.components-button {
 			font-size: 14px;
 		}
@@ -10,7 +11,7 @@
 
 	&.components-panel__body {
 		margin: 2em 0;
-		border: 1px solid var(--plugin-settings-panel--border-color);
+		border: 1px solid var(--ystdtb--plugin-settings-panel--border-color);
 
 		&:first-child {
 			margin-top: 0;
@@ -20,7 +21,7 @@
 			> .components-panel__body-title {
 				margin-bottom: 1em;
 				border-bottom: 1px solid
-					var(--plugin-settings-panel--border-color);
+					var(--ystdtb--plugin-settings-panel--border-color);
 			}
 		}
 
@@ -45,16 +46,36 @@
 
 	&.is-nested {
 		&.components-panel__body {
-			@apply bg-orange-50/30;
+			background-color: color-mix(
+				in srgb,
+				var(--ystdtb--editor--background-color--orange) 30%,
+				transparent
+			);
 		}
 		> .components-panel__body-title {
-			@apply bg-orange-50/80;
+			background-color: color-mix(
+				in srgb,
+				var(--ystdtb--editor--background-color--orange) 80%,
+				transparent
+			);
 		}
 		.ystdtb-heading-v2__panel-group {
 			.components-panel__body-title,
 			.components-panel__body {
-				@apply bg-white;
+				background-color: #fff;
 			}
 		}
+	}
+}
+
+.ystdtb-plugin-settings-panel__inner {
+	> *:not(:first-child) {
+		padding-top: 2.5rem;
+	}
+	> *:not(:last-child) {
+		padding-bottom: 2.5rem;
+	}
+	> * + * {
+		border-top: 1px dashed #aaa;
 	}
 }

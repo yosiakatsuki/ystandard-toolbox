@@ -101,6 +101,7 @@ function ResponsiveBorderEdit( props: {
 		<ResponsiveControlGrid customClassName={ { 'md:grid-cols-3': false } }>
 			<div>
 				<BorderControl
+					label={ __( 'デスクトップ', 'ystandard-toolbox' ) }
 					value={ value?.desktop }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {
@@ -113,6 +114,7 @@ function ResponsiveBorderEdit( props: {
 			</div>
 			<div>
 				<BorderControl
+					label={ __( 'タブレット', 'ystandard-toolbox' ) }
 					value={ value?.tablet }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {
@@ -125,6 +127,7 @@ function ResponsiveBorderEdit( props: {
 			</div>
 			<div>
 				<BorderControl
+					label={ __( 'モバイル', 'ystandard-toolbox' ) }
 					value={ value?.mobile }
 					onChange={ ( newValue: SplitBorders | FlatBorder ) => {
 						handleOnChange( {

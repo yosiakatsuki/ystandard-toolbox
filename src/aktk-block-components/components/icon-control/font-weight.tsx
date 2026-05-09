@@ -9,7 +9,7 @@ import {
  */
 import { DesktopControl, TabletControl, MobileControl } from './wrapper';
 
-const WRAPPER_CLASS = clsx( '!items-end [&>svg]:mb-1.5' );
+const WRAPPER_CLASS = clsx( 'aktk-component__responsive-font-weight-control' );
 
 function IconFontWeightControlBase( props: FontWeightStyleControlProps ) {
 	return <FontWeightControl { ...props } />;
