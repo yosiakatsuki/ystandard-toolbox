@@ -26,6 +26,7 @@ v2 リリースのブロッカーではないものをここに集約する。
 - [CSS カスタムプロパティ命名規則の統一（ブロックローカル変数のダブルハイフン化）](#css-カスタムプロパティ命名規則の統一ブロックローカル変数のダブルハイフン化)
 - [フォント機能：ブロックエディターのフォント選択肢への追加](#フォント機能ブロックエディターのフォント選択肢への追加)
 - [aktk-block-components useTheme* の `@wordpress/editor` 依存削除を yStandard Blocks 側にも反映](#aktk-block-components-usetheme-の-wordpresseditor-依存削除を-ystandard-blocks-側にも反映)
+- [見出し編集機能の背景色をグラデーション対応にする](#見出し編集機能の背景色をグラデーション対応にする)
 
 ---
 
@@ -248,3 +249,142 @@ yStandard Blocks 側でも同じ 4 ファイルを同様に書き換える。
 
 - yStandard Blocks 側で「設定画面相当」の機能から `useTheme*` を呼んでいる箇所があるか要確認。呼んでいる場合は `aktk.hooks.*` フィルタに `addFilter` 登録 + PHP 側 `wp_localize_script` で値提供が必要（ystandard-toolbox の `inc/plugin-settings/class-plugin-settings.php` の `get_editor_colors` / `get_editor_font_sizes` / `get_editor_spacing_sizes` を参考）
 - グラデーション（`useThemeGradient`）は ystandard-toolbox の設定画面では未使用のため、PHP / addFilter の追加対応はしていない。yStandard Blocks 側で必要なら追加
+
+---
+
+## 見出し編集機能の背景色をグラデーション対応にする
+
+- **追加日**: 2026-05-11
+- **優先度**: 中
+- **対象**:
+  - `src/aktk-block-components/components/color-pallet-control/color-gradient-palette.tsx`（コンポーネント差し替えの本丸）
+  - `src/plugin-settings/heading/app/options/background/background-color.tsx`
+  - `src/plugin-settings/heading/app/editor/panel/style.tsx`（および疑似要素 `pseudo-elements.tsx`）
+  - `src/plugin-settings/heading/app/preview/preview-style.tsx`
+  - `src/plugin-settings/heading/types/index.ts`（`HeadingStyle.backgroundGradient` のコメント）
+
+### 背景
+
+見出し編集機能の背景色設定は現状単色（`backgroundColor`）のみ。`HeadingStyle` 型には `backgroundGradient` が定義されているが「未対応」コメントが付いており、UI 側は `ColorPalette`（単色のみ）が使われている。
+
+ブロック側ではグラデーション背景が使えるブロックがあり、見出しデザインでも同等の表現ができると装飾の自由度が上がる。
+
+### 過去の試行と判明した根本原因
+
+2026-05 に `background-color.tsx` を `ColorGradientPalette` に差し替える形で対応を試みたが、`onChange` が 1 操作で 2 回連続で呼ばれる WP の仕様にハマり、巻き戻した。
+
+`@wordpress/block-editor` の `__experimentalColorGradientControl`（= aktk-block-components の現行 `ColorGradientPalette` 内部で使用）は、color と gradient が両方有効なとき、**片方を選ぶともう片方を `onChange` 引数なし（= `undefined`）でクリアしようとする**実装（`node_modules/@wordpress/block-editor/src/components/colors-gradients/control.js` 参照）。
+
+```javascript
+// 抜粋
+onChange={
+    canChooseAGradient
+        ? ( newColor ) => {
+                onColorChange( newColor );
+                onGradientChange();   // ← 引数なしで連続発火
+          }
+        : onColorChange
+}
+```
+
+`setHeadingOption({ ...style, ...newValue })` のスプレッド更新と連続呼び出しが噛み合わず、直前にセットした color が後続の `onGradientChange()` で上書きされる。
+
+ハンドラ側で「引数有無で分岐」する回避策もあるが、根本的に「1 操作 → 1 onChange」になっていないことがバグの温床なので、**コンポーネント側の差し替え**で根本解決する。
+
+#### 課題 1（解消方針）: `ColorGradientPalette` の内部実装を `@wordpress/components` ベースに差し替える
+
+aktk-block-components の `color-pallet-control/color-gradient-palette.tsx` から `__experimentalColorGradientControl`（`@wordpress/block-editor` 由来）を排除し、以下で再構成する。
+
+- `@wordpress/components` の `ColorPalette` + `GradientPicker`
+- タブ切替は自前実装、または `@wordpress/components` の `Tabs` を使う
+- 「片方を選んだらもう片方をクリア」のロジックは**コンポーネント内部**に閉じ込め、外部には `{ color, gradient }` の最終値を**1 度の `onChange`** で通知する
+
+これによる効果:
+
+- 1 操作で `onChange` が 1 回しか呼ばれない → 上書きバグが起きない
+- `@wordpress/block-editor` 依存（`BlockEditorProvider` 必須）から外れる → 設定画面でも安定動作
+- ブロックエディタ側でも引き続き同じインターフェースで使える（破壊的変更を避ける）
+
+実装上の注意:
+
+- `colorValue` / `gradientValue` / `colors` / `gradients` / `onColorChange` / `onGradientChange` / `disableCustomColors` / `disableCustomGradients` / `enableCurrentColor` / `enableTransparent` などの**既存 props 互換は維持**する
+- `useThemeColors` / `useThemeGradients` のフォールバック経路（`aktk.hooks.*` フィルタ）はそのまま使える
+- aktk-block-components は **yStandard Blocks 共用ライブラリ**なので、差し替え後は ystandard-toolbox / yStandard Blocks の両方で動作確認が必要
+
+差し替えが完了すれば、見出し編集側のハンドラはシンプルに書ける:
+
+```typescript
+const handleOnColorChange = ( newValue: string | undefined ) => {
+    onChange( {
+        backgroundColor: newValue,
+        backgroundGradient: undefined,
+    } );
+};
+const handleOnGradientChange = ( newGradient: string | undefined ) => {
+    onChange( {
+        backgroundColor: undefined,
+        backgroundGradient: newGradient,
+    } );
+};
+const handleOnClear = () => {
+    onChange( { backgroundColor: undefined, backgroundGradient: undefined } );
+};
+```
+
+#### 課題 2: `preview-style.tsx` の `Object.keys` が `undefined` 値キーを拾う
+
+`onChange` の戻り値を `style.tsx` 側で `{ ...style, ...newValue }` とスプレッドするため、`backgroundColor: undefined` / `backgroundGradient: undefined` が `style` 上にキーとして残る（値 `undefined`）。
+
+`preview-style.tsx` の `parseStyles` は `Object.keys( styles ).forEach` で全キーを舐めるので、値 `undefined` のキーも処理ループに入り、`background-color: undefined;` / `background: undefined;` といった**無効な CSS 文字列**が生成されてしまう。`background` ショートハンドの場合、無効値で他のプロパティが意図せず初期化される懸念もある。
+
+**設計方針**: `parseStyles` の forEach 冒頭で `value === undefined` のキーをスキップする。これは堅牢化として preview 全体に効く。
+
+```typescript
+Object.keys( styles ).forEach( ( originalKey: string ) => {
+    if ( ( styles as any )[ originalKey ] === undefined ) {
+        return;
+    }
+    // ...
+} );
+```
+
+#### 課題 3: グラデーション値の CSS プロパティ変換
+
+`backgroundGradient` の値（`linear-gradient(...)` 等）を CSS に出すには、`background` ショートハンドとして出力する必要がある。`parseStyles` 内で `'backgroundGradient' === key` のときに `property = 'background'` に置換する処理を追加する。
+
+```typescript
+if ( 'backgroundGradient' === key ) {
+    property = 'background';
+}
+```
+
+#### 課題 4: `BackgroundColor` の型定義の互換性
+
+型 `BackgroundColorProps` に `gradientValue` を追加する場合、`?:` のオプショナルにすること。必須にすると疑似要素側の `pseudo-elements.tsx` の `<BackgroundColor>` 呼び出しでも `gradientValue` を渡す必要が出るため。
+
+### 修正案（再着手時の手順）
+
+1. **コンポーネント差し替え**: aktk-block-components の `color-pallet-control/color-gradient-palette.tsx` を `@wordpress/components` ベースに書き換え
+   - `ColorPalette` + `GradientPicker` + タブ切替を内部で組み合わせ
+   - 「片方を選んだらもう片方をクリア」をコンポーネント内部で完結 → 外部への `onChange` は 1 回
+   - 既存 props 互換を維持
+2. **共用ライブラリ動作確認**: ブロックエディタ側（box / banner-link 等のグラデーション利用箇所）で同じ動作になることを確認
+3. **見出し側適用**: `BackgroundColorProps` に `gradientValue?: string`（オプショナル）を追加し、`background-color.tsx` を `ColorGradientPalette` に差し替え
+4. `style.tsx` から `<BackgroundColor>` に `gradientValue={ option?.backgroundGradient }` を渡す（疑似要素側もグラデーション対応するなら同様に）
+5. `preview-style.tsx` に課題 2 / 3 の修正を入れる
+6. `types/index.ts` の `backgroundGradient` の「未対応」コメントを除去
+7. `preview-style.test.ts` に backgroundGradient の preview 生成ケースを追加
+8. 実機で「色 ↔ グラデーション切替」「ClearButton で両方クリア」「保存・リロード後の値復元」を確認
+
+### 影響範囲
+
+- **aktk-block-components の `ColorGradientPalette`**（共用ライブラリ）— 内部実装差し替え。yStandard Blocks 側のグラデーション利用箇所にも影響するため両方で動作確認が必要
+- 見出し編集機能の背景色設定 UI（メイン要素 / 疑似要素）
+- preview の CSS 生成
+- 既存の見出しスタイル（`backgroundColor` で保存済み）の表示 — 単色は引き続き使えるが、preview ロジック修正のリグレッション要確認
+
+### 注意点
+
+- aktk-block-components の差し替え分は、yStandard Blocks 側にも反映する必要がある（共用ライブラリ。`docs/future-improvements.md` の「aktk-block-components useTheme* の `@wordpress/editor` 依存削除を yStandard Blocks 側にも反映」と同じく、両プロジェクトの同期を意識）
+- `useThemeGradients`（aktk-block-components）はブロックエディタ内では `useSettings` 経由でグラデーション一覧を取れるが、設定画面では `BlockEditorProvider` でラップされていないため空配列になる。設定画面でグラデーションプリセットを表示したい場合は、PHP 側で `editorGradients` を `wp_localize_script` で渡し、設定画面側で `aktk.hooks.getThemeGradients.themeGradients` フィルタに `addFilter` 登録する対応が必要（color / font / spacing と同じパターン）
+- カスタムグラデーション入力（自由入力）は `disableCustomGradients={ false }` を設定すれば動くため、まずはカスタム入力のみ対応し、プリセット供給は別段階で進めるのも選択肢
