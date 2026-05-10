@@ -331,13 +331,25 @@ class Heading_Helper {
 		// *************************************************************
 		// 投稿タイトル.
 		// *************************************************************
-		$title = apply_filters( 'ystdtb_heading_selector_post_title', '.entry-title' );
+		$title = apply_filters(
+			'ystdtb_heading_selector_post_title',
+			[ '.entry-title', '.wp-block-post-title' ]
+		);
 		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
 		$area  = $is_editor ? 'body.post-type-post' : '.single';
+		// セレクターの作成.
+		$target = [];
+		if ( is_array( $title ) ) {
+			foreach ( $title as $item ) {
+				$target[] = "{$body}{$area} {$item}";
+			}
+		} else {
+			$target[] = "{$body}{$area} {$title}";
+		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_post_title',
-			[ "{$body}{$area} {$title}" ],
+			$target,
 			$is_editor
 		);
 		// 結合.
@@ -346,13 +358,25 @@ class Heading_Helper {
 		// *************************************************************
 		// 固定ページタイトル.
 		// *************************************************************
-		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.entry-title' );
+		$title = apply_filters(
+			'ystdtb_heading_selector_page_title',
+			[ '.entry-title' , '.wp-block-post-title' ]
+		);
 		$title = $is_editor ? ':where(.wp-block-post-title)' : $title;
 		$area  = $is_editor ? 'body.post-type-page' : '.page';
+		// セレクターの作成.
+		$target = [];
+		if ( is_array( $title ) ) {
+			foreach ( $title as $item ) {
+				$target[] = "{$body}{$area} {$item}";
+			}
+		} else {
+			$target[] = "{$body}{$area} {$title}";
+		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_page_title',
-			[ "{$body}{$area} {$title}" ],
+			$target,
 			$is_editor
 		);
 		// 結合.
@@ -361,9 +385,22 @@ class Heading_Helper {
 		// *************************************************************
 		// アーカイブページタイトル.
 		// *************************************************************
-		$title = apply_filters( 'ystdtb_heading_selector_page_title', '.archive__header .archive__page-title' );
+		$title = apply_filters(
+			'ystdtb_heading_selector_page_title',
+			[ '.page-title' ,'.wp-block-query-title' ]
+		);
+		$area  = '.archive';
+		// セレクターの作成.
+		$target = [];
+		if ( is_array( $title ) ) {
+			foreach ( $title as $item ) {
+				$target[] = "{$body}{$area} {$item}";
+			}
+		} else {
+			$target[] = "{$body}{$area} {$title}";
+		}
 		// 結合。アーカイブに関してはエディター側の制御は不要なはず….
-		$result['archive-title'] = [ "{$body} {$title}" ];
+		$result['archive-title'] = $target;
 
 		return $result;
 	}
