@@ -12,6 +12,7 @@ import {
 	CustomSelectControlOption,
 } from '@aktk/block-components/components/custom-select-control';
 import { PrimaryButton } from '@aktk/block-components/components/buttons';
+import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 
 /**
  * Plugin Component.
@@ -19,6 +20,7 @@ import { PrimaryButton } from '@aktk/block-components/components/buttons';
 import { HeadingContext } from '../index';
 import { updateHeadingLevel } from '@aktk/plugin-settings/heading/app/api';
 import { getStyleSelectOptions } from '@aktk/plugin-settings/heading/util/setting';
+import { getAdminConfig } from '@aktk/plugin-settings/utils/config';
 
 export function LevelEditContainer() {
 	// @ts-ignore
@@ -71,6 +73,14 @@ export function LevelEditContainer() {
 			<h2 className={ 'mb-3 mt-0 font-bold text-aktk-text-gray' }>
 				{ __( '見出しレベル割り当て', 'ystandard-toolbox' ) }
 			</h2>
+			{ ! getAdminConfig( 'isYStandard' ) && (
+				<NoticeSecondaryText>
+					{ __(
+						'yStandard以外のテーマではテーマの作りによっては割り当て設定が反映されない場合があります。反映されない場合はブロックスタイルとして使用してください',
+						'ystandard-toolbox'
+					) }
+				</NoticeSecondaryText>
+			) }
 			<table className="mt-4">
 				<tbody>
 					{ Object.keys( levelKeys ).map( ( key ) => {
