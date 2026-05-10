@@ -120,7 +120,6 @@ function PresetList( props: PresetListProps ) {
 
 	// プリセット選択時の処理.
 	const handleOnClick = ( value: HeadingOption ) => {
-		console.log( value );
 		onSelect( value );
 	};
 
