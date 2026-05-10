@@ -25,6 +25,7 @@ v2 リリースのブロッカーではないものをここに集約する。
 - [ratio コンポーネントの aspect-ratio 化](#ratio-コンポーネントの-aspect-ratio-化)
 - [CSS カスタムプロパティ命名規則の統一（ブロックローカル変数のダブルハイフン化）](#css-カスタムプロパティ命名規則の統一ブロックローカル変数のダブルハイフン化)
 - [フォント機能：ブロックエディターのフォント選択肢への追加](#フォント機能ブロックエディターのフォント選択肢への追加)
+- [aktk-block-components useTheme* の `@wordpress/editor` 依存削除を yStandard Blocks 側にも反映](#aktk-block-components-usetheme-の-wordpresseditor-依存削除を-ystandard-blocks-側にも反映)
 
 ---
 
@@ -199,3 +200,51 @@ WordPress コア（`--wp--preset--color--black`）や yStandard テーマ（`--y
 
 - WordPress のフォント関連 API は変更が多い領域のため、実装時点での最新 API を確認すること
 - ブロックテーマではフォント設定画面自体を非表示にしているため、ブロックテーマへの対応範囲は別途検討が必要
+
+---
+
+## aktk-block-components useTheme* の `@wordpress/editor` 依存削除を yStandard Blocks 側にも反映
+
+- **追加日**: 2026-05-10
+- **優先度**: 中
+- **対象**: yStandard Blocks プラグイン側の `aktk-block-components/hooks/useThemeColors` / `useThemeGradient` / `useThemeFontSizes` / `useThemeSpacingSizes`（ystandard-toolbox と共用ライブラリ）
+
+### 背景
+
+ystandard-toolbox 側で v2 リリース対応として、`useTheme*` 4 フックから `@wordpress/editor`（`store as editorStore`）への依存を削除した。理由はウィジェット編集画面（`widgets.php` / カスタマイザーのウィジェット）で `wp-editor` スクリプトを enqueue すると WordPress 5.8+ の警告（"wp-editor スクリプトを新しいウィジェットエディターと一緒にエンキューしないでください"）が発生していたため。
+
+aktk-block-components は ystandard-toolbox と yStandard Blocks プラグインの共用ライブラリで、現状 yStandard Blocks 側は古い実装のまま残っている可能性が高い。同期しないと、yStandard Blocks 側のブロックを使ったときに同じ警告が再発する。
+
+### 現状（ystandard-toolbox 側で行った変更）
+
+4 ファイルすべてで以下を削除:
+
+```typescript
+import { useSelect } from '@wordpress/data';
+import { store as editorStore } from '@wordpress/editor';
+
+// useSelectから取得(主に設定画面用).
+const dataXxx = useSelect( ( select ) => {
+    const settings = select( editorStore )?.getEditorSettings();
+    return settings?.xxx || [];
+}, [] );
+```
+
+代わりに以下の 2 経路で値を取得する設計に統一:
+
+1. `useSettings`（`@wordpress/block-editor`）— ブロックエディタ内
+2. `applyFilters('aktk.hooks.getThemeXxx.themeXxx', [])` — 設定画面用フォールバック（PHP 側 `wp_localize_script` で渡した値を `addFilter` で注入）
+
+### 修正案
+
+yStandard Blocks 側でも同じ 4 ファイルを同様に書き換える。
+
+### 影響範囲
+
+- yStandard Blocks プラグインを利用しているサイトでウィジェット編集画面を開いたときの警告
+- yStandard Blocks 側の各ブロックの `*.asset.php` から `wp-editor` 依存が消えるため、ビルド成果物の差分要確認
+
+### 注意点
+
+- yStandard Blocks 側で「設定画面相当」の機能から `useTheme*` を呼んでいる箇所があるか要確認。呼んでいる場合は `aktk.hooks.*` フィルタに `addFilter` 登録 + PHP 側 `wp_localize_script` で値提供が必要（ystandard-toolbox の `inc/plugin-settings/class-plugin-settings.php` の `get_editor_colors` / `get_editor_font_sizes` / `get_editor_spacing_sizes` を参考）
+- グラデーション（`useThemeGradient`）は ystandard-toolbox の設定画面では未使用のため、PHP / addFilter の追加対応はしていない。yStandard Blocks 側で必要なら追加

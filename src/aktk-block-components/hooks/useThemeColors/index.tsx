@@ -5,8 +5,6 @@ import { _x } from '@wordpress/i18n';
 import { useMemo } from '@wordpress/element';
 // @ts-ignore
 import { useSettings } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
 import { applyFilters } from '@wordpress/hooks';
 
 type themeColorsOptions = {
@@ -53,14 +51,6 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 		color: string;
 	} >;
 
-	// useSelectから色情報を取得(主に設定画面用).
-	const dataColors = useSelect( ( select ) => {
-		// @ts-ignore
-		const settings = select( editorStore )?.getEditorSettings();
-		// @ts-ignore
-		return settings?.colors || [];
-	}, [] );
-
 	return useMemo( () => {
 		const result = [];
 		let _themeColors = [];
@@ -69,8 +59,6 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 			_themeColors = themeColors;
 		} else if ( hookThemeColors && hookThemeColors.length ) {
 			_themeColors = hookThemeColors;
-		} else if ( dataColors && dataColors.length ) {
-			_themeColors = dataColors;
 		}
 		// テーマカラーのチェック&追加.
 		if ( _themeColors && _themeColors.length ) {
@@ -101,7 +89,7 @@ const useThemeColors = ( options?: themeColorsOptions ) => {
 		themeColors,
 		defaultColors,
 		enableDefaultColors,
-		dataColors,
+		hookThemeColors,
 	] );
 };
 
