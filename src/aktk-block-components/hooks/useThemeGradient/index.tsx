@@ -7,16 +7,11 @@ import { useSettings } from '@wordpress/block-editor';
 import { _x } from '@wordpress/i18n';
 import { applyFilters } from '@wordpress/hooks';
 
-type UseThemeGradientsOptions = {
-	enableDefaultGradients?: boolean;
-};
-
 /**
  * テーマのカラー設定を取得する（設定画面用）
  * @param options
  */
-const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
-	const { enableDefaultGradients = false } = options || {};
+const useThemeGradients = () => {
 	const [
 		customGradients,
 		themeGradients,
@@ -55,7 +50,6 @@ const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
 			} );
 		}
 		if (
-			enableDefaultGradients &&
 			shouldDisplayDefaultGradients &&
 			defaultGradients &&
 			defaultGradients.length
