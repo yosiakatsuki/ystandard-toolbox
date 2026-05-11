@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "heart",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},

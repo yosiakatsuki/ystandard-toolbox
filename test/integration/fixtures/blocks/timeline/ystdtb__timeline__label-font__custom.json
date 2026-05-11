@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "star",
-					"labelBold": false,
 					"customLabelFontSize": "28px",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"

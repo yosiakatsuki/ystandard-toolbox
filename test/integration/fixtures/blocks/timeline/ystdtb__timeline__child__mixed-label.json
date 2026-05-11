@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},
@@ -36,7 +35,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "star",
-					"labelBold": false,
 					"labelColor": "ys-orange",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"

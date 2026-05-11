@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "text",
 					"labelContents": "1",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},

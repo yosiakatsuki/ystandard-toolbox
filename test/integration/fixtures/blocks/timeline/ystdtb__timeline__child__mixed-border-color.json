@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",
 					"contentsBorderColor": "ys-blue"
@@ -23,7 +22,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",
 					"contentsBorderColor": "ys-green"
@@ -36,7 +34,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",
 					"contentsBorderColor": "ys-red"

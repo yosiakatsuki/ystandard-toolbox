@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "text",
 					"labelContents": "1",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},
@@ -22,7 +21,6 @@
 				"attributes": {
 					"labelType": "text",
 					"labelContents": "2",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},
@@ -34,7 +32,6 @@
 				"attributes": {
 					"labelType": "text",
 					"labelContents": "3",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"
 				},

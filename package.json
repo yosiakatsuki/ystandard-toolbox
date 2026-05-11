@@ -101,7 +101,7 @@
 		"test:integration": "wp-scripts test-unit-js --config test/integration/integration.config.js",
 		"test": "run-s test:unit test:integration",
 		"format": "wp-scripts format",
-		"fixtures:clean": "rimraf \"test/integration/fixtures/blocks/**/*.json\" \"test/integration/fixtures/blocks/**/*.parsed.json\" \"test/integration/fixtures/blocks/**/*.serialized.html\"",
+		"fixtures:clean": "rimraf -g \"test/integration/fixtures/blocks/**/*.json\" \"test/integration/fixtures/blocks/**/*.parsed.json\" \"test/integration/fixtures/blocks/**/*.serialized.html\"",
 		"fixtures:generate": "cross-env GENERATE_MISSING_FIXTURES=y npm run test:integration && npm run format \"test/integration/fixtures/blocks/**/*.json\"",
 		"fixtures:regenerate": "npm run fixtures:clean && npm run fixtures:generate",
 		"i18n:make-pot": "wp i18n make-pot . languages/ystandard-toolbox.pot --domain=\"ystandard-toolbox\" --exclude=\".github,assets,bin,css,js,languages,library,tests\"",
