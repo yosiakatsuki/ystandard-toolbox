@@ -10,6 +10,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: `${ __dirname }/js/app`,
+		clean: true,
 	},
 	module: {
 		...defaultConfig.module,

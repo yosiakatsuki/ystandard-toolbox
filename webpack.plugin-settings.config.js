@@ -24,6 +24,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: `${ __dirname }/build/plugin-settings`,
+		clean: true,
 	},
 	plugins,
 	resolve: {
