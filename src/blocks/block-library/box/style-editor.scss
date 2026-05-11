@@ -14,6 +14,7 @@
 	}
 
 	.ystdtb-box__type-button {
+
 		&.components-button {
 			display: block;
 			height: auto;
@@ -40,25 +41,7 @@
 .ystdtb-box__type-wrap {
 	position: relative;
 	padding: 10px;
-}
 
-.ystdtb-box__type-label {
-	position: relative;
-	height: 10px;
-	width: 30px;
-	background-color: global.$color__ystd_blue;
-}
-
-.ystdtb-box__type-box {
-	padding: 10px;
-	border: 1px solid global.$color__ystd_blue;
-}
-
-.ystdtb-box__type-name {
-	font-size: 10px;
-}
-
-.ystdtb-box__type-wrap {
 	&.is-label-in {
 		padding-top: 20px;
 
@@ -68,6 +51,7 @@
 	}
 
 	&.is-label-wide {
+
 		.ystdtb-box__type-label {
 			width: 100%;
 		}
@@ -87,20 +71,38 @@
 			line-height: 1;
 			z-index: 1;
 
-			&:before {
+			&::before {
 				content: "~~~~";
 			}
 		}
 	}
 
 	&.is-label-none {
+
 		.ystdtb-box__type-label {
 			display: none;
 		}
 	}
 }
 
+.ystdtb-box__type-label {
+	position: relative;
+	height: 10px;
+	width: 30px;
+	background-color: global.$color__ystd_blue;
+}
+
+.ystdtb-box__type-box {
+	padding: 10px;
+	border: 1px solid global.$color__ystd_blue;
+}
+
+.ystdtb-box__type-name {
+	font-size: 10px;
+}
+
 .ystdtb-box {
+
 	&.is-box-style--label-line {
 		padding-top: 1em;
 	}
@@ -111,6 +113,7 @@
 	overflow: hidden;
 
 	.ystdtb-box__label-contents {
+
 		input,
 		.components-text-control__input[type="text"]
 			.aktk-component-stretch-text-control__dummy {
@@ -120,8 +123,11 @@
 }
 
 .ystdtb-box__content {
+
 	> .block-editor-inner-blocks {
+
 		> .block-editor-block-list__layout {
+
 			> * {
 				margin-top: 1em;
 				margin-bottom: 0;
@@ -140,6 +146,7 @@
 }
 
 .editor-styles-wrapper {
+
 	.ystdtb-box * {
 		box-sizing: border-box;
 	}

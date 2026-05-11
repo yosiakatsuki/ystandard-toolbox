@@ -282,15 +282,15 @@ class Sns_Share_Block {
 		$twitter_url_option = '';
 		if ( ! empty( $twitter_via ) ) {
 			$result['official']['twitter-via'] = $twitter_via;
-			$twitter_url_option                .= '&via=' . rawurlencode( $twitter_via );
+			$twitter_url_option               .= '&via=' . rawurlencode( $twitter_via );
 		}
 		if ( ! empty( $twitter_related ) ) {
 			$result['official']['twitter-related'] = $twitter_related;
-			$twitter_url_option                    .= '&related=' . rawurlencode( $twitter_related );
+			$twitter_url_option                   .= '&related=' . rawurlencode( $twitter_related );
 		}
 		if ( ! empty( $twitter_hash_tags ) ) {
 			$result['official']['twitter-hash-tags'] = $twitter_hash_tags;
-			$twitter_url_option                      .= '&hashtags=' . rawurlencode( $twitter_hash_tags );
+			$twitter_url_option                     .= '&hashtags=' . rawurlencode( $twitter_hash_tags );
 		}
 		$twitter_share_url = "https://twitter.com/intent/tweet?text={$share_title}&url={$share_url}{$twitter_url_option}";
 

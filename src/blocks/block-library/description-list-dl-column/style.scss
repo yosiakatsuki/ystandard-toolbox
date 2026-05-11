@@ -7,11 +7,12 @@
 		margin-block-start: var(--ystd-layout-gap, 1.5em);
 	}
 
-	& + :where(.ystdtb-dl-column) {
+	+ :where(.ystdtb-dl-column) {
 		margin-block-start: 0.5em;
 	}
 
 	&:where([style*="dl-column--width"]) {
+
 		> :where(dt) {
 			flex-shrink: 0;
 			width: min(100%, var(--ystdtb--dl-column--width,auto));

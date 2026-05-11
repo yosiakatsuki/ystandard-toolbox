@@ -12,10 +12,7 @@ import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 /**
  * Plugin Dependencies
  */
-import {
-	PluginSettingsPanel,
-	PanelInner,
-} from '@aktk/plugin-settings/components/panel';
+import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 import { CodeInput } from '@aktk/components/code-input';
 import { FontContext } from './index';
 

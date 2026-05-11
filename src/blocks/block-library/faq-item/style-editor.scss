@@ -1,4 +1,5 @@
 [data-type="ystdtb/faq-item"] {
+
 	&,
 	*,
 	*::before,
@@ -13,7 +14,9 @@
 	}
 
 	.ystdtb-faq-item__contents {
+
 		> * {
+
 			&:first-child {
 				margin-top: 0;
 			}
@@ -22,6 +25,7 @@
 				margin-bottom: 0;
 			}
 		}
+
 		> .block-list-appender {
 			margin: 8px 0 0 !important;
 

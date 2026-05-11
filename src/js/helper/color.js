@@ -2,7 +2,7 @@ import { select } from '@wordpress/data';
 
 /**
  * @deprecated
- * @return {EditorColor[]}
+ * @return {Array}
  */
 export const getColorSetting = () => {
 	const { colors } = select( 'core/block-editor' ).getSettings();

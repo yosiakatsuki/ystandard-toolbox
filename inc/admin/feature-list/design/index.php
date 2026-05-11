@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || die();
 	<h2 class="ystdtb-menu__section_title">デザイン機能</h2>
 	<div class="ystdtb-menu__column">
 		<?php
-		include __DIR__ . '/heading.php';
+		require __DIR__ . '/heading.php';
 		?>
 	</div>
 </div>

@@ -418,7 +418,7 @@ class CTA {
 		if ( null !== $type ) {
 			$priority = array_filter(
 				$priority,
-				function( $value ) use ( $type ) {
+				function ( $value ) use ( $type ) {
 					return in_array( $type, $value['type'], true );
 				}
 			);
@@ -497,7 +497,7 @@ class CTA {
 		if ( null !== $type ) {
 			$priority = array_filter(
 				$priority,
-				function( $value ) use ( $type ) {
+				function ( $value ) use ( $type ) {
 					return in_array( $type, $value['type'], true );
 				}
 			);

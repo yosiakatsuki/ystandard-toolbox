@@ -39,7 +39,7 @@ class Icon {
 	 * アイコンリストの追加
 	 */
 	public function add_icons() {
-		if( ! is_admin() ) {
+		if ( ! is_admin() ) {
 			return;
 		}
 		wp_localize_script(
@@ -72,7 +72,6 @@ class Icon {
 	public static function get_icon( $name ) {
 		$icons  = self::get_icons();
 		$result = [];
-
 
 		// 直接名前でマッチするアイコンを検索
 		if ( is_array( $icons ) && isset( $icons[ $name ] ) ) {
