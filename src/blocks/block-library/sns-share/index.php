@@ -182,7 +182,7 @@ class Sns_Share_Block {
 		<?php
 
 		return apply_filters(
-			'ystdtb/blocks/sns_share/get_sns_share_buttons_html',
+			'ystdtb_blocks_sns_share_get_sns_share_buttons_html',
 			ob_get_clean(),
 			$share_button
 		);
@@ -249,7 +249,7 @@ class Sns_Share_Block {
 		<?php
 
 		return apply_filters(
-			'ystdtb/blocks/sns_share/get_sns_share_buttons_official_html',
+			'ystdtb_blocks_sns_share_get_sns_share_buttons_official_html',
 			ob_get_clean(),
 			$share_button
 		);
@@ -265,8 +265,8 @@ class Sns_Share_Block {
 	public static function get_share_button_param( $attributes ) {
 		$result = [];
 		// URL情報.
-		$url         = apply_filters( 'ystdtb/blocks/sns_share/share_btn_url', URL::get_page_url() );
-		$title       = apply_filters( 'ystdtb/blocks/sns_share/share_btn_title', Post::get_page_title() );
+		$url         = apply_filters( 'ystdtb_blocks_sns_share_share_btn_url', URL::get_page_url() );
+		$title       = apply_filters( 'ystdtb_blocks_sns_share_share_btn_title', Post::get_page_title() );
 		$share_url   = rawurlencode( $url );
 		$share_title = rawurlencode( html_entity_decode( $title ) );
 		// URL情報のセット.
@@ -379,7 +379,7 @@ class Sns_Share_Block {
 		}
 
 		if ( Types::to_bool( $attributes['useFacebook'] ) ) {
-			$sdk_ver = apply_filters( 'ystdtb/blocks/sns_share/facebook_sdk_version', self::FACEBOOK_API_VERSION );
+			$sdk_ver = apply_filters( 'ystdtb_blocks_sns_share_facebook_sdk_version', self::FACEBOOK_API_VERSION );
 			$handle  = 'ystdtb-sns-share-script-facebook';
 			wp_enqueue_script(
 				$handle,
