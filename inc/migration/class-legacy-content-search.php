@@ -35,34 +35,6 @@ class Legacy_Content_Search {
 	const CAPABILITY = 'edit_others_posts';
 
 	/**
-	 * 検索パターン定義.
-	 *
-	 * 配列のキーは各パターンの一意な ID。
-	 * - name           : 表示名（必須）
-	 * - description    : 説明文（オプション）
-	 * - block_name     : 絞り込み対象ブロック名（オプション、`wp:` プレフィックスなし）
-	 * - target_strings : 検索対象文字列の配列（必須、OR 検索）
-	 * - changed_at     : 変更があったバージョン（オプション）
-	 *
-	 * @var array
-	 */
-	private static $patterns = [
-		'description-list-dl-column-legacy-class' => [
-			'name'           => '定義リスト（横並び）：旧クラスを使用している投稿',
-			'description'    => 'v2.0.0 で動作が変更されたクラスを含んでいます。エディターで開いて再保存することで最新の構造に更新されます。',
-			'block_name'     => 'ystdtb/description-list-column',
-			'target_strings' => [
-				'dl-column-width-desktop',
-				'dl-column-width-tablet',
-				'dl-column-width-mobile',
-				'is-not-stacked-on-tablet',
-				'is-not-stacked-on-mobile',
-			],
-			'changed_at'     => 'v2.0.0',
-		],
-	];
-
-	/**
 	 * 検索結果キャッシュ.
 	 *
 	 * @var array|null
@@ -77,6 +49,35 @@ class Legacy_Content_Search {
 	}
 
 	/**
+	 * デフォルトの検索パターン定義.
+	 *
+	 * 翻訳関数を使用するため静的プロパティではなくメソッドで定義する。
+	 *
+	 * 配列のキーは各パターンの一意な ID。
+	 * - name           : 表示名（必須）
+	 * - description    : 説明文（オプション）
+	 * - block_name     : 絞り込み対象ブロック名（オプション、`wp:` プレフィックスなし）
+	 * - block_label    : 「使用ブロック」列に表示するブロックのユーザー向け名称（必須）
+	 * - target_strings : 検索対象文字列の配列（必須、OR 検索）
+	 *
+	 * @return array
+	 */
+	private static function get_default_patterns() {
+		return [
+			'description-list-dl-column-legacy-class' => [
+				'name'           => __( '定義リスト（横並び）：v2.0.0で変更されたクラスを使用している投稿', 'ystandard-toolbox' ),
+				'description'    => __( 'v2.0.0 で動作が変更されたクラスを含んでいます。エディターで開いて再保存することで最新の構造に更新されます。うまく更新されない場合は「縦に並べるタイミング」を何度か操作するなど、何かしらの変更を加えると変換が反映される場合があります。', 'ystandard-toolbox' ),
+				'block_name'     => 'ystdtb/description-list-column',
+				'block_label'    => __( '定義リスト（横並び）', 'ystandard-toolbox' ),
+				'target_strings' => [
+					'is-not-stacked-on-tablet',
+					'is-not-stacked-on-mobile',
+				],
+			],
+		];
+	}
+
+	/**
 	 * パターン定義取得.
 	 *
 	 * @return array
@@ -87,7 +88,7 @@ class Legacy_Content_Search {
 		 *
 		 * @param array $patterns 検索パターン定義の配列.
 		 */
-		return apply_filters( 'ystdtb_legacy_content_search_patterns', self::$patterns );
+		return apply_filters( 'ystdtb_legacy_content_search_patterns', self::get_default_patterns() );
 	}
 
 	/**
@@ -193,7 +194,7 @@ class Legacy_Content_Search {
 		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT ID, post_title, post_type, post_content FROM {$wpdb->posts}
+				"SELECT ID, post_title, post_type FROM {$wpdb->posts}
 				WHERE {$or_clause}
 				{$block_clause}
 				AND post_type IN ({$type_placeholders})
@@ -210,19 +211,11 @@ class Legacy_Content_Search {
 
 		$posts = [];
 		foreach ( $rows as $row ) {
-			// ヒットした文字列を抽出.
-			$matched = [];
-			foreach ( $target_strings as $string ) {
-				if ( false !== strpos( $row->post_content, $string ) ) {
-					$matched[] = $string;
-				}
-			}
 			$posts[] = [
-				'post_id'         => (int) $row->ID,
-				'post_title'      => $row->post_title,
-				'post_type'       => $row->post_type,
-				'matched_strings' => $matched,
-				'edit_link'       => get_edit_post_link( $row->ID, 'raw' ),
+				'post_id'    => (int) $row->ID,
+				'post_title' => $row->post_title,
+				'post_type'  => $row->post_type,
+				'edit_link'  => get_edit_post_link( $row->ID, 'raw' ),
 			];
 		}
 
@@ -287,17 +280,6 @@ class Legacy_Content_Search {
 			<?php if ( ! empty( $pattern['description'] ) ) : ?>
 				<p><?php echo esc_html( $pattern['description'] ); ?></p>
 			<?php endif; ?>
-			<?php if ( ! empty( $pattern['changed_at'] ) ) : ?>
-				<p>
-					<?php
-					printf(
-						/* translators: %s: バージョン番号 */
-						esc_html__( '変更時期: %s', 'ystandard-toolbox' ),
-						esc_html( $pattern['changed_at'] )
-					);
-					?>
-				</p>
-			<?php endif; ?>
 			<p style="color: #d63638; font-weight: 600;">
 				<?php
 				printf(
@@ -312,7 +294,7 @@ class Legacy_Content_Search {
 					<tr>
 						<th><?php esc_html_e( '投稿タイトル', 'ystandard-toolbox' ); ?></th>
 						<th><?php esc_html_e( '投稿タイプ', 'ystandard-toolbox' ); ?></th>
-						<th><?php esc_html_e( 'ヒットしたクラス・属性', 'ystandard-toolbox' ); ?></th>
+						<th><?php esc_html_e( '使用ブロック', 'ystandard-toolbox' ); ?></th>
 						<th><?php esc_html_e( '操作', 'ystandard-toolbox' ); ?></th>
 					</tr>
 				</thead>
@@ -328,11 +310,7 @@ class Legacy_Content_Search {
 								?>
 							</td>
 							<td><?php echo esc_html( $this->get_post_type_label( $post['post_type'] ) ); ?></td>
-							<td>
-								<code style="font-size: 12px;">
-									<?php echo esc_html( implode( ', ', $post['matched_strings'] ) ); ?>
-								</code>
-							</td>
+							<td><?php echo esc_html( $pattern['block_label'] ); ?></td>
 							<td>
 								<?php if ( ! empty( $post['edit_link'] ) ) : ?>
 									<a href="<?php echo esc_url( $post['edit_link'] ); ?>" target="_blank">
