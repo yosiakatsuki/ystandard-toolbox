@@ -165,13 +165,13 @@ class Option {
 	/**
 	 * 設定が新しいかチェック.
 	 *
-	 * @param mixed $new New.
-	 * @param mixed $old New.
+	 * @param mixed $new_value New.
+	 * @param mixed $old       Old.
 	 *
 	 * @return bool
 	 */
-	public static function is_new_value( $new, $old ) {
-		if ( $new === $old || maybe_serialize( $new ) === maybe_serialize( $old ) ) {
+	public static function is_new_value( $new_value, $old ) {
+		if ( $new_value === $old || maybe_serialize( $new_value ) === maybe_serialize( $old ) ) {
 			return false;
 		}
 
