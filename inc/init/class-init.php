@@ -79,7 +79,8 @@ class Init {
 		Notice::set_notice(
 			function () {
 				Notice::warning(
-					__( 'このyStandard Toolboxは試用・検証のために作成されたバージョンです。機能が不足していたり、不具合が多く含まれる可能性があります。', 'ystandard-toolbox' )
+					__( 'このyStandard Toolboxは検証のために作成されたバージョンです。機能が不足していたり、不具合が多く含まれる可能性があります。', 'ystandard-toolbox' ) . '<br>' .
+					__( 'また、管理画面からのアップデートを構成するファイルが含まれていないため、アップデートは最新ファイルを「プラグインを追加」から手動でアップロードしてインストールしてください。', 'ystandard-toolbox' )
 				);
 			}
 		);
