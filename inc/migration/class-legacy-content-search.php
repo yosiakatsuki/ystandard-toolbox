@@ -191,7 +191,7 @@ class Legacy_Content_Search {
 		// 複数 LIKE 句の OR 検索は WP_Query では実装が著しく複雑になるため $wpdb を直接利用.
 		// $or_clause / $block_clause / $type_placeholders は事前に組み立てた静的な SQL 片で、
 		// すべての値は $values 経由で $wpdb->prepare() に渡してエスケープしている。.
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT ID, post_title, post_type FROM {$wpdb->posts}
@@ -203,7 +203,7 @@ class Legacy_Content_Search {
 				$values
 			)
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
 
 		if ( empty( $rows ) ) {
 			return [];
