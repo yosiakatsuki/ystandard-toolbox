@@ -33,6 +33,8 @@ class Post_Meta_SEO {
 		add_action( 'ys_save_post_meta_seo', [ $this, 'save_seo_option' ] );
 		add_action( 'pre_get_document_title', [ $this, 'render_title_tag' ], 11 );
 		add_filter( 'ys_get_meta_description', [ $this, 'meta_description' ], PHP_INT_MAX );
+		add_filter( 'ys_ogp_title_singular', [ $this, 'ogp_title_singular' ] );
+		add_filter( 'ys_ogp_description_singular', [ $this, 'ogp_description_singular' ] );
 	}
 
 	/**
@@ -60,6 +62,56 @@ class Post_Meta_SEO {
 	 */
 	public function meta_description( $dscr ) {
 		if ( ! is_singular() ) {
+			return $dscr;
+		}
+		$seo_dscr = Post_Meta::get_post_meta( 'ystdtb_seo_description', get_the_ID() );
+		if ( empty( trim( $seo_dscr ) ) ) {
+			return $dscr;
+		}
+
+		return $seo_dscr;
+	}
+
+	/**
+	 * OGP/Twitter Cards 用タイトルのフォールバック
+	 *
+	 * yStandard 側の OGP 用タイトル（ys_ogp_title）が未設定で、
+	 * Toolbox の <title> タグ用タイトル（ystdtb_seo_title）が設定されている場合、
+	 * SEO 用タイトルを OGP/Twitter Cards にも使う。
+	 *
+	 * @param string $title Title.
+	 *
+	 * @return string
+	 */
+	public function ogp_title_singular( $title ) {
+		// yStandard 側に OGP 専用タイトルがあれば、そのまま使う。
+		$ogp_title = get_post_meta( get_the_ID(), 'ys_ogp_title', true );
+		if ( ! empty( trim( $ogp_title ) ) ) {
+			return $title;
+		}
+		$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
+		if ( empty( trim( $seo_title ) ) ) {
+			return $title;
+		}
+
+		return $seo_title;
+	}
+
+	/**
+	 * OGP/Twitter Cards 用 description のフォールバック
+	 *
+	 * yStandard 側の OGP 用 description（ys_ogp_description）が未設定で、
+	 * Toolbox の meta description（ystdtb_seo_description）が設定されている場合、
+	 * SEO 用 description を OGP/Twitter Cards にも使う。
+	 *
+	 * @param string $dscr Description.
+	 *
+	 * @return string
+	 */
+	public function ogp_description_singular( $dscr ) {
+		// yStandard 側に OGP 専用 description があれば、そのまま使う。
+		$ogp_dscr = get_post_meta( get_the_ID(), 'ys_ogp_description', true );
+		if ( ! empty( trim( $ogp_dscr ) ) ) {
 			return $dscr;
 		}
 		$seo_dscr = Post_Meta::get_post_meta( 'ystdtb_seo_description', get_the_ID() );

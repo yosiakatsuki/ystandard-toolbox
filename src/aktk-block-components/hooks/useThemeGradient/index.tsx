@@ -5,20 +5,13 @@ import { useMemo } from '@wordpress/element';
 // @ts-ignore
 import { useSettings } from '@wordpress/block-editor';
 import { _x } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
 import { applyFilters } from '@wordpress/hooks';
-
-type UseThemeGradientsOptions = {
-	enableDefaultGradients?: boolean;
-};
 
 /**
  * テーマのカラー設定を取得する（設定画面用）
  * @param options
  */
-const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
-	const { enableDefaultGradients = false } = options || {};
+const useThemeGradients = () => {
 	const [
 		customGradients,
 		themeGradients,
@@ -40,14 +33,6 @@ const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
 		color: string;
 	} >;
 
-	// useSelectから色情報を取得(主に設定画面用).
-	const dataGradients = useSelect( ( select ) => {
-		// @ts-ignore
-		const settings = select( editorStore )?.getEditorSettings();
-		// @ts-ignore
-		return settings?.gradients || [];
-	}, [] );
-
 	return useMemo( () => {
 		const result = [];
 		let _themeGradients = [];
@@ -56,8 +41,6 @@ const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
 			_themeGradients = themeGradients;
 		} else if ( hookThemeGradients && hookThemeGradients.length ) {
 			_themeGradients = hookThemeGradients;
-		} else if ( dataGradients && dataGradients.length ) {
-			_themeGradients = dataGradients;
 		}
 		if ( _themeGradients && _themeGradients.length ) {
 			result.push( {
@@ -65,15 +48,8 @@ const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
 				slug: 'theme',
 				gradients: _themeGradients,
 			} );
-		} else if ( dataGradients && dataGradients.length ) {
-			result.push( {
-				name: _x( 'テーマ', 'useThemeGradients', 'ystandard-blocks' ),
-				slug: 'theme',
-				gradients: dataGradients,
-			} );
 		}
 		if (
-			enableDefaultGradients &&
 			shouldDisplayDefaultGradients &&
 			defaultGradients &&
 			defaultGradients.length
@@ -101,7 +77,7 @@ const useThemeGradients = ( options?: UseThemeGradientsOptions ) => {
 		themeGradients,
 		defaultGradients,
 		shouldDisplayDefaultGradients,
-		dataGradients,
+		hookThemeGradients,
 	] );
 };
 

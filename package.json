@@ -62,12 +62,11 @@
 		"tailwindcss": "^3.4.17"
 	},
 	"scripts": {
-		"open": "open http://localhost:10020/",
-		"activate:theme": "wp-env run cli 'wp theme activate ystandard'",
-		"start:update": "wp-env start --xdebug -- --update && npm run activate:theme && npm run import",
-		"start:env": "wp-env start --xdebug -- --update && npm run open",
-		"start": "wp-env start --xdebug && npm run import && npm run open",
-		"stop": "wp-env stop",
+		"env:open": "open http://localhost:10020/",
+		"env:activate:theme": "wp-env run cli 'wp theme activate ystandard'",
+		"env:start:update": "wp-env start --xdebug -- --update && npm run activate:theme && npm run import",
+		"env:start": "wp-env start --xdebug && npm run import && npm run open",
+		"env:stop": "wp-env stop",
 		"lint:js:src": "wp-scripts lint-js src/js/**/*.js ./src/js --fix",
 		"lint:js:settings": "wp-scripts lint-js src/plugin-settings/**/*.{js,tsx} ./src/js --fix",
 		"lint:js:blocks": "wp-scripts lint-js blocks ./src/js --fix",
