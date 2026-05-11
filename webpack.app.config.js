@@ -1,5 +1,4 @@
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const ystdtbConfig = require( './webpack.blocks.config' );
 
 module.exports = {
 	...defaultConfig,
@@ -32,8 +31,5 @@ module.exports = {
 				],
 			},
 		],
-	},
-	resolve: {
-		...ystdtbConfig.resolve,
 	},
 };
