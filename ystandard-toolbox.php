@@ -10,7 +10,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: ystandard-toolbox
  * Domain Path: /languages
- * Requires PHP: 8.3.0
+ * Requires PHP: 8.2.0
  * Requires at least: 6.9
  * Update URI : https://wp-ystandard.com/plugins/ystandard-toolbox/
  *
