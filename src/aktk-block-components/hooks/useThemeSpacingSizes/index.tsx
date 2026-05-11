@@ -4,8 +4,6 @@
 // @ts-ignore
 import { useSettings } from '@wordpress/block-editor';
 import { useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
 import { applyFilters } from '@wordpress/hooks';
 
 /**
@@ -16,16 +14,6 @@ const useThemeSpacingSizes = () => {
 	const [ defaultSpacingSizes, themeSpacingSizes ] = useSettings(
 		'spacing.spacingSizes.default',
 		'spacing.spacingSizes.theme'
-	);
-
-	// useSelectから余白サイズ情報を取得(主に設定画面用).
-	const dataSpacingSizes = useSelect(
-		// @ts-ignore
-		( select ) => {
-			const settings = select( editorStore )?.getEditorSettings();
-			return settings?.spacingSizes;
-		},
-		[]
 	);
 
 	// フィルター経由のフォールバック（プラグイン設定画面など editor store が無い環境用）.
@@ -41,9 +29,6 @@ const useThemeSpacingSizes = () => {
 		if ( Array.isArray( hookSpacingSizes ) && hookSpacingSizes.length ) {
 			return hookSpacingSizes;
 		}
-		if ( dataSpacingSizes && dataSpacingSizes.length ) {
-			return dataSpacingSizes;
-		}
 		if ( defaultSpacingSizes && defaultSpacingSizes.length ) {
 			return defaultSpacingSizes;
 		}
@@ -51,7 +36,6 @@ const useThemeSpacingSizes = () => {
 	}, [
 		themeSpacingSizes,
 		hookSpacingSizes,
-		dataSpacingSizes,
 		defaultSpacingSizes,
 	] );
 };
