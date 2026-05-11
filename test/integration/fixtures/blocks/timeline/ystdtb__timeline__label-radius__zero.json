@@ -11,7 +11,6 @@
 					"labelType": "icon",
 					"labelContents": "bookmark",
 					"labelSize": "40px",
-					"labelBold": false,
 					"labelBorderRadius": "0",
 					"contentsInnerMargin": "normal"
 				},

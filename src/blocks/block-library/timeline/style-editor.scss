@@ -1,7 +1,9 @@
 .ystdtb-timeline-item {
+
 	&:where(:not(:first-child)) {
 		margin-block-start: 0;
 	}
+
 	&:where(:not(:last-child)) {
 		margin-block-end: 0;
 	}

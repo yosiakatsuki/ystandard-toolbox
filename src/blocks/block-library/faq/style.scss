@@ -15,11 +15,12 @@
 
 	border: 0;
 
-	& + :where(.ystdtb-faq) {
+	+ :where(.ystdtb-faq) {
 		margin-top: 0;
 	}
 
 	&:where(.has-padding) {
+
 		:where(.ystdtb-faq-item) {
 			--ystdtb--faq-item--padding-horizon: 1.5em;
 		}
@@ -28,7 +29,7 @@
 	&:where(.border-type--all) {
 		border-style: solid;
 
-		& + :where(.ystdtb-faq) {
+		+ :where(.ystdtb-faq) {
 			border-top: 0;
 		}
 	}
@@ -39,7 +40,9 @@
 
 	// アコーディオン形式
 	&:where(.is-accordion) {
+
 		&:where(.is-open) {
+
 			:where(.is-faq--a) {
 				height: auto;
 				height: calc-size(auto);
@@ -51,7 +54,9 @@
 				transform: rotate(180deg);
 			}
 		}
+
 		&:where(:not(.is-open)) {
+
 			:where(.is-faq--q) {
 				border-bottom: 0;
 			}
@@ -76,9 +81,11 @@
 		}
 
 		:where(.ystdtb-faq-item) {
+
 			&:where(.is-faq--q) {
 				cursor: pointer;
 			}
+
 			&:where(.is-faq--a) {
 				transition:
 					height 0.3s,

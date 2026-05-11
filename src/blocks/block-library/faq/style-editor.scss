@@ -3,6 +3,7 @@
  */
 
 [data-type="ystdtb/faq"] {
+
 	&,
 	*,
 	*::before,
@@ -17,9 +18,13 @@
 
 // エディター内のアコーディオン表示調整
 .ystdtb-faq {
+
 	&.is-accordion {
+
 		.ystdtb-faq-item {
+
 			&.is-faq--q {
+
 				&::after {
 					content: "";
 					display: none;

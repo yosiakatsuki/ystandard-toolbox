@@ -62,6 +62,8 @@ require_once __DIR__ . '/cta/class-cta.php';
 require_once __DIR__ . '/lp/class-lp.php';
 // Custom CSS.
 require_once __DIR__ . '/custom-css/class-custom-css.php';
+// Migration.
+require_once __DIR__ . '/migration/class-legacy-content-search.php';
 // Polyfill.
 require_once __DIR__ . '/polyfill/class-polyfill.php';
 

@@ -60,7 +60,7 @@ class Parts_Block {
 		);
 
 		$attributes['parts_id'] = $attributes['partsId'];
-		$parts_id = $attributes['parts_id'];
+		$parts_id               = $attributes['parts_id'];
 		// ショートコード用に変換.
 		$attributes = Shortcode::parse_shortcode_attributes( $attributes );
 
@@ -146,14 +146,17 @@ class Parts_Block {
 	 * @return void
 	 */
 	public function register_block() {
-		register_block_type( __DIR__, [
-			'render_callback' => [ $this, 'render_callback' ],
-			'attributes'      => [
-				'partsId' => [
-					'type' => 'string',
+		register_block_type(
+			__DIR__,
+			[
+				'render_callback' => [ $this, 'render_callback' ],
+				'attributes'      => [
+					'partsId' => [
+						'type' => 'string',
+					],
 				],
-			],
-		] );
+			]
+		);
 	}
 }
 

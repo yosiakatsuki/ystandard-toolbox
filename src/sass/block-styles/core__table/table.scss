@@ -1,9 +1,12 @@
 @use "../../../../src/sass/global";
 
 .wp-block-table {
+
 	&:where(.is-style-ystdtb-table-2col),
 	&:where(.is-style-ystdtb-table-2col-m) {
+
 		:where(td) {
+
 			&:first-child {
 				background-color: #f1f1f3;
 				white-space: nowrap;
@@ -12,7 +15,9 @@
 	}
 
 	&:where(.is-style-ystdtb-table-2col-m) {
+
 		@include global.media-breakpoint-down(mobile) {
+
 			&,
 			tbody,
 			thead,
@@ -24,6 +29,7 @@
 			}
 
 			tr:where(:not(:first-child)) {
+
 				td {
 					border-top: 0;
 				}
@@ -41,6 +47,7 @@
 	}
 
 	&:where(.is-style-ystdtb-table-scroll) {
+
 		.has-fixed-layout {
 			table-layout: auto;
 		}
@@ -55,7 +62,7 @@
 			-webkit-overflow-scrolling: touch;
 
 
-			& > * {
+			> * {
 				width: auto;
 				min-width: 100%;
 				white-space: nowrap;

@@ -4,6 +4,10 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
+	output: {
+		...defaultConfig.output,
+		clean: true,
+	},
 	resolve: {
 		...defaultConfig.resolve,
 		alias: {

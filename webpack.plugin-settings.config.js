@@ -24,6 +24,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: `${ __dirname }/build/plugin-settings`,
+		clean: true,
 	},
 	plugins,
 	resolve: {
@@ -33,8 +34,8 @@ module.exports = {
 		},
 	},
 	performance: {
-		maxEntrypointSize: 500000,
-		maxAssetSize: 500000,
+		maxEntrypointSize: 800000,
+		maxAssetSize: 800000,
 	},
 	cache: false,
 };

@@ -185,11 +185,11 @@ class Heading {
 	 * @return array
 	 */
 	public function add_plugin_settings( $settings ) {
-		$settings['heading_design']        = self::get_heading_design_options();
-		$settings['heading_level']         = self::get_heading_level_options();
-		$settings['heading_is_compatible'] = $this->is_compatible_mode();
-		$settings['heading_breakpoints']      = Styles::get_breakpoints();
-		$settings['heading_breakpoint_unit']  = Styles::get_breakpoint_unit();
+		$settings['heading_design']          = self::get_heading_design_options();
+		$settings['heading_level']           = self::get_heading_level_options();
+		$settings['heading_is_compatible']   = $this->is_compatible_mode();
+		$settings['heading_breakpoints']     = Styles::get_breakpoints();
+		$settings['heading_breakpoint_unit'] = Styles::get_breakpoint_unit();
 
 		return $settings;
 	}
@@ -243,7 +243,7 @@ class Heading {
 	 * @return \WP_Error|WP_HTTP_Response|\WP_REST_Response
 	 */
 	public function update_heading_style( $request ) {
-		$data   = $request->get_json_params();
+		$data = $request->get_json_params();
 		// データチェック
 		if ( ! is_array( $data ) || ! isset( $data['style'] ) || ! isset( $data['type'] ) ) {
 			return Api::create_response(

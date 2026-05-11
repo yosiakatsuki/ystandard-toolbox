@@ -98,9 +98,9 @@ export default function EditorPanel( { tab }: EditorPanelProps ): JSX.Element {
 			</div>
 			{ useAmp && (
 				<div className="mt-4 space-y-4">
-					<label className="text-lg font-bold text-aktk-text-blue">
+					<p className="text-lg font-bold text-aktk-text-blue">
 						{ __( 'AMP用コード追加', 'ystandard-toolbox' ) }
-					</label>
+					</p>
 					<CodeInput
 						value={ codeAmp }
 						onChange={ handleCodeAmpOnChange }

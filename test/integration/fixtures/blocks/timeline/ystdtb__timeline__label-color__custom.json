@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "bookmark",
-					"labelBold": false,
 					"customLabelColor": "#0284c7",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal"

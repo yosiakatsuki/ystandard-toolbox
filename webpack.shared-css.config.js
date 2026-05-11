@@ -16,6 +16,7 @@ module.exports = {
 	output: {
 		...defaultConfig.output,
 		path: path.resolve( __dirname, 'build/shared' ),
+		clean: true,
 	},
 	plugins,
 };

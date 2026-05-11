@@ -1,6 +1,7 @@
 @use "./style";
 
 [data-type="ystdtb/icon-list"] {
+
 	&,
 	*,
 	*::before,
@@ -10,6 +11,7 @@
 }
 
 .ystdtb-icon-list-edit {
+
 	&.ystdtb-icon-list {
 		display: flex;
 		justify-content: center;

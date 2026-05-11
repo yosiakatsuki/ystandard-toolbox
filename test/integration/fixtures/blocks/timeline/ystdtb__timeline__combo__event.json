@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "bookmark",
-					"labelBold": false,
 					"labelColor": "ys-blue",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",
@@ -24,7 +23,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "star",
-					"labelBold": false,
 					"labelColor": "ys-orange",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",
@@ -38,7 +36,6 @@
 				"attributes": {
 					"labelType": "icon",
 					"labelContents": "heart",
-					"labelBold": false,
 					"labelColor": "ys-red",
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "normal",

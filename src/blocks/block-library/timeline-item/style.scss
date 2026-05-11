@@ -95,12 +95,14 @@
 	}
 
 	&:where(.is-margin-small) {
+
 		> * + * {
 			margin-block-start: var(--ystdtb--timeline-item-contents--item-margin--small);
 		}
 	}
 
 	&:where(.is-margin-large) {
+
 		> * + * {
 			margin-block-start: var(--ystdtb--timeline-item-contents--item-margin--large);
 		}

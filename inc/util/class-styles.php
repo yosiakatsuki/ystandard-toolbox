@@ -394,7 +394,7 @@ class Styles {
 					continue;
 				}
 				// 0pxなど0の場合は単位なしの0をセット.
-				if ( '' !== $value && 'auto' !== $value && 0 == (float) $value ) {
+				if ( '' !== $value && 'auto' !== $value && 0.0 === (float) $value ) {
 					$value = 0;
 				}
 				$parse_result[ "{$name}-{$position}" ] = $value;

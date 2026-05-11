@@ -10,7 +10,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "large"
 				},
@@ -22,7 +21,6 @@
 				"attributes": {
 					"labelType": "",
 					"labelContents": "",
-					"labelBold": false,
 					"labelBorderRadius": "50px",
 					"contentsInnerMargin": "small"
 				},

@@ -9,10 +9,10 @@
   background-size: cover;
   overflow: hidden;
   text-decoration: none;
-  color: currentColor;
+  color: currentcolor;
 
   &:hover {
-    color: currentColor;
+    color: currentcolor;
   }
 
   &,
@@ -21,6 +21,27 @@
   }
 
   @include customProperty.banner-link();
+
+  .ystdtb-banner-link__main-text {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &:not(.has-font-size) {
+      font-size: 1.6em;
+    }
+
+    @include customProperty.main-text();
+  }
+
+  .ystdtb-banner-link__sub-text {
+    margin-bottom: 0;
+
+    &:not(.has-margin-top) {
+      margin-top: 1.5em;
+    }
+
+    @include customProperty.sub-text();
+  }
 }
 
 .ystdtb-banner-link__container {
@@ -51,27 +72,4 @@
 
 .ystdtb-banner-link__overlay-background {
   opacity: 0.5;
-}
-
-.ystdtb-banner-link {
-  .ystdtb-banner-link__main-text {
-    margin-top: 0;
-    margin-bottom: 0;
-
-    &:not(.has-font-size) {
-      font-size: 1.6em;
-    }
-
-    @include customProperty.main-text();
-  }
-
-  .ystdtb-banner-link__sub-text {
-    margin-bottom: 0;
-
-    &:not(.has-margin-top) {
-      margin-top: 1.5em;
-    }
-
-    @include customProperty.sub-text();
-  }
 }

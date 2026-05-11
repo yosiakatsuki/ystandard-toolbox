@@ -1,7 +1,7 @@
 :where(.ystdtb-slider-item) {
 	height: 100%;
 
-	& > * {
+	> * {
 		margin-block: 0;
 
 		+ * {

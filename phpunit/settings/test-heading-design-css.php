@@ -247,6 +247,7 @@ EOD;
 
 		$expected = [
 			'.ystdtb.single .entry-title',
+			'.ystdtb.single .wp-block-post-title',
 		];
 		$actual   = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,

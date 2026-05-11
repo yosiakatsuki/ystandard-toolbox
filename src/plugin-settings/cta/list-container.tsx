@@ -17,8 +17,14 @@ import { NoticeSecondaryText } from '@aktk/block-components/components/notice';
 import ListItem from './list-item';
 
 const TAB_NOTE = {
-	header: __( 'ページ本文上部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。', 'ystandard-toolbox' ),
-	footer: __( 'ページ本文下部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。', 'ystandard-toolbox' ),
+	header: __(
+		'ページ本文上部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。',
+		'ystandard-toolbox'
+	),
+	footer: __(
+		'ページ本文下部の要素の表示/非表示を切り替えられます。並び順はドラッグ＆ドロップで変更可能です。',
+		'ystandard-toolbox'
+	),
 } as const;
 
 type TabName = keyof typeof TAB_NOTE;
@@ -30,7 +36,6 @@ interface ListContainerProps {
 	tabName: TabName;
 }
 
-
 /**
  * CTAアイテムリストコンテナコンポーネント
  * ドラッグ＆ドロップで順序変更可能なCTAアイテムの一覧を表示
@@ -38,6 +43,7 @@ interface ListContainerProps {
  * @param root0.items
  * @param root0.setItems
  * @param root0.position
+ * @param root0.tabName
  */
 export default function ListContainer( {
 	items,
@@ -87,7 +93,9 @@ export default function ListContainer( {
 	};
 	return (
 		<>
-			<NoticeSecondaryText className='mt-0 mb-4'>{ TAB_NOTE[ tabName ] }</NoticeSecondaryText>
+			<NoticeSecondaryText className="mb-4 mt-0">
+				{ TAB_NOTE[ tabName ] }
+			</NoticeSecondaryText>
 			<DragDropContext onDragEnd={ handleOnDragEnd }>
 				<Droppable droppableId={ position }>
 					{ /* @ts-ignore */ }

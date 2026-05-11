@@ -1,7 +1,9 @@
 @use "../../../sass/global";
 
 .editor-styles-wrapper {
+
   [data-type="ystdtb/parts"] {
+
     &,
     *,
     *::before,
@@ -52,6 +54,7 @@
   }
 
   >div {
+
     >* {
       max-width: var(--ystd-content-default-width, 800px);
       margin-right: auto;
