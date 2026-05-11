@@ -260,7 +260,6 @@ class Legacy_Content_Search {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( '移行が必要なブロック一覧', 'ystandard-toolbox' ); ?></h1>
-			<p><?php esc_html_e( 'v2 で破壊的変更があったブロック・クラスを使用している投稿の一覧です。エディターで開いて再保存することで最新の構造に更新されます。', 'ystandard-toolbox' ); ?></p>
 
 			<?php foreach ( $results as $key => $entry ) : ?>
 				<?php $this->render_pattern_section( $key, $entry ); ?>
