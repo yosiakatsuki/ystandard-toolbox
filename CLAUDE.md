@@ -7,6 +7,7 @@
 ## 関連ドキュメント
 
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
+- [docs/v2-manual-update.md](docs/v2-manual-update.md) — v2 リリースに向けたマニュアル（wp-ystandard.com）更新計画と対応状況管理
 - [docs/future-improvements.md](docs/future-improvements.md) — v2 リリース後に対応したい改修リスト
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
