@@ -17,7 +17,7 @@ class Shared_Styles {
 	/**
 	 * aktk-block-componentsエディタースタイルのハンドル名
 	 */
-	const AKTK_COMPONENTS_EDITOR_HANDLE = 'aktk-components-editor';
+	const AKTK_COMPONENTS_EDITOR_HANDLE = 'ystdtb-aktk-components-editor';
 
 	/**
 	 * Instance.
