@@ -6,3 +6,4 @@
 ystandard-toolbox/
 /vendor/
 .codex/
+.playwright-mcp/
