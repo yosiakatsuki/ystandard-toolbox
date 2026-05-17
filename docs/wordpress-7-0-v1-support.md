@@ -1,0 +1,138 @@
+# WordPress 7.0対応方針
+
+作成日: 2026年5月17日
+
+## 前提
+
+このドキュメントは、yStandard Toolbox v1系におけるWordPress 7.0対応方針をまとめたものです。
+
+v2の大幅アップデートは別途開発中で、開発自体はほぼ完了しています。v2ではブロックの`apiVersion: 3`対応も完了しているため、v1系ではWordPress 7.0への完全対応は行わず、動作確認と必要最小限の互換性対応に絞ります。
+
+## 方針
+
+v1系では、WordPress 7.0対応として大きな実装変更は行いません。
+
+対応方針は次の通りです。
+
+- WordPress 7.0では動作確認のみを行う。
+- 完全対応はv2に任せる。
+- v1では重大な不具合、セキュリティ問題、表示崩れ、編集不能など、リリースまでの安定運用に必要なものだけ対応する。
+- `apiVersion: 3`への全面移行はv1では行わない。
+- 編集画面の`apiVersion`警告は、v1では既知の制限として扱う。
+
+## WordPress 7.0の確認事項
+
+WordPress 7.0は、2026年5月20日リリース予定です。
+
+当初、WordPress 7.0では投稿エディターのiframe化が強制される予定でしたが、最新のdev noteでは、WordPress 7.0での強制iframe化は見送られています。
+
+WordPress 7.0では、投稿内に挿入されているブロックがすべて`apiVersion: 3`以上の場合にiframe化され、`apiVersion: 2`以下のブロックが含まれる場合は非iframeのまま動作する見込みです。
+
+そのため、v1系で急いで全ブロックを`apiVersion: 3`へ移行する必要性は下がっています。
+
+## このプラグインの状況
+
+このプラグインのブロックは、現在のv1系では古い構成を含んでいます。
+
+- 多くのブロックがJavaScript内で`registerBlockType()`を直接呼び出している。
+- 多くのブロックが`apiVersion: 2`を指定している。
+- 一部のブロックは`apiVersion`未指定です。
+- 定義リスト系ブロックのみ`block.json`を持っていますが、こちらも`apiVersion: 2`です。
+- 通常ブロック、動的ブロックともにPHP側の`register_block_type()`では`api_version`を指定していません。
+
+対象例:
+
+- `blocks/box/index.js`
+- `blocks/faq/index.js`
+- `blocks/faq/item/index.js`
+- `blocks/icon-list/index.js`
+- `blocks/slider/index.js`
+- `blocks/timeline/index.js`
+- `blocks/description-list/block.json`
+- `inc/blocks/class-blocks.php`
+- `inc/blocks/class-dynamic-block.php`
+
+## `apiVersion: 3`対応をv1で見送る理由
+
+編集画面の警告を消すには、実質的にブロックを`apiVersion: 3`対応済みとして扱う必要があります。
+
+しかし、v1系でこれを行う場合、次の確認が必要になります。
+
+- すべてのブロックの`apiVersion`指定を見直す。
+- `block.json`を持つブロックと、JavaScriptで直接登録しているブロックの差を整理する。
+- PHP側の`register_block_type()`に渡す引数を見直す。
+- iframe化されたエディター内でエディタースタイルが正しく読み込まれるか確認する。
+- `window`や`document`を直接参照している処理がエディターiframe内で問題を起こさないか確認する。
+- 既存投稿の保存内容がInvalid Blockにならないか確認する。
+- ブロックの挿入、編集、保存、再読み込み、フロント表示を全体的に確認する。
+
+あと2日程度でこれらをすべて確認し、v1系として動作保証するのは現実的ではありません。
+
+また、v2ではすでに`apiVersion: 3`対応済みであるため、v1系に大きな変更を入れるよりも、v2で完全対応する方針が安全です。
+
+## 編集画面の警告について
+
+WordPress 6.9以降では、`apiVersion: 2`以下のブロックに対してブラウザコンソール警告が出る可能性があります。
+
+この警告は、今後のiframeエディター互換性に向けた移行を促すものです。
+
+v1系では、警告の解消だけを目的に`apiVersion: 3`へ変更することはしません。警告は既知の制限として扱い、ユーザー影響がある不具合が確認された場合のみ、個別に最小限の対応を検討します。
+
+## WordPress 7.0で注意する機能
+
+### ブロック表示制御
+
+WordPress 7.0では、ブロックの表示・非表示制御がコア機能として追加されます。
+
+このプラグインには、画面サイズ別の非表示設定があります。
+
+- `blocks/extension/hidden-by-size/index.js`
+
+コアの表示制御機能と完全に同じ目的ではありませんが、編集画面上で似た機能として見える可能性があります。v1では機能削除や統合は行わず、必要に応じて既知の仕様として案内します。
+
+### Pattern OverridesとcontentOnly
+
+WordPress 7.0では、カスタムブロックのPattern Overrides対応や、`role: "content"`の活用が重要になります。
+
+ただし、v1系で短期間に対応する範囲ではありません。v2側で対応済みのため、v1では見送ります。
+
+### 個別ブロックのCustom CSS
+
+WordPress 7.0では、個別ブロックにCustom CSSを追加できる機能が入ります。
+
+このプラグインにはブロックスタイルや独自CSS機能がありますが、v1では競合や重大な表示崩れが確認された場合だけ個別対応します。
+
+## 対応することリスト
+
+完了した項目には、行頭に`✅`を付けます。未完了の項目には何も付けません。
+
+- W70-001 WordPress 7.0 RCまたは正式版の検証環境を用意する。
+- W70-002 プラグインを有効化し、管理画面で致命的エラーが出ないことを確認する。
+- W70-003 投稿編集画面を開き、既存投稿で編集不能にならないことを確認する。
+- W70-004 yStandard Toolboxの主要ブロックを新規挿入できることを確認する。
+- W70-005 yStandard Toolboxの主要ブロックを編集、保存、再読み込みできることを確認する。
+- W70-006 既存投稿内のyStandard ToolboxブロックがInvalid Blockにならないことを確認する。
+- W70-007 フロント表示で主要ブロックの表示崩れがないことを確認する。
+- W70-008 画面サイズ別非表示設定が、編集画面とフロントで大きく破綻しないことを確認する。
+- W70-009 コアのブロック表示制御機能と、画面サイズ別非表示設定のUI上の見え方を確認する。
+- W70-010 ブロックエディターのブラウザコンソール警告を確認し、`apiVersion`警告を既知の制限として記録する。
+- W70-011 WordPress 7.0でユーザー影響のある不具合が見つかった場合、v1で最小対応するかv2対応に回すか判断する。
+- W70-012 v1で対応しない内容を、リリースノートまたはサポート向けメモに整理する。
+- W70-013 v2で`apiVersion: 3`対応済みであることを、必要に応じて案内できるようにする。
+
+## v1で対応しないこと
+
+- 全ブロックの`apiVersion: 3`移行。
+- 投稿エディターiframe化への完全対応。
+- Pattern Overrides対応。
+- `role: "content"`対応。
+- ブロック登録構造の大幅な見直し。
+- `block.json`ベースへの全面移行。
+- 広範囲の依存パッケージ更新。
+
+## 参考情報
+
+- WordPress 7.0 Field Guide: https://make.wordpress.org/core/2026/05/14/wordpress-7-0-field-guide/
+- Iframed Editor Changes in WordPress 7.0: https://make.wordpress.org/core/2026/02/24/iframed-editor-changes-in-wordpress-7-0/
+- Block API migration for iframe editor compatibility: https://developer.wordpress.org/block-editor/reference-guides/block-api/block-api-versions/block-migration-for-iframe-editor-compatibility/
+- Block Visibility in WordPress 7.0: https://make.wordpress.org/core/2026/03/15/block-visibility-in-wordpress-7-0/
