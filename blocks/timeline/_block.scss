@@ -10,6 +10,14 @@
   border-left: 2px solid #eee;
   padding: 1em 0 3em 1.75em;
 
+  &.has-border {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 2px;
+    border-left-style: solid;
+  }
+
   @include global.media-breakpoint(sm) {
     padding-left: 2.5em;
   }
