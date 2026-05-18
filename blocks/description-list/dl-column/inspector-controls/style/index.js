@@ -15,30 +15,27 @@ const PanelStyle = ( props ) => {
 
 	return (
 		<PanelBody
-			title={__( '横並び設定', 'ystandard-toolbox' )}
-			initialOpen={true}
+			title={ __( '横並び設定', 'ystandard-toolbox' ) }
+			initialOpen={ true }
 		>
 			<BaseControl
-				id={'isStackedOn'}
-				label={__( '縦に並べるタイミング', 'ystandard-toolbox' )}
+				id={ 'isStackedOn' }
+				label={ __( '縦に並べるタイミング', 'ystandard-toolbox' ) }
 				__nextHasNoMarginBottom
 			>
 				<ToggleControl
-					label={__(
-						'モバイルで縦に並べる',
-						'ystandard-toolbox'
-					)}
-					onChange={isStackedOnMobileOnChange}
-					checked={isStackedOnMobile ?? true}
+					label={ __( 'モバイルで縦に並べる', 'ystandard-toolbox' ) }
+					onChange={ isStackedOnMobileOnChange }
+					checked={ isStackedOnMobile ?? true }
 					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
-					label={__(
+					label={ __(
 						'タブレットで縦に並べる',
 						'ystandard-toolbox'
-					)}
-					onChange={isStackedOnTabletOnChange}
-					checked={isStackedOnTablet ?? false}
+					) }
+					onChange={ isStackedOnTabletOnChange }
+					checked={ isStackedOnTablet ?? false }
 					__nextHasNoMarginBottom
 				/>
 			</BaseControl>
