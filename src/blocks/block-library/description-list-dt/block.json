@@ -85,6 +85,6 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["aktk-components-editor", "file:./index.css"],
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
 	"style": "file:./style-index.css"
 }
