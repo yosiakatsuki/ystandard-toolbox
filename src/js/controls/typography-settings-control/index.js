@@ -47,7 +47,10 @@ const TypographySettingsControl = ( { values, onChange } ) => {
 	};
 
 	return (
-		<BaseControl className={ 'ystdtb-typography-control' } __nextHasNoMarginBottom>
+		<BaseControl
+			className={ 'ystdtb-typography-control' }
+			__nextHasNoMarginBottom
+		>
 			<div className={ 'ystdtb-typography-control__row' }>
 				<div>
 					<FontWeightControl

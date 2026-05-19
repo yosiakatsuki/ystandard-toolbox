@@ -12,40 +12,43 @@ const SlidesPerViewAuto = ( { attributes, setAttributes } ) => {
 			setAttributes,
 			type,
 			slides,
-			newValue: { slidesPerView: !newValue ? undefined : 'auto' },
+			newValue: { slidesPerView: ! newValue ? undefined : 'auto' },
 		} );
 	};
 
 	return (
 		<>
 			<BaseControl
-				id={'slides-par-view-auto'}
-				label={__( '1画面に表示するスライド数(slidesParView)', 'ystandard-toolbox' )}
+				id={ 'slides-par-view-auto' }
+				label={ __(
+					'1画面に表示するスライド数(slidesParView)',
+					'ystandard-toolbox'
+				) }
 				__nextHasNoMarginBottom
 			>
 				<ResponsiveTab>
-					{( tab ) => {
+					{ ( tab ) => {
 						const type = tab.name;
-						const slidesPerView = getSlidesOption( slides, type, optionName );
+						const slidesPerView = getSlidesOption(
+							slides,
+							type,
+							optionName
+						);
 						return (
 							<ToggleControl
-								label={__(
+								label={ __(
 									'"auto"を指定する',
 									'ystandard-toolbox'
-								)}
-								onChange={( value ) => {
-									handleOnChangeToggle(
-										value,
-										type
-									);
-								}}
-								checked={'auto' === slidesPerView}
+								) }
+								onChange={ ( value ) => {
+									handleOnChangeToggle( value, type );
+								} }
+								checked={ 'auto' === slidesPerView }
 								__nextHasNoMarginBottom
 							/>
 						);
-					}}
+					} }
 				</ResponsiveTab>
-
 			</BaseControl>
 		</>
 	);

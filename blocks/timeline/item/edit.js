@@ -71,6 +71,7 @@ function TimelineItem( props ) {
 		[ `is-margin-${ selectContentsInnerMargin }` ]:
 			'normal' !== selectContentsInnerMargin,
 		[ `has-${ selectLabelType }` ]: '' !== selectLabelType,
+		'has-border': contentsBorderColor.class || contentsBorderColor.color,
 		[ contentsBorderColor.class ]: contentsBorderColor.class,
 	} );
 	const timelineStyle = {

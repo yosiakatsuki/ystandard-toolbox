@@ -17,6 +17,11 @@
     margin-bottom: 0;
   }
 
+  &.ystdtb-timeline-item.has-border {
+    border-width: 0 0 0 2px !important;
+    border-left-style: solid !important;
+  }
+
   .ystdtb-timeline__contents {
     &.is-no-child {
       padding-top: 1.3em;
