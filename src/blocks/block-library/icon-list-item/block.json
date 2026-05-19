@@ -17,6 +17,7 @@
 	"attributes": {
 		"content": {
 			"type": "string",
+			"role": "content",
 			"source": "html",
 			"selector": "li",
 			"default": ""

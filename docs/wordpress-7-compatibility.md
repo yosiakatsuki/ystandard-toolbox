@@ -38,17 +38,17 @@ WordPress 7.0は、公式スケジュールでは2026-05-20にリリース予定
 - ✅ WP70-05 WordPress 7.0環境で非yStandardテーマでも共通機能を確認する
 - ✅ WP70-06 `src/blocks/block-library/`配下の全ブロックがエディターに挿入できることを確認する
 - ✅ WP70-07 `apiVersion: 3`ブロックだけの投稿でiframed editor表示になっても編集UIが崩れないことを確認する
-- WP70-08 エディター専用CSSがiframed editor内で正しく読み込まれることを確認する
-- WP70-09 ブロックツールバーとInspector Controlsがiframed editor内で正しく動作することを確認する
-- WP70-10 `contentOnly`内で編集対象にしたい属性へ`role: content`を追加する
-- WP70-11 `banner-link`の`mainText`と`subText`に`role: content`が必要か確認する
-- WP70-12 `box`の`label`に`role: content`が必要か確認する
-- WP70-13 `icon-list-item`の`content`に`role: content`を追加する
-- WP70-14 `timeline-item`の`labelContents`に`role: content`が必要か確認する
-- WP70-15 `faq-item`はInnerBlocks中心のため`contentRole`または`role: content`の必要性を確認する
-- WP70-16 `sns-share`の`labelBefore`と`labelAfter`に`role: content`が必要か確認する
-- WP70-17 `parts`の`partsId`はコンテンツ扱いにしない方針で問題ないか確認する
-- WP70-18 `posts`の検索・表示条件系属性はコンテンツ扱いにしない方針で問題ないか確認する
+- ✅ WP70-08 エディター専用CSSがiframed editor内で正しく読み込まれることを確認する
+- ✅ WP70-09 ブロックツールバーとInspector Controlsがiframed editor内で正しく動作することを確認する
+- ✅ WP70-10 `contentOnly`内で編集対象にしたい属性へ`role: content`を追加する
+- ✅ WP70-11 `banner-link`の`mainText`と`subText`に`role: content`を追加する
+- ✅ WP70-12 `box`の`label`に`role: content`は追加しない
+- ✅ WP70-13 `icon-list-item`の`content`に`role: content`を追加する
+- ✅ WP70-14 `timeline-item`の`labelContents`に`role: content`は追加しない
+- ✅ WP70-15 `faq-item`はInnerBlocks中心のため追加対応しない
+- ✅ WP70-16 `sns-share`の`labelBefore`と`labelAfter`に`role: content`は追加しない
+- ✅ WP70-17 `parts`の`partsId`はコンテンツ扱いにしない
+- ✅ WP70-18 `posts`の検索・表示条件系属性はコンテンツ扱いにしない
 - WP70-19 コンテナ系ブロックに`supports.listView`を追加するか判断する
 - WP70-20 `faq`に`supports.listView`を追加するか確認する
 - WP70-21 `timeline`に`supports.listView`を追加するか確認する
