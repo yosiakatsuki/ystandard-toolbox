@@ -38,6 +38,7 @@
 	"supports": {
 		"align": false,
 		"className": false,
+		"listView": true,
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,

@@ -92,7 +92,8 @@
 	"supports": {
 		"anchor": false,
 		"align": [ "wide", "full" ],
-		"className": false
+		"className": false,
+		"listView": true
 	},
 	"example": {
 		"attributes": {},

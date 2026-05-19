@@ -49,7 +49,8 @@
 	},
 	"supports": {
 		"align": false,
-		"className": false
+		"className": false,
+		"listView": true
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",

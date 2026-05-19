@@ -49,12 +49,12 @@ WordPress 7.0は、公式スケジュールでは2026-05-20にリリース予定
 - ✅ WP70-16 `sns-share`の`labelBefore`と`labelAfter`に`role: content`は追加しない
 - ✅ WP70-17 `parts`の`partsId`はコンテンツ扱いにしない
 - ✅ WP70-18 `posts`の検索・表示条件系属性はコンテンツ扱いにしない
-- WP70-19 コンテナ系ブロックに`supports.listView`を追加するか判断する
-- WP70-20 `faq`に`supports.listView`を追加するか確認する
-- WP70-21 `timeline`に`supports.listView`を追加するか確認する
-- WP70-22 `icon-list`に`supports.listView`を追加するか確認する
-- WP70-23 `description-list`に`supports.listView`を追加するか確認する
-- WP70-24 `slider`に`supports.listView`を追加するか確認する
+- ✅ WP70-19 コンテナ系ブロックに`supports.listView`を追加する
+- ✅ WP70-20 `faq`に`supports.listView`を追加する
+- ✅ WP70-21 `timeline`に`supports.listView`を追加する
+- ✅ WP70-22 `icon-list`に`supports.listView`を追加する
+- ✅ WP70-23 `description-list`に`supports.listView`を追加する
+- ✅ WP70-24 `slider`に`supports.listView`を追加する
 - WP70-25 既存の画面サイズ別非表示機能とWordPress 7.0のBlock Visibilityが競合しないことを確認する
 - WP70-26 `metadata.blockVisibility`がbooleanとobjectの両方になり得る前提で、独自処理が値を壊さないことを確認する
 - WP70-27 独自の`ystdtbIsHiddenMobile`、`ystdtbIsHiddenTablet`、`ystdtbIsHiddenDesktop`はv2では維持する
