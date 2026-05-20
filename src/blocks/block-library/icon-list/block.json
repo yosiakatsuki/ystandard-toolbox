@@ -38,6 +38,7 @@
 	"supports": {
 		"align": false,
 		"className": false,
+		"listView": true,
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,
@@ -82,6 +83,6 @@
 		"ystdtb/customIconColor": "customIconColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["aktk-components-editor", "file:./index.css"],
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
 	"style": "file:./style-index.css"
 }

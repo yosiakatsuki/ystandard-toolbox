@@ -40,12 +40,12 @@ src/aktk-block-components/index.css  （エントリーポイント）
 
 ### CSS配信の仕組み
 
-1. **PHP側**: `Shared_Styles` クラスが `aktk-components-editor` ハンドルでCSSを `wp_register_style` で登録
+1. **PHP側**: `Shared_Styles` クラスが `ystdtb-aktk-components-editor` ハンドルでCSSを `wp_register_style` で登録
 2. **ブロック側**: 各ブロックの `block.json` の `editorStyle` 配列でハンドルを参照
 3. **plugin-settings側**: `wp_enqueue_style` で明示的にenqueue
 
 ```json
-"editorStyle": ["aktk-components-editor", "file:./index.css"]
+"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"]
 ```
 
 共有ハンドルが先 → ブロック固有CSSが後で読み込まれ、オーバーライドが正常に動作する。

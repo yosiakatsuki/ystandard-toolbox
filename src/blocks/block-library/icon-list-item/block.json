@@ -17,6 +17,7 @@
 	"attributes": {
 		"content": {
 			"type": "string",
+			"role": "content",
 			"source": "html",
 			"selector": "li",
 			"default": ""
@@ -60,5 +61,5 @@
 		"ystdtb/customIconColor": "customIconColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["aktk-components-editor", "file:./index.css"]
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"]
 }

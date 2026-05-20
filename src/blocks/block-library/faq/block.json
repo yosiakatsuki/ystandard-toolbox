@@ -49,7 +49,8 @@
 	},
 	"supports": {
 		"align": false,
-		"className": false
+		"className": false,
+		"listView": true
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",
@@ -63,7 +64,7 @@
 		"ystdtb/customAccordionArrowColor": "customAccordionArrowColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["aktk-components-editor", "file:./index.css"],
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
 	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
 	"example": {
