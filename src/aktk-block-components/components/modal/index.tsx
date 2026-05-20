@@ -2,6 +2,7 @@
  * WordPress dependencies.
  */
 import { Modal as WPModal, Button } from '@wordpress/components';
+import { useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -15,6 +16,8 @@ interface ModalProps {
 	onCancel?: () => void;
 	okText?: string;
 	cancelText?: string;
+	isOkDestructive?: boolean;
+	focusOnCancel?: boolean;
 }
 
 export function Modal( props: ModalProps ) {
@@ -26,13 +29,23 @@ export function Modal( props: ModalProps ) {
 		onCancel,
 		okText = __( 'OK', 'aktk-blocks' ),
 		cancelText = __( 'キャンセル', 'aktk-blocks' ),
+		isOkDestructive = false,
+		focusOnCancel = false,
 	} = props;
+	const cancelButtonRef = useRef< HTMLButtonElement >( null );
 
 	const handleOnClose = () => {
 		if ( !! onCancel ) {
 			onCancel();
 		}
 	};
+
+	useEffect( () => {
+		if ( isOpen && focusOnCancel ) {
+			cancelButtonRef.current?.focus();
+		}
+	}, [ isOpen, focusOnCancel ] );
+
 	return (
 		<>
 			{ isOpen && (
@@ -45,6 +58,7 @@ export function Modal( props: ModalProps ) {
 					<div className={ 'mt-4 flex justify-end gap-4' }>
 						{ onCancel && (
 							<Button
+								ref={ cancelButtonRef }
 								variant={ 'tertiary' }
 								onClick={ onCancel }
 								style={ {
@@ -55,7 +69,11 @@ export function Modal( props: ModalProps ) {
 							</Button>
 						) }
 						{ onOk && (
-							<Button variant={ 'primary' } onClick={ onOk }>
+							<Button
+								variant={ 'primary' }
+								onClick={ onOk }
+								isDestructive={ isOkDestructive }
+							>
 								{ okText }
 							</Button>
 						) }
