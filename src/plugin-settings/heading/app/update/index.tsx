@@ -103,6 +103,7 @@ export default function UpdateHeadingOption() {
 					{ __( 'スタイル設定を更新', 'ystandard-toolbox' ) }
 				</PrimaryButton>
 				<DestructiveButton
+					isSmall
 					onClick={ () => setIsDeleteConfirmModalOpen( true ) }
 				>
 					{ __( 'スタイルを削除', 'ystandard-toolbox' ) }
