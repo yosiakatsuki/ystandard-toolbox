@@ -382,27 +382,36 @@ function ModeSelect( props: ModeSelectProps ) {
 				</TabButton>
 			</div>
 			<ConfirmModal
-				title={ __( '編集モード切り替え確認', 'ystandard-toolbox' ) }
+				title={ __( '編集内容を破棄しますか', 'ystandard-toolbox' ) }
 				isOpen={ isConfirmModalOpen }
-				okText={ __( '編集モードを切り替える', 'ystandard-toolbox' ) }
+				cancelText={ __( '設定の編集に戻る', 'ystandard-toolbox' ) }
+				okText={ __(
+					'編集内容を破棄して切り替える',
+					'ystandard-toolbox'
+				) }
 				onCancel={ () => {
 					setIsConfirmModalOpen( false );
 					setTempSelectedType( selectedType );
 				} }
 				onOk={ handleConfirmModalOk }
+				isOkDestructive={ true }
+				focusOnCancel={ true }
+				actionButtonOrder={ 'ok-cancel' }
+				okVariant={ 'secondary' }
+				cancelVariant={ 'primary' }
 			>
 				<p className="mb-0">
 					{ __( '編集中のデータがあります。', 'ystandard-toolbox' ) }
 				</p>
 				<p className="mt-0">
 					{ __(
-						'編集モードを切り替えてもよろしいですか。',
+						'切り替えると、保存していない編集内容は破棄されます。',
 						'ystandard-toolbox'
 					) }
 				</p>
 				<p className={ 'mt-1 text-xs text-gray-400' }>
 					{ __(
-						'※編集中のデータは破棄されます。',
+						'編集を続ける場合は「設定の編集に戻る」を選択してください。',
 						'ystandard-toolbox'
 					) }
 				</p>
