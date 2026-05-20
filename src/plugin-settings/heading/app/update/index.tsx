@@ -19,6 +19,7 @@ import { ConfirmModal } from '@aktk/block-components/components/modal';
 
 import { HeadingContext } from '../index';
 import { updateHeadingStyles } from '@aktk/plugin-settings/heading/app/api';
+import './style-editor.css';
 
 export default function UpdateHeadingOption() {
 	const [ isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen ] =
@@ -94,7 +95,7 @@ export default function UpdateHeadingOption() {
 
 	return (
 		<>
-			<div className="sticky bottom-0 left-0 flex justify-between bg-white/80 pb-5 pt-2">
+			<div className="ystdtb-heading-update-actions">
 				<PrimaryButton
 					icon={ 'cloud-upload' }
 					onClick={ handleOnClickSave }
@@ -117,13 +118,13 @@ export default function UpdateHeadingOption() {
 				isOkDestructive={ true }
 				focusOnCancel={ true }
 			>
-				<p className="mb-0">
+				<p className="ystdtb-heading-update-actions__delete-message">
 					{ __(
 						'選択中の見出しスタイルを削除してもよろしいですか。',
 						'ystandard-toolbox'
 					) }
 				</p>
-				<p className={ 'mt-1 text-xs text-gray-400' }>
+				<p className="ystdtb-heading-update-actions__delete-note">
 					{ __(
 						'※削除したスタイルは元に戻せません。',
 						'ystandard-toolbox'
