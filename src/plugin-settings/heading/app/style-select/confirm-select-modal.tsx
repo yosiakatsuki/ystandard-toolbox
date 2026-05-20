@@ -21,15 +21,21 @@ export default function ConfirmSelectModal( props: ConfirmSelectProps ) {
 	return (
 		<>
 			<ConfirmModal
+				title={ __( '編集内容を破棄しますか', 'ystandard-toolbox' ) }
 				isOpen={ isOpen }
 				onOk={ onSuccess }
 				onCancel={ onCancel }
 				okText={ __( '別のスタイルを編集する', 'ystandard-toolbox' ) }
 				cancelText={ __( 'スタイル編集に戻る', 'ystandard-toolbox' ) }
+				isOkDestructive={ true }
+				focusOnCancel={ true }
+				actionButtonOrder={ 'ok-cancel' }
+				okVariant={ 'secondary' }
+				cancelVariant={ 'primary' }
 			>
 				<p>
 					{ __(
-						'編集中のデータがありますが編集するスタイルを変更してもよろしいですか？',
+						'編集するスタイルを変更してもよろしいですか？',
 						'ystandard-toolbox'
 					) }
 				</p>
