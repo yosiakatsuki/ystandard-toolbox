@@ -467,9 +467,12 @@ class Styles {
 	 * @return array|null
 	 */
 	public static function get_breakpoints() {
+		// 旧フィルターとの互換性を保つため、両方のフィルターを適用.
+		$breakpoints = apply_filters( 'ys_get_break_points', [ self::BREAKPOINTS ] );
+
 		return apply_filters(
 			'ystdtb_css_breakpoints',
-			apply_filters( 'ys_get_break_points', self::BREAKPOINTS )
+			apply_filters( 'ys_get_breakpoints', $breakpoints )
 		);
 	}
 
@@ -497,7 +500,11 @@ class Styles {
 		$unit = self::get_breakpoint_unit();
 		$step = 'px' === $unit ? 0.02 : 0.001;
 
-		return apply_filters( 'ystdtb_css_max_width_step', $step, $unit );
+		return apply_filters(
+			'ystdtb_css_max_width_step',
+			apply_filters( 'ys_get_max_width_step', $step, $unit ),
+			$unit
+		);
 	}
 
 	/**
