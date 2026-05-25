@@ -4,23 +4,58 @@
 import { __ } from '@wordpress/i18n';
 
 /*
- * Plugin Dependencies
- */
-import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
-
-/*
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
+import {
+	ResponsiveSpacingSelect,
+	type ResponsiveSpacing,
+	type ResponsiveSpacingSelectOnChangeProps,
+	type Spacing,
+} from '@aktk/block-components/components/custom-spacing-select';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+
+const hasResponsiveSpacing = ( value?: ResponsiveSpacing ) => {
+	return !! value?.tablet || !! value?.mobile;
+};
+
+const getDefaultSpacing = (
+	value?: ResponsiveSpacing
+): Spacing | undefined => {
+	return value?.desktop;
+};
+
+const getResponsiveSpacing = (
+	value?: ResponsiveSpacing
+): ResponsiveSpacing | undefined => {
+	if ( ! hasResponsiveSpacing( value ) ) {
+		return undefined;
+	}
+	return value;
+};
+
+const toLegacyPadding = (
+	value: ResponsiveSpacingSelectOnChangeProps
+): ResponsiveSpacing | undefined => {
+	if ( value.responsiveSpacing ) {
+		return stripUndefined( value.responsiveSpacing ) as ResponsiveSpacing;
+	}
+	if ( value.spacing ) {
+		return stripUndefined( {
+			desktop: value.spacing,
+		} ) as ResponsiveSpacing;
+	}
+	return undefined;
+};
 
 const Padding = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const { padding } = attributes;
+	const padding = attributes.padding as ResponsiveSpacing | undefined;
 
-	const handleOnChange = ( values ) => {
+	const handleOnChange = ( values: ResponsiveSpacingSelectOnChangeProps ) => {
 		setAttributes( {
-			padding: values,
+			padding: toLegacyPadding( values ),
 		} );
 	};
 
@@ -30,7 +65,8 @@ const Padding = ( props ) => {
 			label={ __( '内側余白', 'ystandard-toolbox' ) }
 		>
 			<ResponsiveSpacingSelect
-				value={ padding }
+				value={ getDefaultSpacing( padding ) }
+				responsiveValue={ getResponsiveSpacing( padding ) }
 				onChange={ handleOnChange }
 			/>
 		</BaseControl>
