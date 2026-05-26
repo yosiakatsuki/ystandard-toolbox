@@ -158,6 +158,7 @@ class Plugin_Settings {
 					'isAmpEnable'        => AMP::is_amp_enable(),
 					'editorColors'       => self::get_editor_colors(),
 					'editorFontSizes'    => self::get_editor_font_sizes(),
+					'editorFontFamilies' => self::get_editor_font_families(),
 					'editorSpacingSizes' => self::get_editor_spacing_sizes(),
 				]
 			)
@@ -419,6 +420,51 @@ class Plugin_Settings {
 		}
 
 		return array_values( $unique_font_sizes );
+	}
+
+	/**
+	 * エディターで使用可能なフォントファミリーを取得
+	 *
+	 * theme.json から typography.fontFamilies を取得する.
+	 *
+	 * @return array フォントファミリーの配列
+	 */
+	private static function get_editor_font_families() {
+		// useSettings()で参照するoriginごとに値を保持する.
+		$font_families = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
+
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			// theme.jsonのtypography.fontFamiliesをoriginごとに取得する.
+			foreach ( array_keys( $font_families ) as $origin ) {
+				if ( isset( $settings['typography']['fontFamilies'][ $origin ] ) && is_array( $settings['typography']['fontFamilies'][ $origin ] ) ) {
+					$font_families[ $origin ] = $settings['typography']['fontFamilies'][ $origin ];
+				}
+			}
+		}
+
+		// slugまたはfontFamilyをキーにして重複を除去する.
+		foreach ( $font_families as $origin => $families ) {
+			$unique_font_families = [];
+			foreach ( $families as $font_family ) {
+				if ( isset( $font_family['slug'] ) ) {
+					$unique_font_families[ $font_family['slug'] ] = $font_family;
+					continue;
+				}
+				if ( isset( $font_family['fontFamily'] ) ) {
+					$unique_font_families[ $font_family['fontFamily'] ] = $font_family;
+				}
+			}
+			$font_families[ $origin ] = array_values( $unique_font_families );
+		}
+
+		return $font_families;
 	}
 
 	/**
