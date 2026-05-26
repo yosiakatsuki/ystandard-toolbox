@@ -11,7 +11,6 @@ import {
 	ResponsiveSpacingSelect,
 	type ResponsiveSpacing,
 	type ResponsiveSpacingSelectOnChangeProps,
-	type Spacing,
 } from '@aktk/block-components/components/custom-spacing-select';
 import { stripUndefined } from '@aktk/block-components/utils/object';
 
@@ -25,47 +24,36 @@ interface BoxPaddingProps {
 	setAttributes: ( attributes: Partial< BoxAttributes > ) => void;
 }
 
-const hasResponsiveSpacing = ( value?: ResponsiveSpacing ) => {
-	return !! value?.tablet || !! value?.mobile;
-};
-
-const getDefaultSpacing = (
-	value?: ResponsiveSpacing
-): Spacing | undefined => {
-	return value?.desktop;
-};
-
-const getResponsiveSpacing = (
-	value?: ResponsiveSpacing
-): ResponsiveSpacing | undefined => {
-	if ( ! hasResponsiveSpacing( value ) ) {
-		return undefined;
-	}
-	return value;
-};
-
-const toLegacyBoxPadding = (
-	value: ResponsiveSpacingSelectOnChangeProps
-): ResponsiveSpacing | undefined => {
-	if ( value.responsiveSpacing ) {
-		return stripUndefined( value.responsiveSpacing ) as ResponsiveSpacing;
-	}
-	if ( value.spacing ) {
-		return stripUndefined( {
-			desktop: value.spacing,
-		} ) as ResponsiveSpacing;
-	}
-	return undefined;
-};
-
 /**
  * ボックス内側余白コントロール
  * @param props
  */
 const BoxPadding = ( props: BoxPaddingProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
+	// Padding.
+	const boxPadding = attributes?.boxPadding as ResponsiveSpacing | undefined;
 
-	const boxPadding = attributes.boxPadding as ResponsiveSpacing | undefined;
+	const handleBoxPaddingChange = (
+		newValue: ResponsiveSpacingSelectOnChangeProps
+	): void => {
+		let newBoxPadding: ResponsiveSpacing | undefined;
+		if ( newValue.responsiveSpacing ) {
+			newBoxPadding = stripUndefined(
+				newValue.responsiveSpacing
+			) as ResponsiveSpacing;
+		} else if ( newValue.spacing ) {
+			newBoxPadding = stripUndefined( {
+				desktop: newValue.spacing,
+			} ) as ResponsiveSpacing;
+		} else {
+			newBoxPadding = undefined;
+		}
+
+		setAttributes( {
+			// @ts-expect-error
+			boxPadding: newBoxPadding,
+		} );
+	};
 
 	return (
 		<BaseControl
@@ -73,20 +61,12 @@ const BoxPadding = ( props: BoxPaddingProps ): React.ReactElement => {
 			label={ __( '余白設定', 'ystandard-toolbox' ) }
 		>
 			<ResponsiveSpacingSelect
-				value={ getDefaultSpacing( boxPadding ) }
-				responsiveValue={ getResponsiveSpacing( boxPadding ) }
-				onChange={ ( newValue ) => {
-					setAttributes( {
-						boxPadding: toLegacyBoxPadding(
-							newValue
-						) as BoxAttributes[ 'boxPadding' ],
-					} );
-				} }
+				value={ boxPadding?.desktop }
+				responsiveValue={ boxPadding }
+				onChange={ handleBoxPaddingChange }
 				responsiveControlStyle="vertical"
 				useResponsive={ true }
 				showResetButton={ true }
-				sides={ [ 'top', 'right', 'bottom', 'left' ] }
-				minimumCustomValue={ 0 }
 			/>
 		</BaseControl>
 	);
