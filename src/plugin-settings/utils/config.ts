@@ -72,6 +72,22 @@ export function getEditorColors(
 }
 
 /**
+ * 設定からエディターのグラデーション設定を取得
+ *
+ * @param origin 取得元
+ * @return
+ */
+export function getEditorGradients(
+	origin: 'default' | 'theme' | 'custom' | undefined = undefined
+) {
+	const gradients = getAdminConfig( 'editorGradients', {} );
+	if ( ! origin ) {
+		return gradients;
+	}
+	return gradients?.[ origin ] || [];
+}
+
+/**
  * 設定からエディターのフォントサイズ設定を取得
  *
  * @param origin 取得元

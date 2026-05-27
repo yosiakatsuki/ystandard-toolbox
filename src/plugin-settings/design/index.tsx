@@ -31,6 +31,7 @@ import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
 import {
 	getEditorColors,
 	getEditorFontSizes,
+	getEditorGradients,
 	getEditorSpacingSizes,
 	registerEditorSettingFilters,
 } from '@aktk/plugin-settings/utils';
@@ -154,6 +155,12 @@ const Design = () => {
 		'aktk.hooks.getThemeColors.themeColors',
 		'ystandard-toolbox/settings/design/getThemeColors',
 		() => getEditorColors( 'theme' )
+	);
+	// addFilter で テーマグラデーションを取得するフィルターを追加
+	addFilter(
+		'aktk.hooks.getThemeGradients.themeGradients',
+		'ystandard-toolbox/settings/design/getThemeGradients',
+		() => getEditorGradients( 'theme' )
 	);
 	// addFilter で テーマフォントサイズを取得するフィルターを追加
 	addFilter(

@@ -158,6 +158,7 @@ class Plugin_Settings {
 					'isAmpEnable'        => AMP::is_amp_enable(),
 					'editorSettings'     => self::get_editor_settings(),
 					'editorColors'       => self::get_editor_colors(),
+					'editorGradients'    => self::get_editor_gradients(),
 					'editorFontSizes'    => self::get_editor_font_sizes(),
 					'editorFontFamilies' => self::get_editor_font_families(),
 					'editorSpacingSizes' => self::get_editor_spacing_sizes(),
@@ -398,6 +399,56 @@ class Plugin_Settings {
 		}
 
 		return $colors;
+	}
+
+	/**
+	 * グラデーションパレットの取得
+	 *
+	 * theme.jsonとadd_theme_support()の両方からグラデーションを取得する.
+	 *
+	 * @return array グラデーションの配列
+	 */
+	private static function get_editor_gradients() {
+		// useSettings()で参照するoriginごとに値を保持する.
+		$gradients = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
+
+		// theme.jsonのcolor.gradientsをoriginごとに取得する.
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			foreach ( array_keys( $gradients ) as $origin ) {
+				if ( isset( $settings['color']['gradients'][ $origin ] ) && is_array( $settings['color']['gradients'][ $origin ] ) ) {
+					$gradients[ $origin ] = $settings['color']['gradients'][ $origin ];
+				}
+			}
+		}
+
+		// add_theme_support('editor-gradient-presets')はtheme originとして扱う.
+		$theme_support_gradients = get_theme_support( 'editor-gradient-presets' );
+		if ( is_array( $theme_support_gradients ) && ! empty( $theme_support_gradients ) ) {
+			$theme_support_gradients = $theme_support_gradients[0];
+			if ( is_array( $theme_support_gradients ) ) {
+				$gradients['theme'] = array_merge( $gradients['theme'], $theme_support_gradients );
+			}
+		}
+
+		// slugをキーにして重複を除去する.
+		foreach ( $gradients as $origin => $gradient_list ) {
+			$unique_gradients = [];
+			foreach ( $gradient_list as $gradient ) {
+				if ( isset( $gradient['slug'] ) ) {
+					$unique_gradients[ $gradient['slug'] ] = $gradient;
+				}
+			}
+			$gradients[ $origin ] = array_values( $unique_gradients );
+		}
+
+		return $gradients;
 	}
 
 	/**

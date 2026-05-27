@@ -15,6 +15,7 @@ import {
 	getEditorColors,
 	getEditorFontFamilies,
 	getEditorFontSizes,
+	getEditorGradients,
 	getEditorSetting,
 	getEditorSpacingSizes,
 } from './config';
@@ -41,6 +42,14 @@ const FALLBACK_SETTING_GETTERS: Record< string, FallbackSettingGetter > = {
 			return getEditorColors( origin );
 		}
 		return getPreferredOriginValue( getEditorColors() as SettingOriginMap );
+	},
+	'color.gradients': ( origin ) => {
+		if ( origin ) {
+			return getEditorGradients( origin );
+		}
+		return getPreferredOriginValue(
+			getEditorGradients() as SettingOriginMap
+		);
 	},
 	'typography.fontSizes': ( origin ) => {
 		if ( origin ) {
@@ -178,6 +187,11 @@ function getNormalizedSettingValue( settingName: string ) {
 			return getEditorColors( origin );
 		}
 		settingValue = getEditorColors() as SettingOriginMap;
+	} else if ( 'color.gradients' === basePath ) {
+		if ( origin ) {
+			return getEditorGradients( origin );
+		}
+		settingValue = getEditorGradients() as SettingOriginMap;
 	} else if ( 'typography.fontSizes' === basePath ) {
 		if ( origin ) {
 			return getEditorFontSizes( origin );
