@@ -2,11 +2,12 @@
  * Aktk Dependencies.
  */
 import SpacingSizesControl, {
-	getCustomValueFromPreset,
 	type SpacingSizeControlProps,
 	type SpacingSizeValues,
 } from '@aktk/block-components/wp-controls/spacing-size-control';
 import { isObject } from '@aktk/block-components/utils/object';
+
+import { getCustomSpacingValueFromPreset } from './util';
 
 export function CustomSpacingSelectControl( props: SpacingSizeControlProps ) {
 	const { values, onChange, label, sides, minimumCustomValue = 0 } = props;
@@ -47,12 +48,11 @@ export function CustomSpacingSelectControlWithCustomValue(
 		// プリセットから値を取得して返す.
 		if ( !! newValue && isObject( newValue ) ) {
 			Object.keys( newValue ).forEach( ( key ) => {
-				// @ts-expect-error
-				newValue[ key ] = getCustomValueFromPreset(
-					// @ts-expect-error
-					newValue[ key ],
+				const spacingKey = key as keyof SpacingSizeValues;
+				newValue[ spacingKey ] = getCustomSpacingValueFromPreset(
+					newValue[ spacingKey ],
 					spacingSizes
-				) as unknown as string;
+				);
 			} );
 			onChange( newValue );
 		} else {
