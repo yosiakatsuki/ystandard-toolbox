@@ -35,6 +35,7 @@ import {
 	LetterSpacing,
 	LineHeight,
 	TextColor,
+	FontFamily
 } from '@aktk/plugin-settings/heading/app/options/typography';
 import {
 	BackgroundColor,
@@ -62,7 +63,6 @@ import {
 import {
 	Background,
 	BoxShadow,
-	FontFamily,
 	ResponsiveDisplay,
 	TextShadow,
 	Position,
