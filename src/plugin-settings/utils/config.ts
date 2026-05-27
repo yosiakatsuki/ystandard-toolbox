@@ -19,6 +19,43 @@ export function getAdminConfig(
 }
 
 /**
+ * エディター設定を取得
+ *
+ * @return
+ */
+export function getEditorSettings() {
+	return getAdminConfig( 'editorSettings', {} );
+}
+
+/**
+ * エディター設定をパスで取得
+ *
+ * @param {string} path         設定パス
+ * @param {any}    defaultValue 初期値
+ * @return
+ */
+export function getEditorSetting(
+	path: string,
+	defaultValue: any = undefined
+) {
+	const settings = getEditorSettings();
+	if ( ! path ) {
+		return settings;
+	}
+
+	return path.split( '.' ).reduce( ( value, key ) => {
+		if (
+			undefined === value ||
+			null === value ||
+			! Object.prototype.hasOwnProperty.call( value, key )
+		) {
+			return defaultValue;
+		}
+		return value[ key ];
+	}, settings );
+}
+
+/**
  * 設定からエディターのカラー設定を取得
  *
  * @return

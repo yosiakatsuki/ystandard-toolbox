@@ -156,6 +156,7 @@ class Plugin_Settings {
 					'adminUrl'           => esc_url_raw( admin_url() ),
 					'isYStandard'        => Version::ystandard_version_compare(),
 					'isAmpEnable'        => AMP::is_amp_enable(),
+					'editorSettings'     => self::get_editor_settings(),
 					'editorColors'       => self::get_editor_colors(),
 					'editorFontSizes'    => self::get_editor_font_sizes(),
 					'editorFontFamilies' => self::get_editor_font_families(),
@@ -334,6 +335,19 @@ class Plugin_Settings {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * エディター設定を取得
+	 *
+	 * @return array エディター設定の配列
+	 */
+	private static function get_editor_settings() {
+		if ( ! function_exists( 'wp_get_global_settings' ) ) {
+			return [];
+		}
+
+		return wp_get_global_settings();
 	}
 
 	/**
