@@ -83,6 +83,7 @@ export const HeadingContext: Context< HeadingContextProps > =
 	// @ts-ignore
 	createContext< HeadingContextProps >();
 
+// 管理画面用のuseSettings()の値を補完する.
 registerEditorSettingFilters( 'ystandard-toolbox/settings/heading' );
 
 export default function HeadingApp( props: HeadingAppProps ) {
@@ -216,7 +217,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	addFilter(
 		'aktk.hooks.getThemeFontSizes.themeFontSizes',
 		'ystandard-toolbox/settings/heading/getThemeFontSizes',
-		() => getEditorFontSizes()
+		() => getEditorFontSizes( 'theme' )
 	);
 	// addFilter で テーマ余白サイズを取得するフィルターを追加
 	addFilter(

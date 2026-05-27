@@ -39,7 +39,7 @@ const FALLBACK_SETTING_GETTERS: Record< string, FallbackSettingGetter > = {
 		return isThemeOrigin( origin ) ? getEditorColors() : undefined;
 	},
 	'typography.fontSizes': ( origin ) => {
-		return isThemeOrigin( origin ) ? getEditorFontSizes() : undefined;
+		return getEditorFontSizes( origin );
 	},
 	'typography.fontFamilies': ( origin ) => {
 		return getEditorFontFamilies( origin );

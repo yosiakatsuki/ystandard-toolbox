@@ -67,10 +67,17 @@ export function getEditorColors() {
 /**
  * 設定からエディターのフォントサイズ設定を取得
  *
+ * @param origin 取得元
  * @return
  */
-export function getEditorFontSizes() {
-	return getAdminConfig( 'editorFontSizes' );
+export function getEditorFontSizes(
+	origin: 'default' | 'theme' | 'custom' | undefined = undefined
+) {
+	const fontSizes = getAdminConfig( 'editorFontSizes', {} );
+	if ( ! origin ) {
+		return fontSizes;
+	}
+	return fontSizes?.[ origin ] || [];
 }
 
 /**

@@ -90,6 +90,7 @@ const TABS: DesignSettingsTab[] = [
 	},
 ];
 
+// 管理画面用のuseSettings()の値を補完する.
 registerEditorSettingFilters( 'ystandard-toolbox/settings/design' );
 
 const Design = () => {
@@ -158,7 +159,7 @@ const Design = () => {
 	addFilter(
 		'aktk.hooks.getThemeFontSizes.themeFontSizes',
 		'ystandard-toolbox/settings/design/getThemeFontSizes',
-		() => getEditorFontSizes()
+		() => getEditorFontSizes( 'theme' )
 	);
 	// addFilter で テーマ余白サイズを取得するフィルターを追加
 	addFilter(

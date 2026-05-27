@@ -396,44 +396,51 @@ class Plugin_Settings {
 	/**
 	 * エディターで使用可能なフォントサイズを取得
 	 *
-	 * theme.jsonとadd_theme_support()の両方からフォントサイズを取得してマージする
+	 * theme.jsonとadd_theme_support()の両方からフォントサイズを取得する.
 	 *
 	 * @return array フォントサイズの配列
 	 */
 	private static function get_editor_font_sizes() {
-		$font_sizes = [];
+		// useSettings()で参照するoriginごとに値を保持する.
+		$font_sizes = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
 
-		// theme.jsonからフォントサイズを取得
+		// theme.jsonのtypography.fontSizesをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['typography']['fontSizes']['theme'] ) ) {
-				$theme_font_sizes = $settings['typography']['fontSizes']['theme'];
-				if ( is_array( $theme_font_sizes ) ) {
-					$font_sizes = array_merge( $font_sizes, $theme_font_sizes );
+			foreach ( array_keys( $font_sizes ) as $origin ) {
+				if ( isset( $settings['typography']['fontSizes'][ $origin ] ) && is_array( $settings['typography']['fontSizes'][ $origin ] ) ) {
+					$font_sizes[ $origin ] = $settings['typography']['fontSizes'][ $origin ];
 				}
 			}
 		}
 
-		// add_theme_support('editor-font-sizes')からフォントサイズを取得
+		// add_theme_support('editor-font-sizes')はtheme originとして扱う.
 		$theme_support_sizes = get_theme_support( 'editor-font-sizes' );
 		if ( is_array( $theme_support_sizes ) && ! empty( $theme_support_sizes ) ) {
 			$theme_support_sizes = $theme_support_sizes[0];
 			if ( is_array( $theme_support_sizes ) ) {
-				$font_sizes = array_merge( $font_sizes, $theme_support_sizes );
+				$font_sizes['theme'] = array_merge( $font_sizes['theme'], $theme_support_sizes );
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）
-		$unique_font_sizes = [];
-		foreach ( $font_sizes as $font_size ) {
-			if ( isset( $font_size['slug'] ) ) {
-				$unique_font_sizes[ $font_size['slug'] ] = $font_size;
+		// slugをキーにして重複を除去する.
+		foreach ( $font_sizes as $origin => $sizes ) {
+			$unique_font_sizes = [];
+			foreach ( $sizes as $font_size ) {
+				if ( isset( $font_size['slug'] ) ) {
+					$unique_font_sizes[ $font_size['slug'] ] = $font_size;
+				}
 			}
+			$font_sizes[ $origin ] = array_values( $unique_font_sizes );
 		}
 
-		return array_values( $unique_font_sizes );
+		return $font_sizes;
 	}
 
 	/**
