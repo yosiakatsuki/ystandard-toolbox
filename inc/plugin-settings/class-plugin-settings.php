@@ -358,39 +358,46 @@ class Plugin_Settings {
 	 * @return array カラーパレットの配列
 	 */
 	private static function get_editor_colors() {
-		$colors = [];
+		// useSettings()で参照するoriginごとに値を保持する.
+		$colors = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
 
-		// theme.jsonからカラーパレットを取得
+		// theme.jsonのcolor.paletteをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['color']['palette']['theme'] ) ) {
-				$theme_colors = $settings['color']['palette']['theme'];
-				if ( is_array( $theme_colors ) ) {
-					$colors = array_merge( $colors, $theme_colors );
+			foreach ( array_keys( $colors ) as $origin ) {
+				if ( isset( $settings['color']['palette'][ $origin ] ) && is_array( $settings['color']['palette'][ $origin ] ) ) {
+					$colors[ $origin ] = $settings['color']['palette'][ $origin ];
 				}
 			}
 		}
 
-		// add_theme_support('editor-color-palette')からカラーパレットを取得
+		// add_theme_support('editor-color-palette')はtheme originとして扱う.
 		$theme_support_colors = get_theme_support( 'editor-color-palette' );
 		if ( is_array( $theme_support_colors ) && ! empty( $theme_support_colors ) ) {
 			$theme_support_colors = $theme_support_colors[0];
 			if ( is_array( $theme_support_colors ) ) {
-				$colors = array_merge( $colors, $theme_support_colors );
+				$colors['theme'] = array_merge( $colors['theme'], $theme_support_colors );
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）
-		$unique_colors = [];
-		foreach ( $colors as $color ) {
-			if ( isset( $color['slug'] ) ) {
-				$unique_colors[ $color['slug'] ] = $color;
+		// slugをキーにして重複を除去する.
+		foreach ( $colors as $origin => $palette ) {
+			$unique_colors = [];
+			foreach ( $palette as $color ) {
+				if ( isset( $color['slug'] ) ) {
+					$unique_colors[ $color['slug'] ] = $color;
+				}
 			}
+			$colors[ $origin ] = array_values( $unique_colors );
 		}
 
-		return array_values( $unique_colors );
+		return $colors;
 	}
 
 	/**

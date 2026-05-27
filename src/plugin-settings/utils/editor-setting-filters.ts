@@ -20,6 +20,7 @@ import {
 } from './config';
 
 type SettingOrigin = 'custom' | 'theme' | 'default';
+type SettingOriginMap = Partial< Record< SettingOrigin, unknown > >;
 type FallbackSettingGetter = ( origin?: SettingOrigin ) => unknown;
 
 const SETTING_ORIGINS: SettingOrigin[] = [ 'custom', 'theme', 'default' ];
@@ -36,13 +37,26 @@ const ORIGIN_OVERRIDE_PATHS = [
 
 const FALLBACK_SETTING_GETTERS: Record< string, FallbackSettingGetter > = {
 	'color.palette': ( origin ) => {
-		return isThemeOrigin( origin ) ? getEditorColors() : undefined;
+		if ( origin ) {
+			return getEditorColors( origin );
+		}
+		return getPreferredOriginValue( getEditorColors() as SettingOriginMap );
 	},
 	'typography.fontSizes': ( origin ) => {
-		return getEditorFontSizes( origin );
+		if ( origin ) {
+			return getEditorFontSizes( origin );
+		}
+		return getPreferredOriginValue(
+			getEditorFontSizes() as SettingOriginMap
+		);
 	},
 	'typography.fontFamilies': ( origin ) => {
-		return getEditorFontFamilies( origin );
+		if ( origin ) {
+			return getEditorFontFamilies( origin );
+		}
+		return getPreferredOriginValue(
+			getEditorFontFamilies() as SettingOriginMap
+		);
 	},
 	'spacing.spacingSizes': ( origin ) => {
 		if ( 'default' === origin ) {
@@ -108,6 +122,23 @@ function getSettingBasePath( settingName: string ) {
 }
 
 /**
+ * origin別設定からWordPressと同じ優先順で値を取得する.
+ *
+ * @param {SettingOriginMap | undefined} settingValue origin別設定.
+ * @return {unknown} 優先originの設定値.
+ */
+function getPreferredOriginValue( settingValue: SettingOriginMap | undefined ) {
+	for ( const settingOrigin of SETTING_ORIGINS ) {
+		const value = settingValue?.[ settingOrigin ];
+		if ( hasSettingValue( value ) ) {
+			return value;
+		}
+	}
+
+	return undefined;
+}
+
+/**
  * WordPressのエディター設定から値を取得する.
  *
  * @param {string} settingName useSettings()の設定名.
@@ -128,14 +159,7 @@ function getOriginSettingValue( settingName: string ) {
 		return originSetting;
 	}
 
-	// origin別設定はWordPressと同じ優先順で値を返す.
-	for ( const settingOrigin of SETTING_ORIGINS ) {
-		if ( hasSettingValue( originSetting?.[ settingOrigin ] ) ) {
-			return originSetting[ settingOrigin ];
-		}
-	}
-
-	return undefined;
+	return getPreferredOriginValue( originSetting );
 }
 
 /**
@@ -146,26 +170,24 @@ function getOriginSettingValue( settingName: string ) {
  */
 function getNormalizedSettingValue( settingName: string ) {
 	const basePath = getSettingBasePath( settingName );
-	if ( 'typography.fontSizes' !== basePath ) {
+	const origin = getSettingOrigin( settingName );
+	let settingValue: SettingOriginMap | undefined;
+
+	if ( 'color.palette' === basePath ) {
+		if ( origin ) {
+			return getEditorColors( origin );
+		}
+		settingValue = getEditorColors() as SettingOriginMap;
+	} else if ( 'typography.fontSizes' === basePath ) {
+		if ( origin ) {
+			return getEditorFontSizes( origin );
+		}
+		settingValue = getEditorFontSizes() as SettingOriginMap;
+	} else {
 		return undefined;
 	}
 
-	const origin = getSettingOrigin( settingName );
-	if ( origin ) {
-		return getEditorFontSizes( origin );
-	}
-
-	const fontSizes = getEditorFontSizes() as Partial<
-		Record< SettingOrigin, unknown >
-	>;
-	// origin別設定はWordPressと同じ優先順で値を返す.
-	for ( const settingOrigin of SETTING_ORIGINS ) {
-		if ( hasSettingValue( fontSizes?.[ settingOrigin ] ) ) {
-			return fontSizes[ settingOrigin ];
-		}
-	}
-
-	return undefined;
+	return getPreferredOriginValue( settingValue );
 }
 
 /**

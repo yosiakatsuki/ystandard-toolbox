@@ -58,10 +58,17 @@ export function getEditorSetting(
 /**
  * 設定からエディターのカラー設定を取得
  *
+ * @param origin 取得元
  * @return
  */
-export function getEditorColors() {
-	return getAdminConfig( 'editorColors' );
+export function getEditorColors(
+	origin: 'default' | 'theme' | 'custom' | undefined = undefined
+) {
+	const colors = getAdminConfig( 'editorColors', {} );
+	if ( ! origin ) {
+		return colors;
+	}
+	return colors?.[ origin ] || [];
 }
 
 /**

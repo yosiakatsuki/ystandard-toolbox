@@ -211,7 +211,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	addFilter(
 		'aktk.hooks.getThemeColors.themeColors',
 		'ystandard-toolbox/settings/design/getThemeColors',
-		() => getEditorColors()
+		() => getEditorColors( 'theme' )
 	);
 	// addFilter で テーマフォントサイズを取得するフィルターを追加
 	addFilter(
