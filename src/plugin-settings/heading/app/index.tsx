@@ -17,7 +17,6 @@ import { addFilter } from '@wordpress/hooks';
  */
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import { ConfirmModal } from '@aktk/block-components/components/modal';
-import { getDefaultSpacingSizes } from '@aktk/block-components/hooks/useThemeSpacingSizes';
 /**
  * Plugin dependencies
  */
@@ -38,9 +37,9 @@ import {
  */
 import {
 	getEditorColors,
-	getEditorFontFamilies,
 	getEditorFontSizes,
 	getEditorSpacingSizes,
+	registerEditorSettingFilters,
 } from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
@@ -83,6 +82,8 @@ interface HeadingContextProps {
 export const HeadingContext: Context< HeadingContextProps > =
 	// @ts-ignore
 	createContext< HeadingContextProps >();
+
+registerEditorSettingFilters( 'ystandard-toolbox/settings/heading' );
 
 export default function HeadingApp( props: HeadingAppProps ) {
 	const { setIsLoading } = props;
@@ -217,58 +218,11 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		'ystandard-toolbox/settings/heading/getThemeFontSizes',
 		() => getEditorFontSizes()
 	);
-	// addFilter で テーマフォントファミリーを取得するフィルターを追加
-	addFilter(
-		'blockEditor.useSetting.before',
-		'ystandard-toolbox/settings/heading/fontFamilies',
-		( settingValue: unknown, settingName: string ) => {
-			if (
-				'typography.fontFamilies.default' === settingName &&
-				! settingValue
-			) {
-				return getEditorFontFamilies( 'default' );
-			}
-			if (
-				'typography.fontFamilies.theme' === settingName &&
-				! settingValue
-			) {
-				return getEditorFontFamilies( 'theme' );
-			}
-			if (
-				'typography.fontFamilies.custom' === settingName &&
-				! settingValue
-			) {
-				return getEditorFontFamilies( 'custom' );
-			}
-			return settingValue;
-		}
-	);
 	// addFilter で テーマ余白サイズを取得するフィルターを追加
 	addFilter(
 		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
 		'ystandard-toolbox/settings/heading/getThemeSpacingSizes',
 		() => getEditorSpacingSizes()
-	);
-	// Gutenberg コアの SpacingSizesControl は内部で useSettings('spacing.spacingSizes.theme') を呼ぶため、
-	// 設定画面では block-editor ストアが空となり UI にプリセットが出ない。
-	// blockEditor.useSetting.before で値を注入し、さらにデフォルトサイズを末尾結合して
-	// RANGE_CONTROL_MAX_SIZE (8) を超えるサイズ数とすることで CustomSelectControl 表示にする.
-	addFilter(
-		'blockEditor.useSetting.before',
-		'ystandard-toolbox/settings/heading/spacingSizes',
-		( settingValue: unknown, settingName: string ) => {
-			if (
-				'spacing.spacingSizes.theme' === settingName &&
-				! settingValue
-			) {
-				const editorSpacingSizes = getEditorSpacingSizes();
-				const themeSizes = Array.isArray( editorSpacingSizes )
-					? editorSpacingSizes
-					: [];
-				return [ ...themeSizes, ...getDefaultSpacingSizes() ];
-			}
-			return settingValue;
-		}
 	);
 
 	return (
