@@ -254,6 +254,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							'fontStyle',
 							'lineHeight',
 							'letterSpacing',
+							'fontFamily',
 						] ) }
 					>
 						<PanelInner>
@@ -284,6 +285,10 @@ function PseudoElements( props: PseudoElementsProps ) {
 								/>
 								<LetterSpacing
 									value={ option?.letterSpacing }
+									onChange={ handleOnChange }
+								/>
+								<FontFamily
+									value={ option?.fontFamily }
 									onChange={ handleOnChange }
 								/>
 							</DisableHasIcon>
@@ -390,9 +395,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							<PanelInner>
 								<Width
 									value={ option?.width }
-									responsiveValue={
-										option?.responsiveWidth
-									}
+									responsiveValue={ option?.responsiveWidth }
 									onChange={ handleOnChange }
 								/>
 								<MaxWidth
@@ -425,9 +428,7 @@ function PseudoElements( props: PseudoElementsProps ) {
 							<PanelInner>
 								<Height
 									value={ option?.height }
-									responsiveValue={
-										option?.responsiveHeight
-									}
+									responsiveValue={ option?.responsiveHeight }
 									onChange={ handleOnChange }
 								/>
 								<MaxHeight
@@ -451,7 +452,6 @@ function PseudoElements( props: PseudoElementsProps ) {
 							initialOpen={ isInitialOpen( option, [
 								'display',
 								'responsiveDisplay',
-								'fontFamily',
 								'background',
 								'textShadow',
 								'boxShadow',
@@ -494,10 +494,6 @@ function PseudoElements( props: PseudoElementsProps ) {
 									value={ option?.zIndex }
 									onChange={ handleOnChange }
 									position={ option?.position }
-								/>
-								<FontFamily
-									value={ option?.fontFamily }
-									onChange={ handleOnChange }
 								/>
 								<Background
 									value={ option?.background }

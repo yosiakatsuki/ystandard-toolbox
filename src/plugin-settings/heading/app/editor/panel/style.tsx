@@ -129,6 +129,7 @@ export function StylePanel() {
 					'fontStyle',
 					'lineHeight',
 					'letterSpacing',
+					'fontFamily',
 				] ) }
 			>
 				<PanelInner>
@@ -161,6 +162,10 @@ export function StylePanel() {
 					/>
 					<LetterSpacing
 						value={ option?.letterSpacing }
+						onChange={ handleOnChange }
+					/>
+					<FontFamily
+						value={ option?.fontFamily }
 						onChange={ handleOnChange }
 					/>
 				</PanelInner>
@@ -314,7 +319,6 @@ export function StylePanel() {
 					'responsiveJustifyContent',
 					'gap',
 					'responsiveGap',
-					'fontFamily',
 					'background',
 					'textShadow',
 					'boxShadow',
@@ -383,10 +387,6 @@ export function StylePanel() {
 						value={ option?.zIndex }
 						onChange={ handleOnChange }
 						position={ option?.position }
-					/>
-					<FontFamily
-						value={ option?.fontFamily }
-						onChange={ handleOnChange }
 					/>
 					<Background
 						value={ option?.background }
