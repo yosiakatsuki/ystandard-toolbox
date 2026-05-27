@@ -172,7 +172,7 @@ const Design = () => {
 	addFilter(
 		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
 		'ystandard-toolbox/settings/design/getThemeSpacingSizes',
-		() => getEditorSpacingSizes()
+		() => getEditorSpacingSizes( 'theme' )
 	);
 
 	return (

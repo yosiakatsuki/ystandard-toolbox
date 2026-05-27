@@ -230,7 +230,7 @@ export default function HeadingApp( props: HeadingAppProps ) {
 	addFilter(
 		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
 		'ystandard-toolbox/settings/heading/getThemeSpacingSizes',
-		() => getEditorSpacingSizes()
+		() => getEditorSpacingSizes( 'theme' )
 	);
 
 	return (

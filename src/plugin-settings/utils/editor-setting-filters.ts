@@ -68,10 +68,16 @@ const FALLBACK_SETTING_GETTERS: Record< string, FallbackSettingGetter > = {
 		);
 	},
 	'spacing.spacingSizes': ( origin ) => {
-		if ( 'default' === origin ) {
-			return getDefaultSpacingSizes();
+		if ( origin ) {
+			const spacingSizes = getEditorSpacingSizes( origin );
+			if ( 'default' === origin && ! hasSettingValue( spacingSizes ) ) {
+				return getDefaultSpacingSizes();
+			}
+			return spacingSizes;
 		}
-		return isThemeOrigin( origin ) ? getEditorSpacingSizes() : undefined;
+		return getPreferredOriginValue(
+			getEditorSpacingSizes() as SettingOriginMap
+		);
 	},
 };
 
@@ -91,17 +97,6 @@ function hasSettingValue( value: unknown ) {
 		return 0 < value.length;
 	}
 	return true;
-}
-
-/**
- * theme originとして扱うか判定する.
- *
- * @param {SettingOrigin} origin 設定のorigin.
- * @return {boolean} theme originとして扱う場合はtrue.
- */
-function isThemeOrigin( origin?: SettingOrigin ) {
-	// origin未指定の親パスでは、既存のtheme相当の設定を使う.
-	return undefined === origin || 'theme' === origin;
 }
 
 /**
@@ -197,6 +192,11 @@ function getNormalizedSettingValue( settingName: string ) {
 			return getEditorFontSizes( origin );
 		}
 		settingValue = getEditorFontSizes() as SettingOriginMap;
+	} else if ( 'spacing.spacingSizes' === basePath ) {
+		if ( origin ) {
+			return getEditorSpacingSizes( origin );
+		}
+		settingValue = getEditorSpacingSizes() as SettingOriginMap;
 	} else {
 		return undefined;
 	}

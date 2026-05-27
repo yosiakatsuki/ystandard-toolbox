@@ -122,10 +122,17 @@ export function getEditorFontFamilies(
 /**
  * 設定からエディターの余白サイズ設定を取得
  *
+ * @param origin 取得元
  * @return
  */
-export function getEditorSpacingSizes() {
-	return getAdminConfig( 'editorSpacingSizes' );
+export function getEditorSpacingSizes(
+	origin: 'default' | 'theme' | 'custom' | undefined = undefined
+) {
+	const spacingSizes = getAdminConfig( 'editorSpacingSizes', {} );
+	if ( ! origin ) {
+		return spacingSizes;
+	}
+	return spacingSizes?.[ origin ] || [];
 }
 
 /**

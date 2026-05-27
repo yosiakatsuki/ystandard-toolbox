@@ -581,35 +581,42 @@ class Plugin_Settings {
 	/**
 	 * 余白サイズ（spacingSizes）の取得
 	 *
-	 * theme.json の typography.fontSizes と同パターンで spacing.spacingSizes.theme を取得する.
+	 * theme.json から spacing.spacingSizes をoriginごとに取得する.
 	 *
 	 * @return array 余白サイズの配列
 	 */
 	private static function get_editor_spacing_sizes() {
-		$spacing_sizes = [];
+		// useSettings()で参照するoriginごとに値を保持する.
+		$spacing_sizes = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
 
-		// theme.json から余白サイズを取得.
+		// theme.jsonのspacing.spacingSizesをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['spacing']['spacingSizes']['theme'] ) ) {
-				$theme_spacing_sizes = $settings['spacing']['spacingSizes']['theme'];
-				if ( is_array( $theme_spacing_sizes ) ) {
-					$spacing_sizes = $theme_spacing_sizes;
+			foreach ( array_keys( $spacing_sizes ) as $origin ) {
+				if ( isset( $settings['spacing']['spacingSizes'][ $origin ] ) && is_array( $settings['spacing']['spacingSizes'][ $origin ] ) ) {
+					$spacing_sizes[ $origin ] = $settings['spacing']['spacingSizes'][ $origin ];
 				}
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）.
-		$unique_spacing_sizes = [];
-		foreach ( $spacing_sizes as $spacing_size ) {
-			if ( isset( $spacing_size['slug'] ) ) {
-				$unique_spacing_sizes[ $spacing_size['slug'] ] = $spacing_size;
+		// slugをキーにして重複を除去する.
+		foreach ( $spacing_sizes as $origin => $sizes ) {
+			$unique_spacing_sizes = [];
+			foreach ( $sizes as $spacing_size ) {
+				if ( isset( $spacing_size['slug'] ) ) {
+					$unique_spacing_sizes[ $spacing_size['slug'] ] = $spacing_size;
+				}
 			}
+			$spacing_sizes[ $origin ] = array_values( $unique_spacing_sizes );
 		}
 
-		return array_values( $unique_spacing_sizes );
+		return $spacing_sizes;
 	}
 
 }
