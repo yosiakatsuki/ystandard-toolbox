@@ -119,6 +119,26 @@ describe( 'parseStyles', () => {
 			const result = parseStyles( styles );
 			expect( result.desktop ).toContain( 'font-size: 24px;' );
 		} );
+		it( 'fontSizeの値がfluidフォントサイズの場合', () => {
+			const styles = {
+				fontSize: {
+					size: 'clamp(12px, 12px + ((1vw - 3.2px) * 0.852), 24px)',
+					slug: 'custom-theme-json',
+					name: 'Custom Theme JSON',
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain(
+				'font-size: clamp(12px, 12px + ((1vw - 3.2px) * 0.852), 24px);'
+			);
+		} );
+		it( 'fontSizeが未設定の場合はfont-sizeを出力しないこと', () => {
+			const styles = {
+				fontSize: undefined,
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).not.toContain( 'font-size:' );
+		} );
 		it( 'fontSizeの値がレスポンシブ指定の場合', () => {
 			const styles = {
 				fontSize: {
@@ -587,7 +607,9 @@ describe( 'parseStyles', () => {
 			expect( result.desktop ).toContain( 'border-top-color: #000000;' );
 			expect( result.desktop ).toContain( 'border-top-style: solid;' );
 			expect( result.desktop ).toContain( 'border-top-width: 1px;' );
-			expect( result.mobile ).toContain( 'border-bottom-color: #222222;' );
+			expect( result.mobile ).toContain(
+				'border-bottom-color: #222222;'
+			);
 			expect( result.mobile ).toContain( 'border-bottom-style: dashed;' );
 			expect( result.mobile ).toContain( 'border-bottom-width: 3px;' );
 		} );
@@ -609,8 +631,12 @@ describe( 'parseStyles', () => {
 				},
 			};
 			const result = parseStyles( styles );
-			expect( result.desktop ).toContain( 'border-bottom-color: #222222;' );
-			expect( result.desktop ).toContain( 'border-bottom-style: dashed;' );
+			expect( result.desktop ).toContain(
+				'border-bottom-color: #222222;'
+			);
+			expect( result.desktop ).toContain(
+				'border-bottom-style: dashed;'
+			);
 			expect( result.desktop ).toContain( 'border-bottom-width: 3px;' );
 			expect( result.desktop ).not.toContain( 'border-desktop' );
 		} );

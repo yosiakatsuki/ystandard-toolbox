@@ -24,6 +24,10 @@ import { isSplit } from '@aktk/block-components/components/custom-border-select/
 const RESPONSIVE_KEYS = [ 'desktop', 'tablet', 'mobile' ];
 const SPACING_KEYS = [ 'top', 'right', 'bottom', 'left' ];
 
+function isEmptyStyleValue( value: unknown ) {
+	return undefined === value || null === value || '' === value;
+}
+
 /**
  * Component.
  */
@@ -85,6 +89,11 @@ export function parseStyles(
 	let mobile: any[] = [];
 
 	Object.keys( styles ).forEach( ( originalKey: string ) => {
+		// @ts-ignore
+		let value = styles[ originalKey ];
+		if ( isEmptyStyleValue( value ) ) {
+			return;
+		}
 		// responsiveXxx キーは元プロパティ名（xxx）として扱い、CSS プロパティ名を導出する.
 		const key =
 			originalKey.startsWith( 'responsive' ) && originalKey.length > 10
@@ -93,11 +102,12 @@ export function parseStyles(
 				: originalKey;
 		// キーをケバブケースに変換.
 		const property = kebabCase( key );
-		// @ts-ignore
-		let value = styles[ originalKey ];
 		// フォントサイズの場合特殊処理.
 		if ( isFontSize( property ) ) {
 			value = parseFontSizeStyle( value );
+		}
+		if ( isEmptyStyleValue( value ) ) {
+			return;
 		}
 		// font-styleの場合、ページのCSSで font-style: normal !importantが効いているので上書きする.
 		if ( 'font-style' === property ) {

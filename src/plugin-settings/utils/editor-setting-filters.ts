@@ -139,6 +139,36 @@ function getOriginSettingValue( settingName: string ) {
 }
 
 /**
+ * 管理画面用に正規化した設定値を取得する.
+ *
+ * @param {string} settingName useSettings()の設定名.
+ * @return {unknown} 正規化済み設定の値.
+ */
+function getNormalizedSettingValue( settingName: string ) {
+	const basePath = getSettingBasePath( settingName );
+	if ( 'typography.fontSizes' !== basePath ) {
+		return undefined;
+	}
+
+	const origin = getSettingOrigin( settingName );
+	if ( origin ) {
+		return getEditorFontSizes( origin );
+	}
+
+	const fontSizes = getEditorFontSizes() as Partial<
+		Record< SettingOrigin, unknown >
+	>;
+	// origin別設定はWordPressと同じ優先順で値を返す.
+	for ( const settingOrigin of SETTING_ORIGINS ) {
+		if ( hasSettingValue( fontSizes?.[ settingOrigin ] ) ) {
+			return fontSizes[ settingOrigin ];
+		}
+	}
+
+	return undefined;
+}
+
+/**
  * 既存の管理画面設定からフォールバック値を取得する.
  *
  * @param {string} settingName useSettings()の設定名.
@@ -172,6 +202,13 @@ export function registerEditorSettingFilters( namespace: string ) {
 			// すでに値がある場合はWordPress側の値を優先する.
 			if ( hasSettingValue( settingValue ) ) {
 				return settingValue;
+			}
+
+			// fluidなど、管理画面向けに正規化した値を優先する.
+			const normalizedSettingValue =
+				getNormalizedSettingValue( settingName );
+			if ( hasSettingValue( normalizedSettingValue ) ) {
+				return normalizedSettingValue;
 			}
 
 			// まずwp_get_global_settings()由来の値を返す.

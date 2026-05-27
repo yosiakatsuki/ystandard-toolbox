@@ -401,6 +401,8 @@ class Plugin_Settings {
 	 * @return array フォントサイズの配列
 	 */
 	private static function get_editor_font_sizes() {
+		$editor_settings = [];
+
 		// useSettings()で参照するoriginごとに値を保持する.
 		$font_sizes = [
 			'default' => [],
@@ -412,6 +414,10 @@ class Plugin_Settings {
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
+
+			if ( is_array( $settings ) ) {
+				$editor_settings = $settings;
+			}
 
 			foreach ( array_keys( $font_sizes ) as $origin ) {
 				if ( isset( $settings['typography']['fontSizes'][ $origin ] ) && is_array( $settings['typography']['fontSizes'][ $origin ] ) ) {
@@ -434,6 +440,7 @@ class Plugin_Settings {
 			$unique_font_sizes = [];
 			foreach ( $sizes as $font_size ) {
 				if ( isset( $font_size['slug'] ) ) {
+					$font_size                               = self::normalize_editor_font_size( $font_size, $editor_settings );
 					$unique_font_sizes[ $font_size['slug'] ] = $font_size;
 				}
 			}
@@ -441,6 +448,31 @@ class Plugin_Settings {
 		}
 
 		return $font_sizes;
+	}
+
+	/**
+	 * エディター用フォントサイズを正規化する
+	 *
+	 * @param array $font_size フォントサイズ設定.
+	 * @param array $settings  エディター設定.
+	 *
+	 * @return array
+	 */
+	private static function normalize_editor_font_size( $font_size, $settings ) {
+		if ( ! is_array( $font_size ) ) {
+			return $font_size;
+		}
+		if ( ! function_exists( 'wp_get_typography_font_size_value' ) || ! isset( $font_size['size'] ) ) {
+			return $font_size;
+		}
+
+		// fluid設定をWordPressコアの処理でCSS値に変換する.
+		$size = \wp_get_typography_font_size_value( $font_size, $settings );
+		if ( null !== $size ) {
+			$font_size['size'] = $size;
+		}
+
+		return $font_size;
 	}
 
 	/**
