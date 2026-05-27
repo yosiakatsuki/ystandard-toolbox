@@ -870,6 +870,24 @@ describe( 'parseStyles', () => {
 			const result = parseStyles( styles );
 			expect( result.desktop ).toContain( 'margin-top: 0;' );
 		} );
+		it( 'marginにundefinedがある場合は出力しない', () => {
+			const styles = {
+				margin: {
+					desktop: {
+						top: '0',
+						right: undefined,
+						bottom: '10px',
+						left: undefined,
+					},
+				},
+			};
+			const result = parseStyles( styles );
+			expect( result.desktop ).toContain( 'margin-top: 0;' );
+			expect( result.desktop ).toContain( 'margin-bottom: 10px;' );
+			expect( result.desktop ).not.toContain( 'margin-right:' );
+			expect( result.desktop ).not.toContain( 'margin-left:' );
+			expect( result.desktop ).not.toContain( 'undefined' );
+		} );
 		it( 'marginがある場合(tablet)', () => {
 			const styles = {
 				margin: {

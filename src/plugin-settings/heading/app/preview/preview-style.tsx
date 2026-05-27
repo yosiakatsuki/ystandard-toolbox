@@ -411,7 +411,11 @@ export function parseSpacingProperty( value: object, name: string ) {
 			return;
 		}
 		// @ts-ignore
-		result = [ ...result, `${ name }-${ key }: ${ value[ key ] };` ];
+		const cssValue = value[ key ];
+		if ( isEmptyStyleValue( cssValue ) ) {
+			return;
+		}
+		result = [ ...result, `${ name }-${ key }: ${ cssValue };` ];
 	} );
 	return result;
 }
