@@ -31,6 +31,7 @@ import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
 import {
 	getEditorColors,
+	getEditorFontFamilies,
 	getEditorFontSizes,
 	getEditorSpacingSizes,
 } from '@aktk/plugin-settings/utils';
@@ -157,6 +158,32 @@ const Design = () => {
 		'aktk.hooks.getThemeFontSizes.themeFontSizes',
 		'ystandard-toolbox/settings/design/getThemeFontSizes',
 		() => getEditorFontSizes()
+	);
+	// addFilter で テーマフォントファミリーを取得するフィルターを追加
+	addFilter(
+		'blockEditor.useSetting.before',
+		'ystandard-toolbox/settings/design/fontFamilies',
+		( settingValue: unknown, settingName: string ) => {
+			if (
+				'typography.fontFamilies.default' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'default' );
+			}
+			if (
+				'typography.fontFamilies.theme' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'theme' );
+			}
+			if (
+				'typography.fontFamilies.custom' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'custom' );
+			}
+			return settingValue;
+		}
 	);
 	// addFilter で テーマ余白サイズを取得するフィルターを追加
 	addFilter(

@@ -38,6 +38,7 @@ import {
  */
 import {
 	getEditorColors,
+	getEditorFontFamilies,
 	getEditorFontSizes,
 	getEditorSpacingSizes,
 } from '@aktk/plugin-settings/utils';
@@ -215,6 +216,32 @@ export default function HeadingApp( props: HeadingAppProps ) {
 		'aktk.hooks.getThemeFontSizes.themeFontSizes',
 		'ystandard-toolbox/settings/heading/getThemeFontSizes',
 		() => getEditorFontSizes()
+	);
+	// addFilter で テーマフォントファミリーを取得するフィルターを追加
+	addFilter(
+		'blockEditor.useSetting.before',
+		'ystandard-toolbox/settings/heading/fontFamilies',
+		( settingValue: unknown, settingName: string ) => {
+			if (
+				'typography.fontFamilies.default' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'default' );
+			}
+			if (
+				'typography.fontFamilies.theme' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'theme' );
+			}
+			if (
+				'typography.fontFamilies.custom' === settingName &&
+				! settingValue
+			) {
+				return getEditorFontFamilies( 'custom' );
+			}
+			return settingValue;
+		}
 	);
 	// addFilter で テーマ余白サイズを取得するフィルターを追加
 	addFilter(

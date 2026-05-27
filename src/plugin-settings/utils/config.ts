@@ -3,7 +3,7 @@
  *
  * @param name
  * @param defaultValue
- * @returns
+ * @return
  */
 export function getAdminConfig(
 	name: string | undefined = undefined,
@@ -21,7 +21,7 @@ export function getAdminConfig(
 /**
  * 設定からエディターのカラー設定を取得
  *
- * @returns
+ * @return
  */
 export function getEditorColors() {
 	return getAdminConfig( 'editorColors' );
@@ -30,16 +30,32 @@ export function getEditorColors() {
 /**
  * 設定からエディターのフォントサイズ設定を取得
  *
- * @returns
+ * @return
  */
 export function getEditorFontSizes() {
 	return getAdminConfig( 'editorFontSizes' );
 }
 
 /**
+ * 設定からエディターのフォントファミリー設定を取得
+ *
+ * @param origin 取得元
+ * @return
+ */
+export function getEditorFontFamilies(
+	origin: 'default' | 'theme' | 'custom' | undefined = undefined
+) {
+	const fontFamilies = getAdminConfig( 'editorFontFamilies', {} );
+	if ( ! origin ) {
+		return fontFamilies;
+	}
+	return fontFamilies?.[ origin ] || [];
+}
+
+/**
  * 設定からエディターの余白サイズ設定を取得
  *
- * @returns
+ * @return
  */
 export function getEditorSpacingSizes() {
 	return getAdminConfig( 'editorSpacingSizes' );
@@ -48,7 +64,7 @@ export function getEditorSpacingSizes() {
 /**
  * プラグインのアセットURLを取得
  *
- * @returns
+ * @return
  */
 export function getPluginAssetsUrl(): string {
 	const pluginUrl = getAdminConfig( 'pluginUrl' );
