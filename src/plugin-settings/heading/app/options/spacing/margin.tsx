@@ -75,7 +75,7 @@ export default function Margin( props: MarginControlProps ) {
 			id={ 'margin' }
 			label={ __( '外側余白(Margin)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
-			className={ '[&_.components-range-control]:hidden' }
+			className={ 'ystdtb--plugin-settings--spacing-panel' }
 		>
 			<ResponsiveSelectTab
 				isResponsive={ isResponsiveValue( responsiveValue ) }
