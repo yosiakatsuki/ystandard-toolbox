@@ -11,7 +11,6 @@ import {
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { brush, cog, Icon as WPIcon } from '@wordpress/icons';
-import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
@@ -35,13 +34,7 @@ import {
 /**
  * Plugin-Setting dependencies.
  */
-import {
-	getEditorColors,
-	getEditorFontSizes,
-	getEditorGradients,
-	getEditorSpacingSizes,
-	registerEditorSettingFilters,
-} from '@aktk/plugin-settings/utils';
+import { registerEditorSettingFilters } from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -207,31 +200,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
-
-	// addFilter で テーマカラーを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeColors.themeColors',
-		'ystandard-toolbox/settings/design/getThemeColors',
-		() => getEditorColors( 'theme' )
-	);
-	// addFilter で テーマグラデーションを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeGradients.themeGradients',
-		'ystandard-toolbox/settings/heading/getThemeGradients',
-		() => getEditorGradients( 'theme' )
-	);
-	// addFilter で テーマフォントサイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeFontSizes.themeFontSizes',
-		'ystandard-toolbox/settings/heading/getThemeFontSizes',
-		() => getEditorFontSizes( 'theme' )
-	);
-	// addFilter で テーマ余白サイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
-		'ystandard-toolbox/settings/heading/getThemeSpacingSizes',
-		() => getEditorSpacingSizes( 'theme' )
-	);
 
 	return (
 		<div>

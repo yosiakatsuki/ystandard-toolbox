@@ -10,7 +10,6 @@ import {
 	createRoot,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
@@ -28,13 +27,7 @@ import { apiPost, getEndpoint } from '@aktk/api';
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
-import {
-	getEditorColors,
-	getEditorFontSizes,
-	getEditorGradients,
-	getEditorSpacingSizes,
-	registerEditorSettingFilters,
-} from '@aktk/plugin-settings/utils';
+import { registerEditorSettingFilters } from '@aktk/plugin-settings/utils';
 
 /**
  * App
@@ -149,31 +142,6 @@ const Design = () => {
 			messageError: notifyError,
 		} );
 	};
-
-	// addFilter で テーマカラーを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeColors.themeColors',
-		'ystandard-toolbox/settings/design/getThemeColors',
-		() => getEditorColors( 'theme' )
-	);
-	// addFilter で テーマグラデーションを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeGradients.themeGradients',
-		'ystandard-toolbox/settings/design/getThemeGradients',
-		() => getEditorGradients( 'theme' )
-	);
-	// addFilter で テーマフォントサイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeFontSizes.themeFontSizes',
-		'ystandard-toolbox/settings/design/getThemeFontSizes',
-		() => getEditorFontSizes( 'theme' )
-	);
-	// addFilter で テーマ余白サイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
-		'ystandard-toolbox/settings/design/getThemeSpacingSizes',
-		() => getEditorSpacingSizes( 'theme' )
-	);
 
 	return (
 		<AppContainer
