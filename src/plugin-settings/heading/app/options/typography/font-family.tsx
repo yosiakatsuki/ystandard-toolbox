@@ -26,6 +26,12 @@ interface FontFamilyControlProps {
 	onChange: ( newValue: { fontFamily: string | undefined } ) => void;
 }
 
+/**
+ * 指定されたfont-family値が、一覧から選択できるフォントか判定する。
+ *
+ * @param value        判定するfont-family値。
+ * @param fontFamilies 一覧から選択できるフォント情報。
+ */
 const isSelectableFontFamily = (
 	value: string | undefined,
 	fontFamilies: FontFamilies
@@ -38,6 +44,12 @@ const isSelectableFontFamily = (
 	} );
 };
 
+/**
+ * 保存済みのfont-family値から、初期表示する入力方法を取得する。
+ *
+ * @param value        保存済みのfont-family値。
+ * @param fontFamilies 一覧から選択できるフォント情報。
+ */
 const getInputMode = (
 	value: string | undefined,
 	fontFamilies: FontFamilies
@@ -48,25 +60,36 @@ const getInputMode = (
 	return isSelectableFontFamily( value, fontFamilies ) ? 'select' : 'custom';
 };
 
+/**
+ * 見出しデザイン設定のfont-family入力コントロールを表示する。
+ *
+ * @param props コンポーネントのプロパティ。
+ */
 export default function FontFamily( props: FontFamilyControlProps ) {
 	const { value, onChange } = props;
 	const fontFamilies = useFontFamilies();
+	// ユーザーが切り替えた入力方法だけを保持し、初期表示は現在値から自動判定する。
 	const [ inputMode, setInputMode ] = useState<
 		FontFamilyInputMode | undefined
 	>( undefined );
 
+	// 入力方法をまだ切り替えていない場合は、保存済みの値に合わせて表示を決める。
 	const mode = inputMode || getInputMode( value, fontFamilies );
 
+	// font-family値を設定値として保存できる形式へ変換して通知する。
 	const handleOnChange = ( newValue: string | undefined ) => {
 		onChange( {
 			fontFamily: newValue || undefined,
 		} );
 	};
+
+	// 入力方法を切り替え、一覧から選択できない値は必要に応じてクリアする。
 	const handleModeChange = ( newMode: string | number | undefined ) => {
 		if ( 'select' !== newMode && 'custom' !== newMode ) {
 			return;
 		}
 		setInputMode( newMode );
+		// 直接入力の値は一覧に存在しないため、一覧入力へ戻すときは値をクリアする。
 		if (
 			'select' === newMode &&
 			! isSelectableFontFamily( value, fontFamilies )
@@ -80,16 +103,17 @@ export default function FontFamily( props: FontFamilyControlProps ) {
 			id={ 'font-family' }
 			label={ __( 'font-family', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
+			className="ystdtb-font-family-control"
 		>
 			<ToggleGroup
 				label={ __( '入力方法', 'ystandard-toolbox' ) }
 				value={ mode }
 				onChange={ handleModeChange }
-				isBlock={ true }
 				isDeselectable={ false }
+				className="ystdtb-font-family-input-mode-toggle"
 				options={ [
 					{
-						label: __( '登録フォント', 'ystandard-toolbox' ),
+						label: __( '一覧から', 'ystandard-toolbox' ),
 						value: 'select',
 					},
 					{

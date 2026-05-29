@@ -1,0 +1,7 @@
+.ystdtb-font-family-control {
+	.ystdtb-font-family-input-mode-toggle {
+		height: calc(24 / 16 * 1rem);
+		margin-bottom: 0.5rem;
+		font-size: calc(13 / 16 * 1rem);
+	}
+}
