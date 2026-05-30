@@ -83,19 +83,12 @@ export default function FontFamily( props: FontFamilyControlProps ) {
 		} );
 	};
 
-	// 入力方法を切り替え、一覧から選択できない値は必要に応じてクリアする。
+	// 入力方法だけを切り替え、入力済みのfont-family値は維持する。
 	const handleModeChange = ( newMode: string | number | undefined ) => {
 		if ( 'select' !== newMode && 'custom' !== newMode ) {
 			return;
 		}
 		setInputMode( newMode );
-		// 直接入力の値は一覧に存在しないため、一覧入力へ戻すときは値をクリアする。
-		if (
-			'select' === newMode &&
-			! isSelectableFontFamily( value, fontFamilies )
-		) {
-			handleOnChange( undefined );
-		}
 	};
 
 	return (
