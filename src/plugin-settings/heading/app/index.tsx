@@ -11,13 +11,11 @@ import {
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { brush, cog, Icon as WPIcon } from '@wordpress/icons';
-import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import { ConfirmModal } from '@aktk/block-components/components/modal';
-import { getDefaultSpacingSizes } from '@aktk/block-components/hooks/useThemeSpacingSizes';
 /**
  * Plugin dependencies
  */
@@ -36,11 +34,7 @@ import {
 /**
  * Plugin-Setting dependencies.
  */
-import {
-	getEditorColors,
-	getEditorFontSizes,
-	getEditorSpacingSizes,
-} from '@aktk/plugin-settings/utils';
+import { registerEditorSettingFilters } from '@aktk/plugin-settings/utils';
 
 interface HeadingAppProps {
 	setIsLoading: ( value: boolean ) => void;
@@ -82,6 +76,9 @@ interface HeadingContextProps {
 export const HeadingContext: Context< HeadingContextProps > =
 	// @ts-ignore
 	createContext< HeadingContextProps >();
+
+// 管理画面用のuseSettings()の値を補完する.
+registerEditorSettingFilters( 'ystandard-toolbox/settings/heading' );
 
 export default function HeadingApp( props: HeadingAppProps ) {
 	const { setIsLoading } = props;
@@ -203,46 +200,6 @@ export default function HeadingApp( props: HeadingAppProps ) {
 			headingStyles[ selectedStyle as keyof typeof headingStyles ];
 		setHeadingOption( option );
 	}, [ selectedStyle ] );
-
-	// addFilter で テーマカラーを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeColors.themeColors',
-		'ystandard-toolbox/settings/design/getThemeColors',
-		() => getEditorColors()
-	);
-	// addFilter で テーマフォントサイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeFontSizes.themeFontSizes',
-		'ystandard-toolbox/settings/heading/getThemeFontSizes',
-		() => getEditorFontSizes()
-	);
-	// addFilter で テーマ余白サイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
-		'ystandard-toolbox/settings/heading/getThemeSpacingSizes',
-		() => getEditorSpacingSizes()
-	);
-	// Gutenberg コアの SpacingSizesControl は内部で useSettings('spacing.spacingSizes.theme') を呼ぶため、
-	// 設定画面では block-editor ストアが空となり UI にプリセットが出ない。
-	// blockEditor.useSetting.before で値を注入し、さらにデフォルトサイズを末尾結合して
-	// RANGE_CONTROL_MAX_SIZE (8) を超えるサイズ数とすることで CustomSelectControl 表示にする.
-	addFilter(
-		'blockEditor.useSetting.before',
-		'ystandard-toolbox/settings/heading/spacingSizes',
-		( settingValue: unknown, settingName: string ) => {
-			if (
-				'spacing.spacingSizes.theme' === settingName &&
-				! settingValue
-			) {
-				const editorSpacingSizes = getEditorSpacingSizes();
-				const themeSizes = Array.isArray( editorSpacingSizes )
-					? editorSpacingSizes
-					: [];
-				return [ ...themeSizes, ...getDefaultSpacingSizes() ];
-			}
-			return settingValue;
-		}
-	);
 
 	return (
 		<div>
@@ -382,27 +339,36 @@ function ModeSelect( props: ModeSelectProps ) {
 				</TabButton>
 			</div>
 			<ConfirmModal
-				title={ __( '編集モード切り替え確認', 'ystandard-toolbox' ) }
+				title={ __( '編集内容を破棄しますか', 'ystandard-toolbox' ) }
 				isOpen={ isConfirmModalOpen }
-				okText={ __( '編集モードを切り替える', 'ystandard-toolbox' ) }
+				cancelText={ __( '設定の編集に戻る', 'ystandard-toolbox' ) }
+				okText={ __(
+					'編集内容を破棄して切り替える',
+					'ystandard-toolbox'
+				) }
 				onCancel={ () => {
 					setIsConfirmModalOpen( false );
 					setTempSelectedType( selectedType );
 				} }
 				onOk={ handleConfirmModalOk }
+				isOkDestructive={ true }
+				focusOnCancel={ true }
+				actionButtonOrder={ 'ok-cancel' }
+				okVariant={ 'secondary' }
+				cancelVariant={ 'primary' }
 			>
 				<p className="mb-0">
 					{ __( '編集中のデータがあります。', 'ystandard-toolbox' ) }
 				</p>
 				<p className="mt-0">
 					{ __(
-						'編集モードを切り替えてもよろしいですか。',
+						'切り替えると、保存していない編集内容は破棄されます。',
 						'ystandard-toolbox'
 					) }
 				</p>
 				<p className={ 'mt-1 text-xs text-gray-400' }>
 					{ __(
-						'※編集中のデータは破棄されます。',
+						'編集を続ける場合は「設定の編集に戻る」を選択してください。',
 						'ystandard-toolbox'
 					) }
 				</p>

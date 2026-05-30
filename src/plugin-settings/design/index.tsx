@@ -10,7 +10,6 @@ import {
 	createRoot,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { addFilter } from '@wordpress/hooks';
 /**
  * Aktk dependencies
  */
@@ -21,7 +20,6 @@ import {
 } from '@aktk/block-components/components/toast-message';
 import { hasKey } from '@aktk/block-components/utils/object';
 import { PrimaryButton } from '@aktk/block-components/components/buttons';
-import { getDefaultSpacingSizes } from '@aktk/block-components/hooks/useThemeSpacingSizes';
 /**
  * Plugin dependencies
  */
@@ -29,11 +27,7 @@ import { apiPost, getEndpoint } from '@aktk/api';
 import AppContainer from '@aktk/plugin-settings/components/app-container';
 import { getPluginSetting } from '@aktk/plugin-settings/utils/setting';
 import { SettingsTab } from '@aktk/plugin-settings/components/settings-tab';
-import {
-	getEditorColors,
-	getEditorFontSizes,
-	getEditorSpacingSizes,
-} from '@aktk/plugin-settings/utils';
+import { registerEditorSettingFilters } from '@aktk/plugin-settings/utils';
 
 /**
  * App
@@ -90,6 +84,9 @@ const TABS: DesignSettingsTab[] = [
 	},
 ];
 
+// 管理画面用のuseSettings()の値を補完する.
+registerEditorSettingFilters( 'ystandard-toolbox/settings/design' );
+
 const Design = () => {
 	const [ isLoading, setIsLoading ] = useState( true );
 	const [ isUpdate, setIsUpdate ] = useState( false );
@@ -145,46 +142,6 @@ const Design = () => {
 			messageError: notifyError,
 		} );
 	};
-
-	// addFilter で テーマカラーを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeColors.themeColors',
-		'ystandard-toolbox/settings/design/getThemeColors',
-		() => getEditorColors()
-	);
-	// addFilter で テーマフォントサイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeFontSizes.themeFontSizes',
-		'ystandard-toolbox/settings/design/getThemeFontSizes',
-		() => getEditorFontSizes()
-	);
-	// addFilter で テーマ余白サイズを取得するフィルターを追加
-	addFilter(
-		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
-		'ystandard-toolbox/settings/design/getThemeSpacingSizes',
-		() => getEditorSpacingSizes()
-	);
-	// Gutenberg コアの SpacingSizesControl は内部で useSettings('spacing.spacingSizes.theme') を呼ぶため、
-	// 設定画面では block-editor ストアが空となり UI にプリセットが出ない。
-	// blockEditor.useSetting.before で値を注入し、さらにデフォルトサイズを末尾結合して
-	// RANGE_CONTROL_MAX_SIZE (8) を超えるサイズ数とすることで CustomSelectControl 表示にする.
-	addFilter(
-		'blockEditor.useSetting.before',
-		'ystandard-toolbox/settings/design/spacingSizes',
-		( settingValue: unknown, settingName: string ) => {
-			if (
-				'spacing.spacingSizes.theme' === settingName &&
-				! settingValue
-			) {
-				const editorSpacingSizes = getEditorSpacingSizes();
-				const themeSizes = Array.isArray( editorSpacingSizes )
-					? editorSpacingSizes
-					: [];
-				return [ ...themeSizes, ...getDefaultSpacingSizes() ];
-			}
-			return settingValue;
-		}
-	);
 
 	return (
 		<AppContainer

@@ -7,7 +7,12 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
+import {
+	ResponsiveSpacingSelect,
+	type ResponsiveSpacing,
+	type ResponsiveSpacingSelectOnChangeProps,
+} from '@aktk/block-components/components/custom-spacing-select';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /*
  * Plugin Dependencies
@@ -25,8 +30,30 @@ interface BoxPaddingProps {
  */
 const BoxPadding = ( props: BoxPaddingProps ): React.ReactElement => {
 	const { attributes, setAttributes } = props;
+	// Padding.
+	const boxPadding = attributes?.boxPadding as ResponsiveSpacing | undefined;
 
-	const { boxPadding } = attributes;
+	const handleBoxPaddingChange = (
+		newValue: ResponsiveSpacingSelectOnChangeProps
+	): void => {
+		let newBoxPadding: ResponsiveSpacing | undefined;
+		if ( newValue.responsiveSpacing ) {
+			newBoxPadding = stripUndefined(
+				newValue.responsiveSpacing
+			) as ResponsiveSpacing;
+		} else if ( newValue.spacing ) {
+			newBoxPadding = stripUndefined( {
+				desktop: newValue.spacing,
+			} ) as ResponsiveSpacing;
+		} else {
+			newBoxPadding = undefined;
+		}
+
+		setAttributes( {
+			// @ts-expect-error
+			boxPadding: newBoxPadding,
+		} );
+	};
 
 	return (
 		<BaseControl
@@ -34,15 +61,12 @@ const BoxPadding = ( props: BoxPaddingProps ): React.ReactElement => {
 			label={ __( '余白設定', 'ystandard-toolbox' ) }
 		>
 			<ResponsiveSpacingSelect
-				value={ boxPadding }
-				onChange={ ( newValue ) => {
-					setAttributes( { boxPadding: newValue } );
-				} }
+				value={ boxPadding?.desktop }
+				responsiveValue={ boxPadding }
+				onChange={ handleBoxPaddingChange }
 				responsiveControlStyle="vertical"
 				useResponsive={ true }
 				showResetButton={ true }
-				sides={ [ 'top', 'right', 'bottom', 'left' ] }
-				minimumCustomValue={ 0 }
 			/>
 		</BaseControl>
 	);

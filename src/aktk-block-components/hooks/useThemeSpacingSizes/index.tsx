@@ -6,37 +6,64 @@ import { useSettings } from '@wordpress/block-editor';
 import { useMemo } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 
+type SpacingSize = {
+	name: string;
+	slug: string;
+	size: string;
+};
+
+const EMPTY_ARRAY: SpacingSize[] = [];
+
 /**
  * 余白設定を取得する（設定画面用）
  */
 const useThemeSpacingSizes = () => {
 	// useSettingsから余白サイズ情報を取得.
-	const [ defaultSpacingSizes, themeSpacingSizes ] = useSettings(
+	const [
+		customSpacingSizes,
+		themeSpacingSizes,
+		defaultSpacingSizes,
+		defaultSpacingSizesEnabled,
+	] = useSettings(
+		'spacing.spacingSizes.custom',
+		'spacing.spacingSizes.theme',
 		'spacing.spacingSizes.default',
-		'spacing.spacingSizes.theme'
+		'spacing.defaultSpacingSizes'
 	);
 
 	// フィルター経由のフォールバック（プラグイン設定画面など editor store が無い環境用）.
 	const hookSpacingSizes = applyFilters(
 		'aktk.hooks.getThemeSpacingSizes.themeSpacingSizes',
 		[]
-	) as Array< { name: string; slug: string; size: string } >;
+	) as SpacingSize[];
 
 	return useMemo( () => {
-		if ( themeSpacingSizes && themeSpacingSizes.length ) {
-			return themeSpacingSizes;
-		}
-		if ( Array.isArray( hookSpacingSizes ) && hookSpacingSizes.length ) {
-			return hookSpacingSizes;
-		}
-		if ( defaultSpacingSizes && defaultSpacingSizes.length ) {
-			return defaultSpacingSizes;
+		const customSizes = Array.isArray( customSpacingSizes )
+			? customSpacingSizes
+			: EMPTY_ARRAY;
+		const themeSizes = [
+			...( Array.isArray( themeSpacingSizes )
+				? themeSpacingSizes
+				: EMPTY_ARRAY ),
+			...( Array.isArray( hookSpacingSizes ) ? hookSpacingSizes : [] ),
+		];
+		const defaultSizes =
+			Array.isArray( defaultSpacingSizes ) &&
+			false !== defaultSpacingSizesEnabled
+				? defaultSpacingSizes
+				: EMPTY_ARRAY;
+
+		const spacingSizes = [ ...customSizes, ...themeSizes, ...defaultSizes ];
+		if ( spacingSizes.length ) {
+			return spacingSizes;
 		}
 		return getDefaultSpacingSizes();
 	}, [
+		customSpacingSizes,
 		themeSpacingSizes,
 		hookSpacingSizes,
 		defaultSpacingSizes,
+		defaultSpacingSizesEnabled,
 	] );
 };
 

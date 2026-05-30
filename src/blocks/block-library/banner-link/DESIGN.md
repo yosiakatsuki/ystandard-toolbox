@@ -101,7 +101,7 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 #### webpackエイリアスで解決されたコンポーネント（7箇所）
 - `inspector-controls/link/rel.tsx` → `@aktk/components/input-controls`
 - `inspector-controls/banner/image.tsx` → `@aktk/components/media-upload-control`
-- `inspector-controls/padding/padding.tsx` → `@aktk/components/responsive-spacing` + `@aktk/helper/responsive`
+- `inspector-controls/padding/padding.tsx` → `@aktk/block-components/components/custom-spacing-select`
 - `inspector-controls/sub-text/font-size.tsx` → `@aktk/components/responsive-font-size` + `@aktk/helper/responsive`
 - `inspector-controls/main-text/font-size.tsx` → `@aktk/components/responsive-font-size` + `@aktk/helper/responsive`
 - `inspector-controls/banner/ratio-size.tsx` → `@aktk/components/ratio-size-control`

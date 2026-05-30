@@ -6,15 +6,26 @@
 
 ## エクスポートされるコンポーネント
 
-### 1. ResponsiveSpacingSelect
+### ResponsiveSpacingSelect
 
 レスポンシブ対応のメインコンポーネント。デフォルト/レスポンシブ切り替え可能。
 
 ```typescript
-import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
+import {
+  ResponsiveSpacingSelect,
+  type ResponsiveSpacingSelectOnChangeProps,
+} from '@aktk/block-components/components/custom-spacing-select';
+
+const handleChange = (value: ResponsiveSpacingSelectOnChangeProps) => {
+  setAttributes({
+    spacing: value.spacing,
+    responsiveSpacing: value.responsiveSpacing,
+  });
+};
 
 <ResponsiveSpacingSelect
   value={spacing}
+  responsiveValue={responsiveSpacing}
   onChange={handleChange}
   responsiveControlStyle="vertical"    // または "horizontal"
   useResponsive={true}
@@ -28,15 +39,16 @@ import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custo
 
 | プロパティ | 型 | デフォルト | 説明 |
 |-----------|---|-----------|-----|
-| `value` | `ResponsiveSpacing` | - | レスポンシブスペーシング値 |
-| `onChange` | `(value) => void` | - | 値変更時のコールバック |
+| `value` | `Spacing \| undefined` | - | 標準タブのスペーシング値 |
+| `responsiveValue` | `ResponsiveSpacing \| undefined` | - | デバイス別タブのスペーシング値 |
+| `onChange` | `(value: ResponsiveSpacingSelectOnChangeProps) => void` | - | 値変更時のコールバック |
 | `responsiveControlStyle` | `'vertical' \| 'horizontal'` | `'vertical'` | レスポンシブコントロールのレイアウト |
 | `useResponsive` | `boolean` | `true` | レスポンシブ機能の有効/無効 |
 | `showResetButton` | `boolean` | `true` | リセットボタンの表示/非表示 |
 | `sides` | `('top' \| 'right' \| 'bottom' \| 'left')[]` | `['top', 'right', 'bottom', 'left']` | 設定対象の辺 |
 | `minimumCustomValue` | `number` | `0` | カスタム値の最小値 |
 
-### 2. CustomSpacingSelectControl
+### CustomSpacingSelectControl
 
 単一デバイス用のスペーシングコントロール。
 
@@ -79,6 +91,17 @@ interface ResponsiveSpacing {
 }
 ```
 
+### ResponsiveSpacingSelectOnChangeProps
+
+`ResponsiveSpacingSelect`の変更値。標準タブの変更時は`spacing`、デバイス別タブの変更時は`responsiveSpacing`が入ります。
+
+```typescript
+type ResponsiveSpacingSelectOnChangeProps = {
+  spacing?: Spacing;
+  responsiveSpacing?: ResponsiveSpacing;
+};
+```
+
 ## 使用例
 
 ### 基本的な使用方法
@@ -88,11 +111,12 @@ import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custo
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 
 const PaddingControl = ({ attributes, setAttributes }) => {
-  const { padding } = attributes;
+  const { padding, responsivePadding } = attributes;
   
   const handleOnChange = (values) => {
     setAttributes({
-      padding: values,
+      padding: values.spacing,
+      responsivePadding: values.responsiveSpacing,
     });
   };
   
@@ -103,6 +127,7 @@ const PaddingControl = ({ attributes, setAttributes }) => {
     >
       <ResponsiveSpacingSelect
         value={padding}
+        responsiveValue={responsivePadding}
         onChange={handleOnChange}
       />
     </BaseControl>
@@ -115,6 +140,7 @@ const PaddingControl = ({ attributes, setAttributes }) => {
 ```tsx
 <ResponsiveSpacingSelect
   value={margin}
+  responsiveValue={responsiveMargin}
   onChange={handleChange}
   sides={['top', 'bottom']}
 />
@@ -125,6 +151,7 @@ const PaddingControl = ({ attributes, setAttributes }) => {
 ```tsx
 <ResponsiveSpacingSelect
   value={spacing}
+  responsiveValue={responsiveSpacing}
   onChange={handleChange}
   responsiveControlStyle="horizontal"
 />
@@ -201,11 +228,15 @@ const handleOnChange = (values) => {
 </BaseControl>
 
 // 変更後
-import { ResponsiveSpacingSelect } from '@aktk/block-components/components/custom-spacing-select';
+import {
+  ResponsiveSpacingSelect,
+  type ResponsiveSpacingSelectOnChangeProps,
+} from '@aktk/block-components/components/custom-spacing-select';
 
-const handleOnChange = (values) => {
+const handleOnChange = (values: ResponsiveSpacingSelectOnChangeProps) => {
   setAttributes({
-    padding: values,  // getResponsiveValues不要
+    padding: values.spacing,
+    responsivePadding: values.responsiveSpacing,
   });
 };
 
@@ -214,7 +245,8 @@ const handleOnChange = (values) => {
   label="内側余白"  // ラベルをBaseControlに移動
 >
   <ResponsiveSpacingSelect
-    value={padding}  // values → value
+    value={padding}
+    responsiveValue={responsivePadding}
     onChange={handleOnChange}
   />
 </BaseControl>
@@ -223,13 +255,14 @@ const handleOnChange = (values) => {
 ### 主な変更点
 
 1. **インポート**: `@aktk/components/responsive-spacing` → `@aktk/block-components/components/custom-spacing-select`
-2. **プロパティ名**: `values` → `value`
-3. **データ変換不要**: `getResponsiveValues`の削除
+2. **プロパティ名**: `values` → `value` / `responsiveValue`
+3. **データ変換不要**: `getResponsiveValues`の削除。`onChange`の`spacing` / `responsiveSpacing`を属性へ保存
 4. **ラベル位置**: コンポーネント内 → `BaseControl`の`label`プロパティ
 
 ## 注意事項
 
-- データ構造は従来の`ResponsiveSpacing`コンポーネントと互換性があります
+- 新規実装では`padding` / `responsivePadding`、`margin` / `responsiveMargin`のように標準値とレスポンシブ値を分ける方式を基本にしてください
+- 旧形式の`{ desktop, tablet, mobile }`属性を維持するブロックでは、ブロック側で互換ラッパーを用意してください
 - プリセット値（`var:preset|spacing|*`）を使用する場合は`presetTokenToCssVar`で変換してください
 - レスポンシブ機能を無効にする場合は`useResponsive={false}`を設定してください
 - カスタム値の最小値制限が必要な場合は`minimumCustomValue`を設定してください

@@ -71,7 +71,7 @@ export default function Padding( props: PaddingControlProps ) {
 			id={ 'padding' }
 			label={ __( '内側余白(Padding)', 'ystandard-toolbox' ) }
 			isFullWidth={ true }
-			className={ '[&_.components-range-control]:hidden' }
+			className={ 'ystdtb--plugin-settings--spacing-panel' }
 		>
 			<ResponsiveSelectTab
 				isResponsive={ isResponsiveValue( responsiveValue ) }

@@ -31,7 +31,7 @@ import {
 	isLabelOutside,
 	getLabelBorderRadius,
 } from './function';
-import { BoxSaveProps } from './types';
+import { type BoxSaveProps } from './types';
 
 /**
  * ボックスブロック保存コンポーネント

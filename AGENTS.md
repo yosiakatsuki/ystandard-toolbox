@@ -97,6 +97,8 @@ npm run zip                  # 配布 zip 作成
 
 - WordPress Coding Standards に従う。
 - ドキュメント・コメントは日本語で書く。
+- 新規作成または更新した関数のうち、コンポーネント外で定義する関数には処理の目的が分かる Docコメントを付ける。
+- コンポーネント内で定義する関数には、処理の目的が分かる 1 行コメントを付ける。
 - TypeScript の型定義・interface 名・import セクションコメントは英語で書く。
 - PHP は short array syntax を使う。
 - CSS クラスは BEM を基本にし、プラグインのブロックは `ystdtb-` プレフィックスを使う。

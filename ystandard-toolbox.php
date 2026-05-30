@@ -11,7 +11,7 @@
  * Text Domain: ystandard-toolbox
  * Domain Path: /languages
  * Requires PHP: 8.2.0
- * Requires at least: 6.9
+ * Requires at least: 6.8
  * Update URI : https://wp-ystandard.com/plugins/ystandard-toolbox/
  *
  * @package yStandard_toolbox

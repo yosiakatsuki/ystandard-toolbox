@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import type { FontSize } from '@wordpress/components/src/font-size-picker/types';
 /**
- * Akatsuki
+ * aktk Dependencies
  */
 import {
 	CustomFontSizePicker,
@@ -34,10 +34,6 @@ export default function FontSize( props: FontSizeControlProps ) {
 	const { value, responsiveValue, onChange } = props;
 
 	const handleOnChange = ( newValue: CustomFontSizePickerOnChangeProps ) => {
-		// fontSize の size が number の場合、px を付与
-		const fontSizeSize = isNumber( newValue?.fontSize?.size )
-			? `${ newValue?.fontSize?.size }px`
-			: newValue?.fontSize?.size;
 		if ( newValue?.responsiveFontSize ) {
 			onChange( {
 				fontSize: undefined,
@@ -48,10 +44,16 @@ export default function FontSize( props: FontSizeControlProps ) {
 			return;
 		}
 
+		// fontSize の size が number の場合、px を付与
+		const fontSizeSize = isNumber( newValue?.fontSize?.size )
+			? `${ newValue?.fontSize?.size }px`
+			: newValue?.fontSize?.size;
+		const fontSize = sanitizeFontSize( newValue?.fontSize );
+
 		onChange( {
-			fontSize: sanitizeFontSize(
-				newValue?.fontSize ?? fontSizeSize ?? newValue?.customFontSize
-			),
+			fontSize:
+				fontSize ??
+				sanitizeFontSize( fontSizeSize ?? newValue?.customFontSize ),
 			responsiveFontSize: undefined,
 		} );
 	};

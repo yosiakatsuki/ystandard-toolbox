@@ -19,7 +19,6 @@ import { ResponsiveSelectTab } from '@aktk/block-components/components/tab-panel
  */
 import type { ResponsiveFontSize, CustomFontSizePickerProps } from './types';
 
-
 /**
  * カスタムフォントサイズピッカー
  * @param props
@@ -72,10 +71,16 @@ export function CustomFontSizePicker(
 		newValue: number | string | undefined,
 		selectedItem?: FontSize
 	) => {
+		const selectedFontSize = normalizeSelectedFontSize(
+			selectedItem,
+			newValue
+		);
 		// WPフォントサイズピッカーを使った場合カスタム側の値を削除しつつ更新.
 		onChange( {
-			fontSize: selectedItem,
-			customFontSize: isNumber( newValue ) ? `${ newValue }px` : newValue,
+			fontSize: selectedFontSize,
+			customFontSize: selectedFontSize
+				? undefined
+				: normalizeCustomFontSize( newValue ),
 			responsiveFontSize: undefined,
 		} );
 	};
@@ -117,6 +122,30 @@ export function CustomFontSizePicker(
 			) }
 		</div>
 	);
+}
+
+function normalizeSelectedFontSize(
+	selectedItem: FontSize | undefined,
+	value: number | string | undefined
+) {
+	if ( ! selectedItem ) {
+		return undefined;
+	}
+	if ( undefined !== selectedItem.size && null !== selectedItem.size ) {
+		return selectedItem;
+	}
+	if ( undefined === value || null === value ) {
+		return undefined;
+	}
+
+	return {
+		...selectedItem,
+		size: value,
+	};
+}
+
+function normalizeCustomFontSize( value: number | string | undefined ) {
+	return isNumber( value ) ? `${ value }px` : value;
 }
 
 /**

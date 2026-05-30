@@ -50,6 +50,11 @@ export function getPluginSettings( name: string ) {
 	return pluginSettings[ name ];
 }
 
+/**
+ * コード追加の設定取得.
+ *
+ * @returns object
+ */
 export function getCodeSetting() {
 	//TODO:移動させる.
 	const defaultSetting = {
@@ -62,3 +67,4 @@ export function getCodeSetting() {
 	};
 	return window?.ystdtbPluginSettings?.code || defaultSetting;
 }
+

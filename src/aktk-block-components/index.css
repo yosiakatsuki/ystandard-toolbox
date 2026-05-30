@@ -9,6 +9,7 @@
 @import "./components/buttons/index.css";
 @import "./components/color-pallet-control/index.css";
 @import "./components/custom-font-size-picker/index.css";
+@import "./components/custom-spacing-select/index.css";
 @import "./components/custom-select-control/index.css";
 @import "./components/icon-control/index.css";
 @import "./components/icon-select/index.css";

@@ -11,13 +11,7 @@ import { applyFilters } from '@wordpress/hooks';
  */
 const useThemeFontSizes = () => {
 	// useSettingsから文字サイズ情報を取得.
-	const [
-		defaultFontSizes,
-		themeFontSizes,
-	] = useSettings(
-		'typography.fontSizes.default',
-		'typography.fontSizes.theme',
-	);
+	const [ fontSizes ] = useSettings( 'typography.fontSizes' );
 
 	// フィルター経由のフォールバック（プラグイン設定画面など editor store が無い環境用）.
 	const hookFontSizes = applyFilters(
@@ -26,14 +20,14 @@ const useThemeFontSizes = () => {
 	) as Array< { name: string; slug: string; size: number | string } >;
 
 	return useMemo( () => {
-		if ( themeFontSizes && themeFontSizes.length ) {
-			return themeFontSizes;
+		if ( fontSizes && fontSizes.length ) {
+			return fontSizes;
 		}
 		if ( Array.isArray( hookFontSizes ) && hookFontSizes.length ) {
 			return hookFontSizes;
 		}
-		return defaultFontSizes || [];
-	}, [ themeFontSizes, hookFontSizes, defaultFontSizes ] );
+		return [];
+	}, [ fontSizes, hookFontSizes ] );
 };
 
 export default useThemeFontSizes;

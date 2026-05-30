@@ -156,8 +156,11 @@ class Plugin_Settings {
 					'adminUrl'           => esc_url_raw( admin_url() ),
 					'isYStandard'        => Version::ystandard_version_compare(),
 					'isAmpEnable'        => AMP::is_amp_enable(),
+					'editorSettings'     => self::get_editor_settings(),
 					'editorColors'       => self::get_editor_colors(),
+					'editorGradients'    => self::get_editor_gradients(),
 					'editorFontSizes'    => self::get_editor_font_sizes(),
+					'editorFontFamilies' => self::get_editor_font_families(),
 					'editorSpacingSizes' => self::get_editor_spacing_sizes(),
 				]
 			)
@@ -336,6 +339,19 @@ class Plugin_Settings {
 	}
 
 	/**
+	 * エディター設定を取得
+	 *
+	 * @return array エディター設定の配列
+	 */
+	private static function get_editor_settings() {
+		if ( ! function_exists( 'wp_get_global_settings' ) ) {
+			return [];
+		}
+
+		return wp_get_global_settings();
+	}
+
+	/**
 	 * カラーパレットの取得
 	 *
 	 * theme.jsonとadd_theme_support()の両方からカラーパレットを取得してマージする
@@ -343,116 +359,264 @@ class Plugin_Settings {
 	 * @return array カラーパレットの配列
 	 */
 	private static function get_editor_colors() {
-		$colors = [];
+		// useSettings()で参照するoriginごとに値を保持する.
+		$colors = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
 
-		// theme.jsonからカラーパレットを取得
+		// theme.jsonのcolor.paletteをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['color']['palette']['theme'] ) ) {
-				$theme_colors = $settings['color']['palette']['theme'];
-				if ( is_array( $theme_colors ) ) {
-					$colors = array_merge( $colors, $theme_colors );
+			foreach ( array_keys( $colors ) as $origin ) {
+				if ( isset( $settings['color']['palette'][ $origin ] ) && is_array( $settings['color']['palette'][ $origin ] ) ) {
+					$colors[ $origin ] = $settings['color']['palette'][ $origin ];
 				}
 			}
 		}
 
-		// add_theme_support('editor-color-palette')からカラーパレットを取得
+		// add_theme_support('editor-color-palette')はtheme originとして扱う.
 		$theme_support_colors = get_theme_support( 'editor-color-palette' );
 		if ( is_array( $theme_support_colors ) && ! empty( $theme_support_colors ) ) {
 			$theme_support_colors = $theme_support_colors[0];
 			if ( is_array( $theme_support_colors ) ) {
-				$colors = array_merge( $colors, $theme_support_colors );
+				$colors['theme'] = array_merge( $colors['theme'], $theme_support_colors );
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）
-		$unique_colors = [];
-		foreach ( $colors as $color ) {
-			if ( isset( $color['slug'] ) ) {
-				$unique_colors[ $color['slug'] ] = $color;
+		// slugをキーにして重複を除去する.
+		foreach ( $colors as $origin => $palette ) {
+			$unique_colors = [];
+			foreach ( $palette as $color ) {
+				if ( isset( $color['slug'] ) ) {
+					$unique_colors[ $color['slug'] ] = $color;
+				}
+			}
+			$colors[ $origin ] = array_values( $unique_colors );
+		}
+
+		return $colors;
+	}
+
+	/**
+	 * グラデーションパレットの取得
+	 *
+	 * theme.jsonとadd_theme_support()の両方からグラデーションを取得する.
+	 *
+	 * @return array グラデーションの配列
+	 */
+	private static function get_editor_gradients() {
+		// useSettings()で参照するoriginごとに値を保持する.
+		$gradients = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
+
+		// theme.jsonのcolor.gradientsをoriginごとに取得する.
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			foreach ( array_keys( $gradients ) as $origin ) {
+				if ( isset( $settings['color']['gradients'][ $origin ] ) && is_array( $settings['color']['gradients'][ $origin ] ) ) {
+					$gradients[ $origin ] = $settings['color']['gradients'][ $origin ];
+				}
 			}
 		}
 
-		return array_values( $unique_colors );
+		// add_theme_support('editor-gradient-presets')はtheme originとして扱う.
+		$theme_support_gradients = get_theme_support( 'editor-gradient-presets' );
+		if ( is_array( $theme_support_gradients ) && ! empty( $theme_support_gradients ) ) {
+			$theme_support_gradients = $theme_support_gradients[0];
+			if ( is_array( $theme_support_gradients ) ) {
+				$gradients['theme'] = array_merge( $gradients['theme'], $theme_support_gradients );
+			}
+		}
+
+		// slugをキーにして重複を除去する.
+		foreach ( $gradients as $origin => $gradient_list ) {
+			$unique_gradients = [];
+			foreach ( $gradient_list as $gradient ) {
+				if ( isset( $gradient['slug'] ) ) {
+					$unique_gradients[ $gradient['slug'] ] = $gradient;
+				}
+			}
+			$gradients[ $origin ] = array_values( $unique_gradients );
+		}
+
+		return $gradients;
 	}
 
 	/**
 	 * エディターで使用可能なフォントサイズを取得
 	 *
-	 * theme.jsonとadd_theme_support()の両方からフォントサイズを取得してマージする
+	 * theme.jsonとadd_theme_support()の両方からフォントサイズを取得する.
 	 *
 	 * @return array フォントサイズの配列
 	 */
 	private static function get_editor_font_sizes() {
-		$font_sizes = [];
+		$editor_settings = [];
 
-		// theme.jsonからフォントサイズを取得
+		// useSettings()で参照するoriginごとに値を保持する.
+		$font_sizes = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
+
+		// theme.jsonのtypography.fontSizesをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['typography']['fontSizes']['theme'] ) ) {
-				$theme_font_sizes = $settings['typography']['fontSizes']['theme'];
-				if ( is_array( $theme_font_sizes ) ) {
-					$font_sizes = array_merge( $font_sizes, $theme_font_sizes );
+			if ( is_array( $settings ) ) {
+				$editor_settings = $settings;
+			}
+
+			foreach ( array_keys( $font_sizes ) as $origin ) {
+				if ( isset( $settings['typography']['fontSizes'][ $origin ] ) && is_array( $settings['typography']['fontSizes'][ $origin ] ) ) {
+					$font_sizes[ $origin ] = $settings['typography']['fontSizes'][ $origin ];
 				}
 			}
 		}
 
-		// add_theme_support('editor-font-sizes')からフォントサイズを取得
+		// add_theme_support('editor-font-sizes')はtheme originとして扱う.
 		$theme_support_sizes = get_theme_support( 'editor-font-sizes' );
 		if ( is_array( $theme_support_sizes ) && ! empty( $theme_support_sizes ) ) {
 			$theme_support_sizes = $theme_support_sizes[0];
 			if ( is_array( $theme_support_sizes ) ) {
-				$font_sizes = array_merge( $font_sizes, $theme_support_sizes );
+				$font_sizes['theme'] = array_merge( $font_sizes['theme'], $theme_support_sizes );
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）
-		$unique_font_sizes = [];
-		foreach ( $font_sizes as $font_size ) {
-			if ( isset( $font_size['slug'] ) ) {
-				$unique_font_sizes[ $font_size['slug'] ] = $font_size;
+		// slugをキーにして重複を除去する.
+		foreach ( $font_sizes as $origin => $sizes ) {
+			$unique_font_sizes = [];
+			foreach ( $sizes as $font_size ) {
+				if ( isset( $font_size['slug'] ) ) {
+					$font_size                               = self::normalize_editor_font_size( $font_size, $editor_settings );
+					$unique_font_sizes[ $font_size['slug'] ] = $font_size;
+				}
+			}
+			$font_sizes[ $origin ] = array_values( $unique_font_sizes );
+		}
+
+		return $font_sizes;
+	}
+
+	/**
+	 * エディター用フォントサイズを正規化する
+	 *
+	 * @param array $font_size フォントサイズ設定.
+	 * @param array $settings  エディター設定.
+	 *
+	 * @return array
+	 */
+	private static function normalize_editor_font_size( $font_size, $settings ) {
+		if ( ! is_array( $font_size ) ) {
+			return $font_size;
+		}
+		if ( ! function_exists( 'wp_get_typography_font_size_value' ) || ! isset( $font_size['size'] ) ) {
+			return $font_size;
+		}
+
+		// fluid設定をWordPressコアの処理でCSS値に変換する.
+		$size = \wp_get_typography_font_size_value( $font_size, $settings );
+		if ( null !== $size ) {
+			$font_size['size'] = $size;
+		}
+
+		return $font_size;
+	}
+
+	/**
+	 * エディターで使用可能なフォントファミリーを取得
+	 *
+	 * theme.json から typography.fontFamilies を取得する.
+	 *
+	 * @return array フォントファミリーの配列
+	 */
+	private static function get_editor_font_families() {
+		// useSettings()で参照するoriginごとに値を保持する.
+		$font_families = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
+
+		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
+			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
+			$settings   = $theme_json->get_settings();
+
+			// theme.jsonのtypography.fontFamiliesをoriginごとに取得する.
+			foreach ( array_keys( $font_families ) as $origin ) {
+				if ( isset( $settings['typography']['fontFamilies'][ $origin ] ) && is_array( $settings['typography']['fontFamilies'][ $origin ] ) ) {
+					$font_families[ $origin ] = $settings['typography']['fontFamilies'][ $origin ];
+				}
 			}
 		}
 
-		return array_values( $unique_font_sizes );
+		// slugまたはfontFamilyをキーにして重複を除去する.
+		foreach ( $font_families as $origin => $families ) {
+			$unique_font_families = [];
+			foreach ( $families as $font_family ) {
+				if ( isset( $font_family['slug'] ) ) {
+					$unique_font_families[ $font_family['slug'] ] = $font_family;
+					continue;
+				}
+				if ( isset( $font_family['fontFamily'] ) ) {
+					$unique_font_families[ $font_family['fontFamily'] ] = $font_family;
+				}
+			}
+			$font_families[ $origin ] = array_values( $unique_font_families );
+		}
+
+		return $font_families;
 	}
 
 	/**
 	 * 余白サイズ（spacingSizes）の取得
 	 *
-	 * theme.json の typography.fontSizes と同パターンで spacing.spacingSizes.theme を取得する.
+	 * theme.json から spacing.spacingSizes をoriginごとに取得する.
 	 *
 	 * @return array 余白サイズの配列
 	 */
 	private static function get_editor_spacing_sizes() {
-		$spacing_sizes = [];
+		// useSettings()で参照するoriginごとに値を保持する.
+		$spacing_sizes = [
+			'default' => [],
+			'theme'   => [],
+			'custom'  => [],
+		];
 
-		// theme.json から余白サイズを取得.
+		// theme.jsonのspacing.spacingSizesをoriginごとに取得する.
 		if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
 			$theme_json = \WP_Theme_JSON_Resolver::get_merged_data();
 			$settings   = $theme_json->get_settings();
 
-			if ( isset( $settings['spacing']['spacingSizes']['theme'] ) ) {
-				$theme_spacing_sizes = $settings['spacing']['spacingSizes']['theme'];
-				if ( is_array( $theme_spacing_sizes ) ) {
-					$spacing_sizes = $theme_spacing_sizes;
+			foreach ( array_keys( $spacing_sizes ) as $origin ) {
+				if ( isset( $settings['spacing']['spacingSizes'][ $origin ] ) && is_array( $settings['spacing']['spacingSizes'][ $origin ] ) ) {
+					$spacing_sizes[ $origin ] = $settings['spacing']['spacingSizes'][ $origin ];
 				}
 			}
 		}
 
-		// 重複を除去（slugをキーとして使用）.
-		$unique_spacing_sizes = [];
-		foreach ( $spacing_sizes as $spacing_size ) {
-			if ( isset( $spacing_size['slug'] ) ) {
-				$unique_spacing_sizes[ $spacing_size['slug'] ] = $spacing_size;
+		// slugをキーにして重複を除去する.
+		foreach ( $spacing_sizes as $origin => $sizes ) {
+			$unique_spacing_sizes = [];
+			foreach ( $sizes as $spacing_size ) {
+				if ( isset( $spacing_size['slug'] ) ) {
+					$unique_spacing_sizes[ $spacing_size['slug'] ] = $spacing_size;
+				}
 			}
+			$spacing_sizes[ $origin ] = array_values( $unique_spacing_sizes );
 		}
 
-		return array_values( $unique_spacing_sizes );
+		return $spacing_sizes;
 	}
 
 }

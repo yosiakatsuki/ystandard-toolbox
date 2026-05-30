@@ -96,7 +96,8 @@
 	"supports": {
 		"anchor": false,
 		"align": false,
-		"className": false
+		"className": false,
+		"listView": true
 	},
 	"example": {
 		"attributes": {
