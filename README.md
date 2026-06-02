@@ -5,6 +5,14 @@
 詳細・購入はこちら▼
 [https://wp-ystandard.com/plugins/ystandard-toolbox/](https://wp-ystandard.com/plugins/ystandard-toolbox/)
 
+## 動作環境
+
+| 項目 | 最低要件 | 推奨 |
+|---|---|---|
+| WordPress | 6.5 以上 | 6.8 以上 |
+| PHP | 7.4 以上 | 8.3 以上 |
+| yStandard テーマ | 4.36.0 以上 | 最新版 |
+
 ## 開発メモ
 - 見出し編集機能
 - プレビュー作成・スタイル調整2024/01/31
