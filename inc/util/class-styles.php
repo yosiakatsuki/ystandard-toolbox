@@ -468,7 +468,7 @@ class Styles {
 	 */
 	public static function get_breakpoints() {
 		// 旧フィルターとの互換性を保つため、両方のフィルターを適用.
-		$breakpoints = apply_filters( 'ys_get_break_points', [ self::BREAKPOINTS ] );
+		$breakpoints = apply_filters( 'ys_get_break_points', self::BREAKPOINTS );
 
 		return apply_filters(
 			'ystdtb_css_breakpoints',
