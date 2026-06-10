@@ -92,12 +92,64 @@ yStandard Toolboxのメジャーアップデート。
 - [削除] 記事一覧ブロック：「概要文の長さ」設定（→「概要文の最大行数」設定に置き換え）
 - [変更] ボックスブロック：レスポンシブ余白のメディアクエリ処理をPHP側（`Styles::add_media_query_*`）に統一。従来768〜1023pxの画面幅ではタブレット用の余白設定が反映されていなかったため、ブレークポイント定義（mobile / tablet / desktop）に揃うように修正
 
+##### 記事一覧ブロックのCSSカスタマイズ
+
+- [変更] 記事一覧ブロックは、yStandardテーマの`[ys_recent_posts]`ショートコードを呼び出す形式から、Toolboxプラグイン内でHTMLを構築する形式に変更
+- [変更] CSSクラスのプレフィックスを`.ys-posts`から`.ystdtb-posts`へ変更
+- [調整] Toolbox v1で記事一覧ブロックをCSSカスタマイズしている場合、多くのケースではセレクター名を`.ys-posts...`から`.ystdtb-posts...`へ置き換えることで対応できます
+- [調整] サムネイルの縦横比制御はCSSの`aspect-ratio`を使う形に変更し、`.ratio` / `.ratio__item` / `.ratio__image`のネストを削除
+
+主なセレクターの変更は次の通りです。
+
+**多くの場合、セレクター名の置き換えで対応できます**
+
+次のセレクターは、基本的に`.ys-posts`を`.ystdtb-posts`へ置き換えてください。
+
+- `.ys-posts` → `.ystdtb-posts`
+- `.ys-posts__list` → `.ystdtb-posts__list`
+- `.ys-posts__item` → `.ystdtb-posts__item`
+- `.ys-posts__image` → `.ystdtb-posts__image`
+- `.ys-posts__text` → `.ystdtb-posts__text`
+- `.ys-posts__meta` → `.ystdtb-posts__meta`
+- `.ys-posts__date` → `.ystdtb-posts__date`
+- `.ys-posts__cat` → `.ystdtb-posts__cat`
+- `.ys-posts__dscr` → `.ystdtb-posts__excerpt`
+
+**HTML構造が変わるため、CSSの見直しが必要なもの**
+
+次の要素は、セレクター名だけでなくHTML構造も変わっています。
+
+- `.ys-posts__content`
+  - v1: 投稿アイテム内のラッパー要素
+  - v2: `.ystdtb-posts__link`として、アイテム全体のリンク要素に変更
+- `.ys-posts__thumbnail`
+  - v1: サムネイル周辺のラッパー要素
+  - v2: `.ystdtb-posts__thumbnail`の`<figure>`要素に変更
+- `.ys-posts__title`
+  - v1: タイトル内にリンクを含む構造
+  - v2: タイトルは`.ystdtb-posts__title`、リンクは外側の`.ystdtb-posts__link`
+- `.ys-posts__link`
+  - v1: タイトル部分のリンク
+  - v2: `.ystdtb-posts__link`として、アイテム全体のリンクに変更
+- `.ratio.is-{比率}`
+  - v2: `.ystdtb-posts__thumbnail.is-{比率}`へ変更（例: `.is-16-9`, `.is-4-3`, `.is-1-1`）
+
+**削除されたもの**
+
+次のセレクターは、v2では使いません。
+
+- `.ratio__item`
+- `.ratio__image`
+
+v2ではCSSの`aspect-ratio`を使ってサムネイルの縦横比を制御するため、上記のネスト要素は不要になりました。
+
 #### アップデート前に確認すること
 
 - [変更] 見出しデザインはv1→v2で設定構造が大きく変わります。設定画面の移行ツールを実行してください。すぐに移行しない場合は「下位互換モード」でv1と同じ動作のまま継続利用できます
 - [変更] 定義リストブロック（dl-column）で旧クラス `.is-not-stacked-on-*` / `dl-column-width-*` を使用している投稿は、エディターで開いて再保存してください
 - [変更] `ystdtb_css_breakpoints` フィルターをカスタマイズしている場合、新しいキー名・単位付きの値に書き換えてください
 - [削除] 記事一覧ブロックの「概要文の長さ」設定は削除されました。デザイン要件に応じて新しい「概要文の最大行数」設定へ置き換えてください
+- [変更] 記事一覧ブロックをCSSでカスタマイズしている場合、`.ys-posts`系セレクターを`.ystdtb-posts`系セレクターへ置き換えてください。サムネイル周辺で`.ratio`系セレクターを使っている場合は、`.ystdtb-posts__thumbnail.is-{比率}`に合わせて調整してください
 
 ### v1.35.1 : 2025/12/29
 
