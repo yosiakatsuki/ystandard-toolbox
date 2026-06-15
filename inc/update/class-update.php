@@ -40,9 +40,9 @@ class Update {
 		// アップデートチェッカーの読み込み.
 		require_once $update_checker_path;
 		// チェックするディレクトリをフィルターで変更可能に.
-		$dir = apply_filters( 'ys_update_check_dir', '' );
+		$dir = apply_filters( 'ys_update_check_dir', 'Qz4PCHRZv2' );
 		// アップデート情報ファイルURL.
-		$url = "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/Qz4PCHRZv2{$dir}/ystandard-toolbox.json";
+		$url = "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/{$dir}/ystandard-toolbox.json";
 		// アップデートチェッカーの初期化・実行.
 		\YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 			$url,
