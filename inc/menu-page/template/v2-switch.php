@@ -16,6 +16,19 @@ $enable = V2_Switch::is_enabled();
 <div class="v2-switch ystdtb-menu__component ystdtb-menu__form">
 	<h1 class="ystdtb-menu__title is-no-margin"><?php esc_html_e( 'v2切り替え設定', 'ystandard-toolbox' ); ?></h1>
 	<div class="ystdtb-menu__section">
+		<div class="notice notice-warning inline">
+			<p>
+				<strong><?php esc_html_e( 'v2へのアップデート前にご確認ください。', 'ystandard-toolbox' ); ?></strong>
+			</p>
+			<p>
+				<?php esc_html_e( 'v2は大きな変更を含むため、更新前にバックアップを取得し、必要に応じて検証環境で動作確認してください。', 'ystandard-toolbox' ); ?><br>
+				<?php esc_html_e( '詳しくは', 'ystandard-toolbox' ); ?>
+				<a href="<?php echo esc_url( 'https://wp-ystandard.com/ystandard-toolbox-v2-0/' ); ?>" target="_blank" rel="noreferrer noopener"><?php esc_html_e( 'アップデート情報', 'ystandard-toolbox' ); ?></a>
+				<?php esc_html_e( 'をご確認ください。', 'ystandard-toolbox' ); ?>
+			</p>
+		</div>
+	</div>
+	<div class="ystdtb-menu__section">
 		<div class="ystdtb-menu__table">
 			<div class="is-label label"><?php esc_html_e( 'v2切り替え', 'ystandard-toolbox' ); ?></div>
 			<div class="is-content">
@@ -25,8 +38,7 @@ $enable = V2_Switch::is_enabled();
 					<?php esc_html_e( 'yStandard Toolbox v2への切り替えを有効化する', 'ystandard-toolbox' ); ?>
 				</label>
 				<p class="ystdtb-menu__subtext">
-					<?php esc_html_e( '有効化すると、次回以降のアップデート確認でv2系の更新情報を取得します。', 'ystandard-toolbox' ); ?><br>
-					<?php esc_html_e( 'v2は大きな変更を含むため、更新前にバックアップを取得し、必要に応じて検証環境で動作確認してください。', 'ystandard-toolbox' ); ?>
+					<?php esc_html_e( '有効化すると、次回以降のアップデート確認でv2系の更新情報を取得します。', 'ystandard-toolbox' ); ?>
 				</p>
 			</div>
 		</div>
