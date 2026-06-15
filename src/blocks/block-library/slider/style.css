@@ -3,6 +3,9 @@
 	--swiper-pagination-color: currentColor;
 }
 .ystdtb-slider {
+	/* 内部のスライド幅が親要素の横幅計算に影響しないようにする */
+	contain: inline-size;
+
 	&,
 	*,
 	*::before,
