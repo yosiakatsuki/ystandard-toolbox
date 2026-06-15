@@ -47,7 +47,7 @@ class Update {
 		\YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 			$url,
 			YSTDTB_PATH . '/ystandard-toolbox.php',
-			'yStandard Toolbox'
+			'ystandard-toolbox'
 		);
 	}
 }
