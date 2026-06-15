@@ -34,7 +34,8 @@ class Update {
 		}
 		require_once YSTDTB_PATH . '/library/plugin-update-checker/plugin-update-checker.php';
 		$dir = apply_filters( 'ys_update_check_dir', '' );
-		$url = "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/jgtmvhneyxrp{$dir}/ystandard-toolbox.json";
+		$key = V2_Switch::get_update_key();
+		$url = "https://wp-ystandard.com/download/ystandard/plugin/ystandard-toolbox/{$key}{$dir}/ystandard-toolbox.json";
 		\Puc_v4_Factory::buildUpdateChecker(
 			$url,
 			YSTDTB_PATH . '/ystandard-toolbox.php',

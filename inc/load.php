@@ -59,6 +59,9 @@ require_once __DIR__ . '/lp/class-lp.php';
 // Polyfill.
 require_once __DIR__ . '/polyfill/class-polyfill.php';
 
+// v2 Switch.
+require_once __DIR__ . '/update/class-v2-switch.php';
+
 // Admin.
 require_once __DIR__ . '/admin/class-admin-utility.php';
 require_once __DIR__ . '/menu-page/class-menu-page.php';
