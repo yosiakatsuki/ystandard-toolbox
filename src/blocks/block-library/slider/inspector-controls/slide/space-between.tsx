@@ -12,6 +12,8 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
  */
 import type { SlideOptionEditProps } from '../../types';
 
+const PX_UNITS = [ { value: 'px', label: 'px' } ];
+
 export function SpaceBetween( props: SlideOptionEditProps ) {
 	const { value, onChange, type } = props;
 	const { spaceBetween } = value || {};
@@ -28,6 +30,7 @@ export function SpaceBetween( props: SlideOptionEditProps ) {
 			<UnitControl
 				value={ spaceBetween || '' }
 				onChange={ handleOnChange }
+				units={ PX_UNITS }
 			/>
 		</BaseControl>
 	);
