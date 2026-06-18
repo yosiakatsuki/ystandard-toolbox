@@ -33,9 +33,12 @@ export const getBackgroundPosition = ( value ) => {
 	}%`;
 };
 
-export const getOverlayBackGround = ( color, gradient ) => {
+export const getOverlayBackGround = ( color, customColor, gradient ) => {
 	if ( gradient ) {
 		return gradient;
+	}
+	if ( customColor ) {
+		return customColor;
 	}
 	if ( color ) {
 		return color;
@@ -68,7 +71,7 @@ const convertSpacingValues = ( spacing ) => {
 	if ( ! spacing || 'object' !== typeof spacing ) {
 		return undefined;
 	}
-	
+
 	return {
 		top: presetTokenToCssVar( spacing.top ),
 		right: presetTokenToCssVar( spacing.right ),

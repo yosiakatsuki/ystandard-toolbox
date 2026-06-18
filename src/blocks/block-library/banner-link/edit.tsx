@@ -10,6 +10,7 @@ import {
 	RichText,
 	withColors,
 	useBlockProps,
+	getColorClassName,
 	__experimentalUseGradient,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -159,17 +160,28 @@ const BannerLink = ( props ) => {
 	 * Overlay
 	 */
 	const hasOverlayBackground =
-		backgroundImage || backgroundColor || gradientClass || gradientValue;
+		backgroundImage ||
+		backgroundColorSlug ||
+		customBackgroundColor ||
+		gradientClass ||
+		gradientValue;
+	const backgroundColorClass =
+		getColorClassName( 'background-color', backgroundColorSlug ) || '';
 	const overlayBackgroundProps = {
 		className: classnames( blockClasses.overlayBackground, {
-			'has-background': backgroundColor.color,
-			[ backgroundColor.class ]: backgroundColor.class,
+			'has-background':
+				backgroundColorSlug ||
+				customBackgroundColor ||
+				gradientClass ||
+				gradientValue,
+			[ backgroundColorClass ]: backgroundColorClass,
 			'has-background-gradient': gradientValue,
 			[ gradientClass ]: gradientClass,
 		} ),
 		style: {
 			background: getOverlayBackGround(
-				backgroundColor.color,
+				backgroundColorSlug,
+				customBackgroundColor,
 				gradientValue
 			),
 			opacity: backgroundOpacity,
@@ -289,7 +301,6 @@ const BannerLink = ( props ) => {
 
 export default compose( [
 	withColors( {
-		backgroundColor: 'background-color',
 		mainTextColor: 'color',
 		subTextColor: 'color',
 	} ),
