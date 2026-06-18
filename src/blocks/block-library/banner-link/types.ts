@@ -40,7 +40,7 @@ export interface BannerLinkAttributes {
 
 export interface BannerLinkEditProps {
 	attributes: BannerLinkAttributes;
-	setAttributes: (attributes: Partial<BannerLinkAttributes>) => void;
+	setAttributes: ( attributes: Partial< BannerLinkAttributes > ) => void;
 	backgroundColor?: {
 		color?: string;
 		class?: string;
@@ -53,4 +53,6 @@ export interface BannerLinkEditProps {
 		color?: string;
 		class?: string;
 	};
+	gradientValue?: string;
+	setGradient?: ( gradientValue?: string ) => void;
 }

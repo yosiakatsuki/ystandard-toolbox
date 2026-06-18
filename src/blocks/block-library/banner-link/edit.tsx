@@ -14,6 +14,7 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
+import { useEffect, useRef } from '@wordpress/element';
 
 /*
  * Plugin Dependencies
@@ -29,7 +30,7 @@ import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
 /**
  * Internal Dependencies.
  */
-import { blockClassName, blockClasses } from './utils';
+import { blockClassName, blockClasses, DEFAULT_CUSTOM_GRADIENT } from './utils';
 import './style-editor.scss';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
@@ -56,8 +57,13 @@ const BannerLink = ( props ) => {
 
 	const {
 		className,
+		link,
 		backgroundImage,
 		backgroundImageFocalPoint,
+		backgroundColor: backgroundColorSlug,
+		customBackgroundColor,
+		gradient,
+		customGradient,
 		backgroundOpacity,
 		ratio,
 		size,
@@ -82,8 +88,30 @@ const BannerLink = ( props ) => {
 		blockPosition,
 	} = attributes;
 
-	const { gradientClass, gradientValue } = __experimentalUseGradient();
+	const { gradientClass, gradientValue, setGradient } =
+		__experimentalUseGradient();
+	const didSetInitialGradient = useRef( false );
 	const clearStyle = HEADING_CLEAR_STYLE;
+
+	useEffect( () => {
+		if ( didSetInitialGradient.current ) {
+			return;
+		}
+		didSetInitialGradient.current = true;
+		if (
+			link?.url ||
+			mainText ||
+			subText ||
+			backgroundImage ||
+			backgroundColorSlug ||
+			customBackgroundColor ||
+			gradient ||
+			customGradient
+		) {
+			return;
+		}
+		setGradient( DEFAULT_CUSTOM_GRADIENT );
+	}, [] );
 
 	const fontSizeClasses = {
 		mainText: getFontSizeClassByObject( mainTextFontSize?.desktop ),
@@ -207,7 +235,11 @@ const BannerLink = ( props ) => {
 					...props,
 				} }
 			/>
-			<InspectorControls { ...props } />
+			<InspectorControls
+				{ ...props }
+				gradientValue={ gradientValue }
+				setGradient={ setGradient }
+			/>
 
 			<div { ...wrapProps }>
 				<div { ...blockProps }>

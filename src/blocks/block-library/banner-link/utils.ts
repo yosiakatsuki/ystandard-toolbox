@@ -13,6 +13,9 @@ export const blockClasses = {
 	subText: 'ystdtb-banner-link__sub-text',
 };
 
+export const DEFAULT_CUSTOM_GRADIENT =
+	'linear-gradient(135deg,#e0f2fe 0%,#f5d0fe 100%)';
+
 export const textHtmlTag = [
 	{ value: 'div', label: 'div' },
 	{ value: 'h1', label: 'h1' },

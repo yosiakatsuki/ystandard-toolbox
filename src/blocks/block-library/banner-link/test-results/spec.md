@@ -17,7 +17,7 @@
 | パネル | 主な設定項目 |
 |---|---|
 | リンク | リンク先URL / 新しいタブで開く / rel 属性 / リセット |
-| バナー設定 | 画像設定（画像・焦点） / 背景色 / グラデーション（UI 未実装） / 不透明度 / 縦横比 / 最大幅 / 最小高さ / 角丸 |
+| バナー設定 | 画像設定（画像・焦点） / 背景（色・グラデーション） / 不透明度 / 縦横比 / 最大幅 / 最小高さ / 角丸 |
 | 枠線設定 | 枠線（太さ・スタイル・色） |
 | メインテキスト | フォントサイズ / 文字色 / 行の高さ / 文字間隔 / HTMLタグ / 見出しスタイル削除 |
 | サブテキスト | フォントサイズ / 文字色 / 行の高さ / 文字間隔 / HTMLタグ / 見出しスタイル削除 / メインテキストとの間隔 |
@@ -97,7 +97,7 @@ L1 fixture は `test/integration/fixtures/blocks/` 配下に配置。各 fixture
 
 ### バナー設定 > グラデーション
 
-**対象外**: UI 未実装のため fixture 作成は保留（`gradient` / `customGradient` 属性は block.json に存在）。UI が追加された段階で fixture 作成。
+- [x] `ystdtb__banner-link__bg-gradient__custom` — `customGradient: "linear-gradient(...)"`
 
 ### バナー設定 > 不透明度
 
@@ -201,7 +201,7 @@ examples HTML の組み合わせ例を流用。
 - [x] `ystdtb__banner-link__combo__simple` — シンプル（背景色 + 白テキスト）
 - [x] `ystdtb__banner-link__combo__photo-banner` — 背景画像 + オーバーレイ
 - [x] `ystdtb__banner-link__combo__card` — カード風（角丸 + 影 + 最大幅 + 中央）
-- [ ] `ystdtb__banner-link__combo__campaign` — キャンペーン風（大文字 + 余白広め）※グラデーションは UI 未実装のため**保留**
+- [ ] `ystdtb__banner-link__combo__campaign` — キャンペーン風（大文字 + 余白広め）
 
 ---
 
