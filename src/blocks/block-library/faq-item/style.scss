@@ -8,22 +8,23 @@
 	border: 0;
 
 	&:where(.has-background) {
-		--ystdtb--faq-item--padding-vertical: 1.5em;
-		--ystdtb--faq-item--padding-horizon: 1.5em;
+		--ystdtb--faq-item--padding-vertical: 1.25rem;
+		--ystdtb--faq-item--padding-horizon: 1.25rem;
 	}
 
 	&:where(.has-border-bottom) {
 		border-bottom-style: solid;
 	}
 
-	&:where(:not(.has-border)) {
-
+	&:where(:not(.has-border, .has-background)) {
 		&:where(.is-faq--q) {
 			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
-		}
 
-		&:where(.is-faq--a) {
-			padding-top: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
+			+ :where(.is-faq--a) {
+				padding-top: calc(
+					var(--ystdtb--faq-item--padding-vertical) / 2
+				);
+			}
 		}
 	}
 }
