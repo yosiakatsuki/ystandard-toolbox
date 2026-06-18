@@ -238,7 +238,10 @@
    ================================ */
 .ystdtb-posts:where(.is-list) {
 	:where(.ystdtb-posts__list) {
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(
+			var(--ystdtb--posts--columns),
+			minmax(0, 1fr)
+		);
 		row-gap: 0;
 	}
 	:where(.ystdtb-posts__item) {
