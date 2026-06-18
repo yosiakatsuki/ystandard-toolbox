@@ -80,11 +80,12 @@ export function ThumbnailRatio( props: PostsEditProps ) {
 					</NoticeSecondaryText>
 				) : (
 					<CustomSelectControl
-						value={ thumbnailRatioMobile }
+						value={ thumbnailRatioMobile || '' }
 						options={ RATIO_OPTIONS }
 						onChange={ ( value ) => {
 							setAttributes( {
-								thumbnailRatioMobile: value as ThumbnailRatio,
+								thumbnailRatioMobile:
+									( value as ThumbnailRatio ) || undefined,
 							} );
 						} }
 						emptyLabel={ '----' }

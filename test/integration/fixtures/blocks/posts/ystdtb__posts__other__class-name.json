@@ -18,7 +18,6 @@
 			"excerptLines": 2,
 			"thumbnailSize": "full",
 			"thumbnailRatio": "16-9",
-			"thumbnailRatioMobile": "16-9",
 			"postType": "post"
 		},
 		"innerBlocks": []

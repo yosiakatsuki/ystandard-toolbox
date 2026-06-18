@@ -82,8 +82,7 @@
 			"default": "16-9"
 		},
 		"thumbnailRatioMobile": {
-			"type": "string",
-			"default": "16-9"
+			"type": "string"
 		},
 		"postType": {
 			"type": "string",

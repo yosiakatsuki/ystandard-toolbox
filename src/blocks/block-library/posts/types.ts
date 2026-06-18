@@ -56,7 +56,7 @@ export interface PostsBlockAttributes {
 	showImg: boolean;
 	thumbnailSize: string;
 	thumbnailRatio: ThumbnailRatio;
-	thumbnailRatioMobile: ThumbnailRatio;
+	thumbnailRatioMobile?: ThumbnailRatio;
 
 	// メタ情報.
 	showDate: boolean;

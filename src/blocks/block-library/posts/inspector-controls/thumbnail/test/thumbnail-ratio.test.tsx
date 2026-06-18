@@ -23,7 +23,6 @@ const createProps = (
 		showImg: true,
 		thumbnailSize: 'medium',
 		thumbnailRatio: '16-9',
-		thumbnailRatioMobile: '16-9',
 		showDate: true,
 		showCategory: true,
 		showExcerpt: false,
@@ -74,6 +73,21 @@ describe( 'ThumbnailRatio', () => {
 		fireEvent.change( selects[ 1 ], { target: { value: '1-1' } } );
 		expect( props.setAttributes ).toHaveBeenCalledWith( {
 			thumbnailRatioMobile: '1-1',
+		} );
+	} );
+
+	it( 'モバイルのセレクトを未選択にすると thumbnailRatioMobile を解除する', () => {
+		const props = createProps( {
+			attributes: {
+				...createProps().attributes,
+				thumbnailRatioMobile: '1-1',
+			},
+		} );
+		render( <ThumbnailRatio { ...props } /> );
+		const selects = screen.getAllByRole( 'combobox' );
+		fireEvent.change( selects[ 1 ], { target: { value: '' } } );
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			thumbnailRatioMobile: undefined,
 		} );
 	} );
 

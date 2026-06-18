@@ -558,6 +558,28 @@ class Posts_Block_Test extends WP_UnitTestCase {
 		remove_filter( 'ystdtb_blocks_posts_is_mobile', '__return_true' );
 	}
 
+	public function test_thumbnail_ratio_mobile_inherits_desktop_when_empty_on_mobile() {
+		add_filter( 'ystdtb_blocks_posts_is_mobile', '__return_true' );
+
+		$html  = $this->render(
+			[
+				'thumbnailRatio' => '1-1',
+			]
+		);
+		$xpath = $this->load_dom( $html );
+
+		$this->assertGreaterThan(
+			0,
+			$xpath->query( "//figure[{$this->has_class( 'is-1-1' )}]" )->length
+		);
+		$this->assertSame(
+			0,
+			$xpath->query( "//figure[{$this->has_class( 'is-16-9' )}]" )->length
+		);
+
+		remove_filter( 'ystdtb_blocks_posts_is_mobile', '__return_true' );
+	}
+
 	public function test_offset_mobile_overrides_on_mobile() {
 		add_filter( 'ystdtb_blocks_posts_is_mobile', '__return_true' );
 
