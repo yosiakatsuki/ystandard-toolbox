@@ -48,13 +48,7 @@ import {
 } from './function/style';
 
 const BannerLink = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-		backgroundColor,
-		mainTextColor,
-		subTextColor,
-	} = props;
+	const { attributes, setAttributes, mainTextColor, subTextColor } = props;
 
 	const {
 		className,
@@ -167,6 +161,7 @@ const BannerLink = ( props ) => {
 		gradientValue;
 	const backgroundColorClass =
 		getColorClassName( 'background-color', backgroundColorSlug ) || '';
+
 	const overlayBackgroundProps = {
 		className: classnames( blockClasses.overlayBackground, {
 			'has-background':
@@ -175,15 +170,17 @@ const BannerLink = ( props ) => {
 				gradientClass ||
 				gradientValue,
 			[ backgroundColorClass ]: backgroundColorClass,
-			'has-background-gradient': gradientValue,
+			'has-background-gradient': gradientValue || gradientClass,
 			[ gradientClass ]: gradientClass,
 		} ),
 		style: {
-			background: getOverlayBackGround(
-				backgroundColorSlug,
-				customBackgroundColor,
-				gradientValue
-			),
+			background:
+				! gradientClass && ! backgroundColorClass
+					? getOverlayBackGround(
+							customBackgroundColor,
+							gradientValue
+					  )
+					: undefined,
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
 		},

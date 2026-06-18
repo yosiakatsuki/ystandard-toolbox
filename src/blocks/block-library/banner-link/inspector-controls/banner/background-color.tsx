@@ -10,12 +10,7 @@ import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { ColorGradientPalette } from '@aktk/block-components/components/color-pallet-control';
 
 const BackgroundColor = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-		gradientValue,
-		setGradient,
-	} = props;
+	const { attributes, setAttributes, gradientValue, setGradient } = props;
 	const { backgroundColor, customBackgroundColor } = attributes;
 
 	const handleColorChange = ( newColor?: string, slug?: string ) => {
@@ -43,8 +38,8 @@ const BackgroundColor = ( props ) => {
 				onColorChange={ handleColorChange }
 				gradientValue={ gradientValue }
 				onGradientChange={ handleGradientChange }
-				enableCurrentColor={ true }
-				enableTransparent={ true }
+				enableCurrentColor={ false }
+				enableTransparent={ false }
 			/>
 		</BaseControl>
 	);

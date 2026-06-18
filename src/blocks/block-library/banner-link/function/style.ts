@@ -33,12 +33,9 @@ export const getBackgroundPosition = ( value ) => {
 	}%`;
 };
 
-export const getOverlayBackGround = ( color, customColor, gradient ) => {
+export const getOverlayBackGround = ( color, gradient ) => {
 	if ( gradient ) {
 		return gradient;
-	}
-	if ( customColor ) {
-		return customColor;
 	}
 	if ( color ) {
 		return color;
