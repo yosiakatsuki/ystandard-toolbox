@@ -139,11 +139,11 @@ export default function Overlay( {
 						options={ [
 							{
 								value: true,
-								label: __( 'ON', 'ystandard-toolbox' ),
+								label: __( '有効', 'ystandard-toolbox' ),
 							},
 							{
 								value: false,
-								label: __( 'OFF', 'ystandard-toolbox' ),
+								label: __( '無効', 'ystandard-toolbox' ),
 							},
 						] }
 					/>
@@ -153,6 +153,7 @@ export default function Overlay( {
 						<PluginSettingsBaseControl
 							label={ __( 'ページタイプ', 'ystandard-toolbox' ) }
 							id={ 'page-type' }
+							className={ 'ystdtb-plugin-settings__header-overlay__page-type' }
 						>
 							{ getOverlayTypes().map( ( type ) => {
 								return (

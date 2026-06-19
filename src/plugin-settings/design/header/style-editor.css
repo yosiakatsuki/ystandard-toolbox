@@ -1,0 +1,5 @@
+.ystdtb-plugin-settings__header-overlay__page-type {
+	.components-checkbox-control + .components-checkbox-control {
+		margin-top: 0.2rem;
+	}
+}

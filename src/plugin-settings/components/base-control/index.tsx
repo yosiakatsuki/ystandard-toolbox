@@ -36,7 +36,6 @@ const PluginSettingsBaseControl = ( {
 					id,
 					...props,
 				} }
-				__nextHasNoMarginBottom
 			>
 				<div className={ className }>{ children }</div>
 			</WPBaseControl>
