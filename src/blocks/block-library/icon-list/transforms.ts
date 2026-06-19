@@ -21,6 +21,9 @@ type SharedAttributes = Partial<
 
 /**
  * オブジェクトから SHARED_ATTRIBUTE_KEYS に含まれる値のみ抽出する。
+ *
+ * @param attributes 対象属性.
+ * @return 変換で引き継ぐ共有属性.
  */
 const pickSharedAttributes = (
 	attributes: Record< string, unknown > = {}
@@ -37,10 +40,90 @@ interface InnerBlock {
 	name: string;
 	attributes: Record< string, unknown >;
 	innerBlocks?: InnerBlock[];
+	innerHTML?: string;
+	originalContent?: string;
 }
 
 /**
+ * RichText系属性からHTML文字列を取得する。
+ *
+ * @param value 属性値.
+ * @return HTML文字列.
+ */
+const getRichTextHtml = ( value: unknown ): string => {
+	if ( 'string' === typeof value ) {
+		return value;
+	}
+
+	if ( ! value || 'object' !== typeof value ) {
+		return '';
+	}
+
+	if ( 'toHTMLString' in value && 'function' === typeof value.toHTMLString ) {
+		return value.toHTMLString();
+	}
+
+	if ( 'toString' in value && 'function' === typeof value.toString ) {
+		const content = value.toString();
+		return '[object Object]' === content ? '' : content;
+	}
+
+	return '';
+};
+
+/**
+ * list-item の保存HTMLから li 直下の内容を取得する。
+ *
+ * @param html list-item の保存HTML.
+ * @return li 直下のHTML.
+ */
+const extractListItemContentFromHtml = ( html: string ): string => {
+	const template = document.createElement( 'template' );
+	template.innerHTML = html.trim();
+	const listItem = template.content.querySelector( 'li' );
+
+	if ( ! listItem ) {
+		return html.trim();
+	}
+
+	Array.from( listItem.children ).forEach( ( child ) => {
+		if ( 'UL' === child.tagName || 'OL' === child.tagName ) {
+			child.remove();
+		}
+	} );
+
+	return listItem.innerHTML.trim();
+};
+
+/**
+ * list-item ブロックのテキスト内容を取得する。
+ *
+ * @param block 変換元の list-item ブロック.
+ * @return list-item のテキスト内容.
+ */
+const getListItemContent = ( block: InnerBlock ): string => {
+	const attributeContent = getRichTextHtml( block.attributes?.content );
+	if ( '' !== attributeContent ) {
+		return attributeContent;
+	}
+
+	const html =
+		'string' === typeof block.originalContent && block.originalContent
+			? block.originalContent
+			: block.innerHTML;
+
+	if ( 'string' !== typeof html || ! html ) {
+		return '';
+	}
+
+	return extractListItemContentFromHtml( html );
+};
+
+/**
  * core/list-item を ystdtb/icon-list-item に変換（入れ子 list は展開して平坦化）。
+ *
+ * @param innerBlocks 変換元の子ブロック.
+ * @return 変換後の icon-list-item ブロック配列.
  */
 const convertListItemsToIconListItems = (
 	innerBlocks: InnerBlock[] = []
@@ -50,10 +133,7 @@ const convertListItemsToIconListItems = (
 	innerBlocks.forEach( ( block ) => {
 		if ( 'core/list-item' === block.name ) {
 			const sharedAttrs = pickSharedAttributes( block.attributes );
-			const content =
-				'string' === typeof block.attributes?.content
-					? block.attributes.content
-					: '';
+			const content = getListItemContent( block );
 			result.push(
 				createBlock( 'ystdtb/icon-list-item', {
 					...sharedAttrs,
@@ -80,6 +160,9 @@ const convertListItemsToIconListItems = (
 
 /**
  * ystdtb/icon-list-item を core/list-item に変換。
+ *
+ * @param innerBlocks 変換元の子ブロック.
+ * @return 変換後の core/list-item ブロック配列.
  */
 const convertIconListItemsToListItems = (
 	innerBlocks: InnerBlock[] = []
@@ -88,10 +171,7 @@ const convertIconListItemsToListItems = (
 		.filter( ( block ) => 'ystdtb/icon-list-item' === block.name )
 		.map( ( block ) => {
 			const sharedAttrs = pickSharedAttributes( block.attributes );
-			const content =
-				'string' === typeof block.attributes?.content
-					? block.attributes.content
-					: '';
+			const content = getListItemContent( block );
 			return createBlock( 'core/list-item', {
 				...sharedAttrs,
 				content,
