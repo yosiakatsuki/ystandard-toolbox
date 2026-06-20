@@ -60,6 +60,11 @@ $taxonomy_icon   = $args['taxonomy_icon'];
 					<?php endif; ?>
 
 					<div class="ystdtb-posts__text">
+
+						<?php if ( 'list' === $list_type ) : ?>
+							<p class="ystdtb-posts__title"><?php the_title(); ?></p>
+						<?php endif; ?>
+
 						<?php
 						// メタ情報の表示判定.
 						$term_data = false;
@@ -93,7 +98,9 @@ $taxonomy_icon   = $args['taxonomy_icon'];
 							</div>
 						<?php endif; ?>
 
-						<p class="ystdtb-posts__title"><?php the_title(); ?></p>
+						<?php if ( 'card' === $list_type ) : ?>
+							<p class="ystdtb-posts__title"><?php the_title(); ?></p>
+						<?php endif; ?>
 
 						<?php if ( $show_excerpt ) : ?>
 							<p class="ystdtb-posts__excerpt" style="<?php echo esc_attr( $excerpt_styles ); ?>">

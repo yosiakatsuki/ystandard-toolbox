@@ -22,6 +22,7 @@
 	--ystdtb--posts--meta-icon-size: 1em;
 	--ystdtb--posts--meta-date-font-size: var(--ystdtb--posts--meta-font-size);
 	--ystdtb--posts--meta-term-font-size: var(--ystdtb--posts--meta-font-size);
+	--ystdtb--posts--meta-spacing-top: 0.5em;
 	--ystdtb--posts--title-font-size: 1em;
 	--ystdtb--posts--title-spacing: 0.5em;
 	--ystdtb--posts--excerpt-text-color: var(--ystdtb--color--gray-sub);
@@ -256,13 +257,12 @@
 		width: var(--ystdtb--posts--list-type-thumbnail-size);
 		flex-shrink: 0;
 	}
-	:where(.ystdtb-posts__meta) {
-		+ :where(.ystdtb-posts__title) {
-			margin-block-start: var(--ystdtb--posts--title-spacing);
-		}
-	}
 	:where(.ystdtb-posts__title) {
 		font-weight: 700;
+
+		+ :where(.ystdtb-posts__meta) {
+			margin-block-start: var(--ystdtb--posts--meta-spacing-top);
+		}
 	}
 }
 
