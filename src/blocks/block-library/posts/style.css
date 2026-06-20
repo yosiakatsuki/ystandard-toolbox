@@ -30,7 +30,7 @@
 	--ystdtb--posts--excerpt-line-clamp: 2;
 
 	--ystdtb--posts--list-type-thumbnail-size-min: 100px;
-	--ystdtb--posts--list-type-thumbnail-size-val: 20vw;
+	--ystdtb--posts--list-type-thumbnail-size-val: 20%;
 	--ystdtb--posts--list-type-thumbnail-size-max: 200px;
 	--ystdtb--posts--list-type-thumbnail-size: clamp(
 		var(--ystdtb--posts--list-type-thumbnail-size-min),
