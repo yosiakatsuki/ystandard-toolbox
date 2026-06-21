@@ -188,13 +188,11 @@ class Heading_Helper {
 			$selectors = [ $selectors ];
 		}
 		foreach ( $selectors as $selector ) {
-			foreach ( explode( ',', $selector ) as $item ) {
-				$item = trim( $item );
-				if ( empty( $item ) ) {
-					continue;
-				}
-				$result[] = $item;
+			$selector = trim( $selector );
+			if ( empty( $selector ) ) {
+				continue;
 			}
+			$result[] = $selector;
 		}
 
 		return $result;
@@ -302,13 +300,14 @@ class Heading_Helper {
 		// レベル別.
 		// *************************************************************
 		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
-		$content = $is_editor ? '.editor-styles-wrapper' : $content;
+		$content = $is_editor ? 'body:not(.widgets-php) .editor-styles-wrapper' : $content;
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
 			$selector = "{$level}:where(.wp-block-heading):not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
+			$prefix   = trim( "{$body} {$content}" );
 			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 			$css_selector     = apply_filters(
 				'ystdtb_heading_css_selector_content',
-				[ "{$body} {$content} {$selector}" ],
+				[ "{$prefix} {$selector}" ],
 				$is_editor
 			);
 			$result[ $level ] = $css_selector;
@@ -317,11 +316,23 @@ class Heading_Helper {
 		// *************************************************************
 		// サイドバー クラシックウィジェット.
 		// *************************************************************
-		$area     = apply_filters( 'ystdtb_heading_selector_classic_widget', '.sidebar' );
-		$area     = $is_editor ? 'body.widgets-php :where(.wp-block-widget-area__panel-body-content)' : $area;
-		$target   = [];
-		$target[] = "{$body} {$area} .widget-title";
-		$target[] = "{$body} {$area} .widgettitle";
+		$area   = apply_filters( 'ystdtb_heading_selector_classic_widget', '.sidebar' );
+		$target = [];
+		if ( $is_editor ) {
+			$areas = [
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"]',
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"]',
+			];
+			foreach ( $areas as $editor_area ) {
+				$target[] = "{$editor_area} .widget-title";
+				$target[] = "{$editor_area} .widgettitle";
+				$target[] = "{$editor_area} " . self::get_widget_heading_block_selector();
+			}
+		} else {
+			$target[] = "{$body} {$area} .widget-title";
+			$target[] = "{$body} {$area} .widgettitle";
+			$target[] = "{$body} {$area} " . self::get_widget_heading_block_selector();
+		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_classic_widget',
@@ -345,10 +356,12 @@ class Heading_Helper {
 			foreach ( $areas as $editor_area ) {
 				$target[] = "{$editor_area} .widget-title";
 				$target[] = "{$editor_area} .widgettitle";
+				$target[] = "{$editor_area} " . self::get_widget_heading_block_selector();
 			}
 		} else {
 			$target[] = "{$body} {$area} .widget-title";
 			$target[] = "{$body} {$area} .widgettitle";
+			$target[] = "{$body} {$area} " . self::get_widget_heading_block_selector();
 		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
@@ -434,6 +447,15 @@ class Heading_Helper {
 		$result['archive-title'] = $target;
 
 		return $result;
+	}
+
+	/**
+	 * ウィジェットエリア内の見出しブロック用セレクターを取得.
+	 *
+	 * @return string
+	 */
+	private static function get_widget_heading_block_selector() {
+		return ':where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])';
 	}
 
 	/**

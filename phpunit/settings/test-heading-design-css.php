@@ -260,6 +260,7 @@ EOD;
 			'.ystdtb .entry-content h3:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 			'.ystdtb .sidebar .widget-title',
 			'.ystdtb .sidebar .widgettitle',
+			'.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 		];
 		$actual   = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,
@@ -282,10 +283,13 @@ EOD;
 		$expected = [
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 		];
 
 		$this->assertEquals( $expected, $actual['footer'] );
@@ -295,6 +299,39 @@ EOD;
 				$actual['footer'],
 				true
 			)
+		);
+	}
+
+	function test_get_selector_all_editor_sidebar_widget() {
+		$actual   = \ystandard_toolbox\Heading_Helper::get_selector_all( true );
+		$expected = [
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] .widget-title',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] .widget-title',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+		];
+
+		$this->assertEquals( $expected, $actual['sidebar'] );
+		$this->assertStringNotContainsString(
+			'data-widget-area-id="footer-left"] .widget-title',
+			implode( ',', $actual['sidebar'] )
+		);
+		$this->assertStringNotContainsString(
+			'div[data-widget-area-id]:not',
+			implode( ',', $actual['sidebar'] )
+		);
+	}
+
+	function test_get_selector_all_editor_content_heading_excludes_widgets_screen() {
+		$actual = \ystandard_toolbox\Heading_Helper::get_selector_all( true );
+
+		$this->assertEquals(
+			[
+				'body:not(.widgets-php) .editor-styles-wrapper h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			],
+			$actual['h2']
 		);
 	}
 
@@ -461,11 +498,20 @@ EOD;
 		$this->assertEquals( $expected, $actual );
 
 		$level    = [
-			'.level-selector-1,.level-selector-2',
+			'.level-selector-1',
+			'.level-selector-2',
 			'.entry-content h2',
 		];
 		$expected = '.block-selector::after,.level-selector-1::after,.level-selector-2::after,.entry-content h2::after';
 		$actual   = \ystandard_toolbox\Heading_Helper::add_pseudo_elements( $block, $level, 'after' );
+		$this->assertEquals( $expected, $actual );
+
+		$level    = [
+			'.entry-content :where(.wp-block-heading)',
+			'.area [data-widget-area-id="footer-left"] :where(.wp-block-heading)',
+		];
+		$expected = '.block-selector::before,.entry-content :where(.wp-block-heading)::before,.area [data-widget-area-id="footer-left"] :where(.wp-block-heading)::before';
+		$actual   = \ystandard_toolbox\Heading_Helper::add_pseudo_elements( $block, $level, 'before' );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -475,6 +521,11 @@ EOD;
 				'slug'  => 'footer',
 				'label' => 'フッター',
 				'style' => [],
+				'before' => [
+					'enable'          => true,
+					'backgroundColor' => '#111111',
+					'height'          => '1px',
+				],
 				'after' => [
 					'enable'          => true,
 					'backgroundColor' => '#222222',
@@ -493,7 +544,47 @@ EOD;
 		$this->assertStringContainsString( '.editor-styles-wrapper .is-style-ystdtb-footer::after', $actual );
 		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widget-title::after', $actual );
 		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widgettitle::after', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after', $actual );
 		$this->assertStringNotContainsString( 'div[data-widget-area-id="footer-left"],body.widgets-php', $actual );
+	}
+
+	function test_widget_area_heading_css_targets_heading_blocks() {
+		$heading = [
+			'sidebar' => [
+				'slug'  => 'sidebar',
+				'label' => 'サイドバー',
+				'style' => [
+					'desktop' => [
+						'color' => '#111111',
+					],
+				],
+			],
+			'footer'  => [
+				'slug'  => 'footer',
+				'label' => 'フッター',
+				'style' => [
+					'desktop' => [
+						'color' => '#222222',
+					],
+				],
+			],
+		];
+
+		$level_list = [
+			'sidebar' => 'sidebar',
+			'footer'  => 'footer',
+		];
+		$actual     = \ystandard_toolbox\Util\Text::minify(
+			\ystandard_toolbox\Heading_Helper::get_heading_css( $heading, $level_list )
+		);
+
+		$this->assertStringContainsString( '.ystdtb .sidebar .widget-title', $actual );
+		$this->assertStringContainsString( '.ystdtb .sidebar .widgettitle', $actual );
+		$this->assertStringContainsString( '.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])', $actual );
+		$this->assertStringContainsString( '.ystdtb .site-footer .widget-title', $actual );
+		$this->assertStringContainsString( '.ystdtb .site-footer .widgettitle', $actual );
+		$this->assertStringContainsString( '.ystdtb .site-footer :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])', $actual );
 	}
 
 	function test_get_styles_css() {
