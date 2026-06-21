@@ -12,7 +12,6 @@ import UnitControl from '@aktk/block-components/wp-controls/unit-control';
 import { ColorPalette } from '@aktk/block-components/components/color-pallet-control/color-palette';
 import { CustomSelectControl } from '@aktk/block-components/components/custom-select-control';
 import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
-import { getColorSetting } from '@aktk/helper/color';
 
 // ボーダースタイル定数
 const BORDER_STYLES = [

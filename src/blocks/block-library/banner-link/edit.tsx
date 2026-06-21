@@ -10,10 +10,12 @@ import {
 	RichText,
 	withColors,
 	useBlockProps,
+	getColorClassName,
 	__experimentalUseGradient,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
+import { useEffect, useRef } from '@wordpress/element';
 
 /*
  * Plugin Dependencies
@@ -29,7 +31,7 @@ import { getFontSizeClassByObject } from '@aktk/helper/fontSize';
 /**
  * Internal Dependencies.
  */
-import { blockClassName, blockClasses } from './utils';
+import { blockClassName, blockClasses, DEFAULT_CUSTOM_GRADIENT } from './utils';
 import './style-editor.scss';
 import { BannerLinkInspectorControls as InspectorControls } from './inspector-controls';
 import { BannerLinkBlockControls as BlockControls } from './block-controls';
@@ -46,18 +48,17 @@ import {
 } from './function/style';
 
 const BannerLink = ( props ) => {
-	const {
-		attributes,
-		setAttributes,
-		backgroundColor,
-		mainTextColor,
-		subTextColor,
-	} = props;
+	const { attributes, setAttributes, mainTextColor, subTextColor } = props;
 
 	const {
 		className,
+		link,
 		backgroundImage,
 		backgroundImageFocalPoint,
+		backgroundColor: backgroundColorSlug,
+		customBackgroundColor,
+		gradient,
+		customGradient,
 		backgroundOpacity,
 		ratio,
 		size,
@@ -82,8 +83,30 @@ const BannerLink = ( props ) => {
 		blockPosition,
 	} = attributes;
 
-	const { gradientClass, gradientValue } = __experimentalUseGradient();
+	const { gradientClass, gradientValue, setGradient } =
+		__experimentalUseGradient();
+	const didSetInitialGradient = useRef( false );
 	const clearStyle = HEADING_CLEAR_STYLE;
+
+	useEffect( () => {
+		if ( didSetInitialGradient.current ) {
+			return;
+		}
+		didSetInitialGradient.current = true;
+		if (
+			link?.url ||
+			mainText ||
+			subText ||
+			backgroundImage ||
+			backgroundColorSlug ||
+			customBackgroundColor ||
+			gradient ||
+			customGradient
+		) {
+			return;
+		}
+		setGradient( DEFAULT_CUSTOM_GRADIENT );
+	}, [] );
 
 	const fontSizeClasses = {
 		mainText: getFontSizeClassByObject( mainTextFontSize?.desktop ),
@@ -131,19 +154,33 @@ const BannerLink = ( props ) => {
 	 * Overlay
 	 */
 	const hasOverlayBackground =
-		backgroundImage || backgroundColor || gradientClass || gradientValue;
+		backgroundImage ||
+		backgroundColorSlug ||
+		customBackgroundColor ||
+		gradientClass ||
+		gradientValue;
+	const backgroundColorClass =
+		getColorClassName( 'background-color', backgroundColorSlug ) || '';
+
 	const overlayBackgroundProps = {
 		className: classnames( blockClasses.overlayBackground, {
-			'has-background': backgroundColor.color,
-			[ backgroundColor.class ]: backgroundColor.class,
-			'has-background-gradient': gradientValue,
+			'has-background':
+				backgroundColorSlug ||
+				customBackgroundColor ||
+				gradientClass ||
+				gradientValue,
+			[ backgroundColorClass ]: backgroundColorClass,
+			'has-background-gradient': gradientValue || gradientClass,
 			[ gradientClass ]: gradientClass,
 		} ),
 		style: {
-			background: getOverlayBackGround(
-				backgroundColor.color,
-				gradientValue
-			),
+			background:
+				! gradientClass && ! backgroundColorClass
+					? getOverlayBackGround(
+							customBackgroundColor,
+							gradientValue
+					  )
+					: undefined,
 			opacity: backgroundOpacity,
 			borderRadius: borderRadius || undefined,
 		},
@@ -207,7 +244,11 @@ const BannerLink = ( props ) => {
 					...props,
 				} }
 			/>
-			<InspectorControls { ...props } />
+			<InspectorControls
+				{ ...props }
+				gradientValue={ gradientValue }
+				setGradient={ setGradient }
+			/>
 
 			<div { ...wrapProps }>
 				<div { ...blockProps }>
@@ -257,7 +298,6 @@ const BannerLink = ( props ) => {
 
 export default compose( [
 	withColors( {
-		backgroundColor: 'background-color',
 		mainTextColor: 'color',
 		subTextColor: 'color',
 	} ),

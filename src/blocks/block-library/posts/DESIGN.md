@@ -67,6 +67,7 @@ blocks/posts/
 | `showImg` | boolean | true | サムネイル | 画像表示 |
 | `thumbnailSize` | string | `'full'` | サムネイル | 画像サイズ |
 | `thumbnailRatio` | string | `'16-9'` | サムネイル | アスペクト比 |
+| `thumbnailRatioMobile` | string | - | サムネイル | モバイル時のアスペクト比（未選択時はPC設定を継承） |
 | `showDate` | boolean | true | メタ | 日付表示 |
 | `showCategory` | boolean | true | メタ | カテゴリー表示 |
 | `showExcerpt` | boolean | false | メタ | 概要表示 |

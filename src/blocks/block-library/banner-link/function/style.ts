@@ -68,7 +68,7 @@ const convertSpacingValues = ( spacing ) => {
 	if ( ! spacing || 'object' !== typeof spacing ) {
 		return undefined;
 	}
-	
+
 	return {
 		top: presetTokenToCssVar( spacing.top ),
 		right: presetTokenToCssVar( spacing.right ),

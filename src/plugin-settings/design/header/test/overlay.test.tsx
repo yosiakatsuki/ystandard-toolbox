@@ -40,7 +40,12 @@ jest.mock(
 
 /* MediaUpload / ColorPalette は実体不要なので空モック */
 jest.mock( '@aktk/block-components/components/media-upload', () => ( {
-	MediaUpload: () => <div data-testid="media-upload" />,
+	MediaUpload: ( props: { previewClassName?: string } ) => (
+		<div
+			data-testid="media-upload"
+			data-preview-class-name={ props.previewClassName }
+		/>
+	),
 	MediaObject: undefined,
 } ) );
 
@@ -73,18 +78,20 @@ const renderPanel = ( overrides: Partial< RenderProps > = {} ) => {
 };
 
 describe( 'Overlay — handleOnChangeEnable', () => {
-	it( '「ON」ボタンクリック → updateSection({ enableOverlay: true })', () => {
+	it( '「有効」ボタンクリック → updateSection({ enableOverlay: true })', () => {
 		const { updateSection } = renderPanel();
-		fireEvent.click( screen.getByRole( 'button', { name: 'ON' } ) );
+		fireEvent.click( screen.getByRole( 'button', { name: '有効' } ) );
 		expect( updateSection ).toHaveBeenCalledWith( { enableOverlay: true } );
 	} );
 
-	it( '「OFF」ボタンクリック → updateSection({ enableOverlay: false })', () => {
+	it( '「無効」ボタンクリック → updateSection({ enableOverlay: false })', () => {
 		const { updateSection } = renderPanel( {
 			sectionSettings: { enableOverlay: true },
 		} );
-		fireEvent.click( screen.getByRole( 'button', { name: 'OFF' } ) );
-		expect( updateSection ).toHaveBeenCalledWith( { enableOverlay: false } );
+		fireEvent.click( screen.getByRole( 'button', { name: '無効' } ) );
+		expect( updateSection ).toHaveBeenCalledWith( {
+			enableOverlay: false,
+		} );
 	} );
 } );
 
@@ -141,5 +148,13 @@ describe( 'Overlay — 条件付き表示の分岐ロジック', () => {
 		expect( screen.getByText( 'ページタイプ' ) ).toBeInTheDocument();
 		expect( screen.getByText( 'ロゴ画像' ) ).toBeInTheDocument();
 		expect( screen.getByText( '文字色' ) ).toBeInTheDocument();
+	} );
+
+	it( 'ロゴ画像プレビュー用のクラスを MediaUpload に渡す', () => {
+		renderPanel( { sectionSettings: { enableOverlay: true } } );
+		expect( screen.getByTestId( 'media-upload' ) ).toHaveAttribute(
+			'data-preview-class-name',
+			'ystdtb-plugin-settings__header-overlay__logo-preview'
+		);
 	} );
 } );

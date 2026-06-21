@@ -17,6 +17,8 @@ import {
 import SubHeader from './sub-header';
 import Overlay from './overlay';
 
+import './style-editor.css';
+
 const TAB_NAME = 'header';
 const SECTION_NAME = 'header_design' as DesignSettingsSection;
 

@@ -22,6 +22,7 @@
 	--ystdtb--posts--meta-icon-size: 1em;
 	--ystdtb--posts--meta-date-font-size: var(--ystdtb--posts--meta-font-size);
 	--ystdtb--posts--meta-term-font-size: var(--ystdtb--posts--meta-font-size);
+	--ystdtb--posts--meta-spacing-top: 0.5em;
 	--ystdtb--posts--title-font-size: 1em;
 	--ystdtb--posts--title-spacing: 0.5em;
 	--ystdtb--posts--excerpt-text-color: var(--ystdtb--color--gray-sub);
@@ -30,7 +31,7 @@
 	--ystdtb--posts--excerpt-line-clamp: 2;
 
 	--ystdtb--posts--list-type-thumbnail-size-min: 100px;
-	--ystdtb--posts--list-type-thumbnail-size-val: 20vw;
+	--ystdtb--posts--list-type-thumbnail-size-val: 20%;
 	--ystdtb--posts--list-type-thumbnail-size-max: 200px;
 	--ystdtb--posts--list-type-thumbnail-size: clamp(
 		var(--ystdtb--posts--list-type-thumbnail-size-min),
@@ -238,7 +239,10 @@
    ================================ */
 .ystdtb-posts:where(.is-list) {
 	:where(.ystdtb-posts__list) {
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(
+			var(--ystdtb--posts--columns),
+			minmax(0, 1fr)
+		);
 		row-gap: 0;
 	}
 	:where(.ystdtb-posts__item) {
@@ -253,13 +257,12 @@
 		width: var(--ystdtb--posts--list-type-thumbnail-size);
 		flex-shrink: 0;
 	}
-	:where(.ystdtb-posts__meta) {
-		+ :where(.ystdtb-posts__title) {
-			margin-block-start: var(--ystdtb--posts--title-spacing);
-		}
-	}
 	:where(.ystdtb-posts__title) {
 		font-weight: 700;
+
+		+ :where(.ystdtb-posts__meta) {
+			margin-block-start: var(--ystdtb--posts--meta-spacing-top);
+		}
 	}
 }
 

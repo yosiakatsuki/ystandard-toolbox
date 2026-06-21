@@ -448,7 +448,8 @@ class Heading_Migration {
 		// v1 で「使う」設定（useCustomStyle）になっていたものだけ、見出しレベルへ自動割り当てする.
 		$is_assigned = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
 		if ( $is_assigned ) {
-			$this->heading_level[ $level ] = $this->new_option['slug'];
+			$this->new_option['useHeadingStyle'] = true;
+			$this->heading_level[ $level ]       = $this->new_option['slug'];
 		}
 	}
 
@@ -549,7 +550,7 @@ class Heading_Migration {
 	 * @return string
 	 */
 	private function get_option_slug( $level ) {
-		return "v1-{$level}";
+		return $level;
 	}
 
 	/**
@@ -573,7 +574,7 @@ class Heading_Migration {
 			'page-title'    => '固定ページタイトル',
 			'archive-title' => '一覧ページタイトル',
 		];
-		$name  = $this->get_option_slug( $level );
+		$name  = "v1-{$level}";
 
 		if ( array_key_exists( $level, $names ) ) {
 			$name = 'v1:' . $names[ $level ];

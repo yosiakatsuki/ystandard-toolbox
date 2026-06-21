@@ -31,9 +31,7 @@ const HtmlTag = ( { attributes, setAttributes } ) => {
 	};
 	return (
 		<>
-			<BaseControl
-				id={ 'subTextHtml' }
-			>
+			<BaseControl id={ 'subTextHtml' }>
 				<CustomSelectControl
 					label={ __( 'HTMLタグ', 'ystandard-toolbox' ) }
 					value={ subTextHtml }

@@ -43,7 +43,6 @@ interface OverlayType {
 	slug: string;
 }
 
-
 export default function Overlay( {
 	updateSection,
 	sectionSettings,
@@ -87,12 +86,13 @@ export default function Overlay( {
 		];
 	};
 
-	const overlayImage: MediaObject | undefined = !!sectionSettings?.overlayImage
-		? {
-				id: sectionSettings?.overlayImageId,
-				url: sectionSettings?.overlayImage,
-		  }
-		: undefined;
+	const overlayImage: MediaObject | undefined =
+		!! sectionSettings?.overlayImage
+			? {
+					id: sectionSettings?.overlayImageId,
+					url: sectionSettings?.overlayImage,
+			  }
+			: undefined;
 
 	const handleOnChangeEnable = ( newValue: string | number | boolean ) => {
 		updateSection( { enableOverlay: toBool( newValue ) } );
@@ -127,7 +127,9 @@ export default function Overlay( {
 	};
 
 	return (
-		<PluginSettingsPanel title={ __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ) }>
+		<PluginSettingsPanel
+			title={ __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ) }
+		>
 			<PanelInner>
 				<PluginSettingsBaseControl
 					label={ __( '有効 / 無効', 'ystandard-toolbox' ) }
@@ -139,11 +141,11 @@ export default function Overlay( {
 						options={ [
 							{
 								value: true,
-								label: __( 'ON', 'ystandard-toolbox' ),
+								label: __( '有効', 'ystandard-toolbox' ),
 							},
 							{
 								value: false,
-								label: __( 'OFF', 'ystandard-toolbox' ),
+								label: __( '無効', 'ystandard-toolbox' ),
 							},
 						] }
 					/>
@@ -153,6 +155,9 @@ export default function Overlay( {
 						<PluginSettingsBaseControl
 							label={ __( 'ページタイプ', 'ystandard-toolbox' ) }
 							id={ 'page-type' }
+							className={
+								'ystdtb-plugin-settings__header-overlay__page-type'
+							}
 						>
 							{ getOverlayTypes().map( ( type ) => {
 								return (
@@ -180,6 +185,9 @@ export default function Overlay( {
 								onSelect={ handleOnSelectLogo }
 								onClear={ handleOnClearLogo }
 								useMediaUtils={ true }
+								previewClassName={
+									'ystdtb-plugin-settings__header-overlay__logo-preview'
+								}
 							/>
 						</PluginSettingsBaseControl>
 						<PluginSettingsBaseControl

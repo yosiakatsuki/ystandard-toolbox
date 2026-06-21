@@ -291,10 +291,10 @@ class Header_Overlay {
 				<label for="ystdtb-overlay-none">-</label>
 
 				<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
-				<label for="ystdtb-overlay-on">ON</label>
+				<label for="ystdtb-overlay-on">有効</label>
 
 				<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
-				<label for="ystdtb-overlay-off">OFF</label>
+				<label for="ystdtb-overlay-off">無効</label>
 			</div>
 			<div class="ystdtb-meta-box__notes">
 				※「-」を選択した場合、ヘッダーオーバーレイ「詳細ページ」設定に従います。
@@ -332,10 +332,10 @@ class Header_Overlay {
 					<td>
 						<div class="ystdtb-radio-horizon is-small">
 							<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
-							<label for="ystdtb-overlay-on">ON</label>
+							<label for="ystdtb-overlay-on">有効</label>
 
 							<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
-							<label for="ystdtb-overlay-off">OFF</label>
+							<label for="ystdtb-overlay-off">無効</label>
 						</div>
 					</td>
 				</tr>

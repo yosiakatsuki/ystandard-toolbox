@@ -13,7 +13,6 @@ import {
 	Layers,
 	MessageCircle,
 	Menu,
-	Minimize2,
 	Smartphone,
 	Sidebar,
 	Square,
@@ -75,24 +74,25 @@ const featureList = {
 				manual: 'https://wp-ystandard.com/manual/ystdtb-block-posts/',
 			},
 			{
-				name: 'パーツブロック',
-				icon: () => <HardDrive />,
-				description:
-					'[ys]パーツ機能で作成したコンテンツを簡単に表示できるブロック',
-				manual: 'https://wp-ystandard.com/manual/ystdtb-block-ys-parts/',
-			},
-			{
 				name: 'シェアボタンブロック',
 				icon: () => <Share2 />,
 				description: 'SNSシェアボタンを表示できるブロック',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-block-sns-share/',
 			},
 			{
-				name: 'バナーリンクブロック(β)',
+				name: 'バナーリンクブロック',
 				icon: () => <Image />,
 				description:
 					'画像の上にテキストを配置したバナータイプのリンクを作成できるブロック',
 				manual: 'https://wp-ystandard.com/manual/ystdtb-block-banner-link/',
+			},
+			{
+				name: 'パーツブロック',
+				icon: () => <HardDrive />,
+				description:
+					'[ys]パーツ機能で作成したコンテンツを簡単に表示できるブロック',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-block-ys-parts/',
+				requireYStandard: true,
 			},
 		],
 	},
@@ -210,16 +210,6 @@ const featureList = {
 				requireYStandard: true,
 			},
 			{
-				name: __( 'ウィジェット子階層折りたたみ', 'ystandard-toolbox' ),
-				icon: () => <Minimize2 />,
-				description: __(
-					'カテゴリー・ナビゲーションメニュー・固定ページウィジェットで子階層を折りたたみ表示する機能',
-					'ystandard-toolbox'
-				),
-				manual: 'https://wp-ystandard.com/manual/ystdtb-widget-accordion/',
-				requireYStandard: true,
-			},
-			{
 				name: __( 'Copyright編集', 'ystandard-toolbox' ),
 				icon: () => <Award />,
 				description: __(
@@ -270,7 +260,7 @@ const featureList = {
 				icon: () => <Code />,
 				description:
 					'公開ページ・ブロックエディターに反映するCSSを追加できる機能',
-				manual: 'https://wp-ystandard.com/manual/custom-css-v2/',
+				manual: 'https://wp-ystandard.com/manual/ystdtb-custom-css/',
 				settingPage: 'admin.php?page=ystdtb-settings-v2-custom-css',
 			},
 		],

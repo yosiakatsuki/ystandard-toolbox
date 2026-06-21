@@ -20,6 +20,7 @@ export interface MediaUploadProps {
 	useMediaUtils?: boolean;
 	selectLabel?: string;
 	clearLabel?: string;
+	previewClassName?: string;
 }
 
 export default function MediaUpload( props: MediaUploadProps ) {
@@ -41,6 +42,7 @@ export default function MediaUpload( props: MediaUploadProps ) {
 					onClear={ onClear }
 					selectLabel={ props.selectLabel }
 					clearLabel={ props.clearLabel }
+					previewClassName={ props.previewClassName }
 				/>
 			) }
 		/>
@@ -51,6 +53,7 @@ interface MediaUploadRenderComponentProps {
 	onClear: () => void;
 	selectLabel?: string;
 	clearLabel?: string;
+	previewClassName?: string;
 }
 
 const DEFAULT_SELECT_LABEL = '画像を選択';
@@ -86,7 +89,12 @@ function MediaUploadRender(
 	return (
 		<div className={ 'flex flex-col' }>
 			<Button onClick={ open } className={ '!h-auto !p-0' }>
-				<MediaPreview type={ type } url={ url } alt={ alt } />
+				<MediaPreview
+					type={ type }
+					url={ url }
+					alt={ alt }
+					className={ props.previewClassName }
+				/>
 			</Button>
 			<div className={ 'flex justify-center' }>
 				<Button
@@ -101,10 +109,10 @@ function MediaUploadRender(
 	);
 }
 
-function MediaPreview( props: MediaObject ) {
-	const { type, url, alt } = props;
+function MediaPreview( props: MediaObject & { className?: string } ) {
+	const { type, url, alt, className } = props;
 	return (
-		<div>
+		<div className={ className }>
 			{ type === 'image' && (
 				<img
 					className={ 'block h-auto max-w-full' }

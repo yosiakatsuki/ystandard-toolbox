@@ -241,7 +241,7 @@ useLINE,
 					</PanelBody>
 					<PanelBody
 						title={ __(
-							'Twitter用オプション',
+							'X用オプション',
 							'ystandard-toolbox'
 						) }
 					>
@@ -262,7 +262,7 @@ useLINE,
 							/>
 							<div className="ystdtb-block-dscr">
 								{ __(
-									'「@」なしのTwitterユーザー名を入力して下さい。',
+									'「@」なしのXユーザー名を入力してください。',
 									'ystandard-toolbox'
 								) }
 							</div>
@@ -270,7 +270,7 @@ useLINE,
 						<BaseControl __nextHasNoMarginBottom>
 							<TextControl
 								label={ __(
-									'ツイート後に表示するおすすめアカウント',
+									'ポスト後に表示するおすすめアカウント',
 									'ystandard-toolbox'
 								) }
 								value={ twitterRelatedUser }
@@ -284,7 +284,7 @@ useLINE,
 							/>
 							<div className="ystdtb-block-dscr">
 								{ __(
-									'「@」なしのTwitterユーザー名を入力して下さい。',
+									'「@」なしのXユーザー名を入力してください。',
 									'ystandard-toolbox'
 								) }
 							</div>
@@ -306,7 +306,7 @@ useLINE,
 							/>
 							<div className="ystdtb-block-dscr">
 								{ __(
-									'「#」を除いたハッシュタグ名を入力して下さい。',
+									'「#」を除いたハッシュタグ名を入力してください。',
 									'ystandard-toolbox'
 								) }
 							</div>

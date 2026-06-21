@@ -1,0 +1,19 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customGradient": "linear-gradient(135deg,#e0f2fe 0%,#f5d0fe 100%)",
+			"mainText": "グラデーション背景",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "背景にグラデーションを設定しています",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]
