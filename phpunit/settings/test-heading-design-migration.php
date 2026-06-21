@@ -24,6 +24,24 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * 移行結果の期待値を検証する.
+	 *
+	 * @param array $expected 期待値.
+	 * @param array $actual 実際の値.
+	 * @param array $input v1 設定値.
+	 */
+	private function assert_migration_equals( $expected, $actual, $input ) {
+		foreach ( $input as $level => $option ) {
+			$use_custom_style = \ystandard_toolbox\Util\Types::to_bool( $option['useCustomStyle'] ?? false );
+			if ( $use_custom_style && isset( $expected[ $level ] ) ) {
+				$expected[ $level ]['useHeadingStyle'] = true;
+			}
+		}
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	/**
 	 * preset:icons でアイコンタイプの疑似要素設定が v2 に正しく移行される.
 	 */
 	public function test_icon_type() {
@@ -98,8 +116,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'fontSize'      => '1.2em',
@@ -127,7 +145,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -153,8 +171,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'margin' => [
@@ -164,7 +182,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -190,8 +208,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'margin' => [
@@ -203,7 +221,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -229,8 +247,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'padding' => [
@@ -240,7 +258,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 
@@ -267,8 +285,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'padding' => [
@@ -280,7 +298,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 
@@ -315,8 +333,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border' => [
@@ -334,7 +352,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 
@@ -369,8 +387,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border' => [
@@ -398,7 +416,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -421,8 +439,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					"backgroundColor"    => "#fafafa",
@@ -433,7 +451,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -456,7 +474,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( 'center left', $v2['v1-h1']['style']['backgroundPosition'] );
+		$this->assertEquals( 'center left', $v2['h1']['style']['backgroundPosition'] );
 	}
 
 	/**
@@ -479,8 +497,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					"responsiveFontSize" => [
@@ -491,7 +509,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -522,8 +540,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					"fontSize"      => "1.4em",
@@ -537,7 +555,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -555,8 +573,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					"display"    => "flex",
@@ -571,7 +589,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -589,8 +607,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					"backgroundColor" => "#d4e7f2",
@@ -633,7 +651,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -651,8 +669,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border'   => [
@@ -678,7 +696,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -700,10 +718,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '10px', $v2['v1-h3']['after']['height'] );
-		$this->assertEquals( '3em', $v2['v1-h3']['after']['width'] );
-		$this->assertEquals( '#DC2222', $v2['v1-h3']['after']['backgroundColor'] );
-		$this->assertTrue( $v2['v1-h3']['after']['enable'] );
+		$this->assertEquals( '10px', $v2['h3']['after']['height'] );
+		$this->assertEquals( '3em', $v2['h3']['after']['width'] );
+		$this->assertEquals( '#DC2222', $v2['h3']['after']['backgroundColor'] );
+		$this->assertTrue( $v2['h3']['after']['enable'] );
 	}
 
 	/**
@@ -728,13 +746,13 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '8px', $v2['v1-h5']['before']['height'] );
-		$this->assertEquals( '#0B9E00', $v2['v1-h5']['before']['backgroundColor'] );
-		$this->assertTrue( $v2['v1-h5']['before']['enable'] );
+		$this->assertEquals( '8px', $v2['h5']['before']['height'] );
+		$this->assertEquals( '#0B9E00', $v2['h5']['before']['backgroundColor'] );
+		$this->assertTrue( $v2['h5']['before']['enable'] );
 
-		$this->assertEquals( '1px', $v2['v1-h5']['after']['height'] );
-		$this->assertEquals( '#1ADEFF', $v2['v1-h5']['after']['backgroundColor'] );
-		$this->assertTrue( $v2['v1-h5']['after']['enable'] );
+		$this->assertEquals( '1px', $v2['h5']['after']['height'] );
+		$this->assertEquals( '#1ADEFF', $v2['h5']['after']['backgroundColor'] );
+		$this->assertTrue( $v2['h5']['after']['enable'] );
 	}
 
 	/**
@@ -758,12 +776,12 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['top']['width'] );
-		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['right']['width'] );
-		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['bottom']['width'] );
-		$this->assertEquals( '10px', $v2['v1-h6']['after']['border']['left']['width'] );
-		$this->assertEquals( '#326182', $v2['v1-h6']['after']['borderTopColor'] );
-		$this->assertTrue( $v2['v1-h6']['after']['enable'] );
+		$this->assertEquals( '10px', $v2['h6']['after']['border']['top']['width'] );
+		$this->assertEquals( '10px', $v2['h6']['after']['border']['right']['width'] );
+		$this->assertEquals( '10px', $v2['h6']['after']['border']['bottom']['width'] );
+		$this->assertEquals( '10px', $v2['h6']['after']['border']['left']['width'] );
+		$this->assertEquals( '#326182', $v2['h6']['after']['borderTopColor'] );
+		$this->assertTrue( $v2['h6']['after']['enable'] );
 	}
 
 	/**
@@ -781,8 +799,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [
 					'border'  => [
@@ -798,7 +816,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 				],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -832,33 +850,33 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-sidebar'       => [
-				'slug'   => 'v1-sidebar',
+			'sidebar'       => [
+				'slug'   => 'sidebar',
 				'label'  => 'v1:サイドバー',
 				'style'  => [],
 			],
-			'v1-footer'        => [
-				'slug'   => 'v1-footer',
+			'footer'        => [
+				'slug'   => 'footer',
 				'label'  => 'v1:フッター',
 				'style'  => [],
 			],
-			'v1-post-title'    => [
-				'slug'   => 'v1-post-title',
+			'post-title'    => [
+				'slug'   => 'post-title',
 				'label'  => 'v1:投稿タイトル',
 				'style'  => [],
 			],
-			'v1-page-title'    => [
-				'slug'   => 'v1-page-title',
+			'page-title'    => [
+				'slug'   => 'page-title',
 				'label'  => 'v1:固定ページタイトル',
 				'style'  => [],
 			],
-			'v1-archive-title' => [
-				'slug'   => 'v1-archive-title',
+			'archive-title' => [
+				'slug'   => 'archive-title',
 				'label'  => 'v1:一覧ページタイトル',
 				'style'  => [],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -880,18 +898,18 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 		$expected = [
-			'v1-h1' => [
-				'slug'   => 'v1-h1',
+			'h1' => [
+				'slug'   => 'h1',
 				'label'  => 'v1:h1',
 				'style'  => [],
 			],
-			'v1-h2' => [
-				'slug'   => 'v1-h2',
+			'h2' => [
+				'slug'   => 'h2',
 				'label'  => 'v1:h2',
 				'style'  => [],
 			],
 		];
-		$this->assertEquals( $expected, $v2 );
+		$this->assert_migration_equals( $expected, $v2, $input );
 	}
 
 	/**
@@ -904,8 +922,9 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->set_v1_option( $input );
 		$data    = [];
 		$heading = new \ystandard_toolbox\Heading_Migration();
-		$heading->migration( $data );
-		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+		$v2      = $heading->migration( $data );
+		$this->assertEquals( [ 'h1' => 'h1' ], $data['level'] );
+		$this->assertTrue( $v2['h1']['useHeadingStyle'] );
 	}
 
 	/**
@@ -918,8 +937,31 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$this->set_v1_option( $input );
 		$data    = [];
 		$heading = new \ystandard_toolbox\Heading_Migration();
-		$heading->migration( $data );
+		$v2      = $heading->migration( $data );
 		$this->assertEquals( [], $data['level'] );
+		$this->assertArrayNotHasKey( 'useHeadingStyle', $v2['h1'] );
+	}
+
+	/**
+	 * 移行したブロックスタイルは v1 と同じ is-style-ystdtb-{level} 形式の CSS クラスを使う.
+	 */
+	public function test_migrated_block_style_keeps_v1_css_class_name() {
+		$input = [
+			'footer' => [
+				'preset'         => 'custom',
+				'useCustomStyle' => true,
+				'fontColor'      => '#111111',
+			],
+		];
+		$this->set_v1_option( $input );
+		$data    = [];
+		$heading = new \ystandard_toolbox\Heading_Migration();
+		$v2      = $heading->migration( $data );
+
+		$css = \ystandard_toolbox\Heading_Helper::get_heading_css( $v2, $data['level'] );
+
+		$this->assertStringContainsString( '.is-style-ystdtb-footer', $css );
+		$this->assertStringNotContainsString( '.is-style-ystdtb-v1-footer', $css );
 	}
 
 	/**
@@ -934,7 +976,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$data    = [];
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$heading->migration( $data );
-		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+		$this->assertEquals( [ 'h1' => 'h1' ], $data['level'] );
 	}
 
 	/**
@@ -952,8 +994,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading->migration( $data );
 		$this->assertEquals(
 			[
-				'h1' => 'v1-h1',
-				'h3' => 'v1-h3',
+				'h1' => 'h1',
+				'h3' => 'h3',
 			],
 			$data['level']
 		);
@@ -976,7 +1018,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		// v2 は戻り値と一致する.
 		$this->assertEquals( $v2, $data['v2'] );
 		// level マップが書き込まれる.
-		$this->assertEquals( [ 'h1' => 'v1-h1' ], $data['level'] );
+		$this->assertEquals( [ 'h1' => 'h1' ], $data['level'] );
 	}
 
 	/**
@@ -1030,10 +1072,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals( \ystandard_toolbox\Api::STATUS_SUCCESS, $body['status'] );
 		// v2 設定が保存されている.
-		$this->assertArrayHasKey( 'v1-h1', get_option( \ystandard_toolbox\Heading::OPTION_MAIN ) );
+		$this->assertArrayHasKey( 'h1', get_option( \ystandard_toolbox\Heading::OPTION_MAIN ) );
 		// level マップが保存されている.
 		$this->assertEquals(
-			[ 'h1' => 'v1-h1' ],
+			[ 'h1' => 'h1' ],
 			get_option( \ystandard_toolbox\Heading::OPTION_LEVEL )
 		);
 		// v1 設定（ystdtb_heading）は削除されている.
@@ -1080,7 +1122,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '5px', $v2['v1-h1']['style']['borderRadius'] );
+		$this->assertEquals( '5px', $v2['h1']['style']['borderRadius'] );
 	}
 
 	/**
@@ -1100,7 +1142,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$box_shadow = $v2['v1-h1']['style']['boxShadow'] ?? '';
+		$box_shadow = $v2['h1']['style']['boxShadow'] ?? '';
 		$this->assertStringContainsString( '--ystdtb-custom-heading', $box_shadow );
 		$this->assertStringNotContainsString( '--ystdtb-custom-header', $box_shadow );
 	}
@@ -1127,7 +1169,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * ラベル定義表にないレベル名（h7 など）でも v1-{level} スラッグで生成され、ラベルは slug がそのまま使われる.
+	 * ラベル定義表にないレベル名（h7 など）でもレベル名が slug になり、ラベルは v1-{level} で生成される.
 	 */
 	public function test_unknown_level() {
 		$input = [
@@ -1138,9 +1180,10 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertArrayHasKey( 'v1-h7', $v2 );
-		$this->assertEquals( 'v1-h7', $v2['v1-h7']['slug'] );
-		$this->assertEquals( 'v1-h7', $v2['v1-h7']['label'] );
+		$this->assertArrayHasKey( 'h7', $v2 );
+		$this->assertEquals( 'h7', $v2['h7']['slug'] );
+		$this->assertEquals( 'v1-h7', $v2['h7']['label'] );
+		$this->assertTrue( $v2['h7']['useHeadingStyle'] );
 	}
 
 	/**
@@ -1164,7 +1207,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertTrue( $v2['v1-h1']['after']['enable'] );
+		$this->assertTrue( $v2['h1']['after']['enable'] );
 	}
 
 	/**
@@ -1189,8 +1232,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertTrue( $v2['v1-h1']['before']['enable'] );
-		$this->assertTrue( $v2['v1-h1']['after']['enable'] );
+		$this->assertTrue( $v2['h1']['before']['enable'] );
+		$this->assertTrue( $v2['h1']['after']['enable'] );
 	}
 
 	/**
@@ -1211,7 +1254,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertFalse( $v2['v1-h1']['after']['enable'] );
+		$this->assertFalse( $v2['h1']['after']['enable'] );
 	}
 
 	/**
@@ -1229,7 +1272,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( 'relative', $v2['v1-h1']['style']['position'] );
+		$this->assertEquals( 'relative', $v2['h1']['style']['position'] );
 	}
 
 	/**
@@ -1249,11 +1292,11 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertStringContainsString(
 			'--ystdtb-custom-heading-background-color',
-			$v2['v1-h1']['style']['boxShadow']
+			$v2['h1']['style']['boxShadow']
 		);
 		$this->assertStringNotContainsString(
 			'--ystdtb-custom-heading-bg-color',
-			$v2['v1-h1']['style']['boxShadow']
+			$v2['h1']['style']['boxShadow']
 		);
 	}
 
@@ -1269,8 +1312,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '20px', $v2['v1-h1']['after']['border']['right']['width'] );
-		$this->assertEquals( '10px', $v2['v1-h1']['after']['border']['bottom']['width'] );
+		$this->assertEquals( '20px', $v2['h1']['after']['border']['right']['width'] );
+		$this->assertEquals( '10px', $v2['h1']['after']['border']['bottom']['width'] );
 	}
 
 	/**
@@ -1289,8 +1332,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertArrayHasKey( '--ystdtb-custom-heading-after-color-rgba-opacity', $v2['v1-h1']['after'] );
-		$this->assertArrayNotHasKey( '--ystdtb-custom-heading-after-color-rbga-opacity', $v2['v1-h1']['after'] );
+		$this->assertArrayHasKey( '--ystdtb-custom-heading-after-color-rgba-opacity', $v2['h1']['after'] );
+		$this->assertArrayNotHasKey( '--ystdtb-custom-heading-after-color-rbga-opacity', $v2['h1']['after'] );
 	}
 
 	/**
@@ -1310,7 +1353,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals(
 			'#aaaaaa',
-			$v2['v1-h1']['after']['border']['right']['color']
+			$v2['h1']['after']['border']['right']['color']
 		);
 	}
 
@@ -1330,7 +1373,7 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 
 		$this->assertEquals(
 			'#d4e7f2',
-			$v2['v1-h1']['after']['border']['top']['color']
+			$v2['h1']['after']['border']['top']['color']
 		);
 	}
 
@@ -1355,8 +1398,8 @@ class Settings_Heading_Design_Migration_Test extends WP_UnitTestCase {
 		$heading = new \ystandard_toolbox\Heading_Migration();
 		$v2      = $heading->migration( $data );
 
-		$this->assertEquals( '100%', $v2['v1-h1']['after']['width'] );
-		$this->assertEquals( '5px', $v2['v1-h1']['after']['height'] );
+		$this->assertEquals( '100%', $v2['h1']['after']['width'] );
+		$this->assertEquals( '5px', $v2['h1']['after']['height'] );
 	}
 
 }
