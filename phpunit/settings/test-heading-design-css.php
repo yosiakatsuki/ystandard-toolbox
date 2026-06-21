@@ -277,6 +277,27 @@ EOD;
 		$this->assertEquals( $expected, $actual );
 	}
 
+	function test_get_selector_all_editor_footer_widget() {
+		$actual   = \ystandard_toolbox\Heading_Helper::get_selector_all( true );
+		$expected = [
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widget-title',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widget-title',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widgettitle',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widget-title',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widgettitle',
+		];
+
+		$this->assertEquals( $expected, $actual['footer'] );
+		$this->assertFalse(
+			in_array(
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"]',
+				$actual['footer'],
+				true
+			)
+		);
+	}
+
 	function test_create_css_desktop_mobile() {
 		$selector = '.block-selector';
 		$styles   = [
@@ -438,6 +459,41 @@ EOD;
 		$expected = '.block-selector::after,.level-selector-1::after,.entry-content h2::after';
 		$actual   = \ystandard_toolbox\Heading_Helper::add_pseudo_elements( $block, $level, 'after' );
 		$this->assertEquals( $expected, $actual );
+
+		$level    = [
+			'.level-selector-1,.level-selector-2',
+			'.entry-content h2',
+		];
+		$expected = '.block-selector::after,.level-selector-1::after,.level-selector-2::after,.entry-content h2::after';
+		$actual   = \ystandard_toolbox\Heading_Helper::add_pseudo_elements( $block, $level, 'after' );
+		$this->assertEquals( $expected, $actual );
+	}
+
+	function test_editor_footer_widget_heading_css_does_not_target_widget_area_body() {
+		$heading = [
+			'footer' => [
+				'slug'  => 'footer',
+				'label' => 'フッター',
+				'style' => [],
+				'after' => [
+					'enable'          => true,
+					'backgroundColor' => '#222222',
+					'height'          => '2px',
+				],
+			],
+		];
+
+		$level_list = [
+			'footer' => 'footer',
+		];
+		$actual     = \ystandard_toolbox\Util\Text::minify(
+			\ystandard_toolbox\Heading_Helper::get_heading_css( $heading, $level_list, true )
+		);
+
+		$this->assertStringContainsString( '.editor-styles-wrapper .is-style-ystdtb-footer::after', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widget-title::after', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widgettitle::after', $actual );
+		$this->assertStringNotContainsString( 'div[data-widget-area-id="footer-left"],body.widgets-php', $actual );
 	}
 
 	function test_get_styles_css() {

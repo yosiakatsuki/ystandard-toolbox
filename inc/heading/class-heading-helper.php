@@ -157,15 +157,44 @@ class Heading_Helper {
 	 * @return string
 	 */
 	public static function add_pseudo_elements( $block_selector, $level_selector, $type ) {
-		$result          = '';
+		$result          = [];
 		$pseudo_elements = "::{$type}";
-		// 結合.
+
+		$selectors = [];
 		if ( $block_selector ) {
-			$result .= "{$block_selector}{$pseudo_elements}";
+			$selectors[] = $block_selector;
 		}
 		if ( ! empty( $level_selector ) ) {
-			$result .= ',';
-			$result .= implode( "{$pseudo_elements},", $level_selector ) . "{$pseudo_elements}";
+			$selectors = array_merge( $selectors, $level_selector );
+		}
+
+		foreach ( self::normalize_selectors( $selectors ) as $selector ) {
+			$result[] = "{$selector}{$pseudo_elements}";
+		}
+
+		return implode( ',', $result );
+	}
+
+	/**
+	 * CSSセレクター配列を正規化.
+	 *
+	 * @param array|string $selectors CSSセレクター.
+	 *
+	 * @return array
+	 */
+	private static function normalize_selectors( $selectors ) {
+		$result = [];
+		if ( ! is_array( $selectors ) ) {
+			$selectors = [ $selectors ];
+		}
+		foreach ( $selectors as $selector ) {
+			foreach ( explode( ',', $selector ) as $item ) {
+				$item = trim( $item );
+				if ( empty( $item ) ) {
+					continue;
+				}
+				$result[] = $item;
+			}
 		}
 
 		return $result;
@@ -305,20 +334,22 @@ class Heading_Helper {
 		// *************************************************************
 		// フッター クラシックウィジェット.
 		// *************************************************************
-		$area = apply_filters( 'ystdtb_heading_selector_footer_classic_widget', '.site-footer' );
-		// エディター用のセレクター.
-		$editor_selector = implode(
-			',',
-			[
+		$area   = apply_filters( 'ystdtb_heading_selector_footer_classic_widget', '.site-footer' );
+		$target = [];
+		if ( $is_editor ) {
+			$areas = [
 				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"]',
 				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"]',
 				'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"]',
-			]
-		);
-		$area            = $is_editor ? $editor_selector : $area;
-		$target          = [];
-		$target[]        = "{$body} {$area} .widget-title";
-		$target[]        = "{$body} {$area} .widgettitle";
+			];
+			foreach ( $areas as $editor_area ) {
+				$target[] = "{$editor_area} .widget-title";
+				$target[] = "{$editor_area} .widgettitle";
+			}
+		} else {
+			$target[] = "{$body} {$area} .widget-title";
+			$target[] = "{$body} {$area} .widgettitle";
+		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
 			'ystdtb_heading_css_selector_footer_classic_widget',
