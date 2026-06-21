@@ -94,11 +94,14 @@ export default function AddStyle( props: AddStyleProps ) {
 			);
 			return false;
 		}
-		// 「ハイフンは1回まで」チェック.
-		const regex = /^[a-zA-Z][a-zA-Z0-9]*-?[a-zA-Z0-9]*$/;
+		// 「ハイフンは連続・末尾では使えない」チェック.
+		const regex = /^[a-zA-Z][a-zA-Z0-9]*(?:-[a-zA-Z0-9]+)*$/;
 		if ( ! regex.test( value ) ) {
 			setIsIdErrorMessage(
-				__( 'ハイフンは1回のみ使用可能です。', 'ystandard-toolbox' )
+				__(
+					'ハイフンは連続・末尾では使用できません。',
+					'ystandard-toolbox'
+				)
 			);
 			return false;
 		}
