@@ -1,7 +1,7 @@
 /**
  * WordPress
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useContext } from '@wordpress/element';
 
 /**
@@ -26,10 +26,19 @@ export default function StyleLabel() {
 		useContext( HeadingContext );
 
 	const label = headingOption?.label;
+	const slug = headingOption?.slug;
 
 	return (
 		<PluginSettingsPanel
-			title={ __( 'スタイル名', 'ystandard-toolbox' ) }
+			title={
+				slug
+					? sprintf(
+							/* translators: %s: style ID. */
+							__( 'スタイル：%s', 'ystandard-toolbox' ),
+							slug
+					  )
+					: __( 'スタイル名', 'ystandard-toolbox' )
+			}
 			initialOpen={ true }
 		>
 			<div>
