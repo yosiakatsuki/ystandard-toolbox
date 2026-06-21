@@ -95,7 +95,9 @@ export default function AddStyle( props: AddStyleProps ) {
 			return false;
 		}
 		// 「ハイフンは連続・末尾では使えない」チェック.
-		const regex = /^[a-zA-Z][a-zA-Z0-9]*(?:-[a-zA-Z0-9]+)*$/;
+		const regex = checkEmpty
+			? /^[a-zA-Z][a-zA-Z0-9]*(?:-[a-zA-Z0-9]+)*$/
+			: /^[a-zA-Z][a-zA-Z0-9]*(?:-[a-zA-Z0-9]+)*-?$/;
 		if ( ! regex.test( value ) ) {
 			setIsIdErrorMessage(
 				__(
