@@ -324,15 +324,43 @@ EOD;
 		);
 	}
 
-	function test_get_selector_all_editor_content_heading_excludes_widgets_screen() {
+	function test_get_selector_all_editor_content_heading_targets_editor_styles_wrapper() {
 		$actual = \ystandard_toolbox\Heading_Helper::get_selector_all( true );
 
 		$this->assertEquals(
 			[
-				'body:not(.widgets-php) .editor-styles-wrapper h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+				'.editor-styles-wrapper h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
 			],
 			$actual['h2']
 		);
+	}
+
+	function test_get_selector_all_editor_content_heading_excludes_widgets_screen() {
+		global $pagenow;
+
+		$has_original_pagenow = isset( $pagenow );
+		$original_pagenow     = $has_original_pagenow ? $pagenow : null;
+		$pagenow              = 'widgets.php';
+
+		try {
+			$actual = \ystandard_toolbox\Heading_Helper::get_selector_all( true );
+
+			$this->assertEquals( [], $actual['h2'] );
+			$this->assertStringContainsString(
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content)',
+				implode( ',', $actual['sidebar'] )
+			);
+			$this->assertStringContainsString(
+				'body.widgets-php :where(.wp-block-widget-area__panel-body-content)',
+				implode( ',', $actual['footer'] )
+			);
+		} finally {
+			if ( $has_original_pagenow ) {
+				$pagenow = $original_pagenow;
+			} else {
+				unset( $GLOBALS['pagenow'] );
+			}
+		}
 	}
 
 	function test_create_css_desktop_mobile() {

@@ -300,8 +300,12 @@ class Heading_Helper {
 		// レベル別.
 		// *************************************************************
 		$content = apply_filters( 'ystdtb_heading_selector_content', '.entry-content' );
-		$content = $is_editor ? 'body:not(.widgets-php) .editor-styles-wrapper' : $content;
+		$content = $is_editor ? '.editor-styles-wrapper' : $content;
 		foreach ( [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ] as $level ) {
+			if ( $is_editor && self::is_widgets_editor_screen() ) {
+				$result[ $level ] = [];
+				continue;
+			}
 			$selector = "{$level}:where(.wp-block-heading):not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
 			$prefix   = trim( "{$body} {$content}" );
 			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
@@ -447,6 +451,28 @@ class Heading_Helper {
 		$result['archive-title'] = $target;
 
 		return $result;
+	}
+
+	/**
+	 * ウィジェット編集画面か判定.
+	 *
+	 * @return bool
+	 */
+	private static function is_widgets_editor_screen() {
+		global $pagenow;
+
+		if ( isset( $pagenow ) && 'widgets.php' === $pagenow ) {
+			return true;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && 'widgets' === $screen->id ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
