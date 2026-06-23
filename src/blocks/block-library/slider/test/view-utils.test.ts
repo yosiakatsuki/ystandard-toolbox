@@ -49,6 +49,37 @@ describe( 'normalizeSliderOptions', () => {
 		} );
 	} );
 
+	it( 'fadeエフェクトではcrossFadeを有効化する', () => {
+		expect(
+			normalizeSliderOptions( {
+				effect: 'fade',
+			} ).fadeEffect
+		).toEqual( {
+			crossFade: true,
+		} );
+	} );
+
+	it( '既存のfadeEffect設定を維持してcrossFadeを有効化する', () => {
+		expect(
+			normalizeSliderOptions( {
+				effect: 'fade',
+				fadeEffect: {
+					crossFade: false,
+				},
+			} ).fadeEffect
+		).toEqual( {
+			crossFade: true,
+		} );
+	} );
+
+	it( 'fade以外のエフェクトではfadeEffectを追加しない', () => {
+		expect(
+			normalizeSliderOptions( {
+				effect: 'slide',
+			} ).fadeEffect
+		).toBeUndefined();
+	} );
+
 	it( '既知キー以外のbreakpointは維持する', () => {
 		const options = normalizeSliderOptions(
 			{

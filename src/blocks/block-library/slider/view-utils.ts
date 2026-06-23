@@ -22,6 +22,7 @@ export function normalizeSliderOptions(
 ): SwiperOptions {
 	const normalizedOptions = {
 		...options,
+		...getFadeEffectOptions( options ),
 		resizeObserver: false,
 	};
 	const runtimeBreakpoints = settings?.breakpoints;
@@ -35,6 +36,24 @@ export function normalizeSliderOptions(
 			normalizedOptions.breakpoints,
 			runtimeBreakpoints
 		),
+	};
+}
+
+/**
+ * fadeエフェクトで非アクティブスライドを重ねて表示しないようにする.
+ *
+ * @param options Swiperオプション
+ */
+function getFadeEffectOptions( options: SwiperOptions ) {
+	if ( 'fade' !== options.effect ) {
+		return {};
+	}
+
+	return {
+		fadeEffect: {
+			...options.fadeEffect,
+			crossFade: true,
+		},
 	};
 }
 
