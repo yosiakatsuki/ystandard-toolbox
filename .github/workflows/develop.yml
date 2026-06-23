@@ -121,7 +121,10 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: PHP Unit Test
-        run: npm run test:unit:php
+        run: |
+          PLUGIN_DIR="$(basename "$GITHUB_WORKSPACE")"
+          npx wp-env start
+          npx wp-env run cli --env-cwd="wp-content/plugins/${PLUGIN_DIR}" -- vendor/bin/phpunit -c phpunit.xml.dist
 
   build-check:
     name: Build Check

@@ -18,6 +18,7 @@
 	}
 
 	&:where(.has-padding) {
+
 		:where(.ystdtb-faq-item) {
 			--ystdtb--faq-item--padding-horizon: 1.25rem;
 		}
@@ -37,7 +38,9 @@
 
 	// アコーディオン形式
 	&:where(.is-accordion) {
+
 		&:where(.is-open) {
+
 			:where(.is-faq--a) {
 				height: auto;
 				height: calc-size(auto);
@@ -51,6 +54,7 @@
 		}
 
 		&:where(:not(.is-open)) {
+
 			:where(.is-faq--q) {
 				border-bottom: 0;
 			}
@@ -75,6 +79,7 @@
 		}
 
 		:where(.ystdtb-faq-item) {
+
 			&:where(.is-faq--q) {
 				cursor: pointer;
 			}

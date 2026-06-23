@@ -67,7 +67,7 @@ describe( 'CustomFontSizePicker', () => {
 
 		expect( onChange ).toHaveBeenCalledWith( {
 			fontSize: { size: 16, slug: 'medium', name: 'Medium' },
-			customFontSize: '16px',
+			customFontSize: undefined,
 			responsiveFontSize: undefined,
 		} );
 	} );
