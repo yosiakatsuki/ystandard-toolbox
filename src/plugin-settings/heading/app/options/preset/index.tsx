@@ -21,11 +21,7 @@ import { PluginSettingsPanel } from '@aktk/plugin-settings/components/panel';
 /**
  * Types
  */
-import type {
-	HeadingOption,
-	HeadingStyle,
-	HeadingPseudoElementsStyle,
-} from '@aktk/plugin-settings/heading/types';
+import type { HeadingOption } from '@aktk/plugin-settings/heading/types';
 // @ts-ignore
 import presetStyles from '../../../preset/preset.json';
 import PreviewStyle from '@aktk/plugin-settings/heading/app/preview/preview-style';

@@ -24,7 +24,7 @@ import { getAdminConfig } from '@aktk/plugin-settings/utils/config';
 
 export function LevelEditContainer() {
 	// @ts-ignore
-	const { levelList, levelKeys, headingStyles, isEdit, setIsEdit } =
+	const { levelList, levelKeys, headingStyles, setIsEdit } =
 		useContext( HeadingContext );
 
 	const [ editLevelList, setEditLevelList ] = useState( levelList );

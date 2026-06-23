@@ -30,7 +30,6 @@ export default function Migration() {
 				if ( SUCCESS === response.status ) {
 					setIsCompletedMigration( true );
 				}
-				console.log( { data: response.data } );
 				setIsButtonDisable( false );
 			},
 			// @ts-ignore

@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { __ } from '@wordpress/i18n';
-
-/**
  * Aktk dependencies
  */
 import type { ResponsiveValues } from '@aktk/block-components/types';

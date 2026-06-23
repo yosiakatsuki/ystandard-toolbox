@@ -9,7 +9,7 @@
  *  - AMP 有効時に settings.{tab.name}_amp の値が AMP 用 CodeInput にバインドされる
  *
  * AMP 切替は getAdminConfig('isAmpEnable', false) の戻り値に依存するため、
- * @aktk/plugin-settings/utils/config をモックして真偽を切り替える。
+ * `@aktk/plugin-settings/utils/config` をモックして真偽を切り替える。
  */
 
 /* WordPress Dependencies */
