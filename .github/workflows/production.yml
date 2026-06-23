@@ -2,7 +2,7 @@ name: Production Build
 on:
   push:
     branches:
-      - v2.0.0
+      - production
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -54,28 +54,28 @@ jobs:
             --upload-file upload/ystandard-toolbox.json \
             "${BASE_URL}/ystandard-toolbox.json"
 
-  # notify:
-  #   name: Notify
-  #   needs: [ deploy ]
-  #   if: always()
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Notify failure
-  #       if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
-  #       uses: sarisia/actions-status-discord@v1
-  #       with:
-  #         nodetail: true
-  #         title: "🚨 [yStandard Toolbox]正規版のアップデート準備に失敗しました"
-  #         color: 0x962305
-  #       env:
-  #         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  notify:
+    name: Notify
+    needs: [ deploy ]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify failure
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          nodetail: true
+          title: "🚨 [yStandard Toolbox]正規版のアップデート準備に失敗しました"
+          color: 0x962305
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
-  #     - name: Notify success
-  #       if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
-  #       uses: sarisia/actions-status-discord@v1
-  #       with:
-  #         nodetail: true
-  #         title: "✅ [yStandard Toolbox]正規版のアップデート準備OK！"
-  #         color: 0x059669
-  #       env:
-  #         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Notify success
+        if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          nodetail: true
+          title: "✅ [yStandard Toolbox]正規版のアップデート準備OK！"
+          color: 0x059669
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
