@@ -33,5 +33,6 @@ class Menu_Page {
 		require_once __DIR__ . '/class-menu-copyright.php';
 		require_once __DIR__ . '/class-menu-block-patterns.php';
 		require_once __DIR__ . '/class-menu-code.php';
+		require_once __DIR__ . '/class-menu-v2-switch.php';
 	}
 }
