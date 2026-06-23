@@ -4,9 +4,146 @@ on:
     branches:
       - v2.0.0
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: none
+
+      - name: Composer install
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.16.0
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+  php-syntax-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '7.4', '8.1', '8.2', '8.3', '8.4' ]
+    name: PHP Error Check (PHP ${{ matrix.php }})
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: none
+
+      - name: php -l
+        run: bash bin/php-l.sh
+
+  js-unit-test:
+    name: JS Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.16.0
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: Unit Test
+        run: npm run test:unit:component
+
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.16.0
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: Integration Test
+        run: npm run test:integration
+
+  php-unit-test:
+    name: PHP Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: none
+
+      - name: Composer install
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.16.0
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: PHP Unit Test
+        run: npm run test:unit:php
+
+  build-check:
+    name: Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.16.0
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
   deploy:
     name: Deploy
+    needs: [ lint, php-syntax-check, js-unit-test, integration-test, php-unit-test, build-check ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -38,3 +175,29 @@ jobs:
           local-dir: ./upload/
           server-dir: ${{ secrets.FTP_REMOTE_DIR_DEVELOP }}/
           log-level: verbose
+
+  notify:
+    name: Notify
+    needs: [ lint, php-syntax-check, js-unit-test, integration-test, php-unit-test, build-check, deploy ]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify failure
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          nodetail: true
+          title: "🚨 [yStandard Toolbox]開発バージョンのアップデート準備に失敗しました"
+          color: 0x962305
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Notify success
+        if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && !contains(needs.*.result, 'skipped') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          nodetail: true
+          title: "✅ [yStandard Toolbox]開発バージョンのアップデート準備OK！"
+          color: 0x059669
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
