@@ -1,5 +1,6 @@
 {
   "port": 10020,
+  "testsEnvironment": false,
   "core": "https://ja.wordpress.org/latest-ja.zip",
   "themes": [
     "https://wp-ystandard.com/download/ystandard/v4/ystandard.zip"

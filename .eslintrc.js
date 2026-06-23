@@ -10,6 +10,25 @@ module.exports = {
 		ystdtbPluginSettings: true,
 	},
 	extends: [ ...defaultConfig.extends, 'plugin:tailwindcss/recommended' ],
+	overrides: [
+		// @ts-ignore
+		...defaultConfig.overrides,
+		{
+			files: [ '**/*.ts', '**/*.tsx' ],
+			parser: '@typescript-eslint/parser',
+			plugins: [ '@typescript-eslint' ],
+			rules: {
+				'no-undef': 'off',
+				'no-unused-vars': 'off',
+				'@typescript-eslint/no-unused-vars': [
+					'error',
+					{
+						ignoreRestSiblings: true,
+					},
+				],
+			},
+		},
+	],
 	rules: {
 		// @ts-ignore
 		...defaultConfig.rules,
