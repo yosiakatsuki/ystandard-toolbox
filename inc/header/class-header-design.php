@@ -41,12 +41,13 @@ class Header_Design {
 	/**
 	 * 設定の取得
 	 *
-	 * @param string $name Option Name.
+	 * @param string $name    Option Name.
+	 * @param mixed  $default Default Value.
 	 *
-	 * @return array
+	 * @return mixed
 	 */
-	public static function get_header_design_option( $name ) {
-		return Option::get_option( self::OPTION_NAME, $name );
+	public static function get_option( $name, $default = null ) {
+		return Option::get_option( self::OPTION_NAME, $name, $default );
 	}
 }
 

@@ -1,0 +1,20 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "basic-speed-5s",
+			"effect": "slide",
+			"speed": 5,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": false,
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

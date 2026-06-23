@@ -1,0 +1,39 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"contentMarginTop": 45
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {
+							"placeholder": "タイムラインコンテンツ…"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>contentMarginTop が設定されているもののタイムライン</p>\n",
+						"innerContent": [
+							"\n<p>contentMarginTop が設定されているもののタイムライン</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:calc(-1.3em + 45px)\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item\"><div class=\"ystdtb-timeline__label\" style=\"border-radius:50px\"></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:calc(-1.3em + 45px)\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"</div>\n"
+		]
+	}
+]

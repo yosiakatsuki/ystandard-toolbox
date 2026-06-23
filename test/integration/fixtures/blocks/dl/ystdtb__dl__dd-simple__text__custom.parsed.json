@@ -1,0 +1,21 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"customTextColor": "#16a34a"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple has-text-color\" style=\"color:#16a34a\">説明文</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple has-text-color\" style=\"color:#16a34a\">説明文</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

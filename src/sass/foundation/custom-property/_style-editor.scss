@@ -1,0 +1,9 @@
+@use "./index";
+
+:root {
+	--ystdtb--editor--text-color--gray: #6b7280;
+	--ystdtb--editor--border-color--gray: #ddd;
+	--ystdtb--editor--block-outline: 1px solid
+		var(--ystdtb--editor--border-color--gray);
+	--ystdtb--editor--background-color--orange: #fff7ed;
+}

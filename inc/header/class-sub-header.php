@@ -9,6 +9,10 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -22,7 +26,7 @@ class Sub_Header {
 	 * Sub_Header constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare( '4.11.0' ) ) {
+		if ( ! Version::ystandard_version_compare( '4.11.0' ) ) {
 			return;
 		}
 		add_action( 'after_setup_theme', [ $this, 'add_menu' ], 11 );
@@ -37,11 +41,10 @@ class Sub_Header {
 	 */
 	public function enqueue_css() {
 		// 設定.
-		$bg    = Option::get_option( Header_Design::OPTION_NAME, 'subHeaderBackgroundColorDesktop', '#f1f1f3' );
-		$color = Option::get_option( Header_Design::OPTION_NAME, 'subHeaderColorDesktop', '#666666' );
-		$align = Option::get_option( Header_Design::OPTION_NAME, 'subHeaderAlignDesktop', 'right' );
-		$size  = Option::get_option( Header_Design::OPTION_NAME, 'subHeaderFontSizeDesktop', 0.7 );
-		$unit  = Option::get_option( Header_Design::OPTION_NAME, 'subHeaderFontSizeUnitDesktop', 'em' );
+		$bg        = Header_Design::get_option( 'subHeaderBackgroundColorDesktop', '#f1f1f3' );
+		$color     = Header_Design::get_option( 'subHeaderColorDesktop', '#666666' );
+		$align     = Header_Design::get_option( 'subHeaderAlignDesktop', 'right' );
+		$font_size = self::get_font_size();
 
 		$menu_align = 'flex-end';
 		if ( 'center' === $align ) {
@@ -54,12 +57,32 @@ class Sub_Header {
 		$css = '';
 		// CSS.
 		$css .= ".sub-header.is-top{background-color:{$bg};color:{$color};}";
-		$css .= ".sub-header__nav{justify-content:{$menu_align};font-size:{$size}{$unit};}";
+		$css .= ".sub-header__nav{justify-content:{$menu_align};font-size:{$font_size};}";
 
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( Utility::add_media_query( $css, 'md' ) )
+			Text::minify( Styles::add_media_query( $css, 'tablet' ) )
 		);
+	}
+
+	/**
+	 * フォントサイズ設定取得
+	 *
+	 * @return string
+	 */
+	public static function get_font_size() {
+		$font_size = Header_Design::get_option( 'subHeaderFontSize' );
+		/**
+		 * Deprecated v1.24.0.
+		 */
+		$size = Header_Design::get_option( 'subHeaderFontSizeDesktop', 0.7 );
+		$unit = Header_Design::get_option( 'subHeaderFontSizeUnitDesktop', 'em' );
+
+		if ( is_null( $font_size ) ) {
+			return "{$size}{$unit}";
+		}
+
+		return $font_size;
 	}
 
 	/**

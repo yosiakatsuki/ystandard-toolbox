@@ -31,18 +31,71 @@ class Icon {
 	 * Icon constructor.
 	 */
 	public function __construct() {
-		add_action( 'enqueue_block_editor_assets', [ $this, 'add_icons' ], 100 );
+		add_action( 'enqueue_block_assets', [ $this, 'add_icons' ], 100 );
+		add_action( 'ystdtb_enqueue_plugin_settings_base_scripts', [ $this, 'admin_add_icons' ], 50 );
 	}
 
 	/**
 	 * アイコンリストの追加
 	 */
 	public function add_icons() {
+		if ( ! is_admin() ) {
+			return;
+		}
 		wp_localize_script(
 			Blocks::BLOCK_EDITOR_SCRIPT_HANDLE,
 			'ystdtbIconList',
-			$this->get_icons()
+			self::get_icons()
 		);
+	}
+
+	/**
+	 * プラグイン設定画面用
+	 *
+	 * @param string $script_handle Script handle.
+	 */
+	public function admin_add_icons( $script_handle ) {
+		wp_localize_script(
+			$script_handle,
+			'ystdtbIconList',
+			self::get_icons()
+		);
+	}
+
+	/**
+	 * アイコン取得
+	 *
+	 * @param string $name アイコン名
+	 *
+	 * @return array アイコンデータの配列（見つからない場合は空配列）
+	 */
+	public static function get_icon( $name ) {
+		$icons  = self::get_icons();
+		$result = [];
+
+		// 直接名前でマッチするアイコンを検索
+		if ( is_array( $icons ) && isset( $icons[ $name ] ) ) {
+			return $icons[ $name ];
+		}
+
+		// nameフィールドでの検索
+		foreach ( $icons as $icon_data ) {
+
+			if ( is_array( $icon_data ) && isset( $icon_data['name'] ) ) {
+
+				if ( $icon_data['name'] === $name ) {
+					return $icon_data;
+				}
+
+				// カスタムアイコンのプレフィックス付きで検索
+				$custom_name = self::CUSTOM_ICON_PREFIX . $name;
+				if ( $icon_data['name'] === $custom_name ) {
+					return $icon_data;
+				}
+			}
+		}
+
+		return [];
 	}
 
 	/**
@@ -50,7 +103,7 @@ class Icon {
 	 *
 	 * @return array
 	 */
-	private function get_icons() {
+	public static function get_icons() {
 
 		$icons = include( YSTDTB_PATH . '/library/svg-icons/svg-icons.php' );
 		// カスタムアイコン.
@@ -60,7 +113,7 @@ class Icon {
 
 		// 結合.
 		$icons = array_merge(
-			$this->sanitize_custom_icon( $custom_icons ),
+			self::sanitize_custom_icon( $custom_icons ),
 			$icons
 		);
 
@@ -74,7 +127,7 @@ class Icon {
 	 *
 	 * @return array
 	 */
-	private function sanitize_custom_icon( $icons ) {
+	public static function sanitize_custom_icon( $icons ) {
 		if ( ! is_array( $icons ) || empty( $icons ) ) {
 			return $icons;
 		}

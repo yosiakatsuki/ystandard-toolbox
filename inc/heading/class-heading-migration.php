@@ -1,0 +1,656 @@
+<?php
+/**
+ * Heading Setting Migration
+ *
+ * @package ystandard-toolbox
+ * @author  yosiakatsuki
+ * @license GPL-2.0+
+ */
+
+namespace ystandard_toolbox;
+
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Types;
+
+defined( 'ABSPATH' ) || die();
+
+/**
+ * Class Heading_Migration.
+ */
+class Heading_Migration {
+
+	/**
+	 * 新設定.
+	 *
+	 * @var array
+	 */
+	private $new_option = [];
+
+	/**
+	 * 旧設定.
+	 *
+	 * @var array
+	 */
+	private $old_option = [];
+
+	/**
+	 * レベルに対応する見出しの設定.
+	 *
+	 * @var array
+	 */
+	private $heading_level = [];
+
+	/**
+	 *  Constructor.
+	 */
+	public function __construct() {
+		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+	}
+
+	/**
+	 * 設定変換 v1 -> v2
+	 *
+	 * @param array $data 設定(v1).
+	 *
+	 * @return array
+	 */
+	public function migration( &$data ) {
+		$v1_options          = Heading_Compatible::get_option();
+		$data['v1']          = $v1_options;
+		$v2_options          = [];
+		$this->heading_level = [];
+
+		if ( is_array( $v1_options ) && ! empty( $v1_options ) ) {
+
+			foreach ( $v1_options as $level => $option ) {
+				// 初期化.
+				$this->new_option = [];
+				$this->old_option = $option;
+				$option_slug      = $this->get_option_slug( $level );
+				// 基本.
+				$this->set_basic_option( $level );
+				$this->set_preset();
+				$this->set_typography();
+				$this->set_background();
+				$this->set_border();
+				$this->set_spacing();
+				// 疑似要素.
+				$this->set_pseudo_elements();
+
+				// 追加.
+				$v2_options[ $option_slug ] = $this->new_option;
+			}
+		}
+
+		$data['v2']    = $v2_options;
+		$data['level'] = $this->heading_level;
+
+		return $v2_options;
+	}
+
+	/**
+	 * 疑似要素のセット.
+	 *
+	 * @return void
+	 */
+	private function set_pseudo_elements() {
+		$types = [ 'before', 'after' ];
+		foreach ( $types as $type ) {
+			$preset_name = $this->get_old_option( 'preset', '' );
+			$preset      = Heading_Helper::get_preset( $preset_name );
+			// プリセットの展開.
+			$this->set_pseudo_elements_preset( $type, $preset_name );
+
+			$color_type = $this->get_old_option( "{$type}ColorType", '' );
+			$color      = $this->get_old_option( "{$type}Color", '' );
+			$content    = $this->get_old_option( "{$type}Content", null );
+			$icon       = $this->get_pseudo_elements_icon( $type );
+			$size       = $this->get_old_option( "{$type}Size", '' );
+			$size_unit  = 'px';
+
+			// content と enable.
+			if ( $this->has_pseudo_elements( $type ) ) {
+				// 疑似要素として描画される条件: content / icon / preset 由来の疑似要素定義のいずれか.
+				$has_preset_pseudo                    = isset( $preset[ $type ] ) && ! empty( $preset[ $type ] );
+				$this->new_option[ $type ]['enable']  = ! empty( $content ) || ! empty( $icon ) || $has_preset_pseudo;
+				$this->new_option[ $type ]['content'] = ! empty( $content ) ? $content : '""';
+			}
+			// 色設定.
+			$color_type = 'background' === $color_type ? 'backgroundColor' : $color_type;
+			$this->add_pseudo_elements_style( $type, $color_type, $color );
+
+			if ( ! empty( $icon ) ) {
+				$this->new_option[ $type ]['icon']       = $icon;
+				$this->new_option['style']['display']    = 'flex';
+				$this->new_option['style']['gap']        = '0.5em';
+				$this->new_option['style']['alignItems'] = 'center';
+
+				$font_size = "{$size}em";
+				if ( empty( $size ) && isset( $preset[ $type ]['fontSize'] ) && ! empty( $preset[ $type ]['fontSize'] ) ) {
+					$font_size = $preset[ $type ]['fontSize'];
+				}
+
+				// サイズ変更.
+				$this->add_pseudo_elements_style( $type, 'fontSize', "{$font_size}" );
+				$size_unit = 'em';
+
+				// アイコン描画時は width/height を CSS 出力側で 1em 固定するため attributes には保存しない.
+				unset( $this->new_option[ $type ]['width'], $this->new_option[ $type ]['height'] );
+
+				// v2 UI ではアイコン色を iconColor で管理するため、color / backgroundColor から移し替える.
+				if ( isset( $this->new_option[ $type ]['color'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['color'];
+					unset( $this->new_option[ $type ]['color'] );
+				}
+				if ( isset( $this->new_option[ $type ]['backgroundColor'] ) ) {
+					$this->new_option[ $type ]['iconColor'] = $this->new_option[ $type ]['backgroundColor'];
+					unset( $this->new_option[ $type ]['backgroundColor'] );
+				}
+			}
+
+			if ( ! empty( $size ) ) {
+				if ( isset( $preset['usePseudoElementsSize'] ) ) {
+					// preset で適用先を明示している場合: その指示に従う（空配列なら何もしない）.
+					foreach ( $preset['usePseudoElementsSize'] as $size_target ) {
+						if ( 'iconSize' === $size_target ) {
+							// アイコン用の size 適用は後段の icon 処理側で行う.
+							continue;
+						}
+						if ( 'borderWidth' === $size_target ) {
+							// border 各辺の width を一括で size に上書き（balloon の三角サイズ等）.
+							foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
+								if ( ! isset( $this->new_option[ $type ]['border'][ $side ] ) ) {
+									continue;
+								}
+								$this->new_option[ $type ]['border'][ $side ]['width'] = "{$size}{$size_unit}";
+							}
+							continue;
+						}
+						if ( 'fontSize' === $size_target ) {
+							$this->add_pseudo_elements_style( $type, 'fontSize', "{$size}{$size_unit}" );
+						} else {
+							$this->add_pseudo_elements_style( $type, $size_target, "{$size}{$size_unit}" );
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 疑似要素のアイコン設定を取得.
+	 *
+	 * @param string $type before/after.
+	 *
+	 * @return string.
+	 */
+	private function get_pseudo_elements_icon( $type ) {
+		$icon = $this->get_old_option( "{$type}Icon", '' );
+		// 設定にアイコンがない場合、プリセットを参照.
+		if ( empty( $icon ) && isset( $this->new_option[ $type ]['icon'] ) ) {
+			$icon = $this->new_option[ $type ]['icon'];
+		}
+
+		return $icon;
+	}
+
+	/**
+	 * プリセットの展開.
+	 *
+	 * @param string $type   before/after.
+	 * @param string $preset preset name.
+	 *
+	 * @return void
+	 */
+	private function set_pseudo_elements_preset( $type, $preset ) {
+		$preset_value = Heading_Helper::get_preset( $preset );
+		if ( is_array( $preset_value ) && ! empty( $preset_value ) && isset( $preset_value[ $type ] ) ) {
+			foreach ( $preset_value[ $type ] as $key => $value ) {
+				// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
+				$key   = $this->replace_custom_property( $key );
+				$value = $this->replace_custom_property( $value );
+				$this->add_pseudo_elements_style( $type, $key, $value );
+			}
+		}
+	}
+
+	/**
+	 * 余白関連設定.
+	 *
+	 * @return void
+	 */
+	private function set_spacing() {
+		$pos     = [ 'Top', 'Right', 'Bottom', 'Left' ];
+		$padding = [];
+		$margin  = [];
+
+		// padding.
+		foreach ( $pos as $position ) {
+			$size = $this->get_old_option( "padding{$position}", '' );
+			$unit = $this->get_old_option( "padding{$position}Unit", 'em' );
+
+			if ( '' !== $size ) {
+				$size = ! empty( $size ) ? "{$size}{$unit}" : 0;
+				// 追加.
+				$padding[ strtolower( $position ) ] = $size;
+			}
+		}
+		if ( ! empty( $padding ) ) {
+			$this->add_style( 'padding', $padding );
+		}
+
+		// margin.
+		foreach ( $pos as $position ) {
+			$size = $this->get_old_option( "margin{$position}", '' );
+			$unit = $this->get_old_option( "margin{$position}Unit", 'em' );
+
+			if ( '' !== $size ) {
+				$size = ! empty( $size ) ? "{$size}{$unit}" : 0;
+				// 追加.
+				$margin[ strtolower( $position ) ] = $size;
+			}
+		}
+		if ( ! empty( $margin ) ) {
+			$this->add_style( 'margin', $margin );
+		}
+	}
+
+
+	/**
+	 * 枠線関連設定.
+	 *
+	 * @return void
+	 */
+	private function set_border() {
+		// 角丸.
+		$radius = $this->get_old_option( 'borderRadius', '' );
+		if ( $radius ) {
+			$this->add_style( 'borderRadius', "{$radius}px" );
+		}
+
+		$border = [];
+		$pos    = [ 'Top', 'Right', 'Bottom', 'Left' ];
+		foreach ( $pos as $position ) {
+			$border_color = $this->get_old_option( "border{$position}Color", '' );
+			$border_width = $this->get_old_option( "border{$position}Width", '' );
+			$border_unit  = $this->get_old_option( "border{$position}WidthUnit", 'px' );
+			$border_style = $this->get_old_option( "border{$position}Style", '' );
+
+			$border_width = ! empty( $border_width ) && '0' !== $border_width ? "{$border_width}{$border_unit}" : 0;
+
+			if ( $border_width ) {
+				$border[ strtolower( $position ) ] = [
+					'color' => $border_color,
+					'style' => $border_style,
+					'width' => $border_width,
+				];
+			}
+		}
+		if ( ! empty( $border ) ) {
+			$this->add_style( 'border', $border );
+		}
+	}
+
+	/**
+	 * 背景関連設定.
+	 *
+	 * @return void
+	 */
+	private function set_background() {
+		// 背景色.
+		$bg_color = $this->get_old_option( 'backgroundColor', '' );
+		if ( $bg_color ) {
+			$this->add_style( 'backgroundColor', $bg_color );
+		}
+		// 画像.
+		$bg_image = $this->get_old_option( 'backgroundImage', '' );
+		if ( $bg_image ) {
+			$this->add_style( 'backgroundImage', "{$bg_image}" );
+		}
+		// 背景 位置.
+		$bg_pos = $this->get_old_option( 'backgroundPosition', '' );
+		if ( $bg_pos ) {
+			// v1 ではハイフン区切り（例: center-left）で保存され CSS 出力時に空白区切りへ変換していた.
+			// v2 attributes は CSS 仕様準拠の空白区切りで保持し、UI のドロップダウン選択肢と一致させる.
+			$this->add_style( 'backgroundPosition', str_replace( '-', ' ', $bg_pos ) );
+		}
+		// 背景 繰り返し.
+		$bg_repeat = $this->get_old_option( 'backgroundRepeat', '' );
+		if ( $bg_repeat ) {
+			$this->add_style( 'backgroundRepeat', $bg_repeat );
+		}
+		// 背景 サイズ.
+		$bg_size = $this->get_old_option( 'backgroundSize', '' );
+		if ( $bg_size ) {
+			$this->add_style( 'backgroundSize', $bg_size );
+		}
+	}
+
+	/**
+	 * プリセットコピー.
+	 *
+	 * @return void
+	 */
+	private function set_preset() {
+		$preset = Heading_Helper::get_preset( $this->get_old_option( 'preset' ) );
+		if ( ! isset( $preset['style'] ) ) {
+			return;
+		}
+		foreach ( $preset['style'] as $key => $value ) {
+			// --ystdtb-custom-header -> --ystdtb-custom-heading へ変換.
+			$key   = $this->replace_custom_property( $key );
+			$value = $this->replace_custom_property( $value );
+			// スタイルのセット.
+			$this->add_style( $key, $value );
+		}
+	}
+
+	/**
+	 * カスタムプロパティ置換.
+	 *
+	 * @param string|array $value 名前.
+	 *
+	 * @return string|array
+	 */
+	private function replace_custom_property( $value ) {
+		if ( ! is_array( $value ) ) {
+			return str_replace( '--ystdtb-custom-header', '--ystdtb-custom-heading', $value );
+		}
+
+		$new_value = [];
+		foreach ( $value as $key => $val ) {
+			$new_value[ $key ] = $this->replace_custom_property( $val );
+		}
+
+		return $new_value;
+	}
+
+	/**
+	 * 文字関連設定.
+	 *
+	 * @return void
+	 */
+	private function set_typography() {
+		// フォントサイズ.
+		$unit         = $this->get_old_option( 'fontSizeUnit', 'em' );
+		$responsive   = Types::to_bool(
+			$this->get_old_option( 'fontSizeResponsive', false )
+		);
+		$size_desktop = $this->get_old_option( 'fontSizePc', '' );
+		$size_tablet  = $this->get_old_option( 'fontSizeTablet', '' );
+		$size_mobile  = $this->get_old_option( 'fontSizeMobile', '' );
+
+		$v2_fz = [];
+		if ( $size_desktop ) {
+			$v2_fz['desktop'] = "{$size_desktop}{$unit}";
+		}
+		if ( $responsive && $size_tablet ) {
+			$v2_fz['tablet'] = "{$size_tablet}{$unit}";
+		}
+		if ( $responsive && $size_mobile ) {
+			$v2_fz['mobile'] = "{$size_mobile}{$unit}";
+		}
+		if ( ! empty( $v2_fz ) ) {
+			if ( $responsive ) {
+				$this->add_style( 'responsiveFontSize', $v2_fz );
+			} elseif ( isset( $v2_fz['desktop'] ) ) {
+				$this->add_style( 'fontSize', $v2_fz['desktop'] );
+			}
+		}
+		// 文字色.
+		$color = $this->get_old_option( 'fontColor', '' );
+		if ( $color ) {
+			$this->add_style( 'color', $color );
+		}
+		// 揃え位置.
+		$align = $this->get_old_option( 'fontAlign', '' );
+		if ( $align ) {
+			$this->add_style( 'textAlign', $align );
+		}
+		// 太さ.
+		$weight = $this->get_old_option( 'fontWeight', '' );
+		if ( $weight ) {
+			$this->add_style( 'fontWeight', $weight );
+		}
+		// スタイル.
+		$font_style = $this->get_old_option( 'fontStyle', '' );
+		if ( $font_style ) {
+			$this->add_style( 'fontStyle', $font_style );
+		}
+		// family.
+		$family = $this->get_old_option( 'fontFamily', '' );
+		if ( $family ) {
+			$this->add_style( 'fontFamily', $family );
+		}
+		// line height.
+		$line_height = $this->get_old_option( 'lineHeight', '' );
+		if ( $line_height ) {
+			$this->add_style( 'lineHeight', $line_height );
+		}
+		// letter spacing.
+		$letter_spacing = $this->get_old_option( 'letterSpacing', '' );
+		if ( $letter_spacing ) {
+			$this->add_style( 'letterSpacing', "{$letter_spacing}em" );
+		}
+	}
+
+	/**
+	 * 基本設定.
+	 *
+	 * @param string $level 見出しレベル.
+	 *
+	 * @return void
+	 */
+	private function set_basic_option( $level ) {
+		$this->new_option['slug']  = $this->get_option_slug( $level );
+		$this->new_option['label'] = $this->get_option_label( $level );
+		$this->new_option['style'] = [];
+		// v1 で「使う」設定（useCustomStyle）になっていたものだけ、見出しレベルへ自動割り当てする.
+		$is_assigned = Types::to_bool( $this->get_old_option( 'useCustomStyle', false ) );
+		if ( $is_assigned ) {
+			$this->new_option['useHeadingStyle'] = true;
+			$this->heading_level[ $level ]       = $this->new_option['slug'];
+		}
+	}
+
+	/**
+	 * 疑似要素を持っているか.
+	 *
+	 * @param string $type before/after.
+	 *
+	 * @return bool
+	 */
+	private function has_pseudo_elements( $type ) {
+		$color = $this->get_old_option( "{$type}Color", '' );
+		$size  = $this->get_old_option( "{$type}Size", '' );
+		$icon  = $this->get_pseudo_elements_icon( $type );
+
+		return ! empty( $color ) || ! empty( $size ) || ! empty( $icon );
+	}
+
+	/**
+	 * 疑似要素スタイルセット.
+	 *
+	 * @param string $pos   before/after.
+	 * @param string $name  Prop Name.
+	 * @param mixed  $value value.
+	 *
+	 * @return void
+	 */
+	private function add_pseudo_elements_style( $pos, $name, $value ) {
+		if ( empty( $name ) && empty( $value ) ) {
+			return;
+		}
+		$this->new_option[ $pos ][ $name ] = $value;
+	}
+
+	/**
+	 * 疑似要素スタイルセット(レスポンシブ).
+	 *
+	 * @param string $pos   before/after.
+	 * @param string $name  Prop Name.
+	 * @param mixed  $value value.
+	 *
+	 * @return void
+	 */
+	private function add_pseudo_elements_responsive_style( $pos, $name, $value ) {
+		if ( empty( $name ) && empty( $value ) ) {
+			return;
+		}
+
+		if ( is_array( $value ) && ! isset( $value['desktop'] ) ) {
+			$value = [
+				'desktop' => $value,
+			];
+		}
+
+		$value = Styles::get_responsive_value( $value );
+
+		// セット.
+		$this->new_option[ $pos ][ $name ] = $value;
+	}
+
+	/**
+	 * スタイル設定追加.
+	 *
+	 * @param string $name  Name.
+	 * @param mixed  $value Value.
+	 *
+	 * @return void
+	 */
+	private function add_style( $name, $value ) {
+		$this->new_option['style'][ $name ] = $value;
+	}
+
+	/**
+	 * スタイル設定追加.
+	 *
+	 * @param string $name  Name.
+	 * @param mixed  $value Responsive Value.
+	 *
+	 * @return void
+	 */
+	private function add_responsive_style( $name, $value ) {
+		if ( is_array( $value ) && ! isset( $value['desktop'] ) ) {
+			$value = [
+				'desktop' => $value,
+			];
+		}
+
+		$value = Styles::get_responsive_value( $value );
+		// セット.
+		$this->new_option['style'][ $name ] = $value;
+	}
+
+	/**
+	 * 新設定スラッグ取得.
+	 *
+	 * @param string $level 見出しレベル.
+	 *
+	 * @return string
+	 */
+	private function get_option_slug( $level ) {
+		return $level;
+	}
+
+	/**
+	 * 新設定名取得.
+	 *
+	 * @param string $level 見出しレベル.
+	 *
+	 * @return string
+	 */
+	private function get_option_label( $level ) {
+		$names = [
+			'h1'            => 'h1',
+			'h2'            => 'h2',
+			'h3'            => 'h3',
+			'h4'            => 'h4',
+			'h5'            => 'h5',
+			'h6'            => 'h6',
+			'sidebar'       => 'サイドバー',
+			'footer'        => 'フッター',
+			'post-title'    => '投稿タイトル',
+			'page-title'    => '固定ページタイトル',
+			'archive-title' => '一覧ページタイトル',
+		];
+		$name  = "v1-{$level}";
+
+		if ( array_key_exists( $level, $names ) ) {
+			$name = 'v1:' . $names[ $level ];
+		}
+
+		return $name;
+	}
+
+	/**
+	 * 旧設定取得
+	 *
+	 * @param string $key     キー.
+	 * @param mixed  $default デフォルト値.
+	 *
+	 * @return mixed
+	 */
+	private function get_old_option( $key, $default = '' ) {
+		if ( ! array_key_exists( $key, $this->old_option ) ) {
+			return $default;
+		}
+
+		return $this->old_option[ $key ];
+	}
+
+	/**
+	 * Register REST API route
+	 *
+	 * @return void
+	 */
+	public function register_routes() {
+		Api::register_rest_route( 'migration_heading_v1_v2', [ $this, 'api_route' ] );
+	}
+
+	/**
+	 * 見出しレベル関連の設定追加
+	 *
+	 * @param \WP_REST_Request $request Request.
+	 *
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
+	 */
+	public function api_route( $request ) {
+		$data = $request->get_json_params();
+		if ( ! is_array( $data ) || ! array_key_exists( 'migration', $data ) ) {
+			return Api::create_response(
+				false,
+				'パラメーターが正しくありません。',
+				wp_json_encode( $data )
+			);
+		}
+		if ( ! Types::to_bool( $data['migration'] ) ) {
+			return Api::create_response(
+				false,
+				'パラメーターが正しくありません。',
+				wp_json_encode( $data )
+			);
+		}
+
+		$update       = false;
+		$update_level = false;
+		$result       = $this->migration( $data );
+		if ( ! empty( $result ) ) {
+			$update       = Heading::update_heading_design_option( $result );
+			$update_level = Heading::update_heading_level_option( $data['level'] );
+			// v2 メイン / レベル設定の保存に両方成功した場合のみ v1 設定を削除する.
+			// 部分的失敗時に v1 を残すことで、再マイグレーションを可能にする.
+			if ( $update && $update_level ) {
+				Heading_Compatible::delete_option();
+			}
+		}
+
+		return Api::create_response(
+			$update && $update_level,
+			'',
+			wp_json_encode( $data )
+		);
+	}
+}
+
+new Heading_Migration();

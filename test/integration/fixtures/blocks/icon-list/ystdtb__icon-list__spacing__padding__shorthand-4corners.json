@@ -1,0 +1,30 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false,
+			"style": {
+				"spacing": {
+					"padding": {
+						"top": "16px",
+						"right": "24px",
+						"bottom": "32px",
+						"left": "40px"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "項目"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

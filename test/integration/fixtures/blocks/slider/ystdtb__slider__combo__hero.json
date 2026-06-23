@@ -1,0 +1,23 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "example-hero",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"height": "500px",
+			"hasNavigation": true,
+			"paginationType": "bullets",
+			"previewType": "grid",
+			"align": "full"
+		},
+		"innerBlocks": []
+	}
+]

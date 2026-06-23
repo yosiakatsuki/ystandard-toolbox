@@ -1,0 +1,32 @@
+#wpbody-content {
+
+	> .notice {
+		display: none;
+	}
+}
+
+.ystdtb-settings-v2 {
+	background: #fff;
+
+	* {
+
+		&,
+		&::before,
+		&::after {
+			box-sizing: border-box;
+		}
+
+	}
+
+	#wpcontent {
+		padding-left: 0;
+	}
+
+	#wpbody {
+		height: 100%;
+	}
+
+	.wrap {
+		margin: 0;
+	}
+}

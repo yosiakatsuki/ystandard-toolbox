@@ -1,11 +1,14 @@
 .ystdtb-responsive-tab {
+
   .ystdtb-responsive-tab__label {
+
     &.is-bold {
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 
   .ystdtb-responsive-tab__panel {
+
     &.has-label {
       margin-top: -20px;
     }
@@ -49,7 +52,7 @@
 
     svg {
       fill: none;
-      stroke: currentColor;
+      stroke: currentcolor;
       width: 12px;
       height: 12px;
     }

@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,7 +29,7 @@ class Copyright {
 	 * Font constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare() ) {
+		if ( ! Version::ystandard_version_compare() ) {
 			return;
 		}
 		add_filter( 'ys_copyright', [ $this, '_copyright' ], 11 );
@@ -39,7 +41,8 @@ class Copyright {
 			},
 			11
 		);
-
+		add_filter( 'ystdtb_admin_config', [ $this, 'add_admin_config' ] );
+		add_filter( 'ystdtb_update_plugin_settings_all_data', [ $this, 'sanitize_copyright' ] );
 	}
 
 	/**
@@ -82,16 +85,7 @@ class Copyright {
 	 */
 	public static function get_default() {
 
-		$year      = date_i18n( 'Y' );
-		$url       = esc_url( home_url( '/' ) );
-		$blog_name = get_bloginfo( 'name' );
-
-		return sprintf(
-			'&copy; %s <a href="%s" rel="home">%s</a>',
-			esc_html( $year ),
-			$url,
-			$blog_name
-		);
+		return '&copy; {year} <a href="{url}" rel="home">{site}</a>';
 	}
 
 	/**
@@ -113,6 +107,54 @@ class Copyright {
 	public static function get_disable_theme_info() {
 
 		return Option::get_option_by_bool( Copyright::OPTION_NAME, 'disable_theme_info', false );
+	}
+
+	/**
+	 * Copyright設定用データ追加
+	 *
+	 * @param array $config Configs.
+	 *
+	 * @return array
+	 */
+	public function add_admin_config( $config ) {
+		$config['copyrightDefault'] = self::get_default();
+
+		return $config;
+	}
+
+	/**
+	 * Copyrightのサニタイズ
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function sanitize_copyright( $settings ) {
+
+		if ( ! array_key_exists( 'copyright', $settings ) ) {
+			return $settings;
+		}
+		if ( ! array_key_exists( 'copyright', $settings['copyright'] ) ) {
+			return $settings;
+		}
+
+		$allowed_html     = wp_kses_allowed_html( 'post' );
+		$new_allowed_html = [];
+		if ( isset( $allowed_html['a'] ) ) {
+			$new_allowed_html['a'] = $allowed_html['a'];
+		}
+		if ( isset( $allowed_html['span'] ) ) {
+			$new_allowed_html['span'] = $allowed_html['span'];
+		}
+		if ( isset( $allowed_html['br'] ) ) {
+			$new_allowed_html['br'] = $allowed_html['br'];
+		}
+		if ( isset( $allowed_html['strong'] ) ) {
+			$new_allowed_html['strong'] = $allowed_html['strong'];
+		}
+		$settings['copyright']['copyright'] = wp_kses( $settings['copyright']['copyright'], $new_allowed_html );
+
+		return $settings;
 	}
 }
 

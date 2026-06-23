@@ -1,0 +1,33 @@
+.ystdtb-plugin-settings__header-overlay__page-type {
+
+	.components-checkbox-control + .components-checkbox-control {
+		margin-top: 0.2rem;
+	}
+}
+
+.ystdtb-plugin-settings__header-overlay__logo-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 100px;
+	padding: 16px;
+	border: 1px solid #dcdcde;
+	background-color: #fff;
+	background-image:
+		linear-gradient(45deg, #dcdcde 25%, transparent 25%),
+		linear-gradient(-45deg, #dcdcde 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, #dcdcde 75%),
+		linear-gradient(-45deg, transparent 75%, #dcdcde 75%);
+	background-position:
+		0 0,
+		0 8px,
+		8px -8px,
+		-8px 0;
+	background-size: 16px 16px;
+}
+
+.ystdtb-plugin-settings__header-overlay__logo-preview img {
+	max-height: 160px;
+	object-fit: contain;
+}

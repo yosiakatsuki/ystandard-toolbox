@@ -1,0 +1,36 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "カラー設定",
+					"backgroundColor": "ys-light-green"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "backgroundColor、",
+					"backgroundColor": "ys-light-orange"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "backgroundColor",
+					"backgroundColor": "ys-light-blue"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

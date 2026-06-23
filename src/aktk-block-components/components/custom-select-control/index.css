@@ -1,0 +1,8 @@
+.aktk-component__custom-select-control {
+	& .components-custom-select-control__label,
+	& .components-base-control__label {
+		&:empty {
+			display: none;
+		}
+	}
+}

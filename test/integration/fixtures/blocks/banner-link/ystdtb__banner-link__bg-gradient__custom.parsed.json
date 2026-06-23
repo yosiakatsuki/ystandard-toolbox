@@ -1,0 +1,16 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customGradient": "linear-gradient(135deg,#e0f2fe 0%,#f5d0fe 100%)"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background-gradient\" style=\"background:linear-gradient(135deg,#e0f2fe 0%,#f5d0fe 100%)\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">グラデーション背景</div><div class=\"ystdtb-banner-link__sub-text\">背景にグラデーションを設定しています</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background-gradient\" style=\"background:linear-gradient(135deg,#e0f2fe 0%,#f5d0fe 100%)\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">グラデーション背景</div><div class=\"ystdtb-banner-link__sub-text\">背景にグラデーションを設定しています</div></div></div></a>\n"
+		]
+	}
+]

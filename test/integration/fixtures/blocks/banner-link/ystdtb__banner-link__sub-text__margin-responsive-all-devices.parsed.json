@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"customMainTextColor": "#ffffff",
+			"customSubTextColor": "#ffffff",
+			"subTextMargin": {
+				"desktop": "24px",
+				"tablet": "16px",
+				"mobile": "8px"
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">メインテキスト</div><div class=\"ystdtb-banner-link__sub-text has-margin-top has-text-color\" style=\"color:#ffffff;--ystdtb-banner-link-margin-top-desktop:24px;--ystdtb-banner-link-margin-top-tablet:16px;--ystdtb-banner-link-margin-top-mobile:8px\" data-ys-ie-styles=\"{&quot;margin-top&quot;:&quot;24px&quot;}\">3 デバイス別の間隔</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">メインテキスト</div><div class=\"ystdtb-banner-link__sub-text has-margin-top has-text-color\" style=\"color:#ffffff;--ystdtb-banner-link-margin-top-desktop:24px;--ystdtb-banner-link-margin-top-tablet:16px;--ystdtb-banner-link-margin-top-mobile:8px\" data-ys-ie-styles=\"{&quot;margin-top&quot;:&quot;24px&quot;}\">3 デバイス別の間隔</div></div></div></a>\n"
+		]
+	}
+]

@@ -1,0 +1,65 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "variant-slider-item",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": false,
+			"previewType": "grid"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/box",
+						"isValid": true,
+						"attributes": {
+							"boxStyle": "label-none",
+							"boxBorderSize": "1px",
+							"boxBorderStyle": "solid",
+							"isResponsiveBoxPadding": false,
+							"customLabelFontSize": "0.9em",
+							"labelWeight": "normal",
+							"backgroundImageCoverOpacity": 0.8,
+							"backgroundImageRepeat": "no-repeat"
+						},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/box",
+						"isValid": true,
+						"attributes": {
+							"boxStyle": "label-none",
+							"boxBorderSize": "1px",
+							"boxBorderStyle": "solid",
+							"isResponsiveBoxPadding": false,
+							"customLabelFontSize": "0.9em",
+							"labelWeight": "normal",
+							"backgroundImageCoverOpacity": 0.8,
+							"backgroundImageRepeat": "no-repeat"
+						},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

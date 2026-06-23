@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "navigation-color-preset",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": true,
+			"navigationColor": "ys-red",
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

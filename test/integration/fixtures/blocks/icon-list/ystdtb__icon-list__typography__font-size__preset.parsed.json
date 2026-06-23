@@ -1,0 +1,25 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"fontSize": "large"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right has-large-font-size\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right has-large-font-size\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

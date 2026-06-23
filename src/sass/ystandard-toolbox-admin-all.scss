@@ -1,3 +1,4 @@
+@use "foundation";
 @use "component/admin/notice";
 @use "component/admin/manual-link";
 @use "component/debug/debug";
@@ -5,5 +6,4 @@
 @use "component/admin/radio-horizon";
 @use "component/admin/option-box";
 @use "component/admin/button";
-
 @use "project/admin/widget";

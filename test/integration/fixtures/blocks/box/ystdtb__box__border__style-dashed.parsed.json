@@ -1,0 +1,26 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxBorderStyle": "dashed",
+			"boxBorderSize": "2px"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>枠線のスタイルを dashed（破線）にしています。</p>\n",
+				"innerContent": [
+					"\n<p>枠線のスタイルを dashed（破線）にしています。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:2px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:dashed\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;2px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;2px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:2px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:dashed\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;2px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;2px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

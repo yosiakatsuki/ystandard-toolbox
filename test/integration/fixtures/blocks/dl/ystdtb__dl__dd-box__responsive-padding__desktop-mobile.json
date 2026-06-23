@@ -1,0 +1,30 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-box",
+				"isValid": true,
+				"attributes": {
+					"responsivePadding": {
+						"desktop": {
+							"top": "24px",
+							"right": "24px",
+							"bottom": "24px",
+							"left": "24px"
+						},
+						"mobile": {
+							"top": "16px",
+							"right": "16px",
+							"bottom": "16px",
+							"left": "16px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

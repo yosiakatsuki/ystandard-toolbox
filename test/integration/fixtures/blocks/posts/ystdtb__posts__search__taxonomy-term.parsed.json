@@ -1,0 +1,12 @@
+[
+	{
+		"blockName": "ystdtb/posts",
+		"attrs": {
+			"taxonomy": "category",
+			"termSlug": "uncategorized"
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

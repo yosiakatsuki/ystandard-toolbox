@@ -1,0 +1,6 @@
+/* SVG アイコンのサイズを親の font-size に追従させる（エディタ表示用） */
+/* フロントでは yStandard テーマの ystandard.css 側で同等ルールが適用されるため、こちらはエディタ側補完目的 */
+:where(.ys-icon svg) {
+	width: var(--ystd--icon--size, 1.25em);
+	height: var(--ystd--icon--size, 1.25em);
+}

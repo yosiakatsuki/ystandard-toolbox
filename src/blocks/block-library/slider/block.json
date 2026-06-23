@@ -1,0 +1,114 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/slider",
+	"version": "2.0.0",
+	"title": "スライダー",
+	"description": "画像スライダーやコンテンツをスライダー表示するブロック",
+	"category": "ystdtb-common",
+	"keywords": [
+		"スライダー",
+		"slider"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"sliderId": {
+			"type": "string"
+		},
+		"effect": {
+			"type": "string",
+			"default": "slide"
+		},
+		"speed": {
+			"type": "number",
+			"default": 0.3
+		},
+		"loop": {
+			"type": "boolean",
+			"default": true
+		},
+		"slideFunction": {
+			"type": "string"
+		},
+		"autoplay": {
+			"type": "boolean",
+			"default": true
+		},
+		"autoplayDelay": {
+			"type": "number",
+			"default": 8
+		},
+		"autoplayPauseOnMouse": {
+			"type": "boolean",
+			"default": false
+		},
+		"autoplayDisableOnInteraction": {
+			"type": "boolean",
+			"default": true
+		},
+		"autoplayReverseDirection": {
+			"type": "boolean",
+			"default": false
+		},
+		"ratio": {
+			"type": "string"
+		},
+		"height": {
+			"type": "string"
+		},
+		"responsiveHeight": {
+			"type": "object"
+		},
+		"slides": {
+			"type": "object"
+		},
+		"responsiveSlides": {
+			"type": "object"
+		},
+		"breakpoints": {
+			"type": "object"
+		},
+		"hasNavigation": {
+			"type": "boolean",
+			"default": false
+		},
+		"navigationColor": {
+			"type": "string"
+		},
+		"customNavigationColor": {
+			"type": "string"
+		},
+		"paginationType": {
+			"type": "string"
+		},
+		"paginationColor": {
+			"type": "string"
+		},
+		"previewType": {
+			"type": "string",
+			"default": "grid"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": [ "wide", "full" ],
+		"className": false,
+		"listView": true
+	},
+	"example": {
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "core/paragraph",
+				"attributes": {
+					"content": "タイムライン..."
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"viewStyle": "file:./view.css"
+}

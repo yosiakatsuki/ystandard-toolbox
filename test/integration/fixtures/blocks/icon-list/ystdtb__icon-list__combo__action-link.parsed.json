@@ -1,0 +1,57 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"iconType": "chevrons-right",
+			"customIconColor": "#0284c7",
+			"style": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "#0284c7"
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">yStandard のはじめかた</a></li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">yStandard のはじめかた</a></li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">Toolbox のおすすめ機能まとめ</a></li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">Toolbox のおすすめ機能まとめ</a></li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">よくある質問はこちら</a></li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\"><a href=\"#\">よくある質問はこちら</a></li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevrons-right has-icon-font-color has-link-color\" style=\"--icon-font-color:#0284c7\">\n\n\n\n</ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevrons-right has-icon-font-color has-link-color\" style=\"--icon-font-color:#0284c7\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</ul>\n"
+		]
+	}
+]

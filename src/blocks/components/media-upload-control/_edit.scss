@@ -1,0 +1,41 @@
+.ystdtb-media-upload-control {
+
+	.ystdtb-media-upload-control__select,
+	.ystdtb-media-upload-control__preview {
+		outline: none !important;
+		box-shadow: none !important;
+		border: 2px solid #ddd !important;
+
+		&:hover {
+			box-shadow: none !important;
+			color: currentcolor !important;
+		}
+	}
+
+	.ystdtb-media-upload-control__select {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100px;
+		width: 100%;
+		background-color: #f1f1f1;
+		color: #222;
+	}
+
+	.ystdtb-media-upload-control__preview {
+		height: auto;
+		max-width: 100%;
+		padding: 0;
+	}
+
+	.ystdtb-media-upload-control__clear {
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}

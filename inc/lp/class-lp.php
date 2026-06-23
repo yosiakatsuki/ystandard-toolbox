@@ -9,6 +9,10 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Template;
+use ystandard_toolbox\Util\Text;
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -22,7 +26,7 @@ class LP {
 	 * LP constructor.
 	 */
 	public function __construct() {
-		if ( ! Utility::ystandard_version_compare( '4.26.1' ) ) {
+		if ( ! Version::ystandard_version_compare( '4.26.1' ) ) {
 			return;
 		}
 		add_filter( 'theme_templates', [ $this, 'add_template' ], 20, 4 );
@@ -39,24 +43,23 @@ class LP {
 	}
 
 	/**
-	 * Body クラス追加
+	 * Body クラス追加（LPテンプレート判別用）
 	 *
-	 * @param array $clases Classes.
+	 * @param array $classes Classes.
 	 *
 	 * @return array
 	 */
-	public function body_class( $clases ) {
-
+	public function body_class( $classes ) {
 		if ( self::is_lp_template() ) {
-			$clases[] = 'is-lp-template';
-			$clases[] = 'is-lp-template-body';
+			$classes[] = 'is-lp-template';
+			$classes[] = 'is-lp-template-body';
 		}
 
-		return $clases;
+		return $classes;
 	}
 
 	/**
-	 * CSS追加
+	 * 固定ヘッダー状態のLPテンプレートでページ上部余白が出ないようCSSを追加
 	 *
 	 * @return void
 	 */
@@ -70,7 +73,7 @@ class LP {
 		';
 		wp_add_inline_style(
 			Config::CSS_HANDLE,
-			Utility::minify( $css )
+			Text::minify( $css )
 		);
 	}
 
@@ -180,7 +183,7 @@ class LP {
 			return $template;
 		}
 
-		return Utility::get_page_template_path( $page_template_slug );
+		return Template::get_page_template_path( $page_template_slug );
 	}
 
 	/**

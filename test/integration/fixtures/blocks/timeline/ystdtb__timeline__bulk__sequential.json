@@ -1,0 +1,42 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "1",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "2",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "3",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

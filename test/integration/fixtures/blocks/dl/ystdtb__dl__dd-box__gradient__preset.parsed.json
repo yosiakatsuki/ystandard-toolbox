@@ -1,0 +1,31 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"gradient": "pale-ocean"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-background has-background-gradient has-pale-ocean-gradient-background\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-background has-background-gradient has-pale-ocean-gradient-background\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

@@ -1,0 +1,36 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dt",
+				"isValid": true,
+				"attributes": {
+					"text": "カラー設定",
+					"gradient": "very-light-gray-to-cyan-bluish-gray"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "gradient",
+					"gradient": "midnight",
+					"textColor": "ys-white"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/description-list-dd-box",
+				"isValid": true,
+				"attributes": {
+					"gradient": "pale-ocean"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

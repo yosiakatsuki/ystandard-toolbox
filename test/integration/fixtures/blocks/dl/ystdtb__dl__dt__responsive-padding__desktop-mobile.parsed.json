@@ -1,0 +1,34 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"responsivePadding": {
+						"desktop": {
+							"top": "20px",
+							"right": "20px",
+							"bottom": "20px",
+							"left": "20px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "12px",
+							"bottom": "12px",
+							"left": "12px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-padding\" style=\"--ystdtb--desktop--dt--padding-top:20px;--ystdtb--desktop--dt--padding-right:20px;--ystdtb--desktop--dt--padding-bottom:20px;--ystdtb--desktop--dt--padding-left:20px;--ystdtb--mobile--dt--padding-top:12px;--ystdtb--mobile--dt--padding-right:12px;--ystdtb--mobile--dt--padding-bottom:12px;--ystdtb--mobile--dt--padding-left:12px\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-padding\" style=\"--ystdtb--desktop--dt--padding-top:20px;--ystdtb--desktop--dt--padding-right:20px;--ystdtb--desktop--dt--padding-bottom:20px;--ystdtb--desktop--dt--padding-left:20px;--ystdtb--mobile--dt--padding-top:12px;--ystdtb--mobile--dt--padding-right:12px;--ystdtb--mobile--dt--padding-bottom:12px;--ystdtb--mobile--dt--padding-left:12px\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

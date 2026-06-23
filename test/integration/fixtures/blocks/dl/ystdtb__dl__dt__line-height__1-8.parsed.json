@@ -1,0 +1,21 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"lineHeight": "1.8"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\" style=\"line-height:1.8\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt\" style=\"line-height:1.8\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

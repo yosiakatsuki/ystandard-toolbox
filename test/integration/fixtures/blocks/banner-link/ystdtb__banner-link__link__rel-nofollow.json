@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/",
+				"rel": "nofollow"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "nofollowリンク",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "rel属性にnofollowを設定しています",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

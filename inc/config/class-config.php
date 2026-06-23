@@ -50,14 +50,13 @@ class Config {
 	const JS_FRONT_APP_HANDLE = 'ystdtb-app';
 
 	/**
-	 * Script Block App Handle
-	 */
-	const JS_BLOCK_APP_HANDLE = 'ystdtb-block-app';
-
-	/**
 	 * CSS Hook
 	 */
 	const AFTER_ENQUEUE_CSS_HOOK = 'ystdtb_enqueue_css';
+	/**
+	 * CSS Hook
+	 */
+	const AFTER_ENQUEUE_BLOCK_ASSETS_CSS_HOOK = 'ystdtb_enqueue_block_assets_css';
 
 	/**
 	 * Body class.
@@ -65,35 +64,32 @@ class Config {
 	const BODY_CLASS = 'ystdtb';
 
 	/**
-	 * ブレークポイント
-	 *
-	 * @var array
+	 * レスポンシブタイプ名.
 	 */
-	const BREAKPOINTS = [
-		'sm' => 600,
-		'md' => 769,
-		'lg' => 1025,
+	const RESPONSIVE_TYPE = [
+		'desktop' => 'desktop',
+		'tablet'  => 'tablet',
+		'mobile'  => 'mobile',
 	];
+
+	/**
+	 * Block Namespace.
+	 */
+	const BLOCK_NAMESPACE = 'ystdtb';
 
 	/**
 	 * ブロックカテゴリー スラッグ
 	 */
-	const BLOCK_CATEGORY = 'ystdtb';
-
-	/**
-	 * ブロックカテゴリー名
-	 */
-	const BLOCK_CATEGORY_NAME = '[ys]yStandard Toolbox';
-
-	/**
-	 * ブロックカテゴリー β スラッグ
-	 */
-	const BLOCK_CATEGORY_BETA = 'ystdtb_beta';
-
-	/**
-	 * ブロックカテゴリー名 β
-	 */
-	const BLOCK_CATEGORY_NAME_BETA = '[ys]Toolbox(beta)';
+	const BLOCK_CATEGORIES = [
+		'main' => [
+			'slug'  => 'ystdtb',
+			'title' => '[Toolbox]yStandard Toolbox',
+		],
+		'beta' => [
+			'slug'  => 'ystdtb_beta',
+			'title' => '[Toolbox]ベータ版 ブロック',
+		],
+	];
 
 	/**
 	 * Block CSS Handle
@@ -126,11 +122,20 @@ class Config {
 	 * 設定画面親スラッグ
 	 */
 	const ADMIN_MENU_PARENT_SLUG = 'ystandard-toolbox';
+	/**
+	 * 設定画面親スラッグ v2
+	 */
+	const ADMIN_MENU_SLUG_V2 = 'ystdtb-settings-v2';
 
 	/**
 	 * 設定画面メニュープレフィックス
 	 */
 	const ADMIN_MENU_PAGE_PREFIX = 'ystdtb-menu';
+
+	/**
+	 * 設定画面メニュープレフィックス v2
+	 */
+	const ADMIN_MENU_PREFIX_V2 = 'ystdtb-settings-v2';
 
 	/**
 	 * 設定メニュー追加用フック

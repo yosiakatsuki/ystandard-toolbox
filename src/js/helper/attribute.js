@@ -1,3 +1,7 @@
+/**
+ *
+ * @deprecated use src/aktk-block-components/utils/attributes/
+ */
 export const getDefaultAttributes = () => {
 	if (
 		! window.ystdtbBlockEditor ||
@@ -11,6 +15,12 @@ export const getDefaultAttributes = () => {
 	return window.ystdtbBlockEditor.defaultAttributes;
 };
 
+/**
+ *
+ * @param      name
+ * @param      attributes
+ * @deprecated use src/aktk-block-components/utils/attributes/
+ */
 export const mergeDefaultAttributes = ( name, attributes ) => {
 	const defaultAttributes = getDefaultAttributes();
 	if ( ! defaultAttributes ) {

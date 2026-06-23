@@ -1,0 +1,21 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"textSize": "large"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple has-font-size has-large-font-size\">説明文</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple has-font-size has-large-font-size\">説明文</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

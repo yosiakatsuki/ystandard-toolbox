@@ -1,0 +1,21 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"customMainTextColor": "#ffffff",
+			"customSubTextColor": "#ffffff",
+			"contentPosition": {
+				"horizontal": "left"
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\" style=\"justify-content:flex-start;text-align:left\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">左寄せ</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">テキストを左側に寄せています</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#3b82f6\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\" style=\"justify-content:flex-start;text-align:left\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text has-text-color\" style=\"color:#ffffff\">左寄せ</div><div class=\"ystdtb-banner-link__sub-text has-text-color\" style=\"color:#ffffff\">テキストを左側に寄せています</div></div></div></a>\n"
+		]
+	}
+]

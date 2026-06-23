@@ -1,0 +1,162 @@
+@use "../../../../library/ys-icon-font/variables";
+
+.ystdtb-icon-list {
+	list-style: none;
+	padding-left: 0;
+
+	:where(li) {
+		position: relative;
+		padding-left: 1.5em;
+		min-height: 1em;
+
+		&::marker {
+			display: none;
+		}
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-family: ys-icon-font, sans-serif;
+			color: var(--icon-font-color, currentColor);
+			font-style: normal;
+			font-weight: 400;
+			font-variant: normal;
+			text-transform: none;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+	}
+
+	&:where([style*="border-"]),
+	&:where(.has-border-color),
+	&:where(.has-background) {
+		padding:1em;
+	}
+
+	&:where(.is-bold) {
+
+		:where(li)::before {
+			font-weight: 700;
+		}
+	}
+
+	&:where(.icon--alert-circle) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-alert-circle;
+		}
+	}
+
+	&:where(.icon--alert-triangle ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-alert-triangle;
+		}
+	}
+
+	&:where(.icon--arrow-right ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-arrow-right;
+		}
+	}
+
+	&:where(.icon--arrow-right-circle ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-arrow-right-circle;
+		}
+	}
+
+	&:where(.icon--award ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-award;
+		}
+	}
+
+	&:where(.icon--bell ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-bell;
+		}
+	}
+
+	&:where(.icon--bookmark ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-bookmark;
+		}
+	}
+
+	&:where(.icon--check ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-check;
+		}
+	}
+
+	&:where(.icon--check-circle ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-check-circle;
+		}
+	}
+
+	&:where(.icon--chevron-right ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-chevron-right;
+		}
+	}
+
+	&:where(.icon--chevrons-right ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-chevrons-right;
+		}
+	}
+
+	&:where(.icon--heart ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-heart;
+		}
+	}
+
+	&:where(.icon--link ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-link;
+		}
+	}
+
+	&:where(.icon--message-circle ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-message-circle;
+		}
+	}
+
+	&:where(.icon--star ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-star;
+		}
+	}
+
+	&:where(.icon--thumbs-down ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-thumbs-down;
+		}
+	}
+
+	&:where(.icon--thumbs-up ) {
+
+		:where(li)::before {
+			content: variables.$ys-icon-thumbs-up;
+		}
+	}
+}

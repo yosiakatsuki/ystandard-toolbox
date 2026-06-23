@@ -1,0 +1,39 @@
+module.exports = {
+	rootDir: '../../',
+	testEnvironment: 'jsdom',
+	setupFilesAfterEnv: [ '<rootDir>/test/unit/setup-tests.js' ],
+	moduleNameMapper: {
+		'^@aktk/block-components/(.+)':
+			'<rootDir>/src/aktk-block-components/$1',
+		'^@aktk/plugin-settings/(.+)': '<rootDir>/src/plugin-settings/$1',
+		'^@aktk/blocks/(.+)': '<rootDir>/src/blocks/$1',
+		'^@aktk/api': '<rootDir>/src/blocks/api',
+		'^@aktk/helper/(.+)': '<rootDir>/src/js/helper/$1',
+		'^@aktk/config/(.+)': '<rootDir>/src/js/config/$1',
+		'^@aktk/components/(.+)': '<rootDir>/src/blocks/components/$1',
+		'^@aktk/controls/(.+)': '<rootDir>/src/blocks/controls/$1',
+		'^@aktk/utils/(.+)': '<rootDir>/src/blocks/utils/$1',
+		'^@aktk/function/(.+)': '<rootDir>/src/blocks/function/$1',
+		'\\.css$': 'identity-obj-proxy',
+		'\\.scss$': 'identity-obj-proxy',
+	},
+	preset: '@wordpress/jest-preset-default',
+	transform: {
+		'^.+\\.[tj]sx?$': 'babel-jest',
+	},
+	testMatch: [
+		'<rootDir>/src/aktk-block-components/**/*.test.[jt]s?(x)',
+		'<rootDir>/src/plugin-settings/**/*.test.[jt]s?(x)',
+		'<rootDir>/src/blocks/block-library/**/*.test.[jt]s?(x)',
+	],
+	testPathIgnorePatterns: [
+		'/.git/',
+		'/node_modules/',
+		'<rootDir>/js/',
+		'<rootDir>/src/js/admin/',
+		'<rootDir>/library/',
+		'<rootDir>/vendor/',
+		'<rootDir>/temp/',
+	],
+	errorOnDeprecated: true,
+};

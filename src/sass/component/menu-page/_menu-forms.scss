@@ -1,225 +1,226 @@
 @use "../../global";
 
 .ystdtb-menu__form {
-  label,
-  .label {
-    font-weight: bold;
 
-    &.is-block {
-      display: block;
-      margin-bottom: .25em;
-    }
+	label,
+	.label {
+		font-weight: 700;
 
-    &.is-small {
-      font-size: .8em;
-    }
+		&.is-block {
+			display: block;
+			margin-bottom: 0.25em;
+		}
 
-    &.is-nowrap {
-      white-space: nowrap;
-    }
-  }
+		&.is-small {
+			font-size: 0.8em;
+		}
 
-  input[type="number"],
-  input[type="text"] {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    background: #f8f8f8;
-    padding: .5em .75em;
-    margin-top: 0;
-    margin-bottom: 0;
-    border-radius: 0;
-    color: #666;
-    font: inherit;
-    font-weight: normal;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    box-shadow: 0 0 2px rgba(#000, 0.2);
+		&.is-nowrap {
+			white-space: nowrap;
+		}
+	}
 
-    &::placeholder {
-      color: #ccc;
-    }
+	input[type="number"],
+	input[type="text"] {
+		width: 100%;
+		max-width: 100%;
+		border: 0;
+		background: #f8f8f8;
+		padding: 0.5em 0.75em;
+		margin-top: 0;
+		margin-bottom: 0;
+		border-radius: 0;
+		color: #666;
+		font: inherit;
+		font-weight: 400;
+		box-sizing: border-box;
+		-webkit-appearance: none;
+		box-shadow: 0 0 2px rgba(#000, 0.2);
 
-    &:disabled {
-      background: #f7f7f7 !important;
-      color: #f7f7f7 !important;
-    }
-  }
+		&::placeholder {
+			color: #ccc;
+		}
 
-  input[type="number"] {
-    &.is-small {
-      width: 5em;
-    }
-  }
+		&:disabled {
+			background: #f7f7f7 !important;
+			color: #f7f7f7 !important;
+		}
+	}
 
-  select,
-  .select {
-    max-width: 100%;
-    width: 100%;
-    position: relative;
-    padding: .25em .75em;
-    background-color: #fff;
-    background-image: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-    background-repeat: no-repeat;
-    background-position: 98% 50%;
-    color: #666;
-    border: 1px solid global.$color__border-gray-light;
-    text-align: left;
-    transition: .2s ease-in-out;
-    transition-property: color, background-color, border;
-  }
+	input[type="number"] {
 
-  button,
-  .button {
-    padding: .5em 1em;
-    background: #fff;
-    border: 1px solid rgba(global.$color__ystd_blue, 0.3);
-    color: global.$color__ystd_blue;
-    border-radius: 4px;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-    transition: .2s ease-in-out;
-    transition-property: color, background-color, border;
+		&.is-small {
+			width: 5em;
+		}
+	}
 
-    svg {
-      vertical-align: -.25em;
-    }
+	select,
+	.select {
+		max-width: 100%;
+		width: 100%;
+		position: relative;
+		padding: 0.25em 0.75em;
+		background-color: #fff;
+		background-image: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+		background-repeat: no-repeat;
+		background-position: 98% 50%;
+		color: #666;
+		border: 1px solid global.$color__border-gray-light;
+		text-align: left;
+		transition: 0.2s ease-in-out;
+		transition-property: color, background-color, border;
+	}
 
-    &.is-nowrap {
-      white-space: nowrap;
-    }
+	button,
+	.button {
+		padding: 0.5em 1em;
+		background: #fff;
+		border: 1px solid rgba(global.$color__ystd_blue, 0.3);
+		color: global.$color__ystd_blue;
+		border-radius: 4px;
+		appearance: none;
+		outline: none;
+		cursor: pointer;
+		transition: 0.2s ease-in-out;
+		transition-property: color, background-color, border;
 
-    &.is-block {
-      display: block;
-      width: 100%;
-    }
+		svg {
+			vertical-align: -0.25em;
+		}
 
-    &.is-small {
-      font-size: .85em;
-    }
+		&.is-nowrap {
+			white-space: nowrap;
+		}
 
-    &.is-white {
-      background: #fff;
-      color: #666;
-      border: 1px solid global.$color__border-gray-light;
-    }
+		&.is-block {
+			display: block;
+			width: 100%;
+		}
 
-    &.is-primary,
-    &.button-primary {
-      background-color: global.$color__ystd_blue;
-      border-color: global.$color__ystd_blue;
-      color: #fff;
-    }
+		&.is-small {
+			font-size: 0.85em;
+		}
 
-    &.is-cancel {
-      border-color: #eee;
-      background-color: #f7f7f7;
-      color: #666;
-      white-space: nowrap;
-    }
+		&.is-white {
+			background: #fff;
+			color: #666;
+			border: 1px solid global.$color__border-gray-light;
+		}
 
-    &.is-danger {
-      border: 1px solid #f0506e;
-      background-color: #fff;
-      color: #f0506e;
-    }
+		&.is-primary,
+		&.button-primary {
+			background-color: global.$color__ystd_blue;
+			border-color: global.$color__ystd_blue;
+			color: #fff;
+		}
 
-    &.is-text {
-      border: 0;
-      background: transparent;
-    }
+		&.is-cancel {
+			border-color: #eee;
+			background-color: #f7f7f7;
+			color: #666;
+			white-space: nowrap;
+		}
 
-    &:disabled {
-      background: #f7f7f7 !important;
-      border-color: #eee !important;
-      color: #a0a5aa !important;
-      cursor: unset !important;
-    }
+		&.is-danger {
+			border: 1px solid #f0506e;
+			background-color: #fff;
+			color: #f0506e;
+		}
 
-    &.is-image-button {
-      padding: .5em;
-      transition: none;
+		&.is-text {
+			border: 0;
+			background: transparent;
+		}
 
-      img {
-        display: block;
-      }
+		&:disabled {
+			background: #f7f7f7 !important;
+			border-color: #eee !important;
+			color: #a0a5aa !important;
+			cursor: unset !important;
+		}
 
-      &.is-select {
-        border-width: .5em;
-        padding: 0;
-      }
-    }
+		&.is-image-button {
+			padding: 0.5em;
+			transition: none;
 
-  }
+			img {
+				display: block;
+			}
 
-  .toggle-button {
-    display: none;
+			&.is-select {
+				border-width: 0.5em;
+				padding: 0;
+			}
+		}
 
-    + label {
-      outline: 0;
-      display: block;
-      width: 2.5em;
-      height: 1.5em;
-      position: relative;
-      background: #ccc;
-      border-radius: 1.5em;
-      padding: 2px;
-      transition: all .4s ease;
-      cursor: pointer;
-      user-select: none;
+	}
 
-      &:after,
-      &:before {
-        position: relative;
-        display: block;
-        content: "";
-        width: 50%;
-        height: 100%;
-      }
+	.toggle-button {
+		display: none;
 
-      &:after {
-        left: 0;
-        border-radius: 50%;
-        background: #fff;
-        transition: all .2s ease;
-      }
+		+ label {
+			outline: 0;
+			display: block;
+			width: 2.5em;
+			height: 1.5em;
+			position: relative;
+			background: #ccc;
+			border-radius: 1.5em;
+			padding: 2px;
+			transition: all 0.4s ease;
+			cursor: pointer;
+			user-select: none;
 
-      &:before {
-        display: none;
-      }
-    }
+			&::after,
+			&::before {
+				position: relative;
+				display: block;
+				content: "";
+				width: 50%;
+				height: 100%;
+			}
 
-    &:checked + label {
-      background: global.$color__ystd_blue;
+			&::after {
+				left: 0;
+				border-radius: 50%;
+				background: #fff;
+				transition: all 0.2s ease;
+			}
 
-      &:after {
-        left: 50%;
-      }
-    }
+			&::before {
+				display: none;
+			}
+		}
 
-    &:disabled + label {
-      background: #ccc;
+		&:checked + label {
+			background: global.$color__ystd_blue;
 
-      &:after {
-        opacity: 0.3;
-      }
-    }
-  }
+			&::after {
+				left: 50%;
+			}
+		}
 
-  .ystdtb-menu__advanced-switch {
-    display: flex;
-    align-items: center;
-    margin-top: 1em;
+		&:disabled + label {
+			background: #ccc;
 
-    &:before {
-      content: "高度な設定";
-      display: inline-block;
-      margin-right: .5em;
-      font-size: .8rem;
-      color: #666;
-    }
-  }
+			&::after {
+				opacity: 0.3;
+			}
+		}
+	}
+
+	.ystdtb-menu__advanced-switch {
+		display: flex;
+		align-items: center;
+		margin-top: 1em;
+
+		&::before {
+			content: "高度な設定";
+			display: inline-block;
+			margin-right: 0.5em;
+			font-size: 0.8rem;
+			color: #666;
+		}
+	}
 }
-
 

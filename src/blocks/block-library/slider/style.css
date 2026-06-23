@@ -1,0 +1,118 @@
+:where(.ystdtb-slider__slider) {
+	--swiper-navigation-color: currentColor;
+	--swiper-pagination-color: currentColor;
+}
+.ystdtb-slider {
+	/* 内部のスライド幅が親要素の横幅計算に影響しないようにする */
+	contain: inline-size;
+
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	:where(figure, video, img) {
+		margin: 0;
+	}
+}
+.ystdtb-slider__slider {
+	/* Swiper 初期化前に最初のスライド以外を非表示 */
+	&:not(:where(.swiper-initialized, .is-edit)) {
+		:where(.ystdtb-slider__container) > *:not(:first-child) {
+			display: none;
+		}
+	}
+
+	&:where(.is-fixed-height) {
+		:where(.ystdtb-slider__container) {
+			&,
+			> *,
+			img,
+			video {
+				height: 100%;
+			}
+		}
+	}
+}
+
+/* コンテナ内の子要素 */
+.ystdtb-slider__container {
+	> * {
+		width: 100%;
+	}
+
+	> :where(.wp-block-image) :where(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	> :where(.wp-block-video) :where(video) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+}
+
+/* ==========================================================================
+ * v1 フォールバック ここから
+ *
+ * v1 で保存されたスライダーブロックは、ブロックエディタで開き直して再保存すれば
+ * v2 形式に自動変換される。再保存前のフロント表示が大きく崩れないよう、
+ * 暫定的に v1 のクラス・カスタムプロパティ向けスタイルをここでカバーする。
+ * v1 資産の変換がすべて完了したら「v1 フォールバック ここから」〜
+ * 「v1 フォールバック ここまで」のブロックを丸ごと削除してよい。
+ * ========================================================================== */
+
+/* アスペクト比: v1 は `ystdtb-ratio is-{w}-{h}` + `.ystdtb-ratio__inner` 構造 */
+.ystdtb-slider.ystdtb-ratio {
+	&.is-1-1 {
+		aspect-ratio: 1 / 1;
+	}
+	&.is-2-1 {
+		aspect-ratio: 2 / 1;
+	}
+	&.is-3-1 {
+		aspect-ratio: 3 / 1;
+	}
+	&.is-3-2 {
+		aspect-ratio: 3 / 2;
+	}
+	&.is-4-3 {
+		aspect-ratio: 4 / 3;
+	}
+	&.is-16-9 {
+		aspect-ratio: 16 / 9;
+	}
+
+	.ystdtb-ratio__inner {
+		height: 100%;
+	}
+}
+
+/* レスポンシブ固定高さ: v1 は `--ystdtb-slide-height-{device}` カスタムプロパティ */
+@media (min-width: 1024px) {
+	.ystdtb-slider__slider.is-fixed-height[style*="--ystdtb-slide-height-desktop"] {
+		height: var(--ystdtb-slide-height-desktop);
+	}
+}
+
+@media (min-width: 640px) and (max-width: 1023.98px) {
+	.ystdtb-slider__slider.is-fixed-height[style*="--ystdtb-slide-height-tablet"] {
+		height: var(--ystdtb-slide-height-tablet);
+	}
+}
+
+@media (max-width: 639.98px) {
+	.ystdtb-slider__slider.is-fixed-height[style*="--ystdtb-slide-height-mobile"] {
+		height: var(--ystdtb-slide-height-mobile);
+	}
+}
+
+/* ==========================================================================
+ * v1 フォールバック ここまで
+ * ========================================================================== */

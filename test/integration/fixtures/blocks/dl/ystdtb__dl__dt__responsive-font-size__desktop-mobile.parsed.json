@@ -1,0 +1,24 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"responsiveTextSize": {
+						"desktop": "24px",
+						"mobile": "18px"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-font-size\" style=\"--ystdtb--desktop--dt--font-size:24px;--ystdtb--mobile--dt--font-size:18px\">用語</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-font-size\" style=\"--ystdtb--desktop--dt--font-size:24px;--ystdtb--mobile--dt--font-size:18px\">用語</dt>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

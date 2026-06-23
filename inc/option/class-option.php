@@ -9,10 +9,12 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Types;
+
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Utility
+ * Class Option
  *
  * @package ystandard_toolbox
  */
@@ -71,7 +73,7 @@ class Option {
 	 */
 	public static function get_option_by_bool( $section, $name, $default = false ) {
 
-		return Utility::to_bool( self::get_option( $section, $name, $default ) );
+		return Types::to_bool( self::get_option( $section, $name, $default ) );
 	}
 
 	/**
@@ -92,14 +94,14 @@ class Option {
 	}
 
 	/**
-	 * 設定更新
+	 * プラグイン設定更新
 	 *
-	 * @param string $name  Name.
-	 * @param mixed  $value Value.
+	 * @param string $section_name セクション名.
+	 * @param mixed  $value        Value.
 	 *
 	 * @return bool
 	 */
-	public static function update_option( $name, $value ) {
+	public static function update_plugin_option( $section_name, $value ) {
 		$option = self::get_all_option();
 		if ( ! is_array( $option ) ) {
 			$option = [];
@@ -117,9 +119,27 @@ class Option {
 			}
 		}
 
-		$option[ $name ] = $value;
+		$option[ $section_name ] = $value;
 
-		return update_option( Config::OPTION_NAME, $option );
+		return self::update_option( Config::OPTION_NAME, $option );
+	}
+
+	/**
+	 * プラグイン設定更新
+	 *
+	 * @param string $name  設定名.
+	 * @param mixed  $value Value.
+	 *
+	 * @return bool
+	 */
+	public static function update_option( $name, $value ) {
+		$old_value = get_option( $name );
+		// 値が変更されていない場合、更新はしないけどtrueを返す.
+		if ( ! self::is_new_value( $value, $old_value ) ) {
+			return true;
+		}
+
+		return update_option( $name, $value );
 	}
 
 	/**
@@ -139,8 +159,25 @@ class Option {
 		}
 		unset( $option[ $name ] );
 
-		return update_option( Config::OPTION_NAME, $option );
+		return self::update_option( Config::OPTION_NAME, $option );
 	}
+
+	/**
+	 * 設定が新しいかチェック.
+	 *
+	 * @param mixed $new_value New.
+	 * @param mixed $old       Old.
+	 *
+	 * @return bool
+	 */
+	public static function is_new_value( $new_value, $old ) {
+		if ( $new_value === $old || maybe_serialize( $new_value ) === maybe_serialize( $old ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
 
 	/**
 	 * [yStandard]の設定取得
@@ -173,5 +210,24 @@ class Option {
 		}
 
 		return self::get_ystd_option( $name, $default, 'boolean' );
+	}
+
+	/**
+	 * プラグインの全設定削除.
+	 *
+	 * @return void
+	 */
+	public static function delete_all_plugin_data() {
+		$keys = [
+			Config::OPTION_NAME,
+			Heading::OPTION_MAIN,
+			Heading::OPTION_LEVEL,
+			Custom_Css::OPTION_NAME,
+			Code::OPTION_NAME,
+		];
+
+		foreach ( $keys as $key ) {
+			delete_option( $key );
+		}
 	}
 }

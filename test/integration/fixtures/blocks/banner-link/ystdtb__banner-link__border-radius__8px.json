@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"borderRadius": "8px",
+			"mainText": "角丸 8px",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "少しだけ角を丸くしています",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

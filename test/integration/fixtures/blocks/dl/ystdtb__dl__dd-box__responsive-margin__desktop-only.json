@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-box",
+				"isValid": true,
+				"attributes": {
+					"responsiveMargin": {
+						"desktop": {
+							"bottom": "24px"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

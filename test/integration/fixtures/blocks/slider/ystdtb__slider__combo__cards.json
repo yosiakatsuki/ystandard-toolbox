@@ -1,0 +1,34 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "example-cards",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"responsiveSlides": {
+				"mobile": {
+					"slidesPerView": 1,
+					"spaceBetween": "16px"
+				},
+				"tablet": {
+					"slidesPerView": 2,
+					"spaceBetween": "16px"
+				},
+				"desktop": {
+					"slidesPerView": 3,
+					"spaceBetween": "24px"
+				}
+			},
+			"hasNavigation": false,
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,5 @@
+.ystdtb--plugin-settings--spacing-panel {
+	.components-unit-control + .components-range-control {
+		display: none;
+	}
+}

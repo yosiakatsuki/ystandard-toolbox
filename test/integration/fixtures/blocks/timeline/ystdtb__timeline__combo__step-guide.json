@@ -1,0 +1,51 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "1",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "2",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "text",
+					"labelContents": "3",
+					"labelBold": true,
+					"labelColor": "ys-white",
+					"labelBackgroundColor": "ys-blue",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

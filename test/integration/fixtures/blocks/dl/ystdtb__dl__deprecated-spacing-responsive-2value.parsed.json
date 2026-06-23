@@ -1,0 +1,116 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"padding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "20px",
+							"left": "21px"
+						},
+						"tablet": {
+							"top": "21px",
+							"right": "22px",
+							"bottom": "21px",
+							"left": "22px"
+						},
+						"mobile": {
+							"top": "22px",
+							"right": "23px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					},
+					"margin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "10px",
+							"left": "11px"
+						},
+						"tablet": {
+							"top": "11px",
+							"right": "12px",
+							"bottom": "11px",
+							"left": "12px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "13px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-padding has-margin\" style=\"--ystdtb-padding-desktop:20px 21px;--ystdtb-padding-tablet:21px 22px;--ystdtb-padding-mobile:22px 23px;--ystdtb-margin-desktop:10px 11px;--ystdtb-margin-tablet:11px 12px;--ystdtb-margin-mobile:12px 13px\">余白設定 上下・左右</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-padding has-margin\" style=\"--ystdtb-padding-desktop:20px 21px;--ystdtb-padding-tablet:21px 22px;--ystdtb-padding-mobile:22px 23px;--ystdtb-margin-desktop:10px 11px;--ystdtb-margin-tablet:11px 12px;--ystdtb-margin-mobile:12px 13px\">余白設定 上下・左右</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"padding": {
+						"desktop": {
+							"top": "20px",
+							"right": "21px",
+							"bottom": "20px",
+							"left": "21px"
+						},
+						"tablet": {
+							"top": "21px",
+							"right": "22px",
+							"bottom": "21px",
+							"left": "22px"
+						},
+						"mobile": {
+							"top": "22px",
+							"right": "23px",
+							"bottom": "22px",
+							"left": "23px"
+						}
+					},
+					"margin": {
+						"desktop": {
+							"top": "10px",
+							"right": "11px",
+							"bottom": "10px",
+							"left": "11px"
+						},
+						"tablet": {
+							"top": "11px",
+							"right": "12px",
+							"bottom": "11px",
+							"left": "12px"
+						},
+						"mobile": {
+							"top": "12px",
+							"right": "13px",
+							"bottom": "12px",
+							"left": "13px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple has-padding has-margin\" style=\"--ystdtb-padding-desktop:20px 21px;--ystdtb-padding-tablet:21px 22px;--ystdtb-padding-mobile:22px 23px;--ystdtb-margin-desktop:10px 11px;--ystdtb-margin-tablet:11px 12px;--ystdtb-margin-mobile:12px 13px\">margin 上下・左右</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple has-padding has-margin\" style=\"--ystdtb-padding-desktop:20px 21px;--ystdtb-padding-tablet:21px 22px;--ystdtb-padding-mobile:22px 23px;--ystdtb-margin-desktop:10px 11px;--ystdtb-margin-tablet:11px 12px;--ystdtb-margin-mobile:12px 13px\">margin 上下・左右</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

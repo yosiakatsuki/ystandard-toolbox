@@ -9,6 +9,10 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Admin;
+use ystandard_toolbox\Util\Manual;
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -114,11 +118,16 @@ class Taxonomy {
 	 * @param string   $taxonomy Current taxonomy slug.
 	 */
 	public function edit_form( $tag, $taxonomy ) {
+		// 現状 `ystdtb_term_edit_form` に登録される機能（SEO設定・オーバーレイ設定）は
+		// いずれも yStandard 専用のため、非 yStandard 環境では設定欄ごと非表示にする。
+		if ( ! Version::ystandard_version_compare() ) {
+			return;
+		}
 		?>
 		<div class="ystdtb-option-box">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
 			<h2 class="ystdtb-option-box__label">yStandard Toolbox 設定</h2>
-			<div class="ystdtb-option-box__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
+			<div class="ystdtb-option-box__manual"><?php echo Manual::manual_link_inline( 'manual/ystdtb-term-meta' ); ?></div>
 			<?php do_action( 'ystdtb_term_edit_form', $tag, $taxonomy ); ?>
 		</div>
 		<?php
@@ -131,7 +140,7 @@ class Taxonomy {
 	 */
 	public function update_term_meta( $term_id ) {
 
-		if ( ! Utility::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
+		if ( ! Admin::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
 			return;
 		}
 

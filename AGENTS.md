@@ -1,106 +1,260 @@
 # AGENTS.md
 
-このファイルは、このリポジトリでCodexが作業するときのプロジェクト固有ルールです。
-ユーザーレベルの`AGENTS.md`と合わせて読み、矛盾する場合はより具体的な指示を優先してください。
+このファイルは、このリポジトリで作業するためのプロジェクトガイドの正本です。
+Codex、Claude Code などのエージェントはこのファイルを優先して参照すること。
+ユーザーレベルの指示と合わせて読み、競合する場合はより具体的な指示を優先すること。
+
+**重要**: ドキュメント・コメント・チャットは日本語で記述する。
 
 ## プロジェクト概要
 
-- このリポジトリは、無料WordPressテーマ「yStandard」用の機能拡張プラグイン`yStandard Toolbox`です。
-- メインプラグインファイルは`ystandard-toolbox.php`です。
-- テキストドメインは`ystandard-toolbox`です。
-- PHPの最低要件は`7.4`、WordPressの最低要件は`6.1`です。
-- ブロック、管理画面、フロント用アセットを含むWordPressプラグインとして扱ってください。
+yStandard Toolbox は、無料 WordPress テーマ「yStandard」を拡張する商用プラグイン。
+Gutenberg ブロック、デザイン設定、管理画面、ユーティリティ機能を提供する。
 
-## 主要ディレクトリ
+- WordPress: 6.1+
+- PHP: 7.4+
+- yStandard テーマ: 4.36.0+
+- namespace: `ystandard_toolbox`
+- 現在の主な作業文脈: v2 リリース後の保守・改善
 
-- `inc/`: PHPの主要実装です。機能ごとにサブディレクトリが分かれています。
-- `blocks/`: Gutenbergブロック、ブロック拡張、ブロック別PHP実装です。
-- `src/js/`: 管理画面・フロント・ブロック補助用JavaScriptのソースです。
-- `src/sass/`: 共通・管理画面・フロント用SCSSのソースです。
-- `css/`, `js/`, `dist/`: ビルド済みアセットです。ソース変更に対応するビルド結果として扱ってください。
-- `languages/`: 翻訳関連ファイルです。
-- `tests/`: PHPUnitテストです。
-- `library/`: 同梱ライブラリです。明確な理由がない限り変更しないでください。
-- `build/`, `ystandard-toolbox/`, `*.zip`: リリース生成物です。リリース作業以外では変更しないでください。
+## 作業開始時の確認
 
-## 作業方針
+作業開始時は、まず次を確認する。
 
-- 既存のクラス構成、ファイル分割、命名規則に合わせて最小限の変更にしてください。
-- 関係のないリファクタリング、整形、コメント追加、型注釈追加はしないでください。
-- 仕様が曖昧な機能追加や設計変更は、先に設計案を提示して確認を取ってください。
-- 既存の未コミット差分はユーザーの変更として扱い、勝手に戻さないでください。
-- `library/plugin-update-checker/`配下は外部ライブラリとして扱い、通常の修正対象から外してください。
+```bash
+git branch --show-current
+git status --short
+```
 
-## v1保守方針
+既存の未コミット差分はユーザーの変更として扱い、勝手に戻さない。
+変更前に対象ファイルと関連ドキュメントを読み、既存の設計意図・命名規則・ディレクトリ構成を尊重する。
 
-- このv1系は、v2の大幅アップデート開発が別途進行中です。
-- v2の開発はほぼ完了しており、リリースは5月末から6月上旬を予定しています。
-- v1系では、リリースまでの安定運用に必要な不具合修正、互換性対応、セキュリティ対応、最小限の調整を優先してください。
-- v2へ反映すべき設計変更、大きな機能追加、構造変更、広範囲の依存更新は、v1では原則実施せず、必要なら先に確認してください。
-- Node.js`16`以上への移行調査も、v1の実装更新ではなく、必要性・リスク・最小手順の整理を優先してください。
+依存関係は通常 `node_modules/` と `vendor/` を使う。存在しない場合は `npm install` / `composer install` が必要。
+wp-env は `.wp-env.json` で port `10020` を使用する。
 
-## Codex運用
+## 参照ドキュメント
 
-- タスクを始める前に、対象ファイル、関連モジュール、既存の実装例、実行すべき検証を短く整理してください。
-- 複数の実装方針があり得る場合は、GitHub Issueに書くように、目的・影響範囲・完了条件を明確にしてから進めてください。
-- 作業中にビルドエラー、環境差分、依存バージョンの問題を見つけた場合は、次回以降の再現性が上がるようにこのファイルまたは関連ドキュメントの更新を提案してください。
-- 失敗したコマンドは、原因、再実行条件、必要な権限や依存関係を切り分けて報告してください。
-- 長時間のタスクや大きな変更は、PHP、ブロック、アセット、テストのように責務ごとに分けて進めてください。
+作業内容に応じて、必要な範囲で次を読む。
 
-## NodeとCodex実行時の注意
+- `docs/testing.md`: unit / integration / PHPUnit の構成と fixture 作成手順
+- `docs/design-system.md`: Toolbox 側のデザイントークンと CSS 方針
+- `docs/ystandard-design-system.md`: yStandard テーマ側の設計
+- `docs/block-examples-guideline.md`: ブロック example 作成ルール
+- `docs/block-operation-test-guideline.md`: UI 操作検証の共通ルール
 
-- このプロジェクトは`.node-version`でNode.js`14.21.3`に固定されています。
-- `@openai/codex`のnpm版はNode.js`>=16`を要求するため、このディレクトリでnpm版`codex`を起動すると警告や互換性問題が出る可能性があります。
-- プロジェクトのビルド・lintは原則として`.node-version`に従ってください。
-- Codex CLI自体を手動実行して挙動確認する場合は、プロジェクトのNode固定と切り分けて、Node.js`16`以上の環境で確認してください。
-- Node.js`16`以上への移行を調査する場合は、`.node-version`、`package-lock.json`、`@wordpress/scripts`、`gulp`、`fibers`、`sass`、`vue-template-compiler`の互換性を先に確認してください。
-- Node.js移行調査では、依存更新やlockfile更新を勝手に行わず、まず現状のビルド・lint・既知の失敗点を整理してください。
+この `AGENTS.md` は Codex 向けの最上位作業ルールとして維持する。
+外部エージェント専用ファイルが存在しても、Codex に必須のルールはこのファイルへ反映する。
 
-## PHPのルール
+## ディレクトリ構成
 
-- PHPCSは`.phpcs.xml.dist`を基準にしてください。
-- 画面出力は適切にエスケープしてください。
-- 入力値、リクエスト値、保存値は用途に応じてサニタイズしてください。
-- 権限チェック、nonceチェックを省略しないでください。
-- 画面に出る日本語文字列は翻訳関数を通し、テキストドメイン`ystandard-toolbox`を使ってください。
-- WordPressの非推奨関数は使わないでください。
-- DBへの直接クエリは避け、必要な場合は`$wpdb->prepare()`を使い、直接クエリを選ぶ理由をコメントで残してください。
+- `ystandard-toolbox.php`: プラグインメインファイル
+- `inc/`: PHP バックエンド
+- `src/blocks/block-library/`: v2 TypeScript ブロック
+- `src/aktk-block-components/`: 共有コンポーネントライブラリ
+- `src/plugin-settings/`: React 管理画面
+- `src/sass/`: SCSS
+- `blocks/posts/`: 残存レガシーブロック
+- `build/`: ビルド済みアセット
+- `test/`: Jest unit / integration
+- `phpunit/`: WordPress PHPUnit
 
-## JavaScriptとブロックのルール
+## 開発コマンド
 
-- Gutenbergブロックは既存の`blocks/*/index.js`, `edit.js`, `save.js`, `config.js`, `block.json`の構成に合わせてください。
-- ブロックの保存形式を変える場合は、既存コンテンツの互換性を確認し、必要に応じて`deprecated/`の追加を検討してください。
-- `InnerBlocks`や`useInnerBlocksProps`を使うブロックでは、既存の保存構造を壊さないでください。
-- `@wordpress/scripts`と既存の`.eslintrc.js`に従ってください。
-- アクセシビリティ、キーボード操作、適切なラベルを意識してください。
-- CSS/SCSSは既存のSCSS構成とビルドフローに合わせ、採用手法を勝手に切り替えないでください。
+```bash
+npm run start                # wp-env 開始、DB/import、ブラウザ open
+npm run start:env            # wp-env 開始、ブラウザ open
+npm run stop                 # wp-env 停止
+npm run watch                # 開発 watch
+npm run build                # production build
+npm run build:blocks:v2      # v2 ブロックのみ build
+npm run lint                 # JS/CSS/PHP lint
+npm run test                 # unit + integration
+npm run test:unit:component  # JS/TS component unit
+npm run test:integration     # Gutenberg fixture-based integration
+npm run test:unit:php        # wp-env 経由 PHPUnit
+npm run fixtures:generate    # 不足 fixture 生成
+npm run fixtures:regenerate  # fixture 全再生成
+npm run zip                  # 配布 zip 作成
+```
 
-## ビルドと検証
+`npm run start` や `npm run test:unit:php` は wp-env / Docker とネットワーク取得を伴う場合がある。
 
-変更後は、影響範囲に応じて可能な範囲で次を実行してください。
+## 実装方針
 
-- PHP変更: `composer phpcs`
-- PHPロジック変更: `composer test`
-- JavaScript・ブロック変更: `npm run lint:js`
-- アセット変更: `npm run build`
-- リリース生成物確認: `npm run zip:production`または`npm run production`
+- WordPress コア / Gutenberg の標準パターンを優先する。
+- 非推奨 API や古い実装パターンは避け、可能な範囲で最新の WordPress / Gutenberg の手法に合わせる。
+- 新規ブロックは `block.json` メタデータ駆動を基本にする。
+- deprecated は WordPress 標準の `deprecated` 配列で管理する。
+- テストは Gutenberg の fixture-based test に寄せる。
+- 過剰な独自抽象は避け、既存のローカルパターンを優先する。
+- WordPress コア準拠の方法がこのプロジェクトには過剰な場合は、推奨案・軽量な代替案・判断材料を整理して提案する。
+- コード変更前に、機能ディレクトリ内の `DESIGN.md` 作成・更新が必要か確認する。
+- PHP でインライン CSS を enqueue する場合は `ystandard_toolbox\Util\Text::minify()` を通す。
+- レスポンシブ CSS を PHP 側で生成する場合は `Styles::add_media_query_only_mobile` / `only_tablet` / `over_desktop` を使う。
 
-注意点:
+## コーディング規約
 
-- `npm run lint:js`は`--fix`付きのスクリプトなので、意図しない整形差分が出ないか確認してください。
-- `npm run lint`はPHPとJavaScriptの両方を実行しますが、JavaScript側で自動修正が走ります。
-- `composer install`や`npm install`が必要な場合は、ネットワークや依存更新を伴うため事前に確認してください。
-- 実行できなかったチェックがある場合は、最終報告に理由を明記してください。
+- WordPress Coding Standards に従う。
+- ドキュメント・コメントは日本語で書く。
+- 新規作成または更新した関数のうち、コンポーネント外で定義する関数には処理の目的が分かる Docコメントを付ける。
+- コンポーネント内で定義する関数には、処理の目的が分かる 1 行コメントを付ける。
+- TypeScript の型定義・interface 名・import セクションコメントは英語で書く。
+- PHP は short array syntax を使う。
+- CSS クラスは BEM を基本にし、プラグインのブロックは `ystdtb-` プレフィックスを使う。
+- CSS カスタムプロパティは WordPress / yStandard と同じダブルハイフン形式にする。
 
-## リリース関連
+### ドキュメント命名
 
-- バージョンを変更する場合は、`ystandard-toolbox.php`のプラグインヘッダーと`YSTDTB_VERSION`の整合性を保ってください。
-- 必要に応じて`README.md`の更新履歴も更新してください。
-- 翻訳対象文字列を追加・変更した場合は、必要に応じて`npm run i18n:make-pot`を検討してください。
-- 配布用zipや`build/`配下の変更は、リリース作業として明示された場合だけ行ってください。
+1つのブロック内に同じ名前の設定が複数ある場合、ドキュメント上は対象要素名を前置する。
 
-## Gitと報告
+- 良い例: `BOX角丸`, `ラベル角丸`, `メインテキスト文字色`, `サブテキスト文字色`
+- 避ける例: 単独の `角丸`, `文字色`
 
-- コミットを求められた場合、コミットメッセージは日本語で書いてください。
-- `Co-Authored-By`行は付けないでください。
-- 作業完了時は、変更ファイル、実行した検証、未実行の検証と理由を簡潔に報告してください。
+行番号だけで参照された場合でも、何の設定か分かる状態にする。
+
+## TypeScript / React ルール
+
+- import セクションコメントは英語のブロックコメントにする。
+- `@wordpress/components` は直接使わず、原則 `@aktk/block-components/wp-controls/` のラッパーを使う。
+- `@aktk/block-components/wp-controls/select-control` は存在しない。`@aktk/block-components/components/custom-select-control` を使う。
+- ブロック側のコントロールは基本的に `BaseControl` でラップする。
+- `src/aktk-block-components/` は複数プロジェクト共用。プラグイン固有ロジックを入れない。
+
+import セクションコメントの例:
+
+```tsx
+import classnames from 'classnames';
+
+/* WordPress Dependencies */
+import { __ } from '@wordpress/i18n';
+
+/* Aktk Dependencies */
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
+
+/* Plugin Dependencies */
+import { CATEGORY } from '@aktk/blocks/config';
+```
+
+`BaseControl` ラップの基本:
+
+```tsx
+<BaseControl>
+	<UnitControl label={ __( 'サイズ', 'ystandard-toolbox' ) } />
+</BaseControl>
+```
+
+ColorPalette などラベルが必要なコントロールは、外側の `BaseControl` と内側のコンポーネントの両方に label を渡す。
+
+## ブロック開発
+
+`src/blocks/block-library/` が v2 ブロックの主な配置場所。
+
+主なブロック:
+
+- 単体: `box`, `banner-link`, `parts`, `posts`, `sns-share`
+- 親子: `slider` / `slider-item`
+- 親子: `faq` / `faq-item`
+- 親子: `timeline` / `timeline-item`
+- 親子: `icon-list` / `icon-list-item`
+- 親子: `description-list` / `description-list-dd-box` / `description-list-dd-simple` / `description-list-dl-column` / `description-list-dt`
+- ブロックフック: `block-hook-hidden-by-size`
+
+標準的なブロック構成:
+
+```text
+src/blocks/block-library/{block}/
+├── block.json
+├── index.tsx
+├── index.php
+├── edit.tsx
+├── save.tsx
+├── style.scss
+├── style-editor.scss
+├── types.ts
+├── utils.ts
+├── inspector-controls/
+├── block-controls/
+└── deprecated/
+```
+
+`index.tsx` の基本方針:
+
+- `registerBlockType` で `block.json` の metadata を使う。
+- `mergeDefaultAttributes( metadata.name, metadata.attributes )` で default attributes を統合する。
+- `CATEGORY` は `@aktk/blocks/config` から import する。
+- `COLORS` は `@aktk/block-components/config` から import する。
+- `style.scss` は `index.tsx` で import する。
+- エディター専用の `style-editor.scss` は `edit.tsx` 側で import する。
+
+`index.php` の基本方針:
+
+- namespace は `ystandard_toolbox`。
+- サブ namespace は使わない。
+- クラス名は `{Block_Name}_Block`。
+- `BLOCK_NAME = 'ystdtb/{block-name}'` を定義する。
+- `init` hook で `register_block_type( __DIR__ )` を実行する。
+- singleton 形式の `get_instance()` を使う既存パターンに合わせる。
+
+## CSS / デザイン
+
+- Toolbox の CSS カスタムプロパティは `--ystdtb--` プレフィックスを使う。
+- yStandard テーマ側の `--ystd--` トークンに依存しすぎず、テーマなしでも破綻しないフォールバックを持たせる。
+- 色は `docs/design-system.md` のトークンを優先する。
+- 不透明度付きの色は、可能なら `color-mix()` を使う。
+- font-size は `rem` / `em`、line-height は単位なし、letter-spacing は `em` を基本にする。
+- padding / margin / gap / border-width / box-shadow は原則 `px` を使う。
+- SCSS のメディアクエリを新規に増やす前に、PHP 側のブレークポイント一元管理が必要な箇所か確認する。
+
+## パスエイリアス
+
+```text
+@aktk/block-components/*  -> src/aktk-block-components/*
+@aktk/blocks/*            -> src/blocks/*
+@aktk/function/*          -> src/blocks/function/*
+@aktk/components/*        -> src/blocks/components/*
+@aktk/controls/*          -> src/blocks/controls/*
+@aktk/utils/*             -> src/blocks/utils/*
+@aktk/api                 -> src/blocks/api/index
+@aktk/config/*            -> src/js/config/*
+@aktk/helper/*            -> src/js/helper/*
+@aktk/plugin-settings/*   -> src/plugin-settings/*
+```
+
+## テスト方針
+
+- 小さな TS utility は該当ファイル近くの `test/*.test.ts` に unit を追加する。
+- ブロックの保存形式・deprecated・migrate は `test/integration/fixtures/blocks/` の fixture-based test で見る。
+- 複雑な PHP render logic は `phpunit/blocks/` に opt-in で追加する。
+- fixture 追加・更新後は `.json` / `.parsed.json` / `.serialized.html` の差分を必ず確認する。
+
+integration fixture の基本:
+
+- 入力 HTML: `{basename}.html`
+- parse 生出力: `{basename}.parsed.json`
+- migrate 後構造: `{basename}.json`
+- 再 serialize 結果: `{basename}.serialized.html`
+
+deprecated 変換テストは basename に `__deprecated-` を含める。
+
+fixture 名は次を基本にする。
+
+```text
+ystdtb__{block}__{panel}__{setting}__{variant}.html
+```
+
+fixture を追加した場合は `test/integration/helpers/register-blocks.js` に対象ブロックが登録されているか確認する。
+
+## ツールと検証
+
+- コード検索は `rg` / `rg --files` を優先する。
+- シンボル構造の把握が必要な場合は、利用可能なら Serena MCP を使う。
+- Linter / Formatter / Test の設定ファイルや npm scripts が存在する場合、コード変更後に関連するチェックを可能な範囲で実行する。
+- PHPCS 設定ファイルが存在しない場合、PHPCS は実行しない。
+- チェックを実行できなかった場合は、理由を最終報告に明記する。
+
+## 注意点
+
+- `library/plugin-update-checker/` は vendored library。通常は編集対象にしない。
+- `build/`, `css/`, `js/` はビルド出力を含む。ソース変更時に必要な範囲だけ更新する。
+- `node_modules/`, `vendor/`, `.wp-content/` は作業対象外。
+- 変更箇所に関係ないリファクタリング、コメント追加、型注釈追加はしない。

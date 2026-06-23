@@ -1,0 +1,77 @@
+import { getPluginSettings } from '@aktk/plugin-settings/utils/setting';
+import type { HeadingOption, HeadingStyle } from '../types';
+import { apiPost, getEndpoint, SUCCESS } from '@aktk/api';
+import {
+	notifyError,
+	notifySuccess,
+} from '@aktk/block-components/components/toast-message';
+
+export function getHeadingOptions() {
+	return {
+		design: getPluginSettings( 'heading_design' ),
+		level: getPluginSettings( 'heading_level' ),
+		isCompatible: getPluginSettings( 'heading_is_compatible' ),
+		breakpoints: getPluginSettings( 'heading_breakpoints' ),
+		breakpointUnit: getPluginSettings( 'heading_breakpoint_unit' ),
+	};
+}
+
+export function getNewOption( slug: string, label: string ): HeadingOption {
+	return {
+		slug,
+		label,
+		useHeadingStyle: true,
+		useParagraphStyle: false,
+		style: {} as HeadingStyle,
+	};
+}
+
+export function updateStyleOption(
+	styles: HeadingOption,
+	onSuccess: () => void | undefined,
+	onError: () => void | undefined
+) {
+	apiPost( {
+		endpoint: getEndpoint( 'add_heading_style' ),
+		data: { style: styles },
+		callback: ( response ) => {
+			if ( SUCCESS === response.status ) {
+				if ( onSuccess ) {
+					onSuccess();
+				}
+			} else if ( onError ) {
+				onError();
+			}
+		},
+		// @ts-ignore
+		messageSuccess: notifySuccess,
+		// @ts-ignore
+		messageError: notifyError,
+	} );
+}
+
+export function getStyleSelectOptions( options: {
+	[ key: string ]: HeadingOption;
+} ) {
+	const styles = Object.keys( options ).map( ( key: string ) => {
+		const style = options[ key ];
+		return {
+			key: style?.slug,
+			name: style?.label,
+		};
+	} );
+	// 空要素の削除.
+	const filteredStyles = styles.filter( ( style ) => {
+		return style.key && style.key.trim() !== '';
+	} );
+
+	return filteredStyles.sort( ( a, b ) => {
+		if ( a.name < b.name ) {
+			return -1;
+		}
+		if ( a.name > b.name ) {
+			return 1;
+		}
+		return 0;
+	} );
+}

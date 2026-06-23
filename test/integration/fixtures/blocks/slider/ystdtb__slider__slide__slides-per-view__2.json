@@ -1,0 +1,23 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "slide-slides-per-view-2",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"slides": {
+				"slidesPerView": 2
+			},
+			"hasNavigation": false,
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-none",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"boxPadding": {
+				"desktop": {
+					"top": "16px",
+					"right": "24px",
+					"bottom": "32px",
+					"left": "8px"
+				}
+			},
+			"isResponsiveBoxPadding": false,
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "no-repeat"
+		},
+		"innerBlocks": []
+	}
+]

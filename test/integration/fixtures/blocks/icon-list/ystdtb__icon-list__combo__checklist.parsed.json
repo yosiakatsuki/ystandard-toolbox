@@ -1,0 +1,49 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"iconType": "check",
+			"iconBold": true,
+			"customIconColor": "#22c55e"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">必要な情報を整理する</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">必要な情報を整理する</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">画像の準備を済ませる</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">画像の準備を済ませる</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">公開前にプレビューで最終チェック</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">公開前にプレビューで最終チェック</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--check is-bold has-icon-font-color\" style=\"--icon-font-color:#22c55e\">\n\n\n\n</ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--check is-bold has-icon-font-color\" style=\"--icon-font-color:#22c55e\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</ul>\n"
+		]
+	}
+]

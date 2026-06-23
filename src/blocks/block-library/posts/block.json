@@ -1,0 +1,121 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/posts",
+	"version": "2.0.0",
+	"title": "記事一覧",
+	"description": "投稿一覧を表示するブロック",
+	"category": "ystdtb-common",
+	"keywords": [ "posts", "post", "記事一覧" ],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"className": {
+			"type": "string",
+			"default": ""
+		},
+		"count": {
+			"type": "number",
+			"default": 3
+		},
+		"countMobile": {
+			"type": "number"
+		},
+		"orderby": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "DESC"
+		},
+		"listType": {
+			"type": "string",
+			"default": "card"
+		},
+		"listTypeMobile": {
+			"type": "string"
+		},
+		"colMobile": {
+			"type": "number",
+			"default": 1
+		},
+		"colTablet": {
+			"type": "number",
+			"default": 3
+		},
+		"colPc": {
+			"type": "number",
+			"default": 3
+		},
+		"taxonomy": {
+			"type": "string"
+		},
+		"termSlug": {
+			"type": "string"
+		},
+		"showImg": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"showCategory": {
+			"type": "boolean",
+			"default": true
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": false
+		},
+		"excerptLines": {
+			"type": "number",
+			"default": 2
+		},
+		"thumbnailSize": {
+			"type": "string",
+			"default": "full"
+		},
+		"thumbnailRatio": {
+			"type": "string",
+			"default": "16-9"
+		},
+		"thumbnailRatioMobile": {
+			"type": "string"
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"postIn": {
+			"type": "string"
+		},
+		"postNameIn": {
+			"type": "string"
+		},
+		"postParent": {
+			"type": "string"
+		},
+		"offset": {
+			"type": "number"
+		},
+		"offsetMobile": {
+			"type": "number"
+		}
+	},
+	"supports": {
+		"className": false,
+		"html": false,
+		"align": [ "full" ]
+	},
+	"example": {
+		"attributes": {
+			"count": 3,
+			"listType": "card"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"style": "file:./style-index.css"
+}

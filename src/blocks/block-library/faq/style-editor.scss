@@ -1,0 +1,53 @@
+/**
+ * FAQブロック エディター専用スタイル
+ */
+
+[data-type="ystdtb/faq"] {
+
+	&,
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	&.is-selected {
+		padding: 0;
+	}
+}
+
+// エディター内のアコーディオン表示調整
+.ystdtb-faq {
+
+	&.is-accordion {
+
+		.ystdtb-faq-item {
+
+			&.is-faq--q {
+
+				&::after {
+					content: "";
+					display: none;
+				}
+
+				&:not(.has-border, .has-background) {
+
+					+ .is-faq--a {
+						padding-top: calc(
+							var(--ystdtb--faq-item--padding-vertical) / 2
+						);
+					}
+				}
+			}
+
+			&.is-faq--a {
+				// エディター内では常に表示
+				height: auto;
+				padding-top: var(--ystdtb--faq-item--padding-vertical);
+				padding-bottom: var(--ystdtb--faq-item--padding-vertical);
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+}

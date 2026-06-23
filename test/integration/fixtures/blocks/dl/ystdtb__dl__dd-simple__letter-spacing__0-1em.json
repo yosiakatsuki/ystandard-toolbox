@@ -1,0 +1,18 @@
+[
+	{
+		"name": "ystdtb/description-list",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/description-list-dd-simple",
+				"isValid": true,
+				"attributes": {
+					"text": "説明文",
+					"letterSpacing": "0.1em"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

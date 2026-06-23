@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#1e293b",
+			"mainText": "メインテキスト",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "プリセットサブテキスト色",
+			"subTextColor": "ys-white",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

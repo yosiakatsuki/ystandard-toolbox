@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "pagination-color-custom",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": false,
+			"paginationType": "bullets",
+			"paginationColor": "#ff00aa",
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

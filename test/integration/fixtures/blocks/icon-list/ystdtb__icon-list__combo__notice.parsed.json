@@ -1,0 +1,54 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"iconType": "alert-triangle",
+			"iconBold": true,
+			"customIconColor": "#dc2626",
+			"style": {
+				"color": {
+					"text": "#7f1d1d"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">作業前にバックアップを取得してください</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">作業前にバックアップを取得してください</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">プラグインのバージョン確認をお願いします</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">プラグインのバージョン確認をお願いします</li>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">本番反映は必ずステージングで動作確認の後に</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">本番反映は必ずステージングで動作確認の後に</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--alert-triangle is-bold has-icon-font-color has-text-color\" style=\"--icon-font-color:#dc2626;color:#7f1d1d\">\n\n\n\n</ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--alert-triangle is-bold has-icon-font-color has-text-color\" style=\"--icon-font-color:#dc2626;color:#7f1d1d\">",
+			null,
+			"\n\n",
+			null,
+			"\n\n",
+			null,
+			"</ul>\n"
+		]
+	}
+]

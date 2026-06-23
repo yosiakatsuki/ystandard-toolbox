@@ -1,0 +1,476 @@
+{
+	"border-bottom": {
+		"slug": "border-bottom",
+		"label": "下線",
+		"style": {
+			"border": {
+				"bottom": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"bottom": "0.5em"
+			}
+		}
+	},
+	"border-bottom-dotted": {
+		"slug": "border-bottom-dotted",
+		"label": "下線(点線)",
+		"style": {
+			"border": {
+				"bottom": {
+					"color": "#222222",
+					"style": "dotted",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"bottom": "0.5em"
+			}
+		}
+	},
+	"border-bottom-dashed": {
+		"slug": "border-bottom-dashed",
+		"label": "下線(破線)",
+		"style": {
+			"border": {
+				"bottom": {
+					"color": "#222222",
+					"style": "dashed",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"bottom": "0.5em"
+			}
+		}
+	},
+	"border-left": {
+		"slug": "border-left",
+		"label": "左線",
+		"style": {
+			"border": {
+				"left": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "4px"
+				}
+			},
+			"padding": {
+				"top": "0.3em",
+				"left": "0.5em",
+				"bottom": "0.3em"
+			}
+		}
+	},
+	"border-horizontal": {
+		"slug": "border-horizontal",
+		"label": "上下の直線",
+		"style": {
+			"border": {
+				"top": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
+				},
+				"bottom": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"top": "0.5em",
+				"bottom": "0.5em"
+			}
+		}
+	},
+	"background-color": {
+		"slug": "background-color",
+		"label": "背景色",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"padding": {
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
+			}
+		}
+	},
+	"border-left-plus-bg": {
+		"slug": "border-left-plus-bg",
+		"label": "左線 + 背景色",
+		"style": {
+			"backgroundColor": "#f7f7f7",
+			"border": {
+				"left": {
+					"color": "#222222",
+					"style": "solid",
+					"width": "4px"
+				}
+			},
+			"padding": {
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
+			}
+		}
+	},
+	"stitch": {
+		"slug": "stitch",
+		"label": "ステッチ",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"border": {
+				"top": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"right": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"bottom": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				},
+				"left": {
+					"color": "#ffffff",
+					"style": "dashed",
+					"width": "2px"
+				}
+			},
+			"borderRadius": "2px",
+			"padding": {
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
+			},
+			"margin": {
+				"top": "0.5em"
+			},
+			"boxShadow": "0 0 0 8px #eeeeee"
+		}
+	},
+	"double-border-bottom": {
+		"slug": "double-border-bottom",
+		"label": "下線2種類",
+		"style": {
+			"border": {
+				"bottom": {
+					"color": "#eeeeee",
+					"style": "solid",
+					"width": "2px"
+				}
+			},
+			"padding": {
+				"bottom": "0.5em"
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"height": "2px",
+			"width": "3em",
+			"backgroundColor": "#222222",
+			"position": "absolute",
+			"left": "0",
+			"top": "100%"
+		}
+	},
+	"text-center-border": {
+		"slug": "text-center-border",
+		"label": "左右に直線",
+		"style": {
+			"display": "flex",
+			"alignItems": "center",
+			"gap": "0.5em"
+		},
+		"before": {
+			"enable": true,
+			"content": "\"\"",
+			"backgroundColor": "#222222",
+			"flexGrow": 1,
+			"height": "2px",
+			"minWidth": "10%"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"backgroundColor": "#222222",
+			"flexGrow": 1,
+			"height": "2px",
+			"minWidth": "10%"
+		}
+	},
+	"balloon": {
+		"slug": "balloon",
+		"label": "吹き出し",
+		"style": {
+			"backgroundColor": "#d4e7f2",
+			"padding": {
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
+			},
+			"margin": {
+				"bottom": "1.5em"
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"height": "0",
+			"width": "0",
+			"position": "absolute",
+			"top": "100%",
+			"left": "1.5em",
+			"border": {
+				"top": {
+					"color": "#d4e7f2",
+					"style": "solid",
+					"width": "1em"
+				},
+				"right": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
+				},
+				"bottom": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
+				},
+				"left": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "1em"
+				}
+			}
+		}
+	},
+	"ribbon": {
+		"slug": "ribbon",
+		"label": "リボン",
+		"style": {
+			"backgroundColor": "#eeeeee",
+			"padding": {
+				"top": "0.5em",
+				"right": "0.5em",
+				"bottom": "0.5em",
+				"left": "0.5em"
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"position": "absolute",
+			"top": "100%",
+			"left": 0,
+			"border": {
+				"right": {
+					"color": "#aaaaaa",
+					"style": "solid",
+					"width": "20px"
+				},
+				"bottom": {
+					"color": "transparent",
+					"style": "solid",
+					"width": "10px"
+				}
+			}
+		}
+	},
+	"icon-award": {
+		"slug": "icons",
+		"label": "アイコン（バッジ）",
+		"style": {
+			"display": "flex",
+			"alignItems": "center",
+			"gap": "0.2em"
+		},
+		"before": {
+			"enable": true,
+			"content": "\"\"",
+			"icon": "award"
+		}
+	},
+	"repeating-linear-gradient-gray": {
+		"slug": "repeating-linear-gradient-gray",
+		"label": "斜めしましま下線（グレー）",
+		"style": {
+			"position": "relative",
+			"zIndex": "1"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"position": "absolute",
+			"left": 0,
+			"bottom": "3px",
+			"height": "5px",
+			"width": "100%",
+			"zIndex": "-1",
+			"background": "repeating-linear-gradient(-45deg,rgba(204,204,204,.3),rgba(204,204,204,.3) 2px,#fff 0,#fff 4px)"
+		}
+	},
+	"tag": {
+		"slug": "tag",
+		"label": "タグ風",
+		"style": {
+			"display": "inline-block",
+			"backgroundColor": "#eef2ff",
+			"color": "#3730a3",
+			"padding": {
+				"top": "0.4em",
+				"right": "1em",
+				"bottom": "0.4em",
+				"left": "1em"
+			},
+			"borderRadius": "999px",
+			"fontWeight": "700"
+		}
+	},
+	"numbering": {
+		"slug": "before-text",
+		"label": "テキスト付き",
+		"style": {
+			"display": "flex",
+			"alignItems": "baseline",
+			"gap": "0.6em",
+			"border": {
+				"bottom": {
+					"color": "#e5e7eb",
+					"style": "solid",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"bottom": "0.3em"
+			}
+		},
+		"before": {
+			"enable": true,
+			"content": "\"01\"",
+			"color": "#ef4444",
+			"fontSize": "1.6em",
+			"fontWeight": "800",
+			"fontFamily": "Georgia, serif",
+			"letterSpacing": "0.05em"
+		}
+	},
+	"quote": {
+		"slug": "quote",
+		"label": "両端カギカッコ",
+		"style": {
+			"display": "flex",
+			"alignItems": "center",
+			"gap": "0.2em"
+		},
+		"before": {
+			"enable": true,
+			"content": "\"「\"",
+			"color": "#2563eb",
+			"fontSize": "1.4em",
+			"fontWeight": "700"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"」\"",
+			"color": "#2563eb",
+			"fontSize": "1.4em",
+			"fontWeight": "700"
+		}
+	},
+	"marker": {
+		"slug": "marker",
+		"label": "マーカーハイライト",
+		"style": {
+			"display": "inline",
+			"background": "linear-gradient(transparent 60%, #fde68a 60%)",
+			"padding": {
+				"left": "0.1em",
+				"right": "0.1em"
+			}
+		}
+	},
+	"double-line-same": {
+		"slug": "double-line-same",
+		"label": "二重下線・同色",
+		"style": {
+			"border": {
+				"bottom": {
+					"color": "#1f2937",
+					"style": "solid",
+					"width": "1px"
+				}
+			},
+			"padding": {
+				"bottom": "0.3em"
+			},
+			"position": "relative"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"position": "absolute",
+			"left": "0",
+			"top": "110%",
+			"width": "100%",
+			"height": "1px",
+			"backgroundColor": "#1f2937"
+		}
+	},
+	"card": {
+		"slug": "card",
+		"label": "影付きカード",
+		"style": {
+			"backgroundColor": "#ffffff",
+			"borderRadius": "8px",
+			"padding": {
+				"top": "0.8em",
+				"right": "1em",
+				"bottom": "0.8em",
+				"left": "1em"
+			},
+			"boxShadow": "0 4px 14px rgba(0, 0, 0, 0.08)"
+		}
+	},
+	"icons-both": {
+		"slug": "icons-both",
+		"label": "両端アイコン挟み",
+		"style": {
+			"display": "flex",
+			"alignItems": "center",
+			"justifyContent": "center",
+			"gap": "0.5em",
+			"textAlign": "center"
+		},
+		"before": {
+			"enable": true,
+			"content": "\"\"",
+			"icon": "star",
+			"fontSize": "1.2em",
+			"iconColor": "#f59e0b"
+		},
+		"after": {
+			"enable": true,
+			"content": "\"\"",
+			"icon": "star",
+			"fontSize": "1.2em",
+			"iconColor": "#f59e0b"
+		}
+	}
+}

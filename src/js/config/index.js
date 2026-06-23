@@ -1,30 +1,37 @@
 import { _x } from '@wordpress/i18n';
 
+export const hasClasses = {
+	textColor: 'has-text-color',
+	fontSize: 'has-font-size',
+	background: 'has-background',
+	backgroundGradient: 'has-background-gradient',
+	padding: 'has-padding',
+	margin: 'has-margin',
+	border: 'has-border',
+	borderColor: 'has-border-color',
+};
+
+export const category = {
+	common: 'ystdtb',
+	beta: 'ystdtb_beta',
+	deprecated: 'ystdtb_deprecated',
+};
+
+export const color = {
+	iconForeground: '#4190be',
+	iconForegroundChild: '#A64276',
+	iconDeprecatedForeground: '#be4141',
+	iconBeta: '#9CADBC',
+};
+
+export const customPropertyPrefix = '--ystdtb';
+
 export const ystdtbConfig = {
-	category: {
-		common: 'ystdtb',
-		beta: 'ystdtb_beta',
-		deprecated: 'ystdtb_deprecated',
-	},
-	color: {
-		iconForeground: '#4190be',
-		iconForegroundChild: '#A64276',
-		iconDeprecatedForeground: '#be4141',
-		iconBeta: '#9CADBC',
-	},
-	hasClasses: {
-		textColor: 'has-text-color',
-		fontSize: 'has-font-size',
-		background: 'has-background',
-		backgroundGradient: 'has-background-gradient',
-		padding: 'has-padding',
-		margin: 'has-margin',
-		border: 'has-border',
-		borderColor: 'has-border-color',
-	},
-	customPropertyPrefix: '--ystdtb',
+	category,
+	color,
+	hasClasses,
+	customPropertyPrefix,
 	component: {
-		headingClearStyle: 'is-clear-style',
 		backgroundRepeat: [
 			{
 				value: 'no-repeat',
@@ -74,7 +81,7 @@ export const ystdtbConfig = {
 		borderStyles: [
 			{
 				value: 'solid',
-				label: _x( '直線', 'component-config', 'ystandard-toolbox' ),
+				label: _x( '実線', 'component-config', 'ystandard-toolbox' ),
 			},
 			{
 				value: 'dotted',
@@ -120,14 +127,6 @@ export const ystdtbConfig = {
 					opacity: 0.7,
 				},
 			},
-		],
-		ratioOptions: [
-			{ value: '1-1', label: '1-1' },
-			{ value: '2-1', label: '2-1' },
-			{ value: '3-1', label: '3-1' },
-			{ value: '3-2', label: '3-2' },
-			{ value: '4-3', label: '4-3' },
-			{ value: '16-9', label: '16-9' },
 		],
 	},
 };

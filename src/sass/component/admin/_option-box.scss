@@ -2,37 +2,37 @@
 
 
 .ystdtb-option-box {
-  position: relative;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  padding: 2em;
-  background-color: rgba(#fff, 0.8);
-  border-radius: .5em;
-  border: 1px solid global.$color__border-gray-light;
+	position: relative;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	padding: 2em;
+	background-color: rgba(#fff, 0.8);
+	border-radius: 0.5em;
+	border: 1px solid global.$color__border-gray-light;
 }
 
 .ystdtb-option-box__label {
-  margin-top: 0;
-  padding-bottom: .5em;
-  border-bottom: 1px solid global.$color__border-gray-light;
-  color: global.$color__ystd_blue;
-  font-size: 1.2em;
-  font-weight: bold;
+	margin-top: 0;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid global.$color__border-gray-light;
+	color: global.$color__ystd_blue;
+	font-size: 1.2em;
+	font-weight: 700;
 }
 
 .ystdtb-option-box__section {
-  margin: 1.5em 0;
+	margin: 1.5em 0;
 }
 
 .ystdtb-option-box__title {
-  margin: 1.5em 0 0.5em;
-  padding-bottom: .25em;
-  border-bottom: 1px solid global.$color__border-gray-light;
-  font-size: 1.2em;
+	margin: 1.5em 0 0.5em;
+	padding-bottom: 0.25em;
+	border-bottom: 1px solid global.$color__border-gray-light;
+	font-size: 1.2em;
 }
 
 .ystdtb-option-box__notes {
-  margin-top: 0.5em;
-  color: global.$color__text-light;
-  font-size: .8em;
+	margin-top: 0.5em;
+	color: global.$color__text-light;
+	font-size: 0.8em;
 }

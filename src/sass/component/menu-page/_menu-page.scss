@@ -1,87 +1,92 @@
 @use "../../global";
 
 .ystdtb-menu-page {
-  background-color: #fff;
+	background-color: #fff;
 }
 
 .ystdtb-menu {
-  margin-top: 2em;
-  font-size: .9rem;
+	margin-top: 2em;
+	font-size: 0.9rem;
 
-  *,
-  *:after,
-  *:before {
-    box-sizing: border-box;
-  }
+	*,
+	*::after,
+	*::before {
+		box-sizing: border-box;
+	}
 
-  @include global.media-breakpoint(md) {
-    display: flex;
-  }
+	@include global.media-breakpoint(md) {
+		display: flex;
+	}
 
-  .ystdtb-menu__nav {
-    margin: 0;
-    list-style: none;
-    font-size: .9em;
-    display: none;
+	.ystdtb-menu__nav {
+		margin: 0;
+		list-style: none;
+		font-size: 0.9em;
+		display: none;
 
-    @include global.media-breakpoint(lg) {
-      display: block;
-      width: 160px;
-      border-right: 1px solid #eee;
-      padding: 0;
-      margin-right: 2em;
-    }
-  }
+		@include global.media-breakpoint(lg) {
+			display: block;
+			width: 160px;
+			border-right: 1px solid #eee;
+			padding: 0;
+			margin-right: 2em;
+		}
+	}
 
-  .ystdtb-menu__nav-item {
-    margin-right: -1px;
+	.ystdtb-menu__nav-item {
+		margin-right: -1px;
 
-    a {
-      text-decoration: none;
-      color: currentColor;
-      transition: all .3s;
+		a {
+			text-decoration: none;
+			color: currentcolor;
+			transition: all 0.3s;
 
-      @include global.media-breakpoint(md) {
-        display: block;
-        padding: .5em;
+			@include global.media-breakpoint(md) {
+				display: block;
+				padding: 0.5em;
 
-        &:hover {
-          background-color: global.$color__ystd_blue;
-          color: #fff;
-        }
-      }
-    }
+				&:hover {
+					background-color: global.$color__ystd_blue;
+					color: #fff;
+				}
+			}
+		}
 
-    &.is-current {
-      a {
-        @include global.media-breakpoint(md) {
-          border-right: 3px solid global.$color__ystd_blue;
-          color: global.$color__ystd_blue;
-          font-weight: 700;
+		&.is-current {
 
-          &:hover {
-            color: #fff;
-          }
-        }
-      }
-    }
-  }
+			a {
 
-  .ystdtb-menu__detail {
-    width: 100%;
-    @include global.media-breakpoint(lg) {
-      width: calc(100% - 180px);
-    }
-  }
+				@include global.media-breakpoint(md) {
+					border-right: 3px solid global.$color__ystd_blue;
+					color: global.$color__ystd_blue;
+					font-weight: 700;
+
+					&:hover {
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+
+	.ystdtb-menu__detail {
+		width: 100%;
+
+		@include global.media-breakpoint(lg) {
+			width: calc(100% - 180px);
+		}
+	}
 }
 
 
 #ystdtb-menu {
-  &.has-error {
-    &:after {
-      content: "設定内容にエラーがあります。";
-      display: block;
-      color: #8a1c16;
-    }
-  }
+
+	&.has-error {
+
+		&::after {
+			content: "設定内容にエラーがあります。";
+			display: block;
+			color: #8a1c16;
+		}
+	}
 }

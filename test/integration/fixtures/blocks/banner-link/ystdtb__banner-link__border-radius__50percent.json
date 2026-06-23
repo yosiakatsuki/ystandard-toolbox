@@ -1,0 +1,29 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"ratio": "1-1",
+			"size": {
+				"maxWidth": {
+					"desktop": "200px"
+				}
+			},
+			"borderRadius": "50%",
+			"mainText": "丸",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "正方形+50%で丸くなります",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true,
+			"blockPosition": "center"
+		},
+		"innerBlocks": []
+	}
+]

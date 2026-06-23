@@ -1,0 +1,29 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/parts",
+	"version": "1.0.0",
+	"title": "[ys]パーツ",
+	"description": "「[ys]パーツ」を表示するブロック",
+	"category": "ystdtb-common",
+	"keywords": [
+		"parts",
+		"ys-parts"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {
+		"partsId": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"customClassName": false,
+		"className": false,
+		"html": false,
+		"align": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"style": "file:./style-index.css"
+}

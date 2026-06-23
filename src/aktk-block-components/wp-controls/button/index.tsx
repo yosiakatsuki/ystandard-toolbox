@@ -1,0 +1,20 @@
+import { Button as WPButton } from '@wordpress/components';
+
+interface ButtonProps {
+	children: React.ReactNode;
+	className?: string;
+	variant?: 'primary' | 'secondary' | 'tertiary' | 'link';
+	size?: 'default' | 'compact' | 'small';
+	style?: React.CSSProperties;
+	isDestructive?: boolean;
+	onClick: () => void;
+	disabled?: boolean;
+	isBusy?: boolean;
+	// aria-label とツールチップ表示を兼ねる
+	label?: string;
+}
+
+export default function Button( props: ButtonProps ): JSX.Element {
+	// @ts-ignore.
+	return <WPButton { ...props } __next40pxDefaultSize />;
+}

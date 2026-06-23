@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "size-height-responsive-all",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"responsiveHeight": {
+				"desktop": "500px",
+				"tablet": "400px",
+				"mobile": "300px"
+			},
+			"hasNavigation": false,
+			"previewType": "grid"
+		},
+		"innerBlocks": []
+	}
+]

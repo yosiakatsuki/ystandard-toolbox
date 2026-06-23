@@ -1,0 +1,34 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\">基本パターン: dl > dt + dd-simple の組み合わせ</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt\">基本パターン: dl > dt + dd-simple の組み合わせ</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">これは基本パターン: dl > dt + dd-simple の組み合わせのddです</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">これは基本パターン: dl > dt + dd-simple の組み合わせのddです</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

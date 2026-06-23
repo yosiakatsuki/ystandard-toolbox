@@ -90,7 +90,7 @@ class Drawer_Menu {
 	 */
 	public function inline_css( $css ) {
 
-		$close  = helper\Drawer_Menu::get_drawer_menu_start();
+		$close  = Navigation::get_drawer_menu_start();
 		$expand = $close + 1;
 
 		$style = "
@@ -141,4 +141,3 @@ class Drawer_Menu {
 }
 
 new Drawer_Menu();
-

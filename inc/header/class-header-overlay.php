@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Post_Type;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -36,6 +38,7 @@ class Header_Overlay {
 			[ $this, 'meta_box' ],
 			[ $this, 'save_meta' ]
 		);
+		add_filter( 'ystdtb_plugin_settings', [ $this, 'add_overlay_plugin_settings' ] );
 	}
 
 
@@ -77,7 +80,7 @@ class Header_Overlay {
 			$overlay = true;
 		}
 		// 投稿タイプ関連.
-		$post_type = Utility::get_post_type();
+		$post_type = Post_Type::get_post_type();
 		// 投稿タイプ.
 		if ( ! is_front_page() && ! is_home() ) {
 			if ( is_singular() ) {
@@ -140,7 +143,7 @@ class Header_Overlay {
 		if ( ! self::is_header_overlay() ) {
 			return $css;
 		}
-		$close  = helper\Drawer_Menu::get_drawer_menu_start();
+		$close  = Navigation::get_drawer_menu_start();
 		$expand = $close + 1;
 		$style  = "
 		@media (min-width: {$expand}px) {
@@ -253,6 +256,24 @@ class Header_Overlay {
 	}
 
 	/**
+	 * オーバーレイ設定の追加.
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_overlay_plugin_settings( $settings ) {
+
+		if ( ! Option::get_option( Header_Design::OPTION_NAME, 'overlayImageId' ) ) {
+			$image_id = url_to_postid( Option::get_option( Header_Design::OPTION_NAME, 'overlayImage' ) );
+			// 画像id追加.
+			$settings['settings'][ Header_Design::OPTION_NAME ]['overlayImageId'] = $image_id;
+		}
+
+		return $settings;
+	}
+
+	/**
 	 * Meta box 表示.
 	 *
 	 * @param int $post_id Post ID.
@@ -270,10 +291,10 @@ class Header_Overlay {
 				<label for="ystdtb-overlay-none">-</label>
 
 				<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
-				<label for="ystdtb-overlay-on">ON</label>
+				<label for="ystdtb-overlay-on">有効</label>
 
 				<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
-				<label for="ystdtb-overlay-off">OFF</label>
+				<label for="ystdtb-overlay-off">無効</label>
 			</div>
 			<div class="ystdtb-meta-box__notes">
 				※「-」を選択した場合、ヘッダーオーバーレイ「詳細ページ」設定に従います。
@@ -311,10 +332,10 @@ class Header_Overlay {
 					<td>
 						<div class="ystdtb-radio-horizon is-small">
 							<input id="ystdtb-overlay-on" type="radio" name="ystdtb-overlay" value="on" <?php checked( $value, 'on' ); ?>>
-							<label for="ystdtb-overlay-on">ON</label>
+							<label for="ystdtb-overlay-on">有効</label>
 
 							<input id="ystdtb-overlay-off" type="radio" name="ystdtb-overlay" value="off" <?php checked( $value, 'off' ); ?>>
-							<label for="ystdtb-overlay-off">OFF</label>
+							<label for="ystdtb-overlay-off">無効</label>
 						</div>
 					</td>
 				</tr>

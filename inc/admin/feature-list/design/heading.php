@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Manual;
+
 defined( 'ABSPATH' ) || die();
 ?>
 <div class="ystdtb-menu__column-item">
@@ -21,8 +23,7 @@ defined( 'ABSPATH' ) || die();
 	<p>コンテンツやページタイトルのデザインをカスタマイズできる機能</p>
 	<div class="ystdtb-menu__manual-link is-horizon">
 		<?php
-		echo Utility::option_link_a( 'heading', '', 'button is-primary is-small' );
-		echo Utility::manual_link_a( 'manual/ystdtb-heading', 'マニュアル', 'button is-primary is-small' );
+		echo Manual::manual_link_a( 'manual/ystdtb-heading', 'マニュアル', 'button is-primary is-small' );
 		?>
 	</div>
 </div>

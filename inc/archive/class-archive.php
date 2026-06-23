@@ -9,6 +9,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Device;
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -27,9 +30,7 @@ class Archive {
 	 * Archive constructor.
 	 */
 	public function __construct() {
-		$this->load_files();
-
-		if ( Utility::ystandard_version_compare( '4.13.1' ) ) {
+		if ( Version::ystandard_version_compare( '4.13.1' ) ) {
 			add_filter( 'ys_get_archive_default_image', [ $this, 'get_archive_default_image' ], 10, 4 );
 		}
 		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
@@ -41,16 +42,10 @@ class Archive {
 		if ( Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' ) ) {
 			add_filter( 'ys_archive_image_ratio', [ $this, 'archive_image_ratio' ] );
 		}
-		if ( Utility::ystandard_version_compare( '4.13.2' ) ) {
+		if ( Version::ystandard_version_compare( '4.13.2' ) ) {
 			add_filter( 'ys_get_archive_detail_date', [ $this, 'get_archive_detail_date' ], 10, 4 );
 		}
-	}
-
-	/**
-	 * 必要ファイルの読み込み
-	 */
-	private function load_files() {
-
+		add_filter( 'ystdtb_plugin_settings', [ $this, 'add_plugin_settings' ] );
 	}
 
 	/**
@@ -92,7 +87,7 @@ class Archive {
 	 */
 	public function mobile_archive_type( $type ) {
 		$mobile = Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' );
-		if ( $mobile && Utility::is_mobile() ) {
+		if ( $mobile && Device::is_mobile() ) {
 			$type = $mobile;
 		}
 
@@ -112,7 +107,7 @@ class Archive {
 		$ratio_option = Option::get_option( self::OPTION_NAME, 'archiveImageRatio', '' );
 		$new_ratio    = ! empty( $ratio_option ) ? $ratio_option : $new_ratio;
 		if ( Option::get_option( self::OPTION_NAME, 'archiveMobileLayout', '' ) ) {
-			if ( Utility::is_mobile() ) {
+			if ( Device::is_mobile() ) {
 				$mobile_ratio = Option::get_option( self::OPTION_NAME, 'archiveImageRatioMobile', '' );
 
 				$new_ratio = ! empty( $mobile_ratio ) ? $mobile_ratio : $new_ratio;
@@ -170,6 +165,26 @@ class Archive {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 設定追加
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return array
+	 */
+	public function add_plugin_settings( $settings ) {
+
+		$settings['settings']['archive']['theme_ys_archive_type'] = get_option( 'ys_archive_type', 'card' );
+		if ( ! Option::get_option( self::OPTION_NAME, 'archiveDefaultImageId' ) ) {
+			$image    = Option::get_option( self::OPTION_NAME, 'archiveDefaultImage' );
+			$image_id = url_to_postid( $image );
+			// 画像id追加.
+			$settings['settings']['archive']['archiveDefaultImageId'] = $image_id;
+		}
+
+		return $settings;
 	}
 
 }

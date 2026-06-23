@@ -1,0 +1,31 @@
+.aktk-component-stretch-text-control {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	translate: 0 -50%;
+	font-size: 1em !important;
+	width: 100%;
+
+	& input {
+		width: 100% !important;
+		max-width: none !important;
+		height: auto !important;
+		min-height: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		background-color: transparent !important;
+		box-shadow: none !important;
+		color: currentcolor !important;
+		font-family: inherit !important;
+
+		&::placeholder {
+			color: currentcolor !important;
+		}
+	}
+}
+
+.aktk-component-stretch-text-control__dummy {
+	opacity: 0;
+	z-index: -1;
+	white-space: nowrap !important;
+}

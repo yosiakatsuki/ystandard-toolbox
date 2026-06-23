@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false,
+			"style": {
+				"typography": {
+					"fontSize": "1.25em"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "項目"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

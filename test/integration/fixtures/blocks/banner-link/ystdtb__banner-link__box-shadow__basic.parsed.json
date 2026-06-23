@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#e2e8f0",
+			"boxShadow": {
+				"offsetX": "0px",
+				"offsetY": "4px",
+				"blurRadius": "12px",
+				"color": "#000000",
+				"opacity": 0.2
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\" style=\"box-shadow:0px 4px 12px rgba(0,0,0,0.2)\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#e2e8f0\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">影あり</div><div class=\"ystdtb-banner-link__sub-text\">ふわっと浮き出たような見た目になります</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\" style=\"box-shadow:0px 4px 12px rgba(0,0,0,0.2)\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#e2e8f0\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">影あり</div><div class=\"ystdtb-banner-link__sub-text\">ふわっと浮き出たような見た目になります</div></div></div></a>\n"
+		]
+	}
+]

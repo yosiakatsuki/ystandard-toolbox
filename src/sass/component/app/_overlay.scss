@@ -2,47 +2,49 @@
 
 .ystdtb.is-overlay {
 
-  &.is-transparent {
-    --header-text: var(--overlay-text-color);
-    --header-dscr: var(--overlay-text-color);
-    --mobile-nav-open: var(--overlay-text-color);
-    --header-bg: transparent;
-    --header-shadow: none;
+	&.is-transparent {
+		--header-text: var(--overlay-text-color);
+		--header-dscr: var(--overlay-text-color);
+		--mobile-nav-open: var(--overlay-text-color);
+		--header-bg: transparent;
+		--header-shadow: none;
 
-    .custom-logo {
-      &.is-normal {
-        display: none;
-      }
+		.custom-logo {
 
-      &.is-overlay {
-        display: block;
-      }
-    }
-  }
+			&.is-normal {
+				display: none;
+			}
 
-  .custom-logo.is-overlay {
-    display: none;
-  }
+			&.is-overlay {
+				display: block;
+			}
+		}
+	}
 
-  .info-bar {
-    display: none;
-  }
+	.custom-logo.is-overlay {
+		display: none;
+	}
 
-  .site-header,
-  .global-nav {
-    transition: background-color .3s, box-shadow .3s,opacity .3s;
-  }
+	.info-bar {
+		display: none;
+	}
 
-  &.has-fixed-header {
-    padding-top: 0;
-  }
+	.site-header,
+	.global-nav {
+		transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+	}
 
-  // ヘッダー固定以外の場合.
-  &:not(.has-fixed-header) {
-    .site-header {
-      position: absolute;
-      width: 100%;
-      z-index: 2;
-    }
-  }
+	&.has-fixed-header {
+		padding-top: 0;
+	}
+
+	// ヘッダー固定以外の場合.
+	&:not(.has-fixed-header) {
+
+		.site-header {
+			position: absolute;
+			width: 100%;
+			z-index: 2;
+		}
+	}
 }

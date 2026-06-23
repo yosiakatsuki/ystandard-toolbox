@@ -1,3 +1,5 @@
+import { kebabCase } from 'lodash';
+
 export const responsiveCustomPropertyPrefix = '--ystdtb';
 
 export const responsiveKeys = {
@@ -11,8 +13,7 @@ export const isResponsive = ( values ) => {
 		return false;
 	}
 	return (
-		values.hasOwnProperty( responsiveKeys.tablet ) &&
-		values.hasOwnProperty( responsiveKeys.mobile )
+		values.hasOwnProperty( 'tablet' ) || values.hasOwnProperty( 'mobile' )
 	);
 };
 
@@ -52,7 +53,11 @@ export const getResponsiveValues = ( values ) => {
 	}
 	return 0 < Object.keys( result ).length ? result : undefined;
 };
-
+/**
+ * @param values
+ * @param arrowFalsy
+ * @deprecated
+ */
 export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 	if ( ! values || 'object' !== typeof values ) {
 		return undefined;
@@ -77,6 +82,16 @@ export const parseResponsiveValues = ( values, arrowFalsy = false ) => {
 	return 0 < Object.keys( result ).length ? result : undefined;
 };
 
+/**
+ * 【廃止予定】カスタムプロパティ作成・取得
+ *
+ * @deprecated
+ * @param {string}  property
+ * @param {Object}  value
+ * @param {string}  prefix
+ * @param {boolean} ignoreDesktop
+ * @return {undefined}
+ */
 export const getResponsiveCustomProperties = (
 	property,
 	value,
@@ -88,7 +103,9 @@ export const getResponsiveCustomProperties = (
 	}
 	let result = {};
 	const _prefix = !! prefix ? `-${ prefix }` : '';
-	const customProperty = `${ responsiveCustomPropertyPrefix }${ _prefix }-${ property }`;
+	const customProperty = `${ responsiveCustomPropertyPrefix }${ _prefix }-${ kebabCase(
+		property
+	) }`;
 	const hasDesktop =
 		value.hasOwnProperty( responsiveKeys.desktop ) && ! ignoreDesktop;
 	const hasTablet = value.hasOwnProperty( responsiveKeys.tablet );
@@ -122,6 +139,12 @@ export const getResponsiveCustomProperties = (
 };
 
 // TODO:廃止.
+/**
+ * @param {Object} attributes
+ * @param {string} key
+ * @deprecated
+ * @return {Object} ResponsiveProperty.
+ */
 export const getResponsiveProperty = ( attributes, key ) => {
 	let result = ! attributes ? { desktop: undefined } : attributes;
 	switch ( key ) {
@@ -148,6 +171,11 @@ export const getResponsiveProperty = ( attributes, key ) => {
 };
 
 // TODO:廃止
+/**
+ * @deprecated
+ * @param {Object} attributes Attributes.
+ * @return {Object} Attributes.
+ */
 export const addResponsiveProperty = ( attributes ) => {
 	let newAttributes = ! attributes ? {} : attributes;
 	if ( ! newAttributes.hasOwnProperty( responsiveKeys.desktop ) ) {
@@ -169,6 +197,11 @@ export const addResponsiveProperty = ( attributes ) => {
 };
 
 // TODO:廃止.
+/**
+ * @deprecated
+ * @param {Object} attributes Attributes.
+ * @return {Object} Attributes.
+ */
 export const deleteResponsiveProperty = ( attributes ) => {
 	attributes = ! attributes ? {} : attributes;
 	if ( attributes.hasOwnProperty( responsiveKeys.tablet ) ) {

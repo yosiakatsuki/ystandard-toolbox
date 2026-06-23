@@ -10,9 +10,7 @@
 defined( 'ABSPATH' ) || die();
 
 require_once __DIR__ . '/config/class-config.php';
-require_once __DIR__ . '/utility/class-filesystem.php';
-require_once __DIR__ . '/utility/class-utility.php';
-require_once __DIR__ . '/helper/load.php';
+require_once __DIR__ . '/util/load.php';
 require_once __DIR__ . '/option/class-option.php';
 require_once __DIR__ . '/notice/class-notice.php';
 require_once __DIR__ . '/init/class-init.php';
@@ -20,17 +18,23 @@ require_once __DIR__ . '/init/class-init.php';
 if ( ! \ystandard_toolbox\Init::check_build_files() ) {
 	return;
 }
+require_once __DIR__ . '/api/class-api.php';
 require_once __DIR__ . '/meta-box/class-meta-box.php';
 require_once __DIR__ . '/enqueue/class-enqueue.php';
-
+// Compat.
+require_once __DIR__ . '/compat/class-compat.php';
 // Blocks.
+require_once __DIR__ . '/blocks/class-shared-styles.php';
 require_once __DIR__ . '/blocks/class-blocks.php';
+require_once __DIR__ . '/blocks/class-block-styles.php';
 // Code.
 require_once __DIR__ . '/code/class-code.php';
 // Heading.
 require_once __DIR__ . '/heading/class-heading.php';
 // Icon.
 require_once __DIR__ . '/icon/class-icon.php';
+// Design.
+require_once __DIR__ . '/design/class-design.php';
 // Font.
 require_once __DIR__ . '/font/class-font.php';
 require_once __DIR__ . '/font/class-icon-font.php';
@@ -56,16 +60,16 @@ require_once __DIR__ . '/widget/class-accordion.php';
 require_once __DIR__ . '/cta/class-cta.php';
 // LP.
 require_once __DIR__ . '/lp/class-lp.php';
+// Custom CSS.
+require_once __DIR__ . '/custom-css/class-custom-css.php';
+// Migration.
+require_once __DIR__ . '/migration/class-legacy-content-search.php';
 // Polyfill.
 require_once __DIR__ . '/polyfill/class-polyfill.php';
 
-// v2 Switch.
-require_once __DIR__ . '/update/class-v2-switch.php';
-
 // Admin.
 require_once __DIR__ . '/admin/class-admin-utility.php';
-require_once __DIR__ . '/menu-page/class-menu-page.php';
-require_once __DIR__ . '/admin/class-plugin-menu.php';
 if ( file_exists( __DIR__ . '/update/class-update.php' ) ) {
 	require_once __DIR__ . '/update/class-update.php';
 }
+require_once __DIR__ . '/plugin-settings/class-plugin-settings.php';

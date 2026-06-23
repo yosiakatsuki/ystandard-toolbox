@@ -1,0 +1,95 @@
+/**
+ * FAQブロック フロントエンド用スタイル
+ */
+
+.ystdtb-faq {
+	--ystdtb--faq--padding: 1rem;
+	--ystdtb--faq-item--gap: 1rem;
+	--ystdtb--faq-item--padding-vertical: var(--ystdtb--faq--padding);
+	--ystdtb--faq-item--padding-horizon: 0;
+	--ystdtb--faq-item--contents-gap: 1em;
+	--ystdtb--faq-item--label--font-size: 1.5em;
+	--ystdtb--faq-item--label--size: 1.75em;
+
+	border: 0;
+
+	+ :where(.ystdtb-faq) {
+		margin-top: 0;
+	}
+
+	&:where(.has-padding) {
+
+		:where(.ystdtb-faq-item) {
+			--ystdtb--faq-item--padding-horizon: 1.25rem;
+		}
+	}
+
+	&:where(.border-type--all) {
+		border-style: solid;
+
+		+ :where(.ystdtb-faq) {
+			border-top: 0;
+		}
+	}
+
+	&:where(.border-type--bottom) {
+		border-bottom-style: solid;
+	}
+
+	// アコーディオン形式
+	&:where(.is-accordion) {
+
+		&:where(.is-open) {
+
+			:where(.is-faq--a) {
+				height: auto;
+				height: calc-size(auto);
+				opacity: 1;
+				visibility: visible;
+			}
+
+			:where(.ystdtb-faq-item__arrow) {
+				transform: rotate(180deg);
+			}
+		}
+
+		&:where(:not(.is-open)) {
+
+			:where(.is-faq--q) {
+				border-bottom: 0;
+			}
+
+			:where(.is-faq--a) {
+				height: 0;
+				padding-top: 0;
+				padding-bottom: 0;
+				opacity: 0;
+				visibility: hidden;
+				transition:
+					height 0.3s,
+					padding 0.3s,
+					opacity 0.2s;
+			}
+		}
+
+		:where(.ystdtb-faq-item__arrow) {
+			display: block;
+			font-size: 1.1em;
+			transition: transform 0.3s;
+		}
+
+		:where(.ystdtb-faq-item) {
+
+			&:where(.is-faq--q) {
+				cursor: pointer;
+			}
+
+			&:where(.is-faq--a) {
+				transition:
+					height 0.3s,
+					padding 0.3s,
+					opacity 0.2s;
+			}
+		}
+	}
+}

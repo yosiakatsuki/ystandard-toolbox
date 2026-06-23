@@ -1,0 +1,44 @@
+[
+	{
+		"blockName": "ystdtb/box",
+		"attrs": {
+			"boxPadding": {
+				"desktop": {
+					"top": "32px",
+					"right": "32px",
+					"bottom": "32px",
+					"left": "32px"
+				},
+				"tablet": {
+					"top": "24px",
+					"right": "24px",
+					"bottom": "24px",
+					"left": "24px"
+				},
+				"mobile": {
+					"top": "16px",
+					"right": "16px",
+					"bottom": "16px",
+					"left": "16px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "core/paragraph",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<p>余白をデバイスごとに変えるレスポンシブ設定です。</p>\n",
+				"innerContent": [
+					"\n<p>余白をデバイスごとに変えるレスポンシブ設定です。</p>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-padding-top:32px;--ystdtb-box-padding-right:32px;--ystdtb-box-padding-bottom:32px;--ystdtb-box-padding-left:32px;--ystdtb-box-padding-top-tablet:24px;--ystdtb-box-padding-right-tablet:24px;--ystdtb-box-padding-bottom-tablet:24px;--ystdtb-box-padding-left-tablet:24px;--ystdtb-box-padding-top-mobile:16px;--ystdtb-box-padding-right-mobile:16px;--ystdtb-box-padding-bottom-mobile:16px;--ystdtb-box-padding-left-mobile:16px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;,&quot;padding-top&quot;:&quot;32px&quot;,&quot;padding-right&quot;:&quot;32px&quot;,&quot;padding-bottom&quot;:&quot;32px&quot;,&quot;padding-left&quot;:&quot;32px&quot;}\"></div></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-box is-box-style--label-none\" style=\"--ystdtb-box-border-width:1px;--ystdtb-box-padding-top:32px;--ystdtb-box-padding-right:32px;--ystdtb-box-padding-bottom:32px;--ystdtb-box-padding-left:32px;--ystdtb-box-padding-top-tablet:24px;--ystdtb-box-padding-right-tablet:24px;--ystdtb-box-padding-bottom-tablet:24px;--ystdtb-box-padding-left-tablet:24px;--ystdtb-box-padding-top-mobile:16px;--ystdtb-box-padding-right-mobile:16px;--ystdtb-box-padding-bottom-mobile:16px;--ystdtb-box-padding-left-mobile:16px;--ystdtb-box-label-font-size:0.9em\"><div class=\"ystdtb-box__inner-container show-default-border\" style=\"border-style:solid\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;}\"><div class=\"ystdtb-box__content\" data-ys-ie-styles=\"{&quot;border-width&quot;:&quot;1px&quot;,&quot;padding-top&quot;:&quot;32px&quot;,&quot;padding-right&quot;:&quot;32px&quot;,&quot;padding-bottom&quot;:&quot;32px&quot;,&quot;padding-left&quot;:&quot;32px&quot;}\">",
+			null,
+			"</div></div></div>\n"
+		]
+	}
+]

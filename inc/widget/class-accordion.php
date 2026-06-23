@@ -9,6 +9,10 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\AMP;
+use ystandard_toolbox\Util\Manual;
+use ystandard_toolbox\Util\Types;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -67,7 +71,7 @@ class Accordion {
 		?>
 		<div class="ystdtb-option-box ystdtb-widget-option">
 			<div class="ystdtb-option-box__label"><?php _e( '[Toolbox]子階層の折りたたみ設定', 'ystandard-toolbox' ); ?></div>
-			<div class="ystdtb-option-box__manual"><?php echo Utility::manual_link_inline( 'manual/ystdtb-widget' ); ?></div>
+			<div class="ystdtb-option-box__manual"><?php echo Manual::manual_link_inline( 'manual/ystdtb-widget' ); ?></div>
 			<div class="ystdtb-option-box__section">
 				<label for="<?php echo esc_attr( $widget->get_field_id( self::FIELD_ID ) ); ?>">
 					<input value="1" id="<?php echo esc_attr( $widget->get_field_id( self::FIELD_ID ) ); ?>" name="<?php echo esc_attr( $widget->get_field_name( self::FIELD_ID ) ); ?>" type="checkbox" <?php checked( $check ); ?>/><?php _e( '2階層目以降を折りたたみ式にする', 'ystandard-toolbox' ); ?>
@@ -95,7 +99,7 @@ class Accordion {
 			return $instance;
 		}
 		if ( isset( $new_instance[ self::FIELD_ID ] ) ) {
-			$instance[ self::FIELD_ID ] = Utility::to_bool( $new_instance[ self::FIELD_ID ] );
+			$instance[ self::FIELD_ID ] = Types::to_bool( $new_instance[ self::FIELD_ID ] );
 		} else {
 			if ( isset( $instance[ self::FIELD_ID ] ) ) {
 				unset( $instance[ self::FIELD_ID ] );
@@ -115,7 +119,7 @@ class Accordion {
 	public function sidebar_params( $params ) {
 		global $wp_registered_widgets;
 
-		if ( Utility::is_amp() ) {
+		if ( AMP::is_amp() ) {
 			return $params;
 		}
 
@@ -139,7 +143,7 @@ class Accordion {
 
 		$accordion = false;
 		if ( isset( $widget_option[ $widget_num ]['ystdtb-accordion'] ) ) {
-			$accordion = Utility::to_bool( $widget_option[ $widget_num ]['ystdtb-accordion'] );
+			$accordion = Types::to_bool( $widget_option[ $widget_num ]['ystdtb-accordion'] );
 		}
 
 		if ( $accordion ) {

@@ -1,0 +1,31 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dd-box",
+				"attrs": {
+					"backgroundColor": "ys-light-blue"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>説明文</p>\n",
+						"innerContent": [ "\n<p>説明文</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-box has-background has-ys-light-blue-background-color\"></dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-box has-background has-ys-light-blue-background-color\">",
+					null,
+					"</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\"></dl>\n",
+		"innerContent": [ "\n<dl class=\"ystdtb-dl\">", null, "</dl>\n" ]
+	}
+]

@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "",
+					"labelContents": "",
+					"labelBorderRadius": "50px",
+					"contentsInnerMargin": "normal",
+					"customContentsBorderColor": "#7c3aed"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

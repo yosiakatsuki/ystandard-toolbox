@@ -1,0 +1,21 @@
+[
+	{
+		"name": "ystdtb/box",
+		"isValid": true,
+		"attributes": {
+			"boxStyle": "label-none",
+			"boxBorderSize": "1px",
+			"boxBorderStyle": "solid",
+			"isResponsiveBoxPadding": false,
+			"customLabelFontSize": "0.9em",
+			"labelWeight": "normal",
+			"backgroundImage": {
+				"id": 2,
+				"url": "https://wp-ystandard.com/wp/wp-content/uploads/2022/08/tviv23vcuz4.jpg"
+			},
+			"backgroundImageCoverOpacity": 0.8,
+			"backgroundImageRepeat": "repeat-y"
+		},
+		"innerBlocks": []
+	}
+]

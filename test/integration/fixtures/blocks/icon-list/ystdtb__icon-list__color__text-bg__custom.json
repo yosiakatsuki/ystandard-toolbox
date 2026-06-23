@@ -1,0 +1,26 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false,
+			"style": {
+				"color": {
+					"text": "#1e293b",
+					"background": "#fef3c7"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "項目"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

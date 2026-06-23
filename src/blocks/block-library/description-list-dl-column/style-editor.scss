@@ -1,0 +1,15 @@
+.ystdtb-dl-column-editor-border {
+
+	.components-border-box-control-linked-button,
+	.components-range-control {
+		display: none;
+	}
+}
+
+.ystdtb-dl-column {
+	margin-block-end: 0;
+
+	&.has-border:not(:last-child) {
+		margin-bottom: 0;
+	}
+}

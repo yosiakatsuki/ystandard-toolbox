@@ -1,0 +1,37 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {
+			"margin": {
+				"top": "24px",
+				"bottom": "24px"
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt\">用語</dt>\n",
+				"innerContent": [ "\n<dt class=\"ystdtb-dt\">用語</dt>\n" ]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\">説明文</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\">説明文</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl has-margin\" style=\"margin-top:24px;margin-bottom:24px\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl has-margin\" style=\"margin-top:24px;margin-bottom:24px\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

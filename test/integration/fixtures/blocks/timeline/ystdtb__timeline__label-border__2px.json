@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/timeline",
+		"isValid": true,
+		"attributes": {},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/timeline-item",
+				"isValid": true,
+				"attributes": {
+					"labelType": "icon",
+					"labelContents": "bookmark",
+					"labelBorderRadius": "50px",
+					"labelBorderSize": "2px",
+					"labelBorderColor": "ys-blue",
+					"contentsInnerMargin": "normal"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

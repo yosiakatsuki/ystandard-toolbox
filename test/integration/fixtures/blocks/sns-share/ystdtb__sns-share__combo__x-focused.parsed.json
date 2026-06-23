@@ -1,0 +1,17 @@
+[
+	{
+		"blockName": "ystdtb/sns-share",
+		"attrs": {
+			"buttonType": "circle",
+			"useFacebook": false,
+			"useHatenaBookmark": false,
+			"useLINE": false,
+			"labelBefore": "この記事をシェア",
+			"twitterVia": "ystandard",
+			"twitterHashTags": "ystandard,wordpress"
+		},
+		"innerBlocks": [],
+		"innerHTML": "",
+		"innerContent": []
+	}
+]

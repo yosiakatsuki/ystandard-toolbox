@@ -1,0 +1,23 @@
+[
+	{
+		"blockName": "ystdtb/banner-link",
+		"attrs": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#f1f5f9",
+			"border": {
+				"width": "2px",
+				"style": "dashed",
+				"color": {
+					"hex": "#333333"
+				}
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#f1f5f9\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__overlay-border has-border\" style=\"border:2px dashed #333333\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">破線の枠線</div><div class=\"ystdtb-banner-link__sub-text\">2pxの破線で囲んでいます</div></div></div></a>\n",
+		"innerContent": [
+			"\n<a class=\"ystdtb-banner-link\" href=\"https://example.com/\"><div class=\"ystdtb-banner-link__overlay-background has-background\" style=\"background:#f1f5f9\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__overlay-border has-border\" style=\"border:2px dashed #333333\" aria-hidden=\"true\"></div><div class=\"ystdtb-banner-link__container\"><div class=\"ystdtb-banner-link__text\"><div class=\"ystdtb-banner-link__main-text\">破線の枠線</div><div class=\"ystdtb-banner-link__sub-text\">2pxの破線で囲んでいます</div></div></div></a>\n"
+		]
+	}
+]

@@ -1,0 +1,41 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "全デバイス別余白",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "3 デバイス別の値",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true,
+			"padding": {
+				"desktop": {
+					"top": "48px",
+					"right": "48px",
+					"bottom": "48px",
+					"left": "48px"
+				},
+				"tablet": {
+					"top": "32px",
+					"right": "32px",
+					"bottom": "32px",
+					"left": "32px"
+				},
+				"mobile": {
+					"top": "16px",
+					"right": "16px",
+					"bottom": "16px",
+					"left": "16px"
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

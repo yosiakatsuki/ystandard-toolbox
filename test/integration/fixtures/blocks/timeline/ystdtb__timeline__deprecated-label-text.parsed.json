@@ -1,0 +1,50 @@
+[
+	{
+		"blockName": "ystdtb/timeline",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/timeline-item",
+				"attrs": {
+					"labelType": "text",
+					"labelContents": "1",
+					"contentMarginTop": 10
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {
+							"placeholder": "タイムラインコンテンツ…"
+						},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ラベルタイプ = textのタイムライン１</p>\n",
+						"innerContent": [
+							"\n<p>ラベルタイプ = textのタイムライン１</p>\n"
+						]
+					},
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>タイムライン１の内容</p>\n",
+						"innerContent": [ "\n<p>タイムライン１の内容</p>\n" ]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:calc(-1.3em + 10px)\">\n\n</div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-timeline-item has-text\"><div class=\"ystdtb-timeline__label has-text\" style=\"border-radius:50px\"><span class=\"ystdtb-timeline__label-text\">1</span></div><div class=\"ystdtb-timeline__contents is-margin-normal\" style=\"margin-top:calc(-1.3em + 10px)\">",
+					null,
+					"\n\n",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-timeline\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-timeline\">",
+			null,
+			"</div>\n"
+		]
+	}
+]

@@ -1,0 +1,24 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"mainText": "メインテキスト",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "16pxの間隔を空けています",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true,
+			"subTextMargin": {
+				"desktop": "16px"
+			}
+		},
+		"innerBlocks": []
+	}
+]

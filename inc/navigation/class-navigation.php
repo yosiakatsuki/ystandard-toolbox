@@ -37,6 +37,15 @@ class Navigation {
 		require_once __DIR__ . '/class-drawer-menu.php';
 		require_once __DIR__ . '/class-menu-replace.php';
 	}
+
+	/**
+	 * ドロワーメニュー開始サイズ取得
+	 *
+	 * @return int
+	 */
+	public static function get_drawer_menu_start() {
+		return apply_filters( 'ys_get_drawer_menu_start', 768 );
+	}
 }
 
 new Navigation();

@@ -1,0 +1,27 @@
+[
+	{
+		"name": "ystdtb/banner-link",
+		"isValid": true,
+		"attributes": {
+			"link": {
+				"url": "https://example.com/"
+			},
+			"customBackgroundColor": "#3b82f6",
+			"size": {
+				"maxWidth": {
+					"desktop": "400px",
+					"mobile": "100%"
+				}
+			},
+			"mainText": "レスポンシブ最大幅",
+			"customMainTextColor": "#ffffff",
+			"mainTextHtml": "div",
+			"mainTextStyleClear": true,
+			"subText": "スマホでは幅いっぱい、PCでは400pxまで",
+			"customSubTextColor": "#ffffff",
+			"subTextHtml": "div",
+			"subTextStyleClear": true
+		},
+		"innerBlocks": []
+	}
+]

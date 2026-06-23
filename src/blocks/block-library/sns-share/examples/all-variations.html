@@ -1,0 +1,403 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">設定の組み合わせ例</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>よく使われる設定の組み合わせをいくつかご紹介します。そのまま使ったり、アレンジのヒントにしてみてください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">記事下の基本シェアボタン</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>記事を読み終えたあとに置く、いちばんオーソドックスな構成です。デフォルトの円ボタンで X・Facebook・はてなブックマーク・LINE をまとめて用意しています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"circle"} /-->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">サイドバーにすっきり置きたい</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>サイドバーや狭いスペースでも場所を取らないよう、アイコンデザイン・左寄せ・SNS 控えめの組み合わせにしています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"icon","align":"left","useX":true,"useFacebook":true,"useHatenaBookmark":false,"useLINE":false} /-->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">X を盛り上げたいブロガー向け</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>X でのシェアを中心にしたい場合の構成です。via アカウントとハッシュタグを設定しておくと、ツイートされたときに自分のアカウントとタグが自動で付きます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"circle","useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"labelBefore":"この記事をシェア","twitterVia":"ystandard","twitterHashTags":"ystandard,wordpress"} /-->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">公式ボタンで信頼感を演出</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>各 SNS が公式で提供しているボタンを使う構成です。見慣れたデザインなのでクリックされやすく、信頼感を出したいときにおすすめです。公式ボタンは Bluesky に対応していないため OFF にしています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"official","useX":true,"useFacebook":true,"useHatenaBookmark":true,"useLINE":true,"useBluesky":false} /-->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">設定一覧</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">ツールバー設定</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ブロック選択時の上部ツールバーから設定できる項目です。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">配置</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>シェアボタン全体の配置を左寄せ・中央・右寄せから選べます。ブロック幅いっぱいではなく、ボタンの並びだけを寄せる設定です。「公式」ボタン時はツールバーから非表示になります。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">左寄せ</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"align":"left"} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">中央（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"align":"center"} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">右寄せ</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"align":"right"} /-->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">デザイン</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>シェアボタンの見た目を切り替えられます。サイトの雰囲気や目的に合わせて選んでみてください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">ボタン種類</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ボタンのデザインを「円」「四角」「アイコン」「公式」の 4 種類から選べます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">円（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"circle"} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">四角</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"square"} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">アイコン</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"icon"} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">公式</h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>各 SNS が公式で配布しているボタンを読み込んで表示します。エディタ内ではプレビューできないので、フロントでの表示をご確認ください。Bluesky には公式ボタンがないため、このモード時は Bluesky は表示されません。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"buttonType":"official"} /-->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">シェアボタン ON-OFF</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>表示したい SNS だけ ON にできます。使わない SNS は OFF にしておくと、読者の目線がぶれずに済みますよ。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">X</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>現在の X ボタンです。デフォルトで ON になっています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":true,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":true,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Twitter</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>旧 Twitter の青い鳥マークを使いたいときに ON にします。デフォルトは OFF です。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":true,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":true,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Bluesky</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bluesky へのシェアボタンです。デフォルトは OFF です。公式ボタン（buttonType: official）時は表示されません。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":true,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":true} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Facebook</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Facebook へのシェアボタンです。デフォルトで ON になっています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":true,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":true,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">はてなブックマーク</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>はてなブックマークに登録するボタンです。デフォルトで ON になっています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":true,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":true,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">LINE</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>LINE へのシェアボタンです。デフォルトで ON になっています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">表示（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":false,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":true,"useBluesky":false} /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">非表示</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"useX":true,"useTwitter":false,"useFacebook":false,"useHatenaBookmark":false,"useLINE":false,"useBluesky":false} /-->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">テキスト</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>シェアボタンの上下に添えるテキストを設定できます。ひと言呼びかけがあると、シェアしてもらえる率がちょっと上がるかもしれません。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">上側テキスト</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>シェアボタンの上に表示されるテキストです。「この記事をシェア！」のような呼びかけに使うと便利です。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">未設定（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">設定あり</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"labelBefore":"この記事をシェア！"} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">下側テキスト</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>シェアボタンの下に表示されるテキストです。「シェアありがとうございます！」のようなお礼の言葉を添えるのにも使えます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">未設定（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">設定あり</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"labelAfter":"シェアありがとうございます！"} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">上下両方設定</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>上下のテキストを両方設定した例です。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:ystdtb/sns-share {"labelBefore":"この記事をシェア！","labelAfter":"シェアありがとうございます！"} /-->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">X用オプション</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Xボタン・TwitterボタンからシェアしたときのURLパラメータに反映される設定です。シェアしてくれた読者のポストに、自分のアカウントやハッシュタグを自動で付けられます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">via アカウント</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ポスト本文の末尾に「via @アカウント名」として付与されます。「@」を除いたユーザー名だけを入力してください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">未設定（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">設定あり（例: ystandard）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"twitterVia":"ystandard"} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">おすすめアカウント</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ポスト送信後に、おすすめフォローとして表示されるアカウントです。関連サービスや運営アカウントなどを指定します。「@」を除いたユーザー名だけを入力してください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">未設定（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">設定あり（例: ystandard）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"twitterRelatedUser":"ystandard"} /-->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">ハッシュタグ</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ポスト本文に追加されるハッシュタグです。「#」を除いて、カンマ区切りで複数指定できます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">未設定（デフォルト）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share /-->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">設定あり（例: ystandard, wordpress）</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/sns-share {"twitterHashTags":"ystandard,wordpress"} /-->

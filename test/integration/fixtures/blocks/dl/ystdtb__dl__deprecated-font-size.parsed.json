@@ -1,0 +1,47 @@
+[
+	{
+		"blockName": "ystdtb/description-list",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/description-list-dt",
+				"attrs": {
+					"textSize": {
+						"desktop": {
+							"size": "20px",
+							"slug": "large"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\">フォントサイズ 20</dt>\n",
+				"innerContent": [
+					"\n<dt class=\"ystdtb-dt has-font-size has-large-font-size\">フォントサイズ 20</dt>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/description-list-dd-simple",
+				"attrs": {
+					"textSize": {
+						"desktop": {
+							"size": "21px"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<dd class=\"ystdtb-dd-simple\" style=\"font-size:21px\">デスクトップのみ 21</dd>\n",
+				"innerContent": [
+					"\n<dd class=\"ystdtb-dd-simple\" style=\"font-size:21px\">デスクトップのみ 21</dd>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<dl class=\"ystdtb-dl\">\n\n</dl>\n",
+		"innerContent": [
+			"\n<dl class=\"ystdtb-dl\">",
+			null,
+			"\n\n",
+			null,
+			"</dl>\n"
+		]
+	}
+]

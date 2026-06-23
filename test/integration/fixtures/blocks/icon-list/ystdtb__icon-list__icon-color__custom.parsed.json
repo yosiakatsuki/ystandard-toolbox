@@ -1,0 +1,25 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"customIconColor": "#22c55e"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right has-icon-font-color\" style=\"--icon-font-color:#22c55e\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right has-icon-font-color\" style=\"--icon-font-color:#22c55e\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

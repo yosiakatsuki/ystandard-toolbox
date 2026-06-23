@@ -1,0 +1,76 @@
+/**
+ * Aktk Dependencies.
+ */
+import SpacingSizesControl, {
+	type SpacingSizeControlProps,
+	type SpacingSizeValues,
+} from '@aktk/block-components/wp-controls/spacing-size-control';
+import { isObject } from '@aktk/block-components/utils/object';
+
+import { getCustomSpacingValueFromPreset } from './util';
+
+export function CustomSpacingSelectControl( props: SpacingSizeControlProps ) {
+	const { values, onChange, label, sides, minimumCustomValue = 0 } = props;
+	const handleOnChange = ( newValue: SpacingSizeValues ) => {
+		onChange( newValue );
+	};
+	return (
+		<div className="aktk-component__custom-spacing-select">
+			<SpacingSizesControl
+				values={ values }
+				onChange={ handleOnChange }
+				label={ label }
+				sides={ sides }
+				minimumCustomValue={ minimumCustomValue }
+			/>
+		</div>
+	);
+}
+
+interface CustomSpacingSelectControlWithCustomValueProps
+	extends SpacingSizeControlProps {
+	spacingSizes: object[];
+}
+
+export function CustomSpacingSelectControlWithCustomValue(
+	props: CustomSpacingSelectControlWithCustomValueProps
+) {
+	const {
+		values,
+		onChange,
+		label,
+		sides,
+		spacingSizes,
+		minimumCustomValue = 0,
+	} = props;
+
+	const handleOnChange = ( newValue: SpacingSizeValues ) => {
+		// プリセットから値を取得して返す.
+		if ( !! newValue && isObject( newValue ) ) {
+			Object.keys( newValue ).forEach( ( key ) => {
+				const spacingKey = key as keyof SpacingSizeValues;
+				newValue[ spacingKey ] = getCustomSpacingValueFromPreset(
+					newValue[ spacingKey ],
+					spacingSizes
+				);
+			} );
+			onChange( newValue );
+		} else {
+			onChange( newValue );
+		}
+	};
+	return (
+		<>
+			<SpacingSizesControl
+				values={ values }
+				onChange={ handleOnChange }
+				label={ label }
+				sides={ sides }
+				minimumCustomValue={ minimumCustomValue }
+			/>
+		</>
+	);
+}
+
+CustomSpacingSelectControl.CustomValue =
+	CustomSpacingSelectControlWithCustomValue;

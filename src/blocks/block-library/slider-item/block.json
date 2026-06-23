@@ -1,0 +1,25 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/slider-item",
+	"version": "2.0.0",
+	"title": "スライダーアイテム",
+	"description": "スライダー内で任意のブロックを使うためのブロック",
+	"parent": [ "ystdtb/slider" ],
+	"category": "ystdtb-common",
+	"keywords": [
+		"スライダー",
+		"slider"
+	],
+	"textdomain": "ystandard-toolbox",
+	"attributes": {},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"className": false
+	},
+	"example": {},
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"style": "file:./style-index.css"
+}
