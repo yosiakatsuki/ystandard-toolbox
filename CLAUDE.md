@@ -6,16 +6,12 @@
 
 ## 関連ドキュメント
 
-- [docs/v2-roadmap.md](docs/v2-roadmap.md) — v2 リリースに向けた残タスク
-- [docs/v2-manual-update.md](docs/v2-manual-update.md) — v2 リリースに向けたマニュアル（wp-ystandard.com）更新計画と対応状況管理
 - [docs/future-improvements.md](docs/future-improvements.md) — v2 リリース後に対応したい改修リスト
 - [docs/design-system.md](docs/design-system.md) — yStandard Toolbox デザインシステム
 - [docs/ystandard-design-system.md](docs/ystandard-design-system.md) — yStandard テーマ デザインシステム
 - [docs/testing.md](docs/testing.md) — テスト全般（unit / integration の構成、fixture 追加手順、テスト用画像URL）
 - [docs/block-examples-guideline.md](docs/block-examples-guideline.md) — ブロック設定例・使用例（examples）の作成ガイドライン
 - [docs/block-operation-test-guideline.md](docs/block-operation-test-guideline.md) — ブロック操作テスト（Playwright MCP を使った UI 自動テスト）の共通ガイドライン
-- [docs/v2-block-testing.md](docs/v2-block-testing.md) — v2 ブロック全体テストの対象・進捗管理
-- [docs/v2-settings-testing.md](docs/v2-settings-testing.md) — プラグイン設定画面テスト（JS/PHP）の方針・命名規則・進捗管理
 
 ## プロジェクト概要
 

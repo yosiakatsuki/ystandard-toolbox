@@ -593,4 +593,3 @@ wp.blocks.serialize(wp.data.select('core/block-editor').getBlocks())
 
 - [block-examples-guideline.md](block-examples-guideline.md) — examples HTML の作成ガイドライン（spec.md のベースになる）
 - [testing.md](testing.md) — unit / integration テスト全般（L1 fixture の実行・追加手順）
-- [v2-block-testing.md](v2-block-testing.md) — v2 リリースに向けたブロックテストの対象・進捗管理

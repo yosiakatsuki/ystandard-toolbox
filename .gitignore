@@ -19,5 +19,4 @@ tsconfig.tsbuildinfo
 .phpunit.result.cache
 src/blocks/block-library/*/test-results/operation.md
 .playwright-mcp/
-!debug-tool/
 upload
