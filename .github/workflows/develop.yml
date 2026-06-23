@@ -120,6 +120,9 @@ jobs:
       - name: npm ci
         run: npm ci --no-audit --no-fund
 
+      - name: Build Blocks
+        run: npm run build:blocks:v2
+
       - name: PHP Unit Test
         run: |
           PLUGIN_DIR="$(basename "$GITHUB_WORKSPACE")"
