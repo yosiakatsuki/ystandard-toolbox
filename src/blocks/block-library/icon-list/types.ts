@@ -1,4 +1,9 @@
 /**
+ * Aktk Dependencies.
+ */
+import type { ResponsiveSpacing } from '@aktk/block-components/components/custom-spacing-select';
+
+/**
  * カラーオブジェクト
  */
 export interface ColorObject {
@@ -17,6 +22,7 @@ export interface IconListAttributes {
 	boxTextColor?: string;
 	iconColor?: string;
 	customIconColor?: string;
+	responsiveMargin?: ResponsiveSpacing;
 }
 
 /**

@@ -7,6 +7,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -26,6 +29,7 @@ class Icon_List_Block {
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
 		add_filter( 'ystdtb_block_editor_option', [ $this, 'add_block_config' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -46,6 +50,42 @@ class Icon_List_Block {
 		$options['listIcons'] = [];
 
 		return $options;
+	}
+
+	/**
+	 * レスポンシブmargin用スタイルを追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_responsive_style() {
+		$responsive = [
+			'tablet' => '',
+			'mobile' => '',
+		];
+		$selector   = '.ystdtb-icon-list';
+
+		foreach ( array_keys( $responsive ) as $type ) {
+			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $position ) {
+				$logical = Styles::get_logical_direction( $position );
+
+				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $selector,
+						'prop_name' => "icon-list--margin-{$position}",
+						'property'  => "margin-{$logical}",
+						'type'      => $type,
+					]
+				);
+			}
+		}
+
+		$css  = Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-icon-list-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
+		wp_enqueue_style( $handle );
 	}
 
 	/**
