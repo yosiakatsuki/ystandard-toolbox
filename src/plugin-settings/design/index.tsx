@@ -97,7 +97,6 @@ const Design = () => {
 		setIsLoading( false );
 	}, [] );
 
-	// eslint-disable-next-line no-undef
 	const parsed = queryString.parse( location.search );
 	const initialTabName = parsed?.tab as string | undefined;
 
