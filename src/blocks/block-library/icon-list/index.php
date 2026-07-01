@@ -59,8 +59,9 @@ class Icon_List_Block {
 	 */
 	public function enqueue_responsive_style() {
 		$responsive = [
-			'tablet' => '',
-			'mobile' => '',
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
 		];
 		$selector   = '.ystdtb-icon-list';
 
@@ -79,7 +80,8 @@ class Icon_List_Block {
 			}
 		}
 
-		$css  = Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css  = Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
 		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
 
 		$handle = 'ystdtb-icon-list-responsive';

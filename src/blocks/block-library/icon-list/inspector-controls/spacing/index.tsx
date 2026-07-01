@@ -8,13 +8,8 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	type ResponsiveSpacing,
-	type Spacing as SpacingValue,
-	CustomSpacingSelectControl,
+	ResponsiveSpacingSelectControl,
 } from '@aktk/block-components/components/custom-spacing-select';
-import {
-	MobileControl,
-	TabletControl,
-} from '@aktk/block-components/components/icon-control';
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import {
 	ToolsPanel,
@@ -34,15 +29,13 @@ const SIDES: ( 'top' | 'right' | 'bottom' | 'left' )[] = [
 	'left',
 ];
 
-type ResponsiveMarginType = 'tablet' | 'mobile';
-
 /**
  * レスポンシブmargin設定があるかチェック.
  *
  * @param value
  */
 function hasResponsiveMargin( value?: ResponsiveSpacing ) {
-	return !! ( value?.tablet || value?.mobile );
+	return !! ( value?.desktop || value?.tablet || value?.mobile );
 }
 
 /**
@@ -59,18 +52,11 @@ export function Spacing( props: IconListEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { responsiveMargin } = attributes;
 	const marginLabel = __( '外側余白(margin)', 'ystandard-toolbox' );
-	const labelClassName = 'text-fz-xs max-w-[calc(100%-24px)] -mb-[1.4em]';
 
 	// デバイスごとのmarginを更新する.
-	const handleOnChange = (
-		type: ResponsiveMarginType,
-		value?: SpacingValue
-	) => {
+	const handleOnChange = ( value: ResponsiveSpacing ) => {
 		setAttributes( {
-			responsiveMargin: cleanResponsiveMargin( {
-				...responsiveMargin,
-				[ type ]: value,
-			} ),
+			responsiveMargin: cleanResponsiveMargin( value ),
 		} );
 	};
 
@@ -93,34 +79,13 @@ export function Spacing( props: IconListEditProps ): JSX.Element {
 				hasValue={ () => hasResponsiveMargin( responsiveMargin ) }
 				onDeselect={ handleOnReset }
 			>
-				<div className="grid grid-cols-1 gap-4">
-					<div>
-						<TabletControl className={ labelClassName }>
-							{ __( 'タブレット', 'ystandard-toolbox' ) }
-						</TabletControl>
-						<CustomSpacingSelectControl
-							sides={ SIDES }
-							values={ responsiveMargin?.tablet }
-							onChange={ ( value ) =>
-								handleOnChange( 'tablet', value )
-							}
-							minimumCustomValue={ -9999 }
-						/>
-					</div>
-					<div>
-						<MobileControl className={ labelClassName }>
-							{ __( 'モバイル', 'ystandard-toolbox' ) }
-						</MobileControl>
-						<CustomSpacingSelectControl
-							sides={ SIDES }
-							values={ responsiveMargin?.mobile }
-							onChange={ ( value ) =>
-								handleOnChange( 'mobile', value )
-							}
-							minimumCustomValue={ -9999 }
-						/>
-					</div>
-				</div>
+				<ResponsiveSpacingSelectControl
+					value={ responsiveMargin }
+					onChange={ handleOnChange }
+					sides={ SIDES }
+					minimumCustomValue={ -9999 }
+					showResetButton={ false }
+				/>
 			</ToolsPanelItem>
 		</ToolsPanel>
 	);

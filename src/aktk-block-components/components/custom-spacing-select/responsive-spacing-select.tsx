@@ -120,7 +120,7 @@ export function ResponsiveSpacingSelect( props: ResponsiveSpacingSelectProps ) {
 	);
 }
 
-function ResponsiveSpacingSelectControl(
+export function ResponsiveSpacingSelectControl(
 	props: ResponsiveSpacingSelectControlProps
 ) {
 	const {
@@ -172,7 +172,7 @@ function ResponsiveSpacingSelectControl(
 			<div className={ gridClassName }>
 				<div>
 					<DesktopControl className={ labelClassName }>
-						{ __( 'テスクトップ', 'ystandard-blocks' ) }
+						{ __( 'デスクトップ', 'ystandard-toolbox' ) }
 					</DesktopControl>
 					<CustomSpacingSelectControl
 						sides={ sides }
@@ -183,7 +183,7 @@ function ResponsiveSpacingSelectControl(
 				</div>
 				<div>
 					<TabletControl className={ labelClassName }>
-						{ __( 'タブレット', 'ystandard-blocks' ) }
+						{ __( 'タブレット', 'ystandard-toolbox' ) }
 					</TabletControl>
 					<CustomSpacingSelectControl
 						sides={ sides }
@@ -194,7 +194,7 @@ function ResponsiveSpacingSelectControl(
 				</div>
 				<div>
 					<MobileControl className={ labelClassName }>
-						{ __( 'モバイル', 'ystandard-blocks' ) }
+						{ __( 'モバイル', 'ystandard-toolbox' ) }
 					</MobileControl>
 					<CustomSpacingSelectControl
 						sides={ sides }

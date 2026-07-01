@@ -6,6 +6,10 @@
 			"iconType": "chevron-right",
 			"iconBold": false,
 			"responsiveMargin": {
+				"desktop": {
+					"top": "56px",
+					"bottom": "36px"
+				},
 				"tablet": {
 					"top": "40px",
 					"bottom": "24px"
