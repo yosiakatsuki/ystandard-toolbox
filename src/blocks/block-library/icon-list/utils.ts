@@ -22,7 +22,7 @@ import type { IconListAttributes } from './types';
 export const blockClassName = 'ystdtb-icon-list';
 
 const responsiveMarginTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
-const responsiveMarginPositions = [ 'top', 'right', 'bottom', 'left' ] as const;
+const responsiveMarginPositions = [ 'top', 'bottom' ] as const;
 
 export function getBlockClasses( attributes: IconListAttributes ) {
 	const { iconType, customIconClass, iconBold, iconColor, customIconColor } =

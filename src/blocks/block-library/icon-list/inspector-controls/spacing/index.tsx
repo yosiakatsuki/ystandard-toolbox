@@ -11,6 +11,7 @@ import {
 	ResponsiveSpacingSelectControl,
 } from '@aktk/block-components/components/custom-spacing-select';
 import { stripUndefined } from '@aktk/block-components/utils/object';
+import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import {
 	ToolsPanel,
 	ToolsPanelItem,
@@ -22,12 +23,7 @@ import {
 import type { IconListEditProps } from '../../types';
 
 const PANEL_ID = 'ystdtb-icon-list-responsive-spacing';
-const SIDES: ( 'top' | 'right' | 'bottom' | 'left' )[] = [
-	'top',
-	'right',
-	'bottom',
-	'left',
-];
+const SIDES: ( 'top' | 'bottom' )[] = [ 'top', 'bottom' ];
 
 /**
  * レスポンシブmargin設定があるかチェック.
@@ -79,13 +75,15 @@ export function Spacing( props: IconListEditProps ): JSX.Element {
 				hasValue={ () => hasResponsiveMargin( responsiveMargin ) }
 				onDeselect={ handleOnReset }
 			>
-				<ResponsiveSpacingSelectControl
-					value={ responsiveMargin }
-					onChange={ handleOnChange }
-					sides={ SIDES }
-					minimumCustomValue={ -9999 }
-					showResetButton={ false }
-				/>
+				<BaseControl id="responsive-margin" label={ marginLabel }>
+					<ResponsiveSpacingSelectControl
+						value={ responsiveMargin }
+						onChange={ handleOnChange }
+						sides={ SIDES }
+						minimumCustomValue={ -9999 }
+						showResetButton={ false }
+					/>
+				</BaseControl>
 			</ToolsPanelItem>
 		</ToolsPanel>
 	);

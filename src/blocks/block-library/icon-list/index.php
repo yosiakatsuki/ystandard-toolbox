@@ -66,7 +66,7 @@ class Icon_List_Block {
 		$selector   = '.ystdtb-icon-list';
 
 		foreach ( array_keys( $responsive ) as $type ) {
-			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $position ) {
+			foreach ( [ 'top', 'bottom' ] as $position ) {
 				$logical = Styles::get_logical_direction( $position );
 
 				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(

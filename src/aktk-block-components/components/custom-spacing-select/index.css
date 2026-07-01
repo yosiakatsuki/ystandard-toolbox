@@ -1,6 +1,16 @@
 .aktk-component__custom-spacing-select {
-
 	.components-base-control {
 		margin-bottom: 0;
+	}
+}
+.aktk-component__responsive-spacing-select-label {
+	max-width: calc(100% - 24px);
+	margin-bottom: -1.8em;
+	font-size: calc(12 / 16 * 1rem);
+
+	svg {
+		--size: 1.2em;
+		width: var(--size);
+		height: var(--size);
 	}
 }

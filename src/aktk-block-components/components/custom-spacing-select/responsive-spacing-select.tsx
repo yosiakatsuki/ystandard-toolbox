@@ -164,7 +164,7 @@ export function ResponsiveSpacingSelectControl(
 	} );
 
 	const labelClassName = classnames(
-		'text-fz-xs max-w-[calc(100%-24px)] -mb-[1.4em]'
+		'aktk-component__responsive-spacing-select-label'
 	);
 
 	return (
