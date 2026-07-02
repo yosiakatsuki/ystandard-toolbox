@@ -106,6 +106,9 @@ class Legacy_Content_Search {
 	 * 該当投稿が1件もない場合はメニューを表示しない。
 	 */
 	public function add_menu() {
+		if ( ! current_user_can( self::CAPABILITY ) ) {
+			return;
+		}
 		if ( ! $this->has_any_matches() ) {
 			return;
 		}
