@@ -1,0 +1,40 @@
+[
+	{
+		"name": "ystdtb/icon-list",
+		"isValid": true,
+		"attributes": {
+			"iconType": "chevron-right",
+			"iconBold": false,
+			"responsivePadding": {
+				"desktop": {
+					"top": "40px",
+					"right": "36px",
+					"bottom": "32px",
+					"left": "28px"
+				},
+				"tablet": {
+					"top": "28px",
+					"right": "24px",
+					"bottom": "20px",
+					"left": "16px"
+				},
+				"mobile": {
+					"top": "20px",
+					"right": "16px",
+					"bottom": "12px",
+					"left": "8px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/icon-list-item",
+				"isValid": true,
+				"attributes": {
+					"content": "項目"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

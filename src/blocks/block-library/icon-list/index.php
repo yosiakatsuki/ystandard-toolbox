@@ -64,19 +64,25 @@ class Icon_List_Block {
 			'mobile'  => '',
 		];
 		$selector   = '.ystdtb-icon-list';
+		$spacing    = [
+			'margin'  => [ 'top', 'bottom' ],
+			'padding' => [ 'top', 'right', 'bottom', 'left' ],
+		];
 
 		foreach ( array_keys( $responsive ) as $type ) {
-			foreach ( [ 'top', 'bottom' ] as $position ) {
-				$logical = Styles::get_logical_direction( $position );
+			foreach ( $spacing as $property => $positions ) {
+				foreach ( $positions as $position ) {
+					$logical = Styles::get_logical_direction( $position );
 
-				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
-					[
-						'selector'  => $selector,
-						'prop_name' => "icon-list--margin-{$position}",
-						'property'  => "margin-{$logical}",
-						'type'      => $type,
-					]
-				);
+					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+						[
+							'selector'  => $selector,
+							'prop_name' => "icon-list--{$property}-{$position}",
+							'property'  => "{$property}-{$logical}",
+							'type'      => $type,
+						]
+					);
+				}
 			}
 		}
 

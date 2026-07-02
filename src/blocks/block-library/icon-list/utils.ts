@@ -21,8 +21,17 @@ import type { IconListAttributes } from './types';
  */
 export const blockClassName = 'ystdtb-icon-list';
 
-const responsiveMarginTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
+const responsiveSpacingTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
 const responsiveMarginPositions = [ 'top', 'bottom' ] as const;
+const responsivePaddingPositions = [
+	'top',
+	'right',
+	'bottom',
+	'left',
+] as const;
+
+type ResponsiveSpacingPosition = 'top' | 'right' | 'bottom' | 'left';
+type ResponsiveSpacingType = 'margin' | 'padding';
 
 export function getBlockClasses( attributes: IconListAttributes ) {
 	const { iconType, customIconClass, iconBold, iconColor, customIconColor } =
@@ -39,25 +48,27 @@ export function getBlockClasses( attributes: IconListAttributes ) {
 }
 
 /**
- * レスポンシブmargin用のカスタムプロパティを取得.
+ * レスポンシブ余白用のカスタムプロパティを取得.
  */
-function getResponsiveMarginStyles( attributes: IconListAttributes ) {
-	const { responsiveMargin } = attributes;
+function getResponsiveSpacingStyles(
+	spacing: IconListAttributes['responsiveMargin'],
+	spacingType: ResponsiveSpacingType,
+	positions: readonly ResponsiveSpacingPosition[]
+) {
+	return responsiveSpacingTypes.reduce(
+		( acc, responsiveType ) => {
+			const value = spacing?.[ responsiveType ];
 
-	return responsiveMarginTypes.reduce(
-		( acc, type ) => {
-			const margin = responsiveMargin?.[ type ];
-
-			responsiveMarginPositions.forEach( ( position ) => {
-				const value = margin?.[ position ];
-				if ( value ) {
+			positions.forEach( ( position ) => {
+				const spacingValue = value?.[ position ];
+				if ( spacingValue ) {
 					const customPropName = getResponsiveCustomPropName(
 						'ystdtb',
-						`icon-list--margin-${ position }`,
-						type
+						`icon-list--${ spacingType }-${ position }`,
+						responsiveType
 					);
 					acc[ customPropName ] =
-						presetTokenToCssVar( value ) || value;
+						presetTokenToCssVar( spacingValue ) || spacingValue;
 				}
 			} );
 
@@ -68,9 +79,19 @@ function getResponsiveMarginStyles( attributes: IconListAttributes ) {
 }
 
 export function getBlockStyles( attributes: IconListAttributes ) {
-	const { customIconColor, iconColor } = attributes;
+	const { customIconColor, iconColor, responsiveMargin, responsivePadding } =
+		attributes;
 	return {
 		'--icon-font-color': iconColor ? undefined : customIconColor,
-		...getResponsiveMarginStyles( attributes ),
+		...getResponsiveSpacingStyles(
+			responsiveMargin,
+			'margin',
+			responsiveMarginPositions
+		),
+		...getResponsiveSpacingStyles(
+			responsivePadding,
+			'padding',
+			responsivePaddingPositions
+		),
 	};
 }

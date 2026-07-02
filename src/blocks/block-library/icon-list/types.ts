@@ -23,6 +23,7 @@ export interface IconListAttributes {
 	iconColor?: string;
 	customIconColor?: string;
 	responsiveMargin?: ResponsiveSpacing;
+	responsivePadding?: ResponsiveSpacing;
 }
 
 /**

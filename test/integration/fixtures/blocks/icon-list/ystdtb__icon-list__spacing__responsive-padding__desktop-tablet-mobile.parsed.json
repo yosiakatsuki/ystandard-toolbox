@@ -1,0 +1,44 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"responsivePadding": {
+				"desktop": {
+					"top": "40px",
+					"right": "36px",
+					"bottom": "32px",
+					"left": "28px"
+				},
+				"tablet": {
+					"top": "28px",
+					"right": "24px",
+					"bottom": "20px",
+					"left": "16px"
+				},
+				"mobile": {
+					"top": "20px",
+					"right": "16px",
+					"bottom": "12px",
+					"left": "8px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"--ystdtb--desktop--icon-list--padding-top:40px;--ystdtb--desktop--icon-list--padding-right:36px;--ystdtb--desktop--icon-list--padding-bottom:32px;--ystdtb--desktop--icon-list--padding-left:28px;--ystdtb--tablet--icon-list--padding-top:28px;--ystdtb--tablet--icon-list--padding-right:24px;--ystdtb--tablet--icon-list--padding-bottom:20px;--ystdtb--tablet--icon-list--padding-left:16px;--ystdtb--mobile--icon-list--padding-top:20px;--ystdtb--mobile--icon-list--padding-right:16px;--ystdtb--mobile--icon-list--padding-bottom:12px;--ystdtb--mobile--icon-list--padding-left:8px\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"--ystdtb--desktop--icon-list--padding-top:40px;--ystdtb--desktop--icon-list--padding-right:36px;--ystdtb--desktop--icon-list--padding-bottom:32px;--ystdtb--desktop--icon-list--padding-left:28px;--ystdtb--tablet--icon-list--padding-top:28px;--ystdtb--tablet--icon-list--padding-right:24px;--ystdtb--tablet--icon-list--padding-bottom:20px;--ystdtb--tablet--icon-list--padding-left:16px;--ystdtb--mobile--icon-list--padding-top:20px;--ystdtb--mobile--icon-list--padding-right:16px;--ystdtb--mobile--icon-list--padding-bottom:12px;--ystdtb--mobile--icon-list--padding-left:8px\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

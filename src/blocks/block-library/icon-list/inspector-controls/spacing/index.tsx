@@ -23,43 +23,72 @@ import {
 import type { IconListEditProps } from '../../types';
 
 const PANEL_ID = 'ystdtb-icon-list-responsive-spacing';
-const SIDES: ( 'top' | 'bottom' )[] = [ 'top', 'bottom' ];
+const MARGIN_SIDES: ( 'top' | 'bottom' )[] = [ 'top', 'bottom' ];
+const PADDING_SIDES: ( 'top' | 'right' | 'bottom' | 'left' )[] = [
+	'top',
+	'right',
+	'bottom',
+	'left',
+];
 
 /**
- * レスポンシブmargin設定があるかチェック.
+ * レスポンシブ余白設定があるかチェック.
  *
  * @param value
  */
-function hasResponsiveMargin( value?: ResponsiveSpacing ) {
+function hasResponsiveSpacing( value?: ResponsiveSpacing ) {
 	return !! ( value?.desktop || value?.tablet || value?.mobile );
 }
 
 /**
- * レスポンシブmarginを整理.
+ * レスポンシブ余白を整理.
  *
  * @param value
  */
-function cleanResponsiveMargin( value: ResponsiveSpacing ) {
+function cleanResponsiveSpacing( value: ResponsiveSpacing ) {
 	return stripUndefined( value ) as ResponsiveSpacing | undefined;
 }
 
 // @ts-ignore.
 export function Spacing( props: IconListEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { responsiveMargin } = attributes;
+	const { responsiveMargin, responsivePadding } = attributes;
 	const marginLabel = __( '外側余白(マージン)', 'ystandard-toolbox' );
+	const paddingLabel = __( '内側余白(パディング)', 'ystandard-toolbox' );
 
 	// デバイスごとのmarginを更新する.
-	const handleOnChange = ( value: ResponsiveSpacing ) => {
+	const handleOnChangeMargin = ( value: ResponsiveSpacing ) => {
 		setAttributes( {
-			responsiveMargin: cleanResponsiveMargin( value ),
+			responsiveMargin: cleanResponsiveSpacing( value ),
+		} );
+	};
+
+	// デバイスごとのpaddingを更新する.
+	const handleOnChangePadding = ( value: ResponsiveSpacing ) => {
+		setAttributes( {
+			responsivePadding: cleanResponsiveSpacing( value ),
 		} );
 	};
 
 	// margin設定をリセットする.
-	const handleOnReset = () => {
+	const handleOnResetMargin = () => {
 		setAttributes( {
 			responsiveMargin: undefined,
+		} );
+	};
+
+	// padding設定をリセットする.
+	const handleOnResetPadding = () => {
+		setAttributes( {
+			responsivePadding: undefined,
+		} );
+	};
+
+	// 余白設定をリセットする.
+	const handleOnResetAll = () => {
+		setAttributes( {
+			responsiveMargin: undefined,
+			responsivePadding: undefined,
 		} );
 	};
 
@@ -67,19 +96,35 @@ export function Spacing( props: IconListEditProps ): JSX.Element {
 		<ToolsPanel
 			label={ __( 'レスポンシブ余白', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
-			resetAll={ handleOnReset }
+			resetAll={ handleOnResetAll }
 		>
+			<ToolsPanelItem
+				label={ paddingLabel }
+				panelId={ PANEL_ID }
+				hasValue={ () => hasResponsiveSpacing( responsivePadding ) }
+				onDeselect={ handleOnResetPadding }
+			>
+				<BaseControl id="responsive-padding" label={ paddingLabel }>
+					<ResponsiveSpacingSelectControl
+						value={ responsivePadding }
+						onChange={ handleOnChangePadding }
+						sides={ PADDING_SIDES }
+						minimumCustomValue={ -9999 }
+						showResetButton={ false }
+					/>
+				</BaseControl>
+			</ToolsPanelItem>
 			<ToolsPanelItem
 				label={ marginLabel }
 				panelId={ PANEL_ID }
-				hasValue={ () => hasResponsiveMargin( responsiveMargin ) }
-				onDeselect={ handleOnReset }
+				hasValue={ () => hasResponsiveSpacing( responsiveMargin ) }
+				onDeselect={ handleOnResetMargin }
 			>
 				<BaseControl id="responsive-margin" label={ marginLabel }>
 					<ResponsiveSpacingSelectControl
 						value={ responsiveMargin }
-						onChange={ handleOnChange }
-						sides={ SIDES }
+						onChange={ handleOnChangeMargin }
+						sides={ MARGIN_SIDES }
 						minimumCustomValue={ -9999 }
 						showResetButton={ false }
 					/>

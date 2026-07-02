@@ -36,6 +36,9 @@
 		},
 		"responsiveMargin": {
 			"type": "object"
+		},
+		"responsivePadding": {
+			"type": "object"
 		}
 	},
 	"supports": {
