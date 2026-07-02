@@ -66,13 +66,12 @@ class Description_Term_Block {
 			);
 
 			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $pos ) {
-				$logical = Styles::get_logical_direction( $pos );
 				// Margin.
 				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
 					[
 						'selector'  => $selector,
 						'prop_name' => "dt--margin-{$pos}",
-						'property'  => "margin-{$logical}",
+						'property'  => "margin-{$pos}",
 						'type'      => $type,
 					]
 				);
@@ -81,7 +80,7 @@ class Description_Term_Block {
 					[
 						'selector'  => $selector,
 						'prop_name' => "dt--padding-{$pos}",
-						'property'  => "padding-{$logical}",
+						'property'  => "padding-{$pos}",
 						'type'      => $type,
 					]
 				);

@@ -53,7 +53,7 @@ class Icon_List_Block {
 	}
 
 	/**
-	 * レスポンシブmargin用スタイルを追加.
+	 * レスポンシブ余白用スタイルを追加.
 	 *
 	 * @return void
 	 */
@@ -72,13 +72,11 @@ class Icon_List_Block {
 		foreach ( array_keys( $responsive ) as $type ) {
 			foreach ( $spacing as $property => $positions ) {
 				foreach ( $positions as $position ) {
-					$logical = Styles::get_logical_direction( $position );
-
 					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
 						[
 							'selector'  => $selector,
 							'prop_name' => "icon-list--{$property}-{$position}",
-							'property'  => "{$property}-{$logical}",
+							'property'  => "{$property}-{$position}",
 							'type'      => $type,
 						]
 					);
