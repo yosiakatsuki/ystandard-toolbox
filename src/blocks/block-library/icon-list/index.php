@@ -9,6 +9,7 @@ namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Text;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -53,23 +54,33 @@ class Icon_List_Block {
 	}
 
 	/**
-	 * レスポンシブ余白用スタイルを追加.
+	 * レスポンシブスタイルを追加.
 	 *
 	 * @return void
 	 */
 	public function enqueue_responsive_style() {
-		$responsive = [
+		$responsive         = [
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '',
 		];
-		$selector   = '.ystdtb-icon-list';
-		$spacing    = [
+		$selector           = '.ystdtb-icon-list';
+		$font_size_selector = $selector;
+		$spacing            = [
 			'margin'  => [ 'top', 'bottom' ],
 			'padding' => [ 'top', 'right', 'bottom', 'left' ],
 		];
 
 		foreach ( array_keys( $responsive ) as $type ) {
+			$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $font_size_selector,
+					'prop_name' => 'icon-list--font-size',
+					'property'  => 'font-size',
+					'type'      => $type,
+				]
+			);
+
 			foreach ( $spacing as $property => $positions ) {
 				foreach ( $positions as $position ) {
 					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(

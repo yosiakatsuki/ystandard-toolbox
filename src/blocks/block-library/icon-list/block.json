@@ -39,6 +39,9 @@
 		},
 		"responsivePadding": {
 			"type": "object"
+		},
+		"responsiveFontSize": {
+			"type": "object"
 		}
 	},
 	"supports": {

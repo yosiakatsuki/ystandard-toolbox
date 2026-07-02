@@ -1,0 +1,29 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"responsiveFontSize": {
+				"desktop": "24px",
+				"tablet": "20px",
+				"mobile": "18px"
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"--ystdtb--desktop--icon-list--font-size:24px;--ystdtb--tablet--icon-list--font-size:20px;--ystdtb--mobile--icon-list--font-size:18px\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"--ystdtb--desktop--icon-list--font-size:24px;--ystdtb--tablet--icon-list--font-size:20px;--ystdtb--mobile--icon-list--font-size:18px\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

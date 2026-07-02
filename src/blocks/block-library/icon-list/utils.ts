@@ -21,7 +21,7 @@ import type { IconListAttributes } from './types';
  */
 export const blockClassName = 'ystdtb-icon-list';
 
-const responsiveSpacingTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
+const responsiveTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
 const responsiveMarginPositions = [ 'top', 'bottom' ] as const;
 const responsivePaddingPositions = [
 	'top',
@@ -55,7 +55,7 @@ function getResponsiveSpacingStyles(
 	spacingType: ResponsiveSpacingType,
 	positions: readonly ResponsiveSpacingPosition[]
 ) {
-	return responsiveSpacingTypes.reduce(
+	return responsiveTypes.reduce(
 		( acc, responsiveType ) => {
 			const value = spacing?.[ responsiveType ];
 
@@ -78,11 +78,41 @@ function getResponsiveSpacingStyles(
 	);
 }
 
+/**
+ * レスポンシブフォントサイズ用のカスタムプロパティを取得.
+ */
+function getResponsiveFontSizeStyles(
+	fontSize: IconListAttributes['responsiveFontSize']
+) {
+	return responsiveTypes.reduce(
+		( acc, responsiveType ) => {
+			const value = fontSize?.[ responsiveType ];
+			if ( value ) {
+				const customPropName = getResponsiveCustomPropName(
+					'ystdtb',
+					'icon-list--font-size',
+					responsiveType
+				);
+				acc[ customPropName ] = presetTokenToCssVar( value ) || value;
+			}
+
+			return acc;
+		},
+		{} as Record< string, string >
+	);
+}
+
 export function getBlockStyles( attributes: IconListAttributes ) {
-	const { customIconColor, iconColor, responsiveMargin, responsivePadding } =
-		attributes;
+	const {
+		customIconColor,
+		iconColor,
+		responsiveMargin,
+		responsivePadding,
+		responsiveFontSize,
+	} = attributes;
 	return {
 		'--icon-font-color': iconColor ? undefined : customIconColor,
+		...getResponsiveFontSizeStyles( responsiveFontSize ),
 		...getResponsiveSpacingStyles(
 			responsiveMargin,
 			'margin',
