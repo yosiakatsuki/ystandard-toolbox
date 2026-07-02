@@ -6,6 +6,12 @@ import classnames from 'classnames';
 import { getColorClassName } from '@wordpress/block-editor';
 
 /**
+ * Aktk Dependencies.
+ */
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
+import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
+
+/**
  * Block Dependencies.
  */
 import type { IconListAttributes } from './types';
@@ -14,6 +20,18 @@ import type { IconListAttributes } from './types';
  * ブロッククラス名
  */
 export const blockClassName = 'ystdtb-icon-list';
+
+const responsiveTypes = [ 'desktop', 'tablet', 'mobile' ] as const;
+const responsiveMarginPositions = [ 'top', 'bottom' ] as const;
+const responsivePaddingPositions = [
+	'top',
+	'right',
+	'bottom',
+	'left',
+] as const;
+
+type ResponsiveSpacingPosition = 'top' | 'right' | 'bottom' | 'left';
+type ResponsiveSpacingType = 'margin' | 'padding';
 
 export function getBlockClasses( attributes: IconListAttributes ) {
 	const { iconType, customIconClass, iconBold, iconColor, customIconColor } =
@@ -29,9 +47,81 @@ export function getBlockClasses( attributes: IconListAttributes ) {
 	} );
 }
 
+/**
+ * レスポンシブ余白用のカスタムプロパティを取得.
+ */
+function getResponsiveSpacingStyles(
+	spacing: IconListAttributes['responsiveMargin'],
+	spacingType: ResponsiveSpacingType,
+	positions: readonly ResponsiveSpacingPosition[]
+) {
+	return responsiveTypes.reduce(
+		( acc, responsiveType ) => {
+			const value = spacing?.[ responsiveType ];
+
+			positions.forEach( ( position ) => {
+				const spacingValue = value?.[ position ];
+				if ( spacingValue ) {
+					const customPropName = getResponsiveCustomPropName(
+						'ystdtb',
+						`icon-list--${ spacingType }-${ position }`,
+						responsiveType
+					);
+					acc[ customPropName ] =
+						presetTokenToCssVar( spacingValue ) || spacingValue;
+				}
+			} );
+
+			return acc;
+		},
+		{} as Record< string, string >
+	);
+}
+
+/**
+ * レスポンシブフォントサイズ用のカスタムプロパティを取得.
+ */
+function getResponsiveFontSizeStyles(
+	fontSize: IconListAttributes['responsiveFontSize']
+) {
+	return responsiveTypes.reduce(
+		( acc, responsiveType ) => {
+			const value = fontSize?.[ responsiveType ];
+			if ( value ) {
+				const customPropName = getResponsiveCustomPropName(
+					'ystdtb',
+					'icon-list--font-size',
+					responsiveType
+				);
+				acc[ customPropName ] = presetTokenToCssVar( value ) || value;
+			}
+
+			return acc;
+		},
+		{} as Record< string, string >
+	);
+}
+
 export function getBlockStyles( attributes: IconListAttributes ) {
-	const { customIconColor, iconColor } = attributes;
+	const {
+		customIconColor,
+		iconColor,
+		responsiveMargin,
+		responsivePadding,
+		responsiveFontSize,
+	} = attributes;
 	return {
 		'--icon-font-color': iconColor ? undefined : customIconColor,
+		...getResponsiveFontSizeStyles( responsiveFontSize ),
+		...getResponsiveSpacingStyles(
+			responsiveMargin,
+			'margin',
+			responsiveMarginPositions
+		),
+		...getResponsiveSpacingStyles(
+			responsivePadding,
+			'padding',
+			responsivePaddingPositions
+		),
 	};
 }

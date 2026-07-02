@@ -60,12 +60,11 @@ class Description_List_Block {
 		$css        = '';
 		foreach ( $types as $type ) {
 			foreach ( [ 'top', 'bottom' ] as $pos ) {
-				$logical              = Styles::get_logical_direction( $pos );
 				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
 					[
 						'selector'  => $selector,
 						'prop_name' => "dl--margin-{$pos}",
-						'property'  => "margin-{$logical}",
+						'property'  => "margin-{$pos}",
 						'type'      => $type,
 					]
 				);

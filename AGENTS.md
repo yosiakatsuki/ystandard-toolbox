@@ -119,6 +119,8 @@ npm run zip                  # 配布 zip 作成
 - `@aktk/block-components/wp-controls/select-control` は存在しない。`@aktk/block-components/components/custom-select-control` を使う。
 - ブロック側のコントロールは基本的に `BaseControl` でラップする。
 - `src/aktk-block-components/` は複数プロジェクト共用。プラグイン固有ロジックを入れない。
+- `src/blocks/controls/` はレガシー扱いとし、今後の新規開発では使わない。新しいコントロールは原則 `src/aktk-block-components/` 側の既存コンポーネントやラッパーを使う。
+- 既存の `src/blocks/controls/` 利用箇所は、特別な指示がない限り勝手に移行・書き換えしない。移行は明示された作業範囲に限定する。
 
 import セクションコメントの例:
 

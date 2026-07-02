@@ -29,7 +29,7 @@ module.exports = {
 	},
 	// node_modules 内の ESM パッケージ（parsel-js 等）も babel-jest で transform する.
 	transformIgnorePatterns: [
-		'/node_modules/(?!(parsel-js|@wordpress|@babel|change-case|memize|fast-deep-equal|hast-util-|unist-util-|mdast-util-|micromark|decode-named-character-reference|character-entities|property-information|space-separated-tokens|comma-separated-tokens|web-namespaces|ccount|escape-string-regexp|markdown-table|zwitch|longest-streak|trim-lines)/)',
+		'/node_modules/(?!(parsel-js|@wordpress|@babel|change-case|memize|fast-deep-equal|uuid|marked|hast-util-|unist-util-|mdast-util-|micromark|decode-named-character-reference|character-entities|property-information|space-separated-tokens|comma-separated-tokens|web-namespaces|ccount|escape-string-regexp|markdown-table|zwitch|longest-streak|trim-lines)/)',
 	],
 	testMatch: [ '<rootDir>/test/integration/**/*.test.[jt]s?(x)' ],
 	testPathIgnorePatterns: [

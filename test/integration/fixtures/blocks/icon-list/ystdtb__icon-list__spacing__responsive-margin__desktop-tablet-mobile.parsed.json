@@ -1,0 +1,46 @@
+[
+	{
+		"blockName": "ystdtb/icon-list",
+		"attrs": {
+			"responsiveMargin": {
+				"desktop": {
+					"top": "56px",
+					"bottom": "36px"
+				},
+				"tablet": {
+					"top": "40px",
+					"bottom": "24px"
+				},
+				"mobile": {
+					"top": "16px",
+					"bottom": "12px"
+				}
+			},
+			"style": {
+				"spacing": {
+					"margin": {
+						"top": "32px",
+						"bottom": "32px"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/icon-list-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<li class=\"ystdtb-icon-list-item\">項目</li>\n",
+				"innerContent": [
+					"\n<li class=\"ystdtb-icon-list-item\">項目</li>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"margin-top:32px;margin-bottom:32px;--ystdtb--desktop--icon-list--margin-top:56px;--ystdtb--desktop--icon-list--margin-bottom:36px;--ystdtb--tablet--icon-list--margin-top:40px;--ystdtb--tablet--icon-list--margin-bottom:24px;--ystdtb--mobile--icon-list--margin-top:16px;--ystdtb--mobile--icon-list--margin-bottom:12px\"></ul>\n",
+		"innerContent": [
+			"\n<ul class=\"ystdtb-icon-list icon--chevron-right\" style=\"margin-top:32px;margin-bottom:32px;--ystdtb--desktop--icon-list--margin-top:56px;--ystdtb--desktop--icon-list--margin-bottom:36px;--ystdtb--tablet--icon-list--margin-top:40px;--ystdtb--tablet--icon-list--margin-bottom:24px;--ystdtb--mobile--icon-list--margin-top:16px;--ystdtb--mobile--icon-list--margin-bottom:12px\">",
+			null,
+			"</ul>\n"
+		]
+	}
+]

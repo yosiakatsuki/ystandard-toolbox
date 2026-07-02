@@ -7,6 +7,10 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -26,6 +30,7 @@ class Icon_List_Block {
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
 		add_filter( 'ystdtb_block_editor_option', [ $this, 'add_block_config' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -46,6 +51,58 @@ class Icon_List_Block {
 		$options['listIcons'] = [];
 
 		return $options;
+	}
+
+	/**
+	 * レスポンシブスタイルを追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_responsive_style() {
+		$responsive         = [
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		];
+		$selector           = '.ystdtb-icon-list';
+		$font_size_selector = $selector;
+		$spacing            = [
+			'margin'  => [ 'top', 'bottom' ],
+			'padding' => [ 'top', 'right', 'bottom', 'left' ],
+		];
+
+		foreach ( array_keys( $responsive ) as $type ) {
+			$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $font_size_selector,
+					'prop_name' => 'icon-list--font-size',
+					'property'  => 'font-size',
+					'type'      => $type,
+				]
+			);
+
+			foreach ( $spacing as $property => $positions ) {
+				foreach ( $positions as $position ) {
+					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+						[
+							'selector'  => $selector,
+							'prop_name' => "icon-list--{$property}-{$position}",
+							'property'  => "{$property}-{$position}",
+							'type'      => $type,
+						]
+					);
+				}
+			}
+		}
+
+		$css  = Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-icon-list-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
+		wp_enqueue_style( $handle );
 	}
 
 	/**
