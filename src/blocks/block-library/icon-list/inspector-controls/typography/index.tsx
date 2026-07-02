@@ -65,7 +65,7 @@ export function Typography( props: IconListEditProps ): JSX.Element {
 
 	return (
 		<ToolsPanel
-			label={ __( 'レスポンシブフォントサイズ', 'ystandard-toolbox' ) }
+			label={ __( 'レスポンシブ文字設定', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
 			resetAll={ handleOnResetFontSize }
 		>
