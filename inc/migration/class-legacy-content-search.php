@@ -74,6 +74,15 @@ class Legacy_Content_Search {
 					'is-not-stacked-on-mobile',
 				],
 			],
+			'posts-legacy-excerpt-length'             => [
+				'name'           => __( '記事一覧：v2.0.0で削除された概要文字数設定を使用している投稿', 'ystandard-toolbox' ),
+				'description'    => __( 'v2.0.0で概要文の設定が「概要文字数」から「概要文の最大行数」に変更されました。エディターで開いて「概要文の最大行数」を設定し直して保存してください。', 'ystandard-toolbox' ),
+				'block_name'     => 'ystdtb/posts',
+				'block_label'    => __( '記事一覧', 'ystandard-toolbox' ),
+				'target_strings' => [
+					'excerptLength',
+				],
+			],
 		];
 	}
 
