@@ -6,12 +6,7 @@
 	"title": "アイコンリストアイテム",
 	"category": "ystdtb-blocks",
 	"description": "アイコンを表示できるリストブロックの行ブロック",
-	"keywords": [
-		"list",
-		"icon",
-		"アイコン",
-		"リスト"
-	],
+	"keywords": [ "list", "icon", "アイコン", "リスト" ],
 	"parent": [ "ystdtb/icon-list" ],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
@@ -36,6 +31,7 @@
 			"__experimentalTextTransform": true,
 			"__experimentalTextDecoration": true,
 			"__experimentalLetterSpacing": true,
+			"__experimentalWritingMode": true,
 			"__experimentalDefaultControls": {
 				"fontSize": true
 			}
@@ -46,8 +42,23 @@
 			"link": true,
 			"__experimentalDefaultControls": {
 				"background": true,
-				"text": true
+				"text": true,
+				"link": true
 			}
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"margin": false,
+				"padding": false
+			}
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
 		},
 		"interactivity": {
 			"clientNavigation": true
@@ -61,5 +72,5 @@
 		"ystdtb/customIconColor": "customIconColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"]
+	"editorStyle": [ "ystdtb-aktk-components-editor", "file:./index.css" ]
 }
