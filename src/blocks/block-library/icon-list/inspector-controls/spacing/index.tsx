@@ -47,7 +47,7 @@ function cleanResponsiveMargin( value: ResponsiveSpacing ) {
 export function Spacing( props: IconListEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { responsiveMargin } = attributes;
-	const marginLabel = __( '外側余白(margin)', 'ystandard-toolbox' );
+	const marginLabel = __( '外側余白(マージン)', 'ystandard-toolbox' );
 
 	// デバイスごとのmarginを更新する.
 	const handleOnChange = ( value: ResponsiveSpacing ) => {

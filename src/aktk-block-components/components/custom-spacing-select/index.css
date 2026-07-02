@@ -2,11 +2,15 @@
 	.components-base-control {
 		margin-bottom: 0;
 	}
+
+	.spacing-sizes-control__header {
+		margin-bottom: 6px;
+	}
 }
 .aktk-component__responsive-spacing-select-label {
 	max-width: calc(100% - 24px);
-	margin-bottom: -1.8em;
-	font-size: calc(12 / 16 * 1rem);
+	margin-bottom: -16px;
+	font-size: 12px;
 
 	svg {
 		--size: 1.2em;
