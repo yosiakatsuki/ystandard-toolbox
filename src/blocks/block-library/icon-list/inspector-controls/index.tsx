@@ -8,7 +8,7 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  */
 import type { IconListEditProps } from '../types';
 import { Icon } from './icon';
-import { FontSize } from './font-size';
+import { Typography } from './typography';
 import { Spacing } from './spacing';
 
 // @ts-ignore.
@@ -19,7 +19,7 @@ export function InspectorControls( props: IconListEditProps ): JSX.Element {
 				<Icon { ...props } />
 			</WPInspectorControls>
 			<WPInspectorControls group="styles">
-				<FontSize />
+				<Typography { ...props } />
 				<Spacing { ...props } />
 			</WPInspectorControls>
 		</>
