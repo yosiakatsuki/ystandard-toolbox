@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { BlockControls } from '@wordpress/block-editor';
-import { ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components';
+import { ToolbarDropdownMenu } from '@wordpress/components';
 
 /**
  * Block Dependencies
@@ -42,15 +42,15 @@ export function InlineFormatToolbar( props: FormatEditProps ) {
 		return null;
 	}
 
+	// ToolbarGroupで包むとgroupの余白・区切り線が入り、
+	// コアのフォーマットボタン(48px)と幅が揃わないため直接描画する
 	return (
 		<BlockControls group="inline">
-			<ToolbarGroup>
-				<ToolbarDropdownMenu
-					icon={ <InlineFormatIcon /> }
-					label={ __( 'yStandard Toolbox', 'ystandard-toolbox' ) }
-					controls={ controlSets }
-				/>
-			</ToolbarGroup>
+			<ToolbarDropdownMenu
+				icon={ <InlineFormatIcon /> }
+				label={ __( 'yStandard Toolbox', 'ystandard-toolbox' ) }
+				controls={ controlSets }
+			/>
 		</BlockControls>
 	);
 }

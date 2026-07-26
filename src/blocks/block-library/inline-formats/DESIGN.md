@@ -56,9 +56,17 @@ src/blocks/block-library/inline-formats/
 ## 共通ツールバー
 
 `toolbar.tsx` の `InlineFormatToolbar` が `BlockControls group="inline"` に
-`ToolbarGroup` + `ToolbarDropdownMenu` を出す。
+`ToolbarDropdownMenu` を出す。
 フォーマットツールバー自体が同じ `group="inline"` スロットに描画されるため
 （`block-editor/src/components/rich-text/format-toolbar-container.js`）、B / I / リンクの隣に並ぶ。
+
+**`ToolbarGroup` で包まないこと。** `.components-toolbar-group` は
+`padding: 0 6px` と `border-right: 1px` を持ち、内側のボタンには
+`min-width: 36px` / `padding: 0 6px` のルールが当たる。
+コアのフォーマットボタンは ToolbarGroup を通さずスロットへ直接描画され
+`min-width: 48px` / `padding: 0 8px` になるため、包むとボタン幅が 36px と 48px で不揃いになり、
+余分な区切り線も入る。`ToolbarDropdownMenu` は `NavigableToolbar` が提供する
+`ToolbarContext` だけを必要とし、`ToolbarGroup` は不要。
 
 - ボタンのアイコンは `icon.tsx` の `InlineFormatIcon`
 - ボタンのラベルは `yStandard Toolbox`
@@ -229,6 +237,7 @@ rich-text のストアを実際に動かすテストでは先頭で `jest.unmock
 `npm run start`（wp-env port 10020）で `docs/block-operation-test-guideline.md` に沿って確認する。
 
 - フォーマットツールバーに yStandard Toolbox のボタンが**1つだけ**表示される
+- ボタンの幅・左右の余白が B / I / リンクと揃っている（48px / 左右 12px）
 - ボタンのアイコンが 24px でも Toolbox マーク + 右下の ys として判別できる（重なり部分が溶けていない）
 - ドロップダウン内のアイコンが線画で表示される（塗りつぶされていない）
 - 段落の途中で「モバイルのみ改行」→ エディター上で改行 + `SP` バッジが出る
