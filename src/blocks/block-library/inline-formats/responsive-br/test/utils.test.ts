@@ -15,7 +15,8 @@ import type { RichTextValue } from '@wordpress/rich-text';
 /**
  * Block Dependencies
  */
-import { FORMAT_TAG_NAME, RESPONSIVE_BREAKS } from '../config';
+import { FORMAT_TAG_NAME } from '../../config';
+import { RESPONSIVE_BREAKS } from '../config';
 import { insertResponsiveBreak } from '../utils';
 
 const MOBILE_FORMAT_NAME = 'ystdtb/br-mobile';

@@ -1,6 +1,6 @@
 <?php
 /**
- * インラインフォーマット：レスポンシブ改行
+ * インラインフォーマット
  *
  * @package ystandard-toolbox
  * @author  yosiakatsuki
@@ -15,25 +15,25 @@ use ystandard_toolbox\Util\Text;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class Format_Responsive_Br.
+ * Class Inline_Formats.
  *
- * 画面サイズ別の改行を提供するクラス.
+ * yStandard Toolbox独自のインラインフォーマットを提供するクラス.
  *
  * @package ystandard_toolbox
  */
-class Format_Responsive_Br {
+class Inline_Formats {
 
 	/**
 	 * Instance.
 	 *
-	 * @var Format_Responsive_Br
+	 * @var Inline_Formats
 	 */
 	private static $instance;
 
 	/**
 	 * スタイルのハンドル名
 	 */
-	const STYLE_HANDLE = 'ystdtb-format-responsive-br-style';
+	const STYLE_HANDLE = 'ystdtb-inline-formats-style';
 
 	/**
 	 * Constructor.
@@ -46,7 +46,7 @@ class Format_Responsive_Br {
 	/**
 	 * Instance.
 	 *
-	 * @return Format_Responsive_Br
+	 * @return Inline_Formats
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -57,13 +57,31 @@ class Format_Responsive_Br {
 	}
 
 	/**
-	 * レスポンシブ改行用スタイル追加
+	 * インラインフォーマット用スタイル追加
 	 *
 	 * エディター側では改行を常に表示するため、フロントのみで読み込む.
+	 * フォーマットを追加する場合はここにCSSを追加する.
 	 *
 	 * @return void
 	 */
 	public function add_style() {
+		$css = $this->get_responsive_br_css();
+
+		if ( empty( $css ) ) {
+			return;
+		}
+
+		wp_register_style( self::STYLE_HANDLE, false );
+		wp_enqueue_style( self::STYLE_HANDLE );
+		wp_add_inline_style( self::STYLE_HANDLE, Text::minify( $css ) );
+	}
+
+	/**
+	 * レスポンシブ改行用CSS取得
+	 *
+	 * @return string
+	 */
+	private function get_responsive_br_css() {
 		// 既定では改行しない.
 		$css = '.ystdtb-br--mobile > br,.ystdtb-br--tablet > br,.ystdtb-br--desktop > br {display: none;}';
 		// 対象の画面サイズのみ改行する.
@@ -77,9 +95,7 @@ class Format_Responsive_Br {
 			'.ystdtb-br--desktop > br {display: inline;}'
 		);
 
-		wp_register_style( self::STYLE_HANDLE, false );
-		wp_enqueue_style( self::STYLE_HANDLE );
-		wp_add_inline_style( self::STYLE_HANDLE, Text::minify( $css ) );
+		return $css;
 	}
 
 	/**
@@ -95,4 +111,4 @@ class Format_Responsive_Br {
 	}
 }
 
-Format_Responsive_Br::get_instance();
+Inline_Formats::get_instance();

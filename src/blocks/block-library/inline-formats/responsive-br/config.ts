@@ -1,5 +1,5 @@
 /**
- * 設定 - インラインフォーマット：レスポンシブ改行
+ * 設定 - レスポンシブ改行
  */
 
 import { Monitor, Smartphone, Tablet } from 'react-feather';
@@ -35,8 +35,3 @@ export const RESPONSIVE_BREAKS: ResponsiveBreak[] = [
 		icon: Monitor,
 	},
 ];
-
-/**
- * フォーマットのタグ名
- */
-export const FORMAT_TAG_NAME = 'span';
