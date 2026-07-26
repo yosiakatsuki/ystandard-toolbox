@@ -9,7 +9,7 @@ import { ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components';
  * Block Dependencies
  */
 import { FORMAT_TOOLBAR_GROUPS, LINE_ICON_STYLE } from './config';
-import { ToolboxIcon } from './icon';
+import { InlineFormatIcon } from './icon';
 import type { FormatEditProps } from './types';
 
 /**
@@ -46,7 +46,7 @@ export function InlineFormatToolbar( props: FormatEditProps ) {
 		<BlockControls group="inline">
 			<ToolbarGroup>
 				<ToolbarDropdownMenu
-					icon={ <ToolboxIcon /> }
+					icon={ <InlineFormatIcon /> }
 					label={ __( 'yStandard Toolbox', 'ystandard-toolbox' ) }
 					controls={ controlSets }
 				/>

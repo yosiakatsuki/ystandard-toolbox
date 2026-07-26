@@ -60,7 +60,7 @@ src/blocks/block-library/inline-formats/
 フォーマットツールバー自体が同じ `group="inline"` スロットに描画されるため
 （`block-editor/src/components/rich-text/format-toolbar-container.js`）、B / I / リンクの隣に並ぶ。
 
-- ボタンのアイコンは管理画面メニューと同じ yStandard Toolbox のマーク（`assets/menu/toolbox.svg` のパスを `icon.tsx` に転記）
+- ボタンのアイコンは `icon.tsx` の `InlineFormatIcon`
 - ボタンのラベルは `yStandard Toolbox`
 - `controls` にはグループごとの配列を渡す。`ToolbarDropdownMenu` は配列の配列を受け取ると
   グループごとに区切って表示する（`components/src/dropdown-menu/index.tsx`）
@@ -72,6 +72,28 @@ src/blocks/block-library/inline-formats/
 `formats.ts` では **先頭のフォーマットにのみ** 共通ツールバーの `edit` を渡している。
 `edit` に渡される `value` / `onChange` は RichText 全体のものなので、1 つの `edit` から全フォーマットを操作できる
 （`block-editor/src/components/rich-text/format-edit.js`。`edit` は任意プロパティ）。
+
+### ツールバーボタンのアイコン
+
+`icon.tsx` の `InlineFormatIcon` は、次の 2 つのマークを 1 つの SVG に合成した独自アイコン。
+「Toolbox の機能」であることと「yStandard 用」であることを 24px のボタンで同時に伝えるため。
+
+- 左上：管理画面メニューと同じ yStandard Toolbox のマーク（`assets/menu/toolbox.svg` のパスを転記）
+- 右下：yStandard の ys マーク（`@aktk/components/ystandard-icon` の `YsIconPaths` を再利用）
+
+CSS の重ね合わせではなく SVG 内の `transform` で配置している。
+`viewBox="0 0 24 24"` に対して
+
+- Toolbox マーク：`scale(0.4251)`（元の高さ 42.34 → 18）で左上に配置
+- ys マーク：`translate(12.11 13.53) scale(0.5013)`（元の幅 22.34 → 11.2）で右下に配置
+
+Toolbox マークは六角形で右下が空くため、この比率だと**マスクや切り抜きなしで重ならずに収まる**
+（六角形の右下の辺と ys の左上に約 0.6 の余白が残る）。
+比率を変える場合は、六角形を大きくしすぎると ys と衝突する点に注意。
+マスクで抜く案は、六角形の右下が大きく削れて形が破綻したため採用していない。
+
+ys マークのパスは `PanelIcon` と共用するため、`ystandard-icon` 側で
+`YsIconPaths`（path のみを返すコンポーネント）として切り出している。
 
 ### アイコンが塗りつぶされる問題
 
@@ -192,6 +214,7 @@ rich-text のストアを実際に動かすテストでは先頭で `jest.unmock
 `npm run start`（wp-env port 10020）で `docs/block-operation-test-guideline.md` に沿って確認する。
 
 - フォーマットツールバーに yStandard Toolbox のボタンが**1つだけ**表示される
+- ボタンのアイコンが 24px でも Toolbox マーク + ys として判別できる
 - ドロップダウン内のアイコンが線画で表示される（塗りつぶされていない）
 - 段落の途中で「モバイルのみ改行」→ エディター上で改行 + `SP` バッジが出る
 - 保存 → リロードしてブロック検証エラーが出ないこと
