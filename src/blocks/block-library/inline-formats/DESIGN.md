@@ -78,19 +78,34 @@ src/blocks/block-library/inline-formats/
 `icon.tsx` の `InlineFormatIcon` は、次の 2 つのマークを 1 つの SVG に合成した独自アイコン。
 「Toolbox の機能」であることと「yStandard 用」であることを 24px のボタンで同時に伝えるため。
 
-- 左上：管理画面メニューと同じ yStandard Toolbox のマーク（`assets/menu/toolbox.svg` のパスを転記）
-- 右下：yStandard の ys マーク（`@aktk/components/ystandard-icon` の `YsIconPaths` を再利用）
+- ベース：管理画面メニューと同じ yStandard Toolbox のマーク（`assets/menu/toolbox.svg` のパスを転記）
+- 右下に重ねる：yStandard の ys マーク（`@aktk/components/ystandard-icon` の `YsIconPaths` を再利用）
 
 CSS の重ね合わせではなく SVG 内の `transform` で配置している。
 `viewBox="0 0 24 24"` に対して
 
-- Toolbox マーク：`scale(0.4251)`（元の高さ 42.34 → 18）で左上に配置
-- ys マーク：`translate(12.11 13.53) scale(0.5013)`（元の幅 22.34 → 11.2）で右下に配置
+- Toolbox マーク：`scale(0.5432)`（元の高さ 42.34 → 23）
+- ys マーク：`translate(12.22 13.61) scale(0.4924)`（元の幅 22.34 → 11）で右下に配置
 
-Toolbox マークは六角形で右下が空くため、この比率だと**マスクや切り抜きなしで重ならずに収まる**
-（六角形の右下の辺と ys の左上に約 0.6 の余白が残る）。
-比率を変える場合は、六角形を大きくしすぎると ys と衝突する点に注意。
-マスクで抜く案は、六角形の右下が大きく削れて形が破綻したため採用していない。
+#### 重なり部分の処理
+
+ys マークは Toolbox マークの右下に重なるため、そのまま描くと同色の図形が溶けて判別できない。
+`mask` で **ys の字形に沿った余白を Toolbox マーク側から抜いている**。
+
+マスク内では ys のパスを `stroke-width="2.6"` の太い線で描いており、
+字形を膨らませたシルエットが抜き領域になる（実寸で約 0.6 の余白）。
+矩形で抜くと六角形が大きく削れて形が破綻するため、字形に沿って抜くのが要点。
+
+#### mask と transform の順序に注意
+
+`transform` を持つ要素に `mask` を付けると、**マスクは変換後の座標系で解釈される**。
+`<g mask="..." transform="scale(0.5432)">` と書くと、マスク内の `24x24` の白矩形が
+拡大前の座標（`38.7x42.34`）に対する `24x24` として扱われ、図形の右下が大きく欠ける。
+そのため mask は `transform` を持たない外側の `g` に付け、拡大は内側の `g` で行っている。
+
+なお、マスク内の `fill="#fff"` / `fill="#000"` は属性で指定しているが、
+WordPress の `.components-button svg { fill: currentColor; }` は `svg` 要素だけを対象にするため
+マスクの中身には影響しない（ボタン内に置いても崩れないことを確認済み）。
 
 ys マークのパスは `PanelIcon` と共用するため、`ystandard-icon` 側で
 `YsIconPaths`（path のみを返すコンポーネント）として切り出している。
@@ -214,7 +229,7 @@ rich-text のストアを実際に動かすテストでは先頭で `jest.unmock
 `npm run start`（wp-env port 10020）で `docs/block-operation-test-guideline.md` に沿って確認する。
 
 - フォーマットツールバーに yStandard Toolbox のボタンが**1つだけ**表示される
-- ボタンのアイコンが 24px でも Toolbox マーク + ys として判別できる
+- ボタンのアイコンが 24px でも Toolbox マーク + 右下の ys として判別できる（重なり部分が溶けていない）
 - ドロップダウン内のアイコンが線画で表示される（塗りつぶされていない）
 - 段落の途中で「モバイルのみ改行」→ エディター上で改行 + `SP` バッジが出る
 - 保存 → リロードしてブロック検証エラーが出ないこと
