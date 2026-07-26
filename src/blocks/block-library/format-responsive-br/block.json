@@ -1,0 +1,13 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/format-responsive-br",
+	"version": "1.0.0",
+	"title": "レスポンシブ改行",
+	"description": "画面サイズ別の改行を文章の途中に挿入するインラインフォーマット。",
+	"category": "ystdtb-hook",
+	"keywords": [],
+	"textdomain": "ystandard-toolbox",
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"]
+}

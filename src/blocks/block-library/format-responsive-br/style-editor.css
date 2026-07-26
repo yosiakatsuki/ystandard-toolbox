@@ -1,0 +1,39 @@
+/**
+ * エディター用スタイル - インラインフォーマット：レスポンシブ改行
+ *
+ * エディター上ではフロント用CSSを読み込まないため改行は常に表示される.
+ * どの画面サイズ用の改行かが分かるよう、改行の手前に小さなバッジを表示する.
+ */
+.ystdtb-br--mobile,
+.ystdtb-br--tablet,
+.ystdtb-br--desktop {
+	--ystdtb--format-responsive-br--color: color-mix(in srgb, #000 60%, transparent);
+	--ystdtb--format-responsive-br--background: color-mix(in srgb, #000 8%, transparent);
+
+	&::before {
+		display: inline-block;
+		margin: 0 2px;
+		padding: 0 3px;
+		border-radius: 3px;
+		background-color: var(--ystdtb--format-responsive-br--background);
+		color: var(--ystdtb--format-responsive-br--color);
+		font-size: 0.625rem;
+		font-weight: 700;
+		line-height: 1.6;
+		vertical-align: middle;
+		pointer-events: none;
+		user-select: none;
+	}
+}
+
+.ystdtb-br--mobile::before {
+	content: "SP";
+}
+
+.ystdtb-br--tablet::before {
+	content: "TAB";
+}
+
+.ystdtb-br--desktop::before {
+	content: "PC";
+}
