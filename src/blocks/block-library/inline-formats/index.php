@@ -40,7 +40,8 @@ class Inline_Formats {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 100 );
-		add_action( 'wp_enqueue_scripts', [ $this, 'add_style' ] );
+		// enqueue_block_assets はフロントとエディターキャンバス(iframe)の両方で実行される.
+		add_action( 'enqueue_block_assets', [ $this, 'add_style' ] );
 	}
 
 	/**
@@ -59,7 +60,8 @@ class Inline_Formats {
 	/**
 	 * インラインフォーマット用スタイル追加
 	 *
-	 * エディター側では改行を常に表示するため、フロントのみで読み込む.
+	 * エディターキャンバスはiframeのため、同じCSSを読み込むことで
+	 * デバイスプレビューの幅に合わせて改行が切り替わる.
 	 * フォーマットを追加する場合はここにCSSを追加する.
 	 *
 	 * @return void
