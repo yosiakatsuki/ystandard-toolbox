@@ -124,6 +124,7 @@ WordPress の `.components-button svg { fill: currentColor; }` は
 `fill="none"` の**属性**より優先されるため、線画アイコン（react-feather 等）が黒く塗りつぶされる。
 共通ツールバー側でインラインスタイル（`config.ts` の `LINE_ICON_STYLE`）を当てて打ち消しているので、
 機能側は `icon` にアイコンコンポーネントを渡すだけでよい。
+ドロップダウン内の線画アイコンは、項目内で主張しすぎないよう20px四方で表示する。
 
 ## フォーマットを追加する手順
 

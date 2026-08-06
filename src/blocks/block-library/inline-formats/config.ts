@@ -35,4 +35,8 @@ export const FORMAT_TOOLBAR_GROUPS: FormatToolbarGroup[] = [
  * WordPressの `.components-button svg { fill: currentColor; }` により
  * 線画アイコンが塗りつぶされてしまうため、インラインスタイルで打ち消す.
  */
-export const LINE_ICON_STYLE: CSSProperties = { fill: 'none' };
+export const LINE_ICON_STYLE: CSSProperties = {
+	fill: 'none',
+	width: 20,
+	height: 20,
+};
