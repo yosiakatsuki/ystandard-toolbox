@@ -21,17 +21,20 @@ export const RESPONSIVE_BREAKS: ResponsiveBreak[] = [
 		className: 'ystdtb-br--mobile',
 		title: __( 'モバイルのみ改行', 'ystandard-toolbox' ),
 		icon: Smartphone,
+		contentEditable: false,
 	},
 	{
 		name: 'ystdtb/br-tablet',
 		className: 'ystdtb-br--tablet',
 		title: __( 'タブレットのみ改行', 'ystandard-toolbox' ),
 		icon: Tablet,
+		contentEditable: false,
 	},
 	{
 		name: 'ystdtb/br-desktop',
 		className: 'ystdtb-br--desktop',
 		title: __( 'PCのみ改行', 'ystandard-toolbox' ),
 		icon: Monitor,
+		contentEditable: false,
 	},
 ];

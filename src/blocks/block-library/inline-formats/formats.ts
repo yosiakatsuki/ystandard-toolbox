@@ -18,12 +18,15 @@ import { InlineFormatToolbar } from './toolbar';
  * 1つの edit から全フォーマットを操作できる.
  */
 export const registerInlineFormats = () => {
-	INLINE_FORMATS.forEach( ( { name, className, title }, index ) => {
-		registerFormatType( name, {
-			title,
-			tagName: FORMAT_TAG_NAME,
-			className,
-			edit: 0 === index ? InlineFormatToolbar : undefined,
-		} );
-	} );
+	INLINE_FORMATS.forEach(
+		( { name, className, title, contentEditable }, index ) => {
+			registerFormatType( name, {
+				title,
+				tagName: FORMAT_TAG_NAME,
+				className,
+				contentEditable,
+				edit: 0 === index ? InlineFormatToolbar : undefined,
+			} );
+		}
+	);
 };

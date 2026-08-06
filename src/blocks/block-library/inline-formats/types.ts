@@ -17,6 +17,8 @@ export interface InlineFormat {
 	className: string;
 	/** ツールバーに表示するラベル */
 	title: string;
+	/** エディター内で内容を直接編集できるか */
+	contentEditable?: boolean;
 }
 
 /**

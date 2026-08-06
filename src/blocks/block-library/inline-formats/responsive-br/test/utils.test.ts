@@ -7,6 +7,7 @@ jest.unmock( '@wordpress/data' );
 import {
 	create,
 	registerFormatType,
+	remove,
 	toHTMLString,
 	unregisterFormatType,
 } from '@wordpress/rich-text';
@@ -29,6 +30,7 @@ beforeAll( () => {
 			title,
 			tagName: FORMAT_TAG_NAME,
 			className,
+			contentEditable: false,
 		} );
 	} );
 } );
@@ -86,5 +88,11 @@ describe( 'insertResponsiveBreak', () => {
 		const html = `あい${ MOBILE_BREAK_HTML }うえお`;
 
 		expect( toHTML( create( { html } ) ) ).toBe( html );
+	} );
+
+	it( '既存のレスポンシブ改行だけを削除して前後の文字を保持する', () => {
+		const value = createValue( `あい${ MOBILE_BREAK_HTML }うえお` );
+
+		expect( toHTML( remove( value, 2, 3 ) ) ).toBe( 'あいうえお' );
 	} );
 } );

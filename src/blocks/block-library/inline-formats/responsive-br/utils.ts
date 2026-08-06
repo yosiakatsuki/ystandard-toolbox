@@ -3,14 +3,14 @@
  */
 
 /* WordPress Dependencies */
-import { applyFormat, create, insert } from '@wordpress/rich-text';
+import { insertObject } from '@wordpress/rich-text';
 import type { RichTextValue } from '@wordpress/rich-text';
 
 /**
  * レスポンシブ改行を挿入したRichTextの値を返す
  *
- * 改行文字( \n )にフォーマットを適用することで
- * <span class="ystdtb-br--mobile"><br></span> の形で保存される.
+ * 改行を非編集の置換オブジェクトとして挿入することで
+ * <span class="ystdtb-br--mobile"><br></span>の形で保存される.
  *
  * @param value      RichTextの値.
  * @param formatName フォーマット名.
@@ -27,14 +27,13 @@ export const insertResponsiveBreak = (
 		return value;
 	}
 
-	// 改行文字1文字にフォーマットを適用した挿入用の値を作る.
-	const lineBreak = applyFormat(
-		create( { text: '\n' } ),
-		{ type: formatName },
-		0,
-		1
-	);
+	// contentEditable: falseのフォーマットとして扱うため、
+	// 改行をRichTextの置換オブジェクトとして挿入する.
+	const lineBreak = {
+		type: formatName,
+		innerHTML: '<br>',
+	};
 
 	// 選択範囲があるときは文字を消さないよう末尾に挿入する.
-	return insert( value, lineBreak, index, index );
+	return insertObject( value, lineBreak, index, index );
 };

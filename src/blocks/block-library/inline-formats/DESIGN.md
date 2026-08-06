@@ -151,23 +151,27 @@ RichText すべてで同じ操作が使え、プラグインを停止しても
 
 ### 保存形式の検討
 
-`@wordpress/rich-text` の制約により、実質 1 通りしか選べない。以下は実装前に node_modules のソースで確認した結果。
-
-#### 採用：`\n` を `span` フォーマットで包む
+#### 採用：非編集フォーマットの置換オブジェクト
 
 ```html
 これはスマホだけ<span class="ystdtb-br--mobile"><br></span>ここで改行される文章です。
 ```
 
-- `to-tree.js`（`\n` の処理分岐）が `\n` を「その時点で開いているフォーマット要素の内側」に `<br>` として書き出す
-- `create.js` は上記 HTML を「`span` フォーマットが適用された `\n` 1 文字」として復元する
-- parse ⇄ serialize が完全に往復するため、ブロック検証（save の HTML 一致）も通る
+- `registerFormatType`で`contentEditable: false`を指定し、`insertObject()`で`innerHTML: '<br>'`を持つ置換オブジェクトとして挿入する
+- `create.js`は既存の保存HTMLを置換オブジェクトとして復元し、`to-tree.js`は同じ`span > br`を出力する
+- エディターでは改行全体が1つの非編集要素になるため、Backspaceで削除しても直前の文字を巻き込まない
+- parse ⇄ serializeで保存HTMLが変わらないため、既存記事とブロック検証の互換性を維持できる
 
-#### 不採用：`<br class="ystdtb-br--mobile">` を直接挿入
+#### 不採用：`\n`を`span`フォーマットで包む
+
+保存HTMLの往復はできるが、対象外の画面幅では`br`を`display: none`にするため、Chromeでは改行の前後にキャレットを置けない。
+改行の直後からBackspaceを押すと直前の文字と改行がまとめて削除されるため採用しない。
+
+#### 不採用：`<br class="ystdtb-br--mobile">`を直接挿入
 
 `create.js` は `br` 要素を**属性ごと捨てて `\n` に変換する**ため、クラスが保存されない。
 
-#### 不採用：`object: true` の void フォーマット（空 `<span>`）
+#### 不採用：`object: true`のvoidフォーマット（空の`span`）
 
 `to-html-string.js` は `object` フォーマットを**閉じタグなしで出力する**（`<img>` や `<br>` 用の実装）。
 `span` で使うと `<span class="...">` だけが出力されて HTML が壊れ、再パース時に後続テキストを巻き込む。
@@ -186,8 +190,8 @@ RichText すべてで同じ操作が使え、プラグインを停止しても
 ### 動作
 
 - キャレット位置に改行を挿入する。選択範囲があるときは文字を消さないよう選択範囲の末尾に挿入する
-- 各項目はトグルではなく「挿入」。削除は通常の改行と同じく Backspace で行う
-- 挿入直後に文字を入力しても `span` の中には入らない（`insert()` が `activeFormats` を落とし、`getActiveFormats` が前後で短い側を採用するため）
+- 各項目はトグルではなく「挿入」。削除は通常の改行と同じくBackspaceで行う
+- エディターでは`contentEditable: false`の置換オブジェクトとして扱うため、挿入直後の文字が`span`の中へ入らず、削除時も前後の文字を保持する
 
 ### CSS
 
@@ -244,6 +248,7 @@ over_desktop  → .ystdtb-br--desktop > br { display: inline; }
 - `registerFormatType` を 3 種登録した上で、`insertResponsiveBreak` の結果を `toHTMLString` して `<span class="ystdtb-br--mobile"><br></span>` になること
 - `create( { html } )` → `toHTMLString` の往復で HTML が一致すること（ブロック検証が通ることの担保）
 - 選択範囲があるケースで既存テキストが消えないこと
+- レスポンシブ改行だけを削除したときに前後のテキストが残ること
 
 `test/unit/setup-tests.js` が `@wordpress/data` を全体でモックしているため、
 rich-text のストアを実際に動かすテストでは先頭で `jest.unmock( '@wordpress/data' )` が必要。
