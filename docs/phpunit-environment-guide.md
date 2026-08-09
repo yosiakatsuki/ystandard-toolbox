@@ -5,14 +5,17 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 ## 方針
 
 - WordPress本体・Gutenbergのテスト環境に合わせる
-- 開発サーバーは Local（Local by Flywheel）を使用し、wp-env はテスト実行専用
-- wp-env のテスト環境コンテナは無効化し、開発環境の `cli` コンテナで PHPUnit を実行する（Docker リソース節約）
+- ローカルのPHPUnitはPlayground CLIで実行し、Dockerを不要にする
+- CIの実行経路はプロジェクトごとに選び、外部配布ZIPへ依存する場合はPlayground CLIを使用する
+- wp-env経路はDocker環境での動作確認が必要な場合に使用する
+- wp-envを使用する場合もテスト環境コンテナは無効化し、Dockerリソースを節約する
 
 ## 前提条件
 
-- Docker Desktop がインストール済み
-- Node.js がインストール済み
-- `@wordpress/env` がプロジェクトの devDependencies に含まれている
+- Node.js 20.18以降がインストール済み
+- `@wp-playground/cli`がプロジェクトのdevDependenciesに含まれている
+- wp-env経路を実行する場合はDocker Desktopがインストール済み
+- `@wordpress/env`がプロジェクトのdevDependenciesに含まれている
 
 ## 各ファイルの設定
 
@@ -55,7 +58,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 - **phpunit-polyfills ^1.1.0**（2.0 ではない）: WordPress 本体・Gutenberg と同じバージョンレンジ
 - **phpcompatibility-wp**（php-compatibility ではない）: WordPress 向けの追加ルールを含む。WP 本体と同じ
 
-### .wp-env.json
+### .wp-env.json（Docker環境確認用）
 
 ```json
 {
@@ -78,7 +81,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 
 ポイント:
 
-- **`"testsEnvironment": false`**: テスト専用コンテナ（`tests-mysql`, `tests-wordpress`, `tests-cli`）を作成しない。開発環境の `cli` コンテナで PHPUnit を実行する
+- **`"testsEnvironment": false`**: テスト専用コンテナ（`tests-mysql`, `tests-wordpress`, `tests-cli`）を作成しない。開発環境の`cli`コンテナでPHPUnitを実行する
 - **ポート**: プロジェクトごとに重複しないよう変更する
 - **themes / plugins**: テスト対象に応じて調整する。テーマプロジェクトの場合は `themes` に `"."` を指定
 
@@ -129,6 +132,16 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 
 // Composer の自動ロード.
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
+
+// Playground内のwp-phpunitからテスト設定を読み込めるようにする.
+if ( file_exists( '/wordpress/wp-load.php' ) ) {
+	putenv( 'WP_PHPUNIT__TESTS_CONFIG=' . __DIR__ . '/wp-tests-config.php' );
+	// 毎回生成されるPlaygroundのDBをそのままテストに使用する.
+	putenv( 'WP_TESTS_SKIP_INSTALL=1' );
+	putenv( 'WP_PHPUNIT__TABLE_PREFIX=wp_' );
+}
+
+require_once __DIR__ . '/wp-tests-config.php';
 
 // WP テストディレクトリの検出.
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
@@ -196,21 +209,49 @@ remove_filter( 'wp_die_handler', 'fail_if_died' );
 - `_manually_load_plugin()` 内でテスト対象のプラグイン/テーマを読み込む
 - 依存プラグインがある場合は同じ関数内で先に読み込む
 
+### phpunit/wp-tests-config.php
+
+Playground CLIで実行するときだけWordPressとDBの設定を定義する。wp-envでは既存のテスト設定をそのまま使用する。
+
+```php
+<?php
+
+// Playground CLIのWordPressテスト環境.
+if ( file_exists( '/wordpress/wp-load.php' ) ) {
+	defined( 'ABSPATH' ) || define( 'ABSPATH', '/wordpress/' );
+	defined( 'DB_NAME' ) || define( 'DB_NAME', 'wordpress' );
+	defined( 'DB_USER' ) || define( 'DB_USER', 'root' );
+	defined( 'DB_PASSWORD' ) || define( 'DB_PASSWORD', '' );
+	defined( 'DB_HOST' ) || define( 'DB_HOST', 'localhost' );
+	defined( 'DB_CHARSET' ) || define( 'DB_CHARSET', 'utf8' );
+	defined( 'DB_COLLATE' ) || define( 'DB_COLLATE', '' );
+}
+
+defined( 'WP_TESTS_DOMAIN' ) || define( 'WP_TESTS_DOMAIN', 'example.org' );
+defined( 'WP_TESTS_EMAIL' ) || define( 'WP_TESTS_EMAIL', 'admin@example.org' );
+defined( 'WP_TESTS_TITLE' ) || define( 'WP_TESTS_TITLE', 'Test Blog' );
+
+defined( 'WP_PHP_BINARY' ) || define( 'WP_PHP_BINARY', 'php' );
+```
+
 ### package.json テストスクリプト
 
 ```json
 {
   "scripts": {
-    "test:unit:php": "wp-env start && wp-env run cli --env-cwd=wp-content/plugins/プラグインディレクトリ名 -- vendor/bin/phpunit -c phpunit.xml.dist"
+    "test:unit:php": "wp-playground-cli php --auto-mount --wp=6.9 --php=8.3 -- /wordpress/wp-content/plugins/プラグインディレクトリ名/vendor/bin/phpunit -c /wordpress/wp-content/plugins/プラグインディレクトリ名/phpunit.xml.dist",
+    "wpenv:test:unit:php": "wp-env start && wp-env run cli --env-cwd=wp-content/plugins/プラグインディレクトリ名 -- vendor/bin/phpunit -c phpunit.xml.dist"
   }
 }
 ```
 
 ポイント:
 
-- **`wp-env run cli`**（`tests-cli` ではない）: `testsEnvironment: false` のため開発環境の `cli` コンテナを使用
-- **`vendor/bin/phpunit`**（グローバルの `phpunit` ではない）: コンテナにグローバルインストールされた PHPUnit とバージョンが異なる可能性があるため、プロジェクトの vendor を明示指定
-- **`--env-cwd`**: コンテナ内の作業ディレクトリを指定。テーマの場合は `wp-content/themes/テーマディレクトリ名`
+- **`wp-playground-cli php --auto-mount`**: リポジトリをPlaygroundへ自動マウントし、ローカルのPHPUnitを実行
+- **`--wp` / `--php`**: テストに使うWordPressとPHPのバージョンを固定
+- **`wp-env run cli`**（`tests-cli`ではない）: `testsEnvironment: false`のため開発環境の`cli`コンテナを使用
+- **`vendor/bin/phpunit`**（グローバルの`phpunit`ではない）: プロジェクトのPHPUnitバージョンを明示して実行
+- **`--env-cwd`**: wp-envコンテナ内の作業ディレクトリを指定。テーマの場合は`wp-content/themes/テーマディレクトリ名`
 
 ### .gitignore に追加するエントリ
 
@@ -239,11 +280,13 @@ phpunit/
 # npm スクリプト経由
 npm run test:unit:php
 
-# 直接実行（wp-env 起動済みの場合）
-npx wp-env run cli --env-cwd=wp-content/plugins/プラグイン名 -- vendor/bin/phpunit -c phpunit.xml.dist
+# Docker上のwp-env経路
+npm run wpenv:test:unit:php
 ```
 
-### 環境管理
+Playground CLIは実行ごとに一時的なWordPress環境を作成するため、事前の起動・停止操作は不要。
+
+### wp-env環境管理
 
 ```bash
 # 起動
@@ -259,9 +302,9 @@ npx wp-env destroy
 docker builder prune -f
 ```
 
-### 初回セットアップ / composer.json 変更後
+### composer.json変更後
 
-wp-env コンテナ内で composer install を実行する:
+通常はホスト側で`composer install`を実行する。wp-env経路で依存関係を更新する必要がある場合は、次を実行する。
 
 ```bash
 npx wp-env start
@@ -280,10 +323,16 @@ npx wp-env run cli --env-cwd=wp-content/plugins/プラグイン名 -- composer i
 - [ ] `composer.json`: `phpcompatibility/php-compatibility` を `phpcompatibility/phpcompatibility-wp` `^2.1.3` に変更
 - [ ] `.wp-env.json`: `"testsEnvironment": false` を追加
 - [ ] `.wp-env.json`: `env.tests` セクションがあれば削除
+- [ ] `package.json`: `@wp-playground/cli`をdevDependenciesへ追加
+- [ ] `package.json`: ローカルのPHPUnitを`wp-playground-cli php --auto-mount`へ変更
+- [ ] `package.json`: wp-env経路をDocker環境確認用スクリプトとして残す
+- [ ] `phpunit/bootstrap.php`: Playground用の`WP_PHPUNIT__TESTS_CONFIG`を設定
+- [ ] `phpunit/wp-tests-config.php`: Playground用のWordPress・DB設定を追加
 - [ ] `phpunit.xml.dist`: `<testsuite>` に `name` 属性を追加
-- [ ] `package.json`: テストスクリプトの `tests-cli` を `cli` に変更
-- [ ] `package.json`: テストスクリプトの `phpunit` を `vendor/bin/phpunit` に変更
-- [ ] `package.json`: `@wordpress/env` を `^11.2.0` 以上に更新
+- [ ] `package.json`: wp-envスクリプトの`tests-cli`を`cli`に変更
+- [ ] `package.json`: テストスクリプトの`phpunit`を`vendor/bin/phpunit`に変更
+- [ ] `package.json`: `@wordpress/env`を`^11.2.0`以上に更新
+- [ ] CI: `.wp-env.json`が外部配布ZIPへ依存する場合はPlayground用スクリプトへ変更
 - [ ] `.gitignore`: `tsconfig.tsbuildinfo` と `.phpunit.result.cache` を追加
 - [ ] コンテナ内で `composer update` を実行して `composer.lock` を更新
 - [ ] 既存の wp-env 環境を `npx wp-env destroy` で破棄してから再起動
