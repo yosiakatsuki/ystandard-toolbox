@@ -12,6 +12,9 @@
 	--ystdtb--format-responsive-br--background: color-mix(in srgb, #000 8%, transparent);
 
 	&::before {
+		content:
+			var(--ystdtb--format-responsive-br--label-break, "") "\A"
+			var(--ystdtb--format-responsive-br--label-device, "");
 		display: inline-block;
 		margin: 0 2px;
 		padding: 0 3px;
@@ -20,21 +23,11 @@
 		color: var(--ystdtb--format-responsive-br--color);
 		font-size: 0.625rem;
 		font-weight: 700;
-		line-height: 1.6;
+		line-height: 1.2;
+		text-align: center;
 		vertical-align: middle;
+		white-space: pre;
 		pointer-events: none;
 		user-select: none;
 	}
-}
-
-.ystdtb-br--mobile::before {
-	content: "SP";
-}
-
-.ystdtb-br--tablet::before {
-	content: "TAB";
-}
-
-.ystdtb-br--desktop::before {
-	content: "PC";
 }

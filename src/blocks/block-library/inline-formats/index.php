@@ -68,6 +68,9 @@ class Inline_Formats {
 	 */
 	public function add_style() {
 		$css = $this->get_responsive_br_css();
+		if ( is_admin() ) {
+			$css .= $this->get_responsive_br_editor_label_css();
+		}
 
 		if ( empty( $css ) ) {
 			return;
@@ -95,6 +98,37 @@ class Inline_Formats {
 		);
 		$css .= Styles::add_media_query_over_desktop(
 			'.ystdtb-br--desktop > br {display: inline;}'
+		);
+
+		return $css;
+	}
+
+	/**
+	 * レスポンシブ改行のエディター用ラベルCSS取得
+	 *
+	 * @return string
+	 */
+	private function get_responsive_br_editor_label_css() {
+		$break_label   = wp_json_encode( __( '改行', 'ystandard-toolbox' ), JSON_UNESCAPED_UNICODE );
+		$mobile_label  = wp_json_encode( __( 'スマホ', 'ystandard-toolbox' ), JSON_UNESCAPED_UNICODE );
+		$tablet_label  = wp_json_encode( __( 'タブレット', 'ystandard-toolbox' ), JSON_UNESCAPED_UNICODE );
+		$desktop_label = wp_json_encode( __( 'PC', 'ystandard-toolbox' ), JSON_UNESCAPED_UNICODE );
+
+		$css  = sprintf(
+			'.ystdtb-br--mobile,.ystdtb-br--tablet,.ystdtb-br--desktop{--ystdtb--format-responsive-br--label-break:%s;}',
+			$break_label
+		);
+		$css .= sprintf(
+			'.ystdtb-br--mobile{--ystdtb--format-responsive-br--label-device:%s;}',
+			$mobile_label
+		);
+		$css .= sprintf(
+			'.ystdtb-br--tablet{--ystdtb--format-responsive-br--label-device:%s;}',
+			$tablet_label
+		);
+		$css .= sprintf(
+			'.ystdtb-br--desktop{--ystdtb--format-responsive-br--label-device:%s;}',
+			$desktop_label
 		);
 
 		return $css;
