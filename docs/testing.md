@@ -31,7 +31,7 @@ npm run test                  # すべてのテスト（unit + integration）
 npm run test:unit             # unit テストのみ（JS unit + PHP unit）
 npm run test:unit:component   # コンポーネント単体テスト
 npm run test:unit:php         # PHPUnit（Playground CLI 経由）
-npm run wpenv:test:unit:php   # PHPUnit（wp-env 経由、CI 用）
+npm run wpenv:test:unit:php   # PHPUnit（wp-env 経由、Docker 環境確認用）
 npm run test:integration      # integration テスト（fixture-based）
 npm run fixtures:generate     # 期待値ファイル未生成のものを自動生成
 npm run fixtures:regenerate   # 期待値ファイルを全削除して再生成
@@ -77,7 +77,7 @@ npm run test:unit:php     # Playground CLI 経由で PHPUnit 実行
 
 ローカル実行ではDockerや事前の`wp-env start`は不要。初回実行時はPlayground用ランタイムのダウンロードを伴う場合がある。
 
-CIと同じwp-env経路を確認する場合は、`npm run wpenv:test:unit:php`を実行する。
+Docker上のwp-env経路を確認する場合は、`npm run wpenv:test:unit:php`を実行する。
 
 ### テスト方針
 

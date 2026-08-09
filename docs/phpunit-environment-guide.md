@@ -6,14 +6,15 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 
 - WordPress本体・Gutenbergのテスト環境に合わせる
 - ローカルのPHPUnitはPlayground CLIで実行し、Dockerを不要にする
-- CIではwp-envの開発環境にある`cli`コンテナでPHPUnitを実行する
-- wp-envのテスト環境コンテナは無効化し、Dockerリソースを節約する
+- CIの実行経路はプロジェクトごとに選び、外部配布ZIPへ依存する場合はPlayground CLIを使用する
+- wp-env経路はDocker環境での動作確認が必要な場合に使用する
+- wp-envを使用する場合もテスト環境コンテナは無効化し、Dockerリソースを節約する
 
 ## 前提条件
 
 - Node.js 20.18以降がインストール済み
 - `@wp-playground/cli`がプロジェクトのdevDependenciesに含まれている
-- CIと同じwp-env経路を実行する場合はDocker Desktopがインストール済み
+- wp-env経路を実行する場合はDocker Desktopがインストール済み
 - `@wordpress/env`がプロジェクトのdevDependenciesに含まれている
 
 ## 各ファイルの設定
@@ -57,7 +58,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 - **phpunit-polyfills ^1.1.0**（2.0 ではない）: WordPress 本体・Gutenberg と同じバージョンレンジ
 - **phpcompatibility-wp**（php-compatibility ではない）: WordPress 向けの追加ルールを含む。WP 本体と同じ
 
-### .wp-env.json（CI用）
+### .wp-env.json（Docker環境確認用）
 
 ```json
 {
@@ -248,7 +249,7 @@ defined( 'WP_PHP_BINARY' ) || define( 'WP_PHP_BINARY', 'php' );
 
 - **`wp-playground-cli php --auto-mount`**: リポジトリをPlaygroundへ自動マウントし、ローカルのPHPUnitを実行
 - **`--wp` / `--php`**: テストに使うWordPressとPHPのバージョンを固定
-- **`wp-env run cli`**（`tests-cli`ではない）: CIでは`testsEnvironment: false`のため開発環境の`cli`コンテナを使用
+- **`wp-env run cli`**（`tests-cli`ではない）: `testsEnvironment: false`のため開発環境の`cli`コンテナを使用
 - **`vendor/bin/phpunit`**（グローバルの`phpunit`ではない）: プロジェクトのPHPUnitバージョンを明示して実行
 - **`--env-cwd`**: wp-envコンテナ内の作業ディレクトリを指定。テーマの場合は`wp-content/themes/テーマディレクトリ名`
 
@@ -279,7 +280,7 @@ phpunit/
 # npm スクリプト経由
 npm run test:unit:php
 
-# CIと同じwp-env経路
+# Docker上のwp-env経路
 npm run wpenv:test:unit:php
 ```
 
@@ -303,7 +304,7 @@ docker builder prune -f
 
 ### composer.json変更後
 
-通常はホスト側で`composer install`を実行する。CIと同じwp-env経路で依存関係を更新する必要がある場合は、次を実行する。
+通常はホスト側で`composer install`を実行する。wp-env経路で依存関係を更新する必要がある場合は、次を実行する。
 
 ```bash
 npx wp-env start
@@ -324,14 +325,14 @@ npx wp-env run cli --env-cwd=wp-content/plugins/プラグイン名 -- composer i
 - [ ] `.wp-env.json`: `env.tests` セクションがあれば削除
 - [ ] `package.json`: `@wp-playground/cli`をdevDependenciesへ追加
 - [ ] `package.json`: ローカルのPHPUnitを`wp-playground-cli php --auto-mount`へ変更
-- [ ] `package.json`: wp-env経路をCI用スクリプトとして残す
+- [ ] `package.json`: wp-env経路をDocker環境確認用スクリプトとして残す
 - [ ] `phpunit/bootstrap.php`: Playground用の`WP_PHPUNIT__TESTS_CONFIG`を設定
 - [ ] `phpunit/wp-tests-config.php`: Playground用のWordPress・DB設定を追加
 - [ ] `phpunit.xml.dist`: `<testsuite>` に `name` 属性を追加
 - [ ] `package.json`: wp-envスクリプトの`tests-cli`を`cli`に変更
 - [ ] `package.json`: テストスクリプトの`phpunit`を`vendor/bin/phpunit`に変更
 - [ ] `package.json`: `@wordpress/env`を`^11.2.0`以上に更新
-- [ ] CI: PHPユニットテストをwp-env用スクリプトへ変更
+- [ ] CI: `.wp-env.json`が外部配布ZIPへ依存する場合はPlayground用スクリプトへ変更
 - [ ] `.gitignore`: `tsconfig.tsbuildinfo` と `.phpunit.result.cache` を追加
 - [ ] コンテナ内で `composer update` を実行して `composer.lock` を更新
 - [ ] 既存の wp-env 環境を `npx wp-env destroy` で破棄してから再起動

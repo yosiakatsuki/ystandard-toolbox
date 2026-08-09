@@ -120,8 +120,8 @@ jobs:
       - name: npm ci
         run: npm ci --no-audit --no-fund
 
-      - name: PHP Unit Test
-        run: npm run wpenv:test:unit:php
+      - name: PHP Unit Test (Playground)
+        run: npm run test:unit:php
 
   build-check:
     name: Build Check
