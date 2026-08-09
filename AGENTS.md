@@ -72,7 +72,7 @@ npm run test                 # unit + integration
 npm run test:unit:component  # JS/TS component unit
 npm run test:integration     # Gutenberg fixture-based integration
 npm run test:unit:php        # Playground CLI 経由 PHPUnit
-npm run wpenv:test:unit:php  # wp-env 経由 PHPUnit（CI 用）
+npm run wpenv:test:unit:php  # wp-env 経由 PHPUnit（Docker 環境確認用）
 npm run fixtures:generate    # 不足 fixture 生成
 npm run fixtures:regenerate  # fixture 全再生成
 npm run zip                  # 配布 zip 作成
