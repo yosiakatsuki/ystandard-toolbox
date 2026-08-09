@@ -1,0 +1,33 @@
+/**
+ * エディター用スタイル - レスポンシブ改行
+ *
+ * エディターではキャンバス幅に応じて改行が切り替わるため、
+ * 改行されていない状態でも位置と種類が分かるよう、改行の手前に小さなバッジを表示する.
+ * バッジは改行の表示状態にかかわらず常に表示する.
+ */
+.ystdtb-br--mobile,
+.ystdtb-br--tablet,
+.ystdtb-br--desktop {
+	--ystdtb--format-responsive-br--color: color-mix(in srgb, #000 60%, transparent);
+	--ystdtb--format-responsive-br--background: color-mix(in srgb, #000 8%, transparent);
+
+	&::before {
+		content:
+			var(--ystdtb--format-responsive-br--label-break, "") "\A"
+			var(--ystdtb--format-responsive-br--label-device, "");
+		display: inline-block;
+		margin: 0 2px;
+		padding: 0 3px;
+		border-radius: 3px;
+		background-color: var(--ystdtb--format-responsive-br--background);
+		color: var(--ystdtb--format-responsive-br--color);
+		font-size: 0.625rem;
+		font-weight: 700;
+		line-height: 1.2;
+		text-align: center;
+		vertical-align: middle;
+		white-space: pre;
+		pointer-events: none;
+		user-select: none;
+	}
+}

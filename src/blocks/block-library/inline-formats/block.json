@@ -1,0 +1,13 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/inline-formats",
+	"version": "1.0.0",
+	"title": "インラインフォーマット",
+	"description": "yStandard Toolbox独自のインラインフォーマットを提供する機能。",
+	"category": "ystdtb-hook",
+	"keywords": [],
+	"textdomain": "ystandard-toolbox",
+	"editorScript": "file:./index.js",
+	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"]
+}

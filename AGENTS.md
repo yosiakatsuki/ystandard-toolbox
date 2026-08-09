@@ -71,13 +71,15 @@ npm run lint                 # JS/CSS/PHP lint
 npm run test                 # unit + integration
 npm run test:unit:component  # JS/TS component unit
 npm run test:integration     # Gutenberg fixture-based integration
-npm run test:unit:php        # wp-env 経由 PHPUnit
+npm run test:unit:php        # Playground CLI 経由 PHPUnit
+npm run wpenv:test:unit:php  # wp-env 経由 PHPUnit（CI 用）
 npm run fixtures:generate    # 不足 fixture 生成
 npm run fixtures:regenerate  # fixture 全再生成
 npm run zip                  # 配布 zip 作成
 ```
 
-`npm run start` や `npm run test:unit:php` は wp-env / Docker とネットワーク取得を伴う場合がある。
+`npm run start` や `npm run wpenv:test:unit:php` は wp-env / Docker とネットワーク取得を伴う場合がある。
+`npm run test:unit:php` は初回実行時にPlayground用ランタイムのダウンロードを伴う場合がある。
 
 ## 実装方針
 
