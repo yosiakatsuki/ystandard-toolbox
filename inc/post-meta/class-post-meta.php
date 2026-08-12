@@ -29,6 +29,7 @@ class Post_Meta {
 	 * Load PHP files.
 	 */
 	private function load_files() {
+		require_once __DIR__ . '/class-post-settings-editor.php';
 		require_once __DIR__ . '/class-post-meta-seo.php';
 	}
 

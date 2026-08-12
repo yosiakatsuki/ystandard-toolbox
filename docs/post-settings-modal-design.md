@@ -6,7 +6,7 @@
 
 投稿設定をブロックエディターのモーダルとして実装できる。
 
-WordPressの公開APIである`registerPlugin()`、`PluginMoreMenuItem`、`Modal`、`useEntityProp()`を組み合わせれば、独自の保存APIを作らず、通常の投稿保存フローへ投稿メタの変更を統合できる。
+WordPressの`registerPlugin()`、`Fill`、`PluginMoreMenuItem`、`Modal`、`useEntityProp()`を組み合わせれば、独自の保存APIを作らず、通常の投稿保存フローへ投稿メタの変更を統合できる。
 
 実装は次の2責務に分ける。
 
@@ -23,6 +23,19 @@ WordPressの公開APIである`registerPlugin()`、`PluginMoreMenuItem`、`Modal
 | Classic Editor | 従来のPHPメタボックス | 現行UIと保存処理を維持 |
 
 ただし、現在のyStandard v5 alphaには投稿設定モーダルと外部注入APIがまだ存在しない。Toolbox実装を始める前に、yStandard v5側のホスト契約を確定する必要がある。
+
+## 段階実装
+
+初期段階では将来のホスト判定を入れず、yStandardのバージョンや使用テーマに関係なく、投稿のブロックエディターでToolbox独自モーダルを表示する。
+
+- エディターヘッダーの固定領域にysアイコン付きの`[Toolbox] 投稿設定`ボタンを追加する
+- 「ツールとオプション」に`[Toolbox] 投稿設定`を追加する
+- どちらの起動操作も同じモーダルホストと開閉状態を使用する
+- `src/aktk-block-components/`のモーダルラッパーを使用する
+- `PluginMoreMenuItem`も`src/aktk-block-components/`のラッパーを介して使用する
+- 実験的な`PinnedItems/core`のSlot名への依存はaktk-componentのアダプターへ隔離する
+- モーダルの開閉だけを実装し、投稿メタ登録や設定フィールドは追加しない
+- yStandard v5側のホストが実装された段階で、ホスト判定とモーダル抑止を追加する
 
 ## 調査した現状
 
@@ -66,13 +79,14 @@ yStandard v5側には、モーダルの見た目だけでなく、Toolboxなど�
 
 ## WordPress標準APIとの対応
 
-採用するAPIはすべて公開APIに限定する。
+採用するコンポーネントはWordPressパッケージから公開されているものに限定する。ただし、任意のモーダルボタンをヘッダーへ追加する安定版SlotFillはないため、実験的な`PinnedItems/core`のSlot名をaktk-componentのアダプター内で利用する。
 
 | API | 用途 |
 | --- | --- |
 | `register_post_meta()` | 既存投稿メタを投稿タイプ単位でREST APIへ公開する |
 | `useEntityProp()` | 現在編集中の投稿メタを読み書きする |
 | `registerPlugin()` | ブロックエディター拡張を登録する |
+| `Fill` | エディターヘッダーの`PinnedItems/core`へモーダル起動ボタンを追加する |
 | `PluginMoreMenuItem` | 「ツールとオプション」へモーダル起動項目を追加する |
 | `Modal` | アクセシブルなモーダル本体を表示する |
 
@@ -84,6 +98,7 @@ yStandard v5側には、モーダルの見た目だけでなく、Toolboxなど�
 - [REST APIでの登録済みメタの読み書き](https://developer.wordpress.org/rest-api/extending-the-rest-api/modifying-responses/#working-with-registered-meta-in-the-rest-api)
 - [@wordpress/core-dataのuseEntityProp](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-core-data/#useentityprop)
 - [@wordpress/pluginsのregisterPlugin](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-plugins/#registerplugin)
+- [@wordpress/componentsのSlotとFill](https://developer.wordpress.org/block-editor/reference-guides/components/slot-fill/)
 - [PluginMoreMenuItem](https://developer.wordpress.org/block-editor/reference-guides/slotfills/plugin-more-menu-item/)
 - [Modal](https://developer.wordpress.org/block-editor/reference-guides/components/modal/)
 - [PluginDocumentSettingPanel](https://developer.wordpress.org/block-editor/reference-guides/slotfills/plugin-document-setting-panel/)
@@ -127,13 +142,14 @@ PHPのレジストリは次を担当する。
 
 モーダルホストは投稿メタの意味や保存ロジックを持たない。
 
-- 起動項目を表示する
+- エディターヘッダーに起動ボタンを表示する
+- 「ツールとオプション」に起動項目を表示する
 - モーダルの開閉状態を管理する
 - セクションとフィールドを共通コンポーネントで描画する
 - `useEntityProp()`の`meta`とsetterを各コントロールへ渡す
 - 利用可能フィールドが0件なら起動項目を表示しない
 
-Toolboxホストは`registerPlugin( 'ystandard-toolbox-post-settings', ... )`で登録し、`PluginMoreMenuItem`から`Modal`を開く。
+Toolboxホストは`registerPlugin( 'ystandard-toolbox-post-settings', ... )`で登録し、`PinnedItems/core`内のボタンと`PluginMoreMenuItem`から同じ`Modal`を開く。任意のモーダルボタンをヘッダーへ追加する安定版SlotFillはないため、Slot名への依存は`src/aktk-block-components/`のアダプターへ隔離する。
 
 モーダル独自の保存ボタンは作らない。コントロール変更時にCore Dataの編集状態へ反映し、通常の「保存」「更新」で投稿と一緒に保存する。モーダル内には「変更は投稿の保存・更新時に保存されます」と表示する。
 
@@ -281,7 +297,7 @@ Toolboxモーダルの基盤は非yStandardでも動作する。ただし、現�
 | `inc/post-meta/class-post-settings-host.php` | yStandardメジャーバージョンとホスト判定 |
 | `inc/post-meta/class-post-settings-editor.php` | ブロックエディター用アセットと設定の受け渡し |
 | `src/post-settings/index.tsx` | エディタープラグイン登録 |
-| `src/post-settings/modal.tsx` | Toolboxモーダルホスト |
+| `src/post-settings/post-settings-modal.tsx` | Toolboxモーダルホスト |
 | `src/post-settings/field-control.tsx` | 共通フィールド描画 |
 | `src/post-settings/types.ts` | セクション・フィールド型 |
 | `src/post-settings/test/` | UIとホスト条件のunit test |
@@ -306,7 +322,7 @@ Toolboxモーダルの基盤は非yStandardでも動作する。ただし、現�
 
 ### Toolboxモーダル
 
-- `PluginMoreMenuItem`と`Modal`を追加する
+- `PinnedItems/core`内のヘッダーボタン、`PluginMoreMenuItem`、`Modal`を追加する
 - 利用可能フィールドだけを表示する
 - Core Dataへ変更を反映する
 - 従来メタボックスをClassic Editor互換へ切り替える
