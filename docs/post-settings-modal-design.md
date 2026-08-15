@@ -1,515 +1,432 @@
-# 投稿設定のブロックエディター対応とモーダル連携設計
+# 投稿設定モーダル連携設計
 
 調査日: 2026-08-12
 更新日: 2026-08-13
 
 ## 結論
 
-投稿設定をブロックエディターのモーダルとして実装できる。
+投稿設定モーダルは、次の2責務へ分離する。
 
-WordPressの`registerPlugin()`、`Fill`、`PluginMoreMenuItem`、`Modal`、`useEntityProp()`を組み合わせれば、独自の保存APIを作らず、通常の投稿保存フローへ投稿メタの変更を統合できる。
+- モーダルホスト: 起動UI、モーダル枠、セクション配置、開閉状態を所有する
+- 設定プロバイダー: 設定ごとのTSXコンポーネント、投稿メタ登録、表示条件、保存処理を所有する
 
-実装は次の2責務に分ける。
+設定項目は`radio`や`select`などの定型定義へ変換しない。各設定を独立したTSXコンポーネントとして実装し、JavaScriptフィルターへコンポーネント参照を登録する。
 
-- モーダルホスト: 起動項目、モーダル枠、セクション配置、共通フィールド描画を担当する
-- 設定プロバイダー: 投稿メタ登録、表示条件、ラベル、コントロール種別、選択肢、サニタイズを担当する
+ToolboxとyStandard v5は同じJavaScriptフック契約を使用する。モーダルホストがToolboxからyStandardへ切り替わっても、Toolboxの設定コンポーネントは変更しない。
 
-環境別のホストは次のとおりとする。
+## 対応環境
 
-| 環境 | モーダルホスト | Toolbox設定の表示先 |
+| 環境 | モーダルホスト | Toolbox設定の扱い |
 | --- | --- | --- |
-| yStandard v5以降 | yStandard | yStandard投稿設定モーダルへ注入 |
-| yStandard v4.59.0-alpha-1以降、v5未満 | Toolbox | title・meta descriptionだけyStandardのSEO設定へ注入し、オーバーレイ・メニュー切り替えはToolboxモーダル |
-| yStandard v4.58以前 | Toolbox | 従来のPHPメタボックスを維持 |
-| yStandard以外 | Toolbox | Toolboxモーダル |
-| Classic Editor | 従来のPHPメタボックス | 現行UIと保存処理を維持 |
+| yStandard v5以降 | yStandard | ToolboxのTSXコンポーネントをyStandardモーダルへ追加する |
+| yStandard v4.59.0-alpha-1以降、v5未満 | Toolbox | オーバーレイとメニュー切り替えをToolboxモーダルへ追加する |
+| yStandard v4.58以前 | Toolbox | 従来のPHPメタボックスを維持する |
+| yStandard以外 | Toolbox | 外部プロバイダーが登録した設定をToolboxモーダルへ追加できる |
+| Classic Editor | 従来のPHPメタボックス | 現行UIと保存処理を維持する |
 
-ただし、現在のyStandard v5 alphaには投稿設定モーダルと外部注入APIがまだ存在しない。Toolbox実装を始める前に、yStandard v5側のホスト契約を確定する必要がある。
+titleとmeta descriptionのyStandard v4 SEOパネル連携は別の既存契約として扱い、今回のオーバーレイ・メニュー切り替え実装には含めない。
 
-## 段階実装
+## 設計原則
 
-初期段階では将来のホスト判定を入れず、yStandardのバージョンや使用テーマに関係なく、投稿のブロックエディターでToolbox独自モーダルを表示する。
+### ホストは設定内容を知らない
 
-- エディターヘッダーの固定領域にysアイコン付きの`[Toolbox] 投稿設定`ボタンを追加する
-- 「ツールとオプション」に`[Toolbox] 投稿設定`を追加する
-- どちらの起動操作も同じモーダルホストと開閉状態を使用する
-- `src/aktk-block-components/`のモーダルラッパーを使用する
-- `PluginMoreMenuItem`も`src/aktk-block-components/`のラッパーを介して使用する
-- 実験的な`PinnedItems/core`のSlot名への依存はaktk-componentのアダプターへ隔離する
-- モーダルの開閉だけを実装し、投稿メタ登録や設定フィールドは追加しない
-- yStandard v5側のホストが実装された段階で、ホスト判定とモーダル抑止を追加する
+モーダルホストは次の処理だけを担当する。
 
-## 調査した現状
+- エディターヘッダーのySアイコンを表示する
+- 「︙」メニューに`[ys]投稿設定`を表示する
+- 両方の操作から同じモーダルと開閉状態を使用する
+- 登録済みセクションと設定コンポーネントを順番に配置する
+- 設定が0件の場合は起動UIを表示しない
+- 後から設定が登録・解除された場合に表示を更新する
+- 設定ごとにエラー境界を設け、1つの設定の例外でモーダル全体を停止させない
 
-### Toolbox
+ホストは次の情報を持たない。
 
-現在の投稿メタは次の4種類である。
+- 投稿メタキー
+- コントロール種別
+- ラベルや選択肢
+- 値の取得・更新方法
+- サニタイズ方法
+- 設定固有の表示条件
 
-| メタキー | 現行UI | 値 | 機能条件 |
-| --- | --- | --- | --- |
-| `ystdtb_seo_title` | yStandardのSEOメタボックスへPHPで追加 | 文字列 | yStandard 4.12.2以降 |
-| `ystdtb_seo_description` | yStandardのSEOメタボックスへPHPで追加 | 文字列 | yStandard 4.12.2以降 |
-| `ystdtb-overlay` | Toolboxメタボックス | `none`、`on`、`off` | yStandardのみ |
-| `ystdtb-menu-replace` | Toolboxメタボックス | メニュー位置をキーとする配列 | yStandardのみ |
+### 設定は独立したTSXにする
 
-`inc/meta-box/class-meta-box.php`は、PHPフォーム描画、nonce、`save_post`保存を一体で管理している。投稿メタはREST APIへ登録されておらず、ブロックエディターのCore Dataからは更新できない。
+各設定コンポーネントは、必要なWordPress APIとaktk-componentを直接使用する。
 
-`title`の出力はWordPress標準の`pre_get_document_title`を使っているが、meta descriptionとOGPの出力はyStandardのフィルターに依存している。現在の挙動を変えない限り、yStandard以外ではSEOの2項目を表示対象にしない。
+- `useEntityProp()`による投稿メタの取得・更新
+- `BaseControl`、`ToggleGroup`、`CustomSelectControl`などによるUI構築
+- 設定固有の説明、注意書き、複数コントロール、条件分岐
+- オブジェクト型メタの部分更新
 
-### yStandard v4.59.0-alpha-1以降
+ホストから共通の`meta`や`setMeta()`を渡さない。将来、投稿メタ以外のCore Dataや独自APIを使用する設定も同じ契約で追加できるようにする。
 
-`feature/meta-box`ブランチの現行`4.59.0-beta-1`では、投稿設定・SEO設定・SNS設定が`PluginDocumentSettingPanel`へ移行されている。Toolbox連携の対象下限は`4.59.0-alpha-1`とする。
+### PHPとJavaScriptの責務を混ぜない
 
-- `register_post_meta()`で既存メタをREST APIへ公開する
-- `useEntityProp( 'postType', postType, 'meta' )`で編集する
-- `ys_block_editor_post_meta_fields`フィルターでフィールド定義を拡張できる
-- 新UI対象の従来メタボックスは`__back_compat_meta_box`でClassic Editor専用にする
+PHPは次を担当する。
 
-この拡張点を使えば、Toolboxの`ystdtb_seo_title`と`ystdtb_seo_description`をyStandard v4.59の`[ys] SEO設定`パネルへ追加できる。
+- 使用テーマとyStandardバージョンの判定
+- 投稿タイプ、投稿ID、機能の利用可否判定
+- `register_post_meta()`、RESTスキーマ、サニタイズ、権限確認
+- 設定コンポーネントが必要とする初期データの受け渡し
+- ホスト用・プロバイダー用スクリプトの読み込み判定
 
-ただし、現在の`get_meta_fields()`は同じフィルター結果をREST登録とUI描画の両方に使う。オーバーレイとメニュー切り替えではこのフィルターを使わず、新しいモーダル項目用フィルターへ表示定義だけを追加し、投稿メタ登録はToolboxが所有する。
+JavaScriptは次を担当する。
 
-- yStandard自身のメタ定義: REST登録と既存保存互換に使用する
-- ブロックエディターのUI定義: `ys_block_editor_post_meta_fields`で拡張する
-- 外部プラグインのメタ登録: 各プラグインが所有する
+- 設定コンポーネントの登録
+- モーダル内の表示
+- Core Dataへの編集値反映
+- 設定固有の操作と状態管理
 
-### yStandard v5 alpha
-
-確認した`5.0.0-alpha-11.10.01`では、投稿設定は従来のPHPメタボックスのままで、投稿設定モーダル、フィールドレジストリ、外部設定の注入APIはまだ存在しない。
-
-yStandard v5側には、モーダルの見た目だけでなく、Toolboxなど外部プロバイダーがシリアライズ可能なフィールド定義を追加できるPHPフィルターが必要になる。
-
-## WordPress標準APIとの対応
-
-採用するコンポーネントはWordPressパッケージから公開されているものに限定する。ただし、任意のモーダルボタンをヘッダーへ追加する安定版SlotFillはないため、実験的な`PinnedItems/core`のSlot名をaktk-componentのアダプター内で利用する。
-
-| API | 用途 |
-| --- | --- |
-| `register_post_meta()` | 既存投稿メタを投稿タイプ単位でREST APIへ公開する |
-| `useEntityProp()` | 現在編集中の投稿メタを読み書きする |
-| `registerPlugin()` | ブロックエディター拡張を登録する |
-| `Fill` | エディターヘッダーの`PinnedItems/core`へモーダル起動ボタンを追加する |
-| `PluginMoreMenuItem` | 「ツールとオプション」へモーダル起動項目を追加する |
-| `Modal` | アクセシブルなモーダル本体を表示する |
-
-`register_post_meta()`で`show_in_rest`を有効にする場合、対象投稿タイプに`custom-fields`サポートが必要になる。`post`と`page`にはToolboxからサポートを追加してよいが、外部プラグインのカスタム投稿タイプには無条件で追加しない。
-
-参考:
-
-- [register_meta()](https://developer.wordpress.org/reference/functions/register_meta/)
-- [REST APIでの登録済みメタの読み書き](https://developer.wordpress.org/rest-api/extending-the-rest-api/modifying-responses/#working-with-registered-meta-in-the-rest-api)
-- [@wordpress/core-dataのuseEntityProp](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-core-data/#useentityprop)
-- [@wordpress/pluginsのregisterPlugin](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-plugins/#registerplugin)
-- [@wordpress/componentsのSlotとFill](https://developer.wordpress.org/block-editor/reference-guides/components/slot-fill/)
-- [PluginMoreMenuItem](https://developer.wordpress.org/block-editor/reference-guides/slotfills/plugin-more-menu-item/)
-- [Modal](https://developer.wordpress.org/block-editor/reference-guides/components/modal/)
-- [PluginDocumentSettingPanel](https://developer.wordpress.org/block-editor/reference-guides/slotfills/plugin-document-setting-panel/)
-
-## 責務分離
-
-### 投稿メタレジストリ
-
-Toolbox内に投稿メタ登録の正本を作る。REST登録用定義とモーダル表示用定義は分離し、yStandardへメタ登録の責務を渡さない。
-
-REST登録用定義は最低限、次の情報を持つ。
-
-```php
-[
-	'ystdtb-overlay' => [
-		'type'               => 'string',
-		'default'            => '',
-		'requires_ystandard' => true,
-		'sanitize_callback' => [ Post_Settings_Meta::class, 'sanitize_overlay' ],
-	],
-]
-```
-
-PHPのレジストリは次を担当する。
-
-- 投稿タイプとテーマ条件に応じた利用可能フィールドの決定
-- `register_post_meta()`の引数生成
-- UI定義フックへ追加する値の生成
-- Classic Editor向けの従来フォームと保存処理の互換維持
-
-サニタイズや権限確認のコールバックはJavaScriptへ渡さず、UI定義には`id`、`section`、`meta_key`、`meta_path`、`control`、`label`、`help`、`options`など表示に必要な値だけを含める。
-
-### モーダルホスト
-
-モーダルホストは投稿メタの意味や保存ロジックを持たない。
-
-- エディターヘッダーに起動ボタンを表示する
-- 「ツールとオプション」に起動項目を表示する
-- モーダルの開閉状態を管理する
-- セクションとフィールドを共通コンポーネントで描画する
-- `useEntityProp()`の`meta`とsetterを各コントロールへ渡す
-- 利用可能フィールドが0件なら起動項目を表示しない
-
-Toolboxホストは`registerPlugin( 'ystandard-toolbox-post-settings', ... )`で登録し、`PinnedItems/core`内のボタンと`PluginMoreMenuItem`から同じ`Modal`を開く。任意のモーダルボタンをヘッダーへ追加する安定版SlotFillはないため、Slot名への依存は`src/aktk-block-components/`のアダプターへ隔離する。
-
-モーダル独自の保存ボタンは作らない。コントロール変更時にCore Dataの編集状態へ反映し、通常の「保存」「更新」で投稿と一緒に保存する。モーダル内には「変更は投稿の保存・更新時に保存されます」と表示する。
-
-### 設定プロバイダー
-
-各機能はレジストリへフィールドを追加するだけにする。
-
-- SEO: title、meta description
-- ヘッダー: オーバーレイ
-- ナビゲーション: メニュー切り替え
-- 将来機能: 同じ定義形式で追加
-
-機能クラスがモーダルの有無やyStandardのバージョンを個別判定しない。ホスト判定を1か所へ集約し、フィールド側は自身の利用条件だけを返す。
+React要素や関数をPHPからJSON化して渡さない。
 
 ## 共通フック契約
 
-Toolboxのv4向けモーダルとyStandard v5のモーダルは、同じPHPフィルター契約を使用する。React要素やコールバックを外部バンドル間で受け渡さず、PHPからJSONへ変換できる配列だけを扱う。
+### PHPのホスト選択
 
-### コンテキスト
-
-各フィルターの第2引数には、現在の編集対象を表す共通コンテキストを渡す。
-
-```php
-$context = [
-	'post_type' => $post_type,
-	'post_id'   => $post_id,
-];
-```
-
-将来キーを追加できるよう、投稿タイプと投稿IDを個別引数ではなく連想配列にまとめる。プロバイダーはホスト名で表示定義を変えない。
-
-`post_type`は文字列、`post_id`は取得できない場合を`0`とする整数に正規化する。将来追加されるキーをプロバイダーが無視しても互換性を保てる契約にする。
-
-### モーダルホスト
+モーダルを表示する実装は、PHPフィルターで選択する。
 
 ```php
 $host = apply_filters(
 	'ys_post_settings_modal_host',
 	'ystandard-toolbox',
-	$context
+	[
+		'post_type' => $post_type,
+		'post_id'   => $post_id,
+	]
 );
 ```
 
-戻り値は次のいずれかとする。
-
-| 値 | 動作 |
+| 戻り値 | 動作 |
 | --- | --- |
 | `ystandard-toolbox` | Toolboxが起動UIとモーダルを表示する |
 | `ystandard` | yStandardが起動UIとモーダルを表示する |
-| `false` | どのホストも表示しない |
+| `false` | モーダルホストを表示しない |
 
-yStandard v4はフィルターを追加しないため、Toolboxホストを使用する。yStandard v5は`ystandard`を返し、Toolbox側のモーダル登録を抑止する。テーマバージョンだけでホストを推測せず、ホスト実装側が利用可能であることを明示する。
+yStandard v4はフィルターを変更しない。yStandard v5は自身のモーダル実装を読み込める場合だけ`ystandard`を返す。
 
-### セクション追加
+テーマバージョンからホストを推測しない。ホスト実装自身が利用可能であることを通知する。
 
-```php
-$sections = apply_filters(
-	'ys_post_settings_modal_sections',
-	[],
-	$context
+### JavaScriptのセクション追加
+
+セクションは`@wordpress/hooks`の次のフィルターへ追加する。
+
+```ts
+const SECTION_FILTER = 'ystandard.hooks.postSettingsModal.sections';
+```
+
+型は次のとおりとする。
+
+```ts
+interface PostSettingsContext {
+	apiVersion: 1;
+	postType: string;
+	postId: number;
+}
+
+interface PostSettingsSection {
+	id: string;
+	title: string;
+	order: number;
+}
+```
+
+登録例:
+
+```tsx
+import { addFilter } from '@wordpress/hooks';
+
+addFilter(
+	'ystandard.hooks.postSettingsModal.sections',
+	'ystandard-toolbox/design',
+	( sections: PostSettingsSection[], context: PostSettingsContext ) => [
+		...sections,
+		{
+			id: 'ystdtb/design',
+			title: __( '[Toolbox]デザイン', 'ystandard-toolbox' ),
+			order: 20,
+		},
+	]
 );
 ```
 
-セクションは名前空間化したIDをキーにする。
+プロバイダーは`context`を使って追加可否を判断できる。ただし、PHPで判定できる条件はPHP側で解決し、不要なスクリプト自体を読み込まない。
 
-```php
-$sections['ystdtb/design'] = [
-	'title' => __( 'デザイン', 'ystandard-toolbox' ),
-	'order' => 20,
-];
+### JavaScriptの設定追加
+
+設定コンポーネントは次のフィルターへ追加する。
+
+```ts
+const ITEM_FILTER = 'ystandard.hooks.postSettingsModal.items';
 ```
 
-同じIDが複数回追加された場合は後から追加した定義を採用する。表示順は`order`の昇順とし、同値の場合は追加順を維持する。
+型は次のとおりとする。
 
-セクション定義は次の形式に統一する。
+```ts
+import type { ComponentType } from '@wordpress/element';
 
-| キー | 必須 | 型 | 既定値・用途 |
-| --- | --- | --- | --- |
-| 配列キー | 必須 | string | セクションID。`ystdtb/design`のように名前空間化する |
-| `title` | 必須 | string | 画面へ表示する見出し |
-| `order` | 任意 | integer | 既定値は`100` |
+interface PostSettingsItemProps {
+	postType: string;
+	postId: number;
+}
 
-### 項目追加
+interface PostSettingsItem {
+	id: string;
+	section: string;
+	order: number;
+	Component: ComponentType< PostSettingsItemProps >;
+}
+```
 
-```php
-$fields = apply_filters(
-	'ys_post_settings_modal_fields',
-	[],
-	$context
+登録例:
+
+```tsx
+addFilter(
+	'ystandard.hooks.postSettingsModal.items',
+	'ystandard-toolbox/header-overlay',
+	( items: PostSettingsItem[] ) => [
+		...items,
+		{
+			id: 'ystdtb/header-overlay',
+			section: 'ystdtb/design',
+			order: 10,
+			Component: HeaderOverlaySetting,
+		},
+	]
 );
 ```
 
-フィールドもプロバイダー名を含むIDをキーにする。初期対応する`control`は`radio`、`select`、`text`、`textarea`、`toggle`とする。
+コンポーネントのインスタンスではなくコンポーネント参照を渡す。ホストは`key`と共通propsを付けて描画する。
 
-```php
-$fields['ystdtb/header-overlay'] = [
-	'section' => 'ystdtb/design',
-	'meta_key' => 'ystdtb-overlay',
-	'control' => 'radio',
-	'label' => __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ),
-	'help' => __( '未指定の場合は全体設定に従います。', 'ystandard-toolbox' ),
-	'options' => [
-		[ 'label' => __( '全体設定に従う', 'ystandard-toolbox' ), 'value' => 'none' ],
-		[ 'label' => __( '有効', 'ystandard-toolbox' ), 'value' => 'on' ],
-		[ 'label' => __( '無効', 'ystandard-toolbox' ), 'value' => 'off' ],
-	],
-	'order' => 10,
-];
+```tsx
+<item.Component postType={ context.postType } postId={ context.postId } />
 ```
 
-フィールド定義は次の形式に統一する。配列キーをシリアライズ時の`id`として使用する。
+### 登録値の規則
 
-| キー | 必須 | 型 | 既定値・用途 |
-| --- | --- | --- | --- |
-| 配列キー | 必須 | string | フィールドID。プロバイダー名で名前空間化する |
-| `section` | 必須 | string | 登録済みセクションID |
-| `meta_key` | 必須 | string | 接続する登録済み投稿メタキー |
-| `meta_path` | 任意 | string[] | オブジェクト型メタ内の更新位置。既定値は空配列 |
-| `control` | 必須 | string | 初期対応する5種類のいずれか |
-| `label` | 必須 | string | コントロールのラベル |
-| `help` | 任意 | string | 補足文。既定値は空文字 |
-| `options` | 条件付き | array | `radio`と`select`で必須。各要素は`label`と`value`を持つ |
-| `order` | 任意 | integer | 既定値は`100` |
+- `id`は`ystdtb/header-overlay`のようにプロバイダー名で名前空間化する
+- `section`は登録済みセクションIDを指定する
+- `order`は昇順で表示する
+- 同じ`order`の場合はフィルター適用後の追加順を維持する
+- 同じ`id`が複数登録された場合は後から登録された定義を採用する
+- 不正な定義、未登録セクション、不正なコンポーネントは描画しない
+- 開発モードでは無視した定義を`console.warn()`で通知する
+- 設定コンポーネントの描画中に例外が発生した場合は、その設定だけをエラー表示へ置き換える
 
-`toggle`の値は真偽値、それ以外の初期コントロールの値は文字列として扱う。ホストは定義の型を検証してから描画する。
+### 後から追加された設定への追従
 
-`meta_path`を省略した場合は`meta_key`の値全体を更新する。オブジェクト型メタの一部を編集する場合は、文字列配列でネスト位置を指定する。
+ホストは初回描画時に`applyFilters()`を実行するだけでなく、`@wordpress/hooks`の`hookAdded`と`hookRemoved`を監視する。
 
-```php
-$fields[ "ystdtb/menu-replace/{$location}" ] = [
-	'section' => 'ystdtb/navigation',
-	'meta_key' => 'ystdtb-menu-replace',
-	'meta_path' => [ $location ],
-	'control' => 'select',
-	'label' => $location_label,
-	'options' => $menu_options,
-	'order' => $order,
-];
+対象のセクション・設定フィルターが追加または解除された場合は、登録一覧を再取得して再描画する。これにより、ホストスクリプトとプロバイダースクリプトの厳密な実行順へ依存しない。
+
+購読解除はReactコンポーネントのアンマウント時に行う。
+
+## React実行環境
+
+ToolboxとyStandardは独立してビルドするが、次のWordPressパッケージを外部依存として使用する。
+
+- `@wordpress/element`
+- `@wordpress/hooks`
+- `@wordpress/core-data`
+- `@wordpress/components`
+- `@wordpress/i18n`
+
+React本体やJSX runtimeを各成果物へ同梱しない。`@wordpress/scripts`が生成する`.asset.php`の依存関係を使い、WordPressが提供する同じReact・hooksレジストリ上で動作させる。
+
+独自SlotFillは採用しない。別バンドルで個別に`createSlotFill()`を実行すると同じ名前でも別インスタンスになり、共有方法がホスト実装へ依存するためである。
+
+## スクリプト分離
+
+### モーダルホスト
+
+Toolbox側のホストを独立したエントリーにする。
+
+```text
+src/post-settings/host/index.tsx
+src/post-settings/host/post-settings-modal.tsx
+src/post-settings/host/use-post-settings-items.ts
 ```
 
-ホストは同じ`meta_key`を使う複数項目をイミュータブルにマージし、他のメニュー位置の値を失わないように`setMeta()`へ渡す。未登録セクションを参照するフィールド、必須キー不足、不明な`control`は描画せず、開発時に確認できる警告対象とする。
+ホストが`ystandard-toolbox`で、ブロックエディターを利用できる場合だけ読み込む。
 
-### 設定プロバイダーの責務
+### Toolbox設定プロバイダー
 
-Toolboxは`4.59.0-alpha-1`以上のyStandardでのみ、オーバーレイとメニュー切り替えのセクション・フィールドを追加する。投稿タイプや投稿IDによる表示条件は、フィルターへ追加する前にPHP側で解決する。
+Toolboxの設定登録も独立したエントリーにする。
 
-- オーバーレイ: 対応する投稿タイプで表示する
-- メニュー切り替え: `ystdtb_can_replace_menu`を含む既存判定がtrueの投稿だけ表示する。現在のprivateな判定処理は公開メソッドへ切り出し、従来メタボックスとモーダル用プロバイダーで共用する
-- メニュー位置と選択肢: `get_registered_nav_menus()`と`wp_get_nav_menus()`から生成する
-- 投稿メタ登録、RESTスキーマ、サニタイズ、権限確認: Toolboxが所有する
-- モーダルの開閉、セクション配置、共通コントロール描画: 選択されたホストが所有する
-
-## ホスト判定
-
-ホスト判定は`ys_post_settings_modal_host`を正本にする。
-
-| 条件 | 判定 |
-| --- | --- |
-| フィルター追加なし | Toolboxホスト |
-| yStandard v5が`ystandard`を返す | yStandardホスト |
-| `false`が返る | ホストを表示しない |
-
-テーマとバージョンの判定は、ToolboxのyStandard依存フィールドを追加できるかの判定にだけ使用する。子テーマ利用時も親テーマを判定できるよう、現行どおり`get_template()`と`wp_get_theme( get_template() )`を使う。
-
-## yStandardとの連携契約
-
-### yStandard v4系
-
-SEOの2項目だけを`ys_block_editor_post_meta_fields`へ追加する。
-
-```php
-$fields['ystdtb_seo_title'] = [
-	'type'        => 'string',
-	'control'     => 'textarea',
-	'panel'       => 'seo',
-	'label'       => __( '<title>タグ用タイトル', 'ystandard-toolbox' ),
-	'help'        => __( '空白の場合は投稿タイトルになります。', 'ystandard-toolbox' ),
-	'post_types'  => [],
-];
+```text
+src/post-settings/providers/index.tsx
+src/post-settings/providers/header-overlay.tsx
+src/post-settings/providers/menu-replace.tsx
+src/post-settings/providers/config.ts
 ```
 
-互換範囲は次のようにする。
+yStandard 4.59.0-alpha-1以降で、対象投稿タイプがREST APIと`custom-fields`を利用できる場合に読み込む。
 
-| yStandardバージョン | SEOの表示 |
-| --- | --- |
-| v4.59.0-alpha-1以降、v5未満 | yStandardの`[ys] SEO設定`ドキュメント設定パネル |
-| v4.58以前 | 現行の`ys_meta_box_seo`による従来SEOメタボックス |
+| 環境 | Toolboxホスト | Toolboxプロバイダー |
+| --- | --- | --- |
+| yStandard v4.59.0-alpha-1以降 | 読み込む | 読み込む |
+| yStandard v5以降 | 読み込まない | 読み込む |
+| yStandard v4.58以前 | 必要な場合だけ読み込む | 読み込まない |
+| yStandard以外 | 読み込む | yStandard依存設定は読み込まない |
 
-Toolboxのオーバーレイとメニュー切り替えは、v4系ではToolboxモーダルへ表示する。
+この分離により、yStandard v5でToolboxモーダルを抑止しても、Toolbox設定コンポーネントはyStandardホストへ登録される。
 
-### yStandard v5以降
+## Toolbox設定コンポーネント
 
-yStandard v5は共通フィルター契約のホストとして実装する。
+### オーバーレイ設定
 
-```php
-add_filter(
-	'ys_post_settings_modal_host',
-	static function () {
-		return 'ystandard';
-	}
-);
+`HeaderOverlaySetting`を1つの独立したTSXとして実装する。
+
+```tsx
+function HeaderOverlaySetting( { postType, postId }: PostSettingsItemProps ) {
+	const [ meta, setMeta ] = useEntityProp(
+		'postType',
+		postType,
+		'meta',
+		postId
+	);
+	const value = meta?.[ 'ystdtb-overlay' ] || 'none';
+
+	return (
+		<BaseControl>
+			<ToggleGroup
+				label={ __( 'ヘッダーオーバーレイ', 'ystandard-toolbox' ) }
+				value={ value }
+				options={ overlayOptions }
+				onChange={ ( nextValue ) =>
+					setMeta( {
+						...meta,
+						'ystdtb-overlay': nextValue,
+					} )
+				}
+			/>
+		</BaseControl>
+	);
+}
 ```
 
-Toolboxはv4と同じ`ys_post_settings_modal_sections`、`ys_post_settings_modal_fields`へ定義を追加する。投稿メタのREST登録とサニタイズはToolboxが行い、yStandardは登録済みメタのUIだけを描画する。
+未保存値と空文字は`none`として表示する。保存値は従来どおり`none`、`on`、`off`とする。
 
-フィールドIDとセクションIDは衝突を避けるため、`ystdtb/seo-title`、`ystdtb/design`のようにプロバイダー名で名前空間化する。
+### メニュー切り替え設定
 
-yStandard v5以降では、Toolboxのモーダルスクリプト、起動項目、モーダル枠を登録しない。Classic EditorではyStandardのモーダルが利用できないため、従来メタボックスを維持する。
+`MenuReplaceSetting`を1つの独立したTSXとして実装する。メニュー位置ごとに汎用フィールド定義を登録せず、コンポーネント内部で必要な数のコントロールを描画する。
 
-独自React要素を別バンドルから直接SlotFillへ注入する方式は初期実装では採用しない。共有Slotの公開方法、Reactコンテキスト、依存バージョンがホストとプロバイダーの結合点になるためである。まずは`radio`、`select`、`text`、`textarea`、`toggle`のシリアライズ可能な定義に限定する。
+PHPから次のシリアライズ可能な初期データだけを渡す。
 
-## 保存設計
+```ts
+interface MenuReplaceConfig {
+	locations: Array< {
+		name: string;
+		label: string;
+	} >;
+	menus: Array< {
+		value: string;
+		label: string;
+	} >;
+}
+```
 
-### 共通方針
+コンポーネントは`ystdtb-menu-replace`を読み、変更したメニュー位置だけをイミュータブルにマージする。他の位置の値を失わない。
 
-- 既存メタキーと保存値の意味を変えない
-- 投稿の保存・自動保存フローへ統合する
-- REST登録に`type`、`single`、`show_in_rest`、`sanitize_callback`、`auth_callback`を指定する
-- `auth_callback`は対象投稿の`edit_post`権限を確認する
-- Classic Editorではnonceと権限確認を維持する
-- REST保存と`save_post`の二重保存を起こさない
+メニュー切り替えを表示するかは、既存の`ystdtb_can_replace_menu`を含むPHP側の判定を正本にする。利用不可の場合は設定データを渡さず、コンポーネントも登録しない。
 
-### SEO
+## 投稿メタと保存
 
-`ystdtb_seo_title`と`ystdtb_seo_description`は`string`、`single => true`として登録する。サニタイズは現行の`wp_strip_all_tags()`相当へ統一し、`wp_unslash()`を適切に扱う。
-
-空文字を保存した場合にメタ行が残ってもフロント出力は変わらない。初期実装では、空文字を削除するためだけの独自REST処理は追加しない。
+投稿メタの登録・検証は引き続きToolboxが所有する。
 
 ### オーバーレイ
 
-`ystdtb-overlay`は`string`として登録し、`none`、`on`、`off`以外を`none`へ正規化する。
-
-未保存または空文字の既存値は、モーダル表示時に`none`として扱う。ユーザーが「全体設定に従う」を選んで保存した後は、従来形式どおり`none`を保存する。
+- メタキー: `ystdtb-overlay`
+- REST型: `string`
+- 許可値: `none`、`on`、`off`
+- 権限: 対象投稿の`edit_post`
 
 ### メニュー切り替え
 
-`ystdtb-menu-replace`は既存データがメニュー位置をキーとする連想配列であるため、保存形式を変更しない。モーダル上はメニュー位置ごとに`select`フィールドを作り、`meta_path`で同じオブジェクト型メタへ接続する。
+- メタキー: `ystdtb-menu-replace`
+- REST型: `object`
+- 保存形式: メニュー位置をキー、メニューIDの数値文字列を値とする既存配列
+- 空文字: 「変更なし」として許可する
+- 書き込み時: 未登録位置、存在しないメニューID、不正値を除外する
+- 読み取り時: 廃止済み位置を含む既存値もREST応答できるスキーマにする
+- 権限: 対象投稿の`edit_post`
 
-RESTスキーマは`object`とし、登録済みメニュー位置から`properties`を動的に組み立てる。既に保存された廃止済みメニュー位置がREST応答全体を無効にしないよう、`additionalProperties`にも文字列スキーマを指定する。各値は既存保存値との互換性を優先して数値文字列として扱い、書き込み時のサニタイズで次を行う。
+各TSXはCore Dataへ編集値を反映する。モーダル独自の保存ボタンは作らず、通常の投稿保存・更新時に保存する。
 
-- 未登録のメニュー位置を除外する
-- 存在しないメニューIDを除外する
-- 空値は「変更なし」を表す空文字として許可する
-- 保存配列のキーと値を正規化する
+Classic Editorではnonce、権限確認、サニタイズを持つ従来メタボックスを維持する。新UI対象の従来メタボックスには`__back_compat_meta_box`を付ける。
 
-WordPressのオブジェクト型メタは、RESTスキーマで許可されないプロパティが含まれると応答時の検証に失敗する可能性がある。`additionalProperties`で読み取り互換を保ち、サニタイズで保存対象を現在のメニュー位置だけに絞る。この複合メタは既存値のREST応答を実装前にPHPUnitで確認し、それでもスキーマ不一致が起きる場合は、保存形式変更ではなく専用RESTフィールドを代替案として再評価する。
+## yStandard v5側の実装契約
 
-## 従来メタボックスとの共存
+yStandard v5は次を実装する。
 
-新UIを利用できる投稿タイプでは、Toolboxの従来メタボックスへ`__back_compat_meta_box => true`を付け、Classic Editor専用にする。
+- `ys_post_settings_modal_host`で`ystandard`を返す
+- `ystandard.hooks.postSettingsModal.sections`を適用する
+- `ystandard.hooks.postSettingsModal.items`を適用する
+- `hookAdded`と`hookRemoved`を監視して登録変更へ追従する
+- 共通propsとして`postType`と`postId`を設定コンポーネントへ渡す
+- 登録値の検証、並び替え、重複ID処理をToolboxホストと同じ規則で行う
+- yStandard自身の投稿設定も同じJavaScriptフィルターへTSXコンポーネントとして登録する
 
-新UIの利用条件は次のすべてを満たすこととする。
+Toolbox固有のReact要素、メタキー、コントロール実装はyStandardへ含めない。
 
-- ブロックエディターを利用している
-- 投稿タイプが`show_in_rest`を有効にしている
-- 投稿タイプが`custom-fields`をサポートしている
-- 利用可能なToolboxフィールドが1件以上ある
+ホスト間で挙動がずれないよう、JavaScriptフック名、型定義、正規化規則、テストケースをこの文書を正本として共有する。
 
-条件を満たさないカスタム投稿タイプでは、従来メタボックスを残す。`post`と`page`以外へToolboxが`custom-fields`サポートを勝手に追加しない。
+## テスト方針
 
-## 非yStandardテーマでの扱い
+### Toolboxプロバイダー
 
-Toolboxモーダルの基盤は非yStandardでも動作する。ただし、現在の4項目はすべてyStandard連携機能である。
+- オーバーレイTSXが未保存値を`none`として表示する
+- オーバーレイ変更時に既存メタを維持して`setMeta()`する
+- メニュー位置と選択肢をPHP設定から表示する
+- 1つのメニュー位置を変更しても他の位置を失わない
+- メニュー切り替え利用不可時は設定を登録しない
+- yStandard 4.59.0-alpha-1未満ではプロバイダースクリプトを読み込まない
+- v5ホストでもプロバイダーは読み込む
 
-現行機能条件を維持する初期実装では、非yStandard環境の利用可能フィールドは0件になり、空のモーダルは表示しない。今後、テーマ非依存の投稿設定が追加された時点で、同じToolboxホストへ自動的に表示される。
+### Toolboxホスト
 
-非yStandardでもSEO設定やメニュー切り替えを有効化する場合は、フロント出力責務と対応テーマ範囲が変わるため、このUI移行とは別機能として判断する。
+- ヘッダーアイコンと「︙」メニューが同じモーダルを開く
+- 登録された独自コンポーネントを描画する
+- セクションと設定を`order`順に表示する
+- 設定が0件の場合は起動UIを表示しない
+- フックが後から追加・解除された場合に再描画する
+- ホストが`ystandard`の場合はToolboxホストを登録しない
 
-## UI方針
+### PHP
 
-- 起動ラベルは`[Toolbox] 投稿設定`とする
-- モーダルには目的が分かるタイトルを必ず付ける
-- セクションは機能単位で分け、同名設定には対象要素名を付ける
-- コントロールはWordPress標準コンポーネントに合わせる
-- プロジェクト規約に従い、`@wordpress/components`を直接使わず`src/aktk-block-components/`のラッパーを使う
-- textareaラッパーが不足する場合は、プラグイン固有ロジックを持たない共通ラッパーを追加する
-- モーダルを閉じても編集値は破棄せず、投稿の未保存変更として維持する
-- 画面幅が狭い場合は1カラムで表示する
-- キーボード操作、Esc、フォーカス復帰は`Modal`の標準挙動を利用する
+- yStandard下限バージョン判定
+- RESTメタ登録、スキーマ、サニタイズ、権限確認
+- 既存保存値をREST APIから読み出せること
+- メニュー位置とメニュー選択肢の初期データ
+- Classic Editorの保存互換
 
-## ファイル構成案
+## 現在の実装からの変更点
 
-| ファイル | 役割 |
-| --- | --- |
-| `inc/post-meta/class-post-settings-registry.php` | 共通フィルターの適用とUI定義の検証 |
-| `inc/post-meta/class-post-settings-meta.php` | REST登録、サニタイズ、投稿タイプ判定 |
-| `inc/post-meta/class-post-settings-provider.php` | Toolbox設定のセクション・フィールド追加 |
-| `inc/post-meta/class-post-settings-host.php` | `ys_post_settings_modal_host`によるホスト判定 |
-| `inc/post-meta/class-post-settings-editor.php` | ブロックエディター用アセットと設定の受け渡し |
-| `src/post-settings/index.tsx` | エディタープラグイン登録 |
-| `src/post-settings/post-settings-modal.tsx` | Toolboxモーダルホスト |
-| `src/post-settings/field-control.tsx` | 共通フィールド描画 |
-| `src/post-settings/types.ts` | セクション・フィールド型 |
-| `src/post-settings/test/` | UIとホスト条件のunit test |
-| `phpunit/test-post-settings.php` | REST登録、サニタイズ、互換条件のPHPUnit |
+定型フィールド方式で作成した次の実装は採用しない。
 
-既存`inc/meta-box/class-meta-box.php`はすぐに削除しない。新UI対象で`__back_compat_meta_box`を指定できるよう拡張し、Classic Editorと対象外投稿タイプの互換層として残す。
+- PHPの`ys_post_settings_modal_sections`と`ys_post_settings_modal_fields`によるUI定義
+- `control`、`label`、`options`、`meta_key`、`meta_path`の汎用フィールド定義
+- `FieldControl`による共通コントロール分岐
+- ホスト側の汎用`getMetaValue()`と`setMetaValue()`
 
-## 実装単位
+次の実装は維持できる。
 
-### オーバーレイ・メニュー切り替え
+- `ys_post_settings_modal_host`によるPHPのホスト選択
+- オーバーレイとメニュー切り替えのRESTメタ登録
+- サニタイズと権限確認
+- 従来メタボックスのClassic Editor互換
+- ヘッダーアイコンと「︙」メニューで同じモーダルを開く構成
 
-- `ystdtb-overlay`と`ystdtb-menu-replace`のREST登録定義を作る
-- 共通フィルターへセクションとフィールドを追加する
-- `post`、`page`と対象カスタム投稿タイプへ登録する
-- 既存値を読み出せることをPHPUnitで確認する
-- Classic Editor保存を同じサニタイズ関数へ寄せる
+実装時は、ホストとプロバイダーのエントリー分離を先に行い、その後にオーバーレイとメニュー切り替えを個別TSXへ移行する。
 
-### yStandard v4 SEO連携
+## 今回の仕様決定
 
-- v4.59のSEOパネルへ2項目を注入する
-- v4.58以前では従来PHPフックを維持する
-- 同じ画面へ新旧UIが重複しないことを確認する
-
-### Toolboxモーダル
-
-- `PinnedItems/core`内のヘッダーボタン、`PluginMoreMenuItem`、`Modal`を追加する
-- 利用可能フィールドだけを表示する
-- Core Dataへ変更を反映する
-- 従来メタボックスをClassic Editor互換へ切り替える
-
-### yStandard v5ホスト連携
-
-- yStandard側のモーダル契約を実装する
-- Toolboxの定義をyStandardホストへ注入する
-- Toolbox側のモーダル登録が抑止されることを確認する
-
-この単位は依存順に進める。yStandard v5ホストが未完成でも、v4系と非yStandard向けToolboxホストまでは独立して実装できる。
-
-## 検証マトリクス
-
-| 環境 | 確認内容 |
-| --- | --- |
-| yStandard v4.59.0-alpha-1以降、v5未満 | SEOの2項目がyStandard SEOパネル、オーバーレイとメニュー切り替えがToolboxモーダルへ表示される |
-| yStandard v4.58以前 | SEO、オーバーレイ、メニュー切り替えが従来のPHPメタボックスへ表示される |
-| yStandard v5 alpha・正式版 | Toolboxモーダルがなく、Toolbox設定がyStandardモーダルへ表示される |
-| yStandard子テーマ | 親テーマのバージョンで項目追加条件を判定し、v5のホスト通知でモーダルを切り替える |
-| 非yStandard | 利用可能フィールドが0件なら起動項目を表示しない |
-| Classic Editor | 従来メタボックスで表示・保存できる |
-| `post`、`page` | 対象フィールドがREST経由で保存・再読込できる |
-| 対応カスタム投稿タイプ | REST、ブロックエディター、`custom-fields`条件を満たす場合だけ新UIになる |
-| 権限不足ユーザー | 投稿メタを更新できない |
-
-自動テストでは次を確認する。
-
-- メタ型、RESTスキーマ、初期値、サニタイズ
-- 親テーマと`4.59.0-alpha-1`の下限を使った項目追加条件
-- 利用可能フィールドが0件の時にスクリプトを読み込まないこと
-- v4 SEOフィールド定義の注入
-- v5ホスト時のToolboxモーダル抑止
-- コントロール変更時の`setMeta()`呼び出し
-- 既存のフロント出力とPHPUnitに回帰がないこと
-
-実装後は関連unit test、PHPUnit、lint、buildを実行する。ブラウザ確認は別途了承を得たうえで、投稿保存・再読込、キーボード操作、Classic Editorを確認する。
-
-## 今回の仕様決定案
-
-- ホスト選択は`ys_post_settings_modal_host`を使用する
-- セクション追加は`ys_post_settings_modal_sections`を使用する
-- 項目追加は`ys_post_settings_modal_fields`を使用する
-- フィルター第2引数は`post_type`と`post_id`を持つコンテキスト配列に統一する
-- 外部プロバイダーから渡す値はシリアライズ可能なUI定義に限定する
-- 投稿メタ登録と保存時検証は設定を提供するプラグインが所有する
-- オブジェクト型メタの部分更新には`meta_path`を使用する
-- yStandard v5は同じ3フィルターを実装し、ホストだけをToolboxからyStandardへ切り替える
-- 非yStandardでyStandard依存設定を有効化するかは、今回のUI移行から分離する
-
-この契約を正本とすれば、Toolbox側で先にオーバーレイとメニュー切り替えを実装し、その定義を変更せずyStandard v5のモーダルへ移行できる。
+- 設定UIは1設定につき1つの独立TSXを基本にする
+- PHPフィルターはモーダルホスト選択だけに使う
+- セクションと設定追加には`@wordpress/hooks`のJavaScriptフィルターを使う
+- 設定登録値にはReactコンポーネント参照を含める
+- ホストは投稿メタや共通フィールドレンダラーを持たない
+- 各設定TSXが値の取得・更新と固有UIを所有する
+- ToolboxホストとToolboxプロバイダーは別スクリプトにする
+- yStandard v5は同じJavaScriptフィルター契約でホストを実装する
+- ToolboxとyStandardはWordPressが提供するReactとhooksレジストリを共有する
+- ToolboxのUI実装ではaktk-componentを使用する

@@ -29,6 +29,9 @@ class Post_Meta {
 	 * Load PHP files.
 	 */
 	private function load_files() {
+		require_once __DIR__ . '/class-post-settings-meta.php';
+		require_once __DIR__ . '/class-post-settings-registry.php';
+		require_once __DIR__ . '/class-post-settings-provider.php';
 		require_once __DIR__ . '/class-post-settings-editor.php';
 		require_once __DIR__ . '/class-post-meta-seo.php';
 	}
@@ -52,15 +55,20 @@ class Post_Meta {
 	/**
 	 * 投稿オプションの更新
 	 *
-	 * @param int    $post_id 投稿ID.
-	 * @param string $key     設定キー.
+	 * @param int           $post_id          投稿ID.
+	 * @param string        $key              設定キー.
+	 * @param callable|null $sanitize_callback サニタイズ処理.
 	 */
-	public static function save_post_meta( $post_id, $key ) {
+	public static function save_post_meta( $post_id, $key, $sanitize_callback = null ) {
 		if ( ! isset( $_POST[ $key ] ) ) {
 			return;
 		}
-		if ( ! empty( $_POST[ $key ] ) ) {
-			update_post_meta( $post_id, $key, $_POST[ $key ] );
+		$value = wp_unslash( $_POST[ $key ] );
+		if ( is_callable( $sanitize_callback ) ) {
+			$value = call_user_func( $sanitize_callback, $value );
+		}
+		if ( ! empty( $value ) ) {
+			update_post_meta( $post_id, $key, $value );
 		} else {
 			delete_post_meta( $post_id, $key );
 		}
