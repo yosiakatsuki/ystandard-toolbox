@@ -19,6 +19,8 @@ import { getProviderConfig } from './config';
 import HeaderOverlaySetting from './header-overlay';
 import MenuReplaceSetting from './menu-replace';
 
+import './style.scss';
+
 const NAMESPACE = 'ystandard-toolbox';
 
 /**

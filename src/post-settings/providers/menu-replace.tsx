@@ -72,31 +72,33 @@ export default function MenuReplaceSetting( {
 
 	return (
 		<div className="ystdtb-post-settings__menu-replace">
-			{ config.menuReplace.locations.map( ( location ) => {
-				// 対象位置だけを更新し、ほかのメニュー設定と投稿メタを保持する.
-				const updateValue = ( menuId: string ) => {
-					setMeta( {
-						...postMeta,
-						[ MENU_REPLACE_META_KEY ]: {
-							...menuReplace,
-							[ location.name ]: menuId,
-						},
-					} );
-				};
+			<div className="ystdtb-post-settings__menu-replace-fields">
+				{ config.menuReplace.locations.map( ( location ) => {
+					// 対象位置だけを更新し、ほかのメニュー設定と投稿メタを保持する.
+					const updateValue = ( menuId: string ) => {
+						setMeta( {
+							...postMeta,
+							[ MENU_REPLACE_META_KEY ]: {
+								...menuReplace,
+								[ location.name ]: menuId,
+							},
+						} );
+					};
 
-				return (
-					<BaseControl key={ location.name }>
-						<CustomSelectControl
-							label={ location.label }
-							value={ menuReplace[ location.name ] || '' }
-							options={ options }
-							onChange={ updateValue }
-							useEmptyValue={ false }
-						/>
-					</BaseControl>
-				);
-			} ) }
-			<p>
+					return (
+						<BaseControl key={ location.name }>
+							<CustomSelectControl
+								label={ location.label }
+								value={ menuReplace[ location.name ] || '' }
+								options={ options }
+								onChange={ updateValue }
+								useEmptyValue={ false }
+							/>
+						</BaseControl>
+					);
+				} ) }
+			</div>
+			<p className="ystdtb-post-settings__menu-replace-notice">
 				{ __(
 					'この投稿を表示するときだけ、選択したメニューへ切り替えます。',
 					'ystandard-toolbox'

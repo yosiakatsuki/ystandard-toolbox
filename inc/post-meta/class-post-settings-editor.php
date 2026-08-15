@@ -109,6 +109,17 @@ class Post_Settings_Editor {
 			$asset['version'],
 			true
 		);
+		$style_entry = "style-{$entry}";
+		$style_path  = YSTDTB_PATH . "/build/plugin-settings/{$style_entry}.css";
+		if ( is_readable( $style_path ) ) {
+			wp_enqueue_style(
+				$handle,
+				YSTDTB_URL . "/build/plugin-settings/{$style_entry}.css",
+				[],
+				$asset['version']
+			);
+			wp_style_add_data( $handle, 'rtl', 'replace' );
+		}
 		wp_set_script_translations(
 			$handle,
 			'ystandard-toolbox',
