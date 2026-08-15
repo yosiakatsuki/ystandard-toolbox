@@ -59,43 +59,47 @@ export default function PostSettingsModal( {
 					title={ title }
 					onRequestClose={ () => setIsOpen( false ) }
 				>
-					{ sections.map( ( section ) => {
-						const sectionItems = items.filter(
-							( item ) => item.section === section.id
-						);
-						if ( sectionItems.length === 0 ) {
-							return null;
-						}
-						return (
-							<section
-								key={ section.id }
-								className="ystdtb-post-settings__section"
-							>
-								<h2>{ section.title }</h2>
-								{ sectionItems.map( ( item ) => {
-									const ItemComponent = item.Component;
-									return (
-										<PostSettingsItemBoundary
-											key={ item.id }
-											fallback={
-												<p role="alert">
-													{ __(
-														'設定項目を表示できませんでした。',
-														'ystandard-toolbox'
-													) }
-												</p>
-											}
-										>
-											<ItemComponent
-												postType={ context.postType }
-												postId={ context.postId }
-											/>
-										</PostSettingsItemBoundary>
-									);
-								} ) }
-							</section>
-						);
-					} ) }
+					<div className="ystdtb-post-settings__sections">
+						{ sections.map( ( section ) => {
+							const sectionItems = items.filter(
+								( item ) => item.section === section.id
+							);
+							if ( sectionItems.length === 0 ) {
+								return null;
+							}
+							return (
+								<section
+									key={ section.id }
+									className="ystdtb-post-settings__section"
+								>
+									<h2>{ section.title }</h2>
+									{ sectionItems.map( ( item ) => {
+										const ItemComponent = item.Component;
+										return (
+											<PostSettingsItemBoundary
+												key={ item.id }
+												fallback={
+													<p role="alert">
+														{ __(
+															'設定項目を表示できませんでした。',
+															'ystandard-toolbox'
+														) }
+													</p>
+												}
+											>
+												<ItemComponent
+													postType={
+														context.postType
+													}
+													postId={ context.postId }
+												/>
+											</PostSettingsItemBoundary>
+										);
+									} ) }
+								</section>
+							);
+						} ) }
+					</div>
 					<p className="ystdtb-post-settings__save-notice">
 						{ __(
 							'変更は投稿の保存・更新時に保存されます。',

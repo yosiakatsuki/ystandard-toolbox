@@ -8,6 +8,8 @@ import { registerPlugin } from '@wordpress/plugins';
  */
 import PostSettingsModal from './post-settings-modal';
 
+import './style.scss';
+
 const context = window.ystdtbPostSettingsHost;
 
 if ( context?.apiVersion === 1 ) {
