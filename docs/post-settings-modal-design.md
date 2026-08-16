@@ -24,7 +24,7 @@ Toolbox、yStandard 4.59系、yStandard v5は同じJavaScriptフック契約を�
 | yStandard以外 | Toolbox | 外部プロバイダーが登録した設定をToolboxモーダルへ追加できる |
 | Classic Editor | 従来のPHPメタボックス | 現行UIと保存処理を維持する |
 
-titleとmeta descriptionのyStandard v4 SEOパネル連携は別の既存契約として扱い、今回のオーバーレイ・メニュー切り替え実装には含めない。
+titleとmeta descriptionのyStandard SEOパネル連携は、[yStandard投稿設定パネルへのToolbox SEO設定追加設計](./post-settings-seo-panel-design.md)に従う。
 
 ## 設計原則
 
