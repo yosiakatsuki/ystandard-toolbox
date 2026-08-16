@@ -1,26 +1,26 @@
-# 投稿設定モーダル連携設計
+# 投稿設定表示・yStandard連携設計
 
 調査日: 2026-08-12
-更新日: 2026-08-13
+更新日: 2026-08-16
 
 ## 結論
 
-投稿設定モーダルは、次の2責務へ分離する。
+投稿設定は、次の2責務へ分離する。
 
-- モーダルホスト: 起動UI、モーダル枠、セクション配置、開閉状態を所有する
+- 表示ホスト: 起動UI、モーダルまたは設定パネル、セクション配置を所有する
 - 設定プロバイダー: 設定ごとのTSXコンポーネント、投稿メタ登録、表示条件、保存処理を所有する
 
 設定項目は`radio`や`select`などの定型定義へ変換しない。各設定を独立したTSXコンポーネントとして実装し、JavaScriptフィルターへコンポーネント参照を登録する。
 
-ToolboxとyStandard v5は同じJavaScriptフック契約を使用する。モーダルホストがToolboxからyStandardへ切り替わっても、Toolboxの設定コンポーネントは変更しない。
+Toolbox、yStandard 4.59系、yStandard v5は同じJavaScriptフック契約を使用する。表示ホストがToolboxモーダル、yStandard投稿設定パネル、yStandardモーダルのいずれへ切り替わっても、Toolboxの設定コンポーネントは変更しない。
 
 ## 対応環境
 
-| 環境 | モーダルホスト | Toolbox設定の扱い |
+| 環境 | 表示ホスト | Toolbox設定の扱い |
 | --- | --- | --- |
 | yStandard v5以降 | yStandard | ToolboxのTSXコンポーネントをyStandardモーダルへ追加する |
-| yStandard v4.59.0-alpha-1以降、v5未満 | Toolbox | オーバーレイとメニュー切り替えをToolboxモーダルへ追加する |
-| yStandard v4.58以前 | Toolbox | 従来のPHPメタボックスを維持する |
+| yStandard v4.59.0-alpha-1以降、v5未満 | yStandard | ToolboxのTSXコンポーネントをブロックエディターの投稿設定パネルへ追加する |
+| yStandard v4.59.0-alpha-1未満 | 従来のPHPメタボックス | 新しい投稿設定UIは使用しない |
 | yStandard以外 | Toolbox | 外部プロバイダーが登録した設定をToolboxモーダルへ追加できる |
 | Classic Editor | 従来のPHPメタボックス | 現行UIと保存処理を維持する |
 
@@ -30,7 +30,7 @@ titleとmeta descriptionのyStandard v4 SEOパネル連携は別の既存契約�
 
 ### ホストは設定内容を知らない
 
-モーダルホストは次の処理だけを担当する。
+表示ホストは次の処理だけを担当する。起動UIと開閉状態はToolboxモーダルを使用する場合だけ所有する。
 
 - エディターヘッダーのySアイコンを表示する
 - 「︙」メニューに`[ys]投稿設定`を表示する
@@ -73,7 +73,7 @@ PHPは次を担当する。
 JavaScriptは次を担当する。
 
 - 設定コンポーネントの登録
-- モーダル内の表示
+- 選択された表示ホスト内の表示
 - Core Dataへの編集値反映
 - 設定固有の操作と状態管理
 
@@ -81,14 +81,14 @@ React要素や関数をPHPからJSON化して渡さない。
 
 ## 共通フック契約
 
-### PHPのホスト選択
+### PHPの表示先選択
 
-モーダルを表示する実装は、PHPフィルターで選択する。
+使用中のyStandardバージョンから初期表示先を判定し、PHPフィルターで変更できるようにする。
 
 ```php
-$host = apply_filters(
-	'ys_post_settings_modal_host',
-	'ystandard-toolbox',
+$display_mode = apply_filters(
+	'ys_post_settings_display_mode',
+	$display_mode,
 	[
 		'post_type' => $post_type,
 		'post_id'   => $post_id,
@@ -98,20 +98,20 @@ $host = apply_filters(
 
 | 戻り値 | 動作 |
 | --- | --- |
-| `ystandard-toolbox` | Toolboxが起動UIとモーダルを表示する |
-| `ystandard` | yStandardが起動UIとモーダルを表示する |
-| `false` | モーダルホストを表示しない |
+| `legacy-meta-box` | yStandardの従来メタボックスを表示する |
+| `toolbox-modal` | Toolboxが起動UIとモーダルを表示する |
+| `ystandard-panel` | yStandard 4.59系の投稿設定パネルへ表示する |
+| `ystandard-modal` | yStandard v5以降のモーダルへ表示する |
+| `false` | Toolboxの表示ホストを読み込まない |
 
-yStandard v4はフィルターを変更しない。yStandard v5は自身のモーダル実装を読み込める場合だけ`ystandard`を返す。
-
-テーマバージョンからホストを推測しない。ホスト実装自身が利用可能であることを通知する。
+初期値はyStandard 4.59.0-alpha-1未満を`legacy-meta-box`、yStandard 4.59.0-alpha-1以上かつv5未満を`ystandard-panel`、yStandard 5.0.0-alpha-1以上を`ystandard-modal`、yStandard以外を`toolbox-modal`とする。
 
 ### JavaScriptのセクション追加
 
 セクションは`@wordpress/hooks`の次のフィルターへ追加する。
 
 ```ts
-const SECTION_FILTER = 'ystandard.hooks.postSettingsModal.sections';
+const SECTION_FILTER = 'ystandard.hooks.postSettings.sections';
 ```
 
 型は次のとおりとする。
@@ -136,7 +136,7 @@ interface PostSettingsSection {
 import { addFilter } from '@wordpress/hooks';
 
 addFilter(
-	'ystandard.hooks.postSettingsModal.sections',
+	'ystandard.hooks.postSettings.sections',
 	'ystandard-toolbox/design',
 	( sections: PostSettingsSection[], context: PostSettingsContext ) => [
 		...sections,
@@ -156,7 +156,7 @@ addFilter(
 設定コンポーネントは次のフィルターへ追加する。
 
 ```ts
-const ITEM_FILTER = 'ystandard.hooks.postSettingsModal.items';
+const ITEM_FILTER = 'ystandard.hooks.postSettings.items';
 ```
 
 型は次のとおりとする。
@@ -181,7 +181,7 @@ interface PostSettingsItem {
 
 ```tsx
 addFilter(
-	'ystandard.hooks.postSettingsModal.items',
+	'ystandard.hooks.postSettings.items',
 	'ystandard-toolbox/header-overlay',
 	( items: PostSettingsItem[] ) => [
 		...items,
@@ -246,7 +246,7 @@ src/post-settings/host/post-settings-modal.tsx
 src/post-settings/host/use-post-settings-items.ts
 ```
 
-ホストが`ystandard-toolbox`で、ブロックエディターを利用できる場合だけ読み込む。
+表示先が`toolbox-modal`で、ブロックエディターを利用できる場合だけ読み込む。
 
 ### Toolbox設定プロバイダー
 
@@ -259,16 +259,16 @@ src/post-settings/providers/menu-replace.tsx
 src/post-settings/providers/config.ts
 ```
 
-yStandard 4.59.0-alpha-1以降で、対象投稿タイプがREST APIと`custom-fields`を利用できる場合に読み込む。
+yStandard 4.59.0-alpha-1以上で、対象投稿タイプがREST APIと`custom-fields`を利用できる場合に読み込む。
 
 | 環境 | Toolboxホスト | Toolboxプロバイダー |
 | --- | --- | --- |
-| yStandard v4.59.0-alpha-1以降 | 読み込む | 読み込む |
+| yStandard v4.59.0-alpha-1以上、v5未満 | 読み込まない | 読み込む |
 | yStandard v5以降 | 読み込まない | 読み込む |
-| yStandard v4.58以前 | 必要な場合だけ読み込む | 読み込まない |
+| yStandard v4.59.0-alpha-1未満 | 読み込まない | 読み込まない |
 | yStandard以外 | 読み込む | yStandard依存設定は読み込まない |
 
-この分離により、yStandard v5でToolboxモーダルを抑止しても、Toolbox設定コンポーネントはyStandardホストへ登録される。
+この分離により、yStandard 4.59系とv5以降でToolboxモーダルを抑止しても、Toolbox設定コンポーネントはyStandardホストへ登録される。
 
 ## Toolbox設定コンポーネント
 
@@ -354,13 +354,12 @@ interface MenuReplaceConfig {
 
 Classic Editorではnonce、権限確認、サニタイズを持つ従来メタボックスを維持する。新UI対象の従来メタボックスには`__back_compat_meta_box`を付ける。
 
-## yStandard v5側の実装契約
+## yStandard側の実装契約
 
-yStandard v5は次を実装する。
+yStandard 4.59系の投稿設定パネルとyStandard v5のモーダルは、次の契約を共有する。
 
-- `ys_post_settings_modal_host`で`ystandard`を返す
-- `ystandard.hooks.postSettingsModal.sections`を適用する
-- `ystandard.hooks.postSettingsModal.items`を適用する
+- `ystandard.hooks.postSettings.sections`を適用する
+- `ystandard.hooks.postSettings.items`を適用する
 - `hookAdded`と`hookRemoved`を監視して登録変更へ追従する
 - 共通propsとして`postType`と`postId`を設定コンポーネントへ渡す
 - 登録値の検証、並び替え、重複ID処理をToolboxホストと同じ規則で行う
@@ -379,7 +378,9 @@ Toolbox固有のReact要素、メタキー、コントロール実装はyStandar
 - メニュー位置と選択肢をPHP設定から表示する
 - 1つのメニュー位置を変更しても他の位置を失わない
 - メニュー切り替え利用不可時は設定を登録しない
-- yStandard 4.59.0-alpha-1未満ではプロバイダースクリプトを読み込まない
+- yStandard 4.59.0-alpha-1以上ではプロバイダースクリプトを読み込む
+- yStandard 4.59.0-alpha-1未満では従来メタボックスを表示する
+- yStandard 4.59系ではToolboxホストを読み込まない
 - v5ホストでもプロバイダーは読み込む
 
 ### Toolboxホスト
@@ -389,11 +390,11 @@ Toolbox固有のReact要素、メタキー、コントロール実装はyStandar
 - セクションと設定を`order`順に表示する
 - 設定が0件の場合は起動UIを表示しない
 - フックが後から追加・解除された場合に再描画する
-- ホストが`ystandard`の場合はToolboxホストを登録しない
+- 表示先が`legacy-meta-box`、`ystandard-panel`、`ystandard-modal`の場合はToolboxホストを登録しない
 
 ### PHP
 
-- yStandard下限バージョン判定
+- yStandard新UI対応下限と表示先のバージョン判定
 - RESTメタ登録、スキーマ、サニタイズ、権限確認
 - 既存保存値をREST APIから読み出せること
 - メニュー位置とメニュー選択肢の初期データ
@@ -410,7 +411,7 @@ Toolbox固有のReact要素、メタキー、コントロール実装はyStandar
 
 次の実装は維持できる。
 
-- `ys_post_settings_modal_host`によるPHPのホスト選択
+- `ys_post_settings_display_mode`によるPHPの表示先選択
 - オーバーレイとメニュー切り替えのRESTメタ登録
 - サニタイズと権限確認
 - 従来メタボックスのClassic Editor互換
@@ -421,12 +422,12 @@ Toolbox固有のReact要素、メタキー、コントロール実装はyStandar
 ## 今回の仕様決定
 
 - 設定UIは1設定につき1つの独立TSXを基本にする
-- PHPフィルターはモーダルホスト選択だけに使う
+- PHPフィルターは表示先選択だけに使う
 - セクションと設定追加には`@wordpress/hooks`のJavaScriptフィルターを使う
 - 設定登録値にはReactコンポーネント参照を含める
 - ホストは投稿メタや共通フィールドレンダラーを持たない
 - 各設定TSXが値の取得・更新と固有UIを所有する
 - ToolboxホストとToolboxプロバイダーは別スクリプトにする
-- yStandard v5は同じJavaScriptフィルター契約でホストを実装する
+- yStandard 4.59系とv5は同じJavaScriptフィルター契約でホストを実装する
 - ToolboxとyStandardはWordPressが提供するReactとhooksレジストリを共有する
 - ToolboxのUI実装ではaktk-componentを使用する

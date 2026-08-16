@@ -127,6 +127,13 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		removeFilter( ITEM_FILTER, 'ystandard-toolbox/menu-replace' );
 	} );
 
+	it( 'yStandardと共通の投稿設定フック名を使用する', () => {
+		expect( SECTION_FILTER ).toBe(
+			'ystandard.hooks.postSettings.sections'
+		);
+		expect( ITEM_FILTER ).toBe( 'ystandard.hooks.postSettings.items' );
+	} );
+
 	it( 'オーバーレイ設定を独立したTSXから投稿メタへ反映する', () => {
 		const setMeta = jest.fn();
 		mockUseEntityProp.mockReturnValue( [

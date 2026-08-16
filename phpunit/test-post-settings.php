@@ -49,7 +49,7 @@ class Post_Settings_Test extends WP_UnitTestCase {
 	public function tear_down() {
 		remove_filter( 'pre_option_template', [ $this, 'filter_template' ] );
 		remove_filter( 'ys_ystandard_version', [ $this, 'filter_ystandard_version' ] );
-		remove_all_filters( 'ys_post_settings_modal_host' );
+		remove_all_filters( 'ys_post_settings_display_mode' );
 		remove_all_filters( 'ystdtb_can_replace_menu' );
 		unregister_nav_menu( 'primary' );
 		unregister_nav_menu( 'footer' );
@@ -151,16 +151,33 @@ class Post_Settings_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * yStandard 4.59.0-alpha-1未満では新しい設定項目を追加しないことを確認する.
+	 * yStandard 4.59.0-alpha-1未満では従来のメタボックスを使用することを確認する.
 	 */
-	public function test_provider_is_disabled_before_minimum_version() {
+	public function test_ystandard_before_459_uses_legacy_meta_box() {
 		$this->theme_version = '4.58.0';
 		$this->use_ystandard_theme();
-		$config = \ystandard_toolbox\Post_Settings_Provider::get_config( 'page', $this->post_id );
+		$config  = \ystandard_toolbox\Post_Settings_Provider::get_config( 'page', $this->post_id );
+		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
 
 		$this->assertFalse( \ystandard_toolbox\Post_Settings_Provider::is_available( 'page' ) );
 		$this->assertFalse( $config['overlay']['enabled'] );
 		$this->assertFalse( $config['menuReplace']['enabled'] );
+		$this->assertSame(
+			\ystandard_toolbox\Post_Settings_Registry::DISPLAY_LEGACY_META_BOX,
+			\ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context )
+		);
+	}
+
+	/**
+	 * yStandard以外ではToolboxモーダルを使用することを確認する.
+	 */
+	public function test_non_ystandard_uses_toolbox_modal() {
+		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
+
+		$this->assertSame(
+			\ystandard_toolbox\Post_Settings_Registry::DISPLAY_TOOLBOX_MODAL,
+			\ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context )
+		);
 	}
 
 	/**
@@ -200,18 +217,46 @@ class Post_Settings_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * yStandard v5がホストを通知した場合にToolboxホストを抑止できることを確認する.
+	 * yStandard 4.59系では投稿設定パネルへ表示することを確認する.
 	 */
-	public function test_ystandard_can_take_over_modal_host() {
+	public function test_459_uses_ystandard_setting_panel() {
+		$this->use_ystandard_theme();
+		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
+
+		$this->assertSame(
+			\ystandard_toolbox\Post_Settings_Registry::DISPLAY_YSTANDARD_PANEL,
+			\ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context )
+		);
+	}
+
+	/**
+	 * yStandard v5以降ではyStandardモーダルへ表示することを確認する.
+	 */
+	public function test_v5_uses_ystandard_modal() {
+		$this->theme_version = '5.0.0-alpha-1';
+		$this->use_ystandard_theme();
+		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
+
+		$this->assertSame(
+			\ystandard_toolbox\Post_Settings_Registry::DISPLAY_YSTANDARD_MODAL,
+			\ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context )
+		);
+	}
+
+	/**
+	 * フィルターで投稿設定の表示先を変更できることを確認する.
+	 */
+	public function test_display_mode_can_be_filtered() {
+		$this->use_ystandard_theme();
 		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
 		add_filter(
-			'ys_post_settings_modal_host',
+			'ys_post_settings_display_mode',
 			static function () {
-				return 'ystandard';
+				return false;
 			}
 		);
 
-		$this->assertSame( 'ystandard', \ystandard_toolbox\Post_Settings_Registry::get_host( $context ) );
+		$this->assertFalse( \ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context ) );
 	}
 
 	/**

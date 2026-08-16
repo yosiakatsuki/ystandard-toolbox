@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || die();
 class Post_Settings_Meta {
 
 	/**
-	 * 対応するyStandardの最低バージョン.
+	 * 新しい投稿設定に対応するyStandardの最低バージョン.
 	 */
 	const YSTANDARD_MIN_VERSION = '4.59.0-alpha-1';
 

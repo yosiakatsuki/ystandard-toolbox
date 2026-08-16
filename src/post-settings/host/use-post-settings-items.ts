@@ -15,7 +15,7 @@ import {
 	type PostSettingsSection,
 } from '../types';
 
-const OBSERVER_NAMESPACE = 'ystandard-toolbox/post-settings-modal-host';
+const OBSERVER_NAMESPACE = 'ystandard-toolbox/post-settings-host';
 
 type Definition = PostSettingsSection | PostSettingsItem;
 

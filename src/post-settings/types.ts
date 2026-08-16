@@ -3,8 +3,8 @@
  */
 import type { ComponentType } from '@wordpress/element';
 
-export const SECTION_FILTER = 'ystandard.hooks.postSettingsModal.sections';
-export const ITEM_FILTER = 'ystandard.hooks.postSettingsModal.items';
+export const SECTION_FILTER = 'ystandard.hooks.postSettings.sections';
+export const ITEM_FILTER = 'ystandard.hooks.postSettings.items';
 
 export interface PostSettingsContext {
 	apiVersion: 1;

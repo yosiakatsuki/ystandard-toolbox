@@ -60,7 +60,7 @@ class Post_Settings_Editor {
 			);
 		}
 
-		if ( 'ystandard-toolbox' === Post_Settings_Registry::get_host( $context ) ) {
+		if ( Post_Settings_Registry::DISPLAY_TOOLBOX_MODAL === Post_Settings_Registry::get_display_mode( $context ) ) {
 			$this->enqueue_script(
 				self::HOST_SCRIPT_HANDLE,
 				'post-settings-host',
