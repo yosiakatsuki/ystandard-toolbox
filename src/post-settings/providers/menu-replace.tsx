@@ -71,7 +71,12 @@ export default function MenuReplaceSetting( {
 	} ) );
 
 	return (
-		<div className="ystdtb-post-settings__menu-replace">
+		<BaseControl
+			help={ __(
+				'この投稿を表示するときだけ、選択したメニューへ切り替えます。',
+				'ystandard-toolbox'
+			) }
+		>
 			<div className="ystdtb-post-settings__menu-replace-fields">
 				{ config.menuReplace.locations.map( ( location ) => {
 					// 対象位置だけを更新し、ほかのメニュー設定と投稿メタを保持する.
@@ -98,12 +103,6 @@ export default function MenuReplaceSetting( {
 					);
 				} ) }
 			</div>
-			<p className="ystdtb-post-settings__menu-replace-notice">
-				{ __(
-					'この投稿を表示するときだけ、選択したメニューへ切り替えます。',
-					'ystandard-toolbox'
-				) }
-			</p>
-		</div>
+		</BaseControl>
 	);
 }

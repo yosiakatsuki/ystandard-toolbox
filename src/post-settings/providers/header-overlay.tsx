@@ -62,7 +62,12 @@ export default function HeaderOverlaySetting( {
 	};
 
 	return (
-		<BaseControl>
+		<BaseControl
+			help={ __(
+				'「全体設定に従う」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。',
+				'ystandard-toolbox'
+			) }
+		>
 			<ToggleGroup
 				label={ label }
 				value={ value }
@@ -83,12 +88,6 @@ export default function HeaderOverlaySetting( {
 				] }
 				isBlock
 			/>
-			<p>
-				{ __(
-					'「全体設定に従う」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。',
-					'ystandard-toolbox'
-				) }
-			</p>
 		</BaseControl>
 	);
 }

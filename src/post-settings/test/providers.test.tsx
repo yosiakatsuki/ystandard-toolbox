@@ -32,8 +32,19 @@ jest.mock( '@wordpress/core-data', () => ( {
 
 jest.mock( '@aktk/block-components/wp-controls/base-control', () => ( {
 	__esModule: true,
-	default: ( { children }: { children: React.ReactNode } ) => (
-		<div>{ children }</div>
+	default: ( {
+		children,
+		help,
+	}: {
+		children: React.ReactNode;
+		help?: string;
+	} ) => (
+		<div>
+			{ children }
+			{ help && (
+				<p className="components-base-control__help">{ help }</p>
+			) }
+		</div>
 	),
 } ) );
 
@@ -201,6 +212,11 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		expect( screen.getAllByText( 'ヘッダーオーバーレイ' ) ).toHaveLength(
 			1
 		);
+		expect(
+			screen.getByText(
+				'「全体設定に従う」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。'
+			)
+		).toHaveClass( 'components-base-control__help' );
 		fireEvent.click( screen.getByRole( 'button', { name: '有効' } ) );
 
 		expect( mockUseEntityProp ).toHaveBeenCalledWith(
@@ -266,6 +282,11 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 
 		render( <MenuReplaceSetting postType="page" postId={ 10 } /> );
 		expect( screen.getAllByText( 'メインメニュー' ) ).toHaveLength( 1 );
+		expect(
+			screen.getByText(
+				'この投稿を表示するときだけ、選択したメニューへ切り替えます。'
+			)
+		).toHaveClass( 'components-base-control__help' );
 		fireEvent.change( screen.getByLabelText( 'メインメニュー' ), {
 			target: { value: '20' },
 		} );
