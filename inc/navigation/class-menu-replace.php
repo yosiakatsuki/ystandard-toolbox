@@ -33,7 +33,10 @@ class Menu_Replace {
 			self::META_BOX_ID,
 			'メニュー切り替え',
 			[ $this, 'meta_box' ],
-			[ $this, 'save_meta' ]
+			[ $this, 'save_meta' ],
+			null,
+			true,
+			true
 		);
 	}
 
@@ -44,7 +47,7 @@ class Menu_Replace {
 	 */
 	public function replace_menu( $args ) {
 
-		if ( ! $this->can_replace_menu() ) {
+		if ( ! self::can_replace_menu() ) {
 			return $args;
 		}
 		$post = get_post();
@@ -69,13 +72,13 @@ class Menu_Replace {
 	}
 
 	/**
-	 * タイトル書き換え可能なページか
+	 * メニュー切り替え可能なページか.
 	 *
 	 * @param int $post_id post id.
 	 *
 	 * @return bool
 	 */
-	private function can_replace_menu( $post_id = 0 ) {
+	public static function can_replace_menu( $post_id = 0 ) {
 		if ( 0 === $post_id ) {
 			$post = get_post();
 			if ( $post ) {
@@ -96,7 +99,7 @@ class Menu_Replace {
 	 */
 	public function delete_meta_box() {
 		global $post;
-		if ( empty( $post ) || $this->can_replace_menu( $post->ID ) ) {
+		if ( empty( $post ) || self::can_replace_menu( $post->ID ) ) {
 			return;
 		}
 		Meta_Box::remove_meta_box( self::META_BOX_ID );
@@ -109,7 +112,7 @@ class Menu_Replace {
 	 */
 	public function meta_box( $post_id ) {
 
-		if ( ! $this->can_replace_menu( $post_id ) ) {
+		if ( ! self::can_replace_menu( $post_id ) ) {
 			return;
 		}
 
@@ -156,7 +159,11 @@ class Menu_Replace {
 	 * @param int $post_id Post ID.
 	 */
 	public function save_meta( $post_id ) {
-		Post_Meta::save_post_meta( $post_id, 'ystdtb-menu-replace' );
+		Post_Meta::save_post_meta(
+			$post_id,
+			Post_Settings_Meta::MENU_REPLACE_META_KEY,
+			[ Post_Settings_Meta::class, 'sanitize_menu_replace' ]
+		);
 	}
 
 }

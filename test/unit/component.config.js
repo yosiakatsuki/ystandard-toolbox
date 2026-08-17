@@ -23,6 +23,7 @@ module.exports = {
 	},
 	testMatch: [
 		'<rootDir>/src/aktk-block-components/**/*.test.[jt]s?(x)',
+		'<rootDir>/src/post-settings/**/*.test.[jt]s?(x)',
 		'<rootDir>/src/plugin-settings/**/*.test.[jt]s?(x)',
 		'<rootDir>/src/blocks/block-library/**/*.test.[jt]s?(x)',
 	],

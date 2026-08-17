@@ -12,6 +12,8 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		'plugin-settings': './src/plugin-settings/',
+		'post-settings-host': './src/post-settings/host/',
+		'post-settings-provider': './src/post-settings/providers/',
 		'ystdtb-settings-v2': './src/plugin-settings/start-page/',
 		'add-code': './src/plugin-settings/add-code/',
 		design: './src/plugin-settings/design/',

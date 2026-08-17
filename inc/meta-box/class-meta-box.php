@@ -75,6 +75,13 @@ class Meta_Box {
 	private $require_ystandard;
 
 	/**
+	 * ブロックエディターでは非表示にするかどうか.
+	 *
+	 * @var boolean
+	 */
+	private $back_compat;
+
+	/**
 	 * Meta_Box constructor.
 	 *
 	 * @param string     $id       ID.
@@ -83,14 +90,16 @@ class Meta_Box {
 	 * @param callable   $save     Save処理.
 	 * @param array|null $screen   ページタイプ.
 	 * @param boolean    $require_ystandard yStandardテーマが必要かどうか.
+	 * @param boolean    $back_compat       新UI対象時にClassic Editor専用にするかどうか.
 	 */
-	public function __construct( $id, $title, $meta_box, $save, $screen = null, $require_ystandard = true ) {
+	public function __construct( $id, $title, $meta_box, $save, $screen = null, $require_ystandard = true, $back_compat = false ) {
 		$this->id                = $id;
 		$this->title             = $title;
 		$this->meta_box          = $meta_box;
 		$this->save              = $save;
 		$this->screen            = $screen;
 		$this->require_ystandard = $require_ystandard;
+		$this->back_compat       = $back_compat;
 
 		add_action( 'admin_menu', [ $this, 'add_meta_box' ] );
 		add_action( 'save_post', [ $this, 'save_post' ] );
@@ -107,13 +116,21 @@ class Meta_Box {
 		if ( is_null( $screen ) ) {
 			$screen = array_keys( Post_Type::get_post_types( [], [ 'ys-parts' ] ) );
 		}
-		add_meta_box(
-			'ystdtb_' . $this->id,
-			$this->title,
-			[ $this, 'add_meta_box_form' ],
-			$screen,
-			'side'
-		);
+		foreach ( (array) $screen as $post_type ) {
+			$callback_args = [];
+			if ( $this->back_compat && Post_Settings_Meta::is_available_for_post_type( $post_type ) ) {
+				$callback_args['__back_compat_meta_box'] = true;
+			}
+			add_meta_box(
+				'ystdtb_' . $this->id,
+				$this->title,
+				[ $this, 'add_meta_box_form' ],
+				$post_type,
+				'side',
+				'default',
+				$callback_args
+			);
+		}
 	}
 
 	/**

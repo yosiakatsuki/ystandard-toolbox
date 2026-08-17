@@ -36,7 +36,10 @@ class Header_Overlay {
 			'overlay',
 			'オーバーレイ',
 			[ $this, 'meta_box' ],
-			[ $this, 'save_meta' ]
+			[ $this, 'save_meta' ],
+			null,
+			true,
+			true
 		);
 		add_filter( 'ystdtb_plugin_settings', [ $this, 'add_overlay_plugin_settings' ] );
 	}
@@ -309,7 +312,11 @@ class Header_Overlay {
 	 * @param int $post_id Post ID.
 	 */
 	public function save_meta( $post_id ) {
-		Post_Meta::save_post_meta( $post_id, 'ystdtb-overlay' );
+		Post_Meta::save_post_meta(
+			$post_id,
+			Post_Settings_Meta::OVERLAY_META_KEY,
+			[ Post_Settings_Meta::class, 'sanitize_overlay' ]
+		);
 	}
 
 	/**

@@ -6,6 +6,7 @@ import { TextControl as WPTextControl } from '@wordpress/components';
 interface TextControlProps {
 	className?: string;
 	label?: string;
+	help?: string;
 	value: string;
 	onChange: ( value: string ) => void;
 	placeholder?: string;
@@ -13,13 +14,14 @@ interface TextControlProps {
 
 // @ts-ignore
 export default function TextControl( props: TextControlProps ) {
-	const { className, label, value, onChange, placeholder } = props;
+	const { className, label, help, value, onChange, placeholder } = props;
 
 	return (
 		// @ts-ignore
 		<WPTextControl
 			className={ className }
 			label={ label }
+			help={ help }
 			value={ value }
 			onChange={ onChange }
 			placeholder={ placeholder }
