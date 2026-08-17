@@ -64,7 +64,7 @@ export default function HeaderOverlaySetting( {
 	return (
 		<BaseControl
 			help={ __(
-				'「全体設定に従う」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。',
+				'「-」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。',
 				'ystandard-toolbox'
 			) }
 		>
@@ -74,7 +74,7 @@ export default function HeaderOverlaySetting( {
 				onChange={ ( nextValue ) => updateValue( nextValue as string ) }
 				options={ [
 					{
-						label: __( '全体設定に従う', 'ystandard-toolbox' ),
+						label: '-',
 						value: 'none',
 					},
 					{

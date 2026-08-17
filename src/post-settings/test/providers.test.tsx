@@ -213,8 +213,11 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 			1
 		);
 		expect(
+			screen.getByRole( 'button', { name: '-' } )
+		).toBeInTheDocument();
+		expect(
 			screen.getByText(
-				'「全体設定に従う」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。'
+				'「-」を選択した場合、ヘッダーオーバーレイの「詳細ページ」設定に従います。'
 			)
 		).toHaveClass( 'components-base-control__help' );
 		fireEvent.click( screen.getByRole( 'button', { name: '有効' } ) );
