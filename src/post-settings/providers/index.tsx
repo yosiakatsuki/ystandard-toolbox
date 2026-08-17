@@ -18,6 +18,8 @@ import {
 import { getProviderConfig } from './config';
 import HeaderOverlaySetting from './header-overlay';
 import MenuReplaceSetting from './menu-replace';
+import SeoDescriptionSetting from './seo-description';
+import SeoTitleSetting from './seo-title';
 
 import './style.scss';
 
@@ -46,6 +48,39 @@ function isSameContext(
 export function registerPostSettingsProviders(
 	config: PostSettingsProviderConfig
 ) {
+	addFilter(
+		ITEM_FILTER,
+		`${ NAMESPACE }/seo-title`,
+		( items: PostSettingsItem[], context: PostSettingsContext ) =>
+			isSameContext( config, context )
+				? [
+						...items,
+						{
+							id: 'ystdtb/seo-title',
+							section: 'ystandard/seo',
+							order: 100,
+							Component: SeoTitleSetting,
+						},
+				  ]
+				: items
+	);
+	addFilter(
+		ITEM_FILTER,
+		`${ NAMESPACE }/seo-description`,
+		( items: PostSettingsItem[], context: PostSettingsContext ) =>
+			isSameContext( config, context )
+				? [
+						...items,
+						{
+							id: 'ystdtb/seo-description',
+							section: 'ystandard/seo',
+							order: 110,
+							Component: SeoDescriptionSetting,
+						},
+				  ]
+				: items
+	);
+
 	if ( config.overlay.enabled ) {
 		addFilter(
 			SECTION_FILTER,

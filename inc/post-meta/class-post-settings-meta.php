@@ -26,6 +26,16 @@ class Post_Settings_Meta {
 	const YSTANDARD_MIN_VERSION = '4.59.0-alpha-1';
 
 	/**
+	 * SEOタイトルのメタキー.
+	 */
+	const SEO_TITLE_META_KEY = 'ystdtb_seo_title';
+
+	/**
+	 * SEO descriptionのメタキー.
+	 */
+	const SEO_DESCRIPTION_META_KEY = 'ystdtb_seo_description';
+
+	/**
 	 * オーバーレイ設定のメタキー.
 	 */
 	const OVERLAY_META_KEY = 'ystdtb-overlay';
@@ -66,6 +76,20 @@ class Post_Settings_Meta {
 		foreach ( $post_types as $post_type ) {
 			if ( ! self::is_post_type_supported( $post_type ) ) {
 				continue;
+			}
+			foreach ( [ self::SEO_TITLE_META_KEY, self::SEO_DESCRIPTION_META_KEY ] as $meta_key ) {
+				register_post_meta(
+					$post_type,
+					$meta_key,
+					[
+						'type'              => 'string',
+						'single'            => true,
+						'default'           => '',
+						'show_in_rest'      => true,
+						'sanitize_callback' => [ __CLASS__, 'sanitize_seo_text' ],
+						'auth_callback'     => [ __CLASS__, 'can_edit_post_meta' ],
+					]
+				);
 			}
 			register_post_meta(
 				$post_type,
@@ -133,6 +157,19 @@ class Post_Settings_Meta {
 		}
 
 		return use_block_editor_for_post_type( $post_type );
+	}
+
+	/**
+	 * SEO用テキストを従来の保存処理と同じ形式へ正規化する.
+	 *
+	 * @param mixed $value 入力値.
+	 *
+	 * @return string
+	 */
+	public static function sanitize_seo_text( $value ) {
+		$value = is_string( $value ) ? $value : '';
+
+		return wp_strip_all_tags( $value, true );
 	}
 
 	/**

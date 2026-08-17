@@ -46,7 +46,7 @@ class Post_Meta_SEO {
 	 */
 	public function render_title_tag( $title ) {
 		if ( is_singular() ) {
-			$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
+			$seo_title = Post_Meta::get_post_meta( Post_Settings_Meta::SEO_TITLE_META_KEY, get_the_ID() );
 			if ( ! empty( trim( $seo_title ) ) ) {
 				$title = Document::get_document_title( $seo_title );
 			}
@@ -64,7 +64,7 @@ class Post_Meta_SEO {
 		if ( ! is_singular() ) {
 			return $dscr;
 		}
-		$seo_dscr = Post_Meta::get_post_meta( 'ystdtb_seo_description', get_the_ID() );
+		$seo_dscr = Post_Meta::get_post_meta( Post_Settings_Meta::SEO_DESCRIPTION_META_KEY, get_the_ID() );
 		if ( empty( trim( $seo_dscr ) ) ) {
 			return $dscr;
 		}
@@ -89,7 +89,7 @@ class Post_Meta_SEO {
 		if ( ! empty( trim( $ogp_title ) ) ) {
 			return $title;
 		}
-		$seo_title = Post_Meta::get_post_meta( 'ystdtb_seo_title', get_the_ID() );
+		$seo_title = Post_Meta::get_post_meta( Post_Settings_Meta::SEO_TITLE_META_KEY, get_the_ID() );
 		if ( empty( trim( $seo_title ) ) ) {
 			return $title;
 		}
@@ -114,7 +114,7 @@ class Post_Meta_SEO {
 		if ( ! empty( trim( $ogp_dscr ) ) ) {
 			return $dscr;
 		}
-		$seo_dscr = Post_Meta::get_post_meta( 'ystdtb_seo_description', get_the_ID() );
+		$seo_dscr = Post_Meta::get_post_meta( Post_Settings_Meta::SEO_DESCRIPTION_META_KEY, get_the_ID() );
 		if ( empty( trim( $seo_dscr ) ) ) {
 			return $dscr;
 		}
@@ -131,12 +131,12 @@ class Post_Meta_SEO {
 		?>
 		<div class="meta-box__list">
 			<label class="meta-box__label" for="ystdtb_seo_title"><?php echo esc_html( '<title>' ); ?>タグ用タイトル</label>
-			<textarea id="ystdtb_seo_title" class="meta-box__textarea" name="ystdtb_seo_title" rows="2" cols="40"><?php echo esc_textarea( Post_Meta::get_post_meta( 'ystdtb_seo_title', $post_id ) ); ?></textarea>
+			<textarea id="ystdtb_seo_title" class="meta-box__textarea" name="ystdtb_seo_title" rows="2" cols="40"><?php echo esc_textarea( Post_Meta::get_post_meta( Post_Settings_Meta::SEO_TITLE_META_KEY, $post_id ) ); ?></textarea>
 			<div class="meta-box__dscr">※<?php echo esc_html( '<title>' ); ?>タグ用のタイトルを設定できます。空白の場合投稿タイトルになります。</div>
 		</div>
 		<div class="meta-box__list">
 			<label class="meta-box__label" for="ystdtb_seo_description">meta description</label>
-			<textarea id="ystdtb_seo_description" class="meta-box__textarea" name="ystdtb_seo_description" rows="4" cols="40"><?php echo esc_textarea( Post_Meta::get_post_meta( 'ystdtb_seo_description', $post_id ) ); ?></textarea>
+			<textarea id="ystdtb_seo_description" class="meta-box__textarea" name="ystdtb_seo_description" rows="4" cols="40"><?php echo esc_textarea( Post_Meta::get_post_meta( Post_Settings_Meta::SEO_DESCRIPTION_META_KEY, $post_id ) ); ?></textarea>
 			<div class="meta-box__dscr">※meta description用の抜粋を設定できます。空白の場合「抜粋」または投稿本文から自動でdescriptionを作成します。</div>
 		</div>
 		<?php
@@ -149,8 +149,8 @@ class Post_Meta_SEO {
 	 */
 	public function save_seo_option( $post_id ) {
 
-		Post_Meta::save_post_textarea( $post_id, 'ystdtb_seo_title' );
-		Post_Meta::save_post_textarea( $post_id, 'ystdtb_seo_description' );
+		Post_Meta::save_post_textarea( $post_id, Post_Settings_Meta::SEO_TITLE_META_KEY );
+		Post_Meta::save_post_textarea( $post_id, Post_Settings_Meta::SEO_DESCRIPTION_META_KEY );
 	}
 }
 

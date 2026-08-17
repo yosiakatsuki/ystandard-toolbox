@@ -16,6 +16,10 @@ import { registerPostSettingsProviders } from '../providers/index';
 import MenuReplaceSetting, {
 	MENU_REPLACE_META_KEY,
 } from '../providers/menu-replace';
+import SeoDescriptionSetting, {
+	SEO_DESCRIPTION_META_KEY,
+} from '../providers/seo-description';
+import SeoTitleSetting, { SEO_TITLE_META_KEY } from '../providers/seo-title';
 import {
 	ITEM_FILTER,
 	SECTION_FILTER,
@@ -30,6 +34,56 @@ jest.mock( '@aktk/block-components/wp-controls/base-control', () => ( {
 	__esModule: true,
 	default: ( { children }: { children: React.ReactNode } ) => (
 		<div>{ children }</div>
+	),
+} ) );
+
+jest.mock( '@aktk/block-components/wp-controls/text-control', () => ( {
+	__esModule: true,
+	default: ( {
+		label,
+		help,
+		value,
+		onChange,
+	}: {
+		label: string;
+		help?: string;
+		value: string;
+		onChange: ( value: string ) => void;
+	} ) => (
+		<>
+			<label htmlFor="test-seo-title">{ label }</label>
+			<input
+				id="test-seo-title"
+				value={ value }
+				onChange={ ( event ) => onChange( event.target.value ) }
+			/>
+			{ help && <p>{ help }</p> }
+		</>
+	),
+} ) );
+
+jest.mock( '@aktk/block-components/wp-controls/textarea-control', () => ( {
+	__esModule: true,
+	default: ( {
+		label,
+		help,
+		value,
+		onChange,
+	}: {
+		label: string;
+		help?: string;
+		value: string;
+		onChange: ( value: string ) => void;
+	} ) => (
+		<>
+			<label htmlFor="test-seo-description">{ label }</label>
+			<textarea
+				id="test-seo-description"
+				value={ value }
+				onChange={ ( event ) => onChange( event.target.value ) }
+			/>
+			{ help && <p>{ help }</p> }
+		</>
 	),
 } ) );
 
@@ -123,6 +177,8 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		jest.clearAllMocks();
 		removeFilter( SECTION_FILTER, 'ystandard-toolbox/design' );
 		removeFilter( SECTION_FILTER, 'ystandard-toolbox/navigation' );
+		removeFilter( ITEM_FILTER, 'ystandard-toolbox/seo-title' );
+		removeFilter( ITEM_FILTER, 'ystandard-toolbox/seo-description' );
 		removeFilter( ITEM_FILTER, 'ystandard-toolbox/header-overlay' );
 		removeFilter( ITEM_FILTER, 'ystandard-toolbox/menu-replace' );
 	} );
@@ -155,6 +211,45 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		);
 		expect( setMeta ).toHaveBeenCalledWith( {
 			[ OVERLAY_META_KEY ]: 'on',
+			untouched: 'keep',
+		} );
+	} );
+
+	it( 'SEOタイトルを独立したTSXから投稿メタへ反映する', () => {
+		const setMeta = jest.fn();
+		mockUseEntityProp.mockReturnValue( [
+			{ [ SEO_TITLE_META_KEY ]: '変更前', untouched: 'keep' },
+			setMeta,
+		] );
+
+		render( <SeoTitleSetting postType="page" postId={ 10 } /> );
+		fireEvent.change( screen.getByLabelText( '<title>タグ用タイトル' ), {
+			target: { value: '変更後' },
+		} );
+
+		expect( setMeta ).toHaveBeenCalledWith( {
+			[ SEO_TITLE_META_KEY ]: '変更後',
+			untouched: 'keep',
+		} );
+	} );
+
+	it( 'meta descriptionを独立したTSXから投稿メタへ反映する', () => {
+		const setMeta = jest.fn();
+		mockUseEntityProp.mockReturnValue( [
+			{
+				[ SEO_DESCRIPTION_META_KEY ]: '変更前',
+				untouched: 'keep',
+			},
+			setMeta,
+		] );
+
+		render( <SeoDescriptionSetting postType="page" postId={ 10 } /> );
+		fireEvent.change( screen.getByLabelText( 'meta description' ), {
+			target: { value: '変更後' },
+		} );
+
+		expect( setMeta ).toHaveBeenCalledWith( {
+			[ SEO_DESCRIPTION_META_KEY ]: '変更後',
 			untouched: 'keep',
 		} );
 	} );
@@ -200,6 +295,18 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		] );
 		expect( items ).toEqual( [
 			{
+				id: 'ystdtb/seo-title',
+				section: 'ystandard/seo',
+				order: 100,
+				Component: SeoTitleSetting,
+			},
+			{
+				id: 'ystdtb/seo-description',
+				section: 'ystandard/seo',
+				order: 110,
+				Component: SeoDescriptionSetting,
+			},
+			{
 				id: 'ystdtb/header-overlay',
 				section: 'ystdtb/design',
 				order: 10,
@@ -212,5 +319,15 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 				Component: MenuReplaceSetting,
 			},
 		] );
+	} );
+
+	it( '投稿設定コンテキストが異なる場合は設定を登録しない', () => {
+		registerPostSettingsProviders( config );
+
+		const otherContext = { ...context, postId: 11 };
+		expect( applyFilters( SECTION_FILTER, [], otherContext ) ).toEqual(
+			[]
+		);
+		expect( applyFilters( ITEM_FILTER, [], otherContext ) ).toEqual( [] );
 	} );
 } );

@@ -79,7 +79,7 @@
 		"env:start": "wp-env start --xdebug && npm run import && npm run open",
 		"env:stop": "wp-env stop",
 		"env:destroy": "wp-env destroy",
-		"lint:js:post-settings": "wp-scripts lint-js 'src/post-settings/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/editor-pinned-button/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/plugin-more-menu-item/**/*.{ts,tsx}' --fix",
+		"lint:js:post-settings": "wp-scripts lint-js 'src/post-settings/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/editor-pinned-button/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/plugin-more-menu-item/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/text-control/**/*.{ts,tsx}' 'src/aktk-block-components/wp-controls/textarea-control/**/*.{ts,tsx}' --fix",
 		"lint:js:src": "wp-scripts lint-js src/js/**/*.js ./src/js --fix",
 		"lint:js:settings": "wp-scripts lint-js src/plugin-settings/**/*.{js,tsx} ./src/js --fix",
 		"lint:js": "run-p lint:js:*",

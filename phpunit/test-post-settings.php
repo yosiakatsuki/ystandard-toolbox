@@ -53,6 +53,8 @@ class Post_Settings_Test extends WP_UnitTestCase {
 		remove_all_filters( 'ystdtb_can_replace_menu' );
 		unregister_nav_menu( 'primary' );
 		unregister_nav_menu( 'footer' );
+		unregister_post_meta( 'page', \ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY );
+		unregister_post_meta( 'page', \ystandard_toolbox\Post_Settings_Meta::SEO_DESCRIPTION_META_KEY );
 		unregister_post_meta( 'page', \ystandard_toolbox\Post_Settings_Meta::OVERLAY_META_KEY );
 		unregister_post_meta( 'page', \ystandard_toolbox\Post_Settings_Meta::MENU_REPLACE_META_KEY );
 		wp_delete_nav_menu( $this->menu_id );
@@ -67,6 +69,17 @@ class Post_Settings_Test extends WP_UnitTestCase {
 		$this->assertSame( 'off', \ystandard_toolbox\Post_Settings_Meta::sanitize_overlay( 'off' ) );
 		$this->assertSame( 'none', \ystandard_toolbox\Post_Settings_Meta::sanitize_overlay( 'invalid' ) );
 		$this->assertSame( 'none', \ystandard_toolbox\Post_Settings_Meta::sanitize_overlay( [] ) );
+	}
+
+	/**
+	 * SEO用テキストからHTMLタグと改行が除去されることを確認する.
+	 */
+	public function test_sanitize_seo_text() {
+		$this->assertSame(
+			'SEO Title Next',
+			\ystandard_toolbox\Post_Settings_Meta::sanitize_seo_text( "<strong>SEO Title</strong>\nNext" )
+		);
+		$this->assertSame( '', \ystandard_toolbox\Post_Settings_Meta::sanitize_seo_text( [] ) );
 	}
 
 	/**
@@ -114,6 +127,16 @@ class Post_Settings_Test extends WP_UnitTestCase {
 		$this->use_ystandard_theme();
 		$meta = new \ystandard_toolbox\Post_Settings_Meta();
 		$meta->register_meta();
+		update_post_meta(
+			$this->post_id,
+			\ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY,
+			'SEOタイトル'
+		);
+		update_post_meta(
+			$this->post_id,
+			\ystandard_toolbox\Post_Settings_Meta::SEO_DESCRIPTION_META_KEY,
+			'SEO description'
+		);
 		update_post_meta( $this->post_id, \ystandard_toolbox\Post_Settings_Meta::OVERLAY_META_KEY, 'on' );
 		update_post_meta(
 			$this->post_id,
@@ -129,10 +152,49 @@ class Post_Settings_Test extends WP_UnitTestCase {
 		$data     = $response->get_data();
 
 		$this->assertSame( 200, $response->get_status() );
+		$this->assertSame(
+			'SEOタイトル',
+			$data['meta'][ \ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY ]
+		);
+		$this->assertSame(
+			'SEO description',
+			$data['meta'][ \ystandard_toolbox\Post_Settings_Meta::SEO_DESCRIPTION_META_KEY ]
+		);
 		$this->assertSame( 'on', $data['meta'][ \ystandard_toolbox\Post_Settings_Meta::OVERLAY_META_KEY ] );
 		$this->assertSame(
 			[ 'primary' => (string) $this->menu_id ],
 			$data['meta'][ \ystandard_toolbox\Post_Settings_Meta::MENU_REPLACE_META_KEY ]
+		);
+	}
+
+	/**
+	 * SEO用投稿メタをWordPress標準REST APIから更新できることを確認する.
+	 */
+	public function test_registered_seo_meta_can_be_updated_via_rest_api() {
+		$this->use_ystandard_theme();
+		$meta = new \ystandard_toolbox\Post_Settings_Meta();
+		$meta->register_meta();
+
+		$user_id = $this->factory->user->create( [ 'role' => 'administrator' ] );
+		wp_set_current_user( $user_id );
+		$request = new WP_REST_Request( 'POST', "/wp/v2/pages/{$this->post_id}" );
+		$request->set_param(
+			'meta',
+			[
+				\ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY       => '<strong>SEO Title</strong>',
+				\ystandard_toolbox\Post_Settings_Meta::SEO_DESCRIPTION_META_KEY => "SEO description\nNext",
+			]
+		);
+		$response = rest_do_request( $request );
+
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertSame(
+			'SEO Title',
+			get_post_meta( $this->post_id, \ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY, true )
+		);
+		$this->assertSame(
+			'SEO description Next',
+			get_post_meta( $this->post_id, \ystandard_toolbox\Post_Settings_Meta::SEO_DESCRIPTION_META_KEY, true )
 		);
 	}
 
@@ -156,12 +218,21 @@ class Post_Settings_Test extends WP_UnitTestCase {
 	public function test_ystandard_before_459_uses_legacy_meta_box() {
 		$this->theme_version = '4.58.0';
 		$this->use_ystandard_theme();
+		$meta = new \ystandard_toolbox\Post_Settings_Meta();
+		$meta->register_meta();
 		$config  = \ystandard_toolbox\Post_Settings_Provider::get_config( 'page', $this->post_id );
 		$context = \ystandard_toolbox\Post_Settings_Registry::get_context( 'page', $this->post_id );
 
 		$this->assertFalse( \ystandard_toolbox\Post_Settings_Provider::is_available( 'page' ) );
 		$this->assertFalse( $config['overlay']['enabled'] );
 		$this->assertFalse( $config['menuReplace']['enabled'] );
+		$this->assertFalse(
+			registered_meta_key_exists(
+				'post',
+				\ystandard_toolbox\Post_Settings_Meta::SEO_TITLE_META_KEY,
+				'page'
+			)
+		);
 		$this->assertSame(
 			\ystandard_toolbox\Post_Settings_Registry::DISPLAY_LEGACY_META_BOX,
 			\ystandard_toolbox\Post_Settings_Registry::get_display_mode( $context )
