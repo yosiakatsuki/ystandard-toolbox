@@ -98,7 +98,8 @@ export function registerPostSettingsProviders(
 									'[Toolbox]デザイン',
 									'ystandard-toolbox'
 								),
-								order: 20,
+								// yStandard標準セクションの後へToolbox設定をまとめる.
+								order: 100,
 							},
 					  ]
 					: sections
@@ -138,7 +139,7 @@ export function registerPostSettingsProviders(
 									'[Toolbox]ナビゲーション',
 									'ystandard-toolbox'
 								),
-								order: 30,
+								order: 110,
 							},
 					  ]
 					: sections
