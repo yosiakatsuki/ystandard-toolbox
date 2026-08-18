@@ -310,11 +310,11 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 		const items = applyFilters( ITEM_FILTER, [], context );
 
 		expect( sections ).toEqual( [
-			{ id: 'ystdtb/design', title: '[Toolbox]デザイン', order: 20 },
+			{ id: 'ystdtb/design', title: '[Toolbox]デザイン', order: 100 },
 			{
 				id: 'ystdtb/navigation',
 				title: '[Toolbox]ナビゲーション',
-				order: 30,
+				order: 110,
 			},
 		] );
 		expect( items ).toEqual( [
@@ -342,6 +342,28 @@ describe( 'Toolbox投稿設定プロバイダー', () => {
 				order: 10,
 				Component: MenuReplaceSetting,
 			},
+		] );
+	} );
+
+	it( 'yStandard標準セクションの後へToolboxセクションをまとめる', () => {
+		registerPostSettingsProviders( config );
+
+		const sections = applyFilters(
+			SECTION_FILTER,
+			[
+				{ id: 'ystandard/post', title: '[ys]投稿設定', order: 10 },
+				{ id: 'ystandard/seo', title: '[ys]SEO設定', order: 20 },
+				{ id: 'ystandard/sns', title: '[ys]SNS設定', order: 30 },
+			],
+			context
+		).sort( ( first, second ) => first.order - second.order );
+
+		expect( sections.map( ( section ) => section.id ) ).toEqual( [
+			'ystandard/post',
+			'ystandard/seo',
+			'ystandard/sns',
+			'ystdtb/design',
+			'ystdtb/navigation',
 		] );
 	} );
 
