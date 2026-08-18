@@ -114,7 +114,7 @@
 		"wpenv:test:unit:php:run": "PLUGIN_DIR=\"${WP_ENV_PLUGIN_DIR:-$(basename \"$PWD\")}\" && wp-env start && wp-env run cli --env-cwd=\"wp-content/plugins/${PLUGIN_DIR}\" -- vendor/bin/phpunit -c phpunit.xml.dist",
 		"test:unit:component": "wp-scripts test-unit-js --config test/unit/component.config.js",
 		"test:unit": "run-s test:unit:*",
-		"test:integration": "wp-scripts test-unit-js --config test/integration/integration.config.js",
+		"test:integration": "cross-env NODE_ENV=test wp-scripts test-unit-js --config test/integration/integration.config.js",
 		"test": "run-s test:unit test:integration",
 		"format": "wp-scripts format",
 		"fixtures:clean": "rimraf -g \"test/integration/fixtures/blocks/**/*.json\" \"test/integration/fixtures/blocks/**/*.parsed.json\" \"test/integration/fixtures/blocks/**/*.serialized.html\"",
