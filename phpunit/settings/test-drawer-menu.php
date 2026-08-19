@@ -70,6 +70,8 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 			remove_action( 'ys_before_drawer_nav_menu', [ $drawer_menu, 'drawer_menu_top' ] );
 			remove_action( 'ys_after_drawer_nav_menu', [ $drawer_menu, 'drawer_menu_bottom' ] );
 			remove_filter( 'ys_get_inline_css', [ $drawer_menu, 'inline_css' ], 100 );
+			remove_filter( 'pre_wp_nav_menu', [ $drawer_menu, 'hide_drawer_nav_menu' ], 10 );
+			remove_filter( 'ys_drawer_menu_search_form_hook', [ $drawer_menu, 'hide_drawer_search_form' ] );
 		}
 		$this->drawer_menus = [];
 		parent::tear_down();
@@ -103,6 +105,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideGlobalMenu' => true,
 			]
 		);
+		$this->use_ystandard_theme( '4.59.0' );
 		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
@@ -113,6 +116,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		);
 		// 検索ルールは含まれない。
 		$this->assertStringNotContainsString( '.global-nav__search', $css );
+		$this->assertFalse( has_filter( 'pre_wp_nav_menu', [ $instance, 'hide_drawer_nav_menu' ] ) );
 	}
 
 	/**
@@ -127,6 +131,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideSearch' => true,
 			]
 		);
+		$this->use_ystandard_theme( '4.59.0' );
 		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
@@ -136,6 +141,9 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		$this->assertStringNotContainsString(
 			'.global-nav__menu:not(',
 			$css
+		);
+		$this->assertFalse(
+			has_filter( 'ys_drawer_menu_search_form_hook', [ $instance, 'hide_drawer_search_form' ] )
 		);
 	}
 
@@ -151,6 +159,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideSearch'     => true,
 			]
 		);
+		$this->use_ystandard_theme( '4.59.0' );
 		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
@@ -201,6 +210,53 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		$this->assertFalse( has_action( 'ys_after_global_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
 		$this->assertSame( 10, has_action( 'ys_before_drawer_nav_menu', [ $instance, 'drawer_menu_top' ] ) );
 		$this->assertSame( 10, has_action( 'ys_after_drawer_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
+	}
+
+	/**
+	 * yStandard V5ではドロワーメニューだけをHTML生成前に除外することを確認する.
+	 */
+	public function test_v5_hides_only_drawer_nav_menu_before_rendering() {
+		$this->update_option(
+			[
+				'mobileMenuEnable'         => true,
+				'mobileMenuHideGlobalMenu' => true,
+			]
+		);
+		$this->use_ystandard_theme( '5.0.0-alpha-1' );
+		$instance = $this->create_drawer_menu();
+
+		$this->assertSame( 10, has_filter( 'pre_wp_nav_menu', [ $instance, 'hide_drawer_nav_menu' ] ) );
+		$this->assertSame(
+			'',
+			apply_filters( 'pre_wp_nav_menu', null, (object) [ 'menu_id' => 'drawer-nav__menu' ] )
+		);
+		$this->assertNull(
+			apply_filters( 'pre_wp_nav_menu', null, (object) [ 'menu_id' => 'global-nav__menu' ] )
+		);
+		$this->assertStringNotContainsString( '.global-nav__menu:not(', $instance->inline_css( '' ) );
+	}
+
+	/**
+	 * yStandard V5では検索フォームの出力フックを無効化することを確認する.
+	 */
+	public function test_v5_disables_drawer_search_form_hook() {
+		$this->update_option(
+			[
+				'mobileMenuEnable'     => true,
+				'mobileMenuHideSearch' => true,
+			]
+		);
+		$this->use_ystandard_theme( '5.0.0-alpha-1' );
+		$instance = $this->create_drawer_menu();
+
+		$this->assertSame(
+			10,
+			has_filter( 'ys_drawer_menu_search_form_hook', [ $instance, 'hide_drawer_search_form' ] )
+		);
+		$this->assertFalse(
+			apply_filters( 'ys_drawer_menu_search_form_hook', 'ys_before_drawer_nav_menu' )
+		);
+		$this->assertStringNotContainsString( '.global-nav__search', $instance->inline_css( '' ) );
 	}
 
 	/**

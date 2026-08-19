@@ -38,6 +38,19 @@ class Drawer_Menu {
 		add_action( $menu_hooks['before'], [ $this, 'drawer_menu_top' ] );
 		add_action( $menu_hooks['after'], [ $this, 'drawer_menu_bottom' ] );
 		add_filter( 'ys_get_inline_css', [ $this, 'inline_css' ], 100 );
+		// V5ではドロワー専用HTMLを生成前に止めるため専用フィルターを登録する.
+		if ( $this->is_ystandard_v5() ) {
+			$this->register_v5_visibility_hooks();
+		}
+	}
+
+	/**
+	 * yStandard V5以降か判定する.
+	 *
+	 * @return bool 判定結果.
+	 */
+	private function is_ystandard_v5() {
+		return (bool) Version::ystandard_version_compare( self::YSTANDARD_DRAWER_NAV_HOOK_MIN_VERSION );
 	}
 
 	/**
@@ -47,7 +60,7 @@ class Drawer_Menu {
 	 */
 	private function get_menu_hooks() {
 		// V5ではグローバルナビとドロワーナビが分離されているため専用フックを使用する.
-		if ( Version::ystandard_version_compare( self::YSTANDARD_DRAWER_NAV_HOOK_MIN_VERSION ) ) {
+		if ( $this->is_ystandard_v5() ) {
 			return [
 				'before' => 'ys_before_drawer_nav_menu',
 				'after'  => 'ys_after_drawer_nav_menu',
@@ -59,6 +72,48 @@ class Drawer_Menu {
 			'before' => 'ys_before_global_nav_menu',
 			'after'  => 'ys_after_global_nav_menu',
 		];
+	}
+
+	/**
+	 * yStandard V5用の表示制御フックを登録する.
+	 */
+	private function register_v5_visibility_hooks() {
+		// ドロワー内のメニューだけを生成前に除外し、ヘッダー側のメニューは維持する.
+		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideGlobalMenu', false ) ) {
+			add_filter( 'pre_wp_nav_menu', [ $this, 'hide_drawer_nav_menu' ], 10, 2 );
+		}
+		// yStandard側が検索フォームの出力処理を登録する前にフック名を無効化する.
+		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideSearch', false ) ) {
+			add_filter( 'ys_drawer_menu_search_form_hook', [ $this, 'hide_drawer_search_form' ] );
+		}
+	}
+
+	/**
+	 * yStandard V5のドロワーメニューHTML生成を停止する.
+	 *
+	 * @param string|null $output メニューHTML.
+	 * @param \stdClass   $args   メニュー引数.
+	 *
+	 * @return string|null メニューHTML.
+	 */
+	public function hide_drawer_nav_menu( $output, $args ) {
+		// ドロワー内のメニューだけを除外し、同じロケーションのヘッダーメニューは残す.
+		if ( isset( $args->menu_id ) && 'drawer-nav__menu' === $args->menu_id ) {
+			return '';
+		}
+
+		return $output;
+	}
+
+	/**
+	 * yStandard V5のドロワー検索フォーム用フックを無効化する.
+	 *
+	 * @param string $hook_name 検索フォーム出力先フック.
+	 *
+	 * @return false
+	 */
+	public function hide_drawer_search_form( $hook_name ) {
+		return false;
 	}
 
 	/**
@@ -146,7 +201,8 @@ class Drawer_Menu {
 		}
 		";
 
-		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideGlobalMenu', false ) ) {
+		// V4ではデスクトップと共通のHTMLを使うためモバイル表示だけCSSで隠す.
+		if ( ! $this->is_ystandard_v5() && Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideGlobalMenu', false ) ) {
 			$style .= "
 			@media (max-width: {$close}px) {
 				.global-nav__menu:not(#global-nav__menu-amp) {
@@ -155,7 +211,8 @@ class Drawer_Menu {
 			}
 			";
 		}
-		if ( Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideSearch', false ) ) {
+		// V4では検索フォームも共通HTMLのためモバイル表示だけCSSで隠す.
+		if ( ! $this->is_ystandard_v5() && Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuHideSearch', false ) ) {
 			$style .= "
 			@media (max-width: {$close}px) {
 				.global-nav__search {
