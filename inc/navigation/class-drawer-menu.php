@@ -9,6 +9,8 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Version;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -19,16 +21,44 @@ defined( 'ABSPATH' ) || die();
 class Drawer_Menu {
 
 	/**
+	 * ドロワーナビ専用フックに対応するyStandardの最低バージョン.
+	 */
+	const YSTANDARD_DRAWER_NAV_HOOK_MIN_VERSION = '5.0.0-alpha-1';
+
+	/**
 	 * Mobile_Nav constructor.
 	 */
 	public function __construct() {
+		// 機能が無効な場合はウィジェットと表示処理を登録しない.
 		if ( ! Option::get_option_by_bool( Navigation::OPTION_NAME, 'mobileMenuEnable', false ) ) {
 			return;
 		}
+		$menu_hooks = $this->get_menu_hooks();
 		add_action( 'widgets_init', [ $this, 'widget_init' ], 11 );
-		add_action( 'ys_before_global_nav_menu', [ $this, 'drawer_menu_top' ] );
-		add_action( 'ys_after_global_nav_menu', [ $this, 'drawer_menu_bottom' ] );
+		add_action( $menu_hooks['before'], [ $this, 'drawer_menu_top' ] );
+		add_action( $menu_hooks['after'], [ $this, 'drawer_menu_bottom' ] );
 		add_filter( 'ys_get_inline_css', [ $this, 'inline_css' ], 100 );
+	}
+
+	/**
+	 * yStandardのバージョンに対応するメニューフックを取得する.
+	 *
+	 * @return array メニュー前後のフック名.
+	 */
+	private function get_menu_hooks() {
+		// V5ではグローバルナビとドロワーナビが分離されているため専用フックを使用する.
+		if ( Version::ystandard_version_compare( self::YSTANDARD_DRAWER_NAV_HOOK_MIN_VERSION ) ) {
+			return [
+				'before' => 'ys_before_drawer_nav_menu',
+				'after'  => 'ys_after_drawer_nav_menu',
+			];
+		}
+
+		// V4にはドロワーナビ専用フックがないため従来の共通フックを維持する.
+		return [
+			'before' => 'ys_before_global_nav_menu',
+			'after'  => 'ys_after_global_nav_menu',
+		];
 	}
 
 	/**

@@ -10,6 +10,20 @@
 class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 
 	/**
+	 * テストで返すyStandardバージョン.
+	 *
+	 * @var string
+	 */
+	private $theme_version = '4.59.0';
+
+	/**
+	 * テスト中に生成したドロワーメニュー.
+	 *
+	 * @var array
+	 */
+	private $drawer_menus = [];
+
+	/**
 	 * Navigation 設定を更新するヘルパー。
 	 *
 	 * @param array $value 設定値。
@@ -21,9 +35,43 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 		);
 	}
 
+	/**
+	 * テスト対象のドロワーメニューを生成する.
+	 *
+	 * @return \ystandard_toolbox\Drawer_Menu ドロワーメニュー.
+	 */
+	private function create_drawer_menu() {
+		$drawer_menu          = new \ystandard_toolbox\Drawer_Menu();
+		$this->drawer_menus[] = $drawer_menu;
+
+		return $drawer_menu;
+	}
+
+	/**
+	 * テスト環境を指定バージョンのyStandardとして扱う.
+	 *
+	 * @param string $version yStandardバージョン.
+	 */
+	private function use_ystandard_theme( $version ) {
+		$this->theme_version = $version;
+		add_filter( 'pre_option_template', [ $this, 'filter_template' ] );
+		add_filter( 'ys_ystandard_version', [ $this, 'filter_ystandard_version' ] );
+	}
+
 	public function tear_down() {
 		// 後続テストへの設定漏れ防止。
 		delete_option( \ystandard_toolbox\Navigation::OPTION_NAME );
+		remove_filter( 'pre_option_template', [ $this, 'filter_template' ] );
+		remove_filter( 'ys_ystandard_version', [ $this, 'filter_ystandard_version' ] );
+		foreach ( $this->drawer_menus as $drawer_menu ) {
+			remove_action( 'widgets_init', [ $drawer_menu, 'widget_init' ], 11 );
+			remove_action( 'ys_before_global_nav_menu', [ $drawer_menu, 'drawer_menu_top' ] );
+			remove_action( 'ys_after_global_nav_menu', [ $drawer_menu, 'drawer_menu_bottom' ] );
+			remove_action( 'ys_before_drawer_nav_menu', [ $drawer_menu, 'drawer_menu_top' ] );
+			remove_action( 'ys_after_drawer_nav_menu', [ $drawer_menu, 'drawer_menu_bottom' ] );
+			remove_filter( 'ys_get_inline_css', [ $drawer_menu, 'inline_css' ], 100 );
+		}
+		$this->drawer_menus = [];
 		parent::tear_down();
 	}
 
@@ -33,7 +81,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 	 */
 	public function test_inline_css_default_enabled_only_outputs_base_css() {
 		$this->update_option( [ 'mobileMenuEnable' => true ] );
-		$instance = new \ystandard_toolbox\Drawer_Menu();
+		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
 		// ベース CSS（.widget-mobile-nav 関連）が含まれる。
@@ -55,7 +103,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideGlobalMenu' => true,
 			]
 		);
-		$instance = new \ystandard_toolbox\Drawer_Menu();
+		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
 		// グローバルメニュー非表示ルールが含まれる。
@@ -79,7 +127,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideSearch' => true,
 			]
 		);
-		$instance = new \ystandard_toolbox\Drawer_Menu();
+		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
 		// 検索非表示ルールが含まれる。
@@ -103,7 +151,7 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 				'mobileMenuHideSearch'     => true,
 			]
 		);
-		$instance = new \ystandard_toolbox\Drawer_Menu();
+		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '' );
 
 		$this->assertStringContainsString(
@@ -119,11 +167,57 @@ class Settings_Drawer_Menu_Test extends WP_UnitTestCase {
 	 */
 	public function test_inline_css_preserves_input_css_at_head() {
 		$this->update_option( [ 'mobileMenuEnable' => true ] );
-		$instance = new \ystandard_toolbox\Drawer_Menu();
+		$instance = $this->create_drawer_menu();
 		$css      = $instance->inline_css( '/* base */' );
 
 		// 入力 CSS が結果の先頭に保持されたうえで、ベースルールが連結される。
 		$this->assertStringStartsWith( '/* base */', $css );
 		$this->assertStringContainsString( '.widget-mobile-nav', $css );
+	}
+
+	/**
+	 * yStandard V4では従来のグローバルナビフックだけを使用することを確認する.
+	 */
+	public function test_v4_registers_only_global_nav_hooks() {
+		$this->update_option( [ 'mobileMenuEnable' => true ] );
+		$this->use_ystandard_theme( '4.59.0' );
+		$instance = $this->create_drawer_menu();
+
+		$this->assertSame( 10, has_action( 'ys_before_global_nav_menu', [ $instance, 'drawer_menu_top' ] ) );
+		$this->assertSame( 10, has_action( 'ys_after_global_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
+		$this->assertFalse( has_action( 'ys_before_drawer_nav_menu', [ $instance, 'drawer_menu_top' ] ) );
+		$this->assertFalse( has_action( 'ys_after_drawer_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
+	}
+
+	/**
+	 * yStandard V5ではドロワーナビ専用フックだけを使用することを確認する.
+	 */
+	public function test_v5_registers_only_drawer_nav_hooks() {
+		$this->update_option( [ 'mobileMenuEnable' => true ] );
+		$this->use_ystandard_theme( '5.0.0-alpha-1' );
+		$instance = $this->create_drawer_menu();
+
+		$this->assertFalse( has_action( 'ys_before_global_nav_menu', [ $instance, 'drawer_menu_top' ] ) );
+		$this->assertFalse( has_action( 'ys_after_global_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
+		$this->assertSame( 10, has_action( 'ys_before_drawer_nav_menu', [ $instance, 'drawer_menu_top' ] ) );
+		$this->assertSame( 10, has_action( 'ys_after_drawer_nav_menu', [ $instance, 'drawer_menu_bottom' ] ) );
+	}
+
+	/**
+	 * テスト中の親テーマをyStandardとして返す.
+	 *
+	 * @return string
+	 */
+	public function filter_template() {
+		return 'ystandard';
+	}
+
+	/**
+	 * テスト中のyStandardバージョンを返す.
+	 *
+	 * @return string
+	 */
+	public function filter_ystandard_version() {
+		return $this->theme_version;
 	}
 }
