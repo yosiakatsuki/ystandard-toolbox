@@ -53,7 +53,7 @@ class HiddenBySize {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		// 画面サイズ非表示用属性を追加するフィルターを登録.
 		add_filter( 'register_block_type_args', [ $this, 'add_attributes' ], 999, 2 );
 

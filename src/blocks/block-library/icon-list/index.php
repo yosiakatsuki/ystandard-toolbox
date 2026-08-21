@@ -28,7 +28,7 @@ class Icon_List_Block {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		add_filter( 'ystdtb_block_editor_option', [ $this, 'add_block_config' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}

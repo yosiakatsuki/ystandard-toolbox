@@ -39,7 +39,7 @@ class Inline_Formats {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		// enqueue_block_assets はフロントとエディターキャンバス(iframe)の両方で実行される.
 		add_action( 'enqueue_block_assets', [ $this, 'add_style' ] );
 	}
