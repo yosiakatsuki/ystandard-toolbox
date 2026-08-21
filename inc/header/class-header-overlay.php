@@ -10,6 +10,7 @@
 namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Post_Type;
+use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -29,8 +30,11 @@ class Header_Overlay {
 		add_filter( 'ys_css_vars', [ $this, 'overlay_css_vars' ], 20 );
 		add_filter( 'get_custom_logo_image_attributes', [ $this, 'custom_logo_image_attributes' ] );
 		add_filter( 'ys_get_header_logo', [ $this, 'add_overlay_logo' ] );
-		add_action( 'ystdtb_term_edit_form', [ $this, 'term_overlay_edit' ], 11, 2 );
-		add_action( 'ystdtb_term_edit_save', [ $this, 'term_overlay_save' ], 11 );
+		// ヘッダーオーバーレイはyStandard専用のため、他テーマのターム設定には追加しない.
+		if ( Version::ystandard_version_compare() ) {
+			add_action( 'ystdtb_term_edit_form', [ $this, 'term_overlay_edit' ], 11, 2 );
+			add_action( 'ystdtb_term_edit_save', [ $this, 'term_overlay_save' ], 11 );
+		}
 		add_filter( 'ys_get_inline_css', [ $this, 'inline_css' ] );
 		new Meta_Box(
 			'overlay',
