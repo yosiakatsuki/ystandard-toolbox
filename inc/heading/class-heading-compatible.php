@@ -238,11 +238,13 @@ class Heading_Compatible {
 		$block_style = $this->get_selector( $level, true );
 		$selector    = $this->get_selector( $level );
 
+		// エディターでは編集画面用ラッパーへ除外条件を追加する.
 		if ( $this->editor ) {
 			$wrap        = Config::EDITOR_STYLES_WRAPPER;
-			$block_style = "{$wrap} .is-style-ystdtb-{$level}";
+			$block_style = "{$wrap} .is-style-ystdtb-{$level}" . Heading_Helper::get_heading_style_enabled_selector();
+			// 見出しレベル別スタイルでは、ブロック単位の無効化設定も反映する.
 			if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading))";
+				$selector = "{$wrap} {$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading))" . Heading_Helper::get_heading_style_enabled_selector();
 			}
 		}
 
@@ -312,12 +314,14 @@ class Heading_Compatible {
 		$body_class = '.' . Config::BODY_CLASS;
 		// ブロックスタイル.
 		$block_style_class = '.' . self::BODY_CLASS_HEADING;
+		$enabled_selector  = Heading_Helper::get_heading_style_enabled_selector();
+		// 明示的に選択したブロックスタイルも無効化できるようにする.
 		if ( $block ) {
-			return "{$body_class}{$block_style_class} .is-style-ystdtb-{$level}";
+			return "{$body_class}{$block_style_class} .is-style-ystdtb-{$level}{$enabled_selector}";
 		}
 		// レベル別.
 		if ( in_array( $level, [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ) {
-			$level_selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading))";
+			$level_selector = "{$level}:not([class*=\"is-style-ystdtb-\"]):not(.is-clear-style):not(:where(.wp-block-accordion-heading)){$enabled_selector}";
 			$class          = apply_filters(
 				'ystdtb_heading_selector_content',
 				'.entry-content'
@@ -350,7 +354,7 @@ class Heading_Compatible {
 				'.entry-title'
 			);
 
-			return "{$body_class}.single {$class}";
+			return "{$body_class}.single {$class}{$enabled_selector}";
 		}
 		// 固定ページタイトル.
 		if ( 'page-title' === $level ) {
@@ -359,7 +363,7 @@ class Heading_Compatible {
 				'.entry-title'
 			);
 
-			return "{$body_class}.page {$class}";
+			return "{$body_class}.page {$class}{$enabled_selector}";
 		}
 		// アーカイブページタイトル.
 		if ( 'archive-title' === $level ) {
