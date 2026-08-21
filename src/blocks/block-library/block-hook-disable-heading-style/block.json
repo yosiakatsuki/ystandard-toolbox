@@ -1,0 +1,13 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/block-hook-disable-heading-style",
+	"version": "1.0.0",
+	"title": "見出しデザイン無効化",
+	"description": "ブロック単位でyStandard Toolboxの見出しデザインを無効化する拡張設定。",
+	"category": "ystdtb-hook",
+	"keywords": [],
+	"textdomain": "ystandard-toolbox",
+	"editorScript": "file:./index.js",
+	"editorStyle": [ "ystdtb-aktk-components-editor", "file:./index.css" ]
+}

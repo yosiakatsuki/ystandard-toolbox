@@ -21,6 +21,11 @@ defined( 'ABSPATH' ) || die();
 class Heading_Helper {
 
 	/**
+	 * 見出しデザイン無効化クラス.
+	 */
+	const DISABLE_HEADING_STYLE_CLASS = 'is-ystdtb-heading-style-disabled';
+
+	/**
 	 * 見出しCSS作成.
 	 *
 	 * @param array $heading 見出しスタイル.
@@ -259,7 +264,20 @@ class Heading_Helper {
 		$heading_selector = self::get_heading_selector( $is_editor );
 		$selector_name    = self::get_block_style_selector_name( $level );
 
-		return "{$body}{$heading_selector} .is-style-{$selector_name}";
+		return "{$body}{$heading_selector} .is-style-{$selector_name}" . self::get_heading_style_enabled_selector();
+	}
+
+	/**
+	 * 見出しデザインが有効な要素へ限定するセレクターを取得する.
+	 *
+	 * ラッパーに無効化クラスが付くブロックもあるため、クラス自身と子孫を除外する.
+	 *
+	 * @return string
+	 */
+	public static function get_heading_style_enabled_selector() {
+		$class_name = self::DISABLE_HEADING_STYLE_CLASS;
+
+		return ":not(:where(.{$class_name})):not(:where(.{$class_name} *))";
 	}
 
 	/**
@@ -293,8 +311,9 @@ class Heading_Helper {
 	 * @return array
 	 */
 	public static function get_selector_all( $is_editor = false ) {
-		$body   = self::get_body_class( $is_editor );
-		$result = [];
+		$body                   = self::get_body_class( $is_editor );
+		$enabled_style_selector = self::get_heading_style_enabled_selector();
+		$result                 = [];
 
 		// *************************************************************
 		// レベル別.
@@ -306,7 +325,7 @@ class Heading_Helper {
 				$result[ $level ] = [];
 				continue;
 			}
-			$selector = "{$level}:where(.wp-block-heading):not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"])";
+			$selector = "{$level}:where(.wp-block-heading):not([class*=\"is-style-ystdtb-\"]):not([class*=\"is-clear-style\"]){$enabled_style_selector}";
 			$prefix   = trim( "{$body} {$content}" );
 			// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 			$css_selector     = apply_filters(
@@ -387,12 +406,14 @@ class Heading_Helper {
 		$area  = $is_editor ? 'body.post-type-post' : '.single';
 		// セレクターの作成.
 		$target = [];
+		// フックで複数のタイトルセレクターが指定された場合はすべてへ除外条件を追加する.
 		if ( is_array( $title ) ) {
 			foreach ( $title as $item ) {
-				$target[] = "{$body}{$area} {$item}";
+				$target[] = "{$body}{$area} {$item}{$enabled_style_selector}";
 			}
 		} else {
-			$target[] = "{$body}{$area} {$title}";
+			// 単一セレクターの場合も同じ除外条件を適用する.
+			$target[] = "{$body}{$area} {$title}{$enabled_style_selector}";
 		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
@@ -414,12 +435,14 @@ class Heading_Helper {
 		$area  = $is_editor ? 'body.post-type-page' : '.page';
 		// セレクターの作成.
 		$target = [];
+		// フックで複数のタイトルセレクターが指定された場合はすべてへ除外条件を追加する.
 		if ( is_array( $title ) ) {
 			foreach ( $title as $item ) {
-				$target[] = "{$body}{$area} {$item}";
+				$target[] = "{$body}{$area} {$item}{$enabled_style_selector}";
 			}
 		} else {
-			$target[] = "{$body}{$area} {$title}";
+			// 単一セレクターの場合も同じ除外条件を適用する.
+			$target[] = "{$body}{$area} {$title}{$enabled_style_selector}";
 		}
 		// エディター側で細かく制御する用フック。配列で渡されるので注意！.
 		$css_selector = apply_filters(
@@ -481,7 +504,7 @@ class Heading_Helper {
 	 * @return string
 	 */
 	private static function get_widget_heading_block_selector() {
-		return ':where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])';
+		return ':where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])' . self::get_heading_style_enabled_selector();
 	}
 
 	/**
