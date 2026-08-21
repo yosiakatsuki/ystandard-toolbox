@@ -32,7 +32,7 @@ class TimelineItem_Block {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 

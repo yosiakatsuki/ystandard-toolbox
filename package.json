@@ -109,7 +109,7 @@
 		"build:icons": "node src/scripts/icons/index.js",
 		"build": "NODE_ENV=production run-s build:*",
 		"test:unit:php": "run-s build test:unit:php:run",
-		"test:unit:php:run": "wp-playground-cli php --auto-mount --wp=6.9 --php=8.3 -- /wordpress/wp-content/plugins/ystandard-toolbox/vendor/bin/phpunit -c /wordpress/wp-content/plugins/ystandard-toolbox/phpunit.xml.dist",
+		"test:unit:php:run": "wp-playground-cli php --auto-mount --wp=7.1 --php=8.3 -- /wordpress/wp-content/plugins/ystandard-toolbox/vendor/bin/phpunit -c /wordpress/wp-content/plugins/ystandard-toolbox/phpunit.xml.dist",
 		"wpenv:test:unit:php": "run-s build wpenv:test:unit:php:run",
 		"wpenv:test:unit:php:run": "PLUGIN_DIR=\"${WP_ENV_PLUGIN_DIR:-$(basename \"$PWD\")}\" && wp-env start && wp-env run cli --env-cwd=\"wp-content/plugins/${PLUGIN_DIR}\" -- vendor/bin/phpunit -c phpunit.xml.dist",
 		"test:unit:component": "wp-scripts test-unit-js --config test/unit/component.config.js",

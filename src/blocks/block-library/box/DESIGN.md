@@ -191,7 +191,7 @@ class Box_Block {
      * Constructor.
      */
     private function __construct() {
-        add_action( 'init', [ $this, 'register_block' ], 100 );
+        add_action( 'init', [ $this, 'register_block' ], 20 );
     }
 
     /**
@@ -219,6 +219,8 @@ class Box_Block {
 
 Box_Block::get_instance();
 ```
+
+ブロック登録は`init`の優先度20で実行する。WordPressのブロックサポート属性登録は優先度22で実行されるため、それより前にToolboxのブロック登録を完了させる。
 
 **render_callback検討**
 - 現在は`save.tsx`による静的保存

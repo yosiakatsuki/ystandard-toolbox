@@ -27,7 +27,7 @@ class FAQ_Item_Block {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 	}
 
 	/**

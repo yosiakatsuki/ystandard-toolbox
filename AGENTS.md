@@ -196,7 +196,7 @@ src/blocks/block-library/{block}/
 - サブ namespace は使わない。
 - クラス名は `{Block_Name}_Block`。
 - `BLOCK_NAME = 'ystdtb/{block-name}'` を定義する。
-- `init` hook で `register_block_type( __DIR__ )` を実行する。
+- `init` hook の優先度20で `register_block_type( __DIR__ )` を実行する。WordPressのブロックサポート属性登録（優先度22）より前にブロック登録を完了させる。
 - singleton 形式の `get_instance()` を使う既存パターンに合わせる。
 
 ## CSS / デザイン
