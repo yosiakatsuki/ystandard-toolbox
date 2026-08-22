@@ -28,4 +28,8 @@
 	*::after {
 		box-sizing: border-box;
 	}
+
+	.aktk-media-upload__preview {
+		border: 1px solid var(--ystdtb--color--gray-border);
+	}
 }

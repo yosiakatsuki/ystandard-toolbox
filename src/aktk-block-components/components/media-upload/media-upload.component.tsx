@@ -1,10 +1,10 @@
-/**
- * WordPress dependencies
- */
+/* External Dependencies */
+import classnames from 'classnames';
+
+/* WordPress Dependencies */
 import { Button } from '@wordpress/components';
-/**
- * Component.
- */
+
+/* Component Dependencies */
 import {
 	type MediaObject,
 	type MediaTypes,
@@ -112,7 +112,9 @@ function MediaUploadRender(
 function MediaPreview( props: MediaObject & { className?: string } ) {
 	const { type, url, alt, className } = props;
 	return (
-		<div className={ className }>
+		<div
+			className={ classnames( 'aktk-media-upload__preview', className ) }
+		>
 			{ type === 'image' && (
 				<img
 					className={ 'block h-auto max-w-full' }
