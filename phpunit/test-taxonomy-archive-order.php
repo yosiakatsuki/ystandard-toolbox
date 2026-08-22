@@ -269,6 +269,20 @@ class Taxonomy_Archive_Order_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * ターム編集画面では現行の管理画面CSSだけを読み込むことを確認.
+	 */
+	public function test_term_edit_screen_enqueues_only_current_admin_asset() {
+		wp_dequeue_style( 'ystdtb-admin' );
+		wp_dequeue_script( 'ystdtb-admin' );
+
+		$taxonomy = new \ystandard_toolbox\Taxonomy();
+		$taxonomy->admin_enqueue_scripts( 'term.php' );
+
+		$this->assertTrue( wp_style_is( 'ystdtb-admin', 'enqueued' ) );
+		$this->assertFalse( wp_script_is( 'ystdtb-admin', 'enqueued' ) );
+	}
+
+	/**
 	 * 全体のアーカイブ並び順を更新.
 	 *
 	 * @param string $order 並び順設定.

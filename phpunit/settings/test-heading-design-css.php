@@ -379,6 +379,14 @@ EOD;
 		);
 	}
 
+	/**
+	 * 下位互換モード用の設定ファイルが配布資産として存在することを確認.
+	 */
+	function test_compatible_heading_assets_exist() {
+		$this->assertFileExists( YSTDTB_PATH . '/assets/heading-compatible/schema.json' );
+		$this->assertFileExists( YSTDTB_PATH . '/assets/heading-compatible/preset.json' );
+	}
+
 	function test_get_selector_all_editor_content_heading_excludes_widgets_screen() {
 		global $pagenow;
 

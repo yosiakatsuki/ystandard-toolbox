@@ -84,13 +84,6 @@ class Taxonomy {
 			[],
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-admin.css' )
 		);
-		wp_enqueue_script(
-			'ystdtb-admin',
-			YSTDTB_URL . '/js/admin/admin.js',
-			[],
-			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
-			true
-		);
 	}
 
 	/**
