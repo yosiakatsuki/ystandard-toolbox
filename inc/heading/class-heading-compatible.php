@@ -178,10 +178,10 @@ class Heading_Compatible {
 		$options = self::get_option();
 		// 初期値等取得.
 		$this->schema = File::get_json_file_contents(
-			YSTDTB_PATH . '/js/admin/heading/schema.json'
+			YSTDTB_PATH . '/assets/heading-compatible/schema.json'
 		);
 		$this->preset = File::get_json_file_contents(
-			YSTDTB_PATH . '/js/admin/heading/preset.json'
+			YSTDTB_PATH . '/assets/heading-compatible/preset.json'
 		);
 
 		$css = '';
