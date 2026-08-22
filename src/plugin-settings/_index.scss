@@ -8,16 +8,6 @@
 .ystdtb-settings-v2 {
 	background: #fff;
 
-	* {
-
-		&,
-		&::before,
-		&::after {
-			box-sizing: border-box;
-		}
-
-	}
-
 	#wpcontent {
 		padding-left: 0;
 	}
@@ -28,5 +18,18 @@
 
 	.wrap {
 		margin: 0;
+	}
+}
+
+.ystdtb-settings-v2__detail {
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	.aktk-media-upload__preview {
+		border: 1px solid var(--ystdtb--color--gray-border);
 	}
 }

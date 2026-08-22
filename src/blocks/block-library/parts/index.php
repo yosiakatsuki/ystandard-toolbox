@@ -24,7 +24,7 @@ class Parts_Block {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		add_action( 'ystdtb_block_editor_option', [ $this, 'add_block_config' ] );
 	}
 

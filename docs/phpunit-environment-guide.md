@@ -31,7 +31,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
     "phpcompatibility/phpcompatibility-wp": "^2.1.3",
     "wp-coding-standards/wpcs": "^3.0",
     "sirbrillig/phpcs-variable-analysis": "^2.8",
-    "wp-phpunit/wp-phpunit": "^6.0",
+    "wp-phpunit/wp-phpunit": "7.1.*",
     "phpunit/phpunit": "^9.6",
     "spatie/phpunit-watcher": "^1.23",
     "yoast/phpunit-polyfills": "^1.1.0"
@@ -45,7 +45,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 |---|---|---|
 | `phpunit/phpunit` | `^9.6` | PHP 7.4〜8.3 対応。WP 本体と同系統 |
 | `yoast/phpunit-polyfills` | `^1.1.0` | PHPUnit バージョン間の互換性。WP 本体と同じ |
-| `wp-phpunit/wp-phpunit` | `^6.0` | WordPress コアのテストライブラリ |
+| `wp-phpunit/wp-phpunit` | `7.1.*` | WordPress 7.1のコアテストライブラリ |
 | `wp-coding-standards/wpcs` | `^3.0` | WordPress コーディング規約。WP 本体と同じ |
 | `phpcompatibility/phpcompatibility-wp` | `^2.1.3` | WordPress 向け PHP 互換性チェック |
 | `dealerdirect/phpcodesniffer-composer-installer` | `^1.0` | PHPCS スタンダードの自動インストーラ |
@@ -64,7 +64,7 @@ yStandard シリーズ（yStandard テーマ、yStandard Blocks、yStandard Tool
 {
   "port": 10020,
   "testsEnvironment": false,
-  "core": "https://ja.wordpress.org/latest-ja.zip",
+  "core": "https://ja.wordpress.org/wordpress-7.1-ja.zip",
   "themes": [
     "https://wp-ystandard.com/download/ystandard/v4/ystandard.zip"
   ],
@@ -239,7 +239,7 @@ defined( 'WP_PHP_BINARY' ) || define( 'WP_PHP_BINARY', 'php' );
 ```json
 {
   "scripts": {
-    "test:unit:php": "wp-playground-cli php --auto-mount --wp=6.9 --php=8.3 -- /wordpress/wp-content/plugins/プラグインディレクトリ名/vendor/bin/phpunit -c /wordpress/wp-content/plugins/プラグインディレクトリ名/phpunit.xml.dist",
+    "test:unit:php": "wp-playground-cli php --auto-mount --wp=7.1 --php=8.3 -- /wordpress/wp-content/plugins/プラグインディレクトリ名/vendor/bin/phpunit -c /wordpress/wp-content/plugins/プラグインディレクトリ名/phpunit.xml.dist",
     "wpenv:test:unit:php": "wp-env start && wp-env run cli --env-cwd=wp-content/plugins/プラグインディレクトリ名 -- vendor/bin/phpunit -c phpunit.xml.dist"
   }
 }
@@ -317,7 +317,7 @@ npx wp-env run cli --env-cwd=wp-content/plugins/プラグイン名 -- composer i
 
 - [ ] `composer.json`: `phpunit/phpunit` を `^9.6` に更新
 - [ ] `composer.json`: `yoast/phpunit-polyfills` を `^1.1.0` に更新
-- [ ] `composer.json`: `wp-phpunit/wp-phpunit` を `^6.0` に更新
+- [ ] `composer.json`: `wp-phpunit/wp-phpunit` を `7.1.*` に更新
 - [ ] `composer.json`: `wp-coding-standards/wpcs` を `^3.0` に更新
 - [ ] `composer.json`: `dealerdirect/phpcodesniffer-composer-installer` を `^1.0` に更新
 - [ ] `composer.json`: `phpcompatibility/php-compatibility` を `phpcompatibility/phpcompatibility-wp` `^2.1.3` に変更

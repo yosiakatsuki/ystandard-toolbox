@@ -11,7 +11,6 @@ namespace ystandard_toolbox;
 
 use ystandard_toolbox\Util\Admin;
 use ystandard_toolbox\Util\Manual;
-use ystandard_toolbox\Util\Version;
 
 defined( 'ABSPATH' ) || die();
 
@@ -85,13 +84,6 @@ class Taxonomy {
 			[],
 			filemtime( YSTDTB_PATH . '/css/ystandard-toolbox-admin.css' )
 		);
-		wp_enqueue_script(
-			'ystdtb-admin',
-			YSTDTB_URL . '/js/admin/admin.js',
-			[],
-			filemtime( YSTDTB_PATH . '/js/admin/admin.js' ),
-			true
-		);
 	}
 
 	/**
@@ -118,11 +110,6 @@ class Taxonomy {
 	 * @param string   $taxonomy Current taxonomy slug.
 	 */
 	public function edit_form( $tag, $taxonomy ) {
-		// 現状 `ystdtb_term_edit_form` に登録される機能（SEO設定・オーバーレイ設定）は
-		// いずれも yStandard 専用のため、非 yStandard 環境では設定欄ごと非表示にする。
-		if ( ! Version::ystandard_version_compare() ) {
-			return;
-		}
 		?>
 		<div class="ystdtb-option-box">
 			<?php wp_nonce_field( self::NONCE_ACTION, self::NONCE_NAME ); ?>
@@ -140,6 +127,12 @@ class Taxonomy {
 	 */
 	public function update_term_meta( $term_id ) {
 
+		// WordPressの権限確認を通過したユーザーだけがターム設定を更新できるようにする.
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
+		// Toolboxのターム編集フォームから送信された場合だけ保存処理を実行する.
 		if ( ! Admin::verify_nonce( self::NONCE_NAME, self::NONCE_ACTION ) ) {
 			return;
 		}

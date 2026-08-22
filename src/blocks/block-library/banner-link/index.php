@@ -27,7 +27,7 @@ class Banner_Link_Block {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'register_block' ], 100 );
+		add_action( 'init', [ $this, 'register_block' ], 20 );
 		add_filter( 'block_bindings_supported_attributes_' . self::BLOCK_NAME, [ $this, 'add_block_bindings_supported_attributes' ] );
 	}
 

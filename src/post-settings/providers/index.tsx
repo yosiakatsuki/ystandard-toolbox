@@ -1,0 +1,169 @@
+/**
+ * WordPress Dependencies
+ */
+import { addFilter } from '@wordpress/hooks';
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Plugin Dependencies
+ */
+import {
+	ITEM_FILTER,
+	SECTION_FILTER,
+	type PostSettingsContext,
+	type PostSettingsItem,
+	type PostSettingsProviderConfig,
+	type PostSettingsSection,
+} from '../types';
+import { getProviderConfig } from './config';
+import HeaderOverlaySetting from './header-overlay';
+import MenuReplaceSetting from './menu-replace';
+import SeoDescriptionSetting from './seo-description';
+import SeoTitleSetting from './seo-title';
+
+import './style.scss';
+
+const NAMESPACE = 'ystandard-toolbox';
+
+/**
+ * 初期データと現在の投稿設定コンテキストが一致するか判定する.
+ *
+ * @param config  初期データ.
+ * @param context 投稿設定コンテキスト.
+ */
+function isSameContext(
+	config: PostSettingsProviderConfig,
+	context: PostSettingsContext
+) {
+	return (
+		config.postType === context.postType && config.postId === context.postId
+	);
+}
+
+/**
+ * Toolboxの投稿設定コンポーネントを共通フックへ登録する.
+ *
+ * @param config 初期データ.
+ */
+export function registerPostSettingsProviders(
+	config: PostSettingsProviderConfig
+) {
+	addFilter(
+		ITEM_FILTER,
+		`${ NAMESPACE }/seo-title`,
+		( items: PostSettingsItem[], context: PostSettingsContext ) =>
+			isSameContext( config, context )
+				? [
+						...items,
+						{
+							id: 'ystdtb/seo-title',
+							section: 'ystandard/seo',
+							order: 100,
+							Component: SeoTitleSetting,
+						},
+				  ]
+				: items
+	);
+	addFilter(
+		ITEM_FILTER,
+		`${ NAMESPACE }/seo-description`,
+		( items: PostSettingsItem[], context: PostSettingsContext ) =>
+			isSameContext( config, context )
+				? [
+						...items,
+						{
+							id: 'ystdtb/seo-description',
+							section: 'ystandard/seo',
+							order: 110,
+							Component: SeoDescriptionSetting,
+						},
+				  ]
+				: items
+	);
+
+	if ( config.overlay.enabled ) {
+		addFilter(
+			SECTION_FILTER,
+			`${ NAMESPACE }/design`,
+			(
+				sections: PostSettingsSection[],
+				context: PostSettingsContext
+			) =>
+				isSameContext( config, context )
+					? [
+							...sections,
+							{
+								id: 'ystdtb/design',
+								title: __(
+									'[Toolbox]デザイン',
+									'ystandard-toolbox'
+								),
+								// yStandard標準セクションの後へToolbox設定をまとめる.
+								order: 100,
+							},
+					  ]
+					: sections
+		);
+		addFilter(
+			ITEM_FILTER,
+			`${ NAMESPACE }/header-overlay`,
+			( items: PostSettingsItem[], context: PostSettingsContext ) =>
+				isSameContext( config, context )
+					? [
+							...items,
+							{
+								id: 'ystdtb/header-overlay',
+								section: 'ystdtb/design',
+								order: 10,
+								Component: HeaderOverlaySetting,
+							},
+					  ]
+					: items
+		);
+	}
+
+	if ( config.menuReplace.enabled ) {
+		addFilter(
+			SECTION_FILTER,
+			`${ NAMESPACE }/navigation`,
+			(
+				sections: PostSettingsSection[],
+				context: PostSettingsContext
+			) =>
+				isSameContext( config, context )
+					? [
+							...sections,
+							{
+								id: 'ystdtb/navigation',
+								title: __(
+									'[Toolbox]ナビゲーション',
+									'ystandard-toolbox'
+								),
+								order: 110,
+							},
+					  ]
+					: sections
+		);
+		addFilter(
+			ITEM_FILTER,
+			`${ NAMESPACE }/menu-replace`,
+			( items: PostSettingsItem[], context: PostSettingsContext ) =>
+				isSameContext( config, context )
+					? [
+							...items,
+							{
+								id: 'ystdtb/menu-replace',
+								section: 'ystdtb/navigation',
+								order: 10,
+								Component: MenuReplaceSetting,
+							},
+					  ]
+					: items
+		);
+	}
+}
+
+const config = getProviderConfig();
+if ( config ) {
+	registerPostSettingsProviders( config );
+}

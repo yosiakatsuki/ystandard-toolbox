@@ -76,46 +76,46 @@ class Settings_Heading_Design_CSS_Test extends WP_UnitTestCase {
 			'h2' => 'heading-1',
 		];
 		$expected   = <<<EOD
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 font-size:16px;
 	margin-top:10px;
 	position:relative;
 }
 @media (min-width: 40rem) AND (max-width: 63.999rem) {
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 	font-size:17px;
 }
 }
 @media (max-width: 39.999rem) {
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 	font-size:18px;
 }
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::before,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before{
 	content:"before";
 	font-size:15px;
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::after,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after{
 	font-size:14px;
 	content:"";
 }
 
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 	font-size:13px;
 	margin-right:11px;
 	position:relative;
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2::after{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after{
 	font-size:11px;
 	content:"";
 }
@@ -186,32 +186,32 @@ EOD;
 			'h2' => 'heading-1',
 		];
 		$expected   = <<<EOD
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]),
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]){
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)),
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 font-size:16px;
 	margin-top:10px;
 	position:relative;
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::before,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before,
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before{
 	content:"before";
 	font-size:15px;
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1::after,
-.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after,
-.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-1:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after,
+.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after,
+.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after{
 	font-size:14px;
 	content:"";
 }
 
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *)){
 	font-size:13px;
 	margin-right:11px;
 	position:relative;
 }
-.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2::after{
+.ystdtb.ystdtb-heading .is-style-ystdtb-heading-2:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after{
 	font-size:11px;
 	content:"";
 }
@@ -235,8 +235,8 @@ EOD;
 			'sidebar'    => 'heading-3',
 		];
 		$expected       = [
-			'.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
-			'.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .entry-content h1:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			'.ystdtb .entry-content h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 		];
 		$actual         = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,
@@ -246,8 +246,8 @@ EOD;
 		$this->assertEquals( $expected, $actual );
 
 		$expected = [
-			'.ystdtb.single .entry-title',
-			'.ystdtb.single .wp-block-post-title',
+			'.ystdtb.single .entry-title:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			'.ystdtb.single .wp-block-post-title:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 		];
 		$actual   = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,
@@ -257,10 +257,10 @@ EOD;
 		$this->assertEquals( $expected, $actual );
 
 		$expected = [
-			'.ystdtb .entry-content h3:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .entry-content h3:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 			'.ystdtb .sidebar .widget-title',
 			'.ystdtb .sidebar .widgettitle',
-			'.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 		];
 		$actual   = \ystandard_toolbox\Heading_Helper::get_level_style_selector(
 			$level_selector,
@@ -283,13 +283,13 @@ EOD;
 		$expected = [
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] .widgettitle',
-			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] .widgettitle',
-			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-center"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] .widgettitle',
-			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="footer-right"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 		];
 
 		$this->assertEquals( $expected, $actual['footer'] );
@@ -307,10 +307,10 @@ EOD;
 		$expected = [
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] .widgettitle',
-			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-widget"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] .widget-title',
 			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] .widgettitle',
-			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+			'body.widgets-php :where(.wp-block-widget-area__panel-body-content) div[data-widget-area-id="sidebar-fixed"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 		];
 
 		$this->assertEquals( $expected, $actual['sidebar'] );
@@ -329,10 +329,62 @@ EOD;
 
 		$this->assertEquals(
 			[
-				'.editor-styles-wrapper h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])',
+				'.editor-styles-wrapper h2:where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
 			],
 			$actual['h2']
 		);
+	}
+
+	function test_get_heading_style_enabled_selector() {
+		$this->assertEquals(
+			':not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			\ystandard_toolbox\Heading_Helper::get_heading_style_enabled_selector()
+		);
+	}
+
+	function test_get_selector_all_title_excludes_disabled_heading_style() {
+		$actual = \ystandard_toolbox\Heading_Helper::get_selector_all();
+
+		$this->assertContains(
+			'.ystdtb.single .wp-block-post-title:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			$actual['post-title']
+		);
+		$this->assertContains(
+			'.ystdtb.page .wp-block-post-title:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			$actual['page-title']
+		);
+	}
+
+	function test_compatible_selector_excludes_disabled_heading_style() {
+		// 通常モードのテスト環境でも下位互換モードのセレクターを検証する.
+		if ( ! class_exists( '\\ystandard_toolbox\\Heading_Compatible' ) ) {
+			require_once YSTDTB_PATH . '/inc/heading/class-heading-compatible.php';
+		}
+
+		$reflection = new ReflectionClass( \ystandard_toolbox\Heading_Compatible::class );
+		$instance   = $reflection->newInstanceWithoutConstructor();
+		$method     = $reflection->getMethod( 'get_selector' );
+
+		$this->assertStringContainsString(
+			':not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			$method->invoke( $instance, 'h2' )
+		);
+		$this->assertStringContainsString(
+			'.is-style-ystdtb-h2:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			$method->invoke( $instance, 'h2', true )
+		);
+		$this->assertStringContainsString(
+			'.entry-title:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))',
+			$method->invoke( $instance, 'post-title' )
+		);
+	}
+
+	/**
+	 * 下位互換モード用の設定ファイルが配布資産として存在することを確認.
+	 */
+	function test_compatible_heading_assets_exist() {
+		$this->assertFileExists( YSTDTB_PATH . '/assets/heading-compatible/schema.json' );
+		$this->assertFileExists( YSTDTB_PATH . '/assets/heading-compatible/preset.json' );
 	}
 
 	function test_get_selector_all_editor_content_heading_excludes_widgets_screen() {
@@ -569,11 +621,11 @@ EOD;
 			\ystandard_toolbox\Heading_Helper::get_heading_css( $heading, $level_list, true )
 		);
 
-		$this->assertStringContainsString( '.editor-styles-wrapper .is-style-ystdtb-footer::after', $actual );
+		$this->assertStringContainsString( '.editor-styles-wrapper .is-style-ystdtb-footer:not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after', $actual );
 		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widget-title::after', $actual );
 		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] .widgettitle::after', $actual );
-		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::before', $actual );
-		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])::after', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::before', $actual );
+		$this->assertStringContainsString( 'div[data-widget-area-id="footer-left"] :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))::after', $actual );
 		$this->assertStringNotContainsString( 'div[data-widget-area-id="footer-left"],body.widgets-php', $actual );
 	}
 
@@ -609,10 +661,10 @@ EOD;
 
 		$this->assertStringContainsString( '.ystdtb .sidebar .widget-title', $actual );
 		$this->assertStringContainsString( '.ystdtb .sidebar .widgettitle', $actual );
-		$this->assertStringContainsString( '.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])', $actual );
+		$this->assertStringContainsString( '.ystdtb .sidebar :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))', $actual );
 		$this->assertStringContainsString( '.ystdtb .site-footer .widget-title', $actual );
 		$this->assertStringContainsString( '.ystdtb .site-footer .widgettitle', $actual );
-		$this->assertStringContainsString( '.ystdtb .site-footer :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"])', $actual );
+		$this->assertStringContainsString( '.ystdtb .site-footer :where(.wp-block-heading):not([class*="is-style-ystdtb-"]):not([class*="is-clear-style"]):not(:where(.is-ystdtb-heading-style-disabled)):not(:where(.is-ystdtb-heading-style-disabled *))', $actual );
 	}
 
 	function test_get_styles_css() {
