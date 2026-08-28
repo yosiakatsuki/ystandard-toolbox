@@ -67,25 +67,20 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 
 	// BlockProps
 	const blockProps = useBlockProps( {
-		className: 'ystdtb-faq-wrap',
+		className: getFaqClassNames( {
+			...attributes,
+		} ),
+		style: {
+			...getFaqStyle( attributes ),
+			...getResponsiveTypographyStyles( attributes ),
+		},
 	} );
 
-	const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: getFaqClassNames( {
-				...attributes,
-			} ),
-			style: {
-				...getFaqStyle( attributes ),
-				...getResponsiveTypographyStyles( attributes ),
-			},
-		},
-		{
-			allowedBlocks: [ 'ystdtb/faq-item' ],
-			template,
-			templateLock: 'all',
-		}
-	);
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: [ 'ystdtb/faq-item' ],
+		template,
+		templateLock: 'all',
+	} );
 
 	const inspectorControlsProps = {
 		...props,
@@ -96,9 +91,7 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 		<>
 			<InspectorControls { ...inspectorControlsProps } />
 
-			<div { ...blockProps }>
-				<div { ...innerBlocksProps } />
-			</div>
+			<div { ...innerBlocksProps } />
 		</>
 	);
 }
