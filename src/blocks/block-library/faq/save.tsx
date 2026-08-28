@@ -10,6 +10,7 @@ import type { FaqBlockAttributes } from './types';
 import {
 	getFaqClassNames,
 	getFaqStyle,
+	getResponsiveTypographyStyles,
 } from '@aktk/blocks/block-library/faq/utils';
 
 type FaqSaveProps = {
@@ -24,7 +25,10 @@ type FaqSaveProps = {
 export default function FaqSave( { attributes }: FaqSaveProps ): JSX.Element {
 	const blockProps = useBlockProps.save( {
 		className: getFaqClassNames( attributes ),
-		style: getFaqStyle( attributes ),
+		style: {
+			...getFaqStyle( attributes ),
+			...getResponsiveTypographyStyles( attributes ),
+		},
 	} );
 
 	return (

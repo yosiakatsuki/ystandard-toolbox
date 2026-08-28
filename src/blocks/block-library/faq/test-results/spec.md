@@ -23,7 +23,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 親のテンプレートは `[q, a]` の固定ペア、`templateLock: 'all'` で追加・削除・並べ替え不可
   - 子 `faq-item` の innerBlocks は段落等自由配置可（`templateLock: false`）
 - **RichText**: なし（コンテンツは子の InnerBlocks に委譲）
-- **レスポンシブ属性**: なし
+- **レスポンシブ属性**: 親のフォントサイズ・文字揃えをdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
   - 親 → 子: `isAccordion` / `backgroundColor` / `customBackgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
 - **親子属性の同期**:
@@ -45,6 +45,9 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQ設定 | 親枠線タイプ | `borderType`（''/all/bottom、default: ''） |
 | FAQ設定 | 親枠線サイズ（borderType 有効時） | `borderSize` |
 | FAQ設定 | 親枠線色（borderType 有効時） | `borderColor` / `customBorderColor` |
+| タイポグラフィ | 親フォントサイズ・行の高さ・文字揃え等 | `fontSize` / `fontFamily` / `style.typography` |
+| レスポンシブ文字設定 | 親フォントサイズ | `style.ystdtb.faq.responsive.typography.fontSize` |
+| レスポンシブ文字設定 | 親文字揃え | `style.ystdtb.faq.responsive.typography.textAlign` |
 
 ### 子 `ystdtb/faq-item`
 
@@ -88,7 +91,9 @@ FAQ ブロック自体には RichText を持たない。コンテンツ部分は
 
 ## デバイス別テスト対象
 
-FAQ ブロックにレスポンシブ対応属性は**なし**（該当なし）。
+- 親フォントサイズ: desktop / tablet / mobile
+- 親文字揃え: desktop / tablet / mobile
+- 未設定のデバイスはCSSカスタムプロパティを出力しない
 
 ---
 
@@ -112,6 +117,11 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__border-size__3px` — `borderType: "all"` + `borderSize: "3px"` + `borderColor: "ys-black"`
 - [ ] `ystdtb__faq__faq__border-color__preset` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-red"`
 - [ ] `ystdtb__faq__faq__border-color__custom` — `borderType: "all"` + `borderSize: "1px"` + `customBorderColor: "#0284c7"`
+
+### 親 `ystdtb/faq` > タイポグラフィ
+
+- [ ] `ystdtb__faq__typography__font-size__preset` — `fontSize: "large"`
+- [ ] `ystdtb__faq__responsive-typography__all-devices` — フォントサイズ・文字揃えをdesktop / tablet / mobileに設定
 
 ### 子 `ystdtb/faq-item` > FAQ タイプ
 
@@ -200,6 +210,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] デザインプリセット 6 種のクリック適用: 各プリセットで期待される子 attributes セット + 親 `accordionArrowColor` 同期が実行される
   - 特に `outline-square` / `outline-circle` / `bottom-divider` は複数属性一括反映が正しいこと
 - [ ] ColorPalette: プリセット → カスタム → クリアの 3 段階遷移で、`xxxColor` と `customXxxColor` が排他的に保存される
+- [ ] 「レスポンシブ文字設定」でフォントサイズ・文字揃えを追加し、3デバイスの値が個別に保存される
+- [ ] レスポンシブ設定の項目リセット・パネル全体リセットで、対象設定だけが削除される
 
 ### 操作順序（切り替え・リセットの整合性）
 
@@ -228,6 +240,11 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親背景色 × 親枠線 × ラベルスタイルの組み合わせ表示
 - [ ] デザインプリセット 6 種の見た目が意図通り
 - [ ] Q / A 側で矢印の有無が正しく切り替わっている（Q のみ表示）
+
+### レスポンシブ挙動
+
+- [ ] 親フォントサイズがdesktop / tablet / mobileの各ビューポートで切り替わる
+- [ ] 親文字揃えがdesktop / tablet / mobileの各ビューポートで切り替わる
 
 ### アコーディオン動作
 

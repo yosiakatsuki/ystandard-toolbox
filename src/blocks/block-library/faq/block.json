@@ -45,12 +45,36 @@
 		},
 		"customAccordionArrowColor": {
 			"type": "string"
+		},
+		"fontSize": {
+			"type": "string"
+		},
+		"fontFamily": {
+			"type": "string"
+		},
+		"style": {
+			"type": "object"
 		}
 	},
 	"supports": {
 		"align": false,
 		"className": false,
-		"listView": true
+		"listView": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"textAlign": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontStyle": true,
+			"__experimentalFontWeight": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalWritingMode": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		}
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",

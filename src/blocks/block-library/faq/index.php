@@ -7,6 +7,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -28,6 +31,7 @@ class FAQ_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 20 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -41,6 +45,48 @@ class FAQ_Block {
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * レスポンシブタイポグラフィ用CSSを追加.
+	 *
+	 * @return void
+	 */
+	public function enqueue_responsive_style() {
+		$types      = [ 'desktop', 'tablet', 'mobile' ];
+		$responsive = [
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		];
+		// コアのタイポグラフィ指定よりレスポンシブ値を優先できる詳細度にする.
+		$selector   = ':is(div).ystdtb-faq';
+		$properties = [
+			'faq--font-size'  => 'font-size',
+			'faq--text-align' => 'text-align',
+		];
+
+		foreach ( $types as $type ) {
+			foreach ( $properties as $prop_name => $property ) {
+				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $selector,
+						'prop_name' => $prop_name,
+						'property'  => $property,
+						'type'      => $type,
+					]
+				);
+			}
+		}
+
+		$css  = Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+
+		$handle = 'ystdtb-faq-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
+		wp_enqueue_style( $handle );
 	}
 
 	/**

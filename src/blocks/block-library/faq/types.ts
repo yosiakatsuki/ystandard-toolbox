@@ -1,3 +1,12 @@
+/**
+ * Aktk Dependencies.
+ */
+import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
+import type {
+	ResponsiveTextAlign,
+	TextAlign,
+} from '@aktk/block-components/components/responsive-text-align-control';
+
 export type FaqEditProps = {
 	attributes: FaqBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqBlockAttributes > ) => void;
@@ -18,4 +27,30 @@ export type FaqBlockAttributes = {
 	customBorderColor?: string;
 	accordionArrowColor?: string;
 	customAccordionArrowColor?: string;
+	fontSize?: string;
+	fontFamily?: string;
+	style?: {
+		typography?: {
+			fontSize?: string;
+			fontFamily?: string;
+			fontStyle?: string;
+			fontWeight?: string;
+			lineHeight?: string | number;
+			letterSpacing?: string;
+			textAlign?: TextAlign;
+			textDecoration?: string;
+			textTransform?: string;
+			writingMode?: string;
+		};
+		ystdtb?: {
+			faq?: {
+				responsive?: {
+					typography?: {
+						fontSize?: ResponsiveFontSize;
+						textAlign?: ResponsiveTextAlign;
+					};
+				};
+			};
+		};
+	};
 };

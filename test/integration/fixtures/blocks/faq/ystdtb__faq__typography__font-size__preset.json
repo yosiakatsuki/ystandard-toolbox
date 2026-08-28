@@ -1,0 +1,12 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"borderType": "",
+			"fontSize": "large"
+		},
+		"innerBlocks": []
+	}
+]

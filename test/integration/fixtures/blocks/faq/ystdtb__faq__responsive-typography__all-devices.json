@@ -1,0 +1,31 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"borderType": "",
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"responsive": {
+							"typography": {
+								"fontSize": {
+									"desktop": "32px",
+									"tablet": "24px",
+									"mobile": "18px"
+								},
+								"textAlign": {
+									"desktop": "left",
+									"tablet": "center",
+									"mobile": "right"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

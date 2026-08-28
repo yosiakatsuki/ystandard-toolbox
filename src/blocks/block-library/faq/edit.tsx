@@ -7,7 +7,11 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Plugin Dependencies
  */
 import type { FaqEditProps } from './types';
-import { getFaqClassNames, getFaqStyle } from './utils';
+import {
+	getFaqClassNames,
+	getFaqStyle,
+	getResponsiveTypographyStyles,
+} from './utils';
 import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
@@ -71,9 +75,10 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 			className: getFaqClassNames( {
 				...attributes,
 			} ),
-			style: getFaqStyle( {
-				...attributes,
-			} ),
+			style: {
+				...getFaqStyle( attributes ),
+				...getResponsiveTypographyStyles( attributes ),
+			},
 		},
 		{
 			allowedBlocks: [ 'ystdtb/faq-item' ],
