@@ -24,9 +24,6 @@
 		"backgroundColor": {
 			"type": "string"
 		},
-		"customBackgroundColor": {
-			"type": "string"
-		},
 		"borderType": {
 			"type": "string",
 			"default": ""
@@ -74,12 +71,17 @@
 			"__experimentalDefaultControls": {
 				"fontSize": true
 			}
+		},
+		"color": {
+			"background": true,
+			"__experimentalDefaultControls": {
+				"background": true
+			}
 		}
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",
 		"ystdtb/backgroundColor": "backgroundColor",
-		"ystdtb/customBackgroundColor": "customBackgroundColor",
 		"ystdtb/borderType": "borderType",
 		"ystdtb/borderSize": "borderSize",
 		"ystdtb/borderColor": "borderColor",

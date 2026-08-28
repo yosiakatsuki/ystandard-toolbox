@@ -11,7 +11,6 @@ import { Panel } from '@aktk/block-components/components/panel';
  */
 import { Accordion } from './accordion';
 import { AccordionArrowColor } from './accordion-arrow-color';
-import { BackgroundColor } from './background-color';
 import { BorderType } from './border-type';
 import { BorderSize } from './border-size';
 import { BorderColor } from './border-color';
@@ -22,7 +21,6 @@ export function FaqOption( props ): JSX.Element {
 		<Panel title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
 			<Accordion { ...props } />
 			<AccordionArrowColor { ...props } />
-			<BackgroundColor { ...props } />
 			<BorderType { ...props } />
 			<BorderSize { ...props } />
 			<BorderColor { ...props } />

@@ -1,0 +1,30 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"borderType": "bottom",
+			"borderSize": "1px",
+			"customBorderColor": "#c2410c",
+			"style": {
+				"color": {
+					"background": "#fff7ed"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"faqBorderType": "",
+					"labelPosition": "center",
+					"labelBold": true
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

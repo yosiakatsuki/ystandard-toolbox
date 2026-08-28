@@ -25,22 +25,18 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 		borderType,
 		borderSize,
 		backgroundColor,
-		customBackgroundColor,
 		borderColor,
 		customBorderColor,
+		style,
 	} = attributes;
 
-	const backgroundColorClass =
-		getColorClassName( 'background-color', backgroundColor ) || '';
 	const borderColorClass =
 		getColorClassName( 'border-color', borderColor ) || '';
 
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
 		'has-padding':
-			'all' === borderType || backgroundColor || customBackgroundColor,
-		'has-background': backgroundColor || customBackgroundColor,
-		[ backgroundColorClass ]: backgroundColorClass,
+			'all' === borderType || backgroundColor || style?.color?.background,
 		'has-border': borderSize || borderColor || customBorderColor,
 		[ borderColorClass ]: borderColorClass,
 		[ `border-type--${ borderType }` ]: '' !== borderType,
@@ -48,24 +44,13 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 }
 
 export function getFaqStyle( attributes: FaqBlockAttributes ) {
-	const {
-		borderType,
-		borderSize,
-		backgroundColor,
-		customBackgroundColor,
-		borderColor,
-		customBorderColor,
-	} = attributes;
+	const { borderType, borderSize, borderColor, customBorderColor } =
+		attributes;
 
-	const backgroundColorClass =
-		getColorClassName( 'background-color', backgroundColor ) || '';
 	const borderColorClass =
 		getColorClassName( 'border-color', borderColor ) || '';
 
 	return {
-		backgroundColor: backgroundColorClass
-			? undefined
-			: customBackgroundColor,
 		borderColor: borderColorClass ? undefined : customBorderColor,
 		borderWidth: 'all' === borderType ? borderSize : undefined,
 		borderBottomWidth:

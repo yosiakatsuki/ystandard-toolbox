@@ -25,7 +25,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 - **RichText**: なし（コンテンツは子の InnerBlocks に委譲）
 - **レスポンシブ属性**: 親のフォントサイズ・文字揃えをdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
-  - 親 → 子: `isAccordion` / `backgroundColor` / `customBackgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
+  - 親 → 子: `isAccordion` / `backgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
 - **カラー withColors**: 子 `faq-item` は 7 属性で `withColors` 利用
@@ -41,7 +41,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 |---|---|---|
 | FAQ設定 | 開閉式 | `isAccordion`（default: false） |
 | FAQ設定 | 開閉ボタンの色（isAccordion=true 時） | `accordionArrowColor` / `customAccordionArrowColor` |
-| FAQ設定 | 親背景色 | `backgroundColor` / `customBackgroundColor` |
+| 色 | 親背景色 | `backgroundColor` / `style.color.background` |
 | FAQ設定 | 親枠線タイプ | `borderType`（''/all/bottom、default: ''） |
 | FAQ設定 | 親枠線サイズ（borderType 有効時） | `borderSize` |
 | FAQ設定 | 親枠線色（borderType 有効時） | `borderColor` / `customBorderColor` |
@@ -82,7 +82,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
-| `backgroundColor` / `customBackgroundColor` 設定（親 or 子） | 要素に `has-padding` クラス付与（内側余白が自動で入る） |
+| 親の`backgroundColor` / `style.color.background`設定 | 親要素に`has-padding`クラス付与（内側余白が自動で入る） |
+| 子の`faqBackgroundColor` / `customFaqBackgroundColor`設定 | 子要素に`has-padding`クラス付与（内側余白が自動で入る） |
 | ラベルに `labelBackgroundColor` / `customLabelBackgroundColor` / `labelBorderColor` / `customLabelBorderColor` / `labelBorderSize` のいずれか設定 | ラベルに `has-padding` クラス付与 |
 
 ## RichText ツールバー制御
@@ -110,7 +111,9 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `accordionArrowColor: "ys-red"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
 - [ ] `ystdtb__faq__faq__bg__preset` — `backgroundColor: "ys-light-orange"`
-- [ ] `ystdtb__faq__faq__bg__custom` — `customBackgroundColor: "#fff7ed"`
+- [ ] `ystdtb__faq__faq__bg__custom` — `style.color.background: "#fff7ed"`
+- [ ] `ystdtb__faq__deprecated-2-3-0-background-custom` — v2.3.0の`customBackgroundColor`を現行形式へ移行
+- [ ] `ystdtb__faq__deprecated-1-34-1-background-custom` — v1.34.1以前の数値枠線幅と`customBackgroundColor`を同時に移行
 - [ ] `ystdtb__faq__faq__border-type__all` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-black"`
 - [ ] `ystdtb__faq__faq__border-type__bottom` — `borderType: "bottom"` + `borderSize: "1px"` + `borderColor: "ys-black"`
 - [ ] `ystdtb__faq__faq__border-size__1px` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-black"`
@@ -173,7 +176,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] `ystdtb__faq__combo__basic` — デフォルトの基本 FAQ
 - [ ] `ystdtb__faq__combo__accordion` — `isAccordion: true` のみ
-- [ ] `ystdtb__faq__combo__card` — `customBackgroundColor` + `borderType: "all"` + 枠線サイズ + カスタム枠線色
+- [ ] `ystdtb__faq__combo__card` — `style.color.background` + `borderType: "all"` + 枠線サイズ + カスタム枠線色
 - [ ] `ystdtb__faq__combo__divider` — 子の `faqBorderType: "bottom"` を Q/A 両方に適用
 - [ ] `ystdtb__faq__combo__preset-bg-circle-applied` — デザインプリセット「背景あり丸」適用済み + `isAccordion: true`
 
@@ -202,7 +205,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親「枠線タイプ」CustomSelectControl: 全 3 選択肢（'' / 'all' / 'bottom'）→ 各値が `borderType` に保存
 - [ ] 子「区切り線タイプ」CustomSelectControl: 全 2 選択肢（'' / 'bottom'）→ 各値が `faqBorderType` に保存
 - [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
-- [ ] 各種 ColorPalette（親背景／親枠線／矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
+- [ ] 親背景色: WordPress標準の色パネルでプリセットが`backgroundColor`、カスタム色が`style.color.background`へ保存される
+- [ ] 各種 ColorPalette（親枠線／矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
 ### 複雑 UI

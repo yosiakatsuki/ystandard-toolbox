@@ -26,9 +26,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-faq has-padding has-background has-ys-light-orange-background-color\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-faq has-padding has-ys-light-orange-background-color has-background\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-faq has-padding has-background has-ys-light-orange-background-color\">",
+			"\n<div class=\"ystdtb-faq has-padding has-ys-light-orange-background-color has-background\">",
 			null,
 			"\n\n",
 			null,

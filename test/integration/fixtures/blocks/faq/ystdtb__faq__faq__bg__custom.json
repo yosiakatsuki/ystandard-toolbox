@@ -4,8 +4,12 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"customBackgroundColor": "#fff7ed",
-			"borderType": ""
+			"borderType": "",
+			"style": {
+				"color": {
+					"background": "#fff7ed"
+				}
+			}
 		},
 		"innerBlocks": [
 			{

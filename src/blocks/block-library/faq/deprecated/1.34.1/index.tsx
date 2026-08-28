@@ -5,6 +5,25 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
+/* Block Dependencies */
+import { migrateFaqBackgroundColor } from '../migrate';
+
+/**
+ * v1.34.1以前のFAQ属性を現行形式へ移行する.
+ *
+ * @param attributes v1.34.1以前のFAQ属性.
+ * @return 現行FAQ属性.
+ */
+export function migrateDeprecated1341Faq( attributes: Record< string, any > ) {
+	const { borderSize } = attributes;
+
+	return migrateFaqBackgroundColor( {
+		...attributes,
+		borderSize:
+			typeof borderSize === 'number' ? `${ borderSize }px` : borderSize,
+	} );
+}
+
 // @ts-ignore.
 export const deprecated1341 = [
 	{
@@ -44,16 +63,7 @@ export const deprecated1341 = [
 			align: false,
 			className: false,
 		},
-		migrate: ( attributes: any ) => {
-			const { borderSize } = attributes;
-			return {
-				...attributes,
-				borderSize:
-					typeof borderSize === 'number'
-						? `${ borderSize }px`
-						: borderSize,
-			};
-		},
+		migrate: migrateDeprecated1341Faq,
 		// @ts-ignore.
 		save( { attributes } ) {
 			const {

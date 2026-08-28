@@ -2,7 +2,11 @@
 	{
 		"blockName": "ystdtb/faq",
 		"attrs": {
-			"customBackgroundColor": "#fff7ed"
+			"style": {
+				"color": {
+					"background": "#fff7ed"
+				}
+			}
 		},
 		"innerBlocks": [
 			{
