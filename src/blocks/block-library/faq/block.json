@@ -74,6 +74,7 @@
 		},
 		"color": {
 			"background": true,
+			"gradients": true,
 			"__experimentalDefaultControls": {
 				"background": true
 			}

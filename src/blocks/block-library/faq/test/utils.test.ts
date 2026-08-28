@@ -1,5 +1,6 @@
 import type { FaqBlockAttributes } from '../types';
 import {
+	getFaqClassNames,
 	getResponsiveTypography,
 	getResponsiveTypographyStyles,
 	updateResponsiveFontSize,
@@ -11,6 +12,31 @@ const DEFAULT_ATTRIBUTES: FaqBlockAttributes = {
 	borderType: '',
 	borderSize: 0,
 };
+
+describe( 'FAQ背景', () => {
+	it( 'プリセットグラデーション設定時に内側余白を追加する', () => {
+		expect(
+			getFaqClassNames( {
+				...DEFAULT_ATTRIBUTES,
+				gradient: 'midnight',
+			} )
+		).toContain( 'has-padding' );
+	} );
+
+	it( 'カスタムグラデーション設定時に内側余白を追加する', () => {
+		expect(
+			getFaqClassNames( {
+				...DEFAULT_ATTRIBUTES,
+				style: {
+					color: {
+						gradient:
+							'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					},
+				},
+			} )
+		).toContain( 'has-padding' );
+	} );
+} );
 
 describe( 'FAQレスポンシブタイポグラフィ', () => {
 	it( 'フォントサイズ更新時にコアのタイポグラフィ設定を保持する', () => {

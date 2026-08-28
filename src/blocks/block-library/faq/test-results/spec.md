@@ -42,6 +42,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQ設定 | 開閉式 | `isAccordion`（default: false） |
 | FAQ設定 | 開閉ボタンの色（isAccordion=true 時） | `accordionArrowColor` / `customAccordionArrowColor` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
+| 色 | 親背景グラデーション | `gradient` / `style.color.gradient` |
 | FAQ設定 | 親枠線タイプ | `borderType`（''/all/bottom、default: ''） |
 | FAQ設定 | 親枠線サイズ（borderType 有効時） | `borderSize` |
 | FAQ設定 | 親枠線色（borderType 有効時） | `borderColor` / `customBorderColor` |
@@ -82,7 +83,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
-| 親の`backgroundColor` / `style.color.background`設定 | 親要素に`has-padding`クラス付与（内側余白が自動で入る） |
+| 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | 親要素に`has-padding`クラス付与（内側余白が自動で入る） |
 | 子の`faqBackgroundColor` / `customFaqBackgroundColor`設定 | 子要素に`has-padding`クラス付与（内側余白が自動で入る） |
 | ラベルに `labelBackgroundColor` / `customLabelBackgroundColor` / `labelBorderColor` / `customLabelBorderColor` / `labelBorderSize` のいずれか設定 | ラベルに `has-padding` クラス付与 |
 
@@ -112,6 +113,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
 - [ ] `ystdtb__faq__faq__bg__preset` — `backgroundColor: "ys-light-orange"`
 - [ ] `ystdtb__faq__faq__bg__custom` — `style.color.background: "#fff7ed"`
+- [ ] `ystdtb__faq__faq__gradient__preset` — `gradient: "midnight"`
+- [ ] `ystdtb__faq__faq__gradient__custom` — `style.color.gradient`に任意のグラデーションを設定
 - [ ] `ystdtb__faq__deprecated-2-3-0-background-custom` — v2.3.0の`customBackgroundColor`を現行形式へ移行
 - [ ] `ystdtb__faq__deprecated-1-34-1-background-custom` — v1.34.1以前の数値枠線幅と`customBackgroundColor`を同時に移行
 - [ ] `ystdtb__faq__faq__border-type__all` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-black"`
@@ -205,7 +208,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親「枠線タイプ」CustomSelectControl: 全 3 選択肢（'' / 'all' / 'bottom'）→ 各値が `borderType` に保存
 - [ ] 子「区切り線タイプ」CustomSelectControl: 全 2 選択肢（'' / 'bottom'）→ 各値が `faqBorderType` に保存
 - [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
-- [ ] 親背景色: WordPress標準の色パネルでプリセットが`backgroundColor`、カスタム色が`style.color.background`へ保存される
+- [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
 - [ ] 各種 ColorPalette（親枠線／矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
@@ -241,7 +244,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] examples HTML をエディターに貼り付け → 全パターンの見た目を目視確認
 - [ ] 「設定の組み合わせ例」5 パターン（基本 / アコーディオン / カード風 / 区切り線 / 背景あり丸）の見た目
-- [ ] 親背景色 × 親枠線 × ラベルスタイルの組み合わせ表示
+- [ ] 親背景色・グラデーション × 親枠線 × ラベルスタイルの組み合わせ表示
 - [ ] デザインプリセット 6 種の見た目が意図通り
 - [ ] Q / A 側で矢印の有無が正しく切り替わっている（Q のみ表示）
 
@@ -295,4 +298,4 @@ FAQ ブロック固有の観点:
 - ブロックの仕様変更時は本仕様も更新する
 - L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/faq/` 配下（既存 `ystdtb__faq__deprecated-*` と同ディレクトリに追加）
-- 本仕様の fixture 数はおよそ 53 件（親 faq 12 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）
+- 本仕様の fixture 数はおよそ55件（親faq 14 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）

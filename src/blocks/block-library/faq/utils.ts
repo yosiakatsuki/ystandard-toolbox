@@ -25,6 +25,7 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 		borderType,
 		borderSize,
 		backgroundColor,
+		gradient,
 		borderColor,
 		customBorderColor,
 		style,
@@ -36,7 +37,11 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
 		'has-padding':
-			'all' === borderType || backgroundColor || style?.color?.background,
+			'all' === borderType ||
+			backgroundColor ||
+			style?.color?.background ||
+			gradient ||
+			style?.color?.gradient,
 		'has-border': borderSize || borderColor || customBorderColor,
 		[ borderColorClass ]: borderColorClass,
 		[ `border-type--${ borderType }` ]: '' !== borderType,

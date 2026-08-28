@@ -20,6 +20,7 @@ export type FaqEditProps = {
 export type FaqBlockAttributes = {
 	isAccordion: boolean;
 	backgroundColor?: string;
+	gradient?: string;
 	borderType: string;
 	borderSize: number;
 	borderColor?: string;
@@ -31,6 +32,7 @@ export type FaqBlockAttributes = {
 	style?: {
 		color?: {
 			background?: string;
+			gradient?: string;
 		};
 		typography?: {
 			fontSize?: string;
