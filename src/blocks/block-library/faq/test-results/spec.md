@@ -47,6 +47,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQ設定 | 親枠線サイズ（borderType 有効時） | `borderSize` |
 | FAQ設定 | 親枠線色（borderType 有効時） | `borderColor` / `customBorderColor` |
 | タイポグラフィ | 親フォントサイズ・行の高さ・文字揃え等 | `fontSize` / `fontFamily` / `style.typography` |
+| サイズ | 親外側余白（上下） | `style.spacing.margin` |
+| サイズ | 親内側余白（上下左右） | `style.spacing.padding` |
 | レスポンシブ文字設定 | 親フォントサイズ | `style.ystdtb.faq.responsive.typography.fontSize` |
 | レスポンシブ文字設定 | 親文字揃え | `style.ystdtb.faq.responsive.typography.textAlign` |
 
@@ -129,6 +131,11 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__typography__font-size__preset` — `fontSize: "large"`
 - [ ] `ystdtb__faq__responsive-typography__all-devices` — フォントサイズ・文字揃えをdesktop / tablet / mobileに設定
 
+### 親 `ystdtb/faq` > 余白
+
+- [ ] `ystdtb__faq__spacing__margin__top-bottom` — `style.spacing.margin`の上・下を個別に設定
+- [ ] `ystdtb__faq__spacing__padding__4corners` — `style.spacing.padding`の上・右・下・左を個別に設定
+
 ### 子 `ystdtb/faq-item` > FAQ タイプ
 
 - [ ] `ystdtb__faq__item-type__q` — `faqType: "q"`（デフォルト・明示指定）
@@ -209,6 +216,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 子「区切り線タイプ」CustomSelectControl: 全 2 選択肢（'' / 'bottom'）→ 各値が `faqBorderType` に保存
 - [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
+- [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
 - [ ] 各種 ColorPalette（親枠線／矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
@@ -245,6 +253,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] examples HTML をエディターに貼り付け → 全パターンの見た目を目視確認
 - [ ] 「設定の組み合わせ例」5 パターン（基本 / アコーディオン / カード風 / 区切り線 / 背景あり丸）の見た目
 - [ ] 親背景色・グラデーション × 親枠線 × ラベルスタイルの組み合わせ表示
+- [ ] 親margin・paddingがフロントとエディターで同じ方向へ反映される
 - [ ] デザインプリセット 6 種の見た目が意図通り
 - [ ] Q / A 側で矢印の有無が正しく切り替わっている（Q のみ表示）
 
@@ -298,4 +307,4 @@ FAQ ブロック固有の観点:
 - ブロックの仕様変更時は本仕様も更新する
 - L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/faq/` 配下（既存 `ystdtb__faq__deprecated-*` と同ディレクトリに追加）
-- 本仕様の fixture 数はおよそ55件（親faq 14 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）
+- 本仕様の fixture 数はおよそ57件（親faq 16 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）

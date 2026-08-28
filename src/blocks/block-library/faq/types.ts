@@ -2,6 +2,7 @@
  * Aktk Dependencies.
  */
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
+import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
 import type {
 	ResponsiveTextAlign,
 	TextAlign,
@@ -33,6 +34,10 @@ export type FaqBlockAttributes = {
 		color?: {
 			background?: string;
 			gradient?: string;
+		};
+		spacing?: {
+			margin?: Spacing | string;
+			padding?: Spacing | string;
 		};
 		typography?: {
 			fontSize?: string;

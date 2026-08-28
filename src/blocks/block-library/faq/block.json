@@ -78,6 +78,14 @@
 			"__experimentalDefaultControls": {
 				"background": true
 			}
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"margin": false,
+				"padding": false
+			}
 		}
 	},
 	"providesContext": {
