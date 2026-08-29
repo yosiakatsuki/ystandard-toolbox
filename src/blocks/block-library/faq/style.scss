@@ -11,7 +11,10 @@
 	--ystdtb--faq-item--label--font-size: 1.5em;
 	--ystdtb--faq-item--label--size: 1.75em;
 
-	border: 0;
+	// Block Supportsで設定した全周枠線をリセットしない。
+	&:where(:not([style*="border-width:"])) {
+		border: 0;
+	}
 
 	+ :where(.ystdtb-faq) {
 		margin-top: 0;

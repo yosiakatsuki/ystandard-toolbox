@@ -288,6 +288,7 @@ FAQ ブロック固有の観点:
 - **親子の `accordionArrowColor` が乖離した状態**: 例えば fixture で親 only / 子 only に色を設定した場合、save 出力はどうなるか（親から子への一方向同期のみ）
 - **子 `faqBorderType: 'bottom'` → `''` にクリア**: `faqBorderColor` が `setFaqBorderColor(undefined)` でクリアされる一方、`customFaqBorderColor` は残る可能性（UI コードで `setFaqBorderColor(undefined)` のみで custom 側のクリアは明示していない）
 - **親の`style.border`に色だけ設定**: ブラウザ既定の枠線幅やスタイルへ意図せず変わらないか、WordPress標準パネルでの保存結果を確認する
+- **親のstyle属性に`border-width`あり**: FAQ共通の`border: 0`でBlock Supportsの全周枠線が打ち消されない
 - **ラベル角丸だけ設定（背景なし・枠線なし）**: `has-padding` が付かないため角丸が見た目にわからない
 - **子 `faqType: 'a'` + `accordionArrowColor` 設定**: A 側は arrow div 自体を出力しないので、色設定は無効（属性は保存されるが DOM には出ない）
 - **デザインプリセット適用直後に個別属性を手動変更**: プリセット復帰機能はないため、再度プリセットをクリックするまで混成状態になる
