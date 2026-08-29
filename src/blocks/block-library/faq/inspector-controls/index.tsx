@@ -7,6 +7,7 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  * Block Dependencies.
  */
 import { FaqOption } from './faq-option';
+import { AccordionArrowColor } from './styles/accordion-arrow-color';
 import { ResponsiveTypography } from './styles/responsive-typography';
 
 // @ts-ignore.
@@ -17,6 +18,7 @@ export function InspectorControls( props ): JSX.Element {
 				<FaqOption { ...props } />
 			</WPInspectorControls>
 			<WPInspectorControls group="styles">
+				<AccordionArrowColor { ...props } />
 				<ResponsiveTypography { ...props } />
 			</WPInspectorControls>
 		</>
