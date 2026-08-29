@@ -1,16 +1,14 @@
 /**
  * WordPress Dependencies
  */
+import { useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
-import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import { ColorPalette } from '@aktk/block-components/components/color-pallet-control';
-import {
-	ToolsPanel,
-	ToolsPanelItem,
-} from '@aktk/block-components/wp-controls/tools-panel';
+import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
+import ColorGradientSettingsDropdown from '@aktk/block-components/wp-controls/color-gradient-settings-dropdown';
+import { ToolsPanel } from '@aktk/block-components/wp-controls/tools-panel';
 
 /**
  * Block Dependencies.
@@ -29,9 +27,19 @@ export function AccordionArrowColor( props: FaqEditProps ): JSX.Element | null {
 	const { attributes, setAttributes, updateChildAttributes } = props;
 	const { isAccordion, accordionArrowColor, customAccordionArrowColor } =
 		attributes;
+	const colors = useThemeColors();
+	const allColors = useMemo(
+		() => colors.flatMap( ( palette ) => palette.colors ),
+		[ colors ]
+	);
+	const colorValue =
+		allColors.find( ( color ) => color.slug === accordionArrowColor )
+			?.color ?? customAccordionArrowColor;
 
 	// 親子の開閉ボタン色を同じ値に更新する.
-	const handleOnChange = ( newColor?: string, slug?: string ) => {
+	const handleOnChange = ( newColor?: string ) => {
+		const slug = allColors.find( ( color ) => color.color === newColor )
+			?.slug;
 		setAttributes( {
 			accordionArrowColor: slug,
 			customAccordionArrowColor: slug ? undefined : newColor,
@@ -44,7 +52,7 @@ export function AccordionArrowColor( props: FaqEditProps ): JSX.Element | null {
 
 	// 開閉ボタン色を親子からまとめて削除する.
 	const resetColor = () => {
-		handleOnChange( undefined, undefined );
+		handleOnChange( undefined );
 	};
 
 	// 開閉ボタンがない通常表示では不要な設定を表示しない.
@@ -54,32 +62,29 @@ export function AccordionArrowColor( props: FaqEditProps ): JSX.Element | null {
 
 	return (
 		<ToolsPanel
-			label={ __( '開閉ボタン', 'ystandard-toolbox' ) }
+			label={ __( '開閉ボタン色', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
 			resetAll={ resetColor }
 		>
-			<ToolsPanelItem
-				className="single-column"
-				hasValue={ () =>
-					!! ( accordionArrowColor || customAccordionArrowColor )
-				}
-				isShownByDefault={ false }
-				label={ __( '色', 'ystandard-toolbox' ) }
-				onDeselect={ resetColor }
+			<ColorGradientSettingsDropdown
 				panelId={ PANEL_ID }
-			>
-				<BaseControl
-					id="faq-accordion-arrow-color"
-					label={ __( '色', 'ystandard-toolbox' ) }
-				>
-					<ColorPalette
-						label={ __( '色', 'ystandard-toolbox' ) }
-						value={ customAccordionArrowColor || '' }
-						slug={ accordionArrowColor }
-						onChange={ handleOnChange }
-					/>
-				</BaseControl>
-			</ToolsPanelItem>
+				colors={ colors }
+				gradients={ [] }
+				disableCustomGradients
+				__experimentalIsRenderedInSidebar
+				settings={ [
+					{
+						label: __( '色', 'ystandard-toolbox' ),
+						colorValue,
+						onColorChange: handleOnChange,
+						onGradientChange: () => undefined,
+						clearable: true,
+						gradients: [],
+						disableCustomGradients: true,
+						isShownByDefault: false,
+					},
+				] }
+			/>
 		</ToolsPanel>
 	);
 }

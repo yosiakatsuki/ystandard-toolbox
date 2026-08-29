@@ -41,7 +41,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | パネル | 設定項目 | 属性 |
 |---|---|---|
 | FAQ設定 | 開閉式 | `isAccordion`（default: false） |
-| スタイル > 開閉ボタン | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
+| スタイル > 開閉ボタン色 | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
 | 色 | 親背景グラデーション | `gradient` / `style.color.gradient` |
 | 枠線 | 親枠線色・角丸・スタイル・幅 | `style.border` |
@@ -75,7 +75,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 
 | 条件 | 影響 |
 |---|---|
-| 親`isAccordion=false` | スタイルパネルの「開閉ボタン」が非表示（`AccordionArrowColor`コンポーネントが早期return） |
+| 親`isAccordion=false` | スタイルパネルの「開閉ボタン色」が非表示（`AccordionArrowColor`コンポーネントが早期return） |
 | 子 `faqBorderType=''` 選択 | `faqBorderSize` が `undefined` にリセット + `faqBorderColor` がクリア（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType=''` | 「区切り線サイズ」「区切り線色」UI が非表示 |
@@ -203,7 +203,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### 条件付き表示
 
 - [ ] 親のスタイルパネルでは、タイポグラフィ・背景色・グラデーション・余白・枠線・開閉ボタン色の設定項目が初期表示されない
-- [ ] 親`isAccordion=true`時のみ、スタイルパネルに「開閉ボタン」パネルが表示される
+- [ ] 親`isAccordion=true`時のみ、スタイルパネルに「開閉ボタン色」パネルが表示される
+- [ ] 開閉ボタン色を設定すると「−」リセットボタンが表示され、操作すると親子の色属性が削除される
 - [ ] 子 `faqBorderType` が空以外のときのみ「区切り線サイズ」「区切り線色」BaseControl が表示される
 - [ ] 子 `faqType: 'a'` 時はエディター上で矢印領域が描画されない
 
