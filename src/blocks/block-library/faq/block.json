@@ -59,14 +59,14 @@
 			"__experimentalTextDecoration": true,
 			"__experimentalWritingMode": true,
 			"__experimentalDefaultControls": {
-				"fontSize": true
+				"fontSize": false
 			}
 		},
 		"color": {
 			"background": true,
 			"gradients": true,
 			"__experimentalDefaultControls": {
-				"background": true
+				"background": false
 			}
 		},
 		"spacing": {

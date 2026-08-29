@@ -202,6 +202,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 ### 条件付き表示
 
+- [ ] 親のスタイルパネルでは、タイポグラフィ・背景色・グラデーション・余白・枠線の設定項目が初期表示されない
 - [ ] 親 `isAccordion=true` 時のみ「開閉ボタンの色」BaseControl が表示される
 - [ ] 子 `faqBorderType` が空以外のときのみ「区切り線サイズ」「区切り線色」BaseControl が表示される
 - [ ] 子 `faqType: 'a'` 時はエディター上で矢印領域が描画されない
