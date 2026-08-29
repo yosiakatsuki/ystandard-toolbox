@@ -5,7 +5,6 @@ import classnames from 'classnames';
  */
 import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
-import type { ResponsiveTextAlign } from '@aktk/block-components/components/responsive-text-align-control';
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 
@@ -109,35 +108,6 @@ export function updateResponsiveFontSize(
 }
 
 /**
- * FAQのレスポンシブ文字揃えを更新.
- *
- * @param style     コアのstyle属性.
- * @param textAlign レスポンシブ文字揃え.
- * @return 更新後のstyle属性.
- */
-export function updateResponsiveTextAlign(
-	style: FaqBlockAttributes[ 'style' ],
-	textAlign?: ResponsiveTextAlign
-) {
-	return stripUndefined( {
-		...style,
-		ystdtb: {
-			...style?.ystdtb,
-			faq: {
-				...style?.ystdtb?.faq,
-				responsive: {
-					...style?.ystdtb?.faq?.responsive,
-					typography: {
-						...style?.ystdtb?.faq?.responsive?.typography,
-						textAlign,
-					},
-				},
-			},
-		},
-	} ) as FaqBlockAttributes[ 'style' ];
-}
-
-/**
  * FAQのレスポンシブタイポグラフィをCSSカスタムプロパティへ変換.
  *
  * @param attributes ブロック属性.
@@ -151,7 +121,6 @@ export function getResponsiveTypographyStyles(
 
 	RESPONSIVE_DEVICES.forEach( ( device ) => {
 		const fontSize = typography?.fontSize?.[ device ];
-		const textAlign = typography?.textAlign?.[ device ];
 
 		// 指定があるデバイスだけフォントサイズを出力する.
 		if ( fontSize ) {
@@ -162,17 +131,6 @@ export function getResponsiveTypographyStyles(
 					device
 				)
 			] = fontSize;
-		}
-
-		// 指定があるデバイスだけ文字揃えを出力する.
-		if ( textAlign ) {
-			styles[
-				getResponsiveCustomPropName(
-					'ystdtb',
-					'faq--text-align',
-					device
-				)
-			] = textAlign;
 		}
 	} );
 

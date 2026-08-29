@@ -11,11 +11,6 @@
 									"desktop": "32px",
 									"tablet": "24px",
 									"mobile": "18px"
-								},
-								"textAlign": {
-									"desktop": "left",
-									"tablet": "center",
-									"mobile": "right"
 								}
 							}
 						}
@@ -24,9 +19,9 @@
 			}
 		},
 		"innerBlocks": [],
-		"innerHTML": "\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--desktop--faq--text-align:left;--ystdtb--tablet--faq--font-size:24px;--ystdtb--tablet--faq--text-align:center;--ystdtb--mobile--faq--font-size:18px;--ystdtb--mobile--faq--text-align:right\"></div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--tablet--faq--font-size:24px;--ystdtb--mobile--faq--font-size:18px\"></div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--desktop--faq--text-align:left;--ystdtb--tablet--faq--font-size:24px;--ystdtb--tablet--faq--text-align:center;--ystdtb--mobile--faq--font-size:18px;--ystdtb--mobile--faq--text-align:right\"></div>\n"
+			"\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--tablet--faq--font-size:24px;--ystdtb--mobile--faq--font-size:18px\"></div>\n"
 		]
 	}
 ]

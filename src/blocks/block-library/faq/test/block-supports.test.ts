@@ -7,6 +7,9 @@ describe( 'FAQ Block Supports', () => {
 		).toEqual( {
 			fontSize: false,
 		} );
+		expect( metadata.supports.typography ).not.toHaveProperty(
+			'textAlign'
+		);
 	} );
 
 	it( '背景色とグラデーション設定を初期表示しない', () => {

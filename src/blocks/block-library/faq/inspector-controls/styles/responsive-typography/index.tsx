@@ -8,10 +8,6 @@ import { __ } from '@wordpress/i18n';
  */
 import { ResponsiveFontSizeControl } from '@aktk/block-components/components/responsive-font-size-control';
 import {
-	hasResponsiveTextAlignValue,
-	ResponsiveTextAlignControl,
-} from '@aktk/block-components/components/responsive-text-align-control';
-import {
 	ToolsPanel,
 	ToolsPanelItem,
 } from '@aktk/block-components/wp-controls/tools-panel';
@@ -23,7 +19,6 @@ import type { FaqEditProps } from '../../../types';
 import {
 	getResponsiveTypography,
 	updateResponsiveFontSize,
-	updateResponsiveTextAlign,
 } from '../../../utils';
 
 const PANEL_ID = 'ystdtb-faq-responsive-typography';
@@ -36,7 +31,7 @@ const PANEL_ID = 'ystdtb-faq-responsive-typography';
  */
 export function ResponsiveTypography( props: FaqEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { fontSize, textAlign } = getResponsiveTypography( attributes ) ?? {};
+	const { fontSize } = getResponsiveTypography( attributes ) ?? {};
 
 	// フォントサイズ設定をリセットする.
 	const resetFontSize = () => {
@@ -45,29 +40,11 @@ export function ResponsiveTypography( props: FaqEditProps ): JSX.Element {
 		} );
 	};
 
-	// 文字揃え設定をリセットする.
-	const resetTextAlign = () => {
-		setAttributes( {
-			style: updateResponsiveTextAlign( attributes.style, undefined ),
-		} );
-	};
-
-	// レスポンシブタイポグラフィ設定をまとめてリセットする.
-	const resetAll = () => {
-		const styleWithoutFontSize = updateResponsiveFontSize(
-			attributes.style,
-			undefined
-		);
-		setAttributes( {
-			style: updateResponsiveTextAlign( styleWithoutFontSize, undefined ),
-		} );
-	};
-
 	return (
 		<ToolsPanel
 			label={ __( 'レスポンシブ文字設定', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
-			resetAll={ resetAll }
+			resetAll={ resetFontSize }
 		>
 			<ToolsPanelItem
 				className="single-column"
@@ -88,28 +65,6 @@ export function ResponsiveTypography( props: FaqEditProps ): JSX.Element {
 					onChange={ ( value ) => {
 						setAttributes( {
 							style: updateResponsiveFontSize(
-								attributes.style,
-								value
-							),
-						} );
-					} }
-				/>
-			</ToolsPanelItem>
-			<ToolsPanelItem
-				className="single-column"
-				hasValue={ () => hasResponsiveTextAlignValue( textAlign ) }
-				label={ __( '文字揃え', 'ystandard-toolbox' ) }
-				onDeselect={ resetTextAlign }
-				panelId={ PANEL_ID }
-				isShownByDefault={ false }
-			>
-				<ResponsiveTextAlignControl
-					id="ystdtb-faq-responsive-text-align"
-					label={ __( '文字揃え', 'ystandard-toolbox' ) }
-					value={ textAlign }
-					onChange={ ( value ) => {
-						setAttributes( {
-							style: updateResponsiveTextAlign(
 								attributes.style,
 								value
 							),

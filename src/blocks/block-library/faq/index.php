@@ -48,7 +48,7 @@ class FAQ_Block {
 	}
 
 	/**
-	 * レスポンシブタイポグラフィ用CSSを追加.
+	 * レスポンシブフォントサイズ用CSSを追加.
 	 *
 	 * @return void
 	 */
@@ -62,8 +62,7 @@ class FAQ_Block {
 		// コアのタイポグラフィ指定よりレスポンシブ値を優先できる詳細度にする.
 		$selector   = ':is(div).ystdtb-faq';
 		$properties = [
-			'faq--font-size'  => 'font-size',
-			'faq--text-align' => 'text-align',
+			'faq--font-size' => 'font-size',
 		];
 
 		foreach ( $types as $type ) {

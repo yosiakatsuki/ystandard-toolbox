@@ -2,11 +2,9 @@ import type { FaqBlockAttributes } from '../types';
 import {
 	getAccordionArrowMargin,
 	getFaqClassNames,
-	getResponsiveTypography,
 	getResponsiveTypographyStyles,
 	updateAccordionArrowMargin,
 	updateResponsiveFontSize,
-	updateResponsiveTextAlign,
 } from '../utils';
 
 const DEFAULT_ATTRIBUTES: FaqBlockAttributes = {
@@ -151,39 +149,6 @@ describe( 'FAQレスポンシブタイポグラフィ', () => {
 		} );
 	} );
 
-	it( '文字揃えを解除してもフォントサイズを保持する', () => {
-		const style = updateResponsiveTextAlign(
-			{
-				ystdtb: {
-					faq: {
-						responsive: {
-							typography: {
-								fontSize: {
-									tablet: '24px',
-								},
-								textAlign: {
-									tablet: 'center',
-								},
-							},
-						},
-					},
-				},
-			},
-			undefined
-		);
-
-		expect(
-			getResponsiveTypography( {
-				...DEFAULT_ATTRIBUTES,
-				style,
-			} )
-		).toEqual( {
-			fontSize: {
-				tablet: '24px',
-			},
-		} );
-	} );
-
 	it( '設定済みデバイスだけCSSカスタムプロパティへ変換する', () => {
 		expect(
 			getResponsiveTypographyStyles( {
@@ -195,10 +160,8 @@ describe( 'FAQレスポンシブタイポグラフィ', () => {
 								typography: {
 									fontSize: {
 										desktop: '32px',
+										tablet: '24px',
 										mobile: '18px',
-									},
-									textAlign: {
-										tablet: 'center',
 									},
 								},
 							},
@@ -208,7 +171,7 @@ describe( 'FAQレスポンシブタイポグラフィ', () => {
 			} )
 		).toEqual( {
 			'--ystdtb--desktop--faq--font-size': '32px',
-			'--ystdtb--tablet--faq--text-align': 'center',
+			'--ystdtb--tablet--faq--font-size': '24px',
 			'--ystdtb--mobile--faq--font-size': '18px',
 		} );
 	} );

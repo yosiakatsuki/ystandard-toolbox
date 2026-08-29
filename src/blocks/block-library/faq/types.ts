@@ -3,10 +3,6 @@
  */
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
 import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
-import type {
-	ResponsiveTextAlign,
-	TextAlign,
-} from '@aktk/block-components/components/responsive-text-align-control';
 
 export type FaqEditProps = {
 	attributes: FaqBlockAttributes;
@@ -69,7 +65,6 @@ export type FaqBlockAttributes = {
 			fontWeight?: string;
 			lineHeight?: string | number;
 			letterSpacing?: string;
-			textAlign?: TextAlign;
 			textDecoration?: string;
 			textTransform?: string;
 			writingMode?: string;
@@ -87,7 +82,6 @@ export type FaqBlockAttributes = {
 				responsive?: {
 					typography?: {
 						fontSize?: ResponsiveFontSize;
-						textAlign?: ResponsiveTextAlign;
 					};
 				};
 			};
