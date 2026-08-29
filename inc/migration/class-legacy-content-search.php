@@ -64,6 +64,16 @@ class Legacy_Content_Search {
 	 */
 	private static function get_default_patterns() {
 		return [
+			'faq-parent-legacy-border-class'          => [
+				'name'           => __( 'FAQ：v2.4.0で変更された親枠線クラスを使用している投稿', 'ystandard-toolbox' ),
+				'description'    => __( 'v2.3.0以前のFAQ親ブロックの枠線設定を含んでいます。エディターで開いて再保存することで最新の構造に更新されます。', 'ystandard-toolbox' ),
+				'block_name'     => 'ystdtb/faq',
+				'block_label'    => __( 'FAQ', 'ystandard-toolbox' ),
+				'target_strings' => [
+					'border-type--all',
+					'border-type--bottom',
+				],
+			],
 			'description-list-dl-column-legacy-class' => [
 				'name'           => __( '定義リスト（横並び）：v2.0.0で変更されたクラスを使用している投稿', 'ystandard-toolbox' ),
 				'description'    => __( 'v2.0.0 で動作が変更されたクラスを含んでいます。エディターで開いて再保存することで最新の構造に更新されます。うまく更新されない場合は「縦に並べるタイミング」を何度か操作するなど、何かしらの変更を加えると変換が反映される場合があります。', 'ystandard-toolbox' ),

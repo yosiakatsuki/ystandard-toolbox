@@ -43,10 +43,7 @@ export type FaqBlockAttributes = {
 	isAccordion: boolean;
 	backgroundColor?: string;
 	gradient?: string;
-	borderType?: string;
-	borderSize?: string | number;
 	borderColor?: string;
-	customBorderColor?: string;
 	accordionArrowColor?: string;
 	customAccordionArrowColor?: string;
 	fontSize?: string;

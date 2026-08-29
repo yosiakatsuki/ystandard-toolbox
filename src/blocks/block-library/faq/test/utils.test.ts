@@ -1,10 +1,8 @@
 import type { FaqBlockAttributes } from '../types';
 import {
-	getFaqBorderType,
 	getFaqClassNames,
 	getResponsiveTypography,
 	getResponsiveTypographyStyles,
-	hasFaqBorder,
 	updateResponsiveFontSize,
 	updateResponsiveTextAlign,
 } from '../utils';
@@ -13,10 +11,12 @@ const DEFAULT_ATTRIBUTES: FaqBlockAttributes = {
 	isAccordion: false,
 };
 
-describe( 'FAQ枠線', () => {
-	it( '全周枠線に既存の余白と位置クラスを付与する', () => {
+describe( 'FAQクラス名', () => {
+	it( '標準スタイル設定から旧クラスを生成しない', () => {
 		const classNames = getFaqClassNames( {
 			...DEFAULT_ATTRIBUTES,
+			backgroundColor: 'ys-light-orange',
+			gradient: 'midnight',
 			style: {
 				border: {
 					color: '#cbd5e1',
@@ -26,72 +26,16 @@ describe( 'FAQ枠線', () => {
 			},
 		} );
 
-		expect( classNames ).toContain( 'has-border' );
-		expect( classNames ).toContain( 'has-padding' );
-		expect( classNames ).toContain( 'border-type--all' );
+		expect( classNames ).toBe( 'ystdtb-faq' );
 	} );
 
-	it( '下枠線では内側余白を追加しない', () => {
-		const classNames = getFaqClassNames( {
-			...DEFAULT_ATTRIBUTES,
-			style: {
-				border: {
-					bottom: {
-						color: '#cbd5e1',
-						style: 'solid',
-						width: '1px',
-					},
-				},
-			},
-		} );
-
-		expect( classNames ).toContain( 'has-border' );
-		expect( classNames ).toContain( 'border-type--bottom' );
-		expect( classNames ).not.toContain( 'has-padding' );
-	} );
-
-	it( '四辺の個別指定を全周枠線として扱う', () => {
-		const border = {
-			top: { width: '1px' },
-			right: { width: '1px' },
-			bottom: { width: '1px' },
-			left: { width: '1px' },
-		};
-
-		expect( getFaqBorderType( border ) ).toBe( 'all' );
-		expect( hasFaqBorder( border ) ).toBe( true );
-	} );
-
-	it( '角丸だけでは枠線ありとして扱わない', () => {
-		const border = { radius: '8px' };
-
-		expect( getFaqBorderType( border ) ).toBe( '' );
-		expect( hasFaqBorder( border ) ).toBe( false );
-	} );
-} );
-
-describe( 'FAQ背景', () => {
-	it( 'プリセットグラデーション設定時に内側余白を追加する', () => {
+	it( '開閉式のクラスだけを独自に付与する', () => {
 		expect(
 			getFaqClassNames( {
 				...DEFAULT_ATTRIBUTES,
-				gradient: 'midnight',
+				isAccordion: true,
 			} )
-		).toContain( 'has-padding' );
-	} );
-
-	it( 'カスタムグラデーション設定時に内側余白を追加する', () => {
-		expect(
-			getFaqClassNames( {
-				...DEFAULT_ATTRIBUTES,
-				style: {
-					color: {
-						gradient:
-							'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-					},
-				},
-			} )
-		).toContain( 'has-padding' );
+		).toBe( 'ystdtb-faq is-accordion' );
 	} );
 } );
 

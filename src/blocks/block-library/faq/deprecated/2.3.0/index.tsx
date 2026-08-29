@@ -7,13 +7,8 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-/* Aktk Dependencies */
-import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
-
 /* Block Dependencies */
 import { migrateFaqAttributes } from '../migrate';
-
-const RESPONSIVE_DEVICES = [ 'desktop', 'tablet', 'mobile' ] as const;
 
 /**
  * v2.3.0時点のFAQクラス名を取得する.
@@ -81,46 +76,6 @@ function getFaqStyle230( attributes: Record< string, any > ) {
 	};
 }
 
-/**
- * v2.3.0時点のレスポンシブタイポグラフィを取得する.
- *
- * @param attributes v2.3.0時点のFAQ属性.
- * @return レスポンシブタイポグラフィのCSSカスタムプロパティ.
- */
-function getResponsiveTypographyStyles230( attributes: Record< string, any > ) {
-	const typography = attributes.style?.ystdtb?.faq?.responsive?.typography;
-	const styles: Record< string, string > = {};
-
-	RESPONSIVE_DEVICES.forEach( ( device ) => {
-		const fontSize = typography?.fontSize?.[ device ];
-		const textAlign = typography?.textAlign?.[ device ];
-
-		// 指定があるデバイスだけフォントサイズを出力する.
-		if ( fontSize ) {
-			styles[
-				getResponsiveCustomPropName(
-					'ystdtb',
-					'faq--font-size',
-					device
-				)
-			] = fontSize;
-		}
-
-		// 指定があるデバイスだけ文字揃えを出力する.
-		if ( textAlign ) {
-			styles[
-				getResponsiveCustomPropName(
-					'ystdtb',
-					'faq--text-align',
-					device
-				)
-			] = textAlign;
-		}
-	} );
-
-	return styles;
-}
-
 // @ts-ignore.
 export const deprecated230 = [
 	{
@@ -154,45 +109,18 @@ export const deprecated230 = [
 			customAccordionArrowColor: {
 				type: 'string',
 			},
-			fontSize: {
-				type: 'string',
-			},
-			fontFamily: {
-				type: 'string',
-			},
-			style: {
-				type: 'object',
-			},
 		},
 		supports: {
 			align: false,
 			className: false,
 			listView: true,
-			typography: {
-				fontSize: true,
-				lineHeight: true,
-				textAlign: true,
-				__experimentalFontFamily: true,
-				__experimentalFontStyle: true,
-				__experimentalFontWeight: true,
-				__experimentalLetterSpacing: true,
-				__experimentalTextTransform: true,
-				__experimentalTextDecoration: true,
-				__experimentalWritingMode: true,
-				__experimentalDefaultControls: {
-					fontSize: true,
-				},
-			},
 		},
 		migrate: migrateFaqAttributes,
 		// @ts-ignore.
 		save( { attributes } ) {
 			const blockProps = useBlockProps.save( {
 				className: getFaqClassNames230( attributes ),
-				style: {
-					...getFaqStyle230( attributes ),
-					...getResponsiveTypographyStyles230( attributes ),
-				},
+				style: getFaqStyle230( attributes ),
 			} );
 
 			return (

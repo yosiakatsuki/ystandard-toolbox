@@ -24,17 +24,7 @@
 		"backgroundColor": {
 			"type": "string"
 		},
-		"borderType": {
-			"type": "string",
-			"default": ""
-		},
-		"borderSize": {
-			"type": "string"
-		},
 		"borderColor": {
-			"type": "string"
-		},
-		"customBorderColor": {
 			"type": "string"
 		},
 		"accordionArrowColor": {
@@ -103,10 +93,6 @@
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",
 		"ystdtb/backgroundColor": "backgroundColor",
-		"ystdtb/borderType": "borderType",
-		"ystdtb/borderSize": "borderSize",
-		"ystdtb/borderColor": "borderColor",
-		"ystdtb/customBorderColor": "customBorderColor",
 		"ystdtb/accordionArrowColor": "accordionArrowColor",
 		"ystdtb/customAccordionArrowColor": "customAccordionArrowColor"
 	},

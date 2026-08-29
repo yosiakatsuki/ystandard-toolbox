@@ -5,7 +5,8 @@
 		"attributes": {
 			"isAccordion": false,
 			"backgroundColor": "ys-light-orange",
-			"borderType": ""
+			"borderType": "",
+			"className": "has-padding"
 		},
 		"innerBlocks": [
 			{

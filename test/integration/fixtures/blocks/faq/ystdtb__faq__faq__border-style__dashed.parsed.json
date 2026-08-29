@@ -32,9 +32,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-faq has-padding has-border border-type--all has-border-color\" style=\"border-color:#94a3b8;border-style:dashed;border-width:2px\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-faq has-border-color\" style=\"border-color:#94a3b8;border-style:dashed;border-width:2px\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-faq has-padding has-border border-type--all has-border-color\" style=\"border-color:#94a3b8;border-style:dashed;border-width:2px\">",
+			"\n<div class=\"ystdtb-faq has-border-color\" style=\"border-color:#94a3b8;border-style:dashed;border-width:2px\">",
 			null,
 			"\n\n",
 			null,

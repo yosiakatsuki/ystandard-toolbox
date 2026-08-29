@@ -82,7 +82,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
-| 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | 親要素に`has-padding`クラス付与（内側余白が自動で入る） |
+| 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | WordPress標準の`has-background`クラスが付き、FAQ項目の左右余白が自動で入る |
 | 子の`faqBackgroundColor` / `customFaqBackgroundColor`設定 | 子要素に`has-padding`クラス付与（内側余白が自動で入る） |
 | ラベルに `labelBackgroundColor` / `customLabelBackgroundColor` / `labelBorderColor` / `customLabelBorderColor` / `labelBorderSize` のいずれか設定 | ラベルに `has-padding` クラス付与 |
 
@@ -116,7 +116,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__gradient__custom` — `style.color.gradient`に任意のグラデーションを設定
 - [ ] `ystdtb__faq__deprecated-2-3-0-background-custom` — v2.3.0の`customBackgroundColor`を現行形式へ移行
 - [ ] `ystdtb__faq__deprecated-1-34-1-background-custom` — v1.34.1以前の数値枠線幅と`customBackgroundColor`を同時に移行
-- [ ] `ystdtb__faq__deprecated-2-3-0-border-all-custom` — 枠線移行直前世代の全周カスタム枠線を`style.border`へ移行
+- [ ] `ystdtb__faq__deprecated-2-3-0-border-all-custom` — v2.3.0の全周カスタム枠線を`style.border`へ移行
 - [ ] `ystdtb__faq__faq__border-type__all` — `borderColor`と`style.border`へ全周のプリセット色・スタイル・幅を設定
 - [ ] `ystdtb__faq__faq__border-type__bottom` — `style.border.bottom`へ下辺の色・スタイル・幅を設定
 - [ ] `ystdtb__faq__faq__border-size__3px` — `style.border.width: "3px"`
