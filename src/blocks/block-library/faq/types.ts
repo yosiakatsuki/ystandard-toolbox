@@ -15,6 +15,27 @@ export type FaqEditProps = {
 	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
 };
 
+export type FaqBorderSide = {
+	color?: string;
+	style?: string;
+	width?: string;
+};
+
+export type FaqBorder = FaqBorderSide & {
+	top?: FaqBorderSide;
+	right?: FaqBorderSide;
+	bottom?: FaqBorderSide;
+	left?: FaqBorderSide;
+	radius?:
+		| string
+		| {
+				topLeft?: string;
+				topRight?: string;
+				bottomRight?: string;
+				bottomLeft?: string;
+		  };
+};
+
 /**
  * FAQブロックの属性型定義
  */
@@ -22,8 +43,8 @@ export type FaqBlockAttributes = {
 	isAccordion: boolean;
 	backgroundColor?: string;
 	gradient?: string;
-	borderType: string;
-	borderSize: number;
+	borderType?: string;
+	borderSize?: string | number;
 	borderColor?: string;
 	customBorderColor?: string;
 	accordionArrowColor?: string;
@@ -31,6 +52,7 @@ export type FaqBlockAttributes = {
 	fontSize?: string;
 	fontFamily?: string;
 	style?: {
+		border?: FaqBorder;
 		color?: {
 			background?: string;
 			gradient?: string;

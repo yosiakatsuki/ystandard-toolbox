@@ -4,9 +4,15 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"borderType": "bottom",
-			"borderSize": "1px",
-			"borderColor": "ys-red"
+			"style": {
+				"border": {
+					"bottom": {
+						"color": "var:preset|color|ys-red",
+						"style": "solid",
+						"width": "1px"
+					}
+				}
+			}
 		},
 		"innerBlocks": [
 			{

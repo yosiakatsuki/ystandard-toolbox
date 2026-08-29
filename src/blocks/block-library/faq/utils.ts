@@ -1,8 +1,4 @@
 import classnames from 'classnames';
-/**
- * WordPress dependencies.
- */
-import { getColorClassName } from '@wordpress/block-editor';
 
 /**
  * Aktk dependencies.
@@ -15,24 +11,77 @@ import { getResponsiveCustomPropName } from '@aktk/block-components/utils/respon
 /**
  * Block dependencies.
  */
-import type { FaqBlockAttributes } from '@aktk/blocks/block-library/faq/types';
+import type {
+	FaqBlockAttributes,
+	FaqBorder,
+	FaqBorderSide,
+} from '@aktk/blocks/block-library/faq/types';
 
 const RESPONSIVE_DEVICES = [ 'desktop', 'tablet', 'mobile' ] as const;
+const BORDER_SIDES = [ 'top', 'right', 'bottom', 'left' ] as const;
 
+/**
+ * 枠線の色・スタイル・幅が1つ以上設定されているか判定する.
+ *
+ * @param border 枠線設定.
+ * @return 表示に影響する枠線設定があるか.
+ */
+function hasBorderSideValue( border?: FaqBorderSide ) {
+	return !! ( border?.color || border?.style || border?.width );
+}
+
+/**
+ * FAQルートの枠線設定位置を取得する.
+ *
+ * @param border 枠線設定.
+ * @return 全周、下のみ、または位置クラスなし.
+ */
+export function getFaqBorderType( border?: FaqBorder ) {
+	// 一括指定は従来の全周枠線と同じ余白・連結表示を適用する.
+	if ( hasBorderSideValue( border ) ) {
+		return 'all';
+	}
+
+	const activeSides = BORDER_SIDES.filter( ( side ) =>
+		hasBorderSideValue( border?.[ side ] )
+	);
+
+	// 四辺すべての個別指定も全周枠線として扱う.
+	if ( BORDER_SIDES.length === activeSides.length ) {
+		return 'all';
+	}
+
+	// 下辺だけの指定は従来の下枠線クラスを維持する.
+	if ( 1 === activeSides.length && 'bottom' === activeSides[ 0 ] ) {
+		return 'bottom';
+	}
+
+	return '';
+}
+
+/**
+ * FAQルートに表示対象の枠線設定があるか判定する.
+ *
+ * @param border 枠線設定.
+ * @return 枠線設定があるか.
+ */
+export function hasFaqBorder( border?: FaqBorder ) {
+	return (
+		hasBorderSideValue( border ) ||
+		BORDER_SIDES.some( ( side ) => hasBorderSideValue( border?.[ side ] ) )
+	);
+}
+
+/**
+ * FAQルートへ付与するクラス名を取得する.
+ *
+ * @param attributes FAQ属性.
+ * @return FAQルートのクラス名.
+ */
 export function getFaqClassNames( attributes: FaqBlockAttributes ) {
-	const {
-		isAccordion,
-		borderType,
-		borderSize,
-		backgroundColor,
-		gradient,
-		borderColor,
-		customBorderColor,
-		style,
-	} = attributes;
-
-	const borderColorClass =
-		getColorClassName( 'border-color', borderColor ) || '';
+	const { isAccordion, backgroundColor, gradient, style } = attributes;
+	const borderType = getFaqBorderType( style?.border );
+	const hasBorder = hasFaqBorder( style?.border );
 
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
@@ -42,27 +91,9 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 			style?.color?.background ||
 			gradient ||
 			style?.color?.gradient,
-		'has-border': borderSize || borderColor || customBorderColor,
-		[ borderColorClass ]: borderColorClass,
+		'has-border': hasBorder,
 		[ `border-type--${ borderType }` ]: '' !== borderType,
 	} );
-}
-
-export function getFaqStyle( attributes: FaqBlockAttributes ) {
-	const { borderType, borderSize, borderColor, customBorderColor } =
-		attributes;
-
-	const borderColorClass =
-		getColorClassName( 'border-color', borderColor ) || '';
-
-	return {
-		borderColor: borderColorClass ? undefined : customBorderColor,
-		borderWidth: 'all' === borderType ? borderSize : undefined,
-		borderBottomWidth:
-			'bottom' === borderType || 'all' === borderType
-				? borderSize
-				: undefined,
-	};
 }
 
 /**

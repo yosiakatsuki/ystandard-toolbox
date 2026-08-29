@@ -4,9 +4,17 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"borderType": "bottom",
-			"borderSize": "1px",
-			"borderColor": "ys-black"
+			"borderType": "",
+			"style": {
+				"border": {
+					"bottom": {
+						"color": "var:preset|color|ys-black",
+						"style": "solid",
+						"width": "1px"
+					}
+				}
+			},
+			"className": "has-border-color"
 		},
 		"innerBlocks": [
 			{

@@ -11,7 +11,7 @@ import {
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 
 /* Block Dependencies */
-import { migrateFaqBackgroundColor } from '../migrate';
+import { migrateFaqAttributes } from '../migrate';
 
 const RESPONSIVE_DEVICES = [ 'desktop', 'tablet', 'mobile' ] as const;
 
@@ -184,7 +184,7 @@ export const deprecated230 = [
 				},
 			},
 		},
-		migrate: migrateFaqBackgroundColor,
+		migrate: migrateFaqAttributes,
 		// @ts-ignore.
 		save( { attributes } ) {
 			const blockProps = useBlockProps.save( {

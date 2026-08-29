@@ -92,8 +92,7 @@ function registerOnce( metadata, settings ) {
 	if ( getBlockType( metadata.name ) ) {
 		return;
 	}
-	registerBlockType( metadata.name, {
-		...metadata,
+	registerBlockType( metadata, {
 		edit: NoopEdit,
 		...settings,
 	} );

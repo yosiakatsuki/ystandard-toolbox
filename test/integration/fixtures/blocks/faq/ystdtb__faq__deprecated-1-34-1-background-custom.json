@@ -4,12 +4,16 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"borderType": "bottom",
-			"borderSize": "1px",
-			"customBorderColor": "#c2410c",
 			"style": {
 				"color": {
 					"background": "#fff7ed"
+				},
+				"border": {
+					"bottom": {
+						"color": "#c2410c",
+						"style": "solid",
+						"width": "1px"
+					}
 				}
 			}
 		},

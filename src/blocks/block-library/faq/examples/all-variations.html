@@ -54,8 +54,8 @@
 <p>親ブロックに淡い背景色と枠線を付けると、カード風の落ち着いた見た目になります。</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"1px","customBorderColor":"#0284c7","style":{"color":{"background":"#f0f9ff"}}} -->
-<div class="ystdtb-faq has-padding has-border border-type--all has-background" style="background-color:#f0f9ff;border-color:#0284c7;border-width:1px;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"style":{"border":{"color":"#0284c7","style":"solid","width":"1px"},"color":{"background":"#f0f9ff"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color has-background" style="border-color:#0284c7;border-style:solid;border-width:1px;background-color:#f0f9ff"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>サポートはどこで受けられますか？</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -108,6 +108,32 @@
 <!-- wp:ystdtb/faq-item {"faqType":"a","faqBorderSize":"0","customLabelColor":"#222222","customLabelBackgroundColor":"#f1f1f3","labelBorderSize":"0","labelBorderRadius":"50px","customAccordionArrowColor":"#222222"} -->
 <div class="ystdtb-faq-item is-faq--a"><div class="ystdtb-faq-item__label has-text-color has-background has-padding" style="color:#222222;background-color:#f1f1f3;border-width:0;border-radius:50px"><span class="ystdtb-faq-item__label-text">a</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>構造化データとパンくずリストを標準装備しています。</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:ystdtb/faq-item --></div>
+<!-- /wp:ystdtb/faq -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">親枠線スタイルと角丸</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>WordPress標準の枠線設定では、線の種類と角丸も変更できます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading">破線 + 角丸8px</h5>
+<!-- /wp:heading -->
+
+<!-- wp:ystdtb/faq {"style":{"border":{"color":"#94a3b8","radius":"8px","style":"dashed","width":"2px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color" style="border-color:#94a3b8;border-radius:8px;border-style:dashed;border-width:2px"><!-- wp:ystdtb/faq-item -->
+<div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
+<p>枠線を破線にし、FAQ全体の角を丸めた例。</p>
+<!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
+<!-- /wp:ystdtb/faq-item -->
+
+<!-- wp:ystdtb/faq-item {"faqType":"a"} -->
+<div class="ystdtb-faq-item is-faq--a"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">a</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
+<p>回答です。</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:ystdtb/faq-item --></div>
 <!-- /wp:ystdtb/faq -->
@@ -349,11 +375,11 @@
 <!-- /wp:ystdtb/faq -->
 
 <!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">親枠線タイプ</h4>
+<h4 class="wp-block-heading">親枠線</h4>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>FAQ 全体の外側に枠線を引くかどうかの設定です。上下左右か、下のみを選べます。</p>
+<p>FAQ全体の枠線をWordPress標準の枠線設定から変更します。四辺をまとめるほか、辺ごとの設定もできます。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":5} -->
@@ -378,8 +404,8 @@
 <h5 class="wp-block-heading">上下左右</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"1px","borderColor":"ys-black"} -->
-<div class="ystdtb-faq has-padding has-border has-ys-black-border-color border-type--all" style="border-width:1px;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"borderColor":"ys-black","style":{"border":{"style":"solid","width":"1px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color has-ys-black-border-color" style="border-style:solid;border-width:1px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>上下左右すべてに枠線を引きます。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -396,8 +422,8 @@
 <h5 class="wp-block-heading">下のみ</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"bottom","borderSize":"1px","borderColor":"ys-black"} -->
-<div class="ystdtb-faq has-border has-ys-black-border-color border-type--bottom" style="border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"style":{"border":{"bottom":{"color":"var:preset|color|ys-black","style":"solid","width":"1px"}}}} -->
+<div class="ystdtb-faq has-border border-type--bottom has-border-color" style="border-bottom-color:var(--wp--preset--color--ys-black);border-bottom-style:solid;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>下側だけに枠線を引きます。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -415,15 +441,15 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>枠線の太さです。枠線タイプが設定されているときだけ表示されます。</p>
+<p>枠線の太さを変更します。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":5} -->
 <h5 class="wp-block-heading">1px（細め）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"1px","borderColor":"ys-black"} -->
-<div class="ystdtb-faq has-padding has-border has-ys-black-border-color border-type--all" style="border-width:1px;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"borderColor":"ys-black","style":{"border":{"style":"solid","width":"1px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color has-ys-black-border-color" style="border-style:solid;border-width:1px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>細めの 1px の枠線です。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -440,8 +466,8 @@
 <h5 class="wp-block-heading">3px（太め）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"3px","borderColor":"ys-black"} -->
-<div class="ystdtb-faq has-padding has-border has-ys-black-border-color border-type--all" style="border-width:3px;border-bottom-width:3px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"borderColor":"ys-black","style":{"border":{"style":"solid","width":"3px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color has-ys-black-border-color" style="border-style:solid;border-width:3px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>太めの 3px の枠線です。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -466,8 +492,8 @@
 <h5 class="wp-block-heading">プリセット色（ys-red）</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"1px","borderColor":"ys-red"} -->
-<div class="ystdtb-faq has-padding has-border has-ys-red-border-color border-type--all" style="border-width:1px;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"borderColor":"ys-red","style":{"border":{"style":"solid","width":"1px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color has-ys-red-border-color" style="border-style:solid;border-width:1px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>枠線色にプリセット色を設定。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>
@@ -484,8 +510,8 @@
 <h5 class="wp-block-heading">カスタム色</h5>
 <!-- /wp:heading -->
 
-<!-- wp:ystdtb/faq {"borderType":"all","borderSize":"1px","customBorderColor":"#0284c7"} -->
-<div class="ystdtb-faq has-padding has-border border-type--all" style="border-color:#0284c7;border-width:1px;border-bottom-width:1px"><!-- wp:ystdtb/faq-item -->
+<!-- wp:ystdtb/faq {"style":{"border":{"color":"#0284c7","style":"solid","width":"1px"}}} -->
+<div class="ystdtb-faq has-padding has-border border-type--all has-border-color" style="border-color:#0284c7;border-style:solid;border-width:1px"><!-- wp:ystdtb/faq-item -->
 <div class="ystdtb-faq-item is-faq--q"><div class="ystdtb-faq-item__label"><span class="ystdtb-faq-item__label-text">q</span></div><div class="ystdtb-faq-item__contents"><!-- wp:paragraph -->
 <p>枠線色を任意のカラーコードで指定。</p>
 <!-- /wp:paragraph --></div><div class="ystdtb-faq-item__arrow"><span class="ys-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div></div>

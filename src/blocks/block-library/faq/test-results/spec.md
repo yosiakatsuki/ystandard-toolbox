@@ -26,6 +26,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 - **レスポンシブ属性**: 親のフォントサイズ・文字揃えをdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
   - 親 → 子: `isAccordion` / `backgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
+  - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
 - **カラー withColors**: 子 `faq-item` は 7 属性で `withColors` 利用
@@ -43,9 +44,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQ設定 | 開閉ボタンの色（isAccordion=true 時） | `accordionArrowColor` / `customAccordionArrowColor` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
 | 色 | 親背景グラデーション | `gradient` / `style.color.gradient` |
-| FAQ設定 | 親枠線タイプ | `borderType`（''/all/bottom、default: ''） |
-| FAQ設定 | 親枠線サイズ（borderType 有効時） | `borderSize` |
-| FAQ設定 | 親枠線色（borderType 有効時） | `borderColor` / `customBorderColor` |
+| 枠線 | 親枠線色・角丸・スタイル・幅 | `style.border` |
 | タイポグラフィ | 親フォントサイズ・行の高さ・文字揃え等 | `fontSize` / `fontFamily` / `style.typography` |
 | サイズ | 親外側余白（上下） | `style.spacing.margin` |
 | サイズ | 親内側余白（上下左右） | `style.spacing.padding` |
@@ -77,8 +76,6 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 条件 | 影響 |
 |---|---|
 | 親 `isAccordion=false` | 「開閉ボタンの色」UI が非表示（`AccordionArrowColor` コンポーネントが早期 return） |
-| 親 `borderType=''` 選択 | `borderSize` / `borderColor` / `customBorderColor` が内部的に `undefined` にリセット（`BorderType.handleOnChange`） |
-| 親 `borderType=''` | 「親枠線サイズ」「親枠線色」UI が非表示（`BorderSize` / `BorderColor` コンポーネントが早期 return） |
 | 子 `faqBorderType=''` 選択 | `faqBorderSize` が `undefined` にリセット + `faqBorderColor` がクリア（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType=''` | 「区切り線サイズ」「区切り線色」UI が非表示 |
@@ -119,12 +116,13 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__gradient__custom` — `style.color.gradient`に任意のグラデーションを設定
 - [ ] `ystdtb__faq__deprecated-2-3-0-background-custom` — v2.3.0の`customBackgroundColor`を現行形式へ移行
 - [ ] `ystdtb__faq__deprecated-1-34-1-background-custom` — v1.34.1以前の数値枠線幅と`customBackgroundColor`を同時に移行
-- [ ] `ystdtb__faq__faq__border-type__all` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-black"`
-- [ ] `ystdtb__faq__faq__border-type__bottom` — `borderType: "bottom"` + `borderSize: "1px"` + `borderColor: "ys-black"`
-- [ ] `ystdtb__faq__faq__border-size__1px` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-black"`
-- [ ] `ystdtb__faq__faq__border-size__3px` — `borderType: "all"` + `borderSize: "3px"` + `borderColor: "ys-black"`
-- [ ] `ystdtb__faq__faq__border-color__preset` — `borderType: "all"` + `borderSize: "1px"` + `borderColor: "ys-red"`
-- [ ] `ystdtb__faq__faq__border-color__custom` — `borderType: "all"` + `borderSize: "1px"` + `customBorderColor: "#0284c7"`
+- [ ] `ystdtb__faq__deprecated-2-3-0-border-all-custom` — 枠線移行直前世代の全周カスタム枠線を`style.border`へ移行
+- [ ] `ystdtb__faq__faq__border-type__all` — `borderColor`と`style.border`へ全周のプリセット色・スタイル・幅を設定
+- [ ] `ystdtb__faq__faq__border-type__bottom` — `style.border.bottom`へ下辺の色・スタイル・幅を設定
+- [ ] `ystdtb__faq__faq__border-size__3px` — `style.border.width: "3px"`
+- [ ] `ystdtb__faq__faq__border-color__custom` — `style.border.color: "#0284c7"`
+- [ ] `ystdtb__faq__faq__border-style__dashed` — `style.border.style: "dashed"`
+- [ ] `ystdtb__faq__faq__border-radius__8px` — `style.border.radius: "8px"`
 
 ### 親 `ystdtb/faq` > タイポグラフィ
 
@@ -186,7 +184,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] `ystdtb__faq__combo__basic` — デフォルトの基本 FAQ
 - [ ] `ystdtb__faq__combo__accordion` — `isAccordion: true` のみ
-- [ ] `ystdtb__faq__combo__card` — `style.color.background` + `borderType: "all"` + 枠線サイズ + カスタム枠線色
+- [ ] `ystdtb__faq__combo__card` — `style.color.background` + `style.border`の全周枠線
 - [ ] `ystdtb__faq__combo__divider` — 子の `faqBorderType: "bottom"` を Q/A 両方に適用
 - [ ] `ystdtb__faq__combo__preset-bg-circle-applied` — デザインプリセット「背景あり丸」適用済み + `isAccordion: true`
 
@@ -197,8 +195,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### 排他関係・カスケード
 
 - [ ] 親 `isAccordion=false` → `true` → 「開閉ボタンの色」UI の表示／非表示が切り替わる
-- [ ] 親 `borderType: 'all'` → `''` に戻す → `borderSize` / `borderColor` / `customBorderColor` が attribute からクリアされる
-- [ ] 親 `borderType: ''` → `'all'` / `'bottom'` に切替 → 「親枠線サイズ」「親枠線色」UI が表示される
+- [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア
 - [ ] 親 `accordionArrowColor` を変更 → 子 Q/A 両方の `accordionArrowColor` も同値に更新される（`updateChildAttributes`）
@@ -206,18 +203,17 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### 条件付き表示
 
 - [ ] 親 `isAccordion=true` 時のみ「開閉ボタンの色」BaseControl が表示される
-- [ ] 親 `borderType` が空以外のときのみ「親枠線サイズ」「親枠線色」BaseControl が表示される
 - [ ] 子 `faqBorderType` が空以外のときのみ「区切り線サイズ」「区切り線色」BaseControl が表示される
 - [ ] 子 `faqType: 'a'` 時はエディター上で矢印領域が描画されない
 
 ### ラベル-値対応（全選択肢網羅）
 
-- [ ] 親「枠線タイプ」CustomSelectControl: 全 3 選択肢（'' / 'all' / 'bottom'）→ 各値が `borderType` に保存
 - [ ] 子「区切り線タイプ」CustomSelectControl: 全 2 選択肢（'' / 'bottom'）→ 各値が `faqBorderType` に保存
 - [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
+- [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
-- [ ] 各種 ColorPalette（親枠線／矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
+- [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
 ### 複雑 UI
@@ -230,7 +226,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 ### 操作順序（切り替え・リセットの整合性）
 
-- [ ] 親 `borderType`: `''` → `'all'` → `'bottom'` → `''` → 各段階で `borderSize` / `borderColor` の残り方を確認
+- [ ] 親枠線: 全周 → 下辺のみ → 解除と切り替え、各段階で`style.border`以外の属性が変わらないことを確認
 - [ ] 子 `faqBorderType`: `''` → `'bottom'` → `''` → `'bottom'` → プリセット値（1px / #eeeeee）が再設定されるか
 - [ ] デザインプリセット複数連続適用: `default` → `background-square` → `outline-circle` → `bottom-divider` → 各適用で attribute が上書きされ、前プリセット由来の残骸がないこと
 
@@ -253,6 +249,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] examples HTML をエディターに貼り付け → 全パターンの見た目を目視確認
 - [ ] 「設定の組み合わせ例」5 パターン（基本 / アコーディオン / カード風 / 区切り線 / 背景あり丸）の見た目
 - [ ] 親背景色・グラデーション × 親枠線 × ラベルスタイルの組み合わせ表示
+- [ ] 親枠線の全周・下辺のみ・破線・角丸がエディターとフロントで一致する
 - [ ] 親margin・paddingがフロントとエディターで同じ方向へ反映される
 - [ ] デザインプリセット 6 種の見た目が意図通り
 - [ ] Q / A 側で矢印の有無が正しく切り替わっている（Q のみ表示）
@@ -290,7 +287,7 @@ FAQ ブロック固有の観点:
 - **親 `accordionArrowColor` を設定した状態で `isAccordion` を off にする**: UI が消えても属性値は残る？再度 on に戻したときに以前の値が復活するか
 - **親子の `accordionArrowColor` が乖離した状態**: 例えば fixture で親 only / 子 only に色を設定した場合、save 出力はどうなるか（親から子への一方向同期のみ）
 - **子 `faqBorderType: 'bottom'` → `''` にクリア**: `faqBorderColor` が `setFaqBorderColor(undefined)` でクリアされる一方、`customFaqBorderColor` は残る可能性（UI コードで `setFaqBorderColor(undefined)` のみで custom 側のクリアは明示していない）
-- **親の `borderType: 'all'` + `borderSize` 未指定**: `getFaqStyle` で `borderWidth: undefined` になり、枠線は描画されない（`borderColor` だけ style に出ても線は見えない）
+- **親の`style.border`に色だけ設定**: ブラウザ既定の枠線幅やスタイルへ意図せず変わらないか、WordPress標準パネルでの保存結果を確認する
 - **ラベル角丸だけ設定（背景なし・枠線なし）**: `has-padding` が付かないため角丸が見た目にわからない
 - **子 `faqType: 'a'` + `accordionArrowColor` 設定**: A 側は arrow div 自体を出力しないので、色設定は無効（属性は保存されるが DOM には出ない）
 - **デザインプリセット適用直後に個別属性を手動変更**: プリセット復帰機能はないため、再度プリセットをクリックするまで混成状態になる
@@ -307,4 +304,4 @@ FAQ ブロック固有の観点:
 - ブロックの仕様変更時は本仕様も更新する
 - L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/faq/` 配下（既存 `ystdtb__faq__deprecated-*` と同ディレクトリに追加）
-- 本仕様の fixture 数はおよそ57件（親faq 16 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）
+- 本仕様のfixture数はおよそ60件（親faq 19 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）
