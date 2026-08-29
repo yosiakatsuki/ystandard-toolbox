@@ -1,3 +1,8 @@
+/**
+ * Aktk Dependencies.
+ */
+import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
+
 export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
@@ -38,6 +43,20 @@ export type FaqItemBlockAttributes = {
 	customLabelBorderColor?: string;
 	accordionArrowColor?: string;
 	customAccordionArrowColor?: string;
+	style?: {
+		ystdtb?: {
+			faqItem?: {
+				arrow?: {
+					color?: {
+						text?: string;
+					};
+					spacing?: {
+						margin?: Spacing;
+					};
+				};
+			};
+		};
+	};
 };
 
 /**

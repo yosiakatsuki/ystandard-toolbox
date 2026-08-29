@@ -62,7 +62,7 @@ export function AccordionArrowColor( props: FaqEditProps ): JSX.Element | null {
 
 	return (
 		<ToolsPanel
-			label={ __( '開閉ボタン色', 'ystandard-toolbox' ) }
+			label={ __( '開閉ボタン（色）', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
 			resetAll={ resetColor }
 		>

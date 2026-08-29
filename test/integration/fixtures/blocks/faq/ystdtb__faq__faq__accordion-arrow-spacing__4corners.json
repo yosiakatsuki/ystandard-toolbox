@@ -1,0 +1,82 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": true,
+			"borderType": "",
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"spacing": {
+								"margin": {
+									"top": "var:preset|spacing|20",
+									"right": "8px",
+									"bottom": "var:preset|spacing|40",
+									"left": "4px"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"faqBorderType": "",
+					"labelPosition": "center",
+					"labelBold": true,
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"spacing": {
+										"margin": {
+											"top": "var:preset|spacing|20",
+											"right": "8px",
+											"bottom": "var:preset|spacing|40",
+											"left": "4px"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a",
+					"faqBorderType": "",
+					"labelPosition": "center",
+					"labelBold": true,
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"spacing": {
+										"margin": {
+											"top": "var:preset|spacing|20",
+											"right": "8px",
+											"bottom": "var:preset|spacing|40",
+											"left": "4px"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

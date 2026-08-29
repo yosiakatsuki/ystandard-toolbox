@@ -3,6 +3,7 @@ import classnames from 'classnames';
 /**
  * Aktk dependencies.
  */
+import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
 import type { ResponsiveTextAlign } from '@aktk/block-components/components/responsive-text-align-control';
 import { stripUndefined } from '@aktk/block-components/utils/object';
@@ -27,6 +28,45 @@ export function getFaqClassNames( attributes: FaqBlockAttributes ) {
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
 	} );
+}
+
+/**
+ * FAQの開閉ボタン余白を取得.
+ *
+ * @param attributes ブロック属性.
+ * @return 開閉ボタンのmargin設定.
+ */
+export function getAccordionArrowMargin( attributes: FaqBlockAttributes ) {
+	return attributes.style?.ystdtb?.faq?.arrow?.spacing?.margin;
+}
+
+/**
+ * FAQの開閉ボタン余白を更新.
+ *
+ * @param style  コアのstyle属性.
+ * @param margin 開閉ボタンのmargin設定.
+ * @return 更新後のstyle属性.
+ */
+export function updateAccordionArrowMargin(
+	style: FaqBlockAttributes[ 'style' ],
+	margin?: Spacing
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faq: {
+				...style?.ystdtb?.faq,
+				arrow: {
+					...style?.ystdtb?.faq?.arrow,
+					spacing: {
+						...style?.ystdtb?.faq?.arrow?.spacing,
+						margin,
+					},
+				},
+			},
+		},
+	} ) as FaqBlockAttributes[ 'style' ];
 }
 
 /**

@@ -41,7 +41,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | パネル | 設定項目 | 属性 |
 |---|---|---|
 | FAQ設定 | 開閉式 | `isAccordion`（default: false） |
-| スタイル > 開閉ボタン色 | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
+| スタイル > 開閉ボタン（色） | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
+| スタイル > 開閉ボタン（余白） | マージン（上下左右、isAccordion=true時） | 親: `style.ystdtb.faq.arrow.spacing.margin` / 子: `style.ystdtb.faqItem.arrow.spacing.margin` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
 | 色 | 親背景グラデーション | `gradient` / `style.color.gradient` |
 | 枠線 | 親枠線色・角丸・スタイル・幅 | `style.border` |
@@ -75,12 +76,13 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 
 | 条件 | 影響 |
 |---|---|
-| 親`isAccordion=false` | スタイルパネルの「開閉ボタン色」が非表示（`AccordionArrowColor`コンポーネントが早期return） |
+| 親`isAccordion=false` | スタイルパネルの「開閉ボタン（色）」「開閉ボタン（余白）」が非表示（各コンポーネントが早期return） |
 | 子 `faqBorderType=''` 選択 | `faqBorderSize` が `undefined` にリセット + `faqBorderColor` がクリア（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType=''` | 「区切り線サイズ」「区切り線色」UI が非表示 |
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
+| 親の開閉ボタンmargin変更 | 子 faq-item 全員の`style.ystdtb.faqItem.arrow.spacing.margin`も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
 | 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | WordPress標準の`has-background`クラスが付き、FAQ項目の左右余白が自動で入る |
 | 子の`faqBackgroundColor` / `customFaqBackgroundColor`設定 | 子要素に`has-padding`クラス付与（内側余白が自動で入る） |
@@ -110,6 +112,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__accordion__on` — `isAccordion: true`
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `accordionArrowColor: "ys-red"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
+- [ ] `ystdtb__faq__faq__accordion-arrow-spacing__4corners` — `isAccordion: true` + 開閉ボタンmarginの上・右・下・左を個別に設定
 - [ ] `ystdtb__faq__faq__bg__preset` — `backgroundColor: "ys-light-orange"`
 - [ ] `ystdtb__faq__faq__bg__custom` — `style.color.background: "#fff7ed"`
 - [ ] `ystdtb__faq__faq__gradient__preset` — `gradient: "midnight"`
@@ -194,17 +197,19 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 ### 排他関係・カスケード
 
-- [ ] 親 `isAccordion=false` → `true` → 「開閉ボタンの色」UI の表示／非表示が切り替わる
+- [ ] 親 `isAccordion=false` → `true` → 「開閉ボタン（色）」「開閉ボタン（余白）」UIの表示／非表示が切り替わる
 - [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア
 - [ ] 親 `accordionArrowColor` を変更 → 子 Q/A 両方の `accordionArrowColor` も同値に更新される（`updateChildAttributes`）
+- [ ] 親の開閉ボタンmarginを変更 → 子 Q/A 両方の`style.ystdtb.faqItem.arrow.spacing.margin`も同値に更新される（`updateChildAttributes`）
 
 ### 条件付き表示
 
-- [ ] 親のスタイルパネルでは、タイポグラフィ・背景色・グラデーション・余白・枠線・開閉ボタン色の設定項目が初期表示されない
-- [ ] 親`isAccordion=true`時のみ、スタイルパネルに「開閉ボタン色」パネルが表示される
+- [ ] 親のスタイルパネルでは、タイポグラフィ・背景色・グラデーション・余白・枠線・開閉ボタン色・開閉ボタン余白の設定項目が初期表示されない
+- [ ] 親`isAccordion=true`時のみ、スタイルパネルに「開閉ボタン（色）」「開閉ボタン（余白）」パネルが表示される
 - [ ] 開閉ボタン色を設定すると「−」リセットボタンが表示され、操作すると親子の色属性が削除される
+- [ ] 開閉ボタンmarginは上下左右を設定でき、リセットすると親子のmarginだけが削除される
 - [ ] 子 `faqBorderType` が空以外のときのみ「区切り線サイズ」「区切り線色」BaseControl が表示される
 - [ ] 子 `faqType: 'a'` 時はエディター上で矢印領域が描画されない
 

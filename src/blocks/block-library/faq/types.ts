@@ -12,7 +12,11 @@ export type FaqEditProps = {
 	attributes: FaqBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqBlockAttributes > ) => void;
 	clientId: string;
-	updateChildAttributes: ( childAttributes: Record< string, any > ) => void;
+	updateChildAttributes: (
+		childAttributes:
+			| Record< string, any >
+			| ( ( attributes: Record< string, any > ) => Record< string, any > )
+	) => void;
 };
 
 export type FaqBorderSide = {
@@ -72,6 +76,14 @@ export type FaqBlockAttributes = {
 		};
 		ystdtb?: {
 			faq?: {
+				arrow?: {
+					color?: {
+						text?: string;
+					};
+					spacing?: {
+						margin?: Spacing;
+					};
+				};
 				responsive?: {
 					typography?: {
 						fontSize?: ResponsiveFontSize;

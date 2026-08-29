@@ -8,7 +8,10 @@ import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
 /**
  * Aktk dependencies.
  */
+import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
+import { getCustomSpacingValues } from '@aktk/block-components/components/custom-spacing-select/util';
 import { hasBorderWidth } from '@aktk/block-components/utils/size';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Block dependencies.
@@ -207,9 +210,52 @@ export function getAccordionArrowClasses( attributes: FaqItemBlockAttributes ) {
 	} );
 }
 
+/**
+ * FAQ開閉ボタンの余白を取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return 開閉ボタンのmargin設定.
+ */
+export function getAccordionArrowMargin( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.arrow?.spacing?.margin;
+}
+
+/**
+ * FAQ開閉ボタンの余白を更新.
+ *
+ * @param style  FAQアイテムのstyle属性.
+ * @param margin 開閉ボタンのmargin設定.
+ * @return 更新後のstyle属性.
+ */
+export function updateAccordionArrowMargin(
+	style: FaqItemBlockAttributes[ 'style' ],
+	margin?: Spacing
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				arrow: {
+					...style?.ystdtb?.faqItem?.arrow,
+					spacing: {
+						...style?.ystdtb?.faqItem?.arrow?.spacing,
+						margin,
+					},
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
+}
+
 export function getAccordionArrowStyles( attributes: FaqItemBlockAttributes ) {
 	const { customAccordionArrowColor } = attributes;
 	return {
 		color: customAccordionArrowColor,
+		...getCustomSpacingValues(
+			getAccordionArrowMargin( attributes ),
+			'margin'
+		),
 	};
 }

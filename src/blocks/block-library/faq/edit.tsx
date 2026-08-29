@@ -11,6 +11,11 @@ import { getFaqClassNames, getResponsiveTypographyStyles } from './utils';
 import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
+type InnerBlock = {
+	clientId: string;
+	attributes: Record< string, any >;
+};
+
 /**
  * FAQブロックの初期テンプレート
  */
@@ -38,12 +43,11 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 
 	// 子ブロックの属性を更新
 	const { updateBlockAttributes } = useDispatch( 'core/block-editor' );
-	const innerBlockClientIds = useSelect(
+	const innerBlocks = useSelect(
 		( select ) => {
 			// @ts-ignore
-			const { getBlockOrder } = select( 'core/block-editor' );
-			// @ts-ignore
-			return getBlockOrder( clientId );
+			const { getBlocks } = select( 'core/block-editor' );
+			return getBlocks( clientId ) as InnerBlock[];
 		},
 		[ clientId ]
 	);
@@ -53,11 +57,16 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 	 * @param childAttributes
 	 */
 	const updateChildAttributes = (
-		childAttributes: Record< string, any >
+		childAttributes:
+			| Record< string, any >
+			| ( ( attributes: Record< string, any > ) => Record< string, any > )
 	) => {
-		// @ts-ignore.
-		innerBlockClientIds.forEach( ( innerBlockClientId ) => {
-			updateBlockAttributes( innerBlockClientId, childAttributes );
+		innerBlocks.forEach( ( innerBlock ) => {
+			const updatedAttributes =
+				'function' === typeof childAttributes
+					? childAttributes( innerBlock.attributes )
+					: childAttributes;
+			updateBlockAttributes( innerBlock.clientId, updatedAttributes );
 		} );
 	};
 

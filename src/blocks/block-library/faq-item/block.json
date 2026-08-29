@@ -88,6 +88,9 @@
 		},
 		"customAccordionArrowColor": {
 			"type": "string"
+		},
+		"style": {
+			"type": "object"
 		}
 	},
 	"usesContext": [

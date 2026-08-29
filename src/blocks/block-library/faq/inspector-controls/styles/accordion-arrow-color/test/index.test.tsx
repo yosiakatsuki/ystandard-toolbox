@@ -99,7 +99,7 @@ describe( 'AccordionArrowColor', () => {
 		);
 
 		expect(
-			screen.queryByRole( 'region', { name: '開閉ボタン色' } )
+			screen.queryByRole( 'region', { name: '開閉ボタン（色）' } )
 		).not.toBeInTheDocument();
 	} );
 

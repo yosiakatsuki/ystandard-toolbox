@@ -1,8 +1,10 @@
 import type { FaqBlockAttributes } from '../types';
 import {
+	getAccordionArrowMargin,
 	getFaqClassNames,
 	getResponsiveTypography,
 	getResponsiveTypographyStyles,
+	updateAccordionArrowMargin,
 	updateResponsiveFontSize,
 	updateResponsiveTextAlign,
 } from '../utils';
@@ -36,6 +38,83 @@ describe( 'FAQクラス名', () => {
 				isAccordion: true,
 			} )
 		).toBe( 'ystdtb-faq is-accordion' );
+	} );
+} );
+
+describe( 'FAQ開閉ボタン余白', () => {
+	it( 'margin更新時に他のstyle設定を保持する', () => {
+		const style = updateAccordionArrowMargin(
+			{
+				typography: {
+					lineHeight: 1.8,
+				},
+				ystdtb: {
+					faq: {
+						arrow: {
+							color: {
+								text: '#222222',
+							},
+						},
+					},
+				},
+			},
+			{
+				top: 'var:preset|spacing|20',
+				right: '8px',
+				bottom: 'var:preset|spacing|20',
+				left: '8px',
+			}
+		);
+
+		expect( style ).toEqual( {
+			typography: {
+				lineHeight: 1.8,
+			},
+			ystdtb: {
+				faq: {
+					arrow: {
+						color: {
+							text: '#222222',
+						},
+						spacing: {
+							margin: {
+								top: 'var:preset|spacing|20',
+								right: '8px',
+								bottom: 'var:preset|spacing|20',
+								left: '8px',
+							},
+						},
+					},
+				},
+			},
+		} );
+	} );
+
+	it( 'margin解除時に空階層を削除する', () => {
+		const style = updateAccordionArrowMargin(
+			{
+				ystdtb: {
+					faq: {
+						arrow: {
+							spacing: {
+								margin: {
+									top: '1rem',
+								},
+							},
+						},
+					},
+				},
+			},
+			undefined
+		);
+
+		expect( style ).toBeUndefined();
+		expect(
+			getAccordionArrowMargin( {
+				...DEFAULT_ATTRIBUTES,
+				style,
+			} )
+		).toBeUndefined();
 	} );
 } );
 
