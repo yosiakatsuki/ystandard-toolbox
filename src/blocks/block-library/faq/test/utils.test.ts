@@ -2,9 +2,12 @@ import type { FaqBlockAttributes } from '../types';
 import {
 	getAccordionArrowMargin,
 	getFaqClassNames,
+	getResponsiveSpacing,
+	getResponsiveSpacingStyles,
 	getResponsiveTypographyStyles,
 	updateAccordionArrowMargin,
 	updateResponsiveFontSize,
+	updateResponsiveSpacing,
 } from '../utils';
 
 const DEFAULT_ATTRIBUTES: FaqBlockAttributes = {
@@ -174,5 +177,128 @@ describe( 'FAQレスポンシブタイポグラフィ', () => {
 			'--ystdtb--tablet--faq--font-size': '24px',
 			'--ystdtb--mobile--faq--font-size': '18px',
 		} );
+	} );
+} );
+
+describe( 'FAQレスポンシブ余白', () => {
+	it( '余白更新時にレスポンシブフォントサイズを保持する', () => {
+		const style = updateResponsiveSpacing(
+			{
+				ystdtb: {
+					faq: {
+						responsive: {
+							typography: {
+								fontSize: {
+									tablet: '24px',
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				margin: {
+					desktop: {
+						top: 'var:preset|spacing|40',
+						bottom: '16px',
+					},
+				},
+				padding: {
+					mobile: {
+						top: '8px',
+						right: '12px',
+						bottom: '8px',
+						left: '12px',
+					},
+				},
+			}
+		);
+
+		expect(
+			getResponsiveSpacing( {
+				...DEFAULT_ATTRIBUTES,
+				style,
+			} )
+		).toEqual( {
+			margin: {
+				desktop: {
+					top: 'var:preset|spacing|40',
+					bottom: '16px',
+				},
+			},
+			padding: {
+				mobile: {
+					top: '8px',
+					right: '12px',
+					bottom: '8px',
+					left: '12px',
+				},
+			},
+		} );
+		expect(
+			style?.ystdtb?.faq?.responsive?.typography?.fontSize?.tablet
+		).toBe( '24px' );
+	} );
+
+	it( '許可した方向だけCSSカスタムプロパティへ変換する', () => {
+		expect(
+			getResponsiveSpacingStyles( {
+				...DEFAULT_ATTRIBUTES,
+				style: {
+					ystdtb: {
+						faq: {
+							responsive: {
+								spacing: {
+									margin: {
+										desktop: {
+											top: 'var:preset|spacing|40',
+											right: '999px',
+											bottom: '16px',
+										},
+									},
+									padding: {
+										mobile: {
+											top: '8px',
+											right: '12px',
+											bottom: '8px',
+											left: '12px',
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			} )
+		).toEqual( {
+			'--ystdtb--desktop--faq--margin-top':
+				'var(--wp--preset--spacing--40)',
+			'--ystdtb--desktop--faq--margin-bottom': '16px',
+			'--ystdtb--mobile--faq--padding-top': '8px',
+			'--ystdtb--mobile--faq--padding-right': '12px',
+			'--ystdtb--mobile--faq--padding-bottom': '8px',
+			'--ystdtb--mobile--faq--padding-left': '12px',
+		} );
+	} );
+
+	it( '余白解除時にレスポンシブ余白の空階層を削除する', () => {
+		const style = updateResponsiveSpacing(
+			{
+				ystdtb: {
+					faq: {
+						responsive: {
+							spacing: {
+								margin: {
+									desktop: { top: '16px' },
+								},
+							},
+						},
+					},
+				},
+			},
+			undefined
+		);
+
+		expect( style ).toBeUndefined();
 	} );
 } );

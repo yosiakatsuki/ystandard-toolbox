@@ -1,0 +1,55 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"borderType": "",
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"responsive": {
+							"spacing": {
+								"margin": {
+									"desktop": {
+										"top": "var:preset|spacing|40",
+										"bottom": "32px"
+									},
+									"tablet": {
+										"top": "24px",
+										"bottom": "24px"
+									},
+									"mobile": {
+										"top": "16px",
+										"bottom": "16px"
+									}
+								},
+								"padding": {
+									"desktop": {
+										"top": "var:preset|spacing|30",
+										"right": "var:preset|spacing|30",
+										"bottom": "var:preset|spacing|30",
+										"left": "var:preset|spacing|30"
+									},
+									"tablet": {
+										"top": "20px",
+										"right": "16px",
+										"bottom": "20px",
+										"left": "16px"
+									},
+									"mobile": {
+										"top": "12px",
+										"right": "8px",
+										"bottom": "12px",
+										"left": "8px"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

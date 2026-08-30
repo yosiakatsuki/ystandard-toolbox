@@ -2,6 +2,7 @@
  * Aktk Dependencies.
  */
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
+import type { ResponsiveSpacing } from '@aktk/block-components/components/responsive-spacing-control';
 import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
 
 export type FaqEditProps = {
@@ -80,6 +81,10 @@ export type FaqBlockAttributes = {
 					};
 				};
 				responsive?: {
+					spacing?: {
+						margin?: ResponsiveSpacing;
+						padding?: ResponsiveSpacing;
+					};
 					typography?: {
 						fontSize?: ResponsiveFontSize;
 					};

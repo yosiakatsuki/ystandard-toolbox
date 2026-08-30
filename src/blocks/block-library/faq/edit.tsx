@@ -7,7 +7,11 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Plugin Dependencies
  */
 import type { FaqEditProps } from './types';
-import { getFaqClassNames, getResponsiveTypographyStyles } from './utils';
+import {
+	getFaqClassNames,
+	getResponsiveSpacingStyles,
+	getResponsiveTypographyStyles,
+} from './utils';
 import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
@@ -76,6 +80,7 @@ export default function FaqEdit( props: FaqEditProps ): JSX.Element {
 			...attributes,
 		} ),
 		style: {
+			...getResponsiveSpacingStyles( attributes ),
 			...getResponsiveTypographyStyles( attributes ),
 		},
 	} );

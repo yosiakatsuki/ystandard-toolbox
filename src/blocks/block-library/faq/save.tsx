@@ -9,6 +9,7 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import type { FaqBlockAttributes } from './types';
 import {
 	getFaqClassNames,
+	getResponsiveSpacingStyles,
 	getResponsiveTypographyStyles,
 } from '@aktk/blocks/block-library/faq/utils';
 
@@ -25,6 +26,7 @@ export default function FaqSave( { attributes }: FaqSaveProps ): JSX.Element {
 	const blockProps = useBlockProps.save( {
 		className: getFaqClassNames( attributes ),
 		style: {
+			...getResponsiveSpacingStyles( attributes ),
 			...getResponsiveTypographyStyles( attributes ),
 		},
 	} );

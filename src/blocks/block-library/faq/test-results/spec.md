@@ -23,7 +23,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 親のテンプレートは `[q, a]` の固定ペア、`templateLock: 'all'` で追加・削除・並べ替え不可
   - 子 `faq-item` の innerBlocks は段落等自由配置可（`templateLock: false`）
 - **RichText**: なし（コンテンツは子の InnerBlocks に委譲）
-- **レスポンシブ属性**: 親のフォントサイズをdesktop / tablet / mobileごとに設定
+- **レスポンシブ属性**: 親のフォントサイズと余白をdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
   - 親 → 子: `isAccordion` / `backgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
   - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
@@ -50,6 +50,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | サイズ | 親外側余白（上下） | `style.spacing.margin` |
 | サイズ | 親内側余白（上下左右） | `style.spacing.padding` |
 | レスポンシブ文字設定 | 親フォントサイズ | `style.ystdtb.faq.responsive.typography.fontSize` |
+| レスポンシブ余白 | 親外側余白（上下） | `style.ystdtb.faq.responsive.spacing.margin` |
+| レスポンシブ余白 | 親内側余白（上下左右） | `style.ystdtb.faq.responsive.spacing.padding` |
 
 ### 子 `ystdtb/faq-item`
 
@@ -94,6 +96,8 @@ FAQ ブロック自体には RichText を持たない。コンテンツ部分は
 ## デバイス別テスト対象
 
 - 親フォントサイズ: desktop / tablet / mobile
+- 親外側余白（上下）: desktop / tablet / mobile
+- 親内側余白（上下左右）: desktop / tablet / mobile
 - 未設定のデバイスはCSSカスタムプロパティを出力しない
 
 ---
@@ -134,6 +138,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] `ystdtb__faq__spacing__margin__top-bottom` — `style.spacing.margin`の上・下を個別に設定
 - [ ] `ystdtb__faq__spacing__padding__4corners` — `style.spacing.padding`の上・右・下・左を個別に設定
+- [ ] `ystdtb__faq__responsive-spacing__all-devices` — marginとpaddingをdesktop / tablet / mobileに設定
 
 ### 子 `ystdtb/faq-item` > FAQ タイプ
 
@@ -218,6 +223,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
 - [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
+- [ ] 親レスポンシブ余白: marginは上・下だけ、paddingは上・右・下・左を3デバイスごとに設定でき、`style.ystdtb.faq.responsive.spacing`へ保存される
 - [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
@@ -227,7 +233,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
   - 特に `outline-square` / `outline-circle` / `bottom-divider` は複数属性一括反映が正しいこと
 - [ ] ColorPalette: プリセット → カスタム → クリアの 3 段階遷移で、`xxxColor` と `customXxxColor` が排他的に保存される
 - [ ] 「レスポンシブ文字設定」でフォントサイズを追加し、3デバイスの値が個別に保存される
-- [ ] レスポンシブ設定の項目リセット・パネル全体リセットで、対象設定だけが削除される
+- [ ] 「レスポンシブ余白」でマージン・パディングを追加し、3デバイスの値が個別に保存される
+- [ ] レスポンシブ設定の項目リセット・パネル全体リセットで、対象設定だけが削除され、単一設定は維持される
 
 ### 操作順序（切り替え・リセットの整合性）
 
@@ -262,6 +269,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### レスポンシブ挙動
 
 - [ ] 親フォントサイズがdesktop / tablet / mobileの各ビューポートで切り替わる
+- [ ] 親margin・paddingがdesktop / tablet / mobileの各ビューポートで切り替わる
 
 ### アコーディオン動作
 

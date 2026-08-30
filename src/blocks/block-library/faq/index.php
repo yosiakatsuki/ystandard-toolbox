@@ -48,7 +48,7 @@ class FAQ_Block {
 	}
 
 	/**
-	 * レスポンシブフォントサイズ用CSSを追加.
+	 * FAQのレスポンシブスタイル用CSSを追加.
 	 *
 	 * @return void
 	 */
@@ -59,10 +59,14 @@ class FAQ_Block {
 			'tablet'  => '',
 			'mobile'  => '',
 		];
-		// コアのタイポグラフィ指定よりレスポンシブ値を優先できる詳細度にする.
+		// コアの単一設定よりレスポンシブ値を優先できる詳細度にする.
 		$selector   = ':is(div).ystdtb-faq';
 		$properties = [
 			'faq--font-size' => 'font-size',
+		];
+		$spacing    = [
+			'margin'  => [ 'top', 'bottom' ],
+			'padding' => [ 'top', 'right', 'bottom', 'left' ],
 		];
 
 		foreach ( $types as $type ) {
@@ -75,6 +79,19 @@ class FAQ_Block {
 						'type'      => $type,
 					]
 				);
+			}
+
+			foreach ( $spacing as $property => $positions ) {
+				foreach ( $positions as $position ) {
+					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
+						[
+							'selector'  => $selector,
+							'prop_name' => "faq--{$property}-{$position}",
+							'property'  => "{$property}-{$position}",
+							'type'      => $type,
+						]
+					);
+				}
 			}
 		}
 
