@@ -17,11 +17,18 @@ import { ResponsiveSpacing } from '..';
 jest.mock( '@aktk/block-components/wp-controls/tools-panel', () => ( {
 	ToolsPanel: ( {
 		children,
+		icon,
 		label,
 	}: {
 		children: ReactNode;
+		icon?: ReactNode;
 		label: string;
-	} ) => <div data-panel-label={ label }>{ children }</div>,
+	} ) => (
+		<div data-panel-label={ label }>
+			{ icon }
+			{ children }
+		</div>
+	),
 	ToolsPanelItem: ( {
 		children,
 		isShownByDefault,
@@ -62,6 +69,10 @@ jest.mock(
 	} )
 );
 
+jest.mock( '@aktk/components/ystandard-icon', () => ( {
+	PanelIcon: () => <span data-testid="ys-panel-icon" />,
+} ) );
+
 const createProps = (): FaqEditProps => ( {
 	attributes: {
 		isAccordion: false,
@@ -78,6 +89,7 @@ describe( 'ResponsiveSpacing', () => {
 		expect(
 			document.querySelector( '[data-panel-label="レスポンシブ余白"]' )
 		).not.toBeNull();
+		expect( screen.getByTestId( 'ys-panel-icon' ) ).toBeInTheDocument();
 		screen.getAllByRole( 'region' ).forEach( ( item ) => {
 			expect( item ).toHaveAttribute( 'data-shown-by-default', 'false' );
 		} );

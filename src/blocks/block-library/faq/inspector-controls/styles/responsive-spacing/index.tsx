@@ -16,6 +16,11 @@ import {
 } from '@aktk/block-components/wp-controls/tools-panel';
 
 /**
+ * Plugin dependencies.
+ */
+import { PanelIcon } from '@aktk/components/ystandard-icon';
+
+/**
  * Block dependencies.
  */
 import type { FaqEditProps } from '../../../types';
@@ -62,6 +67,7 @@ export function ResponsiveSpacing( props: FaqEditProps ): JSX.Element {
 
 	return (
 		<ToolsPanel
+			icon={ <PanelIcon /> }
 			label={ __( 'レスポンシブ余白', 'ystandard-toolbox' ) }
 			panelId={ PANEL_ID }
 			resetAll={ resetAll }
