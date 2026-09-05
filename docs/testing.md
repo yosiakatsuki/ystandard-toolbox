@@ -37,6 +37,15 @@ npm run fixtures:generate     # 期待値ファイル未生成のものを自動
 npm run fixtures:regenerate   # 期待値ファイルを全削除して再生成
 ```
 
+## ビルド時のキャッシュ削除
+
+`block.json`の変更をビルド出力へ反映するため、次のコマンドは開始時にキャッシュと既存の出力を削除してから再生成する。
+
+- `npm run build`: `clean:build`で`node_modules/.cache`と`build`全体を削除
+- `npm run build:blocks:v2`: `clean:build:blocks`で`node_modules/.cache`と`build/blocks`のみ削除（他のビルド出力は維持）
+
+依存パッケージ本体は削除しない。削除したキャッシュと出力はビルドで再生成される。
+
 ## unit テスト
 
 `test/unit/component.config.js` を Jest 設定として使う。
