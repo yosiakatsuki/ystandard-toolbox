@@ -29,8 +29,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は 7 属性で `withColors` 利用
-  - `faqTextColor` / `faqBackgroundColor` / `faqBorderColor` / `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`
+- **カラー withColors**: 子 `faq-item` は 6 属性で `withColors` 利用
+  - `faqBackgroundColor` / `faqBorderColor` / `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色はコアの色サポート）
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
 - **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで複数の子属性 + 親の `accordionArrowColor` を一括適用
 
@@ -66,7 +66,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQラベル設定 | ラベル角丸 | `labelBorderRadius` |
 | FAQラベル設定 | ラベル枠線サイズ | `labelBorderSize` |
 | FAQラベル設定 | ラベル枠線色 | `labelBorderColor` / `customLabelBorderColor` |
-| FAQコンテンツ設定 | コンテンツ文字色 | `faqTextColor` / `customFaqTextColor` |
+| スタイル > タイポグラフィ（コアの文字色UI） | コンテンツ文字色（本文のみ） | `textColor` / `style.color.text` |
 | FAQコンテンツ設定 | コンテンツ背景色 | `faqBackgroundColor` / `customFaqBackgroundColor` |
 | FAQコンテンツ設定 | コンテンツ区切り線タイプ | `faqBorderType`（''/bottom、default: ''） |
 | FAQコンテンツ設定 | 区切り線サイズ（faqBorderType 有効時） | `faqBorderSize` |
@@ -112,6 +112,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] `ystdtb__faq__faq__accordion__off` — `isAccordion: false`（デフォルト・明示指定）
 - [ ] `ystdtb__faq__faq__accordion__on` — `isAccordion: true`
+- [ ] `ystdtb__faq__deprecated-2-3-0-item-text-preset` — FAQ Itemの旧プリセット文字色を`textColor`へ移行
+- [ ] `ystdtb__faq__deprecated-2-3-0-item-text-custom` — FAQ Itemの旧カスタム文字色を`style.color.text`へ移行
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `accordionArrowColor: "ys-red"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-spacing__4corners` — `isAccordion: true` + 開閉ボタンmarginの上・右・下・左を個別に設定
@@ -201,6 +203,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### 排他関係・カスケード
 
 - [ ] 親 `isAccordion=false` → `true` → 「開閉ボタン（色）」「開閉ボタン（余白）」UIの表示／非表示が切り替わる
+- [ ] FAQ Itemのコア文字色でプリセット・カスタム色・リセットを操作し、本文だけが変わる（ラベル・開閉ボタン・背景は維持）
+- [ ] v2.3.0の本文文字色を新形式へ移行し、再保存・再読み込み後も本文の色が維持される
 - [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア

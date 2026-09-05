@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { migrateTextColor } from '../2.3.0/migrate';
 import {
 	InnerBlocks,
 	getColorClassName,
@@ -107,7 +108,8 @@ export const deprecated1341 = [
 				legacyArrowInnerHtml: _legacyArrowInnerHtml,
 				...rest
 			} = attributes;
-			return {
+			// deprecatedは連鎖しないため、v1からも現行の文字色形式へ直接移す.
+			return migrateTextColor( {
 				...rest,
 				labelBorderRadius: labelBorderRadius
 					? `${ labelBorderRadius }px`
@@ -118,7 +120,7 @@ export const deprecated1341 = [
 				faqBorderSize: faqBorderSize
 					? `${ faqBorderSize }px`
 					: undefined,
-			};
+			} );
 		},
 		// @ts-ignore.
 		save( { attributes } ) {

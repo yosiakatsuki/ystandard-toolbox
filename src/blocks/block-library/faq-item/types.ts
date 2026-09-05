@@ -7,7 +7,6 @@ export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
 	isSelected?: boolean;
-	faqTextColor: { color?: string; slug?: string };
 	faqBackgroundColor: { color?: string; slug?: string };
 	faqBorderColor: { color?: string; slug?: string };
 	labelColor: { color?: string; slug?: string };
@@ -21,7 +20,10 @@ export type FaqItemEditProps = {
  */
 export type FaqItemBlockAttributes = {
 	faqType: 'q' | 'a';
+	textColor?: string;
+	/** v2.3.0以前の移行処理用. */
 	faqTextColor?: string;
+	/** v2.3.0以前の移行処理用. */
 	customFaqTextColor?: string;
 	faqBackgroundColor?: string;
 	customFaqBackgroundColor?: string;
@@ -44,6 +46,9 @@ export type FaqItemBlockAttributes = {
 	accordionArrowColor?: string;
 	customAccordionArrowColor?: string;
 	style?: {
+		color?: {
+			text?: string;
+		};
 		ystdtb?: {
 			faqItem?: {
 				arrow?: {

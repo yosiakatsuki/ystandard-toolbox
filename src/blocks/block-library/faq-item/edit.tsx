@@ -6,6 +6,7 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	withColors,
+	__experimentalUseColorProps as useColorProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -18,7 +19,6 @@ import {
 	getItemClasses,
 	getItemStyles,
 	getContentsClasses,
-	getContentsStyles,
 	getAccordionArrowClasses,
 	getAccordionArrowStyles,
 } from './utils';
@@ -45,7 +45,6 @@ const template: [ string, Record< string, any > ][] = [
 function FaqItemEdit( props: FaqItemEditProps ) {
 	const {
 		attributes,
-		faqTextColor,
 		faqBackgroundColor,
 		faqBorderColor,
 		labelColor,
@@ -54,6 +53,11 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 		accordionArrowColor,
 	} = props;
 	const { faqType, labelBorderSize } = attributes;
+	// コアの文字色だけを本文へ適用し、ラベルや開閉ボタンへの継承を避ける.
+	const contentsColorProps = useColorProps( {
+		textColor: attributes.textColor,
+		style: { color: { text: attributes.style?.color?.text } },
+	} );
 
 	// FAQアイテムブロックProps
 	const blockProps = useBlockProps( {
@@ -89,14 +93,8 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	// FAQコンテンツのInnerBlocksProps
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: getContentsClasses( {
-				...attributes,
-				customFaqTextColor: faqTextColor?.color,
-			} ),
-			style: getContentsStyles( {
-				...attributes,
-				customFaqTextColor: faqTextColor?.color,
-			} ),
+			className: getContentsClasses( attributes ),
+			style: contentsColorProps.style,
 		},
 		{
 			templateLock: false,
@@ -140,7 +138,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 export default compose( [
 	withColors( {
-		faqTextColor: 'color',
 		faqBackgroundColor: 'backgroundColor',
 		faqBorderColor: 'borderColor',
 		labelColor: 'color',

@@ -177,13 +177,13 @@ export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 export function getContentsClasses(
 	attributes: FaqItemBlockAttributes
 ): string {
-	const { faqTextColor, customFaqTextColor } = attributes;
+	const { textColor, style } = attributes;
 
-	const faqTextColorClass = getColorClassName( 'color', faqTextColor ) || '';
+	const textColorClass = getColorClassName( 'color', textColor ) || '';
 
 	return classnames( 'ystdtb-faq-item__contents', {
-		'has-text-color': faqTextColor || customFaqTextColor,
-		[ faqTextColorClass ]: faqTextColorClass,
+		'has-text-color': textColor || style?.color?.text,
+		[ textColorClass ]: textColorClass,
 	} );
 }
 
@@ -192,9 +192,9 @@ export function getContentsClasses(
  * @param attributes
  */
 export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
-	const { customFaqTextColor } = attributes;
+	const { style } = attributes;
 	return {
-		color: customFaqTextColor,
+		color: style?.color?.text,
 	};
 }
 

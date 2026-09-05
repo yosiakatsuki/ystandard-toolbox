@@ -1,0 +1,78 @@
+{
+	"faqType": {
+		"type": "string",
+		"default": "q"
+	},
+	"faqTextColor": {
+		"type": "string"
+	},
+	"customFaqTextColor": {
+		"type": "string"
+	},
+	"faqBackgroundColor": {
+		"type": "string"
+	},
+	"customFaqBackgroundColor": {
+		"type": "string"
+	},
+	"faqBorderType": {
+		"type": "string",
+		"default": ""
+	},
+	"faqBorderSize": {
+		"type": "string"
+	},
+	"faqBorderColor": {
+		"type": "string"
+	},
+	"customFaqBorderColor": {
+		"type": "string"
+	},
+	"labelPosition": {
+		"type": "string",
+		"default": "center"
+	},
+	"labelSize": {
+		"type": "string"
+	},
+	"customLabelSize": {
+		"type": "string"
+	},
+	"labelColor": {
+		"type": "string"
+	},
+	"customLabelColor": {
+		"type": "string"
+	},
+	"labelBold": {
+		"type": "boolean",
+		"default": true
+	},
+	"labelBackgroundColor": {
+		"type": "string"
+	},
+	"customLabelBackgroundColor": {
+		"type": "string"
+	},
+	"labelBorderSize": {
+		"type": "string"
+	},
+	"labelBorderRadius": {
+		"type": "string"
+	},
+	"labelBorderColor": {
+		"type": "string"
+	},
+	"customLabelBorderColor": {
+		"type": "string"
+	},
+	"accordionArrowColor": {
+		"type": "string"
+	},
+	"customAccordionArrowColor": {
+		"type": "string"
+	},
+	"style": {
+		"type": "object"
+	}
+}

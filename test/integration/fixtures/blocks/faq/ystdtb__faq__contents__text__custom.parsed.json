@@ -6,7 +6,11 @@
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"customFaqTextColor": "#1e3a8a"
+					"style": {
+						"color": {
+							"text": "#1e3a8a"
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents has-text-color\" style=\"color:#1e3a8a\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
@@ -18,7 +22,11 @@
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"customFaqTextColor": "#1e3a8a"
+					"style": {
+						"color": {
+							"text": "#1e3a8a"
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents has-text-color\" style=\"color:#1e3a8a\"></div></div>\n",

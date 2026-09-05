@@ -20,10 +20,7 @@
 			"type": "string",
 			"default": "q"
 		},
-		"faqTextColor": {
-			"type": "string"
-		},
-		"customFaqTextColor": {
+		"textColor": {
 			"type": "string"
 		},
 		"faqBackgroundColor": {
@@ -104,9 +101,21 @@
 		"ystdtb/customAccordionArrowColor"
 	],
 	"supports": {
+		"color": {
+			"text": true,
+			"background": false,
+			"gradients": false,
+			"__experimentalSkipSerialization": [ "text" ]
+		},
 		"align": false,
 		"className": false,
 		"reusable": false
+	},
+	"selectors": {
+		"root": ".ystdtb-faq-item",
+		"color": {
+			"text": ".ystdtb-faq-item__contents"
+		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],

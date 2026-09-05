@@ -3,8 +3,7 @@
 		"name": "ystdtb/faq",
 		"isValid": true,
 		"attributes": {
-			"isAccordion": false,
-			"borderType": ""
+			"isAccordion": false
 		},
 		"innerBlocks": [
 			{
@@ -12,11 +11,11 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqTextColor": "ys-purple",
 					"faqBackgroundColor": "ys-light-green",
 					"faqBorderType": "",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"textColor": "ys-purple"
 				},
 				"innerBlocks": []
 			},
@@ -25,11 +24,11 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqTextColor": "ys-red",
 					"faqBackgroundColor": "ys-light-orange",
 					"faqBorderType": "",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"textColor": "ys-red"
 				},
 				"innerBlocks": []
 			}
