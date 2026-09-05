@@ -11,7 +11,7 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBackgroundColor": "ys-light-orange",
+					"backgroundColor": "ys-light-orange",
 					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
@@ -23,7 +23,7 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBackgroundColor": "ys-light-orange",
+					"backgroundColor": "ys-light-orange",
 					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true

@@ -6,6 +6,8 @@
  */
 module.exports = {
 	rootDir: '../../',
+	// JSONを埋め込むBabel変換はblock.json単独の変更を追跡できないため、古いブロック仕様の再利用を避ける.
+	cache: false,
 	testEnvironment: 'jsdom',
 	setupFilesAfterEnv: [ '<rootDir>/test/integration/setup-tests.js' ],
 	moduleNameMapper: {

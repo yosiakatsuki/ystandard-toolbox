@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
 import { Panel } from '@aktk/block-components/components/panel';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import Button from '@aktk/block-components/wp-controls/button';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Block Dependencies.
@@ -32,8 +33,8 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: '',
 			faqBorderSize: '0',
 			faqBorderColor: undefined,
@@ -65,8 +66,8 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: '',
 			faqBorderSize: '0',
 			faqBorderColor: undefined,
@@ -99,8 +100,8 @@ const designPreset: DesignPreset[] = [
 			borderRadius: '50px',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: '',
 			faqBorderSize: '0',
 			faqBorderColor: undefined,
@@ -133,8 +134,8 @@ const designPreset: DesignPreset[] = [
 			border: '2px solid #666666',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: '',
 			faqBorderSize: '0',
 			faqBorderColor: undefined,
@@ -168,8 +169,8 @@ const designPreset: DesignPreset[] = [
 			borderRadius: '50px',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: '',
 			faqBorderSize: '0',
 			faqBorderColor: undefined,
@@ -203,8 +204,8 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
 			faqBorderType: 'bottom',
 			faqBorderSize: '1px',
 			faqBorderColor: undefined,
@@ -223,13 +224,27 @@ const designPreset: DesignPreset[] = [
 	},
 ];
 
+/**
+ * FAQ Itemにデザインプリセットを適用する.
+ *
+ * @param props ブロック編集プロパティ.
+ */
 // @ts-ignore.
 export function Design( props ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { faqType } = attributes;
+	// 従来どおりItem背景を解除し、本文色など他のstyle設定は保持する.
 	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
 		setAttributes( {
 			...preset.attributes,
+			style: stripUndefined( {
+				...attributes.style,
+				color: {
+					...attributes.style?.color,
+					background: undefined,
+					gradient: undefined,
+				},
+			} ),
 			accordionArrowColor: undefined,
 			customAccordionArrowColor: preset.attributes.customLabelColor,
 		} );

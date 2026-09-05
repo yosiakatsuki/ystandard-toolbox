@@ -23,10 +23,10 @@
 		"textColor": {
 			"type": "string"
 		},
-		"faqBackgroundColor": {
+		"backgroundColor": {
 			"type": "string"
 		},
-		"customFaqBackgroundColor": {
+		"gradient": {
 			"type": "string"
 		},
 		"faqBorderType": {
@@ -103,8 +103,8 @@
 	"supports": {
 		"color": {
 			"text": true,
-			"background": false,
-			"gradients": false,
+			"background": true,
+			"gradients": true,
 			"__experimentalSkipSerialization": [ "text" ]
 		},
 		"align": false,
@@ -114,6 +114,7 @@
 	"selectors": {
 		"root": ".ystdtb-faq-item",
 		"color": {
+			"root": ".ystdtb-faq-item",
 			"text": ".ystdtb-faq-item__contents"
 		}
 	},

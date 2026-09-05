@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { migrateTextColor } from '../2.3.0/migrate';
+import { migrateColors } from '../2.3.0/migrate';
 import {
 	InnerBlocks,
 	getColorClassName,
@@ -109,7 +109,7 @@ export const deprecated1341 = [
 				...rest
 			} = attributes;
 			// deprecatedは連鎖しないため、v1からも現行の文字色形式へ直接移す.
-			return migrateTextColor( {
+			return migrateColors( {
 				...rest,
 				labelBorderRadius: labelBorderRadius
 					? `${ labelBorderRadius }px`

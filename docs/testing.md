@@ -118,6 +118,8 @@ PHPUnit テストを追加するブロックは、`test-results/spec.md` に「L
 
 ## integration テスト（fixture-based test）
 
+`block.json`はBabelで読み込み元のコードに埋め込まれるため、JSONだけを変更すると古い変換結果が再利用されることがある。現行のブロック仕様で検証するため、integrationテストではJestの変換キャッシュを無効にしている。
+
 Gutenberg コアの [`test/integration/full-content`](https://github.com/WordPress/gutenberg/tree/trunk/test/integration/full-content) を参考にした、ブロックの parse / serialize / validate / migrate の往復検証テスト。
 
 ### 検証する内容

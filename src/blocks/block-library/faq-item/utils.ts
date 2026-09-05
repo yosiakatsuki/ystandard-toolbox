@@ -48,15 +48,11 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
 	const {
 		faqType,
 		faqBorderType,
-		faqBackgroundColor,
-		customFaqBackgroundColor,
 		faqBorderColor,
 		customFaqBorderColor,
 		faqBorderSize,
 	} = attributes;
 
-	const faqBackgroundColorClass =
-		getColorClassName( 'background-color', faqBackgroundColor ) || '';
 	const faqBorderColorClass =
 		getColorClassName( 'border-color', faqBorderColor ) || '';
 	const hasFaqBorderSize = hasBorderWidth( faqBorderSize );
@@ -64,10 +60,8 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
 	return classnames( 'ystdtb-faq-item', {
 		[ `is-faq--${ faqType }` ]: faqType,
 		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-		'has-background': faqBackgroundColor || customFaqBackgroundColor,
 		'has-border':
 			hasFaqBorderSize && ( faqBorderColor || customFaqBorderColor ),
-		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
 		[ faqBorderColorClass ]: hasFaqBorderSize && faqBorderColorClass,
 	} );
 }
@@ -78,8 +72,6 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
  */
 export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 	const {
-		faqBackgroundColor,
-		customFaqBackgroundColor,
 		faqBorderType,
 		faqBorderColor,
 		customFaqBorderColor,
@@ -90,9 +82,6 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 	const isBottomBorder = 'bottom' === faqBorderType;
 
 	return {
-		backgroundColor: faqBackgroundColor
-			? undefined
-			: customFaqBackgroundColor,
 		borderBottomColor:
 			! isBottomBorder || ! faqBorderSize || faqBorderColor
 				? undefined

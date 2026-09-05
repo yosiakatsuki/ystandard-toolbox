@@ -1,12 +1,16 @@
-# FAQ Itemの本文文字色
+# FAQ Itemの文字色・背景設定
 
 ## 標準設定の適用先
 
 文字色はコアの`supports.color.text`を使い、プリセットを`textColor`、カスタム色を`style.color.text`へ保存する。タイポグラフィパネル内での表示はWordPress側のUIに従う。
 
-`selectors.color.text`は`.ystdtb-faq-item__contents`を指定する。個別設定は`__experimentalSkipSerialization: ["text"]`で外側への自動出力を止め、編集時はコアの`useColorProps`、保存時は本文用のクラス・スタイル生成処理で本文へ出力する。背景・ラベル・開閉ボタンの設定には混ぜない。
+`selectors.color.root`は`.ystdtb-faq-item`、`selectors.color.text`は`.ystdtb-faq-item__contents`を指定する。個別設定は`__experimentalSkipSerialization: ["text"]`で外側への自動出力を止め、編集時はコアの`useColorProps`、保存時は本文用のクラス・スタイル生成処理で本文へ出力する。背景・ラベル・開閉ボタンの設定には混ぜない。
 
 ## 旧設定からの移行
+
+背景色・グラデーションは`supports.color.background`と`supports.color.gradients`で有効にし、外側の`.ystdtb-faq-item`へ標準出力する。本文文字色だけを出力先変更の対象にするため、背景はラベルを含むItem全体に適用される。`has-background`による既存の自動余白はグラデーションにも適用する。
+
+`faqBackgroundColor`は`backgroundColor`、`customFaqBackgroundColor`は`style.color.background`へ移行する。旧背景はプリセット指定時にカスタム色を出力しないため、その優先順を維持する。背景と文字色の移行は同じdeprecatedで行う。
 
 v2.3.0の属性と保存処理を`deprecated/2.3.0/`に固定する。`faqTextColor`を`textColor`、`customFaqTextColor`を`style.color.text`へ移し、旧属性を除去する。他の設定と子ブロックは保持する。
 

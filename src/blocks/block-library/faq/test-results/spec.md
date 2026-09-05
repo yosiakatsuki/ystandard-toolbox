@@ -29,8 +29,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は 6 属性で `withColors` 利用
-  - `faqBackgroundColor` / `faqBorderColor` / `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色はコアの色サポート）
+- **カラー withColors**: 子 `faq-item` は 5 属性で `withColors` 利用
+  - `faqBorderColor` / `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景はコアの色サポート）
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
 - **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで複数の子属性 + 親の `accordionArrowColor` を一括適用
 
@@ -67,7 +67,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | FAQラベル設定 | ラベル枠線サイズ | `labelBorderSize` |
 | FAQラベル設定 | ラベル枠線色 | `labelBorderColor` / `customLabelBorderColor` |
 | スタイル > タイポグラフィ（コアの文字色UI） | コンテンツ文字色（本文のみ） | `textColor` / `style.color.text` |
-| FAQコンテンツ設定 | コンテンツ背景色 | `faqBackgroundColor` / `customFaqBackgroundColor` |
+| スタイル > 色 | Item全体の背景色 | `backgroundColor` / `style.color.background` |
+| スタイル > 色 | Item全体の背景グラデーション | `gradient` / `style.color.gradient` |
 | FAQコンテンツ設定 | コンテンツ区切り線タイプ | `faqBorderType`（''/bottom、default: ''） |
 | FAQコンテンツ設定 | 区切り線サイズ（faqBorderType 有効時） | `faqBorderSize` |
 | FAQコンテンツ設定 | 区切り線色（faqBorderType 有効時） | `faqBorderColor` / `customFaqBorderColor` |
@@ -86,7 +87,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 親の開閉ボタンmargin変更 | 子 faq-item 全員の`style.ystdtb.faqItem.arrow.spacing.margin`も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
 | 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | WordPress標準の`has-background`クラスが付き、FAQ項目の左右余白が自動で入る |
-| 子の`faqBackgroundColor` / `customFaqBackgroundColor`設定 | 子要素に`has-padding`クラス付与（内側余白が自動で入る） |
+| 子の背景色・背景グラデーション設定 | Item全体に`has-background`が付き、内側余白が自動で入る |
 | ラベルに `labelBackgroundColor` / `customLabelBackgroundColor` / `labelBorderColor` / `customLabelBorderColor` / `labelBorderSize` のいずれか設定 | ラベルに `has-padding` クラス付与 |
 
 ## RichText ツールバー制御
@@ -114,6 +115,10 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] `ystdtb__faq__faq__accordion__on` — `isAccordion: true`
 - [ ] `ystdtb__faq__deprecated-2-3-0-item-text-preset` — FAQ Itemの旧プリセット文字色を`textColor`へ移行
 - [ ] `ystdtb__faq__deprecated-2-3-0-item-text-custom` — FAQ Itemの旧カスタム文字色を`style.color.text`へ移行
+- [ ] `ystdtb__faq__deprecated-2-3-0-item-background-preset` — 旧Item背景のプリセット色を移行
+- [ ] `ystdtb__faq__deprecated-2-3-0-item-background-custom` — 旧Item背景のカスタム色を移行
+- [ ] `ystdtb__faq__item-background__gradient__preset` — Item全体へプリセットグラデーション
+- [ ] `ystdtb__faq__item-background__gradient__custom` — Item全体へカスタムグラデーション、本文だけに文字色
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `accordionArrowColor: "ys-red"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-spacing__4corners` — `isAccordion: true` + 開閉ボタンmarginの上・右・下・左を個別に設定

@@ -45,7 +45,6 @@ const template: [ string, Record< string, any > ][] = [
 function FaqItemEdit( props: FaqItemEditProps ) {
 	const {
 		attributes,
-		faqBackgroundColor,
 		faqBorderColor,
 		labelColor,
 		labelBackgroundColor,
@@ -63,12 +62,10 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	const blockProps = useBlockProps( {
 		className: getItemClasses( {
 			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
 			customFaqBorderColor: faqBorderColor?.color,
 		} ),
 		style: getItemStyles( {
 			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
 			customFaqBorderColor: faqBorderColor?.color,
 		} ),
 	} );
@@ -138,7 +135,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 export default compose( [
 	withColors( {
-		faqBackgroundColor: 'backgroundColor',
 		faqBorderColor: 'borderColor',
 		labelColor: 'color',
 		labelBackgroundColor: 'backgroundColor',

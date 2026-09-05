@@ -1,11 +1,93 @@
 /* WordPress Dependencies */
-import { createBlock, parse, serialize } from '@wordpress/blocks';
+import { createBlock, getBlockType, parse, serialize } from '@wordpress/blocks';
 
 /* Block Dependencies */
 import { registerFaqTestBlocks } from './helpers/register-blocks';
-import { migrateTextColor } from '../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
+import { migrateColors } from '../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
 
 registerFaqTestBlocks();
+
+describe( 'FAQ Item全体の標準背景設定', () => {
+	it( '色設定の適用先を文字列セレクターとして登録する', () => {
+		const colorSelectors =
+			getBlockType( 'ystdtb/faq-item' ).selectors.color;
+		expect( colorSelectors ).toEqual( {
+			root: '.ystdtb-faq-item',
+			text: '.ystdtb-faq-item__contents',
+		} );
+	} );
+
+	it.each( [
+		{ backgroundColor: 'ys-light-green' },
+		{ style: { color: { background: '#eeeeee' } } },
+		{ gradient: 'midnight' },
+		{
+			style: {
+				color: {
+					gradient: 'linear-gradient(135deg,#ff0000 0%,#0000ff 100%)',
+				},
+			},
+		},
+	] )(
+		'背景はItem全体に出力し、文字色を本文に限定する: %j',
+		( background ) => {
+			const container = renderItem( {
+				...background,
+				textColor: 'ys-purple',
+			} );
+			const item = container.querySelector( '.ystdtb-faq-item' );
+			expect( item.classList.contains( 'has-background' ) ).toBe( true );
+			expect( item.classList.contains( 'has-text-color' ) ).toBe( false );
+			expect(
+				container.querySelectorAll( '.has-background' )
+			).toHaveLength( 1 );
+			expect(
+				container
+					.querySelector( '.has-text-color' )
+					.classList.contains( 'ystdtb-faq-item__contents' )
+			).toBe( true );
+		}
+	);
+
+	it( '背景をリセットしても本文文字色を保持する', () => {
+		const container = renderItem( { textColor: 'ys-purple' } );
+		expect( container.querySelector( '.has-background' ) ).toBeNull();
+		expect(
+			container
+				.querySelector( '.ystdtb-faq-item__contents' )
+				.classList.contains( 'has-ys-purple-color' )
+		).toBe( true );
+	} );
+
+	it( '旧文字色と背景色を同時に移し、開閉ボタンの設定を保持する', () => {
+		const style = {
+			ystdtb: {
+				faqItem: { arrow: { spacing: { margin: { top: '8px' } } } },
+			},
+		};
+		expect(
+			migrateColors( {
+				customFaqTextColor: '#222222',
+				customFaqBackgroundColor: '#eeeeee',
+				style,
+			} )
+		).toEqual( {
+			style: {
+				...style,
+				color: { text: '#222222', background: '#eeeeee' },
+			},
+		} );
+	} );
+
+	it( '旧背景はカスタム色よりプリセットを優先する', () => {
+		expect(
+			migrateColors( {
+				faqBackgroundColor: 'ys-light-green',
+				customFaqBackgroundColor: '#eeeeee',
+			} )
+		).toEqual( { backgroundColor: 'ys-light-green' } );
+	} );
+} );
 
 /**
  * 保存HTMLをDOMとして読み取り、文字色の適用先を検証する.
@@ -29,7 +111,7 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 			...color,
 			customLabelColor: '#aa0000',
 			customAccordionArrowColor: '#00aa00',
-			customFaqBackgroundColor: '#eeeeee',
+			backgroundColor: 'ys-light-gray',
 		} );
 		const item = container.querySelector( '.ystdtb-faq-item' );
 		const contents = container.querySelector(
@@ -53,7 +135,9 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 		expect(
 			container.querySelector( '.ystdtb-faq-item__arrow' ).style.color
 		).toBe( 'rgb(0, 170, 0)' );
-		expect( item.style.backgroundColor ).toBe( 'rgb(238, 238, 238)' );
+		expect(
+			item.classList.contains( 'has-ys-light-gray-background-color' )
+		).toBe( true );
 	} );
 
 	it( '文字色をリセットすると本文の色指定だけがなくなる', () => {
@@ -78,7 +162,7 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 				faqItem: { arrow: { spacing: { margin: { top: '8px' } } } },
 			},
 		};
-		const migrated = migrateTextColor( {
+		const migrated = migrateColors( {
 			faqTextColor: 'ys-purple',
 			customFaqTextColor: '#1e3a8a',
 			labelColor: 'ys-red',

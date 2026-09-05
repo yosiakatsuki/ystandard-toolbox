@@ -1,0 +1,14 @@
+[
+	{
+		"blockName": "ystdtb/faq-item",
+		"attrs": {
+			"faqType": "a",
+			"gradient": "midnight"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-midnight-gradient-background has-background\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq-item is-faq--a has-midnight-gradient-background has-background\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+		]
+	}
+]

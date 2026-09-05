@@ -11,10 +11,14 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"customFaqBackgroundColor": "#ecfdf5",
 					"faqBorderType": "",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"style": {
+						"color": {
+							"background": "#ecfdf5"
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -23,10 +27,14 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"customFaqBackgroundColor": "#ecfdf5",
 					"faqBorderType": "",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"style": {
+						"color": {
+							"background": "#ecfdf5"
+						}
+					}
 				},
 				"innerBlocks": []
 			}
