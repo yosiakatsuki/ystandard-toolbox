@@ -8,7 +8,6 @@
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"faqBorderSize": "0",
 					"customLabelColor": "#222222",
 					"customLabelBackgroundColor": "#f1f1f3",
 					"labelBorderSize": "0",
@@ -25,7 +24,6 @@
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"faqBorderSize": "0",
 					"customLabelColor": "#222222",
 					"customLabelBackgroundColor": "#f1f1f3",
 					"labelBorderSize": "0",

@@ -50,3 +50,45 @@ export function migrateColors( attributes: FaqItemBlockAttributes ) {
 				: rest.style,
 	} );
 }
+
+/**
+ * 旧下区切り線を標準の辺別枠線へ移し、文字色・背景色も現行形式へ統合する.
+ *
+ * @param attributes 旧形式のブロック属性.
+ */
+export function migrateFaqItemAttributes( attributes: FaqItemBlockAttributes ) {
+	const {
+		faqBorderType,
+		faqBorderSize,
+		faqBorderColor,
+		customFaqBorderColor,
+		...rest
+	} = migrateColors( attributes );
+
+	// 新形式の設定を優先し、旧形式で表示されなかった線を新たに出さない.
+	if (
+		undefined !== rest.style?.border ||
+		'bottom' !== faqBorderType ||
+		! faqBorderSize ||
+		/^0(?:[a-z%]+)?$/i.test( faqBorderSize.trim() )
+	) {
+		return rest;
+	}
+
+	return stripUndefined( {
+		...rest,
+		style: {
+			...rest.style,
+			border: {
+				bottom: {
+					width: faqBorderSize,
+					style: 'solid',
+					// 旧表示と同じくプリセット色をカスタム色より優先する.
+					color: faqBorderColor
+						? `var:preset|color|${ faqBorderColor }`
+						: customFaqBorderColor,
+				},
+			},
+		},
+	} );
+}

@@ -1,11 +1,11 @@
 /* Block Dependencies */
 import attributes from './attributes.json';
 import save from './save';
-import { migrateColors } from './migrate';
+import { migrateFaqItemAttributes } from './migrate';
 import type { FaqItemBlockAttributes } from '../../types';
 
 /**
- * 保存HTMLが同じ場合も、旧文字色・背景色属性を標準属性へ移行する.
+ * 保存HTMLが同じ場合も、旧文字色・背景色・枠線属性を標準属性へ移行する.
  *
  * @param value ブロック属性.
  */
@@ -14,7 +14,11 @@ function isEligible( value: FaqItemBlockAttributes ) {
 		undefined !== value.faqTextColor ||
 		undefined !== value.customFaqTextColor ||
 		undefined !== value.faqBackgroundColor ||
-		undefined !== value.customFaqBackgroundColor
+		undefined !== value.customFaqBackgroundColor ||
+		!! value.faqBorderType ||
+		undefined !== value.faqBorderSize ||
+		undefined !== value.faqBorderColor ||
+		undefined !== value.customFaqBorderColor
 	);
 }
 
@@ -23,7 +27,7 @@ export const deprecated230 = [
 		attributes,
 		supports: { align: false, className: false, reusable: false },
 		isEligible,
-		migrate: migrateColors,
+		migrate: migrateFaqItemAttributes,
 		save,
 	},
 ];

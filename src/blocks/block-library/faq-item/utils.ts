@@ -45,24 +45,10 @@ export function getBlockPropsClasses(
  * @param attributes
  */
 export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
-	const {
-		faqType,
-		faqBorderType,
-		faqBorderColor,
-		customFaqBorderColor,
-		faqBorderSize,
-	} = attributes;
-
-	const faqBorderColorClass =
-		getColorClassName( 'border-color', faqBorderColor ) || '';
-	const hasFaqBorderSize = hasBorderWidth( faqBorderSize );
+	const { faqType } = attributes;
 
 	return classnames( 'ystdtb-faq-item', {
 		[ `is-faq--${ faqType }` ]: faqType,
-		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-		'has-border':
-			hasFaqBorderSize && ( faqBorderColor || customFaqBorderColor ),
-		[ faqBorderColorClass ]: hasFaqBorderSize && faqBorderColorClass,
 	} );
 }
 
@@ -71,23 +57,9 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
  * @param attributes
  */
 export function getItemStyles( attributes: FaqItemBlockAttributes ) {
-	const {
-		faqBorderType,
-		faqBorderColor,
-		customFaqBorderColor,
-		faqBorderSize,
-		labelPosition,
-	} = attributes;
-
-	const isBottomBorder = 'bottom' === faqBorderType;
+	const { labelPosition } = attributes;
 
 	return {
-		borderBottomColor:
-			! isBottomBorder || ! faqBorderSize || faqBorderColor
-				? undefined
-				: customFaqBorderColor,
-		borderBottomWidth:
-			! isBottomBorder || ! faqBorderSize ? undefined : faqBorderSize,
 		alignItems: 'center' === labelPosition ? undefined : labelPosition,
 	};
 }

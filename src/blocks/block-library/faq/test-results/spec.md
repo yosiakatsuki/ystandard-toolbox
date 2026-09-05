@@ -29,8 +29,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は 5 属性で `withColors` 利用
-  - `faqBorderColor` / `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景はコアの色サポート）
+- **カラー withColors**: 子 `faq-item` は 4 属性で `withColors` 利用
+  - `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景・Item枠線はコアのサポート）
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
 - **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで複数の子属性 + 親の `accordionArrowColor` を一括適用
 
@@ -69,9 +69,6 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | スタイル > タイポグラフィ（コアの文字色UI） | コンテンツ文字色（本文のみ） | `textColor` / `style.color.text` |
 | スタイル > 色 | Item全体の背景色 | `backgroundColor` / `style.color.background` |
 | スタイル > 色 | Item全体の背景グラデーション | `gradient` / `style.color.gradient` |
-| FAQコンテンツ設定 | コンテンツ区切り線タイプ | `faqBorderType`（''/bottom、default: ''） |
-| FAQコンテンツ設定 | 区切り線サイズ（faqBorderType 有効時） | `faqBorderSize` |
-| FAQコンテンツ設定 | 区切り線色（faqBorderType 有効時） | `faqBorderColor` / `customFaqBorderColor` |
 | デザインサンプル | プリセットボタン | 複数属性を一括適用（default / background-square / background-circle / outline-square / outline-circle / bottom-divider） |
 
 ## 排他関係・条件付き表示
@@ -79,9 +76,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 条件 | 影響 |
 |---|---|
 | 親`isAccordion=false` | スタイルパネルの「開閉ボタン（色）」「開閉ボタン（余白）」が非表示（各コンポーネントが早期return） |
-| 子 `faqBorderType=''` 選択 | `faqBorderSize` が `undefined` にリセット + `faqBorderColor` がクリア（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
-| 子 `faqBorderType=''` | 「区切り線サイズ」「区切り線色」UI が非表示 |
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
 | 親の開閉ボタンmargin変更 | 子 faq-item 全員の`style.ystdtb.faqItem.arrow.spacing.margin`も同時更新（`updateChildAttributes`） |
@@ -223,18 +218,16 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親`isAccordion=true`時のみ、スタイルパネルに「開閉ボタン（色）」「開閉ボタン（余白）」パネルが表示される
 - [ ] 開閉ボタン色を設定すると「−」リセットボタンが表示され、操作すると親子の色属性が削除される
 - [ ] 開閉ボタンmarginは上下左右を設定でき、リセットすると親子のmarginだけが削除される
-- [ ] 子 `faqBorderType` が空以外のときのみ「区切り線サイズ」「区切り線色」BaseControl が表示される
 - [ ] 子 `faqType: 'a'` 時はエディター上で矢印領域が描画されない
 
 ### ラベル-値対応（全選択肢網羅）
 
-- [ ] 子「区切り線タイプ」CustomSelectControl: 全 2 選択肢（'' / 'bottom'）→ 各値が `faqBorderType` に保存
 - [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
 - [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
 - [ ] 親レスポンシブ余白: marginは上・下だけ、paddingは上・右・下・左を3デバイスごとに設定でき、`style.ystdtb.faq.responsive.spacing`へ保存される
-- [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／コンテンツ文字／コンテンツ背景／コンテンツ区切り線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
+- [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／標準本文文字色／標準Item背景／標準Item枠線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
 - [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
 
 ### 複雑 UI
@@ -249,7 +242,6 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 ### 操作順序（切り替え・リセットの整合性）
 
 - [ ] 親枠線: 全周 → 下辺のみ → 解除と切り替え、各段階で`style.border`以外の属性が変わらないことを確認
-- [ ] 子 `faqBorderType`: `''` → `'bottom'` → `''` → `'bottom'` → プリセット値（1px / #eeeeee）が再設定されるか
 - [ ] デザインプリセット複数連続適用: `default` → `background-square` → `outline-circle` → `bottom-divider` → 各適用で attribute が上書きされ、前プリセット由来の残骸がないこと
 
 ### RichText フォーマット・ツールバー制御
@@ -328,3 +320,14 @@ FAQ ブロック固有の観点:
 - L2 / L3 セッション結果は `operation.md`（Git 管理外）に記録
 - L1 fixture は `test/integration/fixtures/blocks/faq/` 配下（既存 `ystdtb__faq__deprecated-*` と同ディレクトリに追加）
 - 本仕様のfixture数はおよそ60件（親faq 19 / item-type 2 / label 17 / contents 9 / preset 6 / combo 5、+ デフォルト含む概算）
+
+### FAQ Item標準枠線の移行
+
+FAQコンテンツの下区切り線設定を標準スタイルパネルへ移行する。適用先はFAQ Item全体。全周・辺別の色、太さ、線種と角丸に対応し、初期表示は無効。
+
+- 旧下区切り線は`style.border.bottom`へ変換し、プリセット色を優先する
+- 幅0・幅未設定・枠線なしは変換後に線を出さない
+- 文字色・背景・ラベル・開閉ボタン・子ブロックを保持する
+- デザインサンプルも標準枠線を更新する
+- 旧CSSは`faq-item/style.scss`末尾に残す
+- 移行fixture: `ystdtb__faq__deprecated-2-3-0-item-border-custom` / `ystdtb__faq__deprecated-2-3-0-item-border-preset` / `ystdtb__faq__deprecated-faq-border`

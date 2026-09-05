@@ -4,7 +4,6 @@
 		"isValid": true,
 		"attributes": {
 			"faqType": "a",
-			"faqBorderType": "",
 			"labelPosition": "center",
 			"labelBold": true,
 			"style": {

@@ -11,8 +11,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "",
-					"faqBorderSize": "0",
 					"labelPosition": "center",
 					"customLabelColor": "#222222",
 					"labelBold": true,
@@ -28,8 +26,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "",
-					"faqBorderSize": "0",
 					"labelPosition": "center",
 					"customLabelColor": "#222222",
 					"labelBold": true,

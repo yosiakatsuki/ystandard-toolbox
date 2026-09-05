@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { migrateColors } from '../2.3.0/migrate';
+import { migrateFaqItemAttributes } from '../2.3.0/migrate';
 import {
 	InnerBlocks,
 	getColorClassName,
@@ -108,8 +108,8 @@ export const deprecated1341 = [
 				legacyArrowInnerHtml: _legacyArrowInnerHtml,
 				...rest
 			} = attributes;
-			// deprecatedは連鎖しないため、v1からも現行の文字色形式へ直接移す.
-			return migrateColors( {
+			// deprecatedは連鎖しないため、v1からも現行の色・枠線形式へ直接移す.
+			return migrateFaqItemAttributes( {
 				...rest,
 				labelBorderRadius: labelBorderRadius
 					? `${ labelBorderRadius }px`

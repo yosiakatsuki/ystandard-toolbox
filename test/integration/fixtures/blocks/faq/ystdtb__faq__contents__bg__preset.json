@@ -12,7 +12,6 @@
 				"attributes": {
 					"faqType": "q",
 					"backgroundColor": "ys-light-orange",
-					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
 				},
@@ -24,7 +23,6 @@
 				"attributes": {
 					"faqType": "a",
 					"backgroundColor": "ys-light-orange",
-					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
 				},

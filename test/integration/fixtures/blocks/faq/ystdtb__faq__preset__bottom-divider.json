@@ -11,13 +11,19 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "bottom",
-					"faqBorderSize": "1px",
-					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
 					"labelBold": true,
 					"labelBorderSize": "0",
-					"labelBorderRadius": "0"
+					"labelBorderRadius": "0",
+					"style": {
+						"border": {
+							"bottom": {
+								"width": "1px",
+								"style": "solid",
+								"color": "#aaaaaa"
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -26,13 +32,19 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "bottom",
-					"faqBorderSize": "1px",
-					"customFaqBorderColor": "#aaaaaa",
 					"labelPosition": "center",
 					"labelBold": true,
 					"labelBorderSize": "0",
-					"labelBorderRadius": "0"
+					"labelBorderRadius": "0",
+					"style": {
+						"border": {
+							"bottom": {
+								"width": "1px",
+								"style": "solid",
+								"color": "#aaaaaa"
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

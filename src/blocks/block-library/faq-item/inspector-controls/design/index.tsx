@@ -35,10 +35,7 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
+			borderColor: undefined,
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: undefined,
@@ -68,10 +65,7 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
+			borderColor: undefined,
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: '#222222',
@@ -102,10 +96,7 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
+			borderColor: undefined,
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: '#222222',
@@ -136,10 +127,7 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
+			borderColor: undefined,
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: '#666666',
@@ -171,10 +159,7 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
+			borderColor: undefined,
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: '#666666',
@@ -206,10 +191,12 @@ const designPreset: DesignPreset[] = [
 		attributes: {
 			backgroundColor: undefined,
 			gradient: undefined,
-			faqBorderType: 'bottom',
-			faqBorderSize: '1px',
-			faqBorderColor: undefined,
-			customFaqBorderColor: '#aaaaaa',
+			borderColor: undefined,
+			style: {
+				border: {
+					bottom: { width: '1px', style: 'solid', color: '#aaaaaa' },
+				},
+			},
 			labelSize: undefined,
 			labelColor: undefined,
 			customLabelColor: undefined,
@@ -233,12 +220,13 @@ const designPreset: DesignPreset[] = [
 export function Design( props ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { faqType } = attributes;
-	// 従来どおりItem背景を解除し、本文色など他のstyle設定は保持する.
+	// Item背景を解除して枠線をプリセットに合わせ、本文色など他のstyle設定は保持する.
 	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
 		setAttributes( {
 			...preset.attributes,
 			style: stripUndefined( {
 				...attributes.style,
+				border: preset.attributes.style?.border,
 				color: {
 					...attributes.style?.color,
 					background: undefined,

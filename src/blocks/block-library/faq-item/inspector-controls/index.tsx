@@ -8,7 +8,6 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
  */
 import { Design } from './design';
 import { FAQLabel } from './faq-label';
-import { FaqContents } from './faq-contents';
 
 // @ts-ignore.
 export function InspectorControls( props ): JSX.Element {
@@ -16,7 +15,6 @@ export function InspectorControls( props ): JSX.Element {
 		<WPInspectorControls>
 			<Design { ...props } />
 			<FAQLabel { ...props } />
-			<FaqContents { ...props } />
 		</WPInspectorControls>
 	);
 }

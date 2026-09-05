@@ -11,11 +11,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "bottom",
-					"faqBorderSize": "1px",
-					"faqBorderColor": "ys-green",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"style": {
+						"border": {
+							"bottom": {
+								"width": "1px",
+								"style": "solid",
+								"color": "var:preset|color|ys-green"
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -24,11 +30,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "bottom",
-					"faqBorderSize": "1px",
-					"faqBorderColor": "ys-green",
 					"labelPosition": "center",
-					"labelBold": true
+					"labelBold": true,
+					"style": {
+						"border": {
+							"bottom": {
+								"width": "1px",
+								"style": "solid",
+								"color": "var:preset|color|ys-green"
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

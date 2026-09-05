@@ -13,7 +13,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
 				},

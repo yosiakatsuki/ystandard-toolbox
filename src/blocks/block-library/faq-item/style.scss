@@ -5,18 +5,19 @@
 	margin: 0;
 	padding: var(--ystdtb--faq-item--padding-vertical)
 		var(--ystdtb--faq-item--padding-horizon);
-	border: 0;
+	// コアの全周枠線幅がある場合は、線種の既定値をリセットしない.
+	&:where(:not([style*="border-width:"])) {
+		border: 0;
+	}
 
 	&:where(.has-background) {
 		--ystdtb--faq-item--padding-vertical: 1.25rem;
 		--ystdtb--faq-item--padding-horizon: 1.25rem;
 	}
 
-	&:where(.has-border-bottom) {
-		border-bottom-style: solid;
-	}
+	// 旧下区切り線の余白判定はhas-borderに任せ、標準枠線だけを幅指定で判定する.
+	&:where(:not(.has-border, .has-background, :not(.has-border-bottom):is([style*="border-width:"], [style*="border-top-width:"], [style*="border-right-width:"], [style*="border-bottom-width:"], [style*="border-left-width:"]))) {
 
-	&:where(:not(.has-border, .has-background)) {
 		&:where(.is-faq--q) {
 			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
 
@@ -69,7 +70,18 @@
 
 // 親ブロックの状態による調整
 .ystdtb-faq:where(.is-accordion:not(.is-open)) {
+
 	:where(.is-faq--q) {
 		padding-bottom: var(--ystdtb--faq-item--padding-vertical);
 	}
 }
+
+// 非推奨: v2.3.0以前の下区切り線。旧ブロック対応終了時にこのまとまりを削除する.
+/* stylelint-disable no-duplicate-selectors */
+.ystdtb-faq-item {
+
+	&:where(.has-border-bottom) {
+		border-bottom-style: solid;
+	}
+}
+/* stylelint-enable no-duplicate-selectors */

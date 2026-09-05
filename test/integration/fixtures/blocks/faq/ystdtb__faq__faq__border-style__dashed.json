@@ -18,7 +18,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
 				},
@@ -29,7 +28,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "",
 					"labelPosition": "center",
 					"labelBold": true
 				},

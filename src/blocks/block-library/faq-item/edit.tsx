@@ -45,7 +45,6 @@ const template: [ string, Record< string, any > ][] = [
 function FaqItemEdit( props: FaqItemEditProps ) {
 	const {
 		attributes,
-		faqBorderColor,
 		labelColor,
 		labelBackgroundColor,
 		labelBorderColor,
@@ -60,14 +59,8 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 	// FAQアイテムブロックProps
 	const blockProps = useBlockProps( {
-		className: getItemClasses( {
-			...attributes,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
-		style: getItemStyles( {
-			...attributes,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
+		className: getItemClasses( attributes ),
+		style: getItemStyles( attributes ),
 	} );
 
 	// FAQラベルのクラス名とスタイル
@@ -135,7 +128,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 export default compose( [
 	withColors( {
-		faqBorderColor: 'borderColor',
 		labelColor: 'color',
 		labelBackgroundColor: 'backgroundColor',
 		labelBorderColor: 'borderColor',

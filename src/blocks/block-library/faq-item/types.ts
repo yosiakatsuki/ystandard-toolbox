@@ -2,12 +2,12 @@
  * Aktk Dependencies.
  */
 import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
+import type { FaqBorder } from '../faq/types';
 
 export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
 	isSelected?: boolean;
-	faqBorderColor: { color?: string; slug?: string };
 	labelColor: { color?: string; slug?: string };
 	labelBackgroundColor: { color?: string; slug?: string };
 	labelBorderColor: { color?: string; slug?: string };
@@ -22,6 +22,7 @@ export type FaqItemBlockAttributes = {
 	textColor?: string;
 	backgroundColor?: string;
 	gradient?: string;
+	borderColor?: string;
 	/** v2.3.0以前の移行処理用. */
 	faqTextColor?: string;
 	/** v2.3.0以前の移行処理用. */
@@ -30,7 +31,8 @@ export type FaqItemBlockAttributes = {
 	faqBackgroundColor?: string;
 	/** v2.3.0以前の移行処理用. */
 	customFaqBackgroundColor?: string;
-	faqBorderType: string;
+	/** v2.3.0以前の移行処理用. */
+	faqBorderType?: string;
 	faqBorderSize?: string;
 	faqBorderColor?: string;
 	customFaqBorderColor?: string;
@@ -49,6 +51,7 @@ export type FaqItemBlockAttributes = {
 	accordionArrowColor?: string;
 	customAccordionArrowColor?: string;
 	style?: {
+		border?: FaqBorder;
 		color?: {
 			text?: string;
 			background?: string;
