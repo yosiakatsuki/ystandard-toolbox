@@ -40,7 +40,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 
 | パネル | 設定項目 | 属性 |
 |---|---|---|
-| FAQ設定 | 開閉式 | `isAccordion`（default: false） |
+| FAQ設定（ToolsPanel） | 開閉式（通常／開閉式の横並び選択、初期表示） | `isAccordion`（default: false、リセットで通常表示） |
 | スタイル > 開閉ボタン（色） | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
 | スタイル > 開閉ボタン（余白） | マージン（上下左右、isAccordion=true時） | 親: `style.ystdtb.faq.arrow.spacing.margin` / 子: `style.ystdtb.faqItem.arrow.spacing.margin` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
