@@ -3,8 +3,7 @@
 		"name": "ystdtb/faq",
 		"isValid": true,
 		"attributes": {
-			"isAccordion": true,
-			"borderType": ""
+			"isAccordion": true
 		},
 		"innerBlocks": [
 			{

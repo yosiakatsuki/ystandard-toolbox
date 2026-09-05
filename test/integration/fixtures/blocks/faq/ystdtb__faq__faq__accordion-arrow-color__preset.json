@@ -4,7 +4,6 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": true,
-			"borderType": "",
 			"accordionArrowColor": "ys-red"
 		},
 		"innerBlocks": [

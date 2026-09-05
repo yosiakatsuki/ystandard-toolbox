@@ -4,8 +4,7 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"backgroundColor": "ys-light-orange",
-			"borderType": ""
+			"backgroundColor": "ys-light-orange"
 		},
 		"innerBlocks": [
 			{

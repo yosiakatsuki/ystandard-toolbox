@@ -4,7 +4,6 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"borderType": "",
 			"style": {
 				"color": {
 					"gradient": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
