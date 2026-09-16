@@ -5,8 +5,8 @@
 	margin: 0;
 	padding: var(--ystdtb--faq-item--padding-vertical)
 		var(--ystdtb--faq-item--padding-horizon);
-	// コアの全周枠線幅がある場合は、線種の既定値をリセットしない.
-	&:where(:not([style*="border-width:"])) {
+	// 旧ブロックの初期表示を維持しつつ、辺別を含む枠線指定がある場合はリセットしない.
+	&:where(:not([style*="border-"], [style*="border:"])) {
 		border: 0;
 	}
 
