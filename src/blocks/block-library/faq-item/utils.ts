@@ -2,7 +2,11 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies.
  */
-import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
+import {
+	getColorClassName,
+	getFontSizeClass,
+	getTypographyClassesAndStyles,
+} from '@wordpress/block-editor';
 
 /**
  * Aktk dependencies.
@@ -131,8 +135,10 @@ export function getContentsClasses(
 	const { textColor, style } = attributes;
 
 	const textColorClass = getColorClassName( 'color', textColor ) || '';
+	const typographyProps = getTypographyClassesAndStyles( attributes );
 
 	return classnames( 'ystdtb-faq-item__contents', {
+		[ typographyProps.className ]: typographyProps.className,
 		'has-text-color': textColor || style?.color?.text,
 		[ textColorClass ]: textColorClass,
 	} );
@@ -144,7 +150,10 @@ export function getContentsClasses(
  */
 export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
 	const { style } = attributes;
+	const typographyProps = getTypographyClassesAndStyles( attributes );
+
 	return {
+		...typographyProps.style,
 		color: style?.color?.text,
 	};
 }

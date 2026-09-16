@@ -59,7 +59,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 |---|---|---|
 | （属性） | FAQ タイプ | `faqType`（'q'/'a'、default: 'q'） |
 | ブロックツールバー | ラベル表示位置 | `labelPosition`（flex-start/center/flex-end、default: center） |
-| FAQラベル設定 | ラベル文字サイズ | `labelSize`（プリセット） / `customLabelSize`（px/em） |
+| スタイル > タイポグラフィ | FAQコンテンツ文字サイズ | `fontSize`（プリセット） / `style.typography.fontSize`（カスタム） |
+| スタイル > FAQラベル（文字） | FAQラベル文字サイズ | `labelSize`（プリセット） / `customLabelSize`（カスタム） |
 | FAQラベル設定 | ラベル太字 | `labelBold`（default: true） |
 | FAQラベル設定 | ラベル文字色 | `labelColor` / `customLabelColor` |
 | FAQラベル設定 | ラベル背景色 | `labelBackgroundColor` / `customLabelBackgroundColor` |
@@ -100,7 +101,7 @@ FAQ ブロック自体には RichText を持たない。コンテンツ部分は
 
 ## L1 fixture テストパターン（全パターン網羅）
 
-fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の `ystdtb__faq__deprecated-*` とは別プレフィックスで v2 操作テスト用を区別する（deprecated は v1 マイグレーションテスト用）。
+fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ystdtb__faq__deprecated-*`とは別プレフィックスで現行形式の操作テスト用を区別する（deprecatedは旧形式のマイグレーションテスト用）。
 
 命名規則: `ystdtb__faq__{scope}__{setting}__{variant}`（scope: `faq` / `item-type` / `label` / `contents` / `preset` / `combo`）
 
@@ -171,6 +172,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 - [ ] `ystdtb__faq__contents__text__preset` — `faqTextColor: "ys-purple"`
 - [ ] `ystdtb__faq__contents__text__custom` — `customFaqTextColor: "#1e3a8a"`
+- [ ] `ystdtb__faq__contents__font-size__preset` — `fontSize: "large"`
+- [ ] `ystdtb__faq__contents__font-size__custom` — `style.typography.fontSize: "24px"`
 - [ ] `ystdtb__faq__contents__bg__preset` — `faqBackgroundColor: "ys-light-orange"`
 - [ ] `ystdtb__faq__contents__bg__custom` — `customFaqBackgroundColor: "#ecfdf5"`
 - [ ] `ystdtb__faq__contents__border-type__bottom` — `faqBorderType: "bottom"` + `faqBorderSize: "1px"` + `faqBorderColor: "ys-black"`
@@ -205,6 +208,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親 `isAccordion=false` → `true` → 「開閉ボタン（色）」「開閉ボタン（余白）」UIの表示／非表示が切り替わる
 - [ ] FAQ Itemのコア文字色でプリセット・カスタム色・リセットを操作し、本文だけが変わる（ラベル・開閉ボタン・背景は維持）
 - [ ] v2.3.0の本文文字色を新形式へ移行し、再保存・再読み込み後も本文の色が維持される
+- [ ] FAQ Itemのコア文字サイズでプリセット・カスタム値・リセットを操作し、FAQコンテンツだけが変わる
+- [ ] 「FAQラベル（文字）」の文字サイズを操作し、ラベルだけが変わる。v2.3.0の設定値もそのまま維持される
 - [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア
@@ -228,7 +233,8 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
 - [ ] 親レスポンシブ余白: marginは上・下だけ、paddingは上・右・下・左を3デバイスごとに設定でき、`style.ystdtb.faq.responsive.spacing`へ保存される
 - [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／標準本文文字色／標準Item背景／標準Item枠線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
-- [ ] ラベル文字サイズ CustomFontSizePicker: プリセット → `labelSize` に slug、カスタム → `customLabelSize` に値
+- [ ] コアの文字サイズ: プリセット → `fontSize`にslug、カスタム → `style.typography.fontSize`に値を保存し、FAQコンテンツへ適用
+- [ ] FAQラベル（文字）: プリセット → `labelSize`にslug、カスタム → `customLabelSize`に値を保存し、FAQラベルへ適用
 
 ### 複雑 UI
 

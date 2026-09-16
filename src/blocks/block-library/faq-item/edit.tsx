@@ -19,6 +19,7 @@ import {
 	getItemClasses,
 	getItemStyles,
 	getContentsClasses,
+	getContentsStyles,
 	getAccordionArrowClasses,
 	getAccordionArrowStyles,
 } from './utils';
@@ -85,7 +86,10 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: getContentsClasses( attributes ),
-			style: contentsColorProps.style,
+			style: {
+				...getContentsStyles( attributes ),
+				...contentsColorProps.style,
+			},
 		},
 		{
 			templateLock: false,

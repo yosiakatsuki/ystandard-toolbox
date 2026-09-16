@@ -37,6 +37,7 @@ export type FaqItemBlockAttributes = {
 	faqBorderColor?: string;
 	customFaqBorderColor?: string;
 	labelPosition: string;
+	fontSize?: string;
 	labelSize?: string;
 	customLabelSize?: string;
 	labelColor?: string;
@@ -56,6 +57,9 @@ export type FaqItemBlockAttributes = {
 			text?: string;
 			background?: string;
 			gradient?: string;
+		};
+		typography?: {
+			fontSize?: string;
 		};
 		ystdtb?: {
 			faqItem?: {

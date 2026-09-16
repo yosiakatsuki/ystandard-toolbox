@@ -36,6 +36,9 @@
 			"type": "string",
 			"default": "center"
 		},
+		"fontSize": {
+			"type": "string"
+		},
 		"labelSize": {
 			"type": "string"
 		},
@@ -109,6 +112,13 @@
 			"gradients": true,
 			"__experimentalSkipSerialization": [ "text" ]
 		},
+		"typography": {
+			"fontSize": true,
+			"__experimentalSkipSerialization": [ "fontSize" ],
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
 		"align": false,
 		"className": false,
 		"reusable": false
@@ -118,7 +128,8 @@
 		"color": {
 			"root": ".ystdtb-faq-item",
 			"text": ".ystdtb-faq-item__contents"
-		}
+		},
+		"typography": ".ystdtb-faq-item__contents"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
