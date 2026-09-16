@@ -2,7 +2,6 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies.
  */
-import { __ } from '@wordpress/i18n';
 import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
 
 /**
@@ -16,16 +15,7 @@ import { stripUndefined } from '@aktk/block-components/utils/object';
 /**
  * Block dependencies.
  */
-import type { FaqItemBlockAttributes, LabelPositionOption } from './types';
-
-/**
- * ラベル位置選択肢
- */
-export const labelPositions: LabelPositionOption[] = [
-	{ label: __( '上', 'ystandard-toolbox' ), name: 'flex-start' },
-	{ label: __( '中央', 'ystandard-toolbox' ), name: 'center' },
-	{ label: __( '下', 'ystandard-toolbox' ), name: 'flex-end' },
-];
+import type { FaqItemBlockAttributes } from './types';
 
 /**
  * FAQアイテムのクラス名を取得

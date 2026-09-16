@@ -58,7 +58,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | パネル | 設定項目 | 属性 |
 |---|---|---|
 | （属性） | FAQ タイプ | `faqType`（'q'/'a'、default: 'q'） |
-| FAQラベル設定 | ラベル表示位置 | `labelPosition`（flex-start/center/flex-end、default: center） |
+| ブロックツールバー | ラベル表示位置 | `labelPosition`（flex-start/center/flex-end、default: center） |
 | FAQラベル設定 | ラベル文字サイズ | `labelSize`（プリセット） / `customLabelSize`（px/em） |
 | FAQラベル設定 | ラベル太字 | `labelBold`（default: true） |
 | FAQラベル設定 | ラベル文字色 | `labelColor` / `customLabelColor` |
@@ -222,7 +222,7 @@ fixture は `test/integration/fixtures/blocks/faq/` 配下に配置。既存の 
 
 ### ラベル-値対応（全選択肢網羅）
 
-- [ ] 子「ラベル表示位置」HorizonButtonSelect: 全 3 選択肢（'flex-start' / 'center' / 'flex-end'）→ 各値が `labelPosition` に保存
+- [ ] 子のBlockVerticalAlignmentToolbar: グループブロックと同じドロップダウン形式で上・中央・下を表示し、`flex-start` / `center` / `flex-end`として`labelPosition`に保存
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
 - [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される

@@ -16,6 +16,10 @@ v2.3.0の属性と保存処理を`deprecated/2.3.0/`に固定する。`faqTextCo
 
 文字色以外の改修もv2.4.0リリースまで同じdeprecatedへまとめる。v1のdeprecatedからも現行形式へ直接移行する。
 
+## ラベル表示位置
+
+ラベル表示位置はブロックツールバーの縦位置コントロールで設定する。コアの`BlockVerticalAlignmentToolbar`をグループブロックと同じドロップダウン形式で表示し、上・中央・下を既存の`labelPosition`属性（`flex-start` / `center` / `flex-end`）へ保存する。属性と保存形式は変更しないため、deprecatedは追加しない。
+
 ## 確認項目
 
 - 標準枠線はFAQ Item全体に適用し、全周・辺別の色／幅／線種と角丸を設定できる

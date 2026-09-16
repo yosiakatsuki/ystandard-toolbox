@@ -81,14 +81,6 @@ export type BorderTypeOption = {
 };
 
 /**
- * ラベル位置選択肢の型定義
- */
-export type LabelPositionOption = {
-	label: string;
-	name: string;
-};
-
-/**
  * デザインプリセットの型定義
  */
 export type DesignPreset = {

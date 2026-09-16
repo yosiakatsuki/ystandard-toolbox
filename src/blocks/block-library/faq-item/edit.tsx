@@ -23,6 +23,7 @@ import {
 	getAccordionArrowStyles,
 } from './utils';
 import { InspectorControls } from './inspector-controls';
+import { FaqItemBlockControls } from './block-controls';
 import type { FaqItemEditProps } from './types';
 import { compose } from '@wordpress/compose';
 
@@ -106,6 +107,7 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 	return (
 		<>
+			<FaqItemBlockControls { ...props } />
 			<InspectorControls { ...props } />
 
 			<div { ...blockProps }>
