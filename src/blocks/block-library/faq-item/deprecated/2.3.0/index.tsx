@@ -18,7 +18,10 @@ function isEligible( value: FaqItemBlockAttributes ) {
 		!! value.faqBorderType ||
 		undefined !== value.faqBorderSize ||
 		undefined !== value.faqBorderColor ||
-		undefined !== value.customFaqBorderColor
+		undefined !== value.customFaqBorderColor ||
+		undefined !== value.labelColor ||
+		undefined !== value.customLabelColor ||
+		false === value.labelBold
 	);
 }
 

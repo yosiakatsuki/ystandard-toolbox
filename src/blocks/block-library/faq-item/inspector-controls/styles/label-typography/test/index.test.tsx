@@ -14,6 +14,24 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import type { FaqItemEditProps } from '../../../../types';
 import { LabelTypography } from '..';
 
+type ColorSetting = {
+	label: string;
+	colorValue?: string;
+	onColorChange: ( value?: string, slug?: string ) => void;
+	clearable?: boolean;
+	isShownByDefault?: boolean;
+};
+
+jest.mock( '@aktk/block-components/hooks/useThemeColors', () => ( {
+	__esModule: true,
+	default: () => [
+		{
+			name: 'テーマ',
+			colors: [ { name: '赤', slug: 'ys-red', color: '#ff0000' } ],
+		},
+	],
+} ) );
+
 jest.mock( '@aktk/block-components/wp-controls/tools-panel', () => ( {
 	ToolsPanel: ( {
 		children,
@@ -34,20 +52,58 @@ jest.mock( '@aktk/block-components/wp-controls/tools-panel', () => ( {
 	ToolsPanelItem: ( {
 		children,
 		isShownByDefault,
+		label,
 		onDeselect,
 	}: {
 		children: ReactNode;
 		isShownByDefault: boolean;
+		label: string;
 		onDeselect: () => void;
 	} ) => (
-		<div data-shown-by-default={ String( isShownByDefault ) }>
+		<div
+			data-label={ label }
+			data-shown-by-default={ String( isShownByDefault ) }
+		>
 			{ children }
 			<button type="button" onClick={ onDeselect }>
-				文字サイズをリセット
+				{ label }をリセット
 			</button>
 		</div>
 	),
 } ) );
+
+jest.mock(
+	'@aktk/block-components/wp-controls/color-gradient-settings-dropdown',
+	() => ( {
+		__esModule: true,
+		default: ( { settings }: { settings: ColorSetting[] } ) => {
+			const setting = settings[ 0 ];
+			return (
+				<div
+					data-testid="color-setting"
+					data-clearable={ String( setting.clearable ) }
+					data-color-value={ setting.colorValue }
+					data-shown-by-default={ String( setting.isShownByDefault ) }
+				>
+					<button
+						type="button"
+						onClick={ () => setting.onColorChange() }
+					>
+						文字色をリセット
+					</button>
+					<button
+						type="button"
+						onClick={ () =>
+							setting.onColorChange( '#ff0000', 'ys-red' )
+						}
+					>
+						プリセット色
+					</button>
+				</div>
+			);
+		},
+	} )
+);
 
 jest.mock(
 	'@aktk/block-components/components/custom-font-size-picker',
@@ -67,32 +123,117 @@ jest.mock(
 	} )
 );
 
+jest.mock(
+	'@aktk/block-components/wp-controls/font-appearance-control',
+	() => ( {
+		FontAppearanceControl: ( { onChange } ) => (
+			<button
+				type="button"
+				onClick={ () =>
+					onChange( {
+						fontStyle: 'italic',
+						fontWeight: '600',
+					} )
+				}
+			>
+				外観を変更
+			</button>
+		),
+	} )
+);
+
 const createProps = (): FaqItemEditProps => ( {
 	attributes: {
 		faqType: 'q',
 		labelPosition: 'center',
-		labelBold: true,
 		labelSize: 'small',
 		customLabelSize: '14px',
 	},
 	setAttributes: jest.fn(),
-	labelColor: {},
 	labelBackgroundColor: {},
 	labelBorderColor: {},
 	accordionArrowColor: {},
 } );
 
 describe( 'LabelTypography', () => {
-	it( 'FAQラベル専用パネルで文字サイズを初期表示する', () => {
+	it( 'FAQラベル専用パネルで色と文字サイズを初期表示する', () => {
 		render( <LabelTypography { ...createProps() } /> );
 
-		const panel = screen.getByRole( 'region', {
-			name: 'FAQラベル（文字）',
-		} );
-		expect( panel.firstElementChild ).toHaveAttribute(
+		const colorSetting = screen.getByTestId( 'color-setting' );
+		expect( colorSetting ).toHaveAttribute( 'data-clearable', 'true' );
+		expect( colorSetting ).toHaveAttribute(
 			'data-shown-by-default',
 			'true'
 		);
+		expect(
+			screen.getByRole( 'button', {
+				name: 'フォントサイズをリセット',
+			} ).parentElement
+		).toHaveAttribute( 'data-shown-by-default', 'true' );
+		expect(
+			screen.getByRole( 'button', { name: '外観をリセット' } )
+				.parentElement
+		).toHaveAttribute( 'data-shown-by-default', 'false' );
+	} );
+
+	it( 'プリセット文字色をラベル専用スタイルへ保存する', () => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					arrow: { spacing: { margin: { top: '8px' } } },
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click(
+			screen.getByRole( 'button', { name: 'プリセット色' } )
+		);
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+						label: {
+							color: { text: 'var:preset|color|ys-red' },
+						},
+					},
+				},
+			},
+		} );
+	} );
+
+	it( '文字色のリセット時にラベルの他の設定を保持する', () => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					arrow: { spacing: { margin: { top: '8px' } } },
+					label: {
+						color: { text: '#0f766e' },
+						typography: { fontWeight: '600' },
+					},
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click(
+			screen.getByRole( 'button', { name: '文字色をリセット' } )
+		);
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+						label: { typography: { fontWeight: '600' } },
+					},
+				},
+			},
+		} );
 	} );
 
 	it( 'プリセット変更時にラベル文字サイズ属性だけを更新する', () => {
@@ -114,12 +255,76 @@ describe( 'LabelTypography', () => {
 		render( <LabelTypography { ...props } /> );
 
 		fireEvent.click(
-			screen.getByRole( 'button', { name: '文字サイズをリセット' } )
+			screen.getByRole( 'button', {
+				name: 'フォントサイズをリセット',
+			} )
 		);
 
 		expect( props.setAttributes ).toHaveBeenCalledWith( {
 			labelSize: undefined,
 			customLabelSize: undefined,
+		} );
+	} );
+
+	it( '外観変更時にラベルの文字スタイルだけを更新する', () => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					arrow: { spacing: { margin: { top: '8px' } } },
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click( screen.getByRole( 'button', { name: '外観を変更' } ) );
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+						label: {
+							typography: {
+								fontStyle: 'italic',
+								fontWeight: '600',
+							},
+						},
+					},
+				},
+			},
+		} );
+	} );
+
+	it( '外観リセット時にラベルの文字スタイルだけを削除する', () => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					label: {
+						typography: {
+							fontStyle: 'italic',
+							fontWeight: '600',
+						},
+					},
+					arrow: { spacing: { margin: { top: '8px' } } },
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click(
+			screen.getByRole( 'button', { name: '外観をリセット' } )
+		);
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+					},
+				},
+			},
 		} );
 	} );
 } );

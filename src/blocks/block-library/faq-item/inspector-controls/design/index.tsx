@@ -22,6 +22,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'default',
 		label: __( 'デフォルト', 'ystandard-toolbox' ),
+		labelTextColor: undefined,
 		itemStyles: {},
 		labelStyles: {
 			color: '#222222',
@@ -37,9 +38,6 @@ const designPreset: DesignPreset[] = [
 			gradient: undefined,
 			borderColor: undefined,
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: undefined,
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: undefined,
 			labelBorderSize: '0',
@@ -51,6 +49,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'background-square',
 		label: __( '背景あり四角', 'ystandard-toolbox' ),
+		labelTextColor: '#222222',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -67,9 +66,6 @@ const designPreset: DesignPreset[] = [
 			gradient: undefined,
 			borderColor: undefined,
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#222222',
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: '#f1f1f3',
 			labelBorderSize: '0',
@@ -81,6 +77,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'background-circle',
 		label: __( '背景あり丸', 'ystandard-toolbox' ),
+		labelTextColor: '#222222',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -98,9 +95,6 @@ const designPreset: DesignPreset[] = [
 			gradient: undefined,
 			borderColor: undefined,
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#222222',
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: '#f1f1f3',
 			labelBorderSize: '0',
@@ -112,6 +106,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'outline-square',
 		label: __( '四角アウトライン', 'ystandard-toolbox' ),
+		labelTextColor: '#666666',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -129,9 +124,6 @@ const designPreset: DesignPreset[] = [
 			gradient: undefined,
 			borderColor: undefined,
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#666666',
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: '#ffffff',
 			labelBorderSize: '2px',
@@ -143,6 +135,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'outline-circle',
 		label: __( '丸アウトライン', 'ystandard-toolbox' ),
+		labelTextColor: '#666666',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -161,9 +154,6 @@ const designPreset: DesignPreset[] = [
 			gradient: undefined,
 			borderColor: undefined,
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#666666',
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: '#ffffff',
 			labelBorderSize: '2px',
@@ -175,6 +165,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'bottom-divider',
 		label: __( '区切り線あり', 'ystandard-toolbox' ),
+		labelTextColor: undefined,
 		itemStyles: {
 			paddingBottom: '.25em',
 			borderBottom: '1px solid #aaaaaa',
@@ -198,9 +189,6 @@ const designPreset: DesignPreset[] = [
 				},
 			},
 			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: undefined,
-			labelBold: true,
 			labelBackgroundColor: undefined,
 			customLabelBackgroundColor: undefined,
 			labelBorderSize: '0',
@@ -224,6 +212,8 @@ export function Design( props ): JSX.Element {
 	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
 		setAttributes( {
 			...preset.attributes,
+			labelColor: undefined,
+			customLabelColor: undefined,
 			style: stripUndefined( {
 				...attributes.style,
 				border: preset.attributes.style?.border,
@@ -232,9 +222,24 @@ export function Design( props ): JSX.Element {
 					background: undefined,
 					gradient: undefined,
 				},
+				ystdtb: {
+					...attributes.style?.ystdtb,
+					faqItem: {
+						...attributes.style?.ystdtb?.faqItem,
+						label: {
+							...attributes.style?.ystdtb?.faqItem?.label,
+							color: {
+								...attributes.style?.ystdtb?.faqItem?.label
+									?.color,
+								text: preset.labelTextColor,
+							},
+							typography: undefined,
+						},
+					},
+				},
 			} ),
 			accordionArrowColor: undefined,
-			customAccordionArrowColor: preset.attributes.customLabelColor,
+			customAccordionArrowColor: preset.labelTextColor,
 		} );
 	};
 	return (

@@ -15,6 +15,7 @@ import type { Spacing } from '@aktk/block-components/components/custom-spacing-s
 import { getCustomSpacingValues } from '@aktk/block-components/components/custom-spacing-select/util';
 import { hasBorderWidth } from '@aktk/block-components/utils/size';
 import { stripUndefined } from '@aktk/block-components/utils/object';
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 
 /**
  * Block dependencies.
@@ -65,8 +66,6 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
 export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
 	const {
 		labelSize = '',
-		labelColor,
-		customLabelColor,
 		labelBackgroundColor,
 		customLabelBackgroundColor,
 		labelBorderColor,
@@ -75,7 +74,6 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
 	} = attributes;
 
 	const labelSizeClass = getFontSizeClass( labelSize ) || '';
-	const labelColorClass = getColorClassName( 'color', labelColor ) || '';
 	const labelBackgroundColorClass =
 		getColorClassName( 'background-color', labelBackgroundColor ) || '';
 	const labelBorderColorClass =
@@ -90,8 +88,6 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
 
 	return classnames( 'ystdtb-faq-item__label', {
 		[ labelSizeClass ]: labelSizeClass,
-		'has-text-color': labelColor || customLabelColor,
-		[ labelColorClass ]: labelColorClass,
 		'has-background': labelBackgroundColor || customLabelBackgroundColor,
 		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
 		'has-border': labelBorderColor || customLabelBorderColor,
@@ -107,22 +103,102 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
 export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 	const {
 		customLabelSize,
-		labelBold,
-		customLabelColor,
 		customLabelBackgroundColor,
 		customLabelBorderColor,
 		labelBorderSize,
 		labelBorderRadius,
 	} = attributes;
+	const typography = getLabelTypography( attributes );
 	return {
 		fontSize: customLabelSize,
-		fontWeight: labelBold ? undefined : 400,
-		color: customLabelColor,
+		fontStyle: typography?.fontStyle,
+		fontWeight: typography?.fontWeight,
+		color: presetTokenToCssVar( getLabelTextColor( attributes ) ),
 		backgroundColor: customLabelBackgroundColor,
 		borderColor: customLabelBorderColor,
 		borderWidth: labelBorderSize || undefined,
 		borderRadius: labelBorderRadius || undefined,
 	};
+}
+
+/**
+ * FAQラベルの文字色を取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return FAQラベルの文字色.
+ */
+export function getLabelTextColor( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.label?.color?.text;
+}
+
+/**
+ * FAQラベルの文字色を更新.
+ *
+ * @param style FAQアイテムのstyle属性.
+ * @param text  FAQラベルの文字色.
+ * @return 更新後のstyle属性.
+ */
+export function updateLabelTextColor(
+	style: FaqItemBlockAttributes[ 'style' ],
+	text?: string
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				label: {
+					...style?.ystdtb?.faqItem?.label,
+					color: {
+						...style?.ystdtb?.faqItem?.label?.color,
+						text,
+					},
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
+}
+
+/**
+ * FAQラベルの文字スタイルを取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return FAQラベルの文字スタイル.
+ */
+export function getLabelTypography( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.label?.typography;
+}
+
+/**
+ * FAQラベルの文字スタイルを更新.
+ *
+ * @param style                 FAQアイテムのstyle属性.
+ * @param typography            FAQラベルの文字スタイル.
+ * @param typography.fontStyle  フォントスタイル.
+ * @param typography.fontWeight フォントウェイト.
+ * @return 更新後のstyle属性.
+ */
+export function updateLabelTypography(
+	style: FaqItemBlockAttributes[ 'style' ],
+	typography?: {
+		fontStyle?: string;
+		fontWeight?: string;
+	}
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				label: {
+					...style?.ystdtb?.faqItem?.label,
+					typography,
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
 }
 
 /**

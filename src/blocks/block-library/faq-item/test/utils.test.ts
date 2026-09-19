@@ -5,14 +5,18 @@ import type { FaqItemBlockAttributes } from '../types';
 import {
 	getAccordionArrowMargin,
 	getAccordionArrowStyles,
+	getLabelStyles,
+	getLabelTextColor,
+	getLabelTypography,
 	updateAccordionArrowMargin,
+	updateLabelTextColor,
+	updateLabelTypography,
 } from '../utils';
 
 const DEFAULT_ATTRIBUTES: FaqItemBlockAttributes = {
 	faqType: 'q',
 	faqBorderType: '',
 	labelPosition: 'center',
-	labelBold: true,
 };
 
 describe( 'FAQアイテム開閉ボタン余白', () => {
@@ -94,6 +98,92 @@ describe( 'FAQアイテム開閉ボタン余白', () => {
 										top: '1rem',
 									},
 								},
+							},
+						},
+					},
+				},
+				undefined
+			)
+		).toBeUndefined();
+	} );
+} );
+
+describe( 'FAQラベル文字スタイル', () => {
+	it( 'プリセット文字色を更新してCSS変数へ変換する', () => {
+		const style = updateLabelTextColor(
+			{
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+					},
+				},
+			},
+			'var:preset|color|ys-red'
+		);
+		const attributes = { ...DEFAULT_ATTRIBUTES, style };
+
+		expect( getLabelTextColor( attributes ) ).toBe(
+			'var:preset|color|ys-red'
+		);
+		expect( getLabelStyles( attributes ).color ).toBe(
+			'var(--wp--preset--color--ys-red)'
+		);
+		expect( style?.ystdtb?.faqItem?.arrow?.spacing?.margin?.top ).toBe(
+			'8px'
+		);
+	} );
+
+	it( '外観を更新して他の設定を保持する', () => {
+		const style = updateLabelTypography(
+			{
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+					},
+				},
+			},
+			{ fontStyle: 'italic', fontWeight: '600' }
+		);
+
+		expect(
+			getLabelTypography( { ...DEFAULT_ATTRIBUTES, style } )
+		).toEqual( { fontStyle: 'italic', fontWeight: '600' } );
+		expect( style?.ystdtb?.faqItem?.arrow?.spacing?.margin?.top ).toBe(
+			'8px'
+		);
+	} );
+
+	it( '外観をラベルのインラインスタイルへ変換する', () => {
+		expect(
+			getLabelStyles( {
+				...DEFAULT_ATTRIBUTES,
+				style: {
+					ystdtb: {
+						faqItem: {
+							label: {
+								typography: {
+									fontStyle: 'italic',
+									fontWeight: '600',
+								},
+							},
+						},
+					},
+				},
+			} )
+		).toMatchObject( {
+			fontStyle: 'italic',
+			fontWeight: '600',
+		} );
+	} );
+
+	it( '外観解除時に空階層を削除する', () => {
+		expect(
+			updateLabelTypography(
+				{
+					ystdtb: {
+						faqItem: {
+							label: {
+								typography: { fontWeight: '400' },
 							},
 						},
 					},

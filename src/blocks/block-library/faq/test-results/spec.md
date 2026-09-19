@@ -29,8 +29,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
 - **親子属性の同期**:
   - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は 4 属性で `withColors` 利用
-  - `labelColor` / `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景・Item枠線はコアのサポート）
+- **カラー withColors**: 子 `faq-item` は3属性で`withColors`利用
+  - `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景・Item枠線はコアのサポート、ラベル文字色は独自スタイル）
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
 - **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで複数の子属性 + 親の `accordionArrowColor` を一括適用
 
@@ -61,8 +61,8 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | ブロックツールバー | ラベル表示位置 | `labelPosition`（flex-start/center/flex-end、default: center） |
 | スタイル > タイポグラフィ | FAQコンテンツ文字サイズ | `fontSize`（プリセット） / `style.typography.fontSize`（カスタム） |
 | スタイル > FAQラベル（文字） | FAQラベル文字サイズ | `labelSize`（プリセット） / `customLabelSize`（カスタム） |
-| FAQラベル設定 | ラベル太字 | `labelBold`（default: true） |
-| FAQラベル設定 | ラベル文字色 | `labelColor` / `customLabelColor` |
+| スタイル > FAQラベル（文字） | FAQラベル文字色 | `style.ystdtb.faqItem.label.color.text` |
+| スタイル > FAQラベル（文字） | FAQラベル外観 | `style.ystdtb.faqItem.label.typography.fontWeight` / `fontStyle` |
 | FAQラベル設定 | ラベル背景色 | `labelBackgroundColor` / `customLabelBackgroundColor` |
 | FAQラベル設定 | ラベル角丸 | `labelBorderRadius` |
 | FAQラベル設定 | ラベル枠線サイズ | `labelBorderSize` |
@@ -156,10 +156,12 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 - [ ] `ystdtb__faq__label__size__preset` — `labelSize: "large"`
 - [ ] `ystdtb__faq__label__size__custom-px` — `customLabelSize: "24px"`
 - [ ] `ystdtb__faq__label__size__custom-em` — `customLabelSize: "1.5em"`
-- [ ] `ystdtb__faq__label__bold__true` — `labelBold: true`（デフォルト・明示指定）
-- [ ] `ystdtb__faq__label__bold__false` — `labelBold: false`
-- [ ] `ystdtb__faq__label__color__preset` — `labelColor: "ys-red"`
-- [ ] `ystdtb__faq__label__color__custom` — `customLabelColor: "#0f766e"`
+- [ ] `ystdtb__faq__deprecated-2-3-0-label-bold-false` — `labelBold: false`をラベル外観の標準へ移行
+- [ ] `ystdtb__faq__label__appearance__italic-600` — ラベル外観に斜体・ウェイト600を設定
+- [ ] `ystdtb__faq__deprecated-2-3-0-label-color-preset` — `labelColor: "ys-red"`をプリセットトークンへ移行
+- [ ] `ystdtb__faq__deprecated-2-3-0-label-color-custom` — `customLabelColor: "#0f766e"`を新しいラベル文字色へ移行
+- [ ] `ystdtb__faq__label__color__preset-token` — プリセットトークンをラベル文字色へ設定
+- [ ] `ystdtb__faq__label__color__custom-value` — カスタム色をラベル文字色へ設定
 - [ ] `ystdtb__faq__label__bg__preset` — `labelBackgroundColor: "ys-light-green"`
 - [ ] `ystdtb__faq__label__bg__custom` — `customLabelBackgroundColor: "#fde68a"`
 - [ ] `ystdtb__faq__label__border-radius__4px` — `labelBorderRadius: "4px"`
@@ -185,9 +187,9 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 ### デザインプリセット（各プリセット適用直後の属性一式を fixture 化）
 
 - [ ] `ystdtb__faq__preset__default` — `attributes: {}`（プリセット「デフォルト」は全属性未設定状態と同等）
-- [ ] `ystdtb__faq__preset__background-square` — `customLabelColor: "#222222"` + `customLabelBackgroundColor: "#f1f1f3"`
+- [ ] `ystdtb__faq__preset__background-square` — ラベル文字色`#222222` + `customLabelBackgroundColor: "#f1f1f3"`
 - [ ] `ystdtb__faq__preset__background-circle` — 上 + `labelBorderRadius: "50px"`
-- [ ] `ystdtb__faq__preset__outline-square` — `labelBorderSize: "2px"` + `customLabelColor: "#666666"` + `customLabelBackgroundColor: "#ffffff"` + `customLabelBorderColor: "#666666"`
+- [ ] `ystdtb__faq__preset__outline-square` — `labelBorderSize: "2px"` + ラベル文字色`#666666` + `customLabelBackgroundColor: "#ffffff"` + `customLabelBorderColor: "#666666"`
 - [ ] `ystdtb__faq__preset__outline-circle` — 上 + `labelBorderRadius: "50px"`
 - [ ] `ystdtb__faq__preset__bottom-divider` — `faqBorderType: "bottom"` + `faqBorderSize: "1px"` + `customFaqBorderColor: "#aaaaaa"`
 
@@ -210,6 +212,8 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 - [ ] v2.3.0の本文文字色を新形式へ移行し、再保存・再読み込み後も本文の色が維持される
 - [ ] FAQ Itemのコア文字サイズでプリセット・カスタム値・リセットを操作し、FAQコンテンツだけが変わる
 - [ ] 「FAQラベル（文字）」の文字サイズを操作し、ラベルだけが変わる。v2.3.0の設定値もそのまま維持される
+- [ ] 「FAQラベル（文字）」の色でプリセット・カスタム色・リセットを操作し、ラベルだけが変わる。v2.3.0の文字色も新形式へ移行される
+- [ ] 「FAQラベル（文字）」の外観でウェイトとスタイルを操作し、ラベルだけが変わる。v2.3.0の太字解除はスタイルnormal・ウェイト400へ移行され、「標準」と表示される
 - [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア
@@ -232,9 +236,11 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 - [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
 - [ ] 親レスポンシブ余白: marginは上・下だけ、paddingは上・右・下・左を3デバイスごとに設定でき、`style.ystdtb.faq.responsive.spacing`へ保存される
-- [ ] 各種 ColorPalette（矢印／ラベル文字／ラベル背景／ラベル枠線／標準本文文字色／標準Item背景／標準Item枠線）: プリセットとカスタムの切替で slug / custom が正しく排他的に保存される
+- [ ] 各種色設定（矢印／ラベル文字／ラベル背景／ラベル枠線／標準本文文字色／標準Item背景／標準Item枠線）: プリセットとカスタムの切替で各設定形式へ正しく保存される
 - [ ] コアの文字サイズ: プリセット → `fontSize`にslug、カスタム → `style.typography.fontSize`に値を保存し、FAQコンテンツへ適用
 - [ ] FAQラベル（文字）: プリセット → `labelSize`にslug、カスタム → `customLabelSize`に値を保存し、FAQラベルへ適用
+- [ ] FAQラベル（文字）の色: プリセットは`var:preset|color|{slug}`、カスタムはCSSカラー値として`style.ystdtb.faqItem.label.color.text`へ保存し、FAQラベルへ適用
+- [ ] FAQラベル（文字）の外観: ウェイトとスタイルを`style.ystdtb.faqItem.label.typography`へ保存し、FAQラベルへ適用
 
 ### 複雑 UI
 

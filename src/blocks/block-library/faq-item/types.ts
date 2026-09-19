@@ -8,7 +8,6 @@ export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
 	isSelected?: boolean;
-	labelColor: { color?: string; slug?: string };
 	labelBackgroundColor: { color?: string; slug?: string };
 	labelBorderColor: { color?: string; slug?: string };
 	accordionArrowColor: { color?: string; slug?: string };
@@ -40,9 +39,12 @@ export type FaqItemBlockAttributes = {
 	fontSize?: string;
 	labelSize?: string;
 	customLabelSize?: string;
+	/** v2.3.0以前の移行処理用. */
 	labelColor?: string;
+	/** v2.3.0以前の移行処理用. */
 	customLabelColor?: string;
-	labelBold: boolean;
+	/** v2.3.0以前の移行処理用. */
+	labelBold?: boolean;
 	labelBackgroundColor?: string;
 	customLabelBackgroundColor?: string;
 	labelBorderSize?: string;
@@ -63,6 +65,15 @@ export type FaqItemBlockAttributes = {
 		};
 		ystdtb?: {
 			faqItem?: {
+				label?: {
+					color?: {
+						text?: string;
+					};
+					typography?: {
+						fontStyle?: string;
+						fontWeight?: string;
+					};
+				};
 				arrow?: {
 					color?: {
 						text?: string;
@@ -90,6 +101,7 @@ export type BorderTypeOption = {
 export type DesignPreset = {
 	name: string;
 	label: string;
+	labelTextColor?: string;
 	itemStyles: Record< string, any >;
 	labelStyles: Record< string, any >;
 	attributes: Partial< FaqItemBlockAttributes >;

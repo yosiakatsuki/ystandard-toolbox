@@ -3,6 +3,7 @@ import { createBlock, getBlockType, parse, serialize } from '@wordpress/blocks';
 
 /* Block Dependencies */
 import { registerFaqTestBlocks } from './helpers/register-blocks';
+import { migrateFaqItemAttributes } from '../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
 
 registerFaqTestBlocks();
 
@@ -84,5 +85,94 @@ describe( 'FAQ Itemの文字サイズ', () => {
 
 		expect( label.style.fontSize ).toBe( '1.5em' );
 		expect( contents.style.fontSize ).toBe( '' );
+	} );
+
+	it.each( [
+		[ 'var:preset|color|ys-red', 'var(--wp--preset--color--ys-red)' ],
+		[ '#0f766e', '#0f766e' ],
+	] )( '専用の文字色%sをFAQラベルだけに保存する', ( color, css ) => {
+		const container = renderItem( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: { color: { text: color } },
+					},
+				},
+			},
+		} );
+		const label = container.querySelector( '.ystdtb-faq-item__label' );
+		const contents = container.querySelector(
+			'.ystdtb-faq-item__contents'
+		);
+
+		expect( label.getAttribute( 'style' ) ).toContain( `color:${ css }` );
+		expect( contents.style.color ).toBe( '' );
+	} );
+
+	it( '専用の外観をFAQラベルだけに保存する', () => {
+		const container = renderItem( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							typography: {
+								fontStyle: 'italic',
+								fontWeight: '600',
+							},
+						},
+					},
+				},
+			},
+		} );
+		const label = container.querySelector( '.ystdtb-faq-item__label' );
+		const contents = container.querySelector(
+			'.ystdtb-faq-item__contents'
+		);
+
+		expect( label.style.fontStyle ).toBe( 'italic' );
+		expect( label.style.fontWeight ).toBe( '600' );
+		expect( contents.style.fontStyle ).toBe( '' );
+		expect( contents.style.fontWeight ).toBe( '' );
+	} );
+
+	it( '旧太字解除を標準ウェイトへ移し、他の設定を保持する', () => {
+		const migrated = migrateFaqItemAttributes( {
+			labelBold: false,
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+					},
+				},
+			},
+		} );
+
+		expect( migrated.style.ystdtb.faqItem.label.typography ).toEqual( {
+			fontStyle: 'normal',
+			fontWeight: '400',
+		} );
+		expect( migrated.style.ystdtb.faqItem.arrow.spacing.margin.top ).toBe(
+			'8px'
+		);
+		expect( migrated ).not.toHaveProperty( 'labelBold' );
+	} );
+
+	it( '旧ラベル文字色を移し、プリセット色を優先する', () => {
+		const migrated = migrateFaqItemAttributes( {
+			labelColor: 'ys-red',
+			customLabelColor: '#0f766e',
+		} );
+
+		expect( migrated.style.ystdtb.faqItem.label.color.text ).toBe(
+			'var:preset|color|ys-red'
+		);
+		expect( migrated ).not.toHaveProperty( 'labelColor' );
+		expect( migrated ).not.toHaveProperty( 'customLabelColor' );
+	} );
+
+	it( '旧既定値の太字はカスタム外観を追加せずに保持する', () => {
+		expect( migrateFaqItemAttributes( { labelBold: true } ) ).toEqual( {
+			labelBold: true,
+		} );
 	} );
 } );

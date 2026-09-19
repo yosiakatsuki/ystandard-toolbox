@@ -47,7 +47,6 @@ const template: [ string, Record< string, any > ][] = [
 function FaqItemEdit( props: FaqItemEditProps ) {
 	const {
 		attributes,
-		labelColor,
 		labelBackgroundColor,
 		labelBorderColor,
 		accordionArrowColor,
@@ -69,14 +68,12 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	const labelProps = {
 		className: getLabelClasses( {
 			...attributes,
-			customLabelColor: labelColor.color,
 			customLabelBackgroundColor: labelBackgroundColor?.color,
 			customLabelBorderColor: labelBorderColor?.color,
 			labelBorderSize,
 		} ),
 		style: getLabelStyles( {
 			...attributes,
-			customLabelColor: labelColor.color,
 			customLabelBackgroundColor: labelBackgroundColor?.color,
 			customLabelBorderColor: labelBorderColor?.color,
 		} ),
@@ -134,7 +131,6 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 export default compose( [
 	withColors( {
-		labelColor: 'color',
 		labelBackgroundColor: 'backgroundColor',
 		labelBorderColor: 'borderColor',
 		accordionArrowColor: 'color',

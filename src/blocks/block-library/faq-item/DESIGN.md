@@ -1,4 +1,4 @@
-# FAQ Itemの標準スタイルとラベル文字サイズ設定
+# FAQ Itemの標準スタイルとラベル文字設定
 
 ## 標準設定の適用先
 
@@ -22,21 +22,33 @@ v2.3.0の属性と保存処理を`deprecated/2.3.0/`に固定する。`faqTextCo
 
 ラベル表示位置はブロックツールバーの縦位置コントロールで設定する。コアの`BlockVerticalAlignmentToolbar`をグループブロックと同じドロップダウン形式で表示し、上・中央・下を既存の`labelPosition`属性（`flex-start` / `center` / `flex-end`）へ保存する。属性と保存形式は変更しないため、deprecatedは追加しない。
 
-## ラベル文字サイズ
+## ラベル文字設定
 
-ラベル文字サイズは、スタイルグループに独自の`ToolsPanel`「FAQラベル（文字）」を表示して設定する。フォントサイズは初期表示し、プリセットを`labelSize`、カスタム値を`customLabelSize`へ保存する。
+ラベル文字色・文字サイズ・外観は、スタイルグループに独自の`ToolsPanel`「FAQラベル（文字）」を表示して設定する。文字色とフォントサイズは初期表示する。
+
+文字色は`style.ystdtb.faqItem.label.color.text`へ保存する。プリセット色は`var:preset|color|{slug}`形式、カスタム色はCSSカラー値を保存し、FAQラベルだけに出力する。プリセット色とカスタム色を同じ属性で管理することで、コントロールの切り替えとリセットを一つの設定として扱う。
+
+フォントサイズはプリセットを`labelSize`、カスタム値を`customLabelSize`へ保存する。
+
+外観はWordPressの`FontAppearanceControl`を使い、ウェイトとスタイルを`style.ystdtb.faqItem.label.typography`へ保存する。従来の「太字にする」トグルは表示しない。未指定時は既存CSSの`font-weight: 700`を維持する。
 
 コアのタイポグラフィはFAQコンテンツ専用とし、ラベル設定とは混ぜない。ラベルの文字設定はβ版カスタム見出しの「サブテキスト（文字）」と同様に、対象要素名を付けた独自パネルとして拡張する。
 
-既存の`labelSize`と`customLabelSize`をそのまま利用するため、ラベル文字サイズのdeprecatedや属性変換は追加しない。
+既存の`labelSize`と`customLabelSize`をそのまま利用するため、ラベル文字サイズのdeprecatedや属性変換は追加しない。v2.3.0の`labelColor`はプリセットトークン、`customLabelColor`はカスタム色として同じ2.3.0のdeprecatedで新しい文字色へ変換する。両方がある場合は従来の表示と同じくプリセット色を優先する。
+
+v2.3.0の`labelBold: false`は同じ2.3.0のdeprecatedで`fontStyle: "normal"`と`fontWeight: "400"`へ変換する。WordPressの外観コントロールはスタイルとウェイトの組み合わせで選択肢を判定するため、両方を保存して「標準」を選択状態にする。`labelColor`、`customLabelColor`、`labelBold`の属性定義は旧ブロックの判定用として残すが、現行のUIと保存処理では利用しない。
 
 ## 確認項目
 
 - 標準枠線はFAQ Item全体に適用し、全周・辺別の色／幅／線種と角丸を設定できる
 - 標準タイポグラフィの文字サイズはFAQコンテンツだけに適用され、Item全体とラベルには出力されない
+- 独自のラベル文字色はラベルだけに適用され、FAQコンテンツには出力されない
 - 独自のラベル文字サイズはラベルだけに適用され、FAQコンテンツには出力されない
+- ラベルの外観はウェイトとスタイルを指定でき、ラベルだけに適用される
 - 旧下区切り線は同じv2.3.0のdeprecatedで`style.border.bottom`へ変換する。幅0・幅未設定・枠線なしは線を追加しない
 - 旧ラベル文字サイズは属性変換なしで引き続き利用できる
+- 旧`labelColor`と`customLabelColor`は新しいラベル文字色へ変換され、両方がある場合はプリセット色が優先される
+- 旧`labelBold: false`はラベルの`fontStyle: "normal"`と`fontWeight: "400"`へ変換され、外観に「標準」と表示される
 - 旧プリセット色を優先し、本文色・背景・ラベル・子ブロックを保持する
 - 旧`.has-border-bottom`用CSSは`style.scss`末尾の非推奨コメント内に残す。エディターも共通CSSを利用する
 - デザインサンプルは標準枠線を更新し、標準枠線コントロールは初期表示しない

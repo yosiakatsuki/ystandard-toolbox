@@ -12,7 +12,18 @@
 				"attributes": {
 					"faqType": "q",
 					"labelPosition": "center",
-					"labelBold": false
+					"labelBold": true,
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -22,7 +33,18 @@
 				"attributes": {
 					"faqType": "a",
 					"labelPosition": "center",
-					"labelBold": false
+					"labelBold": true,
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}
