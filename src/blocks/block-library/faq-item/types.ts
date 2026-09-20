@@ -70,8 +70,11 @@ export type FaqItemBlockAttributes = {
 						text?: string;
 					};
 					typography?: {
+						fontFamily?: string;
 						fontStyle?: string;
 						fontWeight?: string;
+						lineHeight?: string;
+						textTransform?: string;
 					};
 				};
 				arrow?: {

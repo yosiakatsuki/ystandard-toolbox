@@ -153,7 +153,7 @@ describe( 'FAQラベル文字スタイル', () => {
 		);
 	} );
 
-	it( '外観をラベルのインラインスタイルへ変換する', () => {
+	it( '文字設定をラベルのインラインスタイルへ変換する', () => {
 		expect(
 			getLabelStyles( {
 				...DEFAULT_ATTRIBUTES,
@@ -162,8 +162,12 @@ describe( 'FAQラベル文字スタイル', () => {
 						faqItem: {
 							label: {
 								typography: {
+									fontFamily:
+										'var:preset|font-family|ys-gothic',
 									fontStyle: 'italic',
 									fontWeight: '600',
+									lineHeight: '1.4',
+									textTransform: 'lowercase',
 								},
 							},
 						},
@@ -171,8 +175,11 @@ describe( 'FAQラベル文字スタイル', () => {
 				},
 			} )
 		).toMatchObject( {
+			fontFamily: 'var(--wp--preset--font-family--ys-gothic)',
 			fontStyle: 'italic',
 			fontWeight: '600',
+			lineHeight: '1.4',
+			textTransform: 'lowercase',
 		} );
 	} );
 

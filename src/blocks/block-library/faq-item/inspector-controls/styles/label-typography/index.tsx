@@ -11,9 +11,13 @@ import {
 	CustomFontSizePicker,
 	type CustomFontSizePickerOnChangeProps,
 } from '@aktk/block-components/components/custom-font-size-picker';
+import { useFontFamilies } from '@aktk/block-components/components/font-family-select';
 import useThemeColors from '@aktk/block-components/hooks/useThemeColors';
 import ColorGradientSettingsDropdown from '@aktk/block-components/wp-controls/color-gradient-settings-dropdown';
 import { FontAppearanceControl } from '@aktk/block-components/wp-controls/font-appearance-control';
+import FontFamilyControl from '@aktk/block-components/wp-controls/font-family-control';
+import LineHeightControl from '@aktk/block-components/wp-controls/line-height-control';
+import TextTransformControl from '@aktk/block-components/wp-controls/text-transform-control';
 import {
 	ToolsPanel,
 	ToolsPanelItem,
@@ -31,6 +35,13 @@ import {
 } from '../../../utils';
 
 const PANEL_ID = 'ystdtb-faq-item-label-typography';
+const FONT_FAMILY_PRESET_PREFIX = 'var:preset|font-family|';
+
+type FontFamilyPreset = {
+	name: string;
+	slug?: string;
+	fontFamily: string;
+};
 
 /**
  * FAQラベルの文字設定.
@@ -43,6 +54,15 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 	const { labelSize, customLabelSize } = attributes;
 	const typography = getLabelTypography( attributes );
 	const textColor = getLabelTextColor( attributes );
+	const fontFamilies = useFontFamilies() as FontFamilyPreset[];
+	const fontFamilySlug = typography?.fontFamily?.startsWith(
+		FONT_FAMILY_PRESET_PREFIX
+	)
+		? typography.fontFamily.slice( FONT_FAMILY_PRESET_PREFIX.length )
+		: undefined;
+	const fontFamilyValue =
+		fontFamilies.find( ( family ) => family.slug === fontFamilySlug )
+			?.fontFamily ?? typography?.fontFamily;
 	const colors = useThemeColors();
 	const allColors = useMemo(
 		() => colors.flatMap( ( palette ) => palette.colors ),
@@ -86,6 +106,19 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 		} );
 	};
 
+	// ラベルの文字設定を1項目だけ更新する.
+	const updateTypographyValue = (
+		property: 'fontFamily' | 'lineHeight' | 'textTransform',
+		value?: string
+	) => {
+		setAttributes( {
+			style: updateLabelTypography( attributes.style, {
+				...typography,
+				[ property ]: value || undefined,
+			} ),
+		} );
+	};
+
 	// ラベルの外観を更新する.
 	const updateAppearance = ( appearance: {
 		fontStyle?: string;
@@ -102,7 +135,11 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 	// ラベルの外観だけをリセットする.
 	const resetAppearance = () => {
 		setAttributes( {
-			style: updateLabelTypography( attributes.style, undefined ),
+			style: updateLabelTypography( attributes.style, {
+				...typography,
+				fontStyle: undefined,
+				fontWeight: undefined,
+			} ),
 		} );
 	};
 
@@ -161,6 +198,32 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 			</ToolsPanelItem>
 			<ToolsPanelItem
 				className="single-column"
+				hasValue={ () => !! typography?.fontFamily }
+				isShownByDefault={ false }
+				label={ __( 'フォント', 'ystandard-toolbox' ) }
+				onDeselect={ () =>
+					updateTypographyValue( 'fontFamily', undefined )
+				}
+				panelId={ PANEL_ID }
+			>
+				<FontFamilyControl
+					fontFamilies={ fontFamilies }
+					value={ fontFamilyValue }
+					onChange={ ( newValue ) => {
+						const preset = fontFamilies.find(
+							( family ) => family.fontFamily === newValue
+						);
+						updateTypographyValue(
+							'fontFamily',
+							preset?.slug
+								? `${ FONT_FAMILY_PRESET_PREFIX }${ preset.slug }`
+								: newValue
+						);
+					} }
+				/>
+			</ToolsPanelItem>
+			<ToolsPanelItem
+				className="single-column"
 				hasValue={ () =>
 					!! typography?.fontStyle || !! typography?.fontWeight
 				}
@@ -177,6 +240,40 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 					onChange={ updateAppearance }
 					hasFontStyles
 					hasFontWeights
+				/>
+			</ToolsPanelItem>
+			<ToolsPanelItem
+				className="single-column"
+				hasValue={ () => !! typography?.lineHeight }
+				isShownByDefault={ false }
+				label={ __( '行の高さ', 'ystandard-toolbox' ) }
+				onDeselect={ () =>
+					updateTypographyValue( 'lineHeight', undefined )
+				}
+				panelId={ PANEL_ID }
+			>
+				<LineHeightControl
+					value={ typography?.lineHeight }
+					onChange={ ( newValue ) =>
+						updateTypographyValue( 'lineHeight', newValue )
+					}
+				/>
+			</ToolsPanelItem>
+			<ToolsPanelItem
+				className="single-column"
+				hasValue={ () => !! typography?.textTransform }
+				isShownByDefault={ false }
+				label={ __( '大文字小文字', 'ystandard-toolbox' ) }
+				onDeselect={ () =>
+					updateTypographyValue( 'textTransform', undefined )
+				}
+				panelId={ PANEL_ID }
+			>
+				<TextTransformControl
+					value={ typography?.textTransform }
+					onChange={ ( newValue ) =>
+						updateTypographyValue( 'textTransform', newValue )
+					}
 				/>
 			</ToolsPanelItem>
 		</ToolsPanel>

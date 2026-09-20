@@ -135,6 +135,37 @@ describe( 'FAQ Itemの文字サイズ', () => {
 		expect( contents.style.fontWeight ).toBe( '' );
 	} );
 
+	it( '専用のフォント・行の高さ・大文字小文字をFAQラベルだけに保存する', () => {
+		const container = renderItem( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							typography: {
+								fontFamily: 'var:preset|font-family|ys-gothic',
+								lineHeight: '1.4',
+								textTransform: 'lowercase',
+							},
+						},
+					},
+				},
+			},
+		} );
+		const label = container.querySelector( '.ystdtb-faq-item__label' );
+		const contents = container.querySelector(
+			'.ystdtb-faq-item__contents'
+		);
+
+		expect( label.style.fontFamily ).toBe(
+			'var(--wp--preset--font-family--ys-gothic)'
+		);
+		expect( label.style.lineHeight ).toBe( '1.4' );
+		expect( label.style.textTransform ).toBe( 'lowercase' );
+		expect( contents.style.fontFamily ).toBe( '' );
+		expect( contents.style.lineHeight ).toBe( '' );
+		expect( contents.style.textTransform ).toBe( '' );
+	} );
+
 	it( '旧太字解除を標準ウェイトへ移し、他の設定を保持する', () => {
 		const migrated = migrateFaqItemAttributes( {
 			labelBold: false,

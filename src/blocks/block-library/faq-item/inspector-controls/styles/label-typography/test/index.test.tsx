@@ -32,6 +32,16 @@ jest.mock( '@aktk/block-components/hooks/useThemeColors', () => ( {
 	],
 } ) );
 
+jest.mock( '@aktk/block-components/components/font-family-select', () => ( {
+	useFontFamilies: () => [
+		{
+			name: 'ゴシック',
+			slug: 'ys-gothic',
+			fontFamily: '"Noto Sans JP", sans-serif',
+		},
+	],
+} ) );
+
 jest.mock( '@aktk/block-components/wp-controls/tools-panel', () => ( {
 	ToolsPanel: ( {
 		children,
@@ -142,6 +152,39 @@ jest.mock(
 	} )
 );
 
+jest.mock( '@aktk/block-components/wp-controls/font-family-control', () => ( {
+	__esModule: true,
+	default: ( { onChange } ) => (
+		<button
+			type="button"
+			onClick={ () => onChange( '"Noto Sans JP", sans-serif' ) }
+		>
+			フォントを変更
+		</button>
+	),
+} ) );
+
+jest.mock( '@aktk/block-components/wp-controls/line-height-control', () => ( {
+	__esModule: true,
+	default: ( { onChange } ) => (
+		<button type="button" onClick={ () => onChange( '1.4' ) }>
+			行の高さを変更
+		</button>
+	),
+} ) );
+
+jest.mock(
+	'@aktk/block-components/wp-controls/text-transform-control',
+	() => ( {
+		__esModule: true,
+		default: ( { onChange } ) => (
+			<button type="button" onClick={ () => onChange( 'lowercase' ) }>
+				大文字小文字を変更
+			</button>
+		),
+	} )
+);
+
 const createProps = (): FaqItemEditProps => ( {
 	attributes: {
 		faqType: 'q',
@@ -174,6 +217,13 @@ describe( 'LabelTypography', () => {
 			screen.getByRole( 'button', { name: '外観をリセット' } )
 				.parentElement
 		).toHaveAttribute( 'data-shown-by-default', 'false' );
+		[ 'フォント', '行の高さ', '大文字小文字' ].forEach( ( label ) => {
+			expect(
+				screen.getByRole( 'button', {
+					name: `${ label }をリセット`,
+				} ).parentElement
+			).toHaveAttribute( 'data-shown-by-default', 'false' );
+		} );
 	} );
 
 	it( 'プリセット文字色をラベル専用スタイルへ保存する', () => {
@@ -250,6 +300,83 @@ describe( 'LabelTypography', () => {
 		} );
 	} );
 
+	it.each( [
+		[ 'フォントを変更', 'fontFamily', 'var:preset|font-family|ys-gothic' ],
+		[ '行の高さを変更', 'lineHeight', '1.4' ],
+		[ '大文字小文字を変更', 'textTransform', 'lowercase' ],
+	] )( '%sでラベルの文字設定だけを更新する', ( button, key, value ) => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					arrow: { spacing: { margin: { top: '8px' } } },
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click( screen.getByRole( 'button', { name: button } ) );
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						arrow: { spacing: { margin: { top: '8px' } } },
+						label: { typography: { [ key ]: value } },
+					},
+				},
+			},
+		} );
+	} );
+
+	it.each( [
+		[ 'フォント', { lineHeight: '1.4', textTransform: 'lowercase' } ],
+		[
+			'行の高さ',
+			{
+				fontFamily: 'var:preset|font-family|ys-gothic',
+				textTransform: 'lowercase',
+			},
+		],
+		[
+			'大文字小文字',
+			{
+				fontFamily: 'var:preset|font-family|ys-gothic',
+				lineHeight: '1.4',
+			},
+		],
+	] )( '%sのリセットで他の文字設定を保持する', ( label, expected ) => {
+		const props = createProps();
+		props.attributes.style = {
+			ystdtb: {
+				faqItem: {
+					label: {
+						typography: {
+							fontFamily: 'var:preset|font-family|ys-gothic',
+							lineHeight: '1.4',
+							textTransform: 'lowercase',
+						},
+					},
+				},
+			},
+		};
+		render( <LabelTypography { ...props } /> );
+
+		fireEvent.click(
+			screen.getByRole( 'button', { name: `${ label }をリセット` } )
+		);
+
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: { typography: expected },
+					},
+				},
+			},
+		} );
+	} );
+
 	it( '項目リセットでラベル文字サイズ属性だけを削除する', () => {
 		const props = createProps();
 		render( <LabelTypography { ...props } /> );
@@ -305,6 +432,7 @@ describe( 'LabelTypography', () => {
 						typography: {
 							fontStyle: 'italic',
 							fontWeight: '600',
+							lineHeight: '1.4',
 						},
 					},
 					arrow: { spacing: { margin: { top: '8px' } } },
@@ -322,6 +450,7 @@ describe( 'LabelTypography', () => {
 				ystdtb: {
 					faqItem: {
 						arrow: { spacing: { margin: { top: '8px' } } },
+						label: { typography: { lineHeight: '1.4' } },
 					},
 				},
 			},

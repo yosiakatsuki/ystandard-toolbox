@@ -111,8 +111,11 @@ export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 	const typography = getLabelTypography( attributes );
 	return {
 		fontSize: customLabelSize,
+		fontFamily: presetTokenToCssVar( typography?.fontFamily ),
 		fontStyle: typography?.fontStyle,
 		fontWeight: typography?.fontWeight,
+		lineHeight: typography?.lineHeight,
+		textTransform: typography?.textTransform,
 		color: presetTokenToCssVar( getLabelTextColor( attributes ) ),
 		backgroundColor: customLabelBackgroundColor,
 		borderColor: customLabelBorderColor,
@@ -173,17 +176,23 @@ export function getLabelTypography( attributes: FaqItemBlockAttributes ) {
 /**
  * FAQラベルの文字スタイルを更新.
  *
- * @param style                 FAQアイテムのstyle属性.
- * @param typography            FAQラベルの文字スタイル.
- * @param typography.fontStyle  フォントスタイル.
- * @param typography.fontWeight フォントウェイト.
+ * @param style                    FAQアイテムのstyle属性.
+ * @param typography               FAQラベルの文字スタイル.
+ * @param typography.fontFamily    フォントファミリー.
+ * @param typography.fontStyle     フォントスタイル.
+ * @param typography.fontWeight    フォントウェイト.
+ * @param typography.lineHeight    行の高さ.
+ * @param typography.textTransform 大文字小文字.
  * @return 更新後のstyle属性.
  */
 export function updateLabelTypography(
 	style: FaqItemBlockAttributes[ 'style' ],
 	typography?: {
+		fontFamily?: string;
 		fontStyle?: string;
 		fontWeight?: string;
+		lineHeight?: string;
+		textTransform?: string;
 	}
 ) {
 	return stripUndefined( {
