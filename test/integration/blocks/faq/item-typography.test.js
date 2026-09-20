@@ -2,8 +2,8 @@
 import { createBlock, getBlockType, parse, serialize } from '@wordpress/blocks';
 
 /* Block Dependencies */
-import { registerFaqTestBlocks } from './helpers/register-blocks';
-import { migrateFaqItemAttributes } from '../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
+import { registerFaqTestBlocks } from '../../helpers/register-blocks';
+import { migrateFaqItemAttributes } from '../../../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
 
 registerFaqTestBlocks();
 

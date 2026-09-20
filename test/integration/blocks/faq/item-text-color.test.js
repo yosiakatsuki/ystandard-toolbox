@@ -2,8 +2,8 @@
 import { createBlock, getBlockType, parse, serialize } from '@wordpress/blocks';
 
 /* Block Dependencies */
-import { registerFaqTestBlocks } from './helpers/register-blocks';
-import { migrateColors } from '../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
+import { registerFaqTestBlocks } from '../../helpers/register-blocks';
+import { migrateColors } from '../../../../src/blocks/block-library/faq-item/deprecated/2.3.0/migrate';
 
 registerFaqTestBlocks();
 
@@ -109,7 +109,14 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 	] )( '文字色を本文にだけ保存する: %j', ( color ) => {
 		const container = renderItem( {
 			...color,
-			customLabelColor: '#aa0000',
+			style: {
+				...color.style,
+				ystdtb: {
+					faqItem: {
+						label: { color: { text: '#aa0000' } },
+					},
+				},
+			},
 			customAccordionArrowColor: '#00aa00',
 			backgroundColor: 'ys-light-gray',
 		} );
@@ -143,8 +150,14 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 	it( '文字色をリセットすると本文の色指定だけがなくなる', () => {
 		const container = renderItem( {
 			textColor: undefined,
-			style: { color: { text: undefined } },
-			customLabelColor: '#aa0000',
+			style: {
+				color: { text: undefined },
+				ystdtb: {
+					faqItem: {
+						label: { color: { text: '#aa0000' } },
+					},
+				},
+			},
 		} );
 		const contents = container.querySelector(
 			'.ystdtb-faq-item__contents'

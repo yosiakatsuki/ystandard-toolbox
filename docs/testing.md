@@ -12,6 +12,9 @@ test/
 └── integration/         # Gutenberg fixture-based テスト用
     ├── integration.config.js
     ├── setup-tests.js
+    ├── blocks/            # ブロック固有の integration テスト
+    │   └── {block-family}/
+    │       └── {target}-{setting}.test.js
     ├── fixtures/
     │   ├── blocks/      # 各ブロックの fixture セット
     │   ├── index.js
@@ -121,6 +124,14 @@ PHPUnit テストを追加するブロックは、`test-results/spec.md` に「L
 `block.json`はBabelで読み込み元のコードに埋め込まれるため、JSONだけを変更すると古い変換結果が再利用されることがある。現行のブロック仕様で検証するため、integrationテストではJestの変換キャッシュを無効にしている。
 
 Gutenberg コアの [`test/integration/full-content`](https://github.com/WordPress/gutenberg/tree/trunk/test/integration/full-content) を参考にした、ブロックの parse / serialize / validate / migrate の往復検証テスト。
+
+### テストファイルの配置
+
+ブロック固有の処理を直接検証するテストは、`test/integration/blocks/{block-family}/` 配下に配置する。`test/integration/` 直下にブロック名のディレクトリやテストファイルは追加しない。
+
+- `{block-family}` は親子ブロックをひとまとめにする単位とする。例: `faq` / `faq-item` は `blocks/faq/` に配置
+- ファイル名は `{target}-{setting}.test.js` を基本とし、対象要素と検証内容が分かる名前にする。例: `item-typography.test.js`
+- 複数ブロックに共通するテストコードは `helpers/`、fixtureデータは `fixtures/`、fixtureを横断処理するテストは `full-content/` に配置する
 
 ### 検証する内容
 
