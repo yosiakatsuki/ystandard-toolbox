@@ -24,7 +24,7 @@
 		"@wordpress/browserslist-config": "^6.23.0",
 		"@wordpress/core-data": "^7.53.0",
 		"@wordpress/editor": "^14.49.1",
-		"@wordpress/env": "^11.14.0",
+		"@wordpress/env": "^12.0.0",
 		"@wordpress/hooks": "^4.53.0",
 		"@wordpress/icons": "^15.0.0",
 		"@wordpress/plugins": "^7.49.1",
