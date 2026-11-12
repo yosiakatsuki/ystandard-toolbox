@@ -1,6 +1,9 @@
 /* Aktk Dependencies */
 import { stripUndefined } from '@aktk/block-components/utils/object';
 
+/* Block Dependencies */
+import { migrateAccordionArrowColor } from './arrow-color';
+
 /**
  * 旧FAQ属性のカスタム背景色をBlock Supportsのstyle属性へ移行する.
  *
@@ -142,5 +145,8 @@ export function migrateFaqBorder( attributes: Record< string, any > ) {
  * @return 現行FAQ属性.
  */
 export function migrateFaqAttributes( attributes: Record< string, any > ) {
-	return migrateFaqBorder( migrateFaqBackgroundColor( attributes ) );
+	return migrateAccordionArrowColor(
+		migrateFaqBorder( migrateFaqBackgroundColor( attributes ) ),
+		'faq'
+	);
 }

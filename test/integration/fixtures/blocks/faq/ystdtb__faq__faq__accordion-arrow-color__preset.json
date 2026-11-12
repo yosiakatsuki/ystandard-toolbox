@@ -4,7 +4,17 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": true,
-			"accordionArrowColor": "ys-red"
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"color": {
+								"text": "var:preset|color|ys-red"
+							}
+						}
+					}
+				}
+			}
 		},
 		"innerBlocks": [
 			{
@@ -14,7 +24,17 @@
 					"faqType": "q",
 					"labelPosition": "center",
 					"labelBold": true,
-					"accordionArrowColor": "ys-red"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -25,7 +45,17 @@
 					"faqType": "a",
 					"labelPosition": "center",
 					"labelBold": true,
-					"accordionArrowColor": "ys-red"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

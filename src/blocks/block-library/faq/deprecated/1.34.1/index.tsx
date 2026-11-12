@@ -7,6 +7,7 @@ import {
 
 /* Block Dependencies */
 import { migrateFaqAttributes } from '../migrate';
+import { hasLegacyAccordionArrowColor } from '../arrow-color';
 
 /**
  * v1.34.1以前のFAQ属性を現行形式へ移行する.
@@ -57,6 +58,7 @@ export const deprecated1341 = [
 			align: false,
 			className: false,
 		},
+		isEligible: hasLegacyAccordionArrowColor,
 		migrate: migrateDeprecated1341Faq,
 		// @ts-ignore.
 		save( { attributes } ) {

@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { migrateFaqItemAttributes } from '../2.3.0/migrate';
+import { hasLegacyAccordionArrowColor } from '../../../faq/deprecated/arrow-color';
 import {
 	InnerBlocks,
 	getColorClassName,
@@ -99,6 +100,7 @@ export const deprecated1341 = [
 			align: false,
 			className: false,
 		},
+		isEligible: hasLegacyAccordionArrowColor,
 		migrate: ( attributes: any ) => {
 			const {
 				labelBorderRadius,

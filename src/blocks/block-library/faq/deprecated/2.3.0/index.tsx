@@ -9,6 +9,7 @@ import {
 
 /* Block Dependencies */
 import { migrateFaqAttributes } from '../migrate';
+import { hasLegacyAccordionArrowColor } from '../arrow-color';
 
 /**
  * v2.3.0時点のFAQクラス名を取得する.
@@ -115,6 +116,7 @@ export const deprecated230 = [
 			className: false,
 			listView: true,
 		},
+		isEligible: hasLegacyAccordionArrowColor,
 		migrate: migrateFaqAttributes,
 		// @ts-ignore.
 		save( { attributes } ) {

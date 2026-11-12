@@ -3,13 +3,33 @@
 		"blockName": "ystdtb/faq",
 		"attrs": {
 			"isAccordion": true,
-			"customAccordionArrowColor": "#dc2626"
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"color": {
+								"text": "#dc2626"
+							}
+						}
+					}
+				}
+			}
 		},
 		"innerBlocks": [
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"customAccordionArrowColor": "#dc2626"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:#dc2626\"></div></div>\n",
@@ -21,7 +41,17 @@
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"customAccordionArrowColor": "#dc2626"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",

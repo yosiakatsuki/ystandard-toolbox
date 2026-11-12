@@ -6,14 +6,8 @@
 	"title": "FAQアイテム",
 	"category": "ystdtb-blocks",
 	"description": "FAQブロックのQ&Aアイテム",
-	"keywords": [
-		"faq",
-		"item",
-		"Q&A"
-	],
-	"parent": [
-		"ystdtb/faq"
-	],
+	"keywords": [ "faq", "item", "Q&A" ],
+	"parent": [ "ystdtb/faq" ],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
 		"faqType": {
@@ -73,12 +67,6 @@
 		"customLabelBorderColor": {
 			"type": "string"
 		},
-		"accordionArrowColor": {
-			"type": "string"
-		},
-		"customAccordionArrowColor": {
-			"type": "string"
-		},
 		"style": {
 			"type": "object"
 		}
@@ -89,9 +77,7 @@
 		"ystdtb/borderType",
 		"ystdtb/borderSize",
 		"ystdtb/borderColor",
-		"ystdtb/customBorderColor",
-		"ystdtb/accordionArrowColor",
-		"ystdtb/customAccordionArrowColor"
+		"ystdtb/customBorderColor"
 	],
 	"supports": {
 		"__experimentalBorder": {
@@ -132,6 +118,6 @@
 		"typography": ".ystdtb-faq-item__contents"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"editorStyle": [ "ystdtb-aktk-components-editor", "file:./index.css" ],
 	"style": "file:./style-index.css"
 }

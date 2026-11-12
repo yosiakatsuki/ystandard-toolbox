@@ -4,7 +4,17 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": true,
-			"customAccordionArrowColor": "#dc2626"
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"color": {
+								"text": "#dc2626"
+							}
+						}
+					}
+				}
+			}
 		},
 		"innerBlocks": [
 			{
@@ -14,7 +24,17 @@
 					"faqType": "q",
 					"labelPosition": "center",
 					"labelBold": true,
-					"customAccordionArrowColor": "#dc2626"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -25,7 +45,17 @@
 					"faqType": "a",
 					"labelPosition": "center",
 					"labelBold": true,
-					"customAccordionArrowColor": "#dc2626"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

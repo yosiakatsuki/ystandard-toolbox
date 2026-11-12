@@ -2,6 +2,7 @@
 import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /* Block Dependencies */
+import { migrateAccordionArrowColor } from '../../../faq/deprecated/arrow-color';
 import type { FaqItemBlockAttributes } from '../../types';
 
 /**
@@ -161,7 +162,14 @@ export function migrateFaqItemAttributes( attributes: FaqItemBlockAttributes ) {
 		customFaqBorderColor,
 		...rest
 	} = migrateLabelAppearance(
-		migrateLabelTextColor( migrateColors( attributes ) )
+		migrateLabelTextColor(
+			migrateColors(
+				migrateAccordionArrowColor(
+					attributes,
+					'faqItem'
+				) as FaqItemBlockAttributes
+			)
+		)
 	);
 
 	// 新形式の設定を優先し、旧形式で表示されなかった線を新たに出さない.

@@ -45,12 +45,7 @@ const template: [ string, Record< string, any > ][] = [
  * @param props
  */
 function FaqItemEdit( props: FaqItemEditProps ) {
-	const {
-		attributes,
-		labelBackgroundColor,
-		labelBorderColor,
-		accordionArrowColor,
-	} = props;
+	const { attributes, labelBackgroundColor, labelBorderColor } = props;
 	const { faqType, labelBorderSize } = attributes;
 	// コアの文字色だけを本文へ適用し、ラベルや開閉ボタンへの継承を避ける.
 	const contentsColorProps = useColorProps( {
@@ -96,14 +91,8 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 	// アコーディオン矢印のクラス名とスタイル
 	const accordionArrowProps = {
-		className: getAccordionArrowClasses( {
-			...attributes,
-			customAccordionArrowColor: accordionArrowColor?.color,
-		} ),
-		style: getAccordionArrowStyles( {
-			...attributes,
-			customAccordionArrowColor: accordionArrowColor?.color,
-		} ),
+		className: getAccordionArrowClasses( attributes ),
+		style: getAccordionArrowStyles( attributes ),
 	};
 
 	return (
@@ -133,6 +122,5 @@ export default compose( [
 	withColors( {
 		labelBackgroundColor: 'backgroundColor',
 		labelBorderColor: 'borderColor',
-		accordionArrowColor: 'color',
 	} ),
 ] )( FaqItemEdit );

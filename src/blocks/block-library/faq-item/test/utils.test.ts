@@ -59,11 +59,11 @@ describe( 'FAQアイテム開閉ボタン余白', () => {
 		expect(
 			getAccordionArrowStyles( {
 				...DEFAULT_ATTRIBUTES,
-				customAccordionArrowColor: '#222222',
 				style: {
 					ystdtb: {
 						faqItem: {
 							arrow: {
+								color: { text: '#222222' },
 								spacing: {
 									margin: {
 										top: 'var:preset|spacing|20',

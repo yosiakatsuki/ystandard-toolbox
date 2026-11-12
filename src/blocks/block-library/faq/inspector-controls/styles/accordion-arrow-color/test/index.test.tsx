@@ -64,6 +64,12 @@ jest.mock(
 					<span>{ setting.label }</span>
 					<button
 						type="button"
+						onClick={ () => setting.onColorChange( '#123456' ) }
+					>
+						カスタム色
+					</button>
+					<button
+						type="button"
 						onClick={ () => setting.onColorChange() }
 					>
 						リセット
@@ -111,43 +117,75 @@ describe( 'AccordionArrowColor', () => {
 		expect( setting ).toHaveAttribute( 'data-shown-by-default', 'false' );
 	} );
 
-	it( 'リセット時に親子の色属性を削除する', () => {
+	it.each( [
+		[ 'プリセット色', 'var:preset|color|ys-red' ],
+		[ 'カスタム色', '#123456' ],
+		[ 'リセット', undefined ],
+	] )( '%sを親子へ反映し他の設定を保持する', ( button, text ) => {
 		const props = createProps( {
-			accordionArrowColor: 'ys-red',
+			style: {
+				color: { background: '#eeeeee' },
+				ystdtb: {
+					faq: {
+						arrow: {
+							color: { text: 'var:preset|color|ys-red' },
+							spacing: { margin: { top: '8px' } },
+						},
+					},
+				},
+			},
 		} );
 		render( <AccordionArrowColor { ...props } /> );
 		expect( screen.getByTestId( 'color-setting' ) ).toHaveAttribute(
 			'data-color-value',
 			'#ff0000'
 		);
-
-		fireEvent.click( screen.getByRole( 'button', { name: 'リセット' } ) );
-
-		expect( props.setAttributes ).toHaveBeenCalledWith( {
-			accordionArrowColor: undefined,
-			customAccordionArrowColor: undefined,
-		} );
-		expect( props.updateChildAttributes ).toHaveBeenCalledWith( {
-			accordionArrowColor: undefined,
-			customAccordionArrowColor: undefined,
-		} );
-	} );
-
-	it( 'プリセット色はslugとして親子へ保存する', () => {
-		const props = createProps();
-		render( <AccordionArrowColor { ...props } /> );
-
-		fireEvent.click(
-			screen.getByRole( 'button', { name: 'プリセット色' } )
+		fireEvent.click( screen.getByRole( 'button', { name: button } ) );
+		const updated = ( props.setAttributes as jest.Mock ).mock
+			.calls[ 0 ][ 0 ];
+		expect( updated.style.color.background ).toBe( '#eeeeee' );
+		expect( updated.style.ystdtb.faq.arrow.color?.text ).toBe( text );
+		expect( updated.style.ystdtb.faq.arrow.spacing.margin.top ).toBe(
+			'8px'
 		);
-
-		expect( props.setAttributes ).toHaveBeenCalledWith( {
-			accordionArrowColor: 'ys-red',
-			customAccordionArrowColor: undefined,
+		const sync = ( props.updateChildAttributes as jest.Mock ).mock
+			.calls[ 0 ][ 0 ];
+		const childStyle = {
+			color: { text: '#333333' },
+			ystdtb: {
+				faqItem: {
+					label: { color: { text: '#777777' } },
+					arrow: {
+						color: { text: '#abcdef' },
+						spacing: { margin: { left: '4px' } },
+					},
+				},
+			},
+		};
+		for ( const faqType of [ 'q', 'a' ] ) {
+			// Q/Aそれぞれのスタイルを維持して色だけを同期する。
+			const child = sync( { faqType, style: childStyle } );
+			expect( child.style.color ).toEqual( childStyle.color );
+			expect( child.style.ystdtb.faqItem.label ).toEqual(
+				childStyle.ystdtb.faqItem.label
+			);
+			expect( child.style.ystdtb.faqItem.arrow.color?.text ).toBe( text );
+			expect( child.style.ystdtb.faqItem.arrow.spacing.margin.left ).toBe(
+				'4px'
+			);
+		}
+		expect( childStyle.ystdtb.faqItem.arrow.color.text ).toBe( '#abcdef' );
+	} );
+	it( '最後の色をリセットすると空のstyleを残さない', () => {
+		const props = createProps( {
+			style: {
+				ystdtb: { faq: { arrow: { color: { text: '#123456' } } } },
+			},
 		} );
-		expect( props.updateChildAttributes ).toHaveBeenCalledWith( {
-			accordionArrowColor: 'ys-red',
-			customAccordionArrowColor: undefined,
+		render( <AccordionArrowColor { ...props } /> );
+		fireEvent.click( screen.getByRole( 'button', { name: 'リセット' } ) );
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: undefined,
 		} );
 	} );
 } );

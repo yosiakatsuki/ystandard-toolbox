@@ -10,7 +10,6 @@ export type FaqItemEditProps = {
 	isSelected?: boolean;
 	labelBackgroundColor: { color?: string; slug?: string };
 	labelBorderColor: { color?: string; slug?: string };
-	accordionArrowColor: { color?: string; slug?: string };
 };
 
 /**
@@ -51,7 +50,9 @@ export type FaqItemBlockAttributes = {
 	labelBorderRadius?: string;
 	labelBorderColor?: string;
 	customLabelBorderColor?: string;
+	/** v2.3.0以前の移行処理用。 */
 	accordionArrowColor?: string;
+	/** v2.3.0以前の移行処理用。 */
 	customAccordionArrowColor?: string;
 	style?: {
 		border?: FaqBorder;

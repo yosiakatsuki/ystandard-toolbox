@@ -14,6 +14,11 @@ import { ToolsPanel } from '@aktk/block-components/wp-controls/tools-panel';
  * Block Dependencies.
  */
 import type { FaqEditProps } from '../../../types';
+import {
+	getAccordionArrowColor,
+	updateAccordionArrowColor,
+} from '../../../utils';
+import { updateAccordionArrowColor as updateItemAccordionArrowColor } from '@aktk/blocks/block-library/faq-item/utils';
 
 const PANEL_ID = 'ystdtb-faq-accordion-arrow';
 
@@ -25,29 +30,32 @@ const PANEL_ID = 'ystdtb-faq-accordion-arrow';
  */
 export function AccordionArrowColor( props: FaqEditProps ): JSX.Element | null {
 	const { attributes, setAttributes, updateChildAttributes } = props;
-	const { isAccordion, accordionArrowColor, customAccordionArrowColor } =
-		attributes;
+	const { isAccordion } = attributes;
+	const textColor = getAccordionArrowColor( attributes );
+	const prefix = 'var:preset|color|';
+	const presetSlug = textColor?.startsWith( prefix )
+		? textColor.slice( prefix.length )
+		: undefined;
 	const colors = useThemeColors();
 	const allColors = useMemo(
 		() => colors.flatMap( ( palette ) => palette.colors ),
 		[ colors ]
 	);
 	const colorValue =
-		allColors.find( ( color ) => color.slug === accordionArrowColor )
-			?.color ?? customAccordionArrowColor;
+		allColors.find( ( color ) => color.slug === presetSlug )?.color ??
+		textColor;
 
 	// 親子の開閉ボタン色を同じ値に更新する.
 	const handleOnChange = ( newColor?: string ) => {
 		const slug = allColors.find( ( color ) => color.color === newColor )
 			?.slug;
+		const text = slug ? `${ prefix }${ slug }` : newColor;
 		setAttributes( {
-			accordionArrowColor: slug,
-			customAccordionArrowColor: slug ? undefined : newColor,
+			style: updateAccordionArrowColor( attributes.style, text ),
 		} );
-		updateChildAttributes( {
-			accordionArrowColor: slug,
-			customAccordionArrowColor: slug ? undefined : newColor,
-		} );
+		updateChildAttributes( ( childAttributes ) => ( {
+			style: updateItemAccordionArrowColor( childAttributes.style, text ),
+		} ) );
 	};
 
 	// 開閉ボタン色を親子からまとめて削除する.

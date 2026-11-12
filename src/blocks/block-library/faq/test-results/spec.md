@@ -25,14 +25,14 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 - **RichText**: なし（コンテンツは子の InnerBlocks に委譲）
 - **レスポンシブ属性**: 親のフォントサイズと余白をdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
-  - 親 → 子: `isAccordion` / `backgroundColor` / `borderType` / `borderSize` / `borderColor` / `customBorderColor` / `accordionArrowColor` / `customAccordionArrowColor`
-  - 旧背景色・旧枠線のContextキーは移行期間の互換属性としてmetadataに残るが、現行の親枠線表示には使わない
+  - 親 → 子: `isAccordion` / `backgroundColor`
+  - 子のusesContextには旧枠線キーが残るが、現行の親枠線表示には使わない。開閉ボタン色の旧Contextキーは除去し、明示的な属性更新で同期する
 - **親子属性の同期**:
-  - 親の `accordionArrowColor` / `customAccordionArrowColor` 変更時、`updateChildAttributes` で子全員の属性も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は3属性で`withColors`利用
-  - `labelBackgroundColor` / `labelBorderColor` / `accordionArrowColor`（本文文字色・Item背景・Item枠線はコアのサポート、ラベル文字色は独自スタイル）
+  - 親の `style.ystdtb.faq.arrow.color.text` 変更時、`updateChildAttributes` で子全員の `style.ystdtb.faqItem.arrow.color.text` も同値に更新（親子両方に持つのはフロント描画のため）
+- **カラー withColors**: 子 `faq-item` は2属性で`withColors`利用
+  - `labelBackgroundColor` / `labelBorderColor`（本文文字色・Item背景・Item枠線はコアのサポート、ラベル文字色は独自スタイル）
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
-- **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで複数の子属性 + 親の `accordionArrowColor` を一括適用
+- **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで対象Itemの属性と開閉ボタン色を一括適用（親と他方のItemは保持）
 
 ## テスト対象の設定一覧
 
@@ -41,7 +41,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | パネル | 設定項目 | 属性 |
 |---|---|---|
 | FAQ設定（ToolsPanel） | 開閉式（通常／開閉式の横並び選択、初期表示） | `isAccordion`（default: false、リセットで通常表示） |
-| スタイル > 開閉ボタン（色） | 色（isAccordion=true時） | `accordionArrowColor` / `customAccordionArrowColor` |
+| スタイル > 開閉ボタン（色） | 色（isAccordion=true時） | `style.ystdtb.faq.arrow.color.text` |
 | スタイル > 開閉ボタン（余白） | マージン（上下左右、isAccordion=true時） | 親: `style.ystdtb.faq.arrow.spacing.margin` / 子: `style.ystdtb.faqItem.arrow.spacing.margin` |
 | 色 | 親背景色 | `backgroundColor` / `style.color.background` |
 | 色 | 親背景グラデーション | `gradient` / `style.color.gradient` |
@@ -82,7 +82,7 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 | 親`isAccordion=false` | スタイルパネルの「開閉ボタン（色）」「開閉ボタン（余白）」が非表示（各コンポーネントが早期return） |
 | 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
-| 親 `accordionArrowColor` / `customAccordionArrowColor` 変更 | 子 faq-item 全員の同属性も同時更新（`updateChildAttributes`） |
+| 親 `style.ystdtb.faq.arrow.color.text` 変更 | 子 faq-item 全員の `style.ystdtb.faqItem.arrow.color.text` も同時更新（`updateChildAttributes`） |
 | 親の開閉ボタンmargin変更 | 子 faq-item 全員の`style.ystdtb.faqItem.arrow.spacing.margin`も同時更新（`updateChildAttributes`） |
 | 親子テンプレートは `[q, a]` 固定 | 子 faq-item の追加・削除・並べ替え不可（`templateLock: 'all'`） |
 | 親の`backgroundColor` / `style.color.background` / `gradient` / `style.color.gradient`設定 | WordPress標準の`has-background`クラスが付き、FAQ項目の左右余白が自動で入る |
@@ -118,8 +118,8 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 - [ ] `ystdtb__faq__deprecated-2-3-0-item-background-custom` — 旧Item背景のカスタム色を移行
 - [ ] `ystdtb__faq__item-background__gradient__preset` — Item全体へプリセットグラデーション
 - [ ] `ystdtb__faq__item-background__gradient__custom` — Item全体へカスタムグラデーション、本文だけに文字色
-- [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `accordionArrowColor: "ys-red"`
-- [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `customAccordionArrowColor: "#dc2626"`
+- [ ] `ystdtb__faq__faq__accordion-arrow-color__preset` — `isAccordion: true` + `style.ystdtb.faq.arrow.color.text: "var:preset|color|ys-red"`
+- [ ] `ystdtb__faq__faq__accordion-arrow-color__custom` — `isAccordion: true` + `style.ystdtb.faq.arrow.color.text: "#dc2626"`
 - [ ] `ystdtb__faq__faq__accordion-arrow-spacing__4corners` — `isAccordion: true` + 開閉ボタンmarginの上・右・下・左を個別に設定
 - [ ] `ystdtb__faq__faq__bg__preset` — `backgroundColor: "ys-light-orange"`
 - [ ] `ystdtb__faq__faq__bg__custom` — `style.color.background: "#fff7ed"`
@@ -224,7 +224,7 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 - [ ] WordPress標準の枠線パネルで親枠線を追加・解除し、`style.border`だけが更新される
 - [ ] 子 `faqBorderType: ''` → `'bottom'` に切替 → `faqBorderSize: '1px'` + `faqBorderColor: '#eeeeee'` が自動設定される
 - [ ] 子 `faqBorderType: 'bottom'` → `''` に戻す → `faqBorderSize` が undefined、`faqBorderColor` がクリア
-- [ ] 親 `accordionArrowColor` を変更 → 子 Q/A 両方の `accordionArrowColor` も同値に更新される（`updateChildAttributes`）
+- [ ] 親 `style.ystdtb.faq.arrow.color.text` を変更 → 子 Q/A 両方の `style.ystdtb.faqItem.arrow.color.text` も同値に更新される（`updateChildAttributes`）
 - [ ] 親の開閉ボタンmarginを変更 → 子 Q/A 両方の`style.ystdtb.faqItem.arrow.spacing.margin`も同値に更新される（`updateChildAttributes`）
 
 ### 条件付き表示
@@ -253,7 +253,7 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 
 ### 複雑 UI
 
-- [ ] デザインプリセット 6 種のクリック適用: 各プリセットで期待される子 attributes セット + 親 `accordionArrowColor` 同期が実行される
+- [ ] デザインプリセット 6 種のクリック適用: 各プリセットで対象Itemの属性と開閉ボタン色が更新され、親と他方のItemは保持される
   - 特に `outline-square` / `outline-circle` / `bottom-divider` は複数属性一括反映が正しいこと
 - [ ] ColorPalette: プリセット → カスタム → クリアの 3 段階遷移で、`xxxColor` と `customXxxColor` が排他的に保存される
 - [ ] 「レスポンシブ文字設定」でフォントサイズを追加し、3デバイスの値が個別に保存される
@@ -319,16 +319,16 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 
 FAQ ブロック固有の観点:
 
-- **親 `accordionArrowColor` を設定した状態で `isAccordion` を off にする**: UI が消えても属性値は残る？再度 on に戻したときに以前の値が復活するか
-- **親子の `accordionArrowColor` が乖離した状態**: 例えば fixture で親 only / 子 only に色を設定した場合、save 出力はどうなるか（親から子への一方向同期のみ）
+- **親 `style.ystdtb.faq.arrow.color.text` を設定した状態で `isAccordion` を off にする**: UI が消えても属性値は残る？再度 on に戻したときに以前の値が復活するか
+- **親子の開閉ボタン色 が乖離した状態**: 例えば fixture で親 only / 子 only に色を設定した場合、save 出力はどうなるか（親から子への一方向同期のみ）
 - **子 `faqBorderType: 'bottom'` → `''` にクリア**: `faqBorderColor` が `setFaqBorderColor(undefined)` でクリアされる一方、`customFaqBorderColor` は残る可能性（UI コードで `setFaqBorderColor(undefined)` のみで custom 側のクリアは明示していない）
 - **親の`style.border`に色だけ設定**: ブラウザ既定の枠線幅やスタイルへ意図せず変わらないか、WordPress標準パネルでの保存結果を確認する
 - **親のstyle属性に`border-width`あり**: FAQ共通の`border: 0`でBlock Supportsの全周枠線が打ち消されない
 - **ラベル角丸だけ設定（背景なし・枠線なし）**: `has-padding` が付かないため角丸が見た目にわからない
-- **子 `faqType: 'a'` + `accordionArrowColor` 設定**: A 側は arrow div 自体を出力しないので、色設定は無効（属性は保存されるが DOM には出ない）
+- **子 `faqType: 'a'` + `style.ystdtb.faqItem.arrow.color.text` 設定**: A 側は arrow div 自体を出力しないので、色設定は無効（属性は保存されるが DOM には出ない）
 - **デザインプリセット適用直後に個別属性を手動変更**: プリセット復帰機能はないため、再度プリセットをクリックするまで混成状態になる
 - **子ブロックをクリップボード経由で別ブロックに変換**: `parent: ['ystdtb/faq']` 制約で拒否されるか
-- **ブロック複製**: 親 FAQ 全体を複製 → 内部の Q/A の clientId が独立・attributes が独立、親子の accordionArrowColor 同期が複製側でも維持される
+- **ブロック複製**: 親 FAQ 全体を複製 → 内部の Q/A の clientId が独立・attributes が独立、親子の開閉ボタン色同期が複製側でも維持される
 - **ネストされた `faqType` 手動書き換え**: block.json の属性列挙には Q/A 2 値以外も設定可能（string 型）→ UI からは変更できないが、HTML 直書きで `faqType: "x"` を入れた場合の parse 挙動
 - **プリセット色削除後のフォールバック**: 保存時に存在した `ys-xxx` がテーマ更新で未定義化 → フロントで色なしとして表示される挙動
 
@@ -352,3 +352,12 @@ FAQコンテンツの下区切り線設定を標準スタイルパネルへ移�
 - デザインサンプルも標準枠線を更新する
 - 旧CSSは`faq-item/style.scss`末尾に残す
 - 移行fixture: `ystdtb__faq__deprecated-2-3-0-item-border-custom` / `ystdtb__faq__deprecated-2-3-0-item-border-preset` / `ystdtb__faq__deprecated-faq-border`
+
+
+## 開閉ボタン色の保存形式移行
+
+- 親子とも色を独自の`style`配下へ保存し、旧色属性を新規保存しない
+- 色の変更・リセットでは背景・枠線・ラベル・開閉ボタン余白を保持する
+- `ystdtb__faq__deprecated-2-3-0-arrow-color-preset`と`ystdtb__faq__deprecated-2-3-0-arrow-color-custom`で旧形式からの移行を確認する
+- `test/integration/blocks/faq/fixtures/v2.3.0-arrow-color.html`はv2.3.0サイトで保存した実データ。専用integration testで実アイコンと段落を登録し、本文保持と再保存を確認する
+- v1の親子migrateでも色と数値属性が現行形式へ直接変換されることを確認する

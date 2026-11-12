@@ -243,15 +243,13 @@ export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
 	};
 }
 
+/**
+ * 開閉ボタンの色指定に対応するクラスを取得する。
+ * @param attributes ブロック属性。
+ */
 export function getAccordionArrowClasses( attributes: FaqItemBlockAttributes ) {
-	const { accordionArrowColor, customAccordionArrowColor } = attributes;
-
-	const accordionArrowColorClass =
-		getColorClassName( 'color', accordionArrowColor ) || '';
-
 	return classnames( 'ystdtb-faq-item__arrow', {
-		'has-text-color': accordionArrowColor || customAccordionArrowColor,
-		[ accordionArrowColorClass ]: accordionArrowColorClass,
+		'has-text-color': !! getAccordionArrowColor( attributes ),
 	} );
 }
 
@@ -294,13 +292,48 @@ export function updateAccordionArrowMargin(
 	} ) as FaqItemBlockAttributes[ 'style' ];
 }
 
+/**
+ * 開閉ボタンの色と余白を保存用CSSへ変換する。
+ * @param attributes ブロック属性。
+ */
 export function getAccordionArrowStyles( attributes: FaqItemBlockAttributes ) {
-	const { customAccordionArrowColor } = attributes;
 	return {
-		color: customAccordionArrowColor,
+		color: presetTokenToCssVar( getAccordionArrowColor( attributes ) ),
 		...getCustomSpacingValues(
 			getAccordionArrowMargin( attributes ),
 			'margin'
 		),
 	};
+}
+
+/**
+ * 開閉ボタン色を取得する。
+ * @param attributes ブロック属性。
+ */
+export function getAccordionArrowColor( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.arrow?.color?.text;
+}
+
+/**
+ * 他の設定を保持して開閉ボタン色だけを更新・解除する。
+ * @param style 現在のスタイル。
+ * @param text  開閉ボタン色。
+ */
+export function updateAccordionArrowColor(
+	style: FaqItemBlockAttributes[ 'style' ],
+	text?: string
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				arrow: {
+					...style?.ystdtb?.faqItem?.arrow,
+					color: { ...style?.ystdtb?.faqItem?.arrow?.color, text },
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
 }

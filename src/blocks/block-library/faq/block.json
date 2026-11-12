@@ -6,15 +6,8 @@
 	"title": "FAQ",
 	"category": "ystdtb-blocks",
 	"description": "Q&A(FAQ)表示ブロック",
-	"keywords": [
-		"faq",
-		"question",
-		"answer",
-		"Q&A"
-	],
-	"allowedBlocks": [
-		"ystdtb/faq-item"
-	],
+	"keywords": [ "faq", "question", "answer", "Q&A" ],
+	"allowedBlocks": [ "ystdtb/faq-item" ],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
 		"isAccordion": {
@@ -25,12 +18,6 @@
 			"type": "string"
 		},
 		"borderColor": {
-			"type": "string"
-		},
-		"accordionArrowColor": {
-			"type": "string"
-		},
-		"customAccordionArrowColor": {
 			"type": "string"
 		},
 		"fontSize": {
@@ -91,12 +78,10 @@
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",
-		"ystdtb/backgroundColor": "backgroundColor",
-		"ystdtb/accordionArrowColor": "accordionArrowColor",
-		"ystdtb/customAccordionArrowColor": "customAccordionArrowColor"
+		"ystdtb/backgroundColor": "backgroundColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"editorStyle": [ "ystdtb-aktk-components-editor", "file:./index.css" ],
 	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
 	"example": {

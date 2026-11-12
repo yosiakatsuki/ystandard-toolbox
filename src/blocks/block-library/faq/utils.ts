@@ -220,3 +220,35 @@ export function getResponsiveSpacingStyles( attributes: FaqBlockAttributes ) {
 
 	return styles;
 }
+
+/**
+ * 開閉ボタン色を取得する。
+ * @param attributes ブロック属性。
+ */
+export function getAccordionArrowColor( attributes: FaqBlockAttributes ) {
+	return attributes.style?.ystdtb?.faq?.arrow?.color?.text;
+}
+
+/**
+ * 他の設定を保持して開閉ボタン色だけを更新・解除する。
+ * @param style 現在のスタイル。
+ * @param text  開閉ボタン色。
+ */
+export function updateAccordionArrowColor(
+	style: FaqBlockAttributes[ 'style' ],
+	text?: string
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faq: {
+				...style?.ystdtb?.faq,
+				arrow: {
+					...style?.ystdtb?.faq?.arrow,
+					color: { ...style?.ystdtb?.faq?.arrow?.color, text },
+				},
+			},
+		},
+	} ) as FaqBlockAttributes[ 'style' ];
+}

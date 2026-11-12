@@ -16,11 +16,15 @@
 					"customLabelBackgroundColor": "#f1f1f3",
 					"labelBorderSize": "0",
 					"labelBorderRadius": "0",
-					"customAccordionArrowColor": "#222222",
 					"style": {
 						"ystdtb": {
 							"faqItem": {
 								"label": {
+									"color": {
+										"text": "#222222"
+									}
+								},
+								"arrow": {
 									"color": {
 										"text": "#222222"
 									}
@@ -41,11 +45,15 @@
 					"customLabelBackgroundColor": "#f1f1f3",
 					"labelBorderSize": "0",
 					"labelBorderRadius": "0",
-					"customAccordionArrowColor": "#222222",
 					"style": {
 						"ystdtb": {
 							"faqItem": {
 								"label": {
+									"color": {
+										"text": "#222222"
+									}
+								},
+								"arrow": {
 									"color": {
 										"text": "#222222"
 									}

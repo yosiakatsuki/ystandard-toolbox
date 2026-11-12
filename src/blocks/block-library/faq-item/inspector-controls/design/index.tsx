@@ -226,6 +226,14 @@ export function Design( props ): JSX.Element {
 					...attributes.style?.ystdtb,
 					faqItem: {
 						...attributes.style?.ystdtb?.faqItem,
+						arrow: {
+							...attributes.style?.ystdtb?.faqItem?.arrow,
+							color: {
+								...attributes.style?.ystdtb?.faqItem?.arrow
+									?.color,
+								text: preset.labelTextColor,
+							},
+						},
 						label: {
 							...attributes.style?.ystdtb?.faqItem?.label,
 							color: {
@@ -238,8 +246,6 @@ export function Design( props ): JSX.Element {
 					},
 				},
 			} ),
-			accordionArrowColor: undefined,
-			customAccordionArrowColor: preset.labelTextColor,
 		} );
 	};
 	return (

@@ -1,4 +1,5 @@
 /* Block Dependencies */
+import { hasLegacyAccordionArrowColor } from '../../../faq/deprecated/arrow-color';
 import attributes from './attributes.json';
 import save from './save';
 import { migrateFaqItemAttributes } from './migrate';
@@ -21,7 +22,8 @@ function isEligible( value: FaqItemBlockAttributes ) {
 		undefined !== value.customFaqBorderColor ||
 		undefined !== value.labelColor ||
 		undefined !== value.customLabelColor ||
-		false === value.labelBold
+		false === value.labelBold ||
+		hasLegacyAccordionArrowColor( value )
 	);
 }
 

@@ -114,10 +114,10 @@ describe( 'FAQ Itemの標準本文文字色', () => {
 				ystdtb: {
 					faqItem: {
 						label: { color: { text: '#aa0000' } },
+						arrow: { color: { text: '#00aa00' } },
 					},
 				},
 			},
-			customAccordionArrowColor: '#00aa00',
 			backgroundColor: 'ys-light-gray',
 		} );
 		const item = container.querySelector( '.ystdtb-faq-item' );

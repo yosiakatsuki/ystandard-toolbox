@@ -45,7 +45,9 @@ export type FaqBlockAttributes = {
 	backgroundColor?: string;
 	gradient?: string;
 	borderColor?: string;
+	/** v2.3.0以前の移行処理用。 */
 	accordionArrowColor?: string;
+	/** v2.3.0以前の移行処理用。 */
 	customAccordionArrowColor?: string;
 	fontSize?: string;
 	fontFamily?: string;
