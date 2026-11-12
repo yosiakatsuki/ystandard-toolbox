@@ -23,14 +23,13 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
   - 親のテンプレートは `[q, a]` の固定ペア、`templateLock: 'all'` で追加・削除・並べ替え不可
   - 子 `faq-item` の innerBlocks は段落等自由配置可（`templateLock: false`）
 - **RichText**: なし（コンテンツは子の InnerBlocks に委譲）
-- **レスポンシブ属性**: 親のフォントサイズと余白をdesktop / tablet / mobileごとに設定
+- **レスポンシブ属性**: 親のフォントサイズ・余白と、子の文字サイズ・寸法・余白をdesktop / tablet / mobileごとに設定
 - **Context propagation（`providesContext` / `usesContext`）**:
   - 親 → 子: `isAccordion` / `backgroundColor`
   - 子のusesContextには旧枠線キーが残るが、現行の親枠線表示には使わない。開閉ボタン色の旧Contextキーは除去し、明示的な属性更新で同期する
 - **親子属性の同期**:
   - 親の `style.ystdtb.faq.arrow.color.text` 変更時、`updateChildAttributes` で子全員の `style.ystdtb.faqItem.arrow.color.text` も同値に更新（親子両方に持つのはフロント描画のため）
-- **カラー withColors**: 子 `faq-item` は2属性で`withColors`利用
-  - `labelBackgroundColor` / `labelBorderColor`（本文文字色・Item背景・Item枠線はコアのサポート、ラベル文字色は独自スタイル）
+- **子の色設定**: 本文文字色・Item背景・Item枠線はコアのサポート、ラベル文字色・背景・枠線は`style.ystdtb.faqItem.label`へ保存。`withColors`は使用しない
 - **アコーディオン UI**: Q 側のみ矢印（`.ystdtb-faq-item__arrow` + `chevron-down` SVG）を出力。`view.ts` により Q 要素クリックで開閉
 - **デザインプリセット**: 子 `faq-item` の Design パネルに 6 種のプリセット（default / background-square / background-circle / outline-square / outline-circle / bottom-divider）。クリックで対象Itemの属性と開閉ボタン色を一括適用（親と他方のItemは保持）
 
@@ -55,32 +54,23 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 
 ### 子 `ystdtb/faq-item`
 
-| パネル | 設定項目 | 属性 |
-|---|---|---|
-| （属性） | FAQ タイプ | `faqType`（'q'/'a'、default: 'q'） |
-| ブロックツールバー | ラベル表示位置 | `labelPosition`（flex-start/center/flex-end、default: center） |
-| スタイル > タイポグラフィ | FAQコンテンツ文字サイズ | `fontSize`（プリセット） / `style.typography.fontSize`（カスタム） |
-| スタイル > FAQラベル（文字） | FAQラベル文字サイズ | `labelSize`（プリセット） / `customLabelSize`（カスタム） |
-| スタイル > FAQラベル（文字） | FAQラベル文字色 | `style.ystdtb.faqItem.label.color.text` |
-| スタイル > FAQラベル（文字） | FAQラベルフォント | `style.ystdtb.faqItem.label.typography.fontFamily` |
-| スタイル > FAQラベル（文字） | FAQラベル外観 | `style.ystdtb.faqItem.label.typography.fontWeight` / `fontStyle` |
-| スタイル > FAQラベル（文字） | FAQラベル行の高さ | `style.ystdtb.faqItem.label.typography.lineHeight` |
-| スタイル > FAQラベル（文字） | FAQラベル大文字小文字 | `style.ystdtb.faqItem.label.typography.textTransform` |
-| FAQラベル設定 | ラベル背景色 | `labelBackgroundColor` / `customLabelBackgroundColor` |
-| FAQラベル設定 | ラベル角丸 | `labelBorderRadius` |
-| FAQラベル設定 | ラベル枠線サイズ | `labelBorderSize` |
-| FAQラベル設定 | ラベル枠線色 | `labelBorderColor` / `customLabelBorderColor` |
-| スタイル > タイポグラフィ（コアの文字色UI） | コンテンツ文字色（本文のみ） | `textColor` / `style.color.text` |
-| スタイル > 色 | Item全体の背景色 | `backgroundColor` / `style.color.background` |
-| スタイル > 色 | Item全体の背景グラデーション | `gradient` / `style.color.gradient` |
-| デザインサンプル | プリセットボタン | 複数属性を一括適用（default / background-square / background-circle / outline-square / outline-circle / bottom-divider） |
+- FAQタイプ：`faqType`（q／a）。内容属性として維持する
+- ブロックツールバーのラベル表示位置：`style.ystdtb.faqItem.item.layout.alignItems`（flex-start／center／flex-end）
+- コアの本文文字設定：`textColor`／`style.color.text`、`fontSize`／`style.typography.fontSize`
+- コアのItem背景・グラデーション・枠線：`backgroundColor`／`gradient`／`borderColor`と`style.color`／`style.border`
+- スタイルのFAQラベル（文字）：`style.ystdtb.faqItem.label.color.text`、`label.typography`のfontSize／fontFamily／fontWeight／fontStyle／lineHeight／textTransform
+- スタイルのFAQラベル設定：`label.color.background`、`label.border`のcolor／width／radius
+- スタイルのFAQアイテムのレスポンシブ文字設定：`contents.responsive.typography.fontSize`、`label.responsive.typography.fontSize`
+- スタイルのレスポンシブ設定は本文文字・本文余白・ラベル文字・ラベル余白・サイズの5パネル。本文内側余白は本文領域だけに適用する。ラベル余白には上下マージンとラベル・本文の間隔を含む。通常のラベルサイズはFAQラベル設定に常時表示し、端末別サイズと併存できる
+- デザインサンプル：既存6種類を新しい保存先へ適用する。ラベルの文字・背景・枠線を置き換え、追加した寸法・余白は保持する
+
+省略した独自パスは`style.ystdtb.faqItem`配下。保存先の詳細は`../faq-item/DESIGN.md`を参照する。
 
 ## 排他関係・条件付き表示
 
 | 条件 | 影響 |
 |---|---|
 | 親`isAccordion=false` | スタイルパネルの「開閉ボタン（色）」「開閉ボタン（余白）」が非表示（各コンポーネントが早期return） |
-| 子 `faqBorderType='bottom'` 選択 | `faqBorderSize='1px'` + `faqBorderColor='#eeeeee'` がデフォルト適用（`ContentsBorder.handleOnBorderTypeChange`） |
 | 子 `faqType='a'` | アコーディオン矢印（`.ystdtb-faq-item__arrow`）が非出力 |
 | 親 `style.ystdtb.faq.arrow.color.text` 変更 | 子 faq-item 全員の `style.ystdtb.faqItem.arrow.color.text` も同時更新（`updateChildAttributes`） |
 | 親の開閉ボタンmargin変更 | 子 faq-item 全員の`style.ystdtb.faqItem.arrow.spacing.margin`も同時更新（`updateChildAttributes`） |
@@ -98,7 +88,11 @@ FAQ ブロック自体には RichText を持たない。コンテンツ部分は
 - 親フォントサイズ: desktop / tablet / mobile
 - 親外側余白（上下）: desktop / tablet / mobile
 - 親内側余白（上下左右）: desktop / tablet / mobile
-- 未設定のデバイスはCSSカスタムプロパティを出力しない
+- 子の本文文字サイズ・ラベル文字サイズ・本文内側余白・ラベルと本文の間隔・ラベルサイズ・ラベル上下外側余白：desktop／tablet／mobile
+- 未設定のデバイスはCSSカスタムプロパティを出力せず、通常値へフォールバックする。他端末の値は継承しない
+- ラベルサイズは枠線込みの正方形、外側余白は上下のみで負の値を許可する
+- 閉じた回答の上下パディングと高さは0、開くと設定値を適用する
+- ラベルと本文の間隔を0にしても、開閉ボタンの間隔は変わらない
 
 ---
 
@@ -153,12 +147,12 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 
 ### 子 `ystdtb/faq-item` > ラベル設定
 
-- [ ] `ystdtb__faq__label__position__flex-start` — `labelPosition: "flex-start"`
-- [ ] `ystdtb__faq__label__position__center` — `labelPosition: "center"`（デフォルト・明示指定）
-- [ ] `ystdtb__faq__label__position__flex-end` — `labelPosition: "flex-end"`
-- [ ] `ystdtb__faq__label__size__preset` — `labelSize: "large"`
-- [ ] `ystdtb__faq__label__size__custom-px` — `customLabelSize: "24px"`
-- [ ] `ystdtb__faq__label__size__custom-em` — `customLabelSize: "1.5em"`
+- [ ] `ystdtb__faq__label__position__flex-start` — `item.layout.alignItems: "flex-start"`
+- [ ] `ystdtb__faq__label__position__center` — `item.layout.alignItems`未指定（中央）
+- [ ] `ystdtb__faq__label__position__flex-end` — `item.layout.alignItems: "flex-end"`
+- [ ] `ystdtb__faq__label__size__preset` — `label.typography.fontSize: "var:preset|font-size|large"`
+- [ ] `ystdtb__faq__label__size__custom-px` — `label.typography.fontSize: "24px"`
+- [ ] `ystdtb__faq__label__size__custom-em` — `label.typography.fontSize: "1.5em"`
 - [ ] `ystdtb__faq__deprecated-2-3-0-label-bold-false` — `labelBold: false`をラベル外観の標準へ移行
 - [ ] `ystdtb__faq__label__appearance__italic-600` — ラベル外観に斜体・ウェイト600を設定
 - [ ] `ystdtb__faq__deprecated-2-3-0-label-color-preset` — `labelColor: "ys-red"`をプリセットトークンへ移行
@@ -238,14 +232,14 @@ fixture は`test/integration/fixtures/blocks/faq/`配下に配置。既存の`ys
 
 ### ラベル-値対応（全選択肢網羅）
 
-- [ ] 子のBlockVerticalAlignmentToolbar: グループブロックと同じドロップダウン形式で上・中央・下を表示し、`flex-start` / `center` / `flex-end`として`labelPosition`に保存
+- [ ] 子のBlockVerticalAlignmentToolbar: グループブロックと同じドロップダウン形式で上・中央・下を表示し、`flex-start` / `center` / `flex-end`として`style.ystdtb.faqItem.item.layout.alignItems`に保存
 - [ ] 親背景色・グラデーション: WordPress標準の色パネルでプリセット色が`backgroundColor`、カスタム色が`style.color.background`、プリセットグラデーションが`gradient`、カスタムグラデーションが`style.color.gradient`へ保存される
 - [ ] 親枠線: WordPress標準の枠線パネルで色・角丸・スタイル・幅が`style.border`へ保存される
 - [ ] 親余白: WordPress標準のサイズパネルでmarginは上・下だけ、paddingは上・右・下・左を設定でき、`style.spacing`へ保存される
 - [ ] 親レスポンシブ余白: marginは上・下だけ、paddingは上・右・下・左を3デバイスごとに設定でき、`style.ystdtb.faq.responsive.spacing`へ保存される
 - [ ] 各種色設定（矢印／ラベル文字／ラベル背景／ラベル枠線／標準本文文字色／標準Item背景／標準Item枠線）: プリセットとカスタムの切替で各設定形式へ正しく保存される
 - [ ] コアの文字サイズ: プリセット → `fontSize`にslug、カスタム → `style.typography.fontSize`に値を保存し、FAQコンテンツへ適用
-- [ ] FAQラベル（文字）: プリセット → `labelSize`にslug、カスタム → `customLabelSize`に値を保存し、FAQラベルへ適用
+- [ ] FAQラベル（文字）: プリセット → トークン、カスタム → CSS値として`label.typography.fontSize`に保存し、FAQラベルへ適用
 - [ ] FAQラベル（文字）の色: プリセットは`var:preset|color|{slug}`、カスタムはCSSカラー値として`style.ystdtb.faqItem.label.color.text`へ保存し、FAQラベルへ適用
 - [ ] FAQラベル（文字）の外観: ウェイトとスタイルを`style.ystdtb.faqItem.label.typography`へ保存し、FAQラベルへ適用
 - [ ] FAQラベル（文字）のフォント: プリセットは`var:preset|font-family|{slug}`として保存し、FAQラベルへ適用
@@ -361,3 +355,8 @@ FAQコンテンツの下区切り線設定を標準スタイルパネルへ移�
 - `ystdtb__faq__deprecated-2-3-0-arrow-color-preset`と`ystdtb__faq__deprecated-2-3-0-arrow-color-custom`で旧形式からの移行を確認する
 - `test/integration/blocks/faq/fixtures/v2.3.0-arrow-color.html`はv2.3.0サイトで保存した実データ。専用integration testで実アイコンと段落を登録し、本文保持と再保存を確認する
 - v1の親子migrateでも色と数値属性が現行形式へ直接変換されることを確認する
+
+
+## 設計との整合確認
+
+共通契約は`docs/block-style-controls.md`、FAQ Itemの残項目は`../faq-item/DESIGN.md`を参照する（docsのパスはプロジェクトルート基準）。本文余白・ラベル余白の通常入力と端末別入力の分離、レスポンシブ項目解除・全解除で通常値を保持する動作は改修待ち。現行テストの成功を、この整理の完了とは扱わない。

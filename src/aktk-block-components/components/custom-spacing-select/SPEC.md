@@ -261,6 +261,8 @@ const handleOnChange = (values: ResponsiveSpacingSelectOnChangeProps) => {
 
 ## 注意事項
 
+`ResponsiveSpacingSelect`は通常値の変更時に`responsiveSpacing`を、端末別値の変更時に`spacing`を`undefined`として返します。値を分けて保存することと、通常値・端末別値を併存させることは異なります。両方を保持するUIでは、通常入力と`components/responsive-spacing-control`の`ResponsiveSpacingControl`を独立して扱ってください。
+
 - 新規実装では`padding` / `responsivePadding`、`margin` / `responsiveMargin`のように標準値とレスポンシブ値を分ける方式を基本にしてください
 - 旧形式の`{ desktop, tablet, mobile }`属性を維持するブロックでは、ブロック側で互換ラッパーを用意してください
 - プリセット値（`var:preset|spacing|*`）を使用する場合は`presetTokenToCssVar`で変換してください

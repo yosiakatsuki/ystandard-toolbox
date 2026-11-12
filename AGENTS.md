@@ -38,6 +38,7 @@ wp-env は `.wp-env.json` で port `10020` を使用する。
 
 - `docs/testing.md`: unit / integration / PHPUnit の構成と fixture 作成手順
 - `docs/design-system.md`: Toolbox 側のデザイントークンと CSS 方針
+- `docs/block-style-controls.md`: ブロック設定全般の共通設計。標準機能・タブ・パネル・共有部品・保存・リセットと、その一部としてのレスポンシブ設定
 - `docs/ystandard-design-system.md`: yStandard テーマ側の設計
 - `docs/block-examples-guideline.md`: ブロック example 作成ルール
 - `docs/block-operation-test-guideline.md`: UI 操作検証の共通ルール
@@ -83,6 +84,11 @@ npm run zip                  # 配布 zip 作成
 
 ## 実装方針
 
+- ブロックの新規作成・設定追加・設定UI改修の前に`docs/block-style-controls.md`を読む。新規ブロックには標準適用し、固有の例外は理由と影響を`DESIGN.md`へ記載する。
+- 既存ブロックの共通設計への未対応箇所は順次対応する。依頼範囲外を一括変更せず、現状・目標・互換性への影響・確認項目を対象ブロックの`DESIGN.md`へ残す。既存ブロックに新しく追加する設定には共通設計を適用する。
+
+- 仕様の検討・提案・実装では、既存実装、改修中の設計資料、会話で合意した方針と毎回照合し、矛盾・設定の重複・適用範囲や優先順位の不整合・互換性の問題がないか確認する。
+- 整合性に問題がある場合は理由と推奨案を説明し、合意済みの仕様を勝手に変更しない。問題がない場合の報告は簡潔にする。
 - WordPress コア / Gutenberg の標準パターンを優先する。
 - 非推奨 API や古い実装パターンは避け、可能な範囲で最新の WordPress / Gutenberg の手法に合わせる。
 - 新規ブロックは `block.json` メタデータ駆動を基本にする。
