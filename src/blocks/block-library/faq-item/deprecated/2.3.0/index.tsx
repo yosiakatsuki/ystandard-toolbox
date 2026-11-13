@@ -23,6 +23,18 @@ function isEligible( value: FaqItemBlockAttributes ) {
 		undefined !== value.labelColor ||
 		undefined !== value.customLabelColor ||
 		false === value.labelBold ||
+		( value.labelPosition !== undefined &&
+			value.labelPosition !== 'center' ) ||
+		[
+			value.labelSize,
+			value.customLabelSize,
+			value.labelBackgroundColor,
+			value.customLabelBackgroundColor,
+			value.labelBorderColor,
+			value.customLabelBorderColor,
+			value.labelBorderSize,
+			value.labelBorderRadius,
+		].some( ( entry ) => entry !== undefined ) ||
 		hasLegacyAccordionArrowColor( value )
 	);
 }

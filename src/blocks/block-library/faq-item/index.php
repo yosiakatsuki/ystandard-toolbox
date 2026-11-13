@@ -7,6 +7,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -28,6 +31,7 @@ class FAQ_Item_Block {
 	 */
 	private function __construct() {
 		add_action( 'init', [ $this, 'register_block' ], 20 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_responsive_style' ] );
 	}
 
 	/**
@@ -41,6 +45,55 @@ class FAQ_Item_Block {
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * FAQアイテムの端末別設定を編集画面とフロントへ配信する。
+	 *
+	 * @return void
+	 */
+	public function enqueue_responsive_style() {
+		$rules = [
+			'contents-font-size' => [ '.ystdtb-faq-item__contents', 'font-size' ],
+			'label-font-size'    => [ '.ystdtb-faq-item__label', 'font-size' ],
+			'label-gap'          => [ '.ystdtb-faq-item', '--ystdtb--faq-item--label-gap' ],
+		];
+		foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
+			$rules[ "contents-padding-{$side}" ] = [ '.ystdtb-faq-item__contents', "padding-{$side}" ];
+		}
+		foreach ( [ 'top', 'bottom' ] as $side ) {
+			$rules[ "label-margin-{$side}" ] = [ '.ystdtb-faq-item__label', "margin-{$side}" ];
+		}
+
+		$responsive = [];
+		foreach ( [ 'desktop', 'tablet', 'mobile' ] as $device ) {
+			$css = '';
+			foreach ( $rules as $name => $rule ) {
+				$css .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => ':is(div)' . $rule[0],
+						'prop_name' => 'faq-item--' . $name,
+						'property'  => $rule[1],
+						'type'      => $device,
+					]
+				);
+			}
+			// サイズ未指定端末には寸法や中央揃えを追加せず、従来の自動サイズを保つ。
+			$size                  = Styles::get_responsive_custom_prop_name( 'faq-item--label-size', $device );
+			$css                  .= ":is(div).ystdtb-faq-item__label:where([style*=\"{$size}\"]){";
+			$css                  .= "width:var({$size})!important;height:var({$size})!important;";
+			$css                  .= "min-width:var({$size})!important;min-height:var({$size})!important;";
+			$css                  .= 'box-sizing:border-box;flex-shrink:0;display:flex;align-items:center;justify-content:center;}';
+			$responsive[ $device ] = $css;
+		}
+
+		$css    = Styles::add_media_query_over_desktop( $responsive['desktop'] );
+		$css   .= Styles::add_media_query_only_tablet( $responsive['tablet'] );
+		$css   .= Styles::add_media_query_only_mobile( $responsive['mobile'] );
+		$handle = 'ystdtb-faq-item-responsive';
+		wp_register_style( $handle, false );
+		wp_add_inline_style( $handle, Text::minify( $css ) );
+		wp_enqueue_style( $handle );
 	}
 
 	/**

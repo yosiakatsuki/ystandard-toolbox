@@ -16,7 +16,19 @@
 	}
 
 	// 旧下区切り線の余白判定はhas-borderに任せ、標準枠線だけを幅指定で判定する.
-	&:where(:not(.has-border, .has-background, :not(.has-border-bottom):is([style*="border-width:"], [style*="border-top-width:"], [style*="border-right-width:"], [style*="border-bottom-width:"], [style*="border-left-width:"]))) {
+	&:where(
+			:not(
+					.has-border,
+					.has-background,
+					:not(.has-border-bottom):is(
+							[style*="border-width:"],
+							[style*="border-top-width:"],
+							[style*="border-right-width:"],
+							[style*="border-bottom-width:"],
+							[style*="border-left-width:"]
+						)
+				)
+		) {
 
 		&:where(.is-faq--q) {
 			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
@@ -74,6 +86,35 @@
 	:where(.is-faq--q) {
 		padding-bottom: var(--ystdtb--faq-item--padding-vertical);
 	}
+}
+
+// 新しい間隔だけをラベル側で補正し、開閉ボタンの間隔・余白は保持する。
+.ystdtb-faq-item:where([style*="faq-item--label-gap"])
+	> .ystdtb-faq-item__label {
+	margin-right: calc(
+		var(--ystdtb--faq-item--label-gap, var(--ystdtb--faq-item--gap)) - var(
+				--ystdtb--faq-item--gap
+			)
+	);
+}
+
+// 通常サイズの指定があるラベルだけを枠線込みの正方形にする。
+.ystdtb-faq-item__label:where([style*="--ystdtb--faq-item--label-size:"]) {
+	box-sizing: border-box;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ystdtb--faq-item--label-size);
+	height: var(--ystdtb--faq-item--label-size);
+	min-width: var(--ystdtb--faq-item--label-size);
+	min-height: var(--ystdtb--faq-item--label-size);
+}
+
+// 閉じた回答では、通常値・端末別値より閉状態を優先して余白を残さない。
+.ystdtb-faq.is-accordion:not(.is-open, [data-type]) > .ystdtb-faq-item.is-faq--a {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
 }
 
 // 非推奨: v2.3.0以前の下区切り線。旧ブロック対応終了時にこのまとまりを削除する.

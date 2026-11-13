@@ -51,8 +51,12 @@ type FontFamilyPreset = {
  */
 export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 	const { attributes, setAttributes } = props;
-	const { labelSize, customLabelSize } = attributes;
 	const typography = getLabelTypography( attributes );
+	const prefix = 'var:preset|font-size|';
+	const labelSize = typography?.fontSize?.startsWith( prefix )
+		? typography.fontSize.slice( prefix.length )
+		: undefined;
+	const customLabelSize = labelSize ? undefined : typography?.fontSize;
 	const textColor = getLabelTextColor( attributes );
 	const fontFamilies = useFontFamilies() as FontFamilyPreset[];
 	const fontFamilySlug = typography?.fontFamily?.startsWith(
@@ -93,16 +97,22 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 	const updateFontSize = ( newSize: CustomFontSizePickerOnChangeProps ) => {
 		const { fontSize, customFontSize } = newSize;
 		setAttributes( {
-			labelSize: fontSize?.slug,
-			customLabelSize: fontSize ? undefined : customFontSize,
+			style: updateLabelTypography( attributes.style, {
+				...typography,
+				fontSize: fontSize?.slug
+					? `${ prefix }${ fontSize.slug }`
+					: customFontSize,
+			} ),
 		} );
 	};
 
 	// ラベル文字サイズだけをリセットする.
 	const resetFontSize = () => {
 		setAttributes( {
-			labelSize: undefined,
-			customLabelSize: undefined,
+			style: updateLabelTypography( attributes.style, {
+				...typography,
+				fontSize: undefined,
+			} ),
 		} );
 	};
 
@@ -150,8 +160,6 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 			undefined
 		);
 		setAttributes( {
-			labelSize: undefined,
-			customLabelSize: undefined,
 			style: updateLabelTextColor( styleWithoutTypography, undefined ),
 		} );
 	};
@@ -177,14 +185,14 @@ export function LabelTypography( props: FaqItemEditProps ): JSX.Element {
 						clearable: true,
 						gradients: [],
 						disableCustomGradients: true,
-						isShownByDefault: true,
+						isShownByDefault: false,
 					},
 				] }
 			/>
 			<ToolsPanelItem
 				className="single-column"
 				hasValue={ () => !! labelSize || !! customLabelSize }
-				isShownByDefault
+				isShownByDefault={ false }
 				label={ __( 'フォントサイズ', 'ystandard-toolbox' ) }
 				onDeselect={ resetFontSize }
 				panelId={ PANEL_ID }

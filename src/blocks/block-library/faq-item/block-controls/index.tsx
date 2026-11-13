@@ -7,6 +7,7 @@ import {
 
 /* Block Dependencies */
 import type { FaqItemEditProps } from '../types';
+import { updateFaqItemElement } from '../style-utils';
 
 type ToolbarPosition = 'top' | 'center' | 'bottom';
 
@@ -44,9 +45,15 @@ export function FaqItemBlockControls( {
 	// 選択解除時は既定の中央位置へ戻す.
 	const handlePositionChange = ( position?: ToolbarPosition ) => {
 		setAttributes( {
-			labelPosition: position
-				? TOOLBAR_POSITION_MAP[ position ]
-				: 'center',
+			style: updateFaqItemElement( attributes.style, 'item', {
+				...attributes.style?.ystdtb?.faqItem?.item,
+				layout: {
+					alignItems:
+						position && position !== 'center'
+							? TOOLBAR_POSITION_MAP[ position ]
+							: undefined,
+				},
+			} ),
 		} );
 	};
 
@@ -54,7 +61,10 @@ export function FaqItemBlockControls( {
 		<WPBlockControls>
 			<BlockVerticalAlignmentToolbar
 				value={
-					LABEL_POSITION_MAP[ attributes.labelPosition ] ?? 'center'
+					LABEL_POSITION_MAP[
+						attributes.style?.ystdtb?.faqItem?.item?.layout
+							?.alignItems ?? 'center'
+					] ?? 'center'
 				}
 				onChange={ handlePositionChange }
 			/>

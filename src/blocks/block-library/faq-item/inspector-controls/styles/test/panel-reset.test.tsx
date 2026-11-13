@@ -74,7 +74,17 @@ jest.mock(
 );
 jest.mock(
 	'@aktk/block-components/components/responsive-font-size-control',
-	() => ( { ResponsiveFontSizeControl: () => <div /> } )
+	() => ( {
+		ResponsiveFontSizeControl: ( { value, onChange } ) => (
+			<input
+				aria-label="モバイルのフォントサイズ"
+				value={ value?.mobile ?? '' }
+				onChange={ ( e ) =>
+					onChange( { ...value, mobile: e.target.value } )
+				}
+			/>
+		),
+	} )
 );
 
 /** 他要素や通常値の保持を検証するための属性を用意する。 */
@@ -84,6 +94,7 @@ function createProps() {
 			faqType: 'q' as const,
 			style: {
 				color: { background: '#fff' },
+				typography: { fontSize: '18px' },
 				spacing: { padding: { top: '20px' } },
 				ystdtb: {
 					faqItem: {
@@ -94,7 +105,12 @@ function createProps() {
 						},
 						contents: {
 							responsive: {
-								typography: { fontSize: { mobile: '15px' } },
+								typography: {
+									fontSize: {
+										desktop: '22px',
+										mobile: '15px',
+									},
+								},
 								spacing: {
 									padding: { mobile: { top: '8px' } },
 								},
@@ -112,7 +128,12 @@ function createProps() {
 							dimensions: { size: '40px' },
 							spacing: { margin: { top: '-2px' } },
 							responsive: {
-								typography: { fontSize: { mobile: '18px' } },
+								typography: {
+									fontSize: {
+										desktop: '28px',
+										mobile: '18px',
+									},
+								},
 								dimensions: { size: { tablet: '36px' } },
 								spacing: { margin: { mobile: { top: '0' } } },
 							},
@@ -235,6 +256,7 @@ function assertReset(
 	expect( props.setAttributes ).toHaveBeenCalledTimes( 1 );
 	const style = props.setAttributes.mock.calls[ 0 ][ 0 ].style;
 	expect( style.color ).toEqual( props.attributes.style.color );
+	expect( style.typography ).toEqual( props.attributes.style.typography );
 	expect( style.spacing ).toEqual( props.attributes.style.spacing );
 	for ( const path of paths ) {
 		expect( at( style.ystdtb.faqItem, path ) ).toEqual(
@@ -261,6 +283,30 @@ describe.each( cases )( '%sのリセット範囲', ( name, Panel, cleared, items
 			assertReset( props, [ path ] );
 		}
 	);
+} );
+
+describe.each( [
+	[ '本文', ResponsiveTypography, 'contents' ],
+	[ 'ラベル', ResponsiveLabelTypography, 'label' ],
+] as const )( '%sのレスポンシブ文字サイズ', ( name, Panel, target ) => {
+	it( '対象のモバイル文字サイズだけを変更し、通常値・他端末・別要素を保持する', () => {
+		const props = createProps();
+		render( <Panel { ...props } /> );
+		fireEvent.change(
+			screen.getByRole( 'textbox', { name: 'モバイルのフォントサイズ' } ),
+			{
+				target: { value: '16px' },
+			}
+		);
+		const expected = JSON.parse( JSON.stringify( props.attributes.style ) );
+		expected.ystdtb.faqItem[
+			target
+		].responsive.typography.fontSize.mobile = '16px';
+		expect( props.setAttributes ).toHaveBeenCalledTimes( 1 );
+		expect( props.setAttributes ).toHaveBeenCalledWith( {
+			style: expected,
+		} );
+	} );
 } );
 
 describe( 'ラベルの通常・端末別サイズ', () => {

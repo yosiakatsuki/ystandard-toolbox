@@ -37,13 +37,20 @@ const designPreset: DesignPreset[] = [
 			backgroundColor: undefined,
 			gradient: undefined,
 			borderColor: undefined,
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: undefined,
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: undefined },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
@@ -65,13 +72,20 @@ const designPreset: DesignPreset[] = [
 			backgroundColor: undefined,
 			gradient: undefined,
 			borderColor: undefined,
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#f1f1f3',
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#f1f1f3' },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
@@ -94,13 +108,20 @@ const designPreset: DesignPreset[] = [
 			backgroundColor: undefined,
 			gradient: undefined,
 			borderColor: undefined,
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#f1f1f3',
-			labelBorderSize: '0',
-			labelBorderRadius: '50px',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#f1f1f3' },
+							border: {
+								width: '0',
+								radius: '50px',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
@@ -123,13 +144,20 @@ const designPreset: DesignPreset[] = [
 			backgroundColor: undefined,
 			gradient: undefined,
 			borderColor: undefined,
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#ffffff',
-			labelBorderSize: '2px',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: '#666666',
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#ffffff' },
+							border: {
+								width: '2px',
+								radius: '0',
+								color: '#666666',
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
@@ -153,13 +181,20 @@ const designPreset: DesignPreset[] = [
 			backgroundColor: undefined,
 			gradient: undefined,
 			borderColor: undefined,
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#ffffff',
-			labelBorderSize: '2px',
-			labelBorderRadius: '50px',
-			labelBorderColor: undefined,
-			customLabelBorderColor: '#666666',
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#ffffff' },
+							border: {
+								width: '2px',
+								radius: '50px',
+								color: '#666666',
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
@@ -187,14 +222,19 @@ const designPreset: DesignPreset[] = [
 				border: {
 					bottom: { width: '1px', style: 'solid', color: '#aaaaaa' },
 				},
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: undefined },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
 			},
-			labelSize: undefined,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: undefined,
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
 		},
 	},
 ];
@@ -212,8 +252,6 @@ export function Design( props ): JSX.Element {
 	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
 		setAttributes( {
 			...preset.attributes,
-			labelColor: undefined,
-			customLabelColor: undefined,
 			style: stripUndefined( {
 				...attributes.style,
 				border: preset.attributes.style?.border,
@@ -240,8 +278,18 @@ export function Design( props ): JSX.Element {
 								...attributes.style?.ystdtb?.faqItem?.label
 									?.color,
 								text: preset.labelTextColor,
+								background:
+									preset.attributes.style?.ystdtb?.faqItem
+										?.label?.color?.background,
 							},
+							border: preset.attributes.style?.ystdtb?.faqItem
+								?.label?.border,
 							typography: undefined,
+							responsive: {
+								...attributes.style?.ystdtb?.faqItem?.label
+									?.responsive,
+								typography: undefined,
+							},
 						},
 					},
 				},

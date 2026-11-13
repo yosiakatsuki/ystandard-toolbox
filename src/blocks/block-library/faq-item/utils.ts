@@ -4,8 +4,8 @@ import classnames from 'classnames';
  */
 import {
 	getColorClassName,
-	getFontSizeClass,
 	getTypographyClassesAndStyles,
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
 } from '@wordpress/block-editor';
 
 /**
@@ -20,7 +20,8 @@ import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 /**
  * Block dependencies.
  */
-import type { FaqItemBlockAttributes } from './types';
+import type { FaqItemBlockAttributes, FaqLabelStyle } from './types';
+import { responsiveStyles, responsiveSpacingStyles } from './style-utils';
 
 /**
  * FAQアイテムのクラス名を取得
@@ -52,10 +53,17 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
  * @param attributes
  */
 export function getItemStyles( attributes: FaqItemBlockAttributes ) {
-	const { labelPosition } = attributes;
-
+	const item = attributes.style?.ystdtb?.faqItem?.item;
 	return {
-		alignItems: 'center' === labelPosition ? undefined : labelPosition,
+		alignItems:
+			item?.layout?.alignItems === 'center'
+				? undefined
+				: item?.layout?.alignItems,
+		'--ystdtb--faq-item--label-gap':
+			item?.spacing?.gap === '0'
+				? '0px'
+				: presetTokenToCssVar( item?.spacing?.gap ),
+		...responsiveStyles( 'label-gap', item?.responsive?.spacing?.gap ),
 	};
 }
 
@@ -64,35 +72,16 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
  * @param attributes
  */
 export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
-	const {
-		labelSize = '',
-		labelBackgroundColor,
-		customLabelBackgroundColor,
-		labelBorderColor,
-		customLabelBorderColor,
-		labelBorderSize,
-	} = attributes;
-
-	const labelSizeClass = getFontSizeClass( labelSize ) || '';
-	const labelBackgroundColorClass =
-		getColorClassName( 'background-color', labelBackgroundColor ) || '';
-	const labelBorderColorClass =
-		getColorClassName( 'border-color', labelBorderColor ) || '';
-
-	const hasPadding =
-		labelBackgroundColor ||
-		customLabelBackgroundColor ||
-		labelBorderColor ||
-		customLabelBorderColor ||
-		hasBorderWidth( labelBorderSize );
-
+	const label = attributes.style?.ystdtb?.faqItem?.label;
+	const background = label?.color?.background;
+	const border = label?.border;
 	return classnames( 'ystdtb-faq-item__label', {
-		[ labelSizeClass ]: labelSizeClass,
-		'has-background': labelBackgroundColor || customLabelBackgroundColor,
-		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
-		'has-border': labelBorderColor || customLabelBorderColor,
-		[ labelBorderColorClass ]: labelBorderColorClass,
-		'has-padding': hasPadding,
+		'has-background': !! background,
+		'has-border': !! border?.color,
+		'has-padding':
+			!! background ||
+			!! border?.color ||
+			hasBorderWidth( border?.width ),
 	} );
 }
 
@@ -101,26 +90,37 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
  * @param attributes
  */
 export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
-	const {
-		customLabelSize,
-		customLabelBackgroundColor,
-		customLabelBorderColor,
-		labelBorderSize,
-		labelBorderRadius,
-	} = attributes;
+	const label = attributes.style?.ystdtb?.faqItem?.label;
 	const typography = getLabelTypography( attributes );
 	return {
-		fontSize: customLabelSize,
+		fontSize: presetTokenToCssVar( typography?.fontSize ),
 		fontFamily: presetTokenToCssVar( typography?.fontFamily ),
 		fontStyle: typography?.fontStyle,
 		fontWeight: typography?.fontWeight,
 		lineHeight: typography?.lineHeight,
 		textTransform: typography?.textTransform,
-		color: presetTokenToCssVar( getLabelTextColor( attributes ) ),
-		backgroundColor: customLabelBackgroundColor,
-		borderColor: customLabelBorderColor,
-		borderWidth: labelBorderSize || undefined,
-		borderRadius: labelBorderRadius || undefined,
+		color: presetTokenToCssVar( label?.color?.text ),
+		backgroundColor: presetTokenToCssVar( label?.color?.background ),
+		borderColor: presetTokenToCssVar( label?.border?.color ),
+		borderWidth: label?.border?.width,
+		borderRadius: label?.border?.radius,
+		borderStyle: label?.border?.style,
+		'--ystdtb--faq-item--label-size': label?.dimensions?.size,
+		marginTop: presetTokenToCssVar( label?.spacing?.margin?.top ),
+		marginBottom: presetTokenToCssVar( label?.spacing?.margin?.bottom ),
+		...responsiveStyles(
+			'label-font-size',
+			label?.responsive?.typography?.fontSize
+		),
+		...responsiveStyles(
+			'label-size',
+			label?.responsive?.dimensions?.size
+		),
+		...responsiveSpacingStyles(
+			'label-margin',
+			label?.responsive?.spacing?.margin,
+			[ 'top', 'bottom' ]
+		),
 	};
 }
 
@@ -187,13 +187,7 @@ export function getLabelTypography( attributes: FaqItemBlockAttributes ) {
  */
 export function updateLabelTypography(
 	style: FaqItemBlockAttributes[ 'style' ],
-	typography?: {
-		fontFamily?: string;
-		fontStyle?: string;
-		fontWeight?: string;
-		lineHeight?: string;
-		textTransform?: string;
-	}
+	typography?: FaqLabelStyle[ 'typography' ]
 ) {
 	return stripUndefined( {
 		...style,
@@ -239,6 +233,15 @@ export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
 
 	return {
 		...typographyProps.style,
+		...getSpacingClassesAndStyles( attributes ).style,
+		...responsiveSpacingStyles(
+			'contents-padding',
+			style?.ystdtb?.faqItem?.contents?.responsive?.spacing?.padding
+		),
+		...responsiveStyles(
+			'contents-font-size',
+			style?.ystdtb?.faqItem?.contents?.responsive?.typography?.fontSize
+		),
 		color: style?.color?.text,
 	};
 }

@@ -3,6 +3,7 @@ import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /* Block Dependencies */
 import { migrateAccordionArrowColor } from '../../../faq/deprecated/arrow-color';
+import { migrateLabelStyles } from '../label-styles';
 import type { FaqItemBlockAttributes } from '../../types';
 
 /**
@@ -111,7 +112,7 @@ export function migrateLabelTextColor( attributes: FaqItemBlockAttributes ) {
 export function migrateLabelAppearance( attributes: FaqItemBlockAttributes ) {
 	const { labelBold } = attributes;
 
-	// 太字解除だけが新形式への変換対象. 既定値は互換属性として保持する.
+	// 太字解除だけが外観の補完対象。旧属性は後段のラベル移行で除去する。
 	if ( false !== labelBold ) {
 		return attributes;
 	}
@@ -139,7 +140,7 @@ export function migrateLabelAppearance( attributes: FaqItemBlockAttributes ) {
 						...rest.style?.ystdtb?.faqItem?.label,
 						typography: {
 							...currentTypography,
-							fontStyle: 'normal',
+							fontStyle: currentTypography?.fontStyle ?? 'normal',
 							fontWeight: '400',
 						},
 					},
@@ -161,13 +162,15 @@ export function migrateFaqItemAttributes( attributes: FaqItemBlockAttributes ) {
 		faqBorderColor,
 		customFaqBorderColor,
 		...rest
-	} = migrateLabelAppearance(
-		migrateLabelTextColor(
-			migrateColors(
-				migrateAccordionArrowColor(
-					attributes,
-					'faqItem'
-				) as FaqItemBlockAttributes
+	} = migrateLabelStyles(
+		migrateLabelAppearance(
+			migrateLabelTextColor(
+				migrateColors(
+					migrateAccordionArrowColor(
+						attributes,
+						'faqItem'
+					) as FaqItemBlockAttributes
+				)
 			)
 		)
 	);

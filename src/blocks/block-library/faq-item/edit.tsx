@@ -5,7 +5,6 @@ import { ChevronDown } from 'react-feather';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
-	withColors,
 	__experimentalUseColorProps as useColorProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -26,7 +25,6 @@ import {
 import { InspectorControls } from './inspector-controls';
 import { FaqItemBlockControls } from './block-controls';
 import type { FaqItemEditProps } from './types';
-import { compose } from '@wordpress/compose';
 
 import './style-editor.scss';
 
@@ -45,8 +43,8 @@ const template: [ string, Record< string, any > ][] = [
  * @param props
  */
 function FaqItemEdit( props: FaqItemEditProps ) {
-	const { attributes, labelBackgroundColor, labelBorderColor } = props;
-	const { faqType, labelBorderSize } = attributes;
+	const { attributes } = props;
+	const { faqType } = attributes;
 	// コアの文字色だけを本文へ適用し、ラベルや開閉ボタンへの継承を避ける.
 	const contentsColorProps = useColorProps( {
 		textColor: attributes.textColor,
@@ -61,17 +59,8 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 	// FAQラベルのクラス名とスタイル
 	const labelProps = {
-		className: getLabelClasses( {
-			...attributes,
-			customLabelBackgroundColor: labelBackgroundColor?.color,
-			customLabelBorderColor: labelBorderColor?.color,
-			labelBorderSize,
-		} ),
-		style: getLabelStyles( {
-			...attributes,
-			customLabelBackgroundColor: labelBackgroundColor?.color,
-			customLabelBorderColor: labelBorderColor?.color,
-		} ),
+		className: getLabelClasses( attributes ),
+		style: getLabelStyles( attributes ),
 	};
 
 	// FAQコンテンツのInnerBlocksProps
@@ -118,9 +107,4 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	);
 }
 
-export default compose( [
-	withColors( {
-		labelBackgroundColor: 'backgroundColor',
-		labelBorderColor: 'borderColor',
-	} ),
-] )( FaqItemEdit );
+export default FaqItemEdit;

@@ -2,14 +2,14 @@
  * Aktk Dependencies.
  */
 import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
+import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
+import type { ResponsiveSpacing } from '@aktk/block-components/components/responsive-spacing-control';
 import type { FaqBorder } from '../faq/types';
 
 export type FaqItemEditProps = {
 	attributes: FaqItemBlockAttributes;
 	setAttributes: ( attributes: Partial< FaqItemBlockAttributes > ) => void;
 	isSelected?: boolean;
-	labelBackgroundColor: { color?: string; slug?: string };
-	labelBorderColor: { color?: string; slug?: string };
 };
 
 /**
@@ -34,7 +34,7 @@ export type FaqItemBlockAttributes = {
 	faqBorderSize?: string;
 	faqBorderColor?: string;
 	customFaqBorderColor?: string;
-	labelPosition: string;
+	labelPosition?: string;
 	fontSize?: string;
 	labelSize?: string;
 	customLabelSize?: string;
@@ -55,6 +55,7 @@ export type FaqItemBlockAttributes = {
 	/** v2.3.0以前の移行処理用。 */
 	customAccordionArrowColor?: string;
 	style?: {
+		spacing?: { padding?: Spacing | string };
 		border?: FaqBorder;
 		color?: {
 			text?: string;
@@ -66,11 +67,33 @@ export type FaqItemBlockAttributes = {
 		};
 		ystdtb?: {
 			faqItem?: {
+				item?: FaqItemLayoutStyle;
+				contents?: {
+					responsive?: {
+						spacing?: { padding?: ResponsiveSpacing };
+						typography?: { fontSize?: ResponsiveFontSize };
+					};
+				};
 				label?: {
+					border?: {
+						color?: string;
+						width?: string;
+						radius?: string;
+						style?: string;
+					};
+					dimensions?: { size?: string };
+					spacing?: { margin?: Spacing };
+					responsive?: {
+						typography?: { fontSize?: ResponsiveFontSize };
+						dimensions?: { size?: ResponsiveFontSize };
+						spacing?: { margin?: ResponsiveSpacing };
+					};
 					color?: {
 						text?: string;
+						background?: string;
 					};
 					typography?: {
+						fontSize?: string;
 						fontFamily?: string;
 						fontStyle?: string;
 						fontWeight?: string;
@@ -110,3 +133,18 @@ export type DesignPreset = {
 	labelStyles: Record< string, any >;
 	attributes: Partial< FaqItemBlockAttributes >;
 };
+
+export type FaqItemLayoutStyle = {
+	layout?: { alignItems?: string };
+	spacing?: { gap?: string };
+	responsive?: {
+		spacing?: { gap?: ResponsiveFontSize };
+	};
+};
+
+export type FaqItemStyle = NonNullable<
+	NonNullable<
+		NonNullable< FaqItemBlockAttributes[ 'style' ] >[ 'ystdtb' ]
+	>[ 'faqItem' ]
+>;
+export type FaqLabelStyle = NonNullable< FaqItemStyle[ 'label' ] >;
