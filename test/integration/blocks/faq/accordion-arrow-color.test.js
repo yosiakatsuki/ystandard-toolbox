@@ -233,8 +233,8 @@ describe( 'v1形式の開閉ボタン色', () => {
 			accordionArrowColor: 'ys-red',
 			customAccordionArrowColor: '#123456',
 		} );
-		expect( value.labelBorderSize ).toBe( '2px' );
-		expect( value.labelBorderRadius ).toBe( '4px' );
+		expect( value.style.ystdtb.faqItem.label.border.width ).toBe( '2px' );
+		expect( value.style.ystdtb.faqItem.label.border.radius ).toBe( '4px' );
 		expect( value.style.ystdtb.faqItem.arrow.color.text ).toBe(
 			'var:preset|color|ys-red'
 		);

@@ -27,10 +27,6 @@
 			}
 		],
 		"innerHTML": "\n<div class=\"ystdtb-faq\"></div>\n",
-		"innerContent": [
-			"\n<div class=\"ystdtb-faq\">",
-			null,
-			"</div>\n"
-		]
+		"innerContent": [ "\n<div class=\"ystdtb-faq\">", null, "</div>\n" ]
 	}
 ]

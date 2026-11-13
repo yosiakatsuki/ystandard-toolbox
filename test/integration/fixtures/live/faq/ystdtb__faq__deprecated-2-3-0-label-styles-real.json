@@ -1,0 +1,192 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "var:preset|color|ys-red",
+										"background": "var:preset|color|ys-light-green"
+									},
+									"typography": {
+										"fontStyle": "normal",
+										"fontWeight": "400",
+										"fontSize": "var:preset|font-size|large"
+									},
+									"border": {
+										"color": "var:preset|color|ys-blue",
+										"width": "2px",
+										"radius": "8px"
+									}
+								},
+								"item": {
+									"layout": {
+										"alignItems": "flex-start"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"isValid": true,
+						"attributes": {
+							"content": "ラベル移行テスト1：質問の表示を確認します。"
+						},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "var:preset|color|ys-red",
+										"background": "var:preset|color|ys-light-green"
+									},
+									"typography": {
+										"fontStyle": "normal",
+										"fontWeight": "400",
+										"fontSize": "var:preset|font-size|large"
+									},
+									"border": {
+										"color": "var:preset|color|ys-blue",
+										"width": "2px",
+										"radius": "8px"
+									}
+								},
+								"item": {
+									"layout": {
+										"alignItems": "flex-start"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"isValid": true,
+						"attributes": {
+							"content": "ラベル移行テスト1：回答の表示を確認します。"
+						},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "#0f766e",
+										"background": "#fde68a"
+									},
+									"typography": {
+										"fontSize": "22px"
+									},
+									"border": {
+										"color": "#7c3aed",
+										"width": "0",
+										"radius": "0"
+									}
+								},
+								"item": {
+									"layout": {
+										"alignItems": "flex-end"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"isValid": true,
+						"attributes": {
+							"content": "ラベル移行テスト2：質問の表示を確認します。"
+						},
+						"innerBlocks": []
+					}
+				]
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "#0f766e",
+										"background": "#fde68a"
+									},
+									"typography": {
+										"fontSize": "22px"
+									},
+									"border": {
+										"color": "#7c3aed",
+										"width": "0",
+										"radius": "0"
+									}
+								},
+								"item": {
+									"layout": {
+										"alignItems": "flex-end"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"isValid": true,
+						"attributes": {
+							"content": "ラベル移行テスト2：回答の表示を確認します。"
+						},
+						"innerBlocks": []
+					}
+				]
+			}
+		]
+	}
+]

@@ -4,9 +4,7 @@
 		"isValid": true,
 		"attributes": {
 			"faqType": "a",
-			"gradient": "midnight",
-			"labelPosition": "center",
-			"labelBold": true
+			"gradient": "midnight"
 		},
 		"innerBlocks": []
 	}

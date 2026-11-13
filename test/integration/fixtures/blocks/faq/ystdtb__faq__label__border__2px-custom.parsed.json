@@ -6,8 +6,18 @@
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"labelBorderSize": "2px",
-					"customLabelBorderColor": "#7c3aed"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"border": {
+										"color": "#7c3aed",
+										"width": "2px"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label has-border has-padding\" style=\"border-color:#7c3aed;border-width:2px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
@@ -19,8 +29,18 @@
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"labelBorderSize": "2px",
-					"customLabelBorderColor": "#7c3aed"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"border": {
+										"color": "#7c3aed",
+										"width": "2px"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label has-border has-padding\" style=\"border-color:#7c3aed;border-width:2px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",

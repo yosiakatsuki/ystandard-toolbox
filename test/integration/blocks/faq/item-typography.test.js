@@ -62,14 +62,26 @@ describe( 'FAQ Itemの文字サイズ', () => {
 	} );
 
 	it( '専用のプリセット文字サイズをFAQラベルだけに保存する', () => {
-		const container = renderItem( { labelSize: 'large' } );
+		const container = renderItem( {
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							typography: {
+								fontSize: 'var:preset|font-size|large',
+							},
+						},
+					},
+				},
+			},
+		} );
 		const label = container.querySelector( '.ystdtb-faq-item__label' );
 		const contents = container.querySelector(
 			'.ystdtb-faq-item__contents'
 		);
 
-		expect( label.classList.contains( 'has-large-font-size' ) ).toBe(
-			true
+		expect( label.getAttribute( 'style' ) ).toContain(
+			'font-size:var(--wp--preset--font-size--large)'
 		);
 		expect( contents.classList.contains( 'has-large-font-size' ) ).toBe(
 			false
@@ -77,7 +89,13 @@ describe( 'FAQ Itemの文字サイズ', () => {
 	} );
 
 	it( '専用のカスタム文字サイズをFAQラベルだけに保存する', () => {
-		const container = renderItem( { customLabelSize: '1.5em' } );
+		const container = renderItem( {
+			style: {
+				ystdtb: {
+					faqItem: { label: { typography: { fontSize: '1.5em' } } },
+				},
+			},
+		} );
 		const label = container.querySelector( '.ystdtb-faq-item__label' );
 		const contents = container.querySelector(
 			'.ystdtb-faq-item__contents'
@@ -202,8 +220,6 @@ describe( 'FAQ Itemの文字サイズ', () => {
 	} );
 
 	it( '旧既定値の太字はカスタム外観を追加せずに保持する', () => {
-		expect( migrateFaqItemAttributes( { labelBold: true } ) ).toEqual( {
-			labelBold: true,
-		} );
+		expect( migrateFaqItemAttributes( { labelBold: true } ) ).toEqual( {} );
 	} );
 } );

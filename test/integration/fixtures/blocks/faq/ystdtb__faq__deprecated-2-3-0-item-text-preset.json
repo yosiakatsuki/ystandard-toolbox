@@ -11,8 +11,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true,
 					"textColor": "ys-purple"
 				},
 				"innerBlocks": []
@@ -22,8 +20,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"labelBold": true,
 					"textColor": "ys-purple"
 				},
 				"innerBlocks": []

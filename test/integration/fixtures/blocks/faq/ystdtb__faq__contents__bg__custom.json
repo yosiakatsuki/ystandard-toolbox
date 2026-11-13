@@ -11,8 +11,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true,
 					"style": {
 						"color": {
 							"background": "#ecfdf5"
@@ -26,8 +24,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"labelBold": true,
 					"style": {
 						"color": {
 							"background": "#ecfdf5"

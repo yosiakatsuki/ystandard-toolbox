@@ -3,6 +3,7 @@
  */
 import type { FaqItemBlockAttributes } from '../types';
 import {
+	getItemStyles,
 	getAccordionArrowMargin,
 	getAccordionArrowStyles,
 	getLabelStyles,
@@ -198,5 +199,27 @@ describe( 'FAQラベル文字スタイル', () => {
 				undefined
 			)
 		).toBeUndefined();
+	} );
+} );
+
+describe( 'FAQアイテムの間隔', () => {
+	it( '通常とモバイルの0をcalcで計算できる長さとして出力する', () => {
+		const styles = getItemStyles( {
+			faqType: 'q',
+			style: {
+				ystdtb: {
+					faqItem: {
+						item: {
+							spacing: { gap: '0' },
+							responsive: { spacing: { gap: { mobile: '0' } } },
+						},
+					},
+				},
+			},
+		} );
+		expect( styles[ '--ystdtb--faq-item--label-gap' ] ).toBe( '0px' );
+		expect( styles[ '--ystdtb--mobile--faq-item--label-gap' ] ).toBe(
+			'0px'
+		);
 	} );
 } );

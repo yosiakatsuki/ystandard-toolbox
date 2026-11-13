@@ -11,17 +11,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true,
-					"customLabelBackgroundColor": "#f1f1f3",
-					"labelBorderSize": "0",
-					"labelBorderRadius": "50px",
 					"style": {
 						"ystdtb": {
 							"faqItem": {
 								"label": {
 									"color": {
-										"text": "#222222"
+										"text": "#222222",
+										"background": "#f1f1f3"
+									},
+									"border": {
+										"width": "0",
+										"radius": "50px"
 									}
 								},
 								"arrow": {
@@ -40,17 +40,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"labelBold": true,
-					"customLabelBackgroundColor": "#f1f1f3",
-					"labelBorderSize": "0",
-					"labelBorderRadius": "50px",
 					"style": {
 						"ystdtb": {
 							"faqItem": {
 								"label": {
 									"color": {
-										"text": "#222222"
+										"text": "#222222",
+										"background": "#f1f1f3"
+									},
+									"border": {
+										"width": "0",
+										"radius": "50px"
 									}
 								},
 								"arrow": {

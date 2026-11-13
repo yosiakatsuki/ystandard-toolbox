@@ -18,9 +18,7 @@
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "q"
 				},
 				"innerBlocks": []
 			},
@@ -28,9 +26,7 @@
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "a",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "a"
 				},
 				"innerBlocks": []
 			}

@@ -11,9 +11,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"customLabelSize": "1.5em",
-					"labelBold": true
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"typography": {
+										"fontSize": "1.5em"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -22,9 +30,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"customLabelSize": "1.5em",
-					"labelBold": true
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"typography": {
+										"fontSize": "1.5em"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

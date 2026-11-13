@@ -188,31 +188,34 @@ jest.mock(
 const createProps = (): FaqItemEditProps => ( {
 	attributes: {
 		faqType: 'q',
-		labelPosition: 'center',
-		labelSize: 'small',
-		customLabelSize: '14px',
+		style: {
+			ystdtb: {
+				faqItem: {
+					label: {
+						typography: { fontSize: 'var:preset|font-size|small' },
+					},
+				},
+			},
+		},
 	},
 	setAttributes: jest.fn(),
-	labelBackgroundColor: {},
-	labelBorderColor: {},
-	accordionArrowColor: {},
 } );
 
 describe( 'LabelTypography', () => {
-	it( 'FAQラベル専用パネルで色と文字サイズを初期表示する', () => {
+	it( 'FAQラベルの文字設定をすべて追加メニュー式にする', () => {
 		render( <LabelTypography { ...createProps() } /> );
 
 		const colorSetting = screen.getByTestId( 'color-setting' );
 		expect( colorSetting ).toHaveAttribute( 'data-clearable', 'true' );
 		expect( colorSetting ).toHaveAttribute(
 			'data-shown-by-default',
-			'true'
+			'false'
 		);
 		expect(
 			screen.getByRole( 'button', {
 				name: 'フォントサイズをリセット',
 			} ).parentElement
-		).toHaveAttribute( 'data-shown-by-default', 'true' );
+		).toHaveAttribute( 'data-shown-by-default', 'false' );
 		expect(
 			screen.getByRole( 'button', { name: '外観をリセット' } )
 				.parentElement
@@ -295,8 +298,17 @@ describe( 'LabelTypography', () => {
 		);
 
 		expect( props.setAttributes ).toHaveBeenCalledWith( {
-			labelSize: 'large',
-			customLabelSize: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							typography: {
+								fontSize: 'var:preset|font-size|large',
+							},
+						},
+					},
+				},
+			},
 		} );
 	} );
 
@@ -388,8 +400,7 @@ describe( 'LabelTypography', () => {
 		);
 
 		expect( props.setAttributes ).toHaveBeenCalledWith( {
-			labelSize: undefined,
-			customLabelSize: undefined,
+			style: undefined,
 		} );
 	} );
 

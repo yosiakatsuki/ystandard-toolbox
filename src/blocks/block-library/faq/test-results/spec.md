@@ -59,9 +59,9 @@ FAQ（faq）親子ブロック全体のテスト仕様書。
 - コアの本文文字設定：`textColor`／`style.color.text`、`fontSize`／`style.typography.fontSize`
 - コアのItem背景・グラデーション・枠線：`backgroundColor`／`gradient`／`borderColor`と`style.color`／`style.border`
 - スタイルのFAQラベル（文字）：`style.ystdtb.faqItem.label.color.text`、`label.typography`のfontSize／fontFamily／fontWeight／fontStyle／lineHeight／textTransform
-- スタイルのFAQラベル設定：`label.color.background`、`label.border`のcolor／width／radius
+- スタイルのFAQラベル（背景）・FAQラベル（枠線）：`label.color.background`、`label.border`のcolor／width／style／radius
 - スタイルのFAQアイテムのレスポンシブ文字設定：`contents.responsive.typography.fontSize`、`label.responsive.typography.fontSize`
-- スタイルのレスポンシブ設定は本文文字・本文余白・ラベル文字・ラベル余白・サイズの5パネル。本文内側余白は本文領域だけに適用する。ラベル余白には上下マージンとラベル・本文の間隔を含む。通常のラベルサイズはFAQラベル設定に常時表示し、端末別サイズと併存できる
+- スタイルのレスポンシブ設定は本文文字・本文余白・ラベル文字・ラベル余白・サイズの5パネル。本文内側余白は本文領域だけに適用する。ラベル余白には上下マージンとラベル・本文の間隔を含む。通常のラベルサイズはFAQラベル（サイズ）の追加メニューから表示し、端末別サイズと併存できる
 - デザインサンプル：既存6種類を新しい保存先へ適用する。ラベルの文字・背景・枠線を置き換え、追加した寸法・余白は保持する
 
 省略した独自パスは`style.ystdtb.faqItem`配下。保存先の詳細は`../faq-item/DESIGN.md`を参照する。
@@ -359,4 +359,14 @@ FAQコンテンツの下区切り線設定を標準スタイルパネルへ移�
 
 ## 設計との整合確認
 
-共通契約は`docs/block-style-controls.md`、FAQ Itemの残項目は`../faq-item/DESIGN.md`を参照する（docsのパスはプロジェクトルート基準）。本文余白・ラベル余白の通常入力と端末別入力の分離、レスポンシブ項目解除・全解除で通常値を保持する動作は改修待ち。現行テストの成功を、この整理の完了とは扱わない。
+共通契約は`docs/block-style-controls.md`、FAQ Item固有の仕様は`src/blocks/block-library/faq-item/DESIGN.md`を参照する（いずれもプロジェクトルート基準）。
+
+- 通常の本文パディングはコアの`supports.spacing.padding`と`style.spacing.padding`で扱い、本文だけへ出力する。通常のラベル上下マージン・本文との間隔は「FAQラベル（余白）」で扱う
+- ラベルは文字・背景・枠線・余白・サイズの5パネルへ分割し、通常パネルにysアイコンを付けない
+- 5つのレスポンシブパネルには端末別入力のみを配置し、通常パネルの後に並べる。ysアイコンはこれらだけに付ける
+- スタイルグループの全項目は初期非表示とし、設定済みなら自動表示する
+- 項目解除では対象項目のみ、全解除では対象パネルの設定のみを削除する。通常値と端末別値は互いを保持する
+- ラベル余白ではマージンの解除で間隔を保持し、間隔の解除でマージンを保持する
+- ラベルの通常サイズは「FAQラベル（サイズ）」の追加メニュー式とし、端末別サイズの変更・解除と独立させる
+- デザインサンプルは設定タブへ配置する
+- リセットの保持契約は`src/blocks/block-library/faq-item/inspector-controls/styles/test/panel-reset.test.tsx`で検証し、開発サイトでも各パネルの全解除を確認する

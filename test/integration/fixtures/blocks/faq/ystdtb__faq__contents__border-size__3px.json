@@ -11,8 +11,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true,
 					"style": {
 						"border": {
 							"bottom": {
@@ -30,8 +28,6 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"labelBold": true,
 					"style": {
 						"border": {
 							"bottom": {

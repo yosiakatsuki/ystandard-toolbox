@@ -1,0 +1,235 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": true
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"style": {
+						"typography": {
+							"fontSize": "18px"
+						},
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"spacing": {
+										"gap": "16px"
+									},
+									"responsive": {
+										"spacing": {
+											"gap": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										}
+									}
+								},
+								"label": {
+									"typography": {
+										"fontSize": "24px"
+									},
+									"dimensions": {
+										"size": "48px"
+									},
+									"spacing": {
+										"margin": {
+											"top": "-2px",
+											"bottom": "0"
+										}
+									},
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"dimensions": {
+											"size": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"margin": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								},
+								"contents": {
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"padding": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"spacing": {
+							"padding": {
+								"top": "12px",
+								"right": "16px",
+								"bottom": "12px",
+								"left": "16px"
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a",
+					"style": {
+						"typography": {
+							"fontSize": "18px"
+						},
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"spacing": {
+										"gap": "16px"
+									},
+									"responsive": {
+										"spacing": {
+											"gap": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										}
+									}
+								},
+								"label": {
+									"typography": {
+										"fontSize": "24px"
+									},
+									"dimensions": {
+										"size": "48px"
+									},
+									"spacing": {
+										"margin": {
+											"top": "-2px",
+											"bottom": "0"
+										}
+									},
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"dimensions": {
+											"size": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"margin": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								},
+								"contents": {
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"padding": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"spacing": {
+							"padding": {
+								"top": "12px",
+								"right": "16px",
+								"bottom": "12px",
+								"left": "16px"
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

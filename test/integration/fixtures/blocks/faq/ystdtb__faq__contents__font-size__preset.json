@@ -11,9 +11,7 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"labelPosition": "center",
-					"fontSize": "large",
-					"labelBold": true
+					"fontSize": "large"
 				},
 				"innerBlocks": []
 			},
@@ -22,9 +20,7 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"labelPosition": "center",
-					"fontSize": "large",
-					"labelBold": true
+					"fontSize": "large"
 				},
 				"innerBlocks": []
 			}

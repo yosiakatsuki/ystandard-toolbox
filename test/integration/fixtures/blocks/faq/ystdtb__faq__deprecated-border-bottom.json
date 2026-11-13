@@ -19,9 +19,7 @@
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "q",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "q"
 				},
 				"innerBlocks": []
 			}
