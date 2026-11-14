@@ -53,34 +53,25 @@ class FAQ_Block {
 	 * @return void
 	 */
 	public function enqueue_responsive_style() {
-		$types      = [ 'desktop', 'tablet', 'mobile' ];
-		$responsive = [
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '',
-		];
-		// コアの単一設定よりレスポンシブ値を優先できる詳細度にする.
-		$selector   = ':is(div).ystdtb-faq';
-		$properties = [
-			'faq--font-size' => 'font-size',
-		];
+		$selector   = '.ystdtb-faq';
+		$responsive = [];
 		$spacing    = [
 			'margin'  => [ 'top', 'bottom' ],
 			'padding' => [ 'top', 'right', 'bottom', 'left' ],
 		];
 
-		foreach ( $types as $type ) {
-			foreach ( $properties as $prop_name => $property ) {
-				$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(
-					[
-						'selector'  => $selector,
-						'prop_name' => $prop_name,
-						'property'  => $property,
-						'type'      => $type,
-					]
-				);
-			}
+		foreach ( [ 'desktop', 'tablet', 'mobile' ] as $type ) {
+			// 文字サイズ。
+			$responsive[ $type ] = Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $selector,
+					'prop_name' => 'faq--font-size',
+					'property'  => 'font-size',
+					'type'      => $type,
+				]
+			);
 
+			// 外側・内側の余白。
 			foreach ( $spacing as $property => $positions ) {
 				foreach ( $positions as $position ) {
 					$responsive[ $type ] .= Styles::get_responsive_custom_prop_css(

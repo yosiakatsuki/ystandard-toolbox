@@ -53,37 +53,78 @@ class FAQ_Item_Block {
 	 * @return void
 	 */
 	public function enqueue_responsive_style() {
-		$rules = [
-			'contents-font-size' => [ '.ystdtb-faq-item__contents', 'font-size' ],
-			'label-font-size'    => [ '.ystdtb-faq-item__label', 'font-size' ],
-			'label-gap'          => [ '.ystdtb-faq-item', '--ystdtb--faq-item--label-gap' ],
-		];
-		foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
-			$rules[ "contents-padding-{$side}" ] = [ '.ystdtb-faq-item__contents', "padding-{$side}" ];
-		}
-		foreach ( [ 'top', 'bottom' ] as $side ) {
-			$rules[ "label-margin-{$side}" ] = [ '.ystdtb-faq-item__label', "margin-{$side}" ];
-		}
+		$selector          = '.ystdtb-faq-item';
+		$contents_selector = "{$selector} > :where(.ystdtb-faq-item__contents)";
+		$label_selector    = "{$selector} > :where(.ystdtb-faq-item__label)";
+		$responsive        = [];
 
-		$responsive = [];
 		foreach ( [ 'desktop', 'tablet', 'mobile' ] as $device ) {
-			$css = '';
-			foreach ( $rules as $name => $rule ) {
+			// 本文・ラベルの文字サイズ。
+			$css  = Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $contents_selector,
+					'prop_name' => 'faq-item--contents-font-size',
+					'property'  => 'font-size',
+					'type'      => $device,
+				]
+			);
+			$css .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $label_selector,
+					'prop_name' => 'faq-item--label-font-size',
+					'property'  => 'font-size',
+					'type'      => $device,
+				]
+			);
+
+			// 本文の内側余白。
+			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
 				$css .= Styles::get_responsive_custom_prop_css(
 					[
-						'selector'  => ':is(div)' . $rule[0],
-						'prop_name' => 'faq-item--' . $name,
-						'property'  => $rule[1],
+						'selector'  => $contents_selector,
+						'prop_name' => "faq-item--contents-padding-{$side}",
+						'property'  => "padding-{$side}",
 						'type'      => $device,
 					]
 				);
 			}
+
+			// ラベルの上下余白と本文との間隔。
+			foreach ( [ 'top', 'bottom' ] as $side ) {
+				$css .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => $label_selector,
+						'prop_name' => "faq-item--label-margin-{$side}",
+						'property'  => "margin-{$side}",
+						'type'      => $device,
+					]
+				);
+			}
+			$css .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => $selector,
+					'prop_name' => 'faq-item--label-gap',
+					'property'  => '--ystdtb--faq-item--label-gap',
+					'type'      => $device,
+				]
+			);
+
 			// サイズ未指定端末には寸法や中央揃えを追加せず、従来の自動サイズを保つ。
-			$size                  = Styles::get_responsive_custom_prop_name( 'faq-item--label-size', $device );
-			$css                  .= ":is(div).ystdtb-faq-item__label:where([style*=\"{$size}\"]){";
-			$css                  .= "width:var({$size})!important;height:var({$size})!important;";
-			$css                  .= "min-width:var({$size})!important;min-height:var({$size})!important;";
-			$css                  .= 'box-sizing:border-box;flex-shrink:0;display:flex;align-items:center;justify-content:center;}';
+			$size = Styles::get_responsive_custom_prop_name( 'faq-item--label-size', $device );
+			$css .= <<<CSS
+{$label_selector}:where([style*="{$size}"]) {
+	width: var({$size}) !important;
+	height: var({$size}) !important;
+	min-width: var({$size}) !important;
+	min-height: var({$size}) !important;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+CSS;
+
 			$responsive[ $device ] = $css;
 		}
 

@@ -240,11 +240,13 @@ yStandard シリーズはカスタマイズのしやすさが売りのプロダ�
 
 フロントエンドのブロックCSSは、原則としてクラス1つ分の詳細度（0,1,0）で記述する。
 
+新規作成・変更するセレクターはブロックのメインクラスから始め、子要素や状態の条件は`:where()`で指定する。PHPで生成するCSSにも同じ方針を適用し、`:is(div)`など詳細度を上げるためだけの要素指定は使わない。0,1,0で対応できない場合は、詳細度を上げる前に理由を説明して相談する。
+
 ```css
 /* ✅ 正しい: 詳細度 0,1,0 */
 .ystdtb-posts { }
-.ystdtb-posts__list { }
-.ystdtb-posts__thumbnail { }
+.ystdtb-posts > :where(.ystdtb-posts__list) { }
+.ystdtb-posts :where(.ystdtb-posts__thumbnail) { }
 
 /* ❌ 避ける: 詳細度 0,2,0（不必要なネスト） */
 .ystdtb-posts .ystdtb-posts__list { }
@@ -285,7 +287,7 @@ yStandard シリーズはカスタマイズのしやすさが売りのプロダ�
 |---|---|---|
 | CSSカスタムプロパティ定義 | `:root` | 0,1,0（擬似クラス） |
 | ブロックCSS（基本） | `.ystdtb-posts` | 0,1,0 |
-| BEM Element | `.ystdtb-posts__list` | 0,1,0 |
+| BEM Element | `.ystdtb-posts > :where(.ystdtb-posts__list)` | 0,1,0 |
 | 状態クラス | `.ystdtb-posts:where(.is-card)` | 0,1,0 |
 | `!important` | — | **使用禁止** |
 
