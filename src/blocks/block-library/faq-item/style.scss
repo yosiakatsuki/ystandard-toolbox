@@ -5,28 +5,14 @@
 	margin: 0;
 	padding: var(--ystdtb--faq-item--padding-vertical)
 		var(--ystdtb--faq-item--padding-horizon);
-	border: 0;
+	// 枠線のない行だけをリセットし、設定済みの全周・辺別枠線は保持する。
+	&:where(:not(.has-border)) {
+		border: 0;
+	}
 
-	&:where(.has-background) {
+	&:where(.has-background, .has-border) {
 		--ystdtb--faq-item--padding-vertical: 1.25rem;
 		--ystdtb--faq-item--padding-horizon: 1.25rem;
-	}
-
-	&:where(.has-border-bottom) {
-		border-bottom-style: solid;
-	}
-
-	&:where(:not(.has-border, .has-background)) {
-
-		&:where(.is-faq--q) {
-			padding-bottom: calc(var(--ystdtb--faq-item--padding-vertical) / 2);
-
-			+ :where(.is-faq--a) {
-				padding-top: calc(
-					var(--ystdtb--faq-item--padding-vertical) / 2
-				);
-			}
-		}
 	}
 }
 
@@ -67,3 +53,43 @@
 .ystdtb-faq-item__arrow {
 	display: none;
 }
+
+// 新しい間隔だけをラベル側で補正し、開閉ボタンの間隔・余白は保持する。
+.ystdtb-faq-item:where([style*="faq-item--label-gap"])
+	> :where(.ystdtb-faq-item__label) {
+	margin-right: calc(
+		var(--ystdtb--faq-item--label-gap, var(--ystdtb--faq-item--gap)) - var(
+				--ystdtb--faq-item--gap
+			)
+	);
+}
+
+// 通常サイズの指定があるラベルだけを枠線込みの正方形にする。
+.ystdtb-faq-item__label:where([style*="--ystdtb--faq-item--label-size:"]) {
+	box-sizing: border-box;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ystdtb--faq-item--label-size);
+	height: var(--ystdtb--faq-item--label-size);
+	min-width: var(--ystdtb--faq-item--label-size);
+	min-height: var(--ystdtb--faq-item--label-size);
+}
+
+// 閉じた回答では、通常値・端末別値より閉状態を優先して余白を残さない。
+.ystdtb-faq:where(.is-accordion:not(.is-open, [data-type]))
+	> :where(.ystdtb-faq-item.is-faq--a) {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+// 非推奨: v2.3.0以前の下区切り線。旧ブロック対応終了時にこのまとまりを削除する.
+/* stylelint-disable no-duplicate-selectors */
+.ystdtb-faq-item {
+
+	&:where(.has-border-bottom) {
+		border-bottom-style: solid;
+	}
+}
+/* stylelint-enable no-duplicate-selectors */

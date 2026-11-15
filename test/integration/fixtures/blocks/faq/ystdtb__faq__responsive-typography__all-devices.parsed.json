@@ -1,0 +1,27 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"responsive": {
+							"typography": {
+								"fontSize": {
+									"desktop": "32px",
+									"tablet": "24px",
+									"mobile": "18px"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--tablet--faq--font-size:24px;--ystdtb--mobile--faq--font-size:18px\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--font-size:32px;--ystdtb--tablet--faq--font-size:24px;--ystdtb--mobile--faq--font-size:18px\"></div>\n"
+		]
+	}
+]

@@ -4,19 +4,20 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"borderType": "all",
-			"borderSize": "1px",
-			"borderColor": "ys-black"
+			"borderColor": "ys-black",
+			"style": {
+				"border": {
+					"style": "solid",
+					"width": "1px"
+				}
+			}
 		},
 		"innerBlocks": [
 			{
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "q",
-					"faqBorderType": "",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "q"
 				},
 				"innerBlocks": []
 			}

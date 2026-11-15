@@ -1,4 +1,6 @@
 import classnames from 'classnames';
+import { migrateFaqItemAttributes } from '../2.3.0/migrate';
+import { hasLegacyAccordionArrowColor } from '../../../faq/deprecated/arrow-color';
 import {
 	InnerBlocks,
 	getColorClassName,
@@ -98,6 +100,7 @@ export const deprecated1341 = [
 			align: false,
 			className: false,
 		},
+		isEligible: hasLegacyAccordionArrowColor,
 		migrate: ( attributes: any ) => {
 			const {
 				labelBorderRadius,
@@ -107,7 +110,8 @@ export const deprecated1341 = [
 				legacyArrowInnerHtml: _legacyArrowInnerHtml,
 				...rest
 			} = attributes;
-			return {
+			// deprecatedは連鎖しないため、v1からも現行の色・枠線形式へ直接移す.
+			return migrateFaqItemAttributes( {
 				...rest,
 				labelBorderRadius: labelBorderRadius
 					? `${ labelBorderRadius }px`
@@ -118,7 +122,7 @@ export const deprecated1341 = [
 				faqBorderSize: faqBorderSize
 					? `${ faqBorderSize }px`
 					: undefined,
-			};
+			} );
 		},
 		// @ts-ignore.
 		save( { attributes } ) {

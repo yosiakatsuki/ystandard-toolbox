@@ -1,0 +1,60 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": true,
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"color": {
+								"text": "#dc2626"
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a",
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "#dc2626"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

@@ -1,0 +1,32 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"style": {
+				"color": {
+					"gradient": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

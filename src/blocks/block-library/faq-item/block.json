@@ -20,93 +20,94 @@
 			"type": "string",
 			"default": "q"
 		},
-		"faqTextColor": {
+		"textColor": {
 			"type": "string"
 		},
-		"customFaqTextColor": {
+		"backgroundColor": {
 			"type": "string"
 		},
-		"faqBackgroundColor": {
+		"gradient": {
 			"type": "string"
 		},
-		"customFaqBackgroundColor": {
+		"borderColor": {
 			"type": "string"
 		},
-		"faqBorderType": {
-			"type": "string",
-			"default": ""
-		},
-		"faqBorderSize": {
+		"fontSize": {
 			"type": "string"
 		},
-		"faqBorderColor": {
-			"type": "string"
-		},
-		"customFaqBorderColor": {
-			"type": "string"
-		},
-		"labelPosition": {
-			"type": "string",
-			"default": "center"
-		},
-		"labelSize": {
-			"type": "string"
-		},
-		"customLabelSize": {
-			"type": "string"
-		},
-		"labelColor": {
-			"type": "string"
-		},
-		"customLabelColor": {
-			"type": "string"
-		},
-		"labelBold": {
-			"type": "boolean",
-			"default": true
-		},
-		"labelBackgroundColor": {
-			"type": "string"
-		},
-		"customLabelBackgroundColor": {
-			"type": "string"
-		},
-		"labelBorderSize": {
-			"type": "string"
-		},
-		"labelBorderRadius": {
-			"type": "string"
-		},
-		"labelBorderColor": {
-			"type": "string"
-		},
-		"customLabelBorderColor": {
-			"type": "string"
-		},
-		"accordionArrowColor": {
-			"type": "string"
-		},
-		"customAccordionArrowColor": {
-			"type": "string"
+		"style": {
+			"type": "object"
 		}
 	},
 	"usesContext": [
 		"ystdtb/isAccordion",
 		"ystdtb/backgroundColor",
-		"ystdtb/customBackgroundColor",
 		"ystdtb/borderType",
 		"ystdtb/borderSize",
 		"ystdtb/borderColor",
-		"ystdtb/customBorderColor",
-		"ystdtb/accordionArrowColor",
-		"ystdtb/customAccordionArrowColor"
+		"ystdtb/customBorderColor"
 	],
 	"supports": {
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"color": false,
+				"radius": false,
+				"style": false,
+				"width": false
+			}
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true,
+			"__experimentalSkipSerialization": [
+				"text"
+			],
+			"__experimentalDefaultControls": {
+				"text": false,
+				"background": false,
+				"gradients": false
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"__experimentalSkipSerialization": [
+				"fontSize"
+			],
+			"__experimentalDefaultControls": {
+				"fontSize": false
+			}
+		},
 		"align": false,
 		"className": false,
-		"reusable": false
+		"reusable": false,
+		"spacing": {
+			"padding": true,
+			"__experimentalSkipSerialization": [
+				"padding"
+			],
+			"__experimentalDefaultControls": {
+				"padding": false
+			}
+		}
+	},
+	"selectors": {
+		"root": ".ystdtb-faq-item",
+		"color": {
+			"root": ".ystdtb-faq-item",
+			"text": ".ystdtb-faq-item__contents"
+		},
+		"typography": ".ystdtb-faq-item__contents",
+		"spacing": ".ystdtb-faq-item__contents"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"editorStyle": [
+		"ystdtb-aktk-components-editor",
+		"file:./index.css"
+	],
 	"style": "file:./style-index.css"
 }

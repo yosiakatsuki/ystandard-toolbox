@@ -6,15 +6,8 @@
 	"title": "FAQ",
 	"category": "ystdtb-blocks",
 	"description": "Q&A(FAQ)表示ブロック",
-	"keywords": [
-		"faq",
-		"question",
-		"answer",
-		"Q&A"
-	],
-	"allowedBlocks": [
-		"ystdtb/faq-item"
-	],
+	"keywords": [ "faq", "question", "answer", "Q&A" ],
+	"allowedBlocks": [ "ystdtb/faq-item" ],
 	"textdomain": "ystandard-toolbox",
 	"attributes": {
 		"isAccordion": {
@@ -24,47 +17,71 @@
 		"backgroundColor": {
 			"type": "string"
 		},
-		"customBackgroundColor": {
-			"type": "string"
-		},
-		"borderType": {
-			"type": "string",
-			"default": ""
-		},
-		"borderSize": {
-			"type": "string"
-		},
 		"borderColor": {
 			"type": "string"
 		},
-		"customBorderColor": {
+		"fontSize": {
 			"type": "string"
 		},
-		"accordionArrowColor": {
+		"fontFamily": {
 			"type": "string"
 		},
-		"customAccordionArrowColor": {
-			"type": "string"
+		"style": {
+			"type": "object"
 		}
 	},
 	"supports": {
 		"align": false,
 		"className": false,
-		"listView": true
+		"listView": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontStyle": true,
+			"__experimentalFontWeight": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalWritingMode": true,
+			"__experimentalDefaultControls": {
+				"fontSize": false
+			}
+		},
+		"color": {
+			"background": true,
+			"gradients": true,
+			"__experimentalDefaultControls": {
+				"background": false
+			}
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"margin": false,
+				"padding": false
+			}
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"color": false,
+				"radius": false,
+				"style": false,
+				"width": false
+			}
+		}
 	},
 	"providesContext": {
 		"ystdtb/isAccordion": "isAccordion",
-		"ystdtb/backgroundColor": "backgroundColor",
-		"ystdtb/customBackgroundColor": "customBackgroundColor",
-		"ystdtb/borderType": "borderType",
-		"ystdtb/borderSize": "borderSize",
-		"ystdtb/borderColor": "borderColor",
-		"ystdtb/customBorderColor": "customBorderColor",
-		"ystdtb/accordionArrowColor": "accordionArrowColor",
-		"ystdtb/customAccordionArrowColor": "customAccordionArrowColor"
+		"ystdtb/backgroundColor": "backgroundColor"
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": ["ystdtb-aktk-components-editor", "file:./index.css"],
+	"editorStyle": [ "ystdtb-aktk-components-editor", "file:./index.css" ],
 	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
 	"example": {

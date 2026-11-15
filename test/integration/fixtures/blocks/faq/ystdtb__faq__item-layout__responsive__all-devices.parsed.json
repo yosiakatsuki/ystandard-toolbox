@@ -1,0 +1,247 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {
+			"isAccordion": true
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"style": {
+						"typography": {
+							"fontSize": "18px"
+						},
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"spacing": {
+										"gap": "16px"
+									},
+									"responsive": {
+										"spacing": {
+											"gap": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										}
+									}
+								},
+								"label": {
+									"typography": {
+										"fontSize": "24px"
+									},
+									"dimensions": {
+										"size": "48px"
+									},
+									"spacing": {
+										"margin": {
+											"top": "-2px",
+											"bottom": "0"
+										}
+									},
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"dimensions": {
+											"size": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"margin": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								},
+								"contents": {
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"padding": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"spacing": {
+							"padding": {
+								"top": "12px",
+								"right": "16px",
+								"bottom": "12px",
+								"left": "16px"
+							}
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"--ystdtb--faq-item--label-gap:16px;--ystdtb--desktop--faq-item--label-gap:24px;--ystdtb--tablet--faq-item--label-gap:20px;--ystdtb--mobile--faq-item--label-gap:16px\"><div class=\"ystdtb-faq-item__label\" style=\"font-size:24px;--ystdtb--faq-item--label-size:48px;margin-top:-2px;margin-bottom:0;--ystdtb--desktop--faq-item--label-font-size:24px;--ystdtb--tablet--faq-item--label-font-size:20px;--ystdtb--mobile--faq-item--label-font-size:16px;--ystdtb--desktop--faq-item--label-size:24px;--ystdtb--tablet--faq-item--label-size:20px;--ystdtb--mobile--faq-item--label-size:16px;--ystdtb--desktop--faq-item--label-margin-top:0px;--ystdtb--tablet--faq-item--label-margin-top:2px;--ystdtb--mobile--faq-item--label-margin-top:4px;--ystdtb--desktop--faq-item--label-margin-bottom:0;--ystdtb--tablet--faq-item--label-margin-bottom:0;--ystdtb--mobile--faq-item--label-margin-bottom:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\" style=\"font-size:18px;padding-top:12px;padding-right:16px;padding-bottom:12px;padding-left:16px;--ystdtb--desktop--faq-item--contents-padding-top:0px;--ystdtb--tablet--faq-item--contents-padding-top:2px;--ystdtb--mobile--faq-item--contents-padding-top:4px;--ystdtb--desktop--faq-item--contents-padding-bottom:0;--ystdtb--tablet--faq-item--contents-padding-bottom:0;--ystdtb--mobile--faq-item--contents-padding-bottom:0;--ystdtb--desktop--faq-item--contents-font-size:24px;--ystdtb--tablet--faq-item--contents-font-size:20px;--ystdtb--mobile--faq-item--contents-font-size:16px\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"--ystdtb--faq-item--label-gap:16px;--ystdtb--desktop--faq-item--label-gap:24px;--ystdtb--tablet--faq-item--label-gap:20px;--ystdtb--mobile--faq-item--label-gap:16px\"><div class=\"ystdtb-faq-item__label\" style=\"font-size:24px;--ystdtb--faq-item--label-size:48px;margin-top:-2px;margin-bottom:0;--ystdtb--desktop--faq-item--label-font-size:24px;--ystdtb--tablet--faq-item--label-font-size:20px;--ystdtb--mobile--faq-item--label-font-size:16px;--ystdtb--desktop--faq-item--label-size:24px;--ystdtb--tablet--faq-item--label-size:20px;--ystdtb--mobile--faq-item--label-size:16px;--ystdtb--desktop--faq-item--label-margin-top:0px;--ystdtb--tablet--faq-item--label-margin-top:2px;--ystdtb--mobile--faq-item--label-margin-top:4px;--ystdtb--desktop--faq-item--label-margin-bottom:0;--ystdtb--tablet--faq-item--label-margin-bottom:0;--ystdtb--mobile--faq-item--label-margin-bottom:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\" style=\"font-size:18px;padding-top:12px;padding-right:16px;padding-bottom:12px;padding-left:16px;--ystdtb--desktop--faq-item--contents-padding-top:0px;--ystdtb--tablet--faq-item--contents-padding-top:2px;--ystdtb--mobile--faq-item--contents-padding-top:4px;--ystdtb--desktop--faq-item--contents-padding-bottom:0;--ystdtb--tablet--faq-item--contents-padding-bottom:0;--ystdtb--mobile--faq-item--contents-padding-bottom:0;--ystdtb--desktop--faq-item--contents-font-size:24px;--ystdtb--tablet--faq-item--contents-font-size:20px;--ystdtb--mobile--faq-item--contents-font-size:16px\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"style": {
+						"typography": {
+							"fontSize": "18px"
+						},
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"spacing": {
+										"gap": "16px"
+									},
+									"responsive": {
+										"spacing": {
+											"gap": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										}
+									}
+								},
+								"label": {
+									"typography": {
+										"fontSize": "24px"
+									},
+									"dimensions": {
+										"size": "48px"
+									},
+									"spacing": {
+										"margin": {
+											"top": "-2px",
+											"bottom": "0"
+										}
+									},
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"dimensions": {
+											"size": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"margin": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								},
+								"contents": {
+									"responsive": {
+										"typography": {
+											"fontSize": {
+												"desktop": "24px",
+												"tablet": "20px",
+												"mobile": "16px"
+											}
+										},
+										"spacing": {
+											"padding": {
+												"desktop": {
+													"top": "0px",
+													"bottom": "0"
+												},
+												"tablet": {
+													"top": "2px",
+													"bottom": "0"
+												},
+												"mobile": {
+													"top": "4px",
+													"bottom": "0"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"spacing": {
+							"padding": {
+								"top": "12px",
+								"right": "16px",
+								"bottom": "12px",
+								"left": "16px"
+							}
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"--ystdtb--faq-item--label-gap:16px;--ystdtb--desktop--faq-item--label-gap:24px;--ystdtb--tablet--faq-item--label-gap:20px;--ystdtb--mobile--faq-item--label-gap:16px\"><div class=\"ystdtb-faq-item__label\" style=\"font-size:24px;--ystdtb--faq-item--label-size:48px;margin-top:-2px;margin-bottom:0;--ystdtb--desktop--faq-item--label-font-size:24px;--ystdtb--tablet--faq-item--label-font-size:20px;--ystdtb--mobile--faq-item--label-font-size:16px;--ystdtb--desktop--faq-item--label-size:24px;--ystdtb--tablet--faq-item--label-size:20px;--ystdtb--mobile--faq-item--label-size:16px;--ystdtb--desktop--faq-item--label-margin-top:0px;--ystdtb--tablet--faq-item--label-margin-top:2px;--ystdtb--mobile--faq-item--label-margin-top:4px;--ystdtb--desktop--faq-item--label-margin-bottom:0;--ystdtb--tablet--faq-item--label-margin-bottom:0;--ystdtb--mobile--faq-item--label-margin-bottom:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\" style=\"font-size:18px;padding-top:12px;padding-right:16px;padding-bottom:12px;padding-left:16px;--ystdtb--desktop--faq-item--contents-padding-top:0px;--ystdtb--tablet--faq-item--contents-padding-top:2px;--ystdtb--mobile--faq-item--contents-padding-top:4px;--ystdtb--desktop--faq-item--contents-padding-bottom:0;--ystdtb--tablet--faq-item--contents-padding-bottom:0;--ystdtb--mobile--faq-item--contents-padding-bottom:0;--ystdtb--desktop--faq-item--contents-font-size:24px;--ystdtb--tablet--faq-item--contents-font-size:20px;--ystdtb--mobile--faq-item--contents-font-size:16px\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"--ystdtb--faq-item--label-gap:16px;--ystdtb--desktop--faq-item--label-gap:24px;--ystdtb--tablet--faq-item--label-gap:20px;--ystdtb--mobile--faq-item--label-gap:16px\"><div class=\"ystdtb-faq-item__label\" style=\"font-size:24px;--ystdtb--faq-item--label-size:48px;margin-top:-2px;margin-bottom:0;--ystdtb--desktop--faq-item--label-font-size:24px;--ystdtb--tablet--faq-item--label-font-size:20px;--ystdtb--mobile--faq-item--label-font-size:16px;--ystdtb--desktop--faq-item--label-size:24px;--ystdtb--tablet--faq-item--label-size:20px;--ystdtb--mobile--faq-item--label-size:16px;--ystdtb--desktop--faq-item--label-margin-top:0px;--ystdtb--tablet--faq-item--label-margin-top:2px;--ystdtb--mobile--faq-item--label-margin-top:4px;--ystdtb--desktop--faq-item--label-margin-bottom:0;--ystdtb--tablet--faq-item--label-margin-bottom:0;--ystdtb--mobile--faq-item--label-margin-bottom:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\" style=\"font-size:18px;padding-top:12px;padding-right:16px;padding-bottom:12px;padding-left:16px;--ystdtb--desktop--faq-item--contents-padding-top:0px;--ystdtb--tablet--faq-item--contents-padding-top:2px;--ystdtb--mobile--faq-item--contents-padding-top:4px;--ystdtb--desktop--faq-item--contents-padding-bottom:0;--ystdtb--tablet--faq-item--contents-padding-bottom:0;--ystdtb--mobile--faq-item--contents-padding-bottom:0;--ystdtb--desktop--faq-item--contents-font-size:24px;--ystdtb--tablet--faq-item--contents-font-size:20px;--ystdtb--mobile--faq-item--contents-font-size:16px\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq is-accordion\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq is-accordion\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

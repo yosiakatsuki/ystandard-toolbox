@@ -5,7 +5,7 @@ import { ChevronDown } from 'react-feather';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
-	withColors,
+	__experimentalUseColorProps as useColorProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -23,8 +23,8 @@ import {
 	getAccordionArrowStyles,
 } from './utils';
 import { InspectorControls } from './inspector-controls';
+import { FaqItemBlockControls } from './block-controls';
 import type { FaqItemEditProps } from './types';
-import { compose } from '@wordpress/compose';
 
 import './style-editor.scss';
 
@@ -43,60 +43,34 @@ const template: [ string, Record< string, any > ][] = [
  * @param props
  */
 function FaqItemEdit( props: FaqItemEditProps ) {
-	const {
-		attributes,
-		faqTextColor,
-		faqBackgroundColor,
-		faqBorderColor,
-		labelColor,
-		labelBackgroundColor,
-		labelBorderColor,
-		accordionArrowColor,
-	} = props;
-	const { faqType, labelBorderSize } = attributes;
+	const { attributes } = props;
+	const { faqType } = attributes;
+	// コアの文字色だけを本文へ適用し、ラベルや開閉ボタンへの継承を避ける.
+	const contentsColorProps = useColorProps( {
+		textColor: attributes.textColor,
+		style: { color: { text: attributes.style?.color?.text } },
+	} );
 
 	// FAQアイテムブロックProps
 	const blockProps = useBlockProps( {
-		className: getItemClasses( {
-			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
-		style: getItemStyles( {
-			...attributes,
-			customFaqBackgroundColor: faqBackgroundColor?.color,
-			customFaqBorderColor: faqBorderColor?.color,
-		} ),
+		className: getItemClasses( attributes ),
+		style: getItemStyles( attributes ),
 	} );
 
 	// FAQラベルのクラス名とスタイル
 	const labelProps = {
-		className: getLabelClasses( {
-			...attributes,
-			customLabelColor: labelColor.color,
-			customLabelBackgroundColor: labelBackgroundColor?.color,
-			customLabelBorderColor: labelBorderColor?.color,
-			labelBorderSize,
-		} ),
-		style: getLabelStyles( {
-			...attributes,
-			customLabelColor: labelColor.color,
-			customLabelBackgroundColor: labelBackgroundColor?.color,
-			customLabelBorderColor: labelBorderColor?.color,
-		} ),
+		className: getLabelClasses( attributes ),
+		style: getLabelStyles( attributes ),
 	};
 
 	// FAQコンテンツのInnerBlocksProps
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: getContentsClasses( {
-				...attributes,
-				customFaqTextColor: faqTextColor?.color,
-			} ),
-			style: getContentsStyles( {
-				...attributes,
-				customFaqTextColor: faqTextColor?.color,
-			} ),
+			className: getContentsClasses( attributes ),
+			style: {
+				...getContentsStyles( attributes ),
+				...contentsColorProps.style,
+			},
 		},
 		{
 			templateLock: false,
@@ -106,18 +80,13 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 
 	// アコーディオン矢印のクラス名とスタイル
 	const accordionArrowProps = {
-		className: getAccordionArrowClasses( {
-			...attributes,
-			customAccordionArrowColor: accordionArrowColor?.color,
-		} ),
-		style: getAccordionArrowStyles( {
-			...attributes,
-			customAccordionArrowColor: accordionArrowColor?.color,
-		} ),
+		className: getAccordionArrowClasses( attributes ),
+		style: getAccordionArrowStyles( attributes ),
 	};
 
 	return (
 		<>
+			<FaqItemBlockControls { ...props } />
 			<InspectorControls { ...props } />
 
 			<div { ...blockProps }>
@@ -138,14 +107,4 @@ function FaqItemEdit( props: FaqItemEditProps ) {
 	);
 }
 
-export default compose( [
-	withColors( {
-		faqTextColor: 'color',
-		faqBackgroundColor: 'backgroundColor',
-		faqBorderColor: 'borderColor',
-		labelColor: 'color',
-		labelBackgroundColor: 'backgroundColor',
-		labelBorderColor: 'borderColor',
-		accordionArrowColor: 'color',
-	} ),
-] )( FaqItemEdit );
+export default FaqItemEdit;

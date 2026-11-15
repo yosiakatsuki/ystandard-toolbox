@@ -3,25 +3,55 @@
 		"blockName": "ystdtb/faq",
 		"attrs": {
 			"isAccordion": true,
-			"accordionArrowColor": "ys-red"
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"arrow": {
+							"color": {
+								"text": "var:preset|color|ys-red"
+							}
+						}
+					}
+				}
+			}
 		},
 		"innerBlocks": [
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
-					"accordionArrowColor": "ys-red"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color has-ys-red-color\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:var(--wp--preset--color--ys-red)\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color has-ys-red-color\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow has-text-color\" style=\"color:var(--wp--preset--color--ys-red)\"></div></div>\n"
 				]
 			},
 			{
 				"blockName": "ystdtb/faq-item",
 				"attrs": {
 					"faqType": "a",
-					"accordionArrowColor": "ys-red"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"arrow": {
+									"color": {
+										"text": "var:preset|color|ys-red"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": [],
 				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",

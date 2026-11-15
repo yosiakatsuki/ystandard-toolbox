@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
 import { Panel } from '@aktk/block-components/components/panel';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import Button from '@aktk/block-components/wp-controls/button';
+import { stripUndefined } from '@aktk/block-components/utils/object';
 
 /**
  * Block Dependencies.
@@ -21,6 +22,7 @@ const designPreset: DesignPreset[] = [
 	{
 		name: 'default',
 		label: __( 'デフォルト', 'ystandard-toolbox' ),
+		labelTextColor: undefined,
 		itemStyles: {},
 		labelStyles: {
 			color: '#222222',
@@ -32,27 +34,29 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: undefined,
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: undefined,
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: undefined },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
 		name: 'background-square',
 		label: __( '背景あり四角', 'ystandard-toolbox' ),
+		labelTextColor: '#222222',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -65,27 +69,29 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#222222',
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#f1f1f3',
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#f1f1f3' },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
 		name: 'background-circle',
 		label: __( '背景あり丸', 'ystandard-toolbox' ),
+		labelTextColor: '#222222',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -99,27 +105,29 @@ const designPreset: DesignPreset[] = [
 			borderRadius: '50px',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#222222',
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#f1f1f3',
-			labelBorderSize: '0',
-			labelBorderRadius: '50px',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#f1f1f3' },
+							border: {
+								width: '0',
+								radius: '50px',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
 		name: 'outline-square',
 		label: __( '四角アウトライン', 'ystandard-toolbox' ),
+		labelTextColor: '#666666',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -133,27 +141,29 @@ const designPreset: DesignPreset[] = [
 			border: '2px solid #666666',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#666666',
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#ffffff',
-			labelBorderSize: '2px',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: '#666666',
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#ffffff' },
+							border: {
+								width: '2px',
+								radius: '0',
+								color: '#666666',
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
 		name: 'outline-circle',
 		label: __( '丸アウトライン', 'ystandard-toolbox' ),
+		labelTextColor: '#666666',
 		itemStyles: {},
 		labelStyles: {
 			fontWeight: 'bold',
@@ -168,27 +178,29 @@ const designPreset: DesignPreset[] = [
 			borderRadius: '50px',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: '',
-			faqBorderSize: '0',
-			faqBorderColor: undefined,
-			customFaqBorderColor: undefined,
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: '#666666',
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: '#ffffff',
-			labelBorderSize: '2px',
-			labelBorderRadius: '50px',
-			labelBorderColor: undefined,
-			customLabelBorderColor: '#666666',
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: '#ffffff' },
+							border: {
+								width: '2px',
+								radius: '50px',
+								color: '#666666',
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	{
 		name: 'bottom-divider',
 		label: __( '区切り線あり', 'ystandard-toolbox' ),
+		labelTextColor: undefined,
 		itemStyles: {
 			paddingBottom: '.25em',
 			borderBottom: '1px solid #aaaaaa',
@@ -203,35 +215,85 @@ const designPreset: DesignPreset[] = [
 			justifyContent: 'center',
 		},
 		attributes: {
-			faqBackgroundColor: undefined,
-			customFaqBackgroundColor: undefined,
-			faqBorderType: 'bottom',
-			faqBorderSize: '1px',
-			faqBorderColor: undefined,
-			customFaqBorderColor: '#aaaaaa',
-			labelSize: undefined,
-			labelColor: undefined,
-			customLabelColor: undefined,
-			labelBold: true,
-			labelBackgroundColor: undefined,
-			customLabelBackgroundColor: undefined,
-			labelBorderSize: '0',
-			labelBorderRadius: '0',
-			labelBorderColor: undefined,
-			customLabelBorderColor: undefined,
+			backgroundColor: undefined,
+			gradient: undefined,
+			borderColor: undefined,
+			style: {
+				border: {
+					bottom: { width: '1px', style: 'solid', color: '#aaaaaa' },
+				},
+				ystdtb: {
+					faqItem: {
+						label: {
+							color: { background: undefined },
+							border: {
+								width: '0',
+								radius: '0',
+								color: undefined,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 ];
 
+/**
+ * FAQ Itemにデザインプリセットを適用する.
+ *
+ * @param props ブロック編集プロパティ.
+ */
 // @ts-ignore.
 export function Design( props ): JSX.Element {
 	const { attributes, setAttributes } = props;
 	const { faqType } = attributes;
+	// Item背景を解除して枠線をプリセットに合わせ、本文色など他のstyle設定は保持する.
 	const applyPreset = ( preset: ( typeof designPreset )[ 0 ] ) => {
 		setAttributes( {
 			...preset.attributes,
-			accordionArrowColor: undefined,
-			customAccordionArrowColor: preset.attributes.customLabelColor,
+			style: stripUndefined( {
+				...attributes.style,
+				border: preset.attributes.style?.border,
+				color: {
+					...attributes.style?.color,
+					background: undefined,
+					gradient: undefined,
+				},
+				ystdtb: {
+					...attributes.style?.ystdtb,
+					faqItem: {
+						...attributes.style?.ystdtb?.faqItem,
+						arrow: {
+							...attributes.style?.ystdtb?.faqItem?.arrow,
+							color: {
+								...attributes.style?.ystdtb?.faqItem?.arrow
+									?.color,
+								text: preset.labelTextColor,
+							},
+						},
+						label: {
+							...attributes.style?.ystdtb?.faqItem?.label,
+							color: {
+								...attributes.style?.ystdtb?.faqItem?.label
+									?.color,
+								text: preset.labelTextColor,
+								background:
+									preset.attributes.style?.ystdtb?.faqItem
+										?.label?.color?.background,
+							},
+							border: preset.attributes.style?.ystdtb?.faqItem
+								?.label?.border,
+							typography: undefined,
+							responsive: {
+								...attributes.style?.ystdtb?.faqItem?.label
+									?.responsive,
+								typography: undefined,
+							},
+						},
+					},
+				},
+			} ),
 		} );
 	};
 	return (

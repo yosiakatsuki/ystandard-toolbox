@@ -1,0 +1,37 @@
+[
+	{
+		"name": "ystdtb/faq",
+		"isValid": true,
+		"attributes": {
+			"isAccordion": false,
+			"style": {
+				"color": {
+					"background": "#f0f9ff"
+				},
+				"border": {
+					"color": "#0284c7",
+					"style": "solid",
+					"width": "1px"
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "q"
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/faq-item",
+				"isValid": true,
+				"attributes": {
+					"faqType": "a"
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

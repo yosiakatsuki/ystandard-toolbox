@@ -5,6 +5,20 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
+/* Block Dependencies */
+import { migrateFaqAttributes } from '../migrate';
+import { hasLegacyAccordionArrowColor } from '../arrow-color';
+
+/**
+ * v1.34.1以前のFAQ属性を現行形式へ移行する.
+ *
+ * @param attributes v1.34.1以前のFAQ属性.
+ * @return 現行FAQ属性.
+ */
+export function migrateDeprecated1341Faq( attributes: Record< string, any > ) {
+	return migrateFaqAttributes( attributes );
+}
+
 // @ts-ignore.
 export const deprecated1341 = [
 	{
@@ -44,16 +58,8 @@ export const deprecated1341 = [
 			align: false,
 			className: false,
 		},
-		migrate: ( attributes: any ) => {
-			const { borderSize } = attributes;
-			return {
-				...attributes,
-				borderSize:
-					typeof borderSize === 'number'
-						? `${ borderSize }px`
-						: borderSize,
-			};
-		},
+		isEligible: hasLegacyAccordionArrowColor,
+		migrate: migrateDeprecated1341Faq,
 		// @ts-ignore.
 		save( { attributes } ) {
 			const {

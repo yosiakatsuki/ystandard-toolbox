@@ -4,18 +4,18 @@
 		"isValid": true,
 		"attributes": {
 			"isAccordion": false,
-			"customBackgroundColor": "#fff7ed",
-			"borderType": ""
+			"style": {
+				"color": {
+					"background": "#fff7ed"
+				}
+			}
 		},
 		"innerBlocks": [
 			{
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "q",
-					"faqBorderType": "",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "q"
 				},
 				"innerBlocks": []
 			},
@@ -23,10 +23,7 @@
 				"name": "ystdtb/faq-item",
 				"isValid": true,
 				"attributes": {
-					"faqType": "a",
-					"faqBorderType": "",
-					"labelPosition": "center",
-					"labelBold": true
+					"faqType": "a"
 				},
 				"innerBlocks": []
 			}

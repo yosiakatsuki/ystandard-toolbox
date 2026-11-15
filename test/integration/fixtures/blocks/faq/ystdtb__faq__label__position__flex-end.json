@@ -3,8 +3,7 @@
 		"name": "ystdtb/faq",
 		"isValid": true,
 		"attributes": {
-			"isAccordion": false,
-			"borderType": ""
+			"isAccordion": false
 		},
 		"innerBlocks": [
 			{
@@ -12,9 +11,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "",
-					"labelPosition": "flex-end",
-					"labelBold": true
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"layout": {
+										"alignItems": "flex-end"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -23,9 +30,17 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "",
-					"labelPosition": "flex-end",
-					"labelBold": true
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"item": {
+									"layout": {
+										"alignItems": "flex-end"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

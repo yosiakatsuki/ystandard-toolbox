@@ -3,8 +3,7 @@
 		"name": "ystdtb/faq",
 		"isValid": true,
 		"attributes": {
-			"isAccordion": false,
-			"borderType": ""
+			"isAccordion": false
 		},
 		"innerBlocks": [
 			{
@@ -12,16 +11,28 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "q",
-					"faqBorderType": "",
-					"faqBorderSize": "0",
-					"labelPosition": "center",
-					"customLabelColor": "#666666",
-					"labelBold": true,
-					"customLabelBackgroundColor": "#ffffff",
-					"labelBorderSize": "2px",
-					"labelBorderRadius": "0",
-					"customLabelBorderColor": "#666666",
-					"customAccordionArrowColor": "#666666"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "#666666",
+										"background": "#ffffff"
+									},
+									"border": {
+										"color": "#666666",
+										"width": "2px",
+										"radius": "0"
+									}
+								},
+								"arrow": {
+									"color": {
+										"text": "#666666"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			},
@@ -30,16 +41,28 @@
 				"isValid": true,
 				"attributes": {
 					"faqType": "a",
-					"faqBorderType": "",
-					"faqBorderSize": "0",
-					"labelPosition": "center",
-					"customLabelColor": "#666666",
-					"labelBold": true,
-					"customLabelBackgroundColor": "#ffffff",
-					"labelBorderSize": "2px",
-					"labelBorderRadius": "0",
-					"customLabelBorderColor": "#666666",
-					"customAccordionArrowColor": "#666666"
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"color": {
+										"text": "#666666",
+										"background": "#ffffff"
+									},
+									"border": {
+										"color": "#666666",
+										"width": "2px",
+										"radius": "0"
+									}
+								},
+								"arrow": {
+									"color": {
+										"text": "#666666"
+									}
+								}
+							}
+						}
+					}
 				},
 				"innerBlocks": []
 			}

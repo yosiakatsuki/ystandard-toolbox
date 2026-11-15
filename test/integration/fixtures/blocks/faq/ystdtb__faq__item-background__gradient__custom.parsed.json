@@ -1,0 +1,19 @@
+[
+	{
+		"blockName": "ystdtb/faq-item",
+		"attrs": {
+			"faqType": "a",
+			"style": {
+				"color": {
+					"gradient": "linear-gradient(135deg,#ff0000 0%,#0000ff 100%)",
+					"text": "#222222"
+				}
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-background\" style=\"background:linear-gradient(135deg,#ff0000 0%,#0000ff 100%)\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents has-text-color\" style=\"color:#222222\"></div></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq-item is-faq--a has-background\" style=\"background:linear-gradient(135deg,#ff0000 0%,#0000ff 100%)\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents has-text-color\" style=\"color:#222222\"></div></div>\n"
+		]
+	}
+]

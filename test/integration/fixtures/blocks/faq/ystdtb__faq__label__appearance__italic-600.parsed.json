@@ -1,0 +1,32 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"style": {
+						"ystdtb": {
+							"faqItem": {
+								"label": {
+									"typography": {
+										"fontStyle": "italic",
+										"fontWeight": "600"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\" style=\"font-style:italic;font-weight:600\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\" style=\"font-style:italic;font-weight:600\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\"></div>\n",
+		"innerContent": [ "\n<div class=\"ystdtb-faq\">", null, "</div>\n" ]
+	}
+]

@@ -1,0 +1,39 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqTextColor": "ys-purple"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents has-text-color has-ys-purple-color\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents has-text-color has-ys-purple-color\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"faqTextColor": "ys-purple"
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents has-text-color has-ys-purple-color\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents has-text-color has-ys-purple-color\"></div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

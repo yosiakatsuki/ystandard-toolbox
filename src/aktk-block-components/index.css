@@ -1,9 +1,3 @@
-/* コンポーネント共通CSS変数 */
-:root {
-	--aktk-component--text-color--gray: #6b7280;
-	--aktk-component--border-color--gray: #d1d5db;
-}
-
 /* コンポーネントCSS */
 @import "./components/alignment-control/index.css";
 @import "./components/buttons/index.css";
@@ -15,7 +9,16 @@
 @import "./components/icon-select/index.css";
 @import "./components/link-control/index.css";
 @import "./components/notice/index.css";
+@import "./components/responsive-font-size-control/index.css";
+@import "./components/responsive-spacing-control/index.css";
+@import "./components/responsive-text-align-control/index.css";
 @import "./components/svg-icon/index.css";
 @import "./components/tab-panel/index.css";
 @import "./components/text-control/stretch-text-control/index.css";
 @import "./components/toggle-group/index.css";
+
+/* コンポーネント共通CSS変数 */
+:root {
+	--aktk-component--text-color--gray: #6b7280;
+	--aktk-component--border-color--gray: #d1d5db;
+}

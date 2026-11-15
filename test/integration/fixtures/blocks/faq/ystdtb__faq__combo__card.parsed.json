@@ -2,10 +2,16 @@
 	{
 		"blockName": "ystdtb/faq",
 		"attrs": {
-			"customBackgroundColor": "#f0f9ff",
-			"borderType": "all",
-			"borderSize": "1px",
-			"customBorderColor": "#0284c7"
+			"style": {
+				"border": {
+					"color": "#0284c7",
+					"style": "solid",
+					"width": "1px"
+				},
+				"color": {
+					"background": "#f0f9ff"
+				}
+			}
 		},
 		"innerBlocks": [
 			{
@@ -29,9 +35,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-faq has-padding has-background has-border border-type--all\" style=\"background-color:#f0f9ff;border-color:#0284c7;border-width:1px;border-bottom-width:1px\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-faq has-border has-border-color has-background\" style=\"border-color:#0284c7;border-style:solid;border-width:1px;background-color:#f0f9ff\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-faq has-padding has-background has-border border-type--all\" style=\"background-color:#f0f9ff;border-color:#0284c7;border-width:1px;border-bottom-width:1px\">",
+			"\n<div class=\"ystdtb-faq has-border has-border-color has-background\" style=\"border-color:#0284c7;border-style:solid;border-width:1px;background-color:#f0f9ff\">",
 			null,
 			"\n\n",
 			null,

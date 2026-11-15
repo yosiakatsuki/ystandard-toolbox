@@ -1,0 +1,56 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {
+			"style": {
+				"ystdtb": {
+					"faq": {
+						"responsive": {
+							"spacing": {
+								"margin": {
+									"desktop": {
+										"top": "var:preset|spacing|40",
+										"bottom": "32px"
+									},
+									"tablet": {
+										"top": "24px",
+										"bottom": "24px"
+									},
+									"mobile": {
+										"top": "16px",
+										"bottom": "16px"
+									}
+								},
+								"padding": {
+									"desktop": {
+										"top": "var:preset|spacing|30",
+										"right": "var:preset|spacing|30",
+										"bottom": "var:preset|spacing|30",
+										"left": "var:preset|spacing|30"
+									},
+									"tablet": {
+										"top": "20px",
+										"right": "16px",
+										"bottom": "20px",
+										"left": "16px"
+									},
+									"mobile": {
+										"top": "12px",
+										"right": "8px",
+										"bottom": "12px",
+										"left": "8px"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--margin-top:var(--wp--preset--spacing--40);--ystdtb--desktop--faq--margin-bottom:32px;--ystdtb--desktop--faq--padding-top:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-right:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-bottom:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-left:var(--wp--preset--spacing--30);--ystdtb--tablet--faq--margin-top:24px;--ystdtb--tablet--faq--margin-bottom:24px;--ystdtb--tablet--faq--padding-top:20px;--ystdtb--tablet--faq--padding-right:16px;--ystdtb--tablet--faq--padding-bottom:20px;--ystdtb--tablet--faq--padding-left:16px;--ystdtb--mobile--faq--margin-top:16px;--ystdtb--mobile--faq--margin-bottom:16px;--ystdtb--mobile--faq--padding-top:12px;--ystdtb--mobile--faq--padding-right:8px;--ystdtb--mobile--faq--padding-bottom:12px;--ystdtb--mobile--faq--padding-left:8px\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\" style=\"--ystdtb--desktop--faq--margin-top:var(--wp--preset--spacing--40);--ystdtb--desktop--faq--margin-bottom:32px;--ystdtb--desktop--faq--padding-top:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-right:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-bottom:var(--wp--preset--spacing--30);--ystdtb--desktop--faq--padding-left:var(--wp--preset--spacing--30);--ystdtb--tablet--faq--margin-top:24px;--ystdtb--tablet--faq--margin-bottom:24px;--ystdtb--tablet--faq--padding-top:20px;--ystdtb--tablet--faq--padding-right:16px;--ystdtb--tablet--faq--padding-bottom:20px;--ystdtb--tablet--faq--padding-left:16px;--ystdtb--mobile--faq--margin-top:16px;--ystdtb--mobile--faq--margin-bottom:16px;--ystdtb--mobile--faq--padding-top:12px;--ystdtb--mobile--faq--padding-right:8px;--ystdtb--mobile--faq--padding-bottom:12px;--ystdtb--mobile--faq--padding-left:8px\"></div>\n"
+		]
+	}
+]

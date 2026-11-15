@@ -3,7 +3,7 @@
  */
 
 .ystdtb-faq {
-	--ystdtb--faq--padding: 1rem;
+	--ystdtb--faq--padding: 0.5rem;
 	--ystdtb--faq-item--gap: 1rem;
 	--ystdtb--faq-item--padding-vertical: var(--ystdtb--faq--padding);
 	--ystdtb--faq-item--padding-horizon: 0;
@@ -11,29 +11,22 @@
 	--ystdtb--faq-item--label--font-size: 1.5em;
 	--ystdtb--faq-item--label--size: 1.75em;
 
-	border: 0;
+	// 枠線のないFAQだけをリセットし、設定済みの全周・辺別枠線は保持する。
+	&:where(:not(.has-border)) {
+		border: 0;
+	}
 
 	+ :where(.ystdtb-faq) {
 		margin-top: 0;
 	}
 
-	&:where(.has-padding) {
+	// 親の背景・枠線で囲まれるQ/Aにも同じ行余白を適用する。
+	&:where(.has-background, .has-border) {
 
-		:where(.ystdtb-faq-item) {
+		> :where(.ystdtb-faq-item) {
+			--ystdtb--faq-item--padding-vertical: 1.25rem;
 			--ystdtb--faq-item--padding-horizon: 1.25rem;
 		}
-	}
-
-	&:where(.border-type--all) {
-		border-style: solid;
-
-		+ :where(.ystdtb-faq) {
-			border-top: 0;
-		}
-	}
-
-	&:where(.border-type--bottom) {
-		border-bottom-style: solid;
 	}
 
 	// アコーディオン形式
@@ -93,3 +86,35 @@
 		}
 	}
 }
+
+/* stylelint-disable no-duplicate-selectors */
+
+/**
+ * Deprecated: v2.3.0以前のFAQ親枠線設定
+ *
+ * 現行saveでは対象クラスを出力しない。
+ * 移行前ブロックの互換表示が不要になった時点で、このセクションを削除する。
+ */
+.ystdtb-faq {
+
+	&:where(.has-padding) {
+
+		:where(.ystdtb-faq-item) {
+			--ystdtb--faq-item--padding-horizon: 1.25rem;
+		}
+	}
+
+	&:where(.border-type--all) {
+		border-style: solid;
+
+		+ :where(.ystdtb-faq) {
+			border-top: 0;
+		}
+	}
+
+	&:where(.border-type--bottom) {
+		border-bottom-style: solid;
+	}
+}
+
+/* stylelint-enable no-duplicate-selectors */

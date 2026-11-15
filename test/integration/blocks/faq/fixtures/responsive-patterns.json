@@ -1,0 +1,259 @@
+{
+	"patterns": [
+		{
+			"id": "desktop-only",
+			"label": "PCのみ",
+			"devices": [ "desktop" ]
+		},
+		{
+			"id": "tablet-only",
+			"label": "タブレットのみ",
+			"devices": [ "tablet" ]
+		},
+		{
+			"id": "mobile-only",
+			"label": "モバイルのみ",
+			"devices": [ "mobile" ]
+		},
+		{
+			"id": "all-devices",
+			"label": "PC・タブレット・モバイル全部指定",
+			"devices": [ "desktop", "tablet", "mobile" ]
+		},
+		{
+			"id": "tablet-mobile",
+			"label": "タブレット・モバイルの2つ指定",
+			"devices": [ "tablet", "mobile" ]
+		}
+	],
+	"settings": [
+		{
+			"id": "faq-font-size",
+			"label": "親FAQ文字サイズ",
+			"blockName": "ystdtb/faq",
+			"element": "root",
+			"normalPath": "style.typography.fontSize",
+			"normal": "16px",
+			"responsivePath": "style.ystdtb.faq.responsive.typography.fontSize",
+			"values": {
+				"desktop": "22px",
+				"tablet": "20px",
+				"mobile": "18px"
+			},
+			"variables": {
+				"font-size": "faq--font-size"
+			}
+		},
+		{
+			"id": "faq-margin",
+			"label": "親FAQ外側余白",
+			"blockName": "ystdtb/faq",
+			"element": "root",
+			"normalPath": "style.spacing.margin",
+			"normal": {
+				"top": "6px",
+				"bottom": "8px"
+			},
+			"responsivePath": "style.ystdtb.faq.responsive.spacing.margin",
+			"values": {
+				"desktop": {
+					"top": "12px",
+					"bottom": "16px"
+				},
+				"tablet": {
+					"top": "10px",
+					"bottom": "14px"
+				},
+				"mobile": {
+					"top": "8px",
+					"bottom": "12px"
+				}
+			},
+			"variables": {
+				"margin-top": "faq--margin-top",
+				"margin-bottom": "faq--margin-bottom"
+			}
+		},
+		{
+			"id": "faq-padding",
+			"label": "親FAQ内側余白",
+			"blockName": "ystdtb/faq",
+			"element": "root",
+			"normalPath": "style.spacing.padding",
+			"normal": {
+				"top": "2px",
+				"right": "4px",
+				"bottom": "6px",
+				"left": "8px"
+			},
+			"responsivePath": "style.ystdtb.faq.responsive.spacing.padding",
+			"values": {
+				"desktop": {
+					"top": "12px",
+					"right": "14px",
+					"bottom": "16px",
+					"left": "18px"
+				},
+				"tablet": {
+					"top": "10px",
+					"right": "12px",
+					"bottom": "14px",
+					"left": "16px"
+				},
+				"mobile": {
+					"top": "8px",
+					"right": "10px",
+					"bottom": "12px",
+					"left": "14px"
+				}
+			},
+			"variables": {
+				"padding-top": "faq--padding-top",
+				"padding-right": "faq--padding-right",
+				"padding-bottom": "faq--padding-bottom",
+				"padding-left": "faq--padding-left"
+			}
+		},
+		{
+			"id": "contents-font-size",
+			"label": "本文文字サイズ",
+			"blockName": "ystdtb/faq-item",
+			"element": "contents",
+			"normalPath": "style.typography.fontSize",
+			"normal": "16px",
+			"responsivePath": "style.ystdtb.faqItem.contents.responsive.typography.fontSize",
+			"values": {
+				"desktop": "22px",
+				"tablet": "20px",
+				"mobile": "18px"
+			},
+			"variables": {
+				"font-size": "faq-item--contents-font-size"
+			}
+		},
+		{
+			"id": "contents-padding",
+			"label": "本文内側余白",
+			"blockName": "ystdtb/faq-item",
+			"element": "contents",
+			"normalPath": "style.spacing.padding",
+			"normal": {
+				"top": "2px",
+				"right": "4px",
+				"bottom": "6px",
+				"left": "8px"
+			},
+			"responsivePath": "style.ystdtb.faqItem.contents.responsive.spacing.padding",
+			"values": {
+				"desktop": {
+					"top": "12px",
+					"right": "14px",
+					"bottom": "16px",
+					"left": "18px"
+				},
+				"tablet": {
+					"top": "10px",
+					"right": "12px",
+					"bottom": "14px",
+					"left": "16px"
+				},
+				"mobile": {
+					"top": "8px",
+					"right": "10px",
+					"bottom": "12px",
+					"left": "14px"
+				}
+			},
+			"variables": {
+				"padding-top": "faq-item--contents-padding-top",
+				"padding-right": "faq-item--contents-padding-right",
+				"padding-bottom": "faq-item--contents-padding-bottom",
+				"padding-left": "faq-item--contents-padding-left"
+			}
+		},
+		{
+			"id": "label-font-size",
+			"label": "ラベル文字サイズ",
+			"blockName": "ystdtb/faq-item",
+			"element": "label",
+			"normalPath": "style.ystdtb.faqItem.label.typography.fontSize",
+			"normal": "24px",
+			"responsivePath": "style.ystdtb.faqItem.label.responsive.typography.fontSize",
+			"values": {
+				"desktop": "30px",
+				"tablet": "26px",
+				"mobile": "22px"
+			},
+			"variables": {
+				"font-size": "faq-item--label-font-size"
+			}
+		},
+		{
+			"id": "label-margin",
+			"label": "ラベル外側余白",
+			"blockName": "ystdtb/faq-item",
+			"element": "label",
+			"normalPath": "style.ystdtb.faqItem.label.spacing.margin",
+			"normal": {
+				"top": "1px",
+				"bottom": "2px"
+			},
+			"responsivePath": "style.ystdtb.faqItem.label.responsive.spacing.margin",
+			"values": {
+				"desktop": {
+					"top": "3px",
+					"bottom": "4px"
+				},
+				"tablet": {
+					"top": "5px",
+					"bottom": "6px"
+				},
+				"mobile": {
+					"top": "7px",
+					"bottom": "8px"
+				}
+			},
+			"variables": {
+				"margin-top": "faq-item--label-margin-top",
+				"margin-bottom": "faq-item--label-margin-bottom"
+			}
+		},
+		{
+			"id": "label-gap",
+			"label": "ラベルと本文の間隔",
+			"blockName": "ystdtb/faq-item",
+			"element": "root",
+			"normalPath": "style.ystdtb.faqItem.item.spacing.gap",
+			"normal": "14px",
+			"responsivePath": "style.ystdtb.faqItem.item.responsive.spacing.gap",
+			"values": {
+				"desktop": "24px",
+				"tablet": "20px",
+				"mobile": "12px"
+			},
+			"variables": {
+				"gap": "faq-item--label-gap"
+			}
+		},
+		{
+			"id": "label-size",
+			"label": "ラベル寸法",
+			"blockName": "ystdtb/faq-item",
+			"element": "label",
+			"normalPath": "style.ystdtb.faqItem.label.dimensions.size",
+			"normal": "36px",
+			"responsivePath": "style.ystdtb.faqItem.label.responsive.dimensions.size",
+			"values": {
+				"desktop": "48px",
+				"tablet": "40px",
+				"mobile": "32px"
+			},
+			"variables": {
+				"width": "faq-item--label-size",
+				"height": "faq-item--label-size",
+				"min-width": "faq-item--label-size",
+				"min-height": "faq-item--label-size"
+			}
+		}
+	]
+}

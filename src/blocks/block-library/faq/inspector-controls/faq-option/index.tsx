@@ -5,27 +5,47 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
-import { Panel } from '@aktk/block-components/components/panel';
+import {
+	ToolsPanel,
+	ToolsPanelItem,
+} from '@aktk/block-components/wp-controls/tools-panel';
 /**
  * Block dependencies
  */
 import { Accordion } from './accordion';
-import { AccordionArrowColor } from './accordion-arrow-color';
-import { BackgroundColor } from './background-color';
-import { BorderType } from './border-type';
-import { BorderSize } from './border-size';
-import { BorderColor } from './border-color';
+import type { FaqEditProps } from '../../types';
 
-// @ts-ignore.
-export function FaqOption( props ): JSX.Element {
+const PANEL_ID = 'ystdtb-faq-settings';
+
+/**
+ * FAQの表示方式を設定するパネル.
+ *
+ * @param props ブロック編集プロパティ.
+ */
+export function FaqOption( props: FaqEditProps ): JSX.Element {
+	const { attributes, setAttributes } = props;
+
+	// 開閉式を解除し、標準の通常表示に戻す.
+	const resetAccordion = () => {
+		setAttributes( { isAccordion: false } );
+	};
+
 	return (
-		<Panel title={ __( 'FAQ設定', 'ystandard-toolbox' ) }>
-			<Accordion { ...props } />
-			<AccordionArrowColor { ...props } />
-			<BackgroundColor { ...props } />
-			<BorderType { ...props } />
-			<BorderSize { ...props } />
-			<BorderColor { ...props } />
-		</Panel>
+		<ToolsPanel
+			label={ __( 'FAQ設定', 'ystandard-toolbox' ) }
+			panelId={ PANEL_ID }
+			resetAll={ resetAccordion }
+		>
+			<ToolsPanelItem
+				className="single-column"
+				label={ __( '開閉式', 'ystandard-toolbox' ) }
+				panelId={ PANEL_ID }
+				hasValue={ () => attributes.isAccordion }
+				onDeselect={ resetAccordion }
+				isShownByDefault
+			>
+				<Accordion { ...props } />
+			</ToolsPanelItem>
+		</ToolsPanel>
 	);
 }

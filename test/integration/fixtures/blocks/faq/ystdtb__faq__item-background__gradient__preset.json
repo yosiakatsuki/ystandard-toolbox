@@ -1,0 +1,11 @@
+[
+	{
+		"name": "ystdtb/faq-item",
+		"isValid": true,
+		"attributes": {
+			"faqType": "a",
+			"gradient": "midnight"
+		},
+		"innerBlocks": []
+	}
+]

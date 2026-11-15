@@ -1,0 +1,157 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"labelPosition": "flex-start",
+					"labelSize": "large",
+					"labelColor": "ys-red",
+					"labelBold": false,
+					"labelBackgroundColor": "ys-light-green",
+					"labelBorderSize": "2px",
+					"labelBorderRadius": "8px",
+					"labelBorderColor": "ys-blue"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ラベル移行テスト1：質問の表示を確認します。</p>\n",
+						"innerContent": [
+							"\n<p>ラベル移行テスト1：質問の表示を確認します。</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"align-items:flex-start\"><div class=\"ystdtb-faq-item__label has-large-font-size has-text-color has-ys-red-color has-background has-ys-light-green-background-color has-border has-ys-blue-border-color has-padding\" style=\"font-weight:400;border-width:2px;border-radius:8px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-down\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg></span></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"align-items:flex-start\"><div class=\"ystdtb-faq-item__label has-large-font-size has-text-color has-ys-red-color has-background has-ys-light-green-background-color has-border has-ys-blue-border-color has-padding\" style=\"font-weight:400;border-width:2px;border-radius:8px\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\">",
+					null,
+					"</div><div class=\"ystdtb-faq-item__arrow\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-down\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg></span></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"labelPosition": "flex-start",
+					"labelSize": "large",
+					"labelColor": "ys-red",
+					"labelBold": false,
+					"labelBackgroundColor": "ys-light-green",
+					"labelBorderSize": "2px",
+					"labelBorderRadius": "8px",
+					"labelBorderColor": "ys-blue"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ラベル移行テスト1：回答の表示を確認します。</p>\n",
+						"innerContent": [
+							"\n<p>ラベル移行テスト1：回答の表示を確認します。</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"align-items:flex-start\"><div class=\"ystdtb-faq-item__label has-large-font-size has-text-color has-ys-red-color has-background has-ys-light-green-background-color has-border has-ys-blue-border-color has-padding\" style=\"font-weight:400;border-width:2px;border-radius:8px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"align-items:flex-start\"><div class=\"ystdtb-faq-item__label has-large-font-size has-text-color has-ys-red-color has-background has-ys-light-green-background-color has-border has-ys-blue-border-color has-padding\" style=\"font-weight:400;border-width:2px;border-radius:8px\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	},
+	{
+		"blockName": null,
+		"attrs": {},
+		"innerBlocks": [],
+		"innerHTML": "\n\n",
+		"innerContent": [ "\n\n" ]
+	},
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"labelPosition": "flex-end",
+					"customLabelSize": "22px",
+					"customLabelColor": "#0f766e",
+					"customLabelBackgroundColor": "#fde68a",
+					"labelBorderSize": "0",
+					"labelBorderRadius": "0",
+					"customLabelBorderColor": "#7c3aed"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ラベル移行テスト2：質問の表示を確認します。</p>\n",
+						"innerContent": [
+							"\n<p>ラベル移行テスト2：質問の表示を確認します。</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"align-items:flex-end\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"font-size:22px;color:#0f766e;background-color:#fde68a;border-color:#7c3aed;border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-down\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg></span></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"align-items:flex-end\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"font-size:22px;color:#0f766e;background-color:#fde68a;border-color:#7c3aed;border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\">",
+					null,
+					"</div><div class=\"ystdtb-faq-item__arrow\"><span class=\"ys-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-down\"><polyline points=\"6 9 12 15 18 9\"></polyline></svg></span></div></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/faq-item",
+				"attrs": {
+					"faqType": "a",
+					"labelPosition": "flex-end",
+					"customLabelSize": "22px",
+					"customLabelColor": "#0f766e",
+					"customLabelBackgroundColor": "#fde68a",
+					"labelBorderSize": "0",
+					"labelBorderRadius": "0",
+					"customLabelBorderColor": "#7c3aed"
+				},
+				"innerBlocks": [
+					{
+						"blockName": "core/paragraph",
+						"attrs": {},
+						"innerBlocks": [],
+						"innerHTML": "\n<p>ラベル移行テスト2：回答の表示を確認します。</p>\n",
+						"innerContent": [
+							"\n<p>ラベル移行テスト2：回答の表示を確認します。</p>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"align-items:flex-end\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"font-size:22px;color:#0f766e;background-color:#fde68a;border-color:#7c3aed;border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"align-items:flex-end\"><div class=\"ystdtb-faq-item__label has-text-color has-background has-border has-padding\" style=\"font-size:22px;color:#0f766e;background-color:#fde68a;border-color:#7c3aed;border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\">",
+					null,
+					"</div></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-faq\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

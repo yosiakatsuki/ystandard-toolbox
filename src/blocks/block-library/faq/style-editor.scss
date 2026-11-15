@@ -29,15 +29,6 @@
 					content: "";
 					display: none;
 				}
-
-				&:not(.has-border, .has-background) {
-
-					+ .is-faq--a {
-						padding-top: calc(
-							var(--ystdtb--faq-item--padding-vertical) / 2
-						);
-					}
-				}
 			}
 
 			&.is-faq--a {
@@ -51,3 +42,35 @@
 		}
 	}
 }
+
+/* stylelint-disable no-duplicate-selectors */
+
+/**
+ * Deprecated: v2.3.0以前のFAQ親枠線設定
+ *
+ * 現行saveでは対象クラスを出力しない。
+ * 移行前ブロックの互換表示が不要になった時点で、このセクションを削除する。
+ */
+.ystdtb-faq {
+
+	&:where(.has-padding) {
+
+		:where(.ystdtb-faq-item) {
+			--ystdtb--faq-item--padding-horizon: 1.25rem;
+		}
+	}
+
+	&:where(.border-type--all) {
+		border-style: solid;
+
+		+ :where(.ystdtb-faq) {
+			border-top: 0;
+		}
+	}
+
+	&:where(.border-type--bottom) {
+		border-bottom-style: solid;
+	}
+}
+
+/* stylelint-enable no-duplicate-selectors */

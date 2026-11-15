@@ -2,27 +2,27 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies.
  */
-import { __ } from '@wordpress/i18n';
-import { getColorClassName, getFontSizeClass } from '@wordpress/block-editor';
+import {
+	getColorClassName,
+	getTypographyClassesAndStyles,
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
+} from '@wordpress/block-editor';
 
 /**
  * Aktk dependencies.
  */
+import type { Spacing } from '@aktk/block-components/components/custom-spacing-select';
+import { getCustomSpacingValues } from '@aktk/block-components/components/custom-spacing-select/util';
 import { hasBorderWidth } from '@aktk/block-components/utils/size';
+import { stripUndefined } from '@aktk/block-components/utils/object';
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 
 /**
  * Block dependencies.
  */
-import type { FaqItemBlockAttributes, LabelPositionOption } from './types';
-
-/**
- * ラベル位置選択肢
- */
-export const labelPositions: LabelPositionOption[] = [
-	{ label: __( '上', 'ystandard-toolbox' ), name: 'flex-start' },
-	{ label: __( '中央', 'ystandard-toolbox' ), name: 'center' },
-	{ label: __( '下', 'ystandard-toolbox' ), name: 'flex-end' },
-];
+import type { FaqItemBlockAttributes, FaqLabelStyle } from './types';
+import { responsiveStyles, responsiveSpacingStyles } from './style-utils';
+import { hasFaqBorder } from '../faq/utils';
 
 /**
  * FAQアイテムのクラス名を取得
@@ -42,30 +42,11 @@ export function getBlockPropsClasses(
  * @param attributes
  */
 export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
-	const {
-		faqType,
-		faqBorderType,
-		faqBackgroundColor,
-		customFaqBackgroundColor,
-		faqBorderColor,
-		customFaqBorderColor,
-		faqBorderSize,
-	} = attributes;
-
-	const faqBackgroundColorClass =
-		getColorClassName( 'background-color', faqBackgroundColor ) || '';
-	const faqBorderColorClass =
-		getColorClassName( 'border-color', faqBorderColor ) || '';
-	const hasFaqBorderSize = hasBorderWidth( faqBorderSize );
+	const { faqType, style } = attributes;
 
 	return classnames( 'ystdtb-faq-item', {
 		[ `is-faq--${ faqType }` ]: faqType,
-		[ `has-border-${ faqBorderType }` ]: '' !== faqBorderType,
-		'has-background': faqBackgroundColor || customFaqBackgroundColor,
-		'has-border':
-			hasFaqBorderSize && ( faqBorderColor || customFaqBorderColor ),
-		[ faqBackgroundColorClass ]: faqBackgroundColorClass,
-		[ faqBorderColorClass ]: hasFaqBorderSize && faqBorderColorClass,
+		'has-border': hasFaqBorder( style?.border ),
 	} );
 }
 
@@ -74,29 +55,17 @@ export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
  * @param attributes
  */
 export function getItemStyles( attributes: FaqItemBlockAttributes ) {
-	const {
-		faqBackgroundColor,
-		customFaqBackgroundColor,
-		faqBorderType,
-		faqBorderColor,
-		customFaqBorderColor,
-		faqBorderSize,
-		labelPosition,
-	} = attributes;
-
-	const isBottomBorder = 'bottom' === faqBorderType;
-
+	const item = attributes.style?.ystdtb?.faqItem?.item;
 	return {
-		backgroundColor: faqBackgroundColor
-			? undefined
-			: customFaqBackgroundColor,
-		borderBottomColor:
-			! isBottomBorder || ! faqBorderSize || faqBorderColor
+		alignItems:
+			item?.layout?.alignItems === 'center'
 				? undefined
-				: customFaqBorderColor,
-		borderBottomWidth:
-			! isBottomBorder || ! faqBorderSize ? undefined : faqBorderSize,
-		alignItems: 'center' === labelPosition ? undefined : labelPosition,
+				: item?.layout?.alignItems,
+		'--ystdtb--faq-item--label-gap':
+			item?.spacing?.gap === '0'
+				? '0px'
+				: presetTokenToCssVar( item?.spacing?.gap ),
+		...responsiveStyles( 'label-gap', item?.responsive?.spacing?.gap ),
 	};
 }
 
@@ -105,40 +74,16 @@ export function getItemStyles( attributes: FaqItemBlockAttributes ) {
  * @param attributes
  */
 export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
-	const {
-		labelSize = '',
-		labelColor,
-		customLabelColor,
-		labelBackgroundColor,
-		customLabelBackgroundColor,
-		labelBorderColor,
-		customLabelBorderColor,
-		labelBorderSize,
-	} = attributes;
-
-	const labelSizeClass = getFontSizeClass( labelSize ) || '';
-	const labelColorClass = getColorClassName( 'color', labelColor ) || '';
-	const labelBackgroundColorClass =
-		getColorClassName( 'background-color', labelBackgroundColor ) || '';
-	const labelBorderColorClass =
-		getColorClassName( 'border-color', labelBorderColor ) || '';
-
-	const hasPadding =
-		labelBackgroundColor ||
-		customLabelBackgroundColor ||
-		labelBorderColor ||
-		customLabelBorderColor ||
-		hasBorderWidth( labelBorderSize );
-
+	const label = attributes.style?.ystdtb?.faqItem?.label;
+	const background = label?.color?.background;
+	const border = label?.border;
 	return classnames( 'ystdtb-faq-item__label', {
-		[ labelSizeClass ]: labelSizeClass,
-		'has-text-color': labelColor || customLabelColor,
-		[ labelColorClass ]: labelColorClass,
-		'has-background': labelBackgroundColor || customLabelBackgroundColor,
-		[ labelBackgroundColorClass ]: labelBackgroundColorClass,
-		'has-border': labelBorderColor || customLabelBorderColor,
-		[ labelBorderColorClass ]: labelBorderColorClass,
-		'has-padding': hasPadding,
+		'has-background': !! background,
+		'has-border': !! border?.color,
+		'has-padding':
+			!! background ||
+			!! border?.color ||
+			hasBorderWidth( border?.width ),
 	} );
 }
 
@@ -147,24 +92,118 @@ export function getLabelClasses( attributes: FaqItemBlockAttributes ): string {
  * @param attributes
  */
 export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
-	const {
-		customLabelSize,
-		labelBold,
-		customLabelColor,
-		customLabelBackgroundColor,
-		customLabelBorderColor,
-		labelBorderSize,
-		labelBorderRadius,
-	} = attributes;
+	const label = attributes.style?.ystdtb?.faqItem?.label;
+	const typography = getLabelTypography( attributes );
 	return {
-		fontSize: customLabelSize,
-		fontWeight: labelBold ? undefined : 400,
-		color: customLabelColor,
-		backgroundColor: customLabelBackgroundColor,
-		borderColor: customLabelBorderColor,
-		borderWidth: labelBorderSize || undefined,
-		borderRadius: labelBorderRadius || undefined,
+		fontSize: presetTokenToCssVar( typography?.fontSize ),
+		fontFamily: presetTokenToCssVar( typography?.fontFamily ),
+		fontStyle: typography?.fontStyle,
+		fontWeight: typography?.fontWeight,
+		lineHeight: typography?.lineHeight,
+		textTransform: typography?.textTransform,
+		color: presetTokenToCssVar( label?.color?.text ),
+		backgroundColor: presetTokenToCssVar( label?.color?.background ),
+		borderColor: presetTokenToCssVar( label?.border?.color ),
+		borderWidth: label?.border?.width,
+		borderRadius: label?.border?.radius,
+		borderStyle: label?.border?.style,
+		'--ystdtb--faq-item--label-size': label?.dimensions?.size,
+		marginTop: presetTokenToCssVar( label?.spacing?.margin?.top ),
+		marginBottom: presetTokenToCssVar( label?.spacing?.margin?.bottom ),
+		...responsiveStyles(
+			'label-font-size',
+			label?.responsive?.typography?.fontSize
+		),
+		...responsiveStyles(
+			'label-size',
+			label?.responsive?.dimensions?.size
+		),
+		...responsiveSpacingStyles(
+			'label-margin',
+			label?.responsive?.spacing?.margin,
+			[ 'top', 'bottom' ]
+		),
 	};
+}
+
+/**
+ * FAQラベルの文字色を取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return FAQラベルの文字色.
+ */
+export function getLabelTextColor( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.label?.color?.text;
+}
+
+/**
+ * FAQラベルの文字色を更新.
+ *
+ * @param style FAQアイテムのstyle属性.
+ * @param text  FAQラベルの文字色.
+ * @return 更新後のstyle属性.
+ */
+export function updateLabelTextColor(
+	style: FaqItemBlockAttributes[ 'style' ],
+	text?: string
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				label: {
+					...style?.ystdtb?.faqItem?.label,
+					color: {
+						...style?.ystdtb?.faqItem?.label?.color,
+						text,
+					},
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
+}
+
+/**
+ * FAQラベルの文字スタイルを取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return FAQラベルの文字スタイル.
+ */
+export function getLabelTypography( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.label?.typography;
+}
+
+/**
+ * FAQラベルの文字スタイルを更新.
+ *
+ * @param style                    FAQアイテムのstyle属性.
+ * @param typography               FAQラベルの文字スタイル.
+ * @param typography.fontFamily    フォントファミリー.
+ * @param typography.fontStyle     フォントスタイル.
+ * @param typography.fontWeight    フォントウェイト.
+ * @param typography.lineHeight    行の高さ.
+ * @param typography.textTransform 大文字小文字.
+ * @return 更新後のstyle属性.
+ */
+export function updateLabelTypography(
+	style: FaqItemBlockAttributes[ 'style' ],
+	typography?: FaqLabelStyle[ 'typography' ]
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				label: {
+					...style?.ystdtb?.faqItem?.label,
+					typography,
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
 }
 
 /**
@@ -174,13 +213,15 @@ export function getLabelStyles( attributes: FaqItemBlockAttributes ) {
 export function getContentsClasses(
 	attributes: FaqItemBlockAttributes
 ): string {
-	const { faqTextColor, customFaqTextColor } = attributes;
+	const { textColor, style } = attributes;
 
-	const faqTextColorClass = getColorClassName( 'color', faqTextColor ) || '';
+	const textColorClass = getColorClassName( 'color', textColor ) || '';
+	const typographyProps = getTypographyClassesAndStyles( attributes );
 
 	return classnames( 'ystdtb-faq-item__contents', {
-		'has-text-color': faqTextColor || customFaqTextColor,
-		[ faqTextColorClass ]: faqTextColorClass,
+		[ typographyProps.className ]: typographyProps.className,
+		'has-text-color': textColor || style?.color?.text,
+		[ textColorClass ]: textColorClass,
 	} );
 }
 
@@ -189,27 +230,115 @@ export function getContentsClasses(
  * @param attributes
  */
 export function getContentsStyles( attributes: FaqItemBlockAttributes ) {
-	const { customFaqTextColor } = attributes;
+	const { style } = attributes;
+	const typographyProps = getTypographyClassesAndStyles( attributes );
+
 	return {
-		color: customFaqTextColor,
+		...typographyProps.style,
+		...getSpacingClassesAndStyles( attributes ).style,
+		...responsiveSpacingStyles(
+			'contents-padding',
+			style?.ystdtb?.faqItem?.contents?.responsive?.spacing?.padding
+		),
+		...responsiveStyles(
+			'contents-font-size',
+			style?.ystdtb?.faqItem?.contents?.responsive?.typography?.fontSize
+		),
+		color: style?.color?.text,
 	};
 }
 
+/**
+ * 開閉ボタンの色指定に対応するクラスを取得する。
+ * @param attributes ブロック属性。
+ */
 export function getAccordionArrowClasses( attributes: FaqItemBlockAttributes ) {
-	const { accordionArrowColor, customAccordionArrowColor } = attributes;
-
-	const accordionArrowColorClass =
-		getColorClassName( 'color', accordionArrowColor ) || '';
-
 	return classnames( 'ystdtb-faq-item__arrow', {
-		'has-text-color': accordionArrowColor || customAccordionArrowColor,
-		[ accordionArrowColorClass ]: accordionArrowColorClass,
+		'has-text-color': !! getAccordionArrowColor( attributes ),
 	} );
 }
 
+/**
+ * FAQ開閉ボタンの余白を取得.
+ *
+ * @param attributes FAQアイテム属性.
+ * @return 開閉ボタンのmargin設定.
+ */
+export function getAccordionArrowMargin( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.arrow?.spacing?.margin;
+}
+
+/**
+ * FAQ開閉ボタンの余白を更新.
+ *
+ * @param style  FAQアイテムのstyle属性.
+ * @param margin 開閉ボタンのmargin設定.
+ * @return 更新後のstyle属性.
+ */
+export function updateAccordionArrowMargin(
+	style: FaqItemBlockAttributes[ 'style' ],
+	margin?: Spacing
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				arrow: {
+					...style?.ystdtb?.faqItem?.arrow,
+					spacing: {
+						...style?.ystdtb?.faqItem?.arrow?.spacing,
+						margin,
+					},
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
+}
+
+/**
+ * 開閉ボタンの色と余白を保存用CSSへ変換する。
+ * @param attributes ブロック属性。
+ */
 export function getAccordionArrowStyles( attributes: FaqItemBlockAttributes ) {
-	const { customAccordionArrowColor } = attributes;
 	return {
-		color: customAccordionArrowColor,
+		color: presetTokenToCssVar( getAccordionArrowColor( attributes ) ),
+		...getCustomSpacingValues(
+			getAccordionArrowMargin( attributes ),
+			'margin'
+		),
 	};
+}
+
+/**
+ * 開閉ボタン色を取得する。
+ * @param attributes ブロック属性。
+ */
+export function getAccordionArrowColor( attributes: FaqItemBlockAttributes ) {
+	return attributes.style?.ystdtb?.faqItem?.arrow?.color?.text;
+}
+
+/**
+ * 他の設定を保持して開閉ボタン色だけを更新・解除する。
+ * @param style 現在のスタイル。
+ * @param text  開閉ボタン色。
+ */
+export function updateAccordionArrowColor(
+	style: FaqItemBlockAttributes[ 'style' ],
+	text?: string
+) {
+	return stripUndefined( {
+		...style,
+		ystdtb: {
+			...style?.ystdtb,
+			faqItem: {
+				...style?.ystdtb?.faqItem,
+				arrow: {
+					...style?.ystdtb?.faqItem?.arrow,
+					color: { ...style?.ystdtb?.faqItem?.arrow?.color, text },
+				},
+			},
+		},
+	} ) as FaqItemBlockAttributes[ 'style' ];
 }

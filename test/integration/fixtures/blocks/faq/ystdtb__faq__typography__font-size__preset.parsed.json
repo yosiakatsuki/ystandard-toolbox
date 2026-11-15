@@ -1,0 +1,13 @@
+[
+	{
+		"blockName": "ystdtb/faq",
+		"attrs": {
+			"fontSize": "large"
+		},
+		"innerBlocks": [],
+		"innerHTML": "\n<div class=\"ystdtb-faq has-large-font-size\"></div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-faq has-large-font-size\"></div>\n"
+		]
+	}
+]
