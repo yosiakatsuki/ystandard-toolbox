@@ -29,15 +29,6 @@
 					content: "";
 					display: none;
 				}
-
-				&:not(.has-border, .has-background) {
-
-					+ .is-faq--a {
-						padding-top: calc(
-							var(--ystdtb--faq-item--padding-vertical) / 2
-						);
-					}
-				}
 			}
 
 			&.is-faq--a {

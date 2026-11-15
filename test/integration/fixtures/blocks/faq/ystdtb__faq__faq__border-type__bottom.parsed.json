@@ -34,9 +34,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-faq\" style=\"border-bottom-color:var(--wp--preset--color--ys-black);border-bottom-style:solid;border-bottom-width:1px\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-faq has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-black);border-bottom-style:solid;border-bottom-width:1px\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-faq\" style=\"border-bottom-color:var(--wp--preset--color--ys-black);border-bottom-style:solid;border-bottom-width:1px\">",
+			"\n<div class=\"ystdtb-faq has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-black);border-bottom-style:solid;border-bottom-width:1px\">",
 			null,
 			"\n\n",
 			null,

@@ -9,11 +9,15 @@ import type { ResponsiveSpacing } from '@aktk/block-components/components/respon
 import { stripUndefined } from '@aktk/block-components/utils/object';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
+import { hasBorderWidth } from '@aktk/block-components/utils/size';
 
 /**
  * Block dependencies.
  */
-import type { FaqBlockAttributes } from '@aktk/blocks/block-library/faq/types';
+import type {
+	FaqBlockAttributes,
+	FaqBorder,
+} from '@aktk/blocks/block-library/faq/types';
 
 const RESPONSIVE_DEVICES = [ 'desktop', 'tablet', 'mobile' ] as const;
 const RESPONSIVE_SPACING_POSITIONS = {
@@ -22,16 +26,32 @@ const RESPONSIVE_SPACING_POSITIONS = {
 } as const;
 
 /**
+ * 全周・辺別の設定から、FAQに幅のある枠線が指定されているか判定する。
+ *
+ * @param border 枠線設定。
+ * @return いずれかの辺に0以外の幅があるか。
+ */
+export function hasFaqBorder( border?: FaqBorder ): boolean {
+	return [
+		border?.top?.width ?? border?.width,
+		border?.right?.width ?? border?.width,
+		border?.bottom?.width ?? border?.width,
+		border?.left?.width ?? border?.width,
+	].some( hasBorderWidth );
+}
+
+/**
  * FAQルートへ付与するクラス名を取得する.
  *
  * @param attributes FAQ属性.
  * @return FAQルートのクラス名.
  */
 export function getFaqClassNames( attributes: FaqBlockAttributes ) {
-	const { isAccordion } = attributes;
+	const { isAccordion, style } = attributes;
 
 	return classnames( 'ystdtb-faq', {
 		'is-accordion': isAccordion,
+		'has-border': hasFaqBorder( style?.border ),
 	} );
 }
 

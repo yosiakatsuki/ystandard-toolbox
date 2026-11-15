@@ -17,9 +17,9 @@
 					}
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--q has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
 				]
 			},
 			{
@@ -37,9 +37,9 @@
 					}
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--a has-border\" style=\"border-bottom-color:var(--wp--preset--color--ys-green);border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
 				]
 			}
 		],

@@ -3,6 +3,7 @@
  */
 import type { FaqItemBlockAttributes } from '../types';
 import {
+	getItemClasses,
 	getItemStyles,
 	getAccordionArrowMargin,
 	getAccordionArrowStyles,
@@ -19,6 +20,34 @@ const DEFAULT_ATTRIBUTES: FaqItemBlockAttributes = {
 	faqBorderType: '',
 	labelPosition: 'center',
 };
+
+describe( 'FAQアイテムの装飾クラス', () => {
+	it.each( [ 'q', 'a' ] as const )(
+		'%sの辺別枠線からhas-borderを生成する',
+		( faqType ) => {
+			expect(
+				getItemClasses( {
+					faqType,
+					style: { border: { bottom: { width: '2px' } } },
+				} )
+			).toBe( `ystdtb-faq-item is-faq--${ faqType } has-border` );
+		}
+	);
+
+	it( '角丸とラベルの枠線はItem本体の枠線として扱わない', () => {
+		expect(
+			getItemClasses( {
+				faqType: 'q',
+				style: {
+					border: { radius: '8px' },
+					ystdtb: {
+						faqItem: { label: { border: { width: '2px' } } },
+					},
+				},
+			} )
+		).toBe( 'ystdtb-faq-item is-faq--q' );
+	} );
+} );
 
 describe( 'FAQアイテム開閉ボタン余白', () => {
 	it( 'margin更新時に開閉ボタンの他設定を保持する', () => {

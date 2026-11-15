@@ -27,9 +27,9 @@
 					}
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--q has-border\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--q\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--q has-border\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">q</span></div><div class=\"ystdtb-faq-item__contents\"></div><div class=\"ystdtb-faq-item__arrow\"></div></div>\n"
 				]
 			},
 			{
@@ -57,9 +57,9 @@
 					}
 				},
 				"innerBlocks": [],
-				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
+				"innerHTML": "\n<div class=\"ystdtb-faq-item is-faq--a has-border\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n",
 				"innerContent": [
-					"\n<div class=\"ystdtb-faq-item is-faq--a\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
+					"\n<div class=\"ystdtb-faq-item is-faq--a has-border\" style=\"border-bottom-color:#aaaaaa;border-bottom-style:solid;border-bottom-width:1px\"><div class=\"ystdtb-faq-item__label\" style=\"border-width:0;border-radius:0\"><span class=\"ystdtb-faq-item__label-text\">a</span></div><div class=\"ystdtb-faq-item__contents\"></div></div>\n"
 				]
 			}
 		],

@@ -22,6 +22,7 @@ import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
  */
 import type { FaqItemBlockAttributes, FaqLabelStyle } from './types';
 import { responsiveStyles, responsiveSpacingStyles } from './style-utils';
+import { hasFaqBorder } from '../faq/utils';
 
 /**
  * FAQアイテムのクラス名を取得
@@ -41,10 +42,11 @@ export function getBlockPropsClasses(
  * @param attributes
  */
 export function getItemClasses( attributes: FaqItemBlockAttributes ): string {
-	const { faqType } = attributes;
+	const { faqType, style } = attributes;
 
 	return classnames( 'ystdtb-faq-item', {
 		[ `is-faq--${ faqType }` ]: faqType,
+		'has-border': hasFaqBorder( style?.border ),
 	} );
 }
 

@@ -3,7 +3,7 @@
  */
 
 .ystdtb-faq {
-	--ystdtb--faq--padding: 1rem;
+	--ystdtb--faq--padding: 0.5rem;
 	--ystdtb--faq-item--gap: 1rem;
 	--ystdtb--faq-item--padding-vertical: var(--ystdtb--faq--padding);
 	--ystdtb--faq-item--padding-horizon: 0;
@@ -11,8 +11,8 @@
 	--ystdtb--faq-item--label--font-size: 1.5em;
 	--ystdtb--faq-item--label--size: 1.75em;
 
-	// Block Supportsで設定した全周枠線をリセットしない。
-	&:where(:not([style*="border-width:"])) {
+	// 枠線のないFAQだけをリセットし、設定済みの全周・辺別枠線は保持する。
+	&:where(:not(.has-border)) {
 		border: 0;
 	}
 
@@ -20,9 +20,11 @@
 		margin-top: 0;
 	}
 
-	&:where(.has-background) {
+	// 親の背景・枠線で囲まれるQ/Aにも同じ行余白を適用する。
+	&:where(.has-background, .has-border) {
 
-		:where(.ystdtb-faq-item) {
+		> :where(.ystdtb-faq-item) {
+			--ystdtb--faq-item--padding-vertical: 1.25rem;
 			--ystdtb--faq-item--padding-horizon: 1.25rem;
 		}
 	}

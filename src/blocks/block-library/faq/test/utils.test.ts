@@ -2,6 +2,7 @@ import type { FaqBlockAttributes } from '../types';
 import {
 	getAccordionArrowMargin,
 	getFaqClassNames,
+	hasFaqBorder,
 	getResponsiveSpacing,
 	getResponsiveSpacingStyles,
 	getResponsiveTypographyStyles,
@@ -15,7 +16,7 @@ const DEFAULT_ATTRIBUTES: FaqBlockAttributes = {
 };
 
 describe( 'FAQクラス名', () => {
-	it( '標準スタイル設定から旧クラスを生成しない', () => {
+	it( '枠線幅からhas-borderを付け、旧レイアウトクラスは生成しない', () => {
 		const classNames = getFaqClassNames( {
 			...DEFAULT_ATTRIBUTES,
 			backgroundColor: 'ys-light-orange',
@@ -29,7 +30,7 @@ describe( 'FAQクラス名', () => {
 			},
 		} );
 
-		expect( classNames ).toBe( 'ystdtb-faq' );
+		expect( classNames ).toBe( 'ystdtb-faq has-border' );
 	} );
 
 	it( '開閉式のクラスだけを独自に付与する', () => {
@@ -39,6 +40,37 @@ describe( 'FAQクラス名', () => {
 				isAccordion: true,
 			} )
 		).toBe( 'ystdtb-faq is-accordion' );
+	} );
+} );
+
+describe( 'FAQ枠線の有無', () => {
+	it.each( [
+		{ width: '2px' },
+		{ top: { width: '0.5px' } },
+		{ right: { width: '1px' } },
+		{ bottom: { width: '2px' } },
+		{ left: { width: '3px' } },
+		{ width: '0', bottom: { width: '2px' } },
+	] )( '有効な幅が1辺でもあれば枠線ありとする: %j', ( border ) => {
+		expect( hasFaqBorder( border ) ).toBe( true );
+	} );
+
+	it.each( [
+		undefined,
+		{},
+		{ width: '0' },
+		{ top: { width: '0px' }, bottom: { width: '0rem' } },
+		{ color: '#123456' },
+		{ radius: '8px' },
+		{
+			width: '2px',
+			top: { width: '0' },
+			right: { width: '0' },
+			bottom: { width: '0' },
+			left: { width: '0' },
+		},
+	] )( '幅なし・0・色や角丸だけでは枠線なしとする: %j', ( border ) => {
+		expect( hasFaqBorder( border ) ).toBe( false );
 	} );
 } );
 
