@@ -1,4 +1,6 @@
-const wordpressConfig = require( '@wordpress/scripts/config/eslint.config.cjs' );
+const { fixupConfigRules } = require( '@eslint/compat' );
+const wordpressPlugin = require( '@wordpress/eslint-plugin' );
+const jestPlugin = require( 'eslint-plugin-jest' );
 const tailwindcssConfig = require( 'eslint-plugin-tailwindcss' ).configs[
 	'flat/recommended'
 ];
@@ -6,10 +8,25 @@ const globals = require( 'globals' );
 
 module.exports = [
 	{
-		ignores: [ 'blocks/**/deprecated/*.js' ],
+		ignores: [
+			'**/build/**',
+			'**/node_modules/**',
+			'**/vendor/**',
+			'blocks/**/deprecated/*.js',
+		],
 	},
-	...wordpressConfig,
-	...tailwindcssConfig,
+	{ files: [ '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts' ] },
+	...wordpressPlugin.configs.recommended,
+	// Tailwind CSSの既存ルールをESLint10でも利用できるようにする。
+	...fixupConfigRules( tailwindcssConfig ),
+	// WordPressのVitest用設定を取り込まず、既存のJestテストを検証する。
+	{
+		...jestPlugin.configs[ 'flat/recommended' ],
+		files: [
+			'**/@(test|__tests__)/**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}',
+			'**/*.@(test|spec).{js,jsx,ts,tsx,mjs,cjs,mts,cts}',
+		],
+	},
 	{
 		languageOptions: {
 			globals: {

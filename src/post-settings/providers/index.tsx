@@ -61,7 +61,7 @@ export function registerPostSettingsProviders(
 							order: 100,
 							Component: SeoTitleSetting,
 						},
-				  ]
+					]
 				: items
 	);
 	addFilter(
@@ -77,7 +77,7 @@ export function registerPostSettingsProviders(
 							order: 110,
 							Component: SeoDescriptionSetting,
 						},
-				  ]
+					]
 				: items
 	);
 
@@ -101,7 +101,7 @@ export function registerPostSettingsProviders(
 								// yStandard標準セクションの後へToolbox設定をまとめる.
 								order: 100,
 							},
-					  ]
+						]
 					: sections
 		);
 		addFilter(
@@ -117,7 +117,7 @@ export function registerPostSettingsProviders(
 								order: 10,
 								Component: HeaderOverlaySetting,
 							},
-					  ]
+						]
 					: items
 		);
 	}
@@ -141,7 +141,7 @@ export function registerPostSettingsProviders(
 								),
 								order: 110,
 							},
-					  ]
+						]
 					: sections
 		);
 		addFilter(
@@ -157,7 +157,7 @@ export function registerPostSettingsProviders(
 								order: 10,
 								Component: MenuReplaceSetting,
 							},
-					  ]
+						]
 					: items
 		);
 	}
