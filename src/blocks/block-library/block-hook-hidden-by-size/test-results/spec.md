@@ -4,7 +4,8 @@
 
 ## テスト方針
 
-- **L1 (fixture-based integration test)**: **対象外**。ブロック拡張（filter 経由の attribute 追加）のため、test 環境で同等のフィルターを有効化するには `index.tsx` の分割など実装修正が必要。コストに見合わないため L1 は行わず、L2 / L3 で代替する
+- **unitテスト**: `test/index.test.tsx`で`index.tsx`に登録されたフィルターを実行し、パネルの表示判定と対応ブロックの代表的な操作を確認する。WordPressのUIとブロック情報取得をモック化し、Jestとjsdomだけで実行する
+- **L1 (fixture-based integration test)**: **対象外**。今回の変更は設定欄の表示判定に限定し、保存形式は変更しない。表示条件と属性登録の維持はunitテスト、実環境での保存・表示はL2 / L3で確認する
 - **L2 (Playwright UI 自動テスト)**: トグル挙動・クラス付与・排他ではない独立動作・サポート判定の条件付き表示を UI 経由で検証
 - **L3 (手動確認)**: フロントでのメディアクエリ切替を目視確認（デバイスごとの非表示挙動）
 
@@ -19,6 +20,15 @@
 - ブロック名が `core`, `ystdb`, `ystdtb` 名前空間で始まる
 - `customClassName` サポートが有効（WordPress デフォルト true）
 - `ystdtdHiddenBySize` サポートが有効（WordPress デフォルト true）
+- 明示的な非対応ブロック（`core/legacy-widget`、`core/widget-group`）ではない
+
+### 明示的な非対応ブロック
+
+- `core/legacy-widget`: ウィジェット画面で追加属性が保存されないため、パネルを表示しない
+- `core/widget-group`: 表示側のHTMLに`className`が出力されないため、パネルを表示しない
+- これらは`customClassName`と`ystdtdHiddenBySize`が有効でも対象外とする
+- 除外は設定欄の表示判定だけに適用し、JavaScriptとPHPの属性定義、保存済み属性、CSSは維持する
+- 通常のグループ（`core/group`）は設定対象とする
 
 ### 属性
 
@@ -52,9 +62,20 @@
 
 ## L1 fixture テストパターン
 
-**対象外**。本ブロック拡張は `blocks.registerBlockType` フィルタで attribute を追加する仕組みのため、test 環境で正しく parse させるには `index.tsx` を attribute filter と editor filter に分割する必要がある。実装修正コストが L1 による追加検証価値に見合わないため、L1 は実施せず手動テスト（L2 / L3）で代替する。
+**対象外**。今回の変更では設定欄の表示判定だけを変更し、属性定義・保存形式・CSSは維持するため、fixtureの追加・更新は行わない。表示判定と既存の属性登録を維持することはunitテストで確認する。
 
 属性保存の基本動作は既に box / paragraph 側の L1 / L2 / L3 テストで間接的にカバーされる（保存 HTML に `className` と `ystdtbIsHidden*` が保持されること）。
+
+---
+
+## unitテストパターン
+
+- 非対応の2種類はサポートと既存設定が有効でもパネルを表示せず、元の編集UIと属性を維持する
+- `customClassName: false`または`ystdtdHiddenBySize: false`ではパネルを表示しない
+- 対象外の名前空間にはパネルを表示しない
+- 段落、通常のグループ、ToolboxのBOXでは、サポート情報が未指定でもパネルを表示する
+- 通常のグループでタブレット非表示をオンにすると、既存クラスとPC非表示クラスを保持して対応属性・クラスを追加する
+- 非対応の2種類にも既存の非表示属性を登録し、互換性を維持する
 
 ---
 
@@ -63,8 +84,11 @@
 ### 対象ブロックのパネル表示
 
 - [ ] core/paragraph にパネル「非表示設定(画面サイズ)」が表示される
+- [ ] core/group にパネル「非表示設定(画面サイズ)」が表示される
 - [ ] ystdtb/box にパネル「非表示設定(画面サイズ)」が表示される
 - [ ] core/nextpage（`customClassName: false`）にパネルが表示されない
+- [ ] core/legacy-widget にパネルが表示されず、ウィジェット本体の編集ができる
+- [ ] core/widget-group にパネルが表示されず、ウィジェットグループ本体の編集ができる
 
 ### トグル動作と属性・クラス付与
 
