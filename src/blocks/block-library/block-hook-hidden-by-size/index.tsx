@@ -27,6 +27,17 @@ import './style-editor.css';
 const HOOK_NAME = 'hidden-by-size';
 
 /**
+ * 非表示設定を保存・反映できないブロック。
+ * 属性定義は互換性のため維持し、設定欄の表示判定でのみ使用する。
+ */
+const UNSUPPORTED_BLOCKS = [
+	// ウィジェット専用の保存処理では追加属性が保持されない。
+	'core/legacy-widget',
+	// 保存したclassNameが表示側のHTMLに出力されない。
+	'core/widget-group',
+];
+
+/**
  * ブロック属性定義
  */
 const hookAttributes: Record< string, any > = {
@@ -121,8 +132,8 @@ const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 			className,
 		} = attributes;
 
-		// フック有効性確認
-		const isEnable = isEnableHook( name, HOOK_NAME );
+		const isEnable = isEnableHook( name, HOOK_NAME, UNSUPPORTED_BLOCKS );
+		// 保存・反映できないブロックや許可されていない名前空間には設定を表示しない。
 		if ( ! isEnable ) {
 			return <BlockEdit { ...props } />;
 		}
