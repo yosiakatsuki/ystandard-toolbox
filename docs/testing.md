@@ -24,6 +24,15 @@ test/
 
 unit テスト本体は `src/` 配下に `*.test.[jt]s(x)` として配置する。integration テストは `test/integration/` に集約する。
 
+## 実行環境
+
+- CIではNode.js 22.22.2を使用する。ローカルも`@wordpress/scripts`のNode.js要件を満たす版を使用する。
+- 依存関係は`npm ci --no-audit --no-fund`で`package-lock.json`に揃える。古い`node_modules/`のまま検証しない。
+- JavaScriptのテストはJest30を使い、`wp-scripts test-unit-jest`から既存のunit・integration設定を実行する。`@wordpress/scripts`37系の`test-unit-js`はVitest用のため使用しない。
+- Jest、jsdom環境、WordPressのJestプリセット、Babel変換、Jest用Lintプラグインはプロジェクトの開発依存として明示する。
+- StylelintのWordPress設定が参照するデザイントークンは、対応する`@wordpress/theme`を開発依存に明示して解決する。
+- unit・integrationテストはjsdom上で実行し、ブラウザや実DBは使用しない。
+
 ## 実行コマンド
 
 ```bash
