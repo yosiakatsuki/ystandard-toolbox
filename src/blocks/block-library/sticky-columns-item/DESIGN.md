@@ -18,17 +18,18 @@
 
 - faq-item/block.jsonはparentで親の直下への配置を制限する。
 - faq-item/edit.tsxには、子内部のtemplateLockをfalseにして自由編集する例がある。
-- 既存部品はsrc/aktk-block-componentsを優先する。今回は設定UIがないため独自パネルを追加しない。
+- 既存部品はsrc/aktk-block-componentsを優先する。今回の装飾設定は標準Supportsへ任せ、独自パネルを追加しない。
 
-## 今回の最小構成
+## 最小構成と今回の追加
 
-- 独自attributes、装飾Supports、幅入力、追従スイッチは追加しない。
+- 今回は文字サイズ、行間、文字色、単色・グラデーション背景、padding、上下margin、枠線、角丸、影の標準Supportsを追加する。
+- 幅入力と追従スイッチはまだ追加しない。
 - 空の段落を初期配置し、内容だけを編集できるようにする。
 - 親の共通CSSにより、第1は320px固定・追従あり、第2は最低400pxから伸びる可変カラムになる。
 - 親の内容幅が744px未満なら両方全幅・追従なし。判定を子で二重管理しない。
 - 固定幅・追従位置は今回のモックに限る。完成版では固定する側と追従する側を独立して指定する方向とする。
 
-## block.jsonの主要設定
+## block.jsonの構造に関する設定（抜粋）
 
 ```json
 {
@@ -38,7 +39,6 @@
   "textdomain": "ystandard-toolbox",
   "parent": ["ystdtb/sticky-columns"],
   "selectors": { "root": ".ystdtb-sticky-columns-item" },
-  "attributes": {},
   "supports": {
     "html": false,
     "align": false,
@@ -51,6 +51,8 @@
   "style": "file:./style-index.css"
 }
 ```
+
+装飾Supportsは親と同じ宣言を加える。標準属性の保存と出力はuseBlockProps/useBlockProps.save()に任せ、独自のスタイル出力を重ねない。
 
 index.phpはSticky_Columns_Item_Blockクラス、BLOCK_NAMEはystdtb/sticky-columns-itemとする。WordPress 7.0未満では登録しない。互換入力は作らず、プラグイン全体の最低要件も変更しない。
 
@@ -68,22 +70,31 @@ index.phpはSticky_Columns_Item_Blockクラス、BLOCK_NAMEはystdtb/sticky-colu
 - 子内部のtemplateLockはfalse。内容ブロックの種類や数を独自に制限しない。
 - 子の追加・削除・移動を親の通常UIから行えないことと、子内部の自由編集を両立させる。
 - style.scssは子のbox-sizing・min-width・長い文字列の折返し等を担当する。
-- style-editor.scssは空状態の最低高さと輪郭線だけを補い、実カラム幅・padding・gapを変更しない。
+- style-editor.scssから常時表示の点線を削除する。空状態の最低高さだけを補い、Gutenbergの選択・フォーカス表示は変更しない。
 - 自分の装飾も含む子外側全体を追従対象とする。親の範囲外には追従させない。
 
-## 後から追加する設定
+## 装飾設定と後続の設定
 
-- 親子共通：文字サイズ、文字色、単色・グラデーション背景、上下左右padding、上下margin、枠線、影。
-- 追加提案：角丸と行間。今回の実装には含めない。
+- 今回の親子共通設定は標準UIを使い、初期非表示・設定済み時の表示・解除をコアと共通設計に合わせる。
+- 既存の標準パレット・文字サイズ・影の選択肢は使用し、独自プリセットは追加しない。縦書き・本文の段組み・fitTextは採用しない。
 - 子固有：2列時の固定幅、可変時の最低幅、追従ON/OFF。カラム間gapは親だけに置く。
 - 追従の保存先は親の単一値にする案を保持する。子ごとのbooleanを同期する仕組みは作らない。
 - 幅は標準のstyle.dimensions.widthを使う方向とし、任意入力とCSS出力の詳細は最小構成の確認後に決める。プリセット解決は組み込まない。
 - 設定を追加する段階でdocs/block-style-controls.mdを適用し、標準Supportsと共有部品を優先する。
 
+## 左右の表示順について
+
+親の[表示順切替の設計](../sticky-columns/DESIGN.md#左右の表示順切替設計のみ)に従う。今回、子側の属性やUIは追加しない。
+
+- 親が2列時だけCSSのorderを切り替える案とする。
+- 子の保存順・内容・幅・装飾・追従対象は維持する。逆順時に自分を別カラムへ置き換えない。
+- 1列時は元のDOM順へ戻る。読み上げ順・Tab順は変えない。
+
 ## 確認項目
 
 - fixtureのparse/serializeで子の内容が維持され、親の直下に配置されること。
-- 標準ブロック名クラスと専用本文ラッパーが保存されないこと。
+- 標準ブロック名クラスと専用本文ラッパーが保存されないこと。装飾Supports用のクラスは保持する。
+- 装飾設定が子の外側へ保存され、他の子の設定や内容を変更しないこと。
 - 親子が同じバージョン条件で登録され、対象外環境ではどちらも登録されないこと。
 - 許可後の画面確認で、内部ブロックの編集、保存再読込、固定幅・可変幅、1列時の全幅化と追従解除を確認する。
 - ブラウザ未確認の状態を、画面上の動作確認済みとは扱わない。

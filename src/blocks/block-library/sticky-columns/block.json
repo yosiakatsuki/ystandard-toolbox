@@ -8,13 +8,74 @@
 	"description": "片方のカラムがスクロールに追従する2列レイアウトです。",
 	"textdomain": "ystandard-toolbox",
 	"allowedBlocks": [ "ystdtb/sticky-columns-item" ],
-	"selectors": { "root": ".ystdtb-sticky-columns" },
-	"attributes": {},
+	"selectors": {
+		"root": ".ystdtb-sticky-columns"
+	},
+	"attributes": {
+		"fontSize": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"borderColor": {
+			"type": "string"
+		},
+		"style": {
+			"type": "object"
+		}
+	},
 	"supports": {
 		"html": false,
 		"align": false,
 		"className": false,
-		"customClassName": false
+		"customClassName": false,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalDefaultControls": {
+				"fontSize": false,
+				"lineHeight": false
+			}
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true,
+			"__experimentalDefaultControls": {
+				"text": false,
+				"background": false,
+				"gradients": false
+			}
+		},
+		"spacing": {
+			"padding": true,
+			"margin": [ "top", "bottom" ],
+			"__experimentalDefaultControls": {
+				"padding": false,
+				"margin": false
+			}
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"width": true,
+			"style": true,
+			"radius": true,
+			"__experimentalDefaultControls": {
+				"color": false,
+				"width": false,
+				"style": false,
+				"radius": false,
+				"shadow": false
+			}
+		},
+		"shadow": true
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

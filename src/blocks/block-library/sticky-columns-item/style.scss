@@ -2,4 +2,12 @@
 	min-width: 0;
 	box-sizing: border-box;
 	overflow-wrap: anywhere;
+
+	> *:first-child {
+		margin-top: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
 }
