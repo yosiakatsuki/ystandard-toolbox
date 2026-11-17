@@ -12,6 +12,15 @@
 		"root": ".ystdtb-sticky-columns"
 	},
 	"attributes": {
+		"reverse": {
+			"type": "boolean",
+			"default": false
+		},
+		"stickyColumn": {
+			"type": "string",
+			"enum": [ "first", "second", "none" ],
+			"default": "first"
+		},
 		"fontSize": {
 			"type": "string"
 		},

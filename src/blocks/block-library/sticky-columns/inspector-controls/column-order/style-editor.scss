@@ -1,0 +1,22 @@
+.ystdtb-sticky-columns-edit__column-order {
+	display: grid;
+	gap: 16px;
+}
+
+.ystdtb-sticky-columns-edit__preview {
+	display: flex;
+	gap: 8px;
+
+	&-column {
+		flex: 1;
+		padding: 12px 8px;
+		background-color: #f3f4f6;
+		border-radius: 4px;
+		text-align: center;
+	}
+
+	&-sticky {
+		display: block;
+		font-size: 0.85em;
+	}
+}

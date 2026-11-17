@@ -3,6 +3,8 @@
 		"name": "ystdtb/sticky-columns",
 		"isValid": true,
 		"attributes": {
+			"reverse": false,
+			"stickyColumn": "first",
 			"style": {
 				"color": {
 					"text": "#123456",

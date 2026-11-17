@@ -58,9 +58,9 @@
 								]
 							}
 						],
-						"innerHTML": "\n<div class=\"ystdtb-sticky-columns\">\n\n</div>\n",
+						"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\">\n\n</div>\n",
 						"innerContent": [
-							"\n<div class=\"ystdtb-sticky-columns\">",
+							"\n<div class=\"ystdtb-sticky-columns has-sticky-first\">",
 							null,
 							"\n\n",
 							null,
@@ -76,9 +76,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-sticky-columns\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-sticky-columns\">",
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first\">",
 			null,
 			"\n\n",
 			null,

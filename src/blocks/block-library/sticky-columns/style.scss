@@ -18,6 +18,7 @@ $two-column-width: $fixed-width + $flexible-min-width + $gap;
 		max-width: 100%;
 		position: static;
 		top: auto;
+		order: 0;
 	}
 }
 
@@ -26,11 +27,27 @@ $two-column-width: $fixed-width + $flexible-min-width + $gap;
 
 	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:first-child {
 		flex: 0 0 $fixed-width;
-		position: sticky;
-		top: 0;
 	}
 
 	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:last-child {
 		flex: 1 0 $flexible-min-width;
+	}
+
+	.ystdtb-sticky-columns.has-sticky-first
+		> .ystdtb-sticky-columns-item:first-child,
+	.ystdtb-sticky-columns.has-sticky-second
+		> .ystdtb-sticky-columns-item:last-child {
+		position: sticky;
+		top: 0;
+	}
+
+	.ystdtb-sticky-columns.is-reversed
+		> .ystdtb-sticky-columns-item:first-child {
+		order: 2;
+	}
+
+	.ystdtb-sticky-columns.is-reversed
+		> .ystdtb-sticky-columns-item:last-child {
+		order: 1;
 	}
 }

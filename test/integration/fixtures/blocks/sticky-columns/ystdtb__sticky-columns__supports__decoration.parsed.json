@@ -82,9 +82,9 @@
 				]
 			}
 		],
-		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">\n\n</div>\n",
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">\n\n</div>\n",
 		"innerContent": [
-			"\n<div class=\"ystdtb-sticky-columns has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">",
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">",
 			null,
 			"\n\n",
 			null,

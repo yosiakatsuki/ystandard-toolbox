@@ -2,7 +2,10 @@
 	{
 		"name": "ystdtb/sticky-columns",
 		"isValid": true,
-		"attributes": {},
+		"attributes": {
+			"reverse": false,
+			"stickyColumn": "first"
+		},
 		"innerBlocks": [
 			{
 				"name": "ystdtb/sticky-columns-item",
@@ -38,7 +41,10 @@
 					{
 						"name": "ystdtb/sticky-columns",
 						"isValid": true,
-						"attributes": {},
+						"attributes": {
+							"reverse": false,
+							"stickyColumn": "first"
+						},
 						"innerBlocks": [
 							{
 								"name": "ystdtb/sticky-columns-item",

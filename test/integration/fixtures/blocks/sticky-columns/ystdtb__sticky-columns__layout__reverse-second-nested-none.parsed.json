@@ -1,0 +1,98 @@
+[
+	{
+		"blockName": "ystdtb/sticky-columns",
+		"attrs": {
+			"reverse": true,
+			"stickyColumn": "second"
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {
+					"style": {
+						"color": {
+							"background": "#112233"
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/sticky-columns",
+						"attrs": {
+							"stickyColumn": "none"
+						},
+						"innerBlocks": [
+							{
+								"blockName": "ystdtb/sticky-columns-item",
+								"attrs": {
+									"style": {
+										"color": {
+											"background": "#112233"
+										}
+									}
+								},
+								"innerBlocks": [],
+								"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#112233\"></div>\n",
+								"innerContent": [
+									"\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#112233\"></div>\n"
+								]
+							},
+							{
+								"blockName": "ystdtb/sticky-columns-item",
+								"attrs": {
+									"style": {
+										"color": {
+											"background": "#445566"
+										}
+									}
+								},
+								"innerBlocks": [],
+								"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#445566\"></div>\n",
+								"innerContent": [
+									"\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#445566\"></div>\n"
+								]
+							}
+						],
+						"innerHTML": "\n<div class=\"ystdtb-sticky-columns\">\n\n</div>\n",
+						"innerContent": [
+							"\n<div class=\"ystdtb-sticky-columns\">",
+							null,
+							"\n\n",
+							null,
+							"</div>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#112233\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#112233\">",
+					null,
+					"</div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {
+					"style": {
+						"color": {
+							"background": "#445566"
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#445566\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item has-background\" style=\"background-color:#445566\"></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns is-reversed has-sticky-second\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-sticky-columns is-reversed has-sticky-second\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]
