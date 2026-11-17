@@ -85,6 +85,12 @@ import snsShareMetadata from '../../../src/blocks/block-library/sns-share/block.
 // Posts (動的ブロック: save は null).
 import postsMetadata from '../../../src/blocks/block-library/posts/block.json';
 
+/* Sticky Columns */
+import stickyColumnsMetadata from '../../../src/blocks/block-library/sticky-columns/block.json';
+import stickyColumnsSave from '@aktk/blocks/block-library/sticky-columns/save';
+import stickyColumnsItemMetadata from '../../../src/blocks/block-library/sticky-columns-item/block.json';
+import stickyColumnsItemSave from '@aktk/blocks/block-library/sticky-columns-item/save';
+
 const NoopEdit = () => null;
 const NoopSave = () => null;
 
@@ -184,4 +190,12 @@ export function registerPostsTestBlocks() {
 	registerOnce( postsMetadata, {
 		save: NoopSave,
 	} );
+}
+
+/**
+ * 追従カラムの親子を保存形式テストへ登録する。
+ */
+export function registerStickyColumnsTestBlocks() {
+	registerOnce( stickyColumnsMetadata, { save: stickyColumnsSave } );
+	registerOnce( stickyColumnsItemMetadata, { save: stickyColumnsItemSave } );
 }

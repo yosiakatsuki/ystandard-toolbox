@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/sticky-columns-item",
+	"version": "0.1.0",
+	"title": "片方が追従できるカラム（子）",
+	"category": "ystdtb",
+	"description": "片方が追従できるカラムの中に配置するカラムです。",
+	"textdomain": "ystandard-toolbox",
+	"parent": [ "ystdtb/sticky-columns" ],
+	"selectors": { "root": ".ystdtb-sticky-columns-item" },
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"className": false,
+		"customClassName": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

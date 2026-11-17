@@ -1,0 +1,36 @@
+// 最小構成の仮値。レイアウトと切替条件を同じ値から作る。
+$fixed-width: 320px;
+$flexible-min-width: 400px;
+$gap: 24px;
+$two-column-width: $fixed-width + $flexible-min-width + $gap;
+
+.ystdtb-sticky-columns {
+	container: ystdtb-sticky-columns / inline-size;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: $gap;
+	min-width: 0;
+	box-sizing: border-box;
+
+	> .ystdtb-sticky-columns-item {
+		flex: 1 1 100%;
+		max-width: 100%;
+		position: static;
+		top: auto;
+	}
+}
+
+// 親自身は変更せず、同じ条件で子の2列化と追従を有効にする。
+@container ystdtb-sticky-columns (min-width: #{$two-column-width}) {
+
+	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:first-child {
+		flex: 0 0 $fixed-width;
+		position: sticky;
+		top: 0;
+	}
+
+	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:last-child {
+		flex: 1 0 $flexible-min-width;
+	}
+}
