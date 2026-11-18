@@ -75,13 +75,13 @@ class Sticky_Columns_Block {
 	 */
 	private function wide_rule( $key ) {
 		return [
-			'selector'     => '.ystdtb-sticky-columns[data-collapse="' . $key . '"] > .ystdtb-sticky-columns-item',
+			'selector'     => '.ystdtb-sticky-columns:where([data-collapse="' . $key . '"]) > :where(.ystdtb-sticky-columns-item)',
 			'declarations' => [
-				'flex-basis'                      => '0px',
-				'max-width'                       => 'var(--ystdtb--columns--limit)',
-				'position'                        => 'var(--ystdtb--columns--position)',
-				'--ystdtb--columns--active-order' => 'var(--ystdtb--columns--order)',
-				'top'                             => 'var(--ystdtb--columns--top)',
+				'--ystdtb--columns--basis'     => '0px',
+				'--ystdtb--columns--max-width' => 'var(--ystdtb--columns--limit)',
+				'--ystdtb--columns--position'  => 'sticky',
+				'--ystdtb--columns--order'     => '1',
+				'--ystdtb--columns--top'       => 'var(--ystdtb--columns--sticky-offset)',
 			],
 		];
 	}
@@ -98,8 +98,8 @@ class Sticky_Columns_Block {
 	/** Toolboxのフィルターを通した画面幅でレイアウトと端末別寸法を切り替える。 */
 	private function device_styles() {
 		// 画面幅の場合は親自身にも条件が適用できる。狭い配置先での再折返しを防ぐ。
-		$mobile = '.ystdtb-sticky-columns[data-collapse="mobile"]{flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'mobile' ) ] );
-		$tablet = '.ystdtb-sticky-columns[data-collapse="tablet"]{flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'tablet' ) ] );
+		$mobile = '.ystdtb-sticky-columns:where([data-collapse="mobile"]){flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'mobile' ) ] );
+		$tablet = '.ystdtb-sticky-columns:where([data-collapse="tablet"]){flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'tablet' ) ] );
 		$css    = Styles::add_media_query_over_tablet( $mobile ) . Styles::add_media_query_over_desktop( $tablet );
 
 		$rules = [];

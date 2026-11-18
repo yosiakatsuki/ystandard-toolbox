@@ -3,11 +3,11 @@
 	box-sizing: border-box;
 	overflow-wrap: anywhere;
 
-	> *:first-child {
+	> :where(:first-child) {
 		margin-top: 0;
 	}
 
-	> *:last-child {
+	> :where(:last-child) {
 		margin-bottom: 0;
 	}
 }

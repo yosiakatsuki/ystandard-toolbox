@@ -24,9 +24,9 @@ class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 		$css = wp_style_engine_get_stylesheet_from_context( 'block-supports', [ 'prettify' => false ] );
 		foreach ( [ '49.5rem', '650px' ] as $size ) {
 			$this->assertSame( 1, substr_count( $css, "@container ystdtb-sticky-columns (min-width: {$size})" ) );
-			$this->assertStringContainsString( '[data-collapse="' . $size . '"] > .ystdtb-sticky-columns-item', $css );
+			$this->assertStringContainsString( '.ystdtb-sticky-columns:where([data-collapse="' . $size . '"]) > :where(.ystdtb-sticky-columns-item)', $css );
 		}
-		foreach ( [ 'flex-basis:0px', 'position:var(--ystdtb--columns--position)', 'top:var(--ystdtb--columns--top)', '--ystdtb--columns--active-order:var(--ystdtb--columns--order)' ] as $declaration ) {
+		foreach ( [ '--ystdtb--columns--basis:0px', '--ystdtb--columns--max-width:var(--ystdtb--columns--limit)', '--ystdtb--columns--position:sticky', '--ystdtb--columns--top:var(--ystdtb--columns--sticky-offset)', '--ystdtb--columns--order:1' ] as $declaration ) {
 			$this->assertStringContainsString( $declaration, $css );
 		}
 	}
@@ -87,10 +87,10 @@ class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 		$type = WP_Block_Type_Registry::get_instance()->get_registered( Sticky_Columns_Block::BLOCK_NAME );
 		$css  = implode( '', wp_styles()->get_data( $type->style_handles[0], 'after' ) );
 		foreach ( [ 'mobile', 'tablet' ] as $key ) {
-			$this->assertStringContainsString( '[data-collapse="' . $key . '"]', $css );
+			$this->assertStringContainsString( '.ystdtb-sticky-columns:where([data-collapse="' . $key . '"]){flex-wrap:nowrap;}', $css );
 		}
 		$this->assertStringContainsString( '@media (min-width:', $css );
-		$this->assertStringContainsString( 'top:var(--ystdtb--columns--top)', $css );
+		$this->assertStringContainsString( '--ystdtb--columns--top:var(--ystdtb--columns--sticky-offset)', $css );
 		$child = WP_Block_Type_Registry::get_instance()->get_registered( 'ystdtb/sticky-columns-item' );
 		$css   = implode( '', wp_styles()->get_data( $child->style_handles[0], 'after' ) );
 		$this->assertStringContainsString( '--ystdtb--mobile--columns--min-height', $css );

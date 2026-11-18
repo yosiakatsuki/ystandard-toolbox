@@ -1,6 +1,12 @@
 .ystdtb-sticky-columns {
 	--ystdtb--columns--gap: 24px;
 	--ystdtb--columns--sticky-offset: 1rem;
+	// 各親で1列時の値に戻す。2列の条件を満たす直下の子だけが上書きする。
+	--ystdtb--columns--basis: 100%;
+	--ystdtb--columns--max-width: 100%;
+	--ystdtb--columns--position: static;
+	--ystdtb--columns--top: auto;
+	--ystdtb--columns--order: 0;
 	container: ystdtb-sticky-columns / inline-size;
 	display: flex;
 	flex-wrap: wrap;
@@ -18,34 +24,30 @@
 		--ystdtb--columns--#{$index}-current: var(--ystdtb--columns--#{$index}-width);
 	}
 
-	> .ystdtb-sticky-columns-item {
+	> :where(.ystdtb-sticky-columns-item) {
 		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--gap)));
 		--ystdtb--columns--half: calc(var(--ystdtb--columns--available) / 2);
-		--ystdtb--columns--position: static;
-		--ystdtb--columns--top: auto;
-		--ystdtb--columns--order: 0;
-		--ystdtb--columns--active-order: 0;
-		flex: 1 1 100%;
-		max-width: 100%;
+		flex: 1 1 var(--ystdtb--columns--basis);
+		max-width: var(--ystdtb--columns--max-width);
 		position: static;
 		top: auto;
-		order: var(--ystdtb--columns--active-order);
+		order: 0;
 	}
 
 	// 希望幅が無ければ相手の残り、両方無ければ均等。2列時のflex-basisは0。
 	@each $index, $child, $peer in (1, first, 2), (2, last, 1) {
-		> .ystdtb-sticky-columns-item:#{$child}-child {
+		> :where(.ystdtb-sticky-columns-item:#{$child}-child) {
 			--ystdtb--columns--limit: var(--ystdtb--columns--#{$index}-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--#{$peer}-current, var(--ystdtb--columns--half)))));
 		}
 	}
 
-	&.has-sticky-first > .ystdtb-sticky-columns-item:first-child,
-	&.has-sticky-second > .ystdtb-sticky-columns-item:last-child {
-		--ystdtb--columns--position: sticky;
-		--ystdtb--columns--top: var(--ystdtb--columns--sticky-offset);
+	&:where(.has-sticky-first) > :where(.ystdtb-sticky-columns-item:first-child),
+	&:where(.has-sticky-second) > :where(.ystdtb-sticky-columns-item:last-child) {
+		position: var(--ystdtb--columns--position);
+		top: var(--ystdtb--columns--top);
 	}
 
-	&.is-reversed > .ystdtb-sticky-columns-item:first-child {
-		--ystdtb--columns--order: 1;
+	&:where(.is-reversed) > :where(.ystdtb-sticky-columns-item:first-child) {
+		order: var(--ystdtb--columns--order);
 	}
 }
