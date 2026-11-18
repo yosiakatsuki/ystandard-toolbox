@@ -1,0 +1,6 @@
+.ystdtb-sticky-columns {
+	--ystdtb--columns--1-current: var(--ystdtb--columns--1-mobile, var(--ystdtb--columns--1-width));
+	--ystdtb--columns--2-current: var(--ystdtb--columns--2-mobile, var(--ystdtb--columns--2-width));
+	--ystdtb--columns--column-gap-device: var(--ystdtb--columns--column-gap-mobile);
+	--ystdtb--columns--row-gap-device: var(--ystdtb--columns--row-gap-mobile);
+}

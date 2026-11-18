@@ -60,11 +60,14 @@ class Sticky_Columns_Item_Block {
 		}
 
 		$type = register_block_type( __DIR__ );
-		if ( $type && ! empty( $type->style_handles ) ) {
-			$css = $this->responsive_styles( $type->supports['ystdtbResponsiveSize'] ?? [] );
-			if ( '' !== $css ) {
-				wp_add_inline_style( $type->style_handles[0], Text::minify( $css ) );
-			}
+		// 登録したブロックのスタイルに編集・フロント共通の端末条件を追加する。
+		if ( ! $type || empty( $type->style_handles ) ) {
+			return;
+		}
+		$css = $this->responsive_styles( $type->supports['ystdtbResponsiveSize'] ?? [] );
+		// 子自身に適用する寸法がすべて無効なら、メディアクエリも追加しない。
+		if ( '' !== $css ) {
+			wp_add_inline_style( $type->style_handles[0], Text::minify( $css ) );
 		}
 	}
 
@@ -82,32 +85,37 @@ class Sticky_Columns_Item_Block {
 			'minHeight' => 'min-height',
 			'maxHeight' => 'max-height',
 		];
-		$rules      = [
-			'mobile'  => '',
-			'tablet'  => '',
-			'desktop' => '',
-		];
-		foreach ( $properties as $key => $property ) {
-			if ( empty( $settings[ $key ] ) ) {
-				continue;
-			}
-			foreach ( array_keys( $rules ) as $device ) {
-				$rules[ $device ] .= Styles::get_responsive_custom_prop_css(
-					[
-						'selector'  => '.ystdtb-sticky-columns-item',
-						'prop_name' => 'columns--' . $property,
-						'property'  => $property,
-						'type'      => $device,
-					]
-				);
-			}
-		}
-		if ( '' === $rules['mobile'] ) {
+
+		$enabled_properties = array_intersect_key( $properties, array_filter( $settings ) );
+		// 幅だけが有効な場合も、子の寸法を上書きするCSSは不要。
+		if ( empty( $enabled_properties ) ) {
 			return '';
 		}
-		return Styles::add_media_query_only_mobile( $rules['mobile'] )
-			. Styles::add_media_query_only_tablet( $rules['tablet'] )
-			. Styles::add_media_query_over_desktop( $rules['desktop'] );
+		$css  = Styles::add_media_query_only_mobile( $this->dimension_rules( $enabled_properties, 'mobile' ) );
+		$css .= Styles::add_media_query_only_tablet( $this->dimension_rules( $enabled_properties, 'tablet' ) );
+		$css .= Styles::add_media_query_over_desktop( $this->dimension_rules( $enabled_properties, 'desktop' ) );
+		return $css;
+	}
+
+	/**
+	 * 対象端末の値が保存されている子だけ、通常の寸法を上書きする。
+	 *
+	 * @param array  $properties 有効なCSSプロパティ名。
+	 * @param string $device     対象端末。
+	 */
+	private function dimension_rules( $properties, $device ) {
+		$css = '';
+		foreach ( $properties as $property ) {
+			$css .= Styles::get_responsive_custom_prop_css(
+				[
+					'selector'  => '.ystdtb-sticky-columns-item',
+					'prop_name' => 'columns--' . $property,
+					'property'  => $property,
+					'type'      => $device,
+				]
+			);
+		}
+		return $css;
 	}
 }
 

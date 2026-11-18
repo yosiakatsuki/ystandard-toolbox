@@ -1,13 +1,9 @@
 /* WordPress Dependencies */
-import {
-	InspectorControls,
-	useBlockProps,
-	useInnerBlocksProps,
-} from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 /* Plugin Dependencies */
 import { getItemSizeVariables, type ColumnItemEditProps } from './dimensions';
-import { ResponsiveSize } from './inspector-controls/styles/responsive-size';
+import { InspectorControls } from './inspector-controls';
 import './style-editor.scss';
 
 const template: [ string, Record< string, unknown > ][] = [
@@ -30,9 +26,7 @@ export default function StickyColumnsItemEdit( props: ColumnItemEditProps ) {
 
 	return (
 		<>
-			<InspectorControls group="styles">
-				<ResponsiveSize { ...props } />
-			</InspectorControls>
+			<InspectorControls { ...props } />
 			<div { ...innerBlocksProps } />
 		</>
 	);

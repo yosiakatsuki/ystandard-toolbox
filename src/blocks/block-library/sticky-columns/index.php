@@ -7,6 +7,7 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\File;
 use ystandard_toolbox\Util\Styles;
 use ystandard_toolbox\Util\Text;
 
@@ -92,32 +93,37 @@ class Sticky_Columns_Block {
 	 * @param string $size 安全な長さ、または編集用プレースホルダー。
 	 */
 	private function container_rule( $size ) {
-		return [ 'rules_group' => "@container ystdtb-sticky-columns (min-width: {$size})" ] + $this->wide_rule( $size );
+		$rule                = $this->wide_rule( $size );
+		$rule['rules_group'] = "@container ystdtb-sticky-columns (min-width: {$size})";
+		return $rule;
 	}
 
-	/** Toolboxのフィルターを通した画面幅でレイアウトと端末別寸法を切り替える。 */
-	private function device_styles() {
-		// 画面幅の場合は親自身にも条件が適用できる。狭い配置先での再折返しを防ぐ。
-		$mobile = '.ystdtb-sticky-columns:where([data-collapse="mobile"]){flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'mobile' ) ] );
-		$tablet = '.ystdtb-sticky-columns:where([data-collapse="tablet"]){flex-wrap:nowrap;}' . wp_style_engine_get_stylesheet_from_css_rules( [ $this->wide_rule( 'tablet' ) ] );
-		$css    = Styles::add_media_query_over_tablet( $mobile ) . Styles::add_media_query_over_desktop( $tablet );
+	/**
+	 * 画面幅が指定の境界以上なら、親の折り返しを止め、直下の子に2列の配置を適用する。
+	 *
+	 * @param string $mode 1列にするタイミング（mobileまたはtablet）。
+	 */
+	private function viewport_layout_css( $mode ) {
+		$parent_rule = [
+			'selector'     => '.ystdtb-sticky-columns:where([data-collapse="' . $mode . '"])',
+			'declarations' => [ 'flex-wrap' => 'nowrap' ],
+		];
+		return wp_style_engine_get_stylesheet_from_css_rules( [ $parent_rule, $this->wide_rule( $mode ) ] );
+	}
 
-		$rules = [];
-		foreach ( [ 'mobile', 'tablet', 'desktop' ] as $device ) {
-			$declarations = '';
-			foreach ( [ 1, 2 ] as $index ) {
-				$name          = "--ystdtb--columns--{$index}";
-				$declarations .= "{$name}-current:var({$name}-{$device},var({$name}-width));";
-			}
-			foreach ( [ 'column', 'row' ] as $axis ) {
-				$name          = "--ystdtb--columns--{$axis}-gap";
-				$declarations .= "{$name}-device:var({$name}-{$device});";
-			}
-			$rules[ $device ] = ".ystdtb-sticky-columns{{$declarations}}";
-		}
-		return $css . Styles::add_media_query_only_mobile( $rules['mobile'] )
-			. Styles::add_media_query_only_tablet( $rules['tablet'] )
-			. Styles::add_media_query_over_desktop( $rules['desktop'] );
+	/** 固定の端末別CSSを、テーマで変更できる画面幅の条件で包む。 */
+	private function device_styles() {
+		$directory = YSTDTB_PATH . '/assets/blocks/sticky-columns';
+
+		// 1列にするタイミングが「モバイル」ならタブレット以上、「タブレット」ならPC以上で2列にする。
+		$css  = Styles::add_media_query_over_tablet( $this->viewport_layout_css( 'mobile' ) );
+		$css .= Styles::add_media_query_over_desktop( $this->viewport_layout_css( 'tablet' ) );
+
+		// 幅と間隔は、選択した端末の範囲だけで上書きする。
+		$css .= Styles::add_media_query_only_mobile( File::file_get_contents( $directory . '/mobile.css' ) );
+		$css .= Styles::add_media_query_only_tablet( File::file_get_contents( $directory . '/tablet.css' ) );
+		$css .= Styles::add_media_query_over_desktop( File::file_get_contents( $directory . '/desktop.css' ) );
+		return $css;
 	}
 
 	/**
@@ -137,25 +143,51 @@ class Sticky_Columns_Block {
 	 * @param array $children パース済みの子ブロック。
 	 */
 	private function column_widths( $children ) {
-		$css              = '';
-		$type             = \WP_Block_Type_Registry::get_instance()->get_registered( Sticky_Columns_Item_Block::BLOCK_NAME );
-		$responsive_width = block_has_support( $type, [ 'ystdtbResponsiveSize', 'width' ] );
+		$css                  = '';
+		$child_type           = \WP_Block_Type_Registry::get_instance()->get_registered( Sticky_Columns_Item_Block::BLOCK_NAME );
+		$has_responsive_width = block_has_support( $child_type, [ 'ystdtbResponsiveSize', 'width' ] );
 		foreach ( array_slice( $children, 0, 2 ) as $offset => $child ) {
 			$style  = $child['attrs']['style'] ?? [];
 			$widths = [ 'width' => $style['dimensions']['width'] ?? null ];
-			if ( $responsive_width ) {
-				foreach ( [ 'desktop', 'tablet', 'mobile' ] as $device ) {
-					$widths[ $device ] = $style['ystdtb']['stickyColumnsItem']['responsive']['width'][ $device ] ?? null;
-				}
+			// 子のサイズパネルで使用する幅だけを親のレイアウトへ渡す。
+			if ( $has_responsive_width ) {
+				$responsive_width  = $style['ystdtb']['stickyColumnsItem']['responsive']['width'] ?? [];
+				$widths['desktop'] = $responsive_width['desktop'] ?? null;
+				$widths['tablet']  = $responsive_width['tablet'] ?? null;
+				$widths['mobile']  = $responsive_width['mobile'] ?? null;
 			}
+			$column_number = $offset + 1;
 			foreach ( $widths as $suffix => $value ) {
 				// 属性からは数値と寸法単位だけをCSS宣言へ持ち込む。
 				if ( is_string( $value ) && preg_match( '/^(?:0|(?:\d+(?:\.\d+)?|\.\d+)(?:[a-z]+|%))$/iD', $value ) ) {
-					$css .= '--ystdtb--columns--' . ( $offset + 1 ) . "-{$suffix}:{$value};";
+					$css .= "--ystdtb--columns--{$column_number}-{$suffix}:{$value};";
 				}
 			}
 		}
 		return $css;
+	}
+
+	/**
+	 * 親に切り替え条件を設定し、コンテナ幅を指定した場合だけ個別のクエリを登録する。
+	 *
+	 * @param \WP_HTML_Tag_Processor $tag        親の開始タグ。
+	 * @param array                  $attributes 親ブロックの属性。
+	 */
+	private function apply_collapse_condition( $tag, $attributes ) {
+		$mode = $attributes['collapseAt'] ?? 'mobile';
+		// 画面幅による切り替えは、すべての親で共通のCSSを使う。
+		if ( 'container' !== $mode ) {
+			$tag->set_attribute( 'data-collapse', 'tablet' === $mode ? 'tablet' : 'mobile' );
+			return;
+		}
+
+		$size = $attributes['containerSize'] ?? '';
+		// 未入力または無効な長さなら、既定の1列表示を使う。
+		if ( ! is_string( $size ) || ! preg_match( '/^(?:\d+(?:\.\d+)?|\.\d+)(?:px|em|rem|ch|vw|vh)$/D', $size ) ) {
+			return;
+		}
+		$tag->set_attribute( 'data-collapse', $size );
+		wp_style_engine_get_stylesheet_from_css_rules( [ $this->container_rule( $size ) ], [ 'context' => 'block-supports' ] );
 	}
 
 	/**
@@ -170,22 +202,17 @@ class Sticky_Columns_Block {
 		if ( ! $tag->next_tag( [ 'class_name' => 'ystdtb-sticky-columns' ] ) ) {
 			return $html;
 		}
-		$mode = $block['attrs']['collapseAt'] ?? 'mobile';
-		// 端末条件は共通CSSにあり、任意の配置幅だけが描画時に判明する。
-		if ( 'container' === $mode ) {
-			$size = $block['attrs']['containerSize'] ?? '';
-			if ( is_string( $size ) && preg_match( '/^(?:\d+(?:\.\d+)?|\.\d+)(?:px|em|rem|ch|vw|vh)$/D', $size ) ) {
-				$tag->set_attribute( 'data-collapse', $size );
-				wp_style_engine_get_stylesheet_from_css_rules( [ $this->container_rule( $size ) ], [ 'context' => 'block-supports' ] );
-			}
-		} else {
-			$tag->set_attribute( 'data-collapse', 'tablet' === $mode ? 'tablet' : 'mobile' );
-		}
+		$this->apply_collapse_condition( $tag, $block['attrs'] ?? [] );
+
 		$widths = $this->column_widths( $block['innerBlocks'] ?? [] );
 		// 既存の装飾Supportsのstyleを保持する。
 		if ( '' !== $widths ) {
 			$style = rtrim( (string) $tag->get_attribute( 'style' ), '; ' );
-			$tag->set_attribute( 'style', ( '' === $style ? '' : $style . ';' ) . $widths );
+			// 装飾の末尾に区切りを一つだけ入れて幅の宣言を追加する。
+			if ( '' !== $style ) {
+				$style .= ';';
+			}
+			$tag->set_attribute( 'style', $style . $widths );
 		}
 		return $tag->get_updated_html();
 	}

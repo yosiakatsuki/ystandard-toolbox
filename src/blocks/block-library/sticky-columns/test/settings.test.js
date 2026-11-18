@@ -20,6 +20,13 @@ jest.requireMock( '@wordpress/components' ).BaseControl.VisualLabel = ( {
 	children,
 } ) => <span>{ children }</span>;
 
+jest.mock( '@aktk/block-components/wp-controls/tools-panel', () => ( {
+	ToolsPanel: ( { label, children } ) => (
+		<section aria-label={ label }>{ children }</section>
+	),
+	ToolsPanelItem: ( { children } ) => children,
+} ) );
+
 jest.mock( '@wordpress/block-editor', () => ( {
 	InspectorControls: ( { children, group } ) => (
 		<div data-group={ group }>{ children }</div>
@@ -104,6 +111,12 @@ describe( '追従カラムの設定UI', () => {
 		const settings = within(
 			container.querySelector( '[data-group="settings"]' )
 		);
+		const styles = within(
+			container.querySelector( '[data-group="styles"]' )
+		);
+		expect(
+			styles.getByRole( 'region', { name: 'レスポンシブ余白' } )
+		).toBeInTheDocument();
 		const headings = settings.getAllByRole( 'heading' );
 		expect( headings.map( ( heading ) => heading.textContent ) ).toEqual( [
 			'2列表示の設定',

@@ -7,13 +7,17 @@
 
 .ystdtb-sticky-columns {
 	// 各親で初期化し、入れ子では外側の間隔を引き継がない。
-	@each $axis in row, column {
-		--ystdtb--columns--#{$axis}-gap-base: initial;
-		--ystdtb--columns--#{$axis}-gap-desktop: initial;
-		--ystdtb--columns--#{$axis}-gap-tablet: initial;
-		--ystdtb--columns--#{$axis}-gap-mobile: initial;
-		--ystdtb--columns--#{$axis}-gap: var(--ystdtb--columns--#{$axis}-gap-device, var(--ystdtb--columns--#{$axis}-gap-base, 24px));
-	}
+	--ystdtb--columns--row-gap-base: initial;
+	--ystdtb--columns--row-gap-desktop: initial;
+	--ystdtb--columns--row-gap-tablet: initial;
+	--ystdtb--columns--row-gap-mobile: initial;
+	--ystdtb--columns--row-gap: var(--ystdtb--columns--row-gap-device, var(--ystdtb--columns--row-gap-base, 24px));
+
+	--ystdtb--columns--column-gap-base: initial;
+	--ystdtb--columns--column-gap-desktop: initial;
+	--ystdtb--columns--column-gap-tablet: initial;
+	--ystdtb--columns--column-gap-mobile: initial;
+	--ystdtb--columns--column-gap: var(--ystdtb--columns--column-gap-device, var(--ystdtb--columns--column-gap-base, 24px));
 
 	--ystdtb--columns--sticky-offset: 1rem;
 	// 各親で1列時の値に戻す。2列の条件を満たす直下の子だけが上書きする。
@@ -32,13 +36,17 @@
 	box-sizing: border-box;
 
 	// 未設定の幅は、入れ子の外側から継承しない。
-	@each $index in 1, 2 {
-		--ystdtb--columns--#{$index}-width: initial;
-		--ystdtb--columns--#{$index}-mobile: initial;
-		--ystdtb--columns--#{$index}-tablet: initial;
-		--ystdtb--columns--#{$index}-desktop: initial;
-		--ystdtb--columns--#{$index}-current: var(--ystdtb--columns--#{$index}-width);
-	}
+	--ystdtb--columns--1-width: initial;
+	--ystdtb--columns--1-mobile: initial;
+	--ystdtb--columns--1-tablet: initial;
+	--ystdtb--columns--1-desktop: initial;
+	--ystdtb--columns--1-current: var(--ystdtb--columns--1-width);
+
+	--ystdtb--columns--2-width: initial;
+	--ystdtb--columns--2-mobile: initial;
+	--ystdtb--columns--2-tablet: initial;
+	--ystdtb--columns--2-desktop: initial;
+	--ystdtb--columns--2-current: var(--ystdtb--columns--2-width);
 
 	> :where(.ystdtb-sticky-columns-item) {
 		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--column-gap)));
@@ -51,10 +59,12 @@
 	}
 
 	// 希望幅が無ければ相手の残り、両方無ければ均等。2列時のflex-basisは0。
-	@each $index, $child, $peer in (1, first, 2), (2, last, 1) {
-		> :where(.ystdtb-sticky-columns-item:#{$child}-child) {
-			--ystdtb--columns--limit: var(--ystdtb--columns--#{$index}-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--#{$peer}-current, var(--ystdtb--columns--half)))));
-		}
+	> :where(.ystdtb-sticky-columns-item:first-child) {
+		--ystdtb--columns--limit: var(--ystdtb--columns--1-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--2-current, var(--ystdtb--columns--half)))));
+	}
+
+	> :where(.ystdtb-sticky-columns-item:last-child) {
+		--ystdtb--columns--limit: var(--ystdtb--columns--2-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--1-current, var(--ystdtb--columns--half)))));
 	}
 
 	&:where(.has-sticky-first) > :where(.ystdtb-sticky-columns-item:first-child),

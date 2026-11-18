@@ -6,6 +6,8 @@
  */
 
 use ystandard_toolbox\Sticky_Columns_Block;
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
 
 class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 
@@ -103,10 +105,24 @@ class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 		}
 		$this->assertStringContainsString( '@media (min-width:', $css );
 		$this->assertStringContainsString( '--ystdtb--columns--top:var(--ystdtb--columns--sticky-offset)', $css );
-		foreach ( [ 'mobile', 'tablet', 'desktop' ] as $device ) {
+		$device_queries = [
+			'mobile'  => Styles::add_media_query_only_mobile( 'RULE' ),
+			'tablet'  => Styles::add_media_query_only_tablet( 'RULE' ),
+			'desktop' => Styles::add_media_query_over_desktop( 'RULE' ),
+		];
+		foreach ( $device_queries as $device => $query ) {
+			// 各CSSファイルが正しい端末の条件に入り、その端末の幅と間隔を参照することを確認する。
+			$opening = strstr( Text::minify( $query ), 'RULE', true );
+			$pattern = '/' . preg_quote( $opening, '/' ) . '\s*\.ystdtb-sticky-columns\s*\{([^}]+)\}/';
+			$this->assertSame( 1, preg_match( $pattern, $css, $match ) );
+			$declarations = str_replace( ' ', '', $match[1] );
+			foreach ( [ 1, 2 ] as $column ) {
+				$name = "--ystdtb--columns--{$column}";
+				$this->assertStringContainsString( "{$name}-current:var({$name}-{$device},var({$name}-width))", $declarations );
+			}
 			foreach ( [ 'row', 'column' ] as $axis ) {
 				$name = "--ystdtb--columns--{$axis}-gap";
-				$this->assertStringContainsString( "{$name}-device:var({$name}-{$device})", $css );
+				$this->assertStringContainsString( "{$name}-device:var({$name}-{$device})", $declarations );
 			}
 		}
 		$child = WP_Block_Type_Registry::get_instance()->get_registered( 'ystdtb/sticky-columns-item' );

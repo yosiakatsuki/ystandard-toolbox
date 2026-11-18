@@ -1,7 +1,6 @@
 /* WordPress Dependencies */
 import {
 	store as blockEditorStore,
-	InspectorControls as WPInspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 	useStyleOverride,
@@ -13,7 +12,6 @@ import { getLayoutKey, getEditorContainerCSS } from './layout';
 import { getColumnWidthVariables } from './widths';
 import { getGapVariables } from './gap';
 import { InspectorControls } from './inspector-controls';
-import { ResponsiveSpacing } from './inspector-controls/styles/responsive-spacing';
 import { getStickyColumnsClasses, getStickyOffsetStyle } from './utils';
 import type { StickyColumnsEditProps } from './types';
 import './style-editor.scss';
@@ -65,9 +63,6 @@ export default function StickyColumnsEdit( props: StickyColumnsEditProps ) {
 	return (
 		<>
 			<InspectorControls { ...props } />
-			<WPInspectorControls group="styles">
-				<ResponsiveSpacing { ...props } />
-			</WPInspectorControls>
 			<div { ...innerBlocksProps } />
 		</>
 	);
