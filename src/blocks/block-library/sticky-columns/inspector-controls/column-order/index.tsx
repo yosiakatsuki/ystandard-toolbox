@@ -8,20 +8,18 @@ import { Panel } from '@aktk/block-components/components/panel';
 import type { StickyColumnsEditProps } from '../../types';
 import { Preview } from './preview';
 import { DisplayOrder } from './display-order';
-import { StickyColumn } from './sticky-column';
 import './style-editor.scss';
 
 /**
- * 表示順パネルにプレビューと個別の設定をまとめる。
+ * 2列のプレビューと表示順の設定をまとめる。
  * @param props 親ブロックの編集プロパティ。
  */
 export function ColumnOrder( props: StickyColumnsEditProps ) {
 	return (
-		<Panel title={ __( '表示順', 'ystandard-toolbox' ) }>
-			<div className="ystdtb-sticky-columns-edit__column-order">
+		<Panel title={ __( '2列表示の設定', 'ystandard-toolbox' ) }>
+			<div className="ystdtb-sticky-columns-edit__panel-controls">
 				<Preview { ...props } />
 				<DisplayOrder { ...props } />
-				<StickyColumn { ...props } />
 			</div>
 		</Panel>
 	);

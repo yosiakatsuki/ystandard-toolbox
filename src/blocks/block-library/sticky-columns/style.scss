@@ -1,53 +1,51 @@
-// 最小構成の仮値。レイアウトと切替条件を同じ値から作る。
-$fixed-width: 320px;
-$flexible-min-width: 400px;
-$gap: 24px;
-$two-column-width: $fixed-width + $flexible-min-width + $gap;
-
 .ystdtb-sticky-columns {
+	--ystdtb--columns--gap: 24px;
+	--ystdtb--columns--sticky-offset: 1rem;
 	container: ystdtb-sticky-columns / inline-size;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	gap: $gap;
+	gap: var(--ystdtb--columns--gap) min(100%, var(--ystdtb--columns--gap));
 	min-width: 0;
 	box-sizing: border-box;
 
+	// 未設定の幅は、入れ子の外側から継承しない。
+	@each $index in 1, 2 {
+		--ystdtb--columns--#{$index}-width: initial;
+		--ystdtb--columns--#{$index}-mobile: initial;
+		--ystdtb--columns--#{$index}-tablet: initial;
+		--ystdtb--columns--#{$index}-desktop: initial;
+		--ystdtb--columns--#{$index}-current: var(--ystdtb--columns--#{$index}-width);
+	}
+
 	> .ystdtb-sticky-columns-item {
+		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--gap)));
+		--ystdtb--columns--half: calc(var(--ystdtb--columns--available) / 2);
+		--ystdtb--columns--position: static;
+		--ystdtb--columns--top: auto;
+		--ystdtb--columns--order: 0;
+		--ystdtb--columns--active-order: 0;
 		flex: 1 1 100%;
 		max-width: 100%;
 		position: static;
 		top: auto;
-		order: 0;
-	}
-}
-
-// 親自身は変更せず、同じ条件で子の2列化と追従を有効にする。
-@container ystdtb-sticky-columns (min-width: #{$two-column-width}) {
-
-	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:first-child {
-		flex: 0 0 $fixed-width;
+		order: var(--ystdtb--columns--active-order);
 	}
 
-	.ystdtb-sticky-columns > .ystdtb-sticky-columns-item:last-child {
-		flex: 1 0 $flexible-min-width;
+	// 希望幅が無ければ相手の残り、両方無ければ均等。2列時のflex-basisは0。
+	@each $index, $child, $peer in (1, first, 2), (2, last, 1) {
+		> .ystdtb-sticky-columns-item:#{$child}-child {
+			--ystdtb--columns--limit: var(--ystdtb--columns--#{$index}-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--#{$peer}-current, var(--ystdtb--columns--half)))));
+		}
 	}
 
-	.ystdtb-sticky-columns.has-sticky-first
-		> .ystdtb-sticky-columns-item:first-child,
-	.ystdtb-sticky-columns.has-sticky-second
-		> .ystdtb-sticky-columns-item:last-child {
-		position: sticky;
-		top: 0;
+	&.has-sticky-first > .ystdtb-sticky-columns-item:first-child,
+	&.has-sticky-second > .ystdtb-sticky-columns-item:last-child {
+		--ystdtb--columns--position: sticky;
+		--ystdtb--columns--top: var(--ystdtb--columns--sticky-offset);
 	}
 
-	.ystdtb-sticky-columns.is-reversed
-		> .ystdtb-sticky-columns-item:first-child {
-		order: 2;
-	}
-
-	.ystdtb-sticky-columns.is-reversed
-		> .ystdtb-sticky-columns-item:last-child {
-		order: 1;
+	&.is-reversed > .ystdtb-sticky-columns-item:first-child {
+		--ystdtb--columns--order: 1;
 	}
 }

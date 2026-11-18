@@ -35,8 +35,14 @@
 		"html": false,
 		"align": false,
 		"className": false,
-		"customClassName": false,
+		"customClassName": true,
 		"reusable": false,
+		"ystdtbResponsiveSize": { "width": true, "minHeight": true },
+		"dimensions": {
+			"width": true,
+			"minHeight": true,
+			"__experimentalDefaultControls": { "width": false, "minHeight": false }
+		},
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,

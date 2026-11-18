@@ -7,6 +7,9 @@
 
 namespace ystandard_toolbox;
 
+use ystandard_toolbox\Util\Styles;
+use ystandard_toolbox\Util\Text;
+
 defined( 'ABSPATH' ) || die();
 
 /**
@@ -56,7 +59,55 @@ class Sticky_Columns_Item_Block {
 			return;
 		}
 
-		register_block_type( __DIR__ );
+		$type = register_block_type( __DIR__ );
+		if ( $type && ! empty( $type->style_handles ) ) {
+			$css = $this->responsive_styles( $type->supports['ystdtbResponsiveSize'] ?? [] );
+			if ( '' !== $css ) {
+				wp_add_inline_style( $type->style_handles[0], Text::minify( $css ) );
+			}
+		}
+	}
+
+	/**
+	 * 子自身が扱う寸法のうち、有効な項目だけを端末別スタイルに登録する。
+	 *
+	 * @param array $settings メタデータで有効にした寸法。
+	 */
+	private function responsive_styles( $settings ) {
+		// 幅は親のFlexで配分する。
+		$properties = [
+			'minWidth'  => 'min-width',
+			'maxWidth'  => 'max-width',
+			'height'    => 'height',
+			'minHeight' => 'min-height',
+			'maxHeight' => 'max-height',
+		];
+		$rules      = [
+			'mobile'  => '',
+			'tablet'  => '',
+			'desktop' => '',
+		];
+		foreach ( $properties as $key => $property ) {
+			if ( empty( $settings[ $key ] ) ) {
+				continue;
+			}
+			foreach ( array_keys( $rules ) as $device ) {
+				$rules[ $device ] .= Styles::get_responsive_custom_prop_css(
+					[
+						'selector'  => '.ystdtb-sticky-columns-item',
+						'prop_name' => 'columns--' . $property,
+						'property'  => $property,
+						'type'      => $device,
+					]
+				);
+			}
+		}
+		if ( '' === $rules['mobile'] ) {
+			return '';
+		}
+		return Styles::add_media_query_only_mobile( $rules['mobile'] )
+			. Styles::add_media_query_only_tablet( $rules['tablet'] )
+			. Styles::add_media_query_over_desktop( $rules['desktop'] );
 	}
 }
 

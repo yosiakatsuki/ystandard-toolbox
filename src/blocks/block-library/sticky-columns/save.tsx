@@ -3,7 +3,7 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import type { BlockSaveProps } from '@wordpress/blocks';
 
 /* Plugin Dependencies */
-import { getStickyColumnsClasses } from './utils';
+import { getStickyColumnsClasses, getStickyOffsetStyle } from './utils';
 import type { StickyColumnsAttributes } from './types';
 
 /**
@@ -16,6 +16,7 @@ export default function StickyColumnsSave(
 	const { attributes } = props;
 	const blockProps = useBlockProps.save( {
 		className: getStickyColumnsClasses( attributes ),
+		style: getStickyOffsetStyle( attributes ),
 	} );
 
 	return (

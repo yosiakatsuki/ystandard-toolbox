@@ -3,6 +3,7 @@
 		"name": "ystdtb/sticky-columns",
 		"isValid": true,
 		"attributes": {
+			"collapseAt": "mobile",
 			"reverse": true,
 			"stickyColumn": "second"
 		},
@@ -22,6 +23,7 @@
 						"name": "ystdtb/sticky-columns",
 						"isValid": true,
 						"attributes": {
+							"collapseAt": "mobile",
 							"reverse": false,
 							"stickyColumn": "none"
 						},

@@ -43,6 +43,43 @@ function createDecoratedColumns() {
 }
 
 describe( '追従カラムの標準装飾Supports', () => {
+	it( '親と子の追加CSSクラスをそれぞれの外枠へ保存し、再読込できる', () => {
+		const block = createBlock(
+			'ystdtb/sticky-columns',
+			{ className: 'feature-layout wide-section' },
+			[
+				createBlock( 'ystdtb/sticky-columns-item', {
+					className: 'sidebar',
+				} ),
+				createBlock( 'ystdtb/sticky-columns-item' ),
+			]
+		);
+		const html = serialize( block );
+		const container = document.createElement( 'div' );
+		container.innerHTML = html;
+		const parent = container.querySelector( '.ystdtb-sticky-columns' );
+		const [ first, second ] = parent.children;
+		expect(
+			parent.matches( '.feature-layout.wide-section.has-sticky-first' )
+		).toBe( true );
+		expect( first.matches( '.ystdtb-sticky-columns-item.sidebar' ) ).toBe(
+			true
+		);
+		expect( second.className ).toBe( 'ystdtb-sticky-columns-item' );
+		expect( html ).not.toContain( 'wp-block-ystdtb-sticky-columns' );
+
+		const [ parsed ] = parse( html );
+		expect( parsed.isValid ).toBe( true );
+		expect( parsed.innerBlocks[ 0 ].isValid ).toBe( true );
+		expect( parsed.attributes.className ).toBe(
+			'feature-layout wide-section'
+		);
+		expect( parsed.innerBlocks[ 0 ].attributes.className ).toBe(
+			'sidebar'
+		);
+		expect( serialize( parsed ) ).toBe( html );
+	} );
+
 	it( '親子の外枠へ装飾を保存し、再読込しても設定を維持する', () => {
 		const html = serialize( createDecoratedColumns() );
 		const basename = 'ystdtb__sticky-columns__supports__decoration';

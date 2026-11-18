@@ -12,6 +12,12 @@
 		"root": ".ystdtb-sticky-columns"
 	},
 	"attributes": {
+		"collapseAt": {
+			"type": "string",
+			"enum": [ "container", "mobile", "tablet" ],
+			"default": "mobile"
+		},
+		"containerSize": { "type": "string" },
 		"reverse": {
 			"type": "boolean",
 			"default": false
@@ -44,7 +50,7 @@
 		"html": false,
 		"align": false,
 		"className": false,
-		"customClassName": false,
+		"customClassName": true,
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,

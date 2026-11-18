@@ -3,7 +3,18 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 
 /* Plugin Dependencies */
 import { InspectorControls } from '../inspector-controls';
+import { getEditorContainerCSS, getLayoutKey } from '../layout';
 
+jest.mock( '@aktk/block-components/wp-controls/unit-control', () => ( {
+	__esModule: true,
+	default: ( { label, value, onChange } ) => (
+		<input
+			aria-label={ label }
+			value={ value }
+			onChange={ ( event ) => onChange( event.target.value ) }
+		/>
+	),
+} ) );
 // プロジェクト共通のWordPressモックに、標準の表示専用ラベルを補う。
 jest.requireMock( '@wordpress/components' ).BaseControl.VisualLabel = ( {
 	children,
@@ -59,19 +70,64 @@ function getPreviewColumns( container ) {
 }
 
 describe( '追従カラムの設定UI', () => {
-	it( '親の設定に2つの選択欄を置き、カラム1を初期表示する', () => {
+	it( '設定タブに初期値1remを表示し、明示した0pxと解除を区別する', () => {
+		const { attributes, refresh } = renderSettings();
+		const field = screen.getByLabelText( '画面上端からの距離' );
+		expect( field.closest( '[data-group="settings"]' ) ).not.toBeNull();
+		expect( field ).toHaveValue( '1rem' );
+		fireEvent.change( field, { target: { value: '0px' } } );
+		refresh();
+		expect( field ).toHaveValue( '0px' );
+		expect( attributes.style.ystdtb.stickyColumns.stickyOffset ).toBe(
+			'0px'
+		);
+		fireEvent.change( field, { target: { value: '' } } );
+		refresh();
+		expect( field ).toHaveValue( '1rem' );
+		expect( attributes.style ).toEqual( { color: { text: '#123456' } } );
+	} );
+
+	it( '保存済みの距離を表示し、追従対象を切り替えても保持する', () => {
+		const { refresh } = renderSettings( {
+			style: { ystdtb: { stickyColumns: { stickyOffset: '72px' } } },
+		} );
+		const field = screen.getByLabelText( '画面上端からの距離' );
+		expect( field ).toHaveValue( '72px' );
+		fireEvent.change( screen.getByLabelText( '追従させるカラム' ), {
+			target: { value: 'second' },
+		} );
+		refresh();
+		expect( field ).toHaveValue( '72px' );
+	} );
+	it( '設定タブの3つのパネルに対応する項目と初期値を表示する', () => {
 		const { container, setAttributes } = renderSettings();
-		expect(
+		const settings = within(
 			container.querySelector( '[data-group="settings"]' )
-		).toBeInTheDocument();
-		expect( screen.getByText( 'プレビュー' ) ).toBeInTheDocument();
-		const controls = screen.getAllByRole( 'combobox' );
-		expect( controls ).toHaveLength( 2 );
-		expect( controls[ 0 ] ).toHaveAccessibleName( '2列の時の表示順' );
-		expect( controls[ 1 ] ).toHaveAccessibleName( '追従させるカラム' );
-		expect( controls[ 1 ] ).toHaveValue( 'first' );
+		);
+		const headings = settings.getAllByRole( 'heading' );
+		expect( headings.map( ( heading ) => heading.textContent ) ).toEqual( [
+			'2列表示の設定',
+			'追従するカラムの設定',
+			'1列にするタイミング',
+		] );
+		const [ display, sticky, collapse ] = headings.map( ( heading ) =>
+			within( heading.parentElement )
+		);
+		expect( display.getByText( 'プレビュー' ) ).toBeInTheDocument();
+		expect( display.getByLabelText( '2列の時の表示順' ) ).toHaveValue(
+			'normal'
+		);
+		const stickyColumn = sticky.getByLabelText( '追従させるカラム' );
+		expect( stickyColumn ).toHaveValue( 'first' );
+		expect( sticky.getByLabelText( '画面上端からの距離' ) ).toHaveValue(
+			'1rem'
+		);
+		expect( collapse.getByLabelText( '切り替わりタイミング' ) ).toHaveValue(
+			'mobile'
+		);
+		expect( screen.queryByLabelText( 'コンテナサイズ' ) ).toBeNull();
 		expect(
-			within( controls[ 1 ] )
+			within( stickyColumn )
 				.getAllByRole( 'option' )
 				.map( ( item ) => item.textContent )
 		).toEqual( [ '追従なし', 'カラム1', 'カラム2' ] );
@@ -160,5 +216,55 @@ describe( '追従カラムの設定UI', () => {
 			getPreviewColumns( container ).map( ( item ) => item.textContent )
 		).toEqual( [ 'カラム1', 'カラム2(追従)' ] );
 		expect( setAttributes ).not.toHaveBeenCalled();
+	} );
+	it.each( [ 'mobile', 'tablet' ] )(
+		'端末条件%sへ変えるとコンテナサイズを消去する',
+		( mode ) => {
+			const { attributes, refresh } = renderSettings( {
+				collapseAt: 'container',
+				containerSize: '48rem',
+			} );
+			expect( screen.getByLabelText( 'コンテナサイズ' ) ).toHaveValue(
+				'48rem'
+			);
+			fireEvent.change( screen.getByLabelText( '切り替わりタイミング' ), {
+				target: { value: mode },
+			} );
+			refresh();
+			expect( attributes.containerSize ).toBeUndefined();
+			expect( screen.queryByLabelText( 'コンテナサイズ' ) ).toBeNull();
+			fireEvent.change( screen.getByLabelText( '切り替わりタイミング' ), {
+				target: { value: 'container' },
+			} );
+			refresh();
+			expect( screen.getByLabelText( 'コンテナサイズ' ) ).toHaveValue(
+				''
+			);
+		}
+	);
+	it( 'コンテナサイズを消すと編集用クエリを外し、属性に初期値を補わない', () => {
+		const { attributes, refresh } = renderSettings( {
+			collapseAt: 'container',
+		} );
+		const field = screen.getByLabelText( 'コンテナサイズ' );
+		fireEvent.change( field, { target: { value: '50rem' } } );
+		refresh();
+		expect(
+			getEditorContainerCSS(
+				getLayoutKey( attributes ),
+				'(min-width: CONTAINER_SIZE)'
+			)
+		).toBe( '(min-width: 50rem)' );
+		fireEvent.change( field, { target: { value: '' } } );
+		refresh();
+		expect( attributes.containerSize ).toBeUndefined();
+		expect( getLayoutKey( attributes ) ).toBeUndefined();
+		expect(
+			getEditorContainerCSS(
+				getLayoutKey( attributes ),
+				'CONTAINER_SIZE'
+			)
+		).toBe( '' );
+		expect( getLayoutKey( {} ) ).toBe( 'mobile' );
 	} );
 } );
