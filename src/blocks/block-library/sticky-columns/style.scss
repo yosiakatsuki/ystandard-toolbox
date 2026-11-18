@@ -1,5 +1,20 @@
+// 子の文字サイズが異なる場合も、横の間隔と残幅計算に同じ長さを使う。
+@property --ystdtb--columns--column-gap {
+	syntax: "<length-percentage>";
+	inherits: true;
+	initial-value: 24px;
+}
+
 .ystdtb-sticky-columns {
-	--ystdtb--columns--gap: 24px;
+	// 各親で初期化し、入れ子では外側の間隔を引き継がない。
+	@each $axis in row, column {
+		--ystdtb--columns--#{$axis}-gap-base: initial;
+		--ystdtb--columns--#{$axis}-gap-desktop: initial;
+		--ystdtb--columns--#{$axis}-gap-tablet: initial;
+		--ystdtb--columns--#{$axis}-gap-mobile: initial;
+		--ystdtb--columns--#{$axis}-gap: var(--ystdtb--columns--#{$axis}-gap-device, var(--ystdtb--columns--#{$axis}-gap-base, 24px));
+	}
+
 	--ystdtb--columns--sticky-offset: 1rem;
 	// 各親で1列時の値に戻す。2列の条件を満たす直下の子だけが上書きする。
 	--ystdtb--columns--basis: 100%;
@@ -11,7 +26,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	gap: var(--ystdtb--columns--gap) min(100%, var(--ystdtb--columns--gap));
+	row-gap: var(--ystdtb--columns--row-gap);
+	column-gap: min(100%, var(--ystdtb--columns--column-gap));
 	min-width: 0;
 	box-sizing: border-box;
 
@@ -25,7 +41,7 @@
 	}
 
 	> :where(.ystdtb-sticky-columns-item) {
-		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--gap)));
+		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--column-gap)));
 		--ystdtb--columns--half: calc(var(--ystdtb--columns--available) / 2);
 		flex: 1 1 var(--ystdtb--columns--basis);
 		max-width: var(--ystdtb--columns--max-width);

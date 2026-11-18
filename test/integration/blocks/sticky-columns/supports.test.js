@@ -43,6 +43,68 @@ function createDecoratedColumns() {
 }
 
 describe( '追従カラムの標準装飾Supports', () => {
+	it( '通常と端末別の間隔を親ごとに保存し、入れ子を再読込できる', () => {
+		const style = {
+			spacing: {
+				blockGap: { top: 'var:preset|spacing|40', left: '2em' },
+			},
+			ystdtb: {
+				stickyColumns: {
+					responsive: {
+						blockGap: {
+							column: { tablet: '0' },
+							row: { mobile: '12px' },
+						},
+					},
+				},
+			},
+		};
+		const inner = createBlock( 'ystdtb/sticky-columns', {}, [
+			createBlock( 'ystdtb/sticky-columns-item' ),
+			createBlock( 'ystdtb/sticky-columns-item' ),
+		] );
+		const outer = createBlock( 'ystdtb/sticky-columns', { style }, [
+			createBlock( 'ystdtb/sticky-columns-item', {}, [ inner ] ),
+			createBlock( 'ystdtb/sticky-columns-item' ),
+		] );
+		const html = serialize( outer );
+		const basename = 'ystdtb__sticky-columns__spacing__responsive-gap';
+		// この設定の保存結果をfixture生成時だけ記録する。
+		if (
+			process.env.GENERATE_MISSING_FIXTURES &&
+			! getBlockFixtureHTML( basename ).file
+		) {
+			writeBlockFixtureHTML( basename, html + '\n' );
+		}
+		expect( html ).toBe( getBlockFixtureHTML( basename ).file );
+		const container = document.createElement( 'div' );
+		container.innerHTML = html;
+		const [ parent, nested ] = container.querySelectorAll(
+			'.ystdtb-sticky-columns'
+		);
+		expect(
+			parent.style.getPropertyValue( '--ystdtb--columns--row-gap-base' )
+		).toBe( 'var(--wp--preset--spacing--40)' );
+		expect(
+			parent.style.getPropertyValue(
+				'--ystdtb--columns--column-gap-base'
+			)
+		).toBe( '2em' );
+		expect(
+			parent.style.getPropertyValue(
+				'--ystdtb--columns--column-gap-tablet'
+			)
+		).toBe( '0px' );
+		expect(
+			parent.style.getPropertyValue( '--ystdtb--columns--row-gap-mobile' )
+		).toBe( '12px' );
+		expect( nested.getAttribute( 'style' ) ).toBeNull();
+		const [ parsed ] = parse( html );
+		expect( parsed.isValid ).toBe( true );
+		expect( parsed.attributes.style ).toEqual( style );
+		expect( serialize( parsed ) ).toBe( html );
+	} );
+
 	it( '親と子の追加CSSクラスをそれぞれの外枠へ保存し、再読込できる', () => {
 		const block = createBlock(
 			'ystdtb/sticky-columns',

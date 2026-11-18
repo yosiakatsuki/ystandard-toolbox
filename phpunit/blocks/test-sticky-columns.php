@@ -45,6 +45,18 @@ class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 		$this->assertStringContainsString( '(min-width: 48.5rem)', $css );
 	}
 
+	/** 保存した間隔がフロントの親に残り、内側の親には複製されない。 */
+	public function test_render_nested_column_gaps() {
+		$file = dirname( __DIR__, 2 ) . '/test/integration/fixtures/blocks/sticky-columns/ystdtb__sticky-columns__spacing__responsive-gap.html';
+		$tag  = new WP_HTML_Tag_Processor( do_blocks( file_get_contents( $file ) ) );
+		$this->assertTrue( $tag->next_tag( [ 'class_name' => 'ystdtb-sticky-columns' ] ) );
+		$style = $tag->get_attribute( 'style' );
+		$this->assertStringContainsString( '--ystdtb--columns--column-gap-base:2em', $style );
+		$this->assertStringContainsString( '--ystdtb--columns--column-gap-tablet:0px', $style );
+		$this->assertTrue( $tag->next_tag( [ 'class_name' => 'ystdtb-sticky-columns' ] ) );
+		$this->assertNull( $tag->get_attribute( 'style' ) );
+	}
+
 	/** 親の装飾・端末条件を保持し、直下の安全な幅のみ反映する。 */
 	public function test_device_modes_and_widths() {
 		$plugin = Sticky_Columns_Block::get_instance();
@@ -91,6 +103,12 @@ class Sticky_Columns_Layout_Test extends WP_UnitTestCase {
 		}
 		$this->assertStringContainsString( '@media (min-width:', $css );
 		$this->assertStringContainsString( '--ystdtb--columns--top:var(--ystdtb--columns--sticky-offset)', $css );
+		foreach ( [ 'mobile', 'tablet', 'desktop' ] as $device ) {
+			foreach ( [ 'row', 'column' ] as $axis ) {
+				$name = "--ystdtb--columns--{$axis}-gap";
+				$this->assertStringContainsString( "{$name}-device:var({$name}-{$device})", $css );
+			}
+		}
 		$child = WP_Block_Type_Registry::get_instance()->get_registered( 'ystdtb/sticky-columns-item' );
 		$css   = implode( '', wp_styles()->get_data( $child->style_handles[0], 'after' ) );
 		$this->assertStringContainsString( '--ystdtb--mobile--columns--min-height', $css );

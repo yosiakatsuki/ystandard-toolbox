@@ -4,6 +4,7 @@ import type { BlockSaveProps } from '@wordpress/blocks';
 
 /* Plugin Dependencies */
 import { getStickyColumnsClasses, getStickyOffsetStyle } from './utils';
+import { getGapVariables } from './gap';
 import type { StickyColumnsAttributes } from './types';
 
 /**
@@ -16,7 +17,10 @@ export default function StickyColumnsSave(
 	const { attributes } = props;
 	const blockProps = useBlockProps.save( {
 		className: getStickyColumnsClasses( attributes ),
-		style: getStickyOffsetStyle( attributes ),
+		style: {
+			...getStickyOffsetStyle( attributes ),
+			...getGapVariables( attributes ),
+		},
 	} );
 
 	return (

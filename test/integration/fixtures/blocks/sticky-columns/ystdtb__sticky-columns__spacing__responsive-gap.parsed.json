@@ -1,0 +1,92 @@
+[
+	{
+		"blockName": "ystdtb/sticky-columns",
+		"attrs": {
+			"style": {
+				"spacing": {
+					"blockGap": {
+						"top": "var:preset|spacing|40",
+						"left": "2em"
+					}
+				},
+				"ystdtb": {
+					"stickyColumns": {
+						"responsive": {
+							"blockGap": {
+								"column": {
+									"tablet": "0"
+								},
+								"row": {
+									"mobile": "12px"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [
+					{
+						"blockName": "ystdtb/sticky-columns",
+						"attrs": {},
+						"innerBlocks": [
+							{
+								"blockName": "ystdtb/sticky-columns-item",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+								"innerContent": [
+									"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+								]
+							},
+							{
+								"blockName": "ystdtb/sticky-columns-item",
+								"attrs": {},
+								"innerBlocks": [],
+								"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+								"innerContent": [
+									"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+								]
+							}
+						],
+						"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\">\n\n</div>\n",
+						"innerContent": [
+							"\n<div class=\"ystdtb-sticky-columns has-sticky-first\">",
+							null,
+							"\n\n",
+							null,
+							"</div>\n"
+						]
+					}
+				],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\">",
+					null,
+					"</div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\" style=\"--ystdtb--columns--row-gap-base:var(--wp--preset--spacing--40);--ystdtb--columns--row-gap-mobile:12px;--ystdtb--columns--column-gap-base:2em;--ystdtb--columns--column-gap-tablet:0px\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first\" style=\"--ystdtb--columns--row-gap-base:var(--wp--preset--spacing--40);--ystdtb--columns--row-gap-mobile:12px;--ystdtb--columns--column-gap-base:2em;--ystdtb--columns--column-gap-tablet:0px\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

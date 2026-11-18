@@ -72,9 +72,11 @@
 		"spacing": {
 			"padding": true,
 			"margin": [ "top", "bottom" ],
+			"blockGap": { "sides": [ "horizontal", "vertical" ] },
 			"__experimentalDefaultControls": {
 				"padding": false,
-				"margin": false
+				"margin": false,
+				"blockGap": false
 			}
 		},
 		"__experimentalBorder": {

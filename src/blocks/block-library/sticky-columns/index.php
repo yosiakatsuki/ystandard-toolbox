@@ -104,12 +104,16 @@ class Sticky_Columns_Block {
 
 		$rules = [];
 		foreach ( [ 'mobile', 'tablet', 'desktop' ] as $device ) {
-			$widths = '';
+			$declarations = '';
 			foreach ( [ 1, 2 ] as $index ) {
-				$name    = "--ystdtb--columns--{$index}";
-				$widths .= "{$name}-current:var({$name}-{$device},var({$name}-width));";
+				$name          = "--ystdtb--columns--{$index}";
+				$declarations .= "{$name}-current:var({$name}-{$device},var({$name}-width));";
 			}
-			$rules[ $device ] = ".ystdtb-sticky-columns{{$widths}}";
+			foreach ( [ 'column', 'row' ] as $axis ) {
+				$name          = "--ystdtb--columns--{$axis}-gap";
+				$declarations .= "{$name}-device:var({$name}-{$device});";
+			}
+			$rules[ $device ] = ".ystdtb-sticky-columns{{$declarations}}";
 		}
 		return $css . Styles::add_media_query_only_mobile( $rules['mobile'] )
 			. Styles::add_media_query_only_tablet( $rules['tablet'] )
