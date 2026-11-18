@@ -7,6 +7,10 @@
 		margin-top: 0;
 	}
 
+	> * + * {
+		margin-top: var(--ystd--block-gap, var(--ystd-block-gap, 1.5em));
+	}
+
 	> :where(:last-child) {
 		margin-bottom: 0;
 	}

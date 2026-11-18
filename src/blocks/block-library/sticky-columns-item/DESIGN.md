@@ -69,6 +69,7 @@ index.phpはSticky_Columns_Item_Blockクラス、BLOCK_NAMEはystdtb/sticky-colu
 - 子内部のtemplateLockはfalse。内容ブロックの種類や数を独自に制限しない。
 - 子の追加・削除・移動を親の通常UIから行えないことと、子内部の自由編集を両立させる。
 - style.scssは子のbox-sizing・min-width・長い文字列の折返し等を担当する。
+- 子カラム直下の2要素目以降には、yStandardのブロック間隔を上余白として適用する。v5の`--ystd--block-gap`、v4の`--ystd-block-gap`、既定の`1.5em`の順に使う。
 - style-editor.scssから常時表示の点線を削除する。空状態の最低高さだけを補い、Gutenbergの選択・フォーカス表示は変更しない。
 - 自分の装飾も含む子外側全体を追従対象とする。親の範囲外には追従させない。
 
