@@ -33,7 +33,6 @@
 				"attributes": {
 					"style": {
 						"dimensions": {
-							"width": "65%",
 							"height": "var:preset|dimension|medium"
 						},
 						"spacing": {

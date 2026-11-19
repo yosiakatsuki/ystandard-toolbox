@@ -16,7 +16,6 @@ export type SliderItemSaveProps = BlockSaveProps< SliderItemBlockAttributes >;
 export interface SliderItemBlockAttributes {
 	style?: {
 		dimensions?: {
-			width?: string;
 			height?: string;
 		};
 	};

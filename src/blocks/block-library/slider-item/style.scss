@@ -9,8 +9,3 @@
 		}
 	}
 }
-
-/* 幅を指定したアイテムでは、Swiperの既定幅より優先する。 */
-.ystdtb-slider__container > div:where(.ystdtb-slider-item[style*="--ystdtb--slider-item--width:"]) {
-	width: var(--ystdtb--slider-item--width);
-}

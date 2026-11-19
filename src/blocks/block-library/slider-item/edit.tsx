@@ -8,7 +8,6 @@ import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
  */
 import { getSliderItemBlockClasses, getSliderItemDimensions } from './utils';
 import type { SliderItemEditProps } from './types';
-import './style-editor.scss';
 
 /**
  * 子の外枠に寸法を適用して編集する。

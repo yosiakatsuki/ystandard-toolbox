@@ -23,13 +23,11 @@
 		"align": false,
 		"className": false,
 		"dimensions": {
-			"width": true,
 			"height": true,
 			"__experimentalDefaultControls": {
-				"width": false,
 				"height": false
 			},
-			"__experimentalSkipSerialization": [ "width", "height" ]
+			"__experimentalSkipSerialization": [ "height" ]
 		},
 		"spacing": {
 			"padding": true,

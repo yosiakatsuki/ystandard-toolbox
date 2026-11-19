@@ -26,7 +26,7 @@
 - **className サポート**: `false`（`wp-block-ystdtb-slider` は出力されない、新規 v2 ブロック時）。ただし v1 deprecated 経由で `className` 属性が残る場合あり
 - **align サポート**: `[ 'wide', 'full' ]`
 - **anchor サポート**: `false`
-- **スタイルサポート**: 親は上下マージン、子は幅・高さ・パディング。寸法の未指定、設定、解除に加え、子の幅と親の表示数（`auto`・数値）の組み合わせを確認する。
+- **スタイルサポート**: 親は上下マージン、子は高さ・パディング。寸法の未指定、設定、解除を確認する。
 - **deprecated**: 1 件（v1.34.1 形式から v2 への migrate）
 - **`sliderId` 自動生成**: `edit.tsx` の `useEffect` で `clientId.split('-')[0]` を初期値として設定
 - **`previewType` 属性**: エディター内のみで使用（grid / horizontal）。フロント描画には影響しない
