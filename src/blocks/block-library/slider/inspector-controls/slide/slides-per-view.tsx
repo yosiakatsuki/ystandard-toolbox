@@ -33,6 +33,10 @@ export function SlidesPerView( props: SlideOptionEditProps ) {
 		<BaseControl
 			id={ `slide-${ type }-SlidesPerView` }
 			label={ __( '1画面に表示するスライド数', 'ystandard-toolbox' ) }
+			help={ __(
+				'autoを選ぶと、スライダーアイテムで指定した幅が使われます。',
+				'ystandard-toolbox'
+			) }
 		>
 			<div className="flex items-center gap-2 [&>*]:!my-0">
 				<NumberControl

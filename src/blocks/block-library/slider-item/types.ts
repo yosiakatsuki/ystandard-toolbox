@@ -1,3 +1,6 @@
+/* WordPress Dependencies */
+import type { BlockSaveProps } from '@wordpress/blocks';
+
 export interface SliderItemEditProps {
 	attributes: SliderItemBlockAttributes;
 	setAttributes: ( attributes: Partial< SliderItemBlockAttributes > ) => void;
@@ -5,7 +8,16 @@ export interface SliderItemEditProps {
 	isSelected: boolean;
 }
 
+export type SliderItemSaveProps = BlockSaveProps< SliderItemBlockAttributes >;
+
 /**
- * スライダーブロックの属性型定義
+ * スライダーアイテムの属性型定義
  */
-export interface SliderItemBlockAttributes {}
+export interface SliderItemBlockAttributes {
+	style?: {
+		dimensions?: {
+			width?: string;
+			height?: string;
+		};
+	};
+}

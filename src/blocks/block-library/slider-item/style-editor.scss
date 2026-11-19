@@ -1,1 +1,6 @@
-/* placeholder */
+/* 幅を指定したアイテムでは、プレビューの既定幅を上書きする。 */
+.ystdtb-slider-edit:is(.is-preview--grid, .is-preview--horizontal)
+	.ystdtb-slider__container > div:where(.ystdtb-slider-item[style*="--ystdtb--slider-item--width:"]) {
+	flex-basis: var(--ystdtb--slider-item--width);
+	width: var(--ystdtb--slider-item--width);
+}

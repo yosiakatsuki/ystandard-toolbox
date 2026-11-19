@@ -4,7 +4,7 @@
 
 対象ブロック:
 - `ystdtb/slider`（親、static save block）
-- `ystdtb/slider-item`（子、static save block、属性なし）
+- `ystdtb/slider-item`（子、static save block）
 
 `save()` を持つ static block かつ、属性 → `data-slider-options` JSON 文字列の組み立てロジック（`getSliderOptions()`）が複雑なため、四層構成（L0 Jest unit / L1 fixture / L2 Playwright UI / L3 手動）で動作を検証する。
 
@@ -26,6 +26,7 @@
 - **className サポート**: `false`（`wp-block-ystdtb-slider` は出力されない、新規 v2 ブロック時）。ただし v1 deprecated 経由で `className` 属性が残る場合あり
 - **align サポート**: `[ 'wide', 'full' ]`
 - **anchor サポート**: `false`
+- **スタイルサポート**: 親は上下マージン、子は幅・高さ・パディング。寸法の未指定、設定、解除に加え、子の幅と親の表示数（`auto`・数値）の組み合わせを確認する。
 - **deprecated**: 1 件（v1.34.1 形式から v2 への migrate）
 - **`sliderId` 自動生成**: `edit.tsx` の `useEffect` で `clientId.split('-')[0]` を初期値として設定
 - **`previewType` 属性**: エディター内のみで使用（grid / horizontal）。フロント描画には影響しない

@@ -12,11 +12,29 @@
 		"slider"
 	],
 	"textdomain": "ystandard-toolbox",
-	"attributes": {},
+	"selectors": {
+		"root": ".ystdtb-slider-item"
+	},
+	"attributes": {
+		"style": { "type": "object" }
+	},
 	"supports": {
 		"anchor": false,
 		"align": false,
-		"className": false
+		"className": false,
+		"dimensions": {
+			"width": true,
+			"height": true,
+			"__experimentalDefaultControls": {
+				"width": false,
+				"height": false
+			},
+			"__experimentalSkipSerialization": [ "width", "height" ]
+		},
+		"spacing": {
+			"padding": true,
+			"__experimentalDefaultControls": { "padding": false }
+		}
 	},
 	"example": {},
 	"editorScript": "file:./index.js",

@@ -89,11 +89,18 @@
 			"default": "grid"
 		}
 	},
+	"selectors": {
+		"root": ".ystdtb-slider"
+	},
 	"supports": {
 		"anchor": false,
 		"align": [ "wide", "full" ],
 		"className": false,
-		"listView": true
+		"listView": true,
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"__experimentalDefaultControls": { "margin": false }
+		}
 	},
 	"example": {
 		"attributes": {},

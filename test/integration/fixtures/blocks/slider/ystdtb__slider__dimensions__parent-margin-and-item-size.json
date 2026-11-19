@@ -1,0 +1,59 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "dimensions",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"slides": {
+				"slidesPerView": "auto"
+			},
+			"hasNavigation": false,
+			"previewType": "grid",
+			"style": {
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "var:preset|spacing|50"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {
+					"style": {
+						"dimensions": {
+							"width": "65%",
+							"height": "var:preset|dimension|medium"
+						},
+						"spacing": {
+							"padding": {
+								"top": "16px",
+								"right": "24px",
+								"bottom": "0",
+								"left": "var:preset|spacing|50"
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/slider-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": []
+			}
+		]
+	}
+]
