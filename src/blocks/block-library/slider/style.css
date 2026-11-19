@@ -20,8 +20,20 @@
 .ystdtb-slider__slider {
 	/* Swiper 初期化前に最初のスライド以外を非表示 */
 	&:not(:where(.swiper-initialized, .is-edit)) {
+		/* 初期化前の仮表示から初期化後の表示へ切り替わるずれを見せない。高さは1枚目のスライドで確保する */
+		opacity: 0;
+		/* スクリプトが動かない場合も、一定時間後に表示する */
+		animation: ystdtb-slider-reveal 0s 3s forwards;
+
 		:where(.ystdtb-slider__container) > *:not(:first-child) {
 			display: none;
+		}
+	}
+
+	/* 初期化後はフェードインで表示する */
+	@media (prefers-reduced-motion: no-preference) {
+		&:not(:where(.is-edit)) {
+			transition: opacity 0.3s ease;
 		}
 	}
 
@@ -34,6 +46,47 @@
 				height: 100%;
 			}
 		}
+	}
+}
+
+/* 矢印（ナビゲーション）: 四角・円は背景の上に矢印を置く */
+.ystdtb-slider__slider {
+	:where(.ystdtb-slider__navigation--square, .ystdtb-slider__navigation--circle) {
+		background-color: var(--ystdtb--color--white, #fff);
+	}
+
+	:where(.ystdtb-slider__navigation--square) {
+		border-radius: 4px;
+	}
+
+	:where(.ystdtb-slider__navigation--circle) {
+		border-radius: 50%;
+	}
+
+	/* Swiperの矢印はボタンの高さいっぱいに広がるため、背景の内側に収める */
+	.ystdtb-slider__navigation--square svg,
+	.ystdtb-slider__navigation--circle svg {
+		height: 40%;
+	}
+
+	/*
+	 * 背景の中で矢印が中央に見えるよう、矢印の向きを基準に位置を調整する。
+	 * 前へは回転（transform）で左向きになるため、回転前の座標で効く translate の符号を逆にする。
+	 */
+	:is(.ystdtb-slider__navigation--square, .ystdtb-slider__navigation--circle) {
+		&.swiper-button-next svg {
+			translate: 2% 0;
+		}
+
+		&.swiper-button-prev svg {
+			translate: -2% 0;
+		}
+	}
+}
+
+@keyframes ystdtb-slider-reveal {
+	to {
+		opacity: 1;
 	}
 }
 

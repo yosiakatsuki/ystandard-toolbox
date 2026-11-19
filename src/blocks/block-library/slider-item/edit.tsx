@@ -6,11 +6,17 @@ import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
 /**
  * Block dependencies.
  */
-import { getSliderItemBlockClasses } from './utils';
+import { getSliderItemBlockClasses, getSliderItemDimensions } from './utils';
+import type { SliderItemEditProps } from './types';
 
-export default function Edit() {
+/**
+ * 子の外枠に寸法を適用して編集する。
+ * @param props スライダーアイテムの編集プロパティ。
+ */
+export default function Edit( props: SliderItemEditProps ) {
 	const blockProps = useBlockProps( {
 		className: getSliderItemBlockClasses(),
+		style: getSliderItemDimensions( props.attributes ),
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {} );

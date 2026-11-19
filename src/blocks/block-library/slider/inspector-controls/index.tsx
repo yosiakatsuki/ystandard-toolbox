@@ -15,18 +15,29 @@ import { Slide } from './slide';
 import { Navigation } from './navigation';
 import { Pagination } from './pagination';
 import { Advanced } from './advanced';
+import { NavigationStyle } from './styles/navigation';
+import { ResponsiveNavigationSize } from './styles/responsive-navigation-size';
 
 // @ts-ignore.
 export function InspectorControls( props: SliderEditProps ): JSX.Element {
 	return (
-		<WPInspectorControls>
-			<Basic { ...props } />
-			<Autoplay { ...props } />
-			<Size { ...props } />
-			<Slide { ...props } />
-			<Navigation { ...props } />
-			<Pagination { ...props } />
-			<Advanced { ...props } />
-		</WPInspectorControls>
+		<>
+			<WPInspectorControls>
+				<Basic { ...props } />
+				<Autoplay { ...props } />
+				<Size { ...props } />
+				<Slide { ...props } />
+				<Navigation { ...props } />
+				<Pagination { ...props } />
+				<Advanced { ...props } />
+			</WPInspectorControls>
+			{ /* 矢印のスタイルは、矢印を表示する場合だけ編集できる */ }
+			{ props.attributes.hasNavigation && (
+				<WPInspectorControls group="styles">
+					<NavigationStyle { ...props } />
+					<ResponsiveNavigationSize { ...props } />
+				</WPInspectorControls>
+			) }
+		</>
 	);
 }

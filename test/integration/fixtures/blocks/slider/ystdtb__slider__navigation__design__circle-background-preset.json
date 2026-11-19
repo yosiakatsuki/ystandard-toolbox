@@ -1,0 +1,30 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "navigation-design-circle-background-preset",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": true,
+			"navigationBackgroundColor": "ys-blue",
+			"previewType": "grid",
+			"style": {
+				"ystdtb": {
+					"slider": {
+						"navigation": {
+							"design": "circle"
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

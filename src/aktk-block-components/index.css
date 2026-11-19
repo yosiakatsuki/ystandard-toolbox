@@ -10,6 +10,8 @@
 @import "./components/link-control/index.css";
 @import "./components/notice/index.css";
 @import "./components/responsive-font-size-control/index.css";
+@import "./components/responsive-size-panel/index.css";
+@import "./components/responsive-spacing-panel/index.css";
 @import "./components/responsive-spacing-control/index.css";
 @import "./components/responsive-text-align-control/index.css";
 @import "./components/svg-icon/index.css";

@@ -11,6 +11,18 @@
 	}
 }
 
+/* 矢印の色の項目: コアの色パネルと同じく行間をなくし、項目どうしで枠線を共有する */
+.ystdtb-slider-edit__navigation-colors {
+	display: grid;
+	grid-column: 1 / -1;
+	row-gap: 0;
+
+	/* 色の項目がひとつも追加されていない場合は、空の行を作らない */
+	&:not(:has(.block-editor-color-gradient-item)) {
+		display: none;
+	}
+}
+
 .ystdtb-slider-edit {
 	&,
 	*,

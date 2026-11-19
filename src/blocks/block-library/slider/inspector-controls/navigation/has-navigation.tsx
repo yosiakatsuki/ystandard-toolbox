@@ -27,7 +27,7 @@ export function HasNavigation( props: SliderEditProps ): JSX.Element {
 			label={ __( 'ナビゲーション表示', 'ystandard-toolbox' ) }
 		>
 			<ToggleControl
-				label={ __( 'ナビゲーションを表示する', 'ystandard-toolbox' ) }
+				label={ __( '矢印を表示する', 'ystandard-toolbox' ) }
 				checked={ hasNavigation }
 				onChange={ handleOnChange }
 			/>

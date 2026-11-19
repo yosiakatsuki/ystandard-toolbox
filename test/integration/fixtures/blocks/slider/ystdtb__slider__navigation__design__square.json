@@ -1,0 +1,29 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "navigation-design-square",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": true,
+			"previewType": "grid",
+			"style": {
+				"ystdtb": {
+					"slider": {
+						"navigation": {
+							"design": "square"
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

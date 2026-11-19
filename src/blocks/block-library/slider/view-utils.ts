@@ -23,6 +23,7 @@ export function normalizeSliderOptions(
 	const normalizedOptions = {
 		...options,
 		...getFadeEffectOptions( options ),
+		...getPaginationOptions( options ),
 		resizeObserver: false,
 	};
 	const runtimeBreakpoints = settings?.breakpoints;
@@ -53,6 +54,26 @@ function getFadeEffectOptions( options: SwiperOptions ) {
 		fadeEffect: {
 			...options.fadeEffect,
 			crossFade: true,
+		},
+	};
+}
+
+/**
+ * ページネーションのドットをクリックしてスライドを切り替えられるようにする.
+ *
+ * 保存HTMLのオプションを変えずに、公開済みのスライダーにも適用する.
+ *
+ * @param options Swiperオプション
+ */
+function getPaginationOptions( options: SwiperOptions ) {
+	if ( ! options.pagination || 'object' !== typeof options.pagination ) {
+		return {};
+	}
+
+	return {
+		pagination: {
+			...options.pagination,
+			clickable: true,
 		},
 	};
 }

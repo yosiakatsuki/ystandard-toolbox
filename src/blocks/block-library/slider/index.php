@@ -68,14 +68,32 @@ class Slider_Block {
 		CSS;
 
 		$css  = '';
-		$css .= Styles::add_media_query_over_desktop( $desktop );
-		$css .= Styles::add_media_query_only_tablet( $tablet );
-		$css .= Styles::add_media_query_only_mobile( $mobile );
+		$css .= Styles::add_media_query_over_desktop( $desktop . $this->navigation_size_rule( 'desktop' ) );
+		$css .= Styles::add_media_query_only_tablet( $tablet . $this->navigation_size_rule( 'tablet' ) );
+		$css .= Styles::add_media_query_only_mobile( $mobile . $this->navigation_size_rule( 'mobile' ) );
 
 		$handle = 'ystdtb-slider-responsive';
 		wp_register_style( $handle, false );
 		wp_add_inline_style( $handle, Text::minify( $css ) );
 		wp_enqueue_style( $handle );
+	}
+
+	/**
+	 * 対象端末の矢印の大きさが保存されているボタンだけ、通常の大きさを上書きする.
+	 *
+	 * @param string $device 対象端末.
+	 *
+	 * @return string
+	 */
+	private function navigation_size_rule( $device ) {
+		return Styles::get_responsive_custom_prop_css(
+			[
+				'selector'  => '.ystdtb-slider__slider :is(.swiper-button-prev, .swiper-button-next)',
+				'prop_name' => 'slider--navigation-size',
+				'property'  => '--swiper-navigation-size',
+				'type'      => $device,
+			]
+		);
 	}
 
 	/**

@@ -4,7 +4,7 @@
 
 対象ブロック:
 - `ystdtb/slider`（親、static save block）
-- `ystdtb/slider-item`（子、static save block、属性なし）
+- `ystdtb/slider-item`（子、static save block）
 
 `save()` を持つ static block かつ、属性 → `data-slider-options` JSON 文字列の組み立てロジック（`getSliderOptions()`）が複雑なため、四層構成（L0 Jest unit / L1 fixture / L2 Playwright UI / L3 手動）で動作を検証する。
 
@@ -26,6 +26,7 @@
 - **className サポート**: `false`（`wp-block-ystdtb-slider` は出力されない、新規 v2 ブロック時）。ただし v1 deprecated 経由で `className` 属性が残る場合あり
 - **align サポート**: `[ 'wide', 'full' ]`
 - **anchor サポート**: `false`
+- **スタイルサポート**: 親は上下マージン、子は高さ・パディング。寸法の未指定、設定、解除を確認する。
 - **deprecated**: 1 件（v1.34.1 形式から v2 への migrate）
 - **`sliderId` 自動生成**: `edit.tsx` の `useEffect` で `clientId.split('-')[0]` を初期値として設定
 - **`previewType` 属性**: エディター内のみで使用（grid / horizontal）。フロント描画には影響しない
@@ -81,15 +82,20 @@
 | スライド間の余白 | `spaceBetween` | string | undefined |
 | 中央寄せ | `centeredSlides` | boolean | undefined |
 
-### ナビゲーション（パネル: Navigation）
+### ナビゲーション（設定タブのパネル: Navigation、スタイルタブのパネル: 矢印（ナビゲーション）・レスポンシブ矢印サイズ）
 
-| 設定項目 | 属性 | 型 | デフォルト |
-|---|---|---|---|
-| ナビゲーション表示 | `hasNavigation` | boolean | `false` |
-| ナビゲーション色（プリセット slug） | `navigationColor` | string | undefined（テーマ slug、例：`ys-red`） |
-| ナビゲーション色（カスタム HEX） | `customNavigationColor` | string | undefined |
+| 設定項目 | 配置 | 属性 | 型 | デフォルト |
+|---|---|---|---|---|
+| 表示（「矢印を表示する」トグル） | 設定タブ | `hasNavigation` | boolean | `false` |
+| デザイン | スタイルタブ | `style.ystdtb.slider.navigation.design` | string | undefined（既定。`square` / `circle`） |
+| 矢印の色（プリセット slug） | スタイルタブ | `navigationColor` | string | undefined（テーマ slug、例：`ys-red`） |
+| 矢印の色（カスタム HEX） | スタイルタブ | `customNavigationColor` | string | undefined |
+| 背景色（プリセット slug） | スタイルタブ | `navigationBackgroundColor` | string | undefined |
+| 背景色（カスタム HEX） | スタイルタブ | `customNavigationBackgroundColor` | string | undefined |
+| 大きさ | スタイルタブ | `style.ystdtb.slider.navigation.size` | string | undefined（Swiper 既定 44px） |
+| 端末別の大きさ | スタイルタブ | `style.ystdtb.slider.navigation.responsive.size.{desktop,tablet,mobile}` | object | undefined |
 
-`navigationColor` と `customNavigationColor` は ColorPalette 側で排他処理される（プリセット選択時は `customNavigationColor: undefined`）。
+色はプリセット slug とカスタム HEX のどちらか一方だけを保存する（プリセット選択時はカスタム側が `undefined`）。
 
 ### ページネーション（パネル: Pagination）
 
@@ -119,7 +125,8 @@
 | `effect: 'fade'` または `'cube'` | 「スライド表示数」パネル全体が非表示（`hasSlidesOption()` が false → `Slide` コンポーネントが `<></>` 早期 return） |
 | `slides` か `responsiveSlides` の片方を設定 | もう一方を `undefined` に強制クリア（`Slide` パネルの `DefaultTab` / `ResponsiveTab` で実装済） |
 | `autoplay: false` | autoplay 関連の設定値（`autoplayDelay` / `autoplayPauseOnMouse` 等）の UI 表示状態は変化しない（純粋に `data-slider-options.autoplay` キー自体が非出力になる） |
-| `hasNavigation: false` | ナビゲーション色 UI は表示されたまま（属性のみ）。フロント HTML には `swiper-button-prev` / `next` 要素自体が出力されない |
+| `hasNavigation: false` | スタイルタブの「矢印（ナビゲーション）」「レスポンシブ矢印サイズ」パネルが非表示（属性は保持）。フロント HTML には `swiper-button-prev` / `next` 要素自体が出力されない |
+| デザインが既定 | 「背景色」の入力が非表示。四角・円から既定へ戻すと、背景色の属性を `undefined` にクリア |
 | `paginationType: ''`（なし） | フロント HTML に `swiper-pagination` 要素自体が出力されない。色 UI は表示されたまま |
 | `slidesPerView: 'auto'` | 上級者向け設定の警告 NoticeWarning が表示される |
 | `ratio` または `height` または `responsiveHeight` のいずれか設定 | `getSliderWrapClasses()` で `is-fixed-height` クラス追加 |
@@ -189,6 +196,11 @@ L0 Jest unit テスト導入時に Swiper 仕様（[Breakpoints](https://swiperj
 | 44 | `getNavigationClasses('prev', { navigationColor: 'ys-red' })` | `'swiper-button-prev has-text-color has-ys-red-color'` |
 | 45 | `getNavigationClasses('next', { customNavigationColor: '#ff6600' })` | `'swiper-button-next has-text-color'`（プリセット色クラスなし） |
 | 46 | `getNavigationStyles({ customNavigationColor: '#ff6600' })` | `color: '#ff6600'` |
+| 46-1 | `getNavigationStyles({ style.…navigation.size: '56px' })` | `'--swiper-navigation-size': '56px'` |
+| 46-2 | `getNavigationStyles({ …responsive.size: { tablet, mobile } })` | 指定した端末の `--ystdtb--{device}--slider--navigation-size` だけを出力 |
+| 46-3 | `getNavigationStyles({ customNavigationBackgroundColor })` | 四角・円のデザインでだけ `backgroundColor` を出力 |
+| 46-4 | `getNavigationClasses('prev', { navigationBackgroundColor: 'ys-blue', design: 'square' })` | デザインのクラスと `has-ys-blue-background-color` を付ける。既定のデザインでは背景色クラスを付けない |
+| 46-5 | `updateNavigationStyle()`（`navigation-style.test.ts`） | 対象項目だけを更新し、標準サポートの値と他の項目を保持。空になった独自スタイルの階層を除く |
 | 47 | `getPaginationClasses()` | `'swiper-pagination'` |
 | 48 | `getPaginationStyles({ paginationColor: '#ff00aa' })` | `color: '#ff00aa', '--swiper-pagination-color': '#ff00aa'` |
 | 49 | `hasSlidesOption('slide')` | `true` |
@@ -211,7 +223,7 @@ fixture は `test/integration/fixtures/blocks/slider/` 配下に配置（既存�
 
 `ystdtb__slider__{パネル}__{設定}__{バリアント}.html`
 
-### fixture リスト（合計 44 件）
+### fixture リスト（合計 50 件）
 
 #### 設定の組み合わせ例（5 件）
 
@@ -274,12 +286,18 @@ fixture は `test/integration/fixtures/blocks/slider/` 配下に配置（既存�
 | `slide__responsive__mobile-only` | `responsiveSlides:{mobile:{slidesPerView:1}}` |
 | `slide__responsive__mobile-tablet` | `responsiveSlides:{mobile, tablet}` |
 
-#### ナビゲーション（2 件）
+#### ナビゲーション（8 件）
 
 | fixture | attributes |
 |---|---|
 | `navigation__color__preset` | `hasNavigation:true, navigationColor:'ys-red'` |
 | `navigation__color__custom-hex` | `hasNavigation:true, customNavigationColor:'#0099ff'` |
+| `navigation__design__square` | `hasNavigation:true, style.ystdtb.slider.navigation.design:'square'` |
+| `navigation__design__circle-background-preset` | `hasNavigation:true, navigationBackgroundColor:'ys-blue', design:'circle'` |
+| `navigation__background__custom-hex` | `hasNavigation:true, customNavigationColor:'#ffffff', customNavigationBackgroundColor:'#123456', design:'square'` |
+| `navigation__background__alpha` | `hasNavigation:true, customNavigationColor:'#ffffffcc', customNavigationBackgroundColor:'#12345680', design:'square'` |
+| `navigation__size__56px` | `hasNavigation:true, style.ystdtb.slider.navigation.size:'56px'` |
+| `responsive-navigation-size__tablet-mobile` | `hasNavigation:true, size:'56px', responsive.size:{ tablet:'40px', mobile:'32px' }` |
 
 #### ページネーション（4 件）
 
@@ -309,7 +327,8 @@ L1 fixture / L0 Jest unit でカバーできない UI 経由の挙動のみを P
 | エフェクト（RadioControl） | `slide` / `fade` / `coverflow` / `cube` の 4 値とラベル対応 |
 | 縦横比（CustomSelectControl） | 全 9 種（指定なし / 1-1 / 2-1 / 3-1 / 3-2 / 4-3 / 16-9 / 2-3 / 9-16） |
 | ページネーションタイプ（RadioControl） | `''`（なし）/ `bullets` / `dynamicBullets` / `progressbar` / `fraction` の 5 値 |
-| ナビゲーション色（ColorPalette） | プリセット選択時 `navigationColor` に slug 保存、カスタム入力時 `customNavigationColor` に hex 保存 |
+| 矢印の色・背景色（スタイルタブ） | プリセット選択時 `navigationColor` / `navigationBackgroundColor` に slug 保存、カスタム入力時 `customNavigationColor` / `customNavigationBackgroundColor` に hex 保存 |
+| デザイン（ToggleGroupControl） | 既定 → 属性なし、四角 → `square`、円 → `circle` |
 | ページネーション色（ColorPalette） | hex 値が `paginationColor` に保存される |
 | 1 画面表示数（NumberControl + auto ボタン） | 数値入力 / `auto` ボタン切替 / 警告 Notice 表示 |
 
@@ -325,7 +344,11 @@ L1 fixture / L0 Jest unit でカバーできない UI 経由の挙動のみを P
 | `responsiveSlides` を設定 | `slides` 属性がクリアされる（DefaultTab → ResponsiveTab 切替） |
 | `slides` を設定 | `responsiveSlides` 属性がクリアされる（ResponsiveTab → DefaultTab 切替） |
 | `slidesPerView: 'auto'` を選択 | NoticeWarning「auto は上級者向け設定」表示 |
-| `hasNavigation` を OFF | 「ナビゲーション色」UI は残る（属性は保持される） |
+| `hasNavigation` を OFF | スタイルタブの矢印のパネルが非表示になる（属性は保持される） |
+| スタイルタブで矢印のパネルを開く | 「デザイン」が最初から表示され、未設定なら「既定」が選ばれている |
+| デザインを四角・円にする | 「背景色」を追加メニューから選べる。「矢印の色」と「背景色」が1つの枠でつながって表示される |
+| 色の選択画面で任意の色を開く | 不透明度のスライダーが表示され、不透明度付きの値（例：`#12345680`）で保存される |
+| デザインを既定に戻す | 「背景色」の入力が消え、背景色の属性がクリアされる |
 | `paginationType` を「なし」 | 「ページネーション色」UI は残る |
 
 ### 操作順序（切替・useEffect）
@@ -383,6 +406,8 @@ L1 fixture / L0 Jest unit でカバーできない UI 経由の挙動のみを P
 - [x] レスポンシブ高さ（desktop / tablet / mobile）が CSS メディアクエリで切り替わる
 - [x] `responsiveSlides` が動作する（B001 / B002 / B003 修正後の Swiper breakpoints ネスト構造で動作することを実機確認）
 - [x] `align: 'full'` で yStandard テーマの全幅表示が padding 0 で正しく描画される
+- [ ] 矢印のデザイン（既定・四角・円）、背景色、大きさがフロントで反映される
+- [ ] 矢印の端末別の大きさが CSS メディアクエリで切り替わり、未指定の端末では通常の大きさに戻る
 - [x] エディター内表示と、フロント表示で崩れがない
 
 ### 子ブロックの構造
