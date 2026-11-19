@@ -3,6 +3,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+
 /**
  * Aktk dependencies
  */
@@ -138,20 +139,31 @@ export function NormalSizeEdit( props: {
 	);
 }
 
-export function ResponsiveSizeEdit( props: {
+type ResponsiveSizeEditProps = {
+	label?: string;
+	min?: number;
 	value: CustomSizeResponsiveValues;
 	onChange: ( newValue: CustomSizeResponsiveValues ) => void;
 	responsiveControlStyle?: 'vertical' | 'horizontal';
 	onReset?: () => void;
 	units?: UnitType[] | undefined;
-} ) {
+};
+
+/**
+ * 通常値に触れず、端末ごとの寸法を入力する。
+ * @param props 端末別値、単位、入力ラベルと更新関数。
+ */
+export function ResponsiveSizeEdit( props: ResponsiveSizeEditProps ) {
 	const {
 		value,
 		onChange,
 		responsiveControlStyle = 'vertical',
+		label,
+		min,
 		onReset,
 		units,
 	} = props;
+	// 編集した端末の値を既存の値へ重ねる。
 	const handleOnChange = ( newValue: CustomSizeResponsiveValues ) => {
 		onChange( {
 			...value,
@@ -168,6 +180,11 @@ export function ResponsiveSizeEdit( props: {
 			<div className={ gridClasses }>
 				<div>
 					<IconUnitControl.Desktop
+						aria-label={
+							label &&
+							`${ label }（${ __( 'PC', 'ystandard-toolbox' ) }）`
+						}
+						min={ min }
 						unitType={ 'size' }
 						value={ value?.desktop }
 						onChange={ ( newValue ) => {
@@ -181,6 +198,11 @@ export function ResponsiveSizeEdit( props: {
 				</div>
 				<div>
 					<IconUnitControl.Tablet
+						aria-label={
+							label &&
+							`${ label }（${ __( 'タブレット', 'ystandard-toolbox' ) }）`
+						}
+						min={ min }
 						unitType={ 'size' }
 						value={ value?.tablet }
 						onChange={ ( newValue ) => {
@@ -194,6 +216,11 @@ export function ResponsiveSizeEdit( props: {
 				</div>
 				<div>
 					<IconUnitControl.Mobile
+						aria-label={
+							label &&
+							`${ label }（${ __( 'モバイル', 'ystandard-toolbox' ) }）`
+						}
+						min={ min }
 						unitType={ 'size' }
 						value={ value?.mobile }
 						onChange={ ( newValue ) => {

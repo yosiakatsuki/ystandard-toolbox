@@ -1,0 +1,52 @@
+[
+	{
+		"name": "ystdtb/sticky-columns",
+		"isValid": true,
+		"attributes": {
+			"collapseAt": "container",
+			"containerSize": "48.5rem",
+			"reverse": false,
+			"stickyColumn": "first",
+			"style": {
+				"ystdtb": {
+					"stickyColumns": {
+						"stickyOffset": "3.5rem"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {
+					"style": {
+						"dimensions": {
+							"width": "45%",
+							"minHeight": "10rem"
+						},
+						"ystdtb": {
+							"stickyColumnsItem": {
+								"responsive": {
+									"width": {
+										"tablet": "200px"
+									},
+									"minHeight": {
+										"mobile": "0px"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": []
+			}
+		]
+	}
+]

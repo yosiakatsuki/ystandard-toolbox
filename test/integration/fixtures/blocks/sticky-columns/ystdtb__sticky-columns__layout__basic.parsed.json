@@ -1,0 +1,34 @@
+[
+	{
+		"blockName": "ystdtb/sticky-columns",
+		"attrs": {},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

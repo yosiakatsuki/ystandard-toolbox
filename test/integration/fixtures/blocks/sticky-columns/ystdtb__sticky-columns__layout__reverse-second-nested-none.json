@@ -1,0 +1,73 @@
+[
+	{
+		"name": "ystdtb/sticky-columns",
+		"isValid": true,
+		"attributes": {
+			"collapseAt": "mobile",
+			"reverse": true,
+			"stickyColumn": "second"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {
+					"style": {
+						"color": {
+							"background": "#112233"
+						}
+					}
+				},
+				"innerBlocks": [
+					{
+						"name": "ystdtb/sticky-columns",
+						"isValid": true,
+						"attributes": {
+							"collapseAt": "mobile",
+							"reverse": false,
+							"stickyColumn": "none"
+						},
+						"innerBlocks": [
+							{
+								"name": "ystdtb/sticky-columns-item",
+								"isValid": true,
+								"attributes": {
+									"style": {
+										"color": {
+											"background": "#112233"
+										}
+									}
+								},
+								"innerBlocks": []
+							},
+							{
+								"name": "ystdtb/sticky-columns-item",
+								"isValid": true,
+								"attributes": {
+									"style": {
+										"color": {
+											"background": "#445566"
+										}
+									}
+								},
+								"innerBlocks": []
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {
+					"style": {
+						"color": {
+							"background": "#445566"
+						}
+					}
+				},
+				"innerBlocks": []
+			}
+		]
+	}
+]

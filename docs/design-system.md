@@ -152,6 +152,8 @@ PostCSS の `postcss-custom-media` と `postcss-media-minmax`（media-query-rang
 
 ## CSSアーキテクチャ
 
+固定のセレクターと宣言はCSSに記述する。親の設定値やテーマで変更できるブレークポイントなど、実行時に決まる部分をPHPで組み立てる。Sassの繰り返しが10回以下なら、各セレクターと宣言を明記する。
+
 ### CSS単位の方針（アクセシビリティ対応）
 
 yStandard テーマの方針に準拠。ブラウザのフォントサイズ設定変更に対応するため、CSS単位を使い分ける。

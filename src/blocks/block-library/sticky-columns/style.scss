@@ -1,0 +1,79 @@
+// 子の文字サイズが異なる場合も、横の間隔と残幅計算に同じ長さを使う。
+@property --ystdtb--columns--column-gap {
+	syntax: "<length-percentage>";
+	inherits: true;
+	initial-value: 24px;
+}
+
+.ystdtb-sticky-columns {
+	// 各親で初期化し、入れ子では外側の間隔を引き継がない。
+	--ystdtb--columns--row-gap-base: initial;
+	--ystdtb--columns--row-gap-desktop: initial;
+	--ystdtb--columns--row-gap-tablet: initial;
+	--ystdtb--columns--row-gap-mobile: initial;
+	--ystdtb--columns--row-gap: var(--ystdtb--columns--row-gap-device, var(--ystdtb--columns--row-gap-base, 24px));
+
+	--ystdtb--columns--column-gap-base: initial;
+	--ystdtb--columns--column-gap-desktop: initial;
+	--ystdtb--columns--column-gap-tablet: initial;
+	--ystdtb--columns--column-gap-mobile: initial;
+	--ystdtb--columns--column-gap: var(--ystdtb--columns--column-gap-device, var(--ystdtb--columns--column-gap-base, 24px));
+
+	--ystdtb--columns--sticky-offset: 1rem;
+	// 各親で1列時の値に戻す。2列の条件を満たす直下の子だけが上書きする。
+	--ystdtb--columns--basis: 100%;
+	--ystdtb--columns--max-width: 100%;
+	--ystdtb--columns--position: static;
+	--ystdtb--columns--top: auto;
+	--ystdtb--columns--order: 0;
+	container: ystdtb-sticky-columns / inline-size;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	row-gap: var(--ystdtb--columns--row-gap);
+	column-gap: min(100%, var(--ystdtb--columns--column-gap));
+	min-width: 0;
+	box-sizing: border-box;
+
+	// 未設定の幅は、入れ子の外側から継承しない。
+	--ystdtb--columns--1-width: initial;
+	--ystdtb--columns--1-mobile: initial;
+	--ystdtb--columns--1-tablet: initial;
+	--ystdtb--columns--1-desktop: initial;
+	--ystdtb--columns--1-current: var(--ystdtb--columns--1-width);
+
+	--ystdtb--columns--2-width: initial;
+	--ystdtb--columns--2-mobile: initial;
+	--ystdtb--columns--2-tablet: initial;
+	--ystdtb--columns--2-desktop: initial;
+	--ystdtb--columns--2-current: var(--ystdtb--columns--2-width);
+
+	> :where(.ystdtb-sticky-columns-item) {
+		--ystdtb--columns--available: max(0px, calc(100% - var(--ystdtb--columns--column-gap)));
+		--ystdtb--columns--half: calc(var(--ystdtb--columns--available) / 2);
+		flex: 1 1 var(--ystdtb--columns--basis);
+		max-width: var(--ystdtb--columns--max-width);
+		position: static;
+		top: auto;
+		order: 0;
+	}
+
+	// 希望幅が無ければ相手の残り、両方無ければ均等。2列時のflex-basisは0。
+	> :where(.ystdtb-sticky-columns-item:first-child) {
+		--ystdtb--columns--limit: var(--ystdtb--columns--1-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--2-current, var(--ystdtb--columns--half)))));
+	}
+
+	> :where(.ystdtb-sticky-columns-item:last-child) {
+		--ystdtb--columns--limit: var(--ystdtb--columns--2-current, max(0px, calc(var(--ystdtb--columns--available) - var(--ystdtb--columns--1-current, var(--ystdtb--columns--half)))));
+	}
+
+	&:where(.has-sticky-first) > :where(.ystdtb-sticky-columns-item:first-child),
+	&:where(.has-sticky-second) > :where(.ystdtb-sticky-columns-item:last-child) {
+		position: var(--ystdtb--columns--position);
+		top: var(--ystdtb--columns--top);
+	}
+
+	&:where(.is-reversed) > :where(.ystdtb-sticky-columns-item:first-child) {
+		order: var(--ystdtb--columns--order);
+	}
+}

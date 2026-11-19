@@ -1,0 +1,94 @@
+[
+	{
+		"blockName": "ystdtb/sticky-columns",
+		"attrs": {
+			"style": {
+				"color": {
+					"text": "#123456",
+					"background": "#eef2f6"
+				},
+				"typography": {
+					"fontSize": "20px",
+					"lineHeight": "1.8"
+				},
+				"spacing": {
+					"padding": {
+						"top": "24px",
+						"right": "16px",
+						"bottom": "24px",
+						"left": "16px"
+					},
+					"margin": {
+						"top": "32px",
+						"bottom": "16px"
+					}
+				},
+				"border": {
+					"color": "#445566",
+					"style": "solid",
+					"width": "2px",
+					"radius": "8px"
+				},
+				"shadow": "0 2px 8px #00000033"
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {
+					"style": {
+						"color": {
+							"text": "#ffffff",
+							"gradient": "linear-gradient(135deg,rgb(0,0,0) 0%,rgb(100,100,100) 100%)"
+						},
+						"typography": {
+							"fontSize": "16px",
+							"lineHeight": "1.6"
+						},
+						"spacing": {
+							"padding": {
+								"top": "0px",
+								"right": "12px",
+								"bottom": "20px",
+								"left": "12px"
+							},
+							"margin": {
+								"top": "0px",
+								"bottom": "8px"
+							}
+						},
+						"border": {
+							"color": "#334455",
+							"style": "dashed",
+							"width": "1px",
+							"radius": "4px"
+						},
+						"shadow": "0 1px 4px #00000022"
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item has-border-color has-text-color has-background\" style=\"border-color:#334455;border-style:dashed;border-width:1px;border-radius:4px;color:#ffffff;background:linear-gradient(135deg,rgb(0,0,0) 0%,rgb(100,100,100) 100%);margin-top:0px;margin-bottom:8px;padding-top:0px;padding-right:12px;padding-bottom:20px;padding-left:12px;font-size:16px;line-height:1.6;box-shadow:0 1px 4px #00000022\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item has-border-color has-text-color has-background\" style=\"border-color:#334455;border-style:dashed;border-width:1px;border-radius:4px;color:#ffffff;background:linear-gradient(135deg,rgb(0,0,0) 0%,rgb(100,100,100) 100%);margin-top:0px;margin-bottom:8px;padding-top:0px;padding-right:12px;padding-bottom:20px;padding-left:12px;font-size:16px;line-height:1.6;box-shadow:0 1px 4px #00000022\"></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first has-border-color has-text-color has-background\" style=\"border-color:#445566;border-style:solid;border-width:2px;border-radius:8px;color:#123456;background-color:#eef2f6;margin-top:32px;margin-bottom:16px;padding-top:24px;padding-right:16px;padding-bottom:24px;padding-left:16px;font-size:20px;line-height:1.8;box-shadow:0 2px 8px #00000033\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]

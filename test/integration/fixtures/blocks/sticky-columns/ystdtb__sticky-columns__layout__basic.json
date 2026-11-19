@@ -1,0 +1,25 @@
+[
+	{
+		"name": "ystdtb/sticky-columns",
+		"isValid": true,
+		"attributes": {
+			"collapseAt": "mobile",
+			"reverse": false,
+			"stickyColumn": "first"
+		},
+		"innerBlocks": [
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": []
+			},
+			{
+				"name": "ystdtb/sticky-columns-item",
+				"isValid": true,
+				"attributes": {},
+				"innerBlocks": []
+			}
+		]
+	}
+]

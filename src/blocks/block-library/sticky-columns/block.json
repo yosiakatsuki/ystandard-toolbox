@@ -1,0 +1,100 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ystdtb/sticky-columns",
+	"version": "0.1.0",
+	"title": "片方が追従できるカラム",
+	"category": "ystdtb",
+	"description": "片方のカラムがスクロールに追従する2列レイアウトです。",
+	"textdomain": "ystandard-toolbox",
+	"allowedBlocks": [ "ystdtb/sticky-columns-item" ],
+	"selectors": {
+		"root": ".ystdtb-sticky-columns"
+	},
+	"attributes": {
+		"collapseAt": {
+			"type": "string",
+			"enum": [ "container", "mobile", "tablet" ],
+			"default": "mobile"
+		},
+		"containerSize": { "type": "string" },
+		"reverse": {
+			"type": "boolean",
+			"default": false
+		},
+		"stickyColumn": {
+			"type": "string",
+			"enum": [ "first", "second", "none" ],
+			"default": "first"
+		},
+		"fontSize": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"borderColor": {
+			"type": "string"
+		},
+		"style": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false,
+		"className": false,
+		"customClassName": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalDefaultControls": {
+				"fontSize": false,
+				"lineHeight": false
+			}
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true,
+			"__experimentalDefaultControls": {
+				"text": false,
+				"background": false,
+				"gradients": false
+			}
+		},
+		"spacing": {
+			"padding": true,
+			"margin": [ "top", "bottom" ],
+			"blockGap": { "sides": [ "horizontal", "vertical" ] },
+			"__experimentalDefaultControls": {
+				"padding": false,
+				"margin": false,
+				"blockGap": false
+			}
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"width": true,
+			"style": true,
+			"radius": true,
+			"__experimentalDefaultControls": {
+				"color": false,
+				"width": false,
+				"style": false,
+				"radius": false,
+				"shadow": false
+			}
+		},
+		"shadow": true
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

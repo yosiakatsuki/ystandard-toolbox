@@ -1,0 +1,63 @@
+[
+	{
+		"blockName": "ystdtb/sticky-columns",
+		"attrs": {
+			"collapseAt": "container",
+			"containerSize": "48.5rem",
+			"style": {
+				"ystdtb": {
+					"stickyColumns": {
+						"stickyOffset": "3.5rem"
+					}
+				}
+			}
+		},
+		"innerBlocks": [
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {
+					"style": {
+						"dimensions": {
+							"width": "45%",
+							"minHeight": "10rem"
+						},
+						"ystdtb": {
+							"stickyColumnsItem": {
+								"responsive": {
+									"width": {
+										"tablet": "200px"
+									},
+									"minHeight": {
+										"mobile": "0px"
+									}
+								}
+							}
+						}
+					}
+				},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\" style=\"min-height:10rem;width:45%;--ystdtb--mobile--columns--min-height:0px\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\" style=\"min-height:10rem;width:45%;--ystdtb--mobile--columns--min-height:0px\"></div>\n"
+				]
+			},
+			{
+				"blockName": "ystdtb/sticky-columns-item",
+				"attrs": {},
+				"innerBlocks": [],
+				"innerHTML": "\n<div class=\"ystdtb-sticky-columns-item\"></div>\n",
+				"innerContent": [
+					"\n<div class=\"ystdtb-sticky-columns-item\"></div>\n"
+				]
+			}
+		],
+		"innerHTML": "\n<div class=\"ystdtb-sticky-columns has-sticky-first\" style=\"--ystdtb--columns--sticky-offset:3.5rem\">\n\n</div>\n",
+		"innerContent": [
+			"\n<div class=\"ystdtb-sticky-columns has-sticky-first\" style=\"--ystdtb--columns--sticky-offset:3.5rem\">",
+			null,
+			"\n\n",
+			null,
+			"</div>\n"
+		]
+	}
+]
