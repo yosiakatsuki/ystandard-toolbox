@@ -66,10 +66,17 @@ export function ResponsiveSpacingPanel( props: ResponsiveSpacingPanelProps ) {
 				onDeselect={ reset }
 			>
 				<fieldset>
-					<legend>{ gapLabel }</legend>
+					<legend className="aktk-component__responsive-spacing-panel-label">
+						{ gapLabel }
+					</legend>
 					{ ( [ 'column', 'row' ] as const ).map( ( axis ) => (
-						<fieldset key={ axis }>
-							<legend>{ labels[ axis ] }</legend>
+						<fieldset
+							key={ axis }
+							className="aktk-component__responsive-spacing-panel-axis"
+						>
+							<legend className="aktk-component__responsive-spacing-panel-label">
+								{ labels[ axis ] }
+							</legend>
 							<ResponsiveSizeEdit
 								value={ value?.[ axis ] ?? {} }
 								onChange={ ( next ) => update( axis, next ) }
