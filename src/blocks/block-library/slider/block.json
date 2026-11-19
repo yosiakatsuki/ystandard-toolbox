@@ -78,6 +78,12 @@
 		"customNavigationColor": {
 			"type": "string"
 		},
+		"navigationBackgroundColor": {
+			"type": "string"
+		},
+		"customNavigationBackgroundColor": {
+			"type": "string"
+		},
 		"paginationType": {
 			"type": "string"
 		},

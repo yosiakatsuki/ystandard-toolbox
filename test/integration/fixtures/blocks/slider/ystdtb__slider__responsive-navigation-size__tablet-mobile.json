@@ -1,0 +1,35 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "responsive-navigation-size-tablet-mobile",
+			"effect": "slide",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": true,
+			"autoplayDelay": 8,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": true,
+			"previewType": "grid",
+			"style": {
+				"ystdtb": {
+					"slider": {
+						"navigation": {
+							"size": "56px",
+							"responsive": {
+								"size": {
+									"tablet": "40px",
+									"mobile": "32px"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"innerBlocks": []
+	}
+]

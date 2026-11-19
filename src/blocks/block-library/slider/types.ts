@@ -30,9 +30,37 @@ export interface SliderBlockAttributes {
 	hasNavigation?: boolean;
 	navigationColor?: string;
 	customNavigationColor?: string;
+	navigationBackgroundColor?: string;
+	customNavigationBackgroundColor?: string;
 	paginationType?: string;
 	paginationColor?: string;
 	previewType?: previewType;
+	style?: SliderStyle;
+}
+
+/**
+ * スライダーのスタイル属性。標準サポートの値と独自スタイルを持つ。
+ */
+export interface SliderStyle {
+	ystdtb?: {
+		slider?: {
+			navigation?: SliderNavigationStyle;
+		};
+	};
+	[ key: string ]: unknown;
+}
+
+export type NavigationDesign = 'square' | 'circle';
+
+/**
+ * 矢印（ナビゲーション）の独自スタイル。
+ */
+export interface SliderNavigationStyle {
+	design?: NavigationDesign;
+	size?: string;
+	responsive?: {
+		size?: ResponsiveValues;
+	};
 }
 
 export interface ResponsiveSlides {

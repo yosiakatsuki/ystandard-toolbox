@@ -49,6 +49,41 @@
 	}
 }
 
+/* 矢印（ナビゲーション）: 四角・円は背景の上に矢印を置く */
+.ystdtb-slider__slider {
+	:where(.ystdtb-slider__navigation--square, .ystdtb-slider__navigation--circle) {
+		background-color: var(--ystdtb--color--white, #fff);
+	}
+
+	:where(.ystdtb-slider__navigation--square) {
+		border-radius: 4px;
+	}
+
+	:where(.ystdtb-slider__navigation--circle) {
+		border-radius: 50%;
+	}
+
+	/* Swiperの矢印はボタンの高さいっぱいに広がるため、背景の内側に収める */
+	.ystdtb-slider__navigation--square svg,
+	.ystdtb-slider__navigation--circle svg {
+		height: 40%;
+	}
+
+	/*
+	 * 背景の中で矢印が中央に見えるよう、矢印の向きを基準に位置を調整する。
+	 * 前へは回転（transform）で左向きになるため、回転前の座標で効く translate の符号を逆にする。
+	 */
+	:is(.ystdtb-slider__navigation--square, .ystdtb-slider__navigation--circle) {
+		&.swiper-button-next svg {
+			translate: 2% 0;
+		}
+
+		&.swiper-button-prev svg {
+			translate: -2% 0;
+		}
+	}
+}
+
 @keyframes ystdtb-slider-reveal {
 	to {
 		opacity: 1;

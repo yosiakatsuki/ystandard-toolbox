@@ -26,6 +26,7 @@ type ResponsiveSizePanelProps = {
 	title: string;
 	icon?: React.ReactNode;
 	settings: ResponsiveSizeSettings;
+	labels?: Partial< Record< Dimension, string > >;
 	units?: UnitType[];
 	value?: ResponsiveDimensions;
 	onChange: ( changes: ResponsiveDimensions ) => void;
@@ -38,6 +39,7 @@ type ResponsiveSizePanelProps = {
 export function ResponsiveSizePanel( props: ResponsiveSizePanelProps ) {
 	const { panelId, title, icon, settings, units, value, onChange } = props;
 	const enabled = dimensions.filter( ( key ) => settings[ key ] );
+	// ブロックが項目名を渡した寸法だけ、既定の名称を差し替える。
 	const labels = {
 		width: __( '幅', 'ystandard-toolbox' ),
 		minWidth: __( '最小幅', 'ystandard-toolbox' ),
@@ -45,6 +47,7 @@ export function ResponsiveSizePanel( props: ResponsiveSizePanelProps ) {
 		height: __( '高さ', 'ystandard-toolbox' ),
 		minHeight: __( '最小高さ', 'ystandard-toolbox' ),
 		maxHeight: __( '最大高さ', 'ystandard-toolbox' ),
+		...props.labels,
 	};
 	// 全解除でも、このブロックで表示している項目だけをまとめて更新する。
 	const resetAll = () =>

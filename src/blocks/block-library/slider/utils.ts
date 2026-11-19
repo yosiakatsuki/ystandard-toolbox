@@ -88,11 +88,22 @@ export function getNavigationClasses(
 	type: navigationType,
 	attributes: SliderBlockAttributes
 ) {
-	const { navigationColor, customNavigationColor } = attributes;
+	const {
+		navigationColor,
+		customNavigationColor,
+		navigationBackgroundColor,
+	} = attributes;
 	const navColorClass = getColorClassName( 'color', navigationColor || '' );
+	const design = attributes.style?.ystdtb?.slider?.navigation?.design;
+	// 背景色は座布団のあるデザインでだけ出力する。
+	const backgroundClass = design
+		? getColorClassName( 'background-color', navigationBackgroundColor )
+		: undefined;
 	return classnames( `swiper-button-${ type }`, {
 		'has-text-color': navColorClass || customNavigationColor,
 		[ navColorClass ]: navColorClass,
+		[ `ystdtb-slider__navigation--${ design }` ]: design,
+		[ backgroundClass || '' ]: backgroundClass,
 	} );
 }
 
@@ -101,9 +112,33 @@ export function getNavigationClasses(
  * @param attributes
  */
 export function getNavigationStyles( attributes: SliderBlockAttributes ) {
-	const { customNavigationColor } = attributes;
+	const { customNavigationColor, customNavigationBackgroundColor } =
+		attributes;
+	const navigation = attributes.style?.ystdtb?.slider?.navigation;
+	const types = [ 'desktop', 'tablet', 'mobile' ] as const;
+	// 端末別の大きさは、PHP側のメディアクエリで通常の大きさを上書きする。
+	const responsiveStyles = types.reduce(
+		( acc, type ) => {
+			const size = navigation?.responsive?.size?.[ type ];
+			if ( size ) {
+				const customPropName = getResponsiveCustomPropName(
+					'ystdtb',
+					'slider--navigation-size',
+					type
+				);
+				acc[ customPropName ] = size;
+			}
+			return acc;
+		},
+		{} as Record< string, string >
+	);
 	return {
 		color: customNavigationColor || undefined,
+		backgroundColor:
+			( navigation?.design && customNavigationBackgroundColor ) ||
+			undefined,
+		'--swiper-navigation-size': navigation?.size || undefined,
+		...responsiveStyles,
 	};
 }
 

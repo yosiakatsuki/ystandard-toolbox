@@ -5,7 +5,10 @@ import { __ } from '@wordpress/i18n';
 /*
  * Aktk Dependencies
  */
-import { Panel } from '@aktk/block-components/components/panel';
+import {
+	ToolsPanel,
+	ToolsPanelItem,
+} from '@aktk/block-components/wp-controls/tools-panel';
 
 /**
  * Block dependencies.
@@ -13,19 +16,37 @@ import { Panel } from '@aktk/block-components/components/panel';
 import type { SliderEditProps } from '../../types';
 // 設定.
 import { HasNavigation } from './has-navigation';
-import { NavigationColor } from './navigation-color';
 
+/**
+ * 矢印（ナビゲーション）の表示を切り替えるパネル.
+ *
+ * @param props スライダーの編集プロパティ.
+ */
 export function Navigation( props: SliderEditProps ): JSX.Element {
+	const { attributes, setAttributes, clientId } = props;
+	const panelId = clientId + '-navigation';
+
+	// 矢印を非表示に戻す.
+	const resetNavigation = () => {
+		setAttributes( { hasNavigation: false } );
+	};
+
 	return (
-		<Panel title={ __( '矢印（ナビゲーション）', 'ystandard-toolbox' ) }>
-			<p className="text-aktk-text-gray mb-3 text-fz-xxs">
-				{ __(
-					'次へ・前への矢印ナビゲーションの設定',
-					'ystandard-toolbox'
-				) }
-			</p>
-			<HasNavigation { ...props } />
-			<NavigationColor { ...props } />
-		</Panel>
+		<ToolsPanel
+			label={ __( '矢印（ナビゲーション）', 'ystandard-toolbox' ) }
+			panelId={ panelId }
+			resetAll={ resetNavigation }
+		>
+			<ToolsPanelItem
+				className="single-column"
+				label={ __( '表示', 'ystandard-toolbox' ) }
+				panelId={ panelId }
+				hasValue={ () => !! attributes.hasNavigation }
+				onDeselect={ resetNavigation }
+				isShownByDefault
+			>
+				<HasNavigation { ...props } />
+			</ToolsPanelItem>
+		</ToolsPanel>
 	);
 }

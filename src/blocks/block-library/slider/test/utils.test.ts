@@ -187,6 +187,92 @@ describe( 'getNavigationStyles', () => {
 		);
 		expect( style.color ).toBe( '#ff6600' );
 	} );
+
+	it( '矢印の大きさを --swiper-navigation-size に出力する', () => {
+		const style: any = getNavigationStyles(
+			withDefaults( {
+				style: { ystdtb: { slider: { navigation: { size: '56px' } } } },
+			} )
+		);
+		expect( style[ '--swiper-navigation-size' ] ).toBe( '56px' );
+	} );
+
+	it( '端末別の大きさは指定した端末の変数だけを出力する', () => {
+		const style: any = getNavigationStyles(
+			withDefaults( {
+				style: {
+					ystdtb: {
+						slider: {
+							navigation: {
+								responsive: {
+									size: { tablet: '40px', mobile: '32px' },
+								},
+							},
+						},
+					},
+				},
+			} )
+		);
+		expect( style ).not.toHaveProperty(
+			'--ystdtb--desktop--slider--navigation-size'
+		);
+		expect( style[ '--ystdtb--tablet--slider--navigation-size' ] ).toBe(
+			'40px'
+		);
+		expect( style[ '--ystdtb--mobile--slider--navigation-size' ] ).toBe(
+			'32px'
+		);
+		expect( style[ '--swiper-navigation-size' ] ).toBeUndefined();
+	} );
+
+	it( '任意の背景色は四角・円のデザインでだけ出力する', () => {
+		expect(
+			getNavigationStyles(
+				withDefaults( { customNavigationBackgroundColor: '#123456' } )
+			).backgroundColor
+		).toBeUndefined();
+		expect(
+			getNavigationStyles(
+				withDefaults( {
+					customNavigationBackgroundColor: '#123456',
+					style: {
+						ystdtb: {
+							slider: { navigation: { design: 'circle' } },
+						},
+					},
+				} )
+			).backgroundColor
+		).toBe( '#123456' );
+	} );
+} );
+
+describe( 'getNavigationClasses（デザイン・背景色）', () => {
+	it( 'デザインのクラスとパレットの背景色クラスを付ける', () => {
+		expect(
+			getNavigationClasses(
+				'prev',
+				withDefaults( {
+					navigationBackgroundColor: 'ys-blue',
+					style: {
+						ystdtb: {
+							slider: { navigation: { design: 'square' } },
+						},
+					},
+				} )
+			)
+		).toBe(
+			'swiper-button-prev ystdtb-slider__navigation--square has-ys-blue-background-color'
+		);
+	} );
+
+	it( '既定のデザインでは背景色クラスを付けない', () => {
+		expect(
+			getNavigationClasses(
+				'next',
+				withDefaults( { navigationBackgroundColor: 'ys-blue' } )
+			)
+		).toBe( 'swiper-button-next' );
+	} );
 } );
 
 describe( 'getPaginationClasses', () => {
