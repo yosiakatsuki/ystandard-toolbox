@@ -86,7 +86,9 @@ export function ResponsiveSizePanel( props: ResponsiveSizePanelProps ) {
 					onDeselect={ () => onChange( { [ key ]: undefined } ) }
 				>
 					<fieldset>
-						<legend>{ labels[ key ] }</legend>
+						<legend className="aktk-component__responsive-size-panel-label">
+							{ labels[ key ] }
+						</legend>
 						<ResponsiveSizeEdit
 							value={ value?.[ key ] ?? {} }
 							onChange={ ( next ) => update( key, next ) }
