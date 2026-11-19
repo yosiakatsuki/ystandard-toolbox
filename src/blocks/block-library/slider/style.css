@@ -20,8 +20,20 @@
 .ystdtb-slider__slider {
 	/* Swiper 初期化前に最初のスライド以外を非表示 */
 	&:not(:where(.swiper-initialized, .is-edit)) {
+		/* 初期化前の仮表示から初期化後の表示へ切り替わるずれを見せない。高さは1枚目のスライドで確保する */
+		opacity: 0;
+		/* スクリプトが動かない場合も、一定時間後に表示する */
+		animation: ystdtb-slider-reveal 0s 3s forwards;
+
 		:where(.ystdtb-slider__container) > *:not(:first-child) {
 			display: none;
+		}
+	}
+
+	/* 初期化後はフェードインで表示する */
+	@media (prefers-reduced-motion: no-preference) {
+		&:not(:where(.is-edit)) {
+			transition: opacity 0.3s ease;
 		}
 	}
 
@@ -34,6 +46,12 @@
 				height: 100%;
 			}
 		}
+	}
+}
+
+@keyframes ystdtb-slider-reveal {
+	to {
+		opacity: 1;
 	}
 }
 
