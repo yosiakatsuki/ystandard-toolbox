@@ -80,6 +80,31 @@ describe( 'normalizeSliderOptions', () => {
 		).toBeUndefined();
 	} );
 
+	it( 'ページネーションの設定を維持してクリック操作を有効化する', () => {
+		expect(
+			normalizeSliderOptions( {
+				pagination: {
+					type: 'bullets',
+					el: '.swiper-pagination',
+					dynamicBullets: true,
+				},
+			} ).pagination
+		).toEqual( {
+			type: 'bullets',
+			el: '.swiper-pagination',
+			dynamicBullets: true,
+			clickable: true,
+		} );
+	} );
+
+	it( 'ページネーションがない場合はpaginationを追加しない', () => {
+		expect(
+			normalizeSliderOptions( {
+				effect: 'slide',
+			} ).pagination
+		).toBeUndefined();
+	} );
+
 	it( '既知キー以外のbreakpointは維持する', () => {
 		const options = normalizeSliderOptions(
 			{
