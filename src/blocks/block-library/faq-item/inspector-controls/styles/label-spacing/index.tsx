@@ -7,7 +7,9 @@ import {
 } from '@aktk/block-components/wp-controls/tools-panel';
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import SpacingSizesControl from '@aktk/block-components/wp-controls/spacing-size-control';
-import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import UnitControl, {
+	useCustomUnits,
+} from '@aktk/block-components/wp-controls/unit-control';
 import type { Spacing } from '@aktk/block-components/components/responsive-spacing-control';
 import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 /* Block Dependencies */
@@ -26,6 +28,8 @@ export function LabelSpacing( props: FaqItemEditProps ) {
 	const item = attributes.style?.ystdtb?.faqItem?.item;
 	const margin = label?.spacing?.margin;
 	const gap = item?.spacing?.gap;
+	// 単位ごとの刻みをコアに合わせ、em・remで小数を入力できるようにする。
+	const units = useCustomUnits( { availableUnits: [ 'px', 'em', 'rem' ] } );
 	// 同じパネル内の2項目を更新し、端末別値・文字・サイズ・本文余白を保持する。
 	const update = ( nextMargin?: Spacing, nextGap?: string ) =>
 		setAttributes( {
@@ -87,10 +91,7 @@ export function LabelSpacing( props: FaqItemEditProps ) {
 							update( margin, normalizeSizeValue( next ) )
 						}
 						min={ 0 }
-						units={ [ 'px', 'em', 'rem' ].map( ( value ) => ( {
-							value,
-							label: value,
-						} ) ) }
+						units={ units }
 					/>
 				</BaseControl>
 			</ToolsPanelItem>

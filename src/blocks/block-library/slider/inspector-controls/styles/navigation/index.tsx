@@ -11,7 +11,9 @@ import {
 	ToolsPanel,
 	ToolsPanelItem,
 } from '@aktk/block-components/wp-controls/tools-panel';
-import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import UnitControl, {
+	useCustomUnits,
+} from '@aktk/block-components/wp-controls/unit-control';
 import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 
 /* Block Dependencies */
@@ -30,6 +32,8 @@ export function NavigationStyle( props: SliderEditProps ) {
 	const { style } = attributes;
 	const navigation = style?.ystdtb?.slider?.navigation;
 	const panelId = clientId + '-navigation-style';
+	// 単位ごとの刻みをコアに合わせ、em・remで小数を入力できるようにする。
+	const units = useCustomUnits( { availableUnits: [ 'px', 'em', 'rem' ] } );
 
 	// 既定へ戻すときは、背景がなくなり効かなくなる背景色も消す。
 	const updateDesign = ( design?: NavigationDesign ) =>
@@ -119,10 +123,7 @@ export function NavigationStyle( props: SliderEditProps ) {
 						onChange={ ( size ) =>
 							updateSize( normalizeSizeValue( size ) )
 						}
-						units={ [ 'px', 'em', 'rem' ].map( ( unit ) => ( {
-							value: unit,
-							label: unit,
-						} ) ) }
+						units={ units }
 						min={ 0 }
 					/>
 				</BaseControl>

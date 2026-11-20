@@ -7,13 +7,15 @@ import { __ } from '@wordpress/i18n';
  * Aktk Dependencies
  */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import UnitControl, {
+	useCustomUnits,
+} from '@aktk/block-components/wp-controls/unit-control';
 
 /*
  * Plugin Dependencies
  */
 import type { BoxAttributes } from '../types';
-import { units } from '../utils';
+import { availableUnits } from '../utils';
 
 interface LabelBorderRadiusProps {
 	attributes: BoxAttributes;
@@ -24,8 +26,12 @@ interface LabelBorderRadiusProps {
  * ラベル角丸コントロール
  * @param props
  */
-const LabelBorderRadius = ( props: LabelBorderRadiusProps ): React.ReactElement => {
+const LabelBorderRadius = (
+	props: LabelBorderRadiusProps
+): React.ReactElement => {
 	const { attributes, setAttributes } = props;
+	// 単位ごとの刻みをコアに合わせ、em・%で小数を入力できるようにする。
+	const units = useCustomUnits( { availableUnits } );
 
 	const { labelBorderRadius } = attributes;
 

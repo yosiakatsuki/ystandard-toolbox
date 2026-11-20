@@ -19,11 +19,7 @@ export const boxStyleList = [
 /**
  * 単位選択肢
  */
-export const units = [
-	{ value: 'px', label: 'px' },
-	{ value: 'em', label: 'em' },
-	{ value: '%', label: '%' },
-];
+export const availableUnits = [ 'px', 'em', '%' ];
 
 /**
  * ボーダースタイル選択肢

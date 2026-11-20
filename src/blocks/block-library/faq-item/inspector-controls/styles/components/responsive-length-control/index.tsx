@@ -6,11 +6,7 @@ import BaseControl from '@aktk/block-components/wp-controls/base-control';
 import { IconUnitControl } from '@aktk/block-components/components/icon-control';
 import type { ResponsiveFontSize } from '@aktk/block-components/components/responsive-font-size-control';
 import { normalizeSizeValue } from '@aktk/block-components/utils/size';
-
-const UNITS = [ 'px', 'em', 'rem' ].map( ( value ) => ( {
-	value,
-	label: value,
-} ) );
+import { useCustomUnits } from '@aktk/block-components/wp-controls/unit-control';
 
 /**
  * 通常値を扱わず、指定端末の長さだけを更新する。
@@ -29,6 +25,8 @@ export function ResponsiveLengthControl( props: {
 		ResponsiveLengthControl,
 		'faq-responsive-length'
 	);
+	// 単位ごとの刻みをコアに合わせ、em・remで小数を入力できるようにする。
+	const units = useCustomUnits( { availableUnits: [ 'px', 'em', 'rem' ] } );
 	return (
 		<BaseControl id={ String( id ) } label={ label }>
 			<div className="grid grid-cols-1 gap-4">
@@ -55,7 +53,7 @@ export function ResponsiveLengthControl( props: {
 						key={ device }
 						aria-label={ `${ label }（${ deviceLabel }）` }
 						value={ value?.[ device ] }
-						units={ UNITS }
+						units={ units }
 						min={ 0 }
 						onChange={ ( next ) =>
 							onChange( {

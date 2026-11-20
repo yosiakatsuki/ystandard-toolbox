@@ -7,6 +7,7 @@ export type UnitType = {
 	value: string;
 	label: string;
 	default?: number | string;
+	step?: number;
 };
 
 export interface UnitControlProps {
