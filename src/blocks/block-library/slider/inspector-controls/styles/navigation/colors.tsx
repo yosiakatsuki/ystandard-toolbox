@@ -42,7 +42,8 @@ export function NavigationColors( props: NavigationColorsProps ) {
 		clearable: true,
 		gradients: [],
 		disableCustomGradients: true,
-		isShownByDefault: false,
+		// 設定できる項目が分かるよう、未設定でも最初から表示する。
+		isShownByDefault: true,
 	};
 
 	return (

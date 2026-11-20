@@ -2,7 +2,9 @@
 import { __ } from '@wordpress/i18n';
 /* Aktk Dependencies */
 import BaseControl from '@aktk/block-components/wp-controls/base-control';
-import UnitControl from '@aktk/block-components/wp-controls/unit-control';
+import UnitControl, {
+	useCustomUnits,
+} from '@aktk/block-components/wp-controls/unit-control';
 import { normalizeSizeValue } from '@aktk/block-components/utils/size';
 /* Block Dependencies */
 import type { FaqItemEditProps } from '../../../types';
@@ -16,6 +18,8 @@ import { updateFaqItemElement } from '../../../style-utils';
  */
 export function LabelSize( { attributes, setAttributes }: FaqItemEditProps ) {
 	const label = attributes.style?.ystdtb?.faqItem?.label;
+	// 単位ごとの刻みをコアに合わせ、em・remで小数を入力できるようにする。
+	const units = useCustomUnits( { availableUnits: [ 'px', 'em', 'rem' ] } );
 	// 端末別サイズを維持し、幅と高さに共通の通常値だけを更新する。
 	const update = ( value?: string ) =>
 		setAttributes( {
@@ -36,10 +40,7 @@ export function LabelSize( { attributes, setAttributes }: FaqItemEditProps ) {
 				value={ label?.dimensions?.size }
 				onChange={ update }
 				min={ 0 }
-				units={ [ 'px', 'em', 'rem' ].map( ( value ) => ( {
-					value,
-					label: value,
-				} ) ) }
+				units={ units }
 			/>
 		</BaseControl>
 	);

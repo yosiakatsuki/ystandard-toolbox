@@ -27,6 +27,7 @@ type ResponsiveSizePanelProps = {
 	icon?: React.ReactNode;
 	settings: ResponsiveSizeSettings;
 	labels?: Partial< Record< Dimension, string > >;
+	shownByDefault?: ResponsiveSizeSettings;
 	units?: UnitType[];
 	value?: ResponsiveDimensions;
 	onChange: ( changes: ResponsiveDimensions ) => void;
@@ -37,7 +38,16 @@ type ResponsiveSizePanelProps = {
  * @param props ブロックが使う寸法と端末別の値。
  */
 export function ResponsiveSizePanel( props: ResponsiveSizePanelProps ) {
-	const { panelId, title, icon, settings, units, value, onChange } = props;
+	const {
+		panelId,
+		title,
+		icon,
+		settings,
+		shownByDefault,
+		units,
+		value,
+		onChange,
+	} = props;
 	const enabled = dimensions.filter( ( key ) => settings[ key ] );
 	// ブロックが項目名を渡した寸法だけ、既定の名称を差し替える。
 	const labels = {
@@ -79,7 +89,8 @@ export function ResponsiveSizePanel( props: ResponsiveSizePanelProps ) {
 					className="single-column"
 					panelId={ panelId }
 					label={ labels[ key ] }
-					isShownByDefault={ false }
+					// ブロックが指定した寸法だけ、未設定でも最初から表示する。
+					isShownByDefault={ !! shownByDefault?.[ key ] }
 					hasValue={ () =>
 						Object.values( value?.[ key ] ?? {} ).some( Boolean )
 					}

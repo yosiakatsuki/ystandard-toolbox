@@ -58,6 +58,8 @@ jest.mock( '@aktk/block-components/wp-controls/unit-control', () => ( {
 			onChange={ ( e ) => onChange( e.target.value ) }
 		/>
 	),
+	// リセット範囲の検証では単位の選択肢を使わないため、空の一覧を返す。
+	useCustomUnits: () => [],
 } ) );
 jest.mock( '@aktk/block-components/wp-controls/spacing-size-control', () => ( {
 	__esModule: true,
