@@ -27,6 +27,8 @@ export function ResponsiveNavigationSize( props: SliderEditProps ) {
 			// 矢印は正方形のため、幅の入力を大きさとして使う。
 			settings={ { width: true } }
 			labels={ { width: __( '矢印の大きさ', 'ystandard-toolbox' ) } }
+			// 設定できる項目が分かるよう、未設定でも最初から表示する。
+			shownByDefault={ { width: true } }
 			units={ [ 'px', 'em', 'rem' ].map( ( unit ) => ( {
 				value: unit,
 				label: unit,

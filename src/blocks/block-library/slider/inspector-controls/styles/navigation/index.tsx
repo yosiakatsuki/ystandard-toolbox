@@ -70,7 +70,7 @@ export function NavigationStyle( props: SliderEditProps ) {
 				className="single-column"
 				panelId={ panelId }
 				label={ __( 'デザイン', 'ystandard-toolbox' ) }
-				// 背景色の入力を出すかを決める起点のため、例外として最初から表示する。
+				// 設定できる項目が分かるよう、例外として最初から表示する。
 				isShownByDefault
 				hasValue={ () => !! navigation?.design }
 				onDeselect={ () => updateDesign( undefined ) }
@@ -108,7 +108,7 @@ export function NavigationStyle( props: SliderEditProps ) {
 				className="single-column"
 				panelId={ panelId }
 				label={ __( '大きさ', 'ystandard-toolbox' ) }
-				isShownByDefault={ false }
+				isShownByDefault
 				hasValue={ () => !! navigation?.size }
 				onDeselect={ () => updateSize( undefined ) }
 			>
