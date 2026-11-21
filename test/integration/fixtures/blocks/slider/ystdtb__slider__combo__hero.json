@@ -16,6 +16,7 @@
 			"hasNavigation": true,
 			"paginationType": "bullets",
 			"previewType": "grid",
+			"previewColumns": 2,
 			"align": "full"
 		},
 		"innerBlocks": []

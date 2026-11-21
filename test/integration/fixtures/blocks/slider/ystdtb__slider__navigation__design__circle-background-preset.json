@@ -15,6 +15,7 @@
 			"hasNavigation": true,
 			"navigationBackgroundColor": "ys-blue",
 			"previewType": "grid",
+			"previewColumns": 2,
 			"style": {
 				"ystdtb": {
 					"slider": {

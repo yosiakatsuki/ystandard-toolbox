@@ -17,7 +17,8 @@
 				"spaceBetween": "16px"
 			},
 			"hasNavigation": false,
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}

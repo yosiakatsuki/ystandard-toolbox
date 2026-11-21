@@ -30,7 +30,7 @@ const ALLOWED_BLOCKS = [
 
 export default function Edit( props: SliderEditProps ): JSX.Element {
 	const { attributes, setAttributes, clientId } = props;
-	const { previewType, sliderId } = attributes;
+	const { previewType, previewColumns, sliderId } = attributes;
 
 	// sliderIdを設定
 	useEffect( () => {
@@ -48,6 +48,10 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 			'ystdtb-slider-edit',
 			`is-preview--${ previewType || 'grid' }`
 		),
+		style: {
+			// グリッドプレビューの列数
+			'--ystdtb-slider-preview-columns': previewColumns || 2,
+		} as React.CSSProperties,
 	} );
 
 	// スライダーブロック

@@ -35,7 +35,10 @@
 		.ystdtb-slider__container {
 			@media (min-width: 640px) {
 				display: grid;
-				grid-template-columns: repeat(2, 1fr);
+				grid-template-columns: repeat(
+					var(--ystdtb-slider-preview-columns, 2),
+					1fr
+				);
 				gap: 1rem;
 			}
 

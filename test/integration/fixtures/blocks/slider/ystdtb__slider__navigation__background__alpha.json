@@ -16,6 +16,7 @@
 			"customNavigationColor": "#ffffffcc",
 			"customNavigationBackgroundColor": "#12345680",
 			"previewType": "grid",
+			"previewColumns": 2,
 			"style": {
 				"ystdtb": {
 					"slider": {

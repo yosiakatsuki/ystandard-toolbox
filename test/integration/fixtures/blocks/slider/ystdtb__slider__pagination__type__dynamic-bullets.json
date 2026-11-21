@@ -14,7 +14,8 @@
 			"autoplayReverseDirection": false,
 			"hasNavigation": false,
 			"paginationType": "dynamicBullets",
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}

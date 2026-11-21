@@ -35,6 +35,7 @@ export interface SliderBlockAttributes {
 	paginationType?: string;
 	paginationColor?: string;
 	previewType?: previewType;
+	previewColumns?: number;
 	style?: SliderStyle;
 }
 

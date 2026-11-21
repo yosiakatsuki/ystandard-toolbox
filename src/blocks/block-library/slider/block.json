@@ -93,6 +93,10 @@
 		"previewType": {
 			"type": "string",
 			"default": "grid"
+		},
+		"previewColumns": {
+			"type": "number",
+			"default": 2
 		}
 	},
 	"selectors": {

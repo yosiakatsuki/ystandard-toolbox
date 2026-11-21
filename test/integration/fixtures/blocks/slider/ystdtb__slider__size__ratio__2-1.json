@@ -14,7 +14,8 @@
 			"autoplayReverseDirection": false,
 			"ratio": "2-1",
 			"hasNavigation": false,
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}
