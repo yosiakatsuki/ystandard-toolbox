@@ -65,6 +65,35 @@ function getModules( options: SwiperOptions ): SwiperModule[] {
 	return modules;
 }
 
+/**
+ * ズームアニメーション中のスライドに付けるクラス
+ */
+const ZOOM_ACTIVE_CLASS = 'is-zoom-active';
+
+/**
+ * ズームアニメーションのクラスを、表示中のスライドに付け替える
+ *
+ * CSSの.swiper-slide-activeだけで動かすと、フェードアウトの途中でズームが解除され、
+ * 画像が元の大きさに戻って見える。切り替えが終わるまで、前のスライドにもクラスを残す。
+ *
+ * @param slider Swiperインスタンス
+ */
+function setupZoomAnimation( slider: Swiper ) {
+	const addToActiveSlide = () => {
+		slider.slides[ slider.activeIndex ]?.classList.add( ZOOM_ACTIVE_CLASS );
+	};
+	slider.on( 'slideChangeTransitionStart', addToActiveSlide );
+	slider.on( 'slideChangeTransitionEnd', () => {
+		slider.slides.forEach( ( slide, index ) => {
+			// 次に表示されたとき最初から再生するよう、表示中以外のスライドから外す
+			if ( index !== slider.activeIndex ) {
+				slide.classList.remove( ZOOM_ACTIVE_CLASS );
+			}
+		} );
+	} );
+	addToActiveSlide();
+}
+
 document.addEventListener( 'DOMContentLoaded', () => {
 	// @ts-ignore.
 	window.ystdtbSlider = [];
@@ -96,6 +125,14 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		// オプションに基づいたモジュールを設定.
 		options.modules = getModules( options );
 		const slider = new Swiper( element as HTMLElement, options );
+		// 保存時に条件を満たしたスライダーだけ、ズームアニメーションを動かす
+		if (
+			element.matches(
+				'.has-zoom-animation--in, .has-zoom-animation--out'
+			)
+		) {
+			setupZoomAnimation( slider );
+		}
 		// @ts-ignore.
 		window.ystdtbSlider = [ ...window.ystdtbSlider, slider ];
 	} );

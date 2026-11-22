@@ -15,7 +15,8 @@
 			"hasNavigation": false,
 			"paginationType": "bullets",
 			"paginationColor": "#ff00aa",
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}

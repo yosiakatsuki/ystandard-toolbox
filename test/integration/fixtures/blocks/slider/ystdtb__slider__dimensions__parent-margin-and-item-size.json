@@ -17,6 +17,7 @@
 			},
 			"hasNavigation": false,
 			"previewType": "grid",
+			"previewColumns": 2,
 			"style": {
 				"spacing": {
 					"margin": {

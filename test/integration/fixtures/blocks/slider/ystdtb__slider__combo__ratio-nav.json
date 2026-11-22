@@ -15,7 +15,8 @@
 			"ratio": "16-9",
 			"hasNavigation": true,
 			"customNavigationColor": "#ff6600",
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}

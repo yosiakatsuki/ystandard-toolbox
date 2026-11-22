@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ystdtb/slider",
+		"isValid": true,
+		"attributes": {
+			"sliderId": "example-zoom-autoplay-off",
+			"effect": "fade",
+			"speed": 0.3,
+			"loop": true,
+			"autoplay": false,
+			"autoplayDelay": 5,
+			"autoplayPauseOnMouse": false,
+			"autoplayDisableOnInteraction": true,
+			"autoplayReverseDirection": false,
+			"hasNavigation": false,
+			"previewType": "grid",
+			"previewColumns": 2,
+			"zoomAnimation": "in"
+		},
+		"innerBlocks": []
+	}
+]

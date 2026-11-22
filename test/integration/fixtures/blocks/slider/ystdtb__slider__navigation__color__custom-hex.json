@@ -14,7 +14,8 @@
 			"autoplayReverseDirection": false,
 			"hasNavigation": true,
 			"customNavigationColor": "#0099ff",
-			"previewType": "grid"
+			"previewType": "grid",
+			"previewColumns": 2
 		},
 		"innerBlocks": []
 	}

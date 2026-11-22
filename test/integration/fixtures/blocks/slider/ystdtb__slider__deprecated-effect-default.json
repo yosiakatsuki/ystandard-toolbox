@@ -13,6 +13,7 @@
 			"autoplayReverseDirection": false,
 			"hasNavigation": false,
 			"previewType": "grid",
+			"previewColumns": 2,
 			"effect": "slide"
 		},
 		"innerBlocks": []

@@ -93,10 +93,24 @@
 		"previewType": {
 			"type": "string",
 			"default": "grid"
+		},
+		"previewColumns": {
+			"type": "number",
+			"default": 2
+		},
+		"zoomAnimation": {
+			"type": "string"
+		},
+		"zoomAnimationScale": {
+			"type": "number"
+		},
+		"zoomAnimationEasing": {
+			"type": "string"
 		}
 	},
 	"selectors": {
-		"root": ".ystdtb-slider"
+		"root": ".ystdtb-slider",
+		"border": ".ystdtb-slider .ystdtb-slider__slider"
 	},
 	"supports": {
 		"anchor": false,
@@ -106,6 +120,11 @@
 		"spacing": {
 			"margin": [ "top", "bottom" ],
 			"__experimentalDefaultControls": { "margin": false }
+		},
+		"__experimentalBorder": {
+			"radius": true,
+			"__experimentalSkipSerialization": true,
+			"__experimentalDefaultControls": { "radius": false }
 		}
 	},
 	"example": {

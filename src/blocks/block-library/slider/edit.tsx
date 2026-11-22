@@ -16,6 +16,7 @@ import { BlockControls } from './block-controls';
 import {
 	getSliderBlockClasses,
 	getSliderContainerClasses,
+	getSliderWrapBorderStyles,
 	getSliderWrapClasses,
 } from './utils';
 import type { SliderEditProps } from './types';
@@ -30,7 +31,7 @@ const ALLOWED_BLOCKS = [
 
 export default function Edit( props: SliderEditProps ): JSX.Element {
 	const { attributes, setAttributes, clientId } = props;
-	const { previewType, sliderId } = attributes;
+	const { previewType, previewColumns, sliderId } = attributes;
 
 	// sliderIdを設定
 	useEffect( () => {
@@ -48,6 +49,10 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 			'ystdtb-slider-edit',
 			`is-preview--${ previewType || 'grid' }`
 		),
+		style: {
+			// グリッドプレビューの列数
+			'--ystdtb-slider-preview-columns': previewColumns || 2,
+		} as React.CSSProperties,
 	} );
 
 	// スライダーブロック
@@ -59,7 +64,9 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 		className: classnames(
 			getSliderWrapClasses( attributes ),
 			'is-edit'
-		)
+		),
+		// 角丸は保存時と同じく、スライダー本体に付ける
+		style: getSliderWrapBorderStyles( attributes ),
 	};
 	// インナーブロックス
 	const innerBlocksProps = useInnerBlocksProps(

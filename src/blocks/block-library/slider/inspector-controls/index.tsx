@@ -9,6 +9,7 @@ import { InspectorControls as WPInspectorControls } from '@wordpress/block-edito
 import type { SliderEditProps } from '../types';
 // 設定.
 import { Basic } from './basic';
+import { ZoomAnimation } from './zoom-animation';
 import { Autoplay } from './autoplay';
 import { Size } from './size';
 import { Slide } from './slide';
@@ -24,6 +25,11 @@ export function InspectorControls( props: SliderEditProps ): JSX.Element {
 		<>
 			<WPInspectorControls>
 				<Basic { ...props } />
+				{ /* ズームアニメーションは、フェードで自動再生する場合だけ設定できる */ }
+				{ 'fade' === props.attributes.effect &&
+					props.attributes.autoplay && (
+						<ZoomAnimation { ...props } />
+					) }
 				<Autoplay { ...props } />
 				<Size { ...props } />
 				<Slide { ...props } />
