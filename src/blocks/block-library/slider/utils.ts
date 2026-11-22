@@ -22,10 +22,57 @@ export function getSliderBlockClasses() {
  * @param attributes
  */
 export function getSliderWrapClasses( attributes: SliderBlockAttributes ) {
-	const { ratio, height, responsiveHeight } = attributes;
+	const { ratio, height, responsiveHeight, zoomAnimation } = attributes;
 	return classnames( 'ystdtb-slider__slider', 'swiper', {
 		'is-fixed-height': ratio || height || responsiveHeight,
+		[ `has-zoom-animation--${ zoomAnimation }` ]:
+			hasZoomAnimation( attributes ),
 	} );
+}
+
+/**
+ * ズームアニメーションの拡大率の初期値（%）
+ */
+export const ZOOM_ANIMATION_SCALE_DEFAULT = 110;
+
+/**
+ * ズームアニメーションを使うか判定
+ *
+ * 表示中のスライドをズームし続ける演出のため、スライドが重なって切り替わるフェードで、
+ * 自動再生する場合だけ使う。条件から外れても設定値は残し、出力だけを止める。
+ *
+ * @param attributes
+ */
+export function hasZoomAnimation( attributes: SliderBlockAttributes ) {
+	const { effect, autoplay, zoomAnimation } = attributes;
+	return 'fade' === effect && !! autoplay && !! zoomAnimation;
+}
+
+/**
+ * ズームアニメーションのスタイルを取得
+ *
+ * @param attributes
+ */
+function getZoomAnimationStyles( attributes: SliderBlockAttributes ) {
+	// 使わないスライダーの保存HTMLを変えないよう、何も出力しない
+	if ( ! hasZoomAnimation( attributes ) ) {
+		return {};
+	}
+	const { speed, autoplayDelay, zoomAnimationScale, zoomAnimationEasing } =
+		attributes;
+	// フェードイン・表示・フェードアウトの間ずっと動くよう、切り替え2回分を足す
+	const delay = getMilliseconds( autoplayDelay ) ?? 3000;
+	const duration = Math.round(
+		delay + ( getMilliseconds( speed ) || 300 ) * 2
+	);
+	const scale = ( zoomAnimationScale ?? ZOOM_ANIMATION_SCALE_DEFAULT ) / 100;
+
+	return {
+		'--ystdtb-slider--zoom-scale': String( scale ),
+		'--ystdtb-slider--zoom-duration': `${ duration }ms`,
+		// 未指定はCSS側でlinearにする
+		'--ystdtb-slider--zoom-easing': zoomAnimationEasing || undefined,
+	};
 }
 
 /**
@@ -58,6 +105,7 @@ export function getSliderWrapStyles( attributes: SliderBlockAttributes ) {
 		height,
 		...responsiveStyles,
 		...getAspectRatioStyle( ratio || '' ),
+		...getZoomAnimationStyles( attributes ),
 	};
 }
 

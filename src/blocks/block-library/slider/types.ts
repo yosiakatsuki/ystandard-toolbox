@@ -36,8 +36,16 @@ export interface SliderBlockAttributes {
 	paginationColor?: string;
 	previewType?: previewType;
 	previewColumns?: number;
+	zoomAnimation?: ZoomAnimationType;
+	zoomAnimationScale?: number;
+	zoomAnimationEasing?: string;
 	style?: SliderStyle;
 }
+
+/**
+ * ズームアニメーションの種類。in: ズームイン、out: ズームアウト。
+ */
+export type ZoomAnimationType = 'in' | 'out';
 
 /**
  * スライダーのスタイル属性。標準サポートの値と独自スタイルを持つ。

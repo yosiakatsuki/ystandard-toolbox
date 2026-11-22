@@ -90,6 +90,77 @@
 	}
 }
 
+/*
+ * ズームアニメーション: 表示中のスライドの画像・動画・カバーの背景をズームする。
+ * スライドはSwiperのフェードがtransformを使うため、スライド自体はズームしない。
+ * アニメーション中のクラス（is-zoom-active）はフロントのスクリプトだけが付けるため、エディターでは再生しない。
+ */
+.ystdtb-slider__slider:where(.has-zoom-animation--in, .has-zoom-animation--out) {
+	/* ズームではみ出した部分を、画像・動画・カバーの枠の内側で隠す */
+	:where(.wp-block-image, .wp-block-video, .wp-block-cover) {
+		overflow: hidden;
+	}
+
+	/* 動きを減らす設定の利用者には、ズームせず等倍で表示する */
+	@media (prefers-reduced-motion: no-preference) {
+		:where(.is-zoom-active)
+			:where(
+				.wp-block-image img,
+				.wp-block-video video,
+				.wp-block-cover__image-background,
+				.wp-block-cover__video-background
+			) {
+			animation-duration: var(--ystdtb-slider--zoom-duration);
+			animation-timing-function: var(--ystdtb-slider--zoom-easing, linear);
+			/* 表示の始まりから最初のフレームの大きさにし、終わった後も最後の大きさを保つ */
+			animation-fill-mode: both;
+		}
+
+		&:where(.has-zoom-animation--in)
+			:where(.is-zoom-active)
+			:where(
+				.wp-block-image img,
+				.wp-block-video video,
+				.wp-block-cover__image-background,
+				.wp-block-cover__video-background
+			) {
+			animation-name: ystdtb-slider-zoom-in;
+		}
+
+		&:where(.has-zoom-animation--out)
+			:where(.is-zoom-active)
+			:where(
+				.wp-block-image img,
+				.wp-block-video video,
+				.wp-block-cover__image-background,
+				.wp-block-cover__video-background
+			) {
+			animation-name: ystdtb-slider-zoom-out;
+		}
+	}
+}
+
+/* transformは使わず、ほかのスタイルのtransformと重ならないscaleで拡大する */
+@keyframes ystdtb-slider-zoom-in {
+	from {
+		scale: 1;
+	}
+
+	to {
+		scale: var(--ystdtb-slider--zoom-scale);
+	}
+}
+
+@keyframes ystdtb-slider-zoom-out {
+	from {
+		scale: var(--ystdtb-slider--zoom-scale);
+	}
+
+	to {
+		scale: 1;
+	}
+}
+
 /* コンテナ内の子要素 */
 .ystdtb-slider__container {
 	> * {

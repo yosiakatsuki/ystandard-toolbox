@@ -12,6 +12,7 @@ import {
 	getPaginationStyles,
 	getSliderOptions,
 	hasSlidesOption,
+	hasZoomAnimation,
 } from '../utils';
 import type { SliderBlockAttributes } from '../types';
 
@@ -594,6 +595,95 @@ describe( 'getSliderOptions', () => {
 			// トップレベルに数値キーが直接展開されてはいけない
 			expect( opts[ '640' ] ).toBeUndefined();
 			expect( opts[ '1024' ] ).toBeUndefined();
+		} );
+	} );
+} );
+
+describe( 'ズームアニメーション', () => {
+	const ZOOM_VARS = [
+		'--ystdtb-slider--zoom-scale',
+		'--ystdtb-slider--zoom-duration',
+		'--ystdtb-slider--zoom-easing',
+	];
+
+	it( 'フェード・自動再生・種類の指定がそろったときだけ使う', () => {
+		expect(
+			hasZoomAnimation(
+				withDefaults( { effect: 'fade', zoomAnimation: 'in' } )
+			)
+		).toBe( true );
+		expect(
+			hasZoomAnimation(
+				withDefaults( { effect: 'slide', zoomAnimation: 'in' } )
+			)
+		).toBe( false );
+		expect(
+			hasZoomAnimation(
+				withDefaults( {
+					effect: 'fade',
+					autoplay: false,
+					zoomAnimation: 'in',
+				} )
+			)
+		).toBe( false );
+		expect( hasZoomAnimation( withDefaults( { effect: 'fade' } ) ) ).toBe(
+			false
+		);
+	} );
+
+	it.each( [ 'in', 'out' ] as const )(
+		'種類 "%s" のクラスをラップに付ける',
+		( zoomAnimation ) => {
+			expect(
+				getSliderWrapClasses(
+					withDefaults( { effect: 'fade', zoomAnimation } )
+				)
+			).toBe(
+				`ystdtb-slider__slider swiper has-zoom-animation--${ zoomAnimation }`
+			);
+		}
+	);
+
+	it( '未指定の拡大率・動き方は、110%と出力なし（CSSでlinear）にする', () => {
+		const style: any = getSliderWrapStyles(
+			withDefaults( { effect: 'fade', zoomAnimation: 'in' } )
+		);
+		expect( style[ '--ystdtb-slider--zoom-scale' ] ).toBe( '1.1' );
+		// 自動再生の間隔8秒 + 切り替え速度0.3秒 × 2
+		expect( style[ '--ystdtb-slider--zoom-duration' ] ).toBe( '8600ms' );
+		expect( style[ '--ystdtb-slider--zoom-easing' ] ).toBeUndefined();
+	} );
+
+	it( '拡大率・動き方・長さを指定した値で出力する', () => {
+		const style: any = getSliderWrapStyles(
+			withDefaults( {
+				effect: 'fade',
+				zoomAnimation: 'out',
+				zoomAnimationScale: 125,
+				zoomAnimationEasing: 'ease-out',
+				autoplayDelay: 5,
+				speed: 1.1,
+			} )
+		);
+		expect( style[ '--ystdtb-slider--zoom-scale' ] ).toBe( '1.25' );
+		// 小数の秒をミリ秒にした誤差を丸める
+		expect( style[ '--ystdtb-slider--zoom-duration' ] ).toBe( '7200ms' );
+		expect( style[ '--ystdtb-slider--zoom-easing' ] ).toBe( 'ease-out' );
+	} );
+
+	it( '条件から外れたときは、設定値があってもクラス・変数を出力しない', () => {
+		const attributes = withDefaults( {
+			effect: 'slide',
+			zoomAnimation: 'in',
+			zoomAnimationScale: 125,
+			zoomAnimationEasing: 'ease-out',
+		} );
+		const style: any = getSliderWrapStyles( attributes );
+		expect( getSliderWrapClasses( attributes ) ).toBe(
+			'ystdtb-slider__slider swiper'
+		);
+		ZOOM_VARS.forEach( ( name ) => {
+			expect( style ).not.toHaveProperty( name );
 		} );
 	} );
 } );

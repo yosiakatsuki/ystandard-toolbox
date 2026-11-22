@@ -97,6 +97,15 @@
 		"previewColumns": {
 			"type": "number",
 			"default": 2
+		},
+		"zoomAnimation": {
+			"type": "string"
+		},
+		"zoomAnimationScale": {
+			"type": "number"
+		},
+		"zoomAnimationEasing": {
+			"type": "string"
 		}
 	},
 	"selectors": {
