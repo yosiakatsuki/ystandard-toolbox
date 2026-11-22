@@ -14,6 +14,11 @@ const requiredEntries = [
 
 const forbiddenRules = [
 	{
+		// 開発ビルドのまま作成したZIPを配布しないよう、ソースマップを検出する.
+		label: 'ソースマップ',
+		test: ( entry ) => entry.endsWith( '.map' ),
+	},
+	{
 		label: 'TypeScriptビルドキャッシュ',
 		test: ( entry ) => entry.endsWith( '.tsbuildinfo' ),
 	},
@@ -41,7 +46,7 @@ const forbiddenRules = [
 		label: '開発ディレクトリ',
 		test: ( entry ) =>
 			new RegExp(
-				`^${ archiveRoot }/(?:src|test|phpunit|docs|bin|node_modules|vendor)/`
+				`^${ archiveRoot }/(?:src|test|phpunit|docs|plans|bin|node_modules|vendor)/`
 			).test( entry ),
 	},
 	{
