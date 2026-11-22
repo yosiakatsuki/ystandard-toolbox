@@ -687,3 +687,41 @@ describe( 'ズームアニメーション', () => {
 		} );
 	} );
 } );
+
+describe( 'スライダー本体の角丸', () => {
+	it( '未指定では角丸を出力しない', () => {
+		const style: any = getSliderWrapStyles( withDefaults() );
+		expect( style.borderRadius ).toBeUndefined();
+	} );
+
+	it( '角丸をスライダー本体のスタイルに出力する', () => {
+		const style: any = getSliderWrapStyles(
+			withDefaults( { style: { border: { radius: '24px' } } } )
+		);
+		expect( style.borderRadius ).toBe( '24px' );
+	} );
+
+	it( 'プリセットの角丸をCSS変数で出力する', () => {
+		const style: any = getSliderWrapStyles(
+			withDefaults( {
+				style: { border: { radius: 'var:preset|border-radius|md' } },
+			} )
+		);
+		expect( style.borderRadius ).toBe(
+			'var(--wp--preset--border-radius--md)'
+		);
+	} );
+
+	it( '角ごとの角丸を個別のプロパティで出力する', () => {
+		const style: any = getSliderWrapStyles(
+			withDefaults( {
+				style: {
+					border: { radius: { topLeft: '8px', bottomRight: '16px' } },
+				},
+			} )
+		);
+		expect( style.borderTopLeftRadius ).toBe( '8px' );
+		expect( style.borderBottomRightRadius ).toBe( '16px' );
+		expect( style.borderTopRightRadius ).toBeUndefined();
+	} );
+} );

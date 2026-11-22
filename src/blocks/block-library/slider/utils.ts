@@ -9,6 +9,7 @@ import { getColorClassName } from '@wordpress/block-editor';
 import type { navigationType, SliderBlockAttributes } from './types';
 import { getResponsiveCustomPropName } from '@aktk/block-components/utils/responsive-value';
 import { isEmpty, stripUndefined } from '@aktk/block-components/utils/object';
+import { presetTokenToCssVar } from '@aktk/block-components/utils/style-engine';
 
 /**
  * スライダーブロックのクラス名を取得
@@ -106,7 +107,49 @@ export function getSliderWrapStyles( attributes: SliderBlockAttributes ) {
 		...responsiveStyles,
 		...getAspectRatioStyle( ratio || '' ),
 		...getZoomAnimationStyles( attributes ),
+		...getSliderWrapBorderStyles( attributes ),
 	};
+}
+
+/**
+ * 角ごとの角丸の属性とCSSプロパティの対応
+ */
+const RADIUS_CORNER_PROPERTIES = {
+	topLeft: 'borderTopLeftRadius',
+	topRight: 'borderTopRightRadius',
+	bottomLeft: 'borderBottomLeftRadius',
+	bottomRight: 'borderBottomRightRadius',
+} as const;
+
+/**
+ * スライダー本体の角丸のスタイルを取得
+ *
+ * 外枠にはoverflow: hiddenがないため、角丸は外枠への自動出力を止め、
+ * Swiperがはみ出しを隠すスライダー本体へ付ける。スライドやズーム中の画像も角丸で切り取られる。
+ *
+ * @param attributes
+ */
+export function getSliderWrapBorderStyles( attributes: SliderBlockAttributes ) {
+	const radius = attributes.style?.border?.radius;
+	// 未指定のスライダーの保存HTMLを変えないよう、何も出力しない
+	if ( ! radius ) {
+		return {};
+	}
+	// すべての角が同じ値の場合
+	if ( 'string' === typeof radius ) {
+		return { borderRadius: presetTokenToCssVar( radius ) };
+	}
+	// 角ごとの値は、指定した角だけを出力する
+	return Object.entries( RADIUS_CORNER_PROPERTIES ).reduce(
+		( acc, [ corner, property ] ) => {
+			const value = radius[ corner as keyof typeof radius ];
+			if ( value ) {
+				acc[ property ] = presetTokenToCssVar( value ) as string;
+			}
+			return acc;
+		},
+		{} as Record< string, string >
+	);
 }
 
 /**

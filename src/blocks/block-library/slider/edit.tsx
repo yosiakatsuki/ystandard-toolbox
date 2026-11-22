@@ -16,6 +16,7 @@ import { BlockControls } from './block-controls';
 import {
 	getSliderBlockClasses,
 	getSliderContainerClasses,
+	getSliderWrapBorderStyles,
 	getSliderWrapClasses,
 } from './utils';
 import type { SliderEditProps } from './types';
@@ -63,7 +64,9 @@ export default function Edit( props: SliderEditProps ): JSX.Element {
 		className: classnames(
 			getSliderWrapClasses( attributes ),
 			'is-edit'
-		)
+		),
+		// 角丸は保存時と同じく、スライダー本体に付ける
+		style: getSliderWrapBorderStyles( attributes ),
 	};
 	// インナーブロックス
 	const innerBlocksProps = useInnerBlocksProps(

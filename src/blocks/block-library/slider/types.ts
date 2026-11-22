@@ -51,12 +51,25 @@ export type ZoomAnimationType = 'in' | 'out';
  * スライダーのスタイル属性。標準サポートの値と独自スタイルを持つ。
  */
 export interface SliderStyle {
+	border?: {
+		radius?: string | SliderBorderRadius;
+	};
 	ystdtb?: {
 		slider?: {
 			navigation?: SliderNavigationStyle;
 		};
 	};
 	[ key: string ]: unknown;
+}
+
+/**
+ * 角ごとの角丸。
+ */
+export interface SliderBorderRadius {
+	topLeft?: string;
+	topRight?: string;
+	bottomLeft?: string;
+	bottomRight?: string;
 }
 
 export type NavigationDesign = 'square' | 'circle';
